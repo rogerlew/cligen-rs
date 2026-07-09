@@ -1,204 +1,278 @@
 # CLIGEN 5.32.3 Fortran Decomposition
 
-Status: Draft, rev 2 — first pass corrected by a Codex source-verification
-review (2026-07-09, all eight findings applied; verbatim review in
-`docs/work-packages/20260709-repo-scaffold/artifacts/review-codex-fortran-decomposition.md`).
-Evidence mode: Static — Claude Code targeted reads plus Codex full-source
-verification of the inventory, precision map, call dependencies, and unit
-roles. Full ratification (complete common-block ownership map) remains
-ROADMAP item 2.
+Status: **Ratified**, rev 3 — first pass (Claude Code) → Codex
+source-verification review (rev 2, findings applied) → ratification
+package (rev 3: mechanical extraction of unit boundaries, per-unit
+common-block usage, live/commented call graph, complete precision-site
+census, dead-code adjudication, aliasing census).
+Evidence mode: Static + Ran — the rev-3 tables derive from an extraction
+script run over the source
+(`docs/work-packages/20260709-decomposition-ratification/artifacts/`:
+`extract.py`, `unit-extraction.md`, `precision-sites.md`,
+`deadcode-adjudication.md`) plus targeted source reads.
 Source: `reference/cligen532/cligen.f` (7,657 lines) + `.inc` files.
 
 ## 1. Shape of the program
 
-One Fortran 77 file: a main program (`cligen.f:382–981` — `getarg` option
-parsing at 645–660, usage text at 780–784), a `block data` unit
-initializing seeds and command defaults (1037–1089), and **48 subprograms**
-— including an embedded, double-precision ACM special-function library
-(§2.7) that a name-based scan misses. The code is the C. R. Meyer recode
-(1999–2004) whose header states the intent: "Recoded by the WEPP F-77
-Coding Conventions. The logic is greatly simplified; the structure of the
-code is much improved; and the in-line documentation is greatly expanded."
-The in-line changelog (lines ~40–470) is dense and candid — it documents
-the storm-duration/`DSTG` bug history and constant changes — and is a port
-asset: a ready-made list of behaviors needing pinned tests.
+Lines 1–381 are the header changelog (no code). The program proper is
+**50 units**: the main program (`program cligen`, 382–984 — `getarg`
+option parsing at 645–660, usage text at 780–784, mode dispatch), a
+`block data` unit initializing seeds, QC accumulators, and command
+defaults (1037–1093), and 48 subprograms — including an embedded,
+double-precision ACM special-function library (§2.7). The code is the
+C. R. Meyer recode (1999–2004) whose header states the intent: "Recoded
+by the WEPP F-77 Coding Conventions. The logic is greatly simplified; the
+structure of the code is much improved; and the in-line documentation is
+greatly expanded." The changelog documents the storm-duration/`DSTG` bug
+history and is a port asset: a ready-made list of behaviors needing
+pinned tests.
 
-Include files: 13 `.inc` files exist, but two are not part of the live
-build surface — `crandom.inc` is superseded by `crandom3.inc` (the actively
-included RNG/QC state, e.g. `cligen.f:515, 1047, 1172`), and `ctap2.inc`
-appears only on commented include lines. The live set is 11.
+Live include files: 11 — `cbk1/3/4/5/7/9.inc`, `ccl1.inc`,
+`cinterp.inc`, `command6.inc`, `crandom3.inc`, `csumr.inc`.
+(`crandom.inc` is superseded by `crandom3.inc`; `ctap2.inc` appears only
+on commented include lines. Confirmed by extraction: no live unit
+includes either.)
 
-A load-bearing structural fact (Codex finding 3): **the QC self-tests are
-trajectory-load-bearing, not passive diagnostics.** `dstg` calls `ks_tst`
-during generation (`cligen.f:1732`), and `ranset` calls `ks_tst`, `conflm`,
-and `confls` (4227–4230, 4243–4246), with `confls` reaching into the ACM
-`cdfchi` chain (4691). A QC rejection triggers regeneration, which consumes
-additional RNG draws — so the QC and ACM code participate in the stochastic
-trajectory and must port with the deviates, not after them.
+A load-bearing structural fact: **the QC self-tests are
+trajectory-load-bearing, not passive diagnostics.** `dstg` calls
+`ks_tst` during generation (1732), and `ranset` calls `ks_tst`,
+`conflm`, and `confls` (4227–4246), with `confls` reaching the ACM
+`cdfchi` chain (4691). A QC rejection triggers regeneration, which
+consumes additional RNG draws — so the QC and ACM code participate in
+the stochastic trajectory and must port with the deviates, not after
+them. Fixture evidence confirms the path fires in practice (K-S
+failure/regeneration messages in the golden-fixture run logs).
 
 ## 2. Program-unit inventory by functional cluster
 
-Line numbers refer to `reference/cligen532/cligen.f`.
+Line numbers refer to `reference/cligen532/cligen.f`. The full
+mechanical table (per-unit includes and callees) is in
+`unit-extraction.md`; the tables below carry roles and the load-bearing
+facts.
 
 ### 2.1 RNG and random deviates
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `randn` | 1980 | Uniform (0,1). **Pure integer arithmetic** — 4-integer seed with carries (1994–2009); uniform assembled from four `float(k)` f32 multiply-adds (2010–2011); rejection loop for results outside (0,1) (2012–2013). Trivially bit-replicable. |
-| `dstn1` | 1789 | Standard normal deviate (from uniforms). |
-| `dstg` | 1651 | Gamma deviate via rejection sampling — drives `alpha_0.5` peak-intensity ratio. `double precision fu, xx` (1696); `SAVE array, iarrct` (1710–1711); calls `ks_tst` in its QC filter (1732). Long bug history in the changelog. |
-| `ranset` | 4002 | Seed initialization; `SAVE ell, last_r` (4052–4057); runs the QC batch tests (4227–4246). |
-| `nrmd` | 2123 | Inverse standard-normal approximation for a probability (2126–2147). Source comment says it "does not seem to be used" (line 426) — confirm dead-code status during ratification; if dead, record and do not port. |
+| `randn` | 1980–2019 | Uniform (0,1). **Pure integer arithmetic** — 4-integer seed with carries (1994–2009); uniform assembled from four `float(k)` f32 multiply-adds (2010–2011); rejection loop outside (0,1). Live callers: program, `clgen`, `dstg`, `timepk`, `ranset`. |
+| `dstn1` | 1789–1816 | Standard normal deviate. Live callers: `clgen`, `windg`, `ranset`. |
+| `dstg` | 1651–1788 | Gamma deviate via rejection sampling — drives `alpha_0.5` peak intensity. `double precision fu, xx` (1696); `SAVE array, iarrct`; calls `ks_tst` in its QC filter (1732). Only live caller: `alphb`. |
+| `ranset` | 4002–4341 | Seed initialization + QC battery (`ks_tst`, `conflm`, `confls`); `SAVE ell, last_r`. |
 
 ### 2.2 Daily stochastic core
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `clgen` | 1094 | The daily generation loop (precip occurrence/amount, temperatures, radiation, dew point); calls `RANDN` and `DSTN1`. |
-| `alph` / `alphb` | 985 / 3817 | `alpha_0.5` (ratio of max 30-min to total rainfall). `alphb` is the Bofu Yu 1999 latitude-responsive rewrite; **the live path calls `alphb`/`r5monb`** (878, 3118–3119, 3140–3141) — the originals are retained history. |
-| `r5mon` / `r5monb` | 1904 / 3898 | Monthly max-.5-hour rainfall statistics (original / Yu variant, as above). |
-| `windg` | 2020 | Wind generation. |
+| `clgen` | 1094–1515 | The daily generation loop (precip occurrence/amount, temperatures, radiation, dew point). Calls `randn`, `dstn1`, `ranset`, and the generation-time interpolators `fouri2`/`ryf2`. |
+| `alphb` | 3817–3897 | `alpha_0.5` (max 30-min / total rainfall ratio), Bofu Yu 1999 latitude-responsive rewrite — **the live path** (`day_gen:3119,3141`). Calls `dstg`. |
+| `r5monb` | 3898–4001 | Monthly max-.5-h rainfall statistics, Yu variant — live, called once per run (`cligen:878`). |
+| `windg` | 2020–2122 | Wind generation (calls `dstn1`); called from `day_gen`. |
 
 ### 2.3 Storm shape and event machinery
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `timepk` | 2188 | Time-to-peak within storm. |
-| `sing_stm` | 3325 | Single-storm mode; opens output units 7/8 itself (3445–3455). |
-| `day_gen` | 2971 | Per-day generation used by the orchestrator; writes daily unit-7 rows (3173–3176); `SAVE q_gen_started` (3041–3042); observed-mode EOF fix (5.323) lives here. |
+| `timepk` | 2188–2239 | Time-to-peak within storm (calls `randn`). |
+| `sing_stm` | 3325–3496 | Single-storm mode; self-contained computation; opens output units 7/8 itself (3445–3455). |
 
-This cluster plus `dstg`/`alphb` is the **augmentation surface** for storm
-duration/intensity derivation and NOAA design-storm curves — and the part
-of the code with the most documented historical churn ("Storm duration was
-getting hosed"; duration constant 4.607 → 9.210; the `DSTG` gamma QC saga).
+This cluster plus `dstg`/`alphb` is the **augmentation surface** for
+storm duration/intensity derivation and NOAA design-storm curves — and
+the code with the most documented historical churn ("Storm duration was
+getting hosed"; duration constant 4.607 → 9.210; the `DSTG` gamma QC
+saga).
 
 ### 2.4 Generation orchestration and modes
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| main program | 382–981 | Option parsing, mode dispatch. |
-| `wxr_gen` | 3589 | Self-described "the guts of the weather generating code" (3598–3599): top-level generation orchestrator — drives `day_gen` and `opt_calc` (3671–3673, 3788–3798) and writes WEPP unit-7 output headers (3722–3754). |
-| `opt_calc` | 3196 | Output options 1–3 handling (3201–3203); writes unit 8 (3308–3317). |
-| `usr_opt` | 3497 | User option selection; opens observed input files (3557–3574). |
+| `program cligen` | 382–984 | Option parsing, station intake (`sta_dat`), mode dispatch to `usr_opt`/`sing_stm`/`wxr_gen`; runs `r5monb` once per run. |
+| `wxr_gen` | 3589–3816 | "The guts of the weather generating code" (3598–3599): top-level generation orchestrator — drives `day_gen` and `opt_calc`, writes WEPP unit-7 headers (3722–3754), uses `jdt`. |
+| `day_gen` | 2971–3195 | Per-day driver: `jlt`, `lintrp`, `clgen`, `windg`, `alphb`, `timepk`; observed-mode `9999` handling (`nsim`/`msim` flags, 3076–3079) and the 5.323 EOF fix; writes daily unit-7 rows; `SAVE q_gen_started`. |
+| `opt_calc` | 3196–3324 | Output options 1–3; writes unit 8; calls `clmout`. |
+| `usr_opt` | 3497–3588 | Interactive option selection; opens observed input files. |
 
 ### 2.5 Station parameters and monthly-to-daily interpolation
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `sta_dat` / `sta_name` / `sta_parms` | 2240 / 2486 / 2656 | Station `.par` reading, station selection, parameter handling. `sta_parms` aliases `rst1/rst2/rst3/prw1/prw2` onto common arrays (2783–2787) before interpolation calls (2831–2859). |
-| `lintrp` | 7252 | Linear interpolation. |
-| `fouri1` / `fouri2` | 7338 / 7387 | Fourier interpolation of monthly parameters to daily values. |
-| `ryf1` / `ryf2` | 7424 / 7545 | Yoder–Foster monthly-mean-preserving interpolation, setup / evaluation (7427–7441, 7547–7550). |
+| `sta_dat` | 2240–2485 | Station `.par` intake driver; calls `header`, `sta_name`, `sta_parms`. |
+| `sta_name` | 2486–2655 | Station selection. |
+| `sta_parms` | 2656–2970 | Parameter handling; EQUIVALENCE views `rst1/rst2/rst3` and `prw1/prw2` onto the `rst`/`prw` parameter arrays (2783–2787); runs the par-time interpolation setup `fouri1`/`ryf1`. |
+| `lintrp` | 7252–7337 | Linear interpolation (generation-time, from `day_gen`). |
+| `fouri1` / `fouri2` | 7338–7386 / 7387–7423 | Fourier interpolation: setup at par time (`sta_parms`), evaluation at generation time (`clgen`). |
+| `ryf1` / `ryf2` | 7424–7544 / 7545–7657 | Yoder–Foster monthly-mean-preserving interpolation: same setup/evaluation split. |
 
 ### 2.6 Output and display
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `clmout` | 1516 | Interactive screen summaries (options 1/2 viewing) — **not** the `.cli` writer. |
-| `header` | 2153 | Output header support. |
+| `clmout` | 1516–1650 | Interactive screen summaries (options 1/2), via `opt_calc` — **not** the `.cli` writer. |
+| `header` | 2153–2187 | Output header support (via `sta_dat`). |
 
-**`.cli`/WEPP file output has no single owner**: it is spread across
+**`.cli`/WEPP file output has no single owner**: spread across
 `sing_stm` (opens units 7/8), `wxr_gen` (unit-7 headers), `day_gen`
 (daily unit-7 rows), and `opt_calc` (unit 8), on hard-coded shared unit
 numbers. The Rust `output` module centralizes this surface; faithful-mode
-byte parity is judged on the produced files, not on replicating the unit
-plumbing.
+byte parity is judged on the produced files, not the unit plumbing.
 
 ### 2.7 QC statistics and the embedded ACM special-function library
 
-Trajectory-load-bearing (§1). All double-precision.
+Trajectory-load-bearing (§1). Home of 388 of the source's 391
+double-precision sites (§5).
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `chitst` | 4342 | Chi-square test — **all call sites are commented out** (1731, 4225, 4241, 4255); confirm dead-code status during ratification. |
-| `ks_tst` | 4453 | Kolmogorov–Smirnov test (live: called from `dstg`, `ranset`). |
-| `conflm` / `confls` | 4589 / 4650 | Confidence limits on mean / variance; `confls` uses `dble()` (4662–4663) and calls `cdfchi` (4691). |
-| ACM support | 4705–7095 | `cdfchi` (4705), `cumchi` (4954), `cumgam` (5008), `dinvr` (5070), `dzror` (5419), `erf` (5703), `erfc1` (5778), `exparg` (5890), `gam1` (5942), `gamma` (6007), `gratio` (6158), `ipmpar` (6575), `rexp` (7005), `rlog` (7039), `spmpar` (7095). Double precision with `D` literals throughout (from 4787–4803); uses `SAVE` and `ENTRY` (5151, 5316, 5485, 5623). Port note: these are published ACM algorithms — port faithfully, but a well-tested Rust special-function source may serve native mode; faithful mode replicates the embedded versions. |
+| `ks_tst` | 4453–4588 | Kolmogorov–Smirnov test — live from `dstg` and `ranset`. |
+| `conflm` / `confls` | 4589–4649 / 4650–4704 | Confidence limits on mean / variance (live from `ranset`); `confls` uses `dble()` and calls `cdfchi`. |
+| ACM support | 4705–7251 | `cdfchi`, `cumchi`, `cumgam`, `dinvr`, `dzror`, `erf`, `erfc1`, `exparg`, `gam1`, `gamma`, `gratio`, `ipmpar`, `rexp`, `rlog`, `spmpar`. Double precision with `D` literals throughout; `SAVE` and `ENTRY` (`dstinv` is an ENTRY of `dinvr`, `dstzr` of `dzror`; `cdfchi` calls `dstinv`, `dinvr` calls `dstzr`). Published ACM algorithms: faithful mode replicates the embedded versions; native mode may substitute a vetted Rust special-function source. |
 
 ### 2.8 Calendar
 
-| Unit | Line | Role |
+| Unit | Lines | Role |
 |---|---|---|
-| `jdt` / `jlt` | 1817 / 1846 | Julian-date utilities. The leap-year surface (an augmentation target) lives here and in the callers' year loops. |
+| `jdt` | 1817–1845 | Julian-date function (from `wxr_gen`). |
+| `jlt` | 1846–1903 | Date decomposition (from `day_gen`). Leap-year surface lives here and in caller year loops. |
 
-### 2.9 Common blocks → typed state
+### 2.9 Dead code — ratified, not ported
 
-Live includes: `cbk1/3/4/5/7/9.inc`, `ccl1.inc`, `cinterp.inc`,
-`command6.inc`, `crandom3.inc`, `csumr.inc` (11; `crandom.inc` superseded,
-`ctap2.inc` commented-only). Each becomes a named struct; the full
-which-unit-reads/writes-which-block map is ROADMAP item 2's deliverable.
+Zero live references (full adjudication in `deadcode-adjudication.md`):
 
-**Aliasing hazard** (Codex finding 4): common storage is used as shared-
-memory views — `crandom3.inc` aliases `vvx/v2x/v4x/v6x/v8x/fxx/v10x/v12x/zx`
-onto columns of `ranary` (crandom3.inc:46–62), and `sta_parms` aliases
-scalar names onto common arrays (2783–2787). These views cross the
-proposed `rng`/`daily`/`par`/`monthlies` boundaries; the typed-state design
-must give each view a single owning struct with explicit accessors, and the
-ratification pass must enumerate every such aliasing site.
+| Unit | Lines | Evidence |
+|---|---|---|
+| `nrmd` | 2123–2152 | No reference of any kind; source's own comment agrees (line 426). |
+| `chitst` | 4342–4452 | All four call sites commented; K-S replaced it. |
+| `alph` | 985–1036 | Only commented sites (`c call alph` above the live `call alphb`). |
+| `r5mon` | 1904–1979 | Only a commented site above the live `call r5monb`. |
 
-## 3. Proposed Rust module map (to ratify in ROADMAP item 2)
+~330 source lines out of port scope. A future generation profile wanting
+the pre-Yu intensity model would revive these as a labeled extension.
+
+### 2.10 Common-block ownership (extraction-derived)
+
+| Include | Including units (live) |
+|---|---|
+| `cbk1.inc` | program, `clgen`, `windg`, `sta_parms`, `day_gen` |
+| `cbk3.inc` | `clgen`, `windg`, `day_gen`, `alphb`, `r5monb`, `fouri2` |
+| `cbk4.inc` | program, blockdata, `clgen`, `clmout`, `windg`, `timepk`, `day_gen`, `opt_calc`, `sing_stm`, `usr_opt`, `wxr_gen`, `alphb`, `r5monb`, `ranset` |
+| `cbk5.inc` | program, `clgen`, `day_gen`, `opt_calc`, `alphb`, `r5monb` |
+| `cbk7.inc` | program, blockdata, `clgen`, `windg`, `sta_parms`, `day_gen`, `wxr_gen`, `alphb`, `r5monb`, `ranset` |
+| `cbk9.inc` | program, `sta_parms`, `day_gen`, `alphb`, `r5monb` |
+| `ccl1.inc` | `clmout`, `day_gen`, `wxr_gen` |
+| `cinterp.inc` | program, blockdata, `clgen`, `sta_parms`, `day_gen`, `wxr_gen`, `lintrp`, `fouri1`, `fouri2`, `ryf1`, `ryf2` |
+| `command6.inc` | program, blockdata, `sta_dat`, `sta_name`, `sta_parms`, `opt_calc`, `sing_stm`, `usr_opt`, `wxr_gen` |
+| `crandom3.inc` | program, blockdata, `clgen`, `dstg`, `windg`, `timepk`, `ranset`, `ks_tst` |
+| `csumr.inc` | `clmout`, `opt_calc` |
+
+`cbk4.inc` is the widest surface (14 units) and will be the most
+contended typed struct; `cinterp.inc` cleanly bounds the interpolation
+state; `crandom3.inc` bounds RNG + QC state exactly as the module map
+assumes.
+
+**Aliasing census (complete)**: EQUIVALENCE exists at exactly two sites —
+`crandom3.inc:46–62` (nine named views onto columns of `ranary`) and
+`sta_parms:2783–2787` (five local views onto `rst`/`prw`). No other
+EQUIVALENCE statement exists in the live source. Both translate per the
+coding standard §5 (accessor methods on the owning struct).
+
+### 2.11 Live call-graph spine
+
+```text
+program cligen ── sta_dat ─┬─ header
+        │                  ├─ sta_name
+        │                  └─ sta_parms ── fouri1, ryf1        (par time)
+        ├─ r5monb                                              (once/run)
+        ├─ usr_opt / sing_stm                                  (modes)
+        └─ wxr_gen ─┬─ jdt, opt_calc ── clmout
+                    └─ day_gen ─┬─ jlt, lintrp
+                                ├─ clgen ── randn, dstn1, ranset,
+                                │           fouri2, ryf2       (gen time)
+                                ├─ windg ── dstn1
+                                ├─ alphb ── dstg ── ks_tst, randn
+                                └─ timepk ── randn
+ranset ── randn, dstn1, ks_tst, conflm,
+          confls ── cdfchi ── cumchi ── cumgam ── gratio ── erf, erfc1,
+                    │                             gam1, gamma, rexp,
+                    │                             rlog, spmpar ── ipmpar
+                    └─ dinvr (ENTRY dstinv) ── dzror (ENTRY dstzr)
+```
+
+## 3. Rust module map (ratified)
 
 ```text
 crates/cligen/src/
   calendar.rs        jdt, jlt (+ leap-year extension point)
-  rng.rs             randn, ranset, seed state (crandom3.inc)
-  qc.rs              ks_tst, conflm, confls (+ chitst if not dead)
-  acm.rs             the embedded ACM special-function library (f64)
-  deviates.rs        dstn1, dstg (precision map per source; QC-coupled)
-  par/               sta_dat/sta_name/sta_parms: typed par model, parse/serialize
-  monthlies.rs       lintrp, fouri1/2, ryf1/2
-  daily.rs           clgen, alphb/r5monb (+ retained alph/r5mon history), windg
-  storm.rs           timepk, sing_stm event machinery
-  modes.rs           wxr_gen orchestration, opt_calc, usr_opt, day_gen driver
+  rng.rs             randn, ranset, seed state (crandom3.inc struct)
+  qc.rs              ks_tst, conflm, confls        (chitst: dead, recorded)
+  acm.rs             the embedded ACM library (f64 throughout)
+  deviates.rs        dstn1, dstg (QC-coupled; the f64 fu/xx island)
+  par/               sta_dat/sta_name/sta_parms + header: typed par model
+                     and station-intake output header
+  monthlies.rs       lintrp, fouri1/2, ryf1/2 (par-time setup +
+                     generation-time evaluation, both consumers named)
+  daily.rs           clgen, alphb, r5monb, windg   (alph/r5mon: dead)
+  storm.rs           timepk, sing_stm
+  modes.rs           wxr_gen orchestration, day_gen driver, opt_calc,
+                     usr_opt, program dispatch
   observed.rs        observed-mode input (.prn; parquet extension point)
-  output/            centralized .cli text writer (units-7/8 semantics); .cli.parquet later
-  profile.rs         generation profiles + provenance (extension, no Fortran basis)
+  output/            centralized .cli writer (units-7/8 semantics);
+                     clmout summaries; .cli.parquet later
+  profile.rs         generation profiles + provenance (extension)
 ```
 
-## 4. Port order (dependency spine, corrected)
+`block data` (1037–1093) has no module of its own: its initializers land
+in the constructors of the owning state structs (`crandom3`, `cbk4`,
+`cbk7`, `cinterp`, `command6` per its include set), with source lines
+cited per the coding standard §5.
 
-1. `calendar` + `acm` + `qc` — the ACM/QC chain first, because the
-   deviates call it (§1); identity-testable against Fortran taps in
-   isolation.
-2. `rng` + `deviates` — including the QC-coupled regeneration behavior;
-   bit-identical deviate streams are the gate.
-3. `par` + `monthlies` — deterministic input path.
-4. `daily` (+`windg`) — first end-to-end stochastic surface.
+## 4. Port order (ratified against the call graph)
+
+1. `calendar` + `acm` + `qc` — the ACM/QC chain first: the deviates call
+   it (§1), and it holds essentially all the f64 surface.
+2. `rng` + `deviates` — including QC-coupled regeneration; bit-identical
+   deviate streams (via the RNG package's tap patch) are the gate.
+3. `par` + `monthlies` — deterministic input path, including the
+   par-time `fouri1`/`ryf1` setup.
+4. `daily` — `clgen`/`alphb`/`r5monb`/`windg`; consumes the
+   generation-time `fouri2`/`ryf2`/`lintrp` evaluators.
 5. `storm` + `modes` — the contested machinery and the orchestrator,
-   ported against pinned tests derived from the changelog.
-6. `observed` — the `.prn` path (operator has already debugged its EOF
-   behavior in the Fortran).
+   ported against changelog-derived pinned tests.
+6. `observed` — the `.prn` path (both fixture classes: sentinel-padded
+   and hard-EOF).
 7. `output` — centralized `.cli` writer; end-to-end byte-parity gate.
 
-## 5. Known port hazards
+## 5. Known port hazards (ratified)
 
-- **Precision map (systemic, not localized)**: REAL*4 program with REAL*8
-  throughout the QC/ACM chain (`cdfchi` and every support function),
-  `dstg`'s locals, `crandom3.inc`'s `g_dsum`/`g_ssum` accumulators
-  (crandom3.inc:15–16), and `confls`'s `dble()` conversions. Faithful mode
-  replicates the map site-by-site; the unit-by-unit audit is part of each
-  port package.
-- **Stateful constructs**: `block data` (1037–1089) initializes seeds and
-  command defaults; `SAVE` statics in `dstg`, `day_gen`, `ranset`, and the
-  ACM routines; `ENTRY` points in the ACM code (5151, 5316, 5485, 5623).
-  Each becomes explicit owned state in Rust — no hidden statics. No
-  computed GOTOs exist (verified).
-- **Common-block aliasing**: shared-memory views across module boundaries
-  (§2.9).
+- **Precision map — measured, and better-bounded than feared**: 391
+  double-precision sites in `cligen.f`, of which **388 sit inside the
+  QC/ACM cluster** (`ks_tst`/`conflm`/`confls`/ACM; per-unit counts in
+  `precision-sites.md`). The only sites outside it are `dstg`'s
+  `fu`/`xx` locals (1696) and the block-data zero-inits of the
+  `g_dsum`/`g_ssum` QC accumulators (1073–1074; declared
+  `crandom3.inc:15–16` — include-file declarations are listed separately
+  in the artifact). Faithful mode replicates these site-by-site;
+  `acm.rs` is uniformly f64.
+- **Stateful constructs**: block data (1037–1093); `SAVE` statics in
+  `dstg`, `day_gen`, `ranset`, and the ACM routines; ENTRY points
+  `dstinv`/`dstzr` with live cross-unit calls. Each becomes explicit
+  owned state per the coding standard; no computed GOTOs exist.
+- **Common-block aliasing**: complete census in §2.10 — two sites only.
 - **QC-coupled trajectories**: a QC rejection consumes extra RNG draws;
-  porting the deviates without the QC chain produces silently divergent
+  porting deviates without the QC chain produces silently divergent
   streams (§1).
 - **Transcendentals**: libm ULP differences bifurcate trajectories at
-  occurrence branches; pin both sides (Rust `libm` crate; pinned-libm
-  reference build).
-- **FMA contraction**: gfortran contracts by default; the reference build
-  disables it, with flags recorded in fixture provenance.
+  occurrence branches; pin both sides (Rust `libm` crate; the pinned
+  reference build's glibc libm identity is recorded in the fixture
+  provenance).
+- **FMA contraction / build flags**: the reference build pins
+  `-O0 -ffp-contract=off -fprotect-parens -fno-fast-math`; the vendored
+  production makefile's reordering-permitted flags are disqualified for
+  goldens (empirically, they produced byte-range-identical stochastic
+  output on the same host — see the fixture manifest — but that is a
+  measurement, not a license).
 - **Formatted output**: Fortran `FORMAT` rounding differs from Rust
-  formatting; trajectory acceptance is on in-memory values, and the `.cli`
-  text writer gets its own byte-level fixture gate.
-- **Sequence bifurcation**: the fixture differ must report
-  first-divergent-day/variable; aggregate statistics cannot localize a
-  transcription error.
-- **Dead-code candidates**: `nrmd` (source's own comment) and `chitst`
-  (all calls commented). Ratification confirms; dead code is recorded, not
-  ported.
+  formatting; trajectory acceptance is on in-memory values; the `.cli`
+  writer gets its own byte-level gate.
+- **Sequence bifurcation**: the differ reports
+  first-divergent-day/variable (`SPEC-CLI-DIFF`, implemented); aggregate
+  statistics cannot localize a transcription error.
+- **Dead code — ratified**: `nrmd`, `chitst`, `alph`, `r5mon` (§2.9).

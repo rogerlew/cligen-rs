@@ -12,8 +12,7 @@ port-parity-tested is unverifiable.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 2 | **Decomposition ratification** | Full read-through against [port/fortran-decomposition.md](port/fortran-decomposition.md): ratify/correct cluster assignments, map all 13 common blocks to owning units, complete the precision-map audit (every REAL*8 site), fix the module boundaries | Decomposition doc at rev 2 with no `unread` markers on load-bearing units |
-| 3 | **RNG + deviates port** | `randn`, `ranset`, `dstn1`, `dstg`, `nrmd` with the source precision map; SPEC-GENERATOR-CORE seed/state surface | Bit-identical deviate streams vs Fortran taps for all fixture seeds |
+| 3 | **RNG + deviates port** | `randn`, `ranset`, `dstn1`, `dstg` with the source precision map (`nrmd` ratified dead — not ported); owns the recorded Fortran tap patch (applied outside `reference/`); ports with the QC/ACM chain the deviates call (`ks_tst`, `conflm`, `confls` → `cdfchi` ACM cluster) per the ratified port order | Bit-identical deviate streams vs Fortran taps for all fixture seeds, including QC-regeneration draws |
 | 4 | **Par model + monthlies** | Typed `.par` parse/serialize (SPEC-PAR); `lintrp`/Fourier interpolation | Parsed values and interpolated dailies match Fortran to declared tolerance (exact where precision map allows) |
 | 5 | **Daily core** | `clgen` + `alph(b)` + `r5mon(b)` | Faithful-mode daily trajectories identical through the fixture year set |
 | 6 | **Storm machinery** | `timepk`, `sing_stm`, duration/Ipeak chain; changelog-derived pinned tests | Trajectory identity incl. event durations/intensities; single-storm mode parity |
@@ -26,6 +25,6 @@ port-parity-tested is unverifiable.
 | A5 | **Storm-model extensions** | Modified duration/intensity derivation; NOAA design-storm curves | Each behind its own versioned generation profile |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
-Items 2–8 are the remaining faithful-mode port. A-items are augmentations
+Items 3–8 are the remaining faithful-mode port. A-items are augmentations
 and may reorder on demand; A1 is first among them because every later
 extension wants the provenance substrate.
