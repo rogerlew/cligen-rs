@@ -21,11 +21,30 @@ Coverage rationale:
   the seasonal inversion.
 - **Both live modes** — stochastic generation and observed (`-O`).
 - **End-of-record edge**: the Fish Springs `ws.prn` runs to 2026-12-31
-  with trailing `9999` missing-data sentinel rows (the record ends
-  mid-2026) — the end-of-record class behind the 5.323 `day_gen` fix.
-  Phase B of the harness package should additionally craft a
-  hard-truncated `.prn` variant (file ends mid-year without sentinel
-  padding) to pin the exact 5.323 EOF shape.
+  with trailing `9999` sentinel rows (the record ends mid-2026). The
+  mechanics, adjudicated from source (2026-07-09):
+  - `9999` is a per-field "generate this value" instruction to CLIGEN —
+    `day_gen` sets `nsim=1` (simulate precip) / `msim=1` (simulate temps)
+    per 9999 field (`cligen.f:3076-3079`) — so a sentinel-padded final
+    year yields a **complete** year in the `.cli` with the unobserved
+    tail stochastically filled.
+  - A hard-truncated `.prn` (no padding) ends the `.cli` **mid-year**:
+    post-5.323 CLIGEN terminates cleanly at EOF; pre-5.323 it appended a
+    bogus extra day (the 5.323 fix).
+  - The padding is **workflow-necessary because of WEPP**, not CLIGEN:
+    WEPP's `stmget` reads climate in 10-record chunks
+    (`read(13,*,end=20)`, `stmget.for:121` in the wepp-forest baseline)
+    and a mid-data EOF falls through to stale array contents — a run
+    configured through the final year against a short `.cli` silently
+    recycles the previous chunk's storm records rather than erroring.
+    wepppy therefore pads by default (`df_to_prn(pad_to_end_of_year=True)`,
+    `wepppy/climates/cligen/cligen.py`).
+  - Phase B still crafts the hard-truncated `.prn` variant to pin
+    CLIGEN's post-5.323 EOF behavior (partial-year emission) as a
+    faithful-mode fixture; the padded case pins the sentinel-fill path.
+    Both behaviors are port surface. (The A3 observed-parquet input
+    should make end-of-record semantics typed and explicit — this
+    sentinel archaeology is the argument for it.)
 
 ## Provenance
 
