@@ -1,0 +1,8 @@
+[package]
+name = "cligen"
+description = "Rust implementation of the CLIGEN stochastic weather generator (source-code-authority port of CLIGEN 5.32.x)"
+edition.workspace = true
+version.workspace = true
+repository.workspace = true
+
+[dependencies]

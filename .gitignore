@@ -1,0 +1,5 @@
+/target
+**/*.rs.bk
+.DS_Store
+# work-package raw run trees (fixture captures commit manifests, not raw runs)
+docs/work-packages/**/raw/

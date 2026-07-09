@@ -1,0 +1,37 @@
+# Interface Specifications
+
+Specifications for every surface another party depends on: file formats,
+API seams, producer/consumer boundaries. The rule this directory enforces
+(ADR-0001 §5): **no interface whose semantics live only in a binary.**
+
+## Model
+
+One document per surface, `SPEC-<NAME>.md`. Each spec states:
+
+- **Surface** — what is being specified (format, API seam, CLI behavior).
+- **Producers / consumers** — who writes it, who reads it, on which side
+  of the boundary authority sits.
+- **Authority basis** — for ported behavior, the `reference/cligen532/`
+  source locations that define it (source-code authority per ADR-0001);
+  for extensions, the generation profile that introduces it.
+- **Semantics** — fields, units, invariants, failure behavior. Fail-closed
+  is the default posture for malformed input.
+- **Provenance obligations** — what lineage the surface must carry
+  (profile, seed, par lineage, program version) where applicable.
+
+Specs are authored with or before the code that implements them, inside
+the owning work package. Keep them as short as correctness allows; this is
+not the openWEPP science-contract apparatus and should not grow its
+machinery without an ADR.
+
+## Registry
+
+| Spec | Surface | Status |
+|---|---|---|
+| SPEC-PAR | Station parameter (`.par`) format + typed par model | planned |
+| SPEC-CLI-TEXT | `.cli` text output (WEPP-compatible) | planned |
+| SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
+| SPEC-OBSERVED-INPUT | Observed-series input seam (`.prn` compat; f64 parquet) | planned |
+| SPEC-GENERATOR-CORE | Generator API: modes, profiles, seeds, state | planned |
+| SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
+| SPEC-PYO3 | Python API surface | planned |
