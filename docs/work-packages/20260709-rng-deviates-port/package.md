@@ -1,7 +1,7 @@
 # RNG + Deviates Port (with the QC/ACM chain)
 
-Status: `STAGE-C-R1-COMPLETE` (handed back for Claude Code Stage R2;
-package not closed)
+Status: `EXECUTED-COMPLETE` (Stage R2 closed 2026-07-09;
+`artifacts/final-review-claude.md`)
 Date: 2026-07-09
 Evidence mode: Stages S/C/R1 — Ran (tap capture, direct vectors,
 full-stream identity, independent review, all gates; see
