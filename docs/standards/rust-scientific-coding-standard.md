@@ -18,9 +18,11 @@ document is the normative elaboration.
 3. **Transcendentals in faithful paths go through pinned
    implementations**, never `std` float methods, so results are
    platform-independent. Concretely (adjudicated by fixture evidence,
-   2026-07-09): f64 functions (`pow`, `exp`) use the `libm` crate,
-   which matched the reference runtime bit-for-bit across the full tap
-   capture; f32 functions (`logf`, `cosf`) use `cligen::libm_pinned` —
+   2026-07-09): f64 `pow` and `dstg`'s `exp` use the `libm` crate,
+   which matched the reference runtime bit-for-bit across the full `dstg`
+   capture. ACM's broader `exp` surface uses `cligen::libm_pinned` because
+   `libm::exp(-10)` missed its direct Fortran vector by one ULP. f32
+   functions (`logf`, `cosf`) use `cligen::libm_pinned` —
    transcriptions of the glibc/ARM algorithms — because the `libm`
    crate's f32 versions diverge from the reference runtime on ~7.5% of
    captured inputs. `sqrtf` is IEEE-exact and needs no pinning. A new

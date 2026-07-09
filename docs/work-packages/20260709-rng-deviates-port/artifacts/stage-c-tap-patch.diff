@@ -1,0 +1,87 @@
+--- reference/cligen532/cligen.f
++++ artifacts/stage-c-tap-build/cligen.f
+@@ -642,6 +642,9 @@
+ c ---- Lahey:
+ c     numarg = narg()
+ c ---- Solaris (System-V UNIX), GNU, & Watcom:
++      open(unit=94,file='cligen_rs.tap',status='unknown')
++      open(unit=95,file='cligen_stagec.tap',status='unknown')
++      call stagec_vectors
+       numarg = iargc()
+ c     write(*,*) 'NUMARG:', numarg
+ c
+@@ -4061,6 +4064,15 @@
+ c     real ransum,ranavg,level
+       integer level0,level1,chisum(20),ichi
+       real ransum,level,level2
++c -- TAP (Stage C) locals.  The tap is observational only: values are
++c -- copied into equivalenced scratch storage immediately before writes.
++      integer tapi,tapj,tappr1,tappr2,taplr(9),tapra(31)
++      integer*8 tapgdb,tapgsb
++      real tapprv1,tapprv2,taplrv(9),taprav(31)
++      double precision tapgdv,tapgsv
++      equivalence (tapprv1,tappr1),(tapprv2,tappr2)
++      equivalence (taplrv,taplr),(taprav,tapra)
++      equivalence (tapgdv,tapgdb),(tapgsv,tapgsb)
+ c     ransum -- sum of this month's random std norm deviates
+ c     x2sum  -- sum of S^2 (ie, Xi^2) for this month's random std norm deviates
+ c     chisum -- count of the chi-square bins for this month only
+@@ -4087,6 +4099,24 @@
+ c     ellx   -- Saves the value of "ell" in case we re-do preip amts.
+ c     lst_rx -- Saves the value of "last_r(j)" in case of a re-do
+ c
++c -- TAP (Stage C): complete replay entry state.  mox is intentionally
++c -- recorded before any array access to characterize the named mox=0 risk.
++      tapprv1 = prw(mox,1)
++      tapprv2 = prw(mox,2)
++      do 9001 tapi=1,9
++        taplrv(tapi) = last_r(tapi)
++ 9001 continue
++      write(94,9401) mox,ntd,iyear,iopt,ell,tappr1,tappr2
++      write(94,9402) (k1(tapi),tapi=1,4),(k2(tapi),tapi=1,4),
++     1 (k3(tapi),tapi=1,4),(k4(tapi),tapi=1,4),
++     2 (k5(tapi),tapi=1,4),(k6(tapi),tapi=1,4),
++     3 (k7(tapi),tapi=1,4),(k8(tapi),tapi=1,4),
++     4 (k9(tapi),tapi=1,4),(k10(tapi),tapi=1,4)
++      write(94,9403) (taplr(tapi),tapi=1,9)
++ 9401 format('B',1x,5(i12,1x),2(z8.8,1x))
++ 9402 format('K',1x,40(i12,1x))
++ 9403 format('L',1x,9(z8.8,1x))
++c
+ c ---- update the number of days to end of this month.
+       if(mox.ne.2 .or. ntd.eq.365) then
+         dimi = dim(mox)
+@@ -4336,6 +4366,33 @@
+ c
+  999  continue
+ c
++c -- TAP (Stage C): replay exit state and every value/state surface that
++c -- ranset writes.  Values beyond DIMI in RANARY are included so their
++c -- preserved state is asserted as well.
++      do 9002 tapi=1,9
++        taplrv(tapi) = last_r(tapi)
++ 9002 continue
++      write(94,9404) mox,ell
++      write(94,9402) (k1(tapi),tapi=1,4),(k2(tapi),tapi=1,4),
++     1 (k3(tapi),tapi=1,4),(k4(tapi),tapi=1,4),
++     2 (k5(tapi),tapi=1,4),(k6(tapi),tapi=1,4),
++     3 (k7(tapi),tapi=1,4),(k8(tapi),tapi=1,4),
++     4 (k9(tapi),tapi=1,4),(k10(tapi),tapi=1,4)
++      write(94,9403) (taplr(tapi),tapi=1,9)
++      do 9004 tapj=1,9
++        do 9003 tapi=1,31
++          taprav(tapi) = ranary(tapi,tapj)
++ 9003   continue
++        write(94,9405) tapj,(tapra(tapi),tapi=1,31)
++        tapgdv = g_dsum(tapj,mox)
++        tapgsv = g_ssum(tapj,mox)
++        write(94,9406) tapj,g_dimi(mox),g_dimp(mox),tapgdb,tapgsb,
++     1                 (chicnt(tapj,mox,tapi),tapi=1,20)
++ 9004 continue
++ 9404 format('E',1x,2(i12,1x))
++ 9405 format('A',1x,i3,1x,31(z8.8,1x))
++ 9406 format('G',1x,3(i12,1x),2(z16.16,1x),20(i12,1x))
++c
+       return
+       end
+ c

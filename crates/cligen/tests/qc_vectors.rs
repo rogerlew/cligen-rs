@@ -2,8 +2,10 @@
 //! (cligen.f:4453-4588). Trajectory-level verification of `ks_tst` runs
 //! through the dstg replay in tap_identity.rs.
 
+use cligen::acm::AcmState;
 use cligen::crandom3::Crandom3State;
-use cligen::qc::ks_tst;
+use cligen::qc::{conflm, confls, ks_tst};
+use std::path::Path;
 
 fn state_with_bins(n: usize, mox: i32, bins: [i32; 20]) -> Crandom3State {
     let mut cr = Crandom3State {
@@ -64,4 +66,30 @@ fn ks_tst_threshold_edge_uses_f32_statistic() {
     bins[18] -= 4;
     let mut cr = state_with_bins(10, 1, bins);
     assert_eq!(ks_tst(10, &mut cr), 1);
+}
+
+#[test]
+fn confidence_units_match_fortran_bits() {
+    let path =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/taps/stage-c-vectors.tap");
+    let data = std::fs::read_to_string(path).unwrap();
+    let mut acm = AcmState::default();
+    let mut count = 0;
+    for line in data.lines() {
+        let f: Vec<_> = line.split_whitespace().collect();
+        if f.first() == Some(&"CONFLM") {
+            let n = f[1].parse().unwrap();
+            let xbar = f32::from_bits(u32::from_str_radix(f[2], 16).unwrap());
+            let expected = u32::from_str_radix(f[3], 16).unwrap();
+            assert_eq!(conflm(xbar, n, 0.0, 1.0).to_bits(), expected, "{line}");
+            count += 1;
+        } else if f.first() == Some(&"CONFLS") {
+            let n = f[1].parse().unwrap();
+            let x2sum = f32::from_bits(u32::from_str_radix(f[2], 16).unwrap());
+            let expected = u32::from_str_radix(f[3], 16).unwrap();
+            assert_eq!(confls(x2sum, n, &mut acm).to_bits(), expected, "{line}");
+            count += 1;
+        }
+    }
+    assert_eq!(count, 6);
 }
