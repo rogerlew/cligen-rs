@@ -10,3 +10,6 @@ docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/
 docs/work-packages/20260709-rng-deviates-port/artifacts/tap-build/
 docs/work-packages/20260709-rng-deviates-port/artifacts/stage-c-tap-build/
 docs/work-packages/20260709-rng-deviates-port/artifacts/tap-runs/
+# par-monthlies evidence: patched build tree and bulk tap captures stay local (patch + hashes committed)
+docs/work-packages/20260709-par-monthlies-port/artifacts/tap-build/
+docs/work-packages/20260709-par-monthlies-port/artifacts/tap-runs/

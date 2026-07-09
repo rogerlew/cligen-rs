@@ -1,0 +1,228 @@
+--- reference/cligen532/cligen.f	2026-07-09 12:33:05.869510067 -0700
++++ docs/work-packages/20260709-par-monthlies-port/artifacts/tap-build/cligen.f	2026-07-09 16:45:20.979289091 -0700
+@@ -642,6 +642,11 @@
+ c ---- Lahey:
+ c     numarg = narg()
+ c ---- Solaris (System-V UNIX), GNU, & Watcom:
++c -- TAP (par pkg Stage S): open par-state + interpolator taps
++      open(unit=96,file='cligen_par.tap',status='unknown')
++      open(unit=97,file='cligen_f2.tap',status='unknown')
++      open(unit=98,file='cligen_y2.tap',status='unknown')
++      open(unit=99,file='cligen_li.tap',status='unknown')
+       numarg = iargc()
+ c     write(*,*) 'NUMARG:', numarg
+ c
+@@ -2469,6 +2474,9 @@
+ c    2                   timpkd)
+      1    call sta_parms(stidd,index,tp6,wgt,ylt,yll,years,elev,itype,
+      2                   timpkd)
++c -- TAP (par pkg Stage S): intake header record
++      if(ndflag.ne.40) write(96,9601) nst, nstat, igcode
++ 9601 format('H ',i6,1x,i6,1x,i6)
+ c
+ c ****** L2 ENDIF ****
+         endif
+@@ -2925,6 +2933,8 @@
+ 7050  continue
+ c
+       close (10)
++c -- TAP (par pkg Stage S): post-sta_parms par-state snapshot
++      call tapsnap(stidd,ylt,yll,years,itype,elev,tp6,timpkd,wgt,site)
+ c       Close the Parameter File and Write the Parameter if He Wants.
+ c
+ c     if((istate.le.0 .or. index.le.0) .and. infile.eq."XXX") then
+@@ -7292,6 +7302,10 @@
+ c
+ c      + + + LOCAL VARIABLES + + +
+       real mp(12),ni(12)
++c -- TAP (par pkg Stage S) locals:
++      integer tapb1, tapb2
++      real tapv1, tapv2
++      equivalence (tapv1,tapb1), (tapv2,tapb2)
+ c
+ c      + + + LOCAL DEFINITIONS + + +
+ c     mp      - Number of days from beginning to midpoint of each month
+@@ -7330,6 +7344,11 @@
+       endif
+ c
+       lf = 1.0 - rf
++c -- TAP (par pkg Stage S): per-call record
++      tapv1 = lf
++      tapv2 = rf
++      write(99,9901) mo, jd, ntd, o_mo, tapb1, tapb2
++ 9901 format(i3,1x,i3,1x,i5,1x,i3,1x,z8.8,1x,z8.8)
+ c
+       return
+       end
+@@ -7405,6 +7424,11 @@
+ c      read: ida
+ c     ida         - Julian Day of Year.
+ c
++c -- TAP (par pkg Stage S) locals:
++      integer tapb1
++      real tapv1
++      equivalence (tapv1,tapb1)
++c
+ c + + + END SPECIFICATIONS + + +
+ c
+ c ---- compute the daily values from c & t:
+@@ -7416,6 +7440,10 @@
+      4       + c(4,indpar)*cos(6.2832*float(4)*dd+t(4,indpar))
+      5       + c(5,indpar)*cos(6.2832*float(5)*dd+t(5,indpar))
+      6       + c(6,indpar)*cos(6.2832*float(6)*dd+t(6,indpar))
++c -- TAP (par pkg Stage S): per-call record
++      tapv1 = fouri2
++      write(97,9701) indpar, ida, tapb1
++ 9701 format(i3,1x,i5,1x,z8.8)
+ c
+       return
+       end
+@@ -7568,6 +7596,10 @@
+ c      + + + LOCAL VARIABLES + + +
+       integer dim(12)
+       real idim,ipmt,ipmv,emv0,emv1,ratio,mjd
++c -- TAP (par pkg Stage S) locals:
++      integer tapb1
++      real tapv1
++      equivalence (tapv1,tapb1)
+ c
+ c      + + + LOCAL DEFINITIONS + + +
+ c     dim     - Days in each Month.
+@@ -7652,6 +7684,137 @@
+           endif
+         endif
+       endif
++c -- TAP (par pkg Stage S): per-call record
++      tapv1 = ryf2
++      write(98,9801) mo, jd, ntd, indpar, tapb1
++ 9801 format(i3,1x,i3,1x,i5,1x,i3,1x,z8.8)
++c
++      return
++      end
++c
+ c
++c -- TAP (par pkg Stage S): bit-exact post-sta_parms state snapshot.
++c    Dumps every value sta_parms distributes (cbk1/cbk7/cbk9/cinterp
++c    plus its output arguments) as IEEE-754 bit patterns (Z8.8 via
++c    EQUIVALENCE; the par state is REAL*4 throughout, so no Z16.16
++c    records are needed).
++      subroutine tapsnap
++     i           (stidd,ylt,yll,years,itype,elev,tp6,timpkd,wgt,site)
++      character*41 stidd
++      character*19 site(3)
++      integer years,itype,elev
++      real ylt,yll,tp6,timpkd(0:12),wgt(3)
++      include 'cbk1.inc'
++      include 'cbk7.inc'
++      include 'cbk9.inc'
++      include 'cinterp.inc'
++      real tapv(17)
++      integer tapb(17)
++      equivalence (tapv,tapb)
++      integer i,j,k
++c
++      write(96,9600) stidd
++ 9600 format('SNAP |',a41,'|')
++      write(96,9601) interp,o_mo
++ 9601 format('I ',i6,1x,i6)
++      tapv(1)=ylt
++      tapv(2)=yll
++      tapv(3)=tp6
++      write(96,9602) (tapb(j),j=1,3)
++ 9602 format('A ',3(z8.8,1x))
++      write(96,9603) years,itype,elev
++ 9603 format('Y ',i6,1x,i6,1x,i6)
++      tapv(1)=wgt(1)
++      tapv(2)=wgt(2)
++      tapv(3)=wgt(3)
++      write(96,9604) (tapb(j),j=1,3)
++ 9604 format('W ',3(z8.8,1x))
++      write(96,9605) site(1),site(2),site(3)
++ 9605 format('S |',a19,'|',a19,'|',a19,'|')
++      do 10 i=0,12
++        tapv(1)=timpkd(i)
++        write(96,9606) i,tapb(1)
++ 9606   format('K ',i2,1x,z8.8)
++ 10   continue
++      do 20 i=1,12
++        tapv(1)=rst(i,1)
++        tapv(2)=rst(i,2)
++        tapv(3)=rst(i,3)
++        tapv(4)=prw(i,1)
++        tapv(5)=prw(i,2)
++        write(96,9607) i,(tapb(j),j=1,5)
++ 9607   format('R ',i2,1x,5(z8.8,1x))
++ 20   continue
++      do 30 i=1,12
++        tapv(1)=obmx(i)
++        tapv(2)=obmn(i)
++        tapv(3)=stdtx(i)
++        tapv(4)=stdtm(i)
++        tapv(5)=obsl(i)
++        tapv(6)=stdsl(i)
++        tapv(7)=cvs(i)
++        tapv(8)=cvtx(i)
++        tapv(9)=cvtm(i)
++        tapv(10)=wi(i)
++        tapv(11)=rh(i)
++        tapv(12)=calm(i)
++        write(96,9608) i,(tapb(j),j=1,12)
++ 9608   format('M ',i2,1x,12(z8.8,1x))
++ 30   continue
++      do 50 i=1,16
++        do 40 j=1,4
++          do 35 k=1,12
++            tapv(k)=wvl(i,j,k)
++ 35       continue
++          write(96,9609) i,j,(tapb(k),k=1,12)
++ 9609     format('V ',i2,1x,i1,1x,12(z8.8,1x))
++ 40     continue
++ 50   continue
++      do 70 i=1,12
++        do 60 j=1,17
++          tapv(j)=dir(i,j)
++ 60     continue
++        write(96,9610) i,(tapb(j),j=1,17)
++ 9610   format('D ',i2,1x,17(z8.8,1x))
++ 70   continue
++      do 90 i=1,14
++        tapv(1)=x_bar(i)
++        do 80 j=1,6
++          tapv(1+j)=c(j,i)
++          tapv(7+j)=t(j,i)
++ 80     continue
++        write(96,9611) i,(tapb(j),j=1,13)
++ 9611   format('F ',i2,1x,13(z8.8,1x))
++ 90   continue
++      do 110 i=1,14
++        do 100 j=1,14
++          tapv(j)=emv(j,i)
++ 100    continue
++        write(96,9612) i,(tapb(j),j=1,14)
++ 9612   format('E ',i2,1x,14(z8.8,1x))
++ 110  continue
++      do 130 i=1,14
++        do 120 j=1,13
++          tapv(j)=pmt(j,i)
++ 120    continue
++        write(96,9613) i,(tapb(j),j=1,13)
++ 9613   format('Q ',i2,1x,13(z8.8,1x))
++ 130  continue
++      do 150 i=1,14
++        do 140 j=1,13
++          tapv(j)=pmv(j,i)
++ 140    continue
++        write(96,9614) i,(tapb(j),j=1,13)
++ 9614   format('U ',i2,1x,13(z8.8,1x))
++ 150  continue
++      do 170 i=1,14
++        do 160 j=1,12
++          tapv(j)=xes(j,i)
++ 160    continue
++        write(96,9615) i,(tapb(j),j=1,12)
++ 9615   format('Z ',i2,1x,12(z8.8,1x))
++ 170  continue
++      write(96,9616)
++ 9616 format('DONE')
+       return
+       end
