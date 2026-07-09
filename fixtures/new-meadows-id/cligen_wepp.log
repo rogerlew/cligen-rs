@@ -1,0 +1,95 @@
+
+
+  ********************************************************************
+  *                                                                  *
+  *              USDA - WATER EROSION PREDICTION PROJECT             *
+  *                 WEPP CLIMATE INPUT DATA GENERATOR                *
+  *                                                                  *
+  *                    CONTINUOUS SIMULATION AND                     *
+  *                       SINGLE STORM OPTIONS                       *
+  *                    with Command Line Options,                    *
+  *                        and Corrections to                        *
+  *                  Rainfall Intensity Calculations                 *
+  *                   and Random Number Generation.                  *
+  *                                                                  *
+  *                          VERSION 5.32300                         *
+  *                     Revised from VERSION 4.2                     *
+  *                          September 2024                          *
+  *                                                                  *
+  *           (Use -h or /h to list command line options.)           *
+  *                                                                  *
+  ********************************************************************
+
+
+ id106388.par                                                                                                                                                                                                                                                    
+
+ Weather Generator Options
+ ------- --------- -------
+
+ 1 - Single Year Simulation - Screen
+ 2 - Multiple Year - Screen Output
+ 3 - Multiple Year Simulation - CREAMS - GLEAMS Output File
+ 4 - Selected Single Storm WEPP - Output File
+ 5 - Multiple Year - WEPP Output File
+ 6 - Read Observed P and Temp and Generate Missing Data
+ 7 - Single Design Storm - TR 55 Storm Type WEPP Output File
+ 8 - Exit Weather Generator Program
+
+ Enter generator option (1-8): 
+
+ Enter beginning simulation year (positive integer value; e.g. 1 ): 
+
+ Enter number of years to simulate: 
+
+ Enter output file name (ex. Indy.cli): Station No.   -1
+ Tdew -10 rangecheck executed.
+ Tdew -10 rangecheck executed.
+ Tdew -10 rangecheck executed.
+ Tdew -10 rangecheck executed.
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          17  N:         104
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          17  N:         104
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          17  N:         104
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          17  N:         104
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          17  N:         104
+*** ERROR *** Could not produce desired level of quality in
+                    << Time to Peak    >> random deviates.
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          18  N:         115
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          18  N:         115
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          18  N:         115
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          18  N:         115
+ FAILED K-S -- Parm:Time to Peak    Mon:           6  Year:          18  N:         115
+*** ERROR *** Could not produce desired level of quality in
+                    << Time to Peak    >> random deviates.
+ Tdew -10 rangecheck executed.
+ FAILED K-S -- Parm:Time to Peak    Mon:           7  Year:          23  N:         100
+ FAILED K-S -- Parm:Time to Peak    Mon:           7  Year:          23  N:         100
+ FAILED K-S -- Parm:Time to Peak    Mon:           7  Year:          23  N:         100
+ FAILED K-S -- Parm:Time to Peak    Mon:           7  Year:          23  N:         100
+ FAILED K-S -- Parm:Time to Peak    Mon:           7  Year:          23  N:         100
+*** ERROR *** Could not produce desired level of quality in
+                    << Time to Peak    >> random deviates.
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          25  N:         101
+STOP Normal program termination
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          25  N:         101
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          25  N:         101
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          25  N:         101
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          25  N:         101
+*** ERROR *** Could not produce desired level of quality in
+                    << Precip. Amt.    >> random deviates.
+ Tdew -10 rangecheck executed.
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          26  N:         106
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          26  N:         106
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          26  N:         106
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          26  N:         106
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          26  N:         106
+*** ERROR *** Could not produce desired level of quality in
+                    << Precip. Amt.    >> random deviates.
+ FAILED K-S -- Parm:Time to Peak    Mon:           9  Year:          26  N:         106
+ Tdew -10 rangecheck executed.
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          27  N:         109
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          27  N:         109
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          27  N:         109
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          27  N:         109
+ FAILED K-S -- Parm:Precip. Amt.    Mon:           9  Year:          27  N:         109
+*** ERROR *** Could not produce desired level of quality in
+                    << Precip. Amt.    >> random deviates.

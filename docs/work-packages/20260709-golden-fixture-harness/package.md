@@ -53,10 +53,19 @@ Excluded:
 1. **Phase A — build + decisions.** Reference build with provenance;
    record the libm-pinning decision (which libm the reference links; the
    Rust side pins the `libm` crate) and the interior-taps decision.
-2. **Phase B — fixture matrix.** Select and vendor station inputs; justify
-   climate spread (the intensity machinery is latitude-responsive per
-   `alphb`, so latitude spread is mandatory); capture goldens; write the
-   manifest.
+2. **Phase B — fixture matrix.** The station set is selected and vendored
+   (operator, 2026-07-09): four production cases in
+   [`fixtures/`](../../../fixtures/README.md) — Idaho 44.97°N stochastic,
+   California 34.23°N observed (DAYMET), Australia 30.58°S stochastic,
+   Utah 39.83°N observed with end-of-record sentinel tail (gridMET).
+   Remaining Phase B work: reproduce each case's invocation from the
+   vendored `cligen_wepp.log`/`wepp.inp`; add seed variants beyond each
+   run's production seed; craft the hard-truncated `.prn` variant pinning
+   the exact 5.323 EOF shape; verify the QC-regeneration path is
+   exercised (add a stressing seed if not); capture goldens; write the
+   manifest. Bonus Phase A instrument: diff the pinned reference build's
+   output against each vendored production `wepp.cli` (same source
+   version, unknown build) to measure build/libm sensitivity.
 3. **Phase C — differ.** Implement `.cli` differ in `crates/cligen`
    (or a `tools/` binary — decide by what the port packages will reuse);
    zero-self-diff gate; a deliberate one-ULP perturbation test proving the
