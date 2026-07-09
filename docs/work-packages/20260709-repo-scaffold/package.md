@@ -55,6 +55,7 @@ warnings`, `cargo test` (stub crate), results in
 
 ## Follow-ons
 
-- License for the Rust code not yet declared (operator decision).
+- License declared Apache-2.0 (operator, 2026-07-09, same-day follow-on
+  commit).
 - Roadmap item 1 (reference build + golden fixture harness) is the next
   package; nothing may port before it.

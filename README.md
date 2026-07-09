@@ -69,5 +69,4 @@ first-pass, and roadmap exist; no generator code has been ported yet.
 CLIGEN is a USDA-ARS work in the public domain; the pinned copy and its
 lineage are documented in
 [`reference/cligen532/PROVENANCE.md`](reference/cligen532/PROVENANCE.md).
-License for the Rust code: not yet declared (tracked as a scaffold
-follow-on).
+The Rust code is licensed under [Apache-2.0](LICENSE).
