@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 //! Rust implementation of CLIGEN, the WEPP-family stochastic weather
 //! generator — a source-code-authority port of CLIGEN 5.32.x (ADR-0001).
 //!

@@ -12,6 +12,12 @@ documentation.
 
 ## Hard rules
 
+The normative elaboration of these rules — naming, symbol glossaries,
+attribution headers, Fortran state-translation patterns, numerics
+discipline — is
+[docs/standards/rust-scientific-coding-standard.md](docs/standards/rust-scientific-coding-standard.md);
+read it before writing port code. Summary:
+
 - **Never enable fast-math** or float-reordering optimizations, anywhere.
 - **Respect the precision map**: faithful-mode code uses f32 where the
   Fortran uses REAL*4 and f64 exactly where the source declares double

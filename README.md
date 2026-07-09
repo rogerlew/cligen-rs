@@ -54,6 +54,7 @@ lives in the source.
 | `crates/cligen/` | The library crate (generator core, par model, I/O) |
 | `reference/cligen532/` | Pinned public-domain CLIGEN 5.32.3 Fortran source — the faithful-mode specification |
 | `docs/decisions/` | Architecture decision records |
+| `docs/standards/` | Coding standards (the Rust scientific/port standard) |
 | `docs/specifications/` | Interface specifications: file formats, API seams, producer/consumer surfaces |
 | `docs/port/` | Fortran decomposition analysis and port plan |
 | `docs/work-packages/` | Execution record — one package per unit of work |
