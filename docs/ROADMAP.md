@@ -12,7 +12,6 @@ port-parity-tested is unverifiable.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 1 | **Reference build + golden fixture harness** | Build the vendored Fortran with pinned provenance (compiler, `-ffp-contract=off`, recorded libm); select fixture stations × seeds × modes (generation, single-storm, observed); capture golden `.cli` outputs and interior trajectories; build the trajectory differ (first-divergent-day/variable) | Reproducible fixture set with recorded provenance; differ demonstrates zero self-diff on a Fortran re-run |
 | 2 | **Decomposition ratification** | Full read-through against [port/fortran-decomposition.md](port/fortran-decomposition.md): ratify/correct cluster assignments, map all 13 common blocks to owning units, complete the precision-map audit (every REAL*8 site), fix the module boundaries | Decomposition doc at rev 2 with no `unread` markers on load-bearing units |
 | 3 | **RNG + deviates port** | `randn`, `ranset`, `dstn1`, `dstg`, `nrmd` with the source precision map; SPEC-GENERATOR-CORE seed/state surface | Bit-identical deviate streams vs Fortran taps for all fixture seeds |
 | 4 | **Par model + monthlies** | Typed `.par` parse/serialize (SPEC-PAR); `lintrp`/Fourier interpolation | Parsed values and interpolated dailies match Fortran to declared tolerance (exact where precision map allows) |
@@ -27,6 +26,6 @@ port-parity-tested is unverifiable.
 | A5 | **Storm-model extensions** | Modified duration/intensity derivation; NOAA design-storm curves | Each behind its own versioned generation profile |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
-Items 1–8 are the port (faithful mode). A-items are augmentations and may
-reorder on demand; A1 is first among them because every later extension
-wants the provenance substrate.
+Items 2–8 are the remaining faithful-mode port. A-items are augmentations
+and may reorder on demand; A1 is first among them because every later
+extension wants the provenance substrate.

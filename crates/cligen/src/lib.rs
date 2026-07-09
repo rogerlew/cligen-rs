@@ -8,5 +8,7 @@
 //! planned in `docs/port/fortran-decomposition.md` and lands per the
 //! roadmap, fixtures first.
 
+pub mod cli_diff;
+
 /// The CLIGEN version this port is faithful to.
 pub const REFERENCE_VERSION: &str = "5.32.3";

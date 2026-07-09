@@ -61,12 +61,21 @@ Coverage rationale:
 
 ## Role of the vendored `wepp.cli` files
 
-They are **production cross-references, not goldens**: same source
-version, unknown build. Comparing them against the pinned reference
-build's goldens in Phase A measures build/libm/flag sensitivity for free —
-byte-identity would suggest low libm sensitivity; divergence localizes it
-(first-divergent-day differ). Goldens for port acceptance come only from
-the provenance-pinned reference build.
+They are **production cross-references, not goldens** — and the
+harness-package cross-diff (2026-07-09) adjudicated what each measures:
+
+- The **stochastic** files (`new-meadows-id`, `jeogla-au`) are raw CLIGEN
+  output and came out **identical** to the pinned `-O0` deterministic
+  build across full multi-decade trajectories — the production build's
+  reordering-permitted flags changed nothing on these cases (same
+  host/libm; libm sensitivity across hosts remains unmeasured).
+- The **observed** files (`mt-wilson-ca`, `fish-springs-ut`) are
+  **wepppy-post-processed**, not raw generator output: wind/radiation/dew
+  point values substituted and all fields requantized to one decimal by
+  the wepppyo3 round-trip. They measure that round-trip, not the build.
+
+Goldens for port acceptance come only from the provenance-pinned
+reference build.
 
 Not vendored (deliberately): `wepp_cli.parquet` (wepppy's parquet
 rendering — prior art for SPEC-CLI-PARQUET, retrievable from wepppy) and

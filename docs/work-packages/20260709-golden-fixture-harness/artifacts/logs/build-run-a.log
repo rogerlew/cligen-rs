@@ -1,0 +1,85 @@
+reference/cligen532/cligen.f:1595:72:
+
+ 1595 |          do 20 j =1,31
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: Shared DO termination label 20 at (1)
+reference/cligen532/cligen.f:2911:72:
+
+ 2911 | 6000  dir(i,1)=wvl(1,1,i)
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: DO termination statement which is not END DO or CONTINUE with label 6000 at (1)
+reference/cligen532/cligen.f:5168:72:
+
+ 5168 |       ASSIGN 10 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5174:72:
+
+ 5174 |       ASSIGN 20 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5211:72:
+
+ 5211 |       ASSIGN 90 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5236:72:
+
+ 5236 |       ASSIGN 130 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5271:72:
+
+ 5271 |       ASSIGN 200 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5306:72:
+
+ 5306 |       ASSIGN 270 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5415:72:
+
+ 5415 |       GO TO i99999
+      |                                                                        1
+Warning: Deleted feature: Assigned GOTO statement at (1)
+reference/cligen532/cligen.f:5510:72:
+
+ 5510 |       ASSIGN 10 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5518:72:
+
+ 5518 |       ASSIGN 20 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5599:72:
+
+ 5599 |       ASSIGN 200 TO i99999
+      |                                                                        1
+Warning: Deleted feature: ASSIGN statement at (1)
+reference/cligen532/cligen.f:5699:72:
+
+ 5699 |       GO TO i99999
+      |                                                                        1
+Warning: Deleted feature: Assigned GOTO statement at (1)
+reference/cligen532/cligen.f:5979:72:
+
+ 5979 |       IF (t) 40,10,20
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: Arithmetic IF statement at (1)
+reference/cligen532/cligen.f:6072:72:
+
+ 6072 |       IF (m) 40,30,10
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: Arithmetic IF statement at (1)
+reference/cligen532/cligen.f:6477:72:
+
+ 6477 |       IF (iop-2) 280,290,300
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: Arithmetic IF statement at (1)
+reference/cligen532/cligen.f:6523:72:
+
+ 6523 |       IF (iop-2) 340,350,360
+      |                                                                        1
+Warning: Fortran 2018 deleted feature: Arithmetic IF statement at (1)

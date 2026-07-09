@@ -24,4 +24,4 @@ Start from [templates/package.md](templates/package.md).
 | Package | Status |
 |---|---|
 | [20260709-repo-scaffold](20260709-repo-scaffold/package.md) | EXECUTED-COMPLETE |
-| [20260709-golden-fixture-harness](20260709-golden-fixture-harness/package.md) | SCAFFOLDED |
+| [20260709-golden-fixture-harness](20260709-golden-fixture-harness/package.md) | EXECUTED-COMPLETE |

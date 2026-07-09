@@ -1,0 +1,7 @@
+comparison\texit_code\tlog
+zero-self-new-meadows\t0\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/differ-zero-self.log
+perturbed-new-meadows-duration\t1\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/differ-perturbation.log
+production-new-meadows\t0\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/diff-production-new-meadows-id.log
+production-jeogla\t0\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/diff-production-jeogla-au.log
+production-mt-wilson\t1\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/diff-production-mt-wilson-ca.log
+production-fish-springs\t1\tdocs/work-packages/20260709-golden-fixture-harness/artifacts/logs/diff-production-fish-springs-ut.log

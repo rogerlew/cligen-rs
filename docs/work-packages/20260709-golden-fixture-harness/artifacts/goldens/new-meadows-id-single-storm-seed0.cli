@@ -1,0 +1,17 @@
+5.32300
+   2   0   0
+  Station:  NEW MEADOWS R S ID                             CLIGEN VER. 5.32300 -r:    0 -I: 0
+ Latitude Longitude Elevation (m) Obs. Years   Beginning year  Years simulated Command Line:
+    44.97  -116.28        1176          40          12              -1          -iid106388.par -t4 -owepp.cli 
+ Observed monthly ave max temperature (C)
+  -0.9   2.7   7.6  12.8  17.7  22.7  28.9  28.6  23.6  15.7   5.8  -0.8
+ Observed monthly ave min temperature (C)
+ -13.1 -11.7  -6.9  -3.0   0.4   3.9   6.0   4.7   0.5  -3.9  -7.1 -12.6
+ Observed monthly ave solar radiation (Langleys/day)
+ 128.0 216.0 330.0 448.0 555.0 625.0 656.0 574.0 443.0 288.0 148.0 112.0
+ Observed monthly ave precipitation (mm)
+  55.0  54.6  49.4  38.5  41.5  42.4  19.2  17.6  24.6  34.9  52.1  68.0
+ da mo year  prcp  dur   tp     ip  tmax  tmin  rad  w-vl w-dir  tdew
+             (mm)  (h)               (C)   (C) (l/d) (m/s)(Deg)   (C)
+ 15  6    12  57.1  6.00 0.40   4.00  14.6   1.0 619.  5.7  305.   2.7
+  

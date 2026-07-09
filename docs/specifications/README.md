@@ -30,6 +30,7 @@ machinery without an ADR.
 |---|---|---|
 | SPEC-PAR | Station parameter (`.par`) format + typed par model | planned |
 | SPEC-CLI-TEXT | `.cli` text output (WEPP-compatible) | planned |
+| [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
 | SPEC-OBSERVED-INPUT | Observed-series input seam (`.prn` compat; f64 parquet) | planned |
 | SPEC-GENERATOR-CORE | Generator API: modes, profiles, seeds, state | planned |

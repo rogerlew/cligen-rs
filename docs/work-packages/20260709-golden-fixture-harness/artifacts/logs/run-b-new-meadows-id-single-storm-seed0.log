@@ -1,0 +1,31 @@
+STOP Normal program termination
+
+
+  ********************************************************************
+  *                                                                  *
+  *              USDA - WATER EROSION PREDICTION PROJECT             *
+  *                 WEPP CLIMATE INPUT DATA GENERATOR                *
+  *                                                                  *
+  *                    CONTINUOUS SIMULATION AND                     *
+  *                       SINGLE STORM OPTIONS                       *
+  *                    with Command Line Options,                    *
+  *                        and Corrections to                        *
+  *                  Rainfall Intensity Calculations                 *
+  *                   and Random Number Generation.                  *
+  *                                                                  *
+  *                          VERSION 5.32300                         *
+  *                     Revised from VERSION 4.2                     *
+  *                          September 2024                          *
+  *                                                                  *
+  *           (Use -h or /h to list command line options.)           *
+  *                                                                  *
+  ********************************************************************
+
+
+ id106388.par                                                                                                                                                                                                                                                    
+
+  Enter Month Day and Year of Storm (mo da yr)
+  Enter Design Storm Amount in Inches (e.g. 6.30)
+  Enter Storm Duration in Hours (e.g. 6)
+  Enter Time to Peak Intensity (% Duration e.g. .4)
+  Enter Maximum Intensity Inches/Hour (e.g. 3.0)

@@ -1,0 +1,14 @@
+# Determinism rerun SHA-256 sums
+
+a26b7c5537c3b94bd4d1ffbd5644806bc37744b2b6ed1dbc49152d6ce619af9c  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/fish-springs-ut-observed-padded-seed0.cli
+32d8459850095eb0884c4b3f439b8c8be54fd02ac340ae1e86037b9b0d7dba39  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/fish-springs-ut-observed-padded-seed17.cli
+7974ffd427a2b1f28d4d13e5b5ab120e600883735556c6c95e860d83c1e78047  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/fish-springs-ut-observed-truncated-seed0.cli
+b31b38dad35f161205ce5e1bb0499f69f5a6886a3bb4b5453dfe4126d9b948ee  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/fish-springs-ut-observed-truncated-seed17.cli
+9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/jeogla-au-seed0.cli
+69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/jeogla-au-seed17.cli
+234f6227b0b3d59b5f5a933f1b11dbf5ac65d554d9ee0334f1bc05a17bb7cab0  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/mt-wilson-ca-observed-seed0.cli
+3fc4ada84eb4e23fd82e0bb8da763de785de78b75e42aece750703b0a1b560c0  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/mt-wilson-ca-observed-seed17.cli
+a069cb61cb4b9579e9735720a6701930586e0ac6e1156118509971adb50a4ea5  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/new-meadows-id-seed0.cli
+b46ce287a8bc3f0a5aed8c9ee2f3ab4db0947ed50d4e4f03c62c8781038b7d8d  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/new-meadows-id-seed17.cli
+cab3d62d554e2dc341750dadd193d56f98fd62e1b133331b132437dbc94f733b  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/new-meadows-id-single-storm-seed0.cli
+29e0ce7faf48efb0b4e3d51457bcf3d79c35a66269fc89012ea398f21a922d70  docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/new-meadows-id-single-storm-seed17.cli

@@ -3,3 +3,6 @@
 .DS_Store
 # work-package raw run trees (fixture captures commit manifests, not raw runs)
 docs/work-packages/**/raw/
+# fixture-harness evidence: binaries and byte-identical rerun copies stay local (hashes committed)
+docs/work-packages/20260709-golden-fixture-harness/artifacts/build-run-*/
+docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/
