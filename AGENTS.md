@@ -22,9 +22,11 @@ read it before writing port code. Summary:
 - **Respect the precision map**: faithful-mode code uses f32 where the
   Fortran uses REAL*4 and f64 exactly where the source declares double
   precision. Do not "upgrade" widths in faithful paths.
-- **Transcendentals in faithful paths** go through the pinned
-  implementations (`libm` crate) — not `std` float methods — so results
-  are reproducible across platforms.
+- **Transcendentals in faithful paths** go through pinned
+  implementations — f64 via the `libm` crate, f32 via
+  `cligen::libm_pinned` — never `std` float methods. New faithful-path
+  transcendentals are adjudicated empirically against captured
+  reference values first (standard §1.3).
 - **`reference/cligen532/` is read-only.** Fixes go upstream; refreshes
   update PROVENANCE.md.
 - **Extensions declare themselves**: new behavior lives behind a

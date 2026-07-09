@@ -1,0 +1,99 @@
+--- reference/cligen532/cligen.f	2026-07-09 12:33:05.869510067 -0700
++++ docs/work-packages/20260709-rng-deviates-port/artifacts/tap-build/cligen.f	2026-07-09 14:55:02.504014733 -0700
+@@ -642,6 +642,10 @@
+ c ---- Lahey:
+ c     numarg = narg()
+ c ---- Solaris (System-V UNIX), GNU, & Watcom:
++c -- TAP (Stage S): open bit-exact tap streams before arg processing
++      open(unit=91,file='cligen_rn.tap',status='unknown')
++      open(unit=92,file='cligen_n1.tap',status='unknown')
++      open(unit=93,file='cligen_dg.tap',status='unknown')
+       numarg = iargc()
+ c     write(*,*) 'NUMARG:', numarg
+ c
+@@ -1710,8 +1714,19 @@
+       data iarrct /30/
+       save array,iarrct
+ c
++c -- TAP (Stage S) locals:
++      integer tapk7(4), tapmox, tapiar, tapba, tapbr
++      real tapva, tapvr
++      equivalence (tapva,tapba), (tapvr,tapbr)
++c
+ c     + + + END SPECIFICATIONS + + +
+ c
++      tapmox = mox
++      tapiar = iarrct
++      tapk7(1) = k7(1)
++      tapk7(2) = k7(2)
++      tapk7(3) = k7(3)
++      tapk7(4) = k7(4)
+       itryct = 0
+       itryc2 = 0
+ c
+@@ -1781,6 +1796,12 @@
+           endif
+         endif
+       if(flg_10 .ne.0) goto 10
++c -- TAP (Stage S): entry state + argument + result bits
++      tapva = ai
++      tapvr = dstg
++      write(93,9301) tapmox, tapiar, tapk7(1), tapk7(2), tapk7(3),
++     1               tapk7(4), tapba, tapbr
++ 9301 format(i3,1x,i3,1x,4i5,1x,z8.8,1x,z8.8)
+ c
+       return
+       end
+@@ -1802,12 +1823,23 @@
+ c
+ c     + + + END SPECIFICATIONS + + +
+ c
++c -- TAP (Stage S) locals:
++      integer tapb1, tapb2, tapb3
++      real tapv1, tapv2, tapv3
++      equivalence (tapv1,tapb1), (tapv2,tapb2), (tapv3,tapb3)
++c
+ c     Note: This algorithm is found on p. 103ff of N. T. Kottegoda's
+ c           "Stochastic Water Resources Technology", Wiley & Sons NY, 1980.
+       dstn1=sqrt(-2.0*alog(rn1))*cos(6.283185*rn2)
+ c ---- range check:
+       if(dstn1 .lt. -10.0) dstn1 = -10.0
+       if(dstn1 .gt. 10.0) dstn1 = 10.0
++c -- TAP (Stage S): argument + result bits
++      tapv1 = rn1
++      tapv2 = rn2
++      tapv3 = dstn1
++      write(92,9201) tapb1, tapb2, tapb3
++ 9201 format(3(z8.8,1x))
+ c
+       return
+       end
+@@ -1989,8 +2021,17 @@
+ c     + + + ARGUMENT DEFINITIONS + + +
+ c     k           - Seed for random number generation.
+ c
++c -- TAP (Stage S) locals:
++      integer tapk(4), tapbit
++      real tapval
++      equivalence (tapval, tapbit)
++c
+ c     + + + END SPECIFICATIONS + + +
+ c
++      tapk(1) = k(1)
++      tapk(2) = k(2)
++      tapk(3) = k(3)
++      tapk(4) = k(4)
+  10   continue
+       k(4)=3*k(4)+k(2)
+       k(3)=3*k(3)+k(1)
+@@ -2011,6 +2052,10 @@
+      1      float(k(4)))*.01
+ c ---- range check:
+       if(randn .le. 0.0 .or. randn .ge. 1.0) goto 10
++c -- TAP (Stage S): entry state + result bits
++      tapval = randn
++      write(91,9101) tapk(1), tapk(2), tapk(3), tapk(4), tapbit
++ 9101 format(4i5,1x,z8.8)
+ c
+       return
+       end

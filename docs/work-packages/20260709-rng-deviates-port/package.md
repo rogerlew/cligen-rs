@@ -1,8 +1,19 @@
 # RNG + Deviates Port (with the QC/ACM chain)
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` (Stage C/R1 with Codex next, then Stage R2
+closes)
 Date: 2026-07-09
-Evidence mode: — (per stage on execution)
+Evidence mode: Stage S — Ran (tap capture, full-stream identity, all
+gates; see `artifacts/gate-results.md`)
+
+Stage S outcome: tap schema + non-invasive patch + 12-fixture capture
+(non-invasiveness proven by golden byte-identity); `randn`/`dstn1`/
+`ks_tst`/`dstg` ported with **full-stream bit-identity** — 19,784,955 +
+26,402,148 + 30,268 records, QC-regeneration draws included; state
+structs (`Crandom3State`, `Cbk7Seeds`, `DstgState`) and
+SPEC-GENERATOR-CORE established; the f32 transcendental adjudication
+resolved by exhaustive evidence (`libm_pinned`, standard §1.3 amended);
+handoff + Codex kickoff in `artifacts/`.
 Execution model: staged, two executors (operator-ratified 2026-07-09) —
 Claude Code writes the design-setting spine; Codex completes the
 mechanical volume and runs gates; each reviews the other; Claude holds

@@ -15,9 +15,17 @@ document is the normative elaboration.
 2. **No fast-math, ever.** No float-reordering compiler flags, no
    `fadd_fast`-class intrinsics, no algebraic "simplifications" of source
    expressions. Parenthesization and evaluation order follow the Fortran.
-3. **Transcendentals in faithful paths go through the `libm` crate**, not
-   `std` float methods, so results are pinned across platforms. Native
-   mode may use `std`.
+3. **Transcendentals in faithful paths go through pinned
+   implementations**, never `std` float methods, so results are
+   platform-independent. Concretely (adjudicated by fixture evidence,
+   2026-07-09): f64 functions (`pow`, `exp`) use the `libm` crate,
+   which matched the reference runtime bit-for-bit across the full tap
+   capture; f32 functions (`logf`, `cosf`) use `cligen::libm_pinned` —
+   transcriptions of the glibc/ARM algorithms — because the `libm`
+   crate's f32 versions diverge from the reference runtime on ~7.5% of
+   captured inputs. `sqrtf` is IEEE-exact and needs no pinning. A new
+   transcendental entering a faithful path must be adjudicated the same
+   way: empirically, against captured reference values, before use.
 4. **`#![forbid(unsafe_code)]`** in the `cligen` crate. FFI (PyO3) lives
    in a future separate binding crate with its own rules.
 5. **Fortran-style short symbols are allowed — with a glossary.** Inside
@@ -98,6 +106,13 @@ The source's state constructs map to Rust one way, uniformly:
   with a fail-closed error.
 - **Float literals are copied verbatim** from the source (`.001`, `5.795`,
   `9.210`) with the source line cited where the constant has history.
+- **Clippy vs. faithful shape**: lints that would rewrite source shape
+  or source literals (`approx_constant` on a source constant that
+  resembles π/TAU, `manual_clamp` on sequential range checks,
+  `assign_op_pattern` on `k(2)=3*k(2)`-style updates) get a targeted
+  `#[allow]` with a comment citing the source line — never a global
+  allow, and never the "fix" clippy suggests, which would silently
+  diverge from the specification.
 
 ## 6. Numerics discipline
 

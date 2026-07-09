@@ -33,6 +33,6 @@ machinery without an ADR.
 | [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
 | SPEC-OBSERVED-INPUT | Observed-series input seam (`.prn` compat; f64 parquet) | planned |
-| SPEC-GENERATOR-CORE | Generator API: modes, profiles, seeds, state | planned |
+| [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |
 | SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
 | SPEC-PYO3 | Python API surface | planned |

@@ -26,4 +26,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260709-repo-scaffold](20260709-repo-scaffold/package.md) | EXECUTED-COMPLETE |
 | [20260709-golden-fixture-harness](20260709-golden-fixture-harness/package.md) | EXECUTED-COMPLETE |
 | [20260709-decomposition-ratification](20260709-decomposition-ratification/package.md) | EXECUTED-COMPLETE |
-| [20260709-rng-deviates-port](20260709-rng-deviates-port/package.md) | SCAFFOLDED |
+| [20260709-rng-deviates-port](20260709-rng-deviates-port/package.md) | STAGE-S-COMPLETE |

@@ -4,11 +4,17 @@
 //! generator — a source-code-authority port of CLIGEN 5.32.x (ADR-0001).
 //!
 //! The pinned Fortran source at `reference/cligen532/` is the faithful-mode
-//! specification. No generator code has been ported yet; the module map is
-//! planned in `docs/port/fortran-decomposition.md` and lands per the
-//! roadmap, fixtures first.
+//! specification. Module boundaries follow the ratified decomposition in
+//! `docs/port/fortran-decomposition.md`; every port module carries its
+//! attribution header, symbol glossary, and precision map.
 
+pub mod cbk7;
 pub mod cli_diff;
+pub mod crandom3;
+pub mod deviates;
+pub mod libm_pinned;
+pub mod qc;
+pub mod rng;
 
 /// The CLIGEN version this port is faithful to.
 pub const REFERENCE_VERSION: &str = "5.32.3";

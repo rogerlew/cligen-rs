@@ -6,3 +6,6 @@ docs/work-packages/**/raw/
 # fixture-harness evidence: binaries and byte-identical rerun copies stay local (hashes committed)
 docs/work-packages/20260709-golden-fixture-harness/artifacts/build-run-*/
 docs/work-packages/20260709-golden-fixture-harness/artifacts/determinism-rerun/
+# rng-deviates evidence: patched build tree and bulk tap captures stay local (patch + hashes committed)
+docs/work-packages/20260709-rng-deviates-port/artifacts/tap-build/
+docs/work-packages/20260709-rng-deviates-port/artifacts/tap-runs/
