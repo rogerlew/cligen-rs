@@ -20,7 +20,7 @@ tap manifest).
   per-call assertions), so acceptance does not depend on reconstructing
   global call order across streams.
 
-## Streams
+## Stage S streams
 
 Three tap files per fixture run, opened in the main program before the
 argument loop (so `-r` burn draws are captured), written from inside the
@@ -101,3 +101,42 @@ profile as the goldens (`gfortran -O0 -ffp-contract=off -fprotect-parens
 -fno-fast-math`); compiler, source and binary hashes in
 `tap-manifest.md`. The non-invasiveness gate (patched-binary `.cli` ==
 golden, all 12) is part of the manifest.
+
+## Stage C streams
+
+The additive Stage C patch opens two more files in a second copied build
+tree. It retains every Stage S tap and does not modify the vendored source.
+
+### `cligen_rs.tap` — unit 94, 24 lines per `ranset` call
+
+Each record contains:
+
+- `B`: entry `mox`, `ntd`, `iyear`, `iopt`, `ell`, and the two current
+  `prw` bits;
+- `K` + `L`: all ten entry seed arrays and all nine `last_r` bit patterns;
+- `E`, `K`, + `L`: exit month/`ell`, seeds, and `last_r`;
+- nine `A`/`G` pairs: all 31 `ranary` values for that parameter plus
+  `g_dimi`, `g_dimp`, binary64 `g_dsum`/`g_ssum`, and all 20 `chicnt`
+  cells for the current month.
+
+The replay initializes from the first record, asserts every entry state that
+has no external writer, supplies the three source-identified externally
+advanced streams (`k5`, `k7`, `k10`), invokes `ranset`, then asserts every
+captured exit and common-block value. Thus QC verdicts, retry draw counts,
+mixed-precision accumulation, SAVE state, and preserved `ranary` tail cells
+are checked at every call. At the first record, the replay also computes one
+draw from each captured entry seed and asserts the nine common-block rolling
+values initialized at `cligen.f:4099-4117`.
+
+### `cligen_stagec.tap` — unit 95, direct unit vectors
+
+`stage-c-vector-driver.f` is linked only into the copied reference build. It
+emits integer results directly and every REAL/DOUBLE PRECISION result as
+`Z8.8`/`Z16.16` IEEE bits. The committed 919-line fixture covers exhaustive
+365/366-day `jlt` calendars, the valid single-storm `ntd` shape, `jdt`
+boundaries, the confidence routines, all ACM public units, both reverse-
+communication directions, and all three `gratio` accuracy selectors.
+
+The Stage C build profile, patch/driver/source/binary hashes, per-case stream
+hashes, and the representative final non-invasiveness rerun are recorded in
+`tap-manifest.md`.

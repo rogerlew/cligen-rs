@@ -1,6 +1,6 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 1, Stage S of the RNG/deviates package)
+Status: active (rev 2, Stage C of the RNG/deviates package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
@@ -17,11 +17,15 @@ lines per the ratified decomposition.
 - **One struct per live common block** (coding standard §5), built
   incrementally: a block's struct is created by the first package that
   ports one of its units and gains fields as later packages port
-  theirs. Current homes: [`Crandom3State`] (`crandom3.inc`, complete)
-  and [`Cbk7Seeds`] (`cbk7.inc`, seed members only — the par package
-  extends the block's station-parameter fields).
+  theirs. Current homes: [`Crandom3State`] (`crandom3.inc`, complete),
+  [`Cbk7Seeds`] (`cbk7.inc`, seed members plus the `prw` and rolling
+  deviate fields needed by `ranset`; the par package extends the block's
+  remaining station-parameter fields), and [`Cbk4State`] (`cbk4.inc`,
+  currently the `iopt` slice).
 - **Unit-local `SAVE` state** is a per-unit struct named `<Unit>State`
-  (`DstgState`), owned by the caller and passed `&mut`.
+  (`DstgState`, `RansetState`, `DinvrState`, `DzrorState`), owned by the
+  caller and passed `&mut`. The ACM ENTRY pairs share their host-unit
+  state, aggregated for CDF consumers by `AcmState`.
 - **No globals of any kind.** All state flows through parameters; the
   orchestrating caller (ultimately `modes`, Stage C+) owns every struct.
 
@@ -47,8 +51,8 @@ lines per the ratified decomposition.
   through a return-value side channel that diverges from source
   behavior.
 - Precision follows each module's declared precision map; faithful-path
-  transcendentals follow coding-standard §1.3 (f64: `libm` crate;
-  f32: `libm_pinned`; new ones adjudicated empirically first).
+  transcendentals follow coding-standard §1.3 (pinned, with each new
+  function/domain adjudicated empirically before use).
 - Inputs the generator cannot produce (non-positive uniforms, out-of-
   domain cosine arguments, `mox` outside 1..12) fail closed —
   assert/panic — rather than replicating glibc/Fortran special-case or

@@ -1,10 +1,11 @@
 # RNG + Deviates Port (with the QC/ACM chain)
 
-Status: `STAGE-S-COMPLETE` (Stage C/R1 with Codex next, then Stage R2
-closes)
+Status: `STAGE-C-R1-COMPLETE` (handed back for Claude Code Stage R2;
+package not closed)
 Date: 2026-07-09
-Evidence mode: Stage S — Ran (tap capture, full-stream identity, all
-gates; see `artifacts/gate-results.md`)
+Evidence mode: Stages S/C/R1 — Ran (tap capture, direct vectors,
+full-stream identity, independent review, all gates; see
+`artifacts/gate-results.md`)
 
 Stage S outcome: tap schema + non-invasive patch + 12-fixture capture
 (non-invasiveness proven by golden byte-identity); `randn`/`dstn1`/
@@ -14,6 +15,15 @@ structs (`Crandom3State`, `Cbk7Seeds`, `DstgState`) and
 SPEC-GENERATOR-CORE established; the f32 transcendental adjudication
 resolved by exhaustive evidence (`libm_pinned`, standard §1.3 amended);
 handoff + Codex kickoff in `artifacts/`.
+
+Stage C/R1 outcome: `jdt`/`jlt`, `conflm`/`confls`, the complete
+15-unit ACM cluster, and `ranset` are ported under the spine's state and
+precision patterns. The copied Stage C tap supplies a 919-record direct
+fixture and 2,584 full per-call ranset records; the ignored release gate is
+bit-identical across both Stage S streams and the entire ranset capture. The
+named `mox=0` under-run is characterized and fails closed. R1 reviewed both
+stages, fixed all six findings, resolved the ARM math license provenance,
+and reran every gate green. Stage R2 remains the sole closing stage.
 Execution model: staged, two executors (operator-ratified 2026-07-09) —
 Claude Code writes the design-setting spine; Codex completes the
 mechanical volume and runs gates; each reviews the other; Claude holds
@@ -127,6 +137,10 @@ do not widen tolerances).
 
 - `artifacts/tap-schema.md`, `artifacts/tap-patch.diff`,
   `artifacts/tap-fixtures/` (or manifest + hashes if bulky)
+- `artifacts/stage-c-tap-patch.diff`, `artifacts/stage-c-vector-driver.f`,
+  `artifacts/ranset-mox0-characterization.md`
+- `artifacts/libm-pinned-provenance.md`,
+  `artifacts/arm-optimized-routines-LICENSE.txt`
 - `artifacts/spine-handoff.md`, `artifacts/kickoff-codex.md`
 - `artifacts/review-codex.md`, `artifacts/final-review-claude.md`
 - `artifacts/gate-results.md`
