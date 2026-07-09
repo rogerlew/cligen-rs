@@ -53,9 +53,27 @@ Ran at close: `cargo fmt --check`, `cargo clippy --all-targets -- -D
 warnings`, `cargo test` (stub crate), results in
 `artifacts/gate-results.md`.
 
+## Review
+
+The decomposition first pass was reviewed by Codex (via MCP, read-only,
+2026-07-09; verbatim in
+`artifacts/review-codex-fortran-decomposition.md`): 6 confirmations (2
+with corrections), 8 findings (3 High). Load-bearing catches: an embedded
+15-unit double-precision ACM special-function library missing from the
+inventory; the precision map is systemic, not localized to `DSTG`; and
+the QC self-tests are **trajectory-load-bearing** (`dstg`→`ks_tst`,
+`ranset`→QC→`cdfchi`), so QC/ACM must port with the deviates, not last.
+All findings accepted and applied — the decomposition doc is at rev 2
+with a corrected inventory (48 subprograms + main + block data),
+corrected port order, and expanded hazards (SAVE/ENTRY/block-data state,
+common-block aliasing, dead-code candidates `nrmd`/`chitst`).
+
 ## Follow-ons
 
 - License declared Apache-2.0 (operator, 2026-07-09, same-day follow-on
   commit).
 - Roadmap item 1 (reference build + golden fixture harness) is the next
   package; nothing may port before it.
+- Roadmap item 2 (ratification) still owes the full common-block
+  ownership map, aliasing-site enumeration, and dead-code confirmation
+  for `nrmd`/`chitst`.

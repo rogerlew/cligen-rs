@@ -1,0 +1,86 @@
+# Reference Build + Golden Fixture Harness
+
+Status: `SCAFFOLDED`
+Date: 2026-07-09
+Evidence mode: — (to be Ran on execution)
+
+## Objective
+
+Make "faithful" falsifiable before any port code exists: build the vendored
+Fortran with pinned provenance, capture a golden fixture matrix, and build
+the trajectory differ that reports first-divergent-day/variable. ROADMAP
+item 1; nothing ports before this closes.
+
+## Scope
+
+Included:
+
+- Reference build of `reference/cligen532/` with recorded provenance:
+  compiler + version, full flag set (floating-point contraction disabled,
+  e.g. `-ffp-contract=off`; no fast-math), libm identity, source hash,
+  binary hash/size/mtime.
+- Determinism self-gate: two independent builds/runs reproduce
+  byte-identical outputs for the full fixture matrix.
+- Fixture matrix selection and capture: several stations spanning distinct
+  climates × multiple seeds × the live modes (multi-year generation,
+  single-storm, observed `-O` including a partial-final-year `.prn` for
+  the 5.323 EOF case). Fixture `.par`/`.prn` inputs are vendored with
+  provenance (public-domain USDA station parameter files).
+- The trajectory differ (first Rust code beyond the stub): field-wise
+  `.cli` comparison reporting first divergent day/variable/value-pair;
+  zero-self-diff demonstrated on a Fortran re-run.
+- Fixture manifest: every golden file keyed to build provenance, inputs,
+  seeds, mode, and source hash.
+
+Excluded:
+
+- Any generator port code.
+- Interior-trajectory taps (deviate-stream captures): **design decision in
+  Phase A** — either a recorded tap patch under this package (never
+  modifying `reference/`) or deferral to the RNG port package, which needs
+  taps for its bit-identity gate. Decide and record; do not silently skip.
+- `.cli.parquet`, provenance profiles, and all A-item work.
+
+## Authority
+
+- ADR-0001 §4 (fixture provenance rules) and the hazards in
+  [docs/port/fortran-decomposition.md](../../port/fortran-decomposition.md)
+  §5 (FMA contraction, libm pinning, QC-coupled trajectories — fixture
+  seeds must exercise the QC regeneration path).
+
+## Plan
+
+1. **Phase A — build + decisions.** Reference build with provenance;
+   record the libm-pinning decision (which libm the reference links; the
+   Rust side pins the `libm` crate) and the interior-taps decision.
+2. **Phase B — fixture matrix.** Select and vendor station inputs; justify
+   climate spread (the intensity machinery is latitude-responsive per
+   `alphb`, so latitude spread is mandatory); capture goldens; write the
+   manifest.
+3. **Phase C — differ.** Implement `.cli` differ in `crates/cligen`
+   (or a `tools/` binary — decide by what the port packages will reuse);
+   zero-self-diff gate; a deliberate one-ULP perturbation test proving the
+   differ localizes.
+4. **Phase D — close.** Gates, review pass, catalog/roadmap updates.
+
+## Gates
+
+- `cargo fmt --check`; `cargo clippy --all-targets -- -D warnings`;
+  `cargo test`.
+- Reference-build provenance recorded (ADR-0001 §4).
+- Byte-identical determinism re-run across the full matrix.
+- Differ zero-self-diff + perturbation-localization demonstration.
+
+## Exit criteria
+
+`EXECUTED-COMPLETE`: reproducible fixture set with manifest + provenance;
+differ proven; taps decision recorded. Legitimate holds: reference build
+not reproducible (name the nondeterminism source); required station inputs
+lack public provenance.
+
+## Artifacts
+
+- `artifacts/build-provenance.md`
+- `artifacts/fixture-manifest.md`
+- `artifacts/gate-results.md`
+- `artifacts/review-*.md`
