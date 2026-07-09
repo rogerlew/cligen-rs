@@ -51,6 +51,25 @@ cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
+For any package that adds or changes production functions in `crates/`,
+additionally (adopted 2026-07-09, operator decision — present from the
+first function so no burndown debt ever accumulates):
+
+```
+cargo llvm-cov --workspace --lcov --output-path target/lcov.info
+cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above
+```
+
+No production function above CRAP 30. Because `CRAP = comp²·(1−cov)³ +
+comp`, complexity ≥ 30 fails at any coverage — the gate is a complexity
+cap plus a coverage requirement that scales with complexity. For faithful
+port code this forces decomposition of large Fortran units along the
+source's own internal structure, which is numerically safe in Rust
+(f32/f64 values cross function boundaries exactly; there is no
+excess-precision hazard) and is the decomposition the module map wants
+anyway. Do not satisfy the gate by `--allow`-listing a function without a
+recorded justification in the package artifacts.
+
 Plus package-specific evidence gates (fixture identity, byte-parity on
 `.cli` output, etc.). Evidence from the reference binary is valid only with
 recorded build provenance (compiler, flags including `-ffp-contract=off`,

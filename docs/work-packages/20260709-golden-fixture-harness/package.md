@@ -76,6 +76,9 @@ Excluded:
 
 - `cargo fmt --check`; `cargo clippy --all-targets -- -D warnings`;
   `cargo test`.
+- CRAP ≤ 30 on production functions (`cargo llvm-cov` + `cargo crap
+  --fail-above`, per AGENTS.md) — the differ is the first code this
+  gate measures.
 - Reference-build provenance recorded (ADR-0001 §4).
 - Byte-identical determinism re-run across the full matrix.
 - Differ zero-self-diff + perturbation-localization demonstration.

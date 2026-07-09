@@ -112,7 +112,7 @@ The source's state constructs map to Rust one way, uniformly:
 - A faithful-mode module is done when the trajectory differ shows
   identity against its fixture taps — not when its output "looks right."
 
-## 7. Tests and documentation
+## 7. Tests, coverage, and documentation
 
 - Tests live in separate files (unit tests beside the module only when
   they need private access; integration and fixture tests under
@@ -122,6 +122,13 @@ The source's state constructs map to Rust one way, uniformly:
   from any other module.
 - Public API rustdoc includes `# Units`, `# Numerics`, and `# Errors`
   sections where applicable.
+- **CRAP ≤ 30 for every production function** (adopted 2026-07-09),
+  gated per package via `cargo llvm-cov` + `cargo crap --fail-above`
+  (invocation in `AGENTS.md`). The bound doubles as a complexity cap
+  (~29) — large Fortran units decompose along source-internal structure
+  rather than porting as single functions; the fixture-anchored tests
+  this standard already mandates supply the coverage side. Adopted at
+  repository birth precisely so no burndown inventory can accumulate.
 
 ## 8. What this standard deliberately omits
 
