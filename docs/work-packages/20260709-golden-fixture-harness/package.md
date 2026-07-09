@@ -53,6 +53,20 @@ Excluded:
 1. **Phase A — build + decisions.** Reference build with provenance;
    record the libm-pinning decision (which libm the reference links; the
    Rust side pins the `libm` crate) and the interior-taps decision.
+   **Warning (pre-dispatch finding, 2026-07-09):** the vendored
+   `reference/cligen532/makefile` optimized target is **disqualified for
+   golden generation** — its flags include `-fno-protect-parens`
+   (explicitly permits floating-point expression reordering) and the
+   fast-math family (`-ffinite-math-only`, `-fno-trapping-math`,
+   `-fno-signaling-nans`, `-fno-math-errno`). The fixture build defines
+   its own pinned profile (deterministic: no fast-math family,
+   `-ffp-contract=off`, protect-parens default on; optimization level is
+   a Phase A decision to record). The makefile stays untouched in
+   `reference/` as provenance of how production binaries were built —
+   which also means the vendored production `wepp.cli` cross-references
+   may diverge from the pinned build for flag reasons alone; that
+   divergence is signal, not alarm. Toolchain on this host: gfortran
+   14.2.0 (linuxbrew).
 2. **Phase B — fixture matrix.** The station set is selected and vendored
    (operator, 2026-07-09): four production cases in
    [`fixtures/`](../../../fixtures/README.md) — Idaho 44.97°N stochastic,
