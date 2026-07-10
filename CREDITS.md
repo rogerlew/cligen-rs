@@ -45,6 +45,9 @@ History"](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/cligen/CLIGENDescr
   and confidence-interval acceptance with regeneration) that is
   CLIGEN 5's signature feature. The QC-regeneration draws are
   trajectory-load-bearing; this port replicates them draw-for-draw.
+  Chuck Meyer passed away on 4 February 2007; the journal paper
+  formalizing his quality-control method appeared posthumously
+  (Meyer, Renschler & Vining, below).
 - **Maintainers, per the source changelog**: **Jim Frankenberger**
   (USDA-ARS NSERL) — versions 5.3 through 5.32 (dew point, solar
   radiation, observed-mode tpeak fixes) and host of the canonical
@@ -129,9 +132,11 @@ of copying the LGPL glibc carrier.
   No. 10, USDA-ARS-NSERL, West Lafayette, Indiana.
 - Richardson, C. W., and D. A. Wright. 1984. *WGEN: A Model for
   Generating Daily Weather Variables*. USDA-ARS, ARS-8.
-- Meyer, C. R., C. S. Renschler, and R. C. Vining. 2007.
+- Meyer, C. R., C. S. Renschler, and R. C. Vining. 2008.
   "Implementing quality control on a random number stream to improve
-  a stochastic weather generator."
+  a stochastic weather generator." *Hydrological Processes*
+  22(8):1069-1079. doi:10.1002/hyp.6668 (online 2007; published
+  posthumously for Meyer).
 - "Implementing Quality Control Techniques for Random Number
   Generators to Improve Stochastic Weather Generators: The Cligen
   Experience." 2002 (Applied Climatology conference; as listed on the
