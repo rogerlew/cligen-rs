@@ -260,8 +260,14 @@ fn network_sync_follows_redirects_without_forwarding_auth() {
     au.name = "au-net".to_owned(); // distinct cache key for this vector
     au.archive.url = format!("http://127.0.0.1:{port}/asset");
     let cache = temp_dir("net-sync-cache");
-    let outcome = sync_collection(&au, &cache, None, false).unwrap();
-    assert_eq!(outcome, SyncOutcome::Synced);
+    // R1 finding 5: the vector must carry a real token so the
+    // no-forwarding assertion cannot pass vacuously. No other
+    // in-process test reads this variable; the CLI tests run in
+    // subprocesses with their own environments.
+    std::env::set_var("CLIGEN_SYNC_TOKEN", "test-token-q2");
+    let outcome = sync_collection(&au, &cache, None, false);
+    std::env::remove_var("CLIGEN_SYNC_TOKEN");
+    assert_eq!(outcome.unwrap(), SyncOutcome::Synced);
     assert!(au.cache_dir(&cache).join("au_stations.db").is_file());
 
     let (first, second) = server.join().unwrap();
@@ -269,9 +275,66 @@ fn network_sync_follows_redirects_without_forwarding_auth() {
         first.contains("Accept: application/octet-stream"),
         "{first}"
     );
+    assert!(
+        first.contains("Authorization: Bearer test-token-q2"),
+        "the origin request must carry the token: {first}"
+    );
     // The redirect hop must never carry credentials (pre-signed
     // storage rejects a second Authorization).
     assert!(!second.contains("Authorization"), "{second}");
+}
+
+#[test]
+fn forced_resync_with_bad_payload_preserves_the_existing_entry() {
+    // R1 finding 1 regression: a failed --force re-sync must leave
+    // the previously published entry intact and usable.
+    let cache = temp_dir("force-preserve-cache");
+    let tampered_source = temp_dir("force-preserve-src");
+    let au = au_collection();
+    sync_collection(&au, &cache, Some(&fixtures_dir()), false).unwrap();
+
+    let mut bytes = std::fs::read(fixtures_dir().join(au.archive_file_name())).unwrap();
+    let last = bytes.len() - 1;
+    bytes[last] ^= 0xff;
+    std::fs::write(tampered_source.join(au.archive_file_name()), bytes).unwrap();
+    let error = sync_collection(&au, &cache, Some(&tampered_source), true).unwrap_err();
+    assert!(matches!(error, StationsError::HashMismatch { .. }));
+    assert!(
+        au.cache_dir(&cache).join("au_stations.db").is_file(),
+        "the valid entry must survive a failed forced re-sync"
+    );
+
+    // And a successful --force re-publishes cleanly (no leftover
+    // staging or retired directories).
+    let outcome = sync_collection(&au, &cache, Some(&fixtures_dir()), true).unwrap();
+    assert_eq!(outcome, SyncOutcome::Synced);
+    let versions_dir = au.cache_dir(&cache);
+    let parent = versions_dir.parent().unwrap();
+    let leftovers: Vec<String> = std::fs::read_dir(parent)
+        .unwrap()
+        .map(|entry| entry.unwrap().file_name().to_string_lossy().into_owned())
+        .filter(|name| name != &au.version)
+        .collect();
+    assert!(
+        leftovers.is_empty(),
+        "leftover cache entries: {leftovers:?}"
+    );
+}
+
+#[test]
+fn hostile_catalog_par_values_never_reach_the_filesystem() {
+    // R1 finding 2 regression: a catalog row naming an absolute or
+    // traversing path must not resolve (and must fail the sync).
+    use cligen::stations::resolve_par;
+    let payload = temp_dir("hostile-par-payload");
+    std::fs::write(payload.join("ok.par"), b"x").unwrap();
+    assert!(resolve_par(&payload, "ok.par").is_some());
+    for hostile in ["/etc/hostname", "../ok.par", "sub/../ok.par", "a/b.par", ""] {
+        assert!(
+            resolve_par(&payload, hostile).is_none(),
+            "{hostile:?} must not resolve"
+        );
+    }
 }
 
 #[test]

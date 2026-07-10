@@ -1,10 +1,12 @@
 # Q2 — Station Databases + crates.io Deployability (SPEC-STATION-DB)
 
-Status: `EXECUTED-REVIEW-PENDING` — implementation and all gates/acceptance
-evidence complete (`artifacts/gate-results.md`); Codex review dispatched,
-disposition to follow.
+Status: `EXECUTED-COMPLETE` — **closes ROADMAP item Q2.** Implementation,
+gates, and acceptance evidence Ran (`artifacts/gate-results.md`); Codex R1
+review returned six findings (no HIGH), all six accepted and remediated
+same-day (`artifacts/review-codex.md`, `artifacts/disposition-claude.md`);
+post-remediation gates green. Faithful golden byte identity untouched.
 Date: 2026-07-10
-Evidence mode: — (set at close; evidence in `artifacts/gate-results.md`)
+Evidence mode: **Ran** (`artifacts/gate-results.md`; exit codes direct)
 Execution model: single-executor (operator direction, 2026-07-10 —
 the staged S/C split is forgone for this package's shape): Claude
 Code executes end-to-end, then dispatches Codex for the review pass

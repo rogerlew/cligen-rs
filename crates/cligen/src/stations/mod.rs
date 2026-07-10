@@ -142,9 +142,22 @@ impl Collection {
                 ),
             });
         }
-        if self.version.is_empty() || self.catalog.is_empty() {
+        // R1 finding 2: manifest paths feed `Path::join` — pin them
+        // to safe shapes before any filesystem use.
+        if !is_single_normal_component(&self.version) {
             return Err(StationsError::Manifest {
-                message: format!("{}: version and catalog must be non-empty", self.name),
+                message: format!(
+                    "{}: version {:?} must be a single normal path component",
+                    self.name, self.version
+                ),
+            });
+        }
+        if !is_safe_relative_path(&self.catalog) {
+            return Err(StationsError::Manifest {
+                message: format!(
+                    "{}: catalog {:?} must be a safe payload-relative path",
+                    self.name, self.catalog
+                ),
             });
         }
         Ok(())
@@ -174,13 +187,23 @@ impl Collection {
 
 /// Resolve the cache root (SPEC-STATION-DB §Cache):
 /// `$CLIGEN_DATA_DIR`, else `$XDG_CACHE_HOME/cligen`, else
-/// `$HOME/.cache/cligen` (`%USERPROFILE%` on Windows).
+/// `$HOME/.cache/cligen` (`%USERPROFILE%` on Windows). A relative
+/// environment value is absolutized against the working directory so
+/// emitted station paths are always absolute (R1 finding 6).
 ///
 /// # Errors
 ///
 /// Fails closed when no environment root can be resolved.
 pub fn cache_root_from_env() -> Result<PathBuf, StationsError> {
-    cache_root_from(|name| std::env::var_os(name))
+    let root = cache_root_from(|name| std::env::var_os(name))?;
+    if root.is_absolute() {
+        return Ok(root);
+    }
+    let cwd = std::env::current_dir().map_err(|source| StationsError::Io {
+        context: "resolve working directory for a relative cache root".to_owned(),
+        source,
+    })?;
+    Ok(cwd.join(root))
 }
 
 /// The cache-root resolution rule over an abstract variable lookup
@@ -316,8 +339,16 @@ impl Error for StationsError {
 
 /// Resolve a catalog `par` value to a payload-relative path by the
 /// pinned probe order (SPEC-STATION-DB §Catalog-to-file resolution).
+///
+/// The catalog stores **bare file names** (SPEC-STATION-DB §Payload
+/// format); anything else — separators, `..`, absolute paths — is
+/// hostile or corrupt catalog data and never reaches `Path::join`
+/// (R1 finding 2).
 #[must_use]
 pub fn resolve_par(payload_dir: &Path, par: &str) -> Option<PathBuf> {
+    if !is_single_normal_component(par) {
+        return None;
+    }
     const PROBE_ORDER: [&str; 6] = [
         "",
         "all_years",
@@ -337,6 +368,28 @@ pub fn resolve_par(payload_dir: &Path, par: &str) -> Option<PathBuf> {
         }
     }
     None
+}
+
+/// Exactly one `Component::Normal` — a bare file or directory name.
+fn is_single_normal_component(value: &str) -> bool {
+    let mut components = Path::new(value).components();
+    matches!(
+        (components.next(), components.next()),
+        (Some(std::path::Component::Normal(_)), None)
+    )
+}
+
+/// A non-empty relative path made only of `Component::Normal` parts.
+fn is_safe_relative_path(value: &str) -> bool {
+    let mut any = false;
+    for component in Path::new(value).components() {
+        match component {
+            std::path::Component::Normal(_) => any = true,
+            std::path::Component::CurDir => {}
+            _ => return false,
+        }
+    }
+    any
 }
 
 #[cfg(test)]

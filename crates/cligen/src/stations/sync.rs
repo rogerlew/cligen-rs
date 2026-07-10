@@ -65,16 +65,40 @@ pub fn sync_collection(
         let _ = fs::remove_dir_all(&staging);
         return Err(error);
     }
+    publish_staging(&staging, &target)?;
+    Ok(SyncOutcome::Synced)
+}
 
-    if target.exists() {
-        fs::remove_dir_all(&target)
-            .map_err(|source| io_error("remove superseded cache entry", source))?;
-    }
+/// Failure-safe publication (R1 finding 1): an existing entry is
+/// retired aside, the staging renamed in, and the retired copy
+/// removed only after success — a rename failure restores the prior
+/// entry and cleans staging, so the cache never loses a valid entry.
+fn publish_staging(staging: &Path, target: &Path) -> Result<(), StationsError> {
     if let Some(parent) = target.parent() {
         fs::create_dir_all(parent).map_err(|source| io_error("create cache parents", source))?;
     }
-    fs::rename(&staging, &target).map_err(|source| io_error("publish cache entry", source))?;
-    Ok(SyncOutcome::Synced)
+    let retired = target.with_extension(format!("old-{}", std::process::id()));
+    let had_previous = target.exists();
+    if had_previous {
+        if retired.exists() {
+            fs::remove_dir_all(&retired)
+                .map_err(|source| io_error("clear retired cache entry", source))?;
+        }
+        fs::rename(target, &retired)
+            .map_err(|source| io_error("retire superseded cache entry", source))?;
+    }
+    if let Err(source) = fs::rename(staging, target) {
+        if had_previous {
+            let _ = fs::rename(&retired, target);
+        }
+        let _ = fs::remove_dir_all(staging);
+        return Err(io_error("publish cache entry", source));
+    }
+    if had_previous {
+        fs::remove_dir_all(&retired)
+            .map_err(|source| io_error("remove retired cache entry", source))?;
+    }
+    Ok(())
 }
 
 fn io_error(context: &str, source: std::io::Error) -> StationsError {

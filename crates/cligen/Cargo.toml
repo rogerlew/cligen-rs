@@ -1,6 +1,10 @@
 [package]
 name = "cligen"
 description = "Rust implementation of the CLIGEN stochastic weather generator (source-code-authority port of CLIGEN 5.32.x)"
+# Station payload data ships OUTSIDE the crate (SPEC-STATION-DB);
+# the au test-fixture archive is real payload bytes and must not
+# ride in the crates.io tarball (Q2 R1 finding 3).
+exclude = ["tests/fixtures/stations/"]
 edition.workspace = true
 version.workspace = true
 license.workspace = true

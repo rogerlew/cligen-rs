@@ -29,3 +29,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260709-rng-deviates-port](20260709-rng-deviates-port/package.md) | EXECUTED-COMPLETE |
 | [20260709-par-monthlies-port](20260709-par-monthlies-port/package.md) | SCAFFOLDED |
 | [20260710-q1-quality-report](20260710-q1-quality-report/package.md) | EXECUTED-COMPLETE |
+| [20260710-q2-station-db](20260710-q2-station-db/package.md) | EXECUTED-COMPLETE |
