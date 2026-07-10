@@ -35,4 +35,5 @@ machinery without an ADR.
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |
 | [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |
 | SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
+| [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (contract; implementation with item 8) |
 | SPEC-PYO3 | Python API surface | planned |

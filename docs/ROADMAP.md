@@ -13,7 +13,7 @@ port-parity-tested is unverifiable.
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
 | 7 | **Observed mode** | `day_gen` (`.prn` path) | Observed-mode fixture parity incl. the 5.323 EOF case |
-| 8 | **`.cli` text writer + end-to-end faithful gate** | Output formatting (Fortran FORMAT rounding) | Byte-identical `.cli` files across the fixture matrix; QC subroutines ported and green on both engines |
+| 8 | **`.cli` writer, orchestration, and the `cligen` CLI** | `wxr_gen`/`opt_calc` year-loop port; output formatting (Fortran FORMAT rounding); SPEC-RUNSPEC `inp.yaml` binary — **no legacy argv/stdin interface** (ratified, SPEC-RUNSPEC §Non-goals) | `cligen run` on the 12 golden runspecs reproduces the golden `.cli` files byte-identically; `cligen validate` fail-closed tests green |
 | A1 | **Provenance + `.cli.parquet`** (SPEC-PROVENANCE, SPEC-CLI-PARQUET) | Generation-profile block; parquet writer with provenance columns | Spec ratified; openWEPP-side consumption is openWEPP's package |
 | A2 | **Native f64 mode** | Uniform-f64 engine; measured faithful↔native divergence characterization | Divergence documented per variable; profile `native-f64-v1` |
 | A3 | **Observed parquet input + single-pass substitution + leap-year imputation** (SPEC-OBSERVED-INPUT) | f64 parquet observed series; variable replacement in one pass; leap-day handling | Spec + fixtures; kills the flatfile→wepppyo3→flatfile round-trip |
