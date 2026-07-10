@@ -1,6 +1,7 @@
 # Profile the CLI Runtime Outlier
 
-Status: `EXECUTED-COMPLETE`
+Status: `EXECUTED-COMPLETE` (closed 2026-07-10;
+`artifacts/closeout.md`)
 Date: 2026-07-10
 Evidence mode: Mixed
 
@@ -77,3 +78,4 @@ evidence.
 - `artifacts/profile-report.md`
 - `artifacts/wepp1-benchmark-results.json`
 - `artifacts/wepp1-benchmark-results.csv`
+- `artifacts/closeout.md`
