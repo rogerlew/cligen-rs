@@ -16,3 +16,6 @@ docs/work-packages/20260709-par-monthlies-port/artifacts/tap-runs/
 # daily-core evidence: patched build tree and bulk tap captures stay local (patch + hashes committed)
 docs/work-packages/20260709-daily-core-port/artifacts/tap-build/
 docs/work-packages/20260709-daily-core-port/artifacts/tap-runs/
+# storm-machinery evidence: patched build tree and bulk tap captures stay local (patch + hashes committed)
+docs/work-packages/20260709-storm-machinery-port/artifacts/tap-build/
+docs/work-packages/20260709-storm-machinery-port/artifacts/tap-runs/

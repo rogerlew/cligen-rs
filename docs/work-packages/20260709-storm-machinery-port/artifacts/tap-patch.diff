@@ -1,0 +1,75 @@
+--- /workdir/cligen-rs/reference/cligen532/cligen.f	2026-07-09 12:33:05.869510067 -0700
++++ tap-build/cligen.f	2026-07-09 19:39:25.403661166 -0700
+@@ -642,6 +642,9 @@
+ c ---- Lahey:
+ c     numarg = narg()
+ c ---- Solaris (System-V UNIX), GNU, & Watcom:
++c -- TAP (storm pkg Stage S): open tap streams
++      open(unit=83,file='cligen_sd.tap',status='unknown')
++      open(unit=84,file='cligen_tp.tap',status='unknown')
+       numarg = iargc()
+ c     write(*,*) 'NUMARG:', numarg
+ c
+@@ -2212,6 +2215,11 @@
+ c      
+ CC    include 'ctap2.inc'
+ c
++c -- TAP (storm pkg Stage S) locals:
++      integer tapb1, tapb2
++      real tapv1, tapv2
++      equivalence (tapv1,tapb1), (tapv2,tapb2)
++c
+ c     + + + END SPECIFICATIONS + + +
+ c
+       if (iopt.eq.6) then
+@@ -2231,6 +2239,11 @@
+       diff2=timpkd(i) - timpkd(i-1)
+       ratio= diff1/diff2
+       timepk=0.08333*i - ratio*0.08333
++c -- TAP (storm pkg Stage S): per-call record
++      tapv1 = z
++      tapv2 = timepk
++      write(84,8401) iopt, dax, k10, tapb1, tapb2
++ 8401 format('T ',i2,1x,i3,1x,4i5,1x,z8.8,1x,z8.8)
+ c
+       return
+       end
+@@ -3040,6 +3053,11 @@
+       logical q_gen_started
+       data q_gen_started/.false./
+       save q_gen_started
++c -- TAP (storm pkg Stage S) locals:
++      integer tapbd1, tapbd2, tapbd3, tapbd4
++      real tapvd1, tapvd2, tapvd3, tapvd4
++      equivalence (tapvd1,tapbd1), (tapvd2,tapbd2)
++      equivalence (tapvd3,tapbd3), (tapvd4,tapbd4)
+ c
+ c     + + + SUBROUTINES CALLED + + +
+ c     jlt
+@@ -3126,6 +3144,11 @@
+ c 
+             if(dur(mo,jd).gt.24.0) dur(mo,jd)=24.0
+           endif
++c -- TAP (storm pkg Stage S): duration record (both branches)
++          tapvd1 = dur(mo,jd)
++          tapvd2 = r1
++          write(83,8301) tapbd1, tapbd2
++ 8301     format('D ',z8.8,1x,z8.8)
+ c
+ c        Set duration if a single storm is selected
+ c
+@@ -3170,6 +3193,14 @@
+               tpr=dtp(itype)
+             endif
+ c
++c -- TAP (storm pkg Stage S): storm-day quantities at the row seam
++             tapvd1 = xr
++             tapvd2 = dur(mo,jd)
++             tapvd3 = tpr
++             tapvd4 = xmav
++             write(83,8302) jd, mo, iyear, tapbd1, tapbd2, tapbd3,
++     1                      tapbd4
++ 8302        format('S ',i3,1x,i3,1x,i6,1x,4(z8.8,1x))
+ c            Write WEPP Continuous Storm File
+ c            Writes WEPP Single Storm when nbt=ndt
+              write(7,2000) jd,mo,iyear,xr,dur(mo,jd),tpr,
