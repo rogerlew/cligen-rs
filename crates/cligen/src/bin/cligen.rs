@@ -1,5 +1,5 @@
 use std::io::Write;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 use clap::{Parser, Subcommand};
@@ -111,25 +111,7 @@ fn stations(command: StationsCommand) -> Result<(), String> {
     let manifests = Manifests::embedded();
     let cache_root = cache_root_from_env().map_err(|error| error.to_string())?;
     match command {
-        StationsCommand::List { collection } => {
-            let mut rows = list(&manifests, &cache_root).map_err(|error| error.to_string())?;
-            if let Some(name) = &collection {
-                manifests.get(name).map_err(|error| error.to_string())?;
-                rows.retain(|row| &row.name == name);
-            }
-            for row in rows {
-                let state = if row.synced {
-                    format!("synced ({} stations)", row.stations.unwrap_or(0))
-                } else {
-                    "not synced".to_owned()
-                };
-                println!(
-                    "{:<10} {:<8} {:<24} {}",
-                    row.name, row.version, state, row.description
-                );
-            }
-            Ok(())
-        }
+        StationsCommand::List { collection } => stations_list(&manifests, &cache_root, collection),
         StationsCommand::Nearest {
             lat,
             lon,
@@ -137,68 +119,115 @@ fn stations(command: StationsCommand) -> Result<(), String> {
             collection,
             min_years,
             json,
-        } => {
-            let query = NearestQuery {
+        } => stations_nearest(
+            &manifests,
+            &cache_root,
+            NearestQuery {
                 latitude: lat,
                 longitude: lon,
                 count,
                 collection,
                 min_years,
-            };
-            let rows =
-                nearest(&manifests, &cache_root, &query).map_err(|error| error.to_string())?;
-            if json {
-                let text =
-                    serde_json::to_string_pretty(&rows).map_err(|error| error.to_string())?;
-                println!("{text}");
-            } else {
-                for row in rows {
-                    println!(
-                        "{:<10} {:<28} {:>9.4} {:>9.4} {:>5} yr {:>10.2} km  {}",
-                        row.collection,
-                        row.id,
-                        row.latitude,
-                        row.longitude,
-                        row.years,
-                        row.distance_km,
-                        row.path.display()
-                    );
-                }
-            }
-            Ok(())
-        }
+            },
+            json,
+        ),
         StationsCommand::Sync {
             collections,
             from,
             force,
-        } => {
-            let selected: Vec<&str> = if collections.is_empty() {
-                manifests
-                    .collections
-                    .iter()
-                    .map(|collection| collection.name.as_str())
-                    .collect()
-            } else {
-                collections.iter().map(String::as_str).collect()
-            };
-            for name in selected {
-                let collection = manifests.get(name).map_err(|error| error.to_string())?;
-                let outcome = sync_collection(collection, &cache_root, from.as_deref(), force)
-                    .map_err(|error| error.to_string())?;
-                match outcome {
-                    SyncOutcome::Synced => println!(
-                        "{name} {}: synced into {}",
-                        collection.version,
-                        collection.cache_dir(&cache_root).display()
-                    ),
-                    SyncOutcome::AlreadySynced => {
-                        println!("{name} {}: already synced", collection.version);
-                    }
-                }
+        } => stations_sync(
+            &manifests,
+            &cache_root,
+            &collections,
+            from.as_deref(),
+            force,
+        ),
+    }
+}
+
+fn stations_list(
+    manifests: &Manifests,
+    cache_root: &Path,
+    collection: Option<String>,
+) -> Result<(), String> {
+    let mut rows = list(manifests, cache_root).map_err(|error| error.to_string())?;
+    if let Some(name) = &collection {
+        manifests.get(name).map_err(|error| error.to_string())?;
+        rows.retain(|row| &row.name == name);
+    }
+    for row in rows {
+        let state = if row.synced {
+            format!("synced ({} stations)", row.stations.unwrap_or(0))
+        } else {
+            "not synced".to_owned()
+        };
+        println!(
+            "{:<10} {:<8} {:<24} {}",
+            row.name, row.version, state, row.description
+        );
+    }
+    Ok(())
+}
+
+fn stations_nearest(
+    manifests: &Manifests,
+    cache_root: &Path,
+    query: NearestQuery,
+    json: bool,
+) -> Result<(), String> {
+    let rows = nearest(manifests, cache_root, &query).map_err(|error| error.to_string())?;
+    if json {
+        let text = serde_json::to_string_pretty(&rows).map_err(|error| error.to_string())?;
+        println!("{text}");
+        return Ok(());
+    }
+    for row in rows {
+        println!(
+            "{:<10} {:<28} {:>9.4} {:>9.4} {:>5} yr {:>10.2} km  {}",
+            row.collection,
+            row.id,
+            row.latitude,
+            row.longitude,
+            row.years,
+            row.distance_km,
+            row.path.display()
+        );
+    }
+    Ok(())
+}
+
+fn stations_sync(
+    manifests: &Manifests,
+    cache_root: &Path,
+    collections: &[String],
+    from: Option<&Path>,
+    force: bool,
+) -> Result<(), String> {
+    let selected: Vec<&str> = if collections.is_empty() {
+        manifests
+            .collections
+            .iter()
+            .map(|collection| collection.name.as_str())
+            .collect()
+    } else {
+        collections.iter().map(String::as_str).collect()
+    };
+    for name in selected {
+        let collection = manifests.get(name).map_err(|error| error.to_string())?;
+        let outcome = sync_collection(collection, cache_root, from, force)
+            .map_err(|error| error.to_string())?;
+        match outcome {
+            SyncOutcome::Synced => println!(
+                "{name} {}: synced into {}",
+                collection.version,
+                collection.cache_dir(cache_root).display()
+            ),
+            SyncOutcome::AlreadySynced => {
+                println!("{name} {}: already synced", collection.version);
             }
-            Ok(())
         }
     }
+    Ok(())
 }
 
 fn post_hoc_quality(cli: &PathBuf, par: &PathBuf) -> Result<(), String> {

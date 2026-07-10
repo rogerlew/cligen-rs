@@ -180,21 +180,24 @@ impl Collection {
 ///
 /// Fails closed when no environment root can be resolved.
 pub fn cache_root_from_env() -> Result<PathBuf, StationsError> {
-    if let Some(dir) = std::env::var_os("CLIGEN_DATA_DIR") {
-        if !dir.is_empty() {
-            return Ok(PathBuf::from(dir));
-        }
+    cache_root_from(|name| std::env::var_os(name))
+}
+
+/// The cache-root resolution rule over an abstract variable lookup
+/// (unit-testable without touching process environment).
+fn cache_root_from(
+    var: impl Fn(&str) -> Option<std::ffi::OsString>,
+) -> Result<PathBuf, StationsError> {
+    let present = |name: &str| var(name).filter(|value| !value.is_empty());
+    if let Some(dir) = present("CLIGEN_DATA_DIR") {
+        return Ok(PathBuf::from(dir));
     }
-    if let Some(dir) = std::env::var_os("XDG_CACHE_HOME") {
-        if !dir.is_empty() {
-            return Ok(PathBuf::from(dir).join("cligen"));
-        }
+    if let Some(dir) = present("XDG_CACHE_HOME") {
+        return Ok(PathBuf::from(dir).join("cligen"));
     }
     for home in ["HOME", "USERPROFILE"] {
-        if let Some(dir) = std::env::var_os(home) {
-            if !dir.is_empty() {
-                return Ok(PathBuf::from(dir).join(".cache").join("cligen"));
-            }
+        if let Some(dir) = present(home) {
+            return Ok(PathBuf::from(dir).join(".cache").join("cligen"));
         }
     }
     Err(StationsError::CacheRoot)
@@ -375,5 +378,125 @@ mod tests {
             Err(StationsError::UnknownCollection { .. })
         ));
         assert!(manifests.get("au").is_ok());
+    }
+
+    #[test]
+    fn cache_root_resolution_order_is_pinned() {
+        let with = |pairs: &'static [(&'static str, &'static str)]| {
+            move |name: &str| {
+                pairs
+                    .iter()
+                    .find(|(key, _)| *key == name)
+                    .map(|(_, value)| std::ffi::OsString::from(value))
+            }
+        };
+        assert_eq!(
+            cache_root_from(with(&[("CLIGEN_DATA_DIR", "/data"), ("HOME", "/h")])).unwrap(),
+            PathBuf::from("/data")
+        );
+        assert_eq!(
+            cache_root_from(with(&[("XDG_CACHE_HOME", "/xdg"), ("HOME", "/h")])).unwrap(),
+            PathBuf::from("/xdg/cligen")
+        );
+        assert_eq!(
+            cache_root_from(with(&[("HOME", "/h")])).unwrap(),
+            PathBuf::from("/h/.cache/cligen")
+        );
+        assert_eq!(
+            cache_root_from(with(&[("USERPROFILE", "/u")])).unwrap(),
+            PathBuf::from("/u/.cache/cligen")
+        );
+        // Empty values are absent; nothing set fails closed.
+        assert!(matches!(
+            cache_root_from(with(&[("CLIGEN_DATA_DIR", "")])),
+            Err(StationsError::CacheRoot)
+        ));
+    }
+
+    #[test]
+    fn every_error_variant_renders_its_diagnostic() {
+        let io = |kind: std::io::ErrorKind| std::io::Error::new(kind, "boom");
+        let cases: Vec<(StationsError, &str)> = vec![
+            (
+                StationsError::Manifest {
+                    message: "bad".into(),
+                },
+                "manifest: bad",
+            ),
+            (
+                StationsError::UnknownCollection {
+                    name: "x".into(),
+                    known: vec!["au".into(), "chile".into()],
+                },
+                "known: au, chile",
+            ),
+            (StationsError::CacheRoot, "CLIGEN_DATA_DIR"),
+            (
+                StationsError::NotSynced { name: "au".into() },
+                "stations sync au",
+            ),
+            (
+                StationsError::Io {
+                    context: "read x".into(),
+                    source: io(std::io::ErrorKind::NotFound),
+                },
+                "read x",
+            ),
+            (
+                StationsError::Http {
+                    url: "https://x".into(),
+                    message: "HTTP 404".into(),
+                },
+                "fetch https://x",
+            ),
+            (
+                StationsError::SizeMismatch {
+                    name: "au".into(),
+                    expected: 2,
+                    actual: 1,
+                },
+                "manifest pins 2",
+            ),
+            (
+                StationsError::HashMismatch {
+                    name: "au".into(),
+                    expected: "aa".into(),
+                    actual: "bb".into(),
+                },
+                "nothing was extracted",
+            ),
+            (
+                StationsError::BadArchiveEntry {
+                    name: "au".into(),
+                    entry: "../x".into(),
+                    reason: "path escapes the payload root",
+                },
+                "escapes the payload root",
+            ),
+            (
+                StationsError::Catalog {
+                    name: "au".into(),
+                    message: "no table".into(),
+                },
+                "au: catalog: no table",
+            ),
+            (
+                StationsError::UnresolvedCatalogRow {
+                    name: "au".into(),
+                    par: "x.par".into(),
+                },
+                "does not resolve",
+            ),
+            (
+                StationsError::Query {
+                    message: "no synced collections".into(),
+                },
+                "query: no synced",
+            ),
+        ];
+        for (error, expected) in cases {
+            let rendered = error.to_string();
+            assert!(rendered.contains(expected), "{rendered:?} vs {expected:?}");
+        }
     }
 }

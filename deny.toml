@@ -8,4 +8,11 @@ allow = [
     "BSL-1.0",
     "MIT",
     "Unicode-3.0",
+    # 20260710-q2-station-db: the ureq/rustls TLS tree used only by
+    # `cligen stations sync` (SPEC-STATION-DB). All permissive:
+    # ISC (ring, rustls-webpki, untrusted), BSD-3-Clause (subtle),
+    # CDLA-Permissive-2.0 (webpki-roots CA-bundle data).
+    "ISC",
+    "BSD-3-Clause",
+    "CDLA-Permissive-2.0",
 ]

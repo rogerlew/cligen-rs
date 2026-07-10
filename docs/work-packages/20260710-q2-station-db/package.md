@@ -1,6 +1,8 @@
 # Q2 — Station Databases + crates.io Deployability (SPEC-STATION-DB)
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-REVIEW-PENDING` — implementation and all gates/acceptance
+evidence complete (`artifacts/gate-results.md`); Codex review dispatched,
+disposition to follow.
 Date: 2026-07-10
 Evidence mode: — (set at close; evidence in `artifacts/gate-results.md`)
 Execution model: single-executor (operator direction, 2026-07-10 —

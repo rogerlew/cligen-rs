@@ -213,6 +213,84 @@ fn nearest_requires_a_synced_collection_and_valid_point() {
     ));
 }
 
+/// Minimal one-shot HTTP responder on a loopback listener; returns
+/// the received request head.
+fn respond_once(
+    listener: &std::net::TcpListener,
+    status_line: &str,
+    headers: &str,
+    body: &[u8],
+) -> String {
+    use std::io::{Read as _, Write as _};
+    let (mut stream, _) = listener.accept().unwrap();
+    let mut request = Vec::new();
+    let mut byte = [0u8; 1];
+    while !request.ends_with(b"\r\n\r\n") {
+        stream.read_exact(&mut byte).unwrap();
+        request.push(byte[0]);
+    }
+    write!(
+        stream,
+        "{status_line}\r\n{headers}Content-Length: {}\r\nConnection: close\r\n\r\n",
+        body.len()
+    )
+    .unwrap();
+    stream.write_all(body).unwrap();
+    String::from_utf8_lossy(&request).into_owned()
+}
+
+#[test]
+fn network_sync_follows_redirects_without_forwarding_auth() {
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let port = listener.local_addr().unwrap().port();
+    let archive = std::fs::read(fixtures_dir().join(au_collection().archive_file_name())).unwrap();
+
+    let server = std::thread::spawn(move || {
+        let first = respond_once(
+            &listener,
+            "HTTP/1.1 302 Found",
+            &format!("Location: http://127.0.0.1:{port}/real\r\n"),
+            b"",
+        );
+        let second = respond_once(&listener, "HTTP/1.1 200 OK", "", &archive);
+        (first, second)
+    });
+
+    let mut au = au_collection();
+    au.name = "au-net".to_owned(); // distinct cache key for this vector
+    au.archive.url = format!("http://127.0.0.1:{port}/asset");
+    let cache = temp_dir("net-sync-cache");
+    let outcome = sync_collection(&au, &cache, None, false).unwrap();
+    assert_eq!(outcome, SyncOutcome::Synced);
+    assert!(au.cache_dir(&cache).join("au_stations.db").is_file());
+
+    let (first, second) = server.join().unwrap();
+    assert!(
+        first.contains("Accept: application/octet-stream"),
+        "{first}"
+    );
+    // The redirect hop must never carry credentials (pre-signed
+    // storage rejects a second Authorization).
+    assert!(!second.contains("Authorization"), "{second}");
+}
+
+#[test]
+fn network_error_status_fails_closed() {
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let port = listener.local_addr().unwrap().port();
+    let server = std::thread::spawn(move || {
+        respond_once(&listener, "HTTP/1.1 404 Not Found", "", b"nope");
+    });
+    let mut au = au_collection();
+    au.name = "au-404".to_owned();
+    au.archive.url = format!("http://127.0.0.1:{port}/missing");
+    let cache = temp_dir("net-404-cache");
+    let error = sync_collection(&au, &cache, None, false).unwrap_err();
+    assert!(matches!(error, StationsError::Http { .. }), "{error}");
+    assert!(!au.cache_dir(&cache).exists());
+    server.join().unwrap();
+}
+
 #[test]
 fn cli_sync_nearest_validate_run_round_trip() {
     let binary = env!("CARGO_BIN_EXE_cligen");
@@ -235,6 +313,21 @@ fn cli_sync_nearest_validate_run_round_trip() {
         "sync: {}",
         String::from_utf8_lossy(&sync.stderr)
     );
+
+    // `list` shows sync state for all collections and for one by name.
+    for args in [vec!["stations", "list"], vec!["stations", "list", "au"]] {
+        let listing = Command::new(binary)
+            .env("CLIGEN_DATA_DIR", &cache)
+            .args(&args)
+            .output()
+            .unwrap();
+        assert!(listing.status.success());
+        let text = String::from_utf8_lossy(&listing.stdout);
+        assert!(text.contains("synced (7 stations)"), "{text}");
+        if args.len() == 3 {
+            assert!(!text.contains("us-legacy"), "{text}");
+        }
+    }
 
     let nearest = Command::new(binary)
         .env("CLIGEN_DATA_DIR", &cache)
