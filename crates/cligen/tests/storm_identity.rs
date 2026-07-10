@@ -24,7 +24,10 @@ use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
 use cligen::rng::{RansetState, SeedState};
-use cligen::storm::{storm_block, wet_day_duration, SingleStormParams};
+use cligen::storm::{
+    sing_stm, sing_stm_interactive_output_name, sing_stm_output_file_management, storm_block,
+    wet_day_duration, SingStmOut, SingleStormParams, StormError, TYMAX,
+};
 use std::path::{Path, PathBuf};
 
 /// (tap case dir, .par path, interp, iopt). Single-storm parameters
@@ -65,6 +68,104 @@ const CASES: [(&str, &str, i32, i32); 10] = [
         "mt-wilson-ca/ca046006.par",
         3,
         6,
+    ),
+];
+
+/// Every local full-capture run listed in the storm tap manifest.
+const FULL_CASES: [(&str, &str, i32, i32); 24] = [
+    (
+        "fish-springs-ut-observed-padded-I0",
+        "fish-springs-ut/ut422852.par",
+        0,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I1",
+        "fish-springs-ut/ut422852.par",
+        1,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I3",
+        "fish-springs-ut/ut422852.par",
+        3,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed0",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed17",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed0",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed17",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    ("jeogla-au-I1", "jeogla-au/ASN00057011.par", 1, 5),
+    ("jeogla-au-I2", "jeogla-au/ASN00057011.par", 2, 5),
+    ("jeogla-au-I3", "jeogla-au/ASN00057011.par", 3, 5),
+    ("jeogla-au-seed0", "jeogla-au/ASN00057011.par", 0, 5),
+    ("jeogla-au-seed17", "jeogla-au/ASN00057011.par", 0, 5),
+    (
+        "mt-wilson-ca-observed-I0",
+        "mt-wilson-ca/ca046006.par",
+        0,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-I1",
+        "mt-wilson-ca/ca046006.par",
+        1,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-I3",
+        "mt-wilson-ca/ca046006.par",
+        3,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-seed0",
+        "mt-wilson-ca/ca046006.par",
+        2,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-seed17",
+        "mt-wilson-ca/ca046006.par",
+        2,
+        6,
+    ),
+    ("new-meadows-id-I1", "new-meadows-id/id106388.par", 1, 5),
+    ("new-meadows-id-I2", "new-meadows-id/id106388.par", 2, 5),
+    ("new-meadows-id-I3", "new-meadows-id/id106388.par", 3, 5),
+    ("new-meadows-id-seed0", "new-meadows-id/id106388.par", 0, 5),
+    ("new-meadows-id-seed17", "new-meadows-id/id106388.par", 0, 5),
+    (
+        "new-meadows-id-single-storm-seed0",
+        "new-meadows-id/id106388.par",
+        0,
+        4,
+    ),
+    (
+        "new-meadows-id-single-storm-seed17",
+        "new-meadows-id/id106388.par",
+        0,
+        4,
     ),
 ];
 
@@ -254,6 +355,9 @@ fn single_storm_params(iopt: i32) -> SingleStormParams {
     if iopt == 4 {
         // golden harness single-storm.inp: 2.25 / 6.0 / 0.4 / 1.5
         SingleStormParams {
+            mo: 6,
+            jd: 15,
+            ibyear: 12,
             damt: 2.25,
             usdur: 6.0,
             ustpr: 0.4,
@@ -261,6 +365,201 @@ fn single_storm_params(iopt: i32) -> SingleStormParams {
         }
     } else {
         SingleStormParams::default()
+    }
+}
+
+#[test]
+fn sing_stm_typed_intake_matches_characterized_fixture() {
+    let fixture = repo_root().join(
+        "docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/\
+         new-meadows-id/single-storm.inp",
+    );
+    let input = std::fs::read_to_string(fixture).unwrap();
+    let fields: Vec<&str> = input.split_whitespace().collect();
+    assert_eq!(fields.len(), 7);
+    let params = SingleStormParams {
+        mo: fields[0].parse().unwrap(),
+        jd: fields[1].parse().unwrap(),
+        ibyear: fields[2].parse().unwrap(),
+        damt: fields[3].parse().unwrap(),
+        usdur: fields[4].parse().unwrap(),
+        ustpr: fields[5].parse().unwrap(),
+        uxmav: fields[6].parse().unwrap(),
+    };
+    assert_eq!(params, single_storm_params(4));
+
+    let mut bk4 = Cbk4State {
+        iopt: 4,
+        ..Cbk4State::default()
+    };
+    let out = sing_stm(0, -1, 1, Some(&params), &mut bk4).unwrap();
+    assert_eq!(bk4.mo, 6);
+    assert_eq!(
+        out,
+        SingStmOut {
+            jd: Some(15),
+            iyear: Some(12),
+            numyr: 1,
+        }
+    );
+}
+
+#[test]
+fn sing_stm_defaults_and_deferrals_match_source_branches() {
+    let mut bk4 = Cbk4State {
+        mo: 9,
+        iopt: 1,
+        ..Cbk4State::default()
+    };
+    assert_eq!(
+        sing_stm(1993, -1, -1, None, &mut bk4).unwrap(),
+        SingStmOut {
+            jd: None,
+            iyear: None,
+            numyr: -1,
+        }
+    );
+    assert_eq!(bk4.mo, 9, "iopt=1 does not enter sing_stm intake");
+
+    bk4.iopt = 6;
+    assert_eq!(
+        sing_stm(1993, -1, -1, None, &mut bk4).unwrap(),
+        SingStmOut {
+            jd: None,
+            iyear: Some(1993),
+            numyr: 100,
+        }
+    );
+    assert_eq!(
+        sing_stm(1993, 0, 0, None, &mut bk4).unwrap(),
+        SingStmOut {
+            jd: None,
+            iyear: Some(0),
+            numyr: 0,
+        },
+        "observed mode defaults exact -1 sentinels only"
+    );
+
+    for iopt in [2, 3, 5] {
+        bk4.iopt = iopt;
+        assert_eq!(
+            sing_stm(0, 12, 7, None, &mut bk4).unwrap(),
+            SingStmOut {
+                jd: None,
+                iyear: Some(12),
+                numyr: 7,
+            }
+        );
+    }
+    assert_eq!(
+        sing_stm(0, 0, 7, None, &mut bk4),
+        Err(StormError::InteractiveOnly {
+            surface: "sing_stm beginning simulation year prompt",
+        })
+    );
+    assert_eq!(
+        sing_stm(0, 12, 0, None, &mut bk4),
+        Err(StormError::InteractiveOnly {
+            surface: "sing_stm simulation-year count prompt",
+        })
+    );
+
+    bk4.iopt = 4;
+    let missing = sing_stm(0, 0, 1, None, &mut bk4).unwrap_err();
+    assert_eq!(
+        missing,
+        StormError::InteractiveOnly {
+            surface: "sing_stm option-4/7 storm parameter prompts",
+        }
+    );
+    assert_eq!(
+        missing.to_string(),
+        "interactive-only storm surface: sing_stm option-4/7 storm parameter prompts"
+    );
+
+    bk4.iopt = 7;
+    let params = SingleStormParams {
+        mo: 8,
+        jd: 20,
+        ibyear: 2005,
+        damt: 4.5,
+        ..SingleStormParams::default()
+    };
+    assert_eq!(
+        sing_stm(0, 0, 3, Some(&params), &mut bk4).unwrap(),
+        SingStmOut {
+            jd: Some(20),
+            iyear: Some(2005),
+            numyr: 3,
+        }
+    );
+    assert_eq!(bk4.mo, 8);
+
+    bk4.iopt = 8;
+    let unsupported = sing_stm(0, 1, 1, None, &mut bk4).unwrap_err();
+    assert_eq!(
+        unsupported,
+        StormError::Unsupported {
+            surface: "sing_stm iopt outside 1..=7",
+        }
+    );
+    assert_eq!(
+        unsupported.to_string(),
+        "unsupported storm surface: sing_stm iopt outside 1..=7"
+    );
+    assert_eq!(
+        sing_stm_interactive_output_name(),
+        Err(StormError::InteractiveOnly {
+            surface: "sing_stm output filename prompt",
+        })
+    );
+    assert_eq!(
+        sing_stm_output_file_management(),
+        Err(StormError::Unsupported {
+            surface: "sing_stm Fortran unit-7/8 file management",
+        })
+    );
+}
+
+#[test]
+fn constructed_iopt7_vectors_match_source_override_arithmetic() {
+    // No committed fixture reaches iopt=7. These are constructed
+    // source-formula vectors, not reference-binary golden values.
+    for (damt, floor_expected) in [(2.25f32, false), (10_000.0f32, true)] {
+        let bk3 = Cbk3State {
+            ida: 1,
+            ..Cbk3State::default()
+        };
+        let bk4 = Cbk4State {
+            iopt: 7,
+            ..Cbk4State::default()
+        };
+        let mut bk5 = Cbk5State::default();
+        bk5.r[0] = 0.0;
+        let mut bk7 = Cbk7State::default();
+        let mut bk9 = cligen::cbk9::Cbk9State::default();
+        let mut dg = DstgState::default();
+        let mut cr = Crandom3State::default();
+        let ss = SingleStormParams {
+            damt,
+            ..SingleStormParams::default()
+        };
+        let k7_before = bk7.k7;
+        let k10_before = bk7.k10;
+
+        let q = storm_block(
+            9.0, &[0.0; 13], 2, &ss, &bk3, &bk4, &mut bk5, &mut bk7, &mut bk9, &mut dg, &mut cr,
+        );
+        let xr = damt * 25.4;
+        let raw_xmav = TYMAX[1] / (xr / 24.0);
+        let xmav = if raw_xmav < 1.01 { 1.01 } else { raw_xmav };
+        assert_eq!(q.xr.to_bits(), xr.to_bits());
+        assert_eq!(q.dur.to_bits(), 24.0f32.to_bits());
+        assert_eq!(q.tpr.to_bits(), bk4.dtp[1].to_bits());
+        assert_eq!(q.xmav.to_bits(), xmav.to_bits());
+        assert_eq!(q.xmav == 1.01, floor_expected);
+        assert_eq!(bk7.k7, k7_before, "dry override consumes no alphb draw");
+        assert_eq!(bk7.k10, k10_before, "dry override consumes no timepk draw");
     }
 }
 
@@ -300,7 +599,7 @@ fn full_storm_streams_bit_identical() {
         root.join("docs/work-packages/20260709-storm-machinery-port/artifacts/tap-runs");
     let mut days = 0;
     let mut tps = 0;
-    for (case, par_rel, interp, iopt) in CASES {
+    for (case, par_rel, interp, iopt) in FULL_CASES {
         let cg = parse_cg(&daily_runs.join(case).join("cligen_cg.tap"));
         let sd = parse_sd(&storm_runs.join(case).join("cligen_sd.tap"));
         let tp = parse_tp(&storm_runs.join(case).join("cligen_tp.tap"));
@@ -309,7 +608,8 @@ fn full_storm_streams_bit_identical() {
         tps += t;
     }
     println!("full storm replay: days={days} timepk={tps}");
-    assert!(days > 80_000);
+    assert!(days > 180_000);
+    assert!(tps > 36_000);
 }
 
 #[allow(clippy::too_many_arguments)]

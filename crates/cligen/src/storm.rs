@@ -1,9 +1,9 @@
 //! Origin-Class: CLIGEN-5.32.3-Public-Domain
 //! Migration-Method: source-authority-port (ADR-0001)
-//! Replaces: reference/cligen532/cligen.f:2188-2236 (`timepk`) and the
+//! Replaces: reference/cligen532/cligen.f:2188-2236 (`timepk`), the
 //!   day_gen storm block 3114-3176 (wet-day duration + the
-//!   duration/Ipeak chain with the iopt-4/7 overrides). Stage C adds
-//!   the `sing_stm` typed intake (3325-3493).
+//!   duration/Ipeak chain with the iopt-4/7 overrides), and the typed
+//!   non-interactive surface of `sing_stm` 3325-3493.
 //! Precision-Map: REAL*4 throughout (the only transcendental is the
 //!   already-pinned `logf_pinned`)
 //! Faithful-Acceptance: sd/tp tap identity through the storm day-loop
@@ -21,6 +21,10 @@
 //! | `xmav` | `xmav` | normalized peak intensity (`r5p/(xr/dur)`; floors 1.01) | — |
 //! | `tymax` | `tymax(4)` | per-`itype` r5p ceiling (main DATA, `cligen.f:602`) | mm |
 //! | `usdur`,`ustpr`,`uxmav`,`damt` | same | single-storm user parameters (`sing_stm` reads) | h / fraction / in/h / in |
+//! | `mo`,`jd`,`ibyear` | same | typed storm date and beginning simulation year | month / day / year |
+//! | `numyr`,`ioyr` | same | simulation-year count and observed-input beginning year | year |
+
+use std::fmt;
 
 use crate::cbk3::Cbk3State;
 use crate::cbk4::Cbk4State;
@@ -37,11 +41,17 @@ use crate::rng::{randn, SeedState};
 /// (main-program DATA, `cligen.f:602`).
 pub const TYMAX: [f32; 4] = [180.34, 154.94, 307.34, 330.2];
 
-/// The single-storm parameters `sing_stm` reads (`cligen.f:3384-3399`);
-/// unread garbage in the Fortran for other modes — the port passes
-/// zeros there (only the `iopt = 4`/`7` overrides consume them).
-#[derive(Debug, Clone, Copy, Default)]
+/// The single-storm parameters `sing_stm` reads (`cligen.f:3384-3399`).
+/// Option 7 reads the date and amount but leaves the three option-4
+/// shape fields unused.
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
 pub struct SingleStormParams {
+    /// Storm month (`mo`); written into [`Cbk4State::mo`].
+    pub mo: i32,
+    /// Day of the storm (`jd`).
+    pub jd: i32,
+    /// Beginning simulation year read with the storm date (`ibyear`).
+    pub ibyear: i32,
     /// Design storm amount, inches (`damt`).
     pub damt: f32,
     /// Storm duration, hours (`usdur`, `iopt = 4` only).
@@ -50,6 +60,132 @@ pub struct SingleStormParams {
     pub ustpr: f32,
     /// Maximum intensity, inches/hour (`uxmav`, `iopt = 4` only).
     pub uxmav: f32,
+}
+
+/// Values written by the characterized, non-interactive `sing_stm`
+/// intake surface. `None` means the source mode does not assign that
+/// output (`iopt = 1` assigns neither; continuous modes assign no `jd`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct SingStmOut {
+    pub jd: Option<i32>,
+    pub iyear: Option<i32>,
+    pub numyr: i32,
+}
+
+/// Typed deferrals for `sing_stm` surfaces that remain outside the
+/// non-interactive library API.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum StormError {
+    /// The source would enter a prompt/read loop for missing input.
+    InteractiveOnly { surface: &'static str },
+    /// File/unit plumbing or an unrecognized mode has no library surface.
+    Unsupported { surface: &'static str },
+}
+
+impl fmt::Display for StormError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            StormError::InteractiveOnly { surface } => {
+                write!(f, "interactive-only storm surface: {surface}")
+            }
+            StormError::Unsupported { surface } => {
+                write!(f, "unsupported storm surface: {surface}")
+            }
+        }
+    }
+}
+
+impl std::error::Error for StormError {}
+
+/// Typed, non-interactive `sing_stm` intake (`cligen.f:3325-3421`).
+/// Prompt reads are supplied through [`SingleStormParams`] or scalar
+/// arguments; file opening and overwrite policy are separate deferrals.
+///
+/// # Units
+/// `SingleStormParams` retains the source units: `damt` in inches,
+/// `usdur` in hours, `ustpr` as a fraction, and `uxmav` in inches/hour.
+///
+/// # Numerics
+/// No floating-point computation occurs. Option 6 applies only the
+/// source's exact `-1` defaults (`ibyear = ioyr`, `numyr = 100`).
+///
+/// # Errors
+/// Returns [`StormError::InteractiveOnly`] when required typed values
+/// are absent and the source would prompt, or [`StormError::Unsupported`]
+/// for an option outside 1 through 7.
+pub fn sing_stm(
+    ioyr: i32,
+    ibyear: i32,
+    numyr: i32,
+    single_storm: Option<&SingleStormParams>,
+    bk4: &mut Cbk4State,
+) -> Result<SingStmOut, StormError> {
+    match bk4.iopt {
+        1 => Ok(SingStmOut {
+            jd: None,
+            iyear: None,
+            numyr,
+        }),
+        4 | 7 => {
+            let params = single_storm.ok_or(StormError::InteractiveOnly {
+                surface: "sing_stm option-4/7 storm parameter prompts",
+            })?;
+            bk4.mo = params.mo;
+            Ok(SingStmOut {
+                jd: Some(params.jd),
+                iyear: Some(params.ibyear),
+                numyr,
+            })
+        }
+        6 => Ok(SingStmOut {
+            jd: None,
+            iyear: Some(if ibyear == -1 { ioyr } else { ibyear }),
+            numyr: if numyr == -1 { 100 } else { numyr },
+        }),
+        2 | 3 | 5 => {
+            if ibyear <= 0 {
+                return Err(StormError::InteractiveOnly {
+                    surface: "sing_stm beginning simulation year prompt",
+                });
+            }
+            if numyr <= 0 {
+                return Err(StormError::InteractiveOnly {
+                    surface: "sing_stm simulation-year count prompt",
+                });
+            }
+            Ok(SingStmOut {
+                jd: None,
+                iyear: Some(ibyear),
+                numyr,
+            })
+        }
+        _ => Err(StormError::Unsupported {
+            surface: "sing_stm iopt outside 1..=7",
+        }),
+    }
+}
+
+/// Explicit deferral for the source's output-name prompt loop
+/// (`cligen.f:3425-3430`).
+///
+/// # Errors
+/// Always returns [`StormError::InteractiveOnly`].
+pub fn sing_stm_interactive_output_name() -> Result<(), StormError> {
+    Err(StormError::InteractiveOnly {
+        surface: "sing_stm output filename prompt",
+    })
+}
+
+/// Explicit deferral for unit-7/8 open, rewind, and overwrite handling
+/// (`cligen.f:3432-3488`); filesystem policy belongs to the CLI/output
+/// layer.
+///
+/// # Errors
+/// Always returns [`StormError::Unsupported`].
+pub fn sing_stm_output_file_management() -> Result<(), StormError> {
+    Err(StormError::Unsupported {
+        surface: "sing_stm Fortran unit-7/8 file management",
+    })
 }
 
 /// The chain's per-day output — the numeric inputs of the unit-7

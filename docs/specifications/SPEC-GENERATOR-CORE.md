@@ -1,13 +1,13 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 6, Stage C of the daily-core package)
+Status: active (rev 7, Stage C of the storm-machinery package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
 ## Producers / consumers
 
 Producers: the `cligen` crate's port modules (`rng`, `deviates`, `qc`,
-`acm`, `monthlies`, and `daily`, plus later `storm`/`modes`). Consumers:
+`acm`, `monthlies`, `daily`, and `storm`, plus later `modes`). Consumers:
 every downstream port module, and (through them) the output surfaces.
 Authority basis: `reference/cligen532/` per ADR-0001; unit and state
 lines per the ratified decomposition.
@@ -20,7 +20,8 @@ lines per the ratified decomposition.
   theirs. Current homes: [`Crandom3State`] (`crandom3.inc`, complete),
   [`Cbk7State`] (`cbk7.inc`: seeds, station parameters, rolling
   deviates, and daily generation scratch), [`Cbk4State`] (`cbk4.inc`,
-  `iopt` plus daily `nc`/`nt`/`mo`), [`Cbk1State`] (`cbk1.inc`, the
+  `iopt` plus daily `nc`/`nt`/`mo` and storm `dtp`/`dmxi`),
+  [`Cbk1State`] (`cbk1.inc`, the
   `sta_parms` slice plus daily `wv`/`th`/`pi2`/`tdp`), [`Cbk9State`]
   (`cbk9.inc`, `wi` plus daily `ab`/`ab1`/`rn1`/`r1`),
   [`CinterpState`] (`cinterp.inc`, complete), [`Cbk3State`]
@@ -68,6 +69,21 @@ lines per the ratified decomposition.
   assert/panic — rather than replicating glibc/Fortran special-case or
   out-of-bounds behavior. Each such divergence is documented at the
   function.
+
+## Storm intake seam
+
+- [`SingleStormParams`] is the typed replacement for `sing_stm`'s
+  option-4/7 prompt reads: `mo`, `jd`, `ibyear`, `damt`, `usdur`,
+  `ustpr`, and `uxmav`, in the source's integer/REAL*4 widths and units.
+- `sing_stm(ioyr, ibyear, numyr, single_storm, &mut Cbk4State)` returns
+  only the values the source writes (`jd`, `iyear`, and the possibly
+  defaulted `numyr`). For options 4/7 it also writes the storm month to
+  `Cbk4State.mo`; for option 6, only exact `-1` sentinels default
+  (`ibyear = ioyr`, `numyr = 100`).
+- Missing values that would make the source enter a prompt loop return a
+  typed `InteractiveOnly` error. Output-name prompting and unit-7/8
+  open/overwrite management are explicit typed deferrals; filesystem
+  policy belongs to the future CLI/output surface.
 
 ## Modes
 

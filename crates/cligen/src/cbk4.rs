@@ -1,23 +1,26 @@
 //! Origin-Class: CLIGEN-5.32.3-Public-Domain
 //! Migration-Method: source-authority-port (ADR-0001)
 //! Replaces: reference/cligen532/cbk4.inc (common /bk4/: `iopt` slice
-//!   from the RNG package; `nc`/`nt`/`mo` from the daily package) +
-//!   block-data initializers cligen.f:1064 (`nc`), 1083 (`iopt`)
-//! Precision-Map: integer
-//! Faithful-Acceptance: ranset sequential replay; daily tap identity
-//!   (`mo` threads every per-day record)
+//!   from the RNG package; `nc`/`nt`/`mo` from the daily package;
+//!   `dtp`/`dmxi` from the storm package) + block-data initializers
+//!   cligen.f:1064-1066 (`nc`, `dtp`, `dmxi`), 1083 (`iopt`)
+//! Precision-Map: integer control fields; REAL*4 `dtp`/`dmxi`
+//! Faithful-Acceptance: ranset sequential replay; daily/storm tap
+//!   identity (`mo` threads every per-day record; `dtp` is covered by
+//!   the constructed iopt-7 override vector)
 //!
-//! Remaining `/bk4/` members (`iyr`, `px`, `dtp`, `dmxi`) arrive with
-//! the storm/modes packages (incremental-block pattern,
-//! SPEC-GENERATOR-CORE).
+//! Remaining `/bk4/` members (`iyr`, `px`) arrive with the modes package
+//! (incremental-block pattern, SPEC-GENERATOR-CORE).
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
 //! |---|---|---|---|
 //! | `nc` | `nc(13)` | cumulative days preceding each month, non-leap (block data) | day |
 //! | `nt` | `nt` | 1 if the beginning year is not a leap year — set only for options 4/7 | flag |
-//! | `mo` | `mo` | current month (single production writer: `day_gen`'s `jlt` decomposition) | month |
+//! | `mo` | `mo` | current month (`day_gen`'s `jlt` decomposition, or the typed `sing_stm` intake for options 4/7) | month |
 //! | `iopt` | `iopt` | generator option (1..7 in production) | flag |
+//! | `dtp` | `dtp(4)` | design-storm time-to-peak fraction by storm type | fraction |
+//! | `dmxi` | `dmxi(4)` | initialized design-storm values retained for block completeness; live source never reads them | — |
 
 /// Incremental owning struct for common `/bk4/`.
 #[derive(Debug, Clone, PartialEq)]
