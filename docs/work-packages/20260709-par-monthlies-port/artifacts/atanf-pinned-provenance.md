@@ -1,21 +1,60 @@
-# `atanf_pinned` License and Lineage Provenance
+# `atanf_pinned` Provenance and Notice Resolution
 
-Evidence mode: Ran (2026-07-09) — every file fetch, diff, and sweep
-below was executed this session; hashes and counts are from those runs.
-Resolves the Stage S open item "atanf_pinned SunPro license provenance"
-(spine-handoff.md); Stage R1 verifies this record rather than
-performing the adjudication.
+Evidence mode: Static upstream inspection + Ran fixture adjudication
+(2026-07-09).
 
-## Why this record exists
+## Source identity
 
-`libm_pinned::atanf_pinned` is transcribed from glibc 2.39's
-`sysdeps/ieee754/flt-32/s_atanf.c` because that is what the reference
-runtime executes (the pinned fixture builds link the system libm; the
-`libm` crate's `atanf` was rejected on captured 1-ULP evidence —
-gate-results.md). glibc as a project is LGPL-2.1+, and this repository
-is Apache-2.0 with a no-GPL/LGPL policy, so the transcription's true
-origin had to be established rather than assumed. `cargo deny` cannot
-see source transcriptions — this document is the enforcement.
+- Runtime/source carrier: GNU C Library 2.39 release tarball,
+  `https://ftp.gnu.org/gnu/glibc/glibc-2.39.tar.xz`.
+- Tarball SHA-256:
+  `f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926`.
+- Source file: `sysdeps/ieee754/flt-32/s_atanf.c`; SHA-256:
+  `cc8a6b8845df93191e1ec3c4c95e8fc58daae14b52bfe795c2c81b0989ee4646`.
+- Algorithm origin cross-check: Netlib fdlibm `s_atan.c`,
+  `https://www.netlib.org/fdlibm/s_atan.c`. The 11-term odd/even
+  polynomial and four argument-reduction intervals are the same source
+  family specialized to REAL*4 by `s_atanf.c`.
+
+The Rust code transcribes the control flow and constants from the glibc
+2.39 float source because that is the reference host's runtime behavior.
+The glibc carrier is not used as the license assertion for this unit:
+glibc's `LICENSES` file separately identifies the Sun fdlibm files and
+reproduces their permissive notice.
+
+## Notice (preserved in `libm_pinned.rs`)
+
+Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+
+Developed at SunPro, a Sun Microsystems, Inc. business.
+Permission to use, copy, modify, and distribute this software is freely
+granted, provided that this notice is preserved.
+
+R1 disposition: accepted. The grant expressly permits use, copying,
+modification, and distribution subject to notice preservation; the full
+notice now appears in the Rust module header. This replaces the Stage S
+placeholder that named the origin but left the provenance review open.
+
+## Empirical adjudication
+
+- `libm::atanf` was rejected after a captured `fouri1` composition differed
+  by one ULP at input bits `0xBE794977`.
+- The 11-term transcription matched the system `atanf` on the recorded
+  56,253,020-input C sweep and 3,721,018-pair Rust sweep.
+- The committed full-matrix `sta_parms` snapshot gate verifies every
+  `fouri1` composition for four stations × 14 parameters × six harmonics.
+
+The behavioral evidence is detailed in `gate-results.md`; this artifact
+resolves source identity and notice preservation only.
+
+## Consolidated Stage S adjudication (merged from atanf-sunpro-provenance.md)
+
+The sections below were authored on `main` (commit 84b0617,
+operator-directed post-spine closure) before this branch's R1 fix and
+are merged here so the package carries one provenance record. They
+extend the source-identity resolution above with the float-lineage
+anchor, the single glibc-era delta and its disposition, the huge-band
+sweeps, and a probe hazard.
 
 ## Lineage (verified against fetched sources)
 
@@ -88,16 +127,6 @@ and the value is dictated by the mathematics (merger). Every element
 of protectable *expression* in `atanf_pinned` traces to the
 Sun/NetBSD original under the SunPro notice. Disposition: accepted,
 with this record as the audit trail; R1 reviews the reasoning.
-
-## Notice preservation
-
-The SunPro grant's sole condition is notice preservation. Satisfied
-at two sites:
-
-- `crates/cligen/src/libm_pinned.rs` module header (copyright line +
-  grant text + carrier citation);
-- `artifacts/fdlibm-sunpro-LICENSE.txt` (this package), the notice
-  verbatim with its scope.
 
 ## Behavioral verification of the transcription (Ran)
 

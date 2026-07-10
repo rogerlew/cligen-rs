@@ -1,4 +1,4 @@
-# Gate Results — Stage S
+# Gate Results — Stages S + C/R1
 
 Evidence mode: Ran (2026-07-09). All exit codes checked directly (`$?`),
 never through a piped tail.
@@ -76,7 +76,7 @@ surface (non-text, record count, corrupt numeric field).
   exact infinities and the 0x4C000000 boundary (421,788 pairs, 0
   mismatches) plus NaN passthrough; the NetBSD rev 1.4 original was
   fetched and diffed (lineage + license adjudication in
-  atanf-sunpro-provenance.md). Hazard caught while doing so: GCC
+  atanf-pinned-provenance.md). Hazard caught while doing so: GCC
   `-O2` MPFR constant folding can contaminate C libm probes — pair
   dumps must be built `-fno-builtin` (full note in the provenance
   artifact).
@@ -86,3 +86,47 @@ surface (non-text, record count, corrupt numeric field).
 Grep over `cligen.f:2656-2970` and `7252-7657`: zero
 `double`/`dble`/`d0` sites — the package is REAL*4-clean as the
 ratified census predicted. No f64 discovery to record.
+
+## Stage C/R1 final gate suite (Ran)
+
+Run after all R1 findings were fixed:
+
+| Gate | Command | Exit |
+|---|---|---:|
+| Diff hygiene | `git diff --check` | 0 |
+| Format | `cargo fmt --check` | 0 |
+| Lints | `cargo clippy --all-targets -- -D warnings` | 0 |
+| Tests | `cargo test` — 34 passed, 3 ignored | 0 |
+| Item-3 full streams | `cargo test --release --test tap_identity -- --ignored --nocapture` — randn=19,784,955; dstn1=26,402,148; dstg=30,268; ranset=2,584, all bit-identical | 0 |
+| Par/monthlies full streams | `cargo test --release --test par_state_identity -- --ignored --nocapture` — fouri2=380,436; ryf2=275,452; lintrp=36,889, all bit-identical | 0 |
+| Coverage | `cargo llvm-cov --workspace --lcov --output-path target/lcov.info` | 0 |
+| CRAP | `cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above` — 124 functions, none above 30 | 0 |
+
+The committed ordinary-test evaluator gate replays 1,000 records per
+station for each of `fouri2`, `ryf2`, and `lintrp` (12,000 records total).
+Each stream reconstructs evaluator state from the same fixture `.par` via
+the already snapshot-gated `sta_parms` setup. The full y2 capture includes
+5,292 leap-February records; the full li capture includes 8,784 leap-year
+records.
+
+Ran: `sha256sum` over all 16 non-empty full-stream files consumed by the
+monthlies ignored gate matched the complete digests now recorded in
+`tap-manifest.md`.
+
+CRAP correction record: the first Stage C CRAP run failed with
+`ParError::fmt` at 72 after the intake errors expanded its match surface.
+Direct tests were added for every display/source branch; the final gate
+reports 124 functions and zero above 30. No `--allow` list was used.
+
+## Stage R1 review checks
+
+- Static source-vs-port read: `cligen.f:2153-2184`, `2240-2970`, and
+  `7252-7657` against the intake, parser/distribution, and monthlies Rust
+  modules.
+- Static precision grep over package production modules: no f64 site,
+  standard float transcendental, fast-math flag, or duplicated common state.
+- Ran fail-closed regression checks for non-ASCII, CRLF, tabbed numeric
+  fields, missing files, multi-station deferral, and interactive deferral.
+- Static upstream notice check: glibc 2.39 tarball/source hashes and Netlib
+  origin recorded in `atanf-pinned-provenance.md`; full Sun notice preserved
+  in `libm_pinned.rs`.

@@ -82,7 +82,7 @@ the Stage S spine — transcription fidelity against source lines
 package must be REAL*4-clean; any f64 site is a finding), EQUIVALENCE
 and state-translation compliance, SPEC-PAR fitness for the A4
 consumers, verification of the recorded `atanf_pinned` provenance
-adjudication (`artifacts/atanf-sunpro-provenance.md` — check the
+adjudication (`artifacts/atanf-pinned-provenance.md` — check the
 lineage evidence and the disposition reasoning, not redo the fetches),
 and test/evidence alignment. Findings (numbered, severity, line evidence)
 to `artifacts/review-codex.md`; fix accepted findings before handback.

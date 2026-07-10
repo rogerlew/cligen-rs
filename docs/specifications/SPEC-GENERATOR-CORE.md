@@ -1,6 +1,6 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 3, Stage S of the par+monthlies package)
+Status: active (rev 4, Stage C of the par+monthlies package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
@@ -53,6 +53,13 @@ lines per the ratified decomposition.
   through the passed `&mut` (e.g. `ks_tst` writes `chi_n`), never
   through a return-value side channel that diverges from source
   behavior.
+- A source common-block field may be passed as a plain argument before
+  that block has an owning Rust struct only when the current package is
+  read-only over that field and does not otherwise port the block. Stage
+  C applies this narrow rule to `fouri2`: `ida` is passed directly, while
+  `Cbk3State` is deferred to the daily package that owns the rest of
+  `/bk3/`. The evaluator remains shaped as source arguments followed by
+  common state: `fouri2(indpar, ida, &CinterpState)`.
 - Precision follows each module's declared precision map; faithful-path
   transcendentals follow coding-standard §1.3 (pinned, with each new
   function/domain adjudicated empirically before use).

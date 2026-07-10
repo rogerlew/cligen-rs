@@ -41,7 +41,9 @@
 //! | `site`,`wgt` | same | record-83 wind-station names/weights (blank/0.0 in the corpus) | — |
 
 mod file;
+mod intake;
 mod sta_parms;
 
 pub use file::{ParError, ParFile};
+pub use intake::{header, sta_dat, sta_name, StaDatOut, StaDatSelection};
 pub use sta_parms::{sta_parms, StaParmsOut};

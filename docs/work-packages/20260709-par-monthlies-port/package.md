@@ -1,7 +1,7 @@
 # Par Model + Monthlies Port
 
-Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
-Codex next — dispatch prompt at `artifacts/kickoff-codex.md`)
+Status: `STAGE-R1-COMPLETE` (Stage C implementation/gates and Codex R1
+landed 2026-07-09; awaiting Claude Code Stage R2 — package remains open)
 Stage S outcome: Phase A characterizations recorded (intake path,
 round-trip adjudication → lexeme-preserving invariant); 24-run tap
 capture with 12-golden non-invasiveness gate; SPEC-PAR active;
@@ -10,6 +10,11 @@ snapshot identity gate (4 stations × interp {0,1,2,3}) and byte
 round-trip green; `Cbk7Seeds` renamed `Cbk7State`; `sinf_pinned` +
 `atanf_pinned` adjudicated (`libm::atanf` rejected on captured 1-ULP
 evidence — gate-results.md).
+Stage C/R1 outcome: `lintrp`/`fouri2`/`ryf2`, the characterized
+single-file `sta_dat` path, exact `header`, and typed `sta_name`/multi-file
+deferrals landed; 12,000 committed evaluator records and 692,777 local full
+records are bit-identical; all package gates are green; four R1 findings
+were fixed and none remain open (`artifacts/review-codex.md`).
 Date: 2026-07-09
 Evidence mode: — (per stage on execution)
 Execution model: staged, two executors (the item-3 pattern, operator-
@@ -136,6 +141,7 @@ cannot meet bit-identity within the REAL*4 map (stop and characterize).
 - `artifacts/tap-schema.md` (extension), tap patch + manifest
 - `artifacts/par-roundtrip-adjudication.md`
 - `artifacts/intake-path-characterization.md`
+- `artifacts/atanf-pinned-provenance.md`
 - `artifacts/spine-handoff.md`, `artifacts/kickoff-codex.md`
 - `artifacts/review-codex.md`, `artifacts/final-review-claude.md`
 - `artifacts/gate-results.md`

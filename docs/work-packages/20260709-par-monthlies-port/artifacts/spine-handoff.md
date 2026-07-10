@@ -117,7 +117,7 @@ cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above
   BZ #18196) is dispositioned as an uncopyrightable functional
   constant, and the transcription is sweep-verified against the
   reference runtime across the reduction band, the huge band, ±inf,
-  and NaN. See `atanf-sunpro-provenance.md` +
+  and NaN. See `atanf-pinned-provenance.md` +
   `fdlibm-sunpro-LICENSE.txt`. R1 now *verifies this record* instead
   of performing the adjudication.
 - The canonical `.par` renderer (SPEC-PAR §Serialization invariant 2)

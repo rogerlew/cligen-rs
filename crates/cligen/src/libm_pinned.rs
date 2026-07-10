@@ -3,17 +3,23 @@
 //! Origin-Class: ARM-optimized-routines
 //!   (MIT OR Apache-2.0 WITH LLVM-exception)
 //! Copyright: 2017-2025 Arm Limited (`logf`, `cosf`, `sinf`, `exp`
-//!   families); `atanf` is fdlibm/SunPro (Copyright (C) 1993 Sun
-//!   Microsystems — "Permission to use, copy, modify, and distribute
-//!   this software is freely granted, provided that this notice is
-//!   preserved."), float conversion by Ian Lance Taylor (Cygnus),
-//!   via NetBSD s_atanf.c rev 1.4 carried in glibc 2.39
-//!   sysdeps/ieee754/flt-32/s_atanf.c. Provenance adjudicated: every
-//!   protectable expression is Sun/NetBSD under the SunPro notice;
-//!   the sole glibc-era element is the 2^25 huge-arg threshold
-//!   (functional bug-fix constant, glibc commit 9a71f1fc, BZ #18196).
-//!   Full record + license text: par package artifacts
-//!   (atanf-sunpro-provenance.md, fdlibm-sunpro-LICENSE.txt)
+//!   families).
+//!
+//! `atanf` carries the fdlibm/SunPro notice from glibc 2.39
+//! `sysdeps/ieee754/flt-32/s_atanf.c` verbatim:
+//! Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+//! Developed at SunPro, a Sun Microsystems, Inc. business.
+//! Permission to use, copy, modify, and distribute this software is
+//! freely granted, provided that this notice is preserved.
+//!
+//! Lineage: Sun fdlibm double `s_atan.c`, float conversion by Ian
+//! Lance Taylor (Cygnus) as NetBSD `s_atanf.c` rev 1.4, carried in
+//! glibc 2.39. Every protectable expression is Sun/NetBSD under the
+//! SunPro notice; the sole glibc-era element is the 2^25 huge-arg
+//! threshold (functional bug-fix constant, glibc commit 9a71f1fc,
+//! BZ #18196). Full adjudication, tarball/file hashes, and links:
+//! the par package's `atanf-pinned-provenance.md` +
+//! `fdlibm-sunpro-LICENSE.txt` artifacts.
 //! Migration-Method: algorithm transcription, behavior-verified against
 //!   the reference build's runtime (glibc 2.39, x86-64 FMA ifunc
 //!   variants) over the full tap capture — 26,402,148 dstn1 records,
