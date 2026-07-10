@@ -16,9 +16,11 @@
 
 use std::fmt;
 
-/// Typed `.prn` parse failure — fail closed, no inferred defaults.
-#[derive(Debug)]
+/// Typed `.prn` input failure — fail closed, no inferred defaults.
+#[derive(Debug, PartialEq, Eq)]
 pub enum PrnError {
+    /// `day_gen` was invoked in observed mode without a reader.
+    MissingStream,
     NotText,
     /// 1-based record and columns of an unparseable integer field.
     Field {
@@ -31,6 +33,7 @@ pub enum PrnError {
 impl fmt::Display for PrnError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            PrnError::MissingStream => write!(f, "observed mode requires a .prn stream"),
             PrnError::NotText => write!(f, ".prn file is not ASCII text"),
             PrnError::Field { record, cols, text } => write!(
                 f,
@@ -91,6 +94,9 @@ fn i_field(
 
 impl PrnReader {
     /// Load a `.prn` byte stream (fails closed on non-ASCII).
+    ///
+    /// # Errors
+    /// Returns [`PrnError::NotText`] unless `bytes` is ASCII text.
     pub fn new(bytes: &[u8]) -> Result<Self, PrnError> {
         let text = std::str::from_utf8(bytes).map_err(|_| PrnError::NotText)?;
         if !text.is_ascii() {
@@ -104,6 +110,10 @@ impl PrnReader {
 
     /// The `read(9,1000,end=199)` step: `Ok(None)` is end-of-file
     /// (the 5.323 `moveto = 225` path).
+    ///
+    /// # Errors
+    /// Returns [`PrnError::Field`] for a nonblank field that is not a
+    /// valid `i32`; the reader never substitutes a value.
     #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> Result<Option<PrnDay>, PrnError> {
         if self.pos >= self.records.len() {

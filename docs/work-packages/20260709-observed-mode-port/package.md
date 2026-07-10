@@ -1,14 +1,18 @@
 # Observed Mode / Day-Loop Driver Port
 
-Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
-Codex next — `artifacts/kickoff-codex.md`)
+Status: `STAGE-C-R1-COMPLETE` (Stage C and Codex R1 landed 2026-07-09;
+Claude Code Stage R2 remains open)
+Stage C/R1 outcome: the cold-start gate covers all 24 captures with
+explicit per-case day counts, final dates, and exit states (189,207
+days bit-identical); `.prn` PAD/blank/error/line-ending edges are pinned;
+four Medium R1 findings were fixed; all required gates exited 0 directly.
 Stage S outcome: day_gen/generation_setup/PrnReader/Ccl1State ported;
 **cold-start replay green — 80,906 days with zero injected state**
 (block-data seeds + burn + real inputs through the production driver);
 EOF/sentinel stop semantics pinned by both fish-springs cases; no new
 taps or transcendentals needed.
 Date: 2026-07-09
-Evidence mode: — (per stage on execution)
+Evidence mode: Static + Ran (Stages S/C/R1; see artifacts)
 Execution model: staged, two executors (the item-3..6 pattern) —
 Claude Code writes the design-setting spine; Codex completes and runs
 gates; each reviews the other; Claude closes with Stage R2.
@@ -27,19 +31,21 @@ start**.
 
 The prize: with `day_gen` ported, the acceptance harness no longer
 injects any captured state — a run derives from block-data seeds +
-burn + warm setup + the `.par`/`.prn` inputs alone, and every existing
-tap stream (cg/wg/sd/tp, plus ab internally) must fall out
-bit-identical. First full-trajectory replication from cold start.
+burn + warm setup + the `.par`/`.prn` inputs alone, and the complete
+typed daily-row stream falls out bit-identical. The earlier unit replays
+retain the finer cg/wg/sd/tp/ab internal assertions. First
+full-trajectory replication from cold start.
 
 ## Acceptance (whole package)
 
 - **Cold-start replay**: for each fixture case, drive the ported
   `day_gen` year by year (year plan `(iyear, ntd, nbt)` derived from
   the captured B-lines; the `wxr_gen` year loop itself is item 8) and
-  assert the complete cg/wg/sd/tp streams with **zero injected
-  state** — all seeds from block data (+`-r` burn), all rolling
-  values from the ported warm setup, observed values from the real
-  `ws.prn` files.
+  assert every `DailyRow` reconstructed from the cg/wg/sd captures with
+  **zero injected state** — all seeds from block data (+`-r` burn), all
+  rolling values from the ported warm setup, observed values from the
+  real `ws.prn` files. The prior package gates remain the direct
+  per-record acceptance for finer internal/tp state.
 - **Typed daily rows**: `day_gen` emits the unit-7 row values
   (`jd mo iyear xr dur tpr xmav tmxg tmng radg wv th tdp`, with the
   in-place `th·clt` degree conversion) through a typed sink — item

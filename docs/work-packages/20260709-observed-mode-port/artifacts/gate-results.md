@@ -1,4 +1,4 @@
-# Gate Results — Stage S
+# Gate Results — Stages S/C/R1
 
 Evidence mode: Ran (2026-07-09). Exit codes checked directly.
 
@@ -28,3 +28,31 @@ end; both terminate exactly where the captures end (asserted).
   item 8.
 - No new transcendentals; no new taps (the existing 24-run captures
   cover the whole surface).
+
+## Stage C and R1 final gates
+
+Evidence mode: Ran (2026-07-09). Each command's exit code was captured
+directly; no tolerance was introduced or widened.
+
+| Gate | Command | Result | Exit |
+|---|---|---|---:|
+| Format | `cargo fmt --check` | Clean | 0 |
+| Lints | `cargo clippy --all-targets -- -D warnings` | No warnings | 0 |
+| Tests | `cargo test` | 48 passed; eight evidence tests ignored by default | 0 |
+| RNG/deviates full replay | `cargo test --release --test tap_identity -- --ignored --nocapture` | 19,784,955 `randn`; 26,402,148 `dstn1`; 30,268 `dstg`; 2,584 `ranset`, all bit-identical | 0 |
+| Par/monthlies full replay | `cargo test --release --test par_state_identity -- --ignored --nocapture` | 380,436 `fouri2`; 275,452 `ryf2`; 36,889 `lintrp`, all bit-identical | 0 |
+| Daily full replay | `cargo test --release --test daily_identity -- --ignored --nocapture` | 189,207 days; 72,130 `alphb`; 24 `r5monb`, all bit-identical | 0 |
+| Storm full replay | `cargo test --release --test storm_identity -- --ignored --nocapture` | 189,207 days + 36,065 `timepk` calls, all bit-identical | 0 |
+| Cold-start mode replay | `cargo test --release --test modes_identity -- --ignored --nocapture` | 189,207 days across all 24 captures, zero injected state; every case's count, final date, and exit matched | 0 |
+| Coverage | `cargo llvm-cov --workspace --lcov --output-path target/lcov.info` | LCOV report written; `day_gen` 95.0% | 0 |
+| CRAP | `cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above` | 156 functions; none above CRAP 30 (`day_gen` 19.0) | 0 |
+| Documentation | `markdown-doc lint` | Repository Markdown clean | 0 |
+
+The release commands execute all eight ignored evidence tests across five
+integration-test binaries. Their source-faithful RANSET quality warnings are
+expected diagnostics; every direct command exit was zero.
+
+The mode edge suite covers short-record `PAD='YES'`, all-blank fields,
+nonnumeric and non-ASCII rejection, LF/CRLF equivalence, missing observed
+input, and the main-program `nt = 0` initialization. The full gate refuses
+extra rows after a captured endpoint rather than silently truncating them.

@@ -8,9 +8,10 @@
 //!   the source's `·0.01`; the only new arithmetic is `th·clt` and
 //!   the F→C conversions)
 //! Faithful-Acceptance: cold-start replay — zero injected state; the
-//!   complete cg/wg/sd/tp tap streams reproduced from block-data
-//!   seeds + burn + this setup + the real `.par`/`.prn` inputs
-//!   (tests/modes_identity.rs)
+//!   complete `DailyRow` stream reproduced from block-data seeds +
+//!   burn + this setup + the real `.par`/`.prn` inputs, against rows
+//!   reconstructed from cg/wg/sd taps (tests/modes_identity.rs).
+//!   Earlier unit replays retain the finer internal/tp assertions.
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
@@ -107,9 +108,17 @@ pub const CLT: f32 = 57.296;
 /// six rolling-pair warms. The `r5max` scan (866-869) computes a
 /// local the program never reads — not ported. Returns the state
 /// bundle ready for year loops.
+///
+/// # Units
+/// `ylt` is station latitude in degrees; initialized state fields retain
+/// the units documented by their owning common-block modules.
+///
+/// # Numerics
+/// Source REAL*4 throughout. Latitude sine/cosine use the pinned f32
+/// implementations after division by the source's `CLT = 57.296`.
 pub fn generation_setup(
     mut bk1: Cbk1State,
-    bk4: Cbk4State,
+    mut bk4: Cbk4State,
     mut bk7: Cbk7State,
     mut bk9: Cbk9State,
     ci: CinterpState,
@@ -122,6 +131,7 @@ pub fn generation_setup(
     r5monb(&bk4, &bk7, &mut bk9); // cligen.f:878
     bk9.ab = 0.02083; // cligen.f:879
     bk9.ab1 = 1.0 - bk9.ab; // cligen.f:880
+    bk4.nt = 0; // cligen.f:881
     bk7.pit = 58.13; // cligen.f:883
                      // Source literal pi2 = 6.283185 (cligen.f:884) resembles TAU but
                      // is the specification's constant.
@@ -175,8 +185,19 @@ pub fn generation_setup(
 /// source); the observed `.prn` stream is consumed per day under
 /// `iopt = 6`.
 ///
+/// # Units
+/// Inputs and state retain source units. Emitted [`DailyRow`] temperatures
+/// and dew point are Celsius, wind direction is degrees, and storm values
+/// use the units documented by `crate::storm`.
+///
+/// # Numerics
+/// Source REAL*4 expression order is preserved, including `.prn`
+/// precipitation scaling, `th * CLT`, and the Fahrenheit-to-Celsius seam.
+/// Transcendentals occur only in the already pinned downstream units.
+///
 /// # Errors
-/// Propagates `.prn` parse failures (fail closed).
+/// Propagates `.prn` input failures, including a missing observed-mode
+/// stream (fail closed).
 #[allow(clippy::too_many_arguments)]
 pub fn day_gen(
     nbt: i32,
@@ -203,9 +224,7 @@ pub fn day_gen(
             st.bk7.nsim = 0;
             // moveto = 225 armed before the read; EOF keeps it
             // (cligen.f:3070-3074, the 5.323 fix).
-            let reader = prn
-                .as_deref_mut()
-                .expect("observed mode requires a .prn stream");
+            let reader = prn.as_deref_mut().ok_or(PrnError::MissingStream)?;
             match reader.next()? {
                 None => {
                     return Ok(DayGenExit::Stop);

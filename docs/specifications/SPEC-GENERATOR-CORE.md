@@ -1,14 +1,15 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 7, Stage C of the storm-machinery package)
+Status: active (rev 8, Stage R1 of the observed-mode package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
 ## Producers / consumers
 
 Producers: the `cligen` crate's port modules (`rng`, `deviates`, `qc`,
-`acm`, `monthlies`, `daily`, and `storm`, plus later `modes`). Consumers:
-every downstream port module, and (through them) the output surfaces.
+`acm`, `monthlies`, `daily`, `storm`, `observed`, and `modes`). Consumers:
+every downstream port module, the future mode orchestrator, and the output
+surfaces.
 Authority basis: `reference/cligen532/` per ADR-0001; unit and state
 lines per the ratified decomposition.
 
@@ -25,13 +26,16 @@ lines per the ratified decomposition.
   `sta_parms` slice plus daily `wv`/`th`/`pi2`/`tdp`), [`Cbk9State`]
   (`cbk9.inc`, `wi` plus daily `ab`/`ab1`/`rn1`/`r1`),
   [`CinterpState`] (`cinterp.inc`, complete), [`Cbk3State`]
-  (`cbk3.inc` live slice), and [`Cbk5State`] (`cbk5.inc` live slice).
+  (`cbk3.inc` live slice), [`Cbk5State`] (`cbk5.inc` live slice), and
+  [`Ccl1State`] (`ccl1.inc`, complete daily grids).
 - **Unit-local `SAVE` state** is a per-unit struct named `<Unit>State`
-  (`DstgState`, `RansetState`, `DinvrState`, `DzrorState`), owned by the
-  caller and passed `&mut`. The ACM ENTRY pairs share their host-unit
-  state, aggregated for CDF consumers by `AcmState`.
+  (`DstgState`, `RansetState`, `DinvrState`, `DzrorState`,
+  `DayGenState`), owned by the caller and passed `&mut`. The ACM ENTRY
+  pairs share their host-unit state, aggregated for CDF consumers by
+  `AcmState`; `DayGenState.q_gen_started` persists across yearly
+  `day_gen` calls.
 - **No globals of any kind.** All state flows through parameters; the
-  future `modes` orchestrator owns every struct.
+  generation-time `GenState` bundle owns every generator state struct.
 
 ## Seeds
 
@@ -84,6 +88,24 @@ lines per the ratified decomposition.
   typed `InteractiveOnly` error. Output-name prompting and unit-7/8
   open/overwrite management are explicit typed deferrals; filesystem
   policy belongs to the future CLI/output surface.
+
+## Observed/day-loop seam
+
+- `generation_setup` transcribes the main-program cold start at
+  `cligen.f:865-902`, including the unconditional `Cbk4State.nt = 0`, and
+  returns a caller-owned `GenState` bundle. No captured state is injected.
+- `day_gen` is one source year-loop call. Under `iopt = 6` it consumes a
+  `PrnReader`; absence of that required stream and malformed records return
+  typed `PrnError`s. `DayGenExit::Stop` is the source's `moveto = 225`
+  signal; `YearComplete` means the natural end was reached without that
+  signal.
+- `DailyRow` preserves the unit-7 operand order:
+  `jd mo iyear xr dur tpr xmav tmxg tmng radg wv th tdp`. Temperatures and
+  dew point are Celsius at this seam, wind direction is degrees, storm
+  quantities retain their storm-module units, and all numeric values are
+  f32. Text formatting and file emission belong to SPEC-CLI-TEXT.
+- The compatibility `.prn` grammar, sentinel rules, EOF behavior, and
+  extension boundary are normative in SPEC-OBSERVED-INPUT.
 
 ## Modes
 

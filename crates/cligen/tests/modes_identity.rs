@@ -381,13 +381,16 @@ struct DayExpect {
     iyear: i32,
     ntd: i32,
     ida: i32,
-    // from sd S: jd mo iyear + xr dur tpr xmav
+    // From sd S at the unit-7 operand seam (day_gen:3175):
+    // jd mo iyear + xr dur tpr xmav.
     jd: i32,
     mo: i32,
     s: [u32; 4],
-    // from cg A: r tmxg tmng tdp ra rmx (F-scale temps/tdp)
+    // From cg A before day_gen's 3110-3112 conversion:
+    // r tmxg tmng tdp ra rmx (F-scale temps/tdp).
     a: [u32; 6],
-    // from wg X: wv th(rad) v9 j
+    // From wg X at windg exit, before day_gen:3104:
+    // wv th(rad) v9 j.
     wv: u32,
     th_rad: u32,
 }
@@ -634,7 +637,7 @@ fn prn_reader_rejects_nonnumeric_fields_and_non_ascii_input() {
             assert_eq!((*record, *cols), (2, (21, 25)));
             assert_eq!(text, "bad! ");
         }
-        PrnError::NotText => panic!("expected a field error"),
+        PrnError::MissingStream | PrnError::NotText => panic!("expected a field error"),
     }
     assert_eq!(
         err.to_string(),
@@ -659,6 +662,40 @@ fn prn_reader_treats_crlf_and_lf_records_identically() {
         days
     };
     assert_eq!(read_all(lf.as_bytes()), read_all(crlf.as_bytes()));
+}
+
+#[test]
+fn generation_setup_resets_nt_and_observed_mode_requires_prn() {
+    let bk4 = Cbk4State {
+        nt: 1,
+        iopt: 6,
+        ..Cbk4State::default()
+    };
+    let mut st = generation_setup(
+        Cbk1State::default(),
+        bk4,
+        Cbk7State::default(),
+        cligen::cbk9::Cbk9State::default(),
+        CinterpState::default(),
+        0.0,
+    );
+    assert_eq!(st.bk4.nt, 0, "main:881 unconditionally resets nt");
+
+    let err = day_gen(
+        1,
+        1990,
+        &[0.0; 13],
+        &SingleStormParams::default(),
+        1,
+        0,
+        365,
+        None,
+        &mut st,
+        &mut Vec::new(),
+    )
+    .unwrap_err();
+    assert_eq!(err, PrnError::MissingStream);
+    assert_eq!(err.to_string(), "observed mode requires a .prn stream");
 }
 
 #[test]
