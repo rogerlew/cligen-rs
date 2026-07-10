@@ -1,7 +1,9 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: draft rev 1 (contract under ADR-0002; implementation package
-to ratify)
+Status: draft rev 2 (contract under ADR-0002; implementation package
+to ratify; rev 2 = R1 review dispositions: identity content/provenance
+split, group P keyed on qc_filter with retry-cap give-up reporting,
+estimator pins)
 Surface: the `<output>.quality.json` sidecar emitted with every
 generated `.cli`, the `cligen quality <file.cli> --par <file.par>`
 standalone subcommand, and the metric definitions both share.
@@ -42,16 +44,25 @@ reports; `cligen quality` reports them as `null`.
 
 - Default: writing `<name>.cli` also writes `<name>.cli.quality.json`.
 - Opt-out: runspec `output.quality: false`.
-- The report embeds run identity: `metrics_version`, tool version,
-  `.par` SHA-256, `.cli` SHA-256, `generation_profile`, `qc_filter`,
-  `rng.burn`, mode, years simulated, day count, and (run-emitted only)
-  the resolved runspec fields.
+- The report's identity splits into two blocks (with `metrics_version`
+  top-level). **`content`** (recoverable from the inputs alone,
+  present in every report): tool version, `.par` SHA-256, `.cli`
+  SHA-256, day count, year count and calendar span as parsed from the
+  rows.
+  **`provenance`** (run-emitted only; `null` from `cligen quality`
+  unless supplied via explicit flags): `generation_profile`,
+  `qc_filter`, `rng.burn`, mode, and the resolved runspec fields.
+  A bare `.cli` cannot authoritatively recover these — the header
+  command echo is a verbatim, arbitrary field (SPEC-RUNSPEC §Header
+  echo) and is never parsed as authority.
 - Determinism: all accumulation in f64; sample statistics use the
-  n−1 convention; Spearman uses average-rank ties; decades are
-  fixed 10-year blocks from the first simulated year (a trailing
-  partial decade is reported with its `n_years`); JSON keys are
-  emitted in schema order. A given `.cli` + `.par` yields a
-  byte-reproducible report.
+  n−1 convention; **skew** is the adjusted Fisher–Pearson estimator
+  g1·√(n(n−1))/(n−2) (n ≥ 3, else `null`); Spearman uses
+  average-rank ties; **top-N event ordering** breaks ties by earlier
+  date, then lower row index; decades are fixed 10-year blocks from
+  the first simulated year (a trailing partial decade is reported
+  with its `n_years`); JSON keys are emitted in schema order. A given
+  `.cli` + `.par` yields a byte-reproducible report.
 
 ## Metric groups (`metrics_version: 1`)
 
@@ -94,23 +105,30 @@ peak-intensity, longest wet and dry spell (days). Whole-run: the top
 five daily events (depth, duration, ip, date).
 
 **P — process** (run-emitted only; `null` from `cligen quality`)
-QC filter outcomes when active: per parameter × month retry counts
-and final acceptance statistics. QC **counterfactuals** when
-inactive (`qc_filter: off` or batch backends): the faithful K-S /
-mean / variance verdicts evaluated diagnostically over the produced
-batches — the would-have-been-rejected rate, the single number that
-prices what conditioning was removed. Plus: `bk7.v7 == 0.0` recovery
-count, Tdew range-check events, and per-run RNG draw totals.
-Diagnostic evaluation must not mutate generation state.
+Keyed on `qc_filter` alone, regardless of RNG backend. When
+`qc_filter: faithful`: per parameter × month retry counts, final
+acceptance statistics, and **retry-cap give-up events** (the source
+accepts a still-failing batch after 10,000 redos, cligen.f:4302-4332
+— cap hits are reported so "rejection rate 0" is never silently
+false). When `qc_filter: off`: the faithful K-S / mean / variance
+verdicts evaluated diagnostically over the produced batches — the
+would-have-been-rejected rate, the single number that prices what
+conditioning was removed. (`fast_batch_v0` predates the knob and is
+always unconditioned; its reports carry `qc_filter: null` and
+off-style counterfactuals.) Plus: `bk7.v7 == 0.0` recovery count,
+Tdew range-check events, and per-run RNG draw totals. Diagnostic
+evaluation must not mutate generation state.
 
 ## Report envelope (sketch)
 
 ```json
 {
   "metrics_version": 1,
-  "identity": { "tool": "...", "par_sha256": "...", "cli_sha256": "...",
-                "generation_profile": "...", "qc_filter": "...",
-                "burn": 0, "mode": "continuous", "years": 100, "days": 36525 },
+  "identity": {
+    "content":    { "tool": "...", "par_sha256": "...", "cli_sha256": "...",
+                    "days": 36525, "years": 100, "span": [1, 100] },
+    "provenance": { "generation_profile": "...", "qc_filter": "...",
+                    "burn": 0, "mode": "continuous" } },
   "par_convergence": { "precip_wet_mean": { "jan": { "target": ..., "generated": ...,
       "abs_err": ..., "rel_err": ... }, "...": "...",
       "by_decade": [ ... ] }, "...": "..." },
@@ -130,10 +148,13 @@ structure; unknown fields are never emitted.
 - Continuous / observed / storm modes all emit reports; single-storm
   reports carry group D plus identity only (one day supports no
   distributional metric).
-- Observed mode (`iopt = 6`) reports are labeled `mode: observed`;
-  group A errors there measure the observed series against the
-  station `.par` (a data-vs-parameter consistency surface, not
-  generator quality) and are flagged `observed_passthrough: true`.
+- Observed mode (`iopt = 6`) reports carry
+  `identity.provenance.mode: "observed"` (run-emitted); group A
+  additionally carries a top-level boolean field
+  `par_convergence.observed_passthrough` (true when mode is known to
+  be observed, `null` post-hoc): the errors there measure the
+  observed series against the station `.par` — a data-vs-parameter
+  consistency surface, not generator quality.
 
 ## Non-goals
 
@@ -149,8 +170,9 @@ structure; unknown fields are never emitted.
 - Report emission does not perturb faithful golden byte identity
   (sidecar only; the `.cli` byte stream is untouched).
 - `cligen quality` over a golden `.cli` equals the run-emitted report
-  for the same file minus group P (byte-identical after `process`
-  nulling).
+  for the same file after nulling the run-only surfaces: group P
+  **and** `identity.provenance` (byte-identical after both are
+  nulled).
 - Run over a legacy-Fortran `.cli` (fixture cross-references)
   produces a well-formed report — the legacy-measurability check.
 - Determinism: repeated runs produce byte-identical reports.

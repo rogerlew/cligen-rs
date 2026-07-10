@@ -30,10 +30,14 @@ k(1)=3*k(1)
 
 followed by decimal carry propagation (`/1000`, `/100` splits), with
 the output assembled from the digit groups as a fixed-point decimal in
-[0,1) and a rejection loop excluding exact 0 and 1. Functionally this
-is a homemade multiplicative-congruential-style generator with an
-effective multiplier of ~3 over a composite decimal modulus of 10^10
-(~33 bits of state), implemented in digit groups.
+[0,1) and a rejection loop excluding exact 0 and 1. On the composite
+state N = k4·10^8 + k3·10^5 + k2·10^3 + k1, the digit-group update
+with its cross-feeds is **exactly the multiplicative congruential
+generator N' = 100003·N mod 10^10** (verified algebraically and by
+10,000-state simulation against the Fortran update, R1 correction of
+this document's first revision, 2026-07-10): the by-3 multiplies plus
+the k2→k4 / k1→k3 cross-adds implement a = 10^5 + 3 in digit-group
+arithmetic. ~33 bits of state, zero increment, composite modulus.
 
 The structure is a fingerprint of its era: early-1980s portable
 Fortran could not assume a 32-bit multiply without overflow, so
@@ -45,9 +49,13 @@ with the `-r` option a *burn count* (N discarded draws per stream),
 not a seed.
 
 By the selection criteria already standard when it was written (Knuth
-vol. 2's spectral-test guidance; multipliers near the modulus' square
-root), a multiplier of ~3 produces severe serial correlation: each
-output is approximately 3× the previous, mod 1. No modern battery
+vol. 2's spectral-test guidance), the parameters are textbook-poor:
+a = 100003 sits essentially **at √m** (√10^10 = 10^5), the classic
+bad-lattice zone where consecutive pairs concentrate on a coarse 2-D
+lattice; the modulus is composite (2^10·5^10), so the multiplicative
+zero-increment form caps the period at λ(10^10) = 5·10^8 and imposes
+seed-divisibility structure; and the output is quantized to the
+10-decimal-digit state. No modern battery
 result exists for this exact generator — see §5 for the cheap
 executable question this repository is now uniquely positioned to
 answer — but its class fails TestU01's SmallCrush categorically
@@ -61,7 +69,7 @@ consequences.
 
 ### Layer 1 — the RNG itself is defective [read]
 
-Meyer, Renschler & Vining (2007, p. 1) report: *"None of the many
+Meyer, Renschler & Vining (2008 — online 2007; p. 1) report: *"None of the many
 RNGs we tested satisfactorily produced the target distribution…
 distributions whose means do not even match the mean they were
 generated from, regardless of the length of run."* Persistent bias
@@ -236,9 +244,11 @@ conditioning policy, versioned profiles, provenance in every output.
   stream's defects actually are. Nobody has ever published this.
 - **QC as measurement, not just mechanism**: running the faithful QC
   acceptance tests over any candidate profile's batches (rejection
-  rate; faithful = 0 by construction) prices exactly what a profile
-  changed, in the model's own currency — the recommended headline
-  metric for stochastic parity.
+  rate; faithful ≈ 0 by construction — exactly 0 only up to the
+  source's 10,000-retry give-up path, `cligen.f:4302-4332`, which
+  leaves a failed final batch in place; cap-hit events must be
+  reported separately) prices exactly what a profile changed, in the
+  model's own currency — the recommended headline metric.
 - **Layer-3 fixes are tier-2 augmentations** (A-series, versioned
   profiles), not RNG work, and should never be promised as
   consequences of RNG modernization.

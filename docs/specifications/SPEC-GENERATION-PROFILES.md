@@ -28,6 +28,11 @@ implicitly by host, build target, or environment variable.
 
 ## `qc_filter` — the conditioning policy knob (ADR-0002)
 
+**Status: declared contract, not yet accepted by the runspec schema.**
+Current resolvers and the JSON Schema reject `qc_filter` until the Q3
+implementation package (ROADMAP) accepts it and revs SPEC-RUNSPEC in
+the same change — the same fail-closed discipline as `fast_batch_v1`.
+
 Generation policy decomposes into orthogonal declared knobs: the RNG
 backend (`generation_profile`) and the quality-control conditioning
 policy (`qc_filter`). `qc_filter` is an optional top-level runspec

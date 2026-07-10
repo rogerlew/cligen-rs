@@ -20,8 +20,9 @@ to faithful mode" — is circular. A literature review
 (`docs/lit-reviews/legacy-randn-generator-review.md`) grounds why:
 
 - Faithful output is the `.par` contract *as filtered through* a
-  statistically defective RNG (`RANDN`, an uncited multiply-by-3
-  decimal-digit generator) and a quality-control conditioner (Meyer,
+  statistically defective RNG (`RANDN`, an uncited decimal LCG —
+  exactly N' = 100003·N mod 10^10, a ≈ √m, the textbook bad-lattice
+  zone) and a quality-control conditioner (Meyer,
   Renschler & Vining 2008) that regenerates monthly batches until
   they look typical.
 - The QC was motivated by 30-year convergence — WEPP agricultural
