@@ -1,4 +1,4 @@
-# Q3 Dissection Pre-Registration — DRAFT
+# Q3 Dissection Pre-Registration
 
 Status: **RATIFIED** — operator, 2026-07-10 ("yes to ratifying.
 scaffold and execute"): corpus and observed-reference design
@@ -29,7 +29,7 @@ faithful_5_32_3`, `rng.burn: 0`, `interpolation: none`,
 `.cli.quality.json` is the measurement; `.cli` bytes archived by
 hash only.
 
-## Corpus (PROPOSED — operator to confirm or swap rows)
+## Corpus (ratified)
 
 Drawn from `us-2015` (operator direction), all stations with 40-year
 fitting records; regime statistics derived from the pars themselves
@@ -67,7 +67,7 @@ signature); the CONUS-cold class excludes Mount Washington (summit
 observatory vs 1-km grid mismatch would poison the observed
 comparison).
 
-## Observed reference (PROPOSED)
+## Observed reference (ratified)
 
 Group B's authority is observed climate, external to the report
 (ADR-0002 ruling 1; SPEC-QUALITY-REPORT). The `.par` does not encode
@@ -106,7 +106,7 @@ Pinned conventions (drafted to neutralize known Daymet biases):
    trend contribution to observed SD is visible rather than silently
    included or removed.
 
-## Measurements and decision surfaces (DRAFT)
+## Measurements and decision surfaces
 
 - Convergence (what conditioning buys): group A absolute/relative
   errors at 30 vs 100 years, faithful vs off, per class.

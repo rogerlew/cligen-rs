@@ -1,0 +1,568 @@
+{
+ "acquired": "2026-07-10",
+ "daymet_version": "4 R1 (single-pixel API)",
+ "stations": {
+  "ak505769": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 21.41,
+    "annual_max_daily_sd_mm": 9.733,
+    "annual_precip_cv": 0.1901,
+    "annual_precip_detrended_sd_mm": 81.387,
+    "annual_precip_mean_mm": 446.54,
+    "annual_precip_sd_mm": 84.885,
+    "n_years": 46,
+    "raw_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 1.1608,
+    "tmin_annual_mean_sd_c": 1.3245,
+    "wet_day_count_mean": 94.76,
+    "wet_day_count_sd": 14.222
+   },
+   "desc": "MCGRATH WSO AP AK                       505769 0",
+   "ghcn": null,
+   "ghcn_note": "USC00505769: unavailable or failed the completeness screen",
+   "latitude": 62.97,
+   "longitude": -155.62
+  },
+  "al015478": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 114.22,
+    "annual_max_daily_sd_mm": 41.127,
+    "annual_precip_cv": 0.1636,
+    "annual_precip_detrended_sd_mm": 293.495,
+    "annual_precip_mean_mm": 1779.34,
+    "annual_precip_sd_mm": 291.081,
+    "n_years": 46,
+    "raw_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.6369,
+    "tmin_annual_mean_sd_c": 0.7302,
+    "wet_day_count_mean": 106.5,
+    "wet_day_count_sd": 13.617
+   },
+   "desc": "MOBILE WB AIRPORT AL                     15478 0",
+   "ghcn": null,
+   "ghcn_note": "USC00015478: unavailable or failed the completeness screen",
+   "latitude": 30.68,
+   "longitude": -88.25
+  },
+  "az022664": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 29.24,
+    "annual_max_daily_sd_mm": 10.568,
+    "annual_precip_cv": 0.2886,
+    "annual_precip_detrended_sd_mm": 93.881,
+    "annual_precip_mean_mm": 338.11,
+    "annual_precip_sd_mm": 97.583,
+    "n_years": 46,
+    "raw_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.948,
+    "tmin_annual_mean_sd_c": 0.5245,
+    "wet_day_count_mean": 43.61,
+    "wet_day_count_sd": 9.945
+   },
+   "desc": "DOUGLAS B D AP AZ                        22664 0",
+   "ghcn": null,
+   "ghcn_note": "USC00022664: unavailable or failed the completeness screen",
+   "latitude": 31.45,
+   "longitude": -109.6
+  },
+  "az028619": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 30.63,
+    "annual_max_daily_sd_mm": 12.416,
+    "annual_precip_cv": 0.2626,
+    "annual_precip_detrended_sd_mm": 92.112,
+    "annual_precip_mean_mm": 350.17,
+    "annual_precip_sd_mm": 91.97,
+    "n_years": 46,
+    "raw_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.7555,
+    "tmin_annual_mean_sd_c": 0.5622,
+    "wet_day_count_mean": 47.15,
+    "wet_day_count_sd": 8.804
+   },
+   "desc": "TOMBSTONE AZ                             28619 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 39.79,
+    "annual_max_daily_sd_mm": 13.838,
+    "annual_precip_cv": 0.2665,
+    "annual_precip_detrended_sd_mm": 94.242,
+    "annual_precip_mean_mm": 359.62,
+    "annual_precip_sd_mm": 95.846,
+    "n_years": 92,
+    "raw_sha256": "ba3a77c3de37ab9d0355044a9d7e763020dbc2bc092a5f6fab5110fcad500f08",
+    "span": [
+     1898,
+     2025
+    ],
+    "station": "USC00028619",
+    "tmax_annual_mean_sd_c": 1.0033,
+    "tmin_annual_mean_sd_c": 0.9402,
+    "wet_day_count_mean": 45.01,
+    "wet_day_count_sd": 9.625
+   },
+   "latitude": 31.72,
+   "longitude": -110.07
+  },
+  "az029654": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 19.09,
+    "annual_max_daily_sd_mm": 10.949,
+    "annual_precip_cv": 0.6012,
+    "annual_precip_detrended_sd_mm": 48.67,
+    "annual_precip_mean_mm": 80.21,
+    "annual_precip_sd_mm": 48.219,
+    "n_years": 46,
+    "raw_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.7275,
+    "tmin_annual_mean_sd_c": 0.6896,
+    "wet_day_count_mean": 11.43,
+    "wet_day_count_sd": 5.214
+   },
+   "desc": "YUMA TEST STN AZ                         29654 0",
+   "ghcn": null,
+   "ghcn_note": "USC00029654: unavailable or failed the completeness screen",
+   "latitude": 32.83,
+   "longitude": -114.4
+  },
+  "ca042257": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 19.88,
+    "annual_max_daily_sd_mm": 8.407,
+    "annual_precip_cv": 0.5718,
+    "annual_precip_detrended_sd_mm": 65.524,
+    "annual_precip_mean_mm": 118.06,
+    "annual_precip_sd_mm": 67.508,
+    "n_years": 46,
+    "raw_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.723,
+    "tmin_annual_mean_sd_c": 1.0791,
+    "wet_day_count_mean": 16.89,
+    "wet_day_count_sd": 7.119
+   },
+   "desc": "DAGGETT AP CA                            42257 0",
+   "ghcn": null,
+   "ghcn_note": "USC00042257: unavailable or failed the completeness screen",
+   "latitude": 34.87,
+   "longitude": -116.78
+  },
+  "ca042319": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 13.82,
+    "annual_max_daily_sd_mm": 9.512,
+    "annual_precip_cv": 0.6059,
+    "annual_precip_detrended_sd_mm": 34.494,
+    "annual_precip_mean_mm": 56.98,
+    "annual_precip_sd_mm": 34.524,
+    "n_years": 46,
+    "raw_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.7242,
+    "tmin_annual_mean_sd_c": 1.3502,
+    "wet_day_count_mean": 10.65,
+    "wet_day_count_sd": 5.309
+   },
+   "desc": "DEATH VALLEY CA                          42319 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 15.74,
+    "annual_max_daily_sd_mm": 8.989,
+    "annual_precip_cv": 0.518,
+    "annual_precip_detrended_sd_mm": 30.194,
+    "annual_precip_mean_mm": 57.93,
+    "annual_precip_sd_mm": 30.006,
+    "n_years": 60,
+    "raw_sha256": "d3c13ed755ecbdc8e77260e8b6a0fa198c69cd93196271de8527e9f7b91b3cd6",
+    "span": [
+     1962,
+     2025
+    ],
+    "station": "USC00042319",
+    "tmax_annual_mean_sd_c": 0.8434,
+    "tmin_annual_mean_sd_c": 1.1001,
+    "wet_day_count_mean": 10.23,
+    "wet_day_count_sd": 4.22
+   },
+   "latitude": 36.47,
+   "longitude": -116.87
+  },
+  "co051660": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 23.6,
+    "annual_max_daily_sd_mm": 6.051,
+    "annual_precip_cv": 0.1624,
+    "annual_precip_detrended_sd_mm": 120.933,
+    "annual_precip_mean_mm": 736.44,
+    "annual_precip_sd_mm": 119.591,
+    "n_years": 46,
+    "raw_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.7747,
+    "tmin_annual_mean_sd_c": 1.3628,
+    "wet_day_count_mean": 123.85,
+    "wet_day_count_sd": 14.607
+   },
+   "desc": "CLIMAX CO                                51660 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 25.73,
+    "annual_max_daily_sd_mm": 8.234,
+    "annual_precip_cv": 0.1761,
+    "annual_precip_detrended_sd_mm": 102.717,
+    "annual_precip_mean_mm": 605.23,
+    "annual_precip_sd_mm": 106.607,
+    "n_years": 60,
+    "raw_sha256": "a143b96f0934d277cd514d97917b005ea56a5e1a14484a3b6d817a4e349e4192",
+    "span": [
+     1956,
+     2025
+    ],
+    "station": "USC00051660",
+    "tmax_annual_mean_sd_c": 0.9362,
+    "tmin_annual_mean_sd_c": 0.9265,
+    "wet_day_count_mean": 118.9,
+    "wet_day_count_sd": 14.592
+   },
+   "latitude": 39.38,
+   "longitude": -106.2
+  },
+  "fl083909": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 83.1,
+    "annual_max_daily_sd_mm": 34.519,
+    "annual_precip_cv": 0.1568,
+    "annual_precip_detrended_sd_mm": 230.235,
+    "annual_precip_mean_mm": 1658.16,
+    "annual_precip_sd_mm": 260.032,
+    "n_years": 46,
+    "raw_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.473,
+    "tmin_annual_mean_sd_c": 0.6368,
+    "wet_day_count_mean": 127.87,
+    "wet_day_count_sd": 13.832
+   },
+   "desc": "HIALEAH FL                               83909 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 120.86,
+    "annual_max_daily_sd_mm": 63.92,
+    "annual_precip_cv": 0.2104,
+    "annual_precip_detrended_sd_mm": 325.435,
+    "annual_precip_mean_mm": 1637.71,
+    "annual_precip_sd_mm": 344.646,
+    "n_years": 56,
+    "raw_sha256": "86a73a6ef5448b50911584a5bebf13530b6b7a4d02d1a3b6e29054f4617d860f",
+    "span": [
+     1941,
+     2024
+    ],
+    "station": "USC00083909",
+    "tmax_annual_mean_sd_c": 0.736,
+    "tmin_annual_mean_sd_c": 1.2556,
+    "wet_day_count_mean": 114.23,
+    "wet_day_count_sd": 14.754
+   },
+   "latitude": 25.83,
+   "longitude": -80.28
+  },
+  "fl086997": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 125.46,
+    "annual_max_daily_sd_mm": 58.952,
+    "annual_precip_cv": 0.1865,
+    "annual_precip_detrended_sd_mm": 317.958,
+    "annual_precip_mean_mm": 1735.63,
+    "annual_precip_sd_mm": 323.729,
+    "n_years": 46,
+    "raw_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.5983,
+    "tmin_annual_mean_sd_c": 0.7922,
+    "wet_day_count_mean": 103.65,
+    "wet_day_count_sd": 14.691
+   },
+   "desc": "PENSACOLA AP FL                          86997 0",
+   "ghcn": null,
+   "ghcn_note": "USC00086997: unavailable or failed the completeness screen",
+   "latitude": 30.47,
+   "longitude": -87.2
+  },
+  "id106388": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 30.3,
+    "annual_max_daily_sd_mm": 8.16,
+    "annual_precip_cv": 0.202,
+    "annual_precip_detrended_sd_mm": 147.057,
+    "annual_precip_mean_mm": 744.2,
+    "annual_precip_sd_mm": 150.355,
+    "n_years": 46,
+    "raw_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.8029,
+    "tmin_annual_mean_sd_c": 0.9223,
+    "wet_day_count_mean": 101.67,
+    "wet_day_count_sd": 13.633
+   },
+   "desc": "NEW MEADOWS R S ID                      106388 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 33.87,
+    "annual_max_daily_sd_mm": 9.421,
+    "annual_precip_cv": 0.1764,
+    "annual_precip_detrended_sd_mm": 100.591,
+    "annual_precip_mean_mm": 591.95,
+    "annual_precip_sd_mm": 104.396,
+    "n_years": 55,
+    "raw_sha256": "b824a8034fce0663ec375d56039dff988aacf6e3165e29d8d1e5fb4fb2fd8b9d",
+    "span": [
+     1906,
+     2009
+    ],
+    "station": "USC00106388",
+    "tmax_annual_mean_sd_c": 0.8366,
+    "tmin_annual_mean_sd_c": 0.9275,
+    "wet_day_count_mean": 87.98,
+    "wet_day_count_sd": 11.728
+   },
+   "latitude": 44.97,
+   "longitude": -116.28
+  },
+  "mn214026": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 42.46,
+    "annual_max_daily_sd_mm": 13.644,
+    "annual_precip_cv": 0.1582,
+    "annual_precip_detrended_sd_mm": 115.438,
+    "annual_precip_mean_mm": 721.74,
+    "annual_precip_sd_mm": 114.15,
+    "n_years": 46,
+    "raw_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 1.13,
+    "tmin_annual_mean_sd_c": 1.1243,
+    "wet_day_count_mean": 111.74,
+    "wet_day_count_sd": 10.862
+   },
+   "desc": "INT FALLS WP AP MN                      214026 0",
+   "ghcn": null,
+   "ghcn_note": "USC00214026: unavailable or failed the completeness screen",
+   "latitude": 48.57,
+   "longitude": -93.38
+  },
+  "ms227840": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 105.4,
+    "annual_max_daily_sd_mm": 38.677,
+    "annual_precip_cv": 0.1993,
+    "annual_precip_detrended_sd_mm": 363.85,
+    "annual_precip_mean_mm": 1843.62,
+    "annual_precip_sd_mm": 367.416,
+    "n_years": 46,
+    "raw_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.6455,
+    "tmin_annual_mean_sd_c": 0.7136,
+    "wet_day_count_mean": 105.43,
+    "wet_day_count_sd": 15.278
+   },
+   "desc": "SAUCIER EXP FOREST MS                   227840 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 133.84,
+    "annual_max_daily_sd_mm": 53.278,
+    "annual_precip_cv": 0.173,
+    "annual_precip_detrended_sd_mm": 308.183,
+    "annual_precip_mean_mm": 1769.01,
+    "annual_precip_sd_mm": 306.074,
+    "n_years": 56,
+    "raw_sha256": "a8c29054fb25805915226296f8be6f145341c769cfea16838aafae05232152c1",
+    "span": [
+     1955,
+     2015
+    ],
+    "station": "USC00227840",
+    "tmax_annual_mean_sd_c": 0.6557,
+    "tmin_annual_mean_sd_c": 0.6057,
+    "wet_day_count_mean": 101.73,
+    "wet_day_count_sd": 13.167
+   },
+   "latitude": 30.63,
+   "longitude": -89.05
+  },
+  "nm294426": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 27.07,
+    "annual_max_daily_sd_mm": 9.855,
+    "annual_precip_cv": 0.3093,
+    "annual_precip_detrended_sd_mm": 78.654,
+    "annual_precip_mean_mm": 263.33,
+    "annual_precip_sd_mm": 81.453,
+    "n_years": 46,
+    "raw_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.6653,
+    "tmin_annual_mean_sd_c": 0.7633,
+    "wet_day_count_mean": 36.76,
+    "wet_day_count_sd": 9.051
+   },
+   "desc": "JORNADA EXP RANGE NM                    294426 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 33.27,
+    "annual_max_daily_sd_mm": 14.58,
+    "annual_precip_cv": 0.3643,
+    "annual_precip_detrended_sd_mm": 87.97,
+    "annual_precip_mean_mm": 239.53,
+    "annual_precip_sd_mm": 87.255,
+    "n_years": 52,
+    "raw_sha256": "a8d4b3adab40bd0e076a84ab186e3069f0d592aaea8c02e576af55d99389547c",
+    "span": [
+     1924,
+     2025
+    ],
+    "station": "USC00294426",
+    "tmax_annual_mean_sd_c": 0.8124,
+    "tmin_annual_mean_sd_c": 0.9587,
+    "wet_day_count_mean": 33.25,
+    "wet_day_count_sd": 9.389
+   },
+   "latitude": 32.62,
+   "longitude": -106.73
+  },
+  "tx412797": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 24.62,
+    "annual_max_daily_sd_mm": 12.518,
+    "annual_precip_cv": 0.3794,
+    "annual_precip_detrended_sd_mm": 86.499,
+    "annual_precip_mean_mm": 227.28,
+    "annual_precip_sd_mm": 86.242,
+    "n_years": 46,
+    "raw_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.6797,
+    "tmin_annual_mean_sd_c": 0.7047,
+    "wet_day_count_mean": 33.07,
+    "wet_day_count_sd": 9.188
+   },
+   "desc": "EL PASO WB AP TX                        412797 0",
+   "ghcn": null,
+   "ghcn_note": "USC00412797: unavailable or failed the completeness screen",
+   "latitude": 31.8,
+   "longitude": -106.4
+  },
+  "ut429382": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 13.46,
+    "annual_max_daily_sd_mm": 6.301,
+    "annual_precip_cv": 0.402,
+    "annual_precip_detrended_sd_mm": 53.096,
+    "annual_precip_mean_mm": 132.59,
+    "annual_precip_sd_mm": 53.295,
+    "n_years": 46,
+    "raw_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 1.1059,
+    "tmin_annual_mean_sd_c": 0.99,
+    "wet_day_count_mean": 31.41,
+    "wet_day_count_sd": 10.72
+   },
+   "desc": "WENDOVER AP UT                          429382 0",
+   "ghcn": null,
+   "ghcn_note": "USC00429382: unavailable or failed the completeness screen",
+   "latitude": 40.72,
+   "longitude": -114.03
+  },
+  "wy485345": {
+   "daymet": {
+    "annual_max_daily_mean_mm": 22.88,
+    "annual_max_daily_sd_mm": 5.531,
+    "annual_precip_cv": 0.1519,
+    "annual_precip_detrended_sd_mm": 115.329,
+    "annual_precip_mean_mm": 756.19,
+    "annual_precip_sd_mm": 114.872,
+    "n_years": 46,
+    "raw_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+    "span": [
+     1980,
+     2025
+    ],
+    "tmax_annual_mean_sd_c": 0.7206,
+    "tmin_annual_mean_sd_c": 0.934,
+    "wet_day_count_mean": 135.02,
+    "wet_day_count_sd": 14.497
+   },
+   "desc": "LAKE YELLOWSTONE WY                     485345 0",
+   "ghcn": {
+    "annual_max_daily_mean_mm": 26.59,
+    "annual_max_daily_sd_mm": 6.763,
+    "annual_precip_cv": 0.1968,
+    "annual_precip_detrended_sd_mm": 97.886,
+    "annual_precip_mean_mm": 518.57,
+    "annual_precip_sd_mm": 102.038,
+    "n_years": 38,
+    "raw_sha256": "be52cee726af87fc86335b2ff4c098d48a3bd87afd109da041cd69cb7c043777",
+    "span": [
+     1904,
+     2018
+    ],
+    "station": "USC00485345",
+    "tmax_annual_mean_sd_c": 0.8088,
+    "tmin_annual_mean_sd_c": 1.3222,
+    "wet_day_count_mean": 106.66,
+    "wet_day_count_sd": 17.78
+   },
+   "latitude": 44.57,
+   "longitude": -110.4
+  }
+ },
+ "wet_day_threshold_mm": 1.0
+}
