@@ -62,12 +62,19 @@ lives in the source.
 
 ## Status
 
-Pre-implementation. The scaffold, posture decision, decomposition
-first-pass, and roadmap exist; no generator code has been ported yet.
+**The faithful-mode port is complete** (2026-07-09, ROADMAP items
+1-8): `cligen run` on the 12 golden runspecs reproduces the reference
+build's `.cli` files byte-identically, on top of full-trajectory
+interior identity (~47M captured generator records, 189,207
+cold-start days, 57.3M adjudicated formatted fields). The forward
+queue is the augmentation series (provenance/parquet first) —
+see [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Provenance and licensing
 
 CLIGEN is a USDA-ARS work in the public domain; the pinned copy and its
 lineage are documented in
 [`reference/cligen532/PROVENANCE.md`](reference/cligen532/PROVENANCE.md).
-The Rust code is licensed under [Apache-2.0](LICENSE).
+The Rust code is licensed under [Apache-2.0](LICENSE). The full
+authorship lineage of the model this port reproduces — four decades of
+it — is recorded in [CREDITS.md](CREDITS.md).
