@@ -3,12 +3,17 @@
 //! Origin-Class: ARM-optimized-routines
 //!   (MIT OR Apache-2.0 WITH LLVM-exception)
 //! Copyright: 2017-2025 Arm Limited (`logf`, `cosf`, `sinf`, `exp`
-//!   families); `atanf` is fdlibm/SunPro (Copyright (C) 1993 Sun
-//!   Microsystems — "Permission to use, copy, modify, and distribute
-//!   this software is freely granted, provided that this notice is
-//!   preserved."), via glibc 2.39 sysdeps/ieee754/flt-32/s_atanf.c —
-//!   license provenance for the SunPro origin flagged for Stage R1
-//!   review (par package)
+//!   families).
+//!
+//! `atanf` carries the fdlibm/SunPro notice from glibc 2.39
+//! `sysdeps/ieee754/flt-32/s_atanf.c` verbatim:
+//! Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+//! Developed at SunPro, a Sun Microsystems, Inc. business.
+//! Permission to use, copy, modify, and distribute this software is
+//! freely granted, provided that this notice is preserved.
+//! Stage R1 resolved the source/license provenance against the glibc
+//! 2.39 release tarball and Netlib fdlibm; exact hashes and links are in
+//! the par package's `atanf-pinned-provenance.md` artifact.
 //! Migration-Method: algorithm transcription, behavior-verified against
 //!   the reference build's runtime (glibc 2.39, x86-64 FMA ifunc
 //!   variants) over the full tap capture — 26,402,148 dstn1 records,

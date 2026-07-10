@@ -14,8 +14,10 @@ use cligen::cbk1::Cbk1State;
 use cligen::cbk7::Cbk7State;
 use cligen::cbk9::Cbk9State;
 use cligen::cinterp::CinterpState;
-use cligen::par::{sta_parms, ParFile};
+use cligen::monthlies::{fouri2, lintrp, ryf2};
+use cligen::par::{header, sta_dat, sta_name, sta_parms, ParError, ParFile, StaDatSelection};
 use std::collections::HashMap;
+use std::error::Error as _;
 use std::path::{Path, PathBuf};
 
 const STATIONS: [(&str, &str); 4] = [
@@ -25,6 +27,64 @@ const STATIONS: [(&str, &str); 4] = [
     ("fish-springs-ut", "fish-springs-ut/ut422852.par"),
 ];
 const INTERPS: [i32; 4] = [0, 1, 2, 3];
+
+const FULL_F2_CASES: [(&str, &str, &str); 8] = [
+    (
+        "new-meadows-id-I2",
+        "new-meadows-id",
+        "new-meadows-id/id106388.par",
+    ),
+    ("jeogla-au-I2", "jeogla-au", "jeogla-au/ASN00057011.par"),
+    (
+        "mt-wilson-ca-observed-seed0",
+        "mt-wilson-ca",
+        "mt-wilson-ca/ca046006.par",
+    ),
+    (
+        "mt-wilson-ca-observed-seed17",
+        "mt-wilson-ca",
+        "mt-wilson-ca/ca046006.par",
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed0",
+        "fish-springs-ut",
+        "fish-springs-ut/ut422852.par",
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed17",
+        "fish-springs-ut",
+        "fish-springs-ut/ut422852.par",
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed0",
+        "fish-springs-ut",
+        "fish-springs-ut/ut422852.par",
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed17",
+        "fish-springs-ut",
+        "fish-springs-ut/ut422852.par",
+    ),
+];
+
+const FULL_MODE_CASES: [(&str, &str, &str); 4] = [
+    (
+        "new-meadows-id",
+        "new-meadows-id",
+        "new-meadows-id/id106388.par",
+    ),
+    ("jeogla-au", "jeogla-au", "jeogla-au/ASN00057011.par"),
+    (
+        "mt-wilson-ca-observed",
+        "mt-wilson-ca",
+        "mt-wilson-ca/ca046006.par",
+    ),
+    (
+        "fish-springs-ut-observed-padded",
+        "fish-springs-ut",
+        "fish-springs-ut/ut422852.par",
+    ),
+];
 
 fn repo_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
@@ -239,6 +299,91 @@ fn bits1(a: &[f32]) -> Vec<u32> {
     a.iter().map(|v| v.to_bits()).collect()
 }
 
+/// Load one fixture and run the already snapshot-gated `sta_parms`
+/// setup for an evaluator's interpolation mode.
+fn setup_interp(par_rel: &str, interp: i32) -> CinterpState {
+    let bytes = std::fs::read(repo_root().join("fixtures").join(par_rel)).unwrap();
+    let par = ParFile::parse(&bytes).unwrap();
+    let mut bk7 = Cbk7State::default();
+    let mut bk1 = Cbk1State::default();
+    let mut bk9 = Cbk9State::default();
+    let mut ci = CinterpState {
+        interp,
+        ..CinterpState::default()
+    };
+    let _ = sta_parms(&par, &mut bk7, &mut bk1, &mut bk9, &mut ci);
+    ci
+}
+
+fn check_f2_stream(path: &Path, par_rel: &str, label: &str) -> usize {
+    let ci = setup_interp(par_rel, 2);
+    let data = std::fs::read_to_string(path).unwrap();
+    let mut count = 0usize;
+    for (record, line) in data.lines().enumerate() {
+        let mut it = line.split_whitespace();
+        let indpar: usize = it.next().unwrap().parse().unwrap();
+        let ida: i32 = it.next().unwrap().parse().unwrap();
+        let expected = hex(it.next().unwrap());
+        assert!(it.next().is_none(), "{label}: f2 record shape");
+        assert_eq!(
+            fouri2(indpar, ida, &ci).to_bits(),
+            expected,
+            "{label}: fouri2 record {} indpar={indpar} ida={ida}",
+            record + 1
+        );
+        count += 1;
+    }
+    count
+}
+
+fn check_y2_stream(path: &Path, par_rel: &str, label: &str) -> usize {
+    let ci = setup_interp(par_rel, 3);
+    let data = std::fs::read_to_string(path).unwrap();
+    let mut count = 0usize;
+    for (record, line) in data.lines().enumerate() {
+        let mut it = line.split_whitespace();
+        let mo: i32 = it.next().unwrap().parse().unwrap();
+        let jd: i32 = it.next().unwrap().parse().unwrap();
+        let ntd: i32 = it.next().unwrap().parse().unwrap();
+        let indpar: usize = it.next().unwrap().parse().unwrap();
+        let expected = hex(it.next().unwrap());
+        assert!(it.next().is_none(), "{label}: y2 record shape");
+        assert_eq!(
+            ryf2(mo, jd, ntd, indpar, &ci).to_bits(),
+            expected,
+            "{label}: ryf2 record {} mo={mo} jd={jd} ntd={ntd} indpar={indpar}",
+            record + 1
+        );
+        count += 1;
+    }
+    count
+}
+
+fn check_li_stream(path: &Path, par_rel: &str, label: &str) -> usize {
+    let mut ci = setup_interp(par_rel, 1);
+    let data = std::fs::read_to_string(path).unwrap();
+    let mut count = 0usize;
+    for (record, line) in data.lines().enumerate() {
+        let mut it = line.split_whitespace();
+        let mo: i32 = it.next().unwrap().parse().unwrap();
+        let jd: i32 = it.next().unwrap().parse().unwrap();
+        let ntd: i32 = it.next().unwrap().parse().unwrap();
+        let expected_o_mo: i32 = it.next().unwrap().parse().unwrap();
+        let expected_lf = hex(it.next().unwrap());
+        let expected_rf = hex(it.next().unwrap());
+        assert!(it.next().is_none(), "{label}: li record shape");
+        lintrp(mo, jd, ntd, &mut ci);
+        assert_eq!(
+            (ci.o_mo, ci.lf.to_bits(), ci.rf.to_bits()),
+            (expected_o_mo, expected_lf, expected_rf),
+            "{label}: lintrp record {} mo={mo} jd={jd} ntd={ntd}",
+            record + 1
+        );
+        count += 1;
+    }
+    count
+}
+
 /// Run parse + sta_parms for one (station, interp) and assert every
 /// snapshot value bit-exactly.
 fn check_combo(station: &str, par_rel: &str, interp: i32) {
@@ -415,6 +560,10 @@ fn par_roundtrip_fixture_bytes() {
 fn par_parse_fails_closed() {
     assert!(ParFile::parse(&[0xFF, 0xFE, 0x00]).is_err(), "non-text");
     assert!(
+        matches!(ParFile::parse("é\n".as_bytes()), Err(ParError::NotText)),
+        "non-ASCII fixed-column text"
+    );
+    assert!(
         ParFile::parse(b"only\nthree\nrecords\n").is_err(),
         "record count"
     );
@@ -426,4 +575,270 @@ fn par_parse_fails_closed() {
     // corrupt one numeric field on record 4 (MEAN P January)
     text = text.replacen("   .26", "  x.26", 1);
     assert!(ParFile::parse(text.as_bytes()).is_err(), "bad numeric");
+
+    let fixture =
+        std::fs::read_to_string(root.join("fixtures/new-meadows-id/id106388.par")).unwrap();
+    let crlf = fixture.replace('\n', "\r\n");
+    assert!(matches!(
+        ParFile::parse(crlf.as_bytes()),
+        Err(ParError::InvalidLineEnding)
+    ));
+    let tabbed = fixture.replacen("   .26", "  \t.26", 1);
+    assert!(matches!(
+        ParFile::parse(tabbed.as_bytes()),
+        Err(ParError::Field { .. })
+    ));
+}
+
+/// Committed first-1,000-record vectors for all four station states.
+/// Each evaluator receives state produced by the snapshot-gated parser
+/// and `sta_parms` path before its records are replayed.
+#[test]
+fn monthlies_evaluators_match_fortran_tap_samples() {
+    let root = repo_root().join("fixtures/taps/par");
+    let mut f2_total = 0usize;
+    let mut y2_total = 0usize;
+    let mut li_total = 0usize;
+    for (station, par_rel) in STATIONS {
+        let f2_label = format!("{station}-I2");
+        f2_total += check_f2_stream(
+            &root.join(&f2_label).join("f2-sample.tap"),
+            par_rel,
+            &f2_label,
+        );
+        let y2_label = format!("{station}-I3");
+        y2_total += check_y2_stream(
+            &root.join(&y2_label).join("y2-sample.tap"),
+            par_rel,
+            &y2_label,
+        );
+        let li_label = format!("{station}-I1");
+        li_total += check_li_stream(
+            &root.join(&li_label).join("li-sample.tap"),
+            par_rel,
+            &li_label,
+        );
+    }
+    assert_eq!((f2_total, y2_total, li_total), (4_000, 4_000, 4_000));
+}
+
+/// Full local Stage S captures. These files are intentionally
+/// gitignored; the manifest pins their provenance and hashes.
+#[test]
+#[ignore = "full monthlies replay against local par tap-runs capture (evidence gate)"]
+fn full_monthlies_streams_bit_identical() {
+    let tap_runs =
+        repo_root().join("docs/work-packages/20260709-par-monthlies-port/artifacts/tap-runs");
+    let mut f2_total = 0usize;
+    let mut y2_total = 0usize;
+    let mut li_total = 0usize;
+
+    for (case, station, par_rel) in FULL_F2_CASES {
+        f2_total += check_f2_stream(
+            &tap_runs.join(case).join("cligen_f2.tap"),
+            par_rel,
+            &format!("{station}: {case}"),
+        );
+    }
+    for (case_prefix, station, par_rel) in FULL_MODE_CASES {
+        let y2_case = format!("{case_prefix}-I3");
+        y2_total += check_y2_stream(
+            &tap_runs.join(&y2_case).join("cligen_y2.tap"),
+            par_rel,
+            &format!("{station}: {y2_case}"),
+        );
+        let li_case = format!("{case_prefix}-I1");
+        li_total += check_li_stream(
+            &tap_runs.join(&li_case).join("cligen_li.tap"),
+            par_rel,
+            &format!("{station}: {li_case}"),
+        );
+    }
+
+    println!("full monthlies identity: fouri2={f2_total} ryf2={y2_total} lintrp={li_total}");
+    assert_eq!(f2_total, 380_436);
+    assert_eq!(y2_total, 275_452);
+    assert_eq!(li_total, 36_889);
+}
+
+#[test]
+fn header_matches_fortran_banner() {
+    let mut bytes = Vec::new();
+    header(&mut bytes, 5.3230).unwrap();
+    let expected = concat!(
+        "\n\n",
+        "  ********************************************************************\n",
+        "  *                                                                  *\n",
+        "  *              USDA - WATER EROSION PREDICTION PROJECT             *\n",
+        "  *                 WEPP CLIMATE INPUT DATA GENERATOR                *\n",
+        "  *                                                                  *\n",
+        "  *                    CONTINUOUS SIMULATION AND                     *\n",
+        "  *                       SINGLE STORM OPTIONS                       *\n",
+        "  *                    with Command Line Options,                    *\n",
+        "  *                        and Corrections to                        *\n",
+        "  *                  Rainfall Intensity Calculations                 *\n",
+        "  *                   and Random Number Generation.                  *\n",
+        "  *                                                                  *\n",
+        "  *                          VERSION 5.32300                         *\n",
+        "  *                     Revised from VERSION 4.2                     *\n",
+        "  *                          September 2024                          *\n",
+        "  *                                                                  *\n",
+        "  *           (Use -h or /h to list command line options.)           *\n",
+        "  *                                                                  *\n",
+        "  ********************************************************************\n",
+        "\n\n",
+    );
+    assert_eq!(String::from_utf8(bytes).unwrap(), expected);
+}
+
+#[test]
+fn sta_dat_single_file_routes_parse_and_distribution() {
+    let root = repo_root();
+    for (station, par_rel) in STATIONS {
+        let path = root.join("fixtures").join(par_rel);
+        let mut bk7 = Cbk7State::default();
+        let mut bk1 = Cbk1State::default();
+        let mut bk9 = Cbk9State::default();
+        let mut ci = CinterpState {
+            interp: 2,
+            ..CinterpState::default()
+        };
+        let mut screen = Vec::new();
+        let out = sta_dat(
+            StaDatSelection::SingleFile(&path),
+            5.3230,
+            &mut screen,
+            &mut bk7,
+            &mut bk1,
+            &mut bk9,
+            &mut ci,
+        )
+        .unwrap_or_else(|e| panic!("{station}: sta_dat: {e}"));
+
+        let snap = parse_snapshot(
+            &root
+                .join("fixtures/taps/par")
+                .join(format!("{station}-I2"))
+                .join("cligen_par.tap"),
+        );
+        assert_eq!(out.stidd, snap.stidd, "{station}: stidd");
+        assert_eq!(
+            (out.nst, out.nstat, out.igcode),
+            (snap.nst, snap.nstat, snap.igcode),
+            "{station}: header codes"
+        );
+        assert_eq!(out.parms.ylt.to_bits(), snap.ylt, "{station}: ylt");
+        assert_eq!(out.parms.elev, snap.elev, "{station}: elev");
+        assert_eq!(bk7.rst[0].map(f32::to_bits), snap.rst[0], "{station}: rst");
+        assert_eq!(ci.x_bar.map(f32::to_bits), snap.x_bar, "{station}: fouri1");
+        assert!(
+            String::from_utf8(screen)
+                .unwrap()
+                .contains(path.to_str().unwrap()),
+            "{station}: filename banner"
+        );
+    }
+}
+
+#[test]
+fn sta_dat_deferred_paths_fail_closed() {
+    let mut bk7 = Cbk7State::default();
+    let mut bk1 = Cbk1State::default();
+    let mut bk9 = Cbk9State::default();
+    let mut ci = CinterpState::default();
+    let mut screen = Vec::new();
+    let missing = repo_root().join("fixtures/does-not-exist.par");
+    assert!(matches!(
+        sta_dat(
+            StaDatSelection::SingleFile(&missing),
+            5.3230,
+            &mut screen,
+            &mut bk7,
+            &mut bk1,
+            &mut bk9,
+            &mut ci,
+        ),
+        Err(ParError::Io { .. })
+    ));
+    assert!(matches!(
+        sta_dat(
+            StaDatSelection::StateStationFile {
+                path: &missing,
+                state_code: 10,
+                station_code: 6388,
+            },
+            5.3230,
+            &mut screen,
+            &mut bk7,
+            &mut bk1,
+            &mut bk9,
+            &mut ci,
+        ),
+        Err(ParError::Unsupported { .. })
+    ));
+    assert!(matches!(
+        sta_dat(
+            StaDatSelection::Interactive,
+            5.3230,
+            &mut screen,
+            &mut bk7,
+            &mut bk1,
+            &mut bk9,
+            &mut ci,
+        ),
+        Err(ParError::InteractiveOnly { .. })
+    ));
+    assert!(matches!(sta_name(), Err(ParError::InteractiveOnly { .. })));
+}
+
+#[test]
+fn par_error_variants_report_context_and_sources() {
+    let io = ParError::Io {
+        path: PathBuf::from("missing.par"),
+        source: std::io::Error::new(std::io::ErrorKind::NotFound, "gone"),
+    };
+    assert_eq!(io.to_string(), "cannot read .par file missing.par: gone");
+    assert!(io.source().is_some());
+
+    let output = ParError::Output {
+        source: std::io::Error::new(std::io::ErrorKind::BrokenPipe, "closed"),
+    };
+    assert_eq!(
+        output.to_string(),
+        "cannot write station intake output: closed"
+    );
+    assert!(output.source().is_some());
+
+    let unsupported = ParError::Unsupported {
+        surface: "state scan",
+    };
+    assert_eq!(
+        unsupported.to_string(),
+        "unsupported .par surface: state scan"
+    );
+    assert!(unsupported.source().is_none());
+
+    let interactive = ParError::InteractiveOnly { surface: "prompts" };
+    assert_eq!(
+        interactive.to_string(),
+        "interactive-only .par surface: prompts"
+    );
+    assert_eq!(ParError::NotText.to_string(), ".par file is not ASCII text");
+    assert_eq!(
+        ParError::InvalidLineEnding.to_string(),
+        ".par file must use LF line endings"
+    );
+    assert_eq!(
+        ParError::TooFewRecords { found: 2 }.to_string(),
+        ".par has 2 records; CLIGEN reads 83"
+    );
+    assert_eq!(
+        ParError::Field {
+            record: 4,
+            cols: (9, 14),
+            text: " x.26".to_owned(),
+        }
+        .to_string(),
+        ".par record 4 cols 9-14: unparseable field \" x.26\""
+    );
 }

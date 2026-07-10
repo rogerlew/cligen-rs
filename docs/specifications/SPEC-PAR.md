@@ -1,6 +1,6 @@
 # SPEC-PAR — Station Parameter (`.par`) Format and Typed Par Model
 
-Status: active (rev 1, Stage S of the par+monthlies package)
+Status: active (rev 2, Stage C of the par+monthlies package)
 Surface: the CLIGEN station-parameter file format as 5.32.3 reads it,
 and the `cligen::par` typed model (`ParFile`) that owns it. This spec is
 the foundation the A4 par-database/mutation work builds on.
@@ -22,7 +22,7 @@ those lines, not by external CLIGEN documentation.
 
 ## Record grammar
 
-A `.par` file is LF-terminated text records. CLIGEN 5.32.3 reads records
+A `.par` file is ASCII text with LF record terminators. CLIGEN 5.32.3 reads records
 1–83 with fixed-column formats; everything after record 83 is present in
 real files but **never read** (adjudicated: `close(10)` at
 `cligen.f:2927` immediately follows the record-83 read).
@@ -54,9 +54,9 @@ fail a file 5.32.3 would read).
 
 - **Fixed columns.** Fields are column slices of the record; a record
   shorter than a field's extent is blank-padded (`PAD='YES'` default).
-- **Blank handling.** `BLANK='NULL'`: all blanks inside a numeric field
-  are ignored; an all-blank field is 0 (`0.0`). Parse strips blanks
-  before conversion.
+- **Blank handling.** `BLANK='NULL'`: ASCII space characters inside a
+  numeric field are ignored; an all-space field is 0 (`0.0`). Other
+  whitespace (including tabs) is not a Fortran blank and fails parsing.
 - **F-editing.** An explicit decimal point overrides the format's scale.
   A decimal-point-free field is scaled by 10⁻ᵈ (d = 2 or 3 per the
   format). No corpus instance lacks the point; the rule is implemented
@@ -66,9 +66,12 @@ fail a file 5.32.3 would read).
   conversion is theoretically possible and empirically excluded for the
   corpus by the par-state snapshot identity gate; any future mismatch is
   a discovery to characterize, not absorb.
-- **Failure behavior (fail closed):** fewer than 83 records; a numeric
-  field that is non-blank yet unparseable after blank stripping. Both
-  produce typed `ParError`s. A missing/unopenable file is an I/O error
+- **Failure behavior (fail closed):** non-ASCII bytes, CR/CRLF line
+  endings, fewer than 83 records, or a numeric field that is non-blank
+  yet unparseable after ASCII-space stripping produce typed `ParError`s.
+  Rejecting CR/CRLF is required by the byte-round-trip invariant: accepting
+  and normalizing those terminators would silently change the lexemes. A
+  missing/unopenable file is an I/O error
   before parse (the Fortran counterpart aborts on an unopened unit —
   see intake-path-characterization.md).
 
@@ -91,6 +94,30 @@ owning struct (`Cbk7State`) exposes accessor methods (`rst_col(j)`,
 December does not. Faithful consumers must reproduce this window
 exactly. (Parameter 14 has no generation-time evaluator call site in
 5.32.3; the state is still snapshot-verified.)
+
+## Intake-driver interface
+
+`par::sta_dat` is the non-interactive station-intake boundary. Its
+`StaDatSelection` makes each source path explicit:
+
+- `SingleFile(path)` implements the characterized `-i` path: write the
+  `header` banner, open and parse the path as one `ParFile`, retain the
+  record-1 station identity/ET fields, and call `sta_parms` into the
+  caller-owned common-block state. Missing/unreadable files and parse
+  failures return `ParError`; no state distribution occurs after either
+  failure.
+- `StateStationFile { .. }` represents the live but uncaptured `-S`+`-s`
+  scan path and returns `ParError::Unsupported` in this revision. This is
+  a declared deferral, not fallback to the first station.
+- `Interactive` delegates to the explicit `sta_name` boundary, which
+  returns `ParError::InteractiveOnly`. Prompt loops and the external
+  `stations` catalog are not part of the non-interactive library surface.
+
+`header(writer, version)` writes the source banner to an injected writer
+so callers control stdout. `version` remains `f32` (the source REAL*4
+argument) and uses the source's `f7.5` rendering. `sta_dat` takes the same
+writer and invokes `header` before opening the single-station file, as the
+live source path does.
 
 ## Derived state at load (owned by `par::sta_parms`, not `ParFile`)
 
@@ -119,16 +146,31 @@ the package's `par-roundtrip-adjudication.md`):
    producer-dependent record-1/tail shapes) — value→text is not
    injective across real producers, so presentation is retained as
    lexemes rather than faked as data.
-2. **Canonical rendering (specified now, implemented by A4):** mutated
-   records are re-rendered in the USDA convention — 6-char fields,
-   suppressed leading zero (`  .26`, ` -.26`), row-family decimals
-   (2; 3 for Time Pk), 8-char canonical label. Invariant (semantic
-   fixpoint): `parse(canonical(v)) == v` bit-exactly for every field
-   family — canonicalization must never perturb a typed value.
-   Untouched records keep their original bytes (minimal-diff mutation).
-   No corpus instance exercises a negative bare-dot value; the `-.26`
-   form is specified from the F-edit width rules, flagged for A4 to
-   verify against a producer instance before relying on it.
+2. **Canonical rendering (specified now, implemented by A4):** only the
+   record containing a mutated typed field is rewritten; untouched records
+   and the unparsed tail retain their original bytes. Canonical record
+   families are:
+
+   | Record | Canonical form |
+   |---|---|
+   | 1 | `(a41,i2,i4,i2)`: station text right-padded to 41 bytes; state/station/ET codes right-aligned as decimal integers |
+   | 2 | preserve the raw skipped/label spans; rewrite typed fields at the source layout `(6x,f7.2,6x,f7.2,7x,i3,7x,i2)` |
+   | 3 | preserve the raw skipped/label spans with `(12x,i5,17x,f5.2)`; TP5 remains outside the typed surface and retains its input lexeme when another record-3 field changes |
+   | 4–16, 18–82 | preserve the raw 8-byte label + rewrite 12 six-byte numeric fields in the USDA suppressed-leading-zero convention (`  .26`, ` -.26`) with two fractional digits |
+   | 17 | preserve the raw 8-byte label + rewrite 12 six-byte fields with three fractional digits |
+   | 83 | `(a19,f6.3,2(2x,a19,f6.3))`: station text right-padded; weights rendered with three fractional digits |
+
+   A text value that exceeds its A-edit width or a numeric value that does
+   not fit its F/I-edit width is a typed rendering error; truncation and
+   asterisk overflow are forbidden. Integers equal to zero render as
+   numeric zero rather than attempting to recreate producer-specific blank
+   lexemes. A requested f32 mutation that cannot survive the field family's
+   fixed decimal precision bit-exactly is likewise a typed rendering error;
+   canonical rendering must not silently quantize it. For all accepted
+   values, `parse(canonical(v)) == v` must hold bit-exactly. No corpus
+   instance exercises a negative monthly bare-dot
+   value; the `-.26` form follows the F-edit width rules and remains flagged
+   for A4 to verify against a producer instance before relying on it.
 
 ## Provenance obligations
 
@@ -140,7 +182,13 @@ par database owns par-mutation lineage.
 
 - Par-state snapshot bit-identity: parse + `sta_parms` distribution
   reproduce every captured value for all four stations × interp
-  {0, 2, 3} (tap schema: `fixtures/taps/par/`, 191-line snapshots).
+  {0, 1, 2, 3} (tap schema: `fixtures/taps/par/`, 191-line snapshots).
 - Byte round-trip: `to_bytes(parse(b)) == b`, all four fixtures.
-- Both run in `cargo test` (committed samples); the full-matrix
-  verification recipe is in the package's tap-manifest.md.
+- Single-file `sta_dat`: the four fixture files reproduce their captured
+  record-1 identities and the already snapshot-gated `sta_parms` output;
+  missing files, multi-station selection, and interactive selection fail
+  with their typed error variants. `header` is byte-pinned at version
+  5.323.
+- All committed snapshot, evaluator-sample, round-trip, and intake gates run
+  in `cargo test`; the local full evaluator streams run through the ignored
+  release gate documented in the package's tap-manifest.md.

@@ -3,14 +3,30 @@
 //! verbatim (the corpus-supported round-trip invariant).
 
 use std::fmt;
+use std::io;
+use std::path::PathBuf;
 
 /// Typed parse failure — fail closed per SPEC-PAR/AGENTS (no inferred
 /// defaults for malformed input).
 #[derive(Debug)]
 pub enum ParError {
-    /// The file is not ASCII/UTF-8 text (the Fortran reads bytes; the
-    /// typed model fails closed instead of guessing an encoding).
+    /// The selected parameter file could not be read.
+    Io { path: PathBuf, source: io::Error },
+    /// The intake banner or path could not be written to the caller's
+    /// output stream.
+    Output { source: io::Error },
+    /// A non-interactive source path exists but is deliberately not
+    /// implemented without a fixture-backed acceptance surface.
+    Unsupported { surface: &'static str },
+    /// The requested path requires prompt/read loops and is unavailable
+    /// from the non-interactive library API.
+    InteractiveOnly { surface: &'static str },
+    /// The file is not ASCII text (the Fortran surface is fixed byte
+    /// columns; the typed model fails closed instead of guessing an encoding).
     NotText,
+    /// The typed/lexeme-preserving surface accepts LF records only;
+    /// accepting CRLF would let `str::lines` silently break byte identity.
+    InvalidLineEnding,
     /// Fewer records than the 83-record read surface.
     TooFewRecords { found: usize },
     /// A non-blank numeric field that does not parse after Fortran
@@ -26,7 +42,18 @@ pub enum ParError {
 impl fmt::Display for ParError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            ParError::NotText => write!(f, ".par file is not UTF-8 text"),
+            ParError::Io { path, source } => {
+                write!(f, "cannot read .par file {}: {source}", path.display())
+            }
+            ParError::Output { source } => {
+                write!(f, "cannot write station intake output: {source}")
+            }
+            ParError::Unsupported { surface } => write!(f, "unsupported .par surface: {surface}"),
+            ParError::InteractiveOnly { surface } => {
+                write!(f, "interactive-only .par surface: {surface}")
+            }
+            ParError::NotText => write!(f, ".par file is not ASCII text"),
+            ParError::InvalidLineEnding => write!(f, ".par file must use LF line endings"),
             ParError::TooFewRecords { found } => {
                 write!(f, ".par has {found} records; CLIGEN reads 83")
             }
@@ -39,7 +66,14 @@ impl fmt::Display for ParError {
     }
 }
 
-impl std::error::Error for ParError {}
+impl std::error::Error for ParError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            ParError::Io { source, .. } | ParError::Output { source } => Some(source),
+            _ => None,
+        }
+    }
+}
 
 /// One `.par` file: the typed read surface plus every record's raw
 /// bytes (SPEC-PAR §Serialization — presentation is retained as
@@ -111,7 +145,7 @@ fn f_edit(
     d: usize,
 ) -> Result<f32, ParError> {
     let raw = field(record, start, width);
-    let stripped: String = raw.chars().filter(|c| !c.is_ascii_whitespace()).collect();
+    let stripped: String = raw.chars().filter(|&c| c != ' ').collect();
     if stripped.is_empty() {
         return Ok(0.0);
     }
@@ -137,7 +171,7 @@ fn f_edit(
 /// Fortran `Iw` read under `BLANK='NULL'`: blanks stripped, empty = 0.
 fn i_edit(record_1based: usize, record: &str, start: usize, width: usize) -> Result<i32, ParError> {
     let raw = field(record, start, width);
-    let stripped: String = raw.chars().filter(|c| !c.is_ascii_whitespace()).collect();
+    let stripped: String = raw.chars().filter(|&c| c != ' ').collect();
     if stripped.is_empty() {
         return Ok(0);
     }
@@ -249,6 +283,12 @@ impl ParFile {
     /// fields; the tail (records 84+) is retained unparsed.
     pub fn parse(bytes: &[u8]) -> Result<ParFile, ParError> {
         let text = std::str::from_utf8(bytes).map_err(|_| ParError::NotText)?;
+        if !text.is_ascii() {
+            return Err(ParError::NotText);
+        }
+        if text.contains('\r') {
+            return Err(ParError::InvalidLineEnding);
+        }
         let trailing_newline = text.ends_with('\n');
         let records: Vec<String> = text.lines().map(str::to_owned).collect();
         if records.len() < 83 {
