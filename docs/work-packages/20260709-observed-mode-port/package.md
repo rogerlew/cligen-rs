@@ -1,6 +1,12 @@
 # Observed Mode / Day-Loop Driver Port
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
+Codex next — `artifacts/kickoff-codex.md`)
+Stage S outcome: day_gen/generation_setup/PrnReader/Ccl1State ported;
+**cold-start replay green — 80,906 days with zero injected state**
+(block-data seeds + burn + real inputs through the production driver);
+EOF/sentinel stop semantics pinned by both fish-springs cases; no new
+taps or transcendentals needed.
 Date: 2026-07-09
 Evidence mode: — (per stage on execution)
 Execution model: staged, two executors (the item-3..6 pattern) —
