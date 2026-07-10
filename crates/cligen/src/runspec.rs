@@ -15,6 +15,7 @@ use crate::modes::{run_to_cli, RunError, RunInputs};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
 use crate::profile::GenerationProfile;
+use crate::quality::{self, Provenance, QualityError};
 use crate::storm::SingleStormParams;
 
 /// The sole currently-supported runspec schema revision.
@@ -180,6 +181,10 @@ pub struct OutputSpec {
     pub overwrite: bool,
     #[serde(default)]
     pub command_echo: Option<String>,
+    /// SPEC-RUNSPEC rev 4 / SPEC-QUALITY-REPORT: emit the
+    /// `<output.cli>.quality.json` sidecar (default true).
+    #[serde(default)]
+    pub quality: Option<bool>,
 }
 
 /// A typed, field-addressable failure at the runspec boundary.
@@ -207,6 +212,7 @@ pub enum RunspecError {
         path: PathBuf,
     },
     Run(RunError),
+    Quality(QualityError),
 }
 
 impl fmt::Display for RunspecError {
@@ -236,6 +242,7 @@ impl fmt::Display for RunspecError {
                 path.display()
             ),
             RunspecError::Run(error) => write!(f, "generation: {error}"),
+            RunspecError::Quality(error) => write!(f, "output.quality: {error}"),
         }
     }
 }
@@ -256,6 +263,8 @@ pub struct PreparedRun {
     pub years: Option<i32>,
     pub command_echo: String,
     pub storm: Option<SingleStormParams>,
+    /// SPEC-RUNSPEC rev 4 `output.quality` (default true).
+    pub quality: bool,
     par_bytes: Vec<u8>,
     prn_bytes: Option<Vec<u8>>,
 }
@@ -279,13 +288,81 @@ impl PreparedRun {
         .map_err(RunspecError::Run)
     }
 
-    /// Generate the `.cli` text and apply `output.overwrite` without prompts.
+    /// Generate the `.cli` text and apply `output.overwrite` without
+    /// prompts. When `output.quality` is enabled (the default) the
+    /// `<output.cli>.quality.json` sidecar is computed from the
+    /// already-produced `.cli` text + `.par` bytes and always
+    /// rewritten — `output.overwrite` governs the `.cli` only
+    /// (SPEC-QUALITY-REPORT §Emission). The `.cli` byte stream is
+    /// untouched by the sidecar path.
     pub fn generate_and_write(&self) -> Result<(), RunspecError> {
         let cli = self.generate()?;
         let mut output = self.open_output()?;
         output
             .write_all(cli.as_bytes())
-            .map_err(|error| output_error(&self.output_path, error))
+            .map_err(|error| output_error(&self.output_path, error))?;
+        if self.quality {
+            self.write_quality_sidecar(&cli)?;
+        }
+        Ok(())
+    }
+
+    /// The sidecar destination: `<output.cli>.quality.json`.
+    #[must_use]
+    pub fn quality_sidecar_path(&self) -> PathBuf {
+        let mut name = self.output_path.as_os_str().to_owned();
+        name.push(".quality.json");
+        PathBuf::from(name)
+    }
+
+    /// The run-emitted `identity.provenance` block: the resolved
+    /// runspec surface (SPEC-QUALITY-REPORT §Emission). `qc_filter`
+    /// is `"faithful"` on the faithful backend (the only conditioning
+    /// behavior implemented; the knob itself is Q3) and `null` for
+    /// the pre-knob `fast_batch_v0`.
+    #[must_use]
+    pub fn quality_provenance(&self) -> Provenance {
+        Provenance {
+            generation_profile: match self.generation_profile {
+                GenerationProfile::Faithful5323 => "faithful_5_32_3".to_owned(),
+                GenerationProfile::FastBatchV0 => "fast_batch_v0".to_owned(),
+            },
+            qc_filter: match self.generation_profile {
+                GenerationProfile::Faithful5323 => Some("faithful".to_owned()),
+                GenerationProfile::FastBatchV0 => None,
+            },
+            mode: match self.iopt {
+                4 => "single_storm",
+                6 => "observed",
+                7 => "design_storm",
+                _ => "continuous",
+            }
+            .to_owned(),
+            burn: self.burn,
+            begin_year: self.begin_year,
+            years: self.years,
+            interpolation: match self.interpolation {
+                1 => "linear",
+                2 => "fourier",
+                3 => "monthly_mean_preserving",
+                _ => "none",
+            }
+            .to_owned(),
+        }
+    }
+
+    fn write_quality_sidecar(&self, cli: &str) -> Result<(), RunspecError> {
+        let report = quality::compute_report(cli, &self.par_bytes, Some(self.quality_provenance()))
+            .map_err(RunspecError::Quality)?;
+        let bytes = report
+            .to_json_bytes()
+            .map_err(|error| RunspecError::Quality(QualityError::Serialize(error)))?;
+        let path = self.quality_sidecar_path();
+        fs::write(&path, bytes).map_err(|error| RunspecError::Output {
+            field_path: "output.quality".to_owned(),
+            path,
+            message: error.to_string(),
+        })
     }
 
     fn open_output(&self) -> Result<File, RunspecError> {
@@ -385,6 +462,7 @@ impl RunspecDocument {
             years: fields.years,
             command_echo: generation_profile.command_echo(command_echo),
             storm: fields.storm,
+            quality: output.quality.unwrap_or(true),
             par_bytes,
             prn_bytes: prn.map(|value| value.2),
         })

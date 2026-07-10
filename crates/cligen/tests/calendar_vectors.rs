@@ -16,10 +16,10 @@ fn calendar_units_match_fortran_vectors() {
         let fields: Vec<_> = line.split_whitespace().collect();
         match fields.first().copied() {
             Some("JDT") => {
-                let nt = fields[1].parse().unwrap();
-                let m = fields[2].parse().unwrap();
-                let i = fields[3].parse().unwrap();
-                let expected = fields[4].parse().unwrap();
+                let nt = fields[1].parse::<i32>().unwrap();
+                let m = fields[2].parse::<i32>().unwrap();
+                let i = fields[3].parse::<i32>().unwrap();
+                let expected = fields[4].parse::<i32>().unwrap();
                 assert_eq!(jdt(&NC, i, m, nt), expected, "{line}");
                 count += 1;
             }

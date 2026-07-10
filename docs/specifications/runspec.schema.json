@@ -36,7 +36,8 @@
       "properties": {
         "cli": { "$ref": "#/$defs/nonEmptyPath" },
         "overwrite": { "type": "boolean", "default": false },
-        "command_echo": { "type": "string" }
+        "command_echo": { "type": "string" },
+        "quality": { "type": "boolean", "default": true }
       }
     }
   },

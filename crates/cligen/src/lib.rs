@@ -32,6 +32,7 @@ pub mod output;
 pub mod par;
 pub mod profile;
 pub mod qc;
+pub mod quality;
 pub mod rng;
 pub mod runspec;
 pub mod storm;

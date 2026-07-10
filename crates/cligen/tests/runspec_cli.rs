@@ -35,7 +35,9 @@ fn cligen_binary_runs_all_golden_runspecs_byte_identically() {
             .join(case)
             .join("inp.yaml");
         let output = output_dir.join(format!("{case}.cli"));
+        let sidecar = output_dir.join(format!("{case}.cli.quality.json"));
         let _ = std::fs::remove_file(&output);
+        let _ = std::fs::remove_file(&sidecar);
         let validation = Command::new(binary)
             .args(["validate", inp.to_str().unwrap()])
             .output()
@@ -64,6 +66,13 @@ fn cligen_binary_runs_all_golden_runspecs_byte_identically() {
         )
         .unwrap();
         assert_eq!(std::fs::read(&output).unwrap(), golden, "{case}");
+        // SPEC-QUALITY-REPORT: the sidecar appears by default without
+        // altering the `.cli` byte stream (asserted golden above).
+        assert!(
+            sidecar.exists(),
+            "{case}: default run must emit the quality sidecar"
+        );
         std::fs::remove_file(output).unwrap();
+        std::fs::remove_file(sidecar).unwrap();
     }
 }

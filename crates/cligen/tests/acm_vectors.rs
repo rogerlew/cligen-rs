@@ -37,8 +37,8 @@ fn acm_scalar_and_cumulative_units_match_fortran_bits() {
     for f in vector_lines() {
         match f[0].as_str() {
             "CDFCHI" => {
-                let which = f[1].parse().unwrap();
-                let expected_status = f[2].parse().unwrap();
+                let which = f[1].parse::<i32>().unwrap();
+                let expected_status = f[2].parse::<i32>().unwrap();
                 let input_p = f64::from_bits(bits(&f[3]));
                 let input_q = f64::from_bits(bits(&f[4]));
                 let input_x = f64::from_bits(bits(&f[5]));
@@ -100,8 +100,8 @@ fn acm_scalar_and_cumulative_units_match_fortran_bits() {
                 count += 1;
             }
             "IPMPAR" => {
-                let i = f[1].parse().unwrap();
-                let expected = f[2].parse().unwrap();
+                let i = f[1].parse::<i32>().unwrap();
+                let expected = f[2].parse::<i32>().unwrap();
                 assert_eq!(ipmpar(i), expected, "{f:?}");
                 count += 1;
             }
@@ -163,7 +163,7 @@ fn assert_dinvr_trace(tag: &str, initial_x: f64) {
     for f in records {
         assert_eq!(fx.to_bits(), bits(&f[5]), "entry fx: {f:?}");
         let got = dinvr(status, x, fx, &mut state, &mut zero);
-        assert_eq!(got.status, f[1].parse().unwrap(), "{f:?}");
+        assert_eq!(got.status, f[1].parse::<i32>().unwrap(), "{f:?}");
         assert_eq!(got.qleft, logical(&f[2]), "{f:?}");
         assert_eq!(got.qhi, logical(&f[3]), "{f:?}");
         assert_eq!(got.x.to_bits(), bits(&f[4]), "{f:?}");
@@ -190,7 +190,7 @@ fn dzror_reverse_communication_matches_fortran_trace() {
     for f in records {
         assert_eq!(fx.to_bits(), bits(&f[5]), "entry fx: {f:?}");
         let got = dzror(status, x, fx, &mut state);
-        assert_eq!(got.status, f[1].parse().unwrap(), "{f:?}");
+        assert_eq!(got.status, f[1].parse::<i32>().unwrap(), "{f:?}");
         assert_eq!(got.qleft, logical(&f[2]), "{f:?}");
         assert_eq!(got.qhi, logical(&f[3]), "{f:?}");
         assert_eq!(got.x.to_bits(), bits(&f[4]), "{f:?}");
