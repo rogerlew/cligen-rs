@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rogerlew/cligen-rs/blob/main/docs/specifications/quality-report.schema.json",
+  "title": "cligen-rs quality report metrics_version 1",
+  "description": "Full SPEC-QUALITY-REPORT envelope. Object properties are declared in the deterministic serialization order used by the Rust structs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metrics_version", "identity", "par_convergence", "interannual", "covariation", "tails", "process"],
+  "properties": {
+    "metrics_version": { "const": 1 },
+    "identity": { "$ref": "#/$defs/identity" },
+    "par_convergence": { "anyOf": [{ "$ref": "#/$defs/par_convergence" }, { "type": "null" }] },
+    "interannual": { "anyOf": [{ "$ref": "#/$defs/interannual" }, { "type": "null" }] },
+    "covariation": { "anyOf": [{ "$ref": "#/$defs/covariation" }, { "type": "null" }] },
+    "tails": { "$ref": "#/$defs/tails" },
+    "process": { "anyOf": [{ "$ref": "#/$defs/process" }, { "type": "null" }] }
+  },
+  "$defs": {
+    "nullable_number": { "type": ["number", "null"] },
+    "nullable_integer": { "type": ["integer", "null"] },
+    "nullable_boolean": { "type": ["boolean", "null"] },
+    "nonnegative_integer": { "type": "integer", "minimum": 0 },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content", "provenance"],
+      "properties": {
+        "content": { "$ref": "#/$defs/identity_content" },
+        "provenance": { "anyOf": [{ "$ref": "#/$defs/provenance" }, { "type": "null" }] }
+      }
+    },
+    "identity_content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "par_sha256", "cli_sha256", "days", "years", "span"],
+      "properties": {
+        "tool": { "type": "string" },
+        "par_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "cli_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "days": { "$ref": "#/$defs/nonnegative_integer" },
+        "years": { "$ref": "#/$defs/nonnegative_integer" },
+        "span": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "integer" } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generation_profile", "qc_filter", "mode", "burn", "begin_year", "years", "interpolation"],
+      "properties": {
+        "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
+        "qc_filter": { "type": ["string", "null"], "enum": ["faithful", null] },
+        "mode": { "enum": ["continuous", "observed", "single_storm", "design_storm"] },
+        "burn": { "$ref": "#/$defs/nonnegative_integer" },
+        "begin_year": { "$ref": "#/$defs/nullable_integer" },
+        "years": { "$ref": "#/$defs/nullable_integer" },
+        "interpolation": { "enum": ["none", "linear", "fourier", "monthly_mean_preserving"] }
+      }
+    },
+    "par_cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "generated", "abs_err", "rel_err", "n"],
+      "properties": {
+        "target": { "$ref": "#/$defs/nullable_number" },
+        "generated": { "$ref": "#/$defs/nullable_number" },
+        "abs_err": { "$ref": "#/$defs/nullable_number" },
+        "rel_err": { "$ref": "#/$defs/nullable_number" },
+        "n": { "$ref": "#/$defs/nonnegative_integer" }
+      }
+    },
+    "months_par_cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": {
+        "jan": { "$ref": "#/$defs/par_cell" }, "feb": { "$ref": "#/$defs/par_cell" },
+        "mar": { "$ref": "#/$defs/par_cell" }, "apr": { "$ref": "#/$defs/par_cell" },
+        "may": { "$ref": "#/$defs/par_cell" }, "jun": { "$ref": "#/$defs/par_cell" },
+        "jul": { "$ref": "#/$defs/par_cell" }, "aug": { "$ref": "#/$defs/par_cell" },
+        "sep": { "$ref": "#/$defs/par_cell" }, "oct": { "$ref": "#/$defs/par_cell" },
+        "nov": { "$ref": "#/$defs/par_cell" }, "dec": { "$ref": "#/$defs/par_cell" }
+      }
+    },
+    "par_parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", "by_decade"],
+      "properties": {
+        "jan": { "$ref": "#/$defs/par_cell" }, "feb": { "$ref": "#/$defs/par_cell" },
+        "mar": { "$ref": "#/$defs/par_cell" }, "apr": { "$ref": "#/$defs/par_cell" },
+        "may": { "$ref": "#/$defs/par_cell" }, "jun": { "$ref": "#/$defs/par_cell" },
+        "jul": { "$ref": "#/$defs/par_cell" }, "aug": { "$ref": "#/$defs/par_cell" },
+        "sep": { "$ref": "#/$defs/par_cell" }, "oct": { "$ref": "#/$defs/par_cell" },
+        "nov": { "$ref": "#/$defs/par_cell" }, "dec": { "$ref": "#/$defs/par_cell" },
+        "by_decade": { "type": "array", "items": { "$ref": "#/$defs/par_decade" } }
+      }
+    },
+    "par_decade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decade", "start_year", "n_years", "months"],
+      "properties": {
+        "decade": { "$ref": "#/$defs/nonnegative_integer" },
+        "start_year": { "type": "integer" },
+        "n_years": { "$ref": "#/$defs/nonnegative_integer" },
+        "months": { "$ref": "#/$defs/months_par_cell" }
+      }
+    },
+    "par_convergence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_passthrough", "precip_wet_mean_mm", "precip_wet_sd_mm", "precip_wet_skew", "wet_day_fraction", "p_ww", "p_wd", "tmax_mean_c", "tmax_sd_c", "tmin_mean_c", "tmin_sd_c", "radiation_mean_ly", "dewpoint_mean_c", "wind_speed_mean_ms"],
+      "properties": {
+        "observed_passthrough": { "$ref": "#/$defs/nullable_boolean" },
+        "precip_wet_mean_mm": { "$ref": "#/$defs/par_parameter" },
+        "precip_wet_sd_mm": { "$ref": "#/$defs/par_parameter" },
+        "precip_wet_skew": { "$ref": "#/$defs/par_parameter" },
+        "wet_day_fraction": { "$ref": "#/$defs/par_parameter" },
+        "p_ww": { "$ref": "#/$defs/par_parameter" },
+        "p_wd": { "$ref": "#/$defs/par_parameter" },
+        "tmax_mean_c": { "$ref": "#/$defs/par_parameter" },
+        "tmax_sd_c": { "$ref": "#/$defs/par_parameter" },
+        "tmin_mean_c": { "$ref": "#/$defs/par_parameter" },
+        "tmin_sd_c": { "$ref": "#/$defs/par_parameter" },
+        "radiation_mean_ly": { "$ref": "#/$defs/par_parameter" },
+        "dewpoint_mean_c": { "$ref": "#/$defs/par_parameter" },
+        "wind_speed_mean_ms": { "$ref": "#/$defs/par_parameter" }
+      }
+    },
+    "dispersion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mean", "sd", "cv", "n_years"],
+      "properties": { "mean": { "$ref": "#/$defs/nullable_number" }, "sd": { "$ref": "#/$defs/nullable_number" }, "cv": { "$ref": "#/$defs/nullable_number" }, "n_years": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "annual_stats": {
+      "type": "object", "additionalProperties": false,
+      "required": ["precip_total_mm", "wet_day_count", "max_daily_precip_mm", "tmax_mean_c", "tmin_mean_c"],
+      "properties": { "precip_total_mm": { "$ref": "#/$defs/dispersion" }, "wet_day_count": { "$ref": "#/$defs/dispersion" }, "max_daily_precip_mm": { "$ref": "#/$defs/dispersion" }, "tmax_mean_c": { "$ref": "#/$defs/dispersion" }, "tmin_mean_c": { "$ref": "#/$defs/dispersion" } }
+    },
+    "monthly_sd_cell": {
+      "type": "object", "additionalProperties": false, "required": ["sd", "n_years"],
+      "properties": { "sd": { "$ref": "#/$defs/nullable_number" }, "n_years": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "months_monthly_sd": {
+      "type": "object", "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": {
+        "jan": { "$ref": "#/$defs/monthly_sd_cell" }, "feb": { "$ref": "#/$defs/monthly_sd_cell" }, "mar": { "$ref": "#/$defs/monthly_sd_cell" }, "apr": { "$ref": "#/$defs/monthly_sd_cell" },
+        "may": { "$ref": "#/$defs/monthly_sd_cell" }, "jun": { "$ref": "#/$defs/monthly_sd_cell" }, "jul": { "$ref": "#/$defs/monthly_sd_cell" }, "aug": { "$ref": "#/$defs/monthly_sd_cell" },
+        "sep": { "$ref": "#/$defs/monthly_sd_cell" }, "oct": { "$ref": "#/$defs/monthly_sd_cell" }, "nov": { "$ref": "#/$defs/monthly_sd_cell" }, "dec": { "$ref": "#/$defs/monthly_sd_cell" }
+      }
+    },
+    "interannual": {
+      "type": "object", "additionalProperties": false, "required": ["annual", "monthly_precip_total_sd_mm", "by_decade"],
+      "properties": { "annual": { "$ref": "#/$defs/annual_stats" }, "monthly_precip_total_sd_mm": { "$ref": "#/$defs/months_monthly_sd" }, "by_decade": { "type": "array", "items": { "$ref": "#/$defs/interannual_decade" } } }
+    },
+    "interannual_decade": {
+      "type": "object", "additionalProperties": false, "required": ["decade", "start_year", "n_years", "annual", "monthly_precip_total_sd_mm"],
+      "properties": { "decade": { "$ref": "#/$defs/nonnegative_integer" }, "start_year": { "type": "integer" }, "n_years": { "$ref": "#/$defs/nonnegative_integer" }, "annual": { "$ref": "#/$defs/annual_stats" }, "monthly_precip_total_sd_mm": { "$ref": "#/$defs/months_monthly_sd" } }
+    },
+    "corr_pair": {
+      "type": "object", "additionalProperties": false, "required": ["pearson", "spearman", "n"],
+      "properties": { "pearson": { "$ref": "#/$defs/nullable_number" }, "spearman": { "$ref": "#/$defs/nullable_number" }, "n": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "corr_set": {
+      "type": "object", "additionalProperties": false, "required": ["amount_duration", "amount_peak_intensity", "duration_radiation"],
+      "properties": { "amount_duration": { "$ref": "#/$defs/corr_pair" }, "amount_peak_intensity": { "$ref": "#/$defs/corr_pair" }, "duration_radiation": { "$ref": "#/$defs/corr_pair" } }
+    },
+    "contrast_cell": {
+      "type": "object", "additionalProperties": false, "required": ["contrast", "wet_n", "dry_n"],
+      "properties": { "contrast": { "$ref": "#/$defs/nullable_number" }, "wet_n": { "$ref": "#/$defs/nonnegative_integer" }, "dry_n": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "months_corr_set": {
+      "type": "object", "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": { "jan": { "$ref": "#/$defs/corr_set" }, "feb": { "$ref": "#/$defs/corr_set" }, "mar": { "$ref": "#/$defs/corr_set" }, "apr": { "$ref": "#/$defs/corr_set" }, "may": { "$ref": "#/$defs/corr_set" }, "jun": { "$ref": "#/$defs/corr_set" }, "jul": { "$ref": "#/$defs/corr_set" }, "aug": { "$ref": "#/$defs/corr_set" }, "sep": { "$ref": "#/$defs/corr_set" }, "oct": { "$ref": "#/$defs/corr_set" }, "nov": { "$ref": "#/$defs/corr_set" }, "dec": { "$ref": "#/$defs/corr_set" } }
+    },
+    "months_contrast": {
+      "type": "object", "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": { "jan": { "$ref": "#/$defs/contrast_cell" }, "feb": { "$ref": "#/$defs/contrast_cell" }, "mar": { "$ref": "#/$defs/contrast_cell" }, "apr": { "$ref": "#/$defs/contrast_cell" }, "may": { "$ref": "#/$defs/contrast_cell" }, "jun": { "$ref": "#/$defs/contrast_cell" }, "jul": { "$ref": "#/$defs/contrast_cell" }, "aug": { "$ref": "#/$defs/contrast_cell" }, "sep": { "$ref": "#/$defs/contrast_cell" }, "oct": { "$ref": "#/$defs/contrast_cell" }, "nov": { "$ref": "#/$defs/contrast_cell" }, "dec": { "$ref": "#/$defs/contrast_cell" } }
+    },
+    "months_nullable_number": {
+      "type": "object", "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": { "jan": { "$ref": "#/$defs/nullable_number" }, "feb": { "$ref": "#/$defs/nullable_number" }, "mar": { "$ref": "#/$defs/nullable_number" }, "apr": { "$ref": "#/$defs/nullable_number" }, "may": { "$ref": "#/$defs/nullable_number" }, "jun": { "$ref": "#/$defs/nullable_number" }, "jul": { "$ref": "#/$defs/nullable_number" }, "aug": { "$ref": "#/$defs/nullable_number" }, "sep": { "$ref": "#/$defs/nullable_number" }, "oct": { "$ref": "#/$defs/nullable_number" }, "nov": { "$ref": "#/$defs/nullable_number" }, "dec": { "$ref": "#/$defs/nullable_number" } }
+    },
+    "daily_range_mean": {
+      "type": "object", "additionalProperties": false, "required": ["whole_run", "months"],
+      "properties": { "whole_run": { "$ref": "#/$defs/nullable_number" }, "months": { "$ref": "#/$defs/months_nullable_number" } }
+    },
+    "covariation": {
+      "type": "object", "additionalProperties": false, "required": ["whole_run", "months", "radiation_wet_dry_contrast", "daily_range_mean_c", "by_decade"],
+      "properties": { "whole_run": { "$ref": "#/$defs/corr_set" }, "months": { "$ref": "#/$defs/months_corr_set" }, "radiation_wet_dry_contrast": { "$ref": "#/$defs/months_contrast" }, "daily_range_mean_c": { "$ref": "#/$defs/daily_range_mean" }, "by_decade": { "type": "array", "items": { "$ref": "#/$defs/covariation_decade" } } }
+    },
+    "covariation_decade": {
+      "type": "object", "additionalProperties": false, "required": ["decade", "start_year", "n_years", "pairs", "radiation_wet_dry_contrast", "daily_range_mean_c"],
+      "properties": { "decade": { "$ref": "#/$defs/nonnegative_integer" }, "start_year": { "type": "integer" }, "n_years": { "$ref": "#/$defs/nonnegative_integer" }, "pairs": { "$ref": "#/$defs/corr_set" }, "radiation_wet_dry_contrast": { "$ref": "#/$defs/contrast_cell" }, "daily_range_mean_c": { "$ref": "#/$defs/nullable_number" } }
+    },
+    "tails": {
+      "type": "object", "additionalProperties": false, "required": ["per_year", "top_events"],
+      "properties": { "per_year": { "type": "array", "items": { "$ref": "#/$defs/year_tails" } }, "top_events": { "type": "array", "maxItems": 5, "items": { "$ref": "#/$defs/top_event" } } }
+    },
+    "year_tails": {
+      "type": "object", "additionalProperties": false, "required": ["year", "n_days", "max_daily_precip_mm", "storm_count", "max_peak_intensity", "longest_wet_spell_days", "longest_dry_spell_days"],
+      "properties": { "year": { "type": "integer" }, "n_days": { "$ref": "#/$defs/nonnegative_integer" }, "max_daily_precip_mm": { "$ref": "#/$defs/nullable_number" }, "storm_count": { "$ref": "#/$defs/nonnegative_integer" }, "max_peak_intensity": { "$ref": "#/$defs/nullable_number" }, "longest_wet_spell_days": { "$ref": "#/$defs/nonnegative_integer" }, "longest_dry_spell_days": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "top_event": {
+      "type": "object", "additionalProperties": false, "required": ["rank", "year", "month", "day", "row_index", "precip_mm", "duration_h", "peak_intensity"],
+      "properties": { "rank": { "type": "integer", "minimum": 1, "maximum": 5 }, "year": { "type": "integer" }, "month": { "type": "integer", "minimum": 1, "maximum": 12 }, "day": { "type": "integer", "minimum": 1, "maximum": 31 }, "row_index": { "type": "integer", "minimum": 1 }, "precip_mm": { "type": "number" }, "duration_h": { "type": "number" }, "peak_intensity": { "type": "number" } }
+    },
+    "months_u64": {
+      "type": "object", "additionalProperties": false,
+      "required": ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
+      "properties": { "jan": { "$ref": "#/$defs/nonnegative_integer" }, "feb": { "$ref": "#/$defs/nonnegative_integer" }, "mar": { "$ref": "#/$defs/nonnegative_integer" }, "apr": { "$ref": "#/$defs/nonnegative_integer" }, "may": { "$ref": "#/$defs/nonnegative_integer" }, "jun": { "$ref": "#/$defs/nonnegative_integer" }, "jul": { "$ref": "#/$defs/nonnegative_integer" }, "aug": { "$ref": "#/$defs/nonnegative_integer" }, "sep": { "$ref": "#/$defs/nonnegative_integer" }, "oct": { "$ref": "#/$defs/nonnegative_integer" }, "nov": { "$ref": "#/$defs/nonnegative_integer" }, "dec": { "$ref": "#/$defs/nonnegative_integer" } }
+    },
+    "parameter_retries": {
+      "type": "object", "additionalProperties": false, "required": ["parameter", "rejected_attempts", "accepted_batches"],
+      "properties": { "parameter": { "type": "integer", "minimum": 1, "maximum": 9 }, "rejected_attempts": { "$ref": "#/$defs/months_u64" }, "accepted_batches": { "$ref": "#/$defs/months_u64" } }
+    },
+    "acceptance_statistics": {
+      "type": "object", "additionalProperties": false, "required": ["parameter", "month", "year", "ks_level", "mean_level", "variance_level"],
+      "properties": { "parameter": { "type": "integer", "minimum": 1, "maximum": 9 }, "month": { "type": "integer", "minimum": 1, "maximum": 12 }, "year": { "type": "integer" }, "ks_level": { "$ref": "#/$defs/nullable_integer" }, "mean_level": { "$ref": "#/$defs/nullable_number" }, "variance_level": { "$ref": "#/$defs/nullable_number" } }
+    },
+    "cap_give_up": {
+      "type": "object", "additionalProperties": false, "required": ["parameter", "month", "year"],
+      "properties": { "parameter": { "type": "integer", "minimum": 1, "maximum": 9 }, "month": { "type": "integer", "minimum": 1, "maximum": 12 }, "year": { "type": "integer" } }
+    },
+    "process": {
+      "type": "object", "additionalProperties": false,
+      "required": ["qc_filter", "retries", "acceptance_statistics", "cap_give_ups", "v7_recovery_count", "tdew_rangecheck_count", "randn_draws"],
+      "properties": {
+        "qc_filter": { "type": ["string", "null"], "enum": ["faithful", null] },
+        "retries": { "type": "array", "minItems": 9, "maxItems": 9, "items": { "$ref": "#/$defs/parameter_retries" } },
+        "acceptance_statistics": { "type": "array", "items": { "$ref": "#/$defs/acceptance_statistics" } },
+        "cap_give_ups": { "type": "array", "items": { "$ref": "#/$defs/cap_give_up" } },
+        "v7_recovery_count": { "$ref": "#/$defs/nonnegative_integer" },
+        "tdew_rangecheck_count": { "$ref": "#/$defs/nonnegative_integer" },
+        "randn_draws": { "type": "array", "minItems": 10, "maxItems": 10, "items": { "$ref": "#/$defs/nonnegative_integer" }, "description": "Returned RANDN deviates per stream k1 through k10. Internal open-interval rejection iterations are not additional draws." }
+      }
+    }
+  }
+}

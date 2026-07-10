@@ -11,7 +11,7 @@ use std::path::{Path, PathBuf};
 
 use serde::Deserialize;
 
-use crate::modes::{run_to_cli, RunError, RunInputs};
+use crate::modes::{run_to_cli, RunError, RunInputs, RunOutput};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
 use crate::profile::GenerationProfile;
@@ -272,6 +272,10 @@ pub struct PreparedRun {
 impl PreparedRun {
     /// Generate the `.cli` text without touching the output path.
     pub fn generate(&self) -> Result<String, RunspecError> {
+        Ok(self.generate_output()?.cli)
+    }
+
+    fn generate_output(&self) -> Result<RunOutput, RunspecError> {
         run_to_cli(&RunInputs {
             iopt: self.iopt,
             interp: self.interpolation,
@@ -296,13 +300,13 @@ impl PreparedRun {
     /// (SPEC-QUALITY-REPORT §Emission). The `.cli` byte stream is
     /// untouched by the sidecar path.
     pub fn generate_and_write(&self) -> Result<(), RunspecError> {
-        let cli = self.generate()?;
+        let generated = self.generate_output()?;
         let mut output = self.open_output()?;
         output
-            .write_all(cli.as_bytes())
+            .write_all(generated.cli.as_bytes())
             .map_err(|error| output_error(&self.output_path, error))?;
         if self.quality {
-            self.write_quality_sidecar(&cli)?;
+            self.write_quality_sidecar(&generated)?;
         }
         Ok(())
     }
@@ -351,9 +355,14 @@ impl PreparedRun {
         }
     }
 
-    fn write_quality_sidecar(&self, cli: &str) -> Result<(), RunspecError> {
-        let report = quality::compute_report(cli, &self.par_bytes, Some(self.quality_provenance()))
-            .map_err(RunspecError::Quality)?;
+    fn write_quality_sidecar(&self, generated: &RunOutput) -> Result<(), RunspecError> {
+        let report = quality::compute_report(
+            &generated.cli,
+            &self.par_bytes,
+            Some(self.quality_provenance()),
+            Some(generated.process.clone()),
+        )
+        .map_err(RunspecError::Quality)?;
         let bytes = report
             .to_json_bytes()
             .map_err(|error| RunspecError::Quality(QualityError::Serialize(error)))?;

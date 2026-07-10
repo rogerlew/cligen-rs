@@ -34,7 +34,7 @@ machinery without an ADR.
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
 | [SPEC-GENERATION-PROFILES](SPEC-GENERATION-PROFILES.md) | Versioned runspec generator-profile selector + CLI declaration | active (fast-batch spike) |
 | [SPEC-FAST-BATCH-V1](SPEC-FAST-BATCH-V1.md) | Proposed fast-batch-v1 runtime contract + quality assessment (ADR-0002) | draft rev 2 |
-| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument) | active (rev 3; Q1 implementation — group P is Stage C) |
+| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument; [JSON Schema](quality-report.schema.json)) | active (rev 3; Q1 Stage C implemented) |
 | SPEC-STATION-DB | Typed station-par database, collection manifests, location query, `cligen stations` (crates.io: data outside the crate) | planned (Q2) |
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |
 | [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |

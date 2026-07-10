@@ -39,7 +39,9 @@ use crate::libm_pinned::{cosf_pinned, sinf_pinned};
 use crate::monthlies::lintrp;
 use crate::observed::{PrnError, PrnReader};
 use crate::profile::GenerationProfile;
-use crate::rng::randn;
+use crate::quality::process::ProcessCounters;
+use crate::quality::report::ProcessMetrics;
+use crate::rng::randn_observed;
 use crate::storm::{storm_block, wet_day_duration, SingleStormParams};
 
 use crate::acm::AcmState;
@@ -97,8 +99,8 @@ pub struct GenState {
     pub acm: AcmState,
     pub dg: DstgState,
     pub daygen: DayGenState,
-    /// Cumulative Tdew-rangecheck events (screen-only in the source).
-    pub tdew_events: u32,
+    /// Observation-only quality-report group P accumulator.
+    pub process: ProcessCounters,
 }
 
 /// `clt = 57.296` (`cligen.f:882`).
@@ -134,6 +136,28 @@ pub fn generation_setup(
 /// The public faithful entry point remains [`generation_setup`]. Extensions
 /// must select this entry through a declared runspec profile.
 pub fn generation_setup_with_profile(
+    bk1: Cbk1State,
+    bk4: Cbk4State,
+    bk7: Cbk7State,
+    bk9: Cbk9State,
+    ci: CinterpState,
+    ylt: f32,
+    profile: GenerationProfile,
+) -> GenState {
+    generation_setup_with_process(
+        bk1,
+        bk4,
+        bk7,
+        bk9,
+        ci,
+        ylt,
+        profile,
+        ProcessCounters::default(),
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn generation_setup_with_process(
     mut bk1: Cbk1State,
     mut bk4: Cbk4State,
     mut bk7: Cbk7State,
@@ -141,6 +165,7 @@ pub fn generation_setup_with_profile(
     ci: CinterpState,
     ylt: f32,
     profile: GenerationProfile,
+    mut process: ProcessCounters,
 ) -> GenState {
     let bk5 = Cbk5State {
         sml: 0.0, // cligen.f:865
@@ -165,19 +190,19 @@ pub fn generation_setup_with_profile(
     // the block-data state construction.
     #[allow(clippy::field_reassign_with_default)]
     {
-        cr.vv = randn(&mut bk7.k1);
+        cr.vv = randn_observed(&mut bk7.k1, 0, &mut process);
     }
     bk7.l = 2;
     if cr.vv > bk7.prw[0][0] {
         bk7.l = 1; // cligen.f:890 — inverted sense, transcribed
     }
-    bk9.rn1 = randn(&mut bk7.k7); // cligen.f:891
-    bk7.v1 = randn(&mut bk7.k2); // cligen.f:894-899
-    bk7.v3 = randn(&mut bk7.k3);
-    bk7.v5 = randn(&mut bk7.k4);
-    bk7.v7 = randn(&mut bk7.k5);
-    bk7.v9 = randn(&mut bk7.k8);
-    bk7.v11 = randn(&mut bk7.k9);
+    bk9.rn1 = randn_observed(&mut bk7.k7, 6, &mut process); // cligen.f:891
+    bk7.v1 = randn_observed(&mut bk7.k2, 1, &mut process); // cligen.f:894-899
+    bk7.v3 = randn_observed(&mut bk7.k3, 2, &mut process);
+    bk7.v5 = randn_observed(&mut bk7.k4, 3, &mut process);
+    bk7.v7 = randn_observed(&mut bk7.k5, 4, &mut process);
+    bk7.v9 = randn_observed(&mut bk7.k8, 7, &mut process);
+    bk7.v11 = randn_observed(&mut bk7.k9, 8, &mut process);
     bk7.msim = 1; // cligen.f:901-902
     bk7.nsim = 1;
     let batch = MonthlyBatchBackend::from_profile(profile, &bk7);
@@ -195,7 +220,7 @@ pub fn generation_setup_with_profile(
         acm: AcmState::default(),
         dg: DstgState::default(),
         daygen: DayGenState::default(),
-        tdew_events: 0,
+        process,
     }
 }
 
@@ -285,9 +310,10 @@ pub fn day_gen(
                 &mut st.cr,
                 &mut st.batch,
                 &mut st.acm,
+                &mut st.process,
             );
             if events != ClgenEvents::default() {
-                st.tdew_events += 1;
+                st.process.tdew_rangecheck_count += 1;
             }
             windg(&mut st.bk1, &mut st.bk3, &st.bk4, &mut st.bk7, &mut st.cr);
             // cligen.f:3104: wind direction radians -> degrees in
@@ -316,6 +342,7 @@ pub fn day_gen(
                 &mut st.bk9,
                 &mut st.dg,
                 &mut st.cr,
+                &mut st.process,
             );
             st.ccl1.dur[m][d] = dur;
             if st.bk4.iopt >= 4 {
@@ -331,6 +358,7 @@ pub fn day_gen(
                     &mut st.bk9,
                     &mut st.dg,
                     &mut st.cr,
+                    &mut st.process,
                 );
                 st.ccl1.dur[m][d] = q.dur;
                 rows.push(DailyRow {
@@ -414,13 +442,15 @@ pub struct RunInputs<'a> {
 /// Run the declared profile: main-program assembly (burn → station → option
 /// resolution → generation setup, `cligen.f:702-902`) + `wxr_gen`
 /// (`cligen.f:3589-3816`: header, year plan, day loops) + the run-end marker
-/// (`cligen.f:965-966`). Returns the `.cli` bytes.
-pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
+/// (`cligen.f:965-966`). Returns the `.cli` bytes and run-only process
+/// observations.
+pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
     use crate::output::{write_cli_header, write_daily_row, write_run_end, HeaderInputs};
 
     // Seeds + burn (cligen.f:723-737).
     let mut bk7 = Cbk7State::default();
-    bk7.burn(inp.burn);
+    let mut process = ProcessCounters::default();
+    bk7.burn_observed(inp.burn, &mut process);
     // Station intake (sta_dat single-file path).
     let par = crate::par::ParFile::parse(inp.par_bytes).map_err(RunError::Par)?;
     let mut bk1 = Cbk1State::default();
@@ -462,8 +492,16 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
     } else {
         ss_out.numyr
     };
-    let mut st =
-        generation_setup_with_profile(bk1, bk4, bk7, bk9, ci, out.ylt, inp.generation_profile);
+    let mut st = generation_setup_with_process(
+        bk1,
+        bk4,
+        bk7,
+        bk9,
+        ci,
+        out.ylt,
+        inp.generation_profile,
+        process,
+    );
 
     // ---- wxr_gen ----
     let mut cli = String::new();
@@ -556,5 +594,24 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
     if !stopped {
         write_run_end(&mut cli);
     }
-    Ok(cli)
+    Ok(RunOutput {
+        cli,
+        process: st
+            .process
+            .into_metrics(process_qc_filter(inp.generation_profile)),
+    })
+}
+
+fn process_qc_filter(profile: GenerationProfile) -> Option<String> {
+    match profile {
+        GenerationProfile::Faithful5323 => Some("faithful".to_owned()),
+        GenerationProfile::FastBatchV0 => None,
+    }
+}
+
+/// Generated text plus the observation-only group P surface.
+#[derive(Debug, Clone, PartialEq)]
+pub struct RunOutput {
+    pub cli: String,
+    pub process: ProcessMetrics,
 }

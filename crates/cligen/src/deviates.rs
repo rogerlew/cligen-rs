@@ -26,7 +26,8 @@
 
 use crate::crandom3::Crandom3State;
 use crate::qc::ks_tst;
-use crate::rng::{randn, SeedState};
+use crate::quality::process::ProcessCounters;
+use crate::rng::{randn_observed, SeedState};
 
 /// Standard normal deviate from two uniforms — faithful `dstn1`
 /// (`cligen.f:1789-1816`).
@@ -91,7 +92,13 @@ impl Default for DstgState {
 /// Both 10,000-try escapes print the source's warnings and accept.
 // `6.28` is the source's Bofu Yu constant (cligen.f:1691), not TAU.
 #[allow(clippy::approx_constant)]
-pub fn dstg(ai: f32, k7: &mut SeedState, sv: &mut DstgState, cr: &mut Crandom3State) -> f32 {
+pub fn dstg(
+    ai: f32,
+    k7: &mut SeedState,
+    sv: &mut DstgState,
+    cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
+) -> f32 {
     let xn1: f32 = 6.28; // data xn1/6.28/ (Bofu Yu, 1999-07-04)
     let mox = cr.mox as usize;
     debug_assert!((1..=12).contains(&cr.mox), "dstg: mox out of range");
@@ -105,7 +112,7 @@ pub fn dstg(ai: f32, k7: &mut SeedState, sv: &mut DstgState, cr: &mut Crandom3St
                 // Label 21.
                 itryct += 1;
                 for i in 0..30 {
-                    sv.array[i] = randn(k7);
+                    sv.array[i] = randn_observed(k7, 6, process);
                     let ichi = (sv.array[i] * 20.0) as i32 + 1;
                     cr.chicnt[9][mox - 1][(ichi - 1) as usize] += 1;
                 }

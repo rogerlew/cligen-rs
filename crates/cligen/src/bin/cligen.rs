@@ -60,7 +60,8 @@ fn post_hoc_quality(cli: &PathBuf, par: &PathBuf) -> Result<(), String> {
         .map_err(|error| format!("cannot read {}: {error}", cli.display()))?;
     let par_bytes =
         std::fs::read(par).map_err(|error| format!("cannot read {}: {error}", par.display()))?;
-    let report = compute_report(&cli_text, &par_bytes, None).map_err(|error| error.to_string())?;
+    let report =
+        compute_report(&cli_text, &par_bytes, None, None).map_err(|error| error.to_string())?;
     let bytes = report.to_json_bytes().map_err(|error| error.to_string())?;
     std::io::stdout()
         .write_all(&bytes)

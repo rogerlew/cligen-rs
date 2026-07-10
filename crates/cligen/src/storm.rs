@@ -35,7 +35,8 @@ use crate::crandom3::Crandom3State;
 use crate::daily::alphb;
 use crate::deviates::DstgState;
 use crate::libm_pinned::logf_pinned;
-use crate::rng::{randn, SeedState};
+use crate::quality::process::ProcessCounters;
+use crate::rng::{randn_observed, SeedState};
 
 /// `tymax(4)` — upper limit of `r5p` by single-storm `itype`
 /// (main-program DATA, `cligen.f:602`).
@@ -210,9 +211,10 @@ pub fn timepk(
     k10: &mut SeedState,
     bk4: &Cbk4State,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) -> f32 {
     if bk4.iopt == 6 {
-        cr.z = randn(k10);
+        cr.z = randn_observed(k10, 9, process);
     } else {
         cr.z = cr.zx(cr.dax as usize);
     }
@@ -241,13 +243,14 @@ pub fn wet_day_duration(
     bk9: &mut Cbk9State,
     dg: &mut DstgState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) -> f32 {
     let ida = (bk3.ida - 1) as usize;
     if bk5.r[ida] <= 0.0 {
         bk5.r[ida] = 0.0;
         0.0
     } else {
-        alphb(bk3, bk4, bk5, bk7, bk9, dg, cr);
+        alphb(bk3, bk4, bk5, bk7, bk9, dg, cr, process);
         // The live 3.99 coefficient (B. Yu 6/99; 9.210 and 4.607 are
         // retained history, cligen.f:3121-3124).
         let mut dur = 3.99 / (-2.0 * logf_pinned(1.0 - bk9.r1));
@@ -285,6 +288,7 @@ pub fn storm_block(
     bk9: &mut Cbk9State,
     dg: &mut DstgState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) -> StormQuantities {
     assert!(
         bk4.iopt >= 4,
@@ -297,9 +301,9 @@ pub fn storm_block(
     let r = bk5.r[(bk3.ida - 1) as usize];
     let (mut xr, mut tpr, mut xmav);
     if r > 0.0 {
-        alphb(bk3, bk4, bk5, bk7, bk9, dg, cr);
+        alphb(bk3, bk4, bk5, bk7, bk9, dg, cr, process);
         xr = r * 25.4;
-        tpr = timepk(timpkd, &mut bk7.k10, bk4, cr);
+        tpr = timepk(timpkd, &mut bk7.k10, bk4, cr, process);
         if tpr > 0.99 {
             tpr = 0.99;
         }

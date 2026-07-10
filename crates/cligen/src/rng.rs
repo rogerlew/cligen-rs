@@ -24,6 +24,7 @@ use crate::cbk7::Cbk7State;
 use crate::crandom3::Crandom3State;
 use crate::deviates::dstn1;
 use crate::qc::{conflm, confls, ks_tst};
+use crate::quality::process::ProcessCounters;
 
 /// One generator stream's seed state — the Fortran `k(4)` array.
 ///
@@ -72,6 +73,18 @@ pub fn randn(k: &mut SeedState) -> f32 {
     }
 }
 
+/// Return one source uniform and record that returned deviate for group P.
+/// The counter update occurs after the source draw and cannot feed RNG state.
+pub(crate) fn randn_observed(
+    k: &mut SeedState,
+    stream: usize,
+    process: &mut ProcessCounters,
+) -> f32 {
+    let value = randn(k);
+    process.randn_draws[stream] += 1;
+    value
+}
+
 /// `ranset` SAVE state (`cligen.f:4050-4057`).
 #[derive(Debug, Clone)]
 pub struct RansetState {
@@ -116,27 +129,28 @@ fn initialize_ranset_streams(
     seeds: &mut Cbk7State,
     state: &mut RansetState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) {
     if state.last_r[0] != -1.0 {
         return;
     }
-    cr.vv = randn(&mut seeds.k1);
+    cr.vv = randn_observed(&mut seeds.k1, 0, process);
     state.last_r[0] = cr.vv;
-    seeds.v1 = randn(&mut seeds.k2);
+    seeds.v1 = randn_observed(&mut seeds.k2, 1, process);
     state.last_r[1] = seeds.v1;
-    seeds.v3 = randn(&mut seeds.k3);
+    seeds.v3 = randn_observed(&mut seeds.k3, 2, process);
     state.last_r[2] = seeds.v3;
-    seeds.v5 = randn(&mut seeds.k4);
+    seeds.v5 = randn_observed(&mut seeds.k4, 3, process);
     state.last_r[3] = seeds.v5;
-    seeds.v7 = randn(&mut seeds.k5);
+    seeds.v7 = randn_observed(&mut seeds.k5, 4, process);
     state.last_r[4] = seeds.v7;
-    cr.fx = randn(&mut seeds.k6);
+    cr.fx = randn_observed(&mut seeds.k6, 5, process);
     state.last_r[5] = cr.fx;
-    seeds.v9 = randn(&mut seeds.k8);
+    seeds.v9 = randn_observed(&mut seeds.k8, 7, process);
     state.last_r[6] = seeds.v9;
-    seeds.v11 = randn(&mut seeds.k9);
+    seeds.v11 = randn_observed(&mut seeds.k9, 8, process);
     state.last_r[7] = seeds.v11;
-    cr.z = randn(&mut seeds.k10);
+    cr.z = randn_observed(&mut seeds.k10, 9, process);
     state.last_r[8] = cr.z;
 }
 
@@ -152,30 +166,31 @@ fn draw_ranset_value(
     state: &mut RansetState,
     cr: &Crandom3State,
     ldimp: &mut i32,
+    process: &mut ProcessCounters,
 ) -> f32 {
     match j {
-        0 => randn(&mut seeds.k1),
-        1 => randn(&mut seeds.k2),
-        2 => randn(&mut seeds.k3),
-        3 => randn(&mut seeds.k4),
+        0 => randn_observed(&mut seeds.k1, 0, process),
+        1 => randn_observed(&mut seeds.k2, 1, process),
+        2 => randn_observed(&mut seeds.k3, 2, process),
+        3 => randn_observed(&mut seeds.k4, 3, process),
         4 => {
             if cr.ranary[0][i] <= seeds.prw[month][(state.ell - 1) as usize] {
                 state.ell = 1;
                 *ldimp += 1;
-                randn(&mut seeds.k5)
+                randn_observed(&mut seeds.k5, 4, process)
             } else {
                 state.ell = 2;
                 0.0
             }
         }
-        5 => randn(&mut seeds.k6),
-        6 => randn(&mut seeds.k8),
-        7 => randn(&mut seeds.k9),
+        5 => randn_observed(&mut seeds.k6, 5, process),
+        6 => randn_observed(&mut seeds.k8, 7, process),
+        7 => randn_observed(&mut seeds.k9, 8, process),
         8 if iopt == 6 => 0.0,
         8 => {
             if cr.ranary[4][i] > 0.0 {
                 state.ell = 1;
-                randn(&mut seeds.k10)
+                randn_observed(&mut seeds.k10, 9, process)
             } else {
                 state.ell = 2;
                 0.0
@@ -185,6 +200,7 @@ fn draw_ranset_value(
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 fn generate_ranset_parameter(
     j: usize,
     dimi: usize,
@@ -193,6 +209,7 @@ fn generate_ranset_parameter(
     seeds: &mut Cbk7State,
     state: &mut RansetState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) -> MonthAttempt {
     let mut attempt = MonthAttempt {
         ransum: 0.0,
@@ -201,7 +218,17 @@ fn generate_ranset_parameter(
         ldimp: 0,
     };
     for i in 0..dimi {
-        let value = draw_ranset_value(j, i, month, iopt, seeds, state, cr, &mut attempt.ldimp);
+        let value = draw_ranset_value(
+            j,
+            i,
+            month,
+            iopt,
+            seeds,
+            state,
+            cr,
+            &mut attempt.ldimp,
+            process,
+        );
         cr.ranary[j][i] = value;
         if value > 0.0 {
             let ichi = ((value * 20.0) as usize + 1).min(20);
@@ -304,6 +331,7 @@ pub fn ranset(
     state: &mut RansetState,
     acm: &mut AcmState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) {
     assert!(ntd > 0, "ranset: ntd must be positive");
     assert!((1..=7).contains(&bk4.iopt), "ranset: invalid iopt");
@@ -314,23 +342,26 @@ pub fn ranset(
     let month = (cr.mox - 1) as usize;
     let dimi = ranset_month_days(cr.mox, ntd);
     cr.g_dimi[month] += dimi as i32;
-    initialize_ranset_streams(seeds, state, cr);
+    initialize_ranset_streams(seeds, state, cr, process);
 
     let mut iredo = 0i32;
     let ellx = state.ell;
     for j in 0..9 {
         let lst_rx = state.last_r[j];
         loop {
-            let attempt = generate_ranset_parameter(j, dimi, month, bk4.iopt, seeds, state, cr);
+            let attempt =
+                generate_ranset_parameter(j, dimi, month, bk4.iopt, seeds, state, cr, process);
             // Observed-mode time-to-peak skips all statistics, source
             // cligen.f:4204-4205 and 4334-4335.
             if bk4.iopt == 6 && j == 8 {
+                process.record_acceptance(j, month, iyear, None);
                 break;
             }
             add_ranset_attempt(j, month, &attempt, cr);
             let (level1, level, level2) = ranset_quality_levels(j, month, acm, cr);
             let failed = level1 > 0 || level > cr.thresh[j] || level2 > cr.thres2[j];
             if failed {
+                process.record_rejection(j, month);
                 iredo += 1;
                 if iredo != 10_000 {
                     remove_ranset_attempt(j, month, &attempt, ellx, state, cr);
@@ -343,6 +374,10 @@ pub fn ranset(
                 }
             }
             if !failed || iredo >= 10_000 {
+                if failed {
+                    process.record_cap_give_up(j, month, iyear);
+                }
+                process.record_acceptance(j, month, iyear, Some((level1, level, level2)));
                 break;
             }
         }

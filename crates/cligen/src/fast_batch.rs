@@ -11,6 +11,7 @@ use crate::cbk4::Cbk4State;
 use crate::cbk7::Cbk7State;
 use crate::crandom3::{Crandom3State, NRELEM, NRPARM};
 use crate::profile::GenerationProfile;
+use crate::quality::process::ProcessCounters;
 use crate::rng::{ranset, RansetState};
 
 /// Versioned owner for the monthly random-array refill seam.
@@ -46,9 +47,10 @@ impl MonthlyBatchBackend {
         seeds: &mut Cbk7State,
         acm: &mut AcmState,
         cr: &mut Crandom3State,
+        process: &mut ProcessCounters,
     ) {
         match self {
-            Self::Faithful(state) => ranset(ntd, iyear, bk4, seeds, state, acm, cr),
+            Self::Faithful(state) => ranset(ntd, iyear, bk4, seeds, state, acm, cr, process),
             Self::FastBatchV0(state) => state.refill(cr),
         }
     }

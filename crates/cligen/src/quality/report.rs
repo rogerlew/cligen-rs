@@ -327,10 +327,7 @@ pub struct TopEvent {
     pub peak_intensity: f64,
 }
 
-/// Group P — process metrics (run-emitted only; **not produced in
-/// Stage S**). This is the typed target for the Stage C
-/// instrumentation; the observation-seam design lives in
-/// `docs/work-packages/20260710-q1-quality-report/artifacts/spine-handoff.md`.
+/// Group P — run-emitted, observation-only process metrics.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ProcessMetrics {
     /// The conditioning policy the counters describe: `"faithful"`
@@ -339,6 +336,10 @@ pub struct ProcessMetrics {
     pub qc_filter: Option<String>,
     /// Per parameter (1..=9, source numbering) × month retry counts.
     pub retries: Vec<ParameterRetries>,
+    /// Final statistics for every batch that exits `ranset`, in
+    /// occurrence order. The three statistics are `null` for observed-mode
+    /// parameter 9, whose source path bypasses quality evaluation.
+    pub acceptance_statistics: Vec<AcceptanceStatistics>,
     /// Retry-cap give-up events (`iredo` reached 10,000,
     /// cligen.f:4302-4332): the still-failing batch was accepted.
     pub cap_give_ups: Vec<CapGiveUp>,
@@ -348,6 +349,22 @@ pub struct ProcessMetrics {
     pub tdew_rangecheck_count: u64,
     /// Uniform draws consumed per stream k1..k10 over the run.
     pub randn_draws: [u64; 10],
+}
+
+/// Existing quality levels at the point a `ranset` batch is accepted.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct AcceptanceStatistics {
+    pub parameter: u32,
+    pub month: u32,
+    pub year: i32,
+    /// K-S level returned by `ks_tst`, or `null` on the observed bypass.
+    pub ks_level: Option<i32>,
+    /// Mean-confidence level returned by `conflm`; `null` when not
+    /// applicable or when K-S failed before this statistic was computed.
+    pub mean_level: Option<f32>,
+    /// Variance-confidence level returned by `confls`; `null` under the
+    /// same conditions as `mean_level`.
+    pub variance_level: Option<f32>,
 }
 
 /// Retry counts for one source parameter across months.

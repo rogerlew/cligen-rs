@@ -280,7 +280,14 @@ fn replay_rs_stream(path: &Path) -> usize {
             ..Cbk4State::default()
         };
         ranset(
-            rec.ntd, rec.iyear, &bk4, &mut seeds, &mut sv, &mut acm, &mut cr,
+            rec.ntd,
+            rec.iyear,
+            &bk4,
+            &mut seeds,
+            &mut sv,
+            &mut acm,
+            &mut cr,
+            &mut Default::default(),
         );
         assert_eq!(
             seed_matrix(&seeds),
@@ -484,7 +491,13 @@ fn replay_dg_stream(path: &Path) -> usize {
             idx + 1
         );
         cr.mox = rec.mox;
-        let got = dstg(f32::from_bits(rec.ai), &mut k7, &mut sv, &mut cr);
+        let got = dstg(
+            f32::from_bits(rec.ai),
+            &mut k7,
+            &mut sv,
+            &mut cr,
+            &mut Default::default(),
+        );
         assert_eq!(
             got.to_bits(),
             rec.result,
@@ -583,7 +596,16 @@ fn ranset_fails_closed_on_fortran_month_zero_underrun() {
     let mut sv = RansetState::default();
     let mut acm = AcmState::default();
     let mut cr = Crandom3State::default();
-    ranset(365, 1, &bk4, &mut seeds, &mut sv, &mut acm, &mut cr);
+    ranset(
+        365,
+        1,
+        &bk4,
+        &mut seeds,
+        &mut sv,
+        &mut acm,
+        &mut cr,
+        &mut Default::default(),
+    );
 }
 
 #[test]

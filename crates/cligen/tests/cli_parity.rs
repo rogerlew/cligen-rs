@@ -216,10 +216,10 @@ fn goldens_reproduced_byte_identically() {
                 .join(format!("{}.cli", g.name)),
         )
         .unwrap();
-        let got_bytes = got.as_bytes();
+        let got_bytes = got.cli.as_bytes();
         if got_bytes != golden.as_slice() {
             // Localize: first divergent line.
-            let got_lines: Vec<&str> = got.lines().collect();
+            let got_lines: Vec<&str> = got.cli.lines().collect();
             let golden_text = String::from_utf8_lossy(&golden);
             let golden_lines: Vec<&str> = golden_text.lines().collect();
             for (i, (a, b)) in got_lines.iter().zip(&golden_lines).enumerate() {

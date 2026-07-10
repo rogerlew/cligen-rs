@@ -551,7 +551,18 @@ fn constructed_iopt7_vectors_match_source_override_arithmetic() {
         let k10_before = bk7.k10;
 
         let q = storm_block(
-            9.0, &[0.0; 13], 2, &ss, &bk3, &bk4, &mut bk5, &mut bk7, &mut bk9, &mut dg, &mut cr,
+            9.0,
+            &[0.0; 13],
+            2,
+            &ss,
+            &bk3,
+            &bk4,
+            &mut bk5,
+            &mut bk7,
+            &mut bk9,
+            &mut dg,
+            &mut cr,
+            &mut Default::default(),
         );
         let xr = damt * 25.4;
         let raw_xmav = TYMAX[1] / (xr / 24.0);
@@ -696,6 +707,7 @@ fn replay_storm_parsed(
             &mut st.cr,
             &mut st.batch,
             &mut st.acm,
+            &mut Default::default(),
         );
         // day_gen:3110-3112 converts the generated temps F -> C in
         // place before the storm block; the chain's mean-temp floor
@@ -712,6 +724,7 @@ fn replay_storm_parsed(
             &mut st.bk9,
             &mut st.dg,
             &mut st.cr,
+            &mut Default::default(),
         );
         assert_eq!(dur.to_bits(), sd_rec.dur, "{}", at("dur (D record)"));
         if wet {
@@ -741,6 +754,7 @@ fn replay_storm_parsed(
             &mut st.bk9,
             &mut st.dg,
             &mut st.cr,
+            &mut Default::default(),
         );
         assert_eq!(q.xr.to_bits(), sd_rec.s[0], "{}", at("xr"));
         assert_eq!(q.dur.to_bits(), sd_rec.s[1], "{}", at("dur (S record)"));

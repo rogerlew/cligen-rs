@@ -33,7 +33,8 @@
 //! | `cvs`,`cvtx`,`cvtm` | same | CV of radiation / max temp / min temp (temps via Rankine offset, cligen.f:2894-2898) | — |
 //! | `v1`..`v11` | same odd symbols | preceding uniform for normal pairs | — |
 
-use crate::rng::{randn, SeedState};
+use crate::quality::process::ProcessCounters;
+use crate::rng::{randn, randn_observed, SeedState};
 
 /// Common `/bk7/` (`cbk7.inc:10-15`): the ten generator seed streams
 /// with block-data defaults (`cligen.f:1054-1063`), the wet-day
@@ -155,6 +156,21 @@ impl Cbk7State {
             let _ = randn(&mut self.k7);
             let _ = randn(&mut self.k8);
             let _ = randn(&mut self.k9);
+        }
+    }
+
+    /// The faithful burn with observation-only per-stream draw accounting.
+    pub(crate) fn burn_observed(&mut self, n: u32, process: &mut ProcessCounters) {
+        for _ in 0..n {
+            let _ = randn_observed(&mut self.k1, 0, process);
+            let _ = randn_observed(&mut self.k2, 1, process);
+            let _ = randn_observed(&mut self.k3, 2, process);
+            let _ = randn_observed(&mut self.k4, 3, process);
+            let _ = randn_observed(&mut self.k5, 4, process);
+            let _ = randn_observed(&mut self.k6, 5, process);
+            let _ = randn_observed(&mut self.k7, 6, process);
+            let _ = randn_observed(&mut self.k8, 7, process);
+            let _ = randn_observed(&mut self.k9, 8, process);
         }
     }
 

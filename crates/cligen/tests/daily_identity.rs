@@ -433,6 +433,7 @@ fn replay_ab(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> 
             &mut st.bk9,
             &mut st.dg,
             &mut st.cr,
+            &mut Default::default(),
         );
 
         assert_eq!(st.bk9.r1.to_bits(), rec.r1, "{}", at("r1"));
@@ -542,6 +543,7 @@ fn replay_clgen_record(case: &str, idx: usize, rec: &CgRec, st: &mut Replay, com
         &mut st.cr,
         &mut st.batch,
         &mut st.acm,
+        &mut Default::default(),
     );
 
     // Post-boundary column consumption.
@@ -612,6 +614,7 @@ fn replay_alphb_record(case: &str, call: usize, rec: &AbRec, st: &mut Replay) {
         &mut st.bk9,
         &mut st.dg,
         &mut st.cr,
+        &mut Default::default(),
     );
     assert_eq!(st.bk9.r1.to_bits(), rec.r1, "{}", at("r1"));
 }

@@ -57,7 +57,8 @@ use crate::libm_pinned::{
     acosf_pinned, cosf_pinned, expf_pinned, logf_pinned, sinf_pinned, tanf_pinned,
 };
 use crate::monthlies::{fouri2, ryf2};
-use crate::rng::randn;
+use crate::quality::process::ProcessCounters;
+use crate::rng::randn_observed;
 
 use crate::acm::AcmState;
 
@@ -130,6 +131,7 @@ fn gen_precip(
     bk7: &mut Cbk7State,
     ci: &CinterpState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) {
     let m = (mo - 1) as usize;
     cr.vv = cr.vvx(cr.dax as usize);
@@ -164,7 +166,8 @@ fn gen_precip(
         // Band-aid draw (cligen.f:1253) — the reason ranset's replay
         // treats k5 as externally advanced.
         if bk7.v7 == 0.0 {
-            bk7.v7 = randn(&mut bk7.k5);
+            bk7.v7 = randn_observed(&mut bk7.k5, 4, process);
+            process.v7_recovery_count += 1;
         }
         let mut xlv = (dstn1(bk7.v7, v8) - r6) * r6 + 1.0;
         // x**3 expands to left-associated multiplies at -O0.
@@ -337,6 +340,7 @@ pub fn clgen(
     cr: &mut Crandom3State,
     batch: &mut MonthlyBatchBackend,
     acm: &mut AcmState,
+    process: &mut ProcessCounters,
 ) -> ClgenEvents {
     let mo = bk4.mo;
     let ida = bk3.ida;
@@ -346,13 +350,13 @@ pub fn clgen(
     if mo != cr.mox {
         cr.mox = mo;
         cr.dax = 1;
-        batch.refill(ntd, iyear, bk4, bk7, acm, cr);
+        batch.refill(ntd, iyear, bk4, bk7, acm, cr, process);
     } else {
         cr.dax += 1;
     }
 
     if bk7.nsim != 0 {
-        gen_precip(ntd, mo, ida, bk5, bk7, ci, cr);
+        gen_precip(ntd, mo, ida, bk5, bk7, ci, cr, process);
     }
 
     if bk7.msim == 0 {
@@ -457,6 +461,7 @@ pub fn windg(
 /// REAL*4 outside `dstg`'s source-declared f64 island. The f32
 /// exponential uses the adjudicated ARM transcription
 /// [`expf_pinned`].
+#[allow(clippy::too_many_arguments)]
 pub fn alphb(
     bk3: &Cbk3State,
     bk4: &Cbk4State,
@@ -465,6 +470,7 @@ pub fn alphb(
     bk9: &mut Cbk9State,
     dg: &mut DstgState,
     cr: &mut Crandom3State,
+    process: &mut ProcessCounters,
 ) {
     let r = bk5.r[(bk3.ida - 1) as usize];
     assert!(r > 0.0, "alphb requires positive daily precipitation");
@@ -476,7 +482,7 @@ pub fn alphb(
         let tmax = 125.0 / 25.4;
         1.0 - expf_pinned(-tmax / ei)
     };
-    bk9.r1 = dstg(ai, &mut bk7.k7, dg, cr);
+    bk9.r1 = dstg(ai, &mut bk7.k7, dg, cr, process);
     bk9.r1 = (ei * (bk9.ab + bk9.r1 * (ajp - bk9.ab)) + bk5.sml * bk9.ab) / r;
 }
 

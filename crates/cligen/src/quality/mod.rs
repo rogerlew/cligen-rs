@@ -7,15 +7,13 @@
 //! interaction with RNG state, generation order, or output
 //! formatting; the `.cli` byte stream is untouched.
 //!
-//! Group P (process metrics) is run-emitted only and is **not
-//! produced by this module yet**: the Stage C observation seam is
-//! specified in
-//! `docs/work-packages/20260710-q1-quality-report/artifacts/spine-handoff.md`,
-//! with [`report::ProcessMetrics`] as its typed target.
+//! Group P is accumulated through the run-scoped, observation-only
+//! [`process::ProcessCounters`] seam and remains `null` post hoc.
 
 pub mod estimators;
 pub mod groups;
 pub mod intake;
+pub mod process;
 pub mod report;
 pub mod targets;
 
@@ -27,7 +25,7 @@ use sha2::{Digest, Sha256};
 
 use crate::par::{ParError, ParFile};
 use intake::QualityIntakeError;
-use report::{Identity, IdentityContent, METRICS_VERSION};
+use report::{Identity, IdentityContent, ProcessMetrics, METRICS_VERSION};
 
 pub use report::{Provenance, QualityReport};
 
@@ -81,6 +79,7 @@ pub fn compute_report(
     cli_text: &str,
     par_bytes: &[u8],
     provenance: Option<Provenance>,
+    process: Option<ProcessMetrics>,
 ) -> Result<QualityReport, QualityError> {
     let par = ParFile::parse(par_bytes).map_err(QualityError::Par)?;
     let table = intake::parse_cli_table(cli_text).map_err(QualityError::Cli)?;
@@ -126,7 +125,7 @@ pub fn compute_report(
         interannual,
         covariation,
         tails: groups::tails(rows),
-        process: None,
+        process,
     })
 }
 
