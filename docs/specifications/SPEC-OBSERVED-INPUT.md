@@ -1,6 +1,7 @@
 # SPEC-OBSERVED-INPUT — Observed-Series Input Seam
 
-Status: active (rev 1, Stage R1 of the observed-mode package)
+Status: active (rev 2 — adds the `initial_year` seam required by
+SPEC-RUNSPEC's observed `begin_year` derivation)
 Surface: the faithful CLIGEN 5.32.3 `.prn` compatibility reader and its
 consumption by `day_gen`. The A3 f64 parquet input, substitution, and
 leap-day policies remain a future revision and generation-profile surface.
@@ -25,7 +26,7 @@ integer fields:
 
 | Columns | Field | Units and sentinel |
 |---|---|---|
-| 1-15 | ignored | fixture date columns; not validated or exposed |
+| 1-15 | per-day reads: ignored | fixture date columns; not validated or exposed by the daily cursor. **Rev 2**: columns 11-15 of the *first* record are additionally readable once, at open, as `initial_year` — the source's `ioyr` (`usr_opt` reads it with `(10x,i5)` and `backspace`s so the record is not consumed, `cligen.f:3524-3572`). SPEC-RUNSPEC's observed `begin_year` default derives from it; the read is non-consuming and its parse failure is fail-closed like any field. A3's parquet source must expose the same semantic through the common observed-source interface. |
 | 16-20 | `irida` | hundredths of an inch precipitation; `9999` means generate |
 | 21-25 | `itmxg` | maximum temperature, °F; `9999` means generate |
 | 26-30 | `itmng` | minimum temperature, °F; `9999` means generate |

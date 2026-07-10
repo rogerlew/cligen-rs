@@ -1,7 +1,9 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 1 — contract ratified 2026-07-09, operator
-decision; implementation lands with ROADMAP item 8)
+Status: active (rev 2 — contract ratified 2026-07-09, operator
+decision; rev 2 dispositions the 13-finding independent review,
+`docs/work-packages/20260709-runspec-contract/artifacts/review-codex.md`;
+implementation lands with ROADMAP item 8)
 Surface: the **only** user interface of the `cligen` binary: a single
 schema-versioned YAML document that fully specifies a run. The legacy
 CLIGEN interface (argv flags, stdin answer scripts, interactive
@@ -11,31 +13,41 @@ prompts) is **deliberately not replicated** — see §Non-goals.
 
 Producers: humans and orchestrators (wepppy writes a runspec instead
 of composing argv + stdin scripts; the A6 PyO3 surface constructs the
-same typed struct directly). Consumers: the `cligen` binary
-(`run`/`validate`), the item-8 byte-parity gate, and the A1 provenance
-block (which embeds the runspec — the run specification and the output
-lineage are the same object).
+same typed struct directly, supplying **already-resolved paths** —
+§Path resolution). Consumers: the `cligen` binary (`run`/`validate`),
+the item-8 byte-parity gate, and the A1 provenance block.
 
-Authority basis: the typed intake surfaces the port already ratified
+Authority basis: the typed intake surfaces the port ratified
 (`StaDatSelection`, `SingleStormParams`, `sing_stm`, `PrnReader`,
-`generation_setup`) and the characterized legacy option semantics
-(`cligen.f:645-835` argv parsing; the intake/sing_stm
-characterizations in the item-4/6/7 packages). Where the legacy
-interface's *names* were misleading, this schema renames and the
-mapping table below is normative.
+`generation_setup`, `day_gen`) and the characterized legacy option
+semantics (`cligen.f:645-835` argv parsing; the intake/sing_stm/
+day_gen characterizations in the item-4/6/7 packages). Where the
+legacy interface's *names* were misleading, this schema renames and
+the mapping tables below are normative.
 
 ## Design rules
 
 - **One document = one run.** No interactive fallbacks, no cwd-implied
-  inputs, no stdin. Paths are resolved relative to the runspec file's
-  directory.
-- **Fail closed**: unknown fields are rejected; missing
+  inputs, no stdin.
+- **Fail closed**: unknown fields rejected at every level; missing
   mode-conditional blocks are typed errors; only schema-declared
   defaults exist (each cites the legacy behavior it preserves).
+  Numeric domains are the **legacy-permissive** ones (§Field
+  invariants) — the schema types and bounds what the source would
+  crash or misbehave on, and does not invent physical limits the
+  source never enforced.
 - **Versioned**: `cligen_runspec: 1` is required; future revisions
   bump it. A published JSON Schema accompanies the implementation.
-- **Faithful semantics, honest names**: the schema fixes legacy naming
-  traps without changing behavior (see the trap table).
+- **Faithful semantics, honest names** (§Naming traps).
+
+## Path resolution (API boundary)
+
+Relative paths in a runspec **file** resolve against the file's
+directory. Resolution is an explicit API boundary: the typed loader
+takes `(document, base_dir)`; in-memory constructors (A6 PyO3) supply
+already-resolved paths and no base directory exists. Both the lexical
+(as-written) and resolved forms are retained — the lexical forms feed
+the faithful header echo (§Header echo) and A1 provenance.
 
 ## Schema (version 1)
 
@@ -43,45 +55,56 @@ mapping table below is normative.
 cligen_runspec: 1               # required
 
 station:
-  par: id106388.par             # required; the .par station file
-                                # (.par.yaml later, per the flat-file
-                                # modernization plan)
+  par: id106388.par             # required; the single-station .par
+                                # intake (SPEC-PAR). The legacy -S/-s
+                                # multi-station scan is excluded — see
+                                # §Non-goals.
 
 mode: continuous                # required:
                                 # continuous | observed | single_storm
                                 # | design_storm
                                 # (legacy iopt 5 | 6 | 4 | 7)
 
-simulation:
-  begin_year: 1                 # continuous/single_storm/design_storm:
-                                #   required (legacy -b / prompt)
+simulation:                     # block optional for observed and the
+                                # storm modes (see the year-plan table)
+  begin_year: 1                 # continuous: required (legacy -b /
+                                #   prompt); a YEAR INDEX (§Year plan)
                                 # observed: optional — default derives
-                                #   from the observed record exactly as
-                                #   legacy ibyear = -1 -> ioyr
+                                #   from the observed record's first
+                                #   year (§Year plan)
+                                # storm modes: REJECTED (the storm date
+                                #   carries the year)
   years: 31                     # continuous: required (legacy -y)
-                                # observed: optional — default 100
-                                #   (legacy numyr = -1 -> 100; the run
-                                #   ends at record end regardless)
-                                # single/design storm: fixed 1, field
-                                #   rejected if present
+                                # observed: optional, default 100 — a
+                                #   CAP on year loops; the run ends at
+                                #   the earlier of the cap or the stop
+                                #   protocol (§Year plan)
+                                # storm modes: REJECTED (exactly one
+                                #   generation pass; the faithful
+                                #   header still echoes the legacy
+                                #   numyr = -1 — §Header echo)
   interpolation: none           # optional, default none:
                                 # none | linear | fourier
                                 # | monthly_mean_preserving
                                 # (legacy -I0..-I3)
 
-rng:
+rng:                            # block optional
   burn: 0                       # optional, default 0. The legacy -rN
                                 # semantics named honestly: N discarded
-                                # draws from streams k1..k9 (k10
-                                # excluded), on top of the fixed
-                                # block-data seeds. NOT a seed value.
+                                # draws from EACH of k1..k9 (9N draws
+                                # total); k10 is unchanged
+                                # (cligen.f:723-737). NOT a seed value;
+                                # the base seeds are the fixed
+                                # block-data constants.
 
 observed:                       # required iff mode: observed
-  prn: ws.prn                   # the observed series (A3 adds a
-                                # parquet alternative here)
+  prn: ws.prn                   # the observed series
+                                # (SPEC-OBSERVED-INPUT; A3 adds a
+                                # parquet alternative as a sibling
+                                # field — exactly one source required)
 
 single_storm:                   # required iff mode: single_storm
-  date: { month: 6, day: 15, year: 12 }
+  date: { month: 6, day: 15, year: 12 }   # year = the run's iyear
   amount_in: 2.25               # damt, inches
   duration_h: 6.0               # usdur, hours
   time_to_peak_fraction: 0.4    # ustpr
@@ -89,70 +112,144 @@ single_storm:                   # required iff mode: single_storm
 
 design_storm:                   # required iff mode: design_storm
   date: { month: 6, day: 15, year: 12 }
-  amount_in: 2.25               # duration is fixed 24 h; peak shape
-                                # comes from the station TYPE via
-                                # dtp/tymax (see trap table)
+  amount_in: 2.25               # duration fixed 24 h; peak shape from
+                                # the station TYPE via dtp/tymax
 
 output:
   cli: wepp.cli                 # required; the .cli destination
                                 # (SPEC-CLI-PARQUET adds parquet)
   overwrite: false              # optional, default false (legacy -F;
-                                # false = error if the file exists —
-                                # never a prompt)
-  header: true                  # optional, default true (legacy -H
-                                # sets false; the dohedr WEPS header
-                                # switch)
+                                # false = typed error if the file
+                                # exists — never a prompt)
+  command_echo: "-iid106388.par"  # optional; §Header echo
 ```
+
+## Field invariants (normative; encoded in the JSON Schema)
+
+| Field | Type / domain |
+|---|---|
+| `cligen_runspec` | integer, exactly 1 in this revision |
+| `station.par`, `observed.prn`, `output.cli` | non-empty string paths |
+| `mode`, `simulation.interpolation` | closed enums as listed |
+| `simulation.begin_year` | integer ≥ 1 where accepted |
+| `simulation.years` | integer ≥ 1 where accepted |
+| `rng.burn` | integer ≥ 0 |
+| `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode (§Year plan; validated before `jdt` so no assertion is reachable) |
+| `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible, > 0 |
+| `time_to_peak_fraction` | finite f32-convertible in (0, 1] |
+| `output.overwrite` | boolean |
+| parent blocks (`simulation`, `rng`) | omissible when every member is optional/defaulted; mode-conditional blocks (`observed`, `single_storm`, `design_storm`) required for their mode and **rejected under any other mode** |
+
+Anything else — unknown fields anywhere, wrong types, out-of-domain
+values — is a typed validation error.
+
+## Year plan (normative, per mode)
+
+| Mode | `iyear` source | Year count | Leap rule |
+|---|---|---|---|
+| continuous | `simulation.begin_year` — a **year index**, not a calendar year | `simulation.years`, exact | Gregorian test applied to the index (`wxr_gen:3770-3772`): index 4 is leap |
+| observed | `simulation.begin_year`, defaulting to the observed record's first year (`initial_year`, columns 11-15 of the first record — SPEC-OBSERVED-INPUT rev 2; the read does not consume the record) | `simulation.years` (default 100) as a **cap**; the run ends at the earlier of the cap or the stop protocol — mid-year on hard EOF, after the completed year on the sentinel-triggered `q_gen_started` stop | Gregorian on the (calendar) year |
+| single_storm / design_storm | `single_storm.date.year` / `design_storm.date.year` — the date's year **is** `ibyear`/`iyear` (`cligen.f:3384-3419`); `simulation.begin_year`/`years` are rejected | exactly one generation pass | the source's **distinct iopt-4/7 `nt` test** (`wxr_gen:3758-3763` — note its `.and.` where the daily rule has `.and..not.`), transcribed, not the Gregorian rule |
+
+## Header echo (`.cli` byte surface)
+
+The legacy binary writes the accumulated argv string into the `.cli`
+station-header row (`arg_v`, built at `cligen.f:665-683`, emitted by
+`wxr_gen`), and the goldens carry it byte-for-byte — including flag
+order, lexical path spellings, omissions, and trailing whitespace.
+This is **output surface, not input emulation**:
+
+- `output.command_echo` (optional string) is emitted verbatim in that
+  header field.
+- When omitted, the implementation renders a canonical echo from the
+  lexical runspec fields (order: `-rN`, `-i<par>`, `-O<prn>`,
+  `-o<cli>`, `-t<mode>`, `-I<n>`, each only when non-default). The
+  canonical order cannot reproduce every historical command line
+  (the goldens themselves differ in flag order), which is exactly why
+  the explicit field exists.
+- The golden runspecs pin `command_echo` verbatim from
+  `fixture-runs.tsv`; byte parity is asserted on the whole file.
+
+The legacy header also echoes `numyr` as `-1` for storm modes and
+`100` for defaulted observed runs — the faithful writer reproduces
+the *legacy-visible* values, not the schema's resolved ones (the
+resolved values are provenance surface).
 
 ## Legacy naming traps this schema fixes (normative)
 
 | Legacy | Trap | Schema |
 |---|---|---|
-| `-rN` "random seed" | It is a **burn count** — N discarded draws from `k1..k9` (`cligen.f:723-737`), `k10` excluded; base seeds are fixed block-data constants | `rng.burn` |
-| `iyear`/`-b` | In stochastic modes the year is an **index**, and the leap rule applies to the index (year 4 is leap; `wxr_gen:3770-3772`) | documented on `simulation.begin_year`; a native-mode profile may add calendar dates later |
-| `itype` | Never a CLI concern — it is station data (the `TYPE=` field of the `.par`, record 2) feeding `tymax`/`dtp` | absent from the schema |
-| `-t1..3` | Screen-summary / CREAMS output modes — display-era surfaces the port defers fail-closed throughout | excluded (§Non-goals) |
-| interactive prompts, stdin scripts, overwrite dialog | run identity smeared across argv + stdin + tty | the document is the whole run; `output.overwrite` is a boolean, never a question |
+| `-rN` "random seed" | a **burn count**: N draws from each of `k1..k9` (9N total), `k10` excluded (`cligen.f:723-737`); base seeds are fixed block-data constants | `rng.burn` |
+| `-b`/`iyear` | a year **index** in continuous mode, leap rule applied to the index; storm modes take the year from the storm date and ignore `-b` | `simulation.begin_year` / `date.year` per the year-plan table |
+| `-H`/`dohedr` | **behaviorally dead**: written (`cligen.f:765,962,1088`) but never read; the header is written unconditionally | no field; ratified inert (a future header-suppression option would be a labeled extension, not `-H` semantics) |
+| `itype` | station data (the `.par` `TYPE=` field, record 2) feeding `tymax`/`dtp` — never a CLI concern | absent |
+| `-t1..3`, `-t8` | screen/CREAMS display modes and the interactive exit — not run identity | excluded (§Non-goals) |
+| `-v/-V`, `-h/-?` | version/help printers | not replicated; the new CLI has conventional `--version`/`--help` of its own |
+| prompts, stdin scripts, overwrite dialog | run identity smeared across argv + stdin + tty | the document is the run; `output.overwrite` is a boolean |
+
+## `validate` vs `run` (normative)
+
+Both commands: parse the YAML, enforce the schema and mode-conditional
+rules, resolve paths against the base directory, **open and parse the
+declared inputs** (`.par` via SPEC-PAR, `.prn` via
+SPEC-OBSERVED-INPUT — including the observed `initial_year`
+derivation), and resolve effective defaults. `validate` performs no
+generation and never creates, truncates, or stats the output path —
+output-collision checking is deliberately excluded so validation is
+deterministic across workspaces. `run` additionally enforces the
+overwrite policy and generates.
 
 ## Golden equivalence table (normative examples)
 
-The 12 golden fixtures map to runspec documents as follows; the item-8
-acceptance is `cligen run <spec>` reproducing each golden `.cli`
-byte-identically. (Legacy stdin scripts shown for provenance; they
-have no runspec counterpart because their content becomes fields.)
+The 12 golden fixtures map to runspec documents as follows; each
+golden runspec also pins `output.command_echo` verbatim from
+`fixture-runs.tsv`. The item-8 acceptance is `cligen run <spec>`
+reproducing each golden `.cli` byte-identically.
 
 | Golden | Legacy invocation | Runspec |
 |---|---|---|
-| new-meadows-id-seed0 | `-iid106388.par` + stdin `5,1,31,wepp.cli,n` | mode continuous; begin_year 1; years 31; interpolation none; burn 0 |
+| new-meadows-id-seed0 | `-iid106388.par` + stdin `5,1,31,wepp.cli,n` | continuous; begin_year 1; years 31; interpolation none; burn 0 |
 | new-meadows-id-seed17 | `-r17 -iid106388.par` + same stdin | same + `rng.burn: 17` |
-| jeogla-au-seed0 / -seed17 | `-iASN00057011.par` + stdin `5,1,42,…` | mode continuous; years 42; burn 0 / 17 |
-| mt-wilson-ca-observed-seed0 / -seed17 | `-ica046006.par -Ows.prn -owepp.cli -t6 -I2` | mode observed; observed.prn ws.prn; interpolation fourier; begin_year/years omitted (derived); burn 0 / 17 |
+| jeogla-au-seed0 / -seed17 | `-iASN00057011.par` + stdin `5,1,42,…` | continuous; years 42; burn 0 / 17 |
+| mt-wilson-ca-observed ×2 | `-ica046006.par -Ows.prn -owepp.cli -t6 -I2` | observed; prn ws.prn; interpolation fourier; begin_year/years omitted (derive 1990 / cap 100); burn 0 / 17 |
 | fish-springs padded ×2 | `-iut422852.par -Ows.prn … -t6 -I2` | as mt-wilson, station ut422852 |
 | fish-springs truncated ×2 | `… -Ows-truncated.prn …` | as above, `observed.prn: ws-truncated.prn` |
-| new-meadows single-storm ×2 | `-iid106388.par -t4 -owepp.cli` + stdin `6 15 12 / 2.25 / 6.0 / 0.4 / 1.5` | mode single_storm with the block shown in §Schema; burn 0 / 17 |
+| new-meadows single-storm ×2 | `-iid106388.par -t4 -owepp.cli` + stdin `6 15 12 / 2.25 / 6.0 / 0.4 / 1.5` | single_storm with the §Schema block — **no `simulation` block**; the date carries year 12; burn 0 / 17 |
 
 ## Provenance obligations
 
-The A1 provenance block embeds the resolved runspec (or its canonical
-hash) plus the effective defaults, the generation profile, and the
-station lineage — a `.cli`/parquet output is reproducible from its own
-provenance alone.
+The A1 provenance block embeds the **canonical effective runspec
+itself** (resolved defaults, lexical + resolved paths) together with
+its hash **and content identities (hashes) of every input artifact**
+(`.par`, `.prn`). A hash alone is not a substitute for the document,
+and provenance *identifies* inputs — reproduction additionally
+requires the identified input bytes. Details land in SPEC-PROVENANCE;
+this spec fixes what the runspec side must supply.
 
 ## Non-goals (ratified)
 
-- **No legacy argv/stdin emulation, ever.** The equivalence table
-  above is the complete bridge; external legacy-interface consumers
-  (GeoWEPP-era tooling) are explicitly not a compatibility target
-  (operator decision, 2026-07-09).
-- No interactive mode. Every legacy prompt surface remains a typed
-  error in the library and has a field here instead.
-- Legacy `iopt` 1-3 output modes are not exposed. If CREAMS output is
-  ever wanted it arrives as a labeled extension with its own spec.
+- **No legacy argv/stdin emulation, ever.** The equivalence table is
+  the complete bridge; legacy-interface consumers (GeoWEPP-era
+  tooling) are explicitly not a compatibility target (operator
+  decision, 2026-07-09). The header echo (§above) is output-byte
+  compatibility, not interface emulation.
+- **No `-S`/`-s` multi-station catalog selection**: `station.par` is
+  the characterized single-station intake only; the multi-station
+  scan path remains excluded exactly as SPEC-PAR defers it. No
+  silent first-station fallback.
+- No interactive mode; legacy `iopt` 1-3 and 8 not exposed; `-v/-h`
+  replaced by conventional CLI conventions (traps table).
 
 ## Acceptance (lands with item 8)
 
 - `cligen validate` accepts the 12 golden runspecs and rejects
-  unknown-field/missing-block mutations of each (fail-closed tests).
+  unknown-field / missing-block / wrong-mode-block / out-of-domain
+  mutations of each (fail-closed vectors per §Field invariants).
 - `cligen run` on the 12 golden runspecs reproduces the 12 golden
-  `.cli` files byte-identically — the port's end-to-end gate runs
-  through the *new* interface, proving the old bytes.
+  `.cli` files byte-identically — including the header echo.
+- Schema/orchestration vectors cover the publicly ratified branches
+  the goldens do not reach: `design_storm`, `linear` and
+  `monthly_mean_preserving` interpolation, explicit observed
+  `begin_year`/`years`, `overwrite: true`, and the canonical
+  `command_echo` rendering — labeled fixture-unreachable where no
+  golden exists (the established iopt-7 precedent).
