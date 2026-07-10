@@ -16,10 +16,10 @@
 //! members; the par package renamed it to `Cbk7State` when the block's
 //! station-parameter fields landed (the incremental-block pattern in
 //! SPEC-GENERATOR-CORE — one struct per live common block, extended by
-//! the package that ports each member's units). Remaining `/bk7/`
-//! members (`v-` generation scratch beyond the rolling pairs, `ra`,
-//! `tmxg`, `tmng`, `rmx`, `yls`, `ylc`, `pit`, `nsim`, `msim`, `l`)
-//! arrive with the daily/modes packages.
+//! the package that ports each member's units). The daily package
+//! added the generation scratch (`ra`, `tmxg`, `tmng`, `rmx`, `yls`,
+//! `ylc`, `pit`, `nsim`, `msim`, `l`); the block is now complete for
+//! every live member the decomposition names.
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
@@ -77,6 +77,21 @@ pub struct Cbk7State {
     pub v7: f32,
     pub v9: f32,
     pub v11: f32,
+    /// Generation scratch distributed by the daily package: generated
+    /// radiation / max temp / min temp, max possible radiation, the
+    /// main program's latitude sin/cos and `pit = 58.13`
+    /// (`cligen.f:882-887`), the observed-mode per-day flags, and the
+    /// wet/dry Markov selector.
+    pub ra: f32,
+    pub tmxg: f32,
+    pub tmng: f32,
+    pub rmx: f32,
+    pub yls: f32,
+    pub ylc: f32,
+    pub pit: f32,
+    pub nsim: i32,
+    pub msim: i32,
+    pub l: i32,
 }
 
 impl Default for Cbk7State {
@@ -111,6 +126,16 @@ impl Default for Cbk7State {
             v7: 0.0,
             v9: 0.0,
             v11: 0.0,
+            ra: 0.0,
+            tmxg: 0.0,
+            tmng: 0.0,
+            rmx: 0.0,
+            yls: 0.0,
+            ylc: 0.0,
+            pit: 0.0,
+            nsim: 0,
+            msim: 0,
+            l: 0,
         }
     }
 }

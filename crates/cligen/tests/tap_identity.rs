@@ -275,7 +275,10 @@ fn replay_rs_stream(path: &Path) -> usize {
         cr.mox = rec.mox;
         let month = (rec.mox - 1) as usize;
         seeds.prw[month] = rec.prw.map(f32::from_bits);
-        let bk4 = Cbk4State { iopt: rec.iopt };
+        let bk4 = Cbk4State {
+            iopt: rec.iopt,
+            ..Cbk4State::default()
+        };
         ranset(
             rec.ntd, rec.iyear, &bk4, &mut seeds, &mut sv, &mut acm, &mut cr,
         );
@@ -572,7 +575,10 @@ fn ranset_replays_fortran_tap_samples() {
 #[test]
 #[should_panic(expected = "mox=0/out-of-range")]
 fn ranset_fails_closed_on_fortran_month_zero_underrun() {
-    let bk4 = Cbk4State { iopt: 5 };
+    let bk4 = Cbk4State {
+        iopt: 5,
+        ..Cbk4State::default()
+    };
     let mut seeds = Cbk7State::default();
     let mut sv = RansetState::default();
     let mut acm = AcmState::default();

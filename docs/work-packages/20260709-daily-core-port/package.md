@@ -1,6 +1,15 @@
 # Daily Stochastic Core Port
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
+Codex next — dispatch prompt at `artifacts/kickoff-codex.md`)
+Stage S outcome: Phase A characterizations recorded (clgen draw-order/
+month-boundary protocol; transcendental census — libm-crate
+tanf/acosf/expf all REJECTED on sweep evidence, three pinned
+transcriptions landed at 0/24.7M mismatches); 24-run tap capture with
+12/12 golden non-invasiveness; `clgen` ported (decomposed, CRAP-clean)
+with the sequential replay gate green at 80,906 calls bit-identical;
+new Cbk3State/Cbk5State + cbk1/cbk4/cbk7 extensions
+(SPEC-GENERATOR-CORE rev 5).
 Date: 2026-07-09
 Evidence mode: — (per stage on execution)
 Execution model: staged, two executors (the item-3/item-4 pattern,

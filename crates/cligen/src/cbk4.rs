@@ -1,24 +1,44 @@
 //! Origin-Class: CLIGEN-5.32.3-Public-Domain
 //! Migration-Method: source-authority-port (ADR-0001)
-//! Replaces: reference/cligen532/cbk4.inc (common /bk4/, iopt slice) +
-//!   reference/cligen532/cligen.f:1083 (block-data initializer)
+//! Replaces: reference/cligen532/cbk4.inc (common /bk4/: `iopt` slice
+//!   from the RNG package; `nc`/`nt`/`mo` from the daily package) +
+//!   block-data initializers cligen.f:1064 (`nc`), 1083 (`iopt`)
 //! Precision-Map: integer
-//! Faithful-Acceptance: ranset sequential replay
+//! Faithful-Acceptance: ranset sequential replay; daily tap identity
+//!   (`mo` threads every per-day record)
+//!
+//! Remaining `/bk4/` members (`iyr`, `px`, `dtp`, `dmxi`) arrive with
+//! the storm/modes packages (incremental-block pattern,
+//! SPEC-GENERATOR-CORE).
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
 //! |---|---|---|---|
+//! | `nc` | `nc(13)` | cumulative days preceding each month, non-leap (block data) | day |
+//! | `nt` | `nt` | 1 if the beginning year is not a leap year — set only for options 4/7 | flag |
+//! | `mo` | `mo` | current month (single production writer: `day_gen`'s `jlt` decomposition) | month |
 //! | `iopt` | `iopt` | generator option (1..7 in production) | flag |
 
 /// Incremental owning struct for common `/bk4/`.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Cbk4State {
+    pub nc: [i32; 13],
+    pub nt: i32,
+    pub mo: i32,
     pub iopt: i32,
 }
 
 impl Default for Cbk4State {
     fn default() -> Self {
-        // Block data, cligen.f:1083.
-        Self { iopt: -1 }
+        Self {
+            // Block data, cligen.f:1064.
+            nc: [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365],
+            // BSS zero until the option-4/7 paths write it.
+            nt: 0,
+            // BSS zero until jlt/day_gen writes it.
+            mo: 0,
+            // Block data, cligen.f:1083.
+            iopt: -1,
+        }
     }
 }

@@ -1,6 +1,6 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 4, Stage C of the par+monthlies package)
+Status: active (rev 5, Stage S of the daily-core package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
@@ -24,7 +24,11 @@ lines per the ratified decomposition.
   scratch arrives with daily/modes), [`Cbk4State`] (`cbk4.inc`,
   currently the `iopt` slice), [`Cbk1State`] (`cbk1.inc`, the
   `sta_parms` slice), [`Cbk9State`] (`cbk9.inc`, the `wi` slice), and
-  [`CinterpState`] (`cinterp.inc`, complete).
+  [`CinterpState`] (`cinterp.inc`, complete), and — from the daily
+  package — [`Cbk3State`] (`cbk3.inc` live slice) and [`Cbk5State`]
+  (`cbk5.inc` live slice), with `Cbk4State` gaining `nc`/`nt`/`mo`,
+  `Cbk1State` gaining `wv`/`th`/`pi2`/`tdp`, and `Cbk7State` gaining
+  the generation scratch members.
 - **Unit-local `SAVE` state** is a per-unit struct named `<Unit>State`
   (`DstgState`, `RansetState`, `DinvrState`, `DzrorState`), owned by the
   caller and passed `&mut`. The ACM ENTRY pairs share their host-unit

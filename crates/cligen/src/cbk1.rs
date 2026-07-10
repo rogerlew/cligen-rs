@@ -30,6 +30,13 @@ pub struct Cbk1State {
     pub dir: [[f32; 17]; 12],
     pub rh: [f32; 12],
     pub calm: [f32; 12],
+    /// Generation members from the daily package: generated wind
+    /// velocity/direction (windg), `pi2 = 6.283185` (main,
+    /// `cligen.f:884`), generated dew point (clgen).
+    pub wv: f32,
+    pub th: f32,
+    pub pi2: f32,
+    pub tdp: f32,
 }
 
 impl Default for Cbk1State {
@@ -39,6 +46,10 @@ impl Default for Cbk1State {
             dir: [[0.0; 17]; 12],
             rh: [0.0; 12],
             calm: [0.0; 12],
+            wv: 0.0,
+            th: 0.0,
+            pi2: 0.0,
+            tdp: 0.0,
         }
     }
 }
