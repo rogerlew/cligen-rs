@@ -1,13 +1,7 @@
 # Daily Stochastic Core Port
 
-Status: `STAGE-C-R1-COMPLETE` (Codex handback 2026-07-09; awaiting
-Claude Code Stage R2 — the package is not closed)
-Stage C/R1 outcome: `windg`, `alphb`, and `r5monb` ported with committed
-tap samples; the combined source-order replay asserts `k7` and `v9`
-internally; all 24 captured runs replay bit-identically (189,207 daily
-calls, 72,130 `alphb` calls, 24 `r5monb` snapshots); formal gates are
-green with 141 production functions and none above CRAP 30. R1 recorded
-three findings, all accepted and fixed (`artifacts/review-codex.md`).
+Status: `EXECUTED-COMPLETE` (Stage R2 closed 2026-07-09;
+`artifacts/final-review-claude.md`)
 Stage S outcome: Phase A characterizations recorded (clgen draw-order/
 month-boundary protocol; transcendental census — libm-crate
 tanf/acosf/expf all REJECTED on sweep evidence, three pinned
