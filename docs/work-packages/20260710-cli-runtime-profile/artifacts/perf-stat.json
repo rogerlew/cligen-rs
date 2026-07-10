@@ -1,0 +1,294 @@
+{
+  "timestamp_utc": "2026-07-10T15:16:05.919075+00:00",
+  "repetitions": 5,
+  "events": [
+    "task-clock",
+    "cycles",
+    "instructions",
+    "branches",
+    "branch-misses",
+    "cache-misses",
+    "context-switches",
+    "cpu-migrations",
+    "page-faults"
+  ],
+  "manifest_sha256": "f7d995e74c63bf1c076098c7e165612be308581f8129f3f5a423acb4c867d65f",
+  "reference_source_sha256": "3dfd51db98fedfbfb155d4227099cf9133043d4d699093268ed21ce16ec4267c",
+  "rust_binary_sha256": "6abf356f469ec0465cf065a46774b32602816e81fd9a3e226e7b5c1b6ea5db65",
+  "legacy_binary_sha256": "e86a2ad3278a75f4d8706cf801c6dbbf22112d51812e5c782bb06d0feca3e3a8",
+  "compiler": "GNU Fortran (Homebrew GCC 14.2.0_1) 14.2.0",
+  "legacy_build_command": [
+    "gfortran",
+    "-O3",
+    "-ffp-contract=off",
+    "-fprotect-parens",
+    "-fno-fast-math",
+    "-I",
+    "/home/workdir/cligen-rs/reference/cligen532",
+    "/home/workdir/cligen-rs/reference/cligen532/cligen.f",
+    "-o",
+    "/home/workdir/cligen-rs/target/cli-runtime-profile/cligen532"
+  ],
+  "runs": {
+    "rust-jeogla-au-seed0": {
+      "golden_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+      "stat_samples": [
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "118.83",
+          "cycles": "334632209",
+          "instructions": "722511354",
+          "branches": "113925221",
+          "branch-misses": "1496096",
+          "cache-misses": "50550",
+          "context-switches": "0",
+          "cpu-migrations": "0",
+          "page-faults": "429"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "109.45",
+          "cycles": "334593747",
+          "instructions": "722367658",
+          "branches": "113901816",
+          "branch-misses": "1518792",
+          "cache-misses": "47522",
+          "context-switches": "0",
+          "cpu-migrations": "0",
+          "page-faults": "427"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "107.11",
+          "cycles": "328458173",
+          "instructions": "722422793",
+          "branches": "113916461",
+          "branch-misses": "1461334",
+          "cache-misses": "43595",
+          "context-switches": "1",
+          "cpu-migrations": "0",
+          "page-faults": "427"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "104.95",
+          "cycles": "328502818",
+          "instructions": "722395499",
+          "branches": "113912226",
+          "branch-misses": "1476129",
+          "cache-misses": "43050",
+          "context-switches": "2",
+          "cpu-migrations": "0",
+          "page-faults": "430"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "109.30",
+          "cycles": "329928224",
+          "instructions": "722439494",
+          "branches": "113919986",
+          "branch-misses": "1509045",
+          "cache-misses": "44262",
+          "context-switches": "0",
+          "cpu-migrations": "0",
+          "page-faults": "428"
+        }
+      ]
+    },
+    "legacy-jeogla-au-seed0": {
+      "golden_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+      "stat_samples": [
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "112.87",
+          "cycles": "308148685",
+          "instructions": "531113503",
+          "branches": "105212461",
+          "branch-misses": "910321",
+          "cache-misses": "31965",
+          "context-switches": "1",
+          "cpu-migrations": "0",
+          "page-faults": "130"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "103.40",
+          "cycles": "313977293",
+          "instructions": "530692699",
+          "branches": "105148783",
+          "branch-misses": "908734",
+          "cache-misses": "35219",
+          "context-switches": "0",
+          "cpu-migrations": "0",
+          "page-faults": "130"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "106.33",
+          "cycles": "306529759",
+          "instructions": "530690409",
+          "branches": "105141756",
+          "branch-misses": "865803",
+          "cache-misses": "31381",
+          "context-switches": "1",
+          "cpu-migrations": "0",
+          "page-faults": "131"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "108.57",
+          "cycles": "307653155",
+          "instructions": "530822072",
+          "branches": "105160506",
+          "branch-misses": "902093",
+          "cache-misses": "30895",
+          "context-switches": "2",
+          "cpu-migrations": "0",
+          "page-faults": "132"
+        },
+        {
+          "output_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+          "task-clock": "106.12",
+          "cycles": "305956201",
+          "instructions": "530769017",
+          "branches": "105152636",
+          "branch-misses": "903673",
+          "cache-misses": "28150",
+          "context-switches": "1",
+          "cpu-migrations": "0",
+          "page-faults": "130"
+        }
+      ]
+    },
+    "rust-jeogla-au-seed17": {
+      "golden_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+      "stat_samples": [
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "3838.68",
+          "cycles": "11566137443",
+          "instructions": "26725908475",
+          "branches": "3819835969",
+          "branch-misses": "58489474",
+          "cache-misses": "180040",
+          "context-switches": "12",
+          "cpu-migrations": "1",
+          "page-faults": "428"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "3583.15",
+          "cycles": "11268522795",
+          "instructions": "26722903628",
+          "branches": "3819345642",
+          "branch-misses": "58055320",
+          "cache-misses": "121130",
+          "context-switches": "6",
+          "cpu-migrations": "0",
+          "page-faults": "427"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "3650.22",
+          "cycles": "11338110205",
+          "instructions": "26723883873",
+          "branches": "3819510412",
+          "branch-misses": "58466039",
+          "cache-misses": "118132",
+          "context-switches": "6",
+          "cpu-migrations": "0",
+          "page-faults": "429"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "3553.36",
+          "cycles": "11314777701",
+          "instructions": "26722529392",
+          "branches": "3819299392",
+          "branch-misses": "58414063",
+          "cache-misses": "108436",
+          "context-switches": "8",
+          "cpu-migrations": "1",
+          "page-faults": "430"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "3509.52",
+          "cycles": "11354123158",
+          "instructions": "26721866353",
+          "branches": "3819199586",
+          "branch-misses": "58526298",
+          "cache-misses": "128102",
+          "context-switches": "9",
+          "cpu-migrations": "2",
+          "page-faults": "427"
+        }
+      ]
+    },
+    "legacy-jeogla-au-seed17": {
+      "golden_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+      "stat_samples": [
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "552.33",
+          "cycles": "1809843555",
+          "instructions": "3496930729",
+          "branches": "429249938",
+          "branch-misses": "6893857",
+          "cache-misses": "44403",
+          "context-switches": "3",
+          "cpu-migrations": "0",
+          "page-faults": "132"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "555.36",
+          "cycles": "1809653599",
+          "instructions": "3496926256",
+          "branches": "429252312",
+          "branch-misses": "6914699",
+          "cache-misses": "42602",
+          "context-switches": "0",
+          "cpu-migrations": "0",
+          "page-faults": "133"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "545.25",
+          "cycles": "1807638333",
+          "instructions": "3496865280",
+          "branches": "429236711",
+          "branch-misses": "6894511",
+          "cache-misses": "40244",
+          "context-switches": "3",
+          "cpu-migrations": "0",
+          "page-faults": "132"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "566.87",
+          "cycles": "1820458142",
+          "instructions": "3497172003",
+          "branches": "429285309",
+          "branch-misses": "6927380",
+          "cache-misses": "63782",
+          "context-switches": "10",
+          "cpu-migrations": "0",
+          "page-faults": "141"
+        },
+        {
+          "output_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+          "task-clock": "546.59",
+          "cycles": "1809793531",
+          "instructions": "3496805618",
+          "branches": "429224543",
+          "branch-misses": "6914918",
+          "cache-misses": "40156",
+          "context-switches": "2",
+          "cpu-migrations": "0",
+          "page-faults": "133"
+        }
+      ]
+    }
+  }
+}

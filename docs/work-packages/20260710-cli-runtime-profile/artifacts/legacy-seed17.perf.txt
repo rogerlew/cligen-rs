@@ -1,0 +1,307 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 612  of event 'cycles:P'
+# Event count (approx.): 1937478213
+#
+# Overhead  Symbol                                 Shared Object         IPC   [IPC Coverage]
+# ........  .....................................  ....................  ....................
+#
+    31.15%  [.] ranset_                            cligen532             -      -
+            |
+            |--30.00%--clgen_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --1.15%--0x7ffdefb1f6a3
+
+    16.73%  [.] randn_                             cligen532             -      -
+            |
+             --15.75%--ranset_
+                       clgen_
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+    11.11%  [.] __cosf_sse2                        libm.so.6             -      -
+            |
+            |--4.65%--sinf_poly (inlined)
+            |          |
+            |          |--2.42%--__cosf_sse2
+            |          |          ranset_
+            |          |          clgen_
+            |          |          day_gen_
+            |          |          wxr_gen_
+            |          |          MAIN__
+            |          |          main
+            |          |          __libc_start_call_main
+            |          |          __libc_start_main_impl (inlined)
+            |          |          _start
+            |          |
+            |           --2.23%--sinf_poly (inlined)
+            |                     __cosf_sse2
+            |                     ranset_
+            |                     clgen_
+            |                     day_gen_
+            |                     wxr_gen_
+            |                     MAIN__
+            |                     main
+            |                     __libc_start_call_main
+            |                     __libc_start_main_impl (inlined)
+            |                     _start
+            |
+            |--2.87%--reduce_fast (inlined)
+            |          __cosf_sse2
+            |          ranset_
+            |          clgen_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--2.55%--__cosf_sse2
+            |          ranset_
+            |          clgen_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --1.04%--abstop12 (inlined)
+                       __cosf_sse2
+                       ranset_
+                       clgen_
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     9.48%  [.] __logf_sse2                        libm.so.6             -      -
+            |
+            ---ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     5.92%  [k] 0xffffffff99201720                 [unknown]             -      -
+            |
+            |--1.85%--ranset_
+            |          clgen_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--1.16%--randn_
+            |          ranset_
+            |          clgen_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.66%--ks_tst_
+                       ranset_
+                       clgen_
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     5.36%  [.] ks_tst_                            cligen532             -      -
+            |
+            ---ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     1.99%  [.] __printf_fp_buffer_1.isra.0        libc.so.6             -      -
+            |
+             --1.64%--__printf_fp_buffer_1 (inlined)
+                       __printf_fp_l_buffer
+                       __printf_fp_spec (inlined)
+                       __printf_buffer
+                       __vsnprintf_internal
+                       __GI___snprintf
+                       0x770504aa9b9a
+                       0x770504aab231
+                       0x770504aa15e6
+                       0x770504aa1a15
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       |
+                        --1.46%--0xffffffffffffffff
+
+     1.91%  [.] gratio_                            cligen532             -      -
+            |
+             --1.73%--cdfchi_
+                       ranset_
+                       clgen_
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     1.03%  [.] cosf@plt                           cligen532             -      -
+            |
+            ---ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.89%  [.] __printf_buffer                    libc.so.6             -      -
+            |
+            ---__vsnprintf_internal
+               __GI___snprintf
+               0x770504aa9b9a
+               0x770504aab231
+               0x770504aa15e6
+               0x770504aa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.82%  [.] __printf_buffer_write              libc.so.6             -      -
+            |
+             --0.53%--__printf_buffer
+                       __vsnprintf_internal
+                       __GI___snprintf
+                       0x770504aa9b9a
+                       0x770504aab231
+                       0x770504aa15e6
+                       0x770504aa1a15
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     0.72%  [.] hack_digit                         libc.so.6             -      -
+            |
+            ---__printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x770504aa9b9a
+               0x770504aab231
+               0x770504aa15e6
+               0x770504aa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               |
+                --0.56%--0xffffffffffffffff
+
+     0.52%  [.] __mpn_mul_1                        libc.so.6             -      -
+            |
+            ---hack_digit
+               __printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x770504aa9b9a
+               0x770504aab231
+               0x770504aa15e6
+               0x770504aa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+
+     0.52%  [.] __mpn_divrem                       libc.so.6             -      -
+            |
+            ---hack_digit
+               __printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x770504aa9b9a
+               0x770504aab231
+               0x770504aa15e6
+               0x770504aa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               0xffffffffffffffff
+
+     0.51%  [.] rlog_                              cligen532             -      -
+            |
+            ---gratio_
+               cdfchi_
+               ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

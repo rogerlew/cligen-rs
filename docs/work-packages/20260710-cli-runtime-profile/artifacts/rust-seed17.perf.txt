@@ -1,0 +1,58 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 3K of event 'cycles:P'
+# Event count (approx.): 12593937802
+#
+# Overhead  Symbol                                                                                                                  Shared Object         IPC   [IPC Coverage]
+# ........  ......................................................................................................................  ....................  ....................
+#
+    60.15%  [.] compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback                                                    cligen                -      -
+            |
+             --56.53%--fma
+                       |
+                        --56.14%--cligen::rng::ranset
+                                  cligen::daily::clgen
+                                  cligen::modes::day_gen
+                                  cligen::modes::run_to_cli
+                                  0xffffffffffffffff
+
+    21.90%  [.] cligen::rng::ranset                                                                                                 cligen                -      -
+            |
+             --21.43%--cligen::daily::clgen
+                       cligen::modes::day_gen
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     9.24%  [k] 0xffffffff99201720                                                                                                  [unknown]             -      -
+            |
+            |--6.66%--compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback
+            |          fma
+            |          |
+            |           --6.57%--cligen::rng::ranset
+            |                     cligen::daily::clgen
+            |                     cligen::modes::day_gen
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+             --2.19%--cligen::rng::ranset
+                       cligen::daily::clgen
+                       cligen::modes::day_gen
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     5.86%  [.] fma                                                                                                                 cligen                -      -
+            |
+             --2.83%--cligen::rng::ranset
+                       cligen::daily::clgen
+                       cligen::modes::day_gen
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

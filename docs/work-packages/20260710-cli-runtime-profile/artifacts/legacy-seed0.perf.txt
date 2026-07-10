@@ -1,0 +1,1334 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 141  of event 'cycles:P'
+# Event count (approx.): 345757668
+#
+# Overhead  Symbol                                    Shared Object         IPC   [IPC Coverage]
+# ........  ........................................  ....................  ....................
+#
+    10.40%  [.] __printf_fp_buffer_1.isra.0           libc.so.6             -      -
+            |
+            |--9.09%--__printf_fp_buffer_1 (inlined)
+            |          __printf_fp_l_buffer
+            |          __printf_fp_spec (inlined)
+            |          __printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          |
+            |          |--8.47%--0xffffffffffffffff
+            |          |
+            |           --0.62%--__libc_start_main_impl (inlined)
+            |                     0xffffffffffffffff
+            |
+            |--0.67%--hack_digit (inlined)
+            |          __printf_fp_buffer_1 (inlined)
+            |          __printf_fp_l_buffer
+            |          __printf_fp_spec (inlined)
+            |          __printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          0xffffffffffffffff
+            |
+             --0.63%--__printf_buffer_putc (inlined)
+                       __printf_fp_buffer_1 (inlined)
+                       __printf_fp_l_buffer
+                       __printf_fp_spec (inlined)
+                       __printf_buffer
+                       __vsnprintf_internal
+                       __GI___snprintf
+                       0x742ceeaa9b9a
+                       0x742ceeaab231
+                       0x742ceeaa15e6
+                       0x742ceeaa1a15
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       0xffffffffffffffff
+
+     8.91%  [k] 0xffffffff99201720                    [unknown]             -      -
+            |
+            |--1.38%--__printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.85%--__strchrnul_sse2
+            |          __find_specmb (inlined)
+            |          __printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.84%--_gfortran_transfer_integer_write
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.74%--0x742ceeaa83d1
+            |          0x742ceeaa9bd5
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.69%--0x742ceeaab21a
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.68%--0x742ceeaa97b9
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.67%--__printf_fp_buffer_1 (inlined)
+            |          __printf_fp_l_buffer
+            |          __printf_fp_spec (inlined)
+            |          __printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          0xffffffffffffffff
+            |
+            |--0.63%--0x742cee825558
+            |          0x742ceeaa7d00
+            |          0x742ceeaa1741
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.62%--__mpn_divrem
+            |          hack_digit
+            |          __printf_fp_buffer_1 (inlined)
+            |          __printf_fp_l_buffer
+            |          __printf_fp_spec (inlined)
+            |          __printf_buffer
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          0xffffffffffffffff
+            |
+            |--0.62%--0x742ceeaa8329
+            |          0x742ceeaa9bd5
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.62%--windg_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.57%--0xffffffff97f655ef
+                       0xffffffff97f65cda
+                       0xffffffff98314c32
+                       0xffffffff97f8d909
+                       0xffffffff97f94c87
+                       0xffffffff9835cd18
+                       0xffffffff9835fc84
+                       0xffffffff9835b8a7
+                       0xffffffff9835bc5d
+                       0xffffffff9835bfd2
+                       0xffffffff9835c725
+                       0xffffffff982f55c1
+                       0xffffffff982f5ad3
+                       0xffffffff982f5b89
+                       0xffffffff97e059ae
+                       0xffffffff9904c83f
+                       0xffffffff99200130
+                       __GI___libc_write
+                       0x742ceeaa4e86
+                       0x742ceeaa2a21
+                       0x742ceeaa2ee3
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     3.63%  [.] hack_digit                            libc.so.6             -      -
+            |
+            ---__printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               0xffffffffffffffff
+
+     3.44%  [.] __printf_buffer                       libc.so.6             -      -
+            |
+            ---__vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     2.96%  [.] __mpn_mul_1                           libc.so.6             -      -
+            |
+            ---hack_digit
+               __printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               |
+               |--1.53%--main
+               |          |
+               |          |--0.87%--__libc_start_call_main
+               |          |          0xffffffffffffffff
+               |          |
+               |           --0.66%--0xffffffffffffffff
+               |
+                --1.44%--0xffffffffffffffff
+
+     2.72%  [.] __mpn_divrem                          libc.so.6             -      -
+            |
+            ---hack_digit
+               __printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               0xffffffffffffffff
+
+     2.51%  [.] __printf_buffer_done                  libc.so.6             -      -
+            |
+            |--1.69%--__printf_buffer_snprintf_done (inlined)
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.82%--0x7ffd6f541eef
+
+     2.29%  [.] __printf_fp_l_buffer                  libc.so.6             -      -
+            |
+            ---__printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     2.13%  [.] __vsnprintf_internal                  libc.so.6             -      -
+            |
+            |--0.90%--__printf_buffer_snprintf_done (inlined)
+            |          __vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+            |--0.62%--__vsnprintf_internal
+            |          __GI___snprintf
+            |          0x742ceeaa9b9a
+            |          0x742ceeaab231
+            |          0x742ceeaa15e6
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.61%--__printf_buffer_init (inlined)
+                       __printf_buffer_snprintf_init (inlined)
+                       __vsnprintf_internal
+                       __GI___snprintf
+                       0x742ceeaa9b9a
+                       0x742ceeaab231
+                       0x742ceeaa15e6
+                       0x742ceeaa1a15
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     2.11%  [.] windg_                                cligen532             -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     1.71%  [.] 0x000000000028f1a1                    libgfortran.so.5.0.0  -      -
+            |
+            |--0.89%--0x742ceea8f1e4
+            |          0x742ceea8f1e4
+            |          0x742ceea9103e
+            |          0x742ceeaa0ddb
+            |          0x742ceeaa1a15
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.82%--0x742ceea9103e
+                       0x742ceeaa0ddb
+                       0x742ceeaa1a15
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     1.67%  [.] 0x00000000002adac2                    libgfortran.so.5.0.0  -      -
+            |
+            |--0.84%--0x7ffd6f54206f
+            |
+             --0.83%--0x592bfc182a3f
+
+     1.66%  [.] dstg_                                 cligen532             -      -
+            |
+            ---alphb_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     1.64%  [.] 0x00000000002ab260                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x400000002
+
+     1.37%  [.] ks_tst_                               cligen532             -      -
+            |
+            |--0.81%--dstg_
+            |          alphb_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.56%--0x8eeb8184f
+
+     1.34%  [.] 0x00000000002a19dd                    libgfortran.so.5.0.0  -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     1.34%  [.] ranset_                               cligen532             -      -
+            |
+            ---clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     1.26%  [.] day_gen_                              cligen532             -      -
+            |
+            |--0.63%--wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.63%--0x7ffd6f542c57
+
+     1.25%  [.] randn_                                cligen532             -      -
+            |
+            |--0.63%--dstg_
+            |          alphb_
+            |          day_gen_
+            |          wxr_gen_
+            |          MAIN__
+            |          main
+            |          __libc_start_call_main
+            |          __libc_start_main_impl (inlined)
+            |          _start
+            |
+             --0.62%--ranset_
+                       clgen_
+                       day_gen_
+                       wxr_gen_
+                       MAIN__
+                       main
+                       __libc_start_call_main
+                       __libc_start_main_impl (inlined)
+                       _start
+
+     0.87%  [.] __acosf_finite@GLIBC_2.15             libm.so.6             -      -
+            |
+            ---clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.86%  [.] 0x000000000029d7dd                    libgfortran.so.5.0.0  -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.86%  [.] 0x00000000002a2a0b                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.85%  [.] __strchrnul_sse2                      libc.so.6             -      -
+            |
+            ---__find_specmb (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [.] _gfortran_transfer_integer_write@plt  cligen532             -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [.] __mpn_mul                             libc.so.6             -      -
+            |
+            ---__printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               0xffffffffffffffff
+
+     0.84%  [.] 0x000000000028f1e5                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceea8f1e4
+               0x742ceea91098
+               0x742ceeaa0ddb
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [.] __sinf_sse2                           libm.so.6             -      -
+            |
+            ---__sinf_sse2
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [.] 0x000000000028e69d                    libgfortran.so.5.0.0  -      -
+            |
+            ---_gfortran_transfer_real
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [k] 0xffffffff98409928                    [unknown]             -      -
+            |
+            ---0xffffffff981c323f
+               0xffffffff983f11f0
+               0xffffffff983f16fc
+               0xffffffff982f5544
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               0x742ceeaa4e86
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.84%  [.] 0x000000000029e25a                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaabc77
+               0x742ceeaa0f12
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [.] check_match                           ld-linux-x86-64.so.2  -      -
+            |
+            ---do_lookup_x
+               _dl_lookup_symbol_x
+               _dl_fixup
+               _dl_runtime_resolve_xsave
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [.] 0x000000000028f1aa                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceea9103e
+               0x742ceeaa0ddb
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [.] __printf_buffer_write                 libc.so.6             -      -
+            |
+            ---__printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [.] 0x00000000002a19f0                    libgfortran.so.5.0.0  -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [.] 0x00000000002a8a1b                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.82%  [.] 0x000000000029e17b                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa6214
+               0x742ceeaab245
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.82%  [.] 0x000000000029e144                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x4
+
+     0.82%  [.] 0x00000000002a19ab                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x7ffd6f542c23
+
+     0.82%  [.] 0x000000000029e1c2                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaabc77
+               0x742ceeaa0f12
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.82%  [.] __logf_sse2                           libm.so.6             -      -
+            |
+            ---clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.81%  [.] 0x00000000002a9b43                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.81%  [.] __strncmp_sse42                       libc.so.6             -      -
+            |
+            ---0x742ceea90e52
+               0x742ceeaa2177
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.81%  [.] 0x00000000002a78e0                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaab1de
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.78%  [.] 0x00000000002a0e17                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.78%  [.] 0x00000000002a8476                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.76%  [.] __memmove_sse2_unaligned_erms         libc.so.6             -      -
+            |
+            ---0x742ceeaa5272
+               0x742ceeaadb63
+               0x742ceea9fb44
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.75%  [.] 0x00000000002a844b                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.74%  [.] 0x00000000002a83cc                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.74%  [.] 0x00000000002a9b57                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.73%  [.] __ieee754_exp_avx                     libm.so.6             -      -
+            |
+            ---__GI___exp (inlined)
+               gratio_
+               cdfchi_
+               ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.73%  [.] 0x00000000002a8414                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.72%  [.] 0x0000000000290e17                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa2177
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.71%  [.] clgen_                                cligen532             -      -
+            |
+            ---0x7ffd6f542c23
+
+     0.71%  [.] 0x00000000002a815d                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.70%  [.] 0x00000000002a84d5                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.70%  [.] 0x000000000029e174                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa7d3a
+               0x742ceeaa1741
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.69%  [.] 0x00000000002ab219                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x3
+
+     0.68%  [.] 0x00000000002a97b6                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.67%  [.] 0x00000000002a3922                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeadd32f
+
+     0.67%  [.] 0x000000000029103a                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x7ffd6f54255f
+
+     0.66%  [.] 0x00000000002a0f80                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.66%  [.] _gfortran_st_write_done               libgfortran.so.5.0.0  -      -
+            |
+            ---day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.65%  [.] __strlen_sse2                         libc.so.6             -      -
+            |
+            ---__printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.65%  [k] 0xffffffff983ed159                    [unknown]             -      -
+            |
+            ---0xffffffff983efce4
+               0xffffffff984017ba
+               0xffffffff984019cd
+               0xffffffff983ffc8c
+               0xffffffff98409959
+               0xffffffff981c323f
+               0xffffffff983f11f0
+               0xffffffff983f16fc
+               0xffffffff982f5544
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               0x742ceeaa4e86
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.63%  [.] 0x00000000002a0def                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.63%  [.] 0x0000000000025555                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa7d00
+               0x742ceeaa1741
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.63%  [.] 0x00000000002a7c94                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa1741
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.63%  [k] 0xffffffff982d24d2                    [unknown]             -      -
+            |
+            ---0xffffffff9835265e
+               0xffffffff98353de5
+               0xffffffff98353fce
+               0xffffffff983fffff
+               0xffffffff98409959
+               0xffffffff981c323f
+               0xffffffff983f11f0
+               0xffffffff983f16fc
+               0xffffffff982f5544
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               0x742ceeaa4e86
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] 0x00000000002a0d64                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [k] 0xffffffff983ffe6e                    [unknown]             -      -
+            |
+            ---0xffffffff98409959
+               0xffffffff981c323f
+               0xffffffff983f11f0
+               0xffffffff983f16fc
+               0xffffffff982f5544
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               0x742ceeaa4e86
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] 0x00000000002a80ff                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] __cosf_sse2                           libm.so.6             -      -
+            |
+            ---__cosf_sse2
+               ranset_
+               clgen_
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] 0x00000000002a849f                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] 0x000000000028f1e0                    libgfortran.so.5.0.0  -      -
+            |
+            ---0xffffffffffffffff
+
+     0.62%  [.] 0x000000000028f209                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceea8f1e4
+               0x742ceea9103e
+               0x742ceeaa0ddb
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.62%  [.] 0x00000000002a8326                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceeaa9bd5
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.61%  [.] 0x00000000002adaa1                    libgfortran.so.5.0.0  -      -
+            |
+            ---0x742ceea9e249
+               0x742ceeaa6214
+               0x742ceeaab245
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.57%  [k] 0xffffffff97f655ed                    [unknown]             -      -
+            |
+            ---0xffffffff97f65cda
+               0xffffffff98314c32
+               0xffffffff97f8d909
+               0xffffffff97f94c87
+               0xffffffff9835cd18
+               0xffffffff9835fc84
+               0xffffffff9835b8a7
+               0xffffffff9835bc5d
+               0xffffffff9835bfd2
+               0xffffffff9835c725
+               0xffffffff982f55c1
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               0x742ceeaa4e86
+               0x742ceeaa2a21
+               0x742ceeaa2ee3
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.54%  [.] __mpn_extract_double                  libc.so.6             -      -
+            |
+            ---__printf_fp_buffer_1 (inlined)
+               __printf_fp_l_buffer
+               __printf_fp_spec (inlined)
+               __printf_buffer
+               __vsnprintf_internal
+               __GI___snprintf
+               0x742ceeaa9b9a
+               0x742ceeaab231
+               0x742ceeaa15e6
+               0x742ceeaa1a15
+               day_gen_
+               wxr_gen_
+               MAIN__
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               0xffffffffffffffff
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

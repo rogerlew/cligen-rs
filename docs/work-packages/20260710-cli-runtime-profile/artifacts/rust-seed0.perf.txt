@@ -1,0 +1,608 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 140  of event 'cycles:P'
+# Event count (approx.): 357858580
+#
+# Overhead  Symbol                                                                                                  Shared Object         IPC   [IPC Coverage]
+# ........  ......................................................................................................  ....................  ....................
+#
+    32.88%  [.] compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback                                    cligen                -      -
+            |
+            |--32.22%--compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback
+            |          |
+            |          |--30.27%--fma
+            |          |          |
+            |          |          |--20.67%--cligen::rng::ranset
+            |          |          |          cligen::daily::clgen
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |          |--3.80%--cligen::daily::clgen
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |          |--1.91%--cligen::libm_pinned::cosf_pinned
+            |          |          |          cligen::daily::clgen
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |          |--1.46%--cligen::daily::windg
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |          |--0.95%--cligen::libm_pinned::sinf_pinned
+            |          |          |          cligen::daily::clgen
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |          |--0.86%--cligen::storm::wet_day_duration
+            |          |          |          cligen::modes::day_gen
+            |          |          |          cligen::modes::run_to_cli
+            |          |          |          0xffffffffffffffff
+            |          |          |
+            |          |           --0.61%--cligen::storm::storm_block
+            |          |                     cligen::modes::day_gen
+            |          |                     cligen::modes::run_to_cli
+            |          |                     0xffffffffffffffff
+            |          |
+            |          |--0.85%--0x57
+            |          |
+            |          |--0.60%--0x50
+            |          |
+            |           --0.50%--0x1e
+            |
+             --0.65%--0xffffffff99200f30
+
+     6.34%  [k] 0xffffffff99201720                                                                                  [unknown]             -      -
+            |
+            |--3.01%--compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback
+            |          fma
+            |          |
+            |          |--1.54%--cligen::rng::ranset
+            |          |          cligen::daily::clgen
+            |          |          cligen::modes::day_gen
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |          |--0.86%--cligen::storm::wet_day_duration
+            |          |          cligen::modes::day_gen
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |           --0.60%--cligen::libm_pinned::cosf_pinned
+            |                     cligen::daily::clgen
+            |                     cligen::modes::day_gen
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+            |--1.23%--cligen::rng::ranset
+            |          cligen::daily::clgen
+            |          cligen::modes::day_gen
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+            |--0.89%--core::fmt::num::imp::<impl core::fmt::Display for isize>::fmt
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          cligen::fortran_format::i_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+            |--0.61%--__memcpy_sse2_unaligned_erms (inlined)
+            |          <alloc::string::String as core::fmt::Write>::write_str
+            |          core::fmt::num::<impl core::fmt::Display for u128>::fmt
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          cligen::fortran_format::f_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+             --0.60%--_RNvCsiGVaDesi5rv_7___rustc14___rust_dealloc
+                       cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     4.81%  [.] fma                                                                                                 cligen                -      -
+            |
+            |--2.44%--cligen::rng::ranset
+            |          cligen::daily::clgen
+            |          cligen::modes::day_gen
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+            |--0.88%--0x400188bc3fffffff
+            |
+            |--0.88%--cligen::daily::windg
+            |          cligen::modes::day_gen
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+             --0.60%--0x4018043b5fffffff
+
+     4.69%  [.] cligen::rng::ranset                                                                                 cligen                -      -
+            |
+            ---cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     4.56%  [.] cligen::fortran_format::f_edit                                                                      cligen                -      -
+            |
+            |--3.96%--cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+             --0.60%--0x5781743e9aaf
+
+     4.24%  [.] alloc::fmt::format::format_inner                                                                    cligen                -      -
+            |
+            |--2.30%--cligen::fortran_format::i_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+            |--0.72%--0x5781624a63df
+            |
+            |--0.64%--0x57816237f9df
+            |
+             --0.57%--cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     3.68%  [.] <alloc::string::String as core::fmt::Write>::write_str                                              cligen                -      -
+            |
+            |--1.45%--core::fmt::num::<impl core::fmt::Display for u128>::fmt
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          cligen::fortran_format::f_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+            |--1.36%--core::fmt::Formatter::pad
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          |
+            |          |--0.68%--cligen::fortran_format::i_edit
+            |          |          cligen::output::write_daily_row
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |           --0.68%--cligen::fortran_format::f_edit
+            |                     cligen::output::write_daily_row
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+             --0.87%--core::fmt::Formatter::pad_integral
+                       core::fmt::num::<impl core::fmt::Display for u128>::fmt
+                       core::fmt::write
+                       alloc::fmt::format::format_inner
+                       cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     3.65%  [.] _int_free                                                                                           libc.so.6             -      -
+            |
+            |--3.04%--_int_free
+            |          __GI___libc_free (inlined)
+            |          |
+            |          |--2.44%--cligen::output::write_daily_row
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |           --0.60%--cligen::fortran_format::f_edit
+            |                     cligen::output::write_daily_row
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+             --0.60%--tcache_put (inlined)
+                       _int_free
+                       __GI___libc_free (inlined)
+                       cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     3.28%  [.] core::fmt::write                                                                                    cligen                -      -
+            |
+            ---alloc::fmt::format::format_inner
+               |
+               |--2.47%--cligen::fortran_format::f_edit
+               |          cligen::output::write_daily_row
+               |          cligen::modes::run_to_cli
+               |          0xffffffffffffffff
+               |
+                --0.81%--cligen::fortran_format::i_edit
+                          cligen::output::write_daily_row
+                          cligen::modes::run_to_cli
+                          0xffffffffffffffff
+
+     3.24%  [.] <alloc::string::String as core::fmt::Write>::write_char                                             cligen                -      -
+            |
+            |--2.63%--core::fmt::Formatter::pad
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          |
+            |          |--1.79%--cligen::fortran_format::f_edit
+            |          |          cligen::output::write_daily_row
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |           --0.84%--cligen::fortran_format::i_edit
+            |                     cligen::output::write_daily_row
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+             --0.61%--core::fmt::Formatter::pad_integral
+                       core::fmt::num::<impl core::fmt::Display for u128>::fmt
+                       core::fmt::write
+                       alloc::fmt::format::format_inner
+                       cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     3.11%  [.] malloc                                                                                              libc.so.6             -      -
+            |
+            |--1.64%--__GI___libc_malloc (inlined)
+            |          alloc::raw_vec::RawVecInner<A>::finish_grow
+            |          alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+            |          <alloc::string::String as core::fmt::Write>::write_str
+            |          |
+            |          |--0.95%--core::fmt::num::<impl core::fmt::Display for u128>::fmt
+            |          |          core::fmt::write
+            |          |          alloc::fmt::format::format_inner
+            |          |          cligen::fortran_format::f_edit
+            |          |          cligen::output::write_daily_row
+            |          |          cligen::modes::run_to_cli
+            |          |          0xffffffffffffffff
+            |          |
+            |           --0.70%--core::fmt::write
+            |                     alloc::fmt::format::format_inner
+            |                     cligen::fortran_format::f_edit
+            |                     cligen::output::write_daily_row
+            |                     cligen::modes::run_to_cli
+            |                     0xffffffffffffffff
+            |
+            |--0.77%--checked_request2size (inlined)
+            |          __GI___libc_malloc (inlined)
+            |          alloc::raw_vec::RawVecInner<A>::finish_grow
+            |          alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+            |          <alloc::string::String as core::fmt::Write>::write_str
+            |          core::fmt::num::<impl core::fmt::Display for u128>::fmt
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          cligen::fortran_format::f_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+             --0.71%--tcache_get_n (inlined)
+                       tcache_get (inlined)
+                       __GI___libc_malloc (inlined)
+                       alloc::raw_vec::RawVecInner<A>::finish_grow
+                       alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+                       <alloc::string::String as core::fmt::Write>::write_str
+                       core::fmt::num::<impl core::fmt::Display for u128>::fmt
+                       core::fmt::write
+                       alloc::fmt::format::format_inner
+                       cligen::fortran_format::f_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     2.07%  [.] __memmove_sse2_unaligned_erms                                                                       libc.so.6             -      -
+            |
+            ---<alloc::string::String as core::fmt::Write>::write_str
+               |
+               |--0.79%--core::fmt::Formatter::pad
+               |          core::fmt::write
+               |          alloc::fmt::format::format_inner
+               |          cligen::fortran_format::f_edit
+               |          cligen::output::write_daily_row
+               |          cligen::modes::run_to_cli
+               |          0xffffffffffffffff
+               |
+               |--0.67%--core::fmt::write
+               |          alloc::fmt::format::format_inner
+               |          cligen::fortran_format::f_edit
+               |          cligen::output::write_daily_row
+               |          cligen::modes::run_to_cli
+               |          0xffffffffffffffff
+               |
+                --0.61%--core::fmt::num::<impl core::fmt::Display for u128>::fmt
+                          core::fmt::write
+                          alloc::fmt::format::format_inner
+                          cligen::fortran_format::f_edit
+                          cligen::output::write_daily_row
+                          cligen::modes::run_to_cli
+                          0xffffffffffffffff
+
+     2.07%  [.] libm::math::pow::pow                                                                                cligen                -      -
+            |
+            ---cligen::deviates::dstg
+               cligen::daily::alphb
+               cligen::storm::storm_block
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     1.71%  [.] core::fmt::Formatter::pad                                                                           cligen                -      -
+            |
+            ---core::fmt::write
+               alloc::fmt::format::format_inner
+               |
+               |--0.87%--cligen::fortran_format::f_edit
+               |          cligen::output::write_daily_row
+               |          cligen::modes::run_to_cli
+               |          0xffffffffffffffff
+               |
+                --0.85%--cligen::fortran_format::i_edit
+                          cligen::output::write_daily_row
+                          cligen::modes::run_to_cli
+                          0xffffffffffffffff
+
+     1.53%  [.] alloc::raw_vec::RawVecInner<A>::finish_grow                                                         cligen                -      -
+            |
+            |--0.93%--alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+            |          <alloc::string::String as core::fmt::Write>::write_str
+            |          core::fmt::num::imp::<impl core::fmt::Display for isize>::fmt
+            |          core::fmt::write
+            |          alloc::fmt::format::format_inner
+            |          cligen::fortran_format::i_edit
+            |          cligen::output::write_daily_row
+            |          cligen::modes::run_to_cli
+            |          0xffffffffffffffff
+            |
+             --0.61%--<alloc::string::String as core::fmt::Write>::write_char
+                       core::fmt::Formatter::pad
+                       core::fmt::write
+                       alloc::fmt::format::format_inner
+                       cligen::fortran_format::i_edit
+                       cligen::output::write_daily_row
+                       cligen::modes::run_to_cli
+                       0xffffffffffffffff
+
+     1.46%  [.] cligen::deviates::dstg                                                                              cligen                -      -
+            |
+            ---cligen::daily::alphb
+               |
+               |--0.86%--cligen::storm::storm_block
+               |          cligen::modes::day_gen
+               |          cligen::modes::run_to_cli
+               |          0xffffffffffffffff
+               |
+                --0.60%--cligen::storm::wet_day_duration
+                          cligen::modes::day_gen
+                          cligen::modes::run_to_cli
+                          0xffffffffffffffff
+
+     1.24%  [.] cligen::daily::clgen                                                                                cligen                -      -
+            |
+            ---cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.92%  [.] cligen::acm::cdfchi                                                                                 cligen                -      -
+            |
+            ---cligen::rng::ranset
+               cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.92%  [.] cligen::libm_pinned::cosf_pinned                                                                    cligen                -      -
+            |
+            ---cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.89%  [.] core::fmt::num::imp::<impl core::fmt::Display for isize>::fmt                                       cligen                -      -
+            |
+            ---core::fmt::write
+               alloc::fmt::format::format_inner
+               cligen::fortran_format::i_edit
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.87%  [.] cligen::storm::storm_block                                                                          cligen                -      -
+            |
+            ---0x3fefffffffffffff
+
+     0.86%  [.] cligen::libm_pinned::acosf_pinned                                                                   cligen                -      -
+            |
+            ---cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.84%  [k] 0xffffffff97fa5c52                                                                                  [unknown]             -      -
+            |
+            ---0xffffffff984019cd
+               0xffffffff983ffc8c
+               0xffffffff98409959
+               0xffffffff981c323f
+               0xffffffff983f11f0
+               0xffffffff983f16fc
+               0xffffffff982f5544
+               0xffffffff982f5ad3
+               0xffffffff982f5b89
+               0xffffffff97e059ae
+               0xffffffff9904c83f
+               0xffffffff99200130
+               __GI___libc_write
+               <std::process::ChildStdin as std::io::Write>::write
+               std::io::Write::write_all
+               cligen::runspec::PreparedRun::generate_and_write
+               cligen::main
+               std::sys::backtrace::__rust_begin_short_backtrace
+               _ZN3std2rt10lang_start28_$u7b$$u7b$closure$u7d$$u7d$17h837143936c098c0fE.llvm.9797618842963052325
+               std::rt::lang_start_internal
+               main
+               __libc_start_call_main
+               __libc_start_main_impl (inlined)
+               _start
+
+     0.83%  [k] 0xffffffff97f7beb4                                                                                  [unknown]             -      -
+            |
+            ---0xffffffff97f7c43d
+               0xffffffff97f66a58
+               0xffffffff9800c509
+               0xffffffff98024f18
+               0xffffffff98025438
+               0xffffffff9800d452
+               0xffffffff9800e456
+               0xffffffff97ead591
+               0xffffffff99051d1b
+               0xffffffff99200f4b
+               compiler_builtins::math::libm_math::arch::x86::fma::fma_fallback
+               fma
+               cligen::rng::ranset
+               cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.83%  [.] cligen::acm::temme_polynomial                                                                       cligen                -      -
+            |
+            ---cligen::acm::gratio_temme_general
+               cligen::acm::gratio
+               cligen::acm::cdfchi
+               cligen::rng::ranset
+               cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.75%  [.] _RNvCsiGVaDesi5rv_7___rustc11___rdl_alloc                                                           cligen                -      -
+            |
+            ---alloc::raw_vec::RawVecInner<A>::finish_grow
+               alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle
+               <alloc::string::String as core::fmt::Write>::write_str
+               core::fmt::num::<impl core::fmt::Display for u128>::fmt
+               core::fmt::write
+               alloc::fmt::format::format_inner
+               cligen::fortran_format::f_edit
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.73%  [.] cligen::acm::gratio                                                                                 cligen                -      -
+            |
+            ---cligen::acm::cdfchi
+               cligen::rng::ranset
+               cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.66%  [.] cligen::daily::windg                                                                                cligen                -      -
+            |
+            ---0x7ffd75b0f7fb
+
+     0.62%  [.] alloc::raw_vec::RawVecInner<A>::reserve::do_reserve_and_handle                                      cligen                -      -
+            |
+            ---<alloc::string::String as core::fmt::Write>::write_char
+               core::fmt::Formatter::pad
+               core::fmt::write
+               alloc::fmt::format::format_inner
+               cligen::fortran_format::f_edit
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.61%  [.] core::fmt::num::<impl u128>::_fmt_inner                                                             cligen                -      -
+            |
+            ---core::fmt::num::<impl core::fmt::Display for u128>::fmt
+               core::fmt::write
+               alloc::fmt::format::format_inner
+               cligen::fortran_format::f_edit
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.60%  [.] libm::math::exp::exp                                                                                cligen                -      -
+            |
+            ---cligen::deviates::dstg
+               cligen::daily::alphb
+               cligen::storm::wet_day_duration
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.60%  [.] cligen::daily::temp_params                                                                          cligen                -      -
+            |
+            ---cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.60%  [k] 0xffffffff982ce959                                                                                  [unknown]             -      -
+            |
+            ---0xffffffff981d7735
+               0xffffffff981d8686
+               0xffffffff981d9562
+               0xffffffff981d96b1
+               0xffffffff981da68f
+               0xffffffff9822f6d1
+               0xffffffff9823058b
+               0xffffffff98230bf4
+               0xffffffff98230eca
+               0xffffffff97ed7f79
+               0xffffffff99052bb3
+               0xffffffff99200bc7
+               __memcpy_sse2_unaligned_erms (inlined)
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.60%  [.] cligen::output::write_daily_row                                                                     cligen                -      -
+            |
+            ---0xffffffffffffffff
+
+     0.59%  [k] 0xffffffff9825d053                                                                                  [unknown]             -      -
+            |
+            ---0xffffffff9825e709
+               0xffffffff98298341
+               0xffffffff982986b4
+               0xffffffff9822f1dc
+               0xffffffff9822f3cc
+               0xffffffff9823058b
+               0xffffffff98230bf4
+               0xffffffff98230eca
+               0xffffffff97ed7f79
+               0xffffffff99052bb3
+               0xffffffff99200bc7
+               __memcpy_sse2_unaligned_erms (inlined)
+               cligen::output::write_daily_row
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+     0.55%  [.] cligen::qc::conflm                                                                                  cligen                -      -
+            |
+            ---cligen::rng::ranset
+               cligen::daily::clgen
+               cligen::modes::day_gen
+               cligen::modes::run_to_cli
+               0xffffffffffffffff
+
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
