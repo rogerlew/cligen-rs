@@ -138,13 +138,12 @@ false). When `qc_filter: off`: the faithful K-S / mean / variance
 verdicts evaluated diagnostically over the produced batches — the
 would-have-been-rejected rate, the single number that prices what
 conditioning was removed. (`fast_batch_v0` predates the knob and is
-always unconditioned; its reports carry `qc_filter: null`. Rev 4,
-C-R1-003: counterfactual verdicts — for `qc_filter: off` **and** for
-`fast_batch_v0` — land with Q3, which implements the diagnostic
-evaluation and decides the metrics-version consequence of adding the
-field; as of Q1, metrics_version 1 carries no counterfactual surface
-and fast-v0 reports hold the null plus counters only.) Plus:
-`bk7.v7 == 0.0` recovery count,
+always unconditioned; its reports carry `qc_filter: null` and — rev 5
+ruling — `counterfactual: null`: the faithful verdicts are defined
+over the source's rolling-predecessor batch stream, which the v0
+producer does not have. Historical: rev 4 had deferred a possible
+fast-v0 counterfactual surface to Q3; Q3 ruled it undefined instead.)
+Plus: `bk7.v7 == 0.0` recovery count,
 Tdew range-check events, and per-run RNG draw totals. Diagnostic
 evaluation must not mutate generation state.
 
@@ -152,7 +151,7 @@ evaluation must not mutate generation state.
 
 ```json
 {
-  "metrics_version": 1,
+  "metrics_version": 2,
   "identity": {
     "content":    { "tool": "...", "par_sha256": "...", "cli_sha256": "...",
                     "days": 36525, "years": 100, "span": [1, 100] },

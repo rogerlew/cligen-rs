@@ -19,13 +19,16 @@ execution is complete):
   [`20260710-q3-qc-filter-dissection`](work-packages/20260710-q3-qc-filter-dissection/package.md)):
   `qc_filter: faithful | off` implemented (SPEC-RUNSPEC rev 5;
   metrics_version 2 counterfactuals); the ratified 102-run dissection
-  quantified the frontier — conditioning discards ~52% of batches in
-  every regime, buys material convergence only at 30 yr (B1 1.25 vs
-  1.12 at 100 yr), costs material interannual variability at both
-  horizons and is farther from observed climate on 15/17 stations,
-  and is the dominant generation cost (1.70× median / 8.8× corpus
-  total). **Awaiting: ADR-0003 ratification** (Proposed: user-facing,
-  default `faithful`, `off` recommended for 100-yr native runs).
+  quantified the frontier — ~52% of unconditioned batches fail the
+  QC verdicts in every regime (faithful's actual discard cost is far
+  larger where it retries), the convergence buy is real with an
+  estimator-sensitive horizon profile (R1-corrected), the
+  interannual-variability cost is material at both horizons and
+  farther from observed climate on 15/17 stations (single-burn Daymet;
+  detrended 14/17, GHCN 6/8), and conditioning is the dominant
+  generation cost (1.70× median / 8.8× corpus total). **Awaiting:
+  ADR-0003 ratification** (Proposed, R1-amended: user-facing, default
+  `faithful`, `off` to consider for 100-yr variance-priority runs).
 - **Q4 executed** (2026-07-10,
   [`20260710-q4-fast-batch-adjudication`](work-packages/20260710-q4-fast-batch-adjudication/package.md)):
   same-instrument comparison against the qc_off re-baseline; the

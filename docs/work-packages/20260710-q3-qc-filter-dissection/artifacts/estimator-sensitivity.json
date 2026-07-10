@@ -1,0 +1,41 @@
+{
+ "note": "R1 finding 1/4 remediation: B1 aggregation sensitivity + GHCN-secondary join (computed from the same 102-run sidecars)",
+ "B1_30yr": {
+  "published_mean_month_then_median_station": null,
+  "all_cells_median_ratio_off_over_faithful": 1.4382,
+  "median_of_station_medians_ratio": 1.1871
+ },
+ "B1_100yr": {
+  "published_mean_month_then_median_station": null,
+  "all_cells_median_ratio_off_over_faithful": 1.4092,
+  "median_of_station_medians_ratio": 1.4312
+ },
+ "Q4a_30yr": {
+  "all_cells_median_ratio_v0_over_off": 1.0028,
+  "median_of_station_medians_ratio_v0_over_off": 1.1042
+ },
+ "Q4a_100yr": {
+  "all_cells_median_ratio_v0_over_off": 0.9558,
+  "median_of_station_medians_ratio_v0_over_off": 0.912
+ },
+ "ghcn_secondary_join": {
+  "30": {
+   "off_closer_n": 6,
+   "of": 8,
+   "direction_reversals_vs_daymet": [
+    "fl083909",
+    "id106388",
+    "ms227840"
+   ]
+  },
+  "100": {
+   "off_closer_n": 6,
+   "of": 8,
+   "direction_reversals_vs_daymet": [
+    "fl083909",
+    "id106388",
+    "ms227840"
+   ]
+  }
+ }
+}

@@ -17,14 +17,18 @@ ratified; `fast_batch_v1` should never enter the runspec schema;
 
 ## Why
 
-1. **The gate fails on the only leg that motivated the line.** The
-   batch approach existed for performance. Against the honest
+1. **The observed gain is modest, and the pinned gate could not be
+   evaluated as registered** (amended per R1 finding 2: whole-run
+   wall time is a proxy for the pinned refill-path quantity; wepp1
+   was not measured; verdict recorded as NOT EVALUATED AS
+   PRE-REGISTERED, not FAIL). What was measured: against the honest
    baseline — `qc_filter: off` on the faithful backend — the RNG swap
-   buys 1.32× generation-only (1.24–1.27× wall) at 100 years, under
-   the pre-pinned 1.5× materiality bar. The dominant cost was never
-   `RANDN`; it was the conditioner (faithful → off: 1.70× median,
-   8.8× corpus-total, up to 2.5M discarded batch attempts on a single
-   100-year arid run).
+   shows 1.32× generation-only (1.24–1.27× wall) at 100 years on this
+   host. The dominant cost was never `RANDN`; it was the conditioner
+   (faithful → off: 1.70× median, 8.8× corpus-total, up to 2.5M
+   discarded batch attempts on a single 100-year arid run). This is a
+   portfolio judgment on modest observed benefit, not a technical
+   impossibility proof.
 2. **Quality equivalence is not an argument for promotion.** v0
    passes legs (a) and (b) — convergence within 2.3% of the off
    baseline, dispersion ratio 0.95 — i.e., it is statistically
@@ -52,11 +56,10 @@ ratified; `fast_batch_v1` should never enter the runspec schema;
 - The perf-arc packages and SPEC-FAST-BATCH-V1 stay in the record as
   the design study that led here; the spec's registry row should read
   "retired (Q4 adjudication)" upon operator ratification.
-- The wepp1/FMA performance caveat from the ROADMAP row is moot at
-  this margin: FMA affects transcendental-heavy paths, not the ~1.3×
-  refill gap, and could not plausibly bridge 1.32× → 1.5× while the
-  quality legs remain merely equivalent. (Caveat on the record: all
-  timing is this host, not wepp1.)
+- The wepp1/FMA question is **unmeasured** (R1 finding 2): all
+  timing is this host; no refill-path isolation, raw repetitions, or
+  pinned-core methodology was run. The reopening condition in
+  `package.md` names exactly what a future case must measure.
 
 ## If the operator instead wants the batch line
 

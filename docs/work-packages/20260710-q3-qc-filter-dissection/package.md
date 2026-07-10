@@ -55,4 +55,11 @@ to the operator as ADR-0003.
 - `artifacts/frontier-analysis.md` — verdicts vs the bounds.
 - `artifacts/gate-results.md` — Ran gates.
 - `docs/decisions/0003-qc-filter-exposure.md` — Proposed.
-- Review cycle: not yet run (operator directed execute-and-present).
+- `artifacts/review-codex.md` / `artifacts/disposition-claude.md` —
+  the R1 review cycle (8 findings, 8 accepted; two HIGH corrections
+  applied to the adjudication record; Codex's independent opinion:
+  ratify ADR-0003 as amended, retire fast-batch on portfolio grounds).
+- `artifacts/estimator-sensitivity.json` — R1 findings 1/4
+  remediation computations.
+- Evidence archive: release `q3-evidence-2026.07`
+  (`q3-matrix-evidence.tar.gz`, sha256 cc42e65e…8072a).

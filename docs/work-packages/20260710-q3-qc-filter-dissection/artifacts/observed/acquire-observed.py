@@ -140,7 +140,10 @@ def ghcn(coop_id, raw_dir):
             value = int(row[3]) / 10.0  # tenths of mm / tenths of C
             key = {"PRCP": "prcp", "TMAX": "tmax", "TMIN": "tmin"}[row[2]]
             rec[key].append(value)
-    # completeness screen: >=30 years with >=95% PRCP days
+    # Completeness screen. NOTE (R1 finding 8): yearly_stats() then
+    # additionally requires >=360 prcp days, so the EFFECTIVE screen
+    # is ~98.6%, stricter than the registered 95%; recorded, not
+    # rerun (no station fell below 30 retained years; minimum 38).
     screened = {
         y: v
         for y, v in years.items()

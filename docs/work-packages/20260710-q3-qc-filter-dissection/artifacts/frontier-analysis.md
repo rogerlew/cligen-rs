@@ -12,7 +12,7 @@ Supplemental generation-only timing (`timing-no-sidecar.json`,
 
 | Bound | 30 yr | 100 yr |
 |---|---|---|
-| **B1 — convergence buy** (off/faithful median group A error ≥ 1.2 = material) | **1.25 — MATERIAL.** Conditioning buys real convergence at the design horizon (median QC-target error 8.0% vs 10.0%). | **1.12 — NOT material.** The buy fades: 5.5% vs 6.2%. |
+| **B1 — convergence buy** (off/faithful median group A error ≥ 1.2 = material) | 1.25 under the recorded estimator | 1.12 under the recorded estimator. **Corrected per R1 finding 1: the aggregation hierarchy was not pre-registered and the verdict is estimator-sensitive** — all-cells median gives 1.44/1.41 (material at both horizons), median-of-station-medians gives 1.19/1.43 (flipping *both* recorded verdicts). The horizon distinction is **unresolved**; a real convergence buy exists at both horizons under most estimators (`estimator-sensitivity.json`). |
 | **B2 — variability cost** (SD ratio < 0.9 or CV farther from observed on ≥ 2/3) | **MATERIAL on both prongs**: median SD_faithful/SD_off = 0.81; faithful CV farther from observed on 14/17. | **MATERIAL on both prongs**: SD ratio 0.89; farther on 15/17. |
 | **B3 — early-decade prediction** (majority at 100 yr) | — | **CONFIRMED, narrowly: 10/17.** The cumulative-QC "bites hardest early" effect is present but not uniform across regimes. |
 | **B4 — counterfactual price** | would-reject 52.2% median | would-reject 52.7% median; **range 50.5–54.4% across every regime class** |
@@ -20,15 +20,21 @@ Supplemental generation-only timing (`timing-no-sidecar.json`,
 
 ## The headline findings
 
-1. **The conditioner rejects half of everything, everywhere.** The
-   would-have-been-rejected rate is 50.5–54.4% across arid, humid,
-   cold, and monsoonal stations alike — the filter is not an
-   occasional guardrail; it is a persistent resampling layer that
-   discards every second batch regardless of climate regime.
-2. **What that buys is a 30-year effect.** At the agricultural design
-   horizon the convergence gain is material (B1 = 1.25, exactly the
-   Baffaut-motivated purpose). At 100 years the gain is 1.12 — below
-   the materiality bound; time does what the filter was doing.
+1. **Half of all unconditioned batches fail the QC verdicts, in
+   every regime** (corrected per R1 finding 3): the 50.5–54.4% figure
+   is the *raw QC-verdict failure rate along the off trajectory* —
+   non-causal after the first hypothetical rejection, with no
+   shared-cap analogue. Faithful execution's actual discard cost is
+   far larger where it retries (corpus median failed-attempt fraction
+   ≈ 97% at 100 yr; Yuma: 2.5M failed attempts for 10,800 shipped
+   batches).
+2. **The convergence buy is real; its horizon profile is
+   estimator-sensitive** (corrected per R1 finding 1). Under the
+   recorded estimator the gain is material at 30 yr (1.25) and not at
+   100 yr (1.12); under the alternative aggregations it is material
+   at both horizons (1.44/1.41 all-cells). What is NOT
+   estimator-sensitive: the buy never vanishes, and the variability
+   cost (finding 3) exists at both horizons regardless.
 3. **What it costs is real at both horizons and points the wrong way
    vs observed climate.** Conditioned interannual dispersion is
    clipped ~19% (30 yr) / ~11% (100 yr), and the unconditioned runs
@@ -53,9 +59,14 @@ Supplemental generation-only timing (`timing-no-sidecar.json`,
 
 - The observed CV comparison inherits Daymet's grid-vs-point and
   1980–2025-period character; the pre-registered no-detrend choice
-  inflates observed CV slightly. Both effects are shared by every
-  config, and the GHCN-Daily secondary (8/17 stations) does not
-  change the direction on any of its stations.
+  inflates observed CV slightly (detrended sensitivity: 14/17).
+  **Corrected per R1 finding 4**: the GHCN-Daily secondary favors
+  `off` on 6/8 of its stations at both horizons but reverses the
+  Daymet direction on individual stations (at 100 yr: fl083909,
+  id106388, ms227840) — aggregate direction supportive, station-level
+  invariance false as originally stated (`estimator-sensitivity.json`).
+- The 15/17 is a single-burn, 17-station campaign result (R1 finding
+  5): descriptive of this matrix, not a stochastic interval.
 - B3's 10/17 is a bare majority: the early-decade mechanism is
   visible but regime-dependent, weaker than the ADR-0002 prose
   predicted.
