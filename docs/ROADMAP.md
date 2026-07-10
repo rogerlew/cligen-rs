@@ -12,7 +12,6 @@ port-parity-tested is unverifiable.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 7 | **Observed mode** | `day_gen` (`.prn` path) | Observed-mode fixture parity incl. the 5.323 EOF case |
 | 8 | **`.cli` writer, orchestration, and the `cligen` CLI** | `wxr_gen`/`opt_calc` year-loop port; output formatting (Fortran FORMAT rounding); SPEC-RUNSPEC `inp.yaml` binary — **no legacy argv/stdin interface** (ratified, SPEC-RUNSPEC §Non-goals) | `cligen run` on the 12 golden runspecs reproduces the golden `.cli` files byte-identically; `cligen validate` fail-closed tests green |
 | A1 | **Provenance + `.cli.parquet`** (SPEC-PROVENANCE, SPEC-CLI-PARQUET) | Generation-profile block; parquet writer with provenance columns | Spec ratified; openWEPP-side consumption is openWEPP's package |
 | A2 | **Native f64 mode** | Uniform-f64 engine; measured faithful↔native divergence characterization | Divergence documented per variable; profile `native-f64-v1` |
@@ -21,6 +20,6 @@ port-parity-tested is unverifiable.
 | A5 | **Storm-model extensions** | Modified duration/intensity derivation; NOAA design-storm curves | Each behind its own versioned generation profile |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
-Items 7–8 are the remaining faithful-mode port. A-items are augmentations
+Item 8 is the remaining faithful-mode port. A-items are augmentations
 and may reorder on demand; A1 is first among them because every later
 extension wants the provenance substrate.

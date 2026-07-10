@@ -1,11 +1,7 @@
 # Observed Mode / Day-Loop Driver Port
 
-Status: `STAGE-C-R1-COMPLETE` (Stage C and Codex R1 landed 2026-07-09;
-Claude Code Stage R2 remains open)
-Stage C/R1 outcome: the cold-start gate covers all 24 captures with
-explicit per-case day counts, final dates, and exit states (189,207
-days bit-identical); `.prn` PAD/blank/error/line-ending edges are pinned;
-four Medium R1 findings were fixed; all required gates exited 0 directly.
+Status: `EXECUTED-COMPLETE` (Stage R2 closed 2026-07-09;
+`artifacts/final-review-claude.md`)
 Stage S outcome: day_gen/generation_setup/PrnReader/Ccl1State ported;
 **cold-start replay green — 80,906 days with zero injected state**
 (block-data seeds + burn + real inputs through the production driver);
