@@ -4,23 +4,23 @@ Date: 2026-07-10
 Review: [`review-claude.md`](review-claude.md), commit `27d532c`.
 Executor: Codex
 
-## F1 — Accepted; separate faithful-mode package scaffolded
+## F1 — Operator-deferred and closed
 
-The finding is decision-critical. The new
-`20260710-plain-ops-pinned-libm-adjudication` package owns a candidate that
-replaces only explicit `mul_add` calls in the pinned f32 log/cos paths with
-plain operations, then adjudicates it against the captured transcendental
-corpus and all faithful goldens. No faithful numeric change is made here.
-Its pass/fail result determines whether the fast-profile path remains worth a
-stochastic-parity campaign.
+The operator explicitly chose not to pursue the non-FMA optimization path on
+2026-07-10. The separate
+`20260710-plain-ops-pinned-libm-adjudication` package is closed
+`EXECUTED-HOLD-OPERATOR-DEFERRED`; it contains no candidate result and must
+not be reopened implicitly. Its outcome is no longer a prerequisite for
+fast-batch refinement or for deciding whether to assess its stochastic
+behavior.
 
 ## F2 — Accepted and remediated as far as the current baseline permits
 
 The full fast-batch matrix now ran on FMA-capable `wepp1`. The composite is
 2.301 s faithful versus 0.349 s fast (6.59x), with all runner acceptance
 checks passing. This materially narrows, but does not erase, the original
-non-FMA-host result. A rerun against a hypothetical F1-passing faithful
-baseline remains required before any go/no-go parity decision.
+non-FMA-host result. It is sufficient motivation to refine a v1 design; it
+is not itself a stochastic-parity result.
 
 ## F3 — Accepted and remediated
 
@@ -48,14 +48,19 @@ must widen the v0 seed derivation before making quality claims. The operator's
 performance-arc reprioritization is recorded here; it does not silently
 supersede the A-series roadmap.
 
-## Guidance
+## Updated operator sequencing
 
-The review's recommended order is accepted:
+The review's proposed equivalence design remains useful direction, with the
+following operator-directed order:
 
-1. F1 plain-operations adjudication.
-2. F2 rerun against an F1-passing baseline if one exists.
-3. Only if a material gap remains, consider a batchwise-QC `fast_batch_v1`.
-4. Then conduct a bounded, pre-registered stochastic-equivalence study.
+1. Refine and ratify `SPEC-FAST-BATCH-V1`, including the parity-assessment
+   design and the runtime `inp.yaml` profile contract.
+2. Dispatch a bounded v1 implementation/benchmark package and measure it on
+   FMA-capable `wepp1` before committing to a broad parity campaign.
+3. If its performance remains material, dispatch a separate bounded,
+   pre-registered stochastic-parity package.
+4. Keep F1 deferred unless the operator explicitly reopens the faithful
+   non-FMA path.
 
 The current `fast_batch_v0` result remains an experimental performance
 measurement, not a candidate parity claim.

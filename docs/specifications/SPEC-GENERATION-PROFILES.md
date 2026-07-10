@@ -1,6 +1,6 @@
 # SPEC-GENERATION-PROFILES — Declared Generator Behavior Profiles
 
-Status: active (rev 1, fast-batch spike)
+Status: active (rev 2; v1 design draft linked below)
 Surface: the `generation_profile` selector in a rev-1 runspec and its
 required declaration in generated `.cli` header provenance.
 
@@ -13,7 +13,8 @@ remains defined by `reference/cligen532/cligen.f` under ADR-0001.
 
 ## Runspec field
 
-`generation_profile` is an optional top-level string:
+`generation_profile` is an optional top-level string. The currently accepted
+values are:
 
 | Value | Meaning | Output declaration |
 |---|---|---|
@@ -22,6 +23,21 @@ remains defined by `reference/cligen532/cligen.f` under ADR-0001.
 
 Unknown values fail closed at YAML parsing. A profile can never be selected
 implicitly by host, build target, or environment variable.
+
+## Profile evolution
+
+The intended runtime surface remains the `inp.yaml` `generation_profile`
+field: faithful `faithful_5_32_3` is the default, and a fast-batch extension
+is an explicit alternative. Profile identifiers are versioned behavior
+contracts, so the future alternative is named `fast_batch_v1`, not the bare
+`fast_batch`. A bare name would not identify its generator, seed derivation,
+mask semantics, or parity evidence.
+
+[`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) is a draft for that future
+profile and its assessment. It is **not** yet an accepted runspec value;
+current resolvers and the JSON schema must continue to reject it until an
+implementation package updates this specification and the schema together.
+`fast_batch_v0` remains an implemented spike and is not a parity candidate.
 
 ## fast_batch_v0 semantics
 

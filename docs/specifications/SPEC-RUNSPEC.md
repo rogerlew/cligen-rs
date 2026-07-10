@@ -104,6 +104,8 @@ generation_profile: faithful_5_32_3  # optional, default. See
                                       # SPEC-GENERATION-PROFILES.
                                       # `fast_batch_v0` is an explicit,
                                       # non-faithful experimental profile.
+                                      # `fast_batch_v1` is a draft only and
+                                      # is rejected in this revision.
 
 observed:                       # required iff mode: observed
   prn: ws.prn                   # the observed series
@@ -151,6 +153,11 @@ output:
 
 Anything else — unknown fields anywhere, wrong types, out-of-domain
 values — is a typed validation error.
+
+The draft [`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) defines the proposed
+successor to the experimental profile and its parity-assessment strategy. It
+does not amend this rev-3 schema: `fast_batch_v1` must fail closed until a
+later runspec revision accepts it.
 
 ## Year plan (normative, per mode)
 
