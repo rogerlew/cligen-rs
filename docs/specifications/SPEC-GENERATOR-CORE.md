@@ -1,6 +1,6 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 5, Stage S of the daily-core package)
+Status: active (rev 6, Stage C of the daily-core package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
@@ -23,7 +23,8 @@ lines per the ratified decomposition.
   package landed the block's station fields; remaining generation
   scratch arrives with daily/modes), [`Cbk4State`] (`cbk4.inc`,
   currently the `iopt` slice), [`Cbk1State`] (`cbk1.inc`, the
-  `sta_parms` slice), [`Cbk9State`] (`cbk9.inc`, the `wi` slice), and
+  `sta_parms` slice), [`Cbk9State`] (`cbk9.inc`, `wi` plus the daily
+  intensity fields `ab`/`ab1`/`rn1`/`r1`), and
   [`CinterpState`] (`cinterp.inc`, complete), and — from the daily
   package — [`Cbk3State`] (`cbk3.inc` live slice) and [`Cbk5State`]
   (`cbk5.inc` live slice), with `Cbk4State` gaining `nc`/`nt`/`mo`,

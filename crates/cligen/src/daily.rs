@@ -5,15 +5,18 @@
 //!   (3898-4001).
 //! Precision-Map: REAL*4 throughout (census: transcendental-census.md;
 //!   no f64 site, no SAVE state)
-//! Faithful-Acceptance: per-day sequential replay against the cg tap
-//!   streams (fixtures/taps/daily/, tests/daily_identity.rs) — entry
-//!   seed/rolling-state assertions localize any desync to the record
+//! Faithful-Acceptance: per-unit and combined sequential replay against
+//!   the cg/wg/ab/r5 tap streams (fixtures/taps/daily/,
+//!   tests/daily_identity.rs) — entry seed/rolling-state assertions
+//!   localize any desync to the record
 //!
 //! Transcendental adjudication (standard §1.3, Ran 2026-07-09,
 //! transcendental-census.md): the solar geometry routes through
-//! `libm_pinned::{sinf_pinned, cosf_pinned, tanf_pinned, acosf_pinned}`
-//! — the `libm` crate's `tanf`/`acosf` were REJECTED against the
-//! reference runtime (2.06% / 79.6% sweep divergence).
+//! `libm_pinned::{sinf_pinned, cosf_pinned, tanf_pinned, acosf_pinned,
+//! expf_pinned, logf_pinned}` — the `libm` crate's `tanf`/`acosf`/
+//! `expf` were REJECTED against the reference runtime (2.06% / 79.6% /
+//! 0.69% sweep divergence); `logf_pinned` was adjudicated by the RNG
+//! package.
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
@@ -31,16 +34,27 @@
 //! | `twiddle`,`twiddld` | same | SD-delta and mean-delta anchors (2004 Tmax/Tmin/Tdew correlation scheme) | param units |
 //! | `xx` | `xx` | literal 1.0 scale on every dstn1 result (source shape) | — |
 //! | `dax` | `dax` | day-of-month cursor into the ranary batch | day |
+//! | `fx` | `fx` | wind-direction uniform (batch column 6) | — |
+//! | `wv`,`th` | same | generated wind speed and direction | m/s / rad |
+//! | `ei` | `ei` | liquid daily precipitation above snowmelt | in |
+//! | `ai` | `ai` | gamma scaling parameter for `dstg` | — |
+//! | `ajp` | `ajp` | precipitation-dependent upper bound for alpha | — |
+//! | `sm` | `sm(12)` | three-month-smoothed maximum 30-minute rain | in |
+//! | `smm` | `smm(12)` | expected wet days per month | day |
+//! | `r25` | `r25` | mean rain per wet day, guarded above zero | in/day |
 
 use crate::cbk1::Cbk1State;
 use crate::cbk3::Cbk3State;
 use crate::cbk4::Cbk4State;
 use crate::cbk5::Cbk5State;
 use crate::cbk7::Cbk7State;
+use crate::cbk9::Cbk9State;
 use crate::cinterp::CinterpState;
 use crate::crandom3::Crandom3State;
-use crate::deviates::dstn1;
-use crate::libm_pinned::{acosf_pinned, cosf_pinned, sinf_pinned, tanf_pinned};
+use crate::deviates::{dstg, dstn1, DstgState};
+use crate::libm_pinned::{
+    acosf_pinned, cosf_pinned, expf_pinned, logf_pinned, sinf_pinned, tanf_pinned,
+};
 use crate::monthlies::{fouri2, ryf2};
 use crate::rng::{randn, ranset, RansetState};
 
@@ -358,4 +372,151 @@ pub fn clgen(
 
     gen_radiation(ntd, mo, ida, bk7, ci, cr);
     events
+}
+
+/// Faithful daily wind generator (`cligen.f:2020-2119`).
+/// Selects a direction from the monthly cumulative distribution, then
+/// generates speed from the corresponding rolling normal pair. The
+/// source's zero-skew guard mutates the station `wvl` value in place.
+///
+/// # Units
+/// Writes `bk1.wv` in m/s and `bk1.th` in radians from north.
+///
+/// # Numerics
+/// REAL*4 throughout. The Pearson-III cube is evaluated as three
+/// left-associated f32 multiplies; `dstn1` supplies the only
+/// transcendental work through its already-adjudicated pinned path.
+pub fn windg(
+    bk1: &mut Cbk1State,
+    bk3: &mut Cbk3State,
+    bk4: &Cbk4State,
+    bk7: &mut Cbk7State,
+    cr: &mut Crandom3State,
+) {
+    let m = (bk4.mo - 1) as usize;
+    cr.fx = cr.fxx(cr.dax as usize);
+    let mut ndflag = 0;
+    bk3.j = 0;
+    loop {
+        bk3.j += 1;
+        if bk1.dir[m][(bk3.j - 1) as usize] > cr.fx {
+            ndflag = 2;
+        }
+        if ndflag != 0 || bk3.j >= 16 {
+            break;
+        }
+    }
+
+    if ndflag == 0 {
+        bk1.wv = 0.0;
+        bk1.th = 0.0;
+        return;
+    }
+
+    let j = (bk3.j - 1) as usize;
+    let j1 = bk3.j - 1;
+    let g = if bk3.j == 1 {
+        cr.fx / bk1.dir[m][j]
+    } else {
+        (cr.fx - bk1.dir[m][j - 1]) / (bk1.dir[m][j] - bk1.dir[m][j - 1])
+    };
+    let xj1 = j1 as f32;
+    bk1.th = bk1.pi2 * (g + xj1 - 0.5) / 16.0;
+    if bk1.th < 0.0 {
+        // Preserve the source operand order (cligen.f:2101).
+        #[allow(clippy::assign_op_pattern)]
+        {
+            bk1.th = bk1.pi2 + bk1.th;
+        }
+    }
+
+    let v10 = cr.v10x(cr.dax as usize);
+    if bk1.wvl[j][3][m] == 0.0 {
+        bk1.wvl[j][3][m] = 0.01;
+    }
+    let r6 = bk1.wvl[j][3][m] / 6.0;
+    let mut xlv = (dstn1(bk7.v9, v10) - r6) * r6 + 1.0;
+    xlv = (xlv * xlv * xlv - 1.0) * 2.0 / bk1.wvl[j][3][m];
+    bk7.v9 = v10;
+    bk1.wv = xlv * bk1.wvl[j][2][m] + bk1.wvl[j][1][m];
+    if bk1.wv < 0.0 {
+        bk1.wv = 0.1;
+    }
+}
+
+/// Faithful Bofu Yu alpha generator (`cligen.f:3817-3895`).
+/// Consumes one `dstg` deviate from `k7` and writes the event's
+/// maximum-30-minute / total-rain ratio to `bk9.r1`.
+///
+/// # Units
+/// Reads daily precipitation and snowmelt in inches; writes a
+/// dimensionless ratio.
+///
+/// # Numerics
+/// REAL*4 outside `dstg`'s source-declared f64 island. The f32
+/// exponential uses the adjudicated ARM transcription
+/// [`expf_pinned`].
+pub fn alphb(
+    bk3: &Cbk3State,
+    bk4: &Cbk4State,
+    bk5: &Cbk5State,
+    bk7: &mut Cbk7State,
+    bk9: &mut Cbk9State,
+    dg: &mut DstgState,
+    cr: &mut Crandom3State,
+) {
+    let r = bk5.r[(bk3.ida - 1) as usize];
+    assert!(r > 0.0, "alphb requires positive daily precipitation");
+    let ei = r - bk5.sml;
+    let ai = bk9.ab1 / (bk9.wi[(bk4.mo - 1) as usize] - bk9.ab);
+    let ajp = if ei < 1.0 {
+        1.0
+    } else {
+        let tmax = 125.0 / 25.4;
+        1.0 - expf_pinned(-tmax / ei)
+    };
+    bk9.r1 = dstg(ai, &mut bk7.k7, dg, cr);
+    bk9.r1 = (ei * (bk9.ab + bk9.r1 * (ajp - bk9.ab)) + bk5.sml * bk9.ab) / r;
+}
+
+/// Faithful once-per-run monthly maximum-30-minute-rain conversion
+/// (`cligen.f:3898-3996`). Smooths the station values and overwrites
+/// `bk9.wi` in place with the monthly `R30 / R` ratios.
+///
+/// # Units
+/// Reads and writes precipitation depth in inches; the final `wi`
+/// values are dimensionless ratios.
+///
+/// # Numerics
+/// REAL*4 throughout. `alog(f)` routes through the adjudicated ARM
+/// transcription [`logf_pinned`].
+pub fn r5monb(bk4: &Cbk4State, bk7: &Cbk7State, bk9: &mut Cbk9State) {
+    let mut sm = [0.0f32; 12];
+    sm[0] = (bk9.wi[11] + bk9.wi[0] + bk9.wi[1]) / 3.0;
+    for (i, value) in sm.iter_mut().enumerate().take(11).skip(1) {
+        *value = (bk9.wi[i - 1] + bk9.wi[i] + bk9.wi[i + 1]) / 3.0;
+    }
+    sm[11] = (bk9.wi[10] + bk9.wi[11] + bk9.wi[0]) / 3.0;
+
+    for (i, sm_i) in sm.iter().enumerate() {
+        let smm = if bk7.prw[i][1] == 0.0 {
+            0.0006944
+        } else {
+            let xm = (bk4.nc[i + 1] - bk4.nc[i]) as f32;
+            xm * bk7.prw[i][1] / (1.0 - bk7.prw[i][0] + bk7.prw[i][1])
+        };
+        let r25 = if bk7.rst[i][0] == 0.0 {
+            0.001
+        } else {
+            bk7.rst[i][0]
+        };
+        let mut f = 1.0 / (smm + 0.5);
+        f = -1.0 / logf_pinned(f);
+        if f > 1.0 || f <= 0.0 {
+            bk9.wi[i] = *sm_i;
+        } else {
+            bk9.wi[i] = f * *sm_i;
+        }
+        bk9.wi[i] /= r25;
+    }
 }

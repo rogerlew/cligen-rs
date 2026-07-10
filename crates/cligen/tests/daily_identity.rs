@@ -18,9 +18,11 @@ use cligen::cbk3::Cbk3State;
 use cligen::cbk4::Cbk4State;
 use cligen::cbk5::Cbk5State;
 use cligen::cbk7::Cbk7State;
+use cligen::cbk9::Cbk9State;
 use cligen::cinterp::CinterpState;
 use cligen::crandom3::Crandom3State;
-use cligen::daily::clgen;
+use cligen::daily::{alphb, clgen, r5monb, windg};
+use cligen::deviates::DstgState;
 use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
@@ -135,16 +137,98 @@ fn parse_cg(path: &Path) -> Vec<CgRec> {
         .collect()
 }
 
+struct WgRec {
+    mo: i32,
+    dax: i32,
+    v9_in: u32,
+    fx: u32,
+    wv: u32,
+    th: u32,
+    v9_out: u32,
+    j: i32,
+}
+
+fn parse_wg(path: &Path) -> Vec<WgRec> {
+    let data = std::fs::read_to_string(path).unwrap();
+    let lines: Vec<Vec<&str>> = data
+        .lines()
+        .map(|line| line.split_whitespace().collect())
+        .collect();
+    assert_eq!(lines.len() % 2, 0, "{}: partial wg record", path.display());
+    lines
+        .chunks_exact(2)
+        .map(|record| {
+            let (w, x) = (&record[0], &record[1]);
+            assert_eq!((w[0], x[0]), ("W", "X"));
+            WgRec {
+                mo: w[1].parse().unwrap(),
+                dax: w[2].parse().unwrap(),
+                v9_in: hex(w[3]),
+                fx: hex(w[4]),
+                wv: hex(x[1]),
+                th: hex(x[2]),
+                v9_out: hex(x[3]),
+                j: x[4].parse().unwrap(),
+            }
+        })
+        .collect()
+}
+
+struct AbRec {
+    mo: i32,
+    ida: i32,
+    k7: [i32; 4],
+    r: u32,
+    wi: u32,
+    sml: u32,
+    r1: u32,
+}
+
+fn parse_ab(path: &Path) -> Vec<AbRec> {
+    let data = std::fs::read_to_string(path).unwrap();
+    let lines: Vec<Vec<&str>> = data
+        .lines()
+        .map(|line| line.split_whitespace().collect())
+        .collect();
+    assert_eq!(lines.len() % 2, 0, "{}: partial ab record", path.display());
+    lines
+        .chunks_exact(2)
+        .map(|record| {
+            let (g, h) = (&record[0], &record[1]);
+            assert_eq!((g[0], h[0]), ("G", "H"));
+            AbRec {
+                mo: g[1].parse().unwrap(),
+                ida: g[2].parse().unwrap(),
+                k7: std::array::from_fn(|i| g[i + 3].parse().unwrap()),
+                r: hex(g[7]),
+                wi: hex(g[8]),
+                sml: hex(g[9]),
+                r1: hex(h[1]),
+            }
+        })
+        .collect()
+}
+
+fn parse_r5(path: &Path) -> [u32; 12] {
+    let data = std::fs::read_to_string(path).unwrap();
+    let fields: Vec<&str> = data.split_whitespace().collect();
+    assert_eq!(fields.len(), 13, "{}: malformed r5 record", path.display());
+    assert_eq!(fields[0], "R5");
+    std::array::from_fn(|i| hex(fields[i + 1]))
+}
+
 struct Replay {
     bk1: Cbk1State,
     bk3: Cbk3State,
     bk4: Cbk4State,
     bk5: Cbk5State,
     bk7: Cbk7State,
+    bk9: Cbk9State,
     ci: CinterpState,
     cr: Crandom3State,
     rs: RansetState,
     acm: AcmState,
+    dg: DstgState,
 }
 
 /// Station setup: sta_parms + the main program's latitude/constant
@@ -156,7 +240,7 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
     let par = ParFile::parse(&bytes).unwrap();
     let mut bk1 = Cbk1State::default();
     let mut bk7 = Cbk7State::default();
-    let mut bk9 = cligen::cbk9::Cbk9State::default();
+    let mut bk9 = Cbk9State::default();
     let mut ci = CinterpState {
         interp,
         ..CinterpState::default()
@@ -182,10 +266,12 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
         },
         bk5: Cbk5State::default(),
         bk7,
+        bk9,
         ci,
         cr: Crandom3State::default(),
         rs: RansetState::default(),
         acm: AcmState::default(),
+        dg: DstgState::default(),
     }
 }
 
@@ -194,6 +280,78 @@ fn seed_matrix(bk7: &Cbk7State) -> [[i32; 4]; 10] {
         bk7.k1.0, bk7.k2.0, bk7.k3.0, bk7.k4.0, bk7.k5.0, bk7.k6.0, bk7.k7.0, bk7.k8.0, bk7.k9.0,
         bk7.k10.0,
     ]
+}
+
+fn replay_wg(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> usize {
+    let recs = parse_wg(path);
+    let mut st = setup(par_rel, interp, iopt);
+    for (idx, rec) in recs.iter().enumerate() {
+        let at = |what: &str| format!("{case}:{}: windg {what}", idx + 1);
+        st.bk4.mo = rec.mo;
+        st.cr.dax = rec.dax;
+        st.bk7.v9 = f32::from_bits(rec.v9_in);
+        st.cr.ranary[5][(rec.dax - 1) as usize] = f32::from_bits(rec.fx);
+        // On non-calm records windg shifts v10 into v9, so the exit
+        // tap supplies the otherwise-unrecorded batch-column input.
+        // Calm records do not read the column.
+        st.cr.ranary[6][(rec.dax - 1) as usize] = f32::from_bits(rec.v9_out);
+
+        windg(&mut st.bk1, &mut st.bk3, &st.bk4, &mut st.bk7, &mut st.cr);
+
+        assert_eq!(st.cr.fx.to_bits(), rec.fx, "{}", at("fx"));
+        assert_eq!(st.bk1.wv.to_bits(), rec.wv, "{}", at("wv"));
+        assert_eq!(st.bk1.th.to_bits(), rec.th, "{}", at("th"));
+        assert_eq!(st.bk7.v9.to_bits(), rec.v9_out, "{}", at("v9 out"));
+        assert_eq!(st.bk3.j, rec.j, "{}", at("j"));
+    }
+    recs.len()
+}
+
+fn replay_ab(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> usize {
+    let recs = parse_ab(path);
+    if recs.is_empty() {
+        return 0;
+    }
+    let mut st = setup(par_rel, interp, iopt);
+    st.bk7.k7 = SeedState(recs[0].k7);
+    for (idx, rec) in recs.iter().enumerate() {
+        let at = |what: &str| format!("{case}:{}: alphb {what}", idx + 1);
+        assert_eq!(st.bk7.k7.0, rec.k7, "{}", at("k7 entry"));
+        st.bk4.mo = rec.mo;
+        st.bk3.ida = rec.ida;
+        st.bk5.r[(rec.ida - 1) as usize] = f32::from_bits(rec.r);
+        st.bk5.sml = f32::from_bits(rec.sml);
+        st.bk9.wi[(rec.mo - 1) as usize] = f32::from_bits(rec.wi);
+        st.cr.mox = rec.mo;
+
+        alphb(
+            &st.bk3,
+            &st.bk4,
+            &st.bk5,
+            &mut st.bk7,
+            &mut st.bk9,
+            &mut st.dg,
+            &mut st.cr,
+        );
+
+        assert_eq!(st.bk9.r1.to_bits(), rec.r1, "{}", at("r1"));
+    }
+    recs.len()
+}
+
+fn replay_r5(par_rel: &str, interp: i32, iopt: i32, path: &Path) {
+    let expected = parse_r5(path);
+    let mut st = setup(par_rel, interp, iopt);
+    r5monb(&st.bk4, &st.bk7, &mut st.bk9);
+    for (month, bits) in expected.iter().enumerate() {
+        assert_eq!(
+            st.bk9.wi[month].to_bits(),
+            *bits,
+            "{}: r5 wi({})",
+            path.display(),
+            month + 1
+        );
+    }
 }
 
 fn replay_cg(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> usize {
@@ -331,6 +489,69 @@ fn clgen_replays_fortran_cg_samples() {
         total >= 4_000,
         "expected substantial cg replay coverage, got {total}"
     );
+}
+
+#[test]
+fn windg_replays_fortran_wg_samples() {
+    let root = repo_root();
+    let mut total = 0;
+    for (case, par_rel, interp, iopt) in CASES {
+        let path = root
+            .join("fixtures/taps/daily")
+            .join(case)
+            .join("wg-sample.tap");
+        total += replay_wg(case, par_rel, interp, iopt, &path);
+    }
+    assert!(
+        total >= 4_000,
+        "expected substantial wg replay coverage, got {total}"
+    );
+}
+
+#[test]
+fn alphb_replays_fortran_ab_samples() {
+    let root = repo_root();
+    let mut total = 0;
+    for (case, par_rel, interp, iopt) in CASES {
+        let path = root
+            .join("fixtures/taps/daily")
+            .join(case)
+            .join("ab-sample.tap");
+        if path.exists() {
+            total += replay_ab(case, par_rel, interp, iopt, &path);
+        }
+    }
+    assert!(
+        total >= 4_000,
+        "expected substantial ab replay coverage, got {total}"
+    );
+}
+
+#[test]
+fn r5monb_matches_fortran_setup_snapshots() {
+    let root = repo_root();
+    for (case, par_rel, interp, iopt) in CASES {
+        let path = root.join("fixtures/taps/daily").join(case).join("r5.tap");
+        replay_r5(par_rel, interp, iopt, &path);
+    }
+}
+
+#[test]
+#[ignore = "full windg/alphb/r5monb replay against local daily tap-runs capture"]
+fn full_stage_c_unit_streams_bit_identical() {
+    let root = repo_root();
+    let runs = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
+    let mut wg_total = 0;
+    let mut ab_total = 0;
+    for (case, par_rel, interp, iopt) in CASES {
+        let case_dir = runs.join(case);
+        wg_total += replay_wg(case, par_rel, interp, iopt, &case_dir.join("cligen_wg.tap"));
+        ab_total += replay_ab(case, par_rel, interp, iopt, &case_dir.join("cligen_ab.tap"));
+        replay_r5(par_rel, interp, iopt, &case_dir.join("cligen_r5.tap"));
+    }
+    println!("full unit replays: windg calls={wg_total}, alphb calls={ab_total}, r5 runs=10");
+    assert!(wg_total > 80_000);
+    assert!(ab_total > 20_000);
 }
 
 #[test]
