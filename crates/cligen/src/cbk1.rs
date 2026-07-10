@@ -7,9 +7,9 @@
 //! Faithful-Acceptance: par-state snapshot identity
 //!   (fixtures/taps/par/, tests/par_state_identity.rs V/D/M records)
 //!
-//! Remaining `/bk1/` members (`wv`, `th`, `pi2`, `ang`, `tdp`) are
-//! generation-time scratch owned by the daily package when `windg`
-//! ports (incremental-block pattern, SPEC-GENERATOR-CORE).
+//! The daily package added `wv`, `th`, `pi2`, and `tdp`. The remaining
+//! `/bk1/` member `ang` arrives with the storm package (incremental-block
+//! pattern, SPEC-GENERATOR-CORE).
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |

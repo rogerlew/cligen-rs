@@ -70,8 +70,12 @@ probability) — transcribe, don't reason.
    `[0.05·rmx, rmx]`.
 6. `windg` (separate unit, same day): `fxx(dax)`; calm short-circuit
    consumes nothing else; otherwise `v10x(dax)` + 1 `dstn1`.
-7. `alphb` (wet days; `day_gen:3119,3141`): 1 `dstg` call (k7 stream,
-   already fully verified by the item-3 dg replay).
+7. `alphb` (`day_gen:3114-3141`): after normalizing `r(ida) ≤ 0` to
+   zero, the positive-rain branch calls it once at line 3119; for
+   `iopt ≥ 4`, the nested positive-rain branch calls it a second time
+   at line 3141. Thus each wet day consumes one `dstg` draw normally
+   and a second draw on the storm path. All captured package cases use
+   `iopt ≥ 4`, so their `ab` streams contain two records per wet day.
 
 The item-3 `rn`/`n1`/`dg` full streams therefore remain a complete
 draw-order oracle: any port that consumes a column or draw out of

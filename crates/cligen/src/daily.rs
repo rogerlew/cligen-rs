@@ -1,8 +1,8 @@
 //! Origin-Class: CLIGEN-5.32.3-Public-Domain
 //! Migration-Method: source-authority-port (ADR-0001)
-//! Replaces: reference/cligen532/cligen.f:1094-1515 (`clgen`). Stage C
-//!   adds `windg` (2020-2122), `alphb` (3817-3897), `r5monb`
-//!   (3898-4001).
+//! Replaces: reference/cligen532/cligen.f:1094-1515 (`clgen`),
+//!   2020-2122 (`windg`), 3817-3897 (`alphb`), and 3898-4001
+//!   (`r5monb`).
 //! Precision-Map: REAL*4 throughout (census: transcendental-census.md;
 //!   no f64 site, no SAVE state)
 //! Faithful-Acceptance: per-unit and combined sequential replay against

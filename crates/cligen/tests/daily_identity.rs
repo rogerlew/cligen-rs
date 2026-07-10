@@ -68,6 +68,104 @@ const CASES: [(&str, &str, i32, i32); 10] = [
     ),
 ];
 
+/// Every local full-capture run listed in the package tap manifest.
+const FULL_CASES: [(&str, &str, i32, i32); 24] = [
+    (
+        "fish-springs-ut-observed-padded-I0",
+        "fish-springs-ut/ut422852.par",
+        0,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I1",
+        "fish-springs-ut/ut422852.par",
+        1,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I3",
+        "fish-springs-ut/ut422852.par",
+        3,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed0",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed17",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed0",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed17",
+        "fish-springs-ut/ut422852.par",
+        2,
+        6,
+    ),
+    ("jeogla-au-I1", "jeogla-au/ASN00057011.par", 1, 5),
+    ("jeogla-au-I2", "jeogla-au/ASN00057011.par", 2, 5),
+    ("jeogla-au-I3", "jeogla-au/ASN00057011.par", 3, 5),
+    ("jeogla-au-seed0", "jeogla-au/ASN00057011.par", 0, 5),
+    ("jeogla-au-seed17", "jeogla-au/ASN00057011.par", 0, 5),
+    (
+        "mt-wilson-ca-observed-I0",
+        "mt-wilson-ca/ca046006.par",
+        0,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-I1",
+        "mt-wilson-ca/ca046006.par",
+        1,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-I3",
+        "mt-wilson-ca/ca046006.par",
+        3,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-seed0",
+        "mt-wilson-ca/ca046006.par",
+        2,
+        6,
+    ),
+    (
+        "mt-wilson-ca-observed-seed17",
+        "mt-wilson-ca/ca046006.par",
+        2,
+        6,
+    ),
+    ("new-meadows-id-I1", "new-meadows-id/id106388.par", 1, 5),
+    ("new-meadows-id-I2", "new-meadows-id/id106388.par", 2, 5),
+    ("new-meadows-id-I3", "new-meadows-id/id106388.par", 3, 5),
+    ("new-meadows-id-seed0", "new-meadows-id/id106388.par", 0, 5),
+    ("new-meadows-id-seed17", "new-meadows-id/id106388.par", 0, 5),
+    (
+        "new-meadows-id-single-storm-seed0",
+        "new-meadows-id/id106388.par",
+        0,
+        4,
+    ),
+    (
+        "new-meadows-id-single-storm-seed17",
+        "new-meadows-id/id106388.par",
+        0,
+        4,
+    ),
+];
+
 fn repo_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../..")
@@ -572,9 +670,13 @@ fn replay_combined(
         assert_eq!(st.bk7.v9.to_bits(), wg_rec.v9_out, "{}", at("v9 exit"));
         assert_eq!(st.bk3.j, wg_rec.j, "{}", at("j"));
 
-        // day_gen:3114-3141 calls alphb once in the wet branch, then
-        // again for iopt >= 4. The duplicate calls are both captured.
-        if st.bk5.r[(st.bk3.ida - 1) as usize] > 0.0 {
+        // day_gen:3114-3141 normalizes non-positive rain to zero and
+        // calls alphb once in the wet branch, then again for iopt >= 4.
+        // The duplicate calls are both captured.
+        let r = &mut st.bk5.r[(st.bk3.ida - 1) as usize];
+        if *r <= 0.0 {
+            *r = 0.0;
+        } else {
             let rec = ab.get(ab_call).unwrap_or_else(|| {
                 panic!("{case}: missing alphb record for wet day {}", st.bk3.ida)
             });
@@ -699,7 +801,7 @@ fn full_combined_day_loop_bit_identical() {
     let runs = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
     let mut days = 0;
     let mut alpha_calls = 0;
-    for (case, par_rel, interp, iopt) in CASES {
+    for (case, par_rel, interp, iopt) in FULL_CASES {
         let case_dir = runs.join(case);
         let (case_days, case_alpha) = replay_combined(
             case,
@@ -716,8 +818,8 @@ fn full_combined_day_loop_bit_identical() {
         alpha_calls += case_alpha;
     }
     println!("full combined replay: days={days}, alphb calls={alpha_calls}");
-    assert!(days > 80_000);
-    assert!(alpha_calls > 20_000);
+    assert!(days > 180_000);
+    assert!(alpha_calls > 60_000);
 }
 
 #[test]
@@ -727,15 +829,15 @@ fn full_stage_c_unit_streams_bit_identical() {
     let runs = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
     let mut wg_total = 0;
     let mut ab_total = 0;
-    for (case, par_rel, interp, iopt) in CASES {
+    for (case, par_rel, interp, iopt) in FULL_CASES {
         let case_dir = runs.join(case);
         wg_total += replay_wg(case, par_rel, interp, iopt, &case_dir.join("cligen_wg.tap"));
         ab_total += replay_ab(case, par_rel, interp, iopt, &case_dir.join("cligen_ab.tap"));
         replay_r5(par_rel, interp, iopt, &case_dir.join("cligen_r5.tap"));
     }
-    println!("full unit replays: windg calls={wg_total}, alphb calls={ab_total}, r5 runs=10");
-    assert!(wg_total > 80_000);
-    assert!(ab_total > 20_000);
+    println!("full unit replays: windg calls={wg_total}, alphb calls={ab_total}, r5 runs=24");
+    assert!(wg_total > 180_000);
+    assert!(ab_total > 60_000);
 }
 
 #[test]
@@ -744,11 +846,11 @@ fn full_cg_streams_bit_identical() {
     let root = repo_root();
     let runs = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
     let mut total = 0;
-    for (case, par_rel, interp, iopt) in CASES {
+    for (case, par_rel, interp, iopt) in FULL_CASES {
         let path = runs.join(case).join("cligen_cg.tap");
         assert!(path.exists(), "local capture missing: {}", path.display());
         total += replay_cg(case, par_rel, interp, iopt, &path);
     }
     println!("full cg replay: calls={total}");
-    assert!(total > 80_000);
+    assert!(total > 180_000);
 }
