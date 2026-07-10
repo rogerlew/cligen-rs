@@ -1,9 +1,9 @@
 # Output Writer, Orchestration, and the `cligen` CLI
 
-Status: `STAGE-S-COMPLETE` — spine executed and gated; 12/12 golden
-`.cli` byte parity from typed run inputs; format adjudication closed
-(57.3M fields, 0 mismatches). Awaiting Codex Stage C dispatch
-(`artifacts/kickoff-codex.md`).
+Status: `STAGE-C-COMPLETE` — runspec/CLI boundary executed and gated;
+12/12 golden `.cli` files reproduce byte-identically through `cligen
+run`; R1 cross-review found no findings. Awaiting Claude Code R2
+closure (`artifacts/review-codex.md`).
 Date: 2026-07-09
 Evidence mode: Stage S **executional** (`artifacts/gate-results.md`)
 Execution model: staged, two executors (the item-3..7 pattern) —

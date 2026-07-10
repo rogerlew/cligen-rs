@@ -1,0 +1,10 @@
+cligen_runspec: 1
+station:
+  par: ../../../../../../fixtures/jeogla-au/ASN00057011.par
+mode: continuous
+simulation:
+  begin_year: 1
+  years: 42
+output:
+  cli: ../../../../../../target/runspec-goldens/jeogla-au-seed0.cli
+  command_echo: "-iASN00057011.par"

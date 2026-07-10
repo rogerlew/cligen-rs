@@ -31,6 +31,7 @@ pub mod output;
 pub mod par;
 pub mod qc;
 pub mod rng;
+pub mod runspec;
 pub mod storm;
 
 /// The CLIGEN version this port is faithful to.

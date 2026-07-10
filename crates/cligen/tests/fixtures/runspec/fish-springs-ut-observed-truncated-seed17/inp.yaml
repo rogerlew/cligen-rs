@@ -1,0 +1,13 @@
+cligen_runspec: 1
+station:
+  par: ../../../../../../fixtures/fish-springs-ut/ut422852.par
+mode: observed
+simulation:
+  interpolation: fourier
+rng:
+  burn: 17
+observed:
+  prn: ../../../../../../docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn
+output:
+  cli: ../../../../../../target/runspec-goldens/fish-springs-ut-observed-truncated-seed17.cli
+  command_echo: "-r17 -iut422852.par -Ows-truncated.prn -owepp.cli -t6 -I2"

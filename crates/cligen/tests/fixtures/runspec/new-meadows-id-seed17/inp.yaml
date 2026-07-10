@@ -1,0 +1,12 @@
+cligen_runspec: 1
+station:
+  par: ../../../../../../fixtures/new-meadows-id/id106388.par
+mode: continuous
+simulation:
+  begin_year: 1
+  years: 31
+rng:
+  burn: 17
+output:
+  cli: ../../../../../../target/runspec-goldens/new-meadows-id-seed17.cli
+  command_echo: "-r17 -iid106388.par"

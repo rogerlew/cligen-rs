@@ -1,0 +1,11 @@
+# Dependency-policy baseline for the schema/CLI surface.  The workspace and
+# its direct and transitive dependencies use these OSI-approved licenses.
+
+[licenses]
+version = 2
+allow = [
+    "Apache-2.0",
+    "BSL-1.0",
+    "MIT",
+    "Unicode-3.0",
+]

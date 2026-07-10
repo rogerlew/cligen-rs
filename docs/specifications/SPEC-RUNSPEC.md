@@ -40,6 +40,8 @@ the mapping tables below are normative.
   bump it. A published JSON Schema accompanies the implementation.
 - **Faithful semantics, honest names** (§Naming traps).
 
+Machine-readable schema: [`runspec.schema.json`](runspec.schema.json).
+
 ## Path resolution (API boundary)
 
 Relative paths in a runspec **file** resolve against the file's
