@@ -12,7 +12,7 @@ after the command, never after a pipe).
 | Format | `cargo fmt --check` | clean | 0 |
 | Lints | `cargo clippy --all-targets -- -D warnings` | clean | 0 |
 | Tests | `cargo test --release` | **81 passed, 0 failed** across all suites — includes `cli_parity` (12/12 golden `.cli` byte-identical from typed inputs), the extended `runspec_cli` gate (12/12 golden byte identity through the binary **with** the sidecar asserted present and removed per case), and the new 8-test `quality_report` suite | 0 |
-| Identity suites | `CLIGEN_FMT_SWEEP=target/stage-c-fmt/fmt_pairs.txt cargo test --release -- --ignored` | **9 passed, 0 failed**: tap/monthlies/daily(cg/combined/windg)/cold-start replays and the full format sweep `f_edit_matches_gfortran_full_sweep` (57,341,160 fields, 0 mismatches, 18.7 s) against the retained Stage C capture at `target/stage-c-fmt/fmt_pairs.txt` (455 MB, present from the item-8 package) | 0 |
+| Identity suites | `CLIGEN_FMT_SWEEP=/workdir/cligen-rs/target/stage-c-fmt/fmt_pairs.txt cargo test --release -- --ignored` | **9 passed, 0 failed**: tap/monthlies/daily(cg/combined/windg)/cold-start replays and the full format sweep `f_edit_matches_gfortran_full_sweep` (57,341,160 fields, 0 mismatches, 18.7 s) against the retained item-8 capture (455 MB) | 0 |
 | Coverage | `cargo llvm-cov --workspace --lcov --output-path target/lcov.info` | TOTAL 89.55% regions / 84.38% functions / 91.75% lines | 0 |
 | CRAP | `cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above` | **281 functions analyzed; none exceed threshold 30.** No allow-lists. (First run flagged `QualityIntakeError::fmt` at CRAP 72 — CC 8, uncovered; closed by adding intake fail-closed unit tests, not by allow-listing.) `run_to_cli` remains the crate maximum at 29.0 — untouched by this package. | 0 |
 | Dependencies | `cargo deny check` | advisories ok, bans ok, licenses ok, sources ok — run because this package adds `serde_json` (feature `float_roundtrip`) and `sha2` (both previously absent from `Cargo.lock`) | 0 |
@@ -27,6 +27,13 @@ after the command, never after a pipe).
 | Determinism | `report_computation_and_serialization_are_deterministic` (in-process ×2) and `repeated_runs_emit_byte_identical_sidecars` (binary ×2, byte-compared sidecars) | pass |
 | Single-storm: group D + identity only | `single_storm_reports_carry_tails_and_identity_only` — groups A/B/C and P all null; days 1; the one event in `tails` | pass |
 | `output.quality: false` opts out | `cligen_run_emits_sidecar_by_default_and_output_quality_false_opts_out` | pass |
+
+> Correction (Stage R2, C-R1-004): this row originally transcribed
+> the capture path as the relative `target/stage-c-fmt/fmt_pairs.txt`;
+> the command actually run used the absolute path now shown. The
+> relative form is **not** reproducible — `format_identity` resolves
+> `CLIGEN_FMT_SWEEP` from the test process working directory, not the
+> repo root (established Ran in Stage C).
 
 ## What these gates do not cover
 

@@ -1,6 +1,9 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: active (rev 3 — ratified by the implementing package
+Status: active (rev 4 — R1 finding C-R1-003 dispositioned in Stage
+R2: counterfactual QC verdicts, including `fast_batch_v0`'s, begin
+with Q3, which owns their metrics-version consequence; metrics_version
+1 carries none. Rev 3 — ratified by the implementing package
 `20260710-q1-quality-report`; rev 3 records the contract defects
 implementation exposed, as package findings F1-F3: the post-hoc
 equality null set extends to every run-only surface, group C
@@ -126,8 +129,13 @@ false). When `qc_filter: off`: the faithful K-S / mean / variance
 verdicts evaluated diagnostically over the produced batches — the
 would-have-been-rejected rate, the single number that prices what
 conditioning was removed. (`fast_batch_v0` predates the knob and is
-always unconditioned; its reports carry `qc_filter: null` and
-off-style counterfactuals.) Plus: `bk7.v7 == 0.0` recovery count,
+always unconditioned; its reports carry `qc_filter: null`. Rev 4,
+C-R1-003: counterfactual verdicts — for `qc_filter: off` **and** for
+`fast_batch_v0` — land with Q3, which implements the diagnostic
+evaluation and decides the metrics-version consequence of adding the
+field; as of Q1, metrics_version 1 carries no counterfactual surface
+and fast-v0 reports hold the null plus counters only.) Plus:
+`bk7.v7 == 0.0` recovery count,
 Tdew range-check events, and per-run RNG draw totals. Diagnostic
 evaluation must not mutate generation state.
 

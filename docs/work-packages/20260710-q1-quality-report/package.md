@@ -1,12 +1,16 @@
 # Q1 — The Quality-Report Instrument (SPEC-QUALITY-REPORT)
 
-Status: `STAGE-C-COMPLETE` — group P, full JSON Schema, edge vectors,
-and Codex R1 cross-review landed; Stage C gates are green
-(`artifacts/stage-c-report.md`). Stage R2 is Claude's disposition and
-closure pass.
+Status: `EXECUTED-COMPLETE` — **closes ROADMAP item Q1.** Stage S
+spine (quality module, sidecar, `cligen quality`, spec ratification);
+Stage C (group P, JSON Schema, edge vectors); R1 four findings, all
+accepted and dispositioned in R2 (two code remediations, one spec
+rev 4 adjudication, one evidence correction); R2 gates re-run green
+on the final tree (`artifacts/final-review-claude.md`). Faithful
+golden byte identity held through every stage.
 Date: 2026-07-10
-Evidence mode: Stage S **Ran** (`artifacts/gate-results.md`; every
-gate exit code checked directly)
+Evidence mode: **Ran** per stage (`artifacts/gate-results.md`,
+`artifacts/stage-c-report.md`, `artifacts/final-review-claude.md`;
+every gate exit code checked directly)
 Execution model: staged, two executors (the item-3..8 pattern) —
 Claude Code writes the design-setting spine (Stage S); Codex
 (openai gpt-5.6-sol) completes and runs gates (Stage C); each reviews

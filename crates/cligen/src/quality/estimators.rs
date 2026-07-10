@@ -63,7 +63,10 @@ pub fn adjusted_skew(values: &[f64]) -> Option<f64> {
     if m2 == 0.0 {
         return None;
     }
-    let g1 = m3 / m2.powf(1.5);
+    // m2^1.5 as m2·√m2 (C-R1-002): multiply and sqrt are both
+    // IEEE-754 correctly rounded, so the report is byte-reproducible
+    // across platforms; `f64::powf` is not a pinned surface.
+    let g1 = m3 / (m2 * m2.sqrt());
     finite(g1 * (nf * (nf - 1.0)).sqrt() / (nf - 2.0))
 }
 

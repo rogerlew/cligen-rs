@@ -89,6 +89,22 @@ goldens (`-I2`) measure cleanly under this rule.
 | year-boundary spells | group D wet/dry spells are clipped at year boundaries (per-year computation) |
 | JSON | serde struct order = schema order; pretty 2-space; trailing newline; every value finite-or-null (NaN can never be emitted); `float_roundtrip` feature pinned so consumers parse the exact emitted f64 |
 
+## 3a. R2 amendments (R1 dispositions)
+
+- **Skew denominator (C-R1-002):** `m2^1.5` is computed as
+  `m2 * m2.sqrt()` — multiply and square root are IEEE-754 correctly
+  rounded, so the pin is platform-independent; `f64::powf` (the Stage
+  S form) is not a pinned surface. Values may differ from the Stage S
+  emission by ≤ 1-2 ULP; no committed report fixture existed, so no
+  fixture churn.
+- **Intake calendar rule (C-R1-001):** day bounds are month-specific;
+  February 29 is accepted iff the printed year is divisible by 4 —
+  exactly the union of the source's two leap surfaces (daily-mode
+  Gregorian on the printed year, storm-mode century-year `nt` test),
+  since a mode-blind post-hoc intake must accept any date some source
+  mode can emit. February 30/31 and impossible days in every month
+  fail closed.
+
 ## 4. Non-finite parse hazard (found and closed in Stage S)
 
 Ran: `serde_json`'s default f64 **parse** is best-effort (±1 ULP);

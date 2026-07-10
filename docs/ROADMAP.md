@@ -14,15 +14,23 @@ instrument has measured it at both the 30- and 100-year horizons.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| Q1 | **Quality-report instrument** ([SPEC-QUALITY-REPORT](specifications/SPEC-QUALITY-REPORT.md)) | Default `*.cli.quality.json` sidecar (metric groups A convergence-to-par / B interannual / C covariation / D tails / P process, per-decade blocks); `cligen quality` post-hoc subcommand over any WEPP-format `.cli`; JSON Schema published | Spec ratified rev ≥ 2; faithful golden byte identity untouched; run-emitted report == post-hoc report minus group P; a legacy-Fortran `.cli` cross-reference measures cleanly; reports byte-deterministic |
 | Q2 | **Station databases in-crate + crates.io deployability** (SPEC-STATION-DB, planned; extends SPEC-PAR) | Typed station DB over the production collections (US 2015 / US 1995-legacy / international / PRISM-adjusted); query-by-location (`climNearest` successor); `cligen stations` subcommand (list / nearest / sync). Data ships **outside** the crate: hash-pinned collection manifests in-repo, payloads fetched to a local cache by the explicit `sync` subcommand only — simulation and `run` never touch the network | `cargo publish --dry-run` clean under the crates.io size limit with data excluded; a fresh `cargo install cligen` + `cligen stations sync` + `cligen run` round-trip works; collection manifests carry SHA-256 + provenance lineage; nearest-station query matches a pinned oracle set |
 | Q3 | **`qc_filter` implementation + dissection + exposure adjudication** ([SPEC-GENERATION-PROFILES rev 3](specifications/SPEC-GENERATION-PROFILES.md)) | Implement `qc_filter: faithful \| off` (faithful default preserves goldens; `off` emits group-P counterfactual verdicts); run the pre-registered dissection matrix — {faithful, faithful + qc_off} × {30, 100 yr} × Q2-drawn regime corpus (arid / humid / cold / monsoonal + fixtures) — and re-baseline performance against qc_off | Dissection reports archived with the pre-registration; the convergence-vs-variability frontier quantified per horizon (incl. the per-decade early-run conditioning prediction); **adjudication recorded as ADR-0003**: is `qc_filter` user-facing, and is conditioning opt-in or opt-out per use class (30-yr agricultural vs 100-yr native)? Runspec schema rev accepts the ratified surface |
 | Q4 | **Fast-batch vs legacy comparison + promotion adjudication** ([SPEC-FAST-BATCH-V1 rev 2](specifications/SPEC-FAST-BATCH-V1.md)) | Same-instrument comparison across {faithful, faithful + qc_off, fast_batch} **and legacy-Fortran `.cli` output** (Q1 post-hoc mode) on the Q3 corpus at 30/100 yr; performance case made on FMA-capable `wepp1` against the Q3 qc_off re-baseline, not against conditioned faithful | Promotion adjudicated per ADR-0002 with pre-registered bounds: either SPEC-FAST-BATCH-V1 is ratified, implemented, and the schema accepts `fast_batch_v1` — or the batch line is retired with the negative result on the record (v0 stays a closed spike either way). No production default change without a separate operator decision |
 
-Dependencies are real, not ceremonial: Q1 is the instrument every
-later item reports through; Q2 supplies the regime corpus (and the
-packaging substrate) Q3/Q4 adjudicate over; Q3's qc_off re-baseline
-is the denominator of Q4's performance case.
+Dependencies are real, not ceremonial: Q1 (complete) is the
+instrument every later item reports through; Q2 supplies the regime
+corpus (and the packaging substrate) Q3/Q4 adjudicate over; Q3's
+qc_off re-baseline is the denominator of Q4's performance case.
+
+**Q1 (quality-report instrument) is complete** (2026-07-10,
+[`20260710-q1-quality-report`](work-packages/20260710-q1-quality-report/package.md)):
+every `cligen run` emits a `*.cli.quality.json` sidecar (groups A-D +
+group P process metrics, per-decade blocks, byte-deterministic;
+SPEC-QUALITY-REPORT active rev 4 with published JSON Schema), and
+`cligen quality <file.cli> --par <file.par>` measures any WEPP-format
+`.cli` post hoc — legacy-Fortran output included. Faithful golden
+byte identity was untouched throughout.
 
 ## Deferred augmentation queue
 

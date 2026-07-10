@@ -189,10 +189,30 @@ fn parse_row(line_number: usize, line: &str) -> Result<DailyValue, QualityIntake
         wind_direction_deg: num(11)?,
         dewpoint_c: num(12)?,
     };
-    if !(1..=12).contains(&row.month) || !(1..=31).contains(&row.day) {
+    if !(1..=12).contains(&row.month) || row.day < 1 || row.day > max_day(row.month, row.year) {
         return Err(QualityIntakeError::InvalidDate { line_number });
     }
     Ok(row)
+}
+
+/// Maximum valid day for a printed `.cli` month/year (C-R1-001).
+///
+/// A post-hoc surface cannot know the run mode, and the source has two
+/// leap calendars over the printed year: the daily-mode Gregorian test
+/// (`wxr_gen:3766-3770`) and the storm-mode `nt` test
+/// (`wxr_gen:3758-3763`, leap exactly on century years). Their union —
+/// the set of years for which some source mode emits February 29 — is
+/// exactly `year % 4 == 0`: Gregorian contributes div-4-non-century
+/// and div-400 years, the storm rule contributes every century year
+/// (all divisible by 4). February 29 is therefore accepted iff the
+/// printed year is divisible by 4; impossible days are rejected in
+/// every month.
+fn max_day(month: i32, year: i32) -> i32 {
+    match month {
+        2 => 28 + i32::from(year % 4 == 0),
+        4 | 6 | 9 | 11 => 30,
+        _ => 31,
+    }
 }
 
 fn parse_i32(
@@ -270,6 +290,32 @@ mod tests {
             let error = parse_cli_table(&text).unwrap_err();
             let rendered = error.to_string();
             assert!(rendered.contains(expected), "{rendered:?} vs {expected:?}");
+        }
+    }
+
+    // C-R1-001: month-specific day bounds with the union-of-source
+    // leap calendars rule (`max_day` doc) — February 29 iff the
+    // printed year is divisible by 4.
+    #[test]
+    fn impossible_calendar_dates_fail_closed() {
+        let row = |day: i32, month: i32, year: i32| {
+            table(&format!(
+                "{day:>3}{month:>3} {year:>5}   0.0  0.00 0.00   0.00  -6.1 -12.6 114.  4.0  277. -11.7\n"
+            ))
+        };
+        for (day, month, year) in [(31, 2, 1), (30, 2, 4), (29, 2, 3), (31, 4, 1), (0, 1, 1)] {
+            let error = parse_cli_table(&row(day, month, year)).unwrap_err();
+            assert!(
+                error.to_string().contains("invalid calendar date"),
+                "{day}-{month}-{year}: {error}"
+            );
+        }
+        // Accepted: February 29 in div-4 years — the Gregorian daily
+        // surface (year 4) and the storm-calendar century surface
+        // (year 100, leap only under the storm nt test).
+        for year in [4, 100, 1900, 2000] {
+            let parsed = parse_cli_table(&row(29, 2, year)).unwrap();
+            assert_eq!(parsed.rows[0].date_key(), (year, 2, 29));
         }
     }
 
