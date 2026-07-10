@@ -33,6 +33,13 @@ that definition in Rust is what makes meaningful augmentation possible:
 The governing decision — including the faithful/native dual-mode design and
 what "faithful" means — is [ADR-0001](docs/decisions/0001-source-code-authority-port.md).
 
+**This port was written by AI systems in one day.** If that makes you
+skeptical, good — [METHODOLOGY.md](METHODOLOGY.md) explains why the
+correctness case does not depend on trusting anyone: acceptance is
+bit-identity against a provenance-pinned reference build, ~46 million
+interior values plus twelve end-to-end golden outputs are verified
+byte-for-byte, and every gate is re-runnable from this repository.
+
 ## Posture, in two sentences
 
 The pinned Fortran source in [`reference/cligen532/`](reference/cligen532/)
