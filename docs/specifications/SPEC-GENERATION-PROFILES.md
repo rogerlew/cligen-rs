@@ -1,8 +1,10 @@
 # SPEC-GENERATION-PROFILES — Declared Generator Behavior Profiles
 
-Status: active (rev 2; v1 design draft linked below)
-Surface: the `generation_profile` selector in a rev-1 runspec and its
-required declaration in generated `.cli` header provenance.
+Status: active (rev 3; adds the `qc_filter` policy knob under
+ADR-0002; v1 design draft linked below)
+Surface: the `generation_profile` and `qc_filter` selectors in a rev-1
+runspec and their required declaration in generated `.cli` header
+provenance.
 
 ## Producers / consumers
 
@@ -23,6 +25,32 @@ values are:
 
 Unknown values fail closed at YAML parsing. A profile can never be selected
 implicitly by host, build target, or environment variable.
+
+## `qc_filter` — the conditioning policy knob (ADR-0002)
+
+Generation policy decomposes into orthogonal declared knobs: the RNG
+backend (`generation_profile`) and the quality-control conditioning
+policy (`qc_filter`). `qc_filter` is an optional top-level runspec
+string:
+
+| Value | Meaning | Output declaration |
+|---|---|---|
+| `faithful` | Default. The source acceptance/retry protocol (K-S + normal mean/variance CI, cumulative, regeneration; `cligen.f:4002-4340`) applies to the active backend. On the faithful backend this preserves golden byte identity. | none (faithful default) |
+| `off` | No conditioning: every produced batch is accepted. On the faithful backend, `RANDN`, the per-parameter streams, the column-5/9 zero masks, and the `ell` chain remain source-shaped; only the accept/retry loop and its QC accumulation are skipped. Trajectories diverge from faithful exactly where faithful rejected a batch. | The writer appends `--qc-filter off` to the CLI header command line. |
+
+Unknown values fail closed. `qc_filter: off` is the ablation
+configuration ADR-0002 names: it isolates what the Meyer conditioner
+costs (interannual variability) and buys (30-year convergence),
+measured by SPEC-QUALITY-REPORT groups A/B and priced by the group-P
+counterfactual verdicts, which are evaluated diagnostically whenever
+conditioning is off. Conditioning is a use-case choice —
+convergence-priority (30-year agricultural horizons) versus
+variance-priority (100-year native stochastic horizons) — never an
+implicit behavior.
+
+The combination `generation_profile: faithful_5_32_3` +
+`qc_filter: faithful` is the byte-identity surface; every other
+combination is a declared extension measured under ADR-0002.
 
 ## Profile evolution
 

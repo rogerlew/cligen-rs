@@ -1,18 +1,30 @@
-# SPEC-FAST-BATCH-V1 — Fast Batch Runtime Profile and Parity Assessment
+# SPEC-FAST-BATCH-V1 — Fast Batch Runtime Profile and Quality Assessment
 
-Status: draft — operator-directed iteration; no implementation is authorized
-by this document
+Status: draft rev 2 — re-anchored under
+[ADR-0002](../decisions/0002-quality-metrics-authority.md); no
+implementation is authorized by this document
 Surface: the proposed `generation_profile: fast_batch_v1` value in an
 `inp.yaml` rev-1 runspec, its required CLI-header declaration, and the
-evidence needed for a bounded stochastic-parity claim.
+quality evidence required before any recommendation.
+
+> Rev 2 (2026-07-10): the rev-1 "stochastic parity to faithful"
+> assessment is superseded. Authority for extension quality is the
+> SPEC-QUALITY-REPORT vector against the `.par` contract and observed
+> climate (ADR-0002); distance to faithful output is reported
+> compatibility information, never a gate. The rev-1 internal QC-policy
+> fork is superseded by the orthogonal `qc_filter` runspec knob.
 
 ## Purpose and authority
 
 `fast_batch_v1` is a proposed non-faithful extension that replaces the
-monthly random-array refill backend. It is intended to preserve the source
-daily-consumption shape while making random-number production batch-friendly.
-It does not alter the authority of the vendored Fortran: `faithful_5_32_3`
-remains the default source-authority profile under ADR-0001.
+monthly random-array refill backend. It is a **performance and
+parallelism** play, deliberately decoupled from the conditioning
+question: QC policy is owned by the orthogonal `qc_filter` runspec
+knob (SPEC-GENERATION-PROFILES), which composes with every backend
+including faithful. It does not alter the authority of the vendored
+Fortran: `faithful_5_32_3` remains the default source-authority
+profile under ADR-0001, and quality authority for this and every
+extension is the ADR-0002 metric vector.
 
 The draft supersedes neither the implemented `fast_batch_v0` spike nor the
 current runspec schema. `fast_batch_v1` must be rejected until an
@@ -103,94 +115,97 @@ The source's commented-out chi-square call is not a live acceptance check.
 The table describes the actual K-S / mean / variance path, not a new quality
 standard.
 
-## QC policy — decision required before implementation
+## QC policy — owned by the orthogonal `qc_filter` knob
 
-V1 must select one of these policies before code is written; neither may be
-added silently after a benchmark:
+Rev 1 forced a v1-internal choice between batchwise acceptance and
+diagnostic-only QC. Both halves now live elsewhere:
 
-1. **Batchwise acceptance:** maintain private, source-shaped QC state and
-   resample a v1 batch until the source checks accept it. The retry semantics,
-   retry cap, and state rollback must be specified exactly.
-2. **Diagnostic-only:** run the same checks on private state, report their
-   verdicts and counterfactual retry rate, but never alter v1 output or its
-   state progression.
+- **Conditioning** is the `qc_filter` runspec field
+  (SPEC-GENERATION-PROFILES): `faithful` applies the source-shaped
+  acceptance/retry protocol to whichever backend is active; `off`
+  disables conditioning. v1 must compose with both values, and the
+  composition (`fast_batch_v1` × `qc_filter: faithful`) must specify
+  retry semantics, cap, and state rollback exactly if implemented.
+- **Diagnostics** are standing SPEC-QUALITY-REPORT group-P metrics for
+  every run: when conditioning is off, the faithful K-S / mean /
+  variance verdicts are evaluated counterfactually over produced
+  batches and their would-have-been-rejected rate is reported.
+  Diagnostic evaluation must not mutate generation state or the
+  output path.
 
-The first policy aligns more closely with the source filter but may reduce the
-measured speedup. The second isolates the value of batching but makes QC
-divergence a primary parity risk. In either case, diagnostic state must not
-mutate faithful state or the output path. The v1 benchmark package must record
-the chosen policy, retry/failure counts by parameter and month, and its timing
-cost before any parity package is proposed.
+Note the ordering consequence: `qc_filter: off` on the **faithful**
+backend keeps `RANDN`, the per-parameter streams, the column-5/9
+masks, and the `ell` chain source-shaped while removing the retry
+loop and its per-draw normal-deviate accumulation — the dominant
+measured cost of the pathological cells. That configuration is both
+the QC ablation experiment and, plausibly, most of the fast-batch
+speedup. v1's performance case must be made against it, not against
+conditioned faithful.
 
-## Stochastic-parity assessment strategy
+## Quality assessment (supersedes rev-1 stochastic parity)
 
-The goal is a bounded statement: *for this declared v1 profile, corpus, and
-statistics vector, differences are within pre-registered practical bounds*.
-It is neither bit parity nor an unqualified claim of model equivalence.
+The goal is a bounded statement per ADR-0002: *for this declared
+configuration, corpus, and horizon, the SPEC-QUALITY-REPORT vector
+against the `.par` contract and observed climate satisfies its
+pre-registered bounds*. Distance to faithful output is reported as
+compatibility information and is never an acceptance criterion — a
+configuration may beat faithful on group-B interannual metrics and
+that is a result, not a violation.
+
+### Matrix
+
+Adjudication runs 30- **and** 100-year horizons over at least:
+`faithful_5_32_3` (conditioned), `faithful_5_32_3` + `qc_filter: off`
+(the ablation), and `fast_batch_v1` under its proposed `qc_filter`
+default. Reports' per-decade group-A/group-B blocks give the
+convergence-versus-variability frontier at both horizons.
 
 ### Pre-registration and corpus
 
-Before the assessment run, record the profile source revision, binary hash,
-runspecs, `.par` hashes, host/CPU and compiler provenance, burn values, years,
-and exact statistic implementation. `rng.burn` is a draw-discard count, not
-an independent random seed; burn strata must therefore not be reported as
-unqualified independent replicates.
+Unchanged from rev 1 in substance: before the assessment run, record
+profile source revision, binary hash, runspecs, `.par` hashes,
+host/compiler provenance, burn values, years, and the
+`metrics_version`. `rng.burn` is a draw-discard count, not an
+independent seed; burn strata must not be reported as unqualified
+independent replicates. The corpus combines the fixture stations with
+production-collection regimes (at least arid, humid, cold, and
+monsoonal), preceded by a production invocation and burn-distribution
+characterization. Station list and burn sweep are fixed before
+results are seen.
 
-The corpus must combine the existing fixture stations with additional station
-regimes selected from the production collection (at least arid, humid, cold,
-and monsoonal or another documented regime partition). A production invocation
-and burn-distribution characterization precedes final sample-count selection,
-because the current 12-fixture benchmark is an edge-coverage matrix rather
-than a representative workload. The assessment records a fixed station list
-and a fixed burn sweep before results are seen.
+### Attention cells
 
-### Measurements
-
-For each station, month, and declared burn/year block, retain these primary
-statistics:
-
-- wet-day fraction, `P(wet | wet)`, and `P(wet | dry)`;
-- conditional wet-day amount mean, standard deviation, skew, and declared
-  quantiles;
-- maximum/minimum temperature, radiation, wind, and dew-point mean, standard
-  deviation, and declared quantiles;
-- storm duration, time-to-peak, and peak-intensity distributions; and
-- annual/seasonal precipitation, storm count, and maximum daily
-  precipitation.
-
-The mandatory attention cells are parameter-5 dry/wet masks, parameter-9
-zero masks (especially observed mode), first wet day after a dry chain,
-`bk7.v7 == 0.0` recovery count, QC diagnostic outcomes, and short-February
-or short-month padded slots. Report them even when downstream output makes a
-cell appear unchanged.
+Mandatory regardless of headline metrics: parameter-5 dry/wet masks,
+parameter-9 zero masks (especially observed mode), first wet day
+after a dry chain, `bk7.v7 == 0.0` recovery count, group-P
+counterfactual verdicts, and short-February / padded-slot handling.
 
 ### Bounds and decision rule
 
-Source QC thresholds are mechanistic screens, not automatically acceptable
-bounds on climate outputs. Likewise, `.par` quantization may inform a
-resolution floor but cannot be assumed to bound a statistic without measuring
-that station/statistic's response to one-quantum perturbations. A pilot may
-estimate variability and the quantization response; it must not be used to
-choose bounds after viewing the final v1 comparison.
-
-For each primary statistic and attention cell, pre-register an absolute or
-relative practical bound, the aggregation rule, and an uncertainty interval
-that respects station and burn/year blocks. The final comparison passes only
-when every declared primary cell's interval lies inside its bound. Report
-effect sizes and intervals, not a collection of non-significant p-values.
-Failures remain results and identify the next profile refinement; they do not
-license tolerance widening.
+Bounds are pre-registered per metric cell with provenance for each
+bound (`.par` quantization response measured by one-quantum
+perturbation; consumer sensitivity per Srivastava et al. 2019; source
+QC thresholds may inform group-P interpretation but are mechanistic
+screens, not automatic climate-output bounds). Report effect sizes
+and intervals, never bare p-values. Failures are results that
+identify the next refinement; they do not license tolerance widening
+after the comparison is seen.
 
 ## Sequencing and non-goals
 
-This draft deliberately sequences evidence before a broad campaign:
+Evidence order under ADR-0002:
 
-1. Ratify the v1 backend and QC policy in this specification.
-2. Implement unit/structural tests, provenance, and QC diagnostics.
-3. Run a bounded performance matrix on FMA-capable `wepp1`, with pinned-core
-   repeated samples and raw results.
-4. Only if the measured v1 performance remains material, dispatch the
-   separately pre-registered parity assessment.
+1. Implement SPEC-QUALITY-REPORT (the instrument precedes everything).
+2. Implement `qc_filter` (SPEC-GENERATION-PROFILES) with faithful
+   golden identity untouched under `qc_filter: faithful` defaults.
+3. Run the dissection matrix (faithful vs `qc_filter: off`, 30/100
+   years) — this prices the QC filter and re-baselines performance.
+4. Only if v1's batching still buys material performance over
+   `faithful + qc_filter: off` on FMA-capable production hardware
+   (`wepp1`, pinned-core repeated samples), ratify this spec's backend
+   contract and implement v1.
+5. Only then dispatch the pre-registered quality assessment above.
 
-The draft does not change faithful code, assert v1 parity, approve a bare
-`fast_batch` alias, or authorize a production default change.
+The draft does not change faithful code, assert any quality claim for
+v1, approve a bare `fast_batch` alias, or authorize a production
+default change.

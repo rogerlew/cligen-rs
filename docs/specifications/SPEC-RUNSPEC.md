@@ -155,9 +155,12 @@ Anything else — unknown fields anywhere, wrong types, out-of-domain
 values — is a typed validation error.
 
 The draft [`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) defines the proposed
-successor to the experimental profile and its parity-assessment strategy. It
+successor to the experimental profile and its ADR-0002 quality assessment. It
 does not amend this rev-3 schema: `fast_batch_v1` must fail closed until a
-later runspec revision accepts it.
+later runspec revision accepts it. The same holds for the `qc_filter` policy
+knob and `output.quality` opt-out (SPEC-GENERATION-PROFILES rev 3,
+SPEC-QUALITY-REPORT): declared contracts, rejected by this schema revision
+until an implementation package accepts them.
 
 ## Year plan (normative, per mode)
 
