@@ -1,6 +1,9 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 3 — `fast_batch_v0` profile selector added 2026-07-10;
+Status: active (rev 4 — `output.quality` accepted 2026-07-10 by the
+Q1 package `20260710-q1-quality-report`, the schema rev landing with
+the implementation per the F3 discipline; rev 3 — `fast_batch_v0`
+profile selector added 2026-07-10;
 rev 2 contract ratified 2026-07-09, operator
 decision; rev 2 dispositions the 13-finding independent review,
 `docs/work-packages/20260709-runspec-contract/artifacts/review-codex.md`;
@@ -132,6 +135,11 @@ output:
                                 # false = typed error if the file
                                 # exists — never a prompt)
   command_echo: "-iid106388.par"  # optional; §Header echo
+  quality: true                 # optional, default true: emit the
+                                # <output.cli>.quality.json sidecar
+                                # (SPEC-QUALITY-REPORT). The sidecar
+                                # is always rewritten when enabled;
+                                # `overwrite` governs the .cli only.
 ```
 
 ## Field invariants (normative; encoded in the JSON Schema)
@@ -149,6 +157,7 @@ output:
 | `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible, > 0 |
 | `time_to_peak_fraction` | finite f32-convertible in (0, 1] |
 | `output.overwrite` | boolean |
+| `output.quality` | boolean, default true (rev 4) |
 | parent blocks (`simulation`, `rng`) | omissible when every member is optional/defaulted; mode-conditional blocks (`observed`, `single_storm`, `design_storm`) required for their mode and **rejected under any other mode** |
 
 Anything else — unknown fields anywhere, wrong types, out-of-domain
@@ -156,11 +165,12 @@ values — is a typed validation error.
 
 The draft [`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) defines the proposed
 successor to the experimental profile and its ADR-0002 quality assessment. It
-does not amend this rev-3 schema: `fast_batch_v1` must fail closed until a
+does not amend this schema: `fast_batch_v1` must fail closed until a
 later runspec revision accepts it. The same holds for the `qc_filter` policy
-knob and `output.quality` opt-out (SPEC-GENERATION-PROFILES rev 3,
-SPEC-QUALITY-REPORT): declared contracts, rejected by this schema revision
-until an implementation package accepts them.
+knob (SPEC-GENERATION-PROFILES rev 3): a declared contract, rejected by this
+schema revision until the Q3 implementation package accepts it. The
+`output.quality` opt-out (SPEC-QUALITY-REPORT) is **accepted as of rev 4**,
+its schema rev landing with the Q1 implementation.
 
 ## Year plan (normative, per mode)
 

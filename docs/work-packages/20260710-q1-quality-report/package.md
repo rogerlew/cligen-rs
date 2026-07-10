@@ -1,9 +1,12 @@
 # Q1 — The Quality-Report Instrument (SPEC-QUALITY-REPORT)
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` — spine landed (quality module, sidecar
+emission, `cligen quality`, SPEC-QUALITY-REPORT ratified active rev 3,
+SPEC-RUNSPEC rev 4); all gates green (`artifacts/gate-results.md`);
+Stage C dispatches from `artifacts/kickoff-codex.md`.
 Date: 2026-07-10
-Evidence mode: — (set per stage; Stage S evidence in
-`artifacts/gate-results.md`)
+Evidence mode: Stage S **Ran** (`artifacts/gate-results.md`; every
+gate exit code checked directly)
 Execution model: staged, two executors (the item-3..8 pattern) —
 Claude Code writes the design-setting spine (Stage S); Codex
 (openai gpt-5.6-sol) completes and runs gates (Stage C); each reviews

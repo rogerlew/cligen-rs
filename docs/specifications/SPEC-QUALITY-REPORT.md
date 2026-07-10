@@ -1,7 +1,11 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: draft rev 2 (contract under ADR-0002; implementation package
-to ratify; rev 2 = R1 review dispositions: identity content/provenance
+Status: active (rev 3 — ratified by the implementing package
+`20260710-q1-quality-report`; rev 3 records the contract defects
+implementation exposed, as package findings F1-F3: the post-hoc
+equality null set extends to every run-only surface, group C
+`by_decade` is decade-level, sidecar/stdout emission semantics
+pinned. Rev 2 = R1 review dispositions: identity content/provenance
 split, group P keyed on qc_filter with retry-cap give-up reporting,
 estimator pins)
 Surface: the `<output>.quality.json` sidecar emitted with every
@@ -44,6 +48,10 @@ reports; `cligen quality` reports them as `null`.
 
 - Default: writing `<name>.cli` also writes `<name>.cli.quality.json`.
 - Opt-out: runspec `output.quality: false`.
+- Collision semantics (rev 3, F3): the sidecar is **always rewritten**
+  when enabled — it is derived data that must correspond to the `.cli`
+  just produced; `output.overwrite` governs the `.cli` only. `cligen
+  quality` writes the report to stdout and creates no files.
 - The report's identity splits into two blocks (with `metrics_version`
   top-level). **`content`** (recoverable from the inputs alone,
   present in every report): tool version, `.par` SHA-256, `.cli`
@@ -68,7 +76,11 @@ reports; `cligen quality` reports them as `null`.
 
 All per-month groups key on calendar month over the whole run and
 additionally per decade block (`by_decade`), so 30- vs 100-year
-behavior is visible inside a single run.
+behavior is visible inside a single run. Rev 3 altitude pin (F2):
+groups A and B carry full month × decade cells; group C `by_decade`
+blocks are **decade-level** (correlations, contrast, and daily range
+over each decade's days) — month × decade wet-day correlation cells
+hold only tens of samples at a 10-year block and price nothing.
 
 **A — par_convergence** (authority: the `.par` contract)
 Per parameter × month: generated vs `.par` target, absolute and
@@ -170,9 +182,12 @@ structure; unknown fields are never emitted.
 - Report emission does not perturb faithful golden byte identity
   (sidecar only; the `.cli` byte stream is untouched).
 - `cligen quality` over a golden `.cli` equals the run-emitted report
-  for the same file after nulling the run-only surfaces: group P
-  **and** `identity.provenance` (byte-identical after both are
-  nulled).
+  for the same file after nulling **every** run-only surface: group
+  P, `identity.provenance`, and
+  `par_convergence.observed_passthrough` (rev 3, F1 — the rev 2
+  two-surface null set was not satisfiable: `observed_passthrough` is
+  true/false when the mode is known and null post-hoc, so byte
+  equality failed for every mode).
 - Run over a legacy-Fortran `.cli` (fixture cross-references)
   produces a well-formed report — the legacy-measurability check.
 - Determinism: repeated runs produce byte-identical reports.

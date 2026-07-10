@@ -34,10 +34,10 @@ machinery without an ADR.
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
 | [SPEC-GENERATION-PROFILES](SPEC-GENERATION-PROFILES.md) | Versioned runspec generator-profile selector + CLI declaration | active (fast-batch spike) |
 | [SPEC-FAST-BATCH-V1](SPEC-FAST-BATCH-V1.md) | Proposed fast-batch-v1 runtime contract + quality assessment (ADR-0002) | draft rev 2 |
-| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument) | draft rev 1 |
+| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument) | active (rev 3; Q1 implementation — group P is Stage C) |
 | SPEC-STATION-DB | Typed station-par database, collection manifests, location query, `cligen stations` (crates.io: data outside the crate) | planned (Q2) |
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |
 | [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |
 | SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
-| [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (contract; implementation with item 8) |
+| [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (rev 4: `output.quality` accepted) |
 | SPEC-PYO3 | Python API surface | planned |
