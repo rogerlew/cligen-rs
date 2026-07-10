@@ -1,11 +1,12 @@
 # Q3 Dissection Pre-Registration — DRAFT
 
-Status: **DRAFT — not ratified.** No dissection run may cite this
-document until the operator ratifies the corpus, the observed
-reference, and the decision rules, and the status line changes to
-RATIFIED with the date. Amendments after ratification are findings,
-not edits.
-Date: 2026-07-10 (draft)
+Status: **RATIFIED** — operator, 2026-07-10 ("yes to ratifying.
+scaffold and execute"): corpus and observed-reference design
+confirmed as proposed. Numeric bounds (§Bounds) were pinned by the
+executor under the same direction **before any dissection run**; no
+matrix output existed when they were fixed. Amendments after this
+point are findings, not edits.
+Date: 2026-07-10 (ratified)
 Authors: Claude Code (proposal); corpus derivation Ran from the
 synced us-2015 collection (operator direction: use the 2015 database).
 
@@ -119,14 +120,34 @@ Pinned conventions (drafted to neutralize known Daymet biases):
   re-baseline of faithful vs off on this corpus.
 - **No promotion decision here**: outputs are the frontier
   quantification + ADR-0003 exposure adjudication (is `qc_filter`
-  user-facing; opt-in vs opt-out per use class). Bounds for "material
-  difference" to be proposed with the implementation and ratified
-  before runs.
+  user-facing; opt-in vs opt-out per use class).
 
-## Open items blocking ratification
+## Bounds (pinned pre-run, 2026-07-10)
 
-1. Operator confirms/edits the 17-station corpus table.
-2. Operator confirms the observed-reference design (Daymet primary +
-   GHCN-Daily secondary) or narrows to one source.
-3. Numeric bounds for the decision surfaces (proposed with the
-   `qc_filter` implementation).
+"Material" is defined before the data exists:
+
+- **B1 — convergence buy.** Conditioning materially buys convergence
+  at a horizon iff the corpus-median group A |rel_err| for the
+  QC-targeted precipitation parameters (wet-day mean and SD) under
+  `off` is ≥ 1.2× the value under `faithful`.
+- **B2 — variability cost.** Conditioning materially costs
+  variability at a horizon iff the corpus-median ratio
+  SD_faithful/SD_off of annual precipitation totals is < 0.9, or
+  faithful's annual-total CV is farther from the observed-reference
+  CV than off's on ≥ 2/3 of the corpus.
+- **B3 — early-decade prediction.** Confirmed iff the decade-0
+  SD_faithful/SD_off ratio is below the whole-run ratio for a
+  majority of the corpus at the 100-year horizon.
+- **B4 — counterfactual price.** Descriptive (no bound): the
+  would-have-been-rejected batch rate under `off`, and retry/cap
+  costs under `faithful`.
+- **B5 — performance.** Descriptive: corpus wall-clock, faithful vs
+  off (the Q4 fast-batch case is judged against the off baseline).
+- **Q4 promotion gate (pre-pinned here for the follow-on
+  comparison).** A fast-batch promotion is recommendable only if, on
+  this corpus at both horizons, the batch line's (a) group A
+  corpus-median |rel_err| for precipitation wet-day mean/SD/skew and
+  wet-day fraction is ≤ 1.1× the `qc_filter: off` baseline, (b)
+  group B annual-total SD ratio to `off` lies in [0.9, 1.15], and
+  (c) measured refill-path performance gain over `off` is ≥ 1.5× —
+  all three, else retire-with-record per the ROADMAP row.
