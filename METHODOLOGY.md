@@ -118,21 +118,60 @@ adversarial cross-review between two different AI systems on every
 package — each reviewing the other's work against the Fortran source,
 not against each other's opinions.
 
-## 4. The human layer
+## 4. The execution model and the human layer
 
-No scientific or governance decision was made autonomously. The
-operator (Roger Lew, University of Idaho — also the maintainer of the
-pinned upstream CLIGEN fixes) ratified, in the written record: the port
-posture itself, the fixture station cohort, the seed semantics, the
-decision to replace the legacy command-line interface with a
-schema-versioned runspec
+Every port package ran the same four-stage pipeline, with the two AI
+systems in fixed, deliberately asymmetric roles:
+
+- **Stage S — the spine (Anthropic Claude Fable 5).** The
+  design-setting slice of each package, authored first: the
+  instrumentation patch and its captured fixtures, the state-struct
+  patterns translating the Fortran common blocks, the first ported
+  units with their bit-identity tests already passing, and the
+  specification work. The spine exists because whoever writes a
+  package's first files is effectively writing its real coding
+  standard — those files were pattern-normative for everything that
+  followed. Stage S closed by producing a handoff document and the
+  next stage's dispatch prompt, written *after* the code so it cites
+  landed patterns rather than intentions.
+- **Stage C — completion and gates (OpenAI GPT-5.6 / Codex).** The
+  mechanical volume: the remaining units transcribed within the
+  spine's patterns, the full fixture-matrix identity tests, and every
+  gate run with directly verified exit codes — format, lint-as-error,
+  tests, the full-stream bit-identity replays, coverage and the
+  complexity ceiling.
+- **Stage R1 — cross-review (Codex).** An independent review of the
+  entire package *including the spine*, conducted against the Fortran
+  source rather than against the port's own claims: transcription
+  fidelity line-by-line, precision-map compliance, state-translation
+  compliance, test/evidence alignment. Findings carry severity and
+  line evidence; accepted findings are fixed before handback.
+- **Stage R2 — final review and close (Claude).** Gates re-run
+  independently — reported results are never taken on faith — plus
+  targeted source-vs-port reads of the highest-risk translations,
+  review of the R1 dispositions, and the close, or a bounce with named
+  blockers.
+
+The asymmetry is the point. The two systems have complementary error
+profiles — measured in this record, not assumed: the spine author
+missed an entire embedded 15-unit numerical library during
+decomposition and made the census arithmetic slip, both caught by the
+cross-reviewer; the completing executor introduced the two
+High-severity transcription errors of §3, caught by the source-reading
+review. Each fixed errors the other made. Review has teeth only when
+the reviewer is never the author, and the stage boundaries guarantee
+that for every line in the repository.
+
+Above the pipeline sits the human layer. No scientific or governance
+decision was made autonomously. The operator (Roger Lew, University of
+Idaho — also the maintainer of the pinned upstream CLIGEN fixes)
+ratified, in the written record: the port posture itself, the fixture
+station cohort, the seed semantics, the decision to replace the legacy
+command-line interface with a schema-versioned runspec
 ([SPEC-RUNSPEC](docs/specifications/SPEC-RUNSPEC.md)), every license
-adjudication, and every package closure. The AI systems executed within
-those decisions under a staged model — one authored each package's
-design-setting spine, the other completed the volume and ran gates,
-each cross-reviewed the other, with a final human-directed review
-closing every package. Every stage, finding, fix, and gate result is in
-the work-package record with command-level evidence.
+adjudication, and every package closure — and dispatched each stage.
+Every stage, finding, fix, and gate result is in the work-package
+record with command-level evidence.
 
 ## 5. Why one day was possible
 
@@ -155,8 +194,8 @@ which involve skipped verification:
    checked before the next begins.
 4. **The moment's tooling.** The port ran on two frontier AI systems
    released to preview within the same week (Anthropic Claude Fable 5;
-   OpenAI GPT-5.6-sol), whose complementary error profiles made
-   cross-review substantive — each caught errors the other made. The
+   OpenAI GPT-5.6-sol), whose complementary error profiles are what
+   made the §4 cross-review substantive rather than ceremonial. The
    operator's assessment, after a year of intensive agentic-AI
    development work, is that the numerical-parity chain in §3 was not
    reliably executable by AI systems even a month earlier.
