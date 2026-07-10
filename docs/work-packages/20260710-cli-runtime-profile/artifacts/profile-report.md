@@ -64,6 +64,53 @@ operations, and `dstn1` is called twice per generated normal deviate in
 the source-shaped `ranset` accumulation. Seed-17 QC re-does magnify those
 calls; the source's re-do protocol is at `cligen.f:4269-4332`.
 
+## Cross-host follow-on: wepp1
+
+**Measured:** on 2026-07-10, an authorized clone of commit
+`d201947dc10e5ecb947887c729cf460021681919` ran the unchanged full benchmark
+matrix on `wepp1`. The host is a 56-vCPU VMware guest exposing an Intel Xeon
+Gold 5120 CPU and the x86 `fma` flag. It compiled the normal Rust release
+binary with Rust 1.89.0 and the legacy binary with gfortran 13.3.0 and
+`-O3 -ffp-contract=off -fprotect-parens -fno-fast-math`.
+
+The benchmark's twelve cases, one warm-up, and seven alternating samples per
+implementation all completed. Its failure-on-mismatch output check therefore
+accepted 192 golden-verified process executions.
+
+| Composite of per-case medians | Rust (s) | Legacy (s) | Rust / legacy |
+|---|---:|---:|---:|
+| Original Xeon E5-2697 v2 host | 5.626 | 1.350 | 4.17x |
+| wepp1 Xeon Gold 5120 host | 2.295 | 1.323 | 1.74x |
+
+The two former seed-17 outliers materially shrink but remain slower on
+`wepp1`: Jeogla is 1.413 s Rust versus 0.620 s legacy (2.28x), and Mt Wilson
+is 0.477 s versus 0.247 s (1.93x). This supports the original non-FMA-host
+diagnosis without establishing that FMA is the only remaining source of
+overhead.
+
+**Binary evidence:** `objdump` found two x86 hardware-FMA instructions in
+the normal release binary, and `nm -C` found both
+`compiler_builtins::...::fma_with_fma` and
+`compiler_builtins::...::fma_fallback` alongside the `fma` dispatcher. This
+is consistent with the hardware capability, but is not a call-path profile;
+the timing result above is the primary cross-host evidence.
+
+Reproduce on the host after cloning the recorded commit:
+
+```sh
+export PATH=/home/roger/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH
+cargo build --release --bin cligen
+python3 scripts/bench_cli_runtime.py --build-legacy \
+  --results docs/work-packages/20260710-cli-runtime-profile/artifacts/wepp1-benchmark-results.json \
+  --csv docs/work-packages/20260710-cli-runtime-profile/artifacts/wepp1-benchmark-results.csv
+```
+
+Exact samples, binary hashes, compiler versions, build flags, host affinity,
+manifest hash, and reference-source hash are in
+[`wepp1-benchmark-results.json`](wepp1-benchmark-results.json) and its
+tabular companion is
+[`wepp1-benchmark-results.csv`](wepp1-benchmark-results.csv).
+
 ## Reproduction
 
 ```sh
@@ -86,3 +133,9 @@ This is one shared, 48-logical-CPU host without a fixed governor or a
 dedicated core. The sampling attribution is nevertheless stable enough to
 separate the seed-specific FMA/ranset work from formatting and interface
 cost. It is a diagnosis baseline, not a portability or optimization claim.
+
+The `wepp1` follow-on is likewise an unconstrained production VM: it has 56
+available virtual CPUs and ordinary shared-host noise. It is valid evidence
+that the same golden-checked workload is substantially faster on this
+FMA-capable host, not a controlled CPU-only comparison or a production
+deployment benchmark.

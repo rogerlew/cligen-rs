@@ -21,6 +21,8 @@ Included:
 - SHA-256 validation of every profiled output against the named golden,
   before a profile result is accepted.
 - A report that distinguishes measured hot spots from hypotheses.
+- An authorized, reproducible full-matrix benchmark on `wepp1`, recorded as
+  a cross-host follow-on rather than an optimization claim.
 
 Excluded:
 
@@ -45,6 +47,8 @@ Excluded:
    counter collection, sample reports, and hash checks.
 3. Execute it against release Rust and the no-fast-math legacy build.
 4. Record measured attribution, caveats, and package gates.
+5. Clone the recorded `main` commit on `wepp1` and run the existing
+   golden-verified benchmark matrix with its normal release build.
 
 ## Gates
 
@@ -55,6 +59,8 @@ Excluded:
   five times each.
 - Every process output matches the selected golden SHA-256.
 - `perf record` and text report succeed for all four combinations.
+- The `wepp1` benchmark completes all 12 workloads with seven samples and
+  one warm-up per implementation, retaining its JSON and CSV evidence.
 
 ## Exit criteria
 
@@ -69,3 +75,5 @@ evidence.
 - `artifacts/perf-stat.json`
 - `artifacts/{rust,legacy}-{seed0,seed17}.perf.txt`
 - `artifacts/profile-report.md`
+- `artifacts/wepp1-benchmark-results.json`
+- `artifacts/wepp1-benchmark-results.csv`
