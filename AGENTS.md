@@ -42,6 +42,12 @@ read it before writing port code. Summary:
   implementation where either applies.
 - Specs for any new interface surface go in `docs/specifications/`
   (registry in its README) with or before the implementing code.
+- **Branch discipline**: execute a dispatched stage from the branch the
+  kickoff prompt names and push only to its stated target (default:
+  start from current `origin/main`, push `main`). If the kickoff is
+  silent on branches, ask or use `main` — do not create or adopt a side
+  branch for package work; that forks the package record and forces a
+  reconciliation merge at review time.
 - Completed roadmap items move from `docs/ROADMAP.md` to the work-package
   catalog.
 

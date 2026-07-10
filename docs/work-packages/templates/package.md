@@ -24,6 +24,15 @@ Included / excluded, in enough detail that "done" is checkable.
 Numbered phases. Fixture/spec work before implementation where either
 applies.
 
+## Execution & dispatch
+
+For staged multi-executor packages (the item-3/item-4 pattern): name
+each stage's executor, and every kickoff/dispatch prompt **must state
+the repo, the starting branch, and the push target** (normally: start
+from current `origin/main`, push to `main`). A stage executed on an
+unstated branch forks the package record and forces a reconciliation
+merge at review time (item-4 R2 precedent).
+
 ## Gates
 
 - `cargo fmt --check`
