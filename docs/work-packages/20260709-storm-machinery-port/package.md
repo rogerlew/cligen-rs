@@ -1,6 +1,13 @@
 # Storm Machinery Port
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
+Codex next — dispatch prompt at `artifacts/kickoff-codex.md`)
+Stage S outcome: characterizations recorded (chain lives in day_gen;
+sing_stm is intake-only; transient-infinity path; F→C seam); 24-run
+capture 12/12 non-invasive; timepk + wet_day_duration + storm_block
+ported with the day-loop replay green (80,906 days + 15,468 timepk
+calls bit-identical, all ten seed streams asserted per record); no
+new transcendentals (alog already pinned).
 Date: 2026-07-09
 Evidence mode: — (per stage on execution)
 Execution model: staged, two executors (the item-3/4/5 pattern) —
