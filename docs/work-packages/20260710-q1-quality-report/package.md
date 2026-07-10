@@ -1,9 +1,9 @@
 # Q1 — The Quality-Report Instrument (SPEC-QUALITY-REPORT)
 
-Status: `STAGE-S-COMPLETE` — spine landed (quality module, sidecar
-emission, `cligen quality`, SPEC-QUALITY-REPORT ratified active rev 3,
-SPEC-RUNSPEC rev 4); all gates green (`artifacts/gate-results.md`);
-Stage C dispatches from `artifacts/kickoff-codex.md`.
+Status: `STAGE-C-COMPLETE` — group P, full JSON Schema, edge vectors,
+and Codex R1 cross-review landed; Stage C gates are green
+(`artifacts/stage-c-report.md`). Stage R2 is Claude's disposition and
+closure pass.
 Date: 2026-07-10
 Evidence mode: Stage S **Ran** (`artifacts/gate-results.md`; every
 gate exit code checked directly)
