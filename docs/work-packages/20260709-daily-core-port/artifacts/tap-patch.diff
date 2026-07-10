@@ -1,0 +1,166 @@
+--- reference/cligen532/cligen.f	2026-07-09 12:33:05.869510067 -0700
++++ docs/work-packages/20260709-daily-core-port/artifacts/tap-build/cligen.f	2026-07-09 18:40:03.529430377 -0700
+@@ -642,6 +642,11 @@
+ c ---- Lahey:
+ c     numarg = narg()
+ c ---- Solaris (System-V UNIX), GNU, & Watcom:
++c -- TAP (daily pkg Stage S): open per-call tap streams
++      open(unit=85,file='cligen_cg.tap',status='unknown')
++      open(unit=86,file='cligen_wg.tap',status='unknown')
++      open(unit=87,file='cligen_ab.tap',status='unknown')
++      open(unit=88,file='cligen_r5.tap',status='unknown')
+       numarg = iargc()
+ c     write(*,*) 'NUMARG:', numarg
+ c
+@@ -1176,8 +1181,31 @@
+ c     + + + FUNCTION DECLARATIONS + + +
+       real dstn1
+ c
++c -- TAP (daily pkg Stage S) locals:
++      integer tapb(9)
++      real tapv(9)
++      equivalence (tapv,tapb)
++c
+ c     + + + END SPECIFICATIONS + + +
+ c
++c -- TAP (daily pkg Stage S): entry state (pre month-boundary)
++      write(85,8501) mo, ida, ntd, iyear, nsim, msim, l, mox, dax
++ 8501 format('B ',i3,1x,i4,1x,i4,1x,i6,1x,i2,1x,i2,1x,i2,1x,i3,
++     1       1x,i3)
++      write(85,8502) k1, k2, k3, k4, k5, k6, k7, k8, k9, k10
++ 8502 format('K ',40i5)
++      tapv(1)=v1
++      tapv(2)=v3
++      tapv(3)=v5
++      tapv(4)=v7
++      tapv(5)=v9
++      tapv(6)=v11
++      tapv(7)=tmxg
++      tapv(8)=tmng
++      tapv(9)=rst(mo,3)
++      write(85,8503) (tapb(i85),i85=1,9)
++ 8503 format('V ',9(z8.8,1x))
++c
+ cC    integer tdprob
+ cC    data tdprob/0/
+ cC    save tdprob
+@@ -1210,6 +1238,15 @@
+       else
+         dax = dax + 1
+       endif
++c -- TAP (daily pkg Stage S): batch-column consumption at dax
++      tapv(1)=vvx(dax)
++      tapv(2)=v2x(dax)
++      tapv(3)=v4x(dax)
++      tapv(4)=v6x(dax)
++      tapv(5)=v8x(dax)
++      tapv(6)=v12x(dax)
++      write(85,8504) dax, (tapb(i85),i85=1,6)
++ 8504 format('C ',i3,1x,6(z8.8,1x))
+ c 
+       if (nsim.ne.0) then
+         vv=vvx(dax)
+@@ -1507,6 +1544,15 @@
+       if (ra.lt.(rmx*0.05)) ra=0.05*rmx
+ c ------ Shift 2nd constant to 1st position for "reuse".
+       v5=v6
++c -- TAP (daily pkg Stage S): generated-surface exit record
++      tapv(1)=r(ida)
++      tapv(2)=tmxg
++      tapv(3)=tmng
++      tapv(4)=tdp
++      tapv(5)=ra
++      tapv(6)=rmx
++      write(85,8505) (tapb(i85),i85=1,6), l
++ 8505 format('A ',6(z8.8,1x),i2)
+ c
+       return
+       end
+@@ -2066,8 +2112,18 @@
+ c     + + + FUNCTION DECLARATIONS + + +
+       real dstn1
+ c
++c -- TAP (daily pkg Stage S) locals:
++      integer tapb(4)
++      real tapv(4)
++      equivalence (tapv,tapb)
++c
+ c     + + + END SPECIFICATIONS + + +
+ c
++c -- TAP (daily pkg Stage S): entry record
++      tapv(1)=v9
++      tapv(2)=fxx(dax)
++      write(86,8601) mo, dax, tapb(1), tapb(2)
++ 8601 format('W ',i3,1x,i3,1x,2(z8.8,1x))
+       fx=fxx(dax)
+ CC    tap2=fx
+       j = 0
+@@ -2114,6 +2170,12 @@
+         if (wv.lt.0.) wv=.1
+ c **** L1 ENDIF ****
+       endif
++c -- TAP (daily pkg Stage S): exit record
++      tapv(1)=wv
++      tapv(2)=th
++      tapv(3)=v9
++      write(86,8602) tapb(1), tapb(2), tapb(3), j
++ 8602 format('X ',3(z8.8,1x),i3)
+ c
+       return
+       end
+@@ -3843,6 +3905,16 @@
+ c
+ c      dimension k7(4)
+ c
++c -- TAP (daily pkg Stage S) locals:
++      integer tapb(3)
++      real tapv(3)
++      equivalence (tapv,tapb)
++c -- TAP (daily pkg Stage S): entry record
++      tapv(1)=r(ida)
++      tapv(2)=wi(mo)
++      tapv(3)=sml
++      write(87,8701) mo, ida, k7, tapb(1), tapb(2), tapb(3)
++ 8701 format('G ',i3,1x,i4,1x,4i5,1x,3(z8.8,1x))
+       ei=r(ida)-sml
+ 
+ c                                           ei is the rainfall for the
+@@ -3890,6 +3962,10 @@
+ C2001 format(i2,1x,6f17.13)
+ c
+       r1=(ei*(ab+r1*(ajp-ab))+sml*ab)/r(ida)
++c -- TAP (daily pkg Stage S): exit record
++      tapv(1)=r1
++      write(87,8702) tapb(1)
++ 8702 format('H ',z8.8)
+ c
+       return
+       end
+@@ -3992,6 +4068,8 @@
+ 
+ 
+ 30    continue
++c -- TAP (daily pkg Stage S): post-conversion wi snapshot
++      call tapr5
+       return
+       end
+ c
+@@ -7655,3 +7733,18 @@
+ c
+       return
+       end
++c
++c -- TAP (daily pkg Stage S): r5monb post-call wi snapshot writer
++      subroutine tapr5
++      include 'cbk9.inc'
++      real tapv(12)
++      integer tapb(12)
++      equivalence (tapv,tapb)
++      integer i
++      do 10 i=1,12
++        tapv(i)=wi(i)
++ 10   continue
++      write(88,8801) (tapb(i),i=1,12)
++ 8801 format('R5 ',12(z8.8,1x))
++      return
++      end
