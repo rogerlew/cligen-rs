@@ -1,0 +1,920 @@
+[
+ {
+  "station": "ca042319",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 2.626,
+  "cli_sha256": "f1780a15775ac5fbfbf6f135964c3712cfd6e5fc18eba1311676b11b551c3fa1",
+  "cli_bytes": 779008,
+  "report": "ca042319-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042319",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 6.9863,
+  "cli_sha256": "0ce34cd91e49216590ab1ae1686cadb9402c6802da004b6fb855135daa1d4f99",
+  "cli_bytes": 2594266,
+  "report": "ca042319-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "ca042319",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0942,
+  "cli_sha256": "794dc3af33ac47e56a6387a50c65ea2025f1b287c21e44edf4c6026ea173f3ce",
+  "cli_bytes": 779022,
+  "report": "ca042319-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042319",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2817,
+  "cli_sha256": "2b3cba0c0f1532e384f36d94a2e97a2eff5dbe76eda64797b38e7babb45ca9c3",
+  "cli_bytes": 2594280,
+  "report": "ca042319-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "ca042319",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0763,
+  "cli_sha256": "7fcf4ab1547dc5c3679e0e48d78bacc89707ce564631846d15115321700f81da",
+  "cli_bytes": 779042,
+  "report": "ca042319-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042319",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2333,
+  "cli_sha256": "be3acb986048cf019340c63d124d52e5919b239ff3a145956ec33e7da9ccf56b",
+  "cli_bytes": 2594300,
+  "report": "ca042319-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 1.5418,
+  "cli_sha256": "9febeac9009f4cae808c9026fc25f0ef5d0bdc24aa91ad37e7d5894e64950cc6",
+  "cli_bytes": 779008,
+  "report": "az029654-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 9.4957,
+  "cli_sha256": "8066512ec4c2171f411905ac2e26b8063a66e53302bea09d0d54c07d9620509e",
+  "cli_bytes": 2594266,
+  "report": "az029654-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0967,
+  "cli_sha256": "becc38a998bf6e2b806b67573643d1a9968f8222c874954edc49861ffa04ebcc",
+  "cli_bytes": 779022,
+  "report": "az029654-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3113,
+  "cli_sha256": "90e33d51be4dcd9b300b71e3f0c8af75498f33e6a5c7076412ecfc8bd9c83d35",
+  "cli_bytes": 2594280,
+  "report": "az029654-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0793,
+  "cli_sha256": "076f40a41042279dd35099fac214a17f46c07f901155506f9504084ce0acba01",
+  "cli_bytes": 779042,
+  "report": "az029654-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "az029654",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2424,
+  "cli_sha256": "73c493f738a31067116821aec60acc59082c8ba5a5749a041ceac855187c18bb",
+  "cli_bytes": 2594300,
+  "report": "az029654-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.156,
+  "cli_sha256": "d72f3648672558becd947436c2bf8bb933cb343e8a96a434146a99d9af2b04df",
+  "cli_bytes": 779008,
+  "report": "ut429382-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.4677,
+  "cli_sha256": "f06b5ae2b5f86cb33b91814af8d693f9f1d2b1175286361b30d8d7cc751393c3",
+  "cli_bytes": 2594266,
+  "report": "ut429382-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0972,
+  "cli_sha256": "b246f2e85d76770410896054a21133b74222b271d6ea8cd58d54b8a9edd9e17c",
+  "cli_bytes": 779022,
+  "report": "ut429382-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2902,
+  "cli_sha256": "0aca90d678e3824ad730cf874ba509e6cd550466c9578198b9ac32ec4b9a9b7d",
+  "cli_bytes": 2594280,
+  "report": "ut429382-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.081,
+  "cli_sha256": "92a0ab7c9c2fd0285155edde6f017c108435815ccc47079394ef4914d65997c2",
+  "cli_bytes": 779042,
+  "report": "ut429382-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "ut429382",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2378,
+  "cli_sha256": "2f46bb730b1b574e6a53df7a6df540f7e32ceffef6abf211ad8e2f9491c43faa",
+  "cli_bytes": 2594300,
+  "report": "ut429382-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1608,
+  "cli_sha256": "a95b0303a02b4ff80aedc28048325559441a5d9430e732d6442e19c6714508a7",
+  "cli_bytes": 779008,
+  "report": "ca042257-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.503,
+  "cli_sha256": "cd664a510f0c11a8fe63840cc78715025a3d4b4dac6ea61aa55ae4888f335cc6",
+  "cli_bytes": 2594266,
+  "report": "ca042257-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0972,
+  "cli_sha256": "d1ecabd430eb3f7ee40d9ca2981acf5afc1046261499b66df62468d518c2b24f",
+  "cli_bytes": 779022,
+  "report": "ca042257-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2972,
+  "cli_sha256": "6ef979f6812633911710a97de9be7b0b91cfcabe66fbde5ba77d78647d765d34",
+  "cli_bytes": 2594280,
+  "report": "ca042257-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0761,
+  "cli_sha256": "b63edb84cc8de47326f10bcafac8ed3d285a97c5a8e78dac917093ecd62cbdc9",
+  "cli_bytes": 779042,
+  "report": "ca042257-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "ca042257",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2231,
+  "cli_sha256": "492b64383cd80f3f1d07fa8fb9818d7d174fd2374cf8ffd36dae59e0058bdeda",
+  "cli_bytes": 2594300,
+  "report": "ca042257-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1241,
+  "cli_sha256": "4f267e1cf4bd0efd0bf66f65f957fc30753ef1e7c647fb75ecab118c6d121dbd",
+  "cli_bytes": 779008,
+  "report": "az022664-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 2.9657,
+  "cli_sha256": "f69d242ac9b35f3bfc0abe5902fab76c2eb9665ba143a03f3a1da3b0ebba6d6d",
+  "cli_bytes": 2594266,
+  "report": "az022664-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0905,
+  "cli_sha256": "f70f7778f438c135db2d7ee9b3062d9383f9a4aa470774f4d0ad3e56de8f42fb",
+  "cli_bytes": 779022,
+  "report": "az022664-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3055,
+  "cli_sha256": "996def01cd58702adc21380110895bb38827ca3510e5de3c51f34aeae961b510",
+  "cli_bytes": 2594280,
+  "report": "az022664-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0802,
+  "cli_sha256": "6ca0f27e6f62426c4bc299fa1f4e78b49a6804dab16fb78e37245153c74429d9",
+  "cli_bytes": 779042,
+  "report": "az022664-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "az022664",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2382,
+  "cli_sha256": "8509902d1fa1dc17d916f691d922423b6e277152eaa8086d28d7ea8ccdeee002",
+  "cli_bytes": 2594300,
+  "report": "az022664-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.5953,
+  "cli_sha256": "0d85f7aa4a96a9117f59009c50f9d6126706979d02665463f395d5818bcac123",
+  "cli_bytes": 779008,
+  "report": "az028619-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.9329,
+  "cli_sha256": "e0cb6c73b090d4f4ee73c3c4eabc749a196c469e12e5bcc752bda878c94f1556",
+  "cli_bytes": 2594266,
+  "report": "az028619-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0901,
+  "cli_sha256": "7164333577ab8c7d22ba6e8f25a2f61edc5fcbc3ffb13f87fb7caf6daf5ab4f3",
+  "cli_bytes": 779022,
+  "report": "az028619-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2834,
+  "cli_sha256": "ca5da9e46a8ab4ed00e74c0e38ac9f4c5c102a0787eb8a3139ad155c224c03a8",
+  "cli_bytes": 2594280,
+  "report": "az028619-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0753,
+  "cli_sha256": "f57271a4a6a7a019f72876fccc216225e50d5f68bf3f2e57483cde2c6daafa1e",
+  "cli_bytes": 779042,
+  "report": "az028619-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "az028619",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2266,
+  "cli_sha256": "92ec147d2455526ca5984094e31e6401dac7a3baa7162d530b0e29e32f847839",
+  "cli_bytes": 2594300,
+  "report": "az028619-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1212,
+  "cli_sha256": "9b9583c9578f048f6d0f6664c3f30994b0bc91d5e518d67913b598f884cf9e76",
+  "cli_bytes": 779008,
+  "report": "nm294426-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.578,
+  "cli_sha256": "a618e99743181e8cc65bf89fe964424912119e024b66feda6dd48e8c0a9f1edc",
+  "cli_bytes": 2594266,
+  "report": "nm294426-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0926,
+  "cli_sha256": "7e8912eaed22bf39b9eb7b75ec601122b5dfde77cb2f5517a79b7301884d3089",
+  "cli_bytes": 779022,
+  "report": "nm294426-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2886,
+  "cli_sha256": "d92c00f2e770d0b113ede6bca56bb5878581c35f7ac186362ac15d2f833514be",
+  "cli_bytes": 2594280,
+  "report": "nm294426-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0772,
+  "cli_sha256": "4107597b2fcec1b352a4dce9faad6d220da19701f14f51337610714273239f5f",
+  "cli_bytes": 779042,
+  "report": "nm294426-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "nm294426",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2302,
+  "cli_sha256": "4484fe2710420015bdaabb2c3ab7eb1f640b65eb2a070e2769ff02169cb12368",
+  "cli_bytes": 2594300,
+  "report": "nm294426-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1209,
+  "cli_sha256": "b15d4e5a13e121e7b0b22b2841333eb7d003e49ef1b1151e01bb263663268670",
+  "cli_bytes": 779008,
+  "report": "tx412797-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.445,
+  "cli_sha256": "93d84e14e499573d3f72e8d757409ae8e2c771ee837b2bf59fc972c46de30946",
+  "cli_bytes": 2594266,
+  "report": "tx412797-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1,
+  "cli_sha256": "7c66b3786e9b62892825bfa141339fa438603605b2773710d6df9b53ca1035dd",
+  "cli_bytes": 779022,
+  "report": "tx412797-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.286,
+  "cli_sha256": "294d89c0ce63d5234828d0ddd6492a58189e7043346275c3b9de5353eb67f233",
+  "cli_bytes": 2594280,
+  "report": "tx412797-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0803,
+  "cli_sha256": "62f0d6779f9ad44ff12ab0dfe15f72f2b74a293778c5531a1b08d4b94146c91c",
+  "cli_bytes": 779042,
+  "report": "tx412797-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "tx412797",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2242,
+  "cli_sha256": "2dceab2f1e7836aadc03d0d6d20206635c83c7f3fe3193f5a57b1f4748748d49",
+  "cli_bytes": 2594300,
+  "report": "tx412797-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1157,
+  "cli_sha256": "adb58a781c6f9ee79a067cc0b2bc2b1b8a3c0be626c29509def4121892493710",
+  "cli_bytes": 779008,
+  "report": "al015478-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.337,
+  "cli_sha256": "113713d82c5974203b03f04f14f37584303733c2591d514b8a6b6da3be862f4a",
+  "cli_bytes": 2594266,
+  "report": "al015478-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1005,
+  "cli_sha256": "7502a7bccd5916ce2827184bcfe0695e719150157e066ae3d06ca07d10472867",
+  "cli_bytes": 779022,
+  "report": "al015478-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3119,
+  "cli_sha256": "77342864a722ddad85a5848aeba15aebac8aa5013cb1d67f9bdac31ef31b6eba",
+  "cli_bytes": 2594280,
+  "report": "al015478-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.08,
+  "cli_sha256": "2084a8ba5c29c603a26d6c01bcd468ab409f0d39c03ab999bec540c9cb0ddf9b",
+  "cli_bytes": 779042,
+  "report": "al015478-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "al015478",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2458,
+  "cli_sha256": "41d65ed386b017192dce2759d5a5f9a7be6d6ebd433814da4e9854e6764355c7",
+  "cli_bytes": 2594300,
+  "report": "al015478-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.114,
+  "cli_sha256": "85e096d3d3727c12d174a873c6f8e0f9cda5b98edb52d595ac34f1f32301c46c",
+  "cli_bytes": 779008,
+  "report": "ms227840-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3253,
+  "cli_sha256": "f72f2218ab259b35681042d41257f9b80db3a7048aaadff4ba60aaed5c705b51",
+  "cli_bytes": 2594266,
+  "report": "ms227840-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.0975,
+  "cli_sha256": "17fbdee6cc9458e23e532606e2ac503f9b73ee6236d09d64f150b2753fba5f93",
+  "cli_bytes": 779022,
+  "report": "ms227840-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.2983,
+  "cli_sha256": "d7acadfc043c3f710e982e0e7747f6c151bbf56d6a1300b4082833da2e51162c",
+  "cli_bytes": 2594280,
+  "report": "ms227840-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0841,
+  "cli_sha256": "feb588074eb3296508146e8c5b59d35ecda6672fa5cc1d6df2dbda920df6d14d",
+  "cli_bytes": 779042,
+  "report": "ms227840-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "ms227840",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2518,
+  "cli_sha256": "972658f91a9dc20ccec62ef542018b01812e9a4819c752928daa255269fb5ac8",
+  "cli_bytes": 2594300,
+  "report": "ms227840-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 1.394,
+  "cli_sha256": "544ef55b1bdbf3ac4a6124c1cd94e6c0ca7a3b2e63314f36a49a777f2b2fc454",
+  "cli_bytes": 779008,
+  "report": "fl086997-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 9.1822,
+  "cli_sha256": "da28c24f78e53140c63ba01d13f02fcded276cbe19f879a15b2a1709fa704138",
+  "cli_bytes": 2594266,
+  "report": "fl086997-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1017,
+  "cli_sha256": "2f0e568843c25170ebea0e78c48f5bf7611d13ca837eaec71e0fdf3e7e8d1b7d",
+  "cli_bytes": 779022,
+  "report": "fl086997-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3195,
+  "cli_sha256": "6786a260e88c93af9864c23bd95ff42135c015c5e72772a163475b8060257c9f",
+  "cli_bytes": 2594280,
+  "report": "fl086997-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0836,
+  "cli_sha256": "f6f60344ed1e35542a1afafdc9205943873acd8b7ad616fd4c08cbd7d8b32527",
+  "cli_bytes": 779042,
+  "report": "fl086997-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl086997",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2601,
+  "cli_sha256": "1dbd47c8928a92c8e077494bc5453e74bda2123f37998c8e837aedf567ffd881",
+  "cli_bytes": 2594300,
+  "report": "fl086997-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.115,
+  "cli_sha256": "bcac92506615978d647b7c263d366268ff06115e08cffbe35c4ebdd365b94166",
+  "cli_bytes": 779008,
+  "report": "fl083909-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3479,
+  "cli_sha256": "45ddb608f86b70a78c860b420be88f7e097a871526174a5562dc0150473b992d",
+  "cli_bytes": 2594266,
+  "report": "fl083909-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1023,
+  "cli_sha256": "a41d45ffb67a25c720009f7a048266d0cf7c756c1a0ef72a7f0100625a91d33f",
+  "cli_bytes": 779022,
+  "report": "fl083909-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3431,
+  "cli_sha256": "77b0d927a44581b6ad35631e137310879aa0a1c18889d2d132278a228acf959d",
+  "cli_bytes": 2594280,
+  "report": "fl083909-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.083,
+  "cli_sha256": "f4ef65f5f11574afdb91db982f5b5a486db17caca3680af0defd6a29bae3f6f7",
+  "cli_bytes": 779042,
+  "report": "fl083909-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "fl083909",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.6874,
+  "cli_sha256": "8f3f9e6ae197679d7d1f8c43954c0f99ef26189be994318323064b613cbc9442",
+  "cli_bytes": 2594300,
+  "report": "fl083909-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1902,
+  "cli_sha256": "1ea72b70516cc7c3c70feb8a89e441ef8bea9d69de5845fe62286455908743c0",
+  "cli_bytes": 779008,
+  "report": "co051660-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.5711,
+  "cli_sha256": "58556b386e5284bd4f62b41c5010d6d90642174251f502c4861874c6c6f4335f",
+  "cli_bytes": 2594266,
+  "report": "co051660-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1047,
+  "cli_sha256": "fd97551f1bb8a2ab90929e4b70f4380f28f87a77d1f87047587ccacb2643668e",
+  "cli_bytes": 779022,
+  "report": "co051660-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3408,
+  "cli_sha256": "15b001fcc2b75b2fec0adac3e99d850bfb7e17e2c1eb927574f0f6cce0d0eb8d",
+  "cli_bytes": 2594280,
+  "report": "co051660-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0874,
+  "cli_sha256": "170b7955369650def0429ca8383a093cf6f8f00182681d3251442a4eccc53aba",
+  "cli_bytes": 779042,
+  "report": "co051660-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "co051660",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2716,
+  "cli_sha256": "0d20b7fc229c13511fcf656d28939429acfcfaf783bb7b152191ebccd9b0c615",
+  "cli_bytes": 2594300,
+  "report": "co051660-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1215,
+  "cli_sha256": "6e0014bfbea2a0f7a2fedc210ff1366f403bfc252393556ad9c2da4061a2733d",
+  "cli_bytes": 779008,
+  "report": "wy485345-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3854,
+  "cli_sha256": "2ee000f9031b9ae11ae3631b01dd3ed8eb344ef05d84a9813a754c725947dac1",
+  "cli_bytes": 2594266,
+  "report": "wy485345-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1045,
+  "cli_sha256": "eac1ea5ddefe624d46caf20272f9de276550f0a45833271148fdb7c522b800dc",
+  "cli_bytes": 779022,
+  "report": "wy485345-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3323,
+  "cli_sha256": "f28cc6cbf80abaacbcd67b57fe609fe5f2564ddc20b45187196e55049276c921",
+  "cli_bytes": 2594280,
+  "report": "wy485345-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0883,
+  "cli_sha256": "c63ecc8be57c45c0592345acc82bdfbfd59096a68693c8f11cfbbc4174e0d836",
+  "cli_bytes": 779042,
+  "report": "wy485345-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "wy485345",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2871,
+  "cli_sha256": "53d7e95277c47389748801da6eb473c4d15eb94143afd89a1850a99196de728f",
+  "cli_bytes": 2594300,
+  "report": "wy485345-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1464,
+  "cli_sha256": "8bd66be6cb8df1b9af428f935ce3e4d74375b142b9b1f77d4d9eab405d2050b1",
+  "cli_bytes": 779008,
+  "report": "mn214026-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3881,
+  "cli_sha256": "01767992eaa888f411286d1414bf9f94ce9f54a07cfdf053027b7768e3af24fb",
+  "cli_bytes": 2594266,
+  "report": "mn214026-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1063,
+  "cli_sha256": "8d7dc7f41947027e8b28273ee4e76cf99be7e20a23f005c7ced2c30a2ba24e29",
+  "cli_bytes": 779022,
+  "report": "mn214026-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3548,
+  "cli_sha256": "c307ca0a8f75a404c62bb62a34232fb7159ba565f79c0bc4eeb3b9964a0923fc",
+  "cli_bytes": 2594280,
+  "report": "mn214026-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0835,
+  "cli_sha256": "958ea19b7e628070bfea7a05c9d4d941342c13aecd360a495f80b71cbf980143",
+  "cli_bytes": 779042,
+  "report": "mn214026-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "mn214026",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2618,
+  "cli_sha256": "4380ea97afc4ecd22f4fb27d56f7d9f358e8217fc60e2ac78826f91fa8703a3a",
+  "cli_bytes": 2594300,
+  "report": "mn214026-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1125,
+  "cli_sha256": "8bd8d8618588d6c9e0578c23850692d7f2f642a6a0a2c7fe279aabe4317cde1c",
+  "cli_bytes": 779008,
+  "report": "ak505769-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3588,
+  "cli_sha256": "7a24930afa120d3a6cf52a9734ca89d17d697ea6466824021b52c9bacbbb7e05",
+  "cli_bytes": 2594266,
+  "report": "ak505769-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1054,
+  "cli_sha256": "49dd064457d60fa039b3d97e7bbe81fac440f5cf9148521fee5e13db9331daf3",
+  "cli_bytes": 779022,
+  "report": "ak505769-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3236,
+  "cli_sha256": "561ce929769193c8b95ad69f916172f33a393543146ae069f0c64afab34e6239",
+  "cli_bytes": 2594280,
+  "report": "ak505769-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0817,
+  "cli_sha256": "bb12be026f7b70b597653376d1bf90be879d4972ca1e65545a9e2d8c1115b921",
+  "cli_bytes": 779042,
+  "report": "ak505769-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "ak505769",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2667,
+  "cli_sha256": "230e46914e5077c7bc0ff7372310c051a74422d63f41402df43419e80b5581d4",
+  "cli_bytes": 2594300,
+  "report": "ak505769-fast-v0-100yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "faithful",
+  "years": 30,
+  "wall_s": 0.1699,
+  "cli_sha256": "3fac07a427e64ac97c5489ee1dc6b1720569eea5833db22a2609d32a6630fb2c",
+  "cli_bytes": 779008,
+  "report": "id106388-faithful-30yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "faithful",
+  "years": 100,
+  "wall_s": 0.3813,
+  "cli_sha256": "a1377f467cbe81b6356f6b17094a0f202f400cc3de1239d767e69bf873579d41",
+  "cli_bytes": 2594266,
+  "report": "id106388-faithful-100yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "qc-off",
+  "years": 30,
+  "wall_s": 0.1018,
+  "cli_sha256": "5018dce079b2aa8f8668ed82fa5a877bcd8732730900863c9ff4bcfb1dd103f1",
+  "cli_bytes": 779022,
+  "report": "id106388-qc-off-30yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "qc-off",
+  "years": 100,
+  "wall_s": 0.3117,
+  "cli_sha256": "89068199bd6d4c6e8bf29dadd5a35a3493c58e6cf97889293bdfa33e627aa613",
+  "cli_bytes": 2594280,
+  "report": "id106388-qc-off-100yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "fast-v0",
+  "years": 30,
+  "wall_s": 0.0813,
+  "cli_sha256": "bb1f32a129b2c3a406ed1cfef2285cf718ed02af22a84347480c9d7e5595800c",
+  "cli_bytes": 779042,
+  "report": "id106388-fast-v0-30yr.cli.quality.json"
+ },
+ {
+  "station": "id106388",
+  "config": "fast-v0",
+  "years": 100,
+  "wall_s": 0.2459,
+  "cli_sha256": "b34af94db8d060494be3bbac0846f8d9dc14b1156857ad982b03dc6076a9f45a",
+  "cli_bytes": 2594300,
+  "report": "id106388-fast-v0-100yr.cli.quality.json"
+ }
+]

@@ -12,10 +12,28 @@ instrument has measured it at both the 30- and 100-year horizons.
 
 ## Active queue — the quality arc (ADR-0002)
 
-| # | Item | Mechanism | Acceptance |
-|---|---|---|---|
-| Q3 | **`qc_filter` implementation + dissection + exposure adjudication** ([SPEC-GENERATION-PROFILES rev 3](specifications/SPEC-GENERATION-PROFILES.md)) | Implement `qc_filter: faithful \| off` (faithful default preserves goldens; `off` emits group-P counterfactual verdicts); run the pre-registered dissection matrix — {faithful, faithful + qc_off} × {30, 100 yr} × Q2-drawn regime corpus (arid / humid / cold / monsoonal + fixtures) — and re-baseline performance against qc_off | Dissection reports archived with the pre-registration; the convergence-vs-variability frontier quantified per horizon (incl. the per-decade early-run conditioning prediction); **adjudication recorded as ADR-0003**: is `qc_filter` user-facing, and is conditioning opt-in or opt-out per use class (30-yr agricultural vs 100-yr native)? Runspec schema rev accepts the ratified surface |
-| Q4 | **Fast-batch vs legacy comparison + promotion adjudication** ([SPEC-FAST-BATCH-V1 rev 2](specifications/SPEC-FAST-BATCH-V1.md)) | Same-instrument comparison across {faithful, faithful + qc_off, fast_batch} **and legacy-Fortran `.cli` output** (Q1 post-hoc mode) on the Q3 corpus at 30/100 yr; performance case made on FMA-capable `wepp1` against the Q3 qc_off re-baseline, not against conditioned faithful | Promotion adjudicated per ADR-0002 with pre-registered bounds: either SPEC-FAST-BATCH-V1 is ratified, implemented, and the schema accepts `fast_batch_v1` — or the batch line is retired with the negative result on the record (v0 stays a closed spike either way). No production default change without a separate operator decision |
+The queue is **empty pending two operator ratifications** (the arc's
+execution is complete):
+
+- **Q3 executed** (2026-07-10,
+  [`20260710-q3-qc-filter-dissection`](work-packages/20260710-q3-qc-filter-dissection/package.md)):
+  `qc_filter: faithful | off` implemented (SPEC-RUNSPEC rev 5;
+  metrics_version 2 counterfactuals); the ratified 102-run dissection
+  quantified the frontier — conditioning discards ~52% of batches in
+  every regime, buys material convergence only at 30 yr (B1 1.25 vs
+  1.12 at 100 yr), costs material interannual variability at both
+  horizons and is farther from observed climate on 15/17 stations,
+  and is the dominant generation cost (1.70× median / 8.8× corpus
+  total). **Awaiting: ADR-0003 ratification** (Proposed: user-facing,
+  default `faithful`, `off` recommended for 100-yr native runs).
+- **Q4 executed** (2026-07-10,
+  [`20260710-q4-fast-batch-adjudication`](work-packages/20260710-q4-fast-batch-adjudication/package.md)):
+  same-instrument comparison against the qc_off re-baseline; the
+  pre-pinned promotion gate **fails on performance** (1.32×
+  generation-only vs the required 1.5×; quality legs pass — the
+  batch line is equivalent, not better). **Awaiting: operator
+  retirement decision** (recommendation: retire; v0 stays a closed
+  spike).
 
 Dependencies are real, not ceremonial: Q1 (complete) is the
 instrument every later item reports through; Q2 (complete) supplies

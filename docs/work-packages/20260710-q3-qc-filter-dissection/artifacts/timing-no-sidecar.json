@@ -1,0 +1,14 @@
+{
+ "faithful": {
+  "median_s": 0.3759,
+  "total_s": 33.192
+ },
+ "qc-off": {
+  "median_s": 0.2216,
+  "total_s": 3.77
+ },
+ "fast-v0": {
+  "median_s": 0.1684,
+  "total_s": 3.065
+ }
+}

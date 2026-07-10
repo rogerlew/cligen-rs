@@ -30,3 +30,5 @@ Start from [templates/package.md](templates/package.md).
 | [20260709-par-monthlies-port](20260709-par-monthlies-port/package.md) | SCAFFOLDED |
 | [20260710-q1-quality-report](20260710-q1-quality-report/package.md) | EXECUTED-COMPLETE |
 | [20260710-q2-station-db](20260710-q2-station-db/package.md) | EXECUTED-COMPLETE |
+| [20260710-q3-qc-filter-dissection](20260710-q3-qc-filter-dissection/package.md) | EXECUTED-AWAITING-OPERATOR-ADJUDICATION |
+| [20260710-q4-fast-batch-adjudication](20260710-q4-fast-batch-adjudication/package.md) | EXECUTED-AWAITING-OPERATOR-ADJUDICATION |

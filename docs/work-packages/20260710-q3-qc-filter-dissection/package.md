@@ -1,9 +1,13 @@
 # Q3 — `qc_filter` Implementation + Dissection + Exposure Adjudication
 
-Status: `SCAFFOLDED` — pre-registration DRAFT awaiting operator
-ratification (corpus + observed-reference design proposed 2026-07-10)
+Status: `EXECUTED-AWAITING-OPERATOR-ADJUDICATION` — pre-registration
+ratified; observed reference acquired; `qc_filter` implemented
+(SPEC-RUNSPEC rev 5, metrics_version 2 counterfactuals); 102-run
+matrix executed and analyzed against the pre-registered bounds
+(`artifacts/frontier-analysis.md`); **ADR-0003 drafted as Proposed**
+— the exposure ruling is the operator's.
 Date: 2026-07-10
-Evidence mode: — (per stage at execution)
+Evidence mode: **Ran** (`artifacts/gate-results.md`)
 
 ## Objective
 
@@ -43,6 +47,12 @@ to the operator as ADR-0003.
 
 ## Artifacts
 
-- `artifacts/pre-registration.md` — DRAFT (this scaffold).
-- Later: acquisition tooling + observed statistics, dissection run
-  archive, frontier analysis, ADR-0003, review cycle.
+- `artifacts/pre-registration.md` — RATIFIED, bounds pinned pre-run.
+- `artifacts/observed/` — acquisition tooling + derived statistics
+  (Daymet primary, GHCN secondary), raw hashes pinned.
+- `artifacts/run-matrix.py`, `runs.json`, `analyze-matrix.py`,
+  `matrix-analysis.json`, `timing-no-sidecar.json` — the campaign.
+- `artifacts/frontier-analysis.md` — verdicts vs the bounds.
+- `artifacts/gate-results.md` — Ran gates.
+- `docs/decisions/0003-qc-filter-exposure.md` — Proposed.
+- Review cycle: not yet run (operator directed execute-and-present).
