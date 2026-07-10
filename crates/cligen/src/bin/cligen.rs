@@ -6,6 +6,9 @@ use clap::{Parser, Subcommand};
 
 use cligen::quality::compute_report;
 use cligen::runspec::load_runspec_file;
+use cligen::stations::query::{list, nearest, NearestQuery};
+use cligen::stations::sync::{sync_collection, SyncOutcome};
+use cligen::stations::{cache_root_from_env, Manifests};
 
 #[derive(Debug, Parser)]
 #[command(
@@ -33,6 +36,54 @@ enum Command {
         #[arg(long)]
         par: PathBuf,
     },
+    /// Station collections: list, location query, and explicit payload sync
+    /// (SPEC-STATION-DB). Only `sync` ever touches the network.
+    Stations {
+        #[command(subcommand)]
+        command: StationsCommand,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+enum StationsCommand {
+    /// Show every collection with its version, sync state, and station count.
+    List {
+        /// Restrict to one collection.
+        collection: Option<String>,
+    },
+    /// Nearest stations to a point (haversine over the shipped catalog).
+    Nearest {
+        /// Latitude in degrees (negative = south).
+        #[arg(long, allow_hyphen_values = true)]
+        lat: f64,
+        /// Longitude in degrees as the catalog states it (negative = west).
+        #[arg(long, allow_hyphen_values = true)]
+        lon: f64,
+        /// Result count.
+        #[arg(short = 'n', long, default_value_t = 5)]
+        count: usize,
+        /// Search one collection instead of all synced collections.
+        #[arg(long)]
+        collection: Option<String>,
+        /// Keep only stations with at least this many record years.
+        #[arg(long)]
+        min_years: Option<f64>,
+        /// Emit JSON rows instead of the table.
+        #[arg(long)]
+        json: bool,
+    },
+    /// Fetch, hash-verify, and cache collection payloads (all by default).
+    Sync {
+        /// Collections to sync.
+        collections: Vec<String>,
+        /// Air-gap source directory holding `<name>-<version>.tar.gz`
+        /// archives instead of the network.
+        #[arg(long)]
+        from: Option<PathBuf>,
+        /// Re-fetch a collection that is already cached.
+        #[arg(long)]
+        force: bool,
+    },
 }
 
 fn main() -> ExitCode {
@@ -45,12 +96,107 @@ fn main() -> ExitCode {
             .and_then(|run| run.generate_and_write())
             .map_err(|error| error.to_string()),
         Command::Quality { cli, par } => post_hoc_quality(&cli, &par),
+        Command::Stations { command } => stations(command),
     };
     match result {
         Ok(()) => ExitCode::SUCCESS,
         Err(error) => {
             eprintln!("cligen: {error}");
             ExitCode::FAILURE
+        }
+    }
+}
+
+fn stations(command: StationsCommand) -> Result<(), String> {
+    let manifests = Manifests::embedded();
+    let cache_root = cache_root_from_env().map_err(|error| error.to_string())?;
+    match command {
+        StationsCommand::List { collection } => {
+            let mut rows = list(&manifests, &cache_root).map_err(|error| error.to_string())?;
+            if let Some(name) = &collection {
+                manifests.get(name).map_err(|error| error.to_string())?;
+                rows.retain(|row| &row.name == name);
+            }
+            for row in rows {
+                let state = if row.synced {
+                    format!("synced ({} stations)", row.stations.unwrap_or(0))
+                } else {
+                    "not synced".to_owned()
+                };
+                println!(
+                    "{:<10} {:<8} {:<24} {}",
+                    row.name, row.version, state, row.description
+                );
+            }
+            Ok(())
+        }
+        StationsCommand::Nearest {
+            lat,
+            lon,
+            count,
+            collection,
+            min_years,
+            json,
+        } => {
+            let query = NearestQuery {
+                latitude: lat,
+                longitude: lon,
+                count,
+                collection,
+                min_years,
+            };
+            let rows =
+                nearest(&manifests, &cache_root, &query).map_err(|error| error.to_string())?;
+            if json {
+                let text =
+                    serde_json::to_string_pretty(&rows).map_err(|error| error.to_string())?;
+                println!("{text}");
+            } else {
+                for row in rows {
+                    println!(
+                        "{:<10} {:<28} {:>9.4} {:>9.4} {:>5} yr {:>10.2} km  {}",
+                        row.collection,
+                        row.id,
+                        row.latitude,
+                        row.longitude,
+                        row.years,
+                        row.distance_km,
+                        row.path.display()
+                    );
+                }
+            }
+            Ok(())
+        }
+        StationsCommand::Sync {
+            collections,
+            from,
+            force,
+        } => {
+            let selected: Vec<&str> = if collections.is_empty() {
+                manifests
+                    .collections
+                    .iter()
+                    .map(|collection| collection.name.as_str())
+                    .collect()
+            } else {
+                collections.iter().map(String::as_str).collect()
+            };
+            for name in selected {
+                let collection = manifests.get(name).map_err(|error| error.to_string())?;
+                let outcome = sync_collection(collection, &cache_root, from.as_deref(), force)
+                    .map_err(|error| error.to_string())?;
+                match outcome {
+                    SyncOutcome::Synced => println!(
+                        "{name} {}: synced into {}",
+                        collection.version,
+                        collection.cache_dir(&cache_root).display()
+                    ),
+                    SyncOutcome::AlreadySynced => {
+                        println!("{name} {}: already synced", collection.version);
+                    }
+                }
+            }
+            Ok(())
         }
     }
 }

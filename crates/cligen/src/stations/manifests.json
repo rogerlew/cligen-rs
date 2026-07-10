@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "collections": [
+    {
+      "name": "us-legacy",
+      "version": "2026.07",
+      "description": "Original FSWEPP/Windows-WEPP US stations",
+      "lineage": "FSWEPP distribution; jimf-cligen532/db 'stations' tree + stations.db (python-produced catalog)",
+      "catalog": "stations.db",
+      "catalog_rows": 2642,
+      "archive": {
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864206",
+        "sha256": "6c84662d4dd2e614b2dd4248dad417960610944840afc7f4c1dce254029972e4",
+        "bytes": 6884908
+      }
+    },
+    {
+      "name": "us-2015",
+      "version": "2026.07",
+      "description": "US stations, 2015 update (Anurag Srivastava)",
+      "lineage": "Anurag Srivastava 2015; jimf-cligen532/db '2015_par_files' tree + 2015_stations.db (python-produced catalog)",
+      "catalog": "2015_stations.db",
+      "catalog_rows": 2765,
+      "archive": {
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864208",
+        "sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9",
+        "bytes": 5907330
+      }
+    },
+    {
+      "name": "ghcn-intl",
+      "version": "2026.07",
+      "description": "GHCN-Daily-derived international stations",
+      "lineage": "GHCN-Daily derivation; jimf-cligen532/db 'GHCN_Intl_Stations' tree (verbatim, incl. 10/20/30-year duplicate tiers and docs files) + ghcn_stations.db (python-produced catalog referencing all_years/)",
+      "catalog": "ghcn_stations.db",
+      "catalog_rows": 12704,
+      "archive": {
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864204",
+        "sha256": "119053deacd1ff8b51cece29bd7e400611ad5da04a1ce72f67ef0fc7274eac21",
+        "bytes": 46934522
+      }
+    },
+    {
+      "name": "au",
+      "version": "2026.07",
+      "description": "Australia (Victoria fire-area set)",
+      "lineage": "jimf-cligen532/db 'au_par_files' tree + au_stations.db (python-produced catalog; longitudes stored negative as produced)",
+      "catalog": "au_stations.db",
+      "catalog_rows": 7,
+      "archive": {
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864209",
+        "sha256": "01082c6067dcb630f8b6e69e38f1a81728b9db7e3114efb3ac971cec03073ffb",
+        "bytes": 5301
+      }
+    },
+    {
+      "name": "chile",
+      "version": "2026.07",
+      "description": "Chile (NuevaAldea)",
+      "lineage": "jimf-cligen532/db 'chile' tree + chile.db (python-produced catalog; undocumented in the source README)",
+      "catalog": "chile.db",
+      "catalog_rows": 1,
+      "archive": {
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864205",
+        "sha256": "9c3b1f1869927991bc6bfa3807e4da3967231f787fba2961374bff6fa64f920e",
+        "bytes": 3249
+      }
+    }
+  ]
+}
