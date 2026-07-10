@@ -371,6 +371,223 @@ pub fn atanf_pinned(x: f32) -> f32 {
     }
 }
 
+// ------ tanf (glibc sysdeps/ieee754/flt-32/k_tanf.c, fdlibm) ------
+
+/// `T[]` — the 13-term fdlibm tangent polynomial (bits verified against
+/// the compiled decimals: 0x3eaaaaab, 0x3e088889, 0x3d5d0dd1,
+/// 0x3cb327a4, 0x3c11371f, 0x3b6b6916, 0x3abede48, 0x3a1a26c8,
+/// 0x398137b9, 0x38a3f445, 0x3895c07a, 0xb79bae5f, 0x37d95384).
+const TANF_T: [f32; 13] = [
+    f32::from_bits(0x3EAA_AAAB),
+    f32::from_bits(0x3E08_8889),
+    f32::from_bits(0x3D5D_0DD1),
+    f32::from_bits(0x3CB3_27A4),
+    f32::from_bits(0x3C11_371F),
+    f32::from_bits(0x3B6B_6916),
+    f32::from_bits(0x3ABE_DE48),
+    f32::from_bits(0x3A1A_26C8),
+    f32::from_bits(0x3981_37B9),
+    f32::from_bits(0x38A3_F445),
+    f32::from_bits(0x3895_C07A),
+    f32::from_bits(0xB79B_AE5F),
+    f32::from_bits(0x37D9_5384),
+];
+
+/// Faithful `tanf` for the generator's argument domain — glibc 2.39
+/// `s_tanf.c` fast path into `k_tanf.c` (fdlibm/SunPro, NetBSD float
+/// conversion; same notice lineage as [`atanf_pinned`]). `clgen`'s
+/// solar declination is the sole faithful-path caller
+/// (`tan(sd)`, `|sd| ≤ 0.4102`), so only the `|x| ≤ π/4`,
+/// `|x| < 0.6744` kernel branch is carried.
+///
+/// # Panics
+/// Outside `|x| < 0.6744` (0x3F2CA140) — reduction branches the
+/// generator cannot reach are deliberately not carried.
+pub fn tanf_pinned(x: f32) -> f32 {
+    let hx = x.to_bits() as i32;
+    let ix = hx & 0x7fff_ffff;
+    // s_tanf.c: ix <= 0x3f490fda -> __kernel_tanf(x, 0.0, 1)
+    assert!(
+        ix < 0x3F2C_A140,
+        "tanf_pinned: |x| >= 0.6744 outside faithful domain"
+    );
+    if ix < 0x3900_0000 {
+        // |x| < 2^-13, iy == 1: return x (inexact-only branch)
+        return x;
+    }
+    let y = 0.0f32;
+    let z = x * x;
+    let w = z * z;
+    // the source's odd/even split of x^5*(T[1] + x^2*T[2] + ...)
+    let t = &TANF_T;
+    let r = t[1] + w * (t[3] + w * (t[5] + w * (t[7] + w * (t[9] + w * t[11]))));
+    let v = z * (t[2] + w * (t[4] + w * (t[6] + w * (t[8] + w * (t[10] + w * t[12])))));
+    let s = z * x;
+    let r = y + z * (s * (r + v) + y);
+    let r = r + t[0] * s;
+    x + r
+}
+
+// ------ acosf (glibc sysdeps/ieee754/flt-32/e_acosf.c, fdlibm) ------
+
+const ACOSF_PIO2_HI: f32 = f32::from_bits(0x3FC9_0FDA);
+const ACOSF_PIO2_LO: f32 = f32::from_bits(0x33A2_2168);
+/// pS0..pS5 (bits verified: 0x3e2aaaab, 0xbea6b090, 0x3e4e0aa8,
+/// 0xbd241146, 0x3a4f7f04, 0x3811ef08).
+const ACOSF_PS: [f32; 6] = [
+    f32::from_bits(0x3E2A_AAAB),
+    f32::from_bits(0xBEA6_B090),
+    f32::from_bits(0x3E4E_0AA8),
+    f32::from_bits(0xBD24_1146),
+    f32::from_bits(0x3A4F_7F04),
+    f32::from_bits(0x3811_EF08),
+];
+/// qS1..qS4 (bits verified: 0xc019d139, 0x4001572d, 0xbf303361,
+/// 0x3d9dc62e).
+const ACOSF_QS: [f32; 4] = [
+    f32::from_bits(0xC019_D139),
+    f32::from_bits(0x4001_572D),
+    f32::from_bits(0xBF30_3361),
+    f32::from_bits(0x3D9D_C62E),
+];
+
+/// The shared fdlibm rational kernel p(z)/q(z).
+#[inline]
+fn acosf_pq(z: f32) -> f32 {
+    let ps = &ACOSF_PS;
+    let qs = &ACOSF_QS;
+    let p = z * (ps[0] + z * (ps[1] + z * (ps[2] + z * (ps[3] + z * (ps[4] + z * ps[5])))));
+    let q = 1.0 + z * (qs[0] + z * (qs[1] + z * (qs[2] + z * qs[3])));
+    p / q
+}
+
+/// Faithful `acosf` — glibc 2.39 `e_acosf.c` (fdlibm/SunPro, same
+/// notice lineage as [`atanf_pinned`]) for the generator's open
+/// interval `|x| < 1`: `clgen` clamps its half-day-length cosine to
+/// `h = 0` / `h = π` before calling `acos` (`cligen.f:1189-1195`), so
+/// the `|x| ≥ 1` branches are unreachable and deliberately not
+/// carried.
+///
+/// # Panics
+/// On `|x| ≥ 1`.
+pub fn acosf_pinned(x: f32) -> f32 {
+    let hx = x.to_bits() as i32;
+    let ix = hx & 0x7fff_ffff;
+    assert!(
+        ix < 0x3F80_0000,
+        "acosf_pinned: |x| >= 1 outside faithful domain"
+    );
+    if ix < 0x3F00_0000 {
+        // |x| < 0.5
+        if ix <= 0x3280_0000 {
+            // |x| <= 2^-26
+            return ACOSF_PIO2_HI + ACOSF_PIO2_LO;
+        }
+        let z = x * x;
+        let r = acosf_pq(z);
+        ACOSF_PIO2_HI - (x - (ACOSF_PIO2_LO - x * r))
+    } else if hx < 0 {
+        // x < -0.5
+        let z = (1.0 + x) * 0.5;
+        let r = acosf_pq(z);
+        let s = z.sqrt();
+        let w = r * s - ACOSF_PIO2_LO;
+        f32::from_bits(0x4049_0FDA) - 2.0 * (s + w) // pi (bits verified)
+    } else {
+        // x > 0.5
+        let z = (1.0 - x) * 0.5;
+        let s = z.sqrt();
+        let df = f32::from_bits(s.to_bits() & 0xFFFF_F000);
+        let c = (z - df * df) / (s + df);
+        let r = acosf_pq(z);
+        let w = r * s + c;
+        2.0 * (df + w)
+    }
+}
+
+// ------ expf (glibc 2.39 e_expf.c = ARM optimized-routines, N=32) ------
+
+/// `__exp2f_data.tab` — 32 entries, `uint(2^(i/N)) - (i << 52-BITS)`.
+const EXPF_TAB: [u64; 32] = [
+    0x3ff0000000000000,
+    0x3fefd9b0d3158574,
+    0x3fefb5586cf9890f,
+    0x3fef9301d0125b51,
+    0x3fef72b83c7d517b,
+    0x3fef54873168b9aa,
+    0x3fef387a6e756238,
+    0x3fef1e9df51fdee1,
+    0x3fef06fe0a31b715,
+    0x3feef1a7373aa9cb,
+    0x3feedea64c123422,
+    0x3feece086061892d,
+    0x3feebfdad5362a27,
+    0x3feeb42b569d4f82,
+    0x3feeab07dd485429,
+    0x3feea47eb03a5585,
+    0x3feea09e667f3bcd,
+    0x3fee9f75e8ec5f74,
+    0x3feea11473eb0187,
+    0x3feea589994cce13,
+    0x3feeace5422aa0db,
+    0x3feeb737b0cdc5e5,
+    0x3feec49182a3f090,
+    0x3feed503b23e255d,
+    0x3feee89f995ad3ad,
+    0x3feeff76f2fb5e47,
+    0x3fef199bdd85529c,
+    0x3fef3720dcef9069,
+    0x3fef5818dcfba487,
+    0x3fef7c97337b9b5f,
+    0x3fefa4afa2a490da,
+    0x3fefd0765b6e4540,
+];
+/// `invln2_scaled = 0x1.71547652b82fep+0 * 32` (exact power-of-two
+/// scale; bits computed and verified).
+const EXPF_INVLN2N: f64 = f64::from_bits(0x4047_1547_652B_82FE);
+/// `shift = 0x1.8p+52`.
+const EXPF_SHIFT: f64 = f64::from_bits(0x4338_0000_0000_0000);
+/// `poly_scaled[]` — poly over exact powers of N (bits verified).
+const EXPF_C: [f64; 3] = [
+    f64::from_bits(0x3EBC_6AF8_4B91_2394),
+    f64::from_bits(0x3F2E_BFCE_50FA_C4F3),
+    f64::from_bits(0x3F96_2E42_FF0C_52D6),
+];
+
+/// Faithful `expf` — glibc 2.39 `e_expf.c` (the ARM optimized-routines
+/// single-precision exponential, N=32), plain f64 internals with no
+/// contraction (the reference host resolves the non-FMA build).
+/// `alphb`'s `exp(-tmax/ei)` with argument in `(-4.93, 0)` is the
+/// faithful-path caller.
+///
+/// # Panics
+/// For `|x| ≥ 88` (the overflow/underflow/special paths the generator
+/// cannot reach are deliberately not carried).
+pub fn expf_pinned(x: f32) -> f32 {
+    let abstop = (x.to_bits() >> 20) & 0x7ff;
+    // top12(88.0f) = 0x42B
+    assert!(
+        abstop < 0x42B,
+        "expf_pinned: |x| >= 88 outside faithful domain"
+    );
+    let xd = x as f64;
+    // x*N/Ln2 = k + r with r in [-1/2, 1/2]
+    let z = EXPF_INVLN2N * xd;
+    let kd = z + EXPF_SHIFT;
+    let ki = kd.to_bits();
+    let kd = kd - EXPF_SHIFT;
+    let r = z - kd;
+    // exp(x) = 2^(k/N) * 2^(r/N) ~= s * (C0*r^3 + C1*r^2 + C2*r + 1)
+    let t = EXPF_TAB[(ki % 32) as usize].wrapping_add(ki.wrapping_shl(52 - 5));
+    let s = f64::from_bits(t);
+    let z = EXPF_C[0] * r + EXPF_C[1];
+    let r2 = r * r;
+    let y = EXPF_C[2] * r + 1.0;
+    let y = z * r2 + y;
+    let y = y * s;
+    y as f32
+}
+
 // ---------- exp (ARM optimized-routines math/exp.c, N=128) ----------
 
 // `__exp_data.tab`, N=128. Each pair is (tail bits, adjusted scale bits).
