@@ -1,11 +1,12 @@
 # Q3 — `qc_filter` Implementation + Dissection + Exposure Adjudication
 
-Status: `EXECUTED-AWAITING-OPERATOR-ADJUDICATION` — pre-registration
-ratified; observed reference acquired; `qc_filter` implemented
-(SPEC-RUNSPEC rev 5, metrics_version 2 counterfactuals); 102-run
-matrix executed and analyzed against the pre-registered bounds
-(`artifacts/frontier-analysis.md`); **ADR-0003 drafted as Proposed**
-— the exposure ruling is the operator's.
+Status: `EXECUTED-COMPLETE` — **closes ROADMAP item Q3.**
+Pre-registration ratified; `qc_filter` implemented (SPEC-RUNSPEC
+rev 5, metrics_version 2 counterfactuals); 102-run matrix analyzed
+against the pre-registered bounds; Codex R1 review (8 findings, 8
+accepted, two HIGH corrections applied to the record);
+**ADR-0003 Accepted** (operator, 2026-07-10, on the R1-amended
+draft).
 Date: 2026-07-10
 Evidence mode: **Ran** (`artifacts/gate-results.md`)
 

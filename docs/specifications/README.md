@@ -33,7 +33,7 @@ machinery without an ADR.
 | [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
 | [SPEC-GENERATION-PROFILES](SPEC-GENERATION-PROFILES.md) | Versioned generator-profile selector + `qc_filter` conditioning knob + CLI declaration | active (`qc_filter` implemented, Q3) |
-| [SPEC-FAST-BATCH-V1](SPEC-FAST-BATCH-V1.md) | Proposed fast-batch-v1 runtime contract + quality assessment (ADR-0002) | draft rev 2 — **retirement recommended** (Q4 adjudication, awaiting operator) |
+| [SPEC-FAST-BATCH-V1](SPEC-FAST-BATCH-V1.md) | Fast-batch-v1 runtime contract + quality assessment (design study of record) | **RETIRED** (Q4 adjudication ratified 2026-07-10; v0 stays a closed spike) |
 | [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument; [JSON Schema](quality-report.schema.json)) | active (rev 5, metrics_version 2 — Q1/Q3) |
 | [SPEC-STATION-DB](SPEC-STATION-DB.md) | Station collections, hash-pinned manifests, local cache, `cligen stations` (data outside the crate) | active (rev 1; Q2 complete) |
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |

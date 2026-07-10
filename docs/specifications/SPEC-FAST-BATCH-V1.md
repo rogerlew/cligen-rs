@@ -1,8 +1,15 @@
 # SPEC-FAST-BATCH-V1 — Fast Batch Runtime Profile and Quality Assessment
 
-Status: draft rev 2 — re-anchored under
-[ADR-0002](../decisions/0002-quality-metrics-authority.md); no
-implementation is authorized by this document
+Status: **RETIRED** — Q4 adjudication ratified by the operator
+2026-07-10 (`20260710-q4-fast-batch-adjudication`): quality-equivalent
+to the `qc_filter: off` baseline, observed end-to-end gain modest, the
+performance pathology was the conditioner rather than the RNG.
+`fast_batch_v1` is never schema-accepted; `fast_batch_v0` remains a
+closed, labeled spike. Reopening condition pinned in the Q4 package
+(production refill-path profiling on wepp1). Retained as the design
+study of record; no implementation is authorized by this document.
+(Previously: draft rev 2 — re-anchored under
+[ADR-0002](../decisions/0002-quality-metrics-authority.md).)
 Surface: the proposed `generation_profile: fast_batch_v1` value in an
 `inp.yaml` rev-1 runspec, its required CLI-header declaration, and the
 quality evidence required before any recommendation.

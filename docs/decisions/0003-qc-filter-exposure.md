@@ -1,8 +1,10 @@
 # ADR-0003: `qc_filter` Is User-Facing; Conditioning Is a Declared Per-Use-Class Choice
 
-Status: **Proposed** — drafted by Claude Code from the Q3 dissection
-evidence (2026-07-10); amended same-day per the Codex R1 review
-(all five amendments applied); awaiting operator ratification.
+Status: **Accepted** — operator ratification 2026-07-10 ("ratify
+both"), on the R1-amended record. Drafted by Claude Code from the Q3
+dissection evidence; amended same-day per the Codex R1 review (all
+five amendments applied; review + dispositions in
+`docs/work-packages/20260710-q3-qc-filter-dissection/artifacts/`).
 Deciders: Roger Lew (operator)
 Evidence: `docs/work-packages/20260710-q3-qc-filter-dissection/`
 (ratified pre-registration, 102-run matrix, frontier analysis).
@@ -28,7 +30,7 @@ secondary 6/8); conditioning is the dominant generation cost (1.7×
 median, 8.8× corpus-total, with 908 QC give-up events at 100 yr
 meaning conditioning is not even uniformly applied).
 
-## Decision (proposed)
+## Decision
 
 1. **`qc_filter` is user-facing and stays.** It is a legitimate
    use-case choice, not an internal detail: convergence-priority

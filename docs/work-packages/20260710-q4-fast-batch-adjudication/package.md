@@ -1,9 +1,11 @@
 # Q4 — Fast-Batch Comparison + Promotion Adjudication
 
-Status: `EXECUTED-AWAITING-OPERATOR-ADJUDICATION` — comparison run
-and analyzed against the pre-pinned gate; **recommendation: retire
-the fast-batch line** (`artifacts/promotion-adjudication.md`); the
-promotion/retirement decision is the operator's per ADR-0002.
+Status: `EXECUTED-COMPLETE` — **closes ROADMAP item Q4 and the
+quality arc.** Comparison analyzed against the pre-pinned gate
+(quality legs pass; performance leg not evaluable as registered — R1
+finding 2); **retirement ratified by the operator 2026-07-10** as a
+portfolio decision with the pinned reopening condition.
+SPEC-FAST-BATCH-V1 → RETIRED; `fast_batch_v0` stays a closed spike.
 Date: 2026-07-10
 Evidence mode: **Ran** (shares the Q3 matrix evidence:
 `../20260710-q3-qc-filter-dissection/artifacts/`)

@@ -67,11 +67,12 @@ contracts, so the future alternative is named `fast_batch_v1`, not the bare
 `fast_batch`. A bare name would not identify its generator, seed derivation,
 mask semantics, or parity evidence.
 
-[`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) is a draft for that future
-profile and its assessment. It is **not** yet an accepted runspec value;
-current resolvers and the JSON schema must continue to reject it until an
-implementation package updates this specification and the schema together.
-`fast_batch_v0` remains an implemented spike and is not a parity candidate.
+[`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) is **retired** (Q4
+adjudication, operator-ratified 2026-07-10): `fast_batch_v1` is never
+accepted by resolvers or the JSON Schema; the batch line reopens only
+under the condition pinned in `20260710-q4-fast-batch-adjudication`.
+`fast_batch_v0` remains an implemented, closed spike and is not a
+parity candidate.
 
 ## fast_batch_v0 semantics
 

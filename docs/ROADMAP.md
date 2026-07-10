@@ -10,10 +10,20 @@ port before augmentation** (the port arc, complete) — and now, under
 No generation-behavior change is recommended before the quality
 instrument has measured it at both the 30- and 100-year horizons.
 
-## Active queue — the quality arc (ADR-0002)
+## Active queue
 
-The queue is **empty pending two operator ratifications** (the arc's
-execution is complete):
+**Empty — the quality arc (ADR-0002, Q1-Q4) is complete.** Both
+closing adjudications were ratified by the operator on 2026-07-10 on
+the R1-amended record: **ADR-0003 Accepted** (`qc_filter` user-facing,
+default `faithful`, `off` a considered opt-in for 100-year
+variance-priority runs) and **the fast-batch line retired**
+(SPEC-FAST-BATCH-V1 → RETIRED; reopening condition pinned). The next
+queue is drawn from the deferred augmentation items below on operator
+direction — the dissection evidence points at A5 (the group-B/C
+structural gaps: radiation–wetness coupling, interannual-variance
+mechanisms) as the highest-value scientific work.
+
+The closed arc:
 
 - **Q3 executed** (2026-07-10,
   [`20260710-q3-qc-filter-dissection`](work-packages/20260710-q3-qc-filter-dissection/package.md)):
@@ -26,17 +36,18 @@ execution is complete):
   interannual-variability cost is material at both horizons and
   farther from observed climate on 15/17 stations (single-burn Daymet;
   detrended 14/17, GHCN 6/8), and conditioning is the dominant
-  generation cost (1.70× median / 8.8× corpus total). **Awaiting:
-  ADR-0003 ratification** (Proposed, R1-amended: user-facing, default
-  `faithful`, `off` to consider for 100-yr variance-priority runs).
+  generation cost (1.70× median / 8.8× corpus total).
+  **ADR-0003 Accepted** (operator, 2026-07-10, on the R1-amended
+  draft: user-facing, default `faithful`, `off` a considered opt-in
+  for 100-yr variance-priority runs).
 - **Q4 executed** (2026-07-10,
   [`20260710-q4-fast-batch-adjudication`](work-packages/20260710-q4-fast-batch-adjudication/package.md)):
-  same-instrument comparison against the qc_off re-baseline; the
-  pre-pinned promotion gate **fails on performance** (1.32×
-  generation-only vs the required 1.5×; quality legs pass — the
-  batch line is equivalent, not better). **Awaiting: operator
-  retirement decision** (recommendation: retire; v0 stays a closed
-  spike).
+  same-instrument comparison against the qc_off re-baseline: quality
+  legs pass (the batch line is equivalent, not better); the
+  performance leg was not evaluable as pre-registered (R1 finding 2;
+  observed end-to-end gain 1.32× on this host). **Retirement
+  ratified** (operator, 2026-07-10) as a portfolio decision with a
+  pinned reopening condition.
 
 Dependencies are real, not ceremonial: Q1 (complete) is the
 instrument every later item reports through; Q2 (complete) supplies
