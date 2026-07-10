@@ -354,14 +354,7 @@ fn replay_r5(par_rel: &str, interp: i32, iopt: i32, path: &Path) {
     }
 }
 
-fn replay_cg(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> usize {
-    let recs = parse_cg(path);
-    if recs.is_empty() {
-        return 0;
-    }
-    let mut st = setup(par_rel, interp, iopt);
-    // Initialize the internally-evolved state from the first record.
-    let first = &recs[0];
+fn initialize_daily_replay(st: &mut Replay, first: &CgRec) {
     let seeds = first.seeds;
     st.bk7.k1 = SeedState(seeds[0]);
     st.bk7.k2 = SeedState(seeds[1]);
@@ -382,96 +375,227 @@ fn replay_cg(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> 
     st.bk7.l = first.l;
     st.cr.mox = first.mox;
     st.cr.dax = first.dax;
+}
 
-    for (idx, rec) in recs.iter().enumerate() {
-        let at = |what: &str| format!("{case}:{}: {what}", idx + 1);
-        // Internally-evolved assertions (desync localization).
-        let sm = seed_matrix(&st.bk7);
-        for (s, got) in sm.iter().enumerate() {
-            if s == 6 || s == 9 {
-                continue; // k7 (dstg via alphb) and k10 (timepk) are external
-            }
-            assert_eq!(*got, rec.seeds[s], "{}", at(&format!("seed k{}", s + 1)));
+fn replay_clgen_record(case: &str, idx: usize, rec: &CgRec, st: &mut Replay, combined: bool) {
+    let at = |what: &str| format!("{case}:{}: {what}", idx + 1);
+    // Internally-evolved assertions (desync localization). The unit
+    // replay treats k7/v9 as external; the combined replay promotes
+    // both to asserted state after alphb/windg are in the loop.
+    let sm = seed_matrix(&st.bk7);
+    for (s, got) in sm.iter().enumerate() {
+        if s == 9 || (!combined && s == 6) {
+            continue; // k10 is advanced by unported timepk
         }
-        assert_eq!(st.bk7.v1.to_bits(), rec.v[0], "{}", at("v1"));
-        assert_eq!(st.bk7.v3.to_bits(), rec.v[1], "{}", at("v3"));
-        assert_eq!(st.bk7.v5.to_bits(), rec.v[2], "{}", at("v5"));
-        assert_eq!(st.bk7.v7.to_bits(), rec.v[3], "{}", at("v7"));
-        assert_eq!(st.bk7.v11.to_bits(), rec.v[5], "{}", at("v11"));
-        assert_eq!(st.bk7.l, rec.l, "{}", at("l"));
-        assert_eq!(st.cr.mox, rec.mox, "{}", at("mox"));
-        assert_eq!(st.cr.dax, rec.dax, "{}", at("dax"));
-        assert_eq!(
-            st.bk7.rst[(rec.mo - 1) as usize][2].to_bits(),
-            rec.rst3_in,
-            "{}",
-            at("rst(mo,3)")
-        );
-        // External per-record inputs.
+        assert_eq!(*got, rec.seeds[s], "{}", at(&format!("seed k{}", s + 1)));
+    }
+    assert_eq!(st.bk7.v1.to_bits(), rec.v[0], "{}", at("v1"));
+    assert_eq!(st.bk7.v3.to_bits(), rec.v[1], "{}", at("v3"));
+    assert_eq!(st.bk7.v5.to_bits(), rec.v[2], "{}", at("v5"));
+    assert_eq!(st.bk7.v7.to_bits(), rec.v[3], "{}", at("v7"));
+    if combined {
+        assert_eq!(st.bk7.v9.to_bits(), rec.v[4], "{}", at("v9"));
+    } else {
         st.bk7.k7 = SeedState(rec.seeds[6]);
-        st.bk7.k10 = SeedState(rec.seeds[9]);
         st.bk7.v9 = f32::from_bits(rec.v[4]);
-        st.bk7.tmxg = f32::from_bits(rec.tmxg_in);
-        st.bk7.tmng = f32::from_bits(rec.tmng_in);
-        st.bk4.mo = rec.mo;
-        st.bk3.ida = rec.ida;
-        st.bk7.nsim = rec.nsim;
-        st.bk7.msim = rec.msim;
-        if rec.nsim == 0 {
-            // Observed precipitation: day_gen wrote r(ida) before clgen.
-            st.bk5.r[(rec.ida - 1) as usize] = f32::from_bits(rec.out[0]);
-        }
-        if st.ci.interp == 1 {
-            // day_gen calls lintrp before clgen (cligen.f:3090-3093);
-            // jd is the day-of-month clgen will land on (== dax after
-            // its month-boundary update, which the C line re-verifies).
-            let jd = if rec.mo != rec.mox { 1 } else { rec.dax + 1 };
-            lintrp(rec.mo, jd, rec.ntd, &mut st.ci);
-        }
+    }
+    assert_eq!(st.bk7.v11.to_bits(), rec.v[5], "{}", at("v11"));
+    assert_eq!(st.bk7.l, rec.l, "{}", at("l"));
+    assert_eq!(st.cr.mox, rec.mox, "{}", at("mox"));
+    assert_eq!(st.cr.dax, rec.dax, "{}", at("dax"));
+    assert_eq!(
+        st.bk7.rst[(rec.mo - 1) as usize][2].to_bits(),
+        rec.rst3_in,
+        "{}",
+        at("rst(mo,3)")
+    );
+    // External per-record inputs.
+    st.bk7.k10 = SeedState(rec.seeds[9]);
+    st.bk7.tmxg = f32::from_bits(rec.tmxg_in);
+    st.bk7.tmng = f32::from_bits(rec.tmng_in);
+    st.bk4.mo = rec.mo;
+    st.bk3.ida = rec.ida;
+    st.bk7.nsim = rec.nsim;
+    st.bk7.msim = rec.msim;
+    if rec.nsim == 0 {
+        // Observed precipitation: day_gen wrote r(ida) before clgen.
+        st.bk5.r[(rec.ida - 1) as usize] = f32::from_bits(rec.out[0]);
+    }
+    if st.ci.interp == 1 {
+        // day_gen calls lintrp before clgen (cligen.f:3090-3093);
+        // jd is the day-of-month clgen will land on (== dax after
+        // its month-boundary update, which the C line re-verifies).
+        let jd = if rec.mo != rec.mox { 1 } else { rec.dax + 1 };
+        lintrp(rec.mo, jd, rec.ntd, &mut st.ci);
+    }
 
-        let _events = clgen(
-            rec.ntd,
-            rec.iyear,
-            &mut st.bk1,
-            &st.bk3,
-            &st.bk4,
-            &mut st.bk5,
-            &mut st.bk7,
-            &st.ci,
-            &mut st.cr,
-            &mut st.rs,
-            &mut st.acm,
-        );
+    let _events = clgen(
+        rec.ntd,
+        rec.iyear,
+        &mut st.bk1,
+        &st.bk3,
+        &st.bk4,
+        &mut st.bk5,
+        &mut st.bk7,
+        &st.ci,
+        &mut st.cr,
+        &mut st.rs,
+        &mut st.acm,
+    );
 
-        // Post-boundary column consumption.
-        assert_eq!(st.cr.dax, rec.dax_post, "{}", at("dax post"));
-        let d = rec.dax_post as usize;
-        let cols = [
-            st.cr.vvx(d),
-            st.cr.v2x(d),
-            st.cr.v4x(d),
-            st.cr.v6x(d),
-            st.cr.v8x(d),
-            st.cr.v12x(d),
-        ];
-        for (i, c) in cols.iter().enumerate() {
-            assert_eq!(c.to_bits(), rec.cols[i], "{}", at(&format!("column {i}")));
-        }
-        // Generated surface.
-        assert_eq!(
-            st.bk5.r[(rec.ida - 1) as usize].to_bits(),
-            rec.out[0],
-            "{}",
-            at("r(ida)")
-        );
-        assert_eq!(st.bk7.tmxg.to_bits(), rec.out[1], "{}", at("tmxg"));
-        assert_eq!(st.bk7.tmng.to_bits(), rec.out[2], "{}", at("tmng"));
-        assert_eq!(st.bk1.tdp.to_bits(), rec.out[3], "{}", at("tdp"));
-        assert_eq!(st.bk7.ra.to_bits(), rec.out[4], "{}", at("ra"));
-        assert_eq!(st.bk7.rmx.to_bits(), rec.out[5], "{}", at("rmx"));
-        assert_eq!(st.bk7.l, rec.l_out, "{}", at("l out"));
+    // Post-boundary column consumption.
+    assert_eq!(st.cr.dax, rec.dax_post, "{}", at("dax post"));
+    let d = rec.dax_post as usize;
+    let cols = [
+        st.cr.vvx(d),
+        st.cr.v2x(d),
+        st.cr.v4x(d),
+        st.cr.v6x(d),
+        st.cr.v8x(d),
+        st.cr.v12x(d),
+    ];
+    for (i, c) in cols.iter().enumerate() {
+        assert_eq!(c.to_bits(), rec.cols[i], "{}", at(&format!("column {i}")));
+    }
+    // Generated surface.
+    assert_eq!(
+        st.bk5.r[(rec.ida - 1) as usize].to_bits(),
+        rec.out[0],
+        "{}",
+        at("r(ida)")
+    );
+    assert_eq!(st.bk7.tmxg.to_bits(), rec.out[1], "{}", at("tmxg"));
+    assert_eq!(st.bk7.tmng.to_bits(), rec.out[2], "{}", at("tmng"));
+    assert_eq!(st.bk1.tdp.to_bits(), rec.out[3], "{}", at("tdp"));
+    assert_eq!(st.bk7.ra.to_bits(), rec.out[4], "{}", at("ra"));
+    assert_eq!(st.bk7.rmx.to_bits(), rec.out[5], "{}", at("rmx"));
+    assert_eq!(st.bk7.l, rec.l_out, "{}", at("l out"));
+}
+
+fn replay_cg(case: &str, par_rel: &str, interp: i32, iopt: i32, path: &Path) -> usize {
+    let recs = parse_cg(path);
+    if recs.is_empty() {
+        return 0;
+    }
+    let mut st = setup(par_rel, interp, iopt);
+    initialize_daily_replay(&mut st, &recs[0]);
+    for (idx, rec) in recs.iter().enumerate() {
+        replay_clgen_record(case, idx, rec, &mut st, false);
     }
     recs.len()
+}
+
+fn replay_alphb_record(case: &str, call: usize, rec: &AbRec, st: &mut Replay) {
+    let at = |what: &str| format!("{case}:{}: combined alphb {what}", call + 1);
+    assert_eq!(st.bk4.mo, rec.mo, "{}", at("mo"));
+    assert_eq!(st.bk3.ida, rec.ida, "{}", at("ida"));
+    assert_eq!(st.bk7.k7.0, rec.k7, "{}", at("k7 entry"));
+    assert_eq!(
+        st.bk5.r[(rec.ida - 1) as usize].to_bits(),
+        rec.r,
+        "{}",
+        at("r(ida)")
+    );
+    assert_eq!(
+        st.bk9.wi[(rec.mo - 1) as usize].to_bits(),
+        rec.wi,
+        "{}",
+        at("wi(mo)")
+    );
+    assert_eq!(st.bk5.sml.to_bits(), rec.sml, "{}", at("sml"));
+    alphb(
+        &st.bk3,
+        &st.bk4,
+        &st.bk5,
+        &mut st.bk7,
+        &mut st.bk9,
+        &mut st.dg,
+        &mut st.cr,
+    );
+    assert_eq!(st.bk9.r1.to_bits(), rec.r1, "{}", at("r1"));
+}
+
+#[allow(clippy::too_many_arguments)]
+fn replay_combined(
+    case: &str,
+    par_rel: &str,
+    interp: i32,
+    iopt: i32,
+    cg_path: &Path,
+    wg_path: &Path,
+    ab_path: &Path,
+    r5_path: &Path,
+    require_ab_exhausted: bool,
+) -> (usize, usize) {
+    let cg = parse_cg(cg_path);
+    let wg = parse_wg(wg_path);
+    let ab = if ab_path.exists() {
+        parse_ab(ab_path)
+    } else {
+        Vec::new()
+    };
+    assert_eq!(wg.len(), cg.len(), "{case}: wg/cg call count");
+    if cg.is_empty() {
+        return (0, 0);
+    }
+
+    let mut st = setup(par_rel, interp, iopt);
+    let expected_r5 = parse_r5(r5_path);
+    r5monb(&st.bk4, &st.bk7, &mut st.bk9);
+    for (month, bits) in expected_r5.iter().enumerate() {
+        assert_eq!(
+            st.bk9.wi[month].to_bits(),
+            *bits,
+            "{case}: combined r5 month {}",
+            month + 1
+        );
+    }
+    initialize_daily_replay(&mut st, &cg[0]);
+
+    let mut ab_call = 0;
+    for (idx, (cg_rec, wg_rec)) in cg.iter().zip(&wg).enumerate() {
+        replay_clgen_record(case, idx, cg_rec, &mut st, true);
+
+        let at = |what: &str| format!("{case}:{}: combined windg {what}", idx + 1);
+        assert_eq!(st.bk4.mo, wg_rec.mo, "{}", at("mo"));
+        assert_eq!(st.cr.dax, wg_rec.dax, "{}", at("dax"));
+        assert_eq!(st.bk7.v9.to_bits(), wg_rec.v9_in, "{}", at("v9 entry"));
+        assert_eq!(
+            st.cr.fxx(st.cr.dax as usize).to_bits(),
+            wg_rec.fx,
+            "{}",
+            at("fxx(dax)")
+        );
+        windg(&mut st.bk1, &mut st.bk3, &st.bk4, &mut st.bk7, &mut st.cr);
+        assert_eq!(st.bk1.wv.to_bits(), wg_rec.wv, "{}", at("wv"));
+        assert_eq!(st.bk1.th.to_bits(), wg_rec.th, "{}", at("th"));
+        assert_eq!(st.bk7.v9.to_bits(), wg_rec.v9_out, "{}", at("v9 exit"));
+        assert_eq!(st.bk3.j, wg_rec.j, "{}", at("j"));
+
+        // day_gen:3114-3141 calls alphb once in the wet branch, then
+        // again for iopt >= 4. The duplicate calls are both captured.
+        if st.bk5.r[(st.bk3.ida - 1) as usize] > 0.0 {
+            let rec = ab.get(ab_call).unwrap_or_else(|| {
+                panic!("{case}: missing alphb record for wet day {}", st.bk3.ida)
+            });
+            replay_alphb_record(case, ab_call, rec, &mut st);
+            ab_call += 1;
+            if st.bk4.iopt >= 4 {
+                let rec = ab.get(ab_call).unwrap_or_else(|| {
+                    panic!(
+                        "{case}: missing second alphb record for wet day {}",
+                        st.bk3.ida
+                    )
+                });
+                replay_alphb_record(case, ab_call, rec, &mut st);
+                ab_call += 1;
+            }
+        }
+    }
+    if require_ab_exhausted {
+        assert_eq!(ab_call, ab.len(), "{case}: unconsumed alphb records");
+    }
+    (cg.len(), ab_call)
 }
 
 #[test]
@@ -534,6 +658,66 @@ fn r5monb_matches_fortran_setup_snapshots() {
         let path = root.join("fixtures/taps/daily").join(case).join("r5.tap");
         replay_r5(par_rel, interp, iopt, &path);
     }
+}
+
+#[test]
+fn combined_day_loop_replays_committed_samples() {
+    let root = repo_root();
+    let fixtures = root.join("fixtures/taps/daily");
+    let mut days = 0;
+    let mut alpha_calls = 0;
+    for (case, par_rel, interp, iopt) in CASES {
+        let case_dir = fixtures.join(case);
+        let (case_days, case_alpha) = replay_combined(
+            case,
+            par_rel,
+            interp,
+            iopt,
+            &case_dir.join("cg-sample.tap"),
+            &case_dir.join("wg-sample.tap"),
+            &case_dir.join("ab-sample.tap"),
+            &case_dir.join("r5.tap"),
+            false,
+        );
+        days += case_days;
+        alpha_calls += case_alpha;
+    }
+    assert!(
+        days >= 4_000,
+        "expected substantial combined replay, got {days} days"
+    );
+    assert!(
+        alpha_calls >= 1_000,
+        "expected wet-day alpha coverage, got {alpha_calls} calls"
+    );
+}
+
+#[test]
+#[ignore = "full combined day-loop replay against local daily tap-runs capture"]
+fn full_combined_day_loop_bit_identical() {
+    let root = repo_root();
+    let runs = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
+    let mut days = 0;
+    let mut alpha_calls = 0;
+    for (case, par_rel, interp, iopt) in CASES {
+        let case_dir = runs.join(case);
+        let (case_days, case_alpha) = replay_combined(
+            case,
+            par_rel,
+            interp,
+            iopt,
+            &case_dir.join("cligen_cg.tap"),
+            &case_dir.join("cligen_wg.tap"),
+            &case_dir.join("cligen_ab.tap"),
+            &case_dir.join("cligen_r5.tap"),
+            true,
+        );
+        days += case_days;
+        alpha_calls += case_alpha;
+    }
+    println!("full combined replay: days={days}, alphb calls={alpha_calls}");
+    assert!(days > 80_000);
+    assert!(alpha_calls > 20_000);
 }
 
 #[test]
