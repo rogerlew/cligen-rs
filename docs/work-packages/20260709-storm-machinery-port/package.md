@@ -1,12 +1,7 @@
 # Storm Machinery Port
 
-Status: `STAGE-C-R1-COMPLETE` (Stage C and Codex R1 landed 2026-07-09;
-Claude Code Stage R2 remains open)
-Stage C/R1 outcome: typed `sing_stm` intake and fail-closed deferrals
-landed; the ignored storm replay now covers all 24 captures (189,207
-days + 36,065 timepk calls bit-identical); all 48 sd/tp manifest
-digests matched; one Low documentation finding was fixed; all gates
-exited 0 directly.
+Status: `EXECUTED-COMPLETE` (Stage R2 closed 2026-07-09;
+`artifacts/final-review-claude.md`)
 Stage S outcome: characterizations recorded (chain lives in day_gen;
 sing_stm is intake-only; transient-infinity path; F→C seam); 24-run
 capture 12/12 noninvasive; timepk + wet_day_duration + storm_block
