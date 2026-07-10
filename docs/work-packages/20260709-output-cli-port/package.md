@@ -1,8 +1,11 @@
 # Output Writer, Orchestration, and the `cligen` CLI
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` — spine executed and gated; 12/12 golden
+`.cli` byte parity from typed run inputs; format adjudication closed
+(57.3M fields, 0 mismatches). Awaiting Codex Stage C dispatch
+(`artifacts/kickoff-codex.md`).
 Date: 2026-07-09
-Evidence mode: — (per stage on execution)
+Evidence mode: Stage S **executional** (`artifacts/gate-results.md`)
 Execution model: staged, two executors (the item-3..7 pattern) —
 Claude Code writes the design-setting spine; Codex completes and runs
 gates; each reviews the other; Claude closes with Stage R2.
