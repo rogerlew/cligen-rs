@@ -20,6 +20,7 @@
     },
     "simulation": { "$ref": "#/$defs/simulation" },
     "rng": { "$ref": "#/$defs/rng" },
+    "generation_profile": { "$ref": "#/$defs/generationProfile" },
     "observed": {
       "type": "object",
       "additionalProperties": false,
@@ -89,6 +90,11 @@
       "type": "object",
       "additionalProperties": false,
       "properties": { "burn": { "type": "integer", "minimum": 0, "default": 0 } }
+    },
+    "generationProfile": {
+      "type": "string",
+      "enum": ["faithful_5_32_3", "fast_batch_v0"],
+      "default": "faithful_5_32_3"
     },
     "stormDate": {
       "type": "object",

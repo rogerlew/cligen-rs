@@ -1,0 +1,535 @@
+{
+  "benchmark": "cligen-rs faithful versus fast_batch_v0 process-level CLI runtime",
+  "timestamp_utc": "2026-07-10T16:02:42.674664+00:00",
+  "measurement": {
+    "samples": 7,
+    "warmups": 1,
+    "order": "alternating faithful-first and fast-first per sample",
+    "scope": "process startup, YAML intake, input reads, generation, and complete .cli write",
+    "fast_profile_contract": "structural output plus repeat-hash identity; no legacy-output parity claim"
+  },
+  "host": {
+    "hostname": "forest",
+    "platform": "Linux-6.8.0-111-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2697 v2 @ 2.70GHz",
+    "cpu_count": 48,
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47
+    ]
+  },
+  "manifest": {
+    "path": "/home/workdir/cligen-rs/docs/work-packages/20260710-cli-runtime-benchmark/artifacts/benchmark-cases.json",
+    "sha256": "f7d995e74c63bf1c076098c7e165612be308581f8129f3f5a423acb4c867d65f"
+  },
+  "rust_binary": {
+    "path": "/home/workdir/cligen-rs/target/release/cligen",
+    "sha256": "338ddf6cbac61828671678763d409ce9c919072cef9565f2e530529dc0ff57e9",
+    "size_bytes": 1670696
+  },
+  "cases": [
+    {
+      "case": "new-meadows-id-seed0",
+      "golden_sha256": "a069cb61cb4b9579e9735720a6701930586e0ac6e1156118509971adb50a4ea5",
+      "fast_output_sha256": "09906faf1b0280d1f5e8be4d1f6d2eb84039a938049808b3a9cc5a0af4738046",
+      "faithful_s": [
+        0.147500384,
+        0.146398686,
+        0.150025388,
+        0.148544842,
+        0.148901299,
+        0.146868816,
+        0.14836683
+      ],
+      "fast_batch_s": [
+        0.054297978,
+        0.053474262,
+        0.055373658,
+        0.054714356,
+        0.054598322,
+        0.054505208,
+        0.054720921
+      ],
+      "faithful": {
+        "min_s": 0.146398686,
+        "median_s": 0.14836683,
+        "mean_s": 0.14808660642857144,
+        "stdev_s": 0.0012507896634678228,
+        "max_s": 0.150025388
+      },
+      "fast_batch": {
+        "min_s": 0.053474262,
+        "median_s": 0.054598322,
+        "mean_s": 0.05452638642857143,
+        "stdev_s": 0.0005709356138141016,
+        "max_s": 0.055373658
+      },
+      "faithful_to_fast_batch_median_ratio": 2.717424722320221
+    },
+    {
+      "case": "new-meadows-id-seed17",
+      "golden_sha256": "b46ce287a8bc3f0a5aed8c9ee2f3ab4db0947ed50d4e4f03c62c8781038b7d8d",
+      "fast_output_sha256": "4f4cf6d7ba47503d245d1043bea6bc67b476cfa86d57b8057c3cb74af39c74e2",
+      "faithful_s": [
+        0.096617101,
+        0.096623522,
+        0.097559867,
+        0.098712039,
+        0.096386102,
+        0.097164012,
+        0.096280415
+      ],
+      "fast_batch_s": [
+        0.055334044,
+        0.055411114,
+        0.054375701,
+        0.054297361,
+        0.054389535,
+        0.056082594,
+        0.054390664
+      ],
+      "faithful": {
+        "min_s": 0.096280415,
+        "median_s": 0.096623522,
+        "mean_s": 0.09704900828571428,
+        "stdev_s": 0.0008600035370263925,
+        "max_s": 0.098712039
+      },
+      "fast_batch": {
+        "min_s": 0.054297361,
+        "median_s": 0.054390664,
+        "mean_s": 0.054897287571428574,
+        "stdev_s": 0.0007078335098182467,
+        "max_s": 0.056082594
+      },
+      "faithful_to_fast_batch_median_ratio": 1.7764725578639746
+    },
+    {
+      "case": "jeogla-au-seed0",
+      "golden_sha256": "9446451d87778fbaeb9456e529ffbcc25f487fe5ae87d5a537bacd367ddaed78",
+      "fast_output_sha256": "61baeaede9304cb293849256deae42cdb6445618f98acabe630ba5781165da20",
+      "faithful_s": [
+        0.113955508,
+        0.111283594,
+        0.1099819,
+        0.110792747,
+        0.111754204,
+        0.116541565,
+        0.111267427
+      ],
+      "fast_batch_s": [
+        0.072108044,
+        0.071584919,
+        0.071752297,
+        0.072760801,
+        0.071923541,
+        0.072330334,
+        0.07263303
+      ],
+      "faithful": {
+        "min_s": 0.1099819,
+        "median_s": 0.111283594,
+        "mean_s": 0.11222527785714285,
+        "stdev_s": 0.0022632969036211637,
+        "max_s": 0.116541565
+      },
+      "fast_batch": {
+        "min_s": 0.071584919,
+        "median_s": 0.072108044,
+        "mean_s": 0.072156138,
+        "stdev_s": 0.0004414333974180026,
+        "max_s": 0.072760801
+      },
+      "faithful_to_fast_batch_median_ratio": 1.5432895947087402
+    },
+    {
+      "case": "jeogla-au-seed17",
+      "golden_sha256": "69610acd18c14e0bb2589b91be9f06f03c7afb76c8acb32e98ca7b71c06db701",
+      "fast_output_sha256": "172c564ee76269bab41c9570554f7f5153cbf3cfcbc6743aea7a3141f330bf07",
+      "faithful_s": [
+        3.740933892,
+        3.807224832,
+        3.814798524,
+        3.825120588,
+        3.816501421,
+        3.732854832,
+        3.728448959
+      ],
+      "fast_batch_s": [
+        0.071343228,
+        0.071525221,
+        0.072360465,
+        0.071893398,
+        0.072578921,
+        0.070412322,
+        0.070709363
+      ],
+      "faithful": {
+        "min_s": 3.728448959,
+        "median_s": 3.807224832,
+        "mean_s": 3.780840435428572,
+        "stdev_s": 0.04419981733130452,
+        "max_s": 3.825120588
+      },
+      "fast_batch": {
+        "min_s": 0.070412322,
+        "median_s": 0.071525221,
+        "mean_s": 0.07154613114285714,
+        "stdev_s": 0.0008039174715892661,
+        "max_s": 0.072578921
+      },
+      "faithful_to_fast_batch_median_ratio": 53.22912364017722
+    },
+    {
+      "case": "mt-wilson-ca-observed-seed0",
+      "golden_sha256": "234f6227b0b3d59b5f5a933f1b11dbf5ac65d554d9ee0334f1bc05a17bb7cab0",
+      "fast_output_sha256": "212c0fc5cb114336abbe76706149032a58daa1fb277029c8dfe2011c5f405ca8",
+      "faithful_s": [
+        0.0979645,
+        0.096338785,
+        0.095937204,
+        0.097990494,
+        0.099370744,
+        0.095969225,
+        0.094622969
+      ],
+      "fast_batch_s": [
+        0.064217393,
+        0.063800811,
+        0.077213998,
+        0.063788519,
+        0.062807553,
+        0.065721259,
+        0.062774732
+      ],
+      "faithful": {
+        "min_s": 0.094622969,
+        "median_s": 0.096338785,
+        "mean_s": 0.09688484585714285,
+        "stdev_s": 0.0016185619378880141,
+        "max_s": 0.099370744
+      },
+      "fast_batch": {
+        "min_s": 0.062774732,
+        "median_s": 0.063800811,
+        "mean_s": 0.06576060928571428,
+        "stdev_s": 0.005146667724486812,
+        "max_s": 0.077213998
+      },
+      "faithful_to_fast_batch_median_ratio": 1.5099931096487158
+    },
+    {
+      "case": "mt-wilson-ca-observed-seed17",
+      "golden_sha256": "3fc4ada84eb4e23fd82e0bb8da763de785de78b75e42aece750703b0a1b560c0",
+      "fast_output_sha256": "6757478e4fceff72cbdd8db8f7636281c39c31add9fdec592578114d4a1c147a",
+      "faithful_s": [
+        1.211125867,
+        1.230530595,
+        1.224047107,
+        1.210676056,
+        1.231334785,
+        1.177517332,
+        1.191703866
+      ],
+      "fast_batch_s": [
+        0.063296036,
+        0.063567874,
+        0.064286267,
+        0.063684173,
+        0.060853969,
+        0.061773874,
+        0.064924378
+      ],
+      "faithful": {
+        "min_s": 1.177517332,
+        "median_s": 1.211125867,
+        "mean_s": 1.2109908011428572,
+        "stdev_s": 0.020243207324713065,
+        "max_s": 1.231334785
+      },
+      "fast_batch": {
+        "min_s": 0.060853969,
+        "median_s": 0.063567874,
+        "mean_s": 0.06319808157142857,
+        "stdev_s": 0.001418338477910786,
+        "max_s": 0.064924378
+      },
+      "faithful_to_fast_batch_median_ratio": 19.052483444703533
+    },
+    {
+      "case": "fish-springs-ut-observed-padded-seed0",
+      "golden_sha256": "a26b7c5537c3b94bd4d1ffbd5644806bc37744b2b6ed1dbc49152d6ce619af9c",
+      "fast_output_sha256": "0c7d687a59c60240deeef005bb47057ccae240490b80113a182502adb91e6033",
+      "faithful_s": [
+        0.032096636,
+        0.03249609,
+        0.032901906,
+        0.032211636,
+        0.032284635,
+        0.035043591,
+        0.032563665
+      ],
+      "fast_batch_s": [
+        0.024960093,
+        0.022921943,
+        0.022712309,
+        0.024171002,
+        0.022374917,
+        0.021644632,
+        0.024187646
+      ],
+      "faithful": {
+        "min_s": 0.032096636,
+        "median_s": 0.03249609,
+        "mean_s": 0.032799737,
+        "stdev_s": 0.0010245970460361477,
+        "max_s": 0.035043591
+      },
+      "fast_batch": {
+        "min_s": 0.021644632,
+        "median_s": 0.022921943,
+        "mean_s": 0.023281791714285714,
+        "stdev_s": 0.001182122206128412,
+        "max_s": 0.024960093
+      },
+      "faithful_to_fast_batch_median_ratio": 1.4176847922534315
+    },
+    {
+      "case": "fish-springs-ut-observed-padded-seed17",
+      "golden_sha256": "32d8459850095eb0884c4b3f439b8c8be54fd02ac340ae1e86037b9b0d7dba39",
+      "fast_output_sha256": "330d04b66f16e6a0f6f6e170e008bc48f43232de07f1fbfdc1501c9cffffcda4",
+      "faithful_s": [
+        0.061672486,
+        0.062473086,
+        0.061944901,
+        0.065703676,
+        0.061011271,
+        0.060203392,
+        0.060646901
+      ],
+      "fast_batch_s": [
+        0.023276082,
+        0.023200342,
+        0.022602863,
+        0.025430962,
+        0.022797593,
+        0.022016769,
+        0.021583962
+      ],
+      "faithful": {
+        "min_s": 0.060203392,
+        "median_s": 0.061672486,
+        "mean_s": 0.06195081614285714,
+        "stdev_s": 0.0018289640272866159,
+        "max_s": 0.065703676
+      },
+      "fast_batch": {
+        "min_s": 0.021583962,
+        "median_s": 0.022797593,
+        "mean_s": 0.022986939,
+        "stdev_s": 0.001237964290835833,
+        "max_s": 0.025430962
+      },
+      "faithful_to_fast_batch_median_ratio": 2.7052191869553948
+    },
+    {
+      "case": "fish-springs-ut-observed-truncated-seed0",
+      "golden_sha256": "7974ffd427a2b1f28d4d13e5b5ab120e600883735556c6c95e860d83c1e78047",
+      "fast_output_sha256": "c9e988ae55a9019af88a8c52c9534760a9abe7bf87591cc079c12d1266b1b04a",
+      "faithful_s": [
+        0.028415959,
+        0.029200608,
+        0.029353123,
+        0.029255717,
+        0.028994576,
+        0.029648426,
+        0.029973705
+      ],
+      "fast_batch_s": [
+        0.020438249,
+        0.019945447,
+        0.020957256,
+        0.020767479,
+        0.020617516,
+        0.020536977,
+        0.020638652
+      ],
+      "faithful": {
+        "min_s": 0.028415959,
+        "median_s": 0.029255717,
+        "mean_s": 0.029263159142857143,
+        "stdev_s": 0.0004924856139277662,
+        "max_s": 0.029973705
+      },
+      "fast_batch": {
+        "min_s": 0.019945447,
+        "median_s": 0.020617516,
+        "mean_s": 0.020557368,
+        "stdev_s": 0.0003171052282518633,
+        "max_s": 0.020957256
+      },
+      "faithful_to_fast_batch_median_ratio": 1.4189738957884162
+    },
+    {
+      "case": "fish-springs-ut-observed-truncated-seed17",
+      "golden_sha256": "b31b38dad35f161205ce5e1bb0499f69f5a6886a3bb4b5453dfe4126d9b948ee",
+      "fast_output_sha256": "e64ca124224fd761f9bee89d068d54175378571ecca50eae51475a0048dcb7a8",
+      "faithful_s": [
+        0.053793275,
+        0.053719326,
+        0.053370103,
+        0.050155937,
+        0.050761958,
+        0.053112694,
+        0.052760864
+      ],
+      "fast_batch_s": [
+        0.021677569,
+        0.021584074,
+        0.02099311,
+        0.020386148,
+        0.020546488,
+        0.020070662,
+        0.021336956
+      ],
+      "faithful": {
+        "min_s": 0.050155937,
+        "median_s": 0.053112694,
+        "mean_s": 0.052524879571428575,
+        "stdev_s": 0.0014646346361723184,
+        "max_s": 0.053793275
+      },
+      "fast_batch": {
+        "min_s": 0.020070662,
+        "median_s": 0.02099311,
+        "mean_s": 0.020942143857142857,
+        "stdev_s": 0.0006240398228079226,
+        "max_s": 0.021677569
+      },
+      "faithful_to_fast_batch_median_ratio": 2.530005987678815
+    },
+    {
+      "case": "new-meadows-id-single-storm-seed0",
+      "golden_sha256": "cab3d62d554e2dc341750dadd193d56f98fd62e1b133331b132437dbc94f733b",
+      "fast_output_sha256": "273f5288cc63494cfa3b5e829b320d9fe2b3f816773a06016ece7afc7204c34f",
+      "faithful_s": [
+        0.001978815,
+        0.001895509,
+        0.001895816,
+        0.001998018,
+        0.001936053,
+        0.001855259,
+        0.002036893
+      ],
+      "fast_batch_s": [
+        0.001809799,
+        0.001949512,
+        0.001807418,
+        0.001877013,
+        0.001849393,
+        0.001796253,
+        0.001788185
+      ],
+      "faithful": {
+        "min_s": 0.001855259,
+        "median_s": 0.001936053,
+        "mean_s": 0.0019423375714285715,
+        "stdev_s": 6.500126555654423e-05,
+        "max_s": 0.002036893
+      },
+      "fast_batch": {
+        "min_s": 0.001788185,
+        "median_s": 0.001809799,
+        "mean_s": 0.0018396532857142857,
+        "stdev_s": 5.7767506214463635e-05,
+        "max_s": 0.001949512
+      },
+      "faithful_to_fast_batch_median_ratio": 1.0697613381375501
+    },
+    {
+      "case": "new-meadows-id-single-storm-seed17",
+      "golden_sha256": "29e0ce7faf48efb0b4e3d51457bcf3d79c35a66269fc89012ea398f21a922d70",
+      "fast_output_sha256": "c9d9ff0f38d4438a38d5bc603c51d0aed78b853c08338c0d709740d222a0e520",
+      "faithful_s": [
+        0.001875877,
+        0.001916952,
+        0.001957726,
+        0.002075687,
+        0.002097342,
+        0.001991594,
+        0.002124511
+      ],
+      "fast_batch_s": [
+        0.001843353,
+        0.001734334,
+        0.001891555,
+        0.001818977,
+        0.001936527,
+        0.001831916,
+        0.001866083
+      ],
+      "faithful": {
+        "min_s": 0.001875877,
+        "median_s": 0.001991594,
+        "mean_s": 0.002005669857142857,
+        "stdev_s": 9.543163909212459e-05,
+        "max_s": 0.002124511
+      },
+      "fast_batch": {
+        "min_s": 0.001734334,
+        "median_s": 0.001843353,
+        "mean_s": 0.0018461064285714285,
+        "stdev_s": 6.334896355862803e-05,
+        "max_s": 0.001936527
+      },
+      "faithful_to_fast_batch_median_ratio": 1.0804192143338798
+    }
+  ]
+}

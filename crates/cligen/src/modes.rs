@@ -34,10 +34,12 @@ use crate::cinterp::CinterpState;
 use crate::crandom3::Crandom3State;
 use crate::daily::{clgen, r5monb, windg, ClgenEvents};
 use crate::deviates::DstgState;
+use crate::fast_batch::MonthlyBatchBackend;
 use crate::libm_pinned::{cosf_pinned, sinf_pinned};
 use crate::monthlies::lintrp;
 use crate::observed::{PrnError, PrnReader};
-use crate::rng::{randn, RansetState};
+use crate::profile::GenerationProfile;
+use crate::rng::randn;
 use crate::storm::{storm_block, wet_day_duration, SingleStormParams};
 
 use crate::acm::AcmState;
@@ -91,7 +93,7 @@ pub struct GenState {
     pub ccl1: Ccl1State,
     pub ci: CinterpState,
     pub cr: Crandom3State,
-    pub rs: RansetState,
+    pub batch: MonthlyBatchBackend,
     pub acm: AcmState,
     pub dg: DstgState,
     pub daygen: DayGenState,
@@ -117,12 +119,28 @@ pub const CLT: f32 = 57.296;
 /// Source REAL*4 throughout. Latitude sine/cosine use the pinned f32
 /// implementations after division by the source's `CLT = 57.296`.
 pub fn generation_setup(
+    bk1: Cbk1State,
+    bk4: Cbk4State,
+    bk7: Cbk7State,
+    bk9: Cbk9State,
+    ci: CinterpState,
+    ylt: f32,
+) -> GenState {
+    generation_setup_with_profile(bk1, bk4, bk7, bk9, ci, ylt, GenerationProfile::Faithful5323)
+}
+
+/// Generation setup with an explicit profile-owned monthly batch backend.
+///
+/// The public faithful entry point remains [`generation_setup`]. Extensions
+/// must select this entry through a declared runspec profile.
+pub fn generation_setup_with_profile(
     mut bk1: Cbk1State,
     mut bk4: Cbk4State,
     mut bk7: Cbk7State,
     mut bk9: Cbk9State,
     ci: CinterpState,
     ylt: f32,
+    profile: GenerationProfile,
 ) -> GenState {
     let bk5 = Cbk5State {
         sml: 0.0, // cligen.f:865
@@ -162,6 +180,7 @@ pub fn generation_setup(
     bk7.v11 = randn(&mut bk7.k9);
     bk7.msim = 1; // cligen.f:901-902
     bk7.nsim = 1;
+    let batch = MonthlyBatchBackend::from_profile(profile, &bk7);
     GenState {
         bk1,
         bk3: Cbk3State::default(),
@@ -172,7 +191,7 @@ pub fn generation_setup(
         ccl1: Ccl1State::default(),
         ci,
         cr,
-        rs: RansetState::default(),
+        batch,
         acm: AcmState::default(),
         dg: DstgState::default(),
         daygen: DayGenState::default(),
@@ -264,7 +283,7 @@ pub fn day_gen(
                 &mut st.bk7,
                 &st.ci,
                 &mut st.cr,
-                &mut st.rs,
+                &mut st.batch,
                 &mut st.acm,
             );
             if events != ClgenEvents::default() {
@@ -377,6 +396,8 @@ pub struct RunInputs<'a> {
     pub interp: i32,
     /// The `-r` burn count.
     pub burn: u32,
+    /// Explicit generation behavior profile from the runspec boundary.
+    pub generation_profile: GenerationProfile,
     /// `simulation.begin_year` (None = legacy -1 sentinel).
     pub begin_year: Option<i32>,
     /// `simulation.years` (None = legacy -1 sentinel).
@@ -390,10 +411,10 @@ pub struct RunInputs<'a> {
     pub command_echo: &'a str,
 }
 
-/// The full faithful run: main-program assembly (burn → station →
-/// option resolution → generation setup, `cligen.f:702-902`) +
-/// `wxr_gen` (`cligen.f:3589-3816`: header, year plan, day loops) +
-/// the run-end marker (`cligen.f:965-966`). Returns the `.cli` bytes.
+/// Run the declared profile: main-program assembly (burn → station → option
+/// resolution → generation setup, `cligen.f:702-902`) + `wxr_gen`
+/// (`cligen.f:3589-3816`: header, year plan, day loops) + the run-end marker
+/// (`cligen.f:965-966`). Returns the `.cli` bytes.
 pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
     use crate::output::{write_cli_header, write_daily_row, write_run_end, HeaderInputs};
 
@@ -441,7 +462,8 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
     } else {
         ss_out.numyr
     };
-    let mut st = generation_setup(bk1, bk4, bk7, bk9, ci, out.ylt);
+    let mut st =
+        generation_setup_with_profile(bk1, bk4, bk7, bk9, ci, out.ylt, inp.generation_profile);
 
     // ---- wxr_gen ----
     let mut cli = String::new();

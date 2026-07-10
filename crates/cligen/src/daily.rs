@@ -52,11 +52,12 @@ use crate::cbk9::Cbk9State;
 use crate::cinterp::CinterpState;
 use crate::crandom3::Crandom3State;
 use crate::deviates::{dstg, dstn1, DstgState};
+use crate::fast_batch::MonthlyBatchBackend;
 use crate::libm_pinned::{
     acosf_pinned, cosf_pinned, expf_pinned, logf_pinned, sinf_pinned, tanf_pinned,
 };
 use crate::monthlies::{fouri2, ryf2};
-use crate::rng::{randn, ranset, RansetState};
+use crate::rng::randn;
 
 use crate::acm::AcmState;
 
@@ -334,7 +335,7 @@ pub fn clgen(
     bk7: &mut Cbk7State,
     ci: &CinterpState,
     cr: &mut Crandom3State,
-    rs: &mut RansetState,
+    batch: &mut MonthlyBatchBackend,
     acm: &mut AcmState,
 ) -> ClgenEvents {
     let mo = bk4.mo;
@@ -345,7 +346,7 @@ pub fn clgen(
     if mo != cr.mox {
         cr.mox = mo;
         cr.dax = 1;
-        ranset(ntd, iyear, bk4, bk7, rs, acm, cr);
+        batch.refill(ntd, iyear, bk4, bk7, acm, cr);
     } else {
         cr.dax += 1;
     }

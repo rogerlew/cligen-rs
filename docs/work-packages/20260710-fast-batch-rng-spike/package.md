@@ -1,6 +1,6 @@
 # Fast Batch RNG Profile Spike
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE` (12-case benchmark and all gates passed)
 Date: 2026-07-10
 Evidence mode: Mixed
 

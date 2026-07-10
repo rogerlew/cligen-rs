@@ -1,6 +1,7 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 2 — contract ratified 2026-07-09, operator
+Status: active (rev 3 — `fast_batch_v0` profile selector added 2026-07-10;
+rev 2 contract ratified 2026-07-09, operator
 decision; rev 2 dispositions the 13-finding independent review,
 `docs/work-packages/20260709-runspec-contract/artifacts/review-codex.md`;
 implementation lands with ROADMAP item 8)
@@ -99,6 +100,11 @@ rng:                            # block optional
                                 # the base seeds are the fixed
                                 # block-data constants.
 
+generation_profile: faithful_5_32_3  # optional, default. See
+                                      # SPEC-GENERATION-PROFILES.
+                                      # `fast_batch_v0` is an explicit,
+                                      # non-faithful experimental profile.
+
 observed:                       # required iff mode: observed
   prn: ws.prn                   # the observed series
                                 # (SPEC-OBSERVED-INPUT; A3 adds a
@@ -136,6 +142,7 @@ output:
 | `simulation.begin_year` | integer ≥ 1 where accepted |
 | `simulation.years` | integer ≥ 1 where accepted |
 | `rng.burn` | integer ≥ 0 |
+| `generation_profile` | closed enum: `faithful_5_32_3` (default) or the explicitly labeled extension `fast_batch_v0` (SPEC-GENERATION-PROFILES) |
 | `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode (§Year plan; validated before `jdt` so no assertion is reachable) |
 | `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible, > 0 |
 | `time_to_peak_fraction` | finite f32-convertible in (0, 1] |
@@ -171,6 +178,9 @@ This is **output surface, not input emulation**:
   the explicit field exists.
 - The golden runspecs pin `command_echo` verbatim from
   `fixture-runs.tsv`; byte parity is asserted on the whole file.
+- Non-faithful profiles append their mandatory profile marker after this
+  echo; an explicit `command_echo` cannot suppress it. Faithful output keeps
+  its legacy-compatible bytes.
 
 The legacy header also echoes `numyr` as `-1` for storm modes and
 `100` for defaulted observed runs — the faithful writer reproduces

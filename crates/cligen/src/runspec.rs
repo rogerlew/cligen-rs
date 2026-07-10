@@ -14,6 +14,7 @@ use serde::Deserialize;
 use crate::modes::{run_to_cli, RunError, RunInputs};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
+use crate::profile::GenerationProfile;
 use crate::storm::SingleStormParams;
 
 /// The sole currently-supported runspec schema revision.
@@ -33,6 +34,8 @@ pub struct RunspecDocument {
     pub simulation: Option<SimulationSpec>,
     #[serde(default)]
     pub rng: RngSpec,
+    #[serde(default)]
+    pub generation_profile: GenerationProfile,
     #[serde(default)]
     pub observed: Option<ObservedSpec>,
     #[serde(default)]
@@ -248,6 +251,7 @@ pub struct PreparedRun {
     pub iopt: i32,
     pub interpolation: i32,
     pub burn: u32,
+    pub generation_profile: GenerationProfile,
     pub begin_year: Option<i32>,
     pub years: Option<i32>,
     pub command_echo: String,
@@ -263,6 +267,7 @@ impl PreparedRun {
             iopt: self.iopt,
             interp: self.interpolation,
             burn: self.burn,
+            generation_profile: self.generation_profile,
             begin_year: self.begin_year,
             years: self.years,
             par_bytes: &self.par_bytes,
@@ -368,15 +373,17 @@ impl RunspecDocument {
                 burn,
             )
         });
+        let generation_profile = self.generation_profile;
         Ok(PreparedRun {
             output_path: resolve_path(base_dir, output_lexical),
             overwrite: output.overwrite,
             iopt: fields.iopt,
             interpolation: fields.interpolation,
             burn,
+            generation_profile,
             begin_year: fields.begin_year,
             years: fields.years,
-            command_echo,
+            command_echo: generation_profile.command_echo(command_echo),
             storm: fields.storm,
             par_bytes,
             prn_bytes: prn.map(|value| value.2),

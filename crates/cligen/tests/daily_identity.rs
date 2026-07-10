@@ -23,10 +23,12 @@ use cligen::cinterp::CinterpState;
 use cligen::crandom3::Crandom3State;
 use cligen::daily::{alphb, clgen, r5monb, windg};
 use cligen::deviates::DstgState;
+use cligen::fast_batch::MonthlyBatchBackend;
 use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
-use cligen::rng::{RansetState, SeedState};
+use cligen::profile::GenerationProfile;
+use cligen::rng::SeedState;
 use std::path::{Path, PathBuf};
 
 /// (tap case dir, .par path, interp mode, iopt)
@@ -324,7 +326,7 @@ struct Replay {
     bk9: Cbk9State,
     ci: CinterpState,
     cr: Crandom3State,
-    rs: RansetState,
+    batch: MonthlyBatchBackend,
     acm: AcmState,
     dg: DstgState,
 }
@@ -355,6 +357,7 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
     {
         bk1.pi2 = 6.283185;
     }
+    let batch = MonthlyBatchBackend::from_profile(GenerationProfile::Faithful5323, &bk7);
     Replay {
         bk1,
         bk3: Cbk3State::default(),
@@ -367,7 +370,7 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
         bk9,
         ci,
         cr: Crandom3State::default(),
-        rs: RansetState::default(),
+        batch,
         acm: AcmState::default(),
         dg: DstgState::default(),
     }
@@ -537,7 +540,7 @@ fn replay_clgen_record(case: &str, idx: usize, rec: &CgRec, st: &mut Replay, com
         &mut st.bk7,
         &st.ci,
         &mut st.cr,
-        &mut st.rs,
+        &mut st.batch,
         &mut st.acm,
     );
 

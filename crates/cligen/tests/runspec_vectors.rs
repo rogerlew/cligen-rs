@@ -1,5 +1,6 @@
 use std::path::{Path, PathBuf};
 
+use cligen::profile::GenerationProfile;
 use cligen::runspec::{load_runspec_file, RunspecDocument, RunspecError};
 
 fn repo_root() -> PathBuf {
@@ -65,6 +66,10 @@ fn schema_artifact_is_json_with_the_runspec_version_constraint() {
     ))
     .unwrap();
     assert_eq!(schema["properties"]["cligen_runspec"]["const"], 1);
+    assert_eq!(
+        schema["$defs"]["generationProfile"]["default"],
+        "faithful_5_32_3"
+    );
     assert_eq!(
         schema["$defs"]["stormDate"]["x-cligen-source-calendar"],
         "For a February 29 date, the Rust boundary applies wxr_gen:3758-3763 exactly: leap iff year - year/400*400 == 0 OR (year - year/4*4 == 0 AND year - year/100*100 == 0)."
@@ -164,6 +169,12 @@ fn runspec_fails_closed_for_unknown_wrong_type_and_wrong_mode_blocks() {
         RunspecDocument::parse(&CONTINUOUS.replace("cli: wepp.cli", "cli: wepp.cli, overwrite: 1"))
             .unwrap_err();
     assert!(wrong_overwrite.to_string().contains("output.overwrite"));
+    let unknown_profile = RunspecDocument::parse(&CONTINUOUS.replace(
+        "mode: continuous",
+        "generation_profile: unsupported\nmode: continuous",
+    ))
+    .unwrap_err();
+    assert!(unknown_profile.to_string().contains("generation_profile"));
     assert_validation_path(
         &CONTINUOUS.replace(
             "output: { cli: wepp.cli }",
@@ -175,6 +186,24 @@ fn runspec_fails_closed_for_unknown_wrong_type_and_wrong_mode_blocks() {
         &SINGLE_STORM.replace("mode: single_storm", "mode: observed"),
         "observed",
     );
+}
+
+#[test]
+fn generation_profile_defaults_to_faithful_and_marks_fast_batch_output() {
+    let root = repo_root();
+    let output = root.join("target/runspec-vectors/fast-profile.cli");
+    let faithful_yaml = continuous_with(&output.to_string_lossy(), "none");
+    let faithful = document(&faithful_yaml).resolve(&root).unwrap();
+    assert_eq!(faithful.generation_profile, GenerationProfile::Faithful5323);
+
+    let fast_yaml = faithful_yaml.replace(
+        "cligen_runspec: 1\n",
+        "cligen_runspec: 1\ngeneration_profile: fast_batch_v0\n",
+    );
+    let fast = document(&fast_yaml).resolve(&root).unwrap();
+    assert_eq!(fast.generation_profile, GenerationProfile::FastBatchV0);
+    let output = fast.generate().unwrap();
+    assert!(output.contains("--generation-profile fast-batch-v0"));
 }
 
 #[test]

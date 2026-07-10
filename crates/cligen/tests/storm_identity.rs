@@ -20,10 +20,12 @@ use cligen::cinterp::CinterpState;
 use cligen::crandom3::Crandom3State;
 use cligen::daily::clgen;
 use cligen::deviates::DstgState;
+use cligen::fast_batch::MonthlyBatchBackend;
 use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
-use cligen::rng::{RansetState, SeedState};
+use cligen::profile::GenerationProfile;
+use cligen::rng::SeedState;
 use cligen::storm::{
     sing_stm, sing_stm_interactive_output_name, sing_stm_output_file_management, storm_block,
     wet_day_duration, SingStmOut, SingleStormParams, StormError, TYMAX,
@@ -296,7 +298,7 @@ struct Replay {
     bk9: cligen::cbk9::Cbk9State,
     ci: CinterpState,
     cr: Crandom3State,
-    rs: RansetState,
+    batch: MonthlyBatchBackend,
     acm: AcmState,
     dg: DstgState,
     timpkd: [f32; 13],
@@ -327,6 +329,7 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
         ..Cbk4State::default()
     };
     cligen::daily::r5monb(&bk4, &bk7, &mut bk9);
+    let batch = MonthlyBatchBackend::from_profile(GenerationProfile::Faithful5323, &bk7);
     Replay {
         bk1,
         bk3: Cbk3State::default(),
@@ -336,7 +339,7 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
         bk9,
         ci,
         cr: Crandom3State::default(),
-        rs: RansetState::default(),
+        batch,
         acm: AcmState::default(),
         dg: DstgState::default(),
         timpkd: out.timpkd,
@@ -691,7 +694,7 @@ fn replay_storm_parsed(
             &mut st.bk7,
             &st.ci,
             &mut st.cr,
-            &mut st.rs,
+            &mut st.batch,
             &mut st.acm,
         );
         // day_gen:3110-3112 converts the generated temps F -> C in

@@ -4,6 +4,7 @@
 //! the same inputs through the `inp.yaml`/CLI surface.
 
 use cligen::modes::{run_to_cli, RunInputs};
+use cligen::profile::GenerationProfile;
 use cligen::storm::SingleStormParams;
 use std::path::{Path, PathBuf};
 
@@ -200,6 +201,7 @@ fn goldens_reproduced_byte_identically() {
             iopt: g.iopt,
             interp: g.interp,
             burn: g.burn,
+            generation_profile: GenerationProfile::Faithful5323,
             begin_year: g.begin_year,
             years: g.years,
             par_bytes: &par_bytes,
