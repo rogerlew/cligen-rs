@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "description": "End-to-end equivalent legacy and runspec workloads. Legacy inputs are symlinked into a fresh target-only working directory for each process.",
+  "runspec_output_dir": "target/runspec-goldens",
+  "cases": [
+    {
+      "name": "new-meadows-id-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/new-meadows-id-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/new-meadows-id-seed0.cli",
+      "legacy": {
+        "argv": ["-iid106388.par"],
+        "stdin": "5\n1\n31\nwepp.cli\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/new-meadows-id/id106388.par", "name": "id106388.par"}]
+      }
+    },
+    {
+      "name": "new-meadows-id-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/new-meadows-id-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/new-meadows-id-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-iid106388.par"],
+        "stdin": "5\n1\n31\nwepp.cli\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/new-meadows-id/id106388.par", "name": "id106388.par"}]
+      }
+    },
+    {
+      "name": "jeogla-au-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/jeogla-au-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/jeogla-au-seed0.cli",
+      "legacy": {
+        "argv": ["-iASN00057011.par"],
+        "stdin": "5\n1\n42\nwepp.cli\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/jeogla-au/ASN00057011.par", "name": "ASN00057011.par"}]
+      }
+    },
+    {
+      "name": "jeogla-au-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/jeogla-au-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/jeogla-au-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-iASN00057011.par"],
+        "stdin": "5\n1\n42\nwepp.cli\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/jeogla-au/ASN00057011.par", "name": "ASN00057011.par"}]
+      }
+    },
+    {
+      "name": "mt-wilson-ca-observed-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/mt-wilson-ca-observed-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/mt-wilson-ca-observed-seed0.cli",
+      "legacy": {
+        "argv": ["-ica046006.par", "-Ows.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/mt-wilson-ca/ca046006.par", "name": "ca046006.par"},
+          {"source": "fixtures/mt-wilson-ca/ws.prn", "name": "ws.prn"}
+        ]
+      }
+    },
+    {
+      "name": "mt-wilson-ca-observed-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/mt-wilson-ca-observed-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/mt-wilson-ca-observed-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-ica046006.par", "-Ows.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/mt-wilson-ca/ca046006.par", "name": "ca046006.par"},
+          {"source": "fixtures/mt-wilson-ca/ws.prn", "name": "ws.prn"}
+        ]
+      }
+    },
+    {
+      "name": "fish-springs-ut-observed-padded-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/fish-springs-ut-observed-padded-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/fish-springs-ut-observed-padded-seed0.cli",
+      "legacy": {
+        "argv": ["-iut422852.par", "-Ows.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/fish-springs-ut/ut422852.par", "name": "ut422852.par"},
+          {"source": "fixtures/fish-springs-ut/ws.prn", "name": "ws.prn"}
+        ]
+      }
+    },
+    {
+      "name": "fish-springs-ut-observed-padded-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/fish-springs-ut-observed-padded-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/fish-springs-ut-observed-padded-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-iut422852.par", "-Ows.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/fish-springs-ut/ut422852.par", "name": "ut422852.par"},
+          {"source": "fixtures/fish-springs-ut/ws.prn", "name": "ws.prn"}
+        ]
+      }
+    },
+    {
+      "name": "fish-springs-ut-observed-truncated-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/fish-springs-ut-observed-truncated-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/fish-springs-ut-observed-truncated-seed0.cli",
+      "legacy": {
+        "argv": ["-iut422852.par", "-Ows-truncated.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/fish-springs-ut/ut422852.par", "name": "ut422852.par"},
+          {"source": "docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn", "name": "ws-truncated.prn"}
+        ]
+      }
+    },
+    {
+      "name": "fish-springs-ut-observed-truncated-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/fish-springs-ut-observed-truncated-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/fish-springs-ut-observed-truncated-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-iut422852.par", "-Ows-truncated.prn", "-owepp.cli", "-t6", "-I2"],
+        "stdin": "",
+        "output": "wepp.cli",
+        "inputs": [
+          {"source": "fixtures/fish-springs-ut/ut422852.par", "name": "ut422852.par"},
+          {"source": "docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn", "name": "ws-truncated.prn"}
+        ]
+      }
+    },
+    {
+      "name": "new-meadows-id-single-storm-seed0",
+      "runspec": "crates/cligen/tests/fixtures/runspec/new-meadows-id-single-storm-seed0/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/new-meadows-id-single-storm-seed0.cli",
+      "legacy": {
+        "argv": ["-iid106388.par", "-t4", "-owepp.cli"],
+        "stdin": "6 15 12\n2.25\n6.0\n0.4\n1.5\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/new-meadows-id/id106388.par", "name": "id106388.par"}]
+      }
+    },
+    {
+      "name": "new-meadows-id-single-storm-seed17",
+      "runspec": "crates/cligen/tests/fixtures/runspec/new-meadows-id-single-storm-seed17/inp.yaml",
+      "golden": "docs/work-packages/20260709-golden-fixture-harness/artifacts/goldens/new-meadows-id-single-storm-seed17.cli",
+      "legacy": {
+        "argv": ["-r17", "-iid106388.par", "-t4", "-owepp.cli"],
+        "stdin": "6 15 12\n2.25\n6.0\n0.4\n1.5\n",
+        "output": "wepp.cli",
+        "inputs": [{"source": "fixtures/new-meadows-id/id106388.par", "name": "id106388.par"}]
+      }
+    }
+  ]
+}
