@@ -108,6 +108,20 @@ impl PrnReader {
         })
     }
 
+    /// The observed record's first year — the source's `ioyr`
+    /// (`usr_opt:3572-3574`: `rewind`, `read(9,'(10x,i5)') ioyr`,
+    /// `backspace`): columns 11-15 of the first record, read without
+    /// consuming it (SPEC-OBSERVED-INPUT rev 2). An empty file fails
+    /// closed like a malformed field.
+    pub fn initial_year(&self) -> Result<i32, PrnError> {
+        let record = self.records.first().ok_or(PrnError::Field {
+            record: 1,
+            cols: (11, 15),
+            text: String::new(),
+        })?;
+        i_field(1, record, 10, 5)
+    }
+
     /// The `read(9,1000,end=199)` step: `Ok(None)` is end-of-file
     /// (the 5.323 `moveto = 225` path).
     ///

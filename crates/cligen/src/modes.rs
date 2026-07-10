@@ -344,3 +344,195 @@ pub fn day_gen(
         Ok(DayGenExit::YearComplete)
     }
 }
+
+// ---- wxr_gen orchestration + main-program run assembly (item 8) ----
+
+/// Typed run failure for the library orchestration.
+#[derive(Debug)]
+pub enum RunError {
+    Par(crate::par::ParError),
+    Prn(PrnError),
+    Storm(crate::storm::StormError),
+}
+
+impl std::fmt::Display for RunError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            RunError::Par(e) => write!(f, "{e}"),
+            RunError::Prn(e) => write!(f, "{e}"),
+            RunError::Storm(e) => write!(f, "{e}"),
+        }
+    }
+}
+
+impl std::error::Error for RunError {}
+
+/// The typed run inputs the SPEC-RUNSPEC surface resolves to
+/// (Stage C's serde layer produces this; the parity gate constructs
+/// it directly from the golden equivalence table).
+pub struct RunInputs<'a> {
+    /// Legacy `iopt` (4 | 5 | 6 | 7 on this surface).
+    pub iopt: i32,
+    /// Interpolation mode 0..3.
+    pub interp: i32,
+    /// The `-r` burn count.
+    pub burn: u32,
+    /// `simulation.begin_year` (None = legacy -1 sentinel).
+    pub begin_year: Option<i32>,
+    /// `simulation.years` (None = legacy -1 sentinel).
+    pub years: Option<i32>,
+    pub par_bytes: &'a [u8],
+    pub prn_bytes: Option<&'a [u8]>,
+    pub storm: Option<crate::storm::SingleStormParams>,
+    /// The version constant (`cligen.f:618`: 5.3230).
+    pub version: f32,
+    /// SPEC-RUNSPEC §Header echo — emitted verbatim.
+    pub command_echo: &'a str,
+}
+
+/// The full faithful run: main-program assembly (burn → station →
+/// option resolution → generation setup, `cligen.f:702-902`) +
+/// `wxr_gen` (`cligen.f:3589-3816`: header, year plan, day loops) +
+/// the run-end marker (`cligen.f:965-966`). Returns the `.cli` bytes.
+pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<String, RunError> {
+    use crate::output::{write_cli_header, write_daily_row, write_run_end, HeaderInputs};
+
+    // Seeds + burn (cligen.f:723-737).
+    let mut bk7 = Cbk7State::default();
+    bk7.burn(inp.burn);
+    // Station intake (sta_dat single-file path).
+    let par = crate::par::ParFile::parse(inp.par_bytes).map_err(RunError::Par)?;
+    let mut bk1 = Cbk1State::default();
+    let mut bk9 = Cbk9State::default();
+    let mut ci = CinterpState {
+        interp: inp.interp,
+        ..CinterpState::default()
+    };
+    let out = crate::par::sta_parms(&par, &mut bk7, &mut bk1, &mut bk9, &mut ci);
+    let mut bk4 = Cbk4State {
+        iopt: inp.iopt,
+        ..Cbk4State::default()
+    };
+    // usr_opt's observed pieces: open the stream, read ioyr
+    // (cligen.f:3557-3574).
+    let mut prn = match inp.prn_bytes {
+        Some(bytes) => Some(PrnReader::new(bytes).map_err(RunError::Prn)?),
+        None => None,
+    };
+    let ioyr = match &prn {
+        Some(reader) => reader.initial_year().map_err(RunError::Prn)?,
+        None => 0,
+    };
+    // sing_stm option resolution (typed intake; legacy -1 sentinels).
+    let ss_out = crate::storm::sing_stm(
+        ioyr,
+        inp.begin_year.unwrap_or(-1),
+        inp.years.unwrap_or(-1),
+        inp.storm.as_ref(),
+        &mut bk4,
+    )
+    .map_err(RunError::Storm)?;
+    let mut iyear = ss_out.iyear.unwrap_or(0);
+    // The header echoes the COMMAND-BLOCK numyr: -1 for storm modes
+    // (never defaulted there), the resolved value otherwise
+    // (SPEC-RUNSPEC §Header echo; wxr_gen:3728 reads command6 numyr).
+    let numyr_header = if inp.iopt == 4 || inp.iopt == 7 {
+        inp.years.unwrap_or(-1)
+    } else {
+        ss_out.numyr
+    };
+    let mut st = generation_setup(bk1, bk4, bk7, bk9, ci, out.ylt);
+
+    // ---- wxr_gen ----
+    let mut cli = String::new();
+    let mut nbt = 1;
+    if st.bk4.iopt >= 4 {
+        write_cli_header(
+            &mut cli,
+            &HeaderInputs {
+                version: inp.version,
+                igcode: par.igcode,
+                stidd: &par.stidd,
+                ylt: out.ylt,
+                yll: out.yll,
+                years: out.years,
+                elev: out.elev,
+                iopt: st.bk4.iopt,
+                irand: inp.burn as i32,
+                interp: st.ci.interp,
+                iyear,
+                numyr: numyr_header,
+                command_echo: inp.command_echo,
+            },
+            &st.bk7,
+            &st.bk4.nc,
+        );
+    }
+    // Year plan (wxr_gen:3758-3800).
+    let mut loop_years = ss_out.numyr;
+    let mut ntd1 = 0;
+    if st.bk4.iopt == 4 || st.bk4.iopt == 7 {
+        // The distinct iopt-4/7 nt test (note `.and.`, not
+        // `.and..not.` — transcribed, cligen.f:3759-3763).
+        st.bk4.nt = 0;
+        if iyear - iyear / 400 * 400 == 0
+            || (iyear - iyear / 4 * 4 == 0 && iyear - iyear / 100 * 100 == 0)
+        {
+            st.bk4.nt = 1;
+        }
+        let storm = inp.storm.as_ref().expect("sing_stm validated storm params");
+        ntd1 = crate::calendar::jdt(&st.bk4.nc, storm.jd, storm.mo, st.bk4.nt);
+        nbt = ntd1;
+        loop_years = 1;
+    }
+    let mut ii = 1;
+    let mut stopped = false;
+    loop {
+        let mut ntd = 365;
+        // Gregorian test on iyear (wxr_gen:3766-3770); `!= 0` renders
+        // the source's `.not.(mod-100 == 0)`.
+        if (st.bk4.iopt <= 3 || st.bk4.iopt == 5 || st.bk4.iopt == 6)
+            && (iyear - iyear / 400 * 400 == 0
+                || (iyear - iyear / 4 * 4 == 0 && iyear - iyear / 100 * 100 != 0))
+        {
+            ntd = 366;
+        }
+        st.ccl1.zero_year();
+        let mut rows = Vec::new();
+        let exit = day_gen(
+            nbt,
+            iyear,
+            &out.timpkd,
+            inp.storm.as_ref().unwrap_or(&Default::default()),
+            out.itype,
+            ntd1,
+            ntd,
+            prn.as_mut(),
+            &mut st,
+            &mut rows,
+        )
+        .map_err(RunError::Prn)?;
+        for row in &rows {
+            write_daily_row(&mut cli, row);
+        }
+        if exit == DayGenExit::Stop {
+            stopped = true;
+            break;
+        }
+        // opt_calc is a no-op for iopt >= 4 (characterized:
+        // cligen.f:3196-3324 has no branch past iopt = 3); moveto
+        // stays 0, so the year advances (wxr_gen:3784-3789).
+        iyear += 1;
+        ii += 1;
+        if ii > loop_years {
+            break;
+        }
+    }
+    // The run-end blank line is written only on normal termination
+    // (main:941-973: the moveto = 225 stop path closes unit 7 without
+    // it, cligen.f:978).
+    if !stopped {
+        write_run_end(&mut cli);
+    }
+    Ok(cli)
+}
