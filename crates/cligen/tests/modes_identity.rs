@@ -14,7 +14,7 @@ use cligen::cbk4::Cbk4State;
 use cligen::cbk7::Cbk7State;
 use cligen::cinterp::CinterpState;
 use cligen::modes::{day_gen, generation_setup, DailyRow, DayGenExit, CLT};
-use cligen::observed::PrnReader;
+use cligen::observed::{PrnDay, PrnError, PrnReader};
 use cligen::par::{sta_parms, ParFile};
 use cligen::storm::SingleStormParams;
 use std::path::{Path, PathBuf};
@@ -75,6 +75,293 @@ const CASES: [(&str, &str, Option<&str>, i32, i32, u32); 10] = [
         3,
         6,
         0,
+    ),
+];
+
+/// Every local full capture: inputs plus the independently recorded
+/// endpoint `(days, (year, month, day), day_gen exit)`.
+#[allow(clippy::type_complexity)]
+const FULL_CASES: [
+    (
+        &str,
+        &str,
+        Option<&str>,
+        i32,
+        i32,
+        u32,
+        usize,
+        (i32, i32, i32),
+        DayGenExit,
+    );
+    24
+] = [
+    (
+        "fish-springs-ut-observed-padded-I0",
+        "fish-springs-ut/ut422852.par",
+        Some("fixtures/fish-springs-ut/ws.prn"),
+        0,
+        6,
+        0,
+        2_557,
+        (2026, 12, 31),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I1",
+        "fish-springs-ut/ut422852.par",
+        Some("fixtures/fish-springs-ut/ws.prn"),
+        1,
+        6,
+        0,
+        2_557,
+        (2026, 12, 31),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-padded-I3",
+        "fish-springs-ut/ut422852.par",
+        Some("fixtures/fish-springs-ut/ws.prn"),
+        3,
+        6,
+        0,
+        2_557,
+        (2026, 12, 31),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed0",
+        "fish-springs-ut/ut422852.par",
+        Some("fixtures/fish-springs-ut/ws.prn"),
+        2,
+        6,
+        0,
+        2_557,
+        (2026, 12, 31),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-padded-seed17",
+        "fish-springs-ut/ut422852.par",
+        Some("fixtures/fish-springs-ut/ws.prn"),
+        2,
+        6,
+        17,
+        2_557,
+        (2026, 12, 31),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed0",
+        "fish-springs-ut/ut422852.par",
+        Some(
+            "docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn",
+        ),
+        2,
+        6,
+        0,
+        2_380,
+        (2026, 7, 7),
+        DayGenExit::Stop,
+    ),
+    (
+        "fish-springs-ut-observed-truncated-seed17",
+        "fish-springs-ut/ut422852.par",
+        Some(
+            "docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn",
+        ),
+        2,
+        6,
+        17,
+        2_380,
+        (2026, 7, 7),
+        DayGenExit::Stop,
+    ),
+    (
+        "jeogla-au-I1",
+        "jeogla-au/ASN00057011.par",
+        None,
+        1,
+        5,
+        0,
+        15_340,
+        (42, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "jeogla-au-I2",
+        "jeogla-au/ASN00057011.par",
+        None,
+        2,
+        5,
+        0,
+        15_340,
+        (42, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "jeogla-au-I3",
+        "jeogla-au/ASN00057011.par",
+        None,
+        3,
+        5,
+        0,
+        15_340,
+        (42, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "jeogla-au-seed0",
+        "jeogla-au/ASN00057011.par",
+        None,
+        0,
+        5,
+        0,
+        15_340,
+        (42, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "jeogla-au-seed17",
+        "jeogla-au/ASN00057011.par",
+        None,
+        0,
+        5,
+        17,
+        15_340,
+        (42, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "mt-wilson-ca-observed-I0",
+        "mt-wilson-ca/ca046006.par",
+        Some("fixtures/mt-wilson-ca/ws.prn"),
+        0,
+        6,
+        0,
+        7_670,
+        (2010, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "mt-wilson-ca-observed-I1",
+        "mt-wilson-ca/ca046006.par",
+        Some("fixtures/mt-wilson-ca/ws.prn"),
+        1,
+        6,
+        0,
+        7_670,
+        (2010, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "mt-wilson-ca-observed-I3",
+        "mt-wilson-ca/ca046006.par",
+        Some("fixtures/mt-wilson-ca/ws.prn"),
+        3,
+        6,
+        0,
+        7_670,
+        (2010, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "mt-wilson-ca-observed-seed0",
+        "mt-wilson-ca/ca046006.par",
+        Some("fixtures/mt-wilson-ca/ws.prn"),
+        2,
+        6,
+        0,
+        7_670,
+        (2010, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "mt-wilson-ca-observed-seed17",
+        "mt-wilson-ca/ca046006.par",
+        Some("fixtures/mt-wilson-ca/ws.prn"),
+        2,
+        6,
+        17,
+        7_670,
+        (2010, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-I1",
+        "new-meadows-id/id106388.par",
+        None,
+        1,
+        5,
+        0,
+        11_322,
+        (31, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-I2",
+        "new-meadows-id/id106388.par",
+        None,
+        2,
+        5,
+        0,
+        11_322,
+        (31, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-I3",
+        "new-meadows-id/id106388.par",
+        None,
+        3,
+        5,
+        0,
+        11_322,
+        (31, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-seed0",
+        "new-meadows-id/id106388.par",
+        None,
+        0,
+        5,
+        0,
+        11_322,
+        (31, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-seed17",
+        "new-meadows-id/id106388.par",
+        None,
+        0,
+        5,
+        17,
+        11_322,
+        (31, 12, 31),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-single-storm-seed0",
+        "new-meadows-id/id106388.par",
+        None,
+        0,
+        4,
+        0,
+        1,
+        (12, 6, 15),
+        DayGenExit::YearComplete,
+    ),
+    (
+        "new-meadows-id-single-storm-seed17",
+        "new-meadows-id/id106388.par",
+        None,
+        0,
+        4,
+        17,
+        1,
+        (12, 6, 15),
+        DayGenExit::YearComplete,
     ),
 ];
 
@@ -183,6 +470,12 @@ fn rows_equal_bits(a: &DailyRow, b: &DailyRow) -> bool {
         && a.tdp.to_bits() == b.tdp.to_bits()
 }
 
+struct RunSummary {
+    checked: usize,
+    last_day: Option<(i32, i32, i32)>,
+    final_exit: DayGenExit,
+}
+
 #[allow(clippy::too_many_arguments)]
 fn cold_start_run(
     case: &str,
@@ -193,7 +486,7 @@ fn cold_start_run(
     burn: u32,
     expect: &[DayExpect],
     max_days: Option<usize>,
-) -> usize {
+) -> RunSummary {
     let root = repo_root();
     let bytes = std::fs::read(root.join("fixtures").join(par_rel)).unwrap();
     let par = ParFile::parse(&bytes).unwrap();
@@ -233,6 +526,8 @@ fn cold_start_run(
     // Year plan from the captured B-lines.
     let mut checked = 0usize;
     let mut day_idx = 0usize;
+    let mut last_day = None;
+    let mut final_exit = DayGenExit::YearComplete;
     let limit = max_days.unwrap_or(expect.len()).min(expect.len());
     while day_idx < expect.len() {
         let e0 = &expect[day_idx];
@@ -254,8 +549,14 @@ fn cold_start_run(
             &mut rows,
         )
         .expect("fixture .prn records parse");
+        final_exit = exit;
+        let mut checked_this_call = 0usize;
         for row in &rows {
             if day_idx >= limit {
+                assert!(
+                    max_days.is_some(),
+                    "{case}: emitted rows after captured endpoint"
+                );
                 break;
             }
             let want = expected_row(&expect[day_idx]);
@@ -266,6 +567,15 @@ fn cold_start_run(
             );
             day_idx += 1;
             checked += 1;
+            checked_this_call += 1;
+            last_day = Some((row.iyear, row.mo, row.jd));
+        }
+        if max_days.is_none() && day_idx == expect.len() {
+            assert_eq!(
+                checked_this_call,
+                rows.len(),
+                "{case}: final day_gen call emitted rows after captured endpoint"
+            );
         }
         if day_idx >= limit {
             break;
@@ -281,7 +591,74 @@ fn cold_start_run(
             "{case}: run ended before all captured days were reproduced"
         );
     }
-    checked
+    RunSummary {
+        checked,
+        last_day,
+        final_exit,
+    }
+}
+
+#[test]
+fn prn_reader_pads_short_records_and_maps_blank_fields_to_zero() {
+    let short = format!("{}12", "x".repeat(15));
+    let blanks = format!("{}{}{}{}", "x".repeat(15), "     ", "  70 ", "     ");
+    let input = format!("{short}\n{blanks}\n");
+    let mut reader = PrnReader::new(input.as_bytes()).unwrap();
+    assert_eq!(
+        reader.next().unwrap(),
+        Some(PrnDay {
+            irida: 12,
+            itmxg: 0,
+            itmng: 0,
+        })
+    );
+    assert_eq!(
+        reader.next().unwrap(),
+        Some(PrnDay {
+            irida: 0,
+            itmxg: 70,
+            itmng: 0,
+        })
+    );
+    assert_eq!(reader.next().unwrap(), None);
+}
+
+#[test]
+fn prn_reader_rejects_nonnumeric_fields_and_non_ascii_input() {
+    let input = b"               12   70   40   \n               12   bad! 40   \n";
+    let mut reader = PrnReader::new(input).unwrap();
+    assert!(reader.next().unwrap().is_some());
+    let err = reader.next().unwrap_err();
+    match &err {
+        PrnError::Field { record, cols, text } => {
+            assert_eq!((*record, *cols), (2, (21, 25)));
+            assert_eq!(text, "bad! ");
+        }
+        PrnError::NotText => panic!("expected a field error"),
+    }
+    assert_eq!(
+        err.to_string(),
+        ".prn record 2 cols 21-25: unparseable field \"bad! \""
+    );
+
+    let err = PrnReader::new("               12   70   40   é".as_bytes()).unwrap_err();
+    assert!(matches!(err, PrnError::NotText));
+    assert_eq!(err.to_string(), ".prn file is not ASCII text");
+}
+
+#[test]
+fn prn_reader_treats_crlf_and_lf_records_identically() {
+    let lf = "               55   72   40   \n               0    41   24   \n";
+    let crlf = lf.replace('\n', "\r\n");
+    let read_all = |bytes: &[u8]| {
+        let mut reader = PrnReader::new(bytes).unwrap();
+        let mut days = Vec::new();
+        while let Some(day) = reader.next().unwrap() {
+            days.push(day);
+        }
+        days
+    };
+    assert_eq!(read_all(lf.as_bytes()), read_all(crlf.as_bytes()));
 }
 
 #[test]
@@ -304,7 +681,8 @@ fn cold_start_reproduces_first_year_from_samples() {
                 .join("wg-sample.tap"),
         );
         let n = expect.len().min(400);
-        total += cold_start_run(case, par_rel, prn_rel, interp, iopt, burn, &expect, Some(n));
+        total +=
+            cold_start_run(case, par_rel, prn_rel, interp, iopt, burn, &expect, Some(n)).checked;
     }
     assert!(total >= 3_000, "expected substantial coverage, got {total}");
 }
@@ -316,14 +694,40 @@ fn cold_start_full_runs_bit_identical() {
     let daily = root.join("docs/work-packages/20260709-daily-core-port/artifacts/tap-runs");
     let storm = root.join("docs/work-packages/20260709-storm-machinery-port/artifacts/tap-runs");
     let mut total = 0;
-    for (case, par_rel, prn_rel, interp, iopt, burn) in CASES {
+    for (
+        case,
+        par_rel,
+        prn_rel,
+        interp,
+        iopt,
+        burn,
+        expected_days,
+        expected_last_day,
+        expected_exit,
+    ) in FULL_CASES
+    {
         let expect = load_expectations(
             &daily.join(case).join("cligen_cg.tap"),
             &storm.join(case).join("cligen_sd.tap"),
             &daily.join(case).join("cligen_wg.tap"),
         );
-        total += cold_start_run(case, par_rel, prn_rel, interp, iopt, burn, &expect, None);
+        assert_eq!(expect.len(), expected_days, "{case}: capture day count");
+        let captured_last = expect.last().unwrap();
+        assert_eq!(
+            (captured_last.iyear, captured_last.mo, captured_last.jd),
+            expected_last_day,
+            "{case}: capture endpoint"
+        );
+        let summary = cold_start_run(case, par_rel, prn_rel, interp, iopt, burn, &expect, None);
+        assert_eq!(summary.checked, expected_days, "{case}: reproduced days");
+        assert_eq!(
+            summary.last_day,
+            Some(expected_last_day),
+            "{case}: reproduced endpoint"
+        );
+        assert_eq!(summary.final_exit, expected_exit, "{case}: final exit");
+        total += summary.checked;
     }
     println!("cold-start full replay: days={total}");
-    assert!(total > 80_000);
+    assert!(total > 180_000);
 }
