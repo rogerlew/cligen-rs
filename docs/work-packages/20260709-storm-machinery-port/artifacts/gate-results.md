@@ -1,4 +1,4 @@
-# Gate Results — Stage S
+# Gate Results — Stages S/C/R1
 
 Evidence mode: Ran (2026-07-09). Exit codes checked directly.
 
@@ -32,3 +32,26 @@ Evidence mode: Ran (2026-07-09). Exit codes checked directly.
 
 `alog` only, both chain sites (`dur`, `r5p`) — already pinned
 (`logf_pinned`, domain `1 − r1 ∈ (0,1)`). No new §1.3 adjudications.
+
+## Stage C and R1 final gates
+
+Evidence mode: Ran (2026-07-09). Each command's exit code was captured
+directly; no tolerance was introduced or widened.
+
+| Gate | Command | Result | Exit |
+|---|---|---|---:|
+| Format | `cargo fmt --check` | Clean | 0 |
+| Lints | `cargo clippy --all-targets -- -D warnings` | No warnings | 0 |
+| Tests | `cargo test` | 43 passed; seven evidence tests ignored by default | 0 |
+| RNG/deviates full replay | `cargo test --release --test tap_identity -- --ignored --nocapture` | 19,784,955 `randn`; 26,402,148 `dstn1`; 30,268 `dstg`; 2,584 `ranset`, all bit-identical | 0 |
+| Par/monthlies full replay | `cargo test --release --test par_state_identity -- --ignored --nocapture` | 380,436 `fouri2`; 275,452 `ryf2`; 36,889 `lintrp`, all bit-identical | 0 |
+| Daily full replay | `cargo test --release --test daily_identity -- --ignored --nocapture` | 189,207 days; 72,130 `alphb`; 24 `r5monb`, all bit-identical | 0 |
+| Storm full replay | `cargo test --release --test storm_identity -- --ignored --nocapture` | 189,207 days + 36,065 `timepk` calls across all 24 captures, all bit-identical | 0 |
+| Coverage | `cargo llvm-cov --workspace --lcov --output-path target/lcov.info` | LCOV report written; `sing_stm` 100% | 0 |
+| CRAP | `cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above` | 148 functions; none above CRAP 30 | 0 |
+| Storm manifest | Direct line-count + SHA-256 comparison against `tap-schema.md` | 48/48 sd/tp entries matched | 0 |
+
+The ordinary storm suite additionally anchors typed `sing_stm` intake to
+the committed `single-storm.inp`, exercises exact option-6 `-1`
+defaulting and typed deferrals, and checks the fixture-unreachable option-7
+override with explicitly labeled constructed arithmetic vectors.
