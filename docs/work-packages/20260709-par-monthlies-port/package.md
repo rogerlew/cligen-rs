@@ -1,6 +1,15 @@
 # Par Model + Monthlies Port
 
-Status: `SCAFFOLDED`
+Status: `STAGE-S-COMPLETE` (spine landed 2026-07-09; Stage C/R1 with
+Codex next — dispatch prompt at `artifacts/kickoff-codex.md`)
+Stage S outcome: Phase A characterizations recorded (intake path,
+round-trip adjudication → lexeme-preserving invariant); 24-run tap
+capture with 12-golden non-invasiveness gate; SPEC-PAR active;
+`ParFile`/`sta_parms`/`fouri1`/`ryf1` landed with the full-matrix
+snapshot identity gate (4 stations × interp {0,1,2,3}) and byte
+round-trip green; `Cbk7Seeds` renamed `Cbk7State`; `sinf_pinned` +
+`atanf_pinned` adjudicated (`libm::atanf` rejected on captured 1-ULP
+evidence — gate-results.md).
 Date: 2026-07-09
 Evidence mode: — (per stage on execution)
 Execution model: staged, two executors (the item-3 pattern, operator-
