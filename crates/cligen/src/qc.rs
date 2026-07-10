@@ -81,6 +81,33 @@ pub fn ks_tst(n: usize, cr: &mut Crandom3State) -> i32 {
     level1
 }
 
+/// The K-S verdict math over an explicit cumulative bin array — the
+/// same expressions as [`ks_tst`]'s live 20-bin branch, with no
+/// common-state read or write-back. Used by the `qc_filter: off`
+/// counterfactual diagnostics (SPEC-QUALITY-REPORT group P), which
+/// must not mutate generation state.
+pub fn ks_verdict(counts: &[i32; 20]) -> i32 {
+    let mut chi_n: i32 = 0;
+    for count in counts {
+        chi_n += count;
+    }
+    if chi_n < 100 {
+        return 0;
+    }
+    let mut e_chi = 0.05 * chi_n as f32;
+    let mut ks_cnt = counts[0];
+    let mut maxdif = (ks_cnt as f32 - e_chi).abs();
+    for i in 2..=20usize {
+        e_chi = (i as f32) * 0.05 * chi_n as f32;
+        ks_cnt += counts[i - 1];
+        let dif = (ks_cnt as f32 - e_chi).abs();
+        if maxdif < dif {
+            maxdif = dif;
+        }
+    }
+    i32::from(maxdif / libm::sqrtf(chi_n as f32) > 0.8276)
+}
+
 /// Confidence level for a sample mean — faithful `conflm`
 /// (`cligen.f:4589-4647`). All arithmetic remains f32.
 pub fn conflm(xbar: f32, n: i32, mu: f32, sigma: f32) -> f32 {

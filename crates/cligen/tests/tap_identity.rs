@@ -287,6 +287,7 @@ fn replay_rs_stream(path: &Path) -> usize {
             &mut sv,
             &mut acm,
             &mut cr,
+            cligen::profile::QcFilter::Faithful,
             &mut Default::default(),
         );
         assert_eq!(
@@ -604,6 +605,7 @@ fn ranset_fails_closed_on_fortran_month_zero_underrun() {
         &mut sv,
         &mut acm,
         &mut cr,
+        cligen::profile::QcFilter::Faithful,
         &mut Default::default(),
     );
 }

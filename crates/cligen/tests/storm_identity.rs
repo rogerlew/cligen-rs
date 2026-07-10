@@ -24,7 +24,7 @@ use cligen::fast_batch::MonthlyBatchBackend;
 use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
-use cligen::profile::GenerationProfile;
+use cligen::profile::{GenerationProfile, QcFilter};
 use cligen::rng::SeedState;
 use cligen::storm::{
     sing_stm, sing_stm_interactive_output_name, sing_stm_output_file_management, storm_block,
@@ -329,7 +329,11 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
         ..Cbk4State::default()
     };
     cligen::daily::r5monb(&bk4, &bk7, &mut bk9);
-    let batch = MonthlyBatchBackend::from_profile(GenerationProfile::Faithful5323, &bk7);
+    let batch = MonthlyBatchBackend::from_profile(
+        GenerationProfile::Faithful5323,
+        QcFilter::Faithful,
+        &bk7,
+    );
     Replay {
         bk1,
         bk3: Cbk3State::default(),

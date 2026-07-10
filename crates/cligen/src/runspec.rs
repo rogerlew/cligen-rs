@@ -14,7 +14,7 @@ use serde::Deserialize;
 use crate::modes::{run_to_cli, RunError, RunInputs, RunOutput};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
-use crate::profile::GenerationProfile;
+use crate::profile::{GenerationProfile, QcFilter};
 use crate::quality::{self, Provenance, QualityError};
 use crate::storm::SingleStormParams;
 
@@ -37,6 +37,10 @@ pub struct RunspecDocument {
     pub rng: RngSpec,
     #[serde(default)]
     pub generation_profile: GenerationProfile,
+    /// SPEC-RUNSPEC rev 5 / SPEC-GENERATION-PROFILES: the QC
+    /// conditioning policy. Rejected with `fast_batch_v0` (pre-knob).
+    #[serde(default)]
+    pub qc_filter: Option<QcFilter>,
     #[serde(default)]
     pub observed: Option<ObservedSpec>,
     #[serde(default)]
@@ -263,6 +267,8 @@ pub struct PreparedRun {
     pub years: Option<i32>,
     pub command_echo: String,
     pub storm: Option<SingleStormParams>,
+    /// Resolved `qc_filter` (default `Faithful`).
+    pub qc_filter: QcFilter,
     /// SPEC-RUNSPEC rev 4 `output.quality` (default true).
     pub quality: bool,
     par_bytes: Vec<u8>,
@@ -281,6 +287,7 @@ impl PreparedRun {
             interp: self.interpolation,
             burn: self.burn,
             generation_profile: self.generation_profile,
+            qc_filter: self.qc_filter,
             begin_year: self.begin_year,
             years: self.years,
             par_bytes: &self.par_bytes,
@@ -332,7 +339,9 @@ impl PreparedRun {
                 GenerationProfile::FastBatchV0 => "fast_batch_v0".to_owned(),
             },
             qc_filter: match self.generation_profile {
-                GenerationProfile::Faithful5323 => Some("faithful".to_owned()),
+                GenerationProfile::Faithful5323 => {
+                    Some(self.qc_filter.provenance_name().to_owned())
+                }
                 GenerationProfile::FastBatchV0 => None,
             },
             mode: match self.iopt {
@@ -460,6 +469,7 @@ impl RunspecDocument {
             )
         });
         let generation_profile = self.generation_profile;
+        let qc_filter = self.qc_filter.unwrap_or_default();
         Ok(PreparedRun {
             output_path: resolve_path(base_dir, output_lexical),
             overwrite: output.overwrite,
@@ -469,8 +479,9 @@ impl RunspecDocument {
             generation_profile,
             begin_year: fields.begin_year,
             years: fields.years,
-            command_echo: generation_profile.command_echo(command_echo),
+            command_echo: qc_filter.command_echo(generation_profile.command_echo(command_echo)),
             storm: fields.storm,
+            qc_filter,
             quality: output.quality.unwrap_or(true),
             par_bytes,
             prn_bytes: prn.map(|value| value.2),
@@ -494,6 +505,12 @@ impl RunspecDocument {
         if let Some(simulation) = &self.simulation {
             positive_year(simulation.begin_year, "simulation.begin_year")?;
             positive_year(simulation.years, "simulation.years")?;
+        }
+        if self.qc_filter.is_some() && self.generation_profile == GenerationProfile::FastBatchV0 {
+            return Err(invalid(
+                "qc_filter",
+                "is not accepted with generation_profile fast_batch_v0 (pre-knob profile, always unconditioned)",
+            ));
         }
         self.burn_value()?;
         if let Some(storm) = &self.single_storm {

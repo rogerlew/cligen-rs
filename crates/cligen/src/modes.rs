@@ -38,7 +38,7 @@ use crate::fast_batch::MonthlyBatchBackend;
 use crate::libm_pinned::{cosf_pinned, sinf_pinned};
 use crate::monthlies::lintrp;
 use crate::observed::{PrnError, PrnReader};
-use crate::profile::GenerationProfile;
+use crate::profile::{GenerationProfile, QcFilter};
 use crate::quality::process::ProcessCounters;
 use crate::quality::report::ProcessMetrics;
 use crate::rng::randn_observed;
@@ -152,6 +152,7 @@ pub fn generation_setup_with_profile(
         ci,
         ylt,
         profile,
+        QcFilter::Faithful,
         ProcessCounters::default(),
     )
 }
@@ -165,6 +166,7 @@ fn generation_setup_with_process(
     ci: CinterpState,
     ylt: f32,
     profile: GenerationProfile,
+    qc: QcFilter,
     mut process: ProcessCounters,
 ) -> GenState {
     let bk5 = Cbk5State {
@@ -205,7 +207,7 @@ fn generation_setup_with_process(
     bk7.v11 = randn_observed(&mut bk7.k9, 8, &mut process);
     bk7.msim = 1; // cligen.f:901-902
     bk7.nsim = 1;
-    let batch = MonthlyBatchBackend::from_profile(profile, &bk7);
+    let batch = MonthlyBatchBackend::from_profile(profile, qc, &bk7);
     GenState {
         bk1,
         bk3: Cbk3State::default(),
@@ -426,6 +428,9 @@ pub struct RunInputs<'a> {
     pub burn: u32,
     /// Explicit generation behavior profile from the runspec boundary.
     pub generation_profile: GenerationProfile,
+    /// The QC conditioning policy (SPEC-GENERATION-PROFILES §qc_filter);
+    /// `Faithful` preserves golden byte identity.
+    pub qc_filter: QcFilter,
     /// `simulation.begin_year` (None = legacy -1 sentinel).
     pub begin_year: Option<i32>,
     /// `simulation.years` (None = legacy -1 sentinel).
@@ -500,6 +505,7 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
         ci,
         out.ylt,
         inp.generation_profile,
+        inp.qc_filter,
         process,
     );
 
@@ -598,13 +604,13 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
         cli,
         process: st
             .process
-            .into_metrics(process_qc_filter(inp.generation_profile)),
+            .into_metrics(process_qc_filter(inp.generation_profile, inp.qc_filter)),
     })
 }
 
-fn process_qc_filter(profile: GenerationProfile) -> Option<String> {
+fn process_qc_filter(profile: GenerationProfile, qc: QcFilter) -> Option<String> {
     match profile {
-        GenerationProfile::Faithful5323 => Some("faithful".to_owned()),
+        GenerationProfile::Faithful5323 => Some(qc.provenance_name().to_owned()),
         GenerationProfile::FastBatchV0 => None,
     }
 }

@@ -7,8 +7,10 @@
 
 use serde::{Deserialize, Serialize};
 
-/// The published metric-vector revision.
-pub const METRICS_VERSION: u32 = 1;
+/// The published metric-vector revision. Version 2 (Q3,
+/// SPEC-QUALITY-REPORT rev 5) adds `process.counterfactual` — the
+/// `qc_filter: off` would-have-been QC verdicts.
+pub const METRICS_VERSION: u32 = 2;
 
 /// Twelve calendar-month cells in schema order.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -343,6 +345,13 @@ pub struct ProcessMetrics {
     /// Retry-cap give-up events (`iredo` reached 10,000,
     /// cligen.f:4302-4332): the still-failing batch was accepted.
     pub cap_give_ups: Vec<CapGiveUp>,
+    /// `qc_filter: off` only: the faithful K-S / mean / variance
+    /// verdicts evaluated diagnostically over the produced
+    /// (unconditioned) batches — the would-have-been-rejected price of
+    /// removing the conditioner. `null` under `faithful` and for
+    /// `fast_batch_v0` (whose batch stream lacks the source
+    /// predecessor chain the verdicts are defined over — SPEC rev 5).
+    pub counterfactual: Option<CounterfactualMetrics>,
     /// `bk7.v7 == 0.0` band-aid draws (cligen.f:1253).
     pub v7_recovery_count: u64,
     /// Tdew low-range corrections (cligen.f:1464-1467).
@@ -365,6 +374,26 @@ pub struct AcceptanceStatistics {
     /// Variance-confidence level returned by `confls`; `null` under the
     /// same conditions as `mean_level`.
     pub variance_level: Option<f32>,
+}
+
+/// The `qc_filter: off` diagnostic verdict counts.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct CounterfactualMetrics {
+    /// Batches evaluated (parameter × month refills, minus the
+    /// observed-mode parameter-9 bypass).
+    pub batches: u64,
+    /// Batches the faithful conditioner would have rejected.
+    pub would_reject: u64,
+    pub by_parameter: Vec<ParameterCounterfactual>,
+}
+
+/// Per-parameter counterfactual verdicts across months.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ParameterCounterfactual {
+    /// Source parameter number (1..=9).
+    pub parameter: u32,
+    pub batches: Months<u64>,
+    pub would_reject: Months<u64>,
 }
 
 /// Retry counts for one source parameter across months.

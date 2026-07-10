@@ -5,84 +5,285 @@
   "description": "SPEC-RUNSPEC revision 1. The Rust validator performs the source-calendar portion of date validation identified by x-cligen-source-calendar.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["cligen_runspec", "station", "mode", "output"],
+  "required": [
+    "cligen_runspec",
+    "station",
+    "mode",
+    "output"
+  ],
   "properties": {
-    "cligen_runspec": { "type": "integer", "const": 1 },
+    "cligen_runspec": {
+      "type": "integer",
+      "const": 1
+    },
     "station": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["par"],
-      "properties": { "par": { "$ref": "#/$defs/nonEmptyPath" } }
+      "required": [
+        "par"
+      ],
+      "properties": {
+        "par": {
+          "$ref": "#/$defs/nonEmptyPath"
+        }
+      }
     },
     "mode": {
       "type": "string",
-      "enum": ["continuous", "observed", "single_storm", "design_storm"]
+      "enum": [
+        "continuous",
+        "observed",
+        "single_storm",
+        "design_storm"
+      ]
     },
-    "simulation": { "$ref": "#/$defs/simulation" },
-    "rng": { "$ref": "#/$defs/rng" },
-    "generation_profile": { "$ref": "#/$defs/generationProfile" },
+    "simulation": {
+      "$ref": "#/$defs/simulation"
+    },
+    "rng": {
+      "$ref": "#/$defs/rng"
+    },
+    "generation_profile": {
+      "$ref": "#/$defs/generationProfile"
+    },
+    "qc_filter": {
+      "$ref": "#/$defs/qcFilter"
+    },
     "observed": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["prn"],
-      "properties": { "prn": { "$ref": "#/$defs/nonEmptyPath" } }
+      "required": [
+        "prn"
+      ],
+      "properties": {
+        "prn": {
+          "$ref": "#/$defs/nonEmptyPath"
+        }
+      }
     },
-    "single_storm": { "$ref": "#/$defs/singleStorm" },
-    "design_storm": { "$ref": "#/$defs/designStorm" },
+    "single_storm": {
+      "$ref": "#/$defs/singleStorm"
+    },
+    "design_storm": {
+      "$ref": "#/$defs/designStorm"
+    },
     "output": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["cli"],
+      "required": [
+        "cli"
+      ],
       "properties": {
-        "cli": { "$ref": "#/$defs/nonEmptyPath" },
-        "overwrite": { "type": "boolean", "default": false },
-        "command_echo": { "type": "string" },
-        "quality": { "type": "boolean", "default": true }
+        "cli": {
+          "$ref": "#/$defs/nonEmptyPath"
+        },
+        "overwrite": {
+          "type": "boolean",
+          "default": false
+        },
+        "command_echo": {
+          "type": "string"
+        },
+        "quality": {
+          "type": "boolean",
+          "default": true
+        }
       }
     }
   },
   "allOf": [
     {
-      "if": { "properties": { "mode": { "const": "continuous" } }, "required": ["mode"] },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "continuous"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
       "then": {
-        "required": ["simulation"],
-        "properties": { "simulation": { "required": ["begin_year", "years"] } },
-        "not": { "anyOf": [{ "required": ["observed"] }, { "required": ["single_storm"] }, { "required": ["design_storm"] }] }
+        "required": [
+          "simulation"
+        ],
+        "properties": {
+          "simulation": {
+            "required": [
+              "begin_year",
+              "years"
+            ]
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "observed"
+              ]
+            },
+            {
+              "required": [
+                "single_storm"
+              ]
+            },
+            {
+              "required": [
+                "design_storm"
+              ]
+            }
+          ]
+        }
       }
     },
     {
-      "if": { "properties": { "mode": { "const": "observed" } }, "required": ["mode"] },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "observed"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
       "then": {
-        "required": ["observed"],
-        "not": { "anyOf": [{ "required": ["single_storm"] }, { "required": ["design_storm"] }] }
+        "required": [
+          "observed"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "single_storm"
+              ]
+            },
+            {
+              "required": [
+                "design_storm"
+              ]
+            }
+          ]
+        }
       }
     },
     {
-      "if": { "properties": { "mode": { "const": "single_storm" } }, "required": ["mode"] },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "single_storm"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
       "then": {
-        "required": ["single_storm"],
-        "not": { "anyOf": [{ "required": ["simulation"] }, { "required": ["observed"] }, { "required": ["design_storm"] }] }
+        "required": [
+          "single_storm"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "simulation"
+              ]
+            },
+            {
+              "required": [
+                "observed"
+              ]
+            },
+            {
+              "required": [
+                "design_storm"
+              ]
+            }
+          ]
+        }
       }
     },
     {
-      "if": { "properties": { "mode": { "const": "design_storm" } }, "required": ["mode"] },
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "design_storm"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
       "then": {
-        "required": ["design_storm"],
-        "not": { "anyOf": [{ "required": ["simulation"] }, { "required": ["observed"] }, { "required": ["single_storm"] }] }
+        "required": [
+          "design_storm"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "simulation"
+              ]
+            },
+            {
+              "required": [
+                "observed"
+              ]
+            },
+            {
+              "required": [
+                "single_storm"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "generation_profile": {
+            "const": "fast_batch_v0"
+          }
+        },
+        "required": [
+          "generation_profile"
+        ]
+      },
+      "then": {
+        "not": {
+          "required": [
+            "qc_filter"
+          ]
+        }
       }
     }
   ],
   "$defs": {
-    "nonEmptyPath": { "type": "string", "minLength": 1 },
+    "nonEmptyPath": {
+      "type": "string",
+      "minLength": 1
+    },
     "simulation": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "begin_year": { "type": "integer", "minimum": 1 },
-        "years": { "type": "integer", "minimum": 1 },
+        "begin_year": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "years": {
+          "type": "integer",
+          "minimum": 1
+        },
         "interpolation": {
           "type": "string",
-          "enum": ["none", "linear", "fourier", "monthly_mean_preserving"],
+          "enum": [
+            "none",
+            "linear",
+            "fourier",
+            "monthly_mean_preserving"
+          ],
           "default": "none"
         }
       }
@@ -90,25 +291,89 @@
     "rng": {
       "type": "object",
       "additionalProperties": false,
-      "properties": { "burn": { "type": "integer", "minimum": 0, "default": 0 } }
+      "properties": {
+        "burn": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        }
+      }
     },
     "generationProfile": {
       "type": "string",
-      "enum": ["faithful_5_32_3", "fast_batch_v0"],
+      "enum": [
+        "faithful_5_32_3",
+        "fast_batch_v0"
+      ],
       "default": "faithful_5_32_3"
     },
     "stormDate": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["month", "day", "year"],
+      "required": [
+        "month",
+        "day",
+        "year"
+      ],
       "properties": {
-        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
-        "day": { "type": "integer", "minimum": 1, "maximum": 31 },
-        "year": { "type": "integer" }
+        "month": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "day": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 31
+        },
+        "year": {
+          "type": "integer"
+        }
       },
       "allOf": [
-        { "if": { "properties": { "month": { "enum": [4, 6, 9, 11] } }, "required": ["month"] }, "then": { "properties": { "day": { "maximum": 30 } } } },
-        { "if": { "properties": { "month": { "const": 2 } }, "required": ["month"] }, "then": { "properties": { "day": { "maximum": 29 } } } }
+        {
+          "if": {
+            "properties": {
+              "month": {
+                "enum": [
+                  4,
+                  6,
+                  9,
+                  11
+                ]
+              }
+            },
+            "required": [
+              "month"
+            ]
+          },
+          "then": {
+            "properties": {
+              "day": {
+                "maximum": 30
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "month": {
+                "const": 2
+              }
+            },
+            "required": [
+              "month"
+            ]
+          },
+          "then": {
+            "properties": {
+              "day": {
+                "maximum": 29
+              }
+            }
+          }
+        }
       ],
       "x-cligen-source-calendar": "For a February 29 date, the Rust boundary applies wxr_gen:3758-3763 exactly: leap iff year - year/400*400 == 0 OR (year - year/4*4 == 0 AND year - year/100*100 == 0)."
     },
@@ -125,23 +390,55 @@
     "singleStorm": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["date", "amount_in", "duration_h", "time_to_peak_fraction", "max_intensity_in_per_h"],
+      "required": [
+        "date",
+        "amount_in",
+        "duration_h",
+        "time_to_peak_fraction",
+        "max_intensity_in_per_h"
+      ],
       "properties": {
-        "date": { "$ref": "#/$defs/stormDate" },
-        "amount_in": { "$ref": "#/$defs/positiveF32" },
-        "duration_h": { "$ref": "#/$defs/positiveF32" },
-        "time_to_peak_fraction": { "$ref": "#/$defs/fractionF32" },
-        "max_intensity_in_per_h": { "$ref": "#/$defs/positiveF32" }
+        "date": {
+          "$ref": "#/$defs/stormDate"
+        },
+        "amount_in": {
+          "$ref": "#/$defs/positiveF32"
+        },
+        "duration_h": {
+          "$ref": "#/$defs/positiveF32"
+        },
+        "time_to_peak_fraction": {
+          "$ref": "#/$defs/fractionF32"
+        },
+        "max_intensity_in_per_h": {
+          "$ref": "#/$defs/positiveF32"
+        }
       }
     },
     "designStorm": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["date", "amount_in"],
+      "required": [
+        "date",
+        "amount_in"
+      ],
       "properties": {
-        "date": { "$ref": "#/$defs/stormDate" },
-        "amount_in": { "$ref": "#/$defs/positiveF32" }
+        "date": {
+          "$ref": "#/$defs/stormDate"
+        },
+        "amount_in": {
+          "$ref": "#/$defs/positiveF32"
+        }
       }
+    },
+    "qcFilter": {
+      "type": "string",
+      "enum": [
+        "faithful",
+        "off"
+      ],
+      "default": "faithful",
+      "description": "QC conditioning policy (SPEC-GENERATION-PROFILES). Not accepted with generation_profile fast_batch_v0 (pre-knob profile)."
     }
   }
 }

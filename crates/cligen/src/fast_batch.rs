@@ -10,7 +10,7 @@ use crate::acm::AcmState;
 use crate::cbk4::Cbk4State;
 use crate::cbk7::Cbk7State;
 use crate::crandom3::{Crandom3State, NRELEM, NRPARM};
-use crate::profile::GenerationProfile;
+use crate::profile::{GenerationProfile, QcFilter};
 use crate::quality::process::ProcessCounters;
 use crate::rng::{ranset, RansetState};
 
@@ -22,17 +22,19 @@ use crate::rng::{ranset, RansetState};
 /// fast branch rejects a month outside the source's 1-based range.
 #[derive(Debug, Clone)]
 pub enum MonthlyBatchBackend {
-    /// Source-authority `ranset`, including its SAVE state and QC retries.
-    Faithful(RansetState),
-    /// Explicitly divergent four-lane uniform-batch producer.
+    /// Source-authority `ranset` with its SAVE state and the QC
+    /// conditioning policy (SPEC-GENERATION-PROFILES §qc_filter).
+    Faithful(RansetState, QcFilter),
+    /// Explicitly divergent four-lane uniform-batch producer
+    /// (pre-knob; always unconditioned).
     FastBatchV0(FastBatchState),
 }
 
 impl MonthlyBatchBackend {
     /// Construct the selected backend after the faithful burn and warm draws.
-    pub fn from_profile(profile: GenerationProfile, seeds: &Cbk7State) -> Self {
+    pub fn from_profile(profile: GenerationProfile, qc: QcFilter, seeds: &Cbk7State) -> Self {
         match profile {
-            GenerationProfile::Faithful5323 => Self::Faithful(RansetState::default()),
+            GenerationProfile::Faithful5323 => Self::Faithful(RansetState::default(), qc),
             GenerationProfile::FastBatchV0 => Self::FastBatchV0(FastBatchState::from_seeds(seeds)),
         }
     }
@@ -50,7 +52,9 @@ impl MonthlyBatchBackend {
         process: &mut ProcessCounters,
     ) {
         match self {
-            Self::Faithful(state) => ranset(ntd, iyear, bk4, seeds, state, acm, cr, process),
+            Self::Faithful(state, qc) => {
+                ranset(ntd, iyear, bk4, seeds, state, acm, cr, *qc, process);
+            }
             Self::FastBatchV0(state) => state.refill(cr),
         }
     }

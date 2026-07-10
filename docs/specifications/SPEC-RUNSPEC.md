@@ -1,6 +1,9 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 4 — `output.quality` accepted 2026-07-10 by the
+Status: active (rev 5 — `qc_filter: faithful | off` accepted
+2026-07-10 by the Q3 package `20260710-q3-qc-filter-dissection`,
+schema rev landing with the implementation; rejected with
+`fast_batch_v0`. Rev 4 — `output.quality` accepted 2026-07-10 by the
 Q1 package `20260710-q1-quality-report`, the schema rev landing with
 the implementation per the F3 discipline; rev 3 — `fast_batch_v0`
 profile selector added 2026-07-10;
@@ -110,6 +113,14 @@ generation_profile: faithful_5_32_3  # optional, default. See
                                       # `fast_batch_v1` is a draft only and
                                       # is rejected in this revision.
 
+qc_filter: faithful             # optional, default faithful (rev 5):
+                                # faithful | off — the QC conditioning
+                                # policy (SPEC-GENERATION-PROFILES).
+                                # `off` appends `--qc-filter off` to the
+                                # header echo. REJECTED with
+                                # generation_profile fast_batch_v0
+                                # (pre-knob, always unconditioned).
+
 observed:                       # required iff mode: observed
   prn: ws.prn                   # the observed series
                                 # (SPEC-OBSERVED-INPUT; A3 adds a
@@ -153,6 +164,7 @@ output:
 | `simulation.years` | integer ≥ 1 where accepted |
 | `rng.burn` | integer ≥ 0 |
 | `generation_profile` | closed enum: `faithful_5_32_3` (default) or the explicitly labeled extension `fast_batch_v0` (SPEC-GENERATION-PROFILES) |
+| `qc_filter` | closed enum: `faithful` (default) or `off` (rev 5); rejected under `generation_profile: fast_batch_v0` |
 | `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode (§Year plan; validated before `jdt` so no assertion is reachable) |
 | `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible, > 0 |
 | `time_to_peak_fraction` | finite f32-convertible in (0, 1] |
@@ -166,11 +178,10 @@ values — is a typed validation error.
 The draft [`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) defines the proposed
 successor to the experimental profile and its ADR-0002 quality assessment. It
 does not amend this schema: `fast_batch_v1` must fail closed until a
-later runspec revision accepts it. The same holds for the `qc_filter` policy
-knob (SPEC-GENERATION-PROFILES rev 3): a declared contract, rejected by this
-schema revision until the Q3 implementation package accepts it. The
-`output.quality` opt-out (SPEC-QUALITY-REPORT) is **accepted as of rev 4**,
-its schema rev landing with the Q1 implementation.
+later runspec revision accepts it. The `qc_filter` policy knob
+(SPEC-GENERATION-PROFILES) is **accepted as of rev 5** (Q3 implementation),
+and the `output.quality` opt-out (SPEC-QUALITY-REPORT) **as of rev 4**
+(Q1) — each schema rev landing with its implementation.
 
 ## Year plan (normative, per mode)
 

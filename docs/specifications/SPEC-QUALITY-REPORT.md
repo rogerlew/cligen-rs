@@ -1,6 +1,15 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: active (rev 4 — R1 finding C-R1-003 dispositioned in Stage
+Status: active (rev 5 — Q3 implements the `qc_filter: off`
+counterfactual: **metrics_version 2** adds `process.counterfactual`
+(would-have-been K-S/mean/variance verdicts over the produced
+batches, evaluated against a parallel diagnostic copy of the QC
+state — generation state untouched). Ruling on the record:
+`fast_batch_v0` reports keep `counterfactual: null` — the faithful
+verdicts are defined over the source's rolling-predecessor batch
+stream, which the v0 producer does not have; a batch-line
+counterfactual surface, if ever needed, belongs to the v1 promotion
+work. Rev 4 — R1 finding C-R1-003 dispositioned in Stage
 R2: counterfactual QC verdicts, including `fast_batch_v0`'s, begin
 with Q3, which owns their metrics-version consequence; metrics_version
 1 carries none. Rev 3 — ratified by the implementing package
@@ -75,7 +84,7 @@ reports; `cligen quality` reports them as `null`.
   with its `n_years`); JSON keys are emitted in schema order. A given
   `.cli` + `.par` yields a byte-reproducible report.
 
-## Metric groups (`metrics_version: 1`)
+## Metric groups (`metrics_version: 2`)
 
 All per-month groups key on calendar month over the whole run and
 additionally per decade block (`by_decade`), so 30- vs 100-year

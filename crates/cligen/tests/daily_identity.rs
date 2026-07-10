@@ -27,7 +27,7 @@ use cligen::fast_batch::MonthlyBatchBackend;
 use cligen::libm_pinned::{cosf_pinned, sinf_pinned};
 use cligen::monthlies::lintrp;
 use cligen::par::{sta_parms, ParFile};
-use cligen::profile::GenerationProfile;
+use cligen::profile::{GenerationProfile, QcFilter};
 use cligen::rng::SeedState;
 use std::path::{Path, PathBuf};
 
@@ -357,7 +357,11 @@ fn setup(par_rel: &str, interp: i32, iopt: i32) -> Replay {
     {
         bk1.pi2 = 6.283185;
     }
-    let batch = MonthlyBatchBackend::from_profile(GenerationProfile::Faithful5323, &bk7);
+    let batch = MonthlyBatchBackend::from_profile(
+        GenerationProfile::Faithful5323,
+        QcFilter::Faithful,
+        &bk7,
+    );
     Replay {
         bk1,
         bk3: Cbk3State::default(),

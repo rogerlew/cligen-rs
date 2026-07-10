@@ -23,8 +23,9 @@ use crate::cbk4::Cbk4State;
 use crate::cbk7::Cbk7State;
 use crate::crandom3::Crandom3State;
 use crate::deviates::dstn1;
-use crate::qc::{conflm, confls, ks_tst};
-use crate::quality::process::ProcessCounters;
+use crate::profile::QcFilter;
+use crate::qc::{conflm, confls, ks_tst, ks_verdict};
+use crate::quality::process::{DiagnosticQc, ProcessCounters};
 
 /// One generator stream's seed state — the Fortran `k(4)` array.
 ///
@@ -331,6 +332,7 @@ pub fn ranset(
     state: &mut RansetState,
     acm: &mut AcmState,
     cr: &mut Crandom3State,
+    qc: QcFilter,
     process: &mut ProcessCounters,
 ) {
     assert!(ntd > 0, "ranset: ntd must be positive");
@@ -341,9 +343,37 @@ pub fn ranset(
     );
     let month = (cr.mox - 1) as usize;
     let dimi = ranset_month_days(cr.mox, ntd);
-    cr.g_dimi[month] += dimi as i32;
     initialize_ranset_streams(seeds, state, cr, process);
 
+    if qc == QcFilter::Off {
+        // SPEC-GENERATION-PROFILES §qc_filter `off`: every produced
+        // batch is accepted; RANDN, the streams, the column-5/9 masks,
+        // and the `ell` chain stay source-shaped — only the
+        // accept/retry loop and its QC accumulation (`g_dimi`,
+        // `add_ranset_attempt`) are skipped. The faithful verdicts are
+        // evaluated diagnostically over a parallel accumulator owned
+        // by group P; generation state is never touched by them.
+        process.diagnostic.g_dimi[month] += dimi as i32;
+        for j in 0..9 {
+            let attempt =
+                generate_ranset_parameter(j, dimi, month, bk4.iopt, seeds, state, cr, process);
+            if bk4.iopt == 6 && j == 8 {
+                continue; // the observed-mode statistics bypass
+            }
+            let reject = counterfactual_would_reject(
+                j,
+                month,
+                &attempt,
+                cr.thresh[j],
+                cr.thres2[j],
+                process,
+            );
+            process.record_counterfactual(j, month, reject);
+        }
+        return;
+    }
+
+    cr.g_dimi[month] += dimi as i32;
     let mut iredo = 0i32;
     let ellx = state.ell;
     for j in 0..9 {
@@ -382,6 +412,49 @@ pub fn ranset(
             }
         }
     }
+}
+
+/// The `qc_filter: off` counterfactual: accumulate the attempt into
+/// the diagnostic copy of the QC state and evaluate the faithful
+/// verdict expressions over it — the same math as
+/// [`add_ranset_attempt`] + [`ranset_quality_levels`], operating on
+/// [`DiagnosticQc`] storage only.
+fn counterfactual_would_reject(
+    j: usize,
+    month: usize,
+    attempt: &MonthAttempt,
+    thresh: f32,
+    thres2: f32,
+    process: &mut ProcessCounters,
+) -> bool {
+    let diag: &mut DiagnosticQc = &mut process.diagnostic;
+    for ichi in 0..20 {
+        diag.chicnt[j][month][ichi] += attempt.chisum[ichi];
+    }
+    if is_normal_parameter(j) {
+        diag.g_dsum[j][month] += attempt.ransum as f64;
+        diag.g_ssum[j][month] += attempt.x2sum as f64;
+    }
+    if j == 4 {
+        diag.g_dimp[month] += attempt.ldimp;
+    }
+    let level1 = ks_verdict(&diag.chicnt[j][month]);
+    if !is_normal_parameter(j) || level1 != 0 {
+        return level1 > 0;
+    }
+    let n = if j == 4 {
+        diag.g_dimp[month]
+    } else {
+        diag.g_dimi[month]
+    };
+    let g_davg = if n > 0 {
+        (diag.g_dsum[j][month] / (n as f32) as f64) as f32
+    } else {
+        0.0
+    };
+    let level = conflm(g_davg, n, 0.0, 1.0);
+    let level2 = confls(diag.g_ssum[j][month] as f32, n, &mut diag.acm);
+    level > thresh || level2 > thres2
 }
 
 #[cfg(test)]

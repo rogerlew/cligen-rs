@@ -51,6 +51,7 @@ fn new_meadows_run_output() -> RunOutput {
         interp: 0,
         burn: 0,
         generation_profile: GenerationProfile::Faithful5323,
+        qc_filter: cligen::profile::QcFilter::Faithful,
         begin_year: Some(1),
         years: Some(31),
         par_bytes: &par,
