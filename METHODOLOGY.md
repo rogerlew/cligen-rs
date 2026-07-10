@@ -173,7 +173,52 @@ adjudication, and every package closure — and dispatched each stage.
 Every stage, finding, fix, and gate result is in the work-package
 record with command-level evidence.
 
-## 5. Why one day was possible
+## 5. The substrate everything above stands on: a persistent, mutable, shared workspace
+
+Nothing in §§1–4 works the way much of agentic-AI practice is
+currently organized — ephemeral sessions in which the conversation is
+the memory, the human is the only carrier of state between sessions,
+and knowledge dies with the context window. This project's substrate
+is different, and because it is the part of the methodology its
+authors most take for granted, it gets named explicitly:
+
+- **The repository is the working memory.** AI context windows are
+  finite and were treated as disposable by design: sessions ended and
+  fresh ones began throughout the day, across two vendors' models.
+  Every dispatch began "work from the repository record — do not
+  assume prior session memory," and that was sufficient, because each
+  work package carries its plan, scope, authority citations, evidence
+  artifacts, review findings, dispositions, and gate results. The
+  record is not documentation *about* the work; it is the medium the
+  work happened in.
+- **A forward-only queue.** [`docs/ROADMAP.md`](docs/ROADMAP.md) holds
+  only what is next; completed items leave it and live in the package
+  record. Any agent, human, or auditor gets the project's exact state
+  in one read, with no archaeology through stale status.
+- **Dispatch as committed artifact.** The inter-agent protocol was
+  git, not shared context. Each stage's handoff and kickoff prompt was
+  written into the package *after* the code it cites had landed, then
+  dispatched by the operator into the other model's fresh session. The
+  two AI systems never shared a context window; they coordinated
+  exclusively through the record — which is precisely why the §4
+  cross-review had teeth (the reviewer's only channel to the author's
+  reasoning was the same evidence a future auditor has), and why any
+  stage was resumable by any session at any time.
+- **The environment learns.** The workspace is mutable in the strong
+  sense: process failures became committed policy, in the same medium
+  the next session reads, within hours of occurring. A stage executed
+  on an unstated branch at one package's review became a standing
+  dispatch rule in the package template; the math-library divergence
+  became coding-standard §1.3; a lint-vs-fidelity collision became the
+  faithful-shape suppression rule. The ratchet turns one way because
+  the lessons live where the executors live.
+
+The models mattered (§6). But the substrate is what let capability
+compound instead of dissipate: the same models operating in ephemeral
+sessions, with a human relaying context by hand, would have produced
+fluent volume, no record — and, by §3's own standard, no credibility.
+
+## 6. Why one day was possible
 
 For the historical record, the speed had identifiable causes, none of
 which involve skipped verification:
@@ -215,7 +260,7 @@ Timeline (all 2026-07-09, from the git record):
 | 20:54 | Observed mode closed | `ea84199` |
 | 21:57 | Output surface + runspec CLI closed: **faithful port complete** | `1e79c31` |
 
-## 6. What is established, and what is not
+## 7. What is established, and what is not
 
 Established, with re-runnable evidence: the Rust faithful mode
 reproduces the pinned CLIGEN 5.32.3 reference build bit-for-bit on the
@@ -247,7 +292,7 @@ Not established, stated plainly:
   *labeled* extensions behind versioned generation profiles — never
   silent.
 
-## 7. The code's register: non-idiomatic by design, and a landing point
+## 8. The code's register: non-idiomatic by design, and a landing point
 
 A Rust programmer opening `crates/cligen/src/` will find distinctly
 non-idiomatic code: Fortran-shaped short symbols (`mox`, `iarrct`,
@@ -285,7 +330,7 @@ engine rather than forced onto the faithful core — contorting the
 verification substrate to be ergonomic would spend its one
 non-negotiable property, which is that it looks like its specification.
 
-## 8. Check it yourself
+## 9. Check it yourself
 
 Skeptical review is welcome; the repository is built for it.
 
