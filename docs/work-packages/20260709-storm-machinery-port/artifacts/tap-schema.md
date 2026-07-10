@@ -28,9 +28,10 @@ GNU Fortran (Homebrew GCC 14.2.0_1) 14.2.0
 
 ### `cligen_tp.tap` — unit 84, one record per `timepk` call
 
-`T iopt dax k10(4i5) Z(z) Z(timepk)` — entry `iopt`/`dax`/`k10`, the
-drawn/batch uniform, and the result. `iopt = 6` records advance `k10`
-(fresh `randn`); all others read `zx(dax)` and leave `k10` untouched.
+`T iopt dax k10(4i5) Z(z) Z(timepk)` — `iopt`/`dax`, the **exit**
+`k10` state (the record is written before return: post-draw under
+`iopt = 6`, unchanged on the batch path), the drawn/batch uniform, and
+the result.
 
 ## Capture matrix and non-invasiveness (Ran)
 

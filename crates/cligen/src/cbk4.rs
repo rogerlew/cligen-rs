@@ -20,12 +20,18 @@
 //! | `iopt` | `iopt` | generator option (1..7 in production) | flag |
 
 /// Incremental owning struct for common `/bk4/`.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Cbk4State {
     pub nc: [i32; 13],
     pub nt: i32,
     pub mo: i32,
     pub iopt: i32,
+    /// `dtp(4)` — design-storm time-to-peak by `itype` (block data
+    /// `cligen.f:1065`; consumed only by the `iopt = 7` override).
+    pub dtp: [f32; 4],
+    /// `dmxi(4)` — set by block data (`cligen.f:1066`), never read
+    /// (source's own comment); carried for block completeness.
+    pub dmxi: [f32; 4],
 }
 
 impl Default for Cbk4State {
@@ -39,6 +45,9 @@ impl Default for Cbk4State {
             mo: 0,
             // Block data, cligen.f:1083.
             iopt: -1,
+            // Block data, cligen.f:1065-1066.
+            dtp: [0.4, 0.32, 0.5, 0.5],
+            dmxi: [18.24, 5.76, 32.88, 20.16],
         }
     }
 }

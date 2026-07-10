@@ -26,6 +26,7 @@ pub mod monthlies;
 pub mod par;
 pub mod qc;
 pub mod rng;
+pub mod storm;
 
 /// The CLIGEN version this port is faithful to.
 pub const REFERENCE_VERSION: &str = "5.32.3";
