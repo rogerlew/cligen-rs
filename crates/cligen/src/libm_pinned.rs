@@ -6,9 +6,14 @@
 //!   families); `atanf` is fdlibm/SunPro (Copyright (C) 1993 Sun
 //!   Microsystems — "Permission to use, copy, modify, and distribute
 //!   this software is freely granted, provided that this notice is
-//!   preserved."), via glibc 2.39 sysdeps/ieee754/flt-32/s_atanf.c —
-//!   license provenance for the SunPro origin flagged for Stage R1
-//!   review (par package)
+//!   preserved."), float conversion by Ian Lance Taylor (Cygnus),
+//!   via NetBSD s_atanf.c rev 1.4 carried in glibc 2.39
+//!   sysdeps/ieee754/flt-32/s_atanf.c. Provenance adjudicated: every
+//!   protectable expression is Sun/NetBSD under the SunPro notice;
+//!   the sole glibc-era element is the 2^25 huge-arg threshold
+//!   (functional bug-fix constant, glibc commit 9a71f1fc, BZ #18196).
+//!   Full record + license text: par package artifacts
+//!   (atanf-sunpro-provenance.md, fdlibm-sunpro-LICENSE.txt)
 //! Migration-Method: algorithm transcription, behavior-verified against
 //!   the reference build's runtime (glibc 2.39, x86-64 FMA ifunc
 //!   variants) over the full tap capture — 26,402,148 dstn1 records,

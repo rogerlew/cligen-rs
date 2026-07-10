@@ -81,8 +81,10 @@ the Stage S spine — transcription fidelity against source lines
 `ryf2` leap-February `xes` indexing), precision-map compliance (this
 package must be REAL*4-clean; any f64 site is a finding), EQUIVALENCE
 and state-translation compliance, SPEC-PAR fitness for the A4
-consumers, the `atanf_pinned` SunPro-license provenance note, and
-test/evidence alignment. Findings (numbered, severity, line evidence)
+consumers, verification of the recorded `atanf_pinned` provenance
+adjudication (`artifacts/atanf-sunpro-provenance.md` — check the
+lineage evidence and the disposition reasoning, not redo the fetches),
+and test/evidence alignment. Findings (numbered, severity, line evidence)
 to `artifacts/review-codex.md`; fix accepted findings before handback.
 
 Evidence discipline per AGENTS.md throughout (Ran vs Static, commands

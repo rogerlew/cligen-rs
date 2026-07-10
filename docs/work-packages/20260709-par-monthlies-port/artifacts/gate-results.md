@@ -71,6 +71,15 @@ surface (non-text, record count, corrupt numeric field).
   binary and the golden binary link the same system libm (build
   provenance in tap-manifest.md), so system-libm identity is
   reference-runtime identity.
+- Post-spine provenance closure (operator-directed, same day): the
+  sweep matrix was extended to the huge band ±[2^25, +∞] including
+  exact infinities and the 0x4C000000 boundary (421,788 pairs, 0
+  mismatches) plus NaN passthrough; the NetBSD rev 1.4 original was
+  fetched and diffed (lineage + license adjudication in
+  atanf-sunpro-provenance.md). Hazard caught while doing so: GCC
+  `-O2` MPFR constant folding can contaminate C libm probes — pair
+  dumps must be built `-fno-builtin` (full note in the provenance
+  artifact).
 
 ## Precision census confirmation
 

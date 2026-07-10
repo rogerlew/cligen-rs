@@ -109,8 +109,17 @@ cargo crap --workspace --lcov target/lcov.info --exclude 'tests/**' --fail-above
 
 ## Open items the spine leaves deliberately
 
-- `atanf_pinned` SunPro-license provenance note (module header) →
-  Stage R1, alongside the existing ARM-upstream provenance record.
+- ~~`atanf_pinned` SunPro-license provenance~~ **RESOLVED post-spine
+  (operator-directed, 2026-07-09)**: NetBSD rev 1.4 original fetched
+  and diffed against the glibc 2.39 carrier — all protectable
+  expression is Sun/NetBSD under the SunPro notice; the single
+  glibc-era element (2^25 huge-arg threshold, commit 9a71f1fc,
+  BZ #18196) is dispositioned as an uncopyrightable functional
+  constant, and the transcription is sweep-verified against the
+  reference runtime across the reduction band, the huge band, ±inf,
+  and NaN. See `atanf-sunpro-provenance.md` +
+  `fdlibm-sunpro-LICENSE.txt`. R1 now *verifies this record* instead
+  of performing the adjudication.
 - The canonical `.par` renderer (SPEC-PAR §Serialization invariant 2)
   is specified but deliberately unimplemented — A4 surface, not
   Stage C.

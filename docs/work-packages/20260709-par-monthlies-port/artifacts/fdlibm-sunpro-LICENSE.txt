@@ -1,0 +1,17 @@
+SunPro (fdlibm) license notice, preserved per its own terms.
+
+Applies to: the algorithm and constants transcribed into
+crates/cligen/src/libm_pinned.rs `atanf_pinned` — origin Sun fdlibm
+s_atan.c, float conversion by Ian Lance Taylor (Cygnus Support),
+carried as NetBSD src/lib/libm/src/s_atanf.c rev 1.4 and
+glibc 2.39 sysdeps/ieee754/flt-32/s_atanf.c (full lineage and
+adjudication: atanf-sunpro-provenance.md in this directory).
+
+ ====================================================
+ Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+
+ Developed at SunPro, a Sun Microsystems, Inc. business.
+ Permission to use, copy, modify, and distribute this
+ software is freely granted, provided that this notice
+ is preserved.
+ ====================================================
