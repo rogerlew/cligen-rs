@@ -12,7 +12,6 @@ port-parity-tested is unverifiable.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 4 | **Par model + monthlies** | Typed `.par` parse/serialize (SPEC-PAR); `lintrp`/Fourier interpolation | Parsed values and interpolated dailies match Fortran to declared tolerance (exact where precision map allows) |
 | 5 | **Daily core** | `clgen` + `alph(b)` + `r5mon(b)` | Faithful-mode daily trajectories identical through the fixture year set |
 | 6 | **Storm machinery** | `timepk`, `sing_stm`, duration/Ipeak chain; changelog-derived pinned tests | Trajectory identity incl. event durations/intensities; single-storm mode parity |
 | 7 | **Observed mode** | `day_gen` (`.prn` path) | Observed-mode fixture parity incl. the 5.323 EOF case |
@@ -24,6 +23,6 @@ port-parity-tested is unverifiable.
 | A5 | **Storm-model extensions** | Modified duration/intensity derivation; NOAA design-storm curves | Each behind its own versioned generation profile |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
-Items 4–8 are the remaining faithful-mode port. A-items are augmentations
+Items 5–8 are the remaining faithful-mode port. A-items are augmentations
 and may reorder on demand; A1 is first among them because every later
 extension wants the provenance substrate.

@@ -1,7 +1,7 @@
 # Par Model + Monthlies Port
 
-Status: `STAGE-R1-COMPLETE` (Stage C implementation/gates and Codex R1
-landed 2026-07-09; awaiting Claude Code Stage R2 — package remains open)
+Status: `EXECUTED-COMPLETE` (Stage R2 closed 2026-07-09;
+`artifacts/final-review-claude.md`)
 Stage S outcome: Phase A characterizations recorded (intake path,
 round-trip adjudication → lexeme-preserving invariant); 24-run tap
 capture with 12-golden non-invasiveness gate; SPEC-PAR active;
@@ -141,7 +141,7 @@ cannot meet bit-identity within the REAL*4 map (stop and characterize).
 - `artifacts/tap-schema.md` (extension), tap patch + manifest
 - `artifacts/par-roundtrip-adjudication.md`
 - `artifacts/intake-path-characterization.md`
-- `artifacts/atanf-pinned-provenance.md`
+- `artifacts/atanf-pinned-provenance.md`, `artifacts/fdlibm-sunpro-LICENSE.txt`
 - `artifacts/spine-handoff.md`, `artifacts/kickoff-codex.md`
 - `artifacts/review-codex.md`, `artifacts/final-review-claude.md`
 - `artifacts/gate-results.md`
