@@ -28,7 +28,7 @@ machinery without an ADR.
 
 | Spec | Surface | Status |
 |---|---|---|
-| SPEC-PAR | Station parameter (`.par`) format + typed par model | planned |
+| [SPEC-PAR](SPEC-PAR.md) | Station parameter (`.par`) format + typed par model | active |
 | SPEC-CLI-TEXT | `.cli` text output (WEPP-compatible) | planned |
 | [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
 | SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |

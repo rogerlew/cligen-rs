@@ -106,7 +106,8 @@ raw bytes for emission.
   renderer is SPEC-PAR-specified surface for A4 (no implementation
   debt taken now beyond the spec).
 
-## Ran evidence
+## Ran evidence (2026-07-09)
 
-**IN FLIGHT** — filled by gate-results.md when
-`par_roundtrip_fixture_bytes` runs against all four fixtures.
+`par_roundtrip_fixture_bytes` passed against all four fixture `.par`
+files (`to_bytes(parse(b)) == b`), and `par_parse_fails_closed` pins
+the fail-closed surface. Gate transcript in gate-results.md.

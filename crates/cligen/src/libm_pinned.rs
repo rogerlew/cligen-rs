@@ -2,7 +2,13 @@
 //!
 //! Origin-Class: ARM-optimized-routines
 //!   (MIT OR Apache-2.0 WITH LLVM-exception)
-//! Copyright: 2017-2025 Arm Limited (`logf`, `cosf`, `exp` families)
+//! Copyright: 2017-2025 Arm Limited (`logf`, `cosf`, `sinf`, `exp`
+//!   families); `atanf` is fdlibm/SunPro (Copyright (C) 1993 Sun
+//!   Microsystems — "Permission to use, copy, modify, and distribute
+//!   this software is freely granted, provided that this notice is
+//!   preserved."), via glibc 2.39 sysdeps/ieee754/flt-32/s_atanf.c —
+//!   license provenance for the SunPro origin flagged for Stage R1
+//!   review (par package)
 //! Migration-Method: algorithm transcription, behavior-verified against
 //!   the reference build's runtime (glibc 2.39, x86-64 FMA ifunc
 //!   variants) over the full tap capture — 26,402,148 dstn1 records,
@@ -205,6 +211,152 @@ pub fn cosf_pinned(y: f32) -> f32 {
         let s = p.sign[(n & 3) as usize];
         let p = sincos_table(n & 2 != 0);
         sinf_poly(xr * s, xr * xr, &p, n ^ 1)
+    }
+}
+
+/// Faithful `sinf` — glibc/ARM single-precision sine
+/// (sysdeps/ieee754/flt-32/s_sinf.c, same `s_sincosf.h` machinery as
+/// [`cosf_pinned`]), for `fouri1`'s harmonic arguments
+/// (`6.2832·i·j/12 ∈ (0, 37.7]`; the sole faithful-path caller).
+///
+/// # Panics
+/// Outside `|x| < 120` (the `reduce_large` branch is not needed by any
+/// generator path and is deliberately not carried).
+pub fn sinf_pinned(y: f32) -> f32 {
+    let x = y as f64;
+    let p = sincos_table(false);
+    let at = abstop12(y);
+    if at < abstop12(f32::from_bits(0x3F49_0FDB)) {
+        // |y| < π/4
+        if at < abstop12(f32::from_bits(0x3980_0000)) {
+            return y; // |y| < 2^-12: sin(y) rounds to y
+        }
+        sinf_poly(x, x * x, &p, 0)
+    } else {
+        assert!(
+            at < abstop12(120.0f32),
+            "sinf_pinned: |x| >= 120 outside faithful domain"
+        );
+        let (xr, n) = reduce_fast(x, &p);
+        let s = p.sign[(n & 3) as usize];
+        let p = sincos_table(n & 2 != 0);
+        sinf_poly(xr * s, xr * xr, &p, n)
+    }
+}
+
+// ------ atanf (glibc sysdeps/ieee754/flt-32/s_atanf.c, fdlibm) ------
+
+/// `atanhi[]` — atan(0.5/1.0/1.5/inf) high parts. Upstream decimals
+/// 4.6364760399e-01, 7.8539812565e-01, 9.8279368877e-01,
+/// 1.5707962513e+00; stored as the exact IEEE-754 bits the source
+/// comments pin.
+const ATANF_HI: [f32; 4] = [
+    f32::from_bits(0x3EED_6338),
+    f32::from_bits(0x3F49_0FDA),
+    f32::from_bits(0x3F7B_985E),
+    f32::from_bits(0x3FC9_0FDA),
+];
+
+/// `atanlo[]` — low parts (upstream 5.0121582440e-09, 3.7748947079e-08,
+/// 3.4473217170e-08, 7.5497894159e-08).
+const ATANF_LO: [f32; 4] = [
+    f32::from_bits(0x31AC_3769),
+    f32::from_bits(0x3322_2168),
+    f32::from_bits(0x3314_0FB4),
+    f32::from_bits(0x33A2_2168),
+];
+
+/// `aT[]` — glibc's **11-term** float polynomial (the SunPro double
+/// coefficients rounded to float). Bits are those the compiled decimal
+/// literals actually produce: the source's own `/* 0x3eaaaaaa */`
+/// comment on `aT[0]` is stale — `3.3333334327e-01` rounds to
+/// 0x3EAAAAAB (verified against the compiled object). The `libm` crate
+/// carries the 5-term reduced float port instead — that polynomial
+/// difference is the observed 1-ULP divergence, not FMA contraction
+/// (the reference host has no FMA; glibc's ifunc resolves the plain
+/// SSE2 build).
+const ATANF_AT: [f32; 11] = [
+    f32::from_bits(0x3EAA_AAAB),
+    f32::from_bits(0xBE4C_CCCD),
+    f32::from_bits(0x3E12_4925),
+    f32::from_bits(0xBDE3_8E38),
+    f32::from_bits(0x3DBA_2E6E),
+    f32::from_bits(0xBD9D_8795),
+    f32::from_bits(0x3D88_6B35),
+    f32::from_bits(0xBD6E_F16B),
+    f32::from_bits(0x3D4B_DA59),
+    f32::from_bits(0xBD15_A221),
+    f32::from_bits(0x3C85_69D7),
+];
+
+/// Faithful `atanf` — glibc 2.39 `sysdeps/ieee754/flt-32/s_atanf.c`
+/// (fdlibm/SunPro, 11-term polynomial), transcribed with **plain f32
+/// ops, no contraction**: the reference runtime resolves the ifunc to
+/// the non-FMA SSE2 build on the pinned host, and this transcription
+/// (as its C original, compiled `-O2` without FMA) matched the system
+/// `atanf` on a 56,253,020-input sweep of the full reduction domain
+/// (adjudication record in the par package's gate-results.md).
+///
+/// Domain: total for finite/NaN/±∞ inputs, as upstream — `fouri1`'s
+/// `atan(-b/a)` legitimately reaches ±∞ (constant-adjacent monthly
+/// series) and NaN (0/0 on constant series), and the algorithm's own
+/// handling is the faithful behavior.
+pub fn atanf_pinned(x: f32) -> f32 {
+    let hx = x.to_bits() as i32;
+    let ix = hx & 0x7fff_ffff;
+    if ix >= 0x4c00_0000 {
+        // |x| >= 2^25: NaN passthrough or ±(atan(inf)hi + atan(inf)lo)
+        if ix > 0x7f80_0000 {
+            return x + x;
+        }
+        return if hx > 0 {
+            ATANF_HI[3] + ATANF_LO[3]
+        } else {
+            -ATANF_HI[3] - ATANF_LO[3]
+        };
+    }
+    let (xr, id): (f32, i32) = if ix < 0x3ee0_0000 {
+        // |x| < 0.4375
+        if ix < 0x3100_0000 {
+            // |x| < 2^-29: `huge+x > one` always holds numerically
+            return x;
+        }
+        (x, -1)
+    } else {
+        let ax = x.abs();
+        if ix < 0x3f98_0000 {
+            // |x| < 1.1875
+            if ix < 0x3f30_0000 {
+                // 7/16 <= |x| < 11/16
+                ((2.0 * ax - 1.0) / (2.0 + ax), 0)
+            } else {
+                // 11/16 <= |x| < 19/16
+                ((ax - 1.0) / (ax + 1.0), 1)
+            }
+        } else if ix < 0x401c_0000 {
+            // |x| < 2.4375
+            ((ax - 1.5) / (1.0 + 1.5 * ax), 2)
+        } else {
+            // 2.4375 <= |x| < 2^25
+            (-1.0 / ax, 3)
+        }
+    };
+    // s1/s2: the source's odd/even split of the 11-term sum
+    let z = xr * xr;
+    let w = z * z;
+    let a = &ATANF_AT;
+    let s1 = z * (a[0] + w * (a[2] + w * (a[4] + w * (a[6] + w * (a[8] + w * a[10])))));
+    let s2 = w * (a[1] + w * (a[3] + w * (a[5] + w * (a[7] + w * a[9]))));
+    if id < 0 {
+        xr - xr * (s1 + s2)
+    } else {
+        let id = id as usize;
+        let zr = ATANF_HI[id] - ((xr * (s1 + s2) - ATANF_LO[id]) - xr);
+        if hx < 0 {
+            -zr
+        } else {
+            zr
+        }
     }
 }
 

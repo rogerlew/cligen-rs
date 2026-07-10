@@ -20,7 +20,7 @@
 
 use crate::acm::AcmState;
 use crate::cbk4::Cbk4State;
-use crate::cbk7::Cbk7Seeds;
+use crate::cbk7::Cbk7State;
 use crate::crandom3::Crandom3State;
 use crate::deviates::dstn1;
 use crate::qc::{conflm, confls, ks_tst};
@@ -28,7 +28,7 @@ use crate::qc::{conflm, confls, ks_tst};
 /// One generator stream's seed state — the Fortran `k(4)` array.
 ///
 /// `k[0]` is Fortran `k(1)`. The ten production streams (`k1`..`k10`)
-/// live in [`crate::cbk7::Cbk7Seeds`].
+/// live in [`crate::cbk7::Cbk7State`].
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SeedState(pub [i32; 4]);
 
@@ -113,7 +113,7 @@ fn ranset_month_days(mox: i32, ntd: i32) -> usize {
 }
 
 fn initialize_ranset_streams(
-    seeds: &mut Cbk7Seeds,
+    seeds: &mut Cbk7State,
     state: &mut RansetState,
     cr: &mut Crandom3State,
 ) {
@@ -148,7 +148,7 @@ fn draw_ranset_value(
     i: usize,
     month: usize,
     iopt: i32,
-    seeds: &mut Cbk7Seeds,
+    seeds: &mut Cbk7State,
     state: &mut RansetState,
     cr: &Crandom3State,
     ldimp: &mut i32,
@@ -190,7 +190,7 @@ fn generate_ranset_parameter(
     dimi: usize,
     month: usize,
     iopt: i32,
-    seeds: &mut Cbk7Seeds,
+    seeds: &mut Cbk7State,
     state: &mut RansetState,
     cr: &mut Crandom3State,
 ) -> MonthAttempt {
@@ -300,7 +300,7 @@ pub fn ranset(
     ntd: i32,
     iyear: i32,
     bk4: &Cbk4State,
-    seeds: &mut Cbk7Seeds,
+    seeds: &mut Cbk7State,
     state: &mut RansetState,
     acm: &mut AcmState,
     cr: &mut Crandom3State,

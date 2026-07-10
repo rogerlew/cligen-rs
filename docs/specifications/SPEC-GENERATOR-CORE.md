@@ -1,6 +1,6 @@
 # SPEC-GENERATOR-CORE — Seed/State Surface and Faithful-Mode Shapes
 
-Status: active (rev 2, Stage C of the RNG/deviates package)
+Status: active (rev 3, Stage S of the par+monthlies package)
 Surface: the generator core's state ownership and function-signature
 conventions — the patterns every ported unit follows.
 
@@ -18,10 +18,13 @@ lines per the ratified decomposition.
   incrementally: a block's struct is created by the first package that
   ports one of its units and gains fields as later packages port
   theirs. Current homes: [`Crandom3State`] (`crandom3.inc`, complete),
-  [`Cbk7Seeds`] (`cbk7.inc`, seed members plus the `prw` and rolling
-  deviate fields needed by `ranset`; the par package extends the block's
-  remaining station-parameter fields), and [`Cbk4State`] (`cbk4.inc`,
-  currently the `iopt` slice).
+  [`Cbk7State`] (`cbk7.inc`: seeds, `prw`, rolling deviate fields, and
+  the station-parameter arrays — renamed from `Cbk7Seeds` when the par
+  package landed the block's station fields; remaining generation
+  scratch arrives with daily/modes), [`Cbk4State`] (`cbk4.inc`,
+  currently the `iopt` slice), [`Cbk1State`] (`cbk1.inc`, the
+  `sta_parms` slice), [`Cbk9State`] (`cbk9.inc`, the `wi` slice), and
+  [`CinterpState`] (`cinterp.inc`, complete).
 - **Unit-local `SAVE` state** is a per-unit struct named `<Unit>State`
   (`DstgState`, `RansetState`, `DinvrState`, `DzrorState`), owned by the
   caller and passed `&mut`. The ACM ENTRY pairs share their host-unit
@@ -32,11 +35,11 @@ lines per the ratified decomposition.
 ## Seeds
 
 - [`SeedState`] is one stream's `k(4)` integer state. The ten
-  production streams live in [`Cbk7Seeds`] with block-data defaults
+  production streams live in [`Cbk7State`] with block-data defaults
   (`cligen.f:1054-1063`).
-- The `-rN` selector maps to `Cbk7Seeds::burn(n)` — n discarded draws
+- The `-rN` selector maps to `Cbk7State::burn(n)` — n discarded draws
   from `k1..k9`, `k10` deliberately excluded (`cligen.f:723-737`).
-- Stream assignments are documented on `Cbk7Seeds`; `k7` is the
+- Stream assignments are documented on `Cbk7State`; `k7` is the
   intensity/`dstg` stream and, after the main program's single warm
   draw, is consumed exclusively by `dstg`.
 

@@ -10,12 +10,17 @@
 
 pub mod acm;
 pub mod calendar;
+pub mod cbk1;
 pub mod cbk4;
 pub mod cbk7;
+pub mod cbk9;
+pub mod cinterp;
 pub mod cli_diff;
 pub mod crandom3;
 pub mod deviates;
 pub mod libm_pinned;
+pub mod monthlies;
+pub mod par;
 pub mod qc;
 pub mod rng;
 

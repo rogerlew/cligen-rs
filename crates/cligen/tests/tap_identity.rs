@@ -8,7 +8,7 @@
 
 use cligen::acm::AcmState;
 use cligen::cbk4::Cbk4State;
-use cligen::cbk7::Cbk7Seeds;
+use cligen::cbk7::Cbk7State;
 use cligen::crandom3::Crandom3State;
 use cligen::deviates::{dstg, dstn1, DstgState};
 use cligen::rng::{randn, ranset, RansetState, SeedState};
@@ -193,7 +193,7 @@ fn parse_rs_stream(path: &Path) -> Vec<RsRec> {
     records
 }
 
-fn seed_matrix(seeds: &Cbk7Seeds) -> [[i32; 4]; 10] {
+fn seed_matrix(seeds: &Cbk7State) -> [[i32; 4]; 10] {
     [
         seeds.k1.0,
         seeds.k2.0,
@@ -208,7 +208,7 @@ fn seed_matrix(seeds: &Cbk7Seeds) -> [[i32; 4]; 10] {
     ]
 }
 
-fn set_seed_matrix(seeds: &mut Cbk7Seeds, values: [[i32; 4]; 10]) {
+fn set_seed_matrix(seeds: &mut Cbk7State, values: [[i32; 4]; 10]) {
     seeds.k1 = SeedState(values[0]);
     seeds.k2 = SeedState(values[1]);
     seeds.k3 = SeedState(values[2]);
@@ -226,7 +226,7 @@ fn replay_rs_stream(path: &Path) -> usize {
     if records.is_empty() {
         return 0;
     }
-    let mut seeds = Cbk7Seeds::default();
+    let mut seeds = Cbk7State::default();
     set_seed_matrix(&mut seeds, records[0].entry_seeds);
     let mut sv = RansetState::default();
     let mut acm = AcmState::default();
@@ -545,7 +545,7 @@ fn burn_and_warm_draw_reach_first_dstg_state() {
                 .next()
                 .unwrap(),
         );
-        let mut seeds = Cbk7Seeds::default();
+        let mut seeds = Cbk7State::default();
         if case.ends_with("seed17") {
             seeds.burn(17);
         }
@@ -573,7 +573,7 @@ fn ranset_replays_fortran_tap_samples() {
 #[should_panic(expected = "mox=0/out-of-range")]
 fn ranset_fails_closed_on_fortran_month_zero_underrun() {
     let bk4 = Cbk4State { iopt: 5 };
-    let mut seeds = Cbk7Seeds::default();
+    let mut seeds = Cbk7State::default();
     let mut sv = RansetState::default();
     let mut acm = AcmState::default();
     let mut cr = Crandom3State::default();
