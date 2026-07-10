@@ -12,7 +12,6 @@ port-parity-tested is unverifiable.
 
 | # | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 8 | **`.cli` writer, orchestration, and the `cligen` CLI** | `wxr_gen`/`opt_calc` year-loop port; output formatting (Fortran FORMAT rounding); SPEC-RUNSPEC `inp.yaml` binary — **no legacy argv/stdin interface** (ratified, SPEC-RUNSPEC §Non-goals) | `cligen run` on the 12 golden runspecs reproduces the golden `.cli` files byte-identically; `cligen validate` fail-closed tests green |
 | A1 | **Provenance + `.cli.parquet`** (SPEC-PROVENANCE, SPEC-CLI-PARQUET) | Generation-profile block; parquet writer with provenance columns | Spec ratified; openWEPP-side consumption is openWEPP's package |
 | A2 | **Native f64 mode** | Uniform-f64 engine; measured faithful↔native divergence characterization | Divergence documented per variable; profile `native-f64-v1` |
 | A3 | **Observed parquet input + single-pass substitution + leap-year imputation** (SPEC-OBSERVED-INPUT) | f64 parquet observed series; variable replacement in one pass; leap-day handling | Spec + fixtures; kills the flatfile→wepppyo3→flatfile round-trip |
@@ -20,6 +19,8 @@ port-parity-tested is unverifiable.
 | A5 | **Storm-model extensions** | Modified duration/intensity derivation; NOAA design-storm curves | Each behind its own versioned generation profile |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
-Item 8 is the remaining faithful-mode port. A-items are augmentations
-and may reorder on demand; A1 is first among them because every later
-extension wants the provenance substrate.
+**The faithful-mode port (items 1-8) is complete** (2026-07-09,
+`20260709-output-cli-port`): `cligen run` on the 12 golden runspecs
+reproduces the golden `.cli` files byte-identically. A-items are
+augmentations and may reorder on demand; A1 is first among them
+because every later extension wants the provenance substrate.

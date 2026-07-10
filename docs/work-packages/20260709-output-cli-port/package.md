@@ -1,11 +1,14 @@
 # Output Writer, Orchestration, and the `cligen` CLI
 
-Status: `STAGE-C-COMPLETE` — runspec/CLI boundary executed and gated;
-12/12 golden `.cli` files reproduce byte-identically through `cligen
-run`; R1 cross-review found no findings. Awaiting Claude Code R2
-closure (`artifacts/review-codex.md`).
+Status: `EXECUTED-COMPLETE` — 12/12 golden `.cli` byte parity through
+`cligen run`; descriptor sweeps clean (57.3M fields); validate vectors
+green; R1 (no findings) and R2 dispositioned
+(`artifacts/final-review-claude.md`). **Closes ROADMAP items 1-8: the
+faithful-mode port is complete.**
 Date: 2026-07-09
-Evidence mode: Stage S **executional** (`artifacts/gate-results.md`)
+Evidence mode: **executional** — Stage S (`artifacts/gate-results.md`),
+Stage C (`artifacts/stage-c-report.md`), R2 gates re-run independently
+(`artifacts/final-review-claude.md`)
 Execution model: staged, two executors (the item-3..7 pattern) —
 Claude Code writes the design-setting spine; Codex completes and runs
 gates; each reviews the other; Claude closes with Stage R2.
