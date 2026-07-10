@@ -247,7 +247,45 @@ Not established, stated plainly:
   *labeled* extensions behind versioned generation profiles — never
   silent.
 
-## 7. Check it yourself
+## 7. The code's register: non-idiomatic by design, and a landing point
+
+A Rust programmer opening `crates/cligen/src/` will find distinctly
+non-idiomatic code: Fortran-shaped short symbols (`mox`, `iarrct`,
+`k7`), `k[1] = 3 * k[1]` where an idiomatic author would write `*=`,
+sequential range checks instead of `clamp`, the literal `6.283185`
+where the standard library offers `TAU`, and wide `&mut` state-struct
+parameter lists threading what were once common blocks. This is
+disclosed plainly, with the contention that it is a *register*, not
+sloppiness — and the difference is checkable.
+
+The faithful core's intended reader holds `cligen.f` in the other
+hand. Source-shape is the correct register for that reader
+permanently: it is what makes line-for-line verification — the §2
+acceptance regime, and any future auditor's independent read —
+tractable. The trade was written down as policy *before the code
+existed* (the coding standard's naming and state-translation rules),
+and it is enforced per-line: every deviation from Rust idiom carries a
+citation to the source line it mirrors, and every lint suppression is
+individual, justified, and cited. Unaccountable deviation is what
+makes generated code slop; here, "why is this line like this?" always
+has an answer of the form `cligen.f:NNNN`.
+
+The faithful core is also a **landing point, not the destination
+architecture**. Two already-planned futures draw the boundary. The
+extension surfaces — the typed parameter model, the parquet outputs,
+the Python API, the runspec CLI — are written for readers who hold no
+Fortran, and are held to ordinary idiomatic standards; the codebase is
+*supposed* to read as two registers. And when the planned native-f64
+mode arrives as an idiomatic, borrow-checker-natural engine, the
+faithful core is expected to graduate from product to **oracle**: the
+executable specification the new engine is verified against, exactly
+the role the Fortran serves for the Rust today. The
+extensible-architecture question is deliberately deferred to that
+engine rather than forced onto the faithful core — contorting the
+verification substrate to be ergonomic would spend its one
+non-negotiable property, which is that it looks like its specification.
+
+## 8. Check it yourself
 
 Skeptical review is welcome; the repository is built for it.
 
