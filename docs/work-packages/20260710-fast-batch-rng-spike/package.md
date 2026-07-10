@@ -1,6 +1,7 @@
 # Fast Batch RNG Profile Spike
 
-Status: `EXECUTED-COMPLETE` (12-case benchmark and all gates passed)
+Status: `EXECUTED-COMPLETE` (review dispositions, F2 FMA-host evidence, and
+all gates recorded)
 Date: 2026-07-10
 Evidence mode: Mixed
 
@@ -92,4 +93,7 @@ evidence.
 - `artifacts/benchmark-plan.md`
 - `artifacts/fast-batch-results.json`
 - `artifacts/fast-batch-results.csv`
+- `artifacts/wepp1-fast-batch-results.json`
+- `artifacts/wepp1-fast-batch-results.csv`
 - `artifacts/benchmark-report.md`
+- `artifacts/disposition-codex.md`

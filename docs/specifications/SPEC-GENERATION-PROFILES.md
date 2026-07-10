@@ -32,6 +32,17 @@ inside `(0, 1)`. It does not update `ranset`'s cumulative QC state or execute
 the K-S, normal-mean, normal-variance, or retry checks. Daily consumers keep
 their existing parameter transforms and wet/dry decisions.
 
+The profile deliberately does **not** preserve `ranset`'s conditional zero
+masks. In faithful mode, parameter 5 (precipitation amount) is zero on days
+the refill-time `RansetState.ell` chain calls dry, and parameter 9 (time to
+peak) is zero on those days and on every observed-mode (`iopt = 6`) day.
+`fast_batch_v0` instead supplies an open-interval uniform in every slot.
+This removes the source's `bk7.v7 == 0.0` recovery path when the refill and
+daily wet/dry chains desynchronize, and makes observed-mode parameter-9
+storage nonzero even though the downstream observed path does not consume it.
+These are declared distributional changes beyond QC removal and are required
+attention cells for any stochastic-parity study.
+
 The profile's master state is deterministically derived from the faithful
 post-burn, post-warm seed surface. Its algorithm and seed derivation are
 versioned by the `v0` name. It has no bit, trajectory, calibration, or

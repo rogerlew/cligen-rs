@@ -63,6 +63,31 @@ claim that a particular target emitted SIMD instructions. The speedup must
 therefore be read as a first upper-bound measurement for this behavioral
 change, not as a vectorization-only result.
 
+## F2 follow-on: FMA-capable wepp1
+
+**Measured:** after the review identified the original host confound, the
+unchanged full matrix ran on `wepp1` at commit
+`27d532c54accb023c34bb23ab05297625d791dd7`. The host is a 56-vCPU VMware
+guest exposing a Xeon Gold 5120 and the x86 `fma` CPU feature. It uses the
+same one-warm-up, seven-sample, alternating-order method and the same
+faithful golden/fast structural-repeat checks as the baseline run.
+
+| Host | Faithful sum of medians (s) | Fast batch sum of medians (s) | Speedup |
+|---|---:|---:|---:|
+| Xeon E5-2697 v2, non-FMA | 5.651 | 0.471 | 12.0x |
+| wepp1 Xeon Gold 5120, FMA | 2.301 | 0.349 | 6.59x |
+
+The seed-17 outliers remain material on `wepp1`: Jeogla is 1.419 s faithful
+versus 0.0572 s fast (24.8x), and Mt Wilson is 0.480 s versus 0.0415 s
+(11.6x). This resolves the missing FMA-host measurement in review finding
+F2, but does not isolate the three contributing effects or price a future
+plain-operations faithful implementation. The latter is the separate F1
+adjudication package's responsibility.
+
+Raw wepp1 timing samples, binary/manifest hashes, and output identities are
+in [`wepp1-fast-batch-results.json`](wepp1-fast-batch-results.json) and
+[`wepp1-fast-batch-results.csv`](wepp1-fast-batch-results.csv).
+
 ## Reproduction
 
 ```sh
@@ -85,3 +110,7 @@ or a fixed governor. More importantly, deterministic repeatability is not
 stochastic parity. A follow-on campaign must compare distributional and
 downstream properties over a declared seed × station corpus before this
 profile can be recommended beyond experimentation.
+
+The wepp1 follow-on is also an unpinned shared VM. Its 6.59x figure is valid
+for this process-level workload and host, not a controlled hardware-only
+comparison or a production-deployment claim.
