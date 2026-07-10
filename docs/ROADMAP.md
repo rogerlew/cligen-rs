@@ -31,10 +31,13 @@ chile) ship as hash-pinned GitHub-release payloads outside the crate
 network-touching operation; `nearest` reproduces an independent
 oracle across all collections; a fresh install → sync → run
 round-trip reproduces the goldens byte-identically through the
-cache; `cargo publish --dry-run` is clean at 163.5 KiB. Standing
-operator decision: the hosting repo is private, so `sync` currently
-needs `CLIGEN_SYNC_TOKEN` (or `--from`) until the data is made
-publicly fetchable.
+cache; `cargo publish --dry-run` is clean at 163.5 KiB. The repo went
+public same-day: tokenless `sync` verified for all five collections
+(`CLIGEN_SYNC_TOKEN` remains supported but is no longer required).
+Addendum: au payload revised to 2026.07.1 — longitudes corrected to
+east-positive at the source (pars + catalog, jimf-cligen532
+`ddfa671d`), operator-directed
+([addendum](work-packages/20260710-q2-station-db/artifacts/au-longitude-correction.md)).
 
 **Q1 (quality-report instrument) is complete** (2026-07-10,
 [`20260710-q1-quality-report`](work-packages/20260710-q1-quality-report/package.md)):

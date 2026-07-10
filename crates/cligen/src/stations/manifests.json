@@ -42,15 +42,15 @@
     },
     {
       "name": "au",
-      "version": "2026.07",
+      "version": "2026.07.1",
       "description": "Australia (Victoria fire-area set)",
-      "lineage": "jimf-cligen532/db 'au_par_files' tree + au_stations.db (python-produced catalog; longitudes stored negative as produced)",
+      "lineage": "jimf-cligen532/db 'au_par_files' tree + au_stations.db (python-produced catalog). 2026.07.1: longitudes corrected to east-positive in pars and catalog (jimf-cligen532 ddfa671d, operator-directed); 2026.07 stored them negative",
       "catalog": "au_stations.db",
       "catalog_rows": 7,
       "archive": {
-        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472864209",
-        "sha256": "01082c6067dcb630f8b6e69e38f1a81728b9db7e3114efb3ac971cec03073ffb",
-        "bytes": 5301
+        "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/472904725",
+        "sha256": "47f68a07b91c06ea4a542da62af7f052ad03aa8f6241b865d99b7f8969e566d1",
+        "bytes": 5302
       }
     },
     {

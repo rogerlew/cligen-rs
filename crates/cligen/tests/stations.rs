@@ -129,9 +129,8 @@ fn catalog_row_count_mismatch_fails_closed() {
 }
 
 /// Pinned from an independent Python implementation (sqlite3 +
-/// haversine, R = 6371.0088) over `au_stations.db`, query point
-/// (-37.5, -145.5) in catalog space — the au catalog stores
-/// longitudes negative as produced.
+/// haversine, R = 6371.0088) over `au_stations.db` (2026.07.1,
+/// east-positive longitudes), query point (-37.5, 145.5).
 const AU_ORACLE: [(&str, f64); 7] = [
     ("997955_AU,KilmoreEast.par", 53.432104),
     ("997953_AU,Melbourne.par", 58.720220),
@@ -154,7 +153,7 @@ fn nearest_matches_pinned_au_oracle() {
         &cache,
         &NearestQuery {
             latitude: -37.5,
-            longitude: -145.5,
+            longitude: 145.5,
             count: 7,
             collection: Some("au".to_owned()),
             min_years: None,
@@ -177,7 +176,7 @@ fn nearest_matches_pinned_au_oracle() {
         &cache,
         &NearestQuery {
             latitude: -37.5,
-            longitude: -145.5,
+            longitude: 145.5,
             count: 2,
             collection: Some("au".to_owned()),
             min_years: Some(100.0),
@@ -194,7 +193,7 @@ fn nearest_requires_a_synced_collection_and_valid_point() {
     let manifests = Manifests::embedded();
     let query = NearestQuery {
         latitude: -37.5,
-        longitude: -145.5,
+        longitude: 145.5,
         count: 5,
         collection: Some("au".to_owned()),
         min_years: None,
@@ -395,7 +394,7 @@ fn cli_sync_nearest_validate_run_round_trip() {
     let nearest = Command::new(binary)
         .env("CLIGEN_DATA_DIR", &cache)
         .args([
-            "stations", "nearest", "--lat", "-37.5", "--lon", "-145.5", "-n", "1", "--json",
+            "stations", "nearest", "--lat", "-37.5", "--lon", "145.5", "-n", "1", "--json",
         ])
         .output()
         .unwrap();

@@ -102,6 +102,12 @@ dispositioned. Legitimate holds: payload hosting blocked (falls back
 to `--from` evidence + named operator decision), or a dependency
 failing `cargo deny` with no lean alternative.
 
+## Addenda
+
+- 2026-07-10: au payload 2026.07.1 — longitudes corrected to
+  east-positive at the source; repo flipped public and tokenless sync
+  verified (`artifacts/au-longitude-correction.md`).
+
 ## Artifacts
 
 - `artifacts/design-notes.md` — survey evidence + design rulings.
@@ -110,3 +116,5 @@ failing `cargo deny` with no lean alternative.
   exclusions.
 - `artifacts/review-codex.md` / `artifacts/disposition-claude.md` —
   the review cycle.
+- `artifacts/au-longitude-correction.md` — post-close addendum
+  (au 2026.07.1, public-hosting verification).

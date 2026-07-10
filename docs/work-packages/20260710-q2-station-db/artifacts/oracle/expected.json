@@ -137,7 +137,7 @@
  {
   "collection": "au",
   "lat": -37.5,
-  "lon": -145.5,
+  "lon": 145.5,
   "top": [
    {
     "id": "997955_AU,KilmoreEast.par",

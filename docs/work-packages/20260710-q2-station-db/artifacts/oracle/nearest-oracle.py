@@ -26,15 +26,15 @@ import sys
 R = 6371.0088
 
 # (collection, catalog file, query lat, query lon) — 7 fixed points
-# spanning all five collections; au/chile coordinates are in catalog
-# space (the au catalog stores longitudes negative as produced).
+# spanning all five collections (au uses east-positive longitudes as
+# of payload 2026.07.1).
 CASES = [
     ("us-2015", "2015_stations.db", 44.97, -116.28),
     ("us-2015", "2015_stations.db", 46.73, -117.00),
     ("us-legacy", "stations.db", 46.73, -117.00),
     ("ghcn-intl", "ghcn_stations.db", -30.58, 152.11),
     ("ghcn-intl", "ghcn_stations.db", 48.0, 11.0),
-    ("au", "au_stations.db", -37.5, -145.5),
+    ("au", "au_stations.db", -37.5, 145.5),
     ("chile", "chile.db", -36.7, -72.4),
 ]
 
