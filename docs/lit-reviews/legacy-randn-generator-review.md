@@ -117,7 +117,8 @@ repository:
 - **Seed-dependent retry storms** [source + measured]: the QC loop's
   cost varies wildly with seed state. Historically it produced
   outright infinite loops (Yuma and Wupatki, AZ — the `iredo = 10,000`
-  escape hatch and its changelog entry, cligen.f header, v5.2251).
+  escape hatch inserted by Meyer in v5.105, 04/2001; its
+  10,000th-retry bug was fixed in v5.220 — cligen.f header).
   This repository measured the same machinery as the burn-17
   pathology: 6.2× runtime versus burn-0 on one host
   (`docs/work-packages/20260710-cli-runtime-profile/`).
@@ -159,34 +160,54 @@ located quantifies the QC's net effect on CLIGEN's interannual
 variance — an open question, and a cheap one for this repository
 (§5).
 
-### The record of the search — what the 2001–2004 changelog preserves [source]
+### The record of the search — what the changelog preserves [source; readings tagged individually]
 
-The version header of `cligen.f` (entries signed C. R. Meyer,
-2001–2004) is a lab notebook of everything tried before conditioning
-won, and it deserves to be read as one narrative. Chronologically:
+The version header of `cligen.f` is a lab notebook of the QC's whole
+life, and it deserves to be read as one narrative — with the
+chronology the source actually records:
 
-- **5.200 (03/2003)** — a *parameter guard*: monthly precipitation
-  skew clamped to ±4.5, because high skew made "90+ percent of the
-  generated values" negative under Pearson Type-III. Fix the
-  distribution's pathology at the parameter, not the stream.
-- **5.212 (07/2003)** — a *structural fix*: Tpeak regenerated only on
+- **2000 — the QC is born, not arrived at.** The 5.1-era header block
+  states that the 11/11/99 CLIGEN release "does not include the
+  RNG-QC code," and that this version adds "a feedback loop … to
+  apply 'quality control' to the distributions as they are being
+  produced," testing "both the mean and the variance of the standard
+  normal deviates … using a prescribed value for each (`thresh` &
+  `thres2`) set here at 50 percent … on the population of numbers
+  generated to the current point in the simulation." Conditioning —
+  including the 50% thresholds *and* the cumulative-from-run-start
+  design — is the opening move of the 5.x line, motivated by
+  "statistical testing demonstrat[ing] that more often than chance
+  would dictate, the starting distributions were doing a poor job of
+  reproducing the numbers they originated from."
+- **5.105 (04/2001) — the escape cap, and a road not taken.** Yuma AZ
+  and Wupatki AZ hung the QC loop ("The only exit was production of a
+  distribution meeting the acceptance criteria. Not guaranteed!");
+  Meyer inserted the `iredo` 10,000-retry escape himself. The same
+  entry records an alternative he tried and declined: "It was
+  possible to greatly improve the situation for WV by changing the
+  random seed k8(4) from 31 to 41, but this is not the solution
+  pursued." Reseeding was on the table and rejected. (Yuma is also
+  the station that dominates the Q3 dissection's retry pathology,
+  25 years later.)
+- **5.200 (03/2003)** — a parameter guard: monthly precipitation skew
+  clamped to ±4.5, because high skew made "90+ percent of the
+  generated values" negative under Pearson Type-III.
+- **5.212 (07/2003)** — a structural fix: Tpeak regenerated only on
   wet days after chi-square tests "revealed [it] was _not_ uniformly
-  distributed." The same entry contains the thesis of the whole arc,
-  describing the generic rejection sampler in `DSTG`: it "requires a
-  uniform random number generator which functions correctly.
-  **Without using a quality control filter, we have not found one
-  which does.**" Replacement had been tried and, by his criterion,
-  had failed.
-- **5.213 (08/2003)** — an *analytical fix*: the `DSTG` upper limit
+  distributed." The same entry contains the era's thesis, describing
+  the generic rejection sampler in `DSTG`: it "requires a uniform
+  random number generator which functions correctly. Without using a
+  quality control filter, we have not found one which does" — a
+  retrospective justification of the 2000 decision, written three
+  years into living with it.
+- **5.213 (08/2003)** — an analytical fix: the `DSTG` upper limit
   corrected from `ai` to 5.795 by integrating the density in Maple
   (chi-square on 5 cases improved from P ≥ 0.98 to P < 0.625). The
-  same entry cites Zhang & Garbrecht's critique — storm
-  characteristics, not interannual dispersion — which is what the
-  era's problem statement was.
-- **5.220 (08/2003)** — the first stream test lands: chi-square with
-  up to 20 bins. The same entry fixes "a long-standing minor coding
-  bug in [the] 10,000th (unsuccessful) retry" — i.e. the retry cap
-  *predates* the QC arc; Meyer inherited the surrender valve.
+  entry cites Zhang & Garbrecht's storm-characteristics critique.
+- **5.220 (08/2003)** — a chi-square uniformity test (up to 20 bins)
+  is added to the existing QC, and a "long-standing minor coding bug
+  in [the] 10,000th (unsuccessful) retry" — Meyer's own 5.105
+  mechanism — is fixed.
 - **5.221 (09/2003)** — an external verification harness (`rand_nrs`,
   a file existing "solely to verify quality of random numbers") is
   disabled; its commented `open(73,…)` survives at `cligen.f:3441`.
@@ -195,47 +216,57 @@ won, and it deserves to be read as one narrative. Chronologically:
   the temperature scheme (the smaller-SD anchoring, after a
   suggestion by Fred Fox). A NOTE in this era calls the QC "totally
   necessary and to date not known to be provided in any other
-  stochastic model" — he was proud of it, because his tests said it
-  was indispensable.
+  stochastic model."
 - **5.2255 (05/2004)** — chi-square abandoned: "Running Excel with
   varying bin sizes from 10 to 20 showed that the Chi-square test
   gave very inconsistent results… for 30 year runs at 7 stations";
   reading "articles on the Internet" pointed to K-S for continuous
-  distributions. Then the arbitrary target, born in the open: "One
-  problem: I could not find D-value for P=50%," so 0.8276 was
-  "derived iteratively using a spreadsheet." (`thresh`/`thres2` are
-  the same 50 in block data; the paper's "we arbitrarily selected a
-  probability threshold of 50%" — Layer 2 above — is this entry in
-  print.)
-- **5.2256–5.22564 (07–10/2004)** — tuning the machinery he'd built:
-  batch lot 20 → 30 after a Bloomington infinite loop; the `R5MONB`
-  dry-climate fix.
+  distributions. The K-S critical value was then calibrated to the
+  same pre-existing 50% policy: "One problem: I could not find
+  D-value for P=50%," so 0.8276 was derived "interatively" [sic]
+  using a spreadsheet. (The 50% level itself dates to the 2000
+  `thresh`/`thres2` design above; 5.2255 extended it to the new
+  test, and the paper later disclosed the level as arbitrary —
+  Layer 2.)
+- **5.2256–5.22564 (07–10/2004)** — tuning: batch lot 20 → 30 after a
+  Bloomington infinite loop; the `R5MONB` dry-climate fix.
 
-Three readings, on the record:
+Three readings, tagged:
 
-1. **His repertoire was ordered**: analytical correction, then
-   structural fix, then parameter guard — stream conditioning was the
-   last resort, applied only to the one defect he could not fix
-   analytically. The dead `chitst` subroutine, the commented
+1. **[source] The repertoire was broad and the QC was permanent.**
+   Conditioning came first (2000) and was never revisited as a
+   decision; what evolved for four years was everything around it —
+   the tests (CI → +χ² → K-S), the escape valve, the lot size — while
+   genuinely distributional defects were fixed at their proper layer
+   when he could see them (parameter guard 5.200, structural fix
+   5.212, analytical fix 5.213). Reseeding (5.105) and RNG
+   replacement ("many RNGs … tested" — Layer 1) were both examined
+   and declined. The dead `chitst` subroutine, the commented
    `"Failed Chi-square test"` writes, and the unit-73 fossil are the
    abandoned branches still visible in the source.
-2. **The criterion made conditioning inevitable.** His acceptance
-   tests demanded that ~31-draw batch statistics conform to the
-   target distribution — a bar *no* correct generator clears, because
-   sampling variability at that n guarantees excursions (the Layer 1
-   framing caution above). Under that criterion, "no RNG works" is a
-   theorem, and QC-by-rejection is the unique intervention that
-   passes, because it manufactures exactly the conformity the test
-   demands. The empirical evidence that settled the argument was, in
-   part, generated by the instrument that required the answer.
-3. **What never appears is a year-level degree of freedom.** Nothing
-   in the changelog contemplates interannual dispersion; the target
-   was always the monthly input statistics, and the era's critics
-   were asking about storm characteristics. The structural gap now
-   measured by the Q3 dissection
-   (`docs/work-packages/20260710-q3-qc-filter-dissection/`) —
-   which quantified both sides of the tradeoff Meyer engineered and
-   disclosed — was outside every question he was asked.
+2. **[analysis] The acceptance criterion biased the evidence toward
+   conditioning.** A 50%-level test rejects roughly half of correct
+   samples by construction, so its rejection rate cannot by itself
+   distinguish a defective generator from ordinary sampling
+   variability — and per the history notes, replacement candidates
+   were judged partly by outlier rates against that same family of
+   expectations (outliers "exceeding the expected percentage", not
+   any-outlier). The paper itself acknowledges the circularity
+   objection. This does not make QC the *only* intervention that
+   could have satisfied the criterion (moment matching or stratified
+   schemes would too); it means the evidence that "no RNG works"
+   was partly a property of the yardstick, and the yardstick was
+   itself the QC's acceptance rule. RANDN's genuine defects (Layer 1)
+   are established on independent grounds.
+3. **[source + measured] No year-level degree of freedom appears
+   anywhere in this record.** Every remedy in the changelog operates
+   within the fixed-monthly-parameter frame; interannual dispersion
+   was a known literature complaint (Johnson et al. — Layer 3) but
+   no entry contemplates a mechanism for it. The Q3 dissection
+   (`docs/work-packages/20260710-q3-qc-filter-dissection/`) later
+   quantified both sides of the tradeoff Meyer engineered and
+   disclosed — and confirmed the missing variance is structural,
+   beyond any RNG or conditioning setting.
 
 ## 3. Modern generators and the actual tradeoffs
 

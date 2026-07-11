@@ -1,6 +1,14 @@
 # Changelog-History Section for the RANDN Literature Review
 
-Status: `EXECUTED-REVIEW-PENDING`
+Status: `EXECUTED-COMPLETE` — Codex R1 returned seven findings
+(2 HIGH), all seven accepted and applied same-day: the section's
+chronology was rewritten on the corrected QC-first timeline (2000
+feedback loop; 5.105 escape cap — which verification also surfaced
+the rejected-reseeding detail now in the section), the circularity
+reading narrowed to a bias argument, the 50% threshold provenance
+split correctly, a pre-existing Layer 2 version error fixed, evidence
+tags corrected, and the source typo quoted with [sic]
+(`artifacts/review-codex.md`, `artifacts/disposition-claude.md`).
 Date: 2026-07-10
 Evidence mode: documentary — every claim cites `cligen.f` header
 lines/entries (`[source]`) or the already-vendored Meyer et al. 2008
