@@ -1,6 +1,10 @@
 {
  "acquired": "2026-07-10",
  "daymet_version": "4 R1 (single-pixel API)",
+ "monthly_sd_augmented": {
+  "date": "2026-07-10",
+  "note": "recomputed from the original raws (hash-verified); see augment-monthly-sd.py"
+ },
  "stations": {
   "ak505769": {
    "daymet": {
@@ -10,6 +14,20 @@
     "annual_precip_detrended_sd_mm": 81.387,
     "annual_precip_mean_mm": 446.54,
     "annual_precip_sd_mm": 84.885,
+    "monthly_precip_total_sd_mm": [
+     20.567,
+     17.004,
+     16.409,
+     17.591,
+     13.898,
+     18.796,
+     30.374,
+     28.706,
+     36.126,
+     36.495,
+     26.252,
+     21.646
+    ],
     "n_years": 46,
     "raw_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
     "span": [
@@ -35,6 +53,20 @@
     "annual_precip_detrended_sd_mm": 293.495,
     "annual_precip_mean_mm": 1779.34,
     "annual_precip_sd_mm": 291.081,
+    "monthly_precip_total_sd_mm": [
+     85.896,
+     70.632,
+     78.094,
+     112.026,
+     84.509,
+     111.016,
+     77.405,
+     98.796,
+     107.336,
+     83.89,
+     78.507,
+     73.065
+    ],
     "n_years": 46,
     "raw_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
     "span": [
@@ -60,6 +92,20 @@
     "annual_precip_detrended_sd_mm": 93.881,
     "annual_precip_mean_mm": 338.11,
     "annual_precip_sd_mm": 97.583,
+    "monthly_precip_total_sd_mm": [
+     19.587,
+     15.051,
+     14.828,
+     9.485,
+     8.437,
+     16.595,
+     46.192,
+     37.814,
+     29.376,
+     35.178,
+     27.729,
+     28.935
+    ],
     "n_years": 46,
     "raw_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
     "span": [
@@ -85,6 +131,20 @@
     "annual_precip_detrended_sd_mm": 92.112,
     "annual_precip_mean_mm": 350.17,
     "annual_precip_sd_mm": 91.97,
+    "monthly_precip_total_sd_mm": [
+     27.432,
+     18.285,
+     17.557,
+     10.176,
+     8.87,
+     20.316,
+     39.073,
+     44.216,
+     33.086,
+     32.333,
+     19.805,
+     27.679
+    ],
     "n_years": 46,
     "raw_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
     "span": [
@@ -104,6 +164,20 @@
     "annual_precip_detrended_sd_mm": 94.242,
     "annual_precip_mean_mm": 359.62,
     "annual_precip_sd_mm": 95.846,
+    "monthly_precip_total_sd_mm": [
+     24.477,
+     20.382,
+     19.09,
+     8.43,
+     9.266,
+     17.92,
+     51.577,
+     40.756,
+     29.383,
+     26.37,
+     22.957,
+     25.139
+    ],
     "n_years": 92,
     "raw_sha256": "ba3a77c3de37ab9d0355044a9d7e763020dbc2bc092a5f6fab5110fcad500f08",
     "span": [
@@ -127,6 +201,20 @@
     "annual_precip_detrended_sd_mm": 48.67,
     "annual_precip_mean_mm": 80.21,
     "annual_precip_sd_mm": 48.219,
+    "monthly_precip_total_sd_mm": [
+     14.874,
+     13.476,
+     15.752,
+     5.181,
+     1.816,
+     1.024,
+     10.606,
+     15.659,
+     12.073,
+     10.33,
+     12.345,
+     14.798
+    ],
     "n_years": 46,
     "raw_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
     "span": [
@@ -152,6 +240,20 @@
     "annual_precip_detrended_sd_mm": 65.524,
     "annual_precip_mean_mm": 118.06,
     "annual_precip_sd_mm": 67.508,
+    "monthly_precip_total_sd_mm": [
+     26.209,
+     28.784,
+     17.367,
+     11.377,
+     3.925,
+     2.222,
+     13.652,
+     10.853,
+     8.584,
+     9.745,
+     12.632,
+     20.691
+    ],
     "n_years": 46,
     "raw_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
     "span": [
@@ -177,6 +279,20 @@
     "annual_precip_detrended_sd_mm": 34.494,
     "annual_precip_mean_mm": 56.98,
     "annual_precip_sd_mm": 34.524,
+    "monthly_precip_total_sd_mm": [
+     11.127,
+     15.067,
+     10.526,
+     6.586,
+     3.448,
+     2.548,
+     4.254,
+     15.636,
+     6.386,
+     5.11,
+     9.804,
+     9.654
+    ],
     "n_years": 46,
     "raw_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
     "span": [
@@ -196,6 +312,20 @@
     "annual_precip_detrended_sd_mm": 30.194,
     "annual_precip_mean_mm": 57.93,
     "annual_precip_sd_mm": 30.006,
+    "monthly_precip_total_sd_mm": [
+     12.731,
+     16.001,
+     9.097,
+     7.501,
+     3.75,
+     3.049,
+     6.389,
+     9.295,
+     8.019,
+     6.475,
+     8.255,
+     6.737
+    ],
     "n_years": 60,
     "raw_sha256": "d3c13ed755ecbdc8e77260e8b6a0fa198c69cd93196271de8527e9f7b91b3cd6",
     "span": [
@@ -219,6 +349,20 @@
     "annual_precip_detrended_sd_mm": 120.933,
     "annual_precip_mean_mm": 736.44,
     "annual_precip_sd_mm": 119.591,
+    "monthly_precip_total_sd_mm": [
+     38.001,
+     30.413,
+     25.495,
+     28.612,
+     32.044,
+     20.938,
+     34.621,
+     32.981,
+     22.418,
+     19.891,
+     31.192,
+     38.687
+    ],
     "n_years": 46,
     "raw_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
     "span": [
@@ -238,6 +382,20 @@
     "annual_precip_detrended_sd_mm": 102.717,
     "annual_precip_mean_mm": 605.23,
     "annual_precip_sd_mm": 106.607,
+    "monthly_precip_total_sd_mm": [
+     32.776,
+     25.939,
+     21.648,
+     26.642,
+     30.732,
+     20.274,
+     30.04,
+     33.354,
+     23.069,
+     18.337,
+     23.125,
+     35.795
+    ],
     "n_years": 60,
     "raw_sha256": "a143b96f0934d277cd514d97917b005ea56a5e1a14484a3b6d817a4e349e4192",
     "span": [
@@ -261,6 +419,20 @@
     "annual_precip_detrended_sd_mm": 230.235,
     "annual_precip_mean_mm": 1658.16,
     "annual_precip_sd_mm": 260.032,
+    "monthly_precip_total_sd_mm": [
+     52.151,
+     50.89,
+     47.356,
+     60.482,
+     99.181,
+     107.081,
+     68.341,
+     76.28,
+     90.989,
+     105.769,
+     76.647,
+     51.52
+    ],
     "n_years": 46,
     "raw_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
     "span": [
@@ -280,6 +452,20 @@
     "annual_precip_detrended_sd_mm": 325.435,
     "annual_precip_mean_mm": 1637.71,
     "annual_precip_sd_mm": 344.646,
+    "monthly_precip_total_sd_mm": [
+     46.227,
+     40.649,
+     66.308,
+     96.084,
+     101.348,
+     132.725,
+     69.523,
+     92.523,
+     118.645,
+     120.262,
+     74.096,
+     43.623
+    ],
     "n_years": 56,
     "raw_sha256": "86a73a6ef5448b50911584a5bebf13530b6b7a4d02d1a3b6e29054f4617d860f",
     "span": [
@@ -303,6 +489,20 @@
     "annual_precip_detrended_sd_mm": 317.958,
     "annual_precip_mean_mm": 1735.63,
     "annual_precip_sd_mm": 323.729,
+    "monthly_precip_total_sd_mm": [
+     80.603,
+     68.888,
+     75.022,
+     127.217,
+     77.139,
+     119.019,
+     68.192,
+     93.676,
+     120.637,
+     107.614,
+     76.876,
+     77.953
+    ],
     "n_years": 46,
     "raw_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
     "span": [
@@ -328,6 +528,20 @@
     "annual_precip_detrended_sd_mm": 147.057,
     "annual_precip_mean_mm": 744.2,
     "annual_precip_sd_mm": 150.355,
+    "monthly_precip_total_sd_mm": [
+     40.499,
+     46.54,
+     45.253,
+     34.353,
+     33.426,
+     28.112,
+     14.017,
+     17.584,
+     32.237,
+     27.465,
+     43.72,
+     62.266
+    ],
     "n_years": 46,
     "raw_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
     "span": [
@@ -347,6 +561,20 @@
     "annual_precip_detrended_sd_mm": 100.591,
     "annual_precip_mean_mm": 591.95,
     "annual_precip_sd_mm": 104.396,
+    "monthly_precip_total_sd_mm": [
+     47.412,
+     31.622,
+     26.706,
+     24.44,
+     26.312,
+     29.13,
+     12.816,
+     17.931,
+     25.575,
+     33.84,
+     48.997,
+     46.433
+    ],
     "n_years": 55,
     "raw_sha256": "b824a8034fce0663ec375d56039dff988aacf6e3165e29d8d1e5fb4fb2fd8b9d",
     "span": [
@@ -370,6 +598,20 @@
     "annual_precip_detrended_sd_mm": 115.438,
     "annual_precip_mean_mm": 721.74,
     "annual_precip_sd_mm": 114.15,
+    "monthly_precip_total_sd_mm": [
+     14.273,
+     10.995,
+     19.613,
+     33.34,
+     40.744,
+     52.178,
+     42.147,
+     41.315,
+     40.889,
+     31.442,
+     22.721,
+     13.07
+    ],
     "n_years": 46,
     "raw_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
     "span": [
@@ -395,6 +637,20 @@
     "annual_precip_detrended_sd_mm": 363.85,
     "annual_precip_mean_mm": 1843.62,
     "annual_precip_sd_mm": 367.416,
+    "monthly_precip_total_sd_mm": [
+     90.254,
+     71.769,
+     91.815,
+     103.119,
+     99.406,
+     121.3,
+     76.825,
+     109.388,
+     122.051,
+     86.015,
+     79.616,
+     81.574
+    ],
     "n_years": 46,
     "raw_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
     "span": [
@@ -414,6 +670,20 @@
     "annual_precip_detrended_sd_mm": 308.183,
     "annual_precip_mean_mm": 1769.01,
     "annual_precip_sd_mm": 306.074,
+    "monthly_precip_total_sd_mm": [
+     89.926,
+     77.888,
+     82.261,
+     88.725,
+     106.736,
+     104.793,
+     95.683,
+     90.132,
+     125.382,
+     68.903,
+     76.84,
+     79.164
+    ],
     "n_years": 56,
     "raw_sha256": "a8c29054fb25805915226296f8be6f145341c769cfea16838aafae05232152c1",
     "span": [
@@ -437,6 +707,20 @@
     "annual_precip_detrended_sd_mm": 78.654,
     "annual_precip_mean_mm": 263.33,
     "annual_precip_sd_mm": 81.453,
+    "monthly_precip_total_sd_mm": [
+     14.318,
+     11.116,
+     8.073,
+     9.2,
+     16.212,
+     25.304,
+     36.178,
+     33.129,
+     25.14,
+     25.236,
+     15.562,
+     21.641
+    ],
     "n_years": 46,
     "raw_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
     "span": [
@@ -456,6 +740,20 @@
     "annual_precip_detrended_sd_mm": 87.97,
     "annual_precip_mean_mm": 239.53,
     "annual_precip_sd_mm": 87.255,
+    "monthly_precip_total_sd_mm": [
+     9.456,
+     8.143,
+     11.306,
+     6.996,
+     16.169,
+     15.06,
+     35.878,
+     31.079,
+     28.894,
+     21.93,
+     14.983,
+     17.075
+    ],
     "n_years": 52,
     "raw_sha256": "a8d4b3adab40bd0e076a84ab186e3069f0d592aaea8c02e576af55d99389547c",
     "span": [
@@ -479,6 +777,20 @@
     "annual_precip_detrended_sd_mm": 86.499,
     "annual_precip_mean_mm": 227.28,
     "annual_precip_sd_mm": 86.242,
+    "monthly_precip_total_sd_mm": [
+     12.375,
+     13.322,
+     8.853,
+     8.176,
+     12.909,
+     19.977,
+     35.753,
+     38.09,
+     33.219,
+     24.972,
+     12.9,
+     19.318
+    ],
     "n_years": 46,
     "raw_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
     "span": [
@@ -504,6 +816,20 @@
     "annual_precip_detrended_sd_mm": 53.096,
     "annual_precip_mean_mm": 132.59,
     "annual_precip_sd_mm": 53.295,
+    "monthly_precip_total_sd_mm": [
+     13.846,
+     5.888,
+     8.646,
+     14.026,
+     19.407,
+     9.733,
+     5.797,
+     9.618,
+     23.347,
+     12.405,
+     7.692,
+     9.656
+    ],
     "n_years": 46,
     "raw_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
     "span": [
@@ -529,6 +855,20 @@
     "annual_precip_detrended_sd_mm": 115.329,
     "annual_precip_mean_mm": 756.19,
     "annual_precip_sd_mm": 114.872,
+    "monthly_precip_total_sd_mm": [
+     31.762,
+     37.183,
+     32.052,
+     29.433,
+     30.462,
+     36.338,
+     28.682,
+     26.393,
+     32.445,
+     30.905,
+     33.649,
+     41.586
+    ],
     "n_years": 46,
     "raw_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
     "span": [
@@ -548,6 +888,20 @@
     "annual_precip_detrended_sd_mm": 97.886,
     "annual_precip_mean_mm": 518.57,
     "annual_precip_sd_mm": 102.038,
+    "monthly_precip_total_sd_mm": [
+     28.552,
+     24.505,
+     26.02,
+     19.708,
+     23.095,
+     31.172,
+     28.151,
+     28.727,
+     30.372,
+     31.083,
+     21.874,
+     22.892
+    ],
     "n_years": 38,
     "raw_sha256": "be52cee726af87fc86335b2ff4c098d48a3bd87afd109da041cd69cb7c043777",
     "span": [

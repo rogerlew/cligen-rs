@@ -1,0 +1,170 @@
+{
+ "30": {
+  "station_months": {
+   "off_closer_to_observed": 115,
+   "faithful_closer_to_observed": 89,
+   "of": 204,
+   "noise_floor_2mm": {
+    "off_closer": 115,
+    "faithful_closer": 87,
+    "of": 202
+   },
+   "ghcn_secondary": {
+    "off_closer": 60,
+    "faithful_closer": 36,
+    "of": 96
+   },
+   "v0_vs_off": {
+    "v0_closer": 87,
+    "off_closer": 117,
+    "of": 204
+   }
+  },
+  "seasonal": {
+   "jan": {
+    "median_sd_ratio_faithful_over_off": 0.9438,
+    "median_faithful_over_observed": 0.6758,
+    "median_off_over_observed": 0.7059
+   },
+   "feb": {
+    "median_sd_ratio_faithful_over_off": 1.0309,
+    "median_faithful_over_observed": 0.8256,
+    "median_off_over_observed": 0.8172
+   },
+   "mar": {
+    "median_sd_ratio_faithful_over_off": 0.7992,
+    "median_faithful_over_observed": 0.6524,
+    "median_off_over_observed": 0.9077
+   },
+   "apr": {
+    "median_sd_ratio_faithful_over_off": 0.9425,
+    "median_faithful_over_observed": 0.6933,
+    "median_off_over_observed": 0.7357
+   },
+   "may": {
+    "median_sd_ratio_faithful_over_off": 0.7119,
+    "median_faithful_over_observed": 0.7058,
+    "median_off_over_observed": 1.039
+   },
+   "jun": {
+    "median_sd_ratio_faithful_over_off": 1.13,
+    "median_faithful_over_observed": 0.8509,
+    "median_off_over_observed": 0.8012
+   },
+   "jul": {
+    "median_sd_ratio_faithful_over_off": 0.8749,
+    "median_faithful_over_observed": 0.8701,
+    "median_off_over_observed": 1.0911
+   },
+   "aug": {
+    "median_sd_ratio_faithful_over_off": 0.8196,
+    "median_faithful_over_observed": 0.7929,
+    "median_off_over_observed": 0.9018
+   },
+   "sep": {
+    "median_sd_ratio_faithful_over_off": 0.9274,
+    "median_faithful_over_observed": 0.8579,
+    "median_off_over_observed": 1.0036
+   },
+   "oct": {
+    "median_sd_ratio_faithful_over_off": 0.8792,
+    "median_faithful_over_observed": 0.7332,
+    "median_off_over_observed": 0.8772
+   },
+   "nov": {
+    "median_sd_ratio_faithful_over_off": 0.8046,
+    "median_faithful_over_observed": 0.7553,
+    "median_off_over_observed": 0.9387
+   },
+   "dec": {
+    "median_sd_ratio_faithful_over_off": 0.9178,
+    "median_faithful_over_observed": 0.6884,
+    "median_off_over_observed": 0.7168
+   }
+  }
+ },
+ "100": {
+  "station_months": {
+   "off_closer_to_observed": 122,
+   "faithful_closer_to_observed": 82,
+   "of": 204,
+   "noise_floor_2mm": {
+    "off_closer": 121,
+    "faithful_closer": 81,
+    "of": 202
+   },
+   "ghcn_secondary": {
+    "off_closer": 54,
+    "faithful_closer": 42,
+    "of": 96
+   },
+   "v0_vs_off": {
+    "v0_closer": 90,
+    "off_closer": 114,
+    "of": 204
+   }
+  },
+  "seasonal": {
+   "jan": {
+    "median_sd_ratio_faithful_over_off": 0.8965,
+    "median_faithful_over_observed": 0.73,
+    "median_off_over_observed": 0.8053
+   },
+   "feb": {
+    "median_sd_ratio_faithful_over_off": 0.9109,
+    "median_faithful_over_observed": 0.7788,
+    "median_off_over_observed": 0.8655
+   },
+   "mar": {
+    "median_sd_ratio_faithful_over_off": 0.9695,
+    "median_faithful_over_observed": 0.804,
+    "median_off_over_observed": 0.8158
+   },
+   "apr": {
+    "median_sd_ratio_faithful_over_off": 0.9359,
+    "median_faithful_over_observed": 0.757,
+    "median_off_over_observed": 0.753
+   },
+   "may": {
+    "median_sd_ratio_faithful_over_off": 0.8466,
+    "median_faithful_over_observed": 0.8757,
+    "median_off_over_observed": 0.9895
+   },
+   "jun": {
+    "median_sd_ratio_faithful_over_off": 0.9336,
+    "median_faithful_over_observed": 0.8715,
+    "median_off_over_observed": 0.8815
+   },
+   "jul": {
+    "median_sd_ratio_faithful_over_off": 0.914,
+    "median_faithful_over_observed": 0.9207,
+    "median_off_over_observed": 1.0399
+   },
+   "aug": {
+    "median_sd_ratio_faithful_over_off": 0.8932,
+    "median_faithful_over_observed": 0.8177,
+    "median_off_over_observed": 0.9103
+   },
+   "sep": {
+    "median_sd_ratio_faithful_over_off": 0.9256,
+    "median_faithful_over_observed": 0.8952,
+    "median_off_over_observed": 0.9103
+   },
+   "oct": {
+    "median_sd_ratio_faithful_over_off": 0.9105,
+    "median_faithful_over_observed": 0.7639,
+    "median_off_over_observed": 0.8679
+   },
+   "nov": {
+    "median_sd_ratio_faithful_over_off": 0.9304,
+    "median_faithful_over_observed": 0.7922,
+    "median_off_over_observed": 0.8067
+   },
+   "dec": {
+    "median_sd_ratio_faithful_over_off": 0.995,
+    "median_faithful_over_observed": 0.751,
+    "median_off_over_observed": 0.7941
+   }
+  }
+ }
+}

@@ -70,3 +70,14 @@ Supplemental generation-only timing (`timing-no-sidecar.json`,
 - B3's 10/17 is a bare majority: the early-decade mechanism is
   visible but regime-dependent, weaker than the ADR-0002 prose
   predicted.
+
+## Addendum (2026-07-10, operator-directed)
+
+The monthly-grain observed comparison the pre-registration's
+Measurements section promised (but the acquisition never computed —
+a record gap found by the operator, not R1) is closed in
+`monthly-sd-addendum.md`: same direction as the annual result but
+weaker (off closer on 56–60% of station-months vs 88% of stations
+annually), broad non-seasonal clipping, and **both** configurations
+under-dispersing observed monthly totals in 9–12 of 12 months — the
+sharpest number yet for the A5 structural-gap case.

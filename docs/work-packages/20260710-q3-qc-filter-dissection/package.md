@@ -64,3 +64,7 @@ to the operator as ADR-0003.
   remediation computations.
 - Evidence archive: release `q3-evidence-2026.07`
   (`q3-matrix-evidence.tar.gz`, sha256 cc42e65e…8072a).
+- `artifacts/monthly-sd-addendum.md` + `analyze-monthly-sd.py` +
+  `monthly-sd-analysis.json` + `observed/augment-monthly-sd.py` —
+  post-close addendum (operator-directed): the monthly-grain observed
+  comparison, closing the pre-registration Measurements gap.
