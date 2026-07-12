@@ -1,0 +1,10 @@
+ab_id	doi	filename	sha256	evidence
+AB-02	10.1175/1520-0442(1998)011<0591:OPISMO>2.0.CO;2	katz-parlange-1998-overdispersion.pdf	90d90edca9ae7d7b47e9455866a25c82e5259e4847ce582ce3dde9912eb9bb26	full_text_consulted
+AB-03	10.1177/030913339902300302	wilks-wilby-1999-weather-generation-game.pdf	a5cc0fa064068b2105106841c48014772656bf0294ab0ce012cbb362a677c9f7	full_text_consulted
+AB-05	10.1002/hyp.6668	meyer-renschler-vining-2007-hyp6668.pdf	8424ed530f046436b6d3c3d8fccf8e8efab4206630336e00142ea4b2a4a81ec2	full_text_consulted
+AB-06	10.2489/jswc.74.4.334	srivastava-etal-2019-jswc-74-334.pdf	d0526d9a710c348301570a10b4a72f9e4b01ae7805ba939417047937c9b3a73a	full_text_consulted
+AB-09	10.1016/j.jhydrol.2010.05.032	chen2010.pdf	f67edf54e7dbc5062148956bd9959627d7a7be3275e97de9750e16ec540a791c	full_text_consulted
+AB-12	10.1002/wrcr.20528	steinschneider2013.pdf	cc6330a1aaed05b6e0a8cd9241ddc57bf50cf2d34063c1abade7a7badca104e5	full_text_consulted
+AB-21	10.1029/2006WR005364	ivanov2007.pdf	fc22acd42f2b97fbca2006173444038a637ea973f49a832f3a35d14e87021b49	full_text_consulted
+AB-22	10.1016/j.advwatres.2010.12.013	fatichi2011.pdf	7d153defe831069c8ff3c74a2d7dc8940503cbcc0a80017b7ab38a435f148d83	full_text_consulted
+AB-23	10.1002/2016MS000854	peleg2017.pdf	ab50279fd4f740ed6fa54ee8d0814a0777791a02accbb12a32f2944acdaba898	full_text_consulted
