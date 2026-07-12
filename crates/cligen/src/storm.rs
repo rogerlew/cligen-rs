@@ -17,9 +17,9 @@
 //! | `dur` | `dur(mo,jd)` | storm duration (`3.99/(−2·alog(1−r1))`, the live B. Yu 6/99 coefficient; clamp 24) | h |
 //! | `xr` | `xr` | daily precipitation converted to mm (`r·25.4`) | mm |
 //! | `tpr` | `tpr` | time to peak as fraction of duration (clamp 0.99) | fraction |
-//! | `r5p` | `r5p` | max 30-min depth surrogate (`−2·xr·alog(1−r1)`, clamp `tymax(itype)`) | mm |
+//! | `r5p` | `r5p` | source-described peak rainfall rate (`−2·xr·alog(1−r1)`, clamp `tymax(itype)`; expression retained exactly) | mm/h |
 //! | `xmav` | `xmav` | normalized peak intensity (`r5p/(xr/dur)`; floors 1.01) | — |
-//! | `tymax` | `tymax(4)` | per-`itype` r5p ceiling (main DATA, `cligen.f:602`) | mm |
+//! | `tymax` | `tymax(4)` | per-`itype` r5p ceiling (main DATA, `cligen.f:602`) | mm/h |
 //! | `usdur`,`ustpr`,`uxmav`,`damt` | same | single-storm user parameters (`sing_stm` reads) | h / fraction / in/h / in |
 //! | `mo`,`jd`,`ibyear` | same | typed storm date and beginning simulation year | month / day / year |
 //! | `numyr`,`ioyr` | same | simulation-year count and observed-input beginning year | year |

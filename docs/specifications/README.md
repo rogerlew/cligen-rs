@@ -38,6 +38,7 @@ machinery without an ADR.
 | [SPEC-STATION-DB](SPEC-STATION-DB.md) | Station collections, hash-pinned manifests, local cache, `cligen stations` (data outside the crate) | active (rev 1; Q2 complete) |
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |
 | [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |
+| [SPEC-FAITHFUL-GENERATION](SPEC-FAITHFUL-GENERATION.md) | End-to-end continuous stochastic + hybrid observed climate-generation behavior | active |
 | SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
 | [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (rev 5: `qc_filter` + `output.quality` accepted) |
 | SPEC-PYO3 | Python API surface | planned |

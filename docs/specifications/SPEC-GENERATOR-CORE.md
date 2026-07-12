@@ -109,9 +109,14 @@ lines per the ratified decomposition.
 
 ## Modes
 
-Only **faithful mode** exists at this revision. Native f64 mode (A2)
-will be specified as a revision here before it lands; generation
-profiles and output provenance are SPEC-PROVENANCE's surface (A1).
+This spec defines the faithful state-ownership and function-shape baseline.
+The complete continuous/observed faithful algorithm is specified by
+SPEC-FAITHFUL-GENERATION. Public generation and QC profile selectors,
+including the implemented non-faithful `fast_batch_v0` and `qc_filter: off`
+configurations, are owned by SPEC-GENERATION-PROFILES. Native f64 mode (A2)
+remains future work and must revise the relevant core and behavioral specs
+before it lands; shared output provenance remains SPEC-PROVENANCE's surface
+(A1).
 
 ## Acceptance
 
