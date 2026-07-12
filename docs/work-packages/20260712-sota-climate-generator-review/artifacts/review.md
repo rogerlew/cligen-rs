@@ -53,3 +53,19 @@ recommendation depends on archiving them.
 The recommended implementation sequence is informational and pending operator
 ratification. It deliberately does not change `docs/ROADMAP.md`; roadmap
 reconciliation is a prerequisite to dispatching any package from the sequence.
+
+## Local acquisition addendum
+
+After the initial package was published, locally acquired full texts were
+audited by `/root/acquired_map`, `/root/fulltext_annotations`, and
+`/root/extra_cligen_sources`.
+
+| Finding | Disposition |
+|---|---|
+| Nine DOI-bearing papers were already represented by canonical checksum rows, but their public access labels did not say the local full text had been consulted. | Changed AB-02/03/05/06/09/12/21–23 to “local reading copy; not redistributed.” |
+| Aggregate precipitation underdispersion was interpreted too narrowly as proof of a missing annual state. | Reframed it as a measured output deficit with daily precipitation structure and low-frequency conditioning as competing or complementary causes. |
+| The executive counterfactual was absent from the recommended interannual spike. | Added a narrowly scoped higher-order occurrence/amount-dependence counterfactual to step 4 while retaining the broader precipitation-structure study at step 6. |
+| AB-12 was described as a multivariate annual state; AB-21 incorrectly included pressure; AB-22 omitted target enforcement; AB-23 implied an implemented low-frequency remedy. | Corrected each annotation from the acquired full text and carried the resulting feasibility limits into the gap analysis. |
+| The local directory contained duplicate Katz and Wilks article files. | Kept one canonical checksum identity for each; did not delete or treat alternate wrappers as independent evidence. |
+| The USDA CLIGEN history note was distinct and relevant but uncataloged. | Added AB-39 with an explicit no-DOI note and context-only evidence status; retained the Fortran source as faithful-mode authority. |
+| RNG papers share the local directory but are outside this review. | Left them to the existing random-stream research; no duplicate bibliography entries were created. |

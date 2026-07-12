@@ -13,7 +13,9 @@ the terms recorded in `references/open-access/manifest.tsv`. **Link-only**
 means the paper or official record is public, but this repository does not
 redistribute it. **Acquisition required** means a clean checkout has no
 verified reusable full text; the citation and DOI are sufficient to request or
-locate a lawful copy.
+locate a lawful copy. **Local reading copy** means full text was inspected from
+the Git-ignored `references/copyrighted/` directory, its SHA-256 identity is
+committed in the review evidence, and the paper itself is not redistributed.
 
 Annotations distinguish documented findings from their implication for
 `cligen-rs`. A paper's inclusion is not a recommendation to adopt its model.
@@ -35,21 +37,26 @@ fitted lag, cross-variable, and wet/dry-conditioned dependence.
 R. W. Katz and M. B. Parlange (1998), “Overdispersion Phenomenon in Stochastic
 Modeling of Precipitation,” *Journal of Climate* 11, 591–601. DOI:
 `10.1175/1520-0442(1998)011<0591:OPISMO>2.0.CO;2`.
-**Access: acquisition required;** [official article record](https://journals.ametsoc.org/view/journals/clim/11/4/1520-0442_1998_011_0591_opismo_2.0.co_2.xml).
-The paper establishes that richer daily occurrence or amount models alone do
-not generally recover observed monthly/seasonal interannual variance and
-examines low-frequency conditioning. It directly supports treating CLIGEN's
-year-level climate state as a structural gap.
+**Access: local reading copy; not redistributed;** [official article record](https://journals.ametsoc.org/view/journals/clim/11/4/1520-0442_1998_011_0591_opismo_2.0.co_2.xml).
+In its single-site January case, a fourth-order occurrence chain plus
+nonidentical/autocorrelated amounts reduced the monthly-total variance deficit
+from about 40% to 17%, while deliberately stronger amount correlation reduced
+it to 10%; a circulation-conditioned simple model left about 4%. Higher-order
+occurrence also removed the wet-day-count deficit. The paper therefore makes
+daily precipitation structure and low-frequency conditioning competing or
+complementary explanations, not proof of one latent annual-state mechanism.
 
 ### AB-03 — Weather-generator review
 
 D. S. Wilks and R. L. Wilby (1999), “The Weather Generation Game: A Review of
 Stochastic Weather Models,” *Progress in Physical Geography* 23(3), 329–357.
 DOI: [`10.1177/030913339902300302`](https://doi.org/10.1177/030913339902300302).
-**Access: acquisition required.** This remains the most useful conceptual map
-of occurrence, amount, multivariate, multisite, low-frequency, and
-nonparametric approaches. Its identified weaknesses—interannual variation and
-spatial/multivariate coherence—still organize the CLIGEN gap analysis.
+**Access: local reading copy; not redistributed.** This remains the most useful
+conceptual map of occurrence, amount, multivariate, multisite, low-frequency,
+and nonparametric approaches. It treats aggregate-variance failure as possibly
+arising from insufficient daily submodels, absent low-frequency predictors,
+or both. It also documents how pooled WGEN dependence coefficients can miss
+large seasonal/geographic departures, especially for solar radiation.
 
 ### AB-04 — Extended Richardson dependence model
 
@@ -69,20 +76,26 @@ C. R. Meyer, C. S. Renschler, and R. C. Vining (2008; online 2007),
 “Implementing Quality Control on a Random Number Stream to Improve a
 Stochastic Weather Generator,” *Hydrological Processes* 22(8), 1069–1079.
 DOI: [`10.1002/hyp.6668`](https://doi.org/10.1002/hyp.6668).
-**Access: acquisition required.** This is the primary explanation for the
-trajectory-conditioning machinery faithfully retained in CLIGEN 5.32.3. It
-must be read with the repository's Q3 evidence: batch conditioning changes
-dispersion but cannot create a missing low-frequency climate process.
+**Access: local reading copy; not redistributed.** This is the primary
+explanation for the trajectory-conditioning machinery faithfully retained in
+CLIGEN 5.32.3. The P50 acceptance threshold is a deliberate trade of
+randomness for target mean/SD behavior, can require much longer simulations
+to exceed observed maxima, and leaves possible early-run temporal bias
+unresolved. Read with Q3, it shows conditioning changes dispersion but is not
+itself a fitted low-frequency climate process.
 
 ### AB-06 — WEPP sensitivity to station-database change
 
 P. Srivastava et al. (2019), “Updated Climate Database and Impacts on WEPP
 Model Predictions,” *Journal of Soil and Water Conservation* 74(4), 334–349.
 DOI: [`10.2489/jswc.74.4.334`](https://doi.org/10.2489/jswc.74.4.334).
-**Access: link-only;** [USDA full text](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/JSWC-74-4-334-349.pdf).
-The study demonstrates that changes in climate inputs propagate materially to
-WEPP runoff and erosion. It supports requiring downstream WEPP response, not
-weather statistics alone, when promoting a new generator profile.
+**Access: local reading copy; not redistributed;** [USDA full text](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/JSWC-74-4-334-349.pdf).
+The study demonstrates that corrected/updated station inputs propagate
+materially to runoff and erosion for standardized 22.1 m, 9% silt-loam
+tilled-fallow hillslopes at roughly 1,600 stations. It supports requiring
+downstream WEPP response when promoting a generator profile, but it measures
+forcing/database sensitivity rather than a general management response or a
+specific generator-structure effect.
 
 ### AB-07 — WGEN versus LARS-WG
 
@@ -113,11 +126,13 @@ J. Chen, F. P. Brissette, and R. Leconte (2010), “A Daily Stochastic Weather
 Generator for Preserving Low-Frequency of Climate Variability,” *Journal of
 Hydrology* 388, 480–490. DOI:
 [`10.1016/j.jhydrol.2010.05.032`](https://doi.org/10.1016/j.jhydrol.2010.05.032).
-**Access: acquisition required;** [institutional citation](https://espace2.etsmtl.ca/id/eprint/434/).
-The method applies spectral/random-phase correction to restore monthly and
-annual variance and autocorrelation lost by a standard daily generator. It is
-the closest published benchmark for the first CLIGEN interannual experiment,
-even if a latent annual-state model is ultimately easier to parameterize.
+**Access: local reading copy; not redistributed;** [institutional citation](https://espace2.etsmtl.ca/id/eprint/434/).
+The method preserves empirical monthly/yearly Fourier magnitudes, randomizes
+phase, then iteratively adds common within-month adjustments to the daily
+series; it does not adjust occurrence. It is the closest published benchmark
+for the first CLIGEN interannual experiment, but needs the empirical spectrum
+and record-length convention, can break precipitation-temperature dependence,
+and is not equivalent to storing a few stochastic Fourier coefficients.
 
 ### AB-10 — WeaGETS
 
@@ -148,11 +163,13 @@ S. Steinschneider and C. Brown (2013), “A Semiparametric Multivariate,
 Multisite Weather Generator with Low-Frequency Variability for Use in Climate
 Risk Assessments,” *Water Resources Research* 49, 7205–7220. DOI:
 [`10.1002/wrcr.20528`](https://doi.org/10.1002/wrcr.20528).
-**Access: link-only;** [publisher full text](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/wrcr.20528).
-Wavelet autoregression supplies annual low-frequency structure, while a
-Markov/KNN daily model preserves multivariate and spatial dependence and
-quantile mapping imposes scenarios. This is the strongest reference for a
-later multi-coefficient CLIGEN annual-state model.
+**Access: local reading copy; not redistributed;** [publisher full text](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/wrcr.20528).
+Wavelet autoregression supplies a scalar annual area-averaged precipitation
+target; each target year drives a refitted three-state monthly Markov/KNN
+generator selected from nearby historical years. It is a strong precedent for
+hierarchical annual conditioning, not a multivariate annual climate-state
+model: annual temperature signals are ignored, spatial covariance is assumed
+stationary, and trend leakage/data burden are important limitations.
 
 ### AB-13 — GWEX precipitation extremes
 
@@ -262,11 +279,13 @@ V. Y. Ivanov, R. L. Bras, and D. C. Curtis (2007), “A Weather Generator for
 Hydrological, Ecological, and Agricultural Applications,” *Water Resources
 Research* 43. DOI:
 [`10.1029/2006WR005364`](https://doi.org/10.1029/2006WR005364).
-**Access: link-only;** [publisher full text](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006WR005364).
+**Access: local reading copy; not redistributed;** [publisher full text](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2006WR005364).
 This is the point-hourly precursor to AWE-GEN, coupling precipitation,
-cloudiness, radiation, temperature, humidity, wind, and pressure. It is the
-right long-run feature target for erosion/ecohydrology, but it presumes
-hourly multivariable calibration data far beyond the legacy `.par` contract.
+cloudiness, radiation, temperature, humidity/dew point, and wind. Its rainfall
+driver is a simple rectangular-pulse process without intrastorm/diurnal
+variation, cross-correlations are not fitted directly, and validation covered
+only three 30–35-year stations. It is a valuable long-run feature target, but
+presumes hourly calibration data far beyond the legacy `.par` contract.
 
 ### AB-22 — AWE-GEN future scenarios
 
@@ -274,10 +293,13 @@ S. Fatichi, V. Y. Ivanov, and E. Caporali (2011), “Simulation of Future
 Climate Scenarios with a Weather Generator,” *Advances in Water Resources*
 34, 448–467. DOI:
 [`10.1016/j.advwatres.2010.12.013`](https://doi.org/10.1016/j.advwatres.2010.12.013).
-**Access: acquisition required.** AWE-GEN combines a Neyman–Scott pulse model,
-annual precipitation persistence, physically linked hourly variables, and
-climate perturbations. Its annual AR concept is portable to an early CLIGEN
-profile; its full coupled hourly engine is a separate major model.
+**Access: local reading copy; not redistributed.** AWE-GEN combines a
+Neyman–Scott pulse model, annual precipitation persistence, physically linked
+hourly variables, and climate perturbations. Its skewed annual AR(1) target is
+enforced by rejecting complete yearly rainfall sequences and, after too many
+failures, rescaling the closest sequence. That enforcement can alter
+within-year structure and become expensive, so the AR process is a useful
+candidate but is not portable independently of a declared conditioning rule.
 
 ### AB-23 — AWE-GEN-2d
 
@@ -285,11 +307,15 @@ N. Peleg et al. (2017), “An Advanced Stochastic Weather Generator for
 Simulating 2-D High-Resolution Climate Variables,” *Journal of Advances in
 Modeling Earth Systems* 9, 1595–1627. DOI:
 [`10.1002/2016MS000854`](https://doi.org/10.1002/2016MS000854).
-**Access: link-only;** [publisher record](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2016MS000854).
+**Access: local reading copy; not redistributed;** [publisher record](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2016MS000854).
 The model produces precipitation/cloud fields at 2 km and 5 min and other
-variables at finer spatial and hourly scales. It is the broadest stochastic
-WEPP forcing comparator, but radar/reanalysis inputs and request-only software
-make external interoperability more feasible than a Rust reimplementation.
+variables at finer spatial and hourly scales. The paper notes the usual
+weather-generator risk of underrepresenting monthly/annual variability; the
+AWE-GEN low-frequency remedy is proposed as future work rather than
+demonstrated in 2-D. Homogeneous advection, absent
+synoptic/convective state separation, one Alpine calibration region,
+radar/reanalysis inputs, and request-only software make external
+interoperability more feasible than a Rust reimplementation.
 
 ### AB-24 — Hierarchical hourly-to-yearly rainfall
 
@@ -495,11 +521,27 @@ downscaling across Earth-system models. It demonstrates the likely future
 shape of climate-forcing production, but its univariate daily precipitation
 experiment does not supply WEPP-ready station meteorology or storm profiles.
 
+## CLIGEN historical context
+
+### AB-39 — CLIGEN description and history
+
+C. R. Meyer (undated; covers changes through CLIGEN 5.22564), “General
+Description of the CLIGEN Model and its History,” USDA Agricultural Research
+Service, National Soil Erosion Research Laboratory, 21 pp. **No DOI.**
+**Access: local reading copy; not redistributed;**
+[official USDA PDF](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/cligen/CLIGENDescription.pdf).
+The technical note records CLIGEN's single-point monthly-parameter design,
+storm outputs, random-stream quality-control history, operating modes, and the
+limited day-to-day coupling among generated variables. It corroborates why
+multivariate dependence and explicit model provenance appear in this review,
+but it is historical context rather than faithful-mode authority: exact
+behavior remains governed by the vendored 5.32.3 Fortran under ADR-0001.
+
 ## Remaining source-acquisition queue
 
 The core papers previously requested for this review are already present in a
-local, Git-ignored reading corpus and have committed identities in
-the work-package evidence. The remaining queue reflects value to the next two
+local, Git-ignored reading corpus and have committed identities in the
+work-package evidence. The remaining queue reflects value to the next two
 `cligen-rs` studies, not general citation importance.
 
 | Priority | DOI | Request this source because |

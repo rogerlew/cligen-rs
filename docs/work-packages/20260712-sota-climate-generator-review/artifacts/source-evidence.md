@@ -13,7 +13,8 @@ abstract, article HTML, or software release. AB identifiers resolve to
   File identities, versions, licenses, and retrieval URLs are in the
   [`open-access manifest`](../../../../references/open-access/manifest.tsv).
 - Local, Git-ignored corpus: AB-02, AB-03, AB-05, AB-06, AB-09,
-  AB-12, and AB-21–23. File identities are committed in
+  AB-12, AB-21–23, and contextual technical note AB-39. File identities are
+  committed in
   [`local-reading-copies.tsv`](local-reading-copies.tsv); the PDFs themselves
   are not redistributed.
 
@@ -37,4 +38,20 @@ gap.
 - “Published” in the gap analysis identifies external primary-source support;
   it does not imply that every source was locally archived or read from a PDF.
 - The open corpus is curated around direct implementation comparators rather
-  than being an exhaustive archive of all 38 annotations.
+  than being an exhaustive archive of all 39 annotations.
+
+## Local acquisition incorporation
+
+The nine DOI-bearing climate papers in the local reading corpus were
+incorporated as full-text evidence on 2026-07-12, and their bibliography access
+labels now say so explicitly. Three byte-identical `katz1998*.pdf` files are
+alternate copies of AB-02, and `wilks1999.pdf` is an alternate publisher copy
+of AB-03; they are not separate evidence items. AB-39 is a distinct USDA
+technical note and is recorded as context-only. RNG papers in the same local
+directory belong to earlier random-stream research and are outside this
+weather-generator review.
+
+The incorporation was independently checked by Codex tasks
+`/root/acquired_map` (identity/queue mapping), `/root/fulltext_annotations`
+(scientific claims), and `/root/extra_cligen_sources` (duplicates and the USDA
+history note).

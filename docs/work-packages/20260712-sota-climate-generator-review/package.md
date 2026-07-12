@@ -63,6 +63,13 @@ CLIGEN gap map (`/root/cligen_gap_map`), directly comparable stochastic
 generators (`/root/stochastic_wg_survey`), and ML/extreme systems
 (`/root/ml_extremes_survey`).
 
+On 2026-07-12, a post-publication acquisition addendum incorporated nine local
+full-text articles and one USDA technical note without redistributing them.
+Read-only tasks checked identity/queue mapping (`/root/acquired_map`),
+scientific claims (`/root/fulltext_annotations`), and duplicates/context
+(`/root/extra_cligen_sources`). The addendum corrected the causal framing of
+the measured variance deficit and several model-specific annotations.
+
 ## Gates
 
 - `cargo fmt --check`

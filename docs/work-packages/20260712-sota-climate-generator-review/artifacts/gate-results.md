@@ -38,3 +38,24 @@ and 9 ignored evidence/long-sweep tests. No production function under
   remain link-only or under the Git-ignored local reading directory.
 
 Temporary rendered images were removed after visual inspection.
+
+## Local acquisition addendum
+
+After incorporating the local full texts, the three repository commands above
+were rerun on 2026-07-12. All exited 0; the result remained 108 passed, 0
+failed, and 9 ignored evidence/long-sweep tests.
+
+Additional addendum checks:
+
+- All 10 canonical local-reading rows matched the SHA-256 of the corresponding
+  Git-ignored PDF, including context-only AB-39.
+- The bibliography contains 39 uniquely numbered annotations; AB-39 has an
+  explicit no-DOI note.
+- First pages of the 10 incorporated local sources rendered successfully and
+  were visually checked as a contact sheet. All local PDFs parsed with Poppler.
+- The alternate Katz files are one byte-identical group and the second Wilks
+  file is an alternate wrapper of AB-03; none was treated as independent
+  evidence or staged.
+- Local Markdown links and `git diff --check` passed after the addendum.
+- Temporary PDF renders were removed, and no file under
+  `references/copyrighted/` is tracked.

@@ -14,14 +14,15 @@ References below use its `AB-xx` identifiers.
 
 ## Executive finding
 
-The first scientific extension should be an explicit interannual climate
-state, after behaviorally inert station-schema/provenance modernization and a
-quality-metric expansion. This is the only high-ranked model gap that is both
-source-proven and already measured against observed climate in this
-repository. The best first comparison is not “monthly SD versus Fourier” as
-two complete models: monthly SDs are output targets, while Fourier/EOF
-coefficients are a representation that still needs a coefficient distribution,
-covariance, and year-to-year evolution.
+The first scientific study should target CLIGEN's measured aggregate and
+interannual variance deficit, after behaviorally inert station-schema/
+provenance modernization and a quality-metric expansion. An explicit
+interannual climate state is the leading candidate, but acquired full-text
+evidence shows that richer daily precipitation structure is a necessary causal
+counterfactual. The best annual-state comparison is not “monthly SD versus
+Fourier” as two complete models: monthly SDs are output targets, while
+Fourier/EOF coefficients are a representation that still needs a coefficient
+distribution, covariance, and year-to-year evolution.
 
 The next priorities are precipitation tails and multi-day dependence, then
 cross-variable dependence. A full subdaily rainfall process is highly relevant
@@ -32,7 +33,8 @@ good first changes to the point-scale generator.
 The roadmap direction is therefore supported:
 
 1. modernize schema, provenance, typed output, and fitting/validation surfaces;
-2. measure and compare declared annual-state candidates;
+2. compare declared annual-state candidates and a narrowly scoped daily
+   precipitation-structure counterfactual;
 3. promote one only if it improves the observed-climate quality vector;
 4. then address precipitation extremes/dependence and daily multivariate
    coherence;
@@ -88,9 +90,19 @@ in 9–11 of 12 calendar months, while faithful under-dispersed all 12. See the
 and
 [`monthly-SD addendum`](../work-packages/20260710-q3-qc-filter-dissection/artifacts/monthly-sd-addendum.md).
 
-That evidence establishes missing low-frequency structure as more than a
-theoretical feature gap. The other absences above are **Structural** until an
-observed-data campaign measures their magnitude and downstream benefit.
+That evidence establishes a low-frequency output deficit, not its unique
+cause. Published work shows that higher-order occurrence and amount dependence
+can recover much of aggregate precipitation variance, while explicit
+low-frequency conditioning can recover more (AB-02/03). The first study must
+therefore adjudicate daily precipitation structure against a year-level state
+rather than assume the latter is proved. The other absences above are
+**Structural** until an observed-data campaign measures their magnitude and
+downstream benefit.
+
+Meyer's historical USDA description (AB-39) independently records CLIGEN's
+single-point monthly-parameter design, sparse daily coupling, and QC evolution.
+It is context only; the vendored 5.32.3 Fortran remains the faithful-mode
+authority.
 
 ## 3. Feature frontier
 
@@ -100,7 +112,7 @@ dependence model, scenario mechanism, and validation system.
 
 | Feature | Strong precedents | What is now practical | CLIGEN position |
 |---|---|---|---|
-| Low-frequency/interannual variation | WeaGETS spectral correction (AB-09/10), Steinschneider–Brown wavelet-AR (AB-12), AWE-GEN annual AR (AB-22), `swxg` GMHMM (AB-18) | Explicit annual/monthly latent process conditioning daily generation | Missing and measured |
+| Low-frequency/interannual variation | WeaGETS spectral correction (AB-09/10), Steinschneider–Brown wavelet-AR (AB-12), AWE-GEN annual AR (AB-22), `swxg` GMHMM (AB-18) | Explicit annual/monthly process conditioning daily generation | Output deficit measured; an explicit state is missing but not uniquely established as the cause |
 | Precipitation tails and multi-day extremes | GWEX E-GPD + temporal/spatial dependence (AB-13), AWE-GEN/Bartlett–Lewis (AB-22/24/25) | Tail-aware margins plus dependence across aggregation scales | Limited monthly transform and one-day occurrence state |
 | Cross-variable dependence | Richardson/Parlange–Katz (AB-01/04), AWE-GEN (AB-21/22), Rglimclim (AB-16), MSTWeatherGen (AB-17) | Wet/dry-conditioned or joint latent/copula/GLM residual models | Sparse/hard-coded; radiation independent of wetness |
 | Spell/weather-regime persistence | higher-order WeaGETS (AB-10), LARS series (AB-07), weather regimes (AB-29/30) | Higher-order, semi-Markov, HMM/regime, or block-resampled sequences | First-order two-state occurrence only |
@@ -151,19 +163,22 @@ declared extension.
   profile are separate axes. Faithful mode must reject rather than ignore
   annual-state fields.
 
-### Rank 1 — explicit low-frequency/interannual climate state
+### Rank 1 — low-frequency/interannual deficit and explicit climate state
 
 - **Evidence:** **Measured + Published.** Repository underdispersion agrees
-  with the long-standing overdispersion literature (AB-02/03/09) and is
-  addressed by several current architectures (AB-12/18/22/24).
+  with the long-standing overdispersion literature (AB-02/03/09). That
+  literature identifies both daily precipitation structure and low-frequency
+  conditioning as remedies; several current architectures implement the
+  latter (AB-12/18/22/24).
 - **WEPP value:** very high. Drought/pluvial sequencing affects vegetation,
   runoff, soil state, and erosion across months and years.
 - **Feasibility:** high for a rank-one diagnostic; moderate for fitted
   multi-coefficient or hidden-state models.
-- **Required work:** expand metrics; build hash-pinned observed targets; compare
-  declared candidate models; add profile-owned `YearClimateState`; use a
-  dedicated domain-separated RNG; adjudicate across stations, burns, and
-  30/100-year horizons.
+- **Required work:** expand metrics; build hash-pinned observed targets;
+  compare declared candidate models plus a daily precipitation-structure
+  counterfactual; add profile-owned `YearClimateState`; use a dedicated
+  domain-separated RNG; adjudicate across stations, burns, and 30/100-year
+  horizons.
 - **Main risk:** observed monthly/annual SD is an output target, not the latent
   anomaly SD to add. Baseline daily variation and QC already contribute to the
   target variance.
@@ -316,9 +331,10 @@ At minimum, compare these candidates:
 |---|---|---|---|
 | Monthly-SD baseline | 12 monthly loadings per variable plus a declared cross-month/cross-variable covariance approximation | Auditable and easy to fit | Independent draws are jagged; one annual draw is rank-one; marginal SD alone is incomplete |
 | Low-rank Fourier/EOF | A small coefficient vector, 12-month loadings, coefficient covariance, constraints, and fit error | Smooth seasonal anomalies; compact | Coefficients alone add no randomness; raw harmonic SD reconstruction can be negative |
-| Vector AR(1) | Annual/seasonal coefficient vector plus transition matrix and innovation covariance | Adds year-to-year persistence; close to AWE-GEN concept | Short records weakly identify persistence and high-dimensional covariance |
+| Vector AR(1) | Annual/seasonal coefficient vector plus transition matrix and innovation covariance | Adds year-to-year persistence; close to AWE-GEN concept | Short records weakly identify persistence/covariance; AWE-GEN also needs rejection/rescaling to enforce annual rainfall targets |
 | Gaussian-mixture HMM | Climate-state transition matrix plus state means/covariances | Represents dry/wet/pluvial regimes; close to `swxg` | More parameters, label/fit uncertainty, and state-count selection |
-| Spectral random-phase correction | Fitted low-frequency spectrum and phase-randomization procedure | Direct WeaGETS benchmark for variance/autocorrelation | Post-correction semantics can be less transparent than a generative latent state |
+| Spectral random-phase correction | Empirical monthly/yearly spectrum, phase randomization, and iterative daily post-adjustment | Direct WeaGETS benchmark for variance/autocorrelation | Requires full-spectrum/record-length semantics, leaves occurrence unchanged, and can damage cross-variable dependence |
+| Daily precipitation-structure counterfactual | Higher-order occurrence plus declared amount classes/autocorrelation, without an annual state | Tests whether daily misspecification explains aggregate variance before adding a latent process | Does not address cross-variable annual anomalies or persistent external climate predictors |
 
 A useful first runtime diagnostic is a rank-one seasonal annual latent:
 
@@ -473,7 +489,8 @@ any package is dispatched from this sequence.
 3. **Quality metrics v3 + observed target corpus** — annual/monthly
    temperature variation, dependence, fuller spells/tails, multiple burns.
 4. **Interannual candidate spike** — external fitting plus rank-one,
-   Fourier/EOF, vector-AR, HMM, and spectral benchmark outputs.
+   Fourier/EOF, vector-AR, HMM, spectral benchmark outputs, and a narrowly
+   scoped higher-order occurrence/amount-dependence counterfactual.
 5. **Interannual profile adjudication** — promote only an evidence-supported
    versioned model; otherwise record a hold and retain findings.
 6. **Daily precipitation structure study** — jointly compare occurrence/spell
@@ -499,5 +516,8 @@ any package is dispatched from this sequence.
 - Use WeaGETS as the closest low-frequency benchmark, `swxg` as the strongest
   current annual-state/validation implementation reference, GWEX for daily
   extremes, and AWE-GEN/Bartlett–Lewis/STORM for the later subdaily arc.
+- Treat a year-level climate state as a candidate explanation for the measured
+  aggregate-variance deficit, not as an established cause; compare it with
+  higher-order occurrence and amount-dependence alternatives.
 - Keep ML climate systems outside the `cligen` crate. Define an auditable
   external forcing interface when a concrete use case arrives.
