@@ -1,0 +1,1172 @@
+{
+  "aggregation": {
+    "cell_weight": 1,
+    "identity": "a5-equal-weight-median-v1",
+    "levels": [
+      "scalar_cells_within_variable_by_equal_weight_conventional_median",
+      "variables_within_family_by_equal_weight_conventional_median",
+      "families_within_gate_composite_by_equal_weight_conventional_median",
+      "replicates_within_station_by_equal_weight_conventional_median",
+      "stations_within_regime_and_corpus_by_equal_weight_conventional_median"
+    ],
+    "median": "middle_order_statistic_if_odd_else_arithmetic_mean_of_two_middle_order_statistics",
+    "replicate_interval": "nearest_rank_p05_and_p95_of_empirical_replicate_values",
+    "station_pooling": "forbidden",
+    "unequal_weighting": "forbidden"
+  },
+  "canonical_sets": {
+    "correlation_statistics": [
+      "pearson",
+      "spearman"
+    ],
+    "distribution_statistics": [
+      "mean",
+      "sd",
+      "p50",
+      "p90",
+      "p95",
+      "p99",
+      "max"
+    ],
+    "months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep",
+      "oct",
+      "nov",
+      "dec"
+    ],
+    "upper_off_diagonal_month_pairs": "all_zero_based_pairs_row_col_with_0_le_row_lt_col_lt_12"
+  },
+  "climate_gate_metric_manifest_version": 1,
+  "distance_definitions": {
+    "absolute_difference": {
+      "formula": "abs(generated-target)",
+      "target_constraint": "finite_non_null"
+    },
+    "absolute_relative": {
+      "formula": "abs(generated-target)/target",
+      "target_constraint": "finite_non_null_and_strictly_positive"
+    }
+  },
+  "cell_selection": {
+    "baseline_eligible_cell_id": "template_id_plus_canonical_dimension_values_plus_station_id_plus_horizon_plus_target_surface_where_target_is_finite_any_relative_target_or_required_normalization_scale_is_strictly_positive_and_baseline_value_is_finite_and_both_counts_meet_count_sufficiency",
+    "candidate_requirement": "candidate_must_define_every_exact_baseline_eligible_cell_id_with_a_finite_value_and_sufficient_count",
+    "candidate_only_extra_cell": "report_only_never_substitutes_for_a_baseline_eligible_cell",
+    "common_denominator": "baseline_and_candidate_aggregates_use_the_identical_baseline_eligible_cell_id_set",
+    "denominator_switching": "forbidden"
+  },
+  "count_sufficiency": {
+    "correlation_n_or_n_pairs": "integer_at_least_2",
+    "distribution_n_mean_or_quantile_or_max": "integer_at_least_1",
+    "distribution_n_sd": "integer_at_least_2",
+    "fraction_n_days": "integer_at_least_1_and_fraction_finite",
+    "n_years_mean": "integer_at_least_1",
+    "n_years_sd_or_cv": "integer_at_least_2",
+    "par_convergence_n": "integer_at_least_1_and_generated_and_target_finite"
+  },
+  "evidence_completeness": {
+    "count_fields_are_distance_cells": false,
+    "excluded_metadata": [
+      "quality_report_schema_version",
+      "metrics_version",
+      "identity",
+      "process",
+      "par_convergence.observed_passthrough",
+      "par_convergence.*.*.abs_err",
+      "par_convergence.*.*.rel_err",
+      "interannual.by_decade",
+      "covariation.by_decade",
+      "tails.per_year",
+      "tails.top_events",
+      "tails.precipitation_structure.trace_positive",
+      "tails.precipitation_structure.r1mm.wet_day_amount_mm",
+      "tails.storm_descriptors.distributions.depth_mm",
+      "tails.storm_descriptors.distributions.duration_h",
+      "tails.storm_descriptors.dependence.depth_duration",
+      "tails.storm_descriptors.wet_event_days",
+      "tails.storm_descriptors.included_event_days",
+      "tails.storm_descriptors.excluded_event_days",
+      "covariation.winter_air_temperature_proxies.per_year",
+      "covariation.whole_run",
+      "covariation.months",
+      "covariation.radiation_wet_dry_contrast",
+      "covariation.daily_range_mean_c",
+      "par_convergence.radiation_mean_ly",
+      "par_convergence.dewpoint_mean_c",
+      "par_convergence.wind_speed_mean_ms",
+      "interannual.annual.trace_wet_day_count",
+      "interannual.monthly.*.trace_wet_day_count",
+      "interannual.monthly.*.trace_wet_day_mean_amount_mm",
+      "interannual.annual.tmax_mean_c.mean",
+      "interannual.annual.tmin_mean_c.mean",
+      "interannual.monthly.*.tmax_mean_c.mean",
+      "interannual.monthly.*.tmin_mean_c.mean",
+      "interannual.dependence.*.covariance"
+    ],
+    "exclusion_list_semantics": "exhaustive_for_quality_report_leaves_not_expanded_by_metric_templates; metric_templates_are_the_sole_distance_inclusion_authority",
+    "gate_3_contract_identity": "every_candidate_station_parameter_set_sha256_and_every_selected_par_convergence_target_scalar_must_byte_for_byte_equal_the_matched_qc_filter_off_baseline_and_base_station_contract",
+    "null_or_nonfinite_action": "target_or_baseline_undefined_excludes_that_exact_cell_before_comparison_candidate_undefined_fails_gate7",
+    "relative_zero_target_action": "exclude_that_exact_observed_defined_cell_for_baseline_and_candidate_before_comparison"
+  },
+  "gates": [
+    {
+      "gate_id": 1,
+      "membership": "all metric-template bindings naming gate 1",
+      "name": "primary_low_frequency_improvement",
+      "role": "primary_observed_distance",
+      "rule": "at_both_horizons_equal_weight_median_of_the_six_interannual_family_distances_for_candidate_corpus_le_0.90_times_baseline_and_interannual_low_frequency_family_candidate_corpus_le_0.90_times_baseline_and_at_least_11_of_17_station_composite_distances_are_strictly_less_than_baseline_and_each_regime_composite_median_le_1.05_times_baseline"
+    },
+    {
+      "gate_id": 2,
+      "membership": "exact gate-1 metric membership retargeted only to ghcn_evaluation_raw",
+      "name": "independent_source_sensitivity",
+      "role": "secondary_observed_distance",
+      "rule": "at_both_horizons_equal_weight_median_over_available_ghcn_station_composite_distances_for_candidate_le_1.10_times_the_same_station_set_baseline_median"
+    },
+    {
+      "gate_id": 3,
+      "membership": "all metric-template bindings naming gate 3",
+      "name": "monthly_contract_preservation",
+      "role": "station_parameter_contract_guard",
+      "rule": "at_both_horizons_candidate_station_median_family_distance_le_1.10_times_baseline_and_every_candidate_station_distance_le_1.25_times_its_baseline_distance"
+    },
+    {
+      "gate_id": 4,
+      "membership": "all metric-template bindings naming gate 4",
+      "name": "precipitation_structure_guard",
+      "role": "primary_observed_distance",
+      "rule": "at_both_horizons_candidate_family_distance_le_1.10_times_baseline"
+    },
+    {
+      "gate_id": 5,
+      "membership": "all metric-template bindings naming gate 5",
+      "name": "descriptor_no_regression",
+      "role": "baseline_envelope_guard",
+      "rule": "for_each_station_and_cell_candidate_replicate_median_raw_value_must_lie_within_inclusive_faithful_baseline_nearest_rank_p05_p95_raw_value_interval_or_candidate_is_held_for_descriptor_evidence"
+    },
+    {
+      "gate_id": 6,
+      "membership": "all metric-template bindings naming gate 6",
+      "name": "winter_climate_proxy_guard",
+      "role": "primary_observed_distance",
+      "rule": "at_both_horizons_candidate_five_station_family_distance_le_1.10_times_baseline_and_every_candidate_station_distance_le_1.25_times_its_baseline_distance",
+      "station_ids": [
+        "co051660",
+        "wy485345",
+        "mn214026",
+        "ak505769",
+        "id106388"
+      ]
+    },
+    {
+      "gate_id": 7,
+      "membership": "non_distance_evidence_rules_only",
+      "name": "no_missing_evidence",
+      "role": "evidence_completeness",
+      "rules": [
+        "every_matrix_row_has_schema_valid_quality_report_and_provenance",
+        "every_declared_fit_and_generated_artifact_hash_matches_bytes",
+        "every_required_metric_template_expansion_is_accounted_for",
+        "candidate_usable_cell_count_is_not_less_than_its_baseline_for_each_family",
+        "ghcn_unavailable_is_excluded_only_when_source_availability_is_explicitly_unavailable"
+      ]
+    }
+  ],
+  "inclusion_profiles": {
+    "difference": {
+      "generated": "finite_non_null",
+      "target": "finite_non_null",
+      "unusable": "exclude_record_count_apply_gate7"
+    },
+    "relative": {
+      "generated": "finite_non_null",
+      "target": "finite_non_null_and_strictly_positive",
+      "unusable": "exclude_record_count_apply_gate7"
+    }
+  },
+  "manifest_id": "cligen-a5-climate-gate-metrics-v1",
+  "metric_templates": [
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.annual.{variable}.n_years",
+        "target_count_path_template": "{target_prefix}.annual.{variable}.n_years"
+      },
+      "dimensions": {
+        "statistic": [
+          "mean",
+          "sd",
+          "cv"
+        ],
+        "variable": [
+          "precip_total_mm",
+          "r1mm_wet_day_count",
+          "max_daily_precip_mm"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "interannual_annual_dispersion",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.annual.{variable}.{statistic}",
+      "group": "B",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.annual.{variable}.{statistic}",
+      "template_id": "b_annual_nonnegative_dispersion",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.annual.{variable}.n_years",
+        "target_count_path_template": "{target_prefix}.annual.{variable}.n_years"
+      },
+      "dimensions": {
+        "statistic": [
+          "sd"
+        ],
+        "variable": [
+          "tmax_mean_c",
+          "tmin_mean_c"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "interannual_annual_dispersion",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.annual.{variable}.{statistic}",
+      "group": "B",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.annual.{variable}.{statistic}",
+      "template_id": "b_annual_temperature_dispersion",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.monthly.{month}.{variable}.n_years",
+        "target_count_path_template": "{target_prefix}.monthly.{month}.{variable}.n_years"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "statistic": [
+          "mean",
+          "sd",
+          "cv"
+        ],
+        "variable": [
+          "precip_total_mm",
+          "r1mm_wet_day_count",
+          "r1mm_wet_day_mean_amount_mm"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "interannual_monthly_dispersion",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.monthly.{month}.{variable}.{statistic}",
+      "group": "B",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.monthly.{month}.{variable}.{statistic}",
+      "template_id": "b_monthly_nonnegative_dispersion",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.monthly.{month}.{variable}.n_years",
+        "target_count_path_template": "{target_prefix}.monthly.{month}.{variable}.n_years"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "statistic": [
+          "sd"
+        ],
+        "variable": [
+          "tmax_mean_c",
+          "tmin_mean_c"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "interannual_monthly_dispersion",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.monthly.{month}.{variable}.{statistic}",
+      "group": "B",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.monthly.{month}.{variable}.{statistic}",
+      "template_id": "b_monthly_temperature_dispersion",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.dependence.{variable}.n_pairs[{row}][{col}]",
+        "target_count_path_template": "{target_prefix}.dependence.raw.{variable}.n_pairs[{row}][{col}]"
+      },
+      "dimensions": {
+        "matrix_statistic": [
+          "pearson_correlation"
+        ],
+        "month_pair": "canonical_sets.upper_off_diagonal_month_pairs",
+        "variable": [
+          "precip_cross_month",
+          "tmax_cross_month",
+          "tmin_cross_month"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "interannual_cross_month_dependence",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.dependence.{variable}.{matrix_statistic}[{row}][{col}]",
+      "group": "B",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.matrix_statistic",
+      "structural_exclusions": [
+        "matrix_diagonal",
+        "matrix_lower_triangle"
+      ],
+      "target_path_template": "{target_prefix}.dependence.raw.{variable}.{matrix_statistic}[{row}][{col}]",
+      "template_id": "b_cross_month_dependence",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.dependence.cross_variable_by_month.{month}.{variable}.n",
+        "target_count_path_template": "{target_prefix}.dependence.raw.cross_variable_by_month.{month}.{variable}.n"
+      },
+      "dimensions": {
+        "correlation_statistic": "canonical_sets.correlation_statistics",
+        "month": "canonical_sets.months",
+        "variable": [
+          "precip_tmax",
+          "precip_tmin",
+          "tmax_tmin"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "interannual_cross_variable_dependence",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.dependence.cross_variable_by_month.{month}.{variable}.{correlation_statistic}",
+      "group": "B",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.correlation_statistic",
+      "target_path_template": "{target_prefix}.dependence.raw.cross_variable_by_month.{month}.{variable}.{correlation_statistic}",
+      "template_id": "b_cross_variable_dependence",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.dependence.annual.{variable}.lag_one.n",
+        "target_count_path_template": "{target_prefix}.dependence.raw.annual.{variable}.lag_one.n"
+      },
+      "dimensions": {
+        "correlation_statistic": "canonical_sets.correlation_statistics",
+        "variable": [
+          "precip_total_mm",
+          "tmax_mean_c",
+          "tmin_mean_c"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "interannual_annual_dependence",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.dependence.annual.{variable}.lag_one.{correlation_statistic}",
+      "group": "B",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.correlation_statistic",
+      "target_path_template": "{target_prefix}.dependence.raw.annual.{variable}.lag_one.{correlation_statistic}",
+      "template_id": "b_annual_lag_one_dependence",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.interannual.dependence.annual.{variable}.n_years",
+        "target_count_path_template": "{target_prefix}.dependence.raw.annual.{variable}.n_years"
+      },
+      "dimensions": {
+        "variable": [
+          "precip_total_mm",
+          "tmax_mean_c",
+          "tmin_mean_c"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "interannual_low_frequency",
+      "gate_bindings": [
+        {
+          "gate_id": 1,
+          "role": "primary",
+          "target_surface": "daymet_evaluation_raw"
+        },
+        {
+          "gate_id": 2,
+          "role": "independent_source_sensitivity",
+          "target_surface": "ghcn_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.interannual.dependence.annual.{variable}.period_ge_4y_power_fraction",
+      "group": "B",
+      "inclusion_profile": "difference",
+      "statistic_selection": "period_ge_4y_power_fraction",
+      "target_path_template": "{target_prefix}.dependence.raw.annual.{variable}.period_ge_4y_power_fraction",
+      "template_id": "b_annual_low_frequency_fraction",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.par_convergence.{variable}.{month}.n",
+        "target_count_path_template": "$.par_convergence.{variable}.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "variable": [
+          "precip_wet_mean_mm",
+          "precip_wet_sd_mm",
+          "precip_wet_skew"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "monthly_station_contract",
+      "gate_bindings": [
+        {
+          "gate_id": 3,
+          "role": "contract_guard",
+          "target_surface": "report_embedded_station_parameter"
+        }
+      ],
+      "generated_path_template": "$.par_convergence.{variable}.{month}.generated",
+      "group": "A",
+      "inclusion_profile": "relative",
+      "statistic_selection": "generated_vs_target",
+      "target_path_template": "$.par_convergence.{variable}.{month}.target",
+      "template_id": "a_monthly_positive_contract",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.par_convergence.{variable}.{month}.n",
+        "target_count_path_template": "$.par_convergence.{variable}.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "variable": [
+          "wet_day_fraction",
+          "p_ww",
+          "p_wd"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "monthly_station_contract",
+      "gate_bindings": [
+        {
+          "gate_id": 3,
+          "role": "contract_guard",
+          "target_surface": "report_embedded_station_parameter"
+        }
+      ],
+      "generated_path_template": "$.par_convergence.{variable}.{month}.generated",
+      "group": "A",
+      "inclusion_profile": "difference",
+      "statistic_selection": "generated_vs_target",
+      "target_path_template": "$.par_convergence.{variable}.{month}.target",
+      "template_id": "a_monthly_probability_contract",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.par_convergence.tmax_mean_c.{month}.n",
+        "target_count_path_template": "$.par_convergence.tmax_mean_c.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months"
+      },
+      "distance": "absolute_difference",
+      "family": "monthly_station_contract",
+      "gate_bindings": [
+        {
+          "gate_id": 3,
+          "role": "contract_guard",
+          "target_surface": "report_embedded_station_parameter"
+        }
+      ],
+      "generated_path_template": "$.par_convergence.tmax_mean_c.{month}.generated",
+      "group": "A",
+      "inclusion_profile": "difference",
+      "normalization": {
+        "formula": "abs(generated-target)/target_scale",
+        "target_scale_constraint": "finite_non_null_and_strictly_positive",
+        "target_scale_path_template": "$.par_convergence.tmax_sd_c.{month}.target",
+        "type": "divide_by_matched_station_contract_target_sd"
+      },
+      "statistic_selection": "generated_vs_target_scaled_by_tmax_sd_c_target",
+      "target_path_template": "$.par_convergence.tmax_mean_c.{month}.target",
+      "template_id": "a_monthly_tmax_location_contract",
+      "variable_assignment": "tmax_mean_c",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.par_convergence.tmin_mean_c.{month}.n",
+        "target_count_path_template": "$.par_convergence.tmin_mean_c.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months"
+      },
+      "distance": "absolute_difference",
+      "family": "monthly_station_contract",
+      "gate_bindings": [
+        {
+          "gate_id": 3,
+          "role": "contract_guard",
+          "target_surface": "report_embedded_station_parameter"
+        }
+      ],
+      "generated_path_template": "$.par_convergence.tmin_mean_c.{month}.generated",
+      "group": "A",
+      "inclusion_profile": "difference",
+      "normalization": {
+        "formula": "abs(generated-target)/target_scale",
+        "target_scale_constraint": "finite_non_null_and_strictly_positive",
+        "target_scale_path_template": "$.par_convergence.tmin_sd_c.{month}.target",
+        "type": "divide_by_matched_station_contract_target_sd"
+      },
+      "statistic_selection": "generated_vs_target_scaled_by_tmin_sd_c_target",
+      "target_path_template": "$.par_convergence.tmin_mean_c.{month}.target",
+      "template_id": "a_monthly_tmin_location_contract",
+      "variable_assignment": "tmin_mean_c",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.par_convergence.{variable}.{month}.n",
+        "target_count_path_template": "$.par_convergence.{variable}.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "variable": [
+          "tmax_sd_c",
+          "tmin_sd_c"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "monthly_station_contract",
+      "gate_bindings": [
+        {
+          "gate_id": 3,
+          "role": "contract_guard",
+          "target_surface": "report_embedded_station_parameter"
+        }
+      ],
+      "generated_path_template": "$.par_convergence.{variable}.{month}.generated",
+      "group": "A",
+      "inclusion_profile": "relative",
+      "statistic_selection": "generated_vs_target",
+      "target_path_template": "$.par_convergence.{variable}.{month}.target",
+      "template_id": "a_monthly_temperature_scale_contract",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.precipitation_structure.r1mm.{variable}.whole_run.n",
+        "target_count_path_template": "{target_prefix}.precipitation_structure.{variable}.whole_run.n"
+      },
+      "dimensions": {
+        "statistic": "canonical_sets.distribution_statistics",
+        "variable": [
+          "wet_spells_days",
+          "dry_spells_days"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "precipitation_structure",
+      "gate_bindings": [
+        {
+          "gate_id": 4,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.tails.precipitation_structure.r1mm.{variable}.whole_run.{statistic}",
+      "group": "D",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.precipitation_structure.{variable}.whole_run.{statistic}",
+      "template_id": "d_r1mm_spell_whole_run",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.precipitation_structure.r1mm.{variable}.by_start_month.{month}.n",
+        "target_count_path_template": "{target_prefix}.precipitation_structure.{variable}.by_start_month.{month}.n"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months",
+        "statistic": "canonical_sets.distribution_statistics",
+        "variable": [
+          "wet_spells_days",
+          "dry_spells_days"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "precipitation_structure",
+      "gate_bindings": [
+        {
+          "gate_id": 4,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.tails.precipitation_structure.r1mm.{variable}.by_start_month.{month}.{statistic}",
+      "group": "D",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.precipitation_structure.{variable}.by_start_month.{month}.{statistic}",
+      "template_id": "d_r1mm_spell_by_month",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.precipitation_structure.r1mm.adjacent_wet_day_amount.n",
+        "target_count_path_template": "{target_prefix}.precipitation_structure.adjacent_wet_day_amount.n"
+      },
+      "dimensions": {
+        "correlation_statistic": "canonical_sets.correlation_statistics"
+      },
+      "distance": "absolute_difference",
+      "family": "precipitation_structure",
+      "gate_bindings": [
+        {
+          "gate_id": 4,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.tails.precipitation_structure.r1mm.adjacent_wet_day_amount.{correlation_statistic}",
+      "group": "D",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.correlation_statistic",
+      "target_path_template": "{target_prefix}.precipitation_structure.adjacent_wet_day_amount.{correlation_statistic}",
+      "template_id": "d_r1mm_amount_persistence",
+      "variable_assignment": "adjacent_wet_day_amount",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.precipitation_structure.r1mm.{variable}.n",
+        "target_count_path_template": "{target_prefix}.precipitation_structure.{variable}.n"
+      },
+      "dimensions": {
+        "statistic": "canonical_sets.distribution_statistics",
+        "variable": [
+          "annual_max_1_day_mm",
+          "annual_max_3_day_mm",
+          "annual_max_5_day_mm"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "precipitation_structure",
+      "gate_bindings": [
+        {
+          "gate_id": 4,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.tails.precipitation_structure.r1mm.{variable}.{statistic}",
+      "group": "D",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.precipitation_structure.{variable}.{statistic}",
+      "template_id": "d_r1mm_rolling_extremes",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.storm_descriptors.distributions.{variable}.n",
+        "target_count_path_template": "$.tails.storm_descriptors.distributions.{variable}.n"
+      },
+      "dimensions": {
+        "statistic": "canonical_sets.distribution_statistics",
+        "variable": [
+          "time_to_peak_fraction"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "descriptor_guard",
+      "gate_bindings": [
+        {
+          "gate_id": 5,
+          "role": "no_regression",
+          "target_surface": "faithful_off_baseline"
+        }
+      ],
+      "generated_path_template": "$.tails.storm_descriptors.distributions.{variable}.{statistic}",
+      "group": "D",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "$.tails.storm_descriptors.distributions.{variable}.{statistic}",
+      "template_id": "d_descriptor_time_to_peak_distribution",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.storm_descriptors.distributions.{variable}.n",
+        "target_count_path_template": "$.tails.storm_descriptors.distributions.{variable}.n"
+      },
+      "dimensions": {
+        "statistic": "canonical_sets.distribution_statistics",
+        "variable": [
+          "peak_intensity_ratio"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "descriptor_guard",
+      "gate_bindings": [
+        {
+          "gate_id": 5,
+          "role": "no_regression",
+          "target_surface": "faithful_off_baseline"
+        }
+      ],
+      "generated_path_template": "$.tails.storm_descriptors.distributions.{variable}.{statistic}",
+      "group": "D",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "$.tails.storm_descriptors.distributions.{variable}.{statistic}",
+      "template_id": "d_descriptor_peak_ratio_distribution",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.tails.storm_descriptors.dependence.{variable}.n",
+        "target_count_path_template": "$.tails.storm_descriptors.dependence.{variable}.n"
+      },
+      "dimensions": {
+        "correlation_statistic": "canonical_sets.correlation_statistics",
+        "variable": [
+          "depth_time_to_peak",
+          "depth_peak_intensity_ratio",
+          "duration_time_to_peak",
+          "duration_peak_intensity_ratio",
+          "time_to_peak_peak_intensity_ratio"
+        ]
+      },
+      "distance": "absolute_difference",
+      "family": "descriptor_guard",
+      "gate_bindings": [
+        {
+          "gate_id": 5,
+          "role": "no_regression",
+          "target_surface": "faithful_off_baseline"
+        }
+      ],
+      "generated_path_template": "$.tails.storm_descriptors.dependence.{variable}.{correlation_statistic}",
+      "group": "D",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.correlation_statistic",
+      "target_path_template": "$.tails.storm_descriptors.dependence.{variable}.{correlation_statistic}",
+      "template_id": "d_descriptor_dependence",
+      "variable_assignment": "dimensions.variable",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.covariation.winter_air_temperature_proxies.precipitation_on_freezing_air_days.n_days",
+        "target_count_path_template": "{target_prefix}.winter_air_temperature_proxies.precipitation_on_freezing_air_days.n_days"
+      },
+      "dimensions": {},
+      "distance": "absolute_difference",
+      "family": "winter_air_temperature_proxies",
+      "gate_bindings": [
+        {
+          "gate_id": 6,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.covariation.winter_air_temperature_proxies.precipitation_on_freezing_air_days.fraction",
+      "group": "C",
+      "inclusion_profile": "difference",
+      "statistic_selection": "fraction",
+      "target_path_template": "{target_prefix}.winter_air_temperature_proxies.precipitation_on_freezing_air_days.fraction",
+      "template_id": "c_winter_freezing_precipitation_fraction",
+      "variable_assignment": "freezing_precipitation_fraction",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.covariation.winter_air_temperature_proxies.by_month.{month}.n_days",
+        "target_count_path_template": "{target_prefix}.winter_air_temperature_proxies.by_month.{month}.n_days"
+      },
+      "dimensions": {
+        "month": "canonical_sets.months"
+      },
+      "distance": "absolute_difference",
+      "family": "winter_air_temperature_proxies",
+      "gate_bindings": [
+        {
+          "gate_id": 6,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.covariation.winter_air_temperature_proxies.by_month.{month}.fraction",
+      "group": "C",
+      "inclusion_profile": "difference",
+      "statistic_selection": "fraction",
+      "target_path_template": "{target_prefix}.winter_air_temperature_proxies.by_month.{month}.fraction",
+      "template_id": "c_winter_monthly_freezing_precipitation_fraction",
+      "variable_assignment": "freezing_precipitation_fraction",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.covariation.winter_air_temperature_proxies.djf_r1mm_precip_mean_air_temperature.n",
+        "target_count_path_template": "{target_prefix}.winter_air_temperature_proxies.djf_r1mm_precip_mean_air_temperature.n"
+      },
+      "dimensions": {
+        "correlation_statistic": "canonical_sets.correlation_statistics"
+      },
+      "distance": "absolute_difference",
+      "family": "winter_air_temperature_proxies",
+      "gate_bindings": [
+        {
+          "gate_id": 6,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.covariation.winter_air_temperature_proxies.djf_r1mm_precip_mean_air_temperature.{correlation_statistic}",
+      "group": "C",
+      "inclusion_profile": "difference",
+      "statistic_selection": "dimensions.correlation_statistic",
+      "target_path_template": "{target_prefix}.winter_air_temperature_proxies.djf_r1mm_precip_mean_air_temperature.{correlation_statistic}",
+      "template_id": "c_winter_djf_dependence",
+      "variable_assignment": "djf_precipitation_temperature_dependence",
+      "weight": 1
+    },
+    {
+      "completeness": {
+        "generated_count_path_template": "$.covariation.winter_air_temperature_proxies.freeze_thaw_air_temperature_proxy_cycles.n_years",
+        "target_count_path_template": "{target_prefix}.winter_air_temperature_proxies.freeze_thaw_air_temperature_proxy_cycles.n_years"
+      },
+      "dimensions": {
+        "statistic": [
+          "mean",
+          "sd",
+          "cv"
+        ]
+      },
+      "distance": "absolute_relative",
+      "family": "winter_air_temperature_proxies",
+      "gate_bindings": [
+        {
+          "gate_id": 6,
+          "role": "guard",
+          "target_surface": "daymet_evaluation_raw"
+        }
+      ],
+      "generated_path_template": "$.covariation.winter_air_temperature_proxies.freeze_thaw_air_temperature_proxy_cycles.{statistic}",
+      "group": "C",
+      "inclusion_profile": "relative",
+      "statistic_selection": "dimensions.statistic",
+      "target_path_template": "{target_prefix}.winter_air_temperature_proxies.freeze_thaw_air_temperature_proxy_cycles.{statistic}",
+      "template_id": "c_winter_freeze_thaw_cycle_dispersion",
+      "variable_assignment": "freeze_thaw_air_temperature_proxy_cycles",
+      "weight": 1
+    }
+  ],
+  "observed_target_corpus_schema_version": 1,
+  "path_template_language": {
+    "array_indices": "zero_based",
+    "matrix_pair_expansion": "row_major_order_over_row_lt_col",
+    "root": "$",
+    "station_selector": "$.stations[@station_id={station_id}] selects exactly one station object whose station_id equals the matrix-row station_id",
+    "target_prefix": "the exact path_prefix of the binding's target_surface",
+    "template_substitution": "literal brace-token replacement only; no recursive wildcard or analyst-selected filtering"
+  },
+  "quality_report_schema_version": 2,
+  "quality_report_metrics_version": 3,
+  "sensitivity_projections": [
+    {
+      "membership": "all eight B template ids and every canonical expansion",
+      "projection_id": "daymet_full_raw",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "daymet_full_raw",
+      "target_transform": "replace_only_target_prefix_from_daymet_evaluation_raw"
+    },
+    {
+      "membership": "all eight B template ids and every canonical expansion",
+      "projection_id": "ghcn_full_raw",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "ghcn_full_raw",
+      "target_transform": "replace_only_target_prefix_from_ghcn_evaluation_raw"
+    },
+    {
+      "membership": "only sd expansions of the four dispersion templates plus every expansion of the four dependence templates",
+      "projection_id": "daymet_evaluation_detrended",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "daymet_evaluation_detrended",
+      "target_transform": "dispersion_target_statistic_sd_to_detrended_sd_and_dependence_path_raw_to_detrended_generated_path_unchanged"
+    },
+    {
+      "membership": "only sd expansions of the four dispersion templates plus every expansion of the four dependence templates",
+      "projection_id": "daymet_full_detrended",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "daymet_full_detrended",
+      "target_transform": "dispersion_target_statistic_sd_to_detrended_sd_and_dependence_path_raw_to_detrended_generated_path_unchanged"
+    },
+    {
+      "membership": "only sd expansions of the four dispersion templates plus every expansion of the four dependence templates",
+      "projection_id": "ghcn_evaluation_detrended",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "ghcn_evaluation_detrended",
+      "target_transform": "dispersion_target_statistic_sd_to_detrended_sd_and_dependence_path_raw_to_detrended_generated_path_unchanged"
+    },
+    {
+      "membership": "only sd expansions of the four dispersion templates plus every expansion of the four dependence templates",
+      "projection_id": "ghcn_full_detrended",
+      "role": "report_only_not_gate_substitute",
+      "target_surface": "ghcn_full_detrended",
+      "target_transform": "dispersion_target_statistic_sd_to_detrended_sd_and_dependence_path_raw_to_detrended_generated_path_unchanged"
+    }
+  ],
+  "target_surfaces": [
+    {
+      "availability": "required",
+      "detrending": "raw",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.daymet.periods.evaluation",
+      "period": "evaluation_2010_2025",
+      "source": "daymet_v4_r1",
+      "surface_id": "daymet_evaluation_raw"
+    },
+    {
+      "availability": "required",
+      "detrending": "ols_linear_residual_by_integer_year",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.daymet.periods.evaluation",
+      "period": "evaluation_2010_2025",
+      "source": "daymet_v4_r1",
+      "surface_id": "daymet_evaluation_detrended"
+    },
+    {
+      "availability": "required",
+      "detrending": "raw",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.daymet.periods.full",
+      "period": "full_1980_2025",
+      "source": "daymet_v4_r1",
+      "surface_id": "daymet_full_raw"
+    },
+    {
+      "availability": "required",
+      "detrending": "ols_linear_residual_by_integer_year",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.daymet.periods.full",
+      "period": "full_1980_2025",
+      "source": "daymet_v4_r1",
+      "surface_id": "daymet_full_detrended"
+    },
+    {
+      "availability": "explicit_available_only",
+      "detrending": "raw",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.ghcn.periods.evaluation",
+      "period": "evaluation_2010_2025",
+      "source": "ghcn_daily_snapshot_20260712",
+      "surface_id": "ghcn_evaluation_raw"
+    },
+    {
+      "availability": "explicit_available_only",
+      "detrending": "ols_linear_residual_by_integer_year",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.ghcn.periods.evaluation",
+      "period": "evaluation_2010_2025",
+      "source": "ghcn_daily_snapshot_20260712",
+      "surface_id": "ghcn_evaluation_detrended"
+    },
+    {
+      "availability": "explicit_available_only",
+      "detrending": "raw",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.ghcn.periods.full",
+      "period": "full_1980_2025",
+      "source": "ghcn_daily_snapshot_20260712",
+      "surface_id": "ghcn_full_raw"
+    },
+    {
+      "availability": "explicit_available_only",
+      "detrending": "ols_linear_residual_by_integer_year",
+      "path_prefix": "$.stations[@station_id={station_id}].sources.ghcn.periods.full",
+      "period": "full_1980_2025",
+      "source": "ghcn_daily_snapshot_20260712",
+      "surface_id": "ghcn_full_detrended"
+    },
+    {
+      "availability": "required",
+      "detrending": "not_applicable",
+      "path_prefix": "$.par_convergence",
+      "period": "generated_run",
+      "source": "quality_report_embedded_station_parameter_target",
+      "surface_id": "report_embedded_station_parameter"
+    },
+    {
+      "availability": "required",
+      "detrending": "not_applicable",
+      "path_prefix": "$",
+      "period": "matched_horizon_and_replicate_matrix",
+      "source": "faithful_5_32_3_qc_filter_off",
+      "surface_id": "faithful_off_baseline"
+    }
+  ],
+  "uncertainty_application": {
+    "aggregation_order_within_bootstrap_replicate": [
+      "scalar_cells_within_variable_by_equal_weight_conventional_median",
+      "variables_within_family_by_equal_weight_conventional_median",
+      "families_within_gate_composite_by_equal_weight_conventional_median",
+      "eight_fixed_generated_replicates_within_station_by_equal_weight_conventional_median",
+      "stations_within_regime_and_corpus_by_equal_weight_conventional_median"
+    ],
+    "baseline_eligibility": "use_the_exact_unresampled_baseline_eligible_cell_id_set; a_bootstrap_target_never_adds_removes_or_substitutes_membership",
+    "bootstrap_contract_id": "cligen-a5-observed-circular-moving-block-bootstrap-v1",
+    "candidate_and_horizon_application": "compute_the_faithful_qc_filter_off_baseline_and_each_candidate_at_each_30_or_100_year_horizon_separately_against_the_same_station_target_stream_using_their_own_eight_fixed_generated_reports",
+    "crossing": "for_each_target_bootstrap_index_b_cross_that_resampled_target_with_all_eight_fixed_generated_reports_then_aggregate_the_eight_generated_replicates_inside_b",
+    "decision_role": "report_only; bootstrap_endpoints_never_change_deterministic_promotion_pass_or_fail",
+    "excluded_gates": [
+      2,
+      3,
+      5,
+      7
+    ],
+    "included_gate_ids": [
+      1,
+      4,
+      6
+    ],
+    "included_template_ids": [
+      "b_annual_nonnegative_dispersion",
+      "b_annual_temperature_dispersion",
+      "b_monthly_nonnegative_dispersion",
+      "b_monthly_temperature_dispersion",
+      "b_cross_month_dependence",
+      "b_cross_variable_dependence",
+      "b_annual_lag_one_dependence",
+      "b_annual_low_frequency_fraction",
+      "d_r1mm_spell_whole_run",
+      "d_r1mm_spell_by_month",
+      "d_r1mm_amount_persistence",
+      "d_r1mm_rolling_extremes",
+      "c_winter_freezing_precipitation_fraction",
+      "c_winter_monthly_freezing_precipitation_fraction",
+      "c_winter_djf_dependence",
+      "c_winter_freeze_thaw_cycle_dispersion"
+    ],
+    "invalid_resample_cell": "do_not_drop_or_reweight_the_cell; mark_every_dependent_aggregate_unavailable_for_that_bootstrap_index",
+    "percentile_application": "at_each_report_level_apply_nearest_rank_p025_and_p975_to_available_bootstrap_aggregate_values_in_bootstrap_index_order_after_sorting; report_n_available_out_of_2000; zero_available_yields_null_endpoints",
+    "recomputation": "for_each_of_2000_station_specific_target_resamples_recompute_every_included_baseline_eligible_observed_target_scalar_with_the_metrics_v3_estimators_before_any_distance_or_aggregation",
+    "report_levels": [
+      "observed_target_scalar_cell",
+      "station_variable",
+      "station_family",
+      "station_gate",
+      "regime_gate",
+      "corpus_gate"
+    ],
+    "resampled_year_relabeling": "concatenate_sampled_years_in_draw_order_and_relabel_positions_0_through_15_as_the_bootstrap_time_axis; preserve_month_day_and_within_year_daily_order; never_sort_or_group_by_original_source_year_label",
+    "sequence_boundaries": "daily_spells_rolling_windows_and_lag_estimators_cross_each_boundary_inside_the_linear_concatenated_16_year_sequence_including_block_seams_and_source_year_circular_wraps; the_final_sampled_day_or_year_is_not_joined_back_to_the_first",
+    "source_calendar": "Daymet_noleap_365_only; no_leap_days_exist_or_are_inserted",
+    "station_stream_alignment": "each_station_has_its_independently_seeded_stream; the_same_bootstrap_index_b_is_aligned_across_station_streams_for_regime_and_corpus_aggregation",
+    "target_surface": "daymet_evaluation_raw",
+    "year_vector_unit": "all_daily_precipitation_tmax_tmin_records_and_all_components_for_one_complete_aligned_source_year_move_together; components_are_never_resampled_separately"
+  }
+}

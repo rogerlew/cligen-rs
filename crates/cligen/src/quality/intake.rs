@@ -21,7 +21,10 @@ pub struct DailyValue {
     pub precip_mm: f64,
     pub duration_h: f64,
     pub time_to_peak: f64,
-    pub peak_intensity: f64,
+    /// Printed `.cli ip`: peak/mean event-intensity ratio (`xmav`),
+    /// dimensionless. Metrics v2 historically mislabeled this as an
+    /// intensity; metrics v3 corrects the quality-only name.
+    pub peak_intensity_ratio: f64,
     pub tmax_c: f64,
     pub tmin_c: f64,
     pub radiation_ly: f64,
@@ -35,6 +38,20 @@ impl DailyValue {
     #[must_use]
     pub fn is_wet(&self) -> bool {
         self.precip_mm > 0.0
+    }
+
+    /// Observed-comparison wet-day predicate fixed by
+    /// SPEC-OBSERVED-TARGET-CORPUS: daily precipitation at least 1 mm.
+    #[must_use]
+    pub fn is_r1mm(&self) -> bool {
+        self.precip_mm >= 1.0
+    }
+
+    /// Arithmetic daily mean air temperature used only by the explicit
+    /// winter climate proxy surface.
+    #[must_use]
+    pub fn mean_air_temperature_c(&self) -> f64 {
+        (self.tmax_c + self.tmin_c) / 2.0
     }
 
     /// Chronological sort key.
@@ -70,11 +87,24 @@ pub enum QualityIntakeError {
         field_index: usize,
         value: String,
     },
+    /// Printed precipitation is finite but outside the physical input domain.
+    NegativePrecipitation { line_number: usize, value: f64 },
     /// A date field outside its calendar domain.
     InvalidDate { line_number: usize },
     /// Row dates are not strictly increasing (the WEPP daily table is
     /// chronological; decade blocking depends on it).
     MisorderedRow { line_number: usize },
+    /// A multi-row daily file contains a date that is invalid in the
+    /// proleptic Gregorian calendar. The one-row storm exception retains
+    /// the source storm calendar union documented by `max_source_day`.
+    NonGregorianDailyDate { line_number: usize },
+    /// Consecutive rows in a multi-row daily file are not adjacent calendar
+    /// days. Metrics v3 refuses to bridge an unreported gap.
+    DateGap {
+        line_number: usize,
+        expected: (i32, i32, i32),
+        actual: (i32, i32, i32),
+    },
 }
 
 impl fmt::Display for QualityIntakeError {
@@ -101,12 +131,30 @@ impl fmt::Display for QualityIntakeError {
                 f,
                 "invalid numeric field at line {line_number}, field {field_index}: {value:?}"
             ),
+            Self::NegativePrecipitation { line_number, value } => write!(
+                f,
+                "negative precipitation at line {line_number}: {value} mm"
+            ),
             Self::InvalidDate { line_number } => {
                 write!(f, "invalid calendar date at line {line_number}")
             }
             Self::MisorderedRow { line_number } => write!(
                 f,
                 "daily row at line {line_number} is not after the preceding row"
+            ),
+            Self::NonGregorianDailyDate { line_number } => write!(
+                f,
+                "daily row at line {line_number} is not a Gregorian calendar date"
+            ),
+            Self::DateGap {
+                line_number,
+                expected,
+                actual,
+            } => write!(
+                f,
+                "daily row at line {line_number} is not the next calendar day: expected \
+                 {:04}-{:02}-{:02}, found {:04}-{:02}-{:02}",
+                expected.0, expected.1, expected.2, actual.0, actual.1, actual.2
             ),
         }
     }
@@ -119,12 +167,13 @@ impl Error for QualityIntakeError {}
 /// # Errors
 ///
 /// Fails closed on a missing daily header or units line, zero rows,
-/// wrong field counts, non-finite numeric fields, invalid dates, and
-/// non-chronological rows.
+/// wrong field counts, non-finite numeric fields, negative precipitation,
+/// invalid dates, and non-chronological rows.
 pub fn parse_cli_table(text: &str) -> Result<CliTable, QualityIntakeError> {
     let lines: Vec<&str> = text.lines().collect();
     let data_start = find_data_start(&lines)?;
     let mut rows = Vec::new();
+    let mut row_lines = Vec::new();
     for (line_index, line) in lines.iter().enumerate().skip(data_start) {
         if line.trim().is_empty() {
             continue;
@@ -139,10 +188,12 @@ pub fn parse_cli_table(text: &str) -> Result<CliTable, QualityIntakeError> {
             }
         }
         rows.push(row);
+        row_lines.push(line_index + 1);
     }
     if rows.is_empty() {
         return Err(QualityIntakeError::NoDailyRecords);
     }
+    validate_daily_calendar(&rows, &row_lines)?;
     Ok(CliTable { rows })
 }
 
@@ -181,7 +232,7 @@ fn parse_row(line_number: usize, line: &str) -> Result<DailyValue, QualityIntake
         precip_mm: num(3)?,
         duration_h: num(4)?,
         time_to_peak: num(5)?,
-        peak_intensity: num(6)?,
+        peak_intensity_ratio: num(6)?,
         tmax_c: num(7)?,
         tmin_c: num(8)?,
         radiation_ly: num(9)?,
@@ -189,10 +240,62 @@ fn parse_row(line_number: usize, line: &str) -> Result<DailyValue, QualityIntake
         wind_direction_deg: num(11)?,
         dewpoint_c: num(12)?,
     };
-    if !(1..=12).contains(&row.month) || row.day < 1 || row.day > max_day(row.month, row.year) {
+    if !(1..=12).contains(&row.month)
+        || row.day < 1
+        || row.day > max_source_day(row.month, row.year)
+    {
         return Err(QualityIntakeError::InvalidDate { line_number });
     }
+    if row.precip_mm < 0.0 {
+        return Err(QualityIntakeError::NegativePrecipitation {
+            line_number,
+            value: row.precip_mm,
+        });
+    }
     Ok(row)
+}
+
+fn validate_daily_calendar(
+    rows: &[DailyValue],
+    line_numbers: &[usize],
+) -> Result<(), QualityIntakeError> {
+    if rows.len() <= 1 {
+        return Ok(());
+    }
+    for (index, row) in rows.iter().enumerate() {
+        if row.day > max_gregorian_day(row.month, row.year) {
+            return Err(QualityIntakeError::NonGregorianDailyDate {
+                line_number: line_numbers[index],
+            });
+        }
+        if index == 0 {
+            continue;
+        }
+        let expected = next_gregorian_date(&rows[index - 1]).ok_or(
+            QualityIntakeError::NonGregorianDailyDate {
+                line_number: line_numbers[index - 1],
+            },
+        )?;
+        let actual = (row.year, row.month, row.day);
+        if actual != expected {
+            return Err(QualityIntakeError::DateGap {
+                line_number: line_numbers[index],
+                expected,
+                actual,
+            });
+        }
+    }
+    Ok(())
+}
+
+fn next_gregorian_date(row: &DailyValue) -> Option<(i32, i32, i32)> {
+    if row.day < max_gregorian_day(row.month, row.year) {
+        return Some((row.year, row.month, row.day + 1));
+    }
+    if row.month < 12 {
+        return Some((row.year, row.month + 1, 1));
+    }
+    Some((row.year.checked_add(1)?, 1, 1))
 }
 
 /// Maximum valid day for a printed `.cli` month/year (C-R1-001).
@@ -207,9 +310,23 @@ fn parse_row(line_number: usize, line: &str) -> Result<DailyValue, QualityIntake
 /// (all divisible by 4). February 29 is therefore accepted iff the
 /// printed year is divisible by 4; impossible days are rejected in
 /// every month.
-fn max_day(month: i32, year: i32) -> i32 {
+fn max_source_day(month: i32, year: i32) -> i32 {
     match month {
         2 => 28 + i32::from(year % 4 == 0),
+        4 | 6 | 9 | 11 => 30,
+        _ => 31,
+    }
+}
+
+/// Gregorian month length used by multi-row daily quality intake and
+/// complete-period aggregation.
+#[must_use]
+pub(crate) fn max_gregorian_day(month: i32, year: i32) -> i32 {
+    match month {
+        2 => {
+            let leap = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+            28 + i32::from(leap)
+        }
         4 | 6 | 9 | 11 => 30,
         _ => 31,
     }
@@ -263,7 +380,7 @@ mod tests {
 
     #[test]
     fn fail_closed_errors_render_their_diagnostics() {
-        let cases: [(String, &str); 6] = [
+        let cases: [(String, &str); 7] = [
             (
                 "no daily header at all\n".to_owned(),
                 "missing `.cli` daily header",
@@ -280,6 +397,10 @@ mod tests {
             (
                 table("  1  1     1   inf  0.00 0.00   0.00  -6.1 -12.6 114.  4.0  277. -11.7\n"),
                 "invalid numeric field at line 5, field 3",
+            ),
+            (
+                table("  1  1     1  -0.1  0.00 0.00   0.00  -6.1 -12.6 114.  4.0  277. -11.7\n"),
+                "negative precipitation at line 5: -0.1 mm",
             ),
             (
                 table("  1 13     1   0.0  0.00 0.00   0.00  -6.1 -12.6 114.  4.0  277. -11.7\n"),

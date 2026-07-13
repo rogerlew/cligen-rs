@@ -1,0 +1,291 @@
+{
+  "bootstrap_contract_version": 1,
+  "canonical_hash_encoding": "UTF-8 compact JSON via separators comma/colon, ensure_ascii true, no trailing newline",
+  "contract_id": "cligen-a5-observed-circular-moving-block-bootstrap-v1",
+  "expected": {
+    "bootstrap_target_precipitation_mean_rationals_sha256": "4b76fb4f58c2a647ef1cc967f5902d4025085e8516c3d7c061c3396bd7697f0f",
+    "crossed_eight_replicate_median_distance_nearest_rank_p025": [
+      169,
+      609
+    ],
+    "crossed_eight_replicate_median_distance_nearest_rank_p975": [
+      291,
+      149
+    ],
+    "crossed_eight_replicate_median_distance_rationals_sha256": "6c9035b1d1c9ba6d66f7b9bdf9ee03f905ef234f43eb391d838546137047177c",
+    "first_three_sampled_year_indices": [
+      [
+        14,
+        15,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        8
+      ],
+      [
+        6,
+        7,
+        8,
+        9,
+        10,
+        8,
+        9,
+        10,
+        11,
+        12,
+        12,
+        13,
+        14,
+        15,
+        0,
+        10
+      ],
+      [
+        2,
+        3,
+        4,
+        5,
+        6,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        11
+      ]
+    ],
+    "first_three_start_indices": [
+      [
+        14,
+        3,
+        9,
+        8
+      ],
+      [
+        6,
+        8,
+        12,
+        10
+      ],
+      [
+        2,
+        5,
+        11,
+        11
+      ]
+    ],
+    "first_three_target_mean_and_crossed_distance_rationals": [
+      {
+        "crossed_distance": [
+          80,
+          187
+        ],
+        "target_mean": [
+          187,
+          2
+        ]
+      },
+      {
+        "crossed_distance": [
+          320,
+          999
+        ],
+        "target_mean": [
+          999,
+          8
+        ]
+      },
+      {
+        "crossed_distance": [
+          640,
+          1599
+        ],
+        "target_mean": [
+          1599,
+          16
+        ]
+      }
+    ],
+    "replicate_precipitation_sum_nearest_rank_p025": 591,
+    "replicate_precipitation_sum_nearest_rank_p975": 2485,
+    "replicate_precipitation_sums_sha256": "128c325598df039d2b872168efd74ae76f656f4ab0f0e362dafa47e409cec733",
+    "sampled_aligned_year_vectors_sha256": "845650abcf91743e4bc940edbeffc01e03942084ee59c51bd222aae51789efa4",
+    "sampled_year_indices_sha256": "d66bf1c5aa0f81807bd167232309d1ae57b3d4eb318838254b9f9391b943fba3",
+    "seed_sha256": "d3dc3b7b993435a4c9cd8431bf4e193d25228da480f6a06832129ac2cf94b67a",
+    "seed_u64_big_endian": "15266142238916490660",
+    "seed_u64_hex": "d3dc3b7b993435a4",
+    "source_aligned_year_vectors_sha256": "186fb4272da372513579f604be200218efec08da7f4f7f933dbf59f7966f2dc9",
+    "start_indices_sha256": "dcc8848be8795491c2af0881d5b667781e3b1113bafdb9ece7572cb47504e673"
+  },
+  "input": {
+    "aligned_year_vector_columns": [
+      "year",
+      "precipitation_total_integer_test_units",
+      "tmax_integer_test_units",
+      "tmin_integer_test_units"
+    ],
+    "aligned_year_vectors": [
+      [
+        2010,
+        1,
+        80,
+        40
+      ],
+      [
+        2011,
+        4,
+        79,
+        38
+      ],
+      [
+        2012,
+        9,
+        78,
+        36
+      ],
+      [
+        2013,
+        16,
+        77,
+        34
+      ],
+      [
+        2014,
+        25,
+        76,
+        32
+      ],
+      [
+        2015,
+        36,
+        75,
+        30
+      ],
+      [
+        2016,
+        49,
+        74,
+        28
+      ],
+      [
+        2017,
+        64,
+        73,
+        26
+      ],
+      [
+        2018,
+        81,
+        72,
+        24
+      ],
+      [
+        2019,
+        100,
+        71,
+        22
+      ],
+      [
+        2020,
+        121,
+        70,
+        20
+      ],
+      [
+        2021,
+        144,
+        69,
+        18
+      ],
+      [
+        2022,
+        169,
+        68,
+        16
+      ],
+      [
+        2023,
+        196,
+        67,
+        14
+      ],
+      [
+        2024,
+        225,
+        66,
+        12
+      ],
+      [
+        2025,
+        256,
+        65,
+        10
+      ]
+    ],
+    "corpus_sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660",
+    "fixed_generated_replicate_precipitation_means": [
+      40,
+      60,
+      80,
+      100,
+      120,
+      140,
+      160,
+      180
+    ],
+    "period_id": "evaluation",
+    "source_id": "daymet-v4r1-ca042319",
+    "station_id": "ca042319"
+  },
+  "parameters": {
+    "aligned_year_vector_unit": "entire complete aligned year vector; components are never resampled separately",
+    "block_length_years": 5,
+    "blocks_per_replicate": 4,
+    "replicates": 2000,
+    "source_year_count": 16,
+    "starting_index_draw_order": "replicate-major then block-major; draw four starts for replicate 0, then four for replicate 1, continuing through replicate 1999",
+    "truncation": "concatenate four circular five-year blocks in draw order and retain the first 16 year vectors"
+  },
+  "percentile": {
+    "estimator": "empirical_inverse_cdf_nearest_rank_v1",
+    "formula": "sorted_values[ceil(p*n)-1] for 0 < p <= 1",
+    "p025_one_based_rank": 50,
+    "p975_one_based_rank": 1950
+  },
+  "prng": {
+    "bounded_integer": "draw u64 until u < 2^64 - (2^64 mod bound), then return u mod bound",
+    "initial_state": "seed_u64_big_endian",
+    "next_u64": "state=(state+0x9e3779b97f4a7c15) mod 2^64; z=state; z=((z xor (z>>30))*0xbf58476d1ce4e5b9) mod 2^64; z=((z xor (z>>27))*0x94d049bb133111eb) mod 2^64; return z xor (z>>31)",
+    "prng_id": "splitmix64-v1"
+  },
+  "seed_domain": {
+    "byte_concatenation": "domain || corpus_sha256 || source_id || station_id || period_id with no separators after the domain NUL",
+    "domain_ascii_with_terminal_nul": "cligen-a5-bootstrap-v1\\0",
+    "field_encoding": "ASCII bytes exactly as stored",
+    "hash": "SHA-256",
+    "seed_extraction": "digest bytes 0 through 7 interpreted as an unsigned 64-bit big-endian integer"
+  },
+  "uncertainty_application": {
+    "crossing": "for each of 2000 target bootstrap indices, cross the resampled target with all eight fixed generated values before replicate aggregation",
+    "decision_role": "report_only; endpoints cannot change deterministic promotion pass or fail",
+    "distance": "absolute_relative abs(generated-target)/target",
+    "generated_replicate_aggregation": "conventional median; arithmetic mean of the fourth and fifth sorted distances for eight values",
+    "target_estimand": "mean of precipitation_total_integer_test_units across all 16 relabelled bootstrap positions",
+    "year_relabeling": "sampled source years remain in draw order and are relabelled bootstrap positions 0 through 15; original year labels are not sorted or grouped"
+  }
+}

@@ -17,19 +17,21 @@ axes. A revision of one does not imply a revision of another.
 ## Active queue
 
 **Ratified 2026-07-12: file/schema modernization precedes the first
-model-structure study.** A5a is ready for dispatch; each later item opens after
-its predecessor is accepted.
+model-structure study.** A5a completed on 2026-07-13; A5b is ready for
+dispatch, and A5c opens only after A5b is accepted.
 
 | Order | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 1 | **A5a — Quality metrics v3 + observed target corpus** | Extend the instrument for monthly and annual precipitation/Tmax/Tmin dispersion and dependence, fuller spell/tail behavior, storm time-to-peak and peak-ratio dependence, winter-process proxies and downstream WEPP responses, and multiple burns. | Versioned metric schema and hash-pinned observed targets; preregistered 30/100-year, multi-seed gates; climate winter proxies remain distinct from physical snowpack and soil-state metrics. |
-| 2 | **A5b — Interannual candidate spike** | Fit outside the faithful generator and compare a monthly-SD/rank-one baseline, canonical monthly covariance, Fourier/EOF coefficients, vector AR, HMM, and a spectral benchmark, plus a narrow higher-order precipitation occurrence/amount-dependence counterfactual. This is an experiment, not a promoted profile. | Same corpus, seeds, horizons, fitting periods, and quality vector for every candidate; parameter counts and failure modes reported; no candidate silently changes faithful mode. |
-| 3 | **A5c — Interannual profile adjudication** | Apply ADR-0002 to the candidate evidence and either promote one declared station-model/profile pair or record a hold. | Promotion requires an evidence-supported versioned model and profile with complete provenance and no material regression in preregistered climate or downstream WEPP metrics; otherwise faithful behavior remains the default and the study closes without promotion. |
+| 1 | **A5b — Interannual candidate spike** | Fit outside the faithful generator and compare a monthly-SD/rank-one baseline, canonical monthly covariance, Fourier/EOF coefficients, vector AR, HMM, and a spectral benchmark, plus a narrow higher-order precipitation occurrence/amount-dependence counterfactual. This is an experiment, not a promoted profile. | Same corpus, fixed burn trajectories, independent extension realization seeds, horizons, fitting periods, and quality vector for every candidate; parameter counts and failure modes reported; no candidate silently changes faithful mode. |
+| 2 | **A5c — Interannual profile adjudication** | Apply ADR-0002 to the candidate evidence and either promote one declared station-model/profile pair or record a hold. | Promotion requires an evidence-supported versioned model and profile with complete provenance and no material regression in preregistered climate or downstream WEPP metrics; otherwise faithful behavior remains the default and the study closes without promotion. |
 
-A5b is the highest-value scientific work in this sequence, but A5a is an
-enabling dependency rather than an optional preliminary. Any interannual
-parameterization must declare a separate station-model identifier with
-required fields.
+A5a now supplies the fixed instrument, corpus, baseline, and evaluation
+contract for A5b. Any interannual parameterization must declare a separate
+station-model identifier with required fields; station-schema, station-model,
+generation-profile, and output-schema versions remain independent.
+A5b's conformance harness also carries the two nonblocking A5a review actions:
+add an order-sensitive bootstrap toy statistic and a non-divisor bounded-draw
+vector before candidate output is read.
 
 The preceding quality arc (ADR-0002, Q1-Q4) is complete. Both closing
 adjudications were ratified by the operator on 2026-07-10 on the R1-amended

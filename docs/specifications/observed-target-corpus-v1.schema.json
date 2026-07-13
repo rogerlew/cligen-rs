@@ -1,0 +1,1289 @@
+{
+  "$defs": {
+    "annual_dependence": {
+      "additionalProperties": false,
+      "properties": {
+        "precip_total_mm": {
+          "$ref": "#/$defs/series_dependence"
+        },
+        "tmax_mean_c": {
+          "$ref": "#/$defs/series_dependence"
+        },
+        "tmin_mean_c": {
+          "$ref": "#/$defs/series_dependence"
+        }
+      },
+      "required": [
+        "precip_total_mm",
+        "tmax_mean_c",
+        "tmin_mean_c"
+      ],
+      "type": "object"
+    },
+    "annual_targets": {
+      "additionalProperties": false,
+      "properties": {
+        "max_daily_precip_mm": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "precip_total_mm": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "r1mm_wet_day_count": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "tmax_mean_c": {
+          "$ref": "#/$defs/temperature_dispersion"
+        },
+        "tmin_mean_c": {
+          "$ref": "#/$defs/temperature_dispersion"
+        }
+      },
+      "required": [
+        "max_daily_precip_mm",
+        "precip_total_mm",
+        "r1mm_wet_day_count",
+        "tmax_mean_c",
+        "tmin_mean_c"
+      ],
+      "type": "object"
+    },
+    "climate_anomaly_correlations": {
+      "additionalProperties": false,
+      "properties": {
+        "precip_tmax": {
+          "$ref": "#/$defs/corr_pair"
+        },
+        "precip_tmin": {
+          "$ref": "#/$defs/corr_pair"
+        },
+        "tmax_tmin": {
+          "$ref": "#/$defs/corr_pair"
+        }
+      },
+      "required": [
+        "precip_tmax",
+        "precip_tmin",
+        "tmax_tmin"
+      ],
+      "type": "object"
+    },
+    "corr_pair": {
+      "additionalProperties": false,
+      "properties": {
+        "n": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "pearson": {
+          "$ref": "#/$defs/nullable_correlation"
+        },
+        "spearman": {
+          "$ref": "#/$defs/nullable_correlation"
+        }
+      },
+      "required": [
+        "n",
+        "pearson",
+        "spearman"
+      ],
+      "type": "object"
+    },
+    "count_dispersion": {
+      "additionalProperties": false,
+      "properties": {
+        "cv": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "mean": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "n_years": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        }
+      },
+      "required": [
+        "cv",
+        "mean",
+        "n_years",
+        "sd"
+      ],
+      "type": "object"
+    },
+    "daymet_source": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "const": "available"
+        },
+        "periods": {
+          "$ref": "#/$defs/target_periods"
+        },
+        "source_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "archive_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "calendar": {
+              "const": "noleap_365"
+            },
+            "fixed_window_logical_records_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "source_id": {
+              "pattern": "^daymet-v4r1-[a-z]{2}[0-9]{6}$",
+              "type": "string"
+            },
+            "source_sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "required": [
+            "archive_sha256",
+            "calendar",
+            "fixed_window_logical_records_sha256",
+            "source_id",
+            "source_sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "availability",
+        "periods",
+        "source_identity"
+      ],
+      "type": "object"
+    },
+    "dependence": {
+      "additionalProperties": false,
+      "properties": {
+        "detrended": {
+          "$ref": "#/$defs/dependence_variant"
+        },
+        "raw": {
+          "$ref": "#/$defs/dependence_variant"
+        }
+      },
+      "required": [
+        "detrended",
+        "raw"
+      ],
+      "type": "object"
+    },
+    "dependence_variant": {
+      "additionalProperties": false,
+      "properties": {
+        "annual": {
+          "$ref": "#/$defs/annual_dependence"
+        },
+        "cross_variable_by_month": {
+          "$ref": "#/$defs/months_climate_anomaly_correlations"
+        },
+        "precip_cross_month": {
+          "$ref": "#/$defs/month_dependence_matrix"
+        },
+        "tmax_cross_month": {
+          "$ref": "#/$defs/month_dependence_matrix"
+        },
+        "tmin_cross_month": {
+          "$ref": "#/$defs/month_dependence_matrix"
+        }
+      },
+      "required": [
+        "annual",
+        "cross_variable_by_month",
+        "precip_cross_month",
+        "tmax_cross_month",
+        "tmin_cross_month"
+      ],
+      "type": "object"
+    },
+    "freezing_precipitation_fraction": {
+      "additionalProperties": false,
+      "properties": {
+        "fraction": {
+          "$ref": "#/$defs/nullable_fraction"
+        },
+        "freezing_air_day_count": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "n_days": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "precipitation_on_freezing_air_days_mm": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "total_precipitation_mm": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        }
+      },
+      "required": [
+        "fraction",
+        "freezing_air_day_count",
+        "n_days",
+        "precipitation_on_freezing_air_days_mm",
+        "total_precipitation_mm"
+      ],
+      "type": "object"
+    },
+    "ghcn_source": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "const": "available"
+        },
+        "periods": {
+          "$ref": "#/$defs/target_periods"
+        },
+        "source_identity": {
+          "additionalProperties": false,
+          "properties": {
+            "archive_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "calendar": {
+              "const": "proleptic_gregorian"
+            },
+            "fixed_window_logical_records_sha256": {
+              "$ref": "#/$defs/sha256"
+            },
+            "source_id": {
+              "pattern": "^ghcn-daily-USC[0-9]{8}-20260712$",
+              "type": "string"
+            },
+            "source_sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          },
+          "required": [
+            "archive_sha256",
+            "calendar",
+            "fixed_window_logical_records_sha256",
+            "source_id",
+            "source_sha256"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "availability",
+        "periods",
+        "source_identity"
+      ],
+      "type": "object"
+    },
+    "month_dependence_matrix": {
+      "additionalProperties": false,
+      "properties": {
+        "covariance": {
+          "items": {
+            "items": {
+              "$ref": "#/$defs/nullable_number"
+            },
+            "maxItems": 12,
+            "minItems": 12,
+            "type": "array"
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "type": "array"
+        },
+        "n_pairs": {
+          "items": {
+            "items": {
+              "$ref": "#/$defs/nonnegative_integer"
+            },
+            "maxItems": 12,
+            "minItems": 12,
+            "type": "array"
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "type": "array"
+        },
+        "pearson_correlation": {
+          "items": {
+            "items": {
+              "$ref": "#/$defs/nullable_correlation"
+            },
+            "maxItems": 12,
+            "minItems": 12,
+            "type": "array"
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "type": "array"
+        }
+      },
+      "required": [
+        "covariance",
+        "n_pairs",
+        "pearson_correlation"
+      ],
+      "type": "object"
+    },
+    "monthly_targets": {
+      "additionalProperties": false,
+      "properties": {
+        "precip_total_mm": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "r1mm_wet_day_count": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "r1mm_wet_day_mean_amount_mm": {
+          "$ref": "#/$defs/precip_dispersion"
+        },
+        "tmax_mean_c": {
+          "$ref": "#/$defs/temperature_dispersion"
+        },
+        "tmin_mean_c": {
+          "$ref": "#/$defs/temperature_dispersion"
+        }
+      },
+      "required": [
+        "precip_total_mm",
+        "r1mm_wet_day_count",
+        "r1mm_wet_day_mean_amount_mm",
+        "tmax_mean_c",
+        "tmin_mean_c"
+      ],
+      "type": "object"
+    },
+    "months_climate_anomaly_correlations": {
+      "additionalProperties": false,
+      "properties": {
+        "apr": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "aug": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "dec": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "feb": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "jan": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "jul": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "jun": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "mar": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "may": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "nov": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "oct": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        },
+        "sep": {
+          "$ref": "#/$defs/climate_anomaly_correlations"
+        }
+      },
+      "required": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "type": "object"
+    },
+    "months_freezing_precipitation_fraction": {
+      "additionalProperties": false,
+      "properties": {
+        "apr": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "aug": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "dec": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "feb": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "jan": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "jul": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "jun": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "mar": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "may": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "nov": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "oct": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "sep": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        }
+      },
+      "required": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "type": "object"
+    },
+    "months_monthly_targets": {
+      "additionalProperties": false,
+      "properties": {
+        "apr": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "aug": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "dec": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "feb": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "jan": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "jul": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "jun": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "mar": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "may": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "nov": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "oct": {
+          "$ref": "#/$defs/monthly_targets"
+        },
+        "sep": {
+          "$ref": "#/$defs/monthly_targets"
+        }
+      },
+      "required": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "type": "object"
+    },
+    "months_scalar_distribution": {
+      "additionalProperties": false,
+      "properties": {
+        "apr": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "aug": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "dec": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "feb": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "jan": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "jul": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "jun": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "mar": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "may": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "nov": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "oct": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "sep": {
+          "$ref": "#/$defs/scalar_distribution"
+        }
+      },
+      "required": [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec"
+      ],
+      "type": "object"
+    },
+    "nonnegative_integer": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "nullable_correlation": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": -1,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nullable_fraction": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nullable_nonnegative_number": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "nullable_number": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "period_bounds": {
+      "additionalProperties": false,
+      "properties": {
+        "end_year": {
+          "maximum": 2025,
+          "minimum": 1980,
+          "type": "integer"
+        },
+        "start_year": {
+          "maximum": 2025,
+          "minimum": 1980,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "end_year",
+        "start_year"
+      ],
+      "type": "object"
+    },
+    "precip_dispersion": {
+      "additionalProperties": false,
+      "properties": {
+        "cv": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "detrended_sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "mean": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "n_years": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        }
+      },
+      "required": [
+        "cv",
+        "detrended_sd",
+        "mean",
+        "n_years",
+        "sd"
+      ],
+      "type": "object"
+    },
+    "precipitation_coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_days": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "missing_days": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "missing_gap_runs": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "observed_precip_days": {
+          "$ref": "#/$defs/nonnegative_integer"
+        }
+      },
+      "required": [
+        "expected_days",
+        "missing_days",
+        "missing_gap_runs",
+        "observed_precip_days"
+      ],
+      "type": "object"
+    },
+    "precipitation_structure": {
+      "additionalProperties": false,
+      "properties": {
+        "adjacent_wet_day_amount": {
+          "$ref": "#/$defs/corr_pair"
+        },
+        "annual_max_1_day_mm": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "annual_max_3_day_mm": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "annual_max_5_day_mm": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "annual_rolling_maxima": {
+          "items": {
+            "$ref": "#/$defs/rolling_maximum"
+          },
+          "maxItems": 46,
+          "type": "array"
+        },
+        "coverage": {
+          "$ref": "#/$defs/precipitation_coverage"
+        },
+        "dry_spells_days": {
+          "$ref": "#/$defs/spell_distribution"
+        },
+        "threshold_mm": {
+          "const": 1.0
+        },
+        "wet_day_amount_mm": {
+          "$ref": "#/$defs/scalar_distribution"
+        },
+        "wet_spells_days": {
+          "$ref": "#/$defs/spell_distribution"
+        }
+      },
+      "required": [
+        "adjacent_wet_day_amount",
+        "annual_max_1_day_mm",
+        "annual_max_3_day_mm",
+        "annual_max_5_day_mm",
+        "annual_rolling_maxima",
+        "coverage",
+        "dry_spells_days",
+        "threshold_mm",
+        "wet_day_amount_mm",
+        "wet_spells_days"
+      ],
+      "type": "object"
+    },
+    "rolling_maximum": {
+      "additionalProperties": false,
+      "properties": {
+        "max_1_day_mm": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "max_3_day_mm": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "max_5_day_mm": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "year": {
+          "maximum": 2025,
+          "minimum": 1980,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "max_1_day_mm",
+        "max_3_day_mm",
+        "max_5_day_mm",
+        "year"
+      ],
+      "type": "object"
+    },
+    "scalar_distribution": {
+      "additionalProperties": false,
+      "properties": {
+        "max": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "mean": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "n": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "p50": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "p90": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "p95": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "p99": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        }
+      },
+      "required": [
+        "max",
+        "mean",
+        "n",
+        "p50",
+        "p90",
+        "p95",
+        "p99",
+        "sd"
+      ],
+      "type": "object"
+    },
+    "series_dependence": {
+      "additionalProperties": false,
+      "properties": {
+        "lag_one": {
+          "$ref": "#/$defs/corr_pair"
+        },
+        "n_years": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "period_ge_4y_power_fraction": {
+          "$ref": "#/$defs/nullable_fraction"
+        }
+      },
+      "required": [
+        "lag_one",
+        "n_years",
+        "period_ge_4y_power_fraction"
+      ],
+      "type": "object"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "spell_distribution": {
+      "additionalProperties": false,
+      "properties": {
+        "by_start_month": {
+          "$ref": "#/$defs/months_scalar_distribution"
+        },
+        "whole_run": {
+          "$ref": "#/$defs/scalar_distribution"
+        }
+      },
+      "required": [
+        "by_start_month",
+        "whole_run"
+      ],
+      "type": "object"
+    },
+    "station": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_elevation_ft": {
+          "type": "number"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "type": "number"
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "type": "number"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "regime": {
+          "enum": [
+            "arid",
+            "monsoonal",
+            "humid",
+            "cold",
+            "fixture"
+          ]
+        },
+        "sources": {
+          "additionalProperties": false,
+          "properties": {
+            "daymet": {
+              "$ref": "#/$defs/daymet_source"
+            },
+            "ghcn": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ghcn_source"
+                },
+                {
+                  "$ref": "#/$defs/unavailable_source"
+                }
+              ]
+            }
+          },
+          "required": [
+            "daymet",
+            "ghcn"
+          ],
+          "type": "object"
+        },
+        "station_id": {
+          "enum": [
+            "ca042319",
+            "az029654",
+            "ut429382",
+            "ca042257",
+            "az022664",
+            "az028619",
+            "nm294426",
+            "tx412797",
+            "al015478",
+            "ms227840",
+            "fl086997",
+            "fl083909",
+            "co051660",
+            "wy485345",
+            "mn214026",
+            "ak505769",
+            "id106388"
+          ]
+        },
+        "station_parameter": {
+          "$ref": "#/$defs/station_parameter"
+        }
+      },
+      "required": [
+        "catalog_elevation_ft",
+        "latitude",
+        "longitude",
+        "name",
+        "regime",
+        "sources",
+        "station_id",
+        "station_parameter"
+      ],
+      "type": "object"
+    },
+    "station_collection": {
+      "additionalProperties": false,
+      "properties": {
+        "archive_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "catalog_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "name": {
+          "const": "us-2015"
+        },
+        "version": {
+          "const": "2026.07"
+        }
+      },
+      "required": [
+        "archive_sha256",
+        "catalog_sha256",
+        "name",
+        "version"
+      ],
+      "type": "object"
+    },
+    "station_parameter": {
+      "additionalProperties": false,
+      "properties": {
+        "collection": {
+          "const": "us-2015"
+        },
+        "collection_version": {
+          "const": "2026.07"
+        },
+        "legacy_par_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "model": {
+          "const": "fixed_monthly_5_32_3"
+        }
+      },
+      "required": [
+        "collection",
+        "collection_version",
+        "legacy_par_sha256",
+        "model"
+      ],
+      "type": "object"
+    },
+    "storm_descriptors_unavailable": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "const": "unavailable"
+        },
+        "reason": {
+          "const": "daily Daymet/GHCN sources do not contain duration, time-to-peak fraction, or peak-intensity ratio"
+        }
+      },
+      "required": [
+        "availability",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "target_period": {
+      "additionalProperties": false,
+      "properties": {
+        "annual": {
+          "$ref": "#/$defs/annual_targets"
+        },
+        "dependence": {
+          "$ref": "#/$defs/dependence"
+        },
+        "monthly": {
+          "$ref": "#/$defs/months_monthly_targets"
+        },
+        "period": {
+          "$ref": "#/$defs/period_bounds"
+        },
+        "precipitation_structure": {
+          "$ref": "#/$defs/precipitation_structure"
+        },
+        "storm_descriptors": {
+          "$ref": "#/$defs/storm_descriptors_unavailable"
+        },
+        "winter_air_temperature_proxies": {
+          "$ref": "#/$defs/winter_air_temperature_proxies"
+        }
+      },
+      "required": [
+        "annual",
+        "dependence",
+        "monthly",
+        "period",
+        "precipitation_structure",
+        "storm_descriptors",
+        "winter_air_temperature_proxies"
+      ],
+      "type": "object"
+    },
+    "target_periods": {
+      "additionalProperties": false,
+      "properties": {
+        "evaluation": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/target_period"
+            },
+            {
+              "properties": {
+                "period": {
+                  "const": {
+                    "end_year": 2025,
+                    "start_year": 2010
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "fit": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/target_period"
+            },
+            {
+              "properties": {
+                "period": {
+                  "const": {
+                    "end_year": 2009,
+                    "start_year": 1980
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "full": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/target_period"
+            },
+            {
+              "properties": {
+                "period": {
+                  "const": {
+                    "end_year": 2025,
+                    "start_year": 1980
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "required": [
+        "evaluation",
+        "fit",
+        "full"
+      ],
+      "type": "object"
+    },
+    "temperature_dispersion": {
+      "additionalProperties": false,
+      "properties": {
+        "cv": {
+          "type": "null"
+        },
+        "detrended_sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        },
+        "mean": {
+          "$ref": "#/$defs/nullable_number"
+        },
+        "n_years": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "sd": {
+          "$ref": "#/$defs/nullable_nonnegative_number"
+        }
+      },
+      "required": [
+        "cv",
+        "detrended_sd",
+        "mean",
+        "n_years",
+        "sd"
+      ],
+      "type": "object"
+    },
+    "unavailable_source": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "const": "unavailable"
+        },
+        "reason": {
+          "const": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "required": [
+        "availability",
+        "reason"
+      ],
+      "type": "object"
+    },
+    "winter_air_temperature_proxies": {
+      "additionalProperties": false,
+      "properties": {
+        "by_month": {
+          "$ref": "#/$defs/months_freezing_precipitation_fraction"
+        },
+        "djf_r1mm_precip_mean_air_temperature": {
+          "$ref": "#/$defs/corr_pair"
+        },
+        "freeze_thaw_air_temperature_proxy_cycles": {
+          "$ref": "#/$defs/count_dispersion"
+        },
+        "per_year": {
+          "items": {
+            "$ref": "#/$defs/year_winter_air_temperature_proxy"
+          },
+          "maxItems": 46,
+          "minItems": 16,
+          "type": "array"
+        },
+        "precipitation_on_freezing_air_days": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        }
+      },
+      "required": [
+        "by_month",
+        "djf_r1mm_precip_mean_air_temperature",
+        "freeze_thaw_air_temperature_proxy_cycles",
+        "per_year",
+        "precipitation_on_freezing_air_days"
+      ],
+      "type": "object"
+    },
+    "year_winter_air_temperature_proxy": {
+      "additionalProperties": false,
+      "properties": {
+        "complete_year": {
+          "type": "boolean"
+        },
+        "freeze_thaw_air_temperature_proxy_cycles": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "n_days": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "precipitation_on_freezing_air_days": {
+          "$ref": "#/$defs/freezing_precipitation_fraction"
+        },
+        "year": {
+          "maximum": 2025,
+          "minimum": 1980,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "complete_year",
+        "freeze_thaw_air_temperature_proxy_cycles",
+        "n_days",
+        "precipitation_on_freezing_air_days",
+        "year"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/observed-target-corpus-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "conventions": {
+      "const": {
+        "air_freezing_threshold_c": 0.0,
+        "detrending": "OLS linear residual by integer year",
+        "low_frequency": "centered DFT positive-frequency power fraction with period >= 4 years; contiguous annual series required",
+        "precipitation_wet_day_threshold_mm": 1.0,
+        "quantile": "empirical inverse-CDF nearest rank: sorted[ceil(p*n)-1]",
+        "rolling_maxima": "consecutive source-calendar windows attributed to end year; distributions retain complete precipitation years"
+      }
+    },
+    "corpus_id": {
+      "const": "cligen-a5a-observed-v1"
+    },
+    "fixed_periods": {
+      "const": {
+        "evaluation": [
+          2010,
+          2025
+        ],
+        "fit": [
+          1980,
+          2009
+        ],
+        "full": [
+          1980,
+          2025
+        ]
+      }
+    },
+    "metrics_version": {
+      "const": 3
+    },
+    "observed_target_corpus_schema_version": {
+      "const": 1
+    },
+    "source_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "station_collection": {
+      "$ref": "#/$defs/station_collection"
+    },
+    "stations": {
+      "items": {
+        "$ref": "#/$defs/station"
+      },
+      "maxItems": 17,
+      "minItems": 17,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "conventions",
+    "corpus_id",
+    "fixed_periods",
+    "metrics_version",
+    "observed_target_corpus_schema_version",
+    "source_manifest_sha256",
+    "station_collection",
+    "stations"
+  ],
+  "title": "CLIGEN A5 observed-target corpus revision 1",
+  "type": "object"
+}

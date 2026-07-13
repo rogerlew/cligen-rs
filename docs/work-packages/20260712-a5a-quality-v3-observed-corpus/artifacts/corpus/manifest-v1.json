@@ -1,0 +1,91 @@
+{
+  "archive_aggregate_sha256": "55f47f5cf80cfb8faa0be5dc3029ecc5b55cb98446847739421b0c742bc017e4",
+  "archive_documentation": {
+    "path": "references/observed/a5a-v1/README.md",
+    "sha256": "75b69c9636e51319da73d035889b841ec32ce3059eb9e1b8a55229a564448ee0"
+  },
+  "archive_files": 25,
+  "build_documentation": {
+    "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/README.md",
+    "sha256": "90690e2c9e7efbb7764f9f46bd9ad59b83ac382de5a1379f1f764dd4705935e7"
+  },
+  "build_environment": {
+    "cargo_version": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+    "machine": "arm64",
+    "operating_system": "Darwin",
+    "operating_system_release": "25.4.0",
+    "platform_tag": "macosx-11.1-arm64",
+    "python_implementation": "CPython",
+    "python_version": "3.12.7",
+    "rustc_version": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2"
+  },
+  "build_schemas": {
+    "corpus-config-v1.schema.json": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/corpus-config-v1.schema.json",
+      "sha256": "3ff96c1616a041a5572d7e5d3ee9d3036415eed15c5985633f43cdf768c88b1e"
+    },
+    "manifest-v1.schema.json": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/manifest-v1.schema.json",
+      "sha256": "123c6cb582f2f09bd75512e339b712361b9cbaf612b31bc6a967a8918f9d023a"
+    },
+    "source-manifest-v1.schema.json": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/source-manifest-v1.schema.json",
+      "sha256": "bd491158ee6c1450d089326717790c75264c2673a17f3014cef75ca113531be5"
+    }
+  },
+  "config_sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496",
+  "coverage_evidence": {
+    "bytes": 8492,
+    "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/coverage-evidence-v1.md",
+    "sha256": "cb5c8b1d9a06b4ccfff1a225ea81bb81d2a9371cb432ec0cbe89a34178db1403"
+  },
+  "daymet_sources": 17,
+  "ghcn_sources": 8,
+  "manifest_schema_version": 1,
+  "metric_estimator": {
+    "algorithm": "quality_metrics_v3_low_frequency_power_fraction",
+    "build_command": "cargo build --locked --offline --bin cligen-quality-estimator",
+    "compiler": {
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\nrelease: 1.95.0\ncommit-hash: f2d3ce0bd7f24a49f8f72d9000448f8838c4e850\ncommit-date: 2026-03-21\nhost: aarch64-apple-darwin\nlibgit2: 1.9.2 (sys:0.20.4 vendored)\nlibcurl: 8.7.1 (sys:0.4.83+curl-8.15.0 system ssl:(SecureTransport) LibreSSL/3.3.6)\nssl: OpenSSL 3.5.4 30 Sep 2025\nos: Mac OS 26.4.1 [64-bit]",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2"
+    },
+    "files": {
+      "Cargo.lock": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+      "Cargo.toml": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+      "crates/cligen/Cargo.toml": "8e8e8668cd5ae93da7ce95fe528f0ce267698fe90326576525de534069f5dfd6",
+      "crates/cligen/src/bin/cligen-quality-estimator.rs": "7753fa87f73400850f4f27119f8ac588b6732a6baf140973a89d1b7f3a1f7dff",
+      "crates/cligen/src/lib.rs": "5de6ababfbcafda98ee2f18bd153c230fce0771733812d99a1f7d806c3fb8abb",
+      "crates/cligen/src/quality/estimators.rs": "b806c392171104e5d526a2f908b9a9a0bf4892e4097173fb73183f9f30fe8cf2",
+      "crates/cligen/src/quality/mod.rs": "bf0076607d3658911178c67dde0acd2fc1938827c0c29ec998d45dffc6f6300c",
+      "rust-toolchain.toml": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+    },
+    "files_sha256": "8d28be681ecbcf73ea134a9fcc23fb4e60f45e4259780784e3c021286a284b44",
+    "libm": {
+      "checksum": "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981",
+      "version": "0.2.16"
+    }
+  },
+  "observed_target_corpus": {
+    "bytes": 14120366,
+    "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/observed-target-corpus-v1.json",
+    "sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660"
+  },
+  "schema": {
+    "path": "docs/specifications/observed-target-corpus-v1.schema.json",
+    "sha256": "c08a915e2f08a5463a0c7fbca63255a6d4bcee64ca243c5f6f604a889fd8f24d"
+  },
+  "source_manifest_sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec",
+  "third_party_data_notice": {
+    "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+    "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+  },
+  "tools": {
+    "acquire_sources.py": "33b62153c798395cbba31b3d19b204ef4721abb3632a2e339e3394ed0fc37a71",
+    "build_coverage.py": "9d384e2c3e2e4831a1a599f710813d4ecf83f52491051d5a723ea9d6d59b6aa4",
+    "build_target_schema.py": "f9052d0be1dbe1f0d48e53a6289481235304b97950c7e8d43e70d30da408e920",
+    "build_targets.py": "7c8c7428627f55817d81afcb2eb7ef60011ace46349181e4d92b7b1f89efd9e0",
+    "corpus_common.py": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68",
+    "finalize_manifest.py": "e9597cf0729cd5ff59c67903c35f83ee8f1acc9dbbee832c313c23b529ffb1af",
+    "verify_offline.py": "05f33335599cdd5db6a0aa3b15aedf6b4f64f3910140173e1a09575081517e74"
+  }
+}

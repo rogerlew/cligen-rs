@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/corpus-config-v1.schema.json",
+  "title": "A5a observed-corpus build configuration revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "config_version",
+    "periods",
+    "retrieval_date",
+    "station_collection",
+    "stations"
+  ],
+  "properties": {
+    "config_version": {
+      "const": 1
+    },
+    "periods": {
+      "$ref": "#/$defs/periods"
+    },
+    "retrieval_date": {
+      "const": "2026-07-12"
+    },
+    "station_collection": {
+      "$ref": "#/$defs/station_collection"
+    },
+    "stations": {
+      "type": "array",
+      "minItems": 17,
+      "maxItems": 17,
+      "items": {
+        "$ref": "#/$defs/station"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "station_id": {
+      "type": "string",
+      "pattern": "^[a-z]{2}[0-9]{6}$"
+    },
+    "periods": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation",
+        "fit",
+        "full"
+      ],
+      "properties": {
+        "evaluation": {
+          "const": [
+            2010,
+            2025
+          ]
+        },
+        "fit": {
+          "const": [
+            1980,
+            2009
+          ]
+        },
+        "full": {
+          "const": [
+            1980,
+            2025
+          ]
+        }
+      }
+    },
+    "station_collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "archive_sha256",
+        "catalog_sha256",
+        "name",
+        "version"
+      ],
+      "properties": {
+        "archive_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "catalog_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "name": {
+          "const": "us-2015"
+        },
+        "version": {
+          "const": "2026.07"
+        }
+      }
+    },
+    "station": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog_elevation_ft",
+        "daymet_source_sha256",
+        "ghcn_station_id",
+        "latitude",
+        "longitude",
+        "name",
+        "par_sha256",
+        "q3_ghcn_source_sha256",
+        "record_years",
+        "regime",
+        "station_id",
+        "station_type"
+      ],
+      "properties": {
+        "catalog_elevation_ft": {
+          "type": "number"
+        },
+        "daymet_source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "ghcn_station_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^USC[0-9]{8}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "par_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "q3_ghcn_source_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "record_years": {
+          "type": "number",
+          "minimum": 0
+        },
+        "regime": {
+          "enum": [
+            "arid",
+            "monsoonal",
+            "humid",
+            "cold",
+            "fixture"
+          ]
+        },
+        "station_id": {
+          "$ref": "#/$defs/station_id"
+        },
+        "station_type": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

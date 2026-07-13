@@ -1,0 +1,440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.schema.json",
+  "title": "A5a baseline run manifest version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baseline_run_manifest_schema_version",
+    "matrix",
+    "execution",
+    "schemas",
+    "inputs",
+    "raw_output_policy",
+    "archive",
+    "runs"
+  ],
+  "properties": {
+    "baseline_run_manifest_schema_version": { "const": 1 },
+    "matrix": { "$ref": "#/$defs/matrix" },
+    "execution": { "$ref": "#/$defs/execution" },
+    "schemas": { "$ref": "#/$defs/schemas" },
+    "inputs": { "$ref": "#/$defs/inputs" },
+    "raw_output_policy": { "type": "string", "minLength": 1 },
+    "archive": { "$ref": "#/$defs/archive" },
+    "runs": {
+      "type": "array",
+      "minItems": 544,
+      "maxItems": 544,
+      "items": { "$ref": "#/$defs/run" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullable_number": {
+      "oneOf": [
+        { "type": "number" },
+        { "type": "null" }
+      ]
+    },
+    "matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stations",
+        "horizons_years",
+        "burn_offsets",
+        "qc_filters",
+        "expected_runs",
+        "actual_runs"
+      ],
+      "properties": {
+        "stations": { "const": 17 },
+        "horizons_years": { "const": [30, 100] },
+        "burn_offsets": { "const": [0, 17, 101, 503, 1009, 5003, 10007, 50021] },
+        "qc_filters": { "const": ["faithful", "off"] },
+        "expected_runs": { "const": 544 },
+        "actual_runs": { "const": 544 }
+      }
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "files"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "files": {
+          "type": "object",
+          "minProperties": 20,
+          "additionalProperties": { "$ref": "#/$defs/sha256" },
+          "propertyNames": {
+            "pattern": "^(Cargo\\.(lock|toml)|rust-toolchain\\.toml|\\.cargo/|crates/)"
+          }
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parallel_workers",
+        "binary_sha256",
+        "runner_sha256",
+        "verifier_sha256",
+        "manifest_schema_sha256",
+        "analysis_schema_sha256",
+        "python_version",
+        "platform",
+        "build",
+        "compression",
+        "implementation"
+      ],
+      "properties": {
+        "parallel_workers": { "type": "integer", "minimum": 1 },
+        "binary_sha256": { "$ref": "#/$defs/sha256" },
+        "runner_sha256": { "$ref": "#/$defs/sha256" },
+        "verifier_sha256": { "$ref": "#/$defs/sha256" },
+        "manifest_schema_sha256": { "$ref": "#/$defs/sha256" },
+        "analysis_schema_sha256": { "$ref": "#/$defs/sha256" },
+        "python_version": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "build": { "$ref": "#/$defs/build" },
+        "compression": { "$ref": "#/$defs/compression" },
+        "implementation": { "$ref": "#/$defs/implementation" }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "command",
+        "profile",
+        "binary_path",
+        "cargo_executable",
+        "rustc_executable",
+        "rustc_version_verbose",
+        "cargo_version_verbose",
+        "cargo_configuration",
+        "cargo_rust_environment",
+        "build_environment"
+      ],
+      "properties": {
+        "command": {
+          "const": ["cargo", "build", "--locked", "--offline", "--release", "--bin", "cligen"]
+        },
+        "profile": { "const": "release" },
+        "binary_path": { "const": "target/release/cligen" },
+        "cargo_executable": { "type": "string", "minLength": 1 },
+        "rustc_executable": { "type": "string", "minLength": 1 },
+        "rustc_version_verbose": { "type": "string", "minLength": 1 },
+        "cargo_version_verbose": { "type": "string", "minLength": 1 },
+        "cargo_configuration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["workspace_root", "cargo_home", "searched_config_paths", "active_config_files"],
+          "properties": {
+            "workspace_root": { "type": "string", "minLength": 1 },
+            "cargo_home": { "type": "string", "minLength": 1 },
+            "searched_config_paths": {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "active_config_files": { "type": "array", "maxItems": 0 }
+          }
+        },
+        "cargo_rust_environment": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^(CARGO_NET_OFFLINE|CARGO_TERM_.+|RUST_BACKTRACE|RUST_LIB_BACKTRACE|RUST_LOG)$"
+          },
+          "additionalProperties": { "type": "string" }
+        },
+        "build_environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "RUSTC",
+            "RUSTC_WRAPPER",
+            "RUSTC_WORKSPACE_WRAPPER",
+            "RUSTFLAGS",
+            "CARGO_ENCODED_RUSTFLAGS",
+            "CARGO_TARGET_DIR",
+            "CARGO_BUILD_TARGET"
+          ],
+          "properties": {
+            "RUSTC": { "type": "null" },
+            "RUSTC_WRAPPER": { "type": "null" },
+            "RUSTC_WORKSPACE_WRAPPER": { "type": "null" },
+            "RUSTFLAGS": { "type": "null" },
+            "CARGO_ENCODED_RUSTFLAGS": { "type": "null" },
+            "CARGO_TARGET_DIR": { "type": "null" },
+            "CARGO_BUILD_TARGET": { "type": "null" }
+          }
+        }
+      }
+    },
+    "compression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "implementation",
+        "python_version",
+        "zlib_compile_version",
+        "zlib_runtime_version",
+        "gzip_compresslevel",
+        "gzip_mtime",
+        "gzip_header_flags",
+        "gzip_header_extra_flags",
+        "gzip_header_os",
+        "tar_format",
+        "tar_member_mtime",
+        "tar_member_uid",
+        "tar_member_gid",
+        "tar_member_mode",
+        "member_order"
+      ],
+      "properties": {
+        "implementation": { "const": "Python stdlib gzip.GzipFile + tarfile" },
+        "python_version": { "type": "string", "minLength": 1 },
+        "zlib_compile_version": { "type": "string", "minLength": 1 },
+        "zlib_runtime_version": { "type": "string", "minLength": 1 },
+        "gzip_compresslevel": { "const": 9 },
+        "gzip_mtime": { "const": 0 },
+        "gzip_header_flags": { "const": 0 },
+        "gzip_header_extra_flags": { "const": 2 },
+        "gzip_header_os": { "const": 255 },
+        "tar_format": { "const": "ustar" },
+        "tar_member_mtime": { "const": 0 },
+        "tar_member_uid": { "const": 0 },
+        "tar_member_gid": { "const": 0 },
+        "tar_member_mode": { "const": "0644" },
+        "member_order": { "const": "lexicographic" }
+      }
+    },
+    "schema_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^docs/specifications/.+\\.schema\\.json$" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quality_report", "provenance"],
+      "properties": {
+        "quality_report": { "$ref": "#/$defs/schema_binding" },
+        "provenance": { "$ref": "#/$defs/schema_binding" }
+      }
+    },
+    "station_parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station", "par_file", "par_sha256", "par_bytes"],
+      "properties": {
+        "station": { "type": "string", "pattern": "^[a-z]{2}[0-9]{6}$" },
+        "par_file": { "type": "string", "pattern": "^station-parameters/[a-z]{2}[0-9]{6}\\.par$" },
+        "par_sha256": { "$ref": "#/$defs/sha256" },
+        "par_bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "repository_artifact_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "pattern": "^(docs|crates)/.+" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "evaluation_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation_spec",
+        "metric_manifest",
+        "metric_manifest_schema",
+        "metric_manifest_verifier",
+        "observed_bootstrap_reference",
+        "observed_bootstrap_golden",
+        "wepp_response_schema",
+        "wepp_response_verifier",
+        "wepp_response_protocol"
+      ],
+      "properties": {
+        "evaluation_spec": { "$ref": "#/$defs/repository_artifact_binding" },
+        "metric_manifest": { "$ref": "#/$defs/repository_artifact_binding" },
+        "metric_manifest_schema": { "$ref": "#/$defs/repository_artifact_binding" },
+        "metric_manifest_verifier": { "$ref": "#/$defs/repository_artifact_binding" },
+        "observed_bootstrap_reference": { "$ref": "#/$defs/repository_artifact_binding" },
+        "observed_bootstrap_golden": { "$ref": "#/$defs/repository_artifact_binding" },
+        "wepp_response_schema": { "$ref": "#/$defs/repository_artifact_binding" },
+        "wepp_response_verifier": { "$ref": "#/$defs/repository_artifact_binding" },
+        "wepp_response_protocol": { "$ref": "#/$defs/repository_artifact_binding" }
+      }
+    },
+    "archive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "format", "sha256", "bytes", "member_counts"],
+      "properties": {
+        "path": { "const": "baseline-evidence-v1.tar.gz" },
+        "format": { "const": "tar+gzip" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "member_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "quality_reports",
+            "provenance_documents",
+            "station_parameters",
+            "total"
+          ],
+          "properties": {
+            "quality_reports": { "const": 544 },
+            "provenance_documents": { "const": 544 },
+            "station_parameters": { "const": 17 },
+            "total": { "const": 1105 }
+          }
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpus_config_sha256",
+        "observed_target_corpus_sha256",
+        "preregistration_sha256",
+        "evaluation_contract",
+        "station_parameters"
+      ],
+      "properties": {
+        "corpus_config_sha256": { "$ref": "#/$defs/sha256" },
+        "observed_target_corpus_sha256": { "$ref": "#/$defs/sha256" },
+        "preregistration_sha256": { "$ref": "#/$defs/sha256" },
+        "evaluation_contract": { "$ref": "#/$defs/evaluation_contract" },
+        "station_parameters": {
+          "type": "array",
+          "minItems": 17,
+          "maxItems": 17,
+          "items": { "$ref": "#/$defs/station_parameter" }
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "station",
+        "years",
+        "burn",
+        "qc_filter",
+        "wall_seconds",
+        "cli_sha256",
+        "cli_bytes",
+        "quality_report",
+        "quality_report_sha256",
+        "quality_report_bytes",
+        "provenance",
+        "provenance_sha256",
+        "provenance_bytes",
+        "metric_summary",
+        "metric_inventory"
+      ],
+      "properties": {
+        "station": { "type": "string", "pattern": "^[a-z]{2}[0-9]{6}$" },
+        "years": { "enum": [30, 100] },
+        "burn": { "enum": [0, 17, 101, 503, 1009, 5003, 10007, 50021] },
+        "qc_filter": { "enum": ["faithful", "off"] },
+        "wall_seconds": { "type": "number", "minimum": 0 },
+        "cli_sha256": { "$ref": "#/$defs/sha256" },
+        "cli_bytes": { "type": "integer", "minimum": 1 },
+        "quality_report": { "type": "string", "pattern": "^quality-reports/[a-z]{2}[0-9]{6}-.+\\.cli\\.quality\\.json$" },
+        "quality_report_sha256": { "$ref": "#/$defs/sha256" },
+        "quality_report_bytes": { "type": "integer", "minimum": 1 },
+        "provenance": { "type": "string", "pattern": "^provenance/[a-z]{2}[0-9]{6}-.+\\.cli\\.provenance\\.json$" },
+        "provenance_sha256": { "$ref": "#/$defs/sha256" },
+        "provenance_bytes": { "type": "integer", "minimum": 1 },
+        "metric_summary": { "$ref": "#/$defs/metric_summary" },
+        "metric_inventory": { "$ref": "#/$defs/metric_inventory" }
+      }
+    },
+    "metric_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "group_a_median_relative_error",
+        "group_b_annual_precipitation_sd_mm",
+        "group_b_monthly_precipitation_sd_median_mm",
+        "group_b_monthly_r1mm_count_sd_median",
+        "group_b_monthly_tmax_sd_median_c",
+        "group_b_monthly_tmin_sd_median_c",
+        "group_b_annual_precipitation_low_frequency_fraction",
+        "group_c_freezing_air_precipitation_fraction",
+        "group_c_freeze_thaw_proxy_cycles_mean",
+        "group_c_djf_r1mm_temperature_pearson",
+        "group_d_r1mm_wet_spell_p95_days",
+        "group_d_r1mm_dry_spell_p95_days",
+        "group_d_r1mm_adjacent_amount_pearson",
+        "group_d_annual_max_1_day_p95_mm",
+        "group_d_annual_max_3_day_p95_mm",
+        "group_d_annual_max_5_day_p95_mm",
+        "group_d_time_to_peak_mean_fraction",
+        "group_d_peak_intensity_ratio_mean",
+        "group_d_depth_duration_pearson",
+        "group_p_rejected_to_accepted_batch_ratio",
+        "group_p_counterfactual_rejection_fraction"
+      ],
+      "properties": {
+        "group_a_median_relative_error": { "$ref": "#/$defs/nullable_number" },
+        "group_b_annual_precipitation_sd_mm": { "$ref": "#/$defs/nullable_number" },
+        "group_b_monthly_precipitation_sd_median_mm": { "$ref": "#/$defs/nullable_number" },
+        "group_b_monthly_r1mm_count_sd_median": { "$ref": "#/$defs/nullable_number" },
+        "group_b_monthly_tmax_sd_median_c": { "$ref": "#/$defs/nullable_number" },
+        "group_b_monthly_tmin_sd_median_c": { "$ref": "#/$defs/nullable_number" },
+        "group_b_annual_precipitation_low_frequency_fraction": { "$ref": "#/$defs/nullable_number" },
+        "group_c_freezing_air_precipitation_fraction": { "$ref": "#/$defs/nullable_number" },
+        "group_c_freeze_thaw_proxy_cycles_mean": { "$ref": "#/$defs/nullable_number" },
+        "group_c_djf_r1mm_temperature_pearson": { "$ref": "#/$defs/nullable_number" },
+        "group_d_r1mm_wet_spell_p95_days": { "$ref": "#/$defs/nullable_number" },
+        "group_d_r1mm_dry_spell_p95_days": { "$ref": "#/$defs/nullable_number" },
+        "group_d_r1mm_adjacent_amount_pearson": { "$ref": "#/$defs/nullable_number" },
+        "group_d_annual_max_1_day_p95_mm": { "$ref": "#/$defs/nullable_number" },
+        "group_d_annual_max_3_day_p95_mm": { "$ref": "#/$defs/nullable_number" },
+        "group_d_annual_max_5_day_p95_mm": { "$ref": "#/$defs/nullable_number" },
+        "group_d_time_to_peak_mean_fraction": { "$ref": "#/$defs/nullable_number" },
+        "group_d_peak_intensity_ratio_mean": { "$ref": "#/$defs/nullable_number" },
+        "group_d_depth_duration_pearson": { "$ref": "#/$defs/nullable_number" },
+        "group_p_rejected_to_accepted_batch_ratio": { "$ref": "#/$defs/nullable_number" },
+        "group_p_counterfactual_rejection_fraction": { "$ref": "#/$defs/nullable_number" }
+      }
+    },
+    "inventory_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numeric_values", "null_values"],
+      "properties": {
+        "numeric_values": { "type": "integer", "minimum": 1 },
+        "null_values": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "metric_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["par_convergence", "interannual", "covariation", "tails", "process"],
+      "properties": {
+        "par_convergence": { "$ref": "#/$defs/inventory_counts" },
+        "interannual": { "$ref": "#/$defs/inventory_counts" },
+        "covariation": { "$ref": "#/$defs/inventory_counts" },
+        "tails": { "$ref": "#/$defs/inventory_counts" },
+        "process": { "$ref": "#/$defs/inventory_counts" }
+      }
+    }
+  }
+}

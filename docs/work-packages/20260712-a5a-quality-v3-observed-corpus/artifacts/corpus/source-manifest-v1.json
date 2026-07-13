@@ -1,0 +1,1065 @@
+{
+  "config_sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496",
+  "fixed_periods": {
+    "evaluation": [
+      2010,
+      2025
+    ],
+    "fit": [
+      1980,
+      2009
+    ],
+    "full": [
+      1980,
+      2025
+    ]
+  },
+  "source_manifest_schema_version": 1,
+  "station_collection": {
+    "archive_sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9",
+    "catalog_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211",
+    "name": "us-2015",
+    "version": "2026.07"
+  },
+  "stations": [
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 125173,
+          "archive_path": "references/observed/a5a-v1/daymet/ca042319.csv.gz",
+          "archive_sha256": "80e5f4bd9a7a4c679087c0021bbdef4b5e84bde17a1b1c03cda081e4b0373e9a",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "b97986c94cd62f595a03adddcbf40aa21f5e9c95b6725bb1028ad56986ae2862",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": -68,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+          "requested_coordinates": {
+            "latitude": 36.47,
+            "longitude": -116.87
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 427325,
+          "source_id": "daymet-v4r1-ca042319",
+          "source_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=36.47&lon=-116.87&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 813076,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00042319.csv.gz",
+          "archive_sha256": "dda3f157620da916cea00da15dc3af102d8284d29b813eb998243f3bb3d96539",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "8550ca2748b900c083d159b2fbab748bef37a7c6b0ce8717a3564a340da3640f",
+          "fixed_window_record_counts": {
+            "prcp": 16685,
+            "tmax": 16764,
+            "tmin": 16747
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "d3c13ed755ecbdc8e77260e8b6a0fa198c69cd93196271de8527e9f7b91b3cd6",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 813076,
+          "source_id": "ghcn-daily-USC00042319-20260712",
+          "source_sha256": "dda3f157620da916cea00da15dc3af102d8284d29b813eb998243f3bb3d96539",
+          "station_identifier": "USC00042319",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00042319.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "ca042319"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 123666,
+          "archive_path": "references/observed/a5a-v1/daymet/az029654.csv.gz",
+          "archive_sha256": "994f796fd4bc20326bd6bacffba446949a65e56a5cc78534ae6c796aad49b3da",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "fe949d157c4f64fe3ab3ab03011c953c792efef21b7a654bcc02931e76939c1a",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 94,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+          "requested_coordinates": {
+            "latitude": 32.83,
+            "longitude": -114.4
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 427217,
+          "source_id": "daymet-v4r1-az029654",
+          "source_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=32.83&lon=-114.4&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "az029654"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 127892,
+          "archive_path": "references/observed/a5a-v1/daymet/ut429382.csv.gz",
+          "archive_sha256": "7b9006627e78c5a9f01a4f52e33d51711b90aef7f55a3e008141b516f2b4ea75",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "e59a256259c2a5933f408fedcf3f8012b3117720f1659141bc2407ee97a542e9",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1287,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+          "requested_coordinates": {
+            "latitude": 40.72,
+            "longitude": -114.03
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 423384,
+          "source_id": "daymet-v4r1-ut429382",
+          "source_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=40.72&lon=-114.03&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "ut429382"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 124905,
+          "archive_path": "references/observed/a5a-v1/daymet/ca042257.csv.gz",
+          "archive_sha256": "67c87cdfc52567cff3036aa2821046754e17de40c66b05af03c18be09b0be055",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "27ef436ee07fc13be42e46f5c5f8ae1c8181efe1666e3f333062200a5f75f2cc",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 581,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+          "requested_coordinates": {
+            "latitude": 34.87,
+            "longitude": -116.78
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 425390,
+          "source_id": "daymet-v4r1-ca042257",
+          "source_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=34.87&lon=-116.78&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "ca042257"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 127291,
+          "archive_path": "references/observed/a5a-v1/daymet/az022664.csv.gz",
+          "archive_sha256": "b01c06f84ca0109ccdc0a6f1573f97d8426ea0a7a3a107919039ced5b7ab22eb",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "7b38d5a331a5bacc592eabce701635b7b3bbb68fd256afd1454b6ecb382c872a",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1241,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+          "requested_coordinates": {
+            "latitude": 31.45,
+            "longitude": -109.6
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 425447,
+          "source_id": "daymet-v4r1-az022664",
+          "source_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=31.45&lon=-109.6&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "az022664"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 127661,
+          "archive_path": "references/observed/a5a-v1/daymet/az028619.csv.gz",
+          "archive_sha256": "8b3f561fbce04fe9e0723086230b1c3bd4c26b6681111e861cb5b20c620fef7c",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "d81dac1490c3278d1edd38fca789bfa0e43f997214e12d4b7e336780ecbf1f71",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1363,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+          "requested_coordinates": {
+            "latitude": 31.72,
+            "longitude": -110.07
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 425241,
+          "source_id": "daymet-v4r1-az028619",
+          "source_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=31.72&lon=-110.07&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 856969,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00028619.csv.gz",
+          "archive_sha256": "f792b6fbcec932a71d79e8ee7f357522cc677e7fa88ccc63ddf581a9830c4612",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "2d20acbda87bf058f8c2fa85436451ecc1ce7f48f3d4994d17bea8bce628d3a0",
+          "fixed_window_record_counts": {
+            "prcp": 16454,
+            "tmax": 16283,
+            "tmin": 15899
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "ba3a77c3de37ab9d0355044a9d7e763020dbc2bc092a5f6fab5110fcad500f08",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 856969,
+          "source_id": "ghcn-daily-USC00028619-20260712",
+          "source_sha256": "f792b6fbcec932a71d79e8ee7f357522cc677e7fa88ccc63ddf581a9830c4612",
+          "station_identifier": "USC00028619",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00028619.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "az028619"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 127283,
+          "archive_path": "references/observed/a5a-v1/daymet/nm294426.csv.gz",
+          "archive_sha256": "09a585077ee5370007251a110a468807dd4c8452bc0b5b9d45383568a7a68190",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "60e03fc6d10c9b547c45e854f1a521c61f98acbc890cb22ab945fc191df978ec",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1322,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+          "requested_coordinates": {
+            "latitude": 32.62,
+            "longitude": -106.73
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 426109,
+          "source_id": "daymet-v4r1-nm294426",
+          "source_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=32.62&lon=-106.73&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 836693,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00294426.csv.gz",
+          "archive_sha256": "43b89c17c9e977c7ac75471ea081633e4dd92a13be500cdce10c1da87e243b52",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "6c5ebc828aeefc33140c52f83eaf171d7d802a347a00f71cdd70355a3356a683",
+          "fixed_window_record_counts": {
+            "prcp": 16167,
+            "tmax": 14855,
+            "tmin": 14708
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "a8d4b3adab40bd0e076a84ab186e3069f0d592aaea8c02e576af55d99389547c",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 836693,
+          "source_id": "ghcn-daily-USC00294426-20260712",
+          "source_sha256": "43b89c17c9e977c7ac75471ea081633e4dd92a13be500cdce10c1da87e243b52",
+          "station_identifier": "USC00294426",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00294426.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "nm294426"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 126706,
+          "archive_path": "references/observed/a5a-v1/daymet/tx412797.csv.gz",
+          "archive_sha256": "a5b27363e8b5337873e343f206e3a98ee0349aeb287a69c2e9fc291659603e41",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "7510b4b42c5c4ad93c78c9e38c59708a17d6d26c39916f4bfa93ea91ac260282",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1192,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+          "requested_coordinates": {
+            "latitude": 31.8,
+            "longitude": -106.4
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 425970,
+          "source_id": "daymet-v4r1-tx412797",
+          "source_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=31.8&lon=-106.4&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "tx412797"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 134410,
+          "archive_path": "references/observed/a5a-v1/daymet/al015478.csv.gz",
+          "archive_sha256": "15eea2203390ce0ed4ba409648ade03ee58e3843eb4e236461e377badeb5464c",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "07d42e5d45ccb21c1199e89eede1bad8386d4ea0316f5ee751d8b5f810658a61",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 68,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+          "requested_coordinates": {
+            "latitude": 30.68,
+            "longitude": -88.25
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 429781,
+          "source_id": "daymet-v4r1-al015478",
+          "source_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=30.68&lon=-88.25&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "al015478"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 134148,
+          "archive_path": "references/observed/a5a-v1/daymet/ms227840.csv.gz",
+          "archive_sha256": "e36bdb1947bcacce926da90f38296f573770affe8a80b26e2aca8bddc6e49837",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "e5939a53971f7ef33ed605d9ec8b14e333adeb0a2a98e43c3d3e3b8afbeea3e8",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 56,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+          "requested_coordinates": {
+            "latitude": 30.63,
+            "longitude": -89.05
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 430072,
+          "source_id": "daymet-v4r1-ms227840",
+          "source_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=30.63&lon=-89.05&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 519713,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00227840.csv.gz",
+          "archive_sha256": "82f5d920773b372d085fb140a9abde56a3ae29fef0195a920e68f8028acfa81f",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "ef56f44b7a206b382bbb44799f14ecfc96a50b4a085e37782e62bd1e8817e780",
+          "fixed_window_record_counts": {
+            "prcp": 14459,
+            "tmax": 14659,
+            "tmin": 14764
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "a8c29054fb25805915226296f8be6f145341c769cfea16838aafae05232152c1",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 519713,
+          "source_id": "ghcn-daily-USC00227840-20260712",
+          "source_sha256": "82f5d920773b372d085fb140a9abde56a3ae29fef0195a920e68f8028acfa81f",
+          "station_identifier": "USC00227840",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00227840.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "ms227840"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 134185,
+          "archive_path": "references/observed/a5a-v1/daymet/fl086997.csv.gz",
+          "archive_sha256": "c2ebc5eff186ef3a500f39450b177214f17403563ca8058a2892502ff053c203",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "2a62c021ea7b07e30b95632e25be55ec898739fdff1cda4b953c55f5517a928d",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 30,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+          "requested_coordinates": {
+            "latitude": 30.47,
+            "longitude": -87.2
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 430120,
+          "source_id": "daymet-v4r1-fl086997",
+          "source_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=30.47&lon=-87.2&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "fl086997"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 132674,
+          "archive_path": "references/observed/a5a-v1/daymet/fl083909.csv.gz",
+          "archive_sha256": "993e9bd0e0f7ca3bd4759ddb4e0a3ae67eedff0602310929c877492bb42a2db0",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "32c2547633c8932d38ebbc697649cbf7ba84df49f155928d65599912b7162cb0",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 8,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+          "requested_coordinates": {
+            "latitude": 25.83,
+            "longitude": -80.28
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 434231,
+          "source_id": "daymet-v4r1-fl083909",
+          "source_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=25.83&lon=-80.28&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 1004899,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00083909.csv.gz",
+          "archive_sha256": "9a404f5b5d87ef63a07872c295cc5ffc1571bc89cccbee617448b08bd0cac5f2",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "79e6a83e88f530fa0c63603151929618328c31813eed0d3752fc0251a8822e1b",
+          "fixed_window_record_counts": {
+            "prcp": 16301,
+            "tmax": 15843,
+            "tmin": 15598
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "86a73a6ef5448b50911584a5bebf13530b6b7a4d02d1a3b6e29054f4617d860f",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 1004899,
+          "source_id": "ghcn-daily-USC00083909-20260712",
+          "source_sha256": "9a404f5b5d87ef63a07872c295cc5ffc1571bc89cccbee617448b08bd0cac5f2",
+          "station_identifier": "USC00083909",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00083909.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "fl083909"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 135104,
+          "archive_path": "references/observed/a5a-v1/daymet/co051660.csv.gz",
+          "archive_sha256": "2048d37fa7ec06c5d400e81a71522057972db43407d2d0a73cd54103206547f5",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "18e7d55ba12a4d6ac61d3d796fbd9a2a8f55f81567a61c226b43a7c0cfe4d01d",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 3578,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+          "requested_coordinates": {
+            "latitude": 39.38,
+            "longitude": -106.2
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 428689,
+          "source_id": "daymet-v4r1-co051660",
+          "source_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=39.38&lon=-106.2&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 646489,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00051660.csv.gz",
+          "archive_sha256": "3b3f5efc82092e07cb50841e749e6eb7b39a6f8ac79a13d05dad3a73fcb46f09",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "aed573754e314cfb2fdf5c603e5515fe482f2ba25dcf24db779ea294ae82d8c5",
+          "fixed_window_record_counts": {
+            "prcp": 16611,
+            "tmax": 16506,
+            "tmin": 16197
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "a143b96f0934d277cd514d97917b005ea56a5e1a14484a3b6d817a4e349e4192",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 646489,
+          "source_id": "ghcn-daily-USC00051660-20260712",
+          "source_sha256": "3b3f5efc82092e07cb50841e749e6eb7b39a6f8ac79a13d05dad3a73fcb46f09",
+          "station_identifier": "USC00051660",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00051660.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "co051660"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 136701,
+          "archive_path": "references/observed/a5a-v1/daymet/wy485345.csv.gz",
+          "archive_sha256": "01e6d7ce50f5d821f0ba6666003e6e2f3b433b7e5fb69244b8c39d31a3149c9a",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "96671742ae65f64fe02d02d77216591efc20503006595048acae7b472dd1af2e",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 2496,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+          "requested_coordinates": {
+            "latitude": 44.57,
+            "longitude": -110.4
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 428624,
+          "source_id": "daymet-v4r1-wy485345",
+          "source_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=44.57&lon=-110.4&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 872122,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00485345.csv.gz",
+          "archive_sha256": "59900b84b4c1a084de6d1dcb780194bc26aa41543684a2eba800e5f099835c7a",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "6d518fe04d4ac28a6c6e667478fb064028ac4dd9d045a88decaf4e1e8bd56991",
+          "fixed_window_record_counts": {
+            "prcp": 15218,
+            "tmax": 15253,
+            "tmin": 15109
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "be52cee726af87fc86335b2ff4c098d48a3bd87afd109da041cd69cb7c043777",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 872122,
+          "source_id": "ghcn-daily-USC00485345-20260712",
+          "source_sha256": "59900b84b4c1a084de6d1dcb780194bc26aa41543684a2eba800e5f099835c7a",
+          "station_identifier": "USC00485345",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00485345.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "wy485345"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 138913,
+          "archive_path": "references/observed/a5a-v1/daymet/mn214026.csv.gz",
+          "archive_sha256": "e7063f6d11dc2e42fa69298916d90d477e017cc3f88b428e8a9d54eaccd01e89",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "31b00b06fa5e7585c90550c733e52b6f2e1d583c6586da51cfa9303bacc92eb6",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 353,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+          "requested_coordinates": {
+            "latitude": 48.57,
+            "longitude": -93.38
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 430679,
+          "source_id": "daymet-v4r1-mn214026",
+          "source_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=48.57&lon=-93.38&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "mn214026"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 137486,
+          "archive_path": "references/observed/a5a-v1/daymet/ak505769.csv.gz",
+          "archive_sha256": "bc1c62b617ca2e497a5b31917ac076c39b2c44643e6be337b0d9702756529b44",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "74fbbb14e904373bca9e5c87cf5fe87dd3a3d9a943eff88aaeaae9192ce04b70",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 100,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+          "requested_coordinates": {
+            "latitude": 62.97,
+            "longitude": -155.62
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 433290,
+          "source_id": "daymet-v4r1-ak505769",
+          "source_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=62.97&lon=-155.62&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "Q3 station mapping absent or failed the completeness screen"
+        }
+      },
+      "station_id": "ak505769"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 133675,
+          "archive_path": "references/observed/a5a-v1/daymet/id106388.csv.gz",
+          "archive_sha256": "7ef87124b8876c0f2d02a5d83b6d2db6f422087b7c34c3182dfd7b23a4553931",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "compression": "gzip-9-mtime-0-empty-name",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "74f0ca57e6aa5e7b345691ddae6fd54438a2f8b51b139dbb8184094c0d653a63",
+          "fixed_window_record_counts": {
+            "prcp": 16790,
+            "tmax": 16790,
+            "tmin": 16790
+          },
+          "grid_elevation_m": 1180,
+          "intake_rules": {
+            "missing_value_rule": "all 365 no-leap days and all three variables are required; no sentinel or imputation is accepted",
+            "quality_flag_rule": "Daymet single-pixel CSV has no per-observation quality-flag field"
+          },
+          "media_type": "text/csv",
+          "q3_historical_source_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+          "requested_coordinates": {
+            "latitude": 44.97,
+            "longitude": -116.28
+          },
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 421830,
+          "source_id": "daymet-v4r1-id106388",
+          "source_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=44.97&lon=-116.28&vars=prcp,tmax,tmin",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        },
+        "ghcn": {
+          "archive_bytes": 789576,
+          "archive_path": "references/observed/a5a-v1/ghcn/USC00106388.csv.gz",
+          "archive_sha256": "81486c28ff8de20ea0a98542778e6a1a785c36e07ed07dcaa21e193b5e129f1c",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "compression": "upstream-gzip-byte-for-byte",
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-12",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "a8225afaf6a65b8a18569428bef52bb13b8dabbcfd879897ba4d4302ad816074",
+          "fixed_window_record_counts": {
+            "prcp": 12833,
+            "tmax": 13422,
+            "tmin": 13150
+          },
+          "intake_rules": {
+            "missing_value_rule": "absent date/element rows remain missing; no sentinel or imputation is accepted",
+            "quality_flag_rule": "rows with a nonblank GHCN Q_FLAG field are excluded; M_FLAG and S_FLAG do not exclude a row"
+          },
+          "media_type": "application/gzip",
+          "q3_historical_source_sha256": "b824a8034fce0663ec375d56039dff988aacf6e3165e29d8d1e5fb4fb2fd8b9d",
+          "retrieval_date": "2026-07-12",
+          "source_bytes": 789576,
+          "source_id": "ghcn-daily-USC00106388-20260712",
+          "source_sha256": "81486c28ff8de20ea0a98542778e6a1a785c36e07ed07dcaa21e193b5e129f1c",
+          "station_identifier": "USC00106388",
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00106388.csv.gz",
+          "variables": {
+            "prcp": "mm/day",
+            "tmax": "degree_Celsius",
+            "tmin": "degree_Celsius"
+          }
+        }
+      },
+      "station_id": "id106388"
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/manifest-v1.schema.json",
+  "title": "A5a observed-corpus lineage manifest revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "archive_aggregate_sha256",
+    "archive_documentation",
+    "archive_files",
+    "build_environment",
+    "build_documentation",
+    "build_schemas",
+    "config_sha256",
+    "coverage_evidence",
+    "daymet_sources",
+    "ghcn_sources",
+    "manifest_schema_version",
+    "metric_estimator",
+    "observed_target_corpus",
+    "schema",
+    "source_manifest_sha256",
+    "third_party_data_notice",
+    "tools"
+  ],
+  "properties": {
+    "archive_aggregate_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "archive_documentation": {
+      "$ref": "#/$defs/path_hash"
+    },
+    "archive_files": {
+      "const": 25
+    },
+    "build_environment": {
+      "$ref": "#/$defs/build_environment"
+    },
+    "build_documentation": {
+      "$ref": "#/$defs/path_hash"
+    },
+    "build_schemas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpus-config-v1.schema.json",
+        "manifest-v1.schema.json",
+        "source-manifest-v1.schema.json"
+      ],
+      "properties": {
+        "corpus-config-v1.schema.json": {
+          "$ref": "#/$defs/path_hash"
+        },
+        "manifest-v1.schema.json": {
+          "$ref": "#/$defs/path_hash"
+        },
+        "source-manifest-v1.schema.json": {
+          "$ref": "#/$defs/path_hash"
+        }
+      }
+    },
+    "config_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "coverage_evidence": {
+      "$ref": "#/$defs/file_binding"
+    },
+    "daymet_sources": {
+      "const": 17
+    },
+    "ghcn_sources": {
+      "const": 8
+    },
+    "manifest_schema_version": {
+      "const": 1
+    },
+    "metric_estimator": {
+      "$ref": "#/$defs/metric_estimator"
+    },
+    "observed_target_corpus": {
+      "$ref": "#/$defs/file_binding"
+    },
+    "schema": {
+      "$ref": "#/$defs/path_hash"
+    },
+    "source_manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "third_party_data_notice": {
+      "$ref": "#/$defs/path_hash"
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acquire_sources.py",
+        "build_coverage.py",
+        "build_target_schema.py",
+        "build_targets.py",
+        "corpus_common.py",
+        "finalize_manifest.py",
+        "verify_offline.py"
+      ],
+      "properties": {
+        "acquire_sources.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "build_coverage.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "build_target_schema.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "build_targets.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "corpus_common.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "finalize_manifest.py": {
+          "$ref": "#/$defs/sha256"
+        },
+        "verify_offline.py": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "build_environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cargo_version",
+        "machine",
+        "operating_system",
+        "operating_system_release",
+        "platform_tag",
+        "python_implementation",
+        "python_version",
+        "rustc_version"
+      ],
+      "properties": {
+        "cargo_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "machine": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operating_system": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operating_system_release": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform_tag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "python_implementation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "python_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+"
+        },
+        "rustc_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "metric_estimator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "build_command",
+        "compiler",
+        "files",
+        "files_sha256",
+        "libm"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "quality_metrics_v3_low_frequency_power_fraction"
+        },
+        "build_command": {
+          "const": "cargo build --locked --offline --bin cligen-quality-estimator"
+        },
+        "compiler": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["cargo", "rustc"],
+          "properties": {
+            "cargo": { "type": "string", "minLength": 1 },
+            "rustc": { "type": "string", "minLength": 1 }
+          }
+        },
+        "files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "Cargo.lock",
+            "Cargo.toml",
+            "rust-toolchain.toml",
+            "crates/cligen/Cargo.toml",
+            "crates/cligen/src/lib.rs",
+            "crates/cligen/src/bin/cligen-quality-estimator.rs",
+            "crates/cligen/src/quality/estimators.rs",
+            "crates/cligen/src/quality/mod.rs"
+          ],
+          "properties": {
+            "Cargo.lock": { "$ref": "#/$defs/sha256" },
+            "Cargo.toml": { "$ref": "#/$defs/sha256" },
+            "rust-toolchain.toml": { "$ref": "#/$defs/sha256" },
+            "crates/cligen/Cargo.toml": { "$ref": "#/$defs/sha256" },
+            "crates/cligen/src/lib.rs": { "$ref": "#/$defs/sha256" },
+            "crates/cligen/src/bin/cligen-quality-estimator.rs": { "$ref": "#/$defs/sha256" },
+            "crates/cligen/src/quality/estimators.rs": { "$ref": "#/$defs/sha256" },
+            "crates/cligen/src/quality/mod.rs": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "files_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "libm": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["checksum", "version"],
+          "properties": {
+            "checksum": {
+              "const": "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981"
+            },
+            "version": { "const": "0.2.16" }
+          }
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "path_hash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/]"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "file_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bytes",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[^/]"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  }
+}

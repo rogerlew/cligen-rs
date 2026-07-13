@@ -30,6 +30,27 @@ pub fn sample_sd(values: &[f64]) -> Option<f64> {
     finite((ss / (n as f64 - 1.0)).sqrt())
 }
 
+/// n−1 sample covariance; `None` when paired n < 2.
+///
+/// # Panics
+///
+/// Debug builds panic when the paired slices differ in length.
+#[must_use]
+pub fn sample_covariance(xs: &[f64], ys: &[f64]) -> Option<f64> {
+    debug_assert_eq!(xs.len(), ys.len(), "sample covariance: paired samples");
+    if xs.len() < 2 {
+        return None;
+    }
+    let mx = mean(xs)?;
+    let my = mean(ys)?;
+    let sum = xs
+        .iter()
+        .zip(ys)
+        .map(|(x, y)| (x - mx) * (y - my))
+        .sum::<f64>();
+    finite(sum / (xs.len() as f64 - 1.0))
+}
+
 /// Coefficient of variation `sd / mean`; `None` when either input is
 /// `None` or the mean is zero. The sign follows the mean.
 #[must_use]
@@ -98,7 +119,11 @@ pub fn pearson(xs: &[f64], ys: &[f64]) -> Option<f64> {
     if sxx == 0.0 || syy == 0.0 {
         return None;
     }
-    finite(sxy / (sxx * syy).sqrt())
+    // Roundoff can place a mathematically exact ±1 correlation one ulp
+    // outside its closed domain for small samples. Metrics v3 publishes the
+    // mathematical coefficient and its schema therefore clamps that final
+    // rounding residue only; the accumulated estimator is unchanged.
+    finite((sxy / (sxx * syy).sqrt()).clamp(-1.0, 1.0))
 }
 
 /// Spearman rank correlation with average-rank ties: Pearson over the
@@ -141,6 +166,68 @@ pub fn average_ranks(values: &[f64]) -> Vec<f64> {
         start = end + 1;
     }
     ranks
+}
+
+/// Empirical inverse-CDF (nearest-rank) quantile. For `0 < p <= 1`,
+/// return sorted element `ceil(p*n)-1`; `None` for empty input or an
+/// out-of-domain probability.
+#[must_use]
+pub fn nearest_rank_quantile(values: &[f64], probability: f64) -> Option<f64> {
+    if values.is_empty() || !(0.0 < probability && probability <= 1.0) {
+        return None;
+    }
+    let mut sorted = values.to_vec();
+    sorted.sort_by(|a, b| {
+        a.partial_cmp(b)
+            .expect("quality intake and metric builders guarantee finite values")
+    });
+    let rank = libm::ceil(probability * sorted.len() as f64) as usize;
+    Some(sorted[rank.saturating_sub(1)])
+}
+
+/// Fraction of nonzero two-sided periodogram power at Fourier periods of at
+/// least four observations (SPEC-QUALITY-REPORT metrics v3).
+///
+/// The input is demeaned. Positive bins `1..=floor(n/2)` receive weight two,
+/// except the even-length Nyquist bin, whose mirror is itself and receives
+/// weight one. `None` is returned for fewer than four observations or zero
+/// total nonzero-frequency power.
+#[must_use]
+pub fn low_frequency_power_fraction(values: &[f64]) -> Option<f64> {
+    let n = values.len();
+    if n < 4 {
+        return None;
+    }
+    let center = mean(values)?;
+    let mut low_power = 0.0f64;
+    let mut total_power = 0.0f64;
+    for frequency in 1..=n / 2 {
+        let (real, imaginary) = dft_bin(values, center, frequency);
+        let raw_power = real * real + imaginary * imaginary;
+        let nyquist = n.is_multiple_of(2) && frequency == n / 2;
+        let weighted_power = raw_power * if nyquist { 1.0 } else { 2.0 };
+        total_power += weighted_power;
+        if n as f64 / frequency as f64 >= 4.0 {
+            low_power += weighted_power;
+        }
+    }
+    if total_power == 0.0 {
+        return None;
+    }
+    finite(low_power / total_power)
+}
+
+fn dft_bin(values: &[f64], center: f64, frequency: usize) -> (f64, f64) {
+    let scale = std::f64::consts::TAU * frequency as f64 / values.len() as f64;
+    let mut real = 0.0f64;
+    let mut imaginary = 0.0f64;
+    for (index, value) in values.iter().enumerate() {
+        let angle = scale * index as f64;
+        let centered = value - center;
+        real += centered * libm::cos(angle);
+        imaginary -= centered * libm::sin(angle);
+    }
+    (real, imaginary)
 }
 
 /// Map a non-finite result to `None` so JSON emission never sees NaN
@@ -198,5 +285,26 @@ mod tests {
         assert_eq!(pearson(&[1.0, 1.0], &[1.0, 2.0]), None);
         assert_eq!(spearman(&[3.0, 3.0, 3.0], &[1.0, 2.0, 3.0]), None);
         assert_eq!(pearson(&[1.0], &[1.0]), None);
+    }
+
+    #[test]
+    fn covariance_and_nearest_rank_are_pinned() {
+        assert_eq!(
+            sample_covariance(&[1.0, 2.0, 3.0], &[2.0, 4.0, 8.0]),
+            Some(3.0)
+        );
+        let values = [9.0, 1.0, 5.0, 3.0];
+        assert_eq!(nearest_rank_quantile(&values, 0.5), Some(3.0));
+        assert_eq!(nearest_rank_quantile(&values, 0.95), Some(9.0));
+        assert_eq!(nearest_rank_quantile(&values, 0.0), None);
+    }
+
+    #[test]
+    fn low_frequency_fraction_separates_slow_and_nyquist_cycles() {
+        let slow = [1.0, 0.0, -1.0, 0.0, 1.0, 0.0, -1.0, 0.0];
+        let alternating = [1.0, -1.0, 1.0, -1.0, 1.0, -1.0, 1.0, -1.0];
+        assert!((low_frequency_power_fraction(&slow).unwrap() - 1.0).abs() < 1e-12);
+        assert!(low_frequency_power_fraction(&alternating).unwrap().abs() < 1e-12);
+        assert_eq!(low_frequency_power_fraction(&[1.0, 1.0, 1.0, 1.0]), None);
     }
 }

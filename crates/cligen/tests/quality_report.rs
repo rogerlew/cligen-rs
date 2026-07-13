@@ -47,6 +47,10 @@ fn daily_row(day: i32, month: i32, year: i32, precip: f64) -> String {
 }
 
 fn new_meadows_run_output() -> RunOutput {
+    new_meadows_run_output_for_years(31)
+}
+
+fn new_meadows_run_output_for_years(years: i32) -> RunOutput {
     let par = par_bytes("new-meadows-id/id106388.par");
     run_to_cli(&RunInputs {
         iopt: 5,
@@ -55,7 +59,7 @@ fn new_meadows_run_output() -> RunOutput {
         generation_profile: GenerationProfile::Faithful5323,
         qc_filter: cligen::profile::QcFilter::Faithful,
         begin_year: Some(1),
-        years: Some(31),
+        years: Some(years),
         par_bytes: &par,
         prn_bytes: None,
         storm: None,
@@ -120,112 +124,6 @@ fn run_only_quality_inputs_and_mutated_nested_provenance_fail_closed() {
         report.to_json_bytes(),
         Err(QualityError::Provenance(_))
     ));
-}
-
-fn validate_schema(value: &Value, schema: &Value, root: &Value, path: &str) -> Result<(), String> {
-    if let Some(reference) = schema.get("$ref").and_then(Value::as_str) {
-        if reference == "provenance-v1.schema.json" {
-            let external: Value = serde_json::from_str(include_str!(
-                "../../../docs/specifications/provenance-v1.schema.json"
-            ))
-            .map_err(|error| format!("{path}: invalid provenance schema: {error}"))?;
-            return validate_schema(value, &external, &external, path);
-        }
-        let target = reference
-            .strip_prefix("#/$defs/")
-            .and_then(|name| root["$defs"].get(name))
-            .ok_or_else(|| format!("{path}: unresolved ref {reference}"))?;
-        return validate_schema(value, target, root, path);
-    }
-    if let Some(alternatives) = schema.get("anyOf").and_then(Value::as_array) {
-        if alternatives
-            .iter()
-            .any(|candidate| validate_schema(value, candidate, root, path).is_ok())
-        {
-            return Ok(());
-        }
-        return Err(format!("{path}: no anyOf branch matched {value}"));
-    }
-    if let Some(expected) = schema.get("const") {
-        if value != expected {
-            return Err(format!("{path}: expected const {expected}, found {value}"));
-        }
-    }
-    if let Some(values) = schema.get("enum").and_then(Value::as_array) {
-        if !values.contains(value) {
-            return Err(format!("{path}: value {value} not in enum"));
-        }
-    }
-    if let Some(types) = schema.get("type") {
-        let matches = match types {
-            Value::String(kind) => value_has_type(value, kind),
-            Value::Array(kinds) => kinds
-                .iter()
-                .filter_map(Value::as_str)
-                .any(|kind| value_has_type(value, kind)),
-            _ => false,
-        };
-        if !matches {
-            return Err(format!("{path}: {value} does not match type {types}"));
-        }
-    }
-    if let Some(properties) = schema.get("properties").and_then(Value::as_object) {
-        let object = value
-            .as_object()
-            .ok_or_else(|| format!("{path}: expected object"))?;
-        if let Some(required) = schema.get("required").and_then(Value::as_array) {
-            for key in required.iter().filter_map(Value::as_str) {
-                if !object.contains_key(key) {
-                    return Err(format!("{path}: missing required key {key}"));
-                }
-            }
-        }
-        if schema.get("additionalProperties") == Some(&Value::Bool(false)) {
-            for key in object.keys() {
-                if !properties.contains_key(key) {
-                    return Err(format!("{path}: unexpected key {key}"));
-                }
-            }
-        }
-        for (key, child) in object {
-            if let Some(child_schema) = properties.get(key) {
-                validate_schema(child, child_schema, root, &format!("{path}.{key}"))?;
-            }
-        }
-    }
-    if let Some(items) = schema.get("items") {
-        let array = value
-            .as_array()
-            .ok_or_else(|| format!("{path}: expected array"))?;
-        let min = schema.get("minItems").and_then(Value::as_u64).unwrap_or(0) as usize;
-        let max = schema
-            .get("maxItems")
-            .and_then(Value::as_u64)
-            .unwrap_or(u64::MAX) as usize;
-        if !(min..=max).contains(&array.len()) {
-            return Err(format!(
-                "{path}: array length {} outside {min}..={max}",
-                array.len()
-            ));
-        }
-        for (index, child) in array.iter().enumerate() {
-            validate_schema(child, items, root, &format!("{path}[{index}]"))?;
-        }
-    }
-    Ok(())
-}
-
-fn value_has_type(value: &Value, kind: &str) -> bool {
-    match kind {
-        "null" => value.is_null(),
-        "boolean" => value.is_boolean(),
-        "integer" => value.as_i64().is_some() || value.as_u64().is_some(),
-        "number" => value.is_number(),
-        "string" => value.is_string(),
-        "array" => value.is_array(),
-        "object" => value.is_object(),
-        _ => false,
-    }
 }
 
 /// (golden case, station .par) spanning continuous, observed
@@ -402,10 +300,10 @@ fn skew_null_and_partial_decades_land_in_the_pinned_cells() {
     assert_eq!(january.abs_err, None);
     assert_eq!(january.rel_err, None);
 
-    let rows = (1..=12)
-        .map(|year| daily_row(1, 1, year, year as f64))
-        .collect::<String>();
-    let report = compute_report(&synthetic_cli(&rows), &par, None, None).unwrap();
+    // Metrics v3 requires every multirow stream to be contiguous, so use a
+    // real 12-year daily run rather than the old one-row-per-year shortcut.
+    let generated = new_meadows_run_output_for_years(12);
+    let report = compute_report(&generated.cli, &par, None, None).unwrap();
     let group_a = report.par_convergence.as_ref().unwrap();
     let group_b = report.interannual.as_ref().unwrap();
     let group_c = report.covariation.as_ref().unwrap();
@@ -450,16 +348,30 @@ fn truncated_observed_tail_exposes_partial_year_day_count() {
 }
 
 #[test]
-fn published_schema_structurally_validates_post_hoc_and_run_reports() {
+fn published_combination_schema_and_public_parser_validate_both_report_kinds() {
     let root = repo_root();
-    let schema: Value = serde_json::from_slice(
-        &std::fs::read(root.join("docs/specifications/quality-report-v2.schema.json")).unwrap(),
-    )
-    .unwrap();
+    let public_quality =
+        std::fs::read(root.join("docs/specifications/quality-report-s2-m3.schema.json")).unwrap();
+    let runtime_quality =
+        std::fs::read(root.join("crates/cligen/schemas/quality-report-s2-m3.schema.json")).unwrap();
+    assert_eq!(
+        runtime_quality, public_quality,
+        "runtime quality schema drift"
+    );
+    let public_provenance =
+        std::fs::read(root.join("docs/specifications/provenance-v1.schema.json")).unwrap();
+    let runtime_provenance =
+        std::fs::read(root.join("crates/cligen/schemas/provenance-v1.schema.json")).unwrap();
+    assert_eq!(
+        runtime_provenance, public_provenance,
+        "runtime provenance schema drift"
+    );
+    let schema: Value = serde_json::from_slice(&public_quality).unwrap();
     assert_eq!(
         schema["properties"]["quality_report_schema_version"]["const"],
         2
     );
+    assert_eq!(schema["properties"]["metrics_version"]["const"], 3);
     let post_hoc = compute_report(
         &golden_text("new-meadows-id-single-storm-seed0"),
         &par_bytes("new-meadows-id/id106388.par"),
@@ -468,21 +380,20 @@ fn published_schema_structurally_validates_post_hoc_and_run_reports() {
     )
     .unwrap();
     assert_eq!(post_hoc.quality_report_schema_version, 2);
-    assert_eq!(post_hoc.metrics_version, 2);
-    validate_schema(
-        &serde_json::to_value(post_hoc).unwrap(),
-        &schema,
-        &schema,
-        "$",
-    )
-    .unwrap();
+    assert_eq!(post_hoc.metrics_version, 3);
+    let post_hoc_bytes = post_hoc.to_json_bytes().unwrap();
+    assert_eq!(
+        QualityReport::parse_json(&post_hoc_bytes).unwrap(),
+        post_hoc
+    );
 
     let run = load_runspec_file(
         &root.join("crates/cligen/tests/fixtures/runspec/new-meadows-id-seed0/inp.yaml"),
     )
     .unwrap();
-    let run_report = serde_json::to_value(run.generate_quality_report().unwrap()).unwrap();
-    validate_schema(&run_report, &schema, &schema, "$run").unwrap();
+    let run_report = run.generate_quality_report().unwrap();
+    let run_bytes = run_report.to_json_bytes().unwrap();
+    assert_eq!(QualityReport::parse_json(&run_bytes).unwrap(), run_report);
 }
 
 fn write_optout_runspec(dir: &Path, quality_line: &str, output_name: &str) -> PathBuf {

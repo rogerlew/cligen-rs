@@ -10,12 +10,16 @@
 //! Group P is accumulated through the run-scoped, observation-only
 //! [`process::ProcessCounters`] seam and remains `null` post hoc.
 
+mod aggregation;
 pub mod estimators;
 pub mod groups;
 pub mod intake;
+mod interannual;
 pub mod process;
 pub mod report;
+mod tails;
 pub mod targets;
+mod winter;
 
 use std::error::Error;
 use std::fmt;
@@ -53,6 +57,11 @@ pub enum QualityError {
     /// Report serialization failed (unreachable for reports built by
     /// this module; surfaced rather than swallowed).
     Serialize(serde_json::Error),
+    /// Report JSON intake failed before schema validation.
+    Deserialize(serde_json::Error),
+    /// The complete envelope-2/metrics-3 schema or relational validation
+    /// rejected a report.
+    Validation(String),
 }
 
 impl fmt::Display for QualityError {
@@ -66,6 +75,8 @@ impl fmt::Display for QualityError {
                 f.write_str("run-only provenance/process metrics require trusted run orchestration")
             }
             QualityError::Serialize(error) => write!(f, "report serialization: {error}"),
+            QualityError::Deserialize(error) => write!(f, "report JSON intake: {error}"),
+            QualityError::Validation(message) => write!(f, "report validation: {message}"),
         }
     }
 }
@@ -78,7 +89,9 @@ impl Error for QualityError {
             QualityError::Station(error) => Some(error),
             QualityError::Provenance(error) => Some(error),
             QualityError::Serialize(error) => Some(error),
+            QualityError::Deserialize(error) => Some(error),
             QualityError::RunOnlyInputs => None,
+            QualityError::Validation(_) => None,
         }
     }
 }
@@ -171,12 +184,12 @@ pub(crate) fn compute_report_with_station(
                 &targets,
                 observed_passthrough,
             )),
-            Some(groups::interannual(rows, &decades)),
+            Some(interannual::compute(rows, &decades)),
             Some(groups::covariation(rows, &decades)),
         )
     };
 
-    Ok(QualityReport {
+    let report = QualityReport {
         quality_report_schema_version: QUALITY_REPORT_SCHEMA_VERSION,
         metrics_version: METRICS_VERSION,
         identity: Identity {
@@ -186,9 +199,11 @@ pub(crate) fn compute_report_with_station(
         par_convergence,
         interannual,
         covariation,
-        tails: groups::tails(rows),
+        tails: tails::compute(rows),
         process,
-    })
+    };
+    report.validate()?;
+    Ok(report)
 }
 
 fn validate_report_provenance(

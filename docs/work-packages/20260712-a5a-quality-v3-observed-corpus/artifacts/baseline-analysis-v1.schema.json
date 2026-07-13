@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-analysis-v1.schema.json",
+  "title": "A5a baseline empirical across-burn analysis version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baseline_analysis_schema_version",
+    "interpretation",
+    "run_count",
+    "expected_run_count",
+    "matrix_complete",
+    "metric_across_burns",
+    "qc_context",
+    "metric_inventory_totals",
+    "baseline_run_manifest_sha256"
+  ],
+  "properties": {
+    "baseline_analysis_schema_version": { "const": 1 },
+    "interpretation": { "type": "string", "minLength": 1 },
+    "run_count": { "const": 544 },
+    "expected_run_count": { "const": 544 },
+    "matrix_complete": { "const": true },
+    "metric_across_burns": {
+      "type": "array",
+      "minItems": 68,
+      "maxItems": 68,
+      "items": { "$ref": "#/$defs/spread_row" }
+    },
+    "qc_context": {
+      "type": "array",
+      "minItems": 34,
+      "maxItems": 34,
+      "items": { "$ref": "#/$defs/qc_row" }
+    },
+    "metric_inventory_totals": { "$ref": "#/$defs/metric_inventory" },
+    "baseline_run_manifest_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "station": { "type": "string", "pattern": "^[a-z]{2}[0-9]{6}$" },
+    "nonnegative_number": { "type": "number", "minimum": 0 },
+    "nullable_number": {
+      "oneOf": [
+        { "type": "number" },
+        { "type": "null" }
+      ]
+    },
+    "empirical_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["n_available", "n_expected", "median", "p05", "p95", "minimum", "maximum"],
+      "properties": {
+        "n_available": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "n_expected": { "const": 8 },
+        "median": { "$ref": "#/$defs/nullable_number" },
+        "p05": { "$ref": "#/$defs/nullable_number" },
+        "p95": { "$ref": "#/$defs/nullable_number" },
+        "minimum": { "$ref": "#/$defs/nullable_number" },
+        "maximum": { "$ref": "#/$defs/nullable_number" }
+      }
+    },
+    "spread_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station", "years", "qc_filter", "metrics"],
+      "properties": {
+        "station": { "$ref": "#/$defs/station" },
+        "years": { "enum": [30, 100] },
+        "qc_filter": { "enum": ["faithful", "off"] },
+        "metrics": {
+          "type": "object",
+          "minProperties": 21,
+          "maxProperties": 21,
+          "propertyNames": { "pattern": "^group_[a-dp]_" },
+          "additionalProperties": { "$ref": "#/$defs/empirical_summary" }
+        }
+      }
+    },
+    "qc_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station", "years", "faithful_to_off_median_sd_ratio"],
+      "properties": {
+        "station": { "$ref": "#/$defs/station" },
+        "years": { "enum": [30, 100] },
+        "faithful_to_off_median_sd_ratio": {
+          "oneOf": [
+            { "$ref": "#/$defs/nonnegative_number" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "inventory_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["numeric_values", "null_values"],
+      "properties": {
+        "numeric_values": { "type": "integer", "minimum": 1 },
+        "null_values": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "metric_inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["par_convergence", "interannual", "covariation", "tails", "process"],
+      "properties": {
+        "par_convergence": { "$ref": "#/$defs/inventory_counts" },
+        "interannual": { "$ref": "#/$defs/inventory_counts" },
+        "covariation": { "$ref": "#/$defs/inventory_counts" },
+        "tails": { "$ref": "#/$defs/inventory_counts" },
+        "process": { "$ref": "#/$defs/inventory_counts" }
+      }
+    }
+  }
+}

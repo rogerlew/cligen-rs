@@ -1,0 +1,763 @@
+{
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5-climate-gate-metrics-v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "aggregation": {
+      "$ref": "#/$defs/aggregation"
+    },
+    "canonical_sets": {
+      "$ref": "#/$defs/canonical_sets"
+    },
+    "cell_selection": {
+      "$ref": "#/$defs/string_map"
+    },
+    "climate_gate_metric_manifest_version": {
+      "const": 1
+    },
+    "count_sufficiency": {
+      "$ref": "#/$defs/string_map"
+    },
+    "distance_definitions": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute_difference": {
+          "$ref": "#/$defs/distance_definition"
+        },
+        "absolute_relative": {
+          "$ref": "#/$defs/distance_definition"
+        }
+      },
+      "required": [
+        "absolute_difference",
+        "absolute_relative"
+      ],
+      "type": "object"
+    },
+    "evidence_completeness": {
+      "$ref": "#/$defs/evidence_completeness"
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/gate"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "type": "array"
+    },
+    "inclusion_profiles": {
+      "additionalProperties": false,
+      "properties": {
+        "difference": {
+          "$ref": "#/$defs/inclusion_profile"
+        },
+        "relative": {
+          "$ref": "#/$defs/inclusion_profile"
+        }
+      },
+      "required": [
+        "difference",
+        "relative"
+      ],
+      "type": "object"
+    },
+    "manifest_id": {
+      "const": "cligen-a5-climate-gate-metrics-v1"
+    },
+    "metric_templates": {
+      "items": {
+        "$ref": "#/$defs/metric_template"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "observed_target_corpus_schema_version": {
+      "const": 1
+    },
+    "path_template_language": {
+      "$ref": "#/$defs/string_map"
+    },
+    "quality_report_metrics_version": {
+      "const": 3
+    },
+    "quality_report_schema_version": {
+      "const": 2
+    },
+    "sensitivity_projections": {
+      "items": {
+        "$ref": "#/$defs/sensitivity_projection"
+      },
+      "type": "array"
+    },
+    "target_surfaces": {
+      "items": {
+        "$ref": "#/$defs/target_surface"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "uncertainty_application": {
+      "$ref": "#/$defs/uncertainty_application"
+    }
+  },
+  "required": [
+    "aggregation",
+    "canonical_sets",
+    "cell_selection",
+    "climate_gate_metric_manifest_version",
+    "count_sufficiency",
+    "distance_definitions",
+    "evidence_completeness",
+    "gates",
+    "inclusion_profiles",
+    "manifest_id",
+    "metric_templates",
+    "observed_target_corpus_schema_version",
+    "path_template_language",
+    "quality_report_metrics_version",
+    "quality_report_schema_version",
+    "sensitivity_projections",
+    "target_surfaces",
+    "uncertainty_application"
+  ],
+  "title": "CLIGEN A5 climate gate metric-cell manifest version 1",
+  "type": "object",
+  "$defs": {
+    "aggregation": {
+      "additionalProperties": false,
+      "properties": {
+        "cell_weight": {
+          "const": 1
+        },
+        "identity": {
+          "const": "a5-equal-weight-median-v1"
+        },
+        "levels": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "median": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "replicate_interval": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "station_pooling": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "unequal_weighting": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "cell_weight",
+        "identity",
+        "levels",
+        "median",
+        "replicate_interval",
+        "station_pooling",
+        "unequal_weighting"
+      ],
+      "type": "object"
+    },
+    "canonical_sets": {
+      "additionalProperties": false,
+      "properties": {
+        "correlation_statistics": {
+          "items": {
+            "enum": [
+              "pearson",
+              "spearman"
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "distribution_statistics": {
+          "items": {
+            "enum": [
+              "mean",
+              "sd",
+              "p50",
+              "p90",
+              "p95",
+              "p99",
+              "max"
+            ]
+          },
+          "maxItems": 7,
+          "minItems": 7,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "months": {
+          "items": {
+            "enum": [
+              "jan",
+              "feb",
+              "mar",
+              "apr",
+              "may",
+              "jun",
+              "jul",
+              "aug",
+              "sep",
+              "oct",
+              "nov",
+              "dec"
+            ]
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "upper_off_diagonal_month_pairs": {
+          "const": "all_zero_based_pairs_row_col_with_0_le_row_lt_col_lt_12"
+        }
+      },
+      "required": [
+        "correlation_statistics",
+        "distribution_statistics",
+        "months",
+        "upper_off_diagonal_month_pairs"
+      ],
+      "type": "object"
+    },
+    "completeness": {
+      "additionalProperties": false,
+      "properties": {
+        "generated_count_path_template": {
+          "$ref": "#/$defs/path"
+        },
+        "target_count_path_template": {
+          "$ref": "#/$defs/path"
+        }
+      },
+      "required": [
+        "generated_count_path_template",
+        "target_count_path_template"
+      ],
+      "type": "object"
+    },
+    "dimensions": {
+      "additionalProperties": false,
+      "properties": {
+        "correlation_statistic": {
+          "$ref": "#/$defs/dimension"
+        },
+        "matrix_statistic": {
+          "$ref": "#/$defs/dimension"
+        },
+        "month": {
+          "$ref": "#/$defs/dimension"
+        },
+        "month_pair": {
+          "$ref": "#/$defs/dimension"
+        },
+        "statistic": {
+          "$ref": "#/$defs/dimension"
+        },
+        "variable": {
+          "$ref": "#/$defs/dimension"
+        }
+      },
+      "type": "object"
+    },
+    "dimension": {
+      "oneOf": [
+        {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        {
+          "pattern": "^canonical_sets\\.",
+          "type": "string"
+        }
+      ]
+    },
+    "distance_definition": {
+      "additionalProperties": false,
+      "properties": {
+        "formula": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target_constraint": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "formula",
+        "target_constraint"
+      ],
+      "type": "object"
+    },
+    "evidence_completeness": {
+      "additionalProperties": false,
+      "properties": {
+        "count_fields_are_distance_cells": {
+          "const": false
+        },
+        "excluded_metadata": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "exclusion_list_semantics": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "gate_3_contract_identity": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "null_or_nonfinite_action": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "relative_zero_target_action": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "count_fields_are_distance_cells",
+        "excluded_metadata",
+        "exclusion_list_semantics",
+        "gate_3_contract_identity",
+        "null_or_nonfinite_action",
+        "relative_zero_target_action"
+      ],
+      "type": "object"
+    },
+    "gate": {
+      "additionalProperties": false,
+      "properties": {
+        "gate_id": {
+          "maximum": 7,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "membership": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "rule": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "rules": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "station_ids": {
+          "items": {
+            "pattern": "^[a-z]{2}[0-9]{6}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "gate_id",
+        "membership",
+        "name",
+        "role"
+      ],
+      "type": "object"
+    },
+    "gate_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "gate_id": {
+          "maximum": 6,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "role": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target_surface": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "gate_id",
+        "role",
+        "target_surface"
+      ],
+      "type": "object"
+    },
+    "inclusion_profile": {
+      "additionalProperties": false,
+      "properties": {
+        "generated": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "unusable": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "generated",
+        "target",
+        "unusable"
+      ],
+      "type": "object"
+    },
+    "metric_template": {
+      "additionalProperties": false,
+      "properties": {
+        "completeness": {
+          "$ref": "#/$defs/completeness"
+        },
+        "dimensions": {
+          "$ref": "#/$defs/dimensions"
+        },
+        "distance": {
+          "enum": [
+            "absolute_difference",
+            "absolute_relative"
+          ]
+        },
+        "family": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "gate_bindings": {
+          "items": {
+            "$ref": "#/$defs/gate_binding"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "generated_path_template": {
+          "$ref": "#/$defs/path"
+        },
+        "group": {
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        },
+        "inclusion_profile": {
+          "enum": [
+            "difference",
+            "relative"
+          ]
+        },
+        "normalization": {
+          "$ref": "#/$defs/normalization"
+        },
+        "statistic_selection": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "structural_exclusions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "target_path_template": {
+          "$ref": "#/$defs/path"
+        },
+        "template_id": {
+          "pattern": "^[a-z0-9_]+$",
+          "type": "string"
+        },
+        "variable_assignment": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "weight": {
+          "const": 1
+        }
+      },
+      "required": [
+        "completeness",
+        "dimensions",
+        "distance",
+        "family",
+        "gate_bindings",
+        "generated_path_template",
+        "group",
+        "inclusion_profile",
+        "statistic_selection",
+        "target_path_template",
+        "template_id",
+        "variable_assignment",
+        "weight"
+      ],
+      "type": "object"
+    },
+    "normalization": {
+      "additionalProperties": false,
+      "properties": {
+        "formula": {
+          "const": "abs(generated-target)/target_scale"
+        },
+        "target_scale_constraint": {
+          "const": "finite_non_null_and_strictly_positive"
+        },
+        "target_scale_path_template": {
+          "$ref": "#/$defs/path"
+        },
+        "type": {
+          "const": "divide_by_matched_station_contract_target_sd"
+        }
+      },
+      "required": [
+        "formula",
+        "target_scale_constraint",
+        "target_scale_path_template",
+        "type"
+      ],
+      "type": "object"
+    },
+    "path": {
+      "minLength": 1,
+      "pattern": "^(\\$|\\{target_prefix\\})",
+      "type": "string"
+    },
+    "sensitivity_projection": {
+      "additionalProperties": false,
+      "properties": {
+        "membership": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "projection_id": {
+          "pattern": "^[a-z0-9_]+$",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target_surface": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target_transform": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "membership",
+        "projection_id",
+        "role",
+        "target_surface",
+        "target_transform"
+      ],
+      "type": "object"
+    },
+    "string_map": {
+      "additionalProperties": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minProperties": 1,
+      "type": "object"
+    },
+    "target_surface": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "detrending": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "path_prefix": {
+          "$ref": "#/$defs/path"
+        },
+        "period": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "surface_id": {
+          "pattern": "^[a-z0-9_]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "availability",
+        "detrending",
+        "path_prefix",
+        "period",
+        "source",
+        "surface_id"
+      ],
+      "type": "object"
+    },
+    "uncertainty_application": {
+      "additionalProperties": false,
+      "properties": {
+        "aggregation_order_within_bootstrap_replicate": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "baseline_eligibility": {
+          "type": "string"
+        },
+        "bootstrap_contract_id": {
+          "const": "cligen-a5-observed-circular-moving-block-bootstrap-v1"
+        },
+        "candidate_and_horizon_application": {
+          "type": "string"
+        },
+        "crossing": {
+          "type": "string"
+        },
+        "decision_role": {
+          "type": "string"
+        },
+        "excluded_gates": {
+          "items": {
+            "enum": [
+              2,
+              3,
+              5,
+              7
+            ]
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "included_gate_ids": {
+          "items": {
+            "enum": [
+              1,
+              4,
+              6
+            ]
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "included_template_ids": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "invalid_resample_cell": {
+          "type": "string"
+        },
+        "percentile_application": {
+          "type": "string"
+        },
+        "recomputation": {
+          "type": "string"
+        },
+        "report_levels": {
+          "$ref": "#/$defs/nonempty_string_array"
+        },
+        "resampled_year_relabeling": {
+          "type": "string"
+        },
+        "sequence_boundaries": {
+          "type": "string"
+        },
+        "source_calendar": {
+          "type": "string"
+        },
+        "station_stream_alignment": {
+          "type": "string"
+        },
+        "target_surface": {
+          "const": "daymet_evaluation_raw"
+        },
+        "year_vector_unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "aggregation_order_within_bootstrap_replicate",
+        "baseline_eligibility",
+        "bootstrap_contract_id",
+        "candidate_and_horizon_application",
+        "crossing",
+        "decision_role",
+        "excluded_gates",
+        "included_gate_ids",
+        "included_template_ids",
+        "invalid_resample_cell",
+        "percentile_application",
+        "recomputation",
+        "report_levels",
+        "resampled_year_relabeling",
+        "sequence_boundaries",
+        "source_calendar",
+        "station_stream_alignment",
+        "target_surface",
+        "year_vector_unit"
+      ],
+      "type": "object"
+    },
+    "nonempty_string_array": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    }
+  }
+}

@@ -1,0 +1,683 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/provenance-v1.schema.json",
+  "title": "cligen-rs generated climate artifact provenance revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "provenance_schema_version",
+    "producer",
+    "origin",
+    "source_authority",
+    "station",
+    "generation",
+    "effective_runspec",
+    "effective_runspec_sha256",
+    "observed_input",
+    "actual",
+    "artifact"
+  ],
+  "properties": {
+    "provenance_schema_version": { "const": 1 },
+    "producer": { "$ref": "#/$defs/producer" },
+    "origin": { "const": "generated" },
+    "source_authority": { "$ref": "#/$defs/source_authority" },
+    "station": { "$ref": "#/$defs/station" },
+    "generation": { "$ref": "#/$defs/generation" },
+    "effective_runspec": { "$ref": "#/$defs/effective_runspec" },
+    "effective_runspec_sha256": { "$ref": "#/$defs/sha256" },
+    "observed_input": {
+      "oneOf": [
+        { "$ref": "#/$defs/observed_input" },
+        { "type": "null" }
+      ]
+    },
+    "actual": { "$ref": "#/$defs/actual" },
+    "artifact": { "$ref": "#/$defs/artifact" }
+  },
+  "allOf": [
+    { "$ref": "#/$defs/mode_contract" },
+    { "$ref": "#/$defs/artifact_contract" },
+    { "$ref": "#/$defs/station_selector_contract" },
+    { "$ref": "#/$defs/profile_contract" },
+    { "$ref": "#/$defs/qc_contract" },
+    { "$ref": "#/$defs/interpolation_contract" }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1,
+      "not": { "pattern": "[\\u0000\\r\\n]" }
+    },
+    "nullable_string": {
+      "type": ["string", "null"]
+    },
+    "nullable_integer": {
+      "type": ["integer", "null"]
+    },
+    "mode_contract": {
+      "oneOf": [
+        {
+          "properties": {
+            "generation": { "properties": { "mode": { "const": "continuous" } } },
+            "effective_runspec": {
+              "properties": {
+                "mode": { "const": "continuous" },
+                "begin_year": { "type": "integer", "minimum": 1, "maximum": 99999 },
+                "years": { "type": "integer", "minimum": 1, "maximum": 99999 },
+                "observed": { "type": "null" },
+                "storm": { "type": "null" }
+              }
+            },
+            "observed_input": { "type": "null" },
+            "actual": {
+              "properties": {
+                "emitted_day_count": { "type": "integer", "minimum": 1 },
+                "first_date": { "$ref": "#/$defs/date" },
+                "last_date": { "$ref": "#/$defs/date" },
+                "coverage": { "const": "complete_run" }
+              }
+            },
+            "artifact": { "properties": { "calendar": { "const": "proleptic_gregorian" } } }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "mode": { "const": "observed" } } },
+            "effective_runspec": {
+              "properties": {
+                "mode": { "const": "observed" },
+                "begin_year": { "type": "integer", "minimum": 1, "maximum": 99999 },
+                "years": { "type": "integer", "minimum": 1, "maximum": 99999 },
+                "observed": { "$ref": "#/$defs/effective_observed" },
+                "storm": { "type": "null" }
+              }
+            },
+            "observed_input": { "$ref": "#/$defs/observed_input" },
+            "actual": {
+              "properties": {
+                "emitted_day_count": { "type": "integer", "minimum": 1 },
+                "first_date": { "$ref": "#/$defs/date" },
+                "last_date": { "$ref": "#/$defs/date" },
+                "coverage": { "enum": ["complete_run", "observed_source_end"] }
+              }
+            },
+            "artifact": { "properties": { "calendar": { "const": "proleptic_gregorian" } } }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "mode": { "const": "single_storm" } } },
+            "effective_runspec": {
+              "properties": {
+                "mode": { "const": "single_storm" },
+                "begin_year": { "type": "null" },
+                "years": { "type": "null" },
+                "interpolation": { "const": "none" },
+                "observed": { "type": "null" },
+                "storm": {
+                  "type": "object",
+                  "properties": {
+                    "duration_h": { "type": "number", "exclusiveMinimum": 0 },
+                    "time_to_peak_fraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+                    "max_intensity_in_per_h": { "type": "number", "exclusiveMinimum": 0 }
+                  }
+                },
+                "output": { "properties": { "parquet_lexical_path": { "type": "null" } } }
+              }
+            },
+            "observed_input": { "type": "null" },
+            "actual": {
+              "properties": {
+                "emitted_day_count": { "const": 1 },
+                "first_date": { "$ref": "#/$defs/source_date" },
+                "last_date": { "$ref": "#/$defs/source_date" },
+                "coverage": { "const": "single_event" }
+              }
+            },
+            "artifact": {
+              "properties": {
+                "media_type": { "const": "text/plain; charset=utf-8" },
+                "calendar": { "const": "source_storm_calendar" }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "mode": { "const": "design_storm" } } },
+            "effective_runspec": {
+              "properties": {
+                "mode": { "const": "design_storm" },
+                "begin_year": { "type": "null" },
+                "years": { "type": "null" },
+                "interpolation": { "const": "none" },
+                "observed": { "type": "null" },
+                "storm": {
+                  "type": "object",
+                  "properties": {
+                    "duration_h": { "type": "null" },
+                    "time_to_peak_fraction": { "type": "null" },
+                    "max_intensity_in_per_h": { "type": "null" }
+                  }
+                },
+                "output": { "properties": { "parquet_lexical_path": { "type": "null" } } }
+              }
+            },
+            "observed_input": { "type": "null" },
+            "actual": {
+              "properties": {
+                "emitted_day_count": { "const": 1 },
+                "first_date": { "$ref": "#/$defs/source_date" },
+                "last_date": { "$ref": "#/$defs/source_date" },
+                "coverage": { "const": "single_event" }
+              }
+            },
+            "artifact": {
+              "properties": {
+                "media_type": { "const": "text/plain; charset=utf-8" },
+                "calendar": { "const": "source_storm_calendar" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "artifact_contract": {
+      "oneOf": [
+        {
+          "properties": {
+            "artifact": {
+              "properties": {
+                "output_schema": {
+                  "properties": {
+                    "id": { "const": "org.openwepp.cligen.cli.text" },
+                    "version": { "const": "1" }
+                  }
+                },
+                "media_type": { "const": "text/plain; charset=utf-8" },
+                "content_sha256": { "$ref": "#/$defs/sha256" }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "artifact": {
+              "properties": {
+                "output_schema": {
+                  "properties": {
+                    "id": { "const": "org.openwepp.cligen.cli.parquet" },
+                    "version": { "const": "1" }
+                  }
+                },
+                "media_type": { "const": "application/vnd.apache.parquet" },
+                "calendar": { "const": "proleptic_gregorian" },
+                "content_sha256": { "type": "null" }
+              }
+            },
+            "effective_runspec": {
+              "properties": {
+                "output": {
+                  "properties": {
+                    "parquet_lexical_path": { "type": "string", "minLength": 1 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "station_selector_contract": {
+      "oneOf": [
+        {
+          "properties": {
+            "effective_runspec": {
+              "properties": { "station": { "properties": { "selector": { "const": "par" } } } }
+            },
+            "station": {
+              "properties": {
+                "input_schema": {
+                  "properties": { "id": { "const": "cligen_par" }, "version": { "const": "5.32.3" } }
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "effective_runspec": {
+              "properties": { "station": { "properties": { "selector": { "const": "document" } } } }
+            },
+            "station": {
+              "properties": {
+                "input_schema": {
+                  "properties": { "id": { "const": "org.openwepp.cligen.station" }, "version": { "const": "1" } }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "profile_contract": {
+      "oneOf": [
+        {
+          "properties": {
+            "generation": { "properties": { "profile": { "const": "faithful_5_32_3" } } },
+            "effective_runspec": { "properties": { "generation_profile": { "const": "faithful_5_32_3" } } }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "profile": { "const": "fast_batch_v0" } } },
+            "effective_runspec": { "properties": { "generation_profile": { "const": "fast_batch_v0" } } }
+          }
+        }
+      ]
+    },
+    "qc_contract": {
+      "oneOf": [
+        {
+          "properties": {
+            "generation": { "properties": { "qc_policy": { "const": "faithful" } } },
+            "effective_runspec": { "properties": { "qc_filter": { "const": "faithful" } } }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "qc_policy": { "const": "off" } } },
+            "effective_runspec": { "properties": { "qc_filter": { "const": "off" } } }
+          }
+        },
+        {
+          "properties": {
+            "generation": { "properties": { "qc_policy": { "type": "null" } } },
+            "effective_runspec": { "properties": { "qc_filter": { "type": "null" } } }
+          }
+        }
+      ]
+    },
+    "interpolation_contract": {
+      "oneOf": [
+        { "properties": { "generation": { "properties": { "interpolation": { "const": "none" } } }, "effective_runspec": { "properties": { "interpolation": { "const": "none" } } } } },
+        { "properties": { "generation": { "properties": { "interpolation": { "const": "linear" } } }, "effective_runspec": { "properties": { "interpolation": { "const": "linear" } } } } },
+        { "properties": { "generation": { "properties": { "interpolation": { "const": "fourier" } } }, "effective_runspec": { "properties": { "interpolation": { "const": "fourier" } } } } },
+        { "properties": { "generation": { "properties": { "interpolation": { "const": "monthly_mean_preserving" } } }, "effective_runspec": { "properties": { "interpolation": { "const": "monthly_mean_preserving" } } } } }
+      ]
+    },
+    "schema_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonempty" },
+        "version": { "$ref": "#/$defs/nonempty" }
+      }
+    },
+    "station_input_schema": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version"],
+          "properties": {
+            "id": { "const": "cligen_par" },
+            "version": { "const": "5.32.3" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version"],
+          "properties": {
+            "id": { "const": "org.openwepp.cligen.station" },
+            "version": { "const": "1" }
+          }
+        }
+      ]
+    },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "repository", "implementation_revision"],
+      "properties": {
+        "name": { "const": "cligen-rs" },
+        "version": { "$ref": "#/$defs/nonempty" },
+        "repository": { "const": "https://github.com/rogerlew/cligen-rs" },
+        "implementation_revision": {
+          "oneOf": [{ "$ref": "#/$defs/nonempty" }, { "type": "null" }]
+        }
+      }
+    },
+    "source_authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cligen_version", "reference_tree_sha256"],
+      "properties": {
+        "cligen_version": { "const": "5.32.3" },
+        "reference_tree_sha256": {
+          "const": "24966eaed920c2b9fd0b8a9ab1242b32053a730f0691a6a18dc4f44a3096bd5b"
+        }
+      }
+    },
+    "fit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "id"],
+      "properties": {
+        "status": { "const": "unreported" },
+        "id": { "type": "null" }
+      }
+    },
+    "station_collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "name", "version", "archive_sha256"],
+      "properties": {
+        "status": { "const": "unreported" },
+        "name": { "type": "null" },
+        "version": { "type": "null" },
+        "archive_sha256": { "type": "null" }
+      }
+    },
+    "station": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_schema",
+        "input_sha256",
+        "model",
+        "parameter_set_sha256",
+        "fit",
+        "collection",
+        "legacy_source_sha256"
+      ],
+      "properties": {
+        "input_schema": { "$ref": "#/$defs/station_input_schema" },
+        "input_sha256": { "$ref": "#/$defs/sha256" },
+        "model": { "const": "fixed_monthly_5_32_3" },
+        "parameter_set_sha256": { "$ref": "#/$defs/sha256" },
+        "fit": { "$ref": "#/$defs/fit" },
+        "collection": { "$ref": "#/$defs/station_collection" },
+        "legacy_source_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "qc_policy",
+        "mode",
+        "interpolation",
+        "rng_scheme",
+        "burn_per_stream"
+      ],
+      "properties": {
+        "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
+        "qc_policy": {
+          "type": ["string", "null"],
+          "enum": ["faithful", "off", null]
+        },
+        "mode": {
+          "enum": ["continuous", "observed", "single_storm", "design_storm"]
+        },
+        "interpolation": {
+          "enum": ["none", "linear", "fourier", "monthly_mean_preserving"]
+        },
+        "rng_scheme": {
+          "enum": ["cligen_randn_5_32_3", "splitmix64_monthly_v0"]
+        },
+        "burn_per_stream": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "profile": { "const": "faithful_5_32_3" } } },
+          "then": {
+            "properties": {
+              "qc_policy": { "enum": ["faithful", "off"] },
+              "rng_scheme": { "const": "cligen_randn_5_32_3" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "profile": { "const": "fast_batch_v0" } } },
+          "then": {
+            "properties": {
+              "qc_policy": { "type": "null" },
+              "rng_scheme": { "const": "splitmix64_monthly_v0" }
+            }
+          }
+        }
+      ]
+    },
+    "effective_station": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector", "lexical_path", "input_sha256"],
+      "properties": {
+        "selector": { "enum": ["par", "document"] },
+        "lexical_path": { "$ref": "#/$defs/nonempty" },
+        "input_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "effective_observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lexical_path", "input_sha256"],
+      "properties": {
+        "lexical_path": { "$ref": "#/$defs/nonempty" },
+        "input_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "month", "day"],
+      "properties": {
+        "year": { "type": "integer", "minimum": 1, "maximum": 99999 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "day": { "type": "integer", "minimum": 1, "maximum": 31 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "month": { "enum": [4, 6, 9, 11] } } },
+          "then": { "properties": { "day": { "maximum": 30 } } }
+        },
+        {
+          "if": { "properties": { "month": { "const": 2 } } },
+          "then": { "properties": { "day": { "maximum": 29 } } }
+        }
+      ]
+    },
+    "source_date": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "month", "day"],
+      "properties": {
+        "year": { "type": "integer", "minimum": -9999, "maximum": 99999 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "day": { "type": "integer", "minimum": 1, "maximum": 31 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "month": { "enum": [4, 6, 9, 11] } } },
+          "then": { "properties": { "day": { "maximum": 30 } } }
+        },
+        {
+          "if": { "properties": { "month": { "const": 2 } } },
+          "then": { "properties": { "day": { "maximum": 29 } } }
+        }
+      ]
+    },
+    "effective_storm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "amount_in",
+        "duration_h",
+        "time_to_peak_fraction",
+        "max_intensity_in_per_h"
+      ],
+      "properties": {
+        "date": { "$ref": "#/$defs/source_date" },
+        "amount_in": { "type": "number", "exclusiveMinimum": 0 },
+        "duration_h": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "time_to_peak_fraction": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "max_intensity_in_per_h": {
+          "type": ["number", "null"],
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "effective_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cli_lexical_path",
+        "parquet_lexical_path",
+        "quality",
+        "overwrite",
+        "command_echo"
+      ],
+      "properties": {
+        "cli_lexical_path": { "$ref": "#/$defs/nonempty" },
+        "parquet_lexical_path": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "\\.cli\\.parquet$",
+              "not": { "pattern": "[\\u0000\\r\\n]" }
+            },
+            { "type": "null" }
+          ]
+        },
+        "quality": { "type": "boolean" },
+        "overwrite": { "type": "boolean" },
+        "command_echo": {
+          "type": "string",
+          "not": { "pattern": "[\\u0000\\r\\n]" }
+        }
+      }
+    },
+    "effective_runspec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cligen_runspec",
+        "station",
+        "mode",
+        "begin_year",
+        "years",
+        "interpolation",
+        "burn",
+        "generation_profile",
+        "qc_filter",
+        "observed",
+        "storm",
+        "output"
+      ],
+      "properties": {
+        "cligen_runspec": { "const": 1 },
+        "station": { "$ref": "#/$defs/effective_station" },
+        "mode": {
+          "enum": ["continuous", "observed", "single_storm", "design_storm"]
+        },
+        "begin_year": { "$ref": "#/$defs/nullable_integer" },
+        "years": { "$ref": "#/$defs/nullable_integer" },
+        "interpolation": {
+          "enum": ["none", "linear", "fourier", "monthly_mean_preserving"]
+        },
+        "burn": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+        "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
+        "qc_filter": {
+          "type": ["string", "null"],
+          "enum": ["faithful", "off", null]
+        },
+        "observed": {
+          "oneOf": [
+            { "$ref": "#/$defs/effective_observed" },
+            { "type": "null" }
+          ]
+        },
+        "storm": {
+          "oneOf": [
+            { "$ref": "#/$defs/effective_storm" },
+            { "type": "null" }
+          ]
+        },
+        "output": { "$ref": "#/$defs/effective_output" }
+      }
+    },
+    "observed_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "input_sha256"],
+      "properties": {
+        "schema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version"],
+          "properties": {
+            "id": { "const": "cligen_prn" },
+            "version": { "const": "5.32.3" }
+          }
+        },
+        "input_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "actual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["emitted_day_count", "first_date", "last_date", "coverage"],
+      "properties": {
+        "emitted_day_count": { "type": "integer", "minimum": 0 },
+        "first_date": {
+          "oneOf": [{ "$ref": "#/$defs/source_date" }, { "type": "null" }]
+        },
+        "last_date": {
+          "oneOf": [{ "$ref": "#/$defs/source_date" }, { "type": "null" }]
+        },
+        "coverage": { "enum": ["complete_run", "observed_source_end", "single_event"] }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_schema",
+        "media_type",
+        "calendar",
+        "precipitation_representation",
+        "numeric_origin",
+        "content_sha256"
+      ],
+      "properties": {
+        "output_schema": { "$ref": "#/$defs/schema_identity" },
+        "media_type": {
+          "enum": ["text/plain; charset=utf-8", "application/vnd.apache.parquet"]
+        },
+        "calendar": { "enum": ["proleptic_gregorian", "source_storm_calendar"] },
+        "precipitation_representation": { "const": "parametric" },
+        "numeric_origin": { "const": "cligen_f32_daily_row" },
+        "content_sha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        }
+      }
+    }
+  }
+}

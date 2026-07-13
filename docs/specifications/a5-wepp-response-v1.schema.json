@@ -1,0 +1,768 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5-wepp-response-v1.schema.json",
+  "title": "cligen-rs A5 downstream WEPP response record version 1",
+  "$comment": "Draft 2020-12 enforces the three versioned contract IDs and each required metric family as either one unavailable row or exactly four available rows. The hash-pinned package verifier additionally enforces the schema, protocol, and validator content identities, the unique mean/sd/p95/max statistic set, horizon/year-count equality, coherent units and source semantics, nonnegative response magnitudes, summary-value ordering, cross-array output-hash references, and output-hash uniqueness. These constraints compare values across objects and cannot be expressed generically by an object property in JSON Schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "wepp_response_schema_version",
+    "validation_contract",
+    "record_id",
+    "domain",
+    "climate",
+    "wepp_execution",
+    "outputs",
+    "responses"
+  ],
+  "properties": {
+    "wepp_response_schema_version": { "const": 1 },
+    "validation_contract": { "$ref": "#/$defs/validation_contract" },
+    "record_id": { "$ref": "#/$defs/nonempty_string" },
+    "domain": { "enum": ["general", "cold_snow"] },
+    "climate": { "$ref": "#/$defs/climate_identity" },
+    "wepp_execution": { "$ref": "#/$defs/wepp_execution" },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/output_artifact" }
+    },
+    "responses": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/available_response" },
+          { "$ref": "#/$defs/unavailable_response" }
+        ]
+      },
+      "allOf": [
+        { "$ref": "#/$defs/annual_runoff_family" },
+        { "$ref": "#/$defs/annual_peak_runoff_family" },
+        { "$ref": "#/$defs/annual_soil_loss_family" }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "domain": { "const": "cold_snow" } },
+        "required": ["domain"]
+      },
+      "then": {
+        "properties": {
+          "responses": {
+            "allOf": [
+              { "$ref": "#/$defs/annual_max_snow_water_state_family" },
+              { "$ref": "#/$defs/annual_snowmelt_family" },
+              { "$ref": "#/$defs/rain_on_snow_runoff_family" },
+              { "$ref": "#/$defs/winter_runoff_family" },
+              { "$ref": "#/$defs/winter_soil_loss_family" }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "nonempty_string": { "type": "string", "minLength": 1 },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "validation_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_id",
+        "schema_sha256",
+        "protocol_id",
+        "protocol_sha256",
+        "semantic_validator_id",
+        "semantic_validator_sha256"
+      ],
+      "properties": {
+        "schema_id": { "const": "cligen-a5-wepp-response-v1" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" },
+        "protocol_id": { "const": "cligen-a5-wepp-response-protocol-v1" },
+        "protocol_sha256": { "$ref": "#/$defs/sha256" },
+        "semantic_validator_id": { "const": "cligen-a5-wepp-response-semantic-v1" },
+        "semantic_validator_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "nullable_sha256": {
+      "oneOf": [
+        { "$ref": "#/$defs/sha256" },
+        { "type": "null" }
+      ]
+    },
+    "artifact_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "parameter_fit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "model_id", "fit_period", "content_sha256"],
+      "properties": {
+        "schema_id": { "$ref": "#/$defs/nonempty_string" },
+        "model_id": { "$ref": "#/$defs/nonempty_string" },
+        "fit_period": {
+          "type": "array",
+          "prefixItems": [
+            { "type": "integer" },
+            { "type": "integer" }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "replicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "legacy_burn_offset", "extension_seed_u64_hex"],
+      "properties": {
+        "key": { "$ref": "#/$defs/nonempty_string" },
+        "legacy_burn_offset": { "type": "integer", "minimum": 0 },
+        "extension_seed_u64_hex": {
+          "oneOf": [
+            { "type": "string", "pattern": "^0x[0-9a-f]{16}$" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "climate_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "station_id",
+        "generation_profile",
+        "forcing_label",
+        "horizon_years",
+        "replicate",
+        "parameter_fit",
+        "runspec_sha256",
+        "cli_sha256",
+        "provenance_sha256",
+        "quality_report_sha256",
+        "quality_report_schema_version",
+        "metrics_version"
+      ],
+      "properties": {
+        "station_id": { "$ref": "#/$defs/nonempty_string" },
+        "generation_profile": { "$ref": "#/$defs/nonempty_string" },
+        "forcing_label": { "enum": ["synthetic", "hybrid_observed_pt"] },
+        "horizon_years": { "enum": [30, 100] },
+        "replicate": { "$ref": "#/$defs/replicate" },
+        "parameter_fit": { "$ref": "#/$defs/parameter_fit" },
+        "runspec_sha256": { "$ref": "#/$defs/sha256" },
+        "cli_sha256": { "$ref": "#/$defs/sha256" },
+        "provenance_sha256": { "$ref": "#/$defs/sha256" },
+        "quality_report_sha256": { "$ref": "#/$defs/sha256" },
+        "quality_report_schema_version": { "const": 2 },
+        "metrics_version": { "const": 3 }
+      }
+    },
+    "named_input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "content"],
+      "properties": {
+        "role": {
+          "enum": ["run", "management", "soil", "slope", "watershed", "other"]
+        },
+        "content": { "$ref": "#/$defs/artifact_identity" }
+      }
+    },
+    "climate_installation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method_id", "description"],
+      "properties": {
+        "method_id": { "$ref": "#/$defs/nonempty_string" },
+        "description": { "$ref": "#/$defs/nonempty_string" }
+      }
+    },
+    "extraction_adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter_id", "content_sha256"],
+      "properties": {
+        "adapter_id": { "$ref": "#/$defs/nonempty_string" },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "wepp_execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "version_output",
+        "platform",
+        "invocation",
+        "inputs",
+        "climate_installation",
+        "extraction_adapter"
+      ],
+      "properties": {
+        "executable": { "$ref": "#/$defs/artifact_identity" },
+        "version_output": { "$ref": "#/$defs/nonempty_string" },
+        "platform": { "$ref": "#/$defs/nonempty_string" },
+        "invocation": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/named_input" },
+          "allOf": [
+            { "contains": { "properties": { "role": { "const": "run" } }, "required": ["role"] } },
+            { "contains": { "properties": { "role": { "const": "management" } }, "required": ["role"] } },
+            { "contains": { "properties": { "role": { "const": "soil" } }, "required": ["role"] } },
+            { "contains": { "properties": { "role": { "const": "slope" } }, "required": ["role"] } }
+          ]
+        },
+        "climate_installation": { "$ref": "#/$defs/climate_installation" },
+        "extraction_adapter": { "$ref": "#/$defs/extraction_adapter" }
+      }
+    },
+    "output_artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "content"],
+      "properties": {
+        "role": { "$ref": "#/$defs/nonempty_string" },
+        "content": { "$ref": "#/$defs/artifact_identity" }
+      }
+    },
+    "metric_id": {
+      "enum": [
+        "annual_runoff",
+        "annual_peak_runoff",
+        "annual_soil_loss",
+        "annual_max_snow_water_state",
+        "annual_snowmelt",
+        "rain_on_snow_runoff",
+        "winter_runoff",
+        "winter_soil_loss"
+      ]
+    },
+    "status_available": {
+      "properties": { "status": { "const": "available" } },
+      "required": ["status"]
+    },
+    "status_unavailable": {
+      "properties": { "status": { "const": "unavailable" } },
+      "required": ["status"]
+    },
+    "metric_annual_runoff": {
+      "properties": { "metric_id": { "const": "annual_runoff" } },
+      "required": ["metric_id"]
+    },
+    "metric_annual_peak_runoff": {
+      "properties": { "metric_id": { "const": "annual_peak_runoff" } },
+      "required": ["metric_id"]
+    },
+    "metric_annual_soil_loss": {
+      "properties": { "metric_id": { "const": "annual_soil_loss" } },
+      "required": ["metric_id"]
+    },
+    "metric_annual_max_snow_water_state": {
+      "properties": { "metric_id": { "const": "annual_max_snow_water_state" } },
+      "required": ["metric_id"]
+    },
+    "metric_annual_snowmelt": {
+      "properties": { "metric_id": { "const": "annual_snowmelt" } },
+      "required": ["metric_id"]
+    },
+    "metric_rain_on_snow_runoff": {
+      "properties": { "metric_id": { "const": "rain_on_snow_runoff" } },
+      "required": ["metric_id"]
+    },
+    "metric_winter_runoff": {
+      "properties": { "metric_id": { "const": "winter_runoff" } },
+      "required": ["metric_id"]
+    },
+    "metric_winter_soil_loss": {
+      "properties": { "metric_id": { "const": "winter_soil_loss" } },
+      "required": ["metric_id"]
+    },
+    "annual_runoff_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_runoff" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_runoff" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_runoff" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_runoff" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "annual_peak_runoff_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_peak_runoff" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_peak_runoff" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_peak_runoff" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_peak_runoff" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "annual_soil_loss_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_soil_loss" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_soil_loss" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_soil_loss" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_soil_loss" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "annual_max_snow_water_state_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_max_snow_water_state" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_max_snow_water_state" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_max_snow_water_state" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_max_snow_water_state" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "annual_snowmelt_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_snowmelt" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_snowmelt" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_annual_snowmelt" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_annual_snowmelt" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "rain_on_snow_runoff_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_rain_on_snow_runoff" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_rain_on_snow_runoff" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_rain_on_snow_runoff" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_rain_on_snow_runoff" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "winter_runoff_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_winter_runoff" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_winter_runoff" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_winter_runoff" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_winter_runoff" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "winter_soil_loss_family": {
+      "oneOf": [
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_winter_soil_loss" },
+                  { "$ref": "#/$defs/status_available" }
+                ]
+              },
+              "minContains": 4,
+              "maxContains": 4
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_winter_soil_loss" },
+                    { "$ref": "#/$defs/status_unavailable" }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "contains": {
+                "allOf": [
+                  { "$ref": "#/$defs/metric_winter_soil_loss" },
+                  { "$ref": "#/$defs/status_unavailable" }
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "not": {
+                "contains": {
+                  "allOf": [
+                    { "$ref": "#/$defs/metric_winter_soil_loss" },
+                    { "$ref": "#/$defs/status_available" }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "response_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "output_sha256",
+        "selector",
+        "record_meaning",
+        "aggregation",
+        "missing_value_rule"
+      ],
+      "properties": {
+        "output_sha256": { "$ref": "#/$defs/sha256" },
+        "selector": { "$ref": "#/$defs/nonempty_string" },
+        "record_meaning": { "$ref": "#/$defs/nonempty_string" },
+        "aggregation": { "$ref": "#/$defs/nonempty_string" },
+        "missing_value_rule": { "$ref": "#/$defs/nonempty_string" }
+      }
+    },
+    "available_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "metric_id",
+        "statistic",
+        "value",
+        "units",
+        "n_years",
+        "source"
+      ],
+      "properties": {
+        "status": { "const": "available" },
+        "metric_id": { "$ref": "#/$defs/metric_id" },
+        "statistic": { "enum": ["mean", "sd", "p95", "max"] },
+        "value": { "type": "number" },
+        "units": { "$ref": "#/$defs/nonempty_string" },
+        "n_years": { "type": "integer", "minimum": 1 },
+        "source": { "$ref": "#/$defs/response_source" }
+      }
+    },
+    "unavailable_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "metric_id", "reason", "source_audit"],
+      "properties": {
+        "status": { "const": "unavailable" },
+        "metric_id": { "$ref": "#/$defs/metric_id" },
+        "reason": { "$ref": "#/$defs/nonempty_string" },
+        "source_audit": { "$ref": "#/$defs/nonempty_string" }
+      }
+    }
+  }
+}

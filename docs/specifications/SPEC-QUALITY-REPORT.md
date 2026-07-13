@@ -1,6 +1,9 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: active (rev 7 — A1 adds independent `quality_report_schema_version =
+Status: active (rev 8 — A5a advances only `metrics_version = 3`, adding
+complete-period monthly/annual dispersion and dependence, R1mm
+precipitation structure, corrected event-descriptor semantics, and explicit
+winter air-temperature proxies; the report envelope remains version 2. Rev 7 — A1 adds independent `quality_report_schema_version =
 2`, generic station content identity, and shared SPEC-PROVENANCE without
 changing `metrics_version = 2`; rev 6 — A4a permits run-emitted targets from a modern
 fixed-monthly station document without a metrics-version change. Rev 5 — Q3 implements the `qc_filter: off`
@@ -89,7 +92,7 @@ reports; `cligen quality` reports them as `null`.
   `.cli` + fixed-monthly station state and its declared source identity
   yields a byte-reproducible report.
 
-## Metric groups (`metrics_version: 2`)
+## Metric groups (`metrics_version: 3`)
 
 All per-month groups key on calendar month over the whole run and
 additionally per decade block (`by_decade`), so 30- vs 100-year
@@ -109,29 +112,99 @@ seed corrections where the generator applies them — the target is what the
 generator was *asked* to reproduce).
 
 **B — interannual** (authority: observed climate, external)
-SD and CV across years of: annual precipitation total, annual wet-day
-count, annual maximum daily precipitation, annual mean tmax / tmin;
-per-calendar-month interannual SD of monthly precipitation totals.
-All with `by_decade` blocks — the cumulative-QC prediction (early
-decades underdispersed) is read directly from this group. The report
-carries no observed-data comparison itself; adjudication packages
-join reports against observed series.
+Only complete Gregorian months/years enter dispersion or dependence; an
+EOF-truncated observed tail remains visible in identity/tails but cannot bias
+an annual statistic. Annual cells contain precipitation total, trace-positive
+and R1mm wet-day counts, maximum daily precipitation, and annual mean
+Tmax/Tmin. Per-calendar-month cells contain precipitation-total mean/SD/CV,
+trace-positive and R1mm wet-day-count and wet-day-mean-amount dispersion, and
+monthly-mean Tmax/Tmin mean/SD (temperature CV is deliberately absent).
+
+Dependence contains:
+
+- 12×12 pairwise-complete covariance and Pearson-correlation matrices for
+  monthly precipitation-total, Tmax-mean, and Tmin-mean anomalies, ordered
+  January through December on both axes;
+- per-month Pearson/Spearman precipitation–Tmax, precipitation–Tmin, and
+  Tmax–Tmin anomaly correlations;
+- annual lag-one Pearson/Spearman correlations and a low-frequency power
+  fraction for annual precipitation total and annual mean Tmax/Tmin.
+
+The low-frequency fraction is the two-sided demeaned periodogram power in
+nonzero Fourier bins whose periods are at least four years divided by total
+nonzero power. For n observations, positive bins `k = 1..floor(n/2)` use
+period `n/k`; non-Nyquist bins receive weight two and an even-n Nyquist bin
+weight one. The implementation uses pinned `libm` sine/cosine. Zero-variance,
+fewer-than-four-year, and non-finite cases are `null`.
+
+Annual and monthly dispersion retain `by_decade` blocks. Dependence is
+whole-run because ten-year month matrices are too weak to be a decision
+surface. The report carries no observed-data comparison itself;
+SPEC-OBSERVED-TARGET-CORPUS supplies the external join.
 
 **C — covariation** (authority: observed climate, external)
 Wet-day Pearson and Spearman correlations, per month and whole-run:
-amount×duration, amount×peak-intensity, duration×radiation;
+amount×duration, amount×peak-intensity-ratio, duration×radiation;
 radiation wet/dry contrast (mean radiation on wet days ÷ dry days,
-per month); tmax−tmin daily-range mean (sanity surface). Note on
+per month); tmax−tmin daily-range mean (sanity surface). Group C also carries
+`winter_air_temperature_proxies`:
+
+- whole-run and monthly precipitation fraction on days whose mean air
+  temperature `(Tmax + Tmin)/2` is `<= 0 °C`, including numerator,
+  denominator, and day count;
+- Pearson/Spearman dependence between R1mm precipitation and mean air
+  temperature on December/January/February days;
+- per-year and complete-year dispersion of transitions between consecutive
+  daily mean-air states `<= 0 °C` and `> 0 °C`, with a transition across a
+  year boundary attributed to the second day.
+
+These are explicitly air-temperature/precipitation proxies. They are not a
+physical rain/snow partition, snowpack, snowmelt, rain-on-snow runoff, frost
+depth, or soil freeze/thaw state. Those responses use the separate
+SPEC-A5-EVALUATION record. Note on
 record: the current model generates radiation independent of
 wetness, so faithful output is expected to show contrast ≈ 1 and
 correlation ≈ 0 — group C prices a structural absence (layer 3) and
 motivates tier-2 augmentation profiles; it does not discriminate
 among current RNG/QC configurations.
 
-**D — tails**
-Per year: maximum daily precipitation, storm count, maximum
-peak-intensity, longest wet and dry spell (days). Whole-run: the top
-five daily events (depth, duration, ip, date).
+**D — tails, precipitation structure, and event descriptors**
+The historical v2 spellings `storm_count` and `peak_intensity` were
+misleading: a positive-rain row is one wet event day and `.cli ip` is the
+dimensionless peak/mean intensity ratio `xmav`. Metrics v3 uses
+`wet_event_day_count` and `peak_intensity_ratio` throughout.
+
+Per year, Group D reports completeness, maximum 1/3/5-day precipitation,
+wet-event-day count, maximum peak-intensity ratio, and longest wet/dry spell
+clipped to that year. Rolling 3/5-day sums are evaluated over the contiguous
+stream and assigned to the year of the final day. Whole-run top events include
+depth, duration, time-to-peak fraction, peak-intensity ratio, date, and row
+index. Ranking uses every positive-precipitation row. The three descriptor
+fields preserve their raw finite `.cli` values even when they fail the
+descriptor-validity predicate below; descriptor filtering never changes
+top-event identity.
+
+Two precipitation-structure surfaces are emitted: `trace_positive`
+(`precipitation > 0`) and `r1mm` (`precipitation >= 1.0 mm`). Each contains:
+
+- wet/dry spell-length distributions over the whole contiguous row stream,
+  so spells cross month/year boundaries, plus distributions by spell start
+  month;
+- wet-day amount distribution and adjacent-calendar-day wet-amount
+  Pearson/Spearman correlation;
+- distributions across complete years of annual maximum 1/3/5-day totals.
+
+A scalar distribution is `{n, mean, sd, p50, p90, p95, p99, max}`. Quantiles
+use the empirical inverse CDF/nearest-rank rule: for `0 < p <= 1`, sorted
+index `ceil(p*n)-1`; empty distributions are all `null`.
+
+Event-descriptor metrics use positive-precipitation rows with duration > 0,
+time-to-peak in `[0,1]`, and peak-intensity ratio >= 0. They report included
+and excluded counts; depth, duration, time-to-peak, and ratio distributions;
+and all six pairwise Pearson/Spearman relationships among those four fields.
+Daily Daymet/GHCN observations do not provide descriptor targets, so these
+remain a no-silent-regression surface until a versioned high-resolution
+target corpus exists.
 
 **P — process** (run-emitted only; `null` from `cligen quality`)
 Keyed on `qc_filter` alone, regardless of RNG backend. When
@@ -157,26 +230,28 @@ evaluation must not mutate generation state.
 ```json
 {
   "quality_report_schema_version": 2,
-  "metrics_version": 2,
+  "metrics_version": 3,
   "identity": {
     "content":    { "tool": "...", "station_model": "fixed_monthly_5_32_3",
                     "station_parameter_set_sha256": "...",
                     "station_source_sha256": "...", "cli_sha256": "...",
-                    "days": 36525, "years": 100, "span": [1, 100] },
+                    "days": 36524, "years": 100, "span": [1, 100] },
     "provenance": { "provenance_schema_version": 1, "...": "..." } },
   "par_convergence": { "precip_wet_mean": { "jan": { "target": ..., "generated": ...,
       "abs_err": ..., "rel_err": ... }, "...": "...",
       "by_decade": [ ... ] }, "...": "..." },
-  "interannual":   { "...": "..." },
-  "covariation":   { "...": "..." },
-  "tails":         { "...": "..." },
+  "interannual":   { "annual": "...", "monthly": "...", "dependence": "..." },
+  "covariation":   { "...": "...", "winter_air_temperature_proxies": "..." },
+  "tails":         { "per_year": "...", "precipitation_structure": "...",
+                     "storm_descriptors": "..." },
   "process":       { "...": "..." }
 }
 ```
 
-The implementation package publishes the full JSON Schema
-(`docs/specifications/quality-report-v2.schema.json`) with this
-structure; unknown fields are never emitted.
+The implementation package publishes the full combination JSON Schema
+(`docs/specifications/quality-report-s2-m3.schema.json`) with this structure;
+unknown fields are rejected. `quality-report-v2.schema.json` remains the
+immutable envelope-2/metrics-2 resource.
 The pre-A1 envelope remains immutable at `quality-report-v1.schema.json`;
 `quality-report.schema.json` is only a latest-version convenience alias.
 

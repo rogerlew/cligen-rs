@@ -112,7 +112,7 @@ fn qc_off_diverges_declares_itself_and_prices_the_removed_conditioning() {
         .resolve(&repo_root())
         .unwrap();
     let report = prepared.generate_quality_report().unwrap();
-    assert_eq!(report.metrics_version, 2);
+    assert_eq!(report.metrics_version, 3);
     let process = report.process.unwrap();
     assert_eq!(process.qc_filter.as_deref(), Some("off"));
     assert!(process.counterfactual.is_some());

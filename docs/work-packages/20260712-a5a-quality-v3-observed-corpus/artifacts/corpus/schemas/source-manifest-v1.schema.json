@@ -1,0 +1,394 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/schemas/source-manifest-v1.schema.json",
+  "title": "A5a observed-source manifest revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "config_sha256",
+    "fixed_periods",
+    "source_manifest_schema_version",
+    "station_collection",
+    "stations"
+  ],
+  "properties": {
+    "config_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "fixed_periods": {
+      "$ref": "#/$defs/periods"
+    },
+    "source_manifest_schema_version": {
+      "const": 1
+    },
+    "station_collection": {
+      "$ref": "#/$defs/station_collection"
+    },
+    "stations": {
+      "type": "array",
+      "minItems": 17,
+      "maxItems": 17,
+      "items": {
+        "$ref": "#/$defs/station_sources"
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "nonnegative_integer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "periods": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evaluation",
+        "fit",
+        "full"
+      ],
+      "properties": {
+        "evaluation": {
+          "const": [
+            2010,
+            2025
+          ]
+        },
+        "fit": {
+          "const": [
+            1980,
+            2009
+          ]
+        },
+        "full": {
+          "const": [
+            1980,
+            2025
+          ]
+        }
+      }
+    },
+    "station_collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "archive_sha256",
+        "catalog_sha256",
+        "name",
+        "version"
+      ],
+      "properties": {
+        "archive_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "catalog_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "name": {
+          "const": "us-2015"
+        },
+        "version": {
+          "const": "2026.07"
+        }
+      }
+    },
+    "variables": {
+      "const": {
+        "prcp": "mm/day",
+        "tmax": "degree_Celsius",
+        "tmin": "degree_Celsius"
+      }
+    },
+    "record_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prcp",
+        "tmax",
+        "tmin"
+      ],
+      "properties": {
+        "prcp": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "tmax": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "tmin": {
+          "$ref": "#/$defs/nonnegative_integer"
+        }
+      }
+    },
+    "intake_rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "missing_value_rule",
+        "quality_flag_rule"
+      ],
+      "properties": {
+        "missing_value_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quality_flag_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "available_common": {
+      "type": "object",
+      "required": [
+        "archive_bytes",
+        "archive_path",
+        "archive_sha256",
+        "availability",
+        "calendar",
+        "compression",
+        "dataset",
+        "dataset_version",
+        "doi",
+        "fixed_window_logical_records_sha256",
+        "fixed_window_record_counts",
+        "intake_rules",
+        "media_type",
+        "q3_historical_source_sha256",
+        "retrieval_date",
+        "source_bytes",
+        "source_id",
+        "source_sha256",
+        "upstream_url",
+        "variables"
+      ],
+      "properties": {
+        "archive_bytes": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "archive_path": {
+          "type": "string",
+          "pattern": "^references/observed/a5a-v1/(daymet|ghcn)/[^/]+\\.csv\\.gz$"
+        },
+        "archive_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "availability": {
+          "const": "available"
+        },
+        "calendar": {
+          "enum": [
+            "noleap_365",
+            "proleptic_gregorian"
+          ]
+        },
+        "compression": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset": {
+          "enum": [
+            "Daymet",
+            "GHCN-Daily"
+          ]
+        },
+        "dataset_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "doi": {
+          "type": "string",
+          "pattern": "^10\\."
+        },
+        "fixed_window_logical_records_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "fixed_window_record_counts": {
+          "$ref": "#/$defs/record_counts"
+        },
+        "intake_rules": {
+          "$ref": "#/$defs/intake_rules"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "q3_historical_source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "retrieval_date": {
+          "const": "2026-07-12"
+        },
+        "source_bytes": {
+          "$ref": "#/$defs/nonnegative_integer"
+        },
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "upstream_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "variables": {
+          "$ref": "#/$defs/variables"
+        }
+      }
+    },
+    "daymet_source": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/available_common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "grid_elevation_m",
+            "requested_coordinates"
+          ],
+          "properties": {
+            "calendar": {
+              "const": "noleap_365"
+            },
+            "compression": {
+              "const": "gzip-9-mtime-0-empty-name"
+            },
+            "dataset": {
+              "const": "Daymet"
+            },
+            "dataset_version": {
+              "const": "V4 R1"
+            },
+            "doi": {
+              "const": "10.3334/ORNLDAAC/2129"
+            },
+            "grid_elevation_m": {
+              "type": "integer"
+            },
+            "media_type": {
+              "const": "text/csv"
+            },
+            "requested_coordinates": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "latitude",
+                "longitude"
+              ],
+              "properties": {
+                "latitude": {
+                  "type": "number",
+                  "minimum": -90,
+                  "maximum": 90
+                },
+                "longitude": {
+                  "type": "number",
+                  "minimum": -180,
+                  "maximum": 180
+                }
+              }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "ghcn_source": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/available_common"
+        },
+        {
+          "type": "object",
+          "required": [
+            "station_identifier"
+          ],
+          "properties": {
+            "calendar": {
+              "const": "proleptic_gregorian"
+            },
+            "compression": {
+              "const": "upstream-gzip-byte-for-byte"
+            },
+            "dataset": {
+              "const": "GHCN-Daily"
+            },
+            "dataset_version": {
+              "const": "snapshot-2026-07-12"
+            },
+            "doi": {
+              "const": "10.7289/V5D21VHZ"
+            },
+            "media_type": {
+              "const": "application/gzip"
+            },
+            "station_identifier": {
+              "type": "string",
+              "pattern": "^USC[0-9]{8}$"
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "unavailable_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availability",
+        "reason"
+      ],
+      "properties": {
+        "availability": {
+          "const": "unavailable"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "station_sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sources",
+        "station_id"
+      ],
+      "properties": {
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "daymet",
+            "ghcn"
+          ],
+          "properties": {
+            "daymet": {
+              "$ref": "#/$defs/daymet_source"
+            },
+            "ghcn": {
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ghcn_source"
+                },
+                {
+                  "$ref": "#/$defs/unavailable_source"
+                }
+              ]
+            }
+          }
+        },
+        "station_id": {
+          "type": "string",
+          "pattern": "^[a-z]{2}[0-9]{6}$"
+        }
+      }
+    }
+  }
+}

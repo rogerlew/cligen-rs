@@ -98,7 +98,8 @@ impl ProcessCounters {
         }
     }
 
-    /// Freeze counters into the metrics-version-2 report shape.
+    /// Freeze counters into the process shape introduced by metrics version 2
+    /// and retained unchanged by metrics version 3.
     #[must_use]
     pub fn into_metrics(self, qc_filter: Option<String>) -> ProcessMetrics {
         let retries = (0..9)
