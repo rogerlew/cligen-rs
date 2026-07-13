@@ -30,16 +30,16 @@ machinery without an ADR.
 |---|---|---|
 | [SPEC-PAR](SPEC-PAR.md) | Station parameter (`.par`) format + typed par model | active |
 | [SPEC-STATION-DOCUMENT](SPEC-STATION-DOCUMENT.md) | Modern fixed-monthly station JSON + shared typed model ([JSON Schema](station-document.schema.json)) | active (rev 1; A4a) |
-| SPEC-CLI-TEXT | `.cli` text output (WEPP-compatible) | planned |
+| [SPEC-CLI-TEXT](SPEC-CLI-TEXT.md) | Frozen `.cli` text output + mandatory provenance companion | active (rev 1; A1) |
 | [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
-| SPEC-CLI-PARQUET | Native parquet climate output, provenance columns | planned |
+| [SPEC-CLI-PARQUET](SPEC-CLI-PARQUET.md) | Parametric typed row stream + `.cli.parquet` output ([field manifest](cli-parquet-v1.fields.json)) | active (rev 1; A1) |
 | [SPEC-GENERATION-PROFILES](SPEC-GENERATION-PROFILES.md) | Versioned generator-profile selector + `qc_filter` conditioning knob + CLI declaration | active (`qc_filter` implemented, Q3) |
 | [SPEC-FAST-BATCH-V1](SPEC-FAST-BATCH-V1.md) | Fast-batch-v1 runtime contract + quality assessment (design study of record) | **RETIRED** (Q4 adjudication ratified 2026-07-10; v0 stays a closed spike) |
-| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument; [JSON Schema](quality-report.schema.json)) | active (rev 6, metrics_version 2 — A4a bridge) |
+| [SPEC-QUALITY-REPORT](SPEC-QUALITY-REPORT.md) | Machine-readable per-run climate quality report (the ADR-0002 instrument; [v2 schema](quality-report-v2.schema.json), [preserved v1 schema](quality-report-v1.schema.json), [latest alias](quality-report.schema.json)) | active (rev 7, envelope 2 / metrics 2 — A1) |
 | [SPEC-STATION-DB](SPEC-STATION-DB.md) | Station collections, hash-pinned manifests, local cache, `cligen stations` (data outside the crate) | active (rev 2; A4a local converter) |
 | [SPEC-OBSERVED-INPUT](SPEC-OBSERVED-INPUT.md) | Observed-series input seam (active `.prn` compatibility surface; future f64 parquet extension) | active |
 | [SPEC-GENERATOR-CORE](SPEC-GENERATOR-CORE.md) | Generator core: seed/state ownership, faithful-mode shapes | active |
 | [SPEC-FAITHFUL-GENERATION](SPEC-FAITHFUL-GENERATION.md) | End-to-end continuous stochastic + hybrid observed climate-generation behavior | active |
-| SPEC-PROVENANCE | Generation-profile + lineage block shared by all outputs | planned |
-| [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (rev 6: modern station document alternative) |
+| [SPEC-PROVENANCE](SPEC-PROVENANCE.md) | Independently versioned generated-artifact lineage shared by text, Parquet, and quality output ([v1 schema](provenance-v1.schema.json), [latest alias](provenance.schema.json)) | active (rev 1; A1) |
+| [SPEC-RUNSPEC](SPEC-RUNSPEC.md) | `inp.yaml` run specification + `cligen` CLI surface (no legacy interface) | active (rev 7: A1 output/provenance) |
 | SPEC-PYO3 | Python API surface | planned |

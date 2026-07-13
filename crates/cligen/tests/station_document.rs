@@ -410,6 +410,10 @@ fn run_error_renders_every_validated_input_boundary() {
     let par = cligen::par::ParFile::parse(b"short\n").unwrap_err();
     let station = StationDocumentV1::parse_json(b"{}").unwrap_err();
     let errors = [
+        cligen::modes::RunError::InvalidInput {
+            field: "field",
+            message: "invalid",
+        },
         cligen::modes::RunError::Par(par),
         cligen::modes::RunError::Station(station),
         cligen::modes::RunError::Prn(cligen::observed::PrnError::NotText),

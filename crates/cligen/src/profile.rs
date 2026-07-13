@@ -19,7 +19,18 @@ pub enum GenerationProfile {
 }
 
 impl GenerationProfile {
-    /// Stable profile identifier carried by the fast-profile CLI header.
+    /// Canonical schema/provenance identifier. This follows the closed
+    /// SPEC-RUNSPEC enum spelling; legacy command markers are a separate
+    /// presentation surface.
+    pub fn id(self) -> &'static str {
+        match self {
+            Self::Faithful5323 => "faithful_5_32_3",
+            Self::FastBatchV0 => "fast_batch_v0",
+        }
+    }
+
+    /// Legacy display spelling carried by the non-faithful CLI command echo.
+    /// Structured provenance uses [`Self::id`].
     pub fn provenance_name(self) -> &'static str {
         match self {
             Self::Faithful5323 => "faithful-5.32.3",

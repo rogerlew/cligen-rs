@@ -30,7 +30,9 @@ pub mod monthlies;
 pub mod observed;
 pub mod output;
 pub mod par;
+pub mod parquet_output;
 pub mod profile;
+pub mod provenance;
 pub mod qc;
 pub mod quality;
 pub mod rng;
@@ -38,6 +40,7 @@ pub mod runspec;
 pub mod station;
 pub mod stations;
 pub mod storm;
+pub mod typed_output;
 
 /// The CLIGEN version this port is faithful to.
 pub const REFERENCE_VERSION: &str = "5.32.3";

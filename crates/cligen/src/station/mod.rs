@@ -10,10 +10,10 @@ mod document;
 mod model;
 
 pub use document::{
-    AdapterId, FixedMonthly5323Document, IdentityParameters, LegacySourceFormat,
-    LocationParameters, PrecipitationParameters, SolarRadiationParameters, StationDocumentError,
-    StationDocumentV1, StationLineage, StationModelId, StationParameters, StationUnits,
-    StormParameters, TemperatureParameters, Unit, WindDirectionParameters,
+    parameter_set_sha256, AdapterId, FixedMonthly5323Document, IdentityParameters,
+    LegacySourceFormat, LocationParameters, PrecipitationParameters, SolarRadiationParameters,
+    StationDocumentError, StationDocumentV1, StationLineage, StationModelId, StationParameters,
+    StationUnits, StormParameters, TemperatureParameters, Unit, WindDirectionParameters,
     WindInterpolationStation, WindParameters, ADAPTER_VERSION, STATION_SCHEMA_VERSION,
 };
 pub use model::FixedMonthly5323;

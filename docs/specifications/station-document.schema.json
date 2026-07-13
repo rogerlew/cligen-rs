@@ -98,6 +98,8 @@
         "source_format": { "const": "cligen_par_5_32_3" },
         "source_sha256": {
           "type": "string",
+          "minLength": 64,
+          "maxLength": 64,
           "pattern": "^[0-9a-f]{64}$"
         },
         "adapter": { "const": "cligen_rs_legacy_par_to_fixed_monthly" },

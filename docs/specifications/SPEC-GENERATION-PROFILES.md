@@ -1,6 +1,7 @@
 # SPEC-GENERATION-PROFILES — Declared Generator Behavior Profiles
 
-Status: active (rev 3; adds the `qc_filter` policy knob under
+Status: active (rev 4; A1 distinguishes canonical structured profile IDs from
+legacy command-marker spelling; rev 3 adds the `qc_filter` policy knob under
 ADR-0002; v1 design draft linked below)
 Surface: the `generation_profile` and `qc_filter` selectors in a rev-1
 runspec and their required declaration in generated `.cli` header
@@ -25,6 +26,11 @@ values are:
 
 Unknown values fail closed at YAML parsing. A profile can never be selected
 implicitly by host, build target, or environment variable.
+
+SPEC-PROVENANCE uses the runspec enum values exactly
+(`faithful_5_32_3`, `fast_batch_v0`) as canonical structured identifiers. The
+hyphenated `fast-batch-v0` text in `--generation-profile fast-batch-v0` is a
+legacy-compatible command marker only; it is not a second profile identity.
 
 ## `qc_filter` — the conditioning policy knob (ADR-0002)
 

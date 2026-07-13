@@ -169,10 +169,13 @@ extraction and leaves the cache untouched.
 
 ## Provenance obligations
 
-The manifest carries lineage per collection. A future SPEC-PROVENANCE
-block citing a station should record the collection name, version,
-and archive sha256 alongside the `.par` content hash (the quality
-report already carries the latter).
+The manifest carries lineage per collection. A collection-aware selector must
+record collection name, version, and archive SHA-256 alongside selected input
+bytes. A1 path-only runs cannot prove that association and therefore carry the
+explicit SPEC-PROVENANCE revision-1 `collection.status: unreported` object;
+cache paths are never parsed as lineage. A later collection selector must
+promote those fields through a provenance revision rather than silently
+filling them.
 
 ## Non-goals
 

@@ -1,9 +1,9 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: active (rev 6 — A4a permits run-emitted targets from a modern
-fixed-monthly station document without a metrics-version change; the existing
-`par_sha256` is the document's required legacy-source hash until A1 adds
-generic station identities. Rev 5 — Q3 implements the `qc_filter: off`
+Status: active (rev 7 — A1 adds independent `quality_report_schema_version =
+2`, generic station content identity, and shared SPEC-PROVENANCE without
+changing `metrics_version = 2`; rev 6 — A4a permits run-emitted targets from a modern
+fixed-monthly station document without a metrics-version change. Rev 5 — Q3 implements the `qc_filter: off`
 counterfactual: **metrics_version 2** adds `process.counterfactual`
 (would-have-been K-S/mean/variance verdicts over the produced
 batches, evaluated against a parallel diagnostic copy of the QC
@@ -41,9 +41,9 @@ pre-registered campaign packages, not to the emitter.
 Producers: `cligen run` (all profiles, all modes, on by default) and
 `cligen quality` (post-hoc, over any WEPP-format `.cli` including
 legacy-Fortran output). Consumers: adjudication packages, wepppy /
-WEPPcloud pipelines, dashboards, the future `.cli.parquet` metadata
-block (SPEC-PROVENANCE pairing: provenance = what made the file;
-quality = what the file statistically is).
+WEPPcloud pipelines, and dashboards. A1 Parquet embeds the same run identity,
+not the quality vector: provenance says what made an artifact; quality says
+what the paired text climate statistically is.
 
 ## Input surface — deliberately the text `.cli`
 
@@ -63,20 +63,19 @@ reports; `cligen quality` reports them as `null`.
 
 - Default: writing `<name>.cli` also writes `<name>.cli.quality.json`.
 - Opt-out: runspec `output.quality: false`.
-- Collision semantics (rev 3, F3): the sidecar is **always rewritten**
-  when enabled — it is derived data that must correspond to the `.cli`
-  just produced; `output.overwrite` governs the `.cli` only. `cligen
-  quality` writes the report to stdout and creates no files.
-- The report's identity splits into two blocks (with `metrics_version`
+- Collision semantics (rev 7): `output.overwrite` governs both declared
+  climate destinations (`.cli` and optional Parquet). Derived provenance and
+  quality companions are atomically rewritten when enabled. `cligen quality`
+  writes the report to stdout and creates no files.
+- The report's identity splits into two blocks (with independent
+  `quality_report_schema_version` and `metrics_version`
   top-level). **`content`** (recoverable from the inputs alone,
-  present in every report): tool version, `.par` SHA-256 (or, for an A4a
-  converted station document, its required legacy-source SHA-256), `.cli`
-  SHA-256, day count, year count and calendar span as parsed from the
-  rows. This compatibility bridge preserves the metrics-version-2 envelope;
-  A1 replaces it with independently named station-input identities.
-  **`provenance`** (run-emitted only; `null` from `cligen quality`
-  unless supplied via explicit flags): `generation_profile`,
-  `qc_filter`, `rng.burn`, mode, and the resolved runspec fields.
+  present in every report): tool version, station model,
+  syntax-independent station parameter-set SHA-256, declared legacy-source
+  SHA-256, `.cli` SHA-256, day count, year count and calendar span as parsed
+  from the rows. **`provenance`** (trusted run-emission only; always `null`
+  from public post-hoc `cligen quality`/library computation): the full revision-1
+  SPEC-PROVENANCE object for the paired text artifact.
   A bare `.cli` cannot authoritatively recover these — the header
   command echo is a verbatim, arbitrary field (SPEC-RUNSPEC §Header
   echo) and is never parsed as authority.
@@ -157,12 +156,14 @@ evaluation must not mutate generation state.
 
 ```json
 {
+  "quality_report_schema_version": 2,
   "metrics_version": 2,
   "identity": {
-    "content":    { "tool": "...", "par_sha256": "...", "cli_sha256": "...",
+    "content":    { "tool": "...", "station_model": "fixed_monthly_5_32_3",
+                    "station_parameter_set_sha256": "...",
+                    "station_source_sha256": "...", "cli_sha256": "...",
                     "days": 36525, "years": 100, "span": [1, 100] },
-    "provenance": { "generation_profile": "...", "qc_filter": "...",
-                    "burn": 0, "mode": "continuous" } },
+    "provenance": { "provenance_schema_version": 1, "...": "..." } },
   "par_convergence": { "precip_wet_mean": { "jan": { "target": ..., "generated": ...,
       "abs_err": ..., "rel_err": ... }, "...": "...",
       "by_decade": [ ... ] }, "...": "..." },
@@ -174,16 +175,18 @@ evaluation must not mutate generation state.
 ```
 
 The implementation package publishes the full JSON Schema
-(`docs/specifications/quality-report.schema.json`) with this
+(`docs/specifications/quality-report-v2.schema.json`) with this
 structure; unknown fields are never emitted.
+The pre-A1 envelope remains immutable at `quality-report-v1.schema.json`;
+`quality-report.schema.json` is only a latest-version convenience alias.
 
 ## Modes
 
-- Continuous / observed / storm modes all emit reports; single-storm
-  reports carry group D plus identity only (one day supports no
-  distributional metric).
+- Continuous / observed / storm modes all emit reports. A one-day storm has
+  group D plus identity and, on trusted run emission, group P; post-hoc storm
+  reports have group P null. One day supports no A/B/C distributional metric.
 - Observed mode (`iopt = 6`) reports carry
-  `identity.provenance.mode: "observed"` (run-emitted); group A
+  `identity.provenance.generation.mode: "observed"` (run-emitted); group A
   additionally carries a top-level boolean field
   `par_convergence.observed_passthrough` (true when mode is known to
   be observed, `null` post-hoc): the errors there measure the
@@ -213,3 +216,6 @@ structure; unknown fields are never emitted.
 - Run over a legacy-Fortran `.cli` (fixture cross-references)
   produces a well-formed report — the legacy-measurability check.
 - Determinism: repeated runs produce byte-identical reports.
+- Changing report-envelope or metric-vector versions is independent: A1
+  changes only `quality_report_schema_version`; A5a retains ownership of
+  `metrics_version: 3`.

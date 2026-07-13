@@ -44,72 +44,130 @@ pub struct HeaderInputs<'a> {
     pub command_echo: &'a str,
 }
 
+/// Owned typed projection of the legacy unit-7 header.
+///
+/// This is the pre-format authority for the immutable `.cli` header. In
+/// particular, the monthly vectors are derived once with the faithful REAL*4
+/// expression order and retained independently of the mutable generator state.
+#[derive(Debug, Clone, PartialEq)]
+pub(crate) struct LegacyCliHeader {
+    pub(crate) version: f32,
+    pub(crate) isim: i32,
+    pub(crate) itemp: i32,
+    pub(crate) igcode: i32,
+    pub(crate) station_id: String,
+    pub(crate) latitude_deg: f32,
+    pub(crate) longitude_deg: f32,
+    pub(crate) elevation_m: i32,
+    pub(crate) observed_years: i32,
+    pub(crate) begin_year: i32,
+    pub(crate) simulated_years: i32,
+    pub(crate) burn: i32,
+    pub(crate) interpolation: i32,
+    pub(crate) command_echo: String,
+    pub(crate) monthly_tmax_c: [f32; 12],
+    pub(crate) monthly_tmin_c: [f32; 12],
+    pub(crate) monthly_solar_langley_per_day: [f32; 12],
+    pub(crate) monthly_precip_mm: [f32; 12],
+}
+
+impl LegacyCliHeader {
+    /// Capture the values used by `wxr_gen`'s header writes before daily
+    /// generation mutates the common-block state.
+    pub(crate) fn from_inputs(h: &HeaderInputs<'_>, bk7: &Cbk7State, nc: &[i32; 13]) -> Self {
+        // Derived monthly values (cligen.f:3741-3750), REAL*4.
+        let mut monthly_precip_mm = [0.0f32; 12];
+        let mut monthly_tmax_c = [0.0f32; 12];
+        let mut monthly_tmin_c = [0.0f32; 12];
+        for month in 0..12 {
+            let xm = (nc[month + 1] - nc[month]) as f32;
+            monthly_precip_mm[month] =
+                xm * bk7.prw[month][1] / (1.0 - bk7.prw[month][0] + bk7.prw[month][1]);
+            monthly_precip_mm[month] = monthly_precip_mm[month] * bk7.rst[month][0] * 25.4;
+            monthly_tmax_c[month] = (bk7.obmx[month] - 32.0) * (5.0 / 9.0);
+            monthly_tmin_c[month] = (bk7.obmn[month] - 32.0) * (5.0 / 9.0);
+        }
+        Self {
+            version: h.version,
+            isim: if h.iopt == 4 || h.iopt == 7 { 2 } else { 1 },
+            itemp: 0,
+            igcode: h.igcode,
+            station_id: h.stidd.to_owned(),
+            latitude_deg: h.ylt,
+            longitude_deg: h.yll,
+            elevation_m: h.elev,
+            observed_years: h.years,
+            begin_year: h.iyear,
+            simulated_years: h.numyr,
+            burn: h.irand,
+            interpolation: h.interp,
+            command_echo: h.command_echo.to_owned(),
+            monthly_tmax_c,
+            monthly_tmin_c,
+            monthly_solar_langley_per_day: bk7.obsl,
+            monthly_precip_mm,
+        }
+    }
+}
+
 /// The wxr_gen unit-7 header block (`cligen.f:3717-3754`), emitted
 /// only for `iopt ≥ 4` exactly as the source.
 pub fn write_cli_header(out: &mut String, h: &HeaderInputs<'_>, bk7: &Cbk7State, nc: &[i32; 13]) {
+    write_legacy_cli_header(out, &LegacyCliHeader::from_inputs(h, bk7, nc));
+}
+
+/// Render an owned pre-format header with the frozen Fortran formats.
+pub(crate) fn write_legacy_cli_header(out: &mut String, h: &LegacyCliHeader) {
     // format 642: (f7.5)
     out.push_str(&f_edit(h.version, 7, 5));
     out.push('\n');
     // format 778: (3i4)
-    let isim = if h.iopt == 4 || h.iopt == 7 { 2 } else { 1 };
-    let itemp = 0;
-    out.push_str(&i_edit(isim as i64, 4));
-    out.push_str(&i_edit(itemp as i64, 4));
+    out.push_str(&i_edit(h.isim as i64, 4));
+    out.push_str(&i_edit(h.itemp as i64, 4));
     out.push_str(&i_edit(h.igcode as i64, 4));
     out.push('\n');
     // format 644 line 1
     out.push_str("  Station: ");
-    out.push_str(h.stidd);
+    out.push_str(&h.station_id);
     out.push_str("      ");
     out.push_str(" CLIGEN VER.");
     out.push_str(&f_edit(h.version, 8, 5));
     out.push_str(" -r:");
-    out.push_str(&i_edit(h.irand as i64, 5));
+    out.push_str(&i_edit(h.burn as i64, 5));
     out.push_str(" -I:");
-    out.push_str(&i_edit(h.interp as i64, 2));
+    out.push_str(&i_edit(h.interpolation as i64, 2));
     out.push('\n');
     // format 644 line 2
     out.push_str(
         " Latitude Longitude Elevation (m) Obs. Years   Beginning year  Years simulated Command Line:\n",
     );
     // format 644 line 3: 2f9.2,i12,2i12,i16,'          ',a
-    out.push_str(&f_edit(h.ylt, 9, 2));
-    out.push_str(&f_edit(h.yll, 9, 2));
-    out.push_str(&i_edit(h.elev as i64, 12));
-    out.push_str(&i_edit(h.years as i64, 12));
-    out.push_str(&i_edit(h.iyear as i64, 12));
-    out.push_str(&i_edit(h.numyr as i64, 16));
+    out.push_str(&f_edit(h.latitude_deg, 9, 2));
+    out.push_str(&f_edit(h.longitude_deg, 9, 2));
+    out.push_str(&i_edit(h.elevation_m as i64, 12));
+    out.push_str(&i_edit(h.observed_years as i64, 12));
+    out.push_str(&i_edit(h.begin_year as i64, 12));
+    out.push_str(&i_edit(h.simulated_years as i64, 16));
     out.push_str("          ");
-    out.push_str(h.command_echo);
+    out.push_str(&h.command_echo);
     // arg_v(:av_len) carries ONE trailing blank: the main program's
     // length scan sets av_len one past the last non-blank
     // (cligen.f:670-674, 678-682).
     out.push(' ');
     out.push('\n');
-    // Derived monthly values (cligen.f:3741-3750), REAL*4.
-    let mut smy = [0.0f32; 12];
-    let mut tmpcmx = [0.0f32; 12];
-    let mut tmpcmn = [0.0f32; 12];
-    for kkk in 0..12 {
-        let xm = (nc[kkk + 1] - nc[kkk]) as f32;
-        smy[kkk] = xm * bk7.prw[kkk][1] / (1.0 - bk7.prw[kkk][0] + bk7.prw[kkk][1]);
-        smy[kkk] = smy[kkk] * bk7.rst[kkk][0] * 25.4;
-        tmpcmx[kkk] = (bk7.obmx[kkk] - 32.0) * (5.0 / 9.0);
-        tmpcmn[kkk] = (bk7.obmn[kkk] - 32.0) * (5.0 / 9.0);
-    }
     // format 500: two labeled lines of (1x,12(f5.1,1x)). The group's
     // trailing 1x only advances the position — a Fortran X descriptor
     // writes nothing unless later output lands past it, so the record
     // ends after the last value (no trailing blank).
     out.push_str(" Observed monthly ave max temperature (C)\n ");
-    for (i, v) in tmpcmx.iter().enumerate() {
+    for (i, v) in h.monthly_tmax_c.iter().enumerate() {
         if i > 0 {
             out.push(' ');
         }
         out.push_str(&f_edit(*v, 5, 1));
     }
     out.push_str("\n Observed monthly ave min temperature (C)\n ");
-    for (i, v) in tmpcmn.iter().enumerate() {
+    for (i, v) in h.monthly_tmin_c.iter().enumerate() {
         if i > 0 {
             out.push(' ');
         }
@@ -118,14 +176,14 @@ pub fn write_cli_header(out: &mut String, h: &HeaderInputs<'_>, bk7: &Cbk7State,
     out.push('\n');
     // format 520: (12(1x,f5.1)) — space BEFORE each value
     out.push_str(" Observed monthly ave solar radiation (Langleys/day)\n");
-    for v in bk7.obsl {
+    for v in h.monthly_solar_langley_per_day {
         out.push(' ');
         out.push_str(&f_edit(v, 5, 1));
     }
     out.push('\n');
     // format 555: same shape as 520
     out.push_str(" Observed monthly ave precipitation (mm)\n");
-    for v in smy {
+    for v in h.monthly_precip_mm {
         out.push(' ');
         out.push_str(&f_edit(v, 5, 1));
     }

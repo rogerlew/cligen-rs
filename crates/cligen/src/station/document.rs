@@ -359,6 +359,24 @@ impl StationDocumentV1 {
     }
 }
 
+/// Hash the canonical model parameters independently of their input syntax.
+///
+/// Legacy `.par` bytes and a modern station document that represent the same
+/// `fixed_monthly_5_32_3` state produce the same digest. The hashed payload is
+/// the declaration-ordered compact JSON form of [`StationParameters`]; it
+/// excludes input bytes, schema identity, units, and conversion lineage.
+///
+/// # Errors
+/// Returns a field-addressed validation error for invalid model state, or a
+/// serialization error if the canonical JSON payload cannot be emitted.
+pub fn parameter_set_sha256(model: &FixedMonthly5323) -> Result<String, StationDocumentError> {
+    let parameters = StationParameters::from(model);
+    validate_parameters(&parameters)?;
+    let bytes = serde_json::to_vec(&parameters)
+        .map_err(|source| StationDocumentError::Serialize { source })?;
+    Ok(sha256_hex(&bytes))
+}
+
 impl From<&FixedMonthly5323> for StationParameters {
     fn from(model: &FixedMonthly5323) -> Self {
         let precipitation = PrecipitationParameters {

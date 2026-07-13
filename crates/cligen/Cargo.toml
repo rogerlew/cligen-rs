@@ -11,17 +11,25 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
+arrow-array = "=59.1.0"
+arrow-schema = "=59.1.0"
 clap = { version = "4.5", features = ["derive"] }
 flate2 = "1.0"
 libm = "0.2"
+parquet = { version = "=59.1.0", default-features = false, features = ["arrow", "zstd"] }
 # bundled: the payload catalogs are python-produced SQLite files
 # (SPEC-STATION-DB); no system sqlite dependency.
 rusqlite = { version = "0.32", features = ["bundled"] }
+# Atomic no-replace publication where the host exposes renameat2/renamex_np;
+# other targets use the hard-link fallback in parquet_output.
+rustix = { version = "=1.1.4", features = ["fs"] }
+unicode-normalization = "=0.1.24"
+unicode-casefold = "=0.2.0"
 serde = { version = "1.0", features = ["derive"] }
 # float_roundtrip: report consumers must parse the exact f64 the
 # emitter wrote (SPEC-QUALITY-REPORT byte determinism; the default
 # best-effort float parse is ±1 ULP).
-serde_json = { version = "1.0", features = ["float_roundtrip"] }
+serde_json = { version = "=1.0.150", features = ["float_roundtrip"] }
 serde_path_to_error = "0.1"
 serde_yaml = "0.9"
 sha2 = "0.10"

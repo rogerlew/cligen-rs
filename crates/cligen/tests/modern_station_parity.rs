@@ -4,6 +4,7 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
+use cligen::quality::QualityReport;
 use serde_yaml::{Mapping, Value};
 
 const GOLDENS: [&str; 12] = [
@@ -201,10 +202,39 @@ fn modern_station_documents_preserve_all_golden_outputs_and_sidecars() {
         .unwrap();
         assert_eq!(modern_cli, legacy_cli, "{case}: modern vs legacy CLI");
         assert_eq!(modern_cli, golden, "{case}: modern vs committed golden");
+        let mut modern_quality: QualityReport =
+            serde_json::from_slice(&std::fs::read(quality_sidecar(&modern_output)).unwrap())
+                .unwrap();
+        let mut legacy_quality: QualityReport =
+            serde_json::from_slice(&std::fs::read(quality_sidecar(&legacy_output)).unwrap())
+                .unwrap();
         assert_eq!(
-            std::fs::read(quality_sidecar(&modern_output)).unwrap(),
-            std::fs::read(quality_sidecar(&legacy_output)).unwrap(),
-            "{case}: modern vs legacy quality sidecar"
+            modern_quality.identity.content.station_parameter_set_sha256,
+            legacy_quality.identity.content.station_parameter_set_sha256,
+            "{case}: station parameter-set identity"
+        );
+        assert_ne!(
+            modern_quality
+                .identity
+                .provenance
+                .as_ref()
+                .unwrap()
+                .station
+                .input_schema,
+            legacy_quality
+                .identity
+                .provenance
+                .as_ref()
+                .unwrap()
+                .station
+                .input_schema,
+            "{case}: selected input syntax remains truthful"
+        );
+        modern_quality.identity.provenance = None;
+        legacy_quality.identity.provenance = None;
+        assert_eq!(
+            modern_quality, legacy_quality,
+            "{case}: modern vs legacy quality metrics"
         );
     }
 

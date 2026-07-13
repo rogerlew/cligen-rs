@@ -10,14 +10,29 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 
 use serde::Deserialize;
+use unicode_casefold::UnicodeCaseFold as _;
+use unicode_normalization::UnicodeNormalization as _;
 
-use crate::modes::{run_to_cli_resolved, ResolvedRunInputs, RunError, RunOutput};
+use crate::modes::{
+    run_to_cli_resolved, GeneratedRun, ResolvedRunInputs, RunError, RunTermination,
+};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
+use crate::parquet_output::{self, ParquetArtifactV1, ParquetOutputError};
 use crate::profile::{GenerationProfile, QcFilter};
-use crate::quality::{self, Provenance, QualityError};
-use crate::station::{FixedMonthly5323, StationDocumentError, StationDocumentV1};
+use crate::provenance::{
+    ActualOutputV1, ArtifactIdentityV1, ArtifactProvenanceV1, CoverageV1, DateV1,
+    EffectiveObservedV1, EffectiveOutputV1, EffectiveRunspecV1, EffectiveStationV1,
+    EffectiveStormV1, FitIdentityV1, GenerationModeV1, GenerationProfileV1, GenerationProvenanceV1,
+    InterpolationV1, ObservedInputV1, ProvenanceError, QcPolicyV1, RngSchemeV1, SchemaIdentityV1,
+    StationCollectionIdentityV1, StationModelV1, StationProvenanceV1, StationSelectorV1,
+};
+use crate::quality::{self, QualityError};
+use crate::station::{
+    parameter_set_sha256, FixedMonthly5323, StationDocumentError, StationDocumentV1,
+};
 use crate::storm::SingleStormParams;
+use crate::typed_output::{ClimateIdentityV1, ClimateRowV1, TypedOutputError};
 
 /// The sole currently-supported runspec schema revision.
 pub const RUNSPEC_VERSION: i64 = 1;
@@ -26,13 +41,13 @@ pub const RUNSPEC_VERSION: i64 = 1;
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct RunspecDocument {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub cligen_runspec: Option<i64>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub station: Option<StationSpec>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub mode: Option<RunMode>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub simulation: Option<SimulationSpec>,
     #[serde(default)]
     pub rng: RngSpec,
@@ -40,15 +55,15 @@ pub struct RunspecDocument {
     pub generation_profile: GenerationProfile,
     /// SPEC-RUNSPEC rev 5 / SPEC-GENERATION-PROFILES: the QC
     /// conditioning policy. Rejected with `fast_batch_v0` (pre-knob).
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub qc_filter: Option<QcFilter>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub observed: Option<ObservedSpec>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub single_storm: Option<SingleStormSpec>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub design_storm: Option<DesignStormSpec>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub output: Option<OutputSpec>,
 }
 
@@ -93,6 +108,38 @@ where
     deserializer.deserialize_any(PresentStringVisitor)
 }
 
+fn deserialize_present_value<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    T::deserialize(deserializer).map(Some)
+}
+
+fn deserialize_present_bool<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    struct PresentBoolVisitor;
+
+    impl serde::de::Visitor<'_> for PresentBoolVisitor {
+        type Value = Option<bool>;
+
+        fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+            formatter.write_str("a non-null boolean")
+        }
+
+        fn visit_bool<E>(self, value: bool) -> Result<Self::Value, E>
+        where
+            E: serde::de::Error,
+        {
+            Ok(Some(value))
+        }
+    }
+
+    deserializer.deserialize_any(PresentBoolVisitor)
+}
+
 /// Generation mode names from SPEC-RUNSPEC.
 #[derive(Debug, Clone, Copy, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -125,9 +172,9 @@ impl RunMode {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SimulationSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub begin_year: Option<i32>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub years: Option<i32>,
     #[serde(default)]
     pub interpolation: Interpolation,
@@ -159,7 +206,7 @@ impl Interpolation {
 #[derive(Debug, Clone, Default, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct RngSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub burn: Option<i64>,
 }
 
@@ -167,7 +214,7 @@ pub struct RngSpec {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ObservedSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_string")]
     pub prn: Option<String>,
 }
 
@@ -175,11 +222,11 @@ pub struct ObservedSpec {
 #[derive(Debug, Clone, Copy, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct StormDate {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub month: Option<i32>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub day: Option<i32>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub year: Option<i32>,
 }
 
@@ -187,15 +234,15 @@ pub struct StormDate {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SingleStormSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub date: Option<StormDate>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub amount_in: Option<f64>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub duration_h: Option<f64>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub time_to_peak_fraction: Option<f64>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub max_intensity_in_per_h: Option<f64>,
 }
 
@@ -203,9 +250,9 @@ pub struct SingleStormSpec {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct DesignStormSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub date: Option<StormDate>,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_value")]
     pub amount_in: Option<f64>,
 }
 
@@ -213,15 +260,19 @@ pub struct DesignStormSpec {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct OutputSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_string")]
     pub cli: Option<String>,
+    /// Optional SPEC-CLI-PARQUET revision-1 companion. A1 retains the
+    /// required legacy text destination during migration.
+    #[serde(default, deserialize_with = "deserialize_present_string")]
+    pub parquet: Option<String>,
     #[serde(default)]
     pub overwrite: bool,
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_string")]
     pub command_echo: Option<String>,
     /// SPEC-RUNSPEC rev 4 / SPEC-QUALITY-REPORT: emit the
     /// `<output.cli>.quality.json` sidecar (default true).
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_bool")]
     pub quality: Option<bool>,
 }
 
@@ -250,6 +301,9 @@ pub enum RunspecError {
         path: PathBuf,
     },
     Run(RunError),
+    Provenance(ProvenanceError),
+    TypedOutput(TypedOutputError),
+    Parquet(ParquetOutputError),
     Quality(QualityError),
 }
 
@@ -280,6 +334,9 @@ impl fmt::Display for RunspecError {
                 path.display()
             ),
             RunspecError::Run(error) => write!(f, "generation: {error}"),
+            RunspecError::Provenance(error) => write!(f, "provenance: {error}"),
+            RunspecError::TypedOutput(error) => write!(f, "typed output: {error}"),
+            RunspecError::Parquet(error) => write!(f, "output.parquet: {error}"),
             RunspecError::Quality(error) => write!(f, "output.quality: {error}"),
         }
     }
@@ -292,6 +349,8 @@ impl std::error::Error for RunspecError {}
 #[derive(Debug)]
 pub struct PreparedRun {
     pub output_path: PathBuf,
+    /// Optional SPEC-CLI-PARQUET companion destination.
+    pub parquet_path: Option<PathBuf>,
     pub overwrite: bool,
     pub iopt: i32,
     pub interpolation: i32,
@@ -306,17 +365,43 @@ pub struct PreparedRun {
     /// SPEC-RUNSPEC rev 4 `output.quality` (default true).
     pub quality: bool,
     station: FixedMonthly5323,
-    legacy_par_sha256: String,
+    station_provenance: StationProvenanceV1,
+    effective_runspec: EffectiveRunspecV1,
+    observed_input: Option<ObservedInputV1>,
     prn_bytes: Option<Vec<u8>>,
+    resolved_output_path: PathBuf,
+    resolved_parquet_path: Option<PathBuf>,
+}
+
+/// One generated revision-1 typed climate result from a single generator pass.
+#[derive(Debug, Clone, PartialEq)]
+pub struct GeneratedClimateV1 {
+    pub legacy_cli: String,
+    pub rows: Vec<ClimateRowV1>,
+    /// Provenance for the frozen text artifact. Parquet emission reuses the
+    /// run identity with its own independently versioned artifact descriptor.
+    pub provenance: ArtifactProvenanceV1,
+    pub process: crate::quality::report::ProcessMetrics,
 }
 
 impl PreparedRun {
     /// Generate the `.cli` text without touching the output path.
     pub fn generate(&self) -> Result<String, RunspecError> {
-        Ok(self.generate_output()?.cli)
+        Ok(self.generate_output()?.render_cli())
     }
 
-    fn generate_output(&self) -> Result<RunOutput, RunspecError> {
+    /// Generate the frozen text projection and public typed row stream in one
+    /// pass without touching output paths.
+    ///
+    /// # Errors
+    /// Returns generation, provenance, or typed-row validation failures.
+    pub fn generate_climate_v1(&self) -> Result<GeneratedClimateV1, RunspecError> {
+        let generated = self.generate_output()?;
+        self.build_climate_v1(&generated)
+    }
+
+    fn generate_output(&self) -> Result<GeneratedRun, RunspecError> {
+        self.validate_prepared_snapshot()?;
         run_to_cli_resolved(&ResolvedRunInputs {
             iopt: self.iopt,
             interp: self.interpolation,
@@ -334,21 +419,29 @@ impl PreparedRun {
         .map_err(RunspecError::Run)
     }
 
-    /// Generate the `.cli` text and apply `output.overwrite` without
-    /// prompts. When `output.quality` is enabled (the default) the
-    /// `<output.cli>.quality.json` sidecar is computed from the
-    /// already-produced `.cli` text + fixed-monthly station state and always
-    /// rewritten — `output.overwrite` governs the `.cli` only
-    /// (SPEC-QUALITY-REPORT §Emission). The `.cli` byte stream is
-    /// untouched by the sidecar path.
+    /// Generate one typed climate stream and publish the required `.cli`, its
+    /// mandatory provenance companion, optional `.cli.parquet`, and enabled
+    /// quality report. `output.overwrite` governs both declared climate
+    /// destinations; derived companions are rewritten to match the text.
     pub fn generate_and_write(&self) -> Result<(), RunspecError> {
+        self.validate_prepared_snapshot()?;
+        let _lock = OutputLock::acquire(&self.output_path)?;
+        self.preflight_outputs()?;
         let generated = self.generate_output()?;
+        let provenance =
+            self.artifact_provenance(&generated, self.text_artifact_identity(&generated))?;
+        let legacy_cli = generated.render_cli();
         let mut output = self.open_output()?;
         output
-            .write_all(generated.cli.as_bytes())
+            .write_all(legacy_cli.as_bytes())
             .map_err(|error| output_error(&self.output_path, error))?;
+        self.write_provenance_sidecar(&provenance)?;
+        if let Some(path) = &self.parquet_path {
+            let rows = self.build_climate_rows_v1(&generated)?;
+            self.write_parquet(path, &generated, &rows)?;
+        }
         if self.quality {
-            self.write_quality_sidecar(&generated)?;
+            self.write_quality_sidecar(&legacy_cli, &provenance, &generated.process)?;
         }
         Ok(())
     }
@@ -361,62 +454,324 @@ impl PreparedRun {
         PathBuf::from(name)
     }
 
-    /// The run-emitted `identity.provenance` block: the resolved
-    /// runspec surface (SPEC-QUALITY-REPORT §Emission). `qc_filter`
-    /// is `"faithful"` on the faithful backend (the only conditioning
-    /// behavior implemented; the knob itself is Q3) and `null` for
-    /// the pre-knob `fast_batch_v0`.
+    /// Mandatory text provenance destination: `<output.cli>.provenance.json`.
     #[must_use]
-    pub fn quality_provenance(&self) -> Provenance {
-        Provenance {
-            generation_profile: match self.generation_profile {
-                GenerationProfile::Faithful5323 => "faithful_5_32_3".to_owned(),
-                GenerationProfile::FastBatchV0 => "fast_batch_v0".to_owned(),
+    pub fn provenance_sidecar_path(&self) -> PathBuf {
+        let mut name = self.output_path.as_os_str().to_owned();
+        name.push(".provenance.json");
+        PathBuf::from(name)
+    }
+
+    /// Generate and return the full shared provenance block for the frozen
+    /// text artifact. Actual coverage is generation-derived and therefore
+    /// cannot be constructed truthfully from requested fields alone.
+    ///
+    /// # Errors
+    /// Returns generation or provenance validation failures.
+    pub fn quality_provenance(&self) -> Result<ArtifactProvenanceV1, RunspecError> {
+        let generated = self.generate_output()?;
+        self.artifact_provenance(&generated, self.text_artifact_identity(&generated))
+    }
+
+    /// Generate an in-memory quality report with provenance bound inside the
+    /// trusted run orchestration path.
+    ///
+    /// # Errors
+    /// Returns generation, provenance, intake, or report failures.
+    pub fn generate_quality_report(&self) -> Result<quality::QualityReport, RunspecError> {
+        let generated = self.generate_output()?;
+        let provenance =
+            self.artifact_provenance(&generated, self.text_artifact_identity(&generated))?;
+        let legacy_cli = generated.render_cli();
+        quality::compute_report_with_station(
+            &legacy_cli,
+            &self.station,
+            &self.station_provenance.legacy_source_sha256,
+            Some(provenance),
+            Some(generated.process),
+        )
+        .map_err(RunspecError::Quality)
+    }
+
+    fn build_climate_v1(
+        &self,
+        generated: &GeneratedRun,
+    ) -> Result<GeneratedClimateV1, RunspecError> {
+        let provenance =
+            self.artifact_provenance(generated, self.text_artifact_identity(generated))?;
+        let rows = self.build_climate_rows_v1(generated)?;
+        Ok(GeneratedClimateV1 {
+            legacy_cli: generated.render_cli(),
+            rows,
+            provenance,
+            process: generated.process.clone(),
+        })
+    }
+
+    fn build_climate_rows_v1(
+        &self,
+        generated: &GeneratedRun,
+    ) -> Result<Vec<ClimateRowV1>, RunspecError> {
+        if matches!(self.iopt, 4 | 7) {
+            return Err(invalid(
+                "typed_output",
+                "ClimateRowV1 is supported only for continuous and observed modes",
+            ));
+        }
+        let identity = ClimateIdentityV1 {
+            run_id: self
+                .effective_runspec
+                .sha256()
+                .map_err(RunspecError::Provenance)?,
+            generation_profile: self.generation_profile.id().to_owned(),
+            station_parameter_set_sha256: self.station_provenance.parameter_set_sha256.clone(),
+        };
+        let mut rows = Vec::with_capacity(generated.rows.len());
+        for (offset, source) in generated.rows.iter().enumerate() {
+            let sim_day_index = i32::try_from(offset + 1).map_err(|_| {
+                invalid(
+                    "typed_output.sim_day_index",
+                    "generated row count exceeds i32",
+                )
+            })?;
+            rows.push(
+                ClimateRowV1::try_from_daily(&identity, sim_day_index, source)
+                    .map_err(RunspecError::TypedOutput)?,
+            );
+        }
+        Ok(rows)
+    }
+
+    fn artifact_provenance(
+        &self,
+        generated: &GeneratedRun,
+        artifact: ArtifactIdentityV1,
+    ) -> Result<ArtifactProvenanceV1, RunspecError> {
+        ArtifactProvenanceV1::new(
+            self.station_provenance.clone(),
+            GenerationProvenanceV1 {
+                profile: self.effective_runspec.generation_profile,
+                qc_policy: self.effective_runspec.qc_filter,
+                mode: self.effective_runspec.mode,
+                interpolation: self.effective_runspec.interpolation,
+                rng_scheme: provenance_rng(self.generation_profile),
+                burn_per_stream: self.effective_runspec.burn,
             },
-            qc_filter: match self.generation_profile {
-                GenerationProfile::Faithful5323 => {
-                    Some(self.qc_filter.provenance_name().to_owned())
-                }
-                GenerationProfile::FastBatchV0 => None,
-            },
-            mode: match self.iopt {
-                4 => "single_storm",
-                6 => "observed",
-                7 => "design_storm",
-                _ => "continuous",
+            self.effective_runspec.clone(),
+            self.observed_input.clone(),
+            self.actual_output(generated),
+            artifact,
+        )
+        .map_err(RunspecError::Provenance)
+    }
+
+    fn actual_output(&self, generated: &GeneratedRun) -> ActualOutputV1 {
+        let date = |row: &crate::modes::DailyRow| DateV1 {
+            year: row.iyear,
+            // Generated rows are source-calendar validated before emission.
+            month: row.mo as u8,
+            day: row.jd as u8,
+        };
+        let requested_last = self
+            .begin_year
+            .zip(self.years)
+            .and_then(|(begin, years)| begin.checked_add(years - 1))
+            .map(|year| DateV1 {
+                year,
+                month: 12,
+                day: 31,
+            });
+        let actual_last = generated.rows.last().map(date);
+        let coverage = match self.iopt {
+            4 | 7 => CoverageV1::SingleEvent,
+            6 if generated.termination == RunTermination::EarlyStop
+                && actual_last != requested_last =>
+            {
+                CoverageV1::ObservedSourceEnd
             }
-            .to_owned(),
-            burn: self.burn,
-            begin_year: self.begin_year,
-            years: self.years,
-            interpolation: match self.interpolation {
-                1 => "linear",
-                2 => "fourier",
-                3 => "monthly_mean_preserving",
-                _ => "none",
-            }
-            .to_owned(),
+            _ => CoverageV1::CompleteRun,
+        };
+        ActualOutputV1 {
+            emitted_day_count: generated.rows.len() as u64,
+            first_date: generated.rows.first().map(date),
+            last_date: actual_last,
+            coverage,
         }
     }
 
-    fn write_quality_sidecar(&self, generated: &RunOutput) -> Result<(), RunspecError> {
+    fn text_artifact_identity(&self, generated: &GeneratedRun) -> ArtifactIdentityV1 {
+        let content_sha256 = quality::sha256_hex(generated.render_cli().as_bytes());
+        match self.iopt {
+            4 | 7 => ArtifactIdentityV1::storm_cli_text(content_sha256),
+            _ => ArtifactIdentityV1::cli_text(content_sha256),
+        }
+    }
+
+    fn preflight_outputs(&self) -> Result<(), RunspecError> {
+        self.validate_prepared_snapshot()?;
+        self.validate_distinct_destinations()?;
+        if self.overwrite {
+            return Ok(());
+        }
+        for (field_path, path) in std::iter::once(("output.cli", &self.output_path)).chain(
+            self.parquet_path
+                .as_ref()
+                .map(|path| ("output.parquet", path)),
+        ) {
+            if path.try_exists().map_err(|error| RunspecError::Output {
+                field_path: field_path.to_owned(),
+                path: path.clone(),
+                message: error.to_string(),
+            })? {
+                return Err(RunspecError::OutputCollision { path: path.clone() });
+            }
+        }
+        Ok(())
+    }
+
+    fn validate_prepared_snapshot(&self) -> Result<(), RunspecError> {
+        self.validate_output_snapshot()?;
+        let mode = runtime_mode(self.effective_runspec.mode);
+        ensure_snapshot(
+            self.iopt == mode.iopt(),
+            "prepared_run.iopt",
+            "generation mode changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            self.interpolation == runtime_interpolation(self.effective_runspec.interpolation),
+            "prepared_run.interpolation",
+            "interpolation changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            self.burn == self.effective_runspec.burn,
+            "prepared_run.burn",
+            "burn changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            provenance_profile(self.generation_profile)
+                == self.effective_runspec.generation_profile
+                && provenance_qc(self.generation_profile, self.qc_filter)
+                    == self.effective_runspec.qc_filter,
+            "prepared_run.generation_profile",
+            "generation profile or QC policy changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            self.begin_year == self.effective_runspec.begin_year
+                && self.years == self.effective_runspec.years,
+            "prepared_run.simulation",
+            "simulation span changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            provenance_storm(mode, self.storm) == self.effective_runspec.storm,
+            "prepared_run.storm",
+            "storm inputs changed after runspec resolution",
+        )
+    }
+
+    fn validate_output_snapshot(&self) -> Result<(), RunspecError> {
+        ensure_snapshot(
+            self.output_path == self.resolved_output_path
+                && self.parquet_path == self.resolved_parquet_path,
+            "prepared_run.output",
+            "resolved output destinations changed after runspec resolution",
+        )?;
+        ensure_snapshot(
+            self.overwrite == self.effective_runspec.output.overwrite
+                && self.quality == self.effective_runspec.output.quality
+                && self.command_echo == self.effective_runspec.output.command_echo,
+            "prepared_run.output",
+            "output controls changed after runspec resolution",
+        )
+    }
+
+    fn validate_distinct_destinations(&self) -> Result<(), RunspecError> {
+        let provenance = self.provenance_sidecar_path();
+        let provenance_staging = companion_staging_path(&provenance)?;
+        let mut final_paths = vec![
+            ("output.cli", self.output_path.clone()),
+            ("output.provenance", provenance),
+        ];
+        let mut paths = vec![
+            final_paths[0].clone(),
+            final_paths[1].clone(),
+            ("output.provenance.staging", provenance_staging.clone()),
+        ];
+        paths.push((
+            "output.lock",
+            output_lock_path(&destination_identity(&self.output_path)?)?,
+        ));
+        let mut reserved_staging = vec![provenance_staging];
+        if self.quality {
+            let quality = self.quality_sidecar_path();
+            let quality_staging = companion_staging_path(&quality)?;
+            final_paths.push(("output.quality", quality.clone()));
+            paths.push(("output.quality", quality));
+            paths.push(("output.quality.staging", quality_staging.clone()));
+            reserved_staging.push(quality_staging);
+        }
+        if let Some(parquet) = &self.parquet_path {
+            let staging = parquet_output::staging_path(parquet).map_err(RunspecError::Parquet)?;
+            final_paths.push(("output.parquet", parquet.clone()));
+            paths.push(("output.parquet", parquet.clone()));
+            paths.push(("output.parquet.staging", staging.clone()));
+            reserved_staging.push(staging);
+        }
+        for (field, path) in final_paths {
+            reject_directory_destination(field, &path)?;
+        }
+        validate_unique_destinations(&paths)?;
+        for path in reserved_staging {
+            reject_existing_staging(&path)?;
+        }
+        Ok(())
+    }
+
+    fn write_provenance_sidecar(
+        &self,
+        provenance: &ArtifactProvenanceV1,
+    ) -> Result<(), RunspecError> {
+        let bytes = provenance
+            .to_pretty_json_bytes()
+            .map_err(RunspecError::Provenance)?;
+        let path = self.provenance_sidecar_path();
+        write_atomic_companion(&path, &bytes, "output.provenance")
+    }
+
+    fn write_parquet(
+        &self,
+        path: &Path,
+        generated: &GeneratedRun,
+        rows: &[ClimateRowV1],
+    ) -> Result<(), RunspecError> {
+        let provenance = self.artifact_provenance(generated, ArtifactIdentityV1::cli_parquet())?;
+        parquet_output::write_cli_parquet_v1(
+            path,
+            ParquetArtifactV1 {
+                provenance: &provenance,
+            },
+            rows,
+            self.overwrite,
+        )
+        .map_err(RunspecError::Parquet)
+    }
+
+    fn write_quality_sidecar(
+        &self,
+        legacy_cli: &str,
+        provenance: &ArtifactProvenanceV1,
+        process: &crate::quality::report::ProcessMetrics,
+    ) -> Result<(), RunspecError> {
         let report = quality::compute_report_with_station(
-            &generated.cli,
+            legacy_cli,
             &self.station,
-            &self.legacy_par_sha256,
-            Some(self.quality_provenance()),
-            Some(generated.process.clone()),
+            &self.station_provenance.legacy_source_sha256,
+            Some(provenance.clone()),
+            Some(process.clone()),
         )
         .map_err(RunspecError::Quality)?;
-        let bytes = report
-            .to_json_bytes()
-            .map_err(|error| RunspecError::Quality(QualityError::Serialize(error)))?;
+        let bytes = report.to_json_bytes().map_err(RunspecError::Quality)?;
         let path = self.quality_sidecar_path();
-        fs::write(&path, bytes).map_err(|error| RunspecError::Output {
-            field_path: "output.quality".to_owned(),
-            path,
-            message: error.to_string(),
-        })
+        write_atomic_companion(&path, &bytes, "output.quality")
     }
 
     fn open_output(&self) -> Result<File, RunspecError> {
@@ -449,6 +804,101 @@ struct ModeFields {
     storm: Option<SingleStormParams>,
 }
 
+fn provenance_mode(mode: RunMode) -> GenerationModeV1 {
+    match mode {
+        RunMode::Continuous => GenerationModeV1::Continuous,
+        RunMode::Observed => GenerationModeV1::Observed,
+        RunMode::SingleStorm => GenerationModeV1::SingleStorm,
+        RunMode::DesignStorm => GenerationModeV1::DesignStorm,
+    }
+}
+
+fn runtime_mode(mode: GenerationModeV1) -> RunMode {
+    match mode {
+        GenerationModeV1::Continuous => RunMode::Continuous,
+        GenerationModeV1::Observed => RunMode::Observed,
+        GenerationModeV1::SingleStorm => RunMode::SingleStorm,
+        GenerationModeV1::DesignStorm => RunMode::DesignStorm,
+    }
+}
+
+fn runtime_interpolation(interpolation: InterpolationV1) -> i32 {
+    match interpolation {
+        InterpolationV1::None => 0,
+        InterpolationV1::Linear => 1,
+        InterpolationV1::Fourier => 2,
+        InterpolationV1::MonthlyMeanPreserving => 3,
+    }
+}
+
+fn ensure_snapshot(condition: bool, field_path: &str, message: &str) -> Result<(), RunspecError> {
+    if condition {
+        Ok(())
+    } else {
+        Err(invalid(field_path, message))
+    }
+}
+
+fn provenance_profile(profile: GenerationProfile) -> GenerationProfileV1 {
+    match profile {
+        GenerationProfile::Faithful5323 => GenerationProfileV1::Faithful5323,
+        GenerationProfile::FastBatchV0 => GenerationProfileV1::FastBatchV0,
+    }
+}
+
+fn provenance_rng(profile: GenerationProfile) -> RngSchemeV1 {
+    match profile {
+        GenerationProfile::Faithful5323 => RngSchemeV1::CligenRandn5323,
+        GenerationProfile::FastBatchV0 => RngSchemeV1::SplitMix64MonthlyV0,
+    }
+}
+
+fn provenance_qc(profile: GenerationProfile, qc: QcFilter) -> Option<QcPolicyV1> {
+    match profile {
+        GenerationProfile::FastBatchV0 => None,
+        GenerationProfile::Faithful5323 => Some(match qc {
+            QcFilter::Faithful => QcPolicyV1::Faithful,
+            QcFilter::Off => QcPolicyV1::Off,
+        }),
+    }
+}
+
+fn provenance_interpolation(interpolation: i32) -> InterpolationV1 {
+    match interpolation {
+        1 => InterpolationV1::Linear,
+        2 => InterpolationV1::Fourier,
+        3 => InterpolationV1::MonthlyMeanPreserving,
+        _ => InterpolationV1::None,
+    }
+}
+
+fn provenance_storm(mode: RunMode, storm: Option<SingleStormParams>) -> Option<EffectiveStormV1> {
+    let storm = storm?;
+    let date = DateV1 {
+        year: storm.ibyear,
+        // SPEC-RUNSPEC validation has already established these ranges.
+        month: storm.mo as u8,
+        day: storm.jd as u8,
+    };
+    match mode {
+        RunMode::SingleStorm => Some(EffectiveStormV1 {
+            date,
+            amount_in: storm.damt as f64,
+            duration_h: Some(storm.usdur as f64),
+            time_to_peak_fraction: Some(storm.ustpr as f64),
+            max_intensity_in_per_h: Some(storm.uxmav as f64),
+        }),
+        RunMode::DesignStorm => Some(EffectiveStormV1 {
+            date,
+            amount_in: storm.damt as f64,
+            duration_h: None,
+            time_to_peak_fraction: None,
+            max_intensity_in_per_h: None,
+        }),
+        RunMode::Continuous | RunMode::Observed => None,
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum StationSyntax {
     LegacyPar,
@@ -465,6 +915,17 @@ struct StationSelection<'a> {
 struct ResolvedStation {
     model: FixedMonthly5323,
     legacy_par_sha256: String,
+    input_schema: SchemaIdentityV1,
+    input_sha256: String,
+    parameter_set_sha256: String,
+}
+
+#[derive(Debug)]
+struct ResolvedObserved {
+    lexical: String,
+    initial_year: i32,
+    bytes: Vec<u8>,
+    input_sha256: String,
 }
 
 impl RunspecDocument {
@@ -506,15 +967,27 @@ impl RunspecDocument {
         let output = self.output_ref()?;
         let mode = self.mode_value()?;
         let output_lexical = required_text(output.cli.as_deref(), "output.cli")?;
+        let output_path = resolve_path(base_dir, output_lexical);
+        let parquet_lexical = output.parquet.clone();
+        let parquet_path = parquet_lexical
+            .as_deref()
+            .map(|path| resolve_path(base_dir, path));
+        if parquet_path.as_ref() == Some(&output_path) {
+            return Err(invalid(
+                "output.parquet",
+                "must resolve to a path distinct from output.cli",
+            ));
+        }
         let station = read_station(base_dir, station_selection)?;
         let prn = self.read_observed_input(base_dir, mode)?;
-        let fields = self.resolve_mode_fields(mode, prn.as_ref().map(|value| value.1))?;
+        let fields =
+            self.resolve_mode_fields(mode, prn.as_ref().map(|value| value.initial_year))?;
         let burn = self.burn_value()?;
         let command_echo = output.command_echo.clone().unwrap_or_else(|| {
             self.canonical_echo(
                 mode,
                 station_selection,
-                prn.as_ref().map(|value| value.0.as_str()),
+                prn.as_ref().map(|value| value.lexical.as_str()),
                 output_lexical,
                 fields.interpolation,
                 burn,
@@ -522,8 +995,62 @@ impl RunspecDocument {
         });
         let generation_profile = self.generation_profile;
         let qc_filter = self.qc_filter.unwrap_or_default();
+        let command_echo = qc_filter.command_echo(generation_profile.command_echo(command_echo));
+        let provenance_mode = provenance_mode(mode);
+        let provenance_profile = provenance_profile(generation_profile);
+        let provenance_qc = provenance_qc(generation_profile, qc_filter);
+        let provenance_interpolation = provenance_interpolation(fields.interpolation);
+        let station_selector = match station_selection.syntax {
+            StationSyntax::LegacyPar => StationSelectorV1::LegacyPar,
+            StationSyntax::Document => StationSelectorV1::StationDocument,
+        };
+        let station_provenance = StationProvenanceV1 {
+            input_schema: station.input_schema.clone(),
+            input_sha256: station.input_sha256.clone(),
+            model: StationModelV1::FixedMonthly5323,
+            parameter_set_sha256: station.parameter_set_sha256.clone(),
+            fit: FitIdentityV1::unreported(),
+            collection: StationCollectionIdentityV1::unreported(),
+            legacy_source_sha256: station.legacy_par_sha256.clone(),
+        };
+        let effective_observed = prn.as_ref().map(|value| EffectiveObservedV1 {
+            lexical_path: value.lexical.clone(),
+            input_sha256: value.input_sha256.clone(),
+        });
+        let observed_input = prn.as_ref().map(|value| ObservedInputV1 {
+            schema: SchemaIdentityV1::legacy_observed(),
+            input_sha256: value.input_sha256.clone(),
+        });
+        let effective_runspec = EffectiveRunspecV1 {
+            cligen_runspec: RUNSPEC_VERSION as u32,
+            station: EffectiveStationV1 {
+                selector: station_selector,
+                lexical_path: station_selection.lexical.to_owned(),
+                input_sha256: station.input_sha256,
+            },
+            mode: provenance_mode,
+            begin_year: fields.begin_year,
+            years: fields.years,
+            interpolation: provenance_interpolation,
+            burn,
+            generation_profile: provenance_profile,
+            qc_filter: provenance_qc,
+            observed: effective_observed,
+            storm: provenance_storm(mode, fields.storm),
+            output: EffectiveOutputV1 {
+                cli_lexical_path: output_lexical.to_owned(),
+                parquet_lexical_path: parquet_lexical.clone(),
+                quality: output.quality.unwrap_or(true),
+                overwrite: output.overwrite,
+                command_echo: command_echo.clone(),
+            },
+        };
+        effective_runspec
+            .validate()
+            .map_err(RunspecError::Provenance)?;
         Ok(PreparedRun {
-            output_path: resolve_path(base_dir, output_lexical),
+            output_path: output_path.clone(),
+            parquet_path: parquet_path.clone(),
             overwrite: output.overwrite,
             iopt: fields.iopt,
             interpolation: fields.interpolation,
@@ -531,13 +1058,17 @@ impl RunspecDocument {
             generation_profile,
             begin_year: fields.begin_year,
             years: fields.years,
-            command_echo: qc_filter.command_echo(generation_profile.command_echo(command_echo)),
+            command_echo,
             storm: fields.storm,
             qc_filter,
             quality: output.quality.unwrap_or(true),
             station: station.model,
-            legacy_par_sha256: station.legacy_par_sha256,
-            prn_bytes: prn.map(|value| value.2),
+            station_provenance,
+            effective_runspec,
+            observed_input,
+            prn_bytes: prn.map(|value| value.bytes),
+            resolved_output_path: output_path,
+            resolved_parquet_path: parquet_path,
         })
     }
 
@@ -550,7 +1081,29 @@ impl RunspecDocument {
         }
         self.station_selection()?;
         self.mode_value()?;
-        required_text(self.output_ref()?.cli.as_deref(), "output.cli")?;
+        let output = self.output_ref()?;
+        let cli = required_text(output.cli.as_deref(), "output.cli")?;
+        if let Some(parquet) = output.parquet.as_deref() {
+            let parquet = required_text(Some(parquet), "output.parquet")?;
+            if !parquet.ends_with(".cli.parquet") {
+                return Err(invalid("output.parquet", "must end with .cli.parquet"));
+            }
+            if parquet == cli {
+                return Err(invalid(
+                    "output.parquet",
+                    "must be distinct from output.cli",
+                ));
+            }
+        }
+        if output.command_echo.as_ref().is_some_and(|echo| {
+            echo.chars()
+                .any(|character| matches!(character, '\0' | '\r' | '\n'))
+        }) {
+            return Err(invalid(
+                "output.command_echo",
+                "must not contain NUL or record terminators",
+            ));
+        }
         Ok(())
     }
 
@@ -589,8 +1142,9 @@ impl RunspecDocument {
             .simulation
             .as_ref()
             .ok_or_else(|| missing("simulation"))?;
-        positive_required(simulation.begin_year, "simulation.begin_year")?;
-        positive_required(simulation.years, "simulation.years")?;
+        let begin = positive_required(simulation.begin_year, "simulation.begin_year")?;
+        let years = positive_required(simulation.years, "simulation.years")?;
+        validate_loop_span(begin, years)?;
         reject_present(self.observed.is_some(), "observed", "continuous mode")?;
         reject_present(
             self.single_storm.is_some(),
@@ -621,6 +1175,11 @@ impl RunspecDocument {
             self.design_storm.is_some(),
             "design_storm",
             "single_storm mode",
+        )?;
+        reject_present(
+            self.output_ref()?.parquet.is_some(),
+            "output.parquet",
+            "single_storm mode",
         )
     }
 
@@ -634,6 +1193,11 @@ impl RunspecDocument {
             self.single_storm.is_some(),
             "single_storm",
             "design_storm mode",
+        )?;
+        reject_present(
+            self.output_ref()?.parquet.is_some(),
+            "output.parquet",
+            "design_storm mode",
         )
     }
 
@@ -641,7 +1205,7 @@ impl RunspecDocument {
         &self,
         base_dir: &Path,
         mode: RunMode,
-    ) -> Result<Option<(String, i32, Vec<u8>)>, RunspecError> {
+    ) -> Result<Option<ResolvedObserved>, RunspecError> {
         if mode != RunMode::Observed {
             return Ok(None);
         }
@@ -660,7 +1224,13 @@ impl RunspecDocument {
                 "must resolve to an integer greater than or equal to 1",
             ));
         }
-        Ok(Some((lexical, initial_year, bytes)))
+        let input_sha256 = quality::sha256_hex(&bytes);
+        Ok(Some(ResolvedObserved {
+            lexical,
+            initial_year,
+            bytes,
+            input_sha256,
+        }))
     }
 
     fn resolve_mode_fields(
@@ -823,7 +1393,13 @@ impl RunspecDocument {
                 "must be an integer greater than or equal to 0",
             ));
         }
-        u32::try_from(burn).map_err(|_| invalid("rng.burn", "must fit in u32"))
+        if burn > i64::from(i32::MAX) {
+            return Err(invalid(
+                "rng.burn",
+                "must fit the faithful signed 32-bit header/control field",
+            ));
+        }
+        Ok(burn as u32)
     }
 }
 
@@ -876,6 +1452,12 @@ fn validate_storm_date(date: StormDate, prefix: &str) -> Result<(), RunspecError
     let year = date
         .year
         .ok_or_else(|| missing(&format!("{prefix}.year")))?;
+    if !(-9_999..=99_999).contains(&year) {
+        return Err(invalid(
+            &format!("{prefix}.year"),
+            "must fit the legacy i5 output field (-9999..=99999)",
+        ));
+    }
     if !(1..=12).contains(&month) {
         return Err(invalid(&format!("{prefix}.month"), "must be in 1..=12"));
     }
@@ -978,6 +1560,25 @@ fn positive_required(value: Option<i32>, path: &str) -> Result<i32, RunspecError
     Ok(value)
 }
 
+fn validate_loop_span(begin_year: i32, years: i32) -> Result<(), RunspecError> {
+    if begin_year > 99_999 {
+        return Err(invalid(
+            "simulation.begin_year",
+            "must fit the legacy positive i5 output field (<= 99999)",
+        ));
+    }
+    if begin_year
+        .checked_add(years - 1)
+        .is_none_or(|year| year > 99_999)
+    {
+        return Err(invalid(
+            "simulation.years",
+            "final year must fit the legacy positive i5 output field (<= 99999)",
+        ));
+    }
+    Ok(())
+}
+
 fn required_i32(value: Option<i32>, path: &str) -> Result<i32, RunspecError> {
     value.ok_or_else(|| missing(path))
 }
@@ -986,6 +1587,12 @@ fn required_text<'a>(value: Option<&'a str>, path: &str) -> Result<&'a str, Runs
     let value = value.ok_or_else(|| missing(path))?;
     if value.is_empty() {
         return Err(invalid(path, "must be a non-empty path"));
+    }
+    if value
+        .chars()
+        .any(|character| matches!(character, '\0' | '\r' | '\n'))
+    {
+        return Err(invalid(path, "must not contain NUL or record terminators"));
     }
     Ok(value)
 }
@@ -1007,6 +1614,189 @@ fn resolve_path(base_dir: &Path, lexical: &str) -> PathBuf {
     }
 }
 
+fn destination_identity(path: &Path) -> Result<PathBuf, RunspecError> {
+    destination_identity_inner(path, 0)
+        .map(fold_destination_file_name)
+        .map_err(|error| RunspecError::Output {
+            field_path: "output".to_owned(),
+            path: path.to_owned(),
+            message: format!("cannot resolve destination identity: {error}"),
+        })
+}
+
+fn fold_destination_file_name(path: PathBuf) -> PathBuf {
+    let Some(name) = path.file_name().and_then(|name| name.to_str()) else {
+        return path;
+    };
+    let folded = name.nfd().case_fold().collect::<String>();
+    path.with_file_name(folded)
+}
+
+fn destination_identity_inner(path: &Path, depth: u8) -> Result<PathBuf, std::io::Error> {
+    if depth >= 32 {
+        return Err(std::io::Error::other(
+            "too many symbolic links while resolving output destination",
+        ));
+    }
+    match fs::symlink_metadata(path) {
+        Ok(metadata) if metadata.file_type().is_symlink() => {
+            let target = fs::read_link(path)?;
+            let resolved = if target.is_absolute() {
+                target
+            } else {
+                path.parent().unwrap_or_else(|| Path::new(".")).join(target)
+            };
+            destination_identity_inner(&resolved, depth + 1)
+        }
+        Ok(_) => fs::canonicalize(path),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+            let file_name = path.file_name().ok_or_else(|| {
+                std::io::Error::new(
+                    std::io::ErrorKind::InvalidInput,
+                    "output destination has no file name",
+                )
+            })?;
+            let parent = path.parent().unwrap_or_else(|| Path::new("."));
+            Ok(fs::canonicalize(parent)?.join(file_name))
+        }
+        Err(error) => Err(error),
+    }
+}
+
+fn companion_staging_path(path: &Path) -> Result<PathBuf, RunspecError> {
+    let file_name = path
+        .file_name()
+        .ok_or_else(|| invalid("output", "companion destination has no file name"))?;
+    let mut staging_name = std::ffi::OsString::from(".");
+    staging_name.push(file_name);
+    staging_name.push(".cligen-stage");
+    Ok(path.with_file_name(staging_name))
+}
+
+fn output_lock_path(path: &Path) -> Result<PathBuf, RunspecError> {
+    let file_name = path
+        .file_name()
+        .ok_or_else(|| invalid("output.cli", "destination has no file name"))?;
+    let mut lock_name = std::ffi::OsString::from(".");
+    lock_name.push(file_name);
+    lock_name.push(".cligen-lock");
+    Ok(path.with_file_name(lock_name))
+}
+
+struct OutputLock {
+    path: PathBuf,
+    _file: File,
+}
+
+impl OutputLock {
+    fn acquire(cli_path: &Path) -> Result<Self, RunspecError> {
+        let path = output_lock_path(&destination_identity(cli_path)?)?;
+        let file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&path)
+            .map_err(|error| {
+                if error.kind() == std::io::ErrorKind::AlreadyExists {
+                    RunspecError::OutputCollision { path: path.clone() }
+                } else {
+                    RunspecError::Output {
+                        field_path: "output.lock".to_owned(),
+                        path: path.clone(),
+                        message: error.to_string(),
+                    }
+                }
+            })?;
+        Ok(Self { path, _file: file })
+    }
+}
+
+impl Drop for OutputLock {
+    fn drop(&mut self) {
+        let _ = fs::remove_file(&self.path);
+    }
+}
+
+fn validate_unique_destinations(paths: &[(&str, PathBuf)]) -> Result<(), RunspecError> {
+    let mut identities = Vec::with_capacity(paths.len());
+    for (field, path) in paths {
+        let identity = destination_identity(path)?;
+        if let Some((prior, _)) = identities
+            .iter()
+            .find(|(_, prior_identity)| prior_identity == &identity)
+        {
+            return Err(invalid(
+                field,
+                &format!("must not alias {prior} or a reserved staging path"),
+            ));
+        }
+        identities.push((*field, identity));
+    }
+    Ok(())
+}
+
+fn reject_existing_staging(path: &Path) -> Result<(), RunspecError> {
+    match fs::symlink_metadata(path) {
+        Ok(_) => Err(RunspecError::OutputCollision {
+            path: path.to_owned(),
+        }),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
+        Err(error) => Err(RunspecError::Output {
+            field_path: "output.staging".to_owned(),
+            path: path.to_owned(),
+            message: error.to_string(),
+        }),
+    }
+}
+
+fn reject_directory_destination(field_path: &str, path: &Path) -> Result<(), RunspecError> {
+    match fs::metadata(path) {
+        Ok(metadata) if metadata.is_dir() => Err(RunspecError::Output {
+            field_path: field_path.to_owned(),
+            path: path.to_owned(),
+            message: "destination is a directory".to_owned(),
+        }),
+        Ok(_) => Ok(()),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
+        Err(error) => Err(RunspecError::Output {
+            field_path: field_path.to_owned(),
+            path: path.to_owned(),
+            message: error.to_string(),
+        }),
+    }
+}
+
+fn write_atomic_companion(path: &Path, bytes: &[u8], field_path: &str) -> Result<(), RunspecError> {
+    let staging = companion_staging_path(path)?;
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&staging)
+        .map_err(|error| RunspecError::Output {
+            field_path: field_path.to_owned(),
+            path: path.to_owned(),
+            message: error.to_string(),
+        })?;
+    let write_result = file.write_all(bytes).and_then(|()| file.flush());
+    drop(file);
+    if let Err(error) = write_result {
+        let _ = fs::remove_file(&staging);
+        return Err(RunspecError::Output {
+            field_path: field_path.to_owned(),
+            path: path.to_owned(),
+            message: error.to_string(),
+        });
+    }
+    if let Err(error) = fs::rename(&staging, path) {
+        let _ = fs::remove_file(&staging);
+        return Err(RunspecError::Output {
+            field_path: field_path.to_owned(),
+            path: path.to_owned(),
+            message: error.to_string(),
+        });
+    }
+    Ok(())
+}
+
 fn read_station(
     base_dir: &Path,
     selection: StationSelection<'_>,
@@ -1020,26 +1810,38 @@ fn read_station(
 
 fn read_legacy_station(path: &Path) -> Result<ResolvedStation, RunspecError> {
     let bytes = fs::read(path).map_err(|error| input_error("station.par", path, error))?;
+    let input_sha256 = quality::sha256_hex(&bytes);
     let par = ParFile::parse(&bytes).map_err(|error| par_error(path, error))?;
     let document = StationDocumentV1::from_legacy_par(&par)
+        .map_err(|error| station_document_error("station.par", path, error))?;
+    let parameter_set_sha256 = parameter_set_sha256(par.fixed_monthly())
         .map_err(|error| station_document_error("station.par", path, error))?;
     Ok(ResolvedStation {
         model: par.into_fixed_monthly(),
         legacy_par_sha256: document.lineage.source_sha256,
+        input_schema: SchemaIdentityV1::legacy_station(),
+        input_sha256,
+        parameter_set_sha256,
     })
 }
 
 fn read_station_document(path: &Path) -> Result<ResolvedStation, RunspecError> {
     let bytes = fs::read(path).map_err(|error| input_error("station.document", path, error))?;
+    let input_sha256 = quality::sha256_hex(&bytes);
     let document = StationDocumentV1::parse_json(&bytes)
         .map_err(|error| station_document_error("station.document", path, error))?;
     let legacy_par_sha256 = document.lineage.source_sha256.clone();
     let model = document
         .into_model()
         .map_err(|error| station_document_error("station.document", path, error))?;
+    let parameter_set_sha256 = parameter_set_sha256(&model)
+        .map_err(|error| station_document_error("station.document", path, error))?;
     Ok(ResolvedStation {
         model,
         legacy_par_sha256,
+        input_schema: SchemaIdentityV1::modern_station(),
+        input_sha256,
+        parameter_set_sha256,
     })
 }
 

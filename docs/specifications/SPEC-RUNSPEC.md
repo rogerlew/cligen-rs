@@ -1,6 +1,7 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 6 — A4a adds exactly-one `station.par` or
+Status: active (rev 7 — A1 adds optional `output.parquet`, mandatory text
+provenance, and the portable canonical-effective-runspec contract; rev 6 — A4a adds exactly-one `station.par` or
 `station.document`, with the station-document version independent of this
 runspec revision; rev 5 — `qc_filter: faithful | off` accepted
 2026-07-10 by the Q3 package `20260710-q3-qc-filter-dissection`,
@@ -147,7 +148,8 @@ design_storm:                   # required iff mode: design_storm
 
 output:
   cli: wepp.cli                 # required; the .cli destination
-                                # (SPEC-CLI-PARQUET adds parquet)
+  parquet: wepp.cli.parquet     # optional A1 companion; continuous or
+                                # observed only (SPEC-CLI-PARQUET)
   overwrite: false              # optional, default false (legacy -F;
                                 # false = typed error if the file
                                 # exists — never a prompt)
@@ -156,31 +158,37 @@ output:
                                 # <output.cli>.quality.json sidecar
                                 # (SPEC-QUALITY-REPORT). The sidecar
                                 # is always rewritten when enabled;
-                                # `overwrite` governs the .cli only.
+                                # `overwrite` governs declared .cli and
+                                # .cli.parquet climate destinations.
 ```
 
-## Field invariants (normative; encoded in the JSON Schema)
+## Field invariants (normative; JSON Schema plus semantic validation)
 
 | Field | Type / domain |
 |---|---|
 | `cligen_runspec` | integer, exactly 1 in this revision |
 | `station.par`, `station.document` | exactly one non-empty string path; syntax selected explicitly, never by extension |
 | `observed.prn`, `output.cli` | non-empty string paths |
+| `output.parquet` | optional non-empty string path ending in `.cli.parquet`; distinct/non-aliasing from text, companions, and reserved staging paths (semantic filesystem check); rejected in storm modes |
 | `mode`, `simulation.interpolation` | closed enums as listed |
-| `simulation.begin_year` | integer ≥ 1 where accepted |
-| `simulation.years` | integer ≥ 1 where accepted |
-| `rng.burn` | integer ≥ 0 |
+| `simulation.begin_year` | integer 1–99,999 where accepted |
+| `simulation.years` | integer ≥ 1 whose final year is ≤ 99,999 |
+| `rng.burn` | integer 0–2,147,483,647 (faithful signed-32-bit control/header domain) |
 | `generation_profile` | closed enum: `faithful_5_32_3` (default) or the explicitly labeled extension `fast_batch_v0` (SPEC-GENERATION-PROFILES) |
 | `qc_filter` | closed enum: `faithful` (default) or `off` (rev 5); rejected under `generation_profile: fast_batch_v0` |
-| `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode (§Year plan; validated before `jdt` so no assertion is reachable) |
-| `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible, > 0 |
-| `time_to_peak_fraction` | finite f32-convertible in (0, 1] |
+| `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode; storm year −9,999..99,999 (legacy `i5`) |
+| `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible input, > 0 |
+| `time_to_peak_fraction` | finite f32-convertible input in (0, 1] |
+| `output.command_echo` | base string without NUL/CR/LF; generation always appends required profile/QC markers for divergent behavior |
 | `output.overwrite` | boolean |
 | `output.quality` | boolean, default true (rev 4) |
 | parent blocks (`simulation`, `rng`) | omissible when every member is optional/defaulted; mode-conditional blocks (`observed`, `single_storm`, `design_storm`) required for their mode and **rejected under any other mode** |
 
 Anything else — unknown fields anywhere, wrong types, out-of-domain
-values — is a typed validation error.
+values, or an explicit YAML/JSON `null` where a field type is non-null — is a
+typed validation error. Omission alone selects a documented default.
+Resolved provenance stores the exact widened f32 values actually consumed by
+the generator, not the original higher-precision YAML lexemes.
 
 The draft [`SPEC-FAST-BATCH-V1`](SPEC-FAST-BATCH-V1.md) defines the proposed
 successor to the experimental profile and its ADR-0002 quality assessment. It
@@ -272,7 +280,7 @@ reproducing each golden `.cli` byte-identically.
 ## Provenance obligations
 
 The A1 provenance block embeds the **canonical effective runspec
-itself** (resolved defaults, lexical + resolved paths) together with
+itself** (resolved defaults and lexical paths) together with
 its hash **and content identities (hashes) of every input artifact**
 (`.par` or station document, `.prn`). A converted station document also
 carries its legacy-source SHA-256 per SPEC-STATION-DOCUMENT. A hash alone is
@@ -280,6 +288,24 @@ not a substitute for the document,
 and provenance *identifies* inputs — reproduction additionally
 requires the identified input bytes. Details land in SPEC-PROVENANCE;
 this spec fixes what the runspec side must supply.
+
+Resolved filesystem paths remain runtime context and are deliberately absent
+from serialized provenance: they leak host/cache layout and are not portable
+identity. Exact selected bytes are bound by their hashes. This rev-7 A1 ruling
+supersedes rev 6's requirement to serialize both lexical and resolved paths.
+
+Every run writes `<output.cli>.provenance.json`, including when
+`output.quality: false`. The optional Parquet artifact embeds the same shared
+run identity with its independent output-schema descriptor. `output.overwrite`
+governs both declared climate destinations; derived provenance/quality
+companions are rewritten to match the newly produced text.
+One canonical-destination lock serializes cooperating writers. On success the
+publication order is text, mandatory provenance, optional Parquet, then
+optional quality. Each non-text artifact is staged and atomically renamed;
+the bundle as a whole is not claimed to be transactional. Abrupt process or
+host termination may leave the hidden `.cligen-lock` file. After confirming
+that no writer is active for that destination, an operator may remove the
+stale lock and retry the run.
 
 ## Non-goals (ratified)
 
@@ -304,8 +330,9 @@ this spec fixes what the runspec side must supply.
 - `cligen run` on the 12 golden runspecs reproduces the 12 golden
   `.cli` files byte-identically — including the header echo.
 - Converted modern-station variants of all 12 runspecs reproduce the same
-  `.cli` and quality-sidecar bytes when their explicit historical
-  `command_echo` is retained.
+  `.cli` bytes when their explicit historical `command_echo` is retained.
+  Quality metrics remain equal while shared provenance truthfully identifies
+  the selected station-input schema and bytes.
 - Schema/orchestration vectors cover the publicly ratified branches
   the goldens do not reach: `design_storm`, `linear` and
   `monthly_mean_preserving` interpolation, explicit observed

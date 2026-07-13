@@ -162,10 +162,14 @@ header echo for the modern path is `--station-document=<lexical-path>`;
 explicit `output.command_echo` remains verbatim and lets converted golden
 vectors retain their historical header bytes.
 
-Until A1 adds generic station-input identity fields, a run using a converted
-document fills the quality report's existing `identity.content.par_sha256`
-from `lineage.source_sha256`. Quality targets come from the same typed state.
-The standalone `cligen quality --par` surface remains legacy-only in A4a.
+A1 replaces the temporary `identity.content.par_sha256` bridge with the
+syntax-independent station model/parameter-set identity plus the declared
+legacy-source SHA-256. Full run provenance truthfully distinguishes selected
+legacy and document input schema/bytes. Quality targets still come from the
+same typed state; standalone `cligen quality --par` remains legacy intake.
+The parameter-set identity is SHA-256 over compact canonical JSON for the
+declaration-ordered `parameters` object only; envelope, model, units, and
+lineage are excluded.
 
 ## Acceptance
 
@@ -173,8 +177,10 @@ The standalone `cligen quality --par` surface remains legacy-only in A4a.
   bit-identical `f32`, including explicit negative-zero vectors.
 - Modern state reproduces all existing four-station × interpolation 0..3
   `sta_parms` snapshots.
-- All 12 runspec goldens reproduce `.cli` and quality-sidecar bytes through
-  either station syntax when the historical `command_echo` is explicit.
+- All 12 runspec goldens reproduce `.cli` bytes through either station syntax
+  when the historical `command_echo` is explicit. Quality metric content is
+  identical; A1 provenance intentionally distinguishes selected input syntax
+  and bytes.
 - Deterministic bytes validate against the published JSON Schema; malformed
   vectors cover every failure class above.
 - The ignored five-collection gate follows the Q2 SQLite catalogs and requires

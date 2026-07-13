@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/provenance.schema.json",
+  "title": "Latest cligen-rs provenance schema",
+  "$ref": "provenance-v1.schema.json"
+}

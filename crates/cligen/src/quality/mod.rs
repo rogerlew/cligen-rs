@@ -24,11 +24,18 @@ use std::fmt::Write as _;
 use sha2::{Digest, Sha256};
 
 use crate::par::{ParError, ParFile};
-use crate::station::FixedMonthly5323;
+use crate::provenance::{
+    ArtifactProvenanceV1, DateV1, GenerationModeV1, MediaTypeV1, ProvenanceError,
+};
+use crate::station::{parameter_set_sha256, FixedMonthly5323, StationDocumentError};
 use intake::QualityIntakeError;
-use report::{Identity, IdentityContent, ProcessMetrics, METRICS_VERSION};
+use report::{
+    Identity, IdentityContent, ProcessMetrics, METRICS_VERSION, QUALITY_REPORT_SCHEMA_VERSION,
+};
 
-pub use report::{Provenance, QualityReport};
+pub use report::QualityReport;
+/// Migration alias for the shared SPEC-PROVENANCE object.
+pub type Provenance = ArtifactProvenanceV1;
 
 /// Typed failure computing a quality report.
 #[derive(Debug)]
@@ -37,6 +44,12 @@ pub enum QualityError {
     Cli(QualityIntakeError),
     /// The `.par` bytes failed the SPEC-PAR typed parse.
     Par(ParError),
+    /// The station model could not produce its canonical content identity.
+    Station(StationDocumentError),
+    /// Supplied shared provenance was invalid or did not match report inputs.
+    Provenance(ProvenanceError),
+    /// Public post-hoc computation cannot attest run-only provenance/process.
+    RunOnlyInputs,
     /// Report serialization failed (unreachable for reports built by
     /// this module; surfaced rather than swallowed).
     Serialize(serde_json::Error),
@@ -47,6 +60,11 @@ impl fmt::Display for QualityError {
         match self {
             QualityError::Cli(error) => write!(f, ".cli intake: {error}"),
             QualityError::Par(error) => write!(f, ".par intake: {error}"),
+            QualityError::Station(error) => write!(f, "station identity: {error}"),
+            QualityError::Provenance(error) => write!(f, "report provenance: {error}"),
+            QualityError::RunOnlyInputs => {
+                f.write_str("run-only provenance/process metrics require trusted run orchestration")
+            }
             QualityError::Serialize(error) => write!(f, "report serialization: {error}"),
         }
     }
@@ -57,17 +75,21 @@ impl Error for QualityError {
         match self {
             QualityError::Cli(error) => Some(error),
             QualityError::Par(error) => Some(error),
+            QualityError::Station(error) => Some(error),
+            QualityError::Provenance(error) => Some(error),
             QualityError::Serialize(error) => Some(error),
+            QualityError::RunOnlyInputs => None,
         }
     }
 }
 
 /// Compute a quality report from `.cli` text and `.par` bytes.
 ///
-/// `provenance` is `Some` only on the run-emitted path; `cligen
-/// quality` passes `None` and the report carries
-/// `identity.provenance: null`, `process: null`, and
-/// `par_convergence.observed_passthrough: null`.
+/// This public surface is post-hoc: `provenance` and `process` must both be
+/// `None`, producing `identity.provenance: null`, `process: null`, and
+/// `par_convergence.observed_passthrough: null`. Trusted run orchestration uses
+/// the crate-private station-state seam so callers cannot attest invented
+/// run-only data.
 ///
 /// A single-event file (exactly one daily row — the storm modes)
 /// carries group D plus identity only: one day supports no
@@ -75,13 +97,17 @@ impl Error for QualityError {
 ///
 /// # Errors
 ///
-/// Fails closed on a malformed `.cli` daily table or `.par` file.
+/// Fails closed on a malformed `.cli` daily table or `.par` file, or supplied
+/// run-only inputs.
 pub fn compute_report(
     cli_text: &str,
     par_bytes: &[u8],
     provenance: Option<Provenance>,
     process: Option<ProcessMetrics>,
 ) -> Result<QualityReport, QualityError> {
+    if provenance.is_some() || process.is_some() {
+        return Err(QualityError::RunOnlyInputs);
+    }
     let par = ParFile::parse(par_bytes).map_err(QualityError::Par)?;
     compute_report_with_station(
         cli_text,
@@ -94,30 +120,43 @@ pub fn compute_report(
 
 /// Compute a report against syntax-independent fixed-monthly station state.
 ///
-/// A4a's modern station path supplies the required legacy-source SHA-256 from
-/// document lineage. This preserves the metrics-version-2 `par_sha256` bridge
-/// until A1 introduces generic station-input identities.
+/// A1 identifies syntax-independent model parameters in `identity.content`;
+/// run-only SPEC-PROVENANCE separately retains the selected station syntax
+/// and exact input bytes.
 pub(crate) fn compute_report_with_station(
     cli_text: &str,
     station: &FixedMonthly5323,
-    legacy_par_sha256: &str,
+    station_source_sha256: &str,
     provenance: Option<Provenance>,
     process: Option<ProcessMetrics>,
 ) -> Result<QualityReport, QualityError> {
     let table = intake::parse_cli_table(cli_text).map_err(QualityError::Cli)?;
     let rows = &table.rows;
+    let parameter_set_sha256 = parameter_set_sha256(station).map_err(QualityError::Station)?;
+    let cli_sha256 = sha256_hex(cli_text.as_bytes());
+    if let Some(value) = &provenance {
+        validate_report_provenance(
+            value,
+            &parameter_set_sha256,
+            station_source_sha256,
+            &cli_sha256,
+            rows,
+        )?;
+    }
 
     let content = IdentityContent {
         tool: format!("cligen-rs {}", env!("CARGO_PKG_VERSION")),
-        par_sha256: legacy_par_sha256.to_owned(),
-        cli_sha256: sha256_hex(cli_text.as_bytes()),
+        station_model: "fixed_monthly_5_32_3".to_owned(),
+        station_parameter_set_sha256: parameter_set_sha256,
+        station_source_sha256: station_source_sha256.to_owned(),
+        cli_sha256,
         days: rows.len() as u64,
         years: groups::distinct_years(rows),
         span: [rows[0].year, rows[rows.len() - 1].year],
     };
     let observed_passthrough = provenance
         .as_ref()
-        .map(|provenance| provenance.mode == "observed");
+        .map(|provenance| provenance.generation.mode == GenerationModeV1::Observed);
 
     let single_event = rows.len() == 1;
     let (par_convergence, interannual, covariation) = if single_event {
@@ -138,6 +177,7 @@ pub(crate) fn compute_report_with_station(
     };
 
     Ok(QualityReport {
+        quality_report_schema_version: QUALITY_REPORT_SCHEMA_VERSION,
         metrics_version: METRICS_VERSION,
         identity: Identity {
             content,
@@ -149,6 +189,42 @@ pub(crate) fn compute_report_with_station(
         tails: groups::tails(rows),
         process,
     })
+}
+
+fn validate_report_provenance(
+    provenance: &ArtifactProvenanceV1,
+    parameter_set_sha256: &str,
+    station_source_sha256: &str,
+    cli_sha256: &str,
+    rows: &[intake::DailyValue],
+) -> Result<(), QualityError> {
+    provenance.validate().map_err(QualityError::Provenance)?;
+    let first = rows.first().expect("quality intake rejects empty tables");
+    let last = rows.last().expect("quality intake rejects empty tables");
+    let actual_first = DateV1 {
+        year: first.year,
+        month: first.month as u8,
+        day: first.day as u8,
+    };
+    let actual_last = DateV1 {
+        year: last.year,
+        month: last.month as u8,
+        day: last.day as u8,
+    };
+    let matches = provenance.artifact.media_type == MediaTypeV1::CliText
+        && provenance.artifact.content_sha256.as_deref() == Some(cli_sha256)
+        && provenance.station.parameter_set_sha256 == parameter_set_sha256
+        && provenance.station.legacy_source_sha256 == station_source_sha256
+        && provenance.actual.emitted_day_count == rows.len() as u64
+        && provenance.actual.first_date == Some(actual_first)
+        && provenance.actual.last_date == Some(actual_last);
+    if !matches {
+        return Err(QualityError::Provenance(ProvenanceError::Validation {
+            field_path: "identity.provenance".to_owned(),
+            message: "does not match the measured text/station inputs".to_owned(),
+        }));
+    }
+    Ok(())
 }
 
 /// Lowercase-hex SHA-256 of a byte stream.

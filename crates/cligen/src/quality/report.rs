@@ -7,10 +7,15 @@
 
 use serde::{Deserialize, Serialize};
 
+use super::QualityError;
+
 /// The published metric-vector revision. Version 2 (Q3,
 /// SPEC-QUALITY-REPORT rev 5) adds `process.counterfactual` — the
 /// `qc_filter: off` would-have-been QC verdicts.
 pub const METRICS_VERSION: u32 = 2;
+/// Quality-report envelope revision. A1 changes identity/provenance without
+/// changing the ADR-0002 metric vector.
+pub const QUALITY_REPORT_SCHEMA_VERSION: u32 = 2;
 
 /// Twelve calendar-month cells in schema order.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -52,6 +57,7 @@ impl<T> Months<T> {
 /// The complete report.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct QualityReport {
+    pub quality_report_schema_version: u32,
     pub metrics_version: u32,
     pub identity: Identity,
     pub par_convergence: Option<ParConvergence>,
@@ -82,8 +88,11 @@ impl QualityReport {
     ///
     /// Returns the underlying serializer error; unreachable for
     /// reports built by this module (no non-finite values, no maps).
-    pub fn to_json_bytes(&self) -> Result<Vec<u8>, serde_json::Error> {
-        let mut bytes = serde_json::to_vec_pretty(self)?;
+    pub fn to_json_bytes(&self) -> Result<Vec<u8>, QualityError> {
+        if let Some(provenance) = &self.identity.provenance {
+            provenance.validate().map_err(QualityError::Provenance)?;
+        }
+        let mut bytes = serde_json::to_vec_pretty(self).map_err(QualityError::Serialize)?;
         bytes.push(b'\n');
         Ok(bytes)
     }
@@ -93,30 +102,20 @@ impl QualityReport {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Identity {
     pub content: IdentityContent,
-    pub provenance: Option<Provenance>,
+    pub provenance: Option<crate::provenance::ArtifactProvenanceV1>,
 }
 
 /// Recoverable from the inputs alone; present in every report.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct IdentityContent {
     pub tool: String,
-    pub par_sha256: String,
+    pub station_model: String,
+    pub station_parameter_set_sha256: String,
+    pub station_source_sha256: String,
     pub cli_sha256: String,
     pub days: u64,
     pub years: u32,
     pub span: [i32; 2],
-}
-
-/// Run-emitted resolved runspec surface; `null` from `cligen quality`.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Provenance {
-    pub generation_profile: String,
-    pub qc_filter: Option<String>,
-    pub mode: String,
-    pub burn: u32,
-    pub begin_year: Option<i32>,
-    pub years: Option<i32>,
-    pub interpolation: String,
 }
 
 /// One generated-vs-target comparison cell.

@@ -8,7 +8,6 @@ use std::path::{Path, PathBuf};
 
 use cligen::modes::{run_to_cli, RunInputs};
 use cligen::profile::{GenerationProfile, QcFilter};
-use cligen::quality::compute_report;
 use cligen::runspec::RunspecDocument;
 
 fn repo_root() -> PathBuf {
@@ -56,8 +55,8 @@ fn explicit_faithful_qc_is_byte_identical_to_the_golden() {
 #[test]
 fn qc_off_diverges_declares_itself_and_prices_the_removed_conditioning() {
     let par = new_meadows_par();
-    let faithful_echo = QcFilter::Faithful.command_echo("-iid106388.par".to_owned());
-    let off_echo = QcFilter::Off.command_echo("-iid106388.par".to_owned());
+    let faithful_echo = "-iid106388.par".to_owned();
+    let off_echo = "-iid106388.par".to_owned();
     let faithful = run_to_cli(&new_meadows_inputs(
         &par,
         &faithful_echo,
@@ -100,25 +99,49 @@ fn qc_off_diverges_declares_itself_and_prices_the_removed_conditioning() {
 
     // Report provenance carries the knob; the sidecar surface accepts
     // the process block.
-    let report = compute_report(
-        &off_a.cli,
-        &par,
-        Some(cligen::quality::Provenance {
-            generation_profile: "faithful_5_32_3".to_owned(),
-            qc_filter: Some("off".to_owned()),
-            mode: "continuous".to_owned(),
-            burn: 0,
-            begin_year: Some(1),
-            years: Some(31),
-            interpolation: "none".to_owned(),
-        }),
-        Some(off_a.process.clone()),
-    )
-    .unwrap();
+    let provenance_document = String::from(
+        "cligen_runspec: 1\n\
+         station: { par: fixtures/new-meadows-id/id106388.par }\n\
+         mode: continuous\n\
+         simulation: { begin_year: 1, years: 31 }\n\
+         qc_filter: off\n\
+         output: { cli: wepp.cli }\n",
+    );
+    let prepared = RunspecDocument::parse(&provenance_document)
+        .unwrap()
+        .resolve(&repo_root())
+        .unwrap();
+    let report = prepared.generate_quality_report().unwrap();
     assert_eq!(report.metrics_version, 2);
     let process = report.process.unwrap();
     assert_eq!(process.qc_filter.as_deref(), Some("off"));
     assert!(process.counterfactual.is_some());
+}
+
+#[test]
+fn direct_run_api_marks_profiles_and_rejects_oversized_burns() {
+    let par = new_meadows_par();
+    let mut fast = new_meadows_inputs(&par, "-iid106388.par", QcFilter::Faithful);
+    fast.generation_profile = GenerationProfile::FastBatchV0;
+    fast.years = Some(1);
+    let output = run_to_cli(&fast).unwrap();
+    assert!(output
+        .cli
+        .contains("-iid106388.par --generation-profile fast-batch-v0"));
+
+    let mut invalid_fast = new_meadows_inputs(&par, "-iid106388.par", QcFilter::Off);
+    invalid_fast.generation_profile = GenerationProfile::FastBatchV0;
+    assert!(run_to_cli(&invalid_fast)
+        .unwrap_err()
+        .to_string()
+        .contains("qc_filter"));
+
+    let mut oversized = new_meadows_inputs(&par, "-iid106388.par", QcFilter::Faithful);
+    oversized.burn = i32::MAX as u32 + 1;
+    assert!(run_to_cli(&oversized)
+        .unwrap_err()
+        .to_string()
+        .contains("burn"));
 }
 
 const RUNSPEC_TEMPLATE: &str = "cligen_runspec: 1\n\

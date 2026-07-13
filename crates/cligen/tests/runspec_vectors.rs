@@ -1,6 +1,7 @@
 use std::path::{Path, PathBuf};
 
 use cligen::profile::GenerationProfile;
+use cligen::provenance::RngSchemeV1;
 use cligen::runspec::{load_runspec_file, RunspecDocument, RunspecError};
 
 fn repo_root() -> PathBuf {
@@ -67,6 +68,7 @@ fn schema_artifact_is_json_with_the_runspec_version_constraint() {
     .unwrap();
     assert_eq!(schema["properties"]["cligen_runspec"]["const"], 1);
     assert!(schema["properties"]["station"]["properties"]["document"].is_mapping());
+    assert!(schema["properties"]["output"]["properties"]["parquet"].is_mapping());
     assert_eq!(
         schema["properties"]["station"]["oneOf"]
             .as_sequence()
@@ -123,6 +125,65 @@ fn runspec_requires_exactly_one_explicit_station_syntax() {
 }
 
 #[test]
+fn parquet_destination_is_explicit_and_storm_modes_fail_closed() {
+    let continuous = CONTINUOUS.replace(
+        "output: { cli: wepp.cli }",
+        "output: { cli: wepp.cli, parquet: wepp.cli.parquet }",
+    );
+    document(&continuous).validate().unwrap();
+
+    let wrong_suffix = continuous.replace("wepp.cli.parquet", "wepp.parquet");
+    assert_validation_path(&wrong_suffix, "output.parquet");
+
+    let same_path = continuous.replace("wepp.cli.parquet", "wepp.cli");
+    assert_validation_path(&same_path, "output.parquet");
+
+    for (yaml, expected) in [
+        (
+            continuous.replace("parquet: wepp.cli.parquet", "parquet: null"),
+            "output.parquet",
+        ),
+        (
+            CONTINUOUS.replace(
+                "output: { cli: wepp.cli }",
+                "output: { cli: wepp.cli, quality: null }",
+            ),
+            "output.quality",
+        ),
+    ] {
+        let error = RunspecDocument::parse(&yaml).unwrap_err().to_string();
+        assert!(error.contains(expected), "expected {expected} in {error}");
+    }
+
+    let storm = SINGLE_STORM.replace(
+        "output: { cli: wepp.cli }",
+        "output: { cli: wepp.cli, parquet: storm.cli.parquet }",
+    );
+    assert_validation_path(&storm, "output.parquet");
+}
+
+#[test]
+fn resolved_generation_controls_fail_closed_if_public_fields_are_mutated() {
+    let root = repo_root();
+    let yaml = CONTINUOUS.replace("fixture.par", "fixtures/new-meadows-id/id106388.par");
+    let mut prepared = RunspecDocument::parse(&yaml)
+        .unwrap()
+        .resolve(&root)
+        .unwrap();
+    prepared.burn = 17;
+    let error = prepared.generate().unwrap_err();
+    assert!(error.to_string().contains("prepared_run.burn"));
+
+    let mut prepared = RunspecDocument::parse(&yaml)
+        .unwrap()
+        .resolve(&root)
+        .unwrap();
+    prepared.interpolation = 99;
+    let error = prepared.generate().unwrap_err();
+    assert!(error.to_string().contains("prepared_run.interpolation"));
+}
+
+#[test]
 fn runspec_rejects_every_scalar_field_invariant_with_its_path() {
     let cases = [
         (
@@ -143,6 +204,14 @@ fn runspec_rejects_every_scalar_field_invariant_with_its_path() {
             "simulation.years",
         ),
         (
+            CONTINUOUS.replace("begin_year: 1", "begin_year: 100000"),
+            "simulation.begin_year",
+        ),
+        (
+            CONTINUOUS.replace("begin_year: 1, years: 1", "begin_year: 99999, years: 2"),
+            "simulation.years",
+        ),
+        (
             CONTINUOUS.replace(
                 "output: { cli: wepp.cli }",
                 "rng: { burn: -1 }\noutput: { cli: wepp.cli }",
@@ -150,8 +219,26 @@ fn runspec_rejects_every_scalar_field_invariant_with_its_path() {
             "rng.burn",
         ),
         (
+            CONTINUOUS.replace(
+                "output: { cli: wepp.cli }",
+                "rng: { burn: 2147483648 }\noutput: { cli: wepp.cli }",
+            ),
+            "rng.burn",
+        ),
+        (
+            CONTINUOUS.replace(
+                "output: { cli: wepp.cli }",
+                "output: { cli: wepp.cli, command_echo: \"bad\\nrecord\" }",
+            ),
+            "output.command_echo",
+        ),
+        (
             SINGLE_STORM.replace("month: 6", "month: 13"),
             "single_storm.date.month",
+        ),
+        (
+            SINGLE_STORM.replace("year: 12", "year: -10000"),
+            "single_storm.date.year",
         ),
         (
             SINGLE_STORM.replace("month: 6, day: 15", "month: 4, day: 31"),
@@ -235,6 +322,42 @@ fn runspec_fails_closed_for_unknown_wrong_type_and_wrong_mode_blocks() {
 }
 
 #[test]
+fn explicit_null_never_smuggles_a_default_or_absent_mode_block() {
+    let vectors = [
+        (
+            CONTINUOUS.replace(
+                "output: { cli: wepp.cli }",
+                "rng: { burn: null }\noutput: { cli: wepp.cli }",
+            ),
+            "rng.burn",
+        ),
+        (
+            CONTINUOUS.replace("mode: continuous", "qc_filter: null\nmode: continuous"),
+            "qc_filter",
+        ),
+        (
+            CONTINUOUS.replace("begin_year: 1", "begin_year: null"),
+            "simulation.begin_year",
+        ),
+        (
+            CONTINUOUS.replace(
+                "output: { cli: wepp.cli }",
+                "output: { cli: wepp.cli, command_echo: null }",
+            ),
+            "output.command_echo",
+        ),
+        (
+            CONTINUOUS.replace("mode: continuous", "mode: continuous\nobserved: null"),
+            "observed",
+        ),
+    ];
+    for (yaml, field) in vectors {
+        let error = RunspecDocument::parse(&yaml).unwrap_err().to_string();
+        assert!(error.contains(field), "expected {field} in {error}");
+    }
+}
+
+#[test]
 fn generation_profile_defaults_to_faithful_and_marks_fast_batch_output() {
     let root = repo_root();
     let output = root.join("target/runspec-vectors/fast-profile.cli");
@@ -250,6 +373,10 @@ fn generation_profile_defaults_to_faithful_and_marks_fast_batch_output() {
     assert_eq!(fast.generation_profile, GenerationProfile::FastBatchV0);
     let output = fast.generate().unwrap();
     assert!(output.contains("--generation-profile fast-batch-v0"));
+    assert_eq!(
+        fast.quality_provenance().unwrap().generation.rng_scheme,
+        RngSchemeV1::SplitMix64MonthlyV0
+    );
 }
 
 #[test]

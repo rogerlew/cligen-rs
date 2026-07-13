@@ -399,6 +399,10 @@ pub fn day_gen(
 /// Typed run failure for the library orchestration.
 #[derive(Debug)]
 pub enum RunError {
+    InvalidInput {
+        field: &'static str,
+        message: &'static str,
+    },
     Par(crate::par::ParError),
     Station(crate::station::StationDocumentError),
     Prn(PrnError),
@@ -408,6 +412,7 @@ pub enum RunError {
 impl std::fmt::Display for RunError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            RunError::InvalidInput { field, message } => write!(f, "{field}: {message}"),
             RunError::Par(e) => write!(f, "{e}"),
             RunError::Station(e) => write!(f, "{e}"),
             RunError::Prn(e) => write!(f, "{e}"),
@@ -444,7 +449,8 @@ pub struct RunInputs<'a> {
     pub storm: Option<crate::storm::SingleStormParams>,
     /// The version constant (`cligen.f:618`: 5.3230).
     pub version: f32,
-    /// SPEC-RUNSPEC §Header echo — emitted verbatim.
+    /// Base SPEC-RUNSPEC header echo. The public seam appends
+    /// mandatory non-faithful profile/QC markers before emission.
     pub command_echo: &'a str,
 }
 
@@ -470,9 +476,35 @@ pub(crate) struct ResolvedRunInputs<'a> {
 /// (`cligen.f:965-966`). Returns the `.cli` bytes and run-only process
 /// observations.
 pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
+    if inp.generation_profile == GenerationProfile::FastBatchV0 && inp.qc_filter == QcFilter::Off {
+        return Err(RunError::InvalidInput {
+            field: "qc_filter",
+            message: "is not defined for generation_profile fast_batch_v0",
+        });
+    }
+    if inp.burn > i32::MAX as u32 {
+        return Err(RunError::InvalidInput {
+            field: "burn",
+            message: "must fit the faithful signed 32-bit header/control field",
+        });
+    }
+    if inp
+        .command_echo
+        .chars()
+        .any(|character| matches!(character, '\0' | '\r' | '\n'))
+    {
+        return Err(RunError::InvalidInput {
+            field: "command_echo",
+            message: "must not contain NUL or record terminators",
+        });
+    }
     let par = crate::par::ParFile::parse(inp.par_bytes).map_err(RunError::Par)?;
     crate::station::StationDocumentV1::from_legacy_par(&par).map_err(RunError::Station)?;
-    run_to_cli_resolved(&ResolvedRunInputs {
+    let command_echo = inp.qc_filter.command_echo(
+        inp.generation_profile
+            .command_echo(inp.command_echo.to_owned()),
+    );
+    let generated = run_to_cli_resolved(&ResolvedRunInputs {
         iopt: inp.iopt,
         interp: inp.interp,
         burn: inp.burn,
@@ -484,13 +516,15 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
         prn_bytes: inp.prn_bytes,
         storm: inp.storm,
         version: inp.version,
-        command_echo: inp.command_echo,
-    })
+        command_echo: &command_echo,
+    })?;
+    Ok(generated.into_run_output())
 }
 
-/// Execute after SPEC-RUNSPEC has resolved and validated station syntax.
-pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutput, RunError> {
-    use crate::output::{write_cli_header, write_daily_row, write_run_end, HeaderInputs};
+/// Execute after SPEC-RUNSPEC has resolved and validated station syntax,
+/// retaining the typed pre-format projections used by every output writer.
+pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<GeneratedRun, RunError> {
+    use crate::output::{HeaderInputs, LegacyCliHeader};
 
     // Seeds + burn (cligen.f:723-737).
     let mut bk7 = Cbk7State::default();
@@ -550,11 +584,9 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutp
     );
 
     // ---- wxr_gen ----
-    let mut cli = String::new();
     let mut nbt = 1;
-    if st.bk4.iopt >= 4 {
-        write_cli_header(
-            &mut cli,
+    let header = (st.bk4.iopt >= 4).then(|| {
+        LegacyCliHeader::from_inputs(
             &HeaderInputs {
                 version: inp.version,
                 igcode: station.igcode,
@@ -572,8 +604,8 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutp
             },
             &st.bk7,
             &st.bk4.nc,
-        );
-    }
+        )
+    });
     // Year plan (wxr_gen:3758-3800).
     let mut loop_years = ss_out.numyr;
     let mut ntd1 = 0;
@@ -592,7 +624,8 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutp
         loop_years = 1;
     }
     let mut ii = 1;
-    let mut stopped = false;
+    let mut rows = Vec::new();
+    let mut termination = RunTermination::Normal;
     loop {
         let mut ntd = 365;
         // Gregorian test on iyear (wxr_gen:3766-3770); `!= 0` renders
@@ -604,7 +637,6 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutp
             ntd = 366;
         }
         st.ccl1.zero_year();
-        let mut rows = Vec::new();
         let exit = day_gen(
             nbt,
             iyear,
@@ -618,30 +650,25 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutp
             &mut rows,
         )
         .map_err(RunError::Prn)?;
-        for row in &rows {
-            write_daily_row(&mut cli, row);
-        }
         if exit == DayGenExit::Stop {
-            stopped = true;
+            termination = RunTermination::EarlyStop;
             break;
         }
         // opt_calc is a no-op for iopt >= 4 (characterized:
         // cligen.f:3196-3324 has no branch past iopt = 3); moveto
-        // stays 0, so the year advances (wxr_gen:3784-3789).
-        iyear += 1;
+        // stays 0. Test the completed loop count before advancing the
+        // source-shaped i32 year so a terminal i32::MAX storm/year cannot
+        // overflow after its final emitted row.
         ii += 1;
         if ii > loop_years {
             break;
         }
+        iyear += 1;
     }
-    // The run-end blank line is written only on normal termination
-    // (main:941-973: the moveto = 225 stop path closes unit 7 without
-    // it, cligen.f:978).
-    if !stopped {
-        write_run_end(&mut cli);
-    }
-    Ok(RunOutput {
-        cli,
+    Ok(GeneratedRun {
+        header,
+        rows,
+        termination,
         process: st
             .process
             .into_metrics(process_qc_filter(inp.generation_profile, inp.qc_filter)),
@@ -660,4 +687,116 @@ fn process_qc_filter(profile: GenerationProfile, qc: QcFilter) -> Option<String>
 pub struct RunOutput {
     pub cli: String,
     pub process: ProcessMetrics,
+}
+
+/// Why the faithful year loop ended. The legacy run-end record is present
+/// only for [`RunTermination::Normal`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum RunTermination {
+    Normal,
+    EarlyStop,
+}
+
+/// One generated climate run before any output-specific formatting.
+///
+/// All writers consume `rows`; text rendering is a projection and never a
+/// second generation pass.
+#[derive(Debug, Clone, PartialEq)]
+pub(crate) struct GeneratedRun {
+    pub(crate) header: Option<crate::output::LegacyCliHeader>,
+    pub(crate) rows: Vec<DailyRow>,
+    pub(crate) termination: RunTermination,
+    pub(crate) process: ProcessMetrics,
+}
+
+impl GeneratedRun {
+    /// Render the frozen WEPP-compatible `.cli` text from typed projections.
+    pub(crate) fn render_cli(&self) -> String {
+        use crate::output::{write_daily_row, write_legacy_cli_header, write_run_end};
+
+        let mut cli = String::new();
+        if let Some(header) = &self.header {
+            write_legacy_cli_header(&mut cli, header);
+        }
+        for row in &self.rows {
+            write_daily_row(&mut cli, row);
+        }
+        // The run-end blank line is written only on normal termination
+        // (main:941-973: the moveto = 225 stop path closes unit 7 without
+        // it, cligen.f:978).
+        if self.termination == RunTermination::Normal {
+            write_run_end(&mut cli);
+        }
+        cli
+    }
+
+    /// Preserve the source-compatible public library return surface.
+    pub(crate) fn into_run_output(self) -> RunOutput {
+        let cli = self.render_cli();
+        RunOutput {
+            cli,
+            process: self.process,
+        }
+    }
+}
+
+#[cfg(test)]
+mod generated_run_tests {
+    use super::*;
+    use std::path::{Path, PathBuf};
+
+    fn repo_root() -> PathBuf {
+        Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../..")
+            .canonicalize()
+            .unwrap()
+    }
+
+    fn generated_run(par_rel: &str, prn_rel: Option<&str>, iopt: i32) -> GeneratedRun {
+        let root = repo_root();
+        let par_bytes = std::fs::read(root.join(par_rel)).unwrap();
+        let par = crate::par::ParFile::parse(&par_bytes).unwrap();
+        let prn_bytes = prn_rel.map(|path| std::fs::read(root.join(path)).unwrap());
+        run_to_cli_resolved(&ResolvedRunInputs {
+            iopt,
+            interp: if iopt == 6 { 2 } else { 0 },
+            burn: 0,
+            generation_profile: GenerationProfile::Faithful5323,
+            qc_filter: QcFilter::Faithful,
+            begin_year: (iopt == 5).then_some(1),
+            years: (iopt == 5).then_some(1),
+            station: par.fixed_monthly(),
+            prn_bytes: prn_bytes.as_deref(),
+            storm: None,
+            version: 5.3230,
+            command_echo: "typed-stream-test",
+        })
+        .unwrap()
+    }
+
+    #[test]
+    fn generated_bundle_retains_normal_rows_header_and_run_end() {
+        let generated = generated_run("fixtures/new-meadows-id/id106388.par", None, 5);
+
+        assert_eq!(generated.termination, RunTermination::Normal);
+        assert_eq!(generated.rows.len(), 365);
+        assert_eq!(generated.rows[0].iyear, 1);
+        let station_id = &generated.header.as_ref().unwrap().station_id;
+        assert_eq!(station_id.len(), 41);
+        assert!(station_id.starts_with(" NEW MEADOWS R S ID"));
+        assert!(generated.render_cli().ends_with("  \n"));
+    }
+
+    #[test]
+    fn generated_bundle_retains_observed_source_early_stop() {
+        let generated = generated_run(
+            "fixtures/fish-springs-ut/ut422852.par",
+            Some("docs/work-packages/20260709-golden-fixture-harness/artifacts/inputs/fish-springs-ut/ws-truncated.prn"),
+            6,
+        );
+
+        assert_eq!(generated.termination, RunTermination::EarlyStop);
+        assert_eq!(generated.rows.len(), 2_380);
+        assert!(!generated.render_cli().ends_with("  \n"));
+    }
 }

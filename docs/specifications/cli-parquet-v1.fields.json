@@ -1,0 +1,23 @@
+{
+  "output_schema": "org.openwepp.cligen.cli.parquet",
+  "output_schema_version": 1,
+  "fields": [
+    { "name": "run_id", "arrow_type": "utf8", "nullable": false, "units": "1", "description": "effective-runspec SHA-256" },
+    { "name": "generation_profile", "arrow_type": "utf8", "nullable": false, "units": "1", "description": "declared profile ID" },
+    { "name": "station_parameter_set_sha256", "arrow_type": "utf8", "nullable": false, "units": "1", "description": "syntax-independent station-model content identity" },
+    { "name": "sim_day_index", "arrow_type": "int32", "nullable": false, "units": "day", "description": "one-based contiguous row index" },
+    { "name": "year", "arrow_type": "int32", "nullable": false, "units": "year", "description": "CLIGEN/WEPP output year; year 1 is valid" },
+    { "name": "month", "arrow_type": "int8", "nullable": false, "units": "month", "description": "calendar month 1–12" },
+    { "name": "day_of_month", "arrow_type": "int8", "nullable": false, "units": "day", "description": "valid day in month" },
+    { "name": "precip_mm", "arrow_type": "float64", "nullable": false, "units": "mm", "description": "total daily precipitation" },
+    { "name": "duration_h", "arrow_type": "float64", "nullable": false, "units": "h", "description": "parametric storm duration; source value on dry days" },
+    { "name": "time_to_peak_fraction", "arrow_type": "float64", "nullable": false, "units": "1", "description": "time-to-peak / duration; source value on dry days" },
+    { "name": "peak_intensity_ratio", "arrow_type": "float64", "nullable": false, "units": "1", "description": "peak / mean rainfall intensity; source value on dry days" },
+    { "name": "tmax_c", "arrow_type": "float64", "nullable": false, "units": "degree_Celsius", "description": "daily maximum air temperature" },
+    { "name": "tmin_c", "arrow_type": "float64", "nullable": false, "units": "degree_Celsius", "description": "daily minimum air temperature" },
+    { "name": "solar_langley_day", "arrow_type": "float64", "nullable": false, "units": "langley/day", "description": "daily solar radiation" },
+    { "name": "wind_velocity_m_s", "arrow_type": "float64", "nullable": false, "units": "m/s", "description": "daily wind velocity" },
+    { "name": "wind_direction_deg", "arrow_type": "float64", "nullable": false, "units": "degree", "description": "clockwise from north" },
+    { "name": "tdew_c", "arrow_type": "float64", "nullable": false, "units": "degree_Celsius", "description": "daily dew-point temperature" }
+  ]
+}

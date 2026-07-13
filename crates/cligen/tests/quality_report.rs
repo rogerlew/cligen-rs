@@ -3,13 +3,15 @@
 //! legacy-Fortran measurability, byte determinism, single-storm
 //! group coverage, and the `output.quality` opt-out.
 
+use std::error::Error as _;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use cligen::modes::{run_to_cli, RunInputs, RunOutput};
 use cligen::profile::GenerationProfile;
-use cligen::quality::{compute_report, QualityReport};
+use cligen::quality::{compute_report, QualityError, QualityReport};
 use cligen::runspec::load_runspec_file;
+use cligen::station::StationDocumentError;
 use serde_json::Value;
 
 fn repo_root() -> PathBuf {
@@ -63,8 +65,72 @@ fn new_meadows_run_output() -> RunOutput {
     .unwrap()
 }
 
+#[test]
+fn quality_error_variants_retain_typed_sources() {
+    let par = par_bytes("new-meadows-id/id106388.par");
+    let cli = compute_report("not a .cli", &par, None, None).unwrap_err();
+    assert!(matches!(cli, QualityError::Cli(_)));
+    assert!(cli.source().is_some());
+
+    let par_error = compute_report("not a .cli", b"not a .par", None, None).unwrap_err();
+    assert!(matches!(par_error, QualityError::Par(_)));
+    assert!(par_error.source().is_some());
+
+    let station = QualityError::Station(StationDocumentError::Validation {
+        field_path: "parameters".to_owned(),
+        message: "non-finite value".to_owned(),
+    });
+    assert!(station.source().is_some());
+
+    let source = serde_json::from_str::<Value>("{").unwrap_err();
+    let serialize = QualityError::Serialize(source);
+    assert!(serialize.source().is_some());
+
+    let run_only = QualityError::RunOnlyInputs;
+    assert!(run_only.source().is_none());
+}
+
+#[test]
+fn run_only_quality_inputs_and_mutated_nested_provenance_fail_closed() {
+    let root = repo_root();
+    let run = load_runspec_file(
+        &root.join("crates/cligen/tests/fixtures/runspec/new-meadows-id-seed0/inp.yaml"),
+    )
+    .unwrap();
+    let provenance = run.quality_provenance().unwrap();
+    let error = compute_report(
+        &golden_text("new-meadows-id-seed0"),
+        &par_bytes("new-meadows-id/id106388.par"),
+        Some(provenance),
+        None,
+    )
+    .unwrap_err();
+    assert!(matches!(error, QualityError::RunOnlyInputs));
+
+    let mut report = run.generate_quality_report().unwrap();
+    report
+        .identity
+        .provenance
+        .as_mut()
+        .unwrap()
+        .effective_runspec
+        .output
+        .command_echo = "mutated".to_owned();
+    assert!(matches!(
+        report.to_json_bytes(),
+        Err(QualityError::Provenance(_))
+    ));
+}
+
 fn validate_schema(value: &Value, schema: &Value, root: &Value, path: &str) -> Result<(), String> {
     if let Some(reference) = schema.get("$ref").and_then(Value::as_str) {
+        if reference == "provenance-v1.schema.json" {
+            let external: Value = serde_json::from_str(include_str!(
+                "../../../docs/specifications/provenance-v1.schema.json"
+            ))
+            .map_err(|error| format!("{path}: invalid provenance schema: {error}"))?;
+            return validate_schema(value, &external, &external, path);
+        }
         let target = reference
             .strip_prefix("#/$defs/")
             .and_then(|name| root["$defs"].get(name))
@@ -191,8 +257,7 @@ fn post_hoc_equals_run_emitted_after_nulling_run_only_surfaces() {
         assert_eq!(cli_text, golden_text(case), "{case}: parity precondition");
         let par = par_bytes(station);
 
-        let mut run_emitted =
-            compute_report(&cli_text, &par, Some(run.quality_provenance()), None).unwrap();
+        let mut run_emitted = run.generate_quality_report().unwrap();
         assert!(
             run_emitted.identity.provenance.is_some(),
             "{case}: run-emitted provenance"
@@ -215,18 +280,18 @@ fn observed_mode_sets_observed_passthrough() {
     let runspec =
         root.join("crates/cligen/tests/fixtures/runspec/mt-wilson-ca-observed-seed0/inp.yaml");
     let run = load_runspec_file(&runspec).unwrap();
-    let report = compute_report(
-        &golden_text("mt-wilson-ca-observed-seed0"),
-        &par_bytes("mt-wilson-ca/ca046006.par"),
-        Some(run.quality_provenance()),
-        None,
-    )
-    .unwrap();
+    let report = run.generate_quality_report().unwrap();
     let group_a = report.par_convergence.unwrap();
     assert_eq!(group_a.observed_passthrough, Some(true));
     let provenance = report.identity.provenance.unwrap();
-    assert_eq!(provenance.mode, "observed");
-    assert_eq!(provenance.interpolation, "fourier");
+    assert_eq!(
+        provenance.generation.mode,
+        cligen::provenance::GenerationModeV1::Observed
+    );
+    assert_eq!(
+        provenance.generation.interpolation,
+        cligen::provenance::InterpolationV1::Fourier
+    );
 }
 
 #[test]
@@ -388,9 +453,13 @@ fn truncated_observed_tail_exposes_partial_year_day_count() {
 fn published_schema_structurally_validates_post_hoc_and_run_reports() {
     let root = repo_root();
     let schema: Value = serde_json::from_slice(
-        &std::fs::read(root.join("docs/specifications/quality-report.schema.json")).unwrap(),
+        &std::fs::read(root.join("docs/specifications/quality-report-v2.schema.json")).unwrap(),
     )
     .unwrap();
+    assert_eq!(
+        schema["properties"]["quality_report_schema_version"]["const"],
+        2
+    );
     let post_hoc = compute_report(
         &golden_text("new-meadows-id-single-storm-seed0"),
         &par_bytes("new-meadows-id/id106388.par"),
@@ -398,6 +467,8 @@ fn published_schema_structurally_validates_post_hoc_and_run_reports() {
         None,
     )
     .unwrap();
+    assert_eq!(post_hoc.quality_report_schema_version, 2);
+    assert_eq!(post_hoc.metrics_version, 2);
     validate_schema(
         &serde_json::to_value(post_hoc).unwrap(),
         &schema,
@@ -406,22 +477,11 @@ fn published_schema_structurally_validates_post_hoc_and_run_reports() {
     )
     .unwrap();
 
-    let generated = new_meadows_run_output();
-    let provenance = load_runspec_file(
+    let run = load_runspec_file(
         &root.join("crates/cligen/tests/fixtures/runspec/new-meadows-id-seed0/inp.yaml"),
     )
-    .unwrap()
-    .quality_provenance();
-    let run_report = serde_json::to_value(
-        compute_report(
-            &generated.cli,
-            &par_bytes("new-meadows-id/id106388.par"),
-            Some(provenance),
-            Some(generated.process),
-        )
-        .unwrap(),
-    )
     .unwrap();
+    let run_report = serde_json::to_value(run.generate_quality_report().unwrap()).unwrap();
     validate_schema(&run_report, &schema, &schema, "$run").unwrap();
 }
 
@@ -454,6 +514,7 @@ fn cligen_run_emits_sidecar_by_default_and_output_quality_false_opts_out() {
         .unwrap();
     assert!(status.success());
     assert!(dir.join("default.cli").exists());
+    assert!(dir.join("default.cli.provenance.json").exists());
     assert!(
         dir.join("default.cli.quality.json").exists(),
         "sidecar emitted by default"
@@ -474,6 +535,14 @@ fn cligen_run_emits_sidecar_by_default_and_output_quality_false_opts_out() {
         .unwrap();
     assert!(status.success());
     assert!(dir.join("optout.cli").exists());
+    let provenance = cligen::provenance::ArtifactProvenanceV1::parse_json(
+        &std::fs::read(dir.join("optout.cli.provenance.json")).unwrap(),
+    )
+    .unwrap();
+    assert_eq!(
+        provenance.artifact.output_schema,
+        cligen::provenance::SchemaIdentityV1::cli_text()
+    );
     assert!(
         !dir.join("optout.cli.quality.json").exists(),
         "output.quality: false suppresses the sidecar"

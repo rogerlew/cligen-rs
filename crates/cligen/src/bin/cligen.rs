@@ -26,8 +26,8 @@ struct Cli {
 enum Command {
     /// Parse, validate, resolve, and open declared inputs without generating output.
     Validate { input: PathBuf },
-    /// Validate the document, enforce overwrite policy, and write the `.cli` output
-    /// (plus the `.cli.quality.json` sidecar unless `output.quality: false`).
+    /// Validate the document, enforce overwrite policy, and write `.cli`, its
+    /// mandatory provenance companion, optional Parquet, and enabled quality output.
     Run { input: PathBuf },
     /// Compute a post-hoc quality report over any WEPP-format `.cli` and write it
     /// to stdout. `identity.provenance` and group P are null (SPEC-QUALITY-REPORT).
