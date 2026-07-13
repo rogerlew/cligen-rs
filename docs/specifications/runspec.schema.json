@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/rogerlew/cligen-rs/docs/specifications/runspec.schema.json",
   "title": "CLIGEN runspec",
-  "description": "SPEC-RUNSPEC revision 1. The Rust validator performs the source-calendar portion of date validation identified by x-cligen-source-calendar.",
+  "description": "SPEC-RUNSPEC contract revision 6, document major version 1. The Rust validator performs the source-calendar portion of date validation identified by x-cligen-source-calendar.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -19,14 +19,24 @@
     "station": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "par"
-      ],
       "properties": {
         "par": {
           "$ref": "#/$defs/nonEmptyPath"
+        },
+        "document": {
+          "$ref": "#/$defs/nonEmptyPath"
         }
-      }
+      },
+      "oneOf": [
+        {
+          "required": ["par"],
+          "not": { "required": ["document"] }
+        },
+        {
+          "required": ["document"],
+          "not": { "required": ["par"] }
+        }
+      ]
     },
     "mode": {
       "type": "string",

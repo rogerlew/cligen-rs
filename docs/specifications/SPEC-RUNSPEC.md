@@ -1,6 +1,8 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 5 — `qc_filter: faithful | off` accepted
+Status: active (rev 6 — A4a adds exactly-one `station.par` or
+`station.document`, with the station-document version independent of this
+runspec revision; rev 5 — `qc_filter: faithful | off` accepted
 2026-07-10 by the Q3 package `20260710-q3-qc-filter-dissection`,
 schema rev landing with the implementation; rejected with
 `fast_batch_v0`. Rev 4 — `output.quality` accepted 2026-07-10 by the
@@ -11,8 +13,10 @@ rev 2 contract ratified 2026-07-09, operator
 decision; rev 2 dispositions the 13-finding independent review,
 `docs/work-packages/20260709-runspec-contract/artifacts/review-codex.md`;
 implementation lands with ROADMAP item 8)
-Surface: the **only** user interface of the `cligen` binary: a single
-schema-versioned YAML document that fully specifies a run. The legacy
+Surface: the generation interface of the `cligen` binary: a single
+schema-versioned YAML document that fully specifies a run. Auxiliary
+`quality` and `stations` subcommands are specified by their owning surfaces.
+The legacy
 CLIGEN interface (argv flags, stdin answer scripts, interactive
 prompts) is **deliberately not replicated** — see §Non-goals.
 
@@ -43,8 +47,9 @@ the mapping tables below are normative.
   invariants) — the schema types and bounds what the source would
   crash or misbehave on, and does not invent physical limits the
   source never enforced.
-- **Versioned**: `cligen_runspec: 1` is required; future revisions
-  bump it. A published JSON Schema accompanies the implementation.
+- **Versioned**: `cligen_runspec: 1` is required. Compatible additions update
+  this contract revision and its published JSON Schema; an incompatible
+  envelope change bumps `cligen_runspec`.
 - **Faithful semantics, honest names** (§Naming traps).
 
 Machine-readable schema: [`runspec.schema.json`](runspec.schema.json).
@@ -64,10 +69,11 @@ the faithful header echo (§Header echo) and A1 provenance.
 cligen_runspec: 1               # required
 
 station:
-  par: id106388.par             # required; the single-station .par
-                                # intake (SPEC-PAR). The legacy -S/-s
-                                # multi-station scan is excluded — see
-                                # §Non-goals.
+  par: id106388.par             # exactly one of `par` (SPEC-PAR) or
+  # document: id106388.station.json  # `document`
+                                # (SPEC-STATION-DOCUMENT). No extension
+                                # sniffing. The legacy -S/-s multi-station
+                                # scan is excluded — see §Non-goals.
 
 mode: continuous                # required:
                                 # continuous | observed | single_storm
@@ -158,7 +164,8 @@ output:
 | Field | Type / domain |
 |---|---|
 | `cligen_runspec` | integer, exactly 1 in this revision |
-| `station.par`, `observed.prn`, `output.cli` | non-empty string paths |
+| `station.par`, `station.document` | exactly one non-empty string path; syntax selected explicitly, never by extension |
+| `observed.prn`, `output.cli` | non-empty string paths |
 | `mode`, `simulation.interpolation` | closed enums as listed |
 | `simulation.begin_year` | integer ≥ 1 where accepted |
 | `simulation.years` | integer ≥ 1 where accepted |
@@ -202,9 +209,11 @@ This is **output surface, not input emulation**:
 - `output.command_echo` (optional string) is emitted verbatim in that
   header field.
 - When omitted, the implementation renders a canonical echo from the
-  lexical runspec fields (order: `-rN`, `-i<par>`, `-O<prn>`,
+  lexical runspec fields (order: `-rN`, the station selector, `-O<prn>`,
   `-o<cli>`, `-t<mode>`, `-I<n>`, each only when non-default). The
-  canonical order cannot reproduce every historical command line
+  legacy selector is `-i<par>`; the modern selector is
+  `--station-document=<document>`.
+  The canonical order cannot reproduce every historical command line
   (the goldens themselves differ in flag order), which is exactly why
   the explicit field exists.
 - The golden runspecs pin `command_echo` verbatim from
@@ -234,7 +243,8 @@ resolved values are provenance surface).
 
 Both commands: parse the YAML, enforce the schema and mode-conditional
 rules, resolve paths against the base directory, **open and parse the
-declared inputs** (`.par` via SPEC-PAR, `.prn` via
+declared inputs** (`.par` via SPEC-PAR or modern JSON via
+SPEC-STATION-DOCUMENT, `.prn` via
 SPEC-OBSERVED-INPUT — including the observed `initial_year`
 derivation), and resolve effective defaults. `validate` performs no
 generation and never creates, truncates, or stats the output path —
@@ -264,7 +274,9 @@ reproducing each golden `.cli` byte-identically.
 The A1 provenance block embeds the **canonical effective runspec
 itself** (resolved defaults, lexical + resolved paths) together with
 its hash **and content identities (hashes) of every input artifact**
-(`.par`, `.prn`). A hash alone is not a substitute for the document,
+(`.par` or station document, `.prn`). A converted station document also
+carries its legacy-source SHA-256 per SPEC-STATION-DOCUMENT. A hash alone is
+not a substitute for the document,
 and provenance *identifies* inputs — reproduction additionally
 requires the identified input bytes. Details land in SPEC-PROVENANCE;
 this spec fixes what the runspec side must supply.
@@ -276,8 +288,9 @@ this spec fixes what the runspec side must supply.
   tooling) are explicitly not a compatibility target (operator
   decision, 2026-07-09). The header echo (§above) is output-byte
   compatibility, not interface emulation.
-- **No `-S`/`-s` multi-station catalog selection**: `station.par` is
-  the characterized single-station intake only; the multi-station
+- **No `-S`/`-s` multi-station catalog selection**: `station.par` remains
+  the characterized single-station legacy intake and `station.document` is
+  one explicit modern document; the multi-station
   scan path remains excluded exactly as SPEC-PAR defers it. No
   silent first-station fallback.
 - No interactive mode; legacy `iopt` 1-3 and 8 not exposed; `-v/-h`
@@ -290,6 +303,9 @@ this spec fixes what the runspec side must supply.
   mutations of each (fail-closed vectors per §Field invariants).
 - `cligen run` on the 12 golden runspecs reproduces the 12 golden
   `.cli` files byte-identically — including the header echo.
+- Converted modern-station variants of all 12 runspecs reproduce the same
+  `.cli` and quality-sidecar bytes when their explicit historical
+  `command_echo` is retained.
 - Schema/orchestration vectors cover the publicly ratified branches
   the goldens do not reach: `design_storm`, `linear` and
   `monthly_mean_preserving` interpolation, explicit observed

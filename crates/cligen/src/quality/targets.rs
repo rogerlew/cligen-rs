@@ -25,6 +25,7 @@
 //! interpolation-method bias.
 
 use crate::par::ParFile;
+use crate::station::FixedMonthly5323;
 
 const IN_TO_MM: f64 = 25.4;
 const F_TO_C_SCALE: f64 = 5.0 / 9.0;
@@ -51,6 +52,13 @@ impl ParTargets {
     /// Derive every group A target from a parsed `.par`.
     #[must_use]
     pub fn from_par(par: &ParFile) -> Self {
+        Self::from_station(par.fixed_monthly())
+    }
+
+    /// Derive every group A target from syntax-independent fixed-monthly
+    /// station state (SPEC-STATION-DOCUMENT).
+    #[must_use]
+    pub fn from_station(station: &FixedMonthly5323) -> Self {
         let mut targets = ParTargets {
             precip_wet_mean_mm: [None; 12],
             precip_wet_sd_mm: [None; 12],
@@ -67,21 +75,21 @@ impl ParTargets {
             wind_speed_mean_ms: [None; 12],
         };
         for m in 0..12 {
-            targets.precip_wet_mean_mm[m] = Some(f64::from(par.rst[m][0]) * IN_TO_MM);
-            targets.precip_wet_sd_mm[m] = Some(f64::from(par.rst[m][1]) * IN_TO_MM);
-            targets.precip_wet_skew[m] = Some(effective_skew(f64::from(par.rst[m][2])));
-            let p_ww = f64::from(par.prw[m][0]);
-            let p_wd = f64::from(par.prw[m][1]);
+            targets.precip_wet_mean_mm[m] = Some(f64::from(station.rst[m][0]) * IN_TO_MM);
+            targets.precip_wet_sd_mm[m] = Some(f64::from(station.rst[m][1]) * IN_TO_MM);
+            targets.precip_wet_skew[m] = Some(effective_skew(f64::from(station.rst[m][2])));
+            let p_ww = f64::from(station.prw[m][0]);
+            let p_wd = f64::from(station.prw[m][1]);
             targets.p_ww[m] = Some(p_ww);
             targets.p_wd[m] = Some(p_wd);
             targets.wet_day_fraction[m] = stationary_wet_fraction(p_ww, p_wd);
-            targets.tmax_mean_c[m] = Some(f_to_c(f64::from(par.obmx[m])));
-            targets.tmax_sd_c[m] = Some(f64::from(par.stdtx[m]) * F_TO_C_SCALE);
-            targets.tmin_mean_c[m] = Some(f_to_c(f64::from(par.obmn[m])));
-            targets.tmin_sd_c[m] = Some(f64::from(par.stdtm[m]) * F_TO_C_SCALE);
-            targets.radiation_mean_ly[m] = Some(f64::from(par.obsl[m]));
-            targets.dewpoint_mean_c[m] = Some(f_to_c(f64::from(par.rh[m])));
-            targets.wind_speed_mean_ms[m] = Some(wind_mean(par, m));
+            targets.tmax_mean_c[m] = Some(f_to_c(f64::from(station.obmx[m])));
+            targets.tmax_sd_c[m] = Some(f64::from(station.stdtx[m]) * F_TO_C_SCALE);
+            targets.tmin_mean_c[m] = Some(f_to_c(f64::from(station.obmn[m])));
+            targets.tmin_sd_c[m] = Some(f64::from(station.stdtm[m]) * F_TO_C_SCALE);
+            targets.radiation_mean_ly[m] = Some(f64::from(station.obsl[m]));
+            targets.dewpoint_mean_c[m] = Some(f_to_c(f64::from(station.rh[m])));
+            targets.wind_speed_mean_ms[m] = Some(wind_mean(station, m));
         }
         targets
     }
@@ -113,11 +121,11 @@ fn stationary_wet_fraction(p_ww: f64, p_wd: f64) -> Option<f64> {
 /// `wvl[direction][0]` is percent-of-time, `wvl[direction][1]` the
 /// direction's mean speed; calm days (the percentage shortfall from
 /// 100) contribute zero, exactly as `windg`'s `ndflag = 0` path.
-fn wind_mean(par: &ParFile, month: usize) -> f64 {
+fn wind_mean(station: &FixedMonthly5323, month: usize) -> f64 {
     let mut mean = 0.0f64;
     for direction in 0..16 {
-        let probability = f64::from(par.wvl[direction][0][month]) * 0.01;
-        mean += probability * f64::from(par.wvl[direction][1][month]);
+        let probability = f64::from(station.wvl[direction][0][month]) * 0.01;
+        mean += probability * f64::from(station.wvl[direction][1][month]);
     }
     mean
 }

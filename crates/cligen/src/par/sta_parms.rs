@@ -2,8 +2,9 @@
 //! `.par` values into the common-block state, derive the load-time
 //! quantities, and run the par-time interpolation setup.
 //!
-//! The Fortran unit reads records 2-83 from open unit 10; the port
-//! consumes a [`ParFile`] (record 1 is `sta_dat`'s read — Stage C).
+//! The Fortran unit reads records 2-83 from open unit 10; the port consumes
+//! serialization-independent [`FixedMonthly5323`] state (record 1 is
+//! `sta_dat`'s read — Stage C).
 //! The interactive display block (`cligen.f:2939-2965`) is dead on
 //! every non-interactive path (`numarg > 0` forces `yc = 'N'`) and is
 //! not ported (intake-path-characterization.md).
@@ -14,6 +15,7 @@ use crate::cbk9::Cbk9State;
 use crate::cinterp::CinterpState;
 use crate::monthlies::{fouri1, ryf1};
 use crate::par::ParFile;
+use crate::station::FixedMonthly5323;
 
 /// `sta_parms`' output arguments (`cligen.f:2656-2659`).
 #[derive(Debug, Clone)]
@@ -43,7 +45,7 @@ pub struct StaParmsOut {
 }
 
 /// Faithful `sta_parms` state distribution. Reads nothing from the
-/// filesystem: `par` is the typed record surface, `ci.interp` plays
+/// filesystem: `par` is the validated legacy typed surface, `ci.interp` plays
 /// the role of the `/interp/` common's mode field (set from the `-I`
 /// flag by the caller).
 ///
@@ -54,13 +56,21 @@ pub struct StaParmsOut {
 /// SPEC-PAR), elevation feet→meters (2886), temperature CVs via the
 /// Rankine offset and the guarded radiation CV (2889-2904), and the
 /// cumulative wind-direction distribution (2910-2925).
-// Faithful source shape: `wi(i) = 0.5*wi(i)` (cligen.f:2811) and
-// `dir(i,j) = dir(i,j)*.01` (cligen.f:2923) keep the source's
-// assignment form; clippy's assign-op rewrite is suppressed so the
-// derivations read line-for-line against the source.
-#[allow(clippy::assign_op_pattern)]
 pub fn sta_parms(
     par: &ParFile,
+    bk7: &mut Cbk7State,
+    bk1: &mut Cbk1State,
+    bk9: &mut Cbk9State,
+    ci: &mut CinterpState,
+) -> StaParmsOut {
+    sta_parms_fixed(par.fixed_monthly(), bk7, bk1, bk9, ci)
+}
+
+// Source uses assignment forms that must remain visible; keep the load-time
+// derivations line-for-line against the source.
+#[allow(clippy::assign_op_pattern)]
+pub(crate) fn sta_parms_fixed(
+    par: &FixedMonthly5323,
     bk7: &mut Cbk7State,
     bk1: &mut Cbk1State,
     bk9: &mut Cbk9State,

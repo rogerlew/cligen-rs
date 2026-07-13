@@ -669,8 +669,9 @@ control flow cannot create safely, such as out-of-range months or a missing
 observed stream. It does not infer parameters or defaults from incomplete
 scientific input.
 
-No modern station schema or new parameter may alter this profile. A future
-format may represent the faithful monthly model losslessly, but a schema
+SPEC-STATION-DOCUMENT revision 1 may represent this faithful fixed-monthly
+model losslessly; legacy and modern syntax converge on the same typed state
+before generation. The document cannot alter this profile. A schema/model
 variant containing interannual parameters must be rejected by faithful mode.
 Consuming such parameters requires a versioned generation profile, output
 provenance, and ADR-0002 quality adjudication. File representation and model

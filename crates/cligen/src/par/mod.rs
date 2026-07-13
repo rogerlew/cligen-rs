@@ -13,11 +13,13 @@
 //!
 //! Format semantics, units, EQUIVALENCE views, serialization, and the
 //! round-trip adjudication live in SPEC-PAR (docs/specifications/).
-//! `ParFile` is the typed read surface **plus retained raw records**:
-//! byte-preserving emission is the round-trip invariant the corpus
-//! supports (two zero-rendering conventions exist, section-mixed within
-//! one fixture — a canonical value→text formatter cannot reproduce the
-//! bytes; see par-roundtrip-adjudication.md).
+//! `ParFile` owns the retained raw records plus a
+//! [`FixedMonthly5323`](crate::station::FixedMonthly5323) typed state. The
+//! latter is the common adapter seam for legacy and modern station intake;
+//! byte-preserving legacy emission remains the round-trip invariant the
+//! corpus supports (two zero-rendering conventions exist, section-mixed
+//! within one fixture — a canonical value→text formatter cannot reproduce
+//! the bytes; see par-roundtrip-adjudication.md).
 //!
 //! # Symbol glossary
 //! | Symbol | Fortran | Meaning | Units |
@@ -46,4 +48,5 @@ mod sta_parms;
 
 pub use file::{ParError, ParFile};
 pub use intake::{header, sta_dat, sta_name, StaDatOut, StaDatSelection};
+pub(crate) use sta_parms::sta_parms_fixed;
 pub use sta_parms::{sta_parms, StaParmsOut};

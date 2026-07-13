@@ -1,9 +1,10 @@
 # SPEC-PAR — Station Parameter (`.par`) Format and Typed Par Model
 
-Status: active (rev 2, Stage C of the par+monthlies package)
+Status: active (rev 3; A4a extracts the syntax-independent
+`FixedMonthly5323` state and leaves fixed-width mutation rendering to A4b)
 Surface: the CLIGEN station-parameter file format as 5.32.3 reads it,
-and the `cligen::par` typed model (`ParFile`) that owns it. This spec is
-the foundation the A4 par-database/mutation work builds on.
+and the `cligen::par` lexeme-preserving typed parser (`ParFile`). The shared
+model state and modern transport are SPEC-STATION-DOCUMENT surfaces.
 
 ## Producers / consumers
 
@@ -11,8 +12,10 @@ Producers (external): the USDA station-parameter database and the
 wepppy/GHCN builder — at least two formatting conventions exist in the
 wild (see §Serialization). Consumers: `par::ParFile::parse` (this spec's
 implementation), `par::sta_parms` (state distribution into the common-
-block structs), Stage C's `sta_dat` intake driver, and later the A4
-par-database/mutation utilities.
+block structs), Stage C's `sta_dat` intake driver, and the A4 station adapter
+and A4b mutation utilities. `ParFile` owns the raw records plus one
+`FixedMonthly5323`; `sta_parms` consumes that shared state so legacy and
+modern station syntax have one numerical seam.
 
 Authority basis: `reference/cligen532/cligen.f` read sites — formats
 `cligen.f:2753-2756` (`sta_parms`), `cligen.f:2324-2325` (`sta_dat`
@@ -146,7 +149,7 @@ the package's `par-roundtrip-adjudication.md`):
    producer-dependent record-1/tail shapes) — value→text is not
    injective across real producers, so presentation is retained as
    lexemes rather than faked as data.
-2. **Canonical rendering (specified now, implemented by A4):** only the
+2. **Canonical mutation rendering (specified now, deferred to A4b):** only the
    record containing a mutated typed field is rewritten; untouched records
    and the unparsed tail retain their original bytes. Canonical record
    families are:
@@ -174,9 +177,10 @@ the package's `par-roundtrip-adjudication.md`):
 
 ## Provenance obligations
 
-None carried in the file itself (the format has no provenance fields).
-Station lineage for generated outputs is SPEC-PROVENANCE surface; the A4
-par database owns par-mutation lineage.
+None carried in the file itself (the format has no provenance fields). A4a's
+SPEC-STATION-DOCUMENT adapter hashes the complete source bytes and carries
+that lineage in the modern document. Generated-output identity remains the A1
+SPEC-PROVENANCE surface; A4b owns mutation lineage.
 
 ## Acceptance
 

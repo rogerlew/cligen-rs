@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rogerlew/cligen-rs/docs/specifications/station-document.schema.json",
+  "title": "CLIGEN fixed-monthly station document",
+  "description": "SPEC-STATION-DOCUMENT revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "station_schema_version",
+    "station_model",
+    "units",
+    "lineage",
+    "parameters"
+  ],
+  "properties": {
+    "station_schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "station_model": {
+      "type": "string",
+      "const": "fixed_monthly_5_32_3"
+    },
+    "units": {
+      "$ref": "#/$defs/units"
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "parameters": {
+      "$ref": "#/$defs/parameters"
+    }
+  },
+  "$defs": {
+    "monthValues": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/finiteF32"
+      }
+    },
+    "finiteF32": {
+      "type": "number",
+      "minimum": -3.4028234663852886e+38,
+      "maximum": 3.4028234663852886e+38,
+      "description": "Runtime deserializes directly to finite IEEE-754 binary32."
+    },
+    "i32": {
+      "type": "integer",
+      "minimum": -2147483648,
+      "maximum": 2147483647
+    },
+    "units": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "latitude",
+        "longitude",
+        "elevation",
+        "record_length",
+        "precipitation_depth",
+        "precipitation_intensity",
+        "temperature",
+        "solar_radiation",
+        "wind_speed",
+        "frequency",
+        "probability",
+        "interpolation_weight",
+        "skew"
+      ],
+      "properties": {
+        "latitude": { "const": "degree_north" },
+        "longitude": { "const": "degree_east" },
+        "elevation": { "const": "foot" },
+        "record_length": { "const": "year" },
+        "precipitation_depth": { "const": "inch" },
+        "precipitation_intensity": { "const": "inch_per_hour" },
+        "temperature": { "const": "degree_fahrenheit" },
+        "solar_radiation": { "const": "langley_per_day" },
+        "wind_speed": { "const": "meter_per_second" },
+        "frequency": { "const": "percent" },
+        "probability": { "const": "fraction" },
+        "interpolation_weight": { "const": "dimensionless" },
+        "skew": { "const": "dimensionless" }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_format",
+        "source_sha256",
+        "adapter",
+        "adapter_version"
+      ],
+      "properties": {
+        "source_format": { "const": "cligen_par_5_32_3" },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "adapter": { "const": "cligen_rs_legacy_par_to_fixed_monthly" },
+        "adapter_version": { "type": "integer", "const": 1 }
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "location",
+        "storm",
+        "precipitation",
+        "temperature",
+        "solar_radiation",
+        "wind"
+      ],
+      "properties": {
+        "identity": { "$ref": "#/$defs/identity" },
+        "location": { "$ref": "#/$defs/location" },
+        "storm": { "$ref": "#/$defs/storm" },
+        "precipitation": { "$ref": "#/$defs/precipitation" },
+        "temperature": { "$ref": "#/$defs/temperature" },
+        "solar_radiation": { "$ref": "#/$defs/solarRadiation" },
+        "wind": { "$ref": "#/$defs/wind" }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station_name_raw", "state_code", "station_code", "wind_et_flag"],
+      "properties": {
+        "station_name_raw": {
+          "type": "string",
+          "minLength": 41,
+          "maxLength": 41,
+          "pattern": "^[\\u0000-\\u007f]{41}$"
+        },
+        "state_code": { "$ref": "#/$defs/i32" },
+        "station_code": { "$ref": "#/$defs/i32" },
+        "wind_et_flag": { "$ref": "#/$defs/i32" }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["latitude", "longitude", "elevation", "record_years"],
+      "properties": {
+        "latitude": { "$ref": "#/$defs/finiteF32" },
+        "longitude": { "$ref": "#/$defs/finiteF32" },
+        "elevation": { "$ref": "#/$defs/i32" },
+        "record_years": { "$ref": "#/$defs/i32" }
+      }
+    },
+    "storm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["single_storm_type", "max_six_hour_precipitation", "time_to_peak_cdf"],
+      "properties": {
+        "single_storm_type": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "max_six_hour_precipitation": { "$ref": "#/$defs/finiteF32" },
+        "time_to_peak_cdf": { "$ref": "#/$defs/monthValues" }
+      }
+    },
+    "precipitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mean_daily",
+        "standard_deviation_daily",
+        "skew",
+        "probability_wet_given_wet",
+        "probability_wet_given_dry",
+        "max_half_hour_intensity"
+      ],
+      "properties": {
+        "mean_daily": { "$ref": "#/$defs/monthValues" },
+        "standard_deviation_daily": { "$ref": "#/$defs/monthValues" },
+        "skew": { "$ref": "#/$defs/monthValues" },
+        "probability_wet_given_wet": { "$ref": "#/$defs/monthValues" },
+        "probability_wet_given_dry": { "$ref": "#/$defs/monthValues" },
+        "max_half_hour_intensity": { "$ref": "#/$defs/monthValues" }
+      }
+    },
+    "temperature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "maximum_mean",
+        "minimum_mean",
+        "maximum_standard_deviation",
+        "minimum_standard_deviation",
+        "dew_point_mean"
+      ],
+      "properties": {
+        "maximum_mean": { "$ref": "#/$defs/monthValues" },
+        "minimum_mean": { "$ref": "#/$defs/monthValues" },
+        "maximum_standard_deviation": { "$ref": "#/$defs/monthValues" },
+        "minimum_standard_deviation": { "$ref": "#/$defs/monthValues" },
+        "dew_point_mean": { "$ref": "#/$defs/monthValues" }
+      }
+    },
+    "solarRadiation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mean_daily", "standard_deviation_daily"],
+      "properties": {
+        "mean_daily": { "$ref": "#/$defs/monthValues" },
+        "standard_deviation_daily": { "$ref": "#/$defs/monthValues" }
+      }
+    },
+    "wind": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "directions",
+        "calm_frequency",
+        "interpolation_stations"
+      ],
+      "properties": {
+        "directions": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/windDirection" }
+        },
+        "calm_frequency": { "$ref": "#/$defs/monthValues" },
+        "interpolation_stations": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/windInterpolationStation" }
+        }
+      }
+    },
+    "windDirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frequency", "mean_speed", "standard_deviation_speed", "skew"],
+      "properties": {
+        "frequency": { "$ref": "#/$defs/monthValues" },
+        "mean_speed": { "$ref": "#/$defs/monthValues" },
+        "standard_deviation_speed": { "$ref": "#/$defs/monthValues" },
+        "skew": { "$ref": "#/$defs/monthValues" }
+      }
+    },
+    "windInterpolationStation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station_name_raw", "weight"],
+      "properties": {
+        "station_name_raw": {
+          "type": "string",
+          "minLength": 19,
+          "maxLength": 19,
+          "pattern": "^[\\u0000-\\u007f]{19}$"
+        },
+        "weight": { "$ref": "#/$defs/finiteF32" }
+      }
+    }
+  }
+}

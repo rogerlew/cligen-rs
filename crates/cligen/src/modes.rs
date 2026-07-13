@@ -400,6 +400,7 @@ pub fn day_gen(
 #[derive(Debug)]
 pub enum RunError {
     Par(crate::par::ParError),
+    Station(crate::station::StationDocumentError),
     Prn(PrnError),
     Storm(crate::storm::StormError),
 }
@@ -408,6 +409,7 @@ impl std::fmt::Display for RunError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             RunError::Par(e) => write!(f, "{e}"),
+            RunError::Station(e) => write!(f, "{e}"),
             RunError::Prn(e) => write!(f, "{e}"),
             RunError::Storm(e) => write!(f, "{e}"),
         }
@@ -435,6 +437,8 @@ pub struct RunInputs<'a> {
     pub begin_year: Option<i32>,
     /// `simulation.years` (None = legacy -1 sentinel).
     pub years: Option<i32>,
+    /// Legacy `.par` bytes. Modern runspec intake uses the crate-private
+    /// resolved seam after validating its independently versioned document.
     pub par_bytes: &'a [u8],
     pub prn_bytes: Option<&'a [u8]>,
     pub storm: Option<crate::storm::SingleStormParams>,
@@ -444,27 +448,63 @@ pub struct RunInputs<'a> {
     pub command_echo: &'a str,
 }
 
+/// Crate-private run seam after either station syntax has been validated.
+pub(crate) struct ResolvedRunInputs<'a> {
+    pub(crate) iopt: i32,
+    pub(crate) interp: i32,
+    pub(crate) burn: u32,
+    pub(crate) generation_profile: GenerationProfile,
+    pub(crate) qc_filter: QcFilter,
+    pub(crate) begin_year: Option<i32>,
+    pub(crate) years: Option<i32>,
+    pub(crate) station: &'a crate::station::FixedMonthly5323,
+    pub(crate) prn_bytes: Option<&'a [u8]>,
+    pub(crate) storm: Option<crate::storm::SingleStormParams>,
+    pub(crate) version: f32,
+    pub(crate) command_echo: &'a str,
+}
+
 /// Run the declared profile: main-program assembly (burn → station → option
 /// resolution → generation setup, `cligen.f:702-902`) + `wxr_gen`
 /// (`cligen.f:3589-3816`: header, year plan, day loops) + the run-end marker
 /// (`cligen.f:965-966`). Returns the `.cli` bytes and run-only process
 /// observations.
 pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
+    let par = crate::par::ParFile::parse(inp.par_bytes).map_err(RunError::Par)?;
+    crate::station::StationDocumentV1::from_legacy_par(&par).map_err(RunError::Station)?;
+    run_to_cli_resolved(&ResolvedRunInputs {
+        iopt: inp.iopt,
+        interp: inp.interp,
+        burn: inp.burn,
+        generation_profile: inp.generation_profile,
+        qc_filter: inp.qc_filter,
+        begin_year: inp.begin_year,
+        years: inp.years,
+        station: par.fixed_monthly(),
+        prn_bytes: inp.prn_bytes,
+        storm: inp.storm,
+        version: inp.version,
+        command_echo: inp.command_echo,
+    })
+}
+
+/// Execute after SPEC-RUNSPEC has resolved and validated station syntax.
+pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<RunOutput, RunError> {
     use crate::output::{write_cli_header, write_daily_row, write_run_end, HeaderInputs};
 
     // Seeds + burn (cligen.f:723-737).
     let mut bk7 = Cbk7State::default();
     let mut process = ProcessCounters::default();
     bk7.burn_observed(inp.burn, &mut process);
-    // Station intake (sta_dat single-file path).
-    let par = crate::par::ParFile::parse(inp.par_bytes).map_err(RunError::Par)?;
+    // Station intake: both declared syntaxes converge before RNG/state setup.
+    let station = inp.station;
     let mut bk1 = Cbk1State::default();
     let mut bk9 = Cbk9State::default();
     let mut ci = CinterpState {
         interp: inp.interp,
         ..CinterpState::default()
     };
-    let out = crate::par::sta_parms(&par, &mut bk7, &mut bk1, &mut bk9, &mut ci);
+    let out = crate::par::sta_parms_fixed(station, &mut bk7, &mut bk1, &mut bk9, &mut ci);
     let mut bk4 = Cbk4State {
         iopt: inp.iopt,
         ..Cbk4State::default()
@@ -517,8 +557,8 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
             &mut cli,
             &HeaderInputs {
                 version: inp.version,
-                igcode: par.igcode,
-                stidd: &par.stidd,
+                igcode: station.igcode,
+                stidd: &station.stidd,
                 ylt: out.ylt,
                 yll: out.yll,
                 years: out.years,

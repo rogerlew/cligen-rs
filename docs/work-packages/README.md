@@ -35,3 +35,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260710-changelog-history-doc](20260710-changelog-history-doc/package.md) | EXECUTED-COMPLETE |
 | [20260712-faithful-generation-spec](20260712-faithful-generation-spec/package.md) | EXECUTED-COMPLETE |
 | [20260712-sota-climate-generator-review](20260712-sota-climate-generator-review/package.md) | EXECUTED-COMPLETE |
+| [20260712-a4a-modern-station-schema](20260712-a4a-modern-station-schema/package.md) | EXECUTED-COMPLETE |

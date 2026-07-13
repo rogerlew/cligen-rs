@@ -66,6 +66,14 @@ fn schema_artifact_is_json_with_the_runspec_version_constraint() {
     ))
     .unwrap();
     assert_eq!(schema["properties"]["cligen_runspec"]["const"], 1);
+    assert!(schema["properties"]["station"]["properties"]["document"].is_mapping());
+    assert_eq!(
+        schema["properties"]["station"]["oneOf"]
+            .as_sequence()
+            .unwrap()
+            .len(),
+        2
+    );
     assert_eq!(
         schema["$defs"]["generationProfile"]["default"],
         "faithful_5_32_3"
@@ -74,6 +82,44 @@ fn schema_artifact_is_json_with_the_runspec_version_constraint() {
         schema["$defs"]["stormDate"]["x-cligen-source-calendar"],
         "For a February 29 date, the Rust boundary applies wxr_gen:3758-3763 exactly: leap iff year - year/400*400 == 0 OR (year - year/4*4 == 0 AND year - year/100*100 == 0)."
     );
+}
+
+#[test]
+fn runspec_requires_exactly_one_explicit_station_syntax() {
+    assert_validation_path(
+        &CONTINUOUS.replace("station: { par: fixture.par }", "station: {}"),
+        "station",
+    );
+    assert_validation_path(
+        &CONTINUOUS.replace(
+            "station: { par: fixture.par }",
+            "station: { par: fixture.par, document: fixture.station.json }",
+        ),
+        "station",
+    );
+    assert_validation_path(
+        &CONTINUOUS.replace("station: { par: fixture.par }", "station: { document: '' }"),
+        "station.document",
+    );
+    for (yaml, expected) in [
+        (
+            CONTINUOUS.replace(
+                "station: { par: fixture.par }",
+                "station: { par: null, document: fixture.station.json }",
+            ),
+            "station.par",
+        ),
+        (
+            CONTINUOUS.replace(
+                "station: { par: fixture.par }",
+                "station: { par: fixture.par, document: null }",
+            ),
+            "station.document",
+        ),
+    ] {
+        let error = RunspecDocument::parse(&yaml).unwrap_err().to_string();
+        assert!(error.contains(expected), "expected {expected} in {error}");
+    }
 }
 
 #[test]

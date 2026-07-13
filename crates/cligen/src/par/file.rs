@@ -1,10 +1,14 @@
-//! `ParFile`: the typed `.par` model (SPEC-PAR). Parse replicates the
-//! Fortran fixed-column reads; `to_bytes` emits the retained records
-//! verbatim (the corpus-supported round-trip invariant).
+//! `ParFile`: the legacy `.par` parser and raw-record container (SPEC-PAR).
+//! Parse produces serialization-independent [`FixedMonthly5323`] state;
+//! `to_bytes` emits the retained records verbatim (the corpus-supported
+//! round-trip invariant).
 
 use std::fmt;
 use std::io;
+use std::ops::Deref;
 use std::path::PathBuf;
+
+use crate::station::FixedMonthly5323;
 
 /// Typed parse failure — fail closed per SPEC-PAR/AGENTS (no inferred
 /// defaults for malformed input).
@@ -75,47 +79,29 @@ impl std::error::Error for ParError {
     }
 }
 
-/// One `.par` file: the typed read surface plus every record's raw
-/// bytes (SPEC-PAR §Serialization — presentation is retained as
-/// lexemes, not reconstructed).
+/// One `.par` file: typed model state plus every record's raw bytes
+/// (SPEC-PAR §Serialization — presentation is retained as lexemes, not
+/// reconstructed).
 #[derive(Debug, Clone)]
 pub struct ParFile {
     /// Every record, verbatim, without line terminators.
     records: Vec<String>,
     /// Whether the file ended with a final newline (all fixtures do).
     trailing_newline: bool,
-    // --- record 1 (a41,i2,i4,i2), cligen.f:2324/2459 ---
-    pub stidd: String,
-    pub nst: i32,
-    pub nstat: i32,
-    pub igcode: i32,
-    // --- record 2 (6x,f7.2,6x,f7.2,7x,i3,7x,i2), cligen.f:2753 ---
-    pub ylt: f32,
-    pub yll: f32,
-    pub years: i32,
-    pub itype: i32,
-    // --- record 3 (12x,i5,17x,f5.2) — TP5 falls in the 17x skip ---
-    pub elev_ft: i32,
-    pub tp6: f32,
-    // --- records 4-17 (8x,12f6.2 / 12f6.3) ---
-    pub rst: [[f32; 3]; 12],
-    pub prw: [[f32; 2]; 12],
-    pub obmx: [f32; 12],
-    pub obmn: [f32; 12],
-    pub stdtx: [f32; 12],
-    pub stdtm: [f32; 12],
-    pub obsl: [f32; 12],
-    pub stdsl: [f32; 12],
-    pub wi_raw: [f32; 12],
-    pub rh: [f32; 12],
-    pub timpkd: [f32; 12],
-    // --- records 18-81 (8x,12f6.2), (((wvl(i,j,k),k),j),i) ---
-    pub wvl: [[[f32; 12]; 4]; 16],
-    // --- record 82 ---
-    pub calm: [f32; 12],
-    // --- record 83 (a19,f6.3,2(2x,a19,f6.3)) ---
-    pub site: [String; 3],
-    pub wgt: [f32; 3],
+    /// Serialization-independent raw typed model state.
+    fixed_monthly: FixedMonthly5323,
+}
+
+/// Preserve source-compatible read access (`par.rst`, `par.stidd`, ...)
+/// while keeping the raw-record container and model state single-owned.
+/// Deliberately no `DerefMut`: changing model state without rewriting the
+/// retained legacy records would violate `to_bytes`' identity contract.
+impl Deref for ParFile {
+    type Target = FixedMonthly5323;
+
+    fn deref(&self) -> &Self::Target {
+        &self.fixed_monthly
+    }
 }
 
 /// Fixed-column slice with `PAD='YES'` semantics: columns beyond the
@@ -311,9 +297,7 @@ impl ParFile {
         let timpkd = monthly_row(17, r(17), 3)?;
         let (wvl, calm, site, wgt) = parse_wind(&records)?;
 
-        Ok(ParFile {
-            records,
-            trailing_newline,
+        let fixed_monthly = FixedMonthly5323 {
             stidd: scalars.stidd,
             nst: scalars.nst,
             nstat: scalars.nstat,
@@ -339,7 +323,25 @@ impl ParFile {
             calm,
             site,
             wgt,
+        };
+
+        Ok(ParFile {
+            records,
+            trailing_newline,
+            fixed_monthly,
         })
+    }
+
+    /// Borrow the serialization-independent station model state.
+    #[must_use]
+    pub fn fixed_monthly(&self) -> &FixedMonthly5323 {
+        &self.fixed_monthly
+    }
+
+    /// Consume the legacy raw-record container and return its typed model.
+    #[must_use]
+    pub fn into_fixed_monthly(self) -> FixedMonthly5323 {
+        self.fixed_monthly
     }
 
     /// Byte-preserving emission (SPEC-PAR invariant 1):

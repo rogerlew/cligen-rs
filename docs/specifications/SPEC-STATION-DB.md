@@ -1,11 +1,12 @@
 # SPEC-STATION-DB — Station Collections, Local Cache, and Location Query
 
-Status: active (rev 1 — authored and implemented by
+Status: active (rev 2 — A4a adds the local-only `stations convert` bridge to
+SPEC-STATION-DOCUMENT. Rev 1 was authored and implemented by
 `20260710-q2-station-db`; operator rulings 2026-07-10: GitHub-hosted
 payloads, verbatim collection trees, SQLite catalogs ship —
 **python is the catalog producer**, Rust is a consumer)
 Surface: the embedded collection manifests, the `cligen stations`
-subcommand family (`list` / `nearest` / `sync`), the local payload
+subcommand family (`list` / `nearest` / `sync` / `convert`), the local payload
 cache, and the payload archive format.
 
 ## Purpose
@@ -147,6 +148,11 @@ the sync.
   already cached at (name, version) is skipped unless `--force`.
   `--from` is the air-gap path: bytes may arrive by any transport;
   verification is identical.
+- `cligen stations convert <par> <document> [--overwrite]` — parse one
+  explicit legacy `.par` through SPEC-PAR and write deterministic
+  SPEC-STATION-DOCUMENT JSON. This command never reads a catalog or touches
+  the network; an existing destination fails closed unless `--overwrite` is
+  explicit.
 - Authentication: if `CLIGEN_SYNC_TOKEN` is set, `sync` sends it as a
   bearer token (with `Accept: application/octet-stream`) — required
   while the hosting repository is private. Token material is never
@@ -154,7 +160,8 @@ the sync.
 
 ## Network posture (normative)
 
-`cligen run`, `cligen validate`, `cligen quality`, and every library
+`cligen run`, `cligen validate`, `cligen quality`, `cligen stations convert`,
+and every library
 simulation path perform **no network I/O, ever**. Only
 `stations sync` fetches, only from manifest URLs, and nothing is
 trusted until its hash matches. A hash mismatch aborts before

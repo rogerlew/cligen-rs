@@ -11,11 +11,12 @@ use std::path::{Path, PathBuf};
 
 use serde::Deserialize;
 
-use crate::modes::{run_to_cli, RunError, RunInputs, RunOutput};
+use crate::modes::{run_to_cli_resolved, ResolvedRunInputs, RunError, RunOutput};
 use crate::observed::{PrnError, PrnReader};
 use crate::par::{ParError, ParFile};
 use crate::profile::{GenerationProfile, QcFilter};
 use crate::quality::{self, Provenance, QualityError};
+use crate::station::{FixedMonthly5323, StationDocumentError, StationDocumentV1};
 use crate::storm::SingleStormParams;
 
 /// The sole currently-supported runspec schema revision.
@@ -55,8 +56,41 @@ pub struct RunspecDocument {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct StationSpec {
-    #[serde(default)]
+    #[serde(default, deserialize_with = "deserialize_present_string")]
     pub par: Option<String>,
+    #[serde(default, deserialize_with = "deserialize_present_string")]
+    pub document: Option<String>,
+}
+
+fn deserialize_present_string<'de, D>(deserializer: D) -> Result<Option<String>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    struct PresentStringVisitor;
+
+    impl serde::de::Visitor<'_> for PresentStringVisitor {
+        type Value = Option<String>;
+
+        fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+            formatter.write_str("a non-null string path")
+        }
+
+        fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+        where
+            E: serde::de::Error,
+        {
+            Ok(Some(value.to_owned()))
+        }
+
+        fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+        where
+            E: serde::de::Error,
+        {
+            Ok(Some(value))
+        }
+    }
+
+    deserializer.deserialize_any(PresentStringVisitor)
 }
 
 /// Generation mode names from SPEC-RUNSPEC.
@@ -271,7 +305,8 @@ pub struct PreparedRun {
     pub qc_filter: QcFilter,
     /// SPEC-RUNSPEC rev 4 `output.quality` (default true).
     pub quality: bool,
-    par_bytes: Vec<u8>,
+    station: FixedMonthly5323,
+    legacy_par_sha256: String,
     prn_bytes: Option<Vec<u8>>,
 }
 
@@ -282,7 +317,7 @@ impl PreparedRun {
     }
 
     fn generate_output(&self) -> Result<RunOutput, RunspecError> {
-        run_to_cli(&RunInputs {
+        run_to_cli_resolved(&ResolvedRunInputs {
             iopt: self.iopt,
             interp: self.interpolation,
             burn: self.burn,
@@ -290,7 +325,7 @@ impl PreparedRun {
             qc_filter: self.qc_filter,
             begin_year: self.begin_year,
             years: self.years,
-            par_bytes: &self.par_bytes,
+            station: &self.station,
             prn_bytes: self.prn_bytes.as_deref(),
             storm: self.storm,
             version: 5.3230,
@@ -302,7 +337,7 @@ impl PreparedRun {
     /// Generate the `.cli` text and apply `output.overwrite` without
     /// prompts. When `output.quality` is enabled (the default) the
     /// `<output.cli>.quality.json` sidecar is computed from the
-    /// already-produced `.cli` text + `.par` bytes and always
+    /// already-produced `.cli` text + fixed-monthly station state and always
     /// rewritten — `output.overwrite` governs the `.cli` only
     /// (SPEC-QUALITY-REPORT §Emission). The `.cli` byte stream is
     /// untouched by the sidecar path.
@@ -365,9 +400,10 @@ impl PreparedRun {
     }
 
     fn write_quality_sidecar(&self, generated: &RunOutput) -> Result<(), RunspecError> {
-        let report = quality::compute_report(
+        let report = quality::compute_report_with_station(
             &generated.cli,
-            &self.par_bytes,
+            &self.station,
+            &self.legacy_par_sha256,
             Some(self.quality_provenance()),
             Some(generated.process.clone()),
         )
@@ -413,6 +449,24 @@ struct ModeFields {
     storm: Option<SingleStormParams>,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum StationSyntax {
+    LegacyPar,
+    Document,
+}
+
+#[derive(Debug, Clone, Copy)]
+struct StationSelection<'a> {
+    lexical: &'a str,
+    syntax: StationSyntax,
+}
+
+#[derive(Debug)]
+struct ResolvedStation {
+    model: FixedMonthly5323,
+    legacy_par_sha256: String,
+}
+
 impl RunspecDocument {
     /// Parse exactly one YAML runspec document with field-path parse errors.
     pub fn parse(document: &str) -> Result<Self, RunspecError> {
@@ -448,20 +502,18 @@ impl RunspecDocument {
     /// inputs, then materialize defaults for the faithful run seam.
     pub fn resolve(&self, base_dir: &Path) -> Result<PreparedRun, RunspecError> {
         self.validate()?;
-        let station = self.station_ref()?;
+        let station_selection = self.station_selection()?;
         let output = self.output_ref()?;
         let mode = self.mode_value()?;
-        let par_lexical = required_text(station.par.as_deref(), "station.par")?;
         let output_lexical = required_text(output.cli.as_deref(), "output.cli")?;
-        let par_path = resolve_path(base_dir, par_lexical);
-        let par_bytes = read_par(&par_path)?;
+        let station = read_station(base_dir, station_selection)?;
         let prn = self.read_observed_input(base_dir, mode)?;
         let fields = self.resolve_mode_fields(mode, prn.as_ref().map(|value| value.1))?;
         let burn = self.burn_value()?;
         let command_echo = output.command_echo.clone().unwrap_or_else(|| {
             self.canonical_echo(
                 mode,
-                par_lexical,
+                station_selection,
                 prn.as_ref().map(|value| value.0.as_str()),
                 output_lexical,
                 fields.interpolation,
@@ -483,7 +535,8 @@ impl RunspecDocument {
             storm: fields.storm,
             qc_filter,
             quality: output.quality.unwrap_or(true),
-            par_bytes,
+            station: station.model,
+            legacy_par_sha256: station.legacy_par_sha256,
             prn_bytes: prn.map(|value| value.2),
         })
     }
@@ -495,7 +548,7 @@ impl RunspecDocument {
         if version != RUNSPEC_VERSION {
             return Err(invalid("cligen_runspec", "must equal 1"));
         }
-        required_text(self.station_ref()?.par.as_deref(), "station.par")?;
+        self.station_selection()?;
         self.mode_value()?;
         required_text(self.output_ref()?.cli.as_deref(), "output.cli")?;
         Ok(())
@@ -697,7 +750,7 @@ impl RunspecDocument {
     fn canonical_echo(
         &self,
         mode: RunMode,
-        par: &str,
+        station: StationSelection<'_>,
         prn: Option<&str>,
         output: &str,
         interpolation: i32,
@@ -707,7 +760,12 @@ impl RunspecDocument {
         if burn != 0 {
             fields.push(format!("-r{burn}"));
         }
-        fields.push(format!("-i{par}"));
+        fields.push(match station.syntax {
+            StationSyntax::LegacyPar => format!("-i{}", station.lexical),
+            StationSyntax::Document => {
+                format!("--station-document={}", station.lexical)
+            }
+        });
         if let Some(prn) = prn {
             fields.push(format!("-O{prn}"));
         }
@@ -725,6 +783,28 @@ impl RunspecDocument {
 
     fn station_ref(&self) -> Result<&StationSpec, RunspecError> {
         self.station.as_ref().ok_or_else(|| missing("station"))
+    }
+
+    fn station_selection(&self) -> Result<StationSelection<'_>, RunspecError> {
+        let station = self.station_ref()?;
+        match (station.par.as_deref(), station.document.as_deref()) {
+            (Some(par), None) => Ok(StationSelection {
+                lexical: required_text(Some(par), "station.par")?,
+                syntax: StationSyntax::LegacyPar,
+            }),
+            (None, Some(document)) => Ok(StationSelection {
+                lexical: required_text(Some(document), "station.document")?,
+                syntax: StationSyntax::Document,
+            }),
+            (None, None) => Err(invalid(
+                "station",
+                "exactly one of station.par or station.document is required",
+            )),
+            (Some(_), Some(_)) => Err(invalid(
+                "station",
+                "station.par and station.document are mutually exclusive",
+            )),
+        }
     }
 
     fn output_ref(&self) -> Result<&OutputSpec, RunspecError> {
@@ -927,10 +1007,40 @@ fn resolve_path(base_dir: &Path, lexical: &str) -> PathBuf {
     }
 }
 
-fn read_par(path: &Path) -> Result<Vec<u8>, RunspecError> {
+fn read_station(
+    base_dir: &Path,
+    selection: StationSelection<'_>,
+) -> Result<ResolvedStation, RunspecError> {
+    let path = resolve_path(base_dir, selection.lexical);
+    match selection.syntax {
+        StationSyntax::LegacyPar => read_legacy_station(&path),
+        StationSyntax::Document => read_station_document(&path),
+    }
+}
+
+fn read_legacy_station(path: &Path) -> Result<ResolvedStation, RunspecError> {
     let bytes = fs::read(path).map_err(|error| input_error("station.par", path, error))?;
-    ParFile::parse(&bytes).map_err(|error| par_error(path, error))?;
-    Ok(bytes)
+    let par = ParFile::parse(&bytes).map_err(|error| par_error(path, error))?;
+    let document = StationDocumentV1::from_legacy_par(&par)
+        .map_err(|error| station_document_error("station.par", path, error))?;
+    Ok(ResolvedStation {
+        model: par.into_fixed_monthly(),
+        legacy_par_sha256: document.lineage.source_sha256,
+    })
+}
+
+fn read_station_document(path: &Path) -> Result<ResolvedStation, RunspecError> {
+    let bytes = fs::read(path).map_err(|error| input_error("station.document", path, error))?;
+    let document = StationDocumentV1::parse_json(&bytes)
+        .map_err(|error| station_document_error("station.document", path, error))?;
+    let legacy_par_sha256 = document.lineage.source_sha256.clone();
+    let model = document
+        .into_model()
+        .map_err(|error| station_document_error("station.document", path, error))?;
+    Ok(ResolvedStation {
+        model,
+        legacy_par_sha256,
+    })
 }
 
 fn normalized_parse_path(path: String) -> String {
@@ -971,6 +1081,18 @@ fn output_error(path: &Path, error: std::io::Error) -> RunspecError {
 fn par_error(path: &Path, error: ParError) -> RunspecError {
     RunspecError::Input {
         field_path: "station.par".to_owned(),
+        path: path.to_owned(),
+        message: error.to_string(),
+    }
+}
+
+fn station_document_error(
+    field_path: &str,
+    path: &Path,
+    error: StationDocumentError,
+) -> RunspecError {
+    RunspecError::Input {
+        field_path: field_path.to_owned(),
         path: path.to_owned(),
         message: error.to_string(),
     }

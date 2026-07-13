@@ -1,6 +1,9 @@
 # SPEC-QUALITY-REPORT — Machine-Readable Climate Quality Report
 
-Status: active (rev 5 — Q3 implements the `qc_filter: off`
+Status: active (rev 6 — A4a permits run-emitted targets from a modern
+fixed-monthly station document without a metrics-version change; the existing
+`par_sha256` is the document's required legacy-source hash until A1 adds
+generic station identities. Rev 5 — Q3 implements the `qc_filter: off`
 counterfactual: **metrics_version 2** adds `process.counterfactual`
 (would-have-been K-S/mean/variance verdicts over the produced
 batches, evaluated against a parallel diagnostic copy of the QC
@@ -66,9 +69,11 @@ reports; `cligen quality` reports them as `null`.
   quality` writes the report to stdout and creates no files.
 - The report's identity splits into two blocks (with `metrics_version`
   top-level). **`content`** (recoverable from the inputs alone,
-  present in every report): tool version, `.par` SHA-256, `.cli`
+  present in every report): tool version, `.par` SHA-256 (or, for an A4a
+  converted station document, its required legacy-source SHA-256), `.cli`
   SHA-256, day count, year count and calendar span as parsed from the
-  rows.
+  rows. This compatibility bridge preserves the metrics-version-2 envelope;
+  A1 replaces it with independently named station-input identities.
   **`provenance`** (run-emitted only; `null` from `cligen quality`
   unless supplied via explicit flags): `generation_profile`,
   `qc_filter`, `rng.burn`, mode, and the resolved runspec fields.
@@ -82,7 +87,8 @@ reports; `cligen quality` reports them as `null`.
   date, then lower row index; decades are fixed 10-year blocks from
   the first simulated year (a trailing partial decade is reported
   with its `n_years`); JSON keys are emitted in schema order. A given
-  `.cli` + `.par` yields a byte-reproducible report.
+  `.cli` + fixed-monthly station state and its declared source identity
+  yields a byte-reproducible report.
 
 ## Metric groups (`metrics_version: 2`)
 
@@ -94,14 +100,14 @@ blocks are **decade-level** (correlations, contrast, and daily range
 over each decade's days) — month × decade wet-day correlation cells
 hold only tens of samples at a 10-year block and price nothing.
 
-**A — par_convergence** (authority: the `.par` contract)
-Per parameter × month: generated vs `.par` target, absolute and
+**A — par_convergence** (authority: the fixed-monthly station contract)
+Per parameter × month: generated vs station target, absolute and
 relative error, for: precipitation wet-day mean / SD / skew; wet-day
 fraction, `P(W|W)`, `P(W|D)`; tmax / tmin mean and SD; radiation
-mean; dew-point mean; wind speed mean. Targets are the parsed `.par`
-values (post the source's own seed corrections where the generator
-applies them — the target is what the generator was *asked* to
-reproduce).
+mean; dew-point mean; wind speed mean. Targets are the shared typed values
+from parsed `.par` or a validated A4a station document (post the source's own
+seed corrections where the generator applies them — the target is what the
+generator was *asked* to reproduce).
 
 **B — interannual** (authority: observed climate, external)
 SD and CV across years of: annual precipitation total, annual wet-day

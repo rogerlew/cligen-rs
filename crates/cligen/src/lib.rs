@@ -35,6 +35,7 @@ pub mod qc;
 pub mod quality;
 pub mod rng;
 pub mod runspec;
+pub mod station;
 pub mod stations;
 pub mod storm;
 

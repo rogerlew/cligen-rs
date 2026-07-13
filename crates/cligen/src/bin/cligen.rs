@@ -4,8 +4,10 @@ use std::process::ExitCode;
 
 use clap::{Parser, Subcommand};
 
+use cligen::par::ParFile;
 use cligen::quality::compute_report;
 use cligen::runspec::load_runspec_file;
+use cligen::station::StationDocumentV1;
 use cligen::stations::query::{list, nearest, NearestQuery};
 use cligen::stations::sync::{sync_collection, SyncOutcome};
 use cligen::stations::{cache_root_from_env, Manifests};
@@ -84,6 +86,16 @@ enum StationsCommand {
         #[arg(long)]
         force: bool,
     },
+    /// Convert one legacy `.par` into deterministic modern station JSON.
+    Convert {
+        /// Legacy CLIGEN 5.32.3 station parameter file.
+        par: PathBuf,
+        /// Destination `*.station.json` document.
+        document: PathBuf,
+        /// Replace an existing destination instead of failing closed.
+        #[arg(long)]
+        overwrite: bool,
+    },
 }
 
 fn main() -> ExitCode {
@@ -108,10 +120,16 @@ fn main() -> ExitCode {
 }
 
 fn stations(command: StationsCommand) -> Result<(), String> {
-    let manifests = Manifests::embedded();
-    let cache_root = cache_root_from_env().map_err(|error| error.to_string())?;
     match command {
-        StationsCommand::List { collection } => stations_list(&manifests, &cache_root, collection),
+        StationsCommand::Convert {
+            par,
+            document,
+            overwrite,
+        } => stations_convert(&par, &document, overwrite),
+        StationsCommand::List { collection } => {
+            let (manifests, cache_root) = station_collection_context()?;
+            stations_list(&manifests, &cache_root, collection)
+        }
         StationsCommand::Nearest {
             lat,
             lon,
@@ -119,30 +137,42 @@ fn stations(command: StationsCommand) -> Result<(), String> {
             collection,
             min_years,
             json,
-        } => stations_nearest(
-            &manifests,
-            &cache_root,
-            NearestQuery {
-                latitude: lat,
-                longitude: lon,
-                count,
-                collection,
-                min_years,
-            },
-            json,
-        ),
+        } => {
+            let (manifests, cache_root) = station_collection_context()?;
+            stations_nearest(
+                &manifests,
+                &cache_root,
+                NearestQuery {
+                    latitude: lat,
+                    longitude: lon,
+                    count,
+                    collection,
+                    min_years,
+                },
+                json,
+            )
+        }
         StationsCommand::Sync {
             collections,
             from,
             force,
-        } => stations_sync(
-            &manifests,
-            &cache_root,
-            &collections,
-            from.as_deref(),
-            force,
-        ),
+        } => {
+            let (manifests, cache_root) = station_collection_context()?;
+            stations_sync(
+                &manifests,
+                &cache_root,
+                &collections,
+                from.as_deref(),
+                force,
+            )
+        }
     }
+}
+
+fn station_collection_context() -> Result<(Manifests, PathBuf), String> {
+    let manifests = Manifests::embedded();
+    let cache_root = cache_root_from_env().map_err(|error| error.to_string())?;
+    Ok((manifests, cache_root))
 }
 
 fn stations_list(
@@ -227,6 +257,35 @@ fn stations_sync(
             }
         }
     }
+    Ok(())
+}
+
+fn stations_convert(par: &Path, document: &Path, overwrite: bool) -> Result<(), String> {
+    let par_bytes = std::fs::read(par)
+        .map_err(|error| format!("cannot read legacy station {}: {error}", par.display()))?;
+    let parsed = ParFile::parse(&par_bytes).map_err(|error| error.to_string())?;
+    let station = StationDocumentV1::from_legacy_par(&parsed).map_err(|error| error.to_string())?;
+    let bytes = station.to_json_bytes().map_err(|error| error.to_string())?;
+    let mut options = std::fs::OpenOptions::new();
+    options.write(true);
+    if overwrite {
+        options.create(true).truncate(true);
+    } else {
+        options.create_new(true);
+    }
+    let mut output = options.open(document).map_err(|error| {
+        format!(
+            "cannot create station document {}: {error}",
+            document.display()
+        )
+    })?;
+    output.write_all(&bytes).map_err(|error| {
+        format!(
+            "cannot write station document {}: {error}",
+            document.display()
+        )
+    })?;
+    println!("{}", document.display());
     Ok(())
 }
 

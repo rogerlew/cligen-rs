@@ -24,6 +24,7 @@ use std::fmt::Write as _;
 use sha2::{Digest, Sha256};
 
 use crate::par::{ParError, ParFile};
+use crate::station::FixedMonthly5323;
 use intake::QualityIntakeError;
 use report::{Identity, IdentityContent, ProcessMetrics, METRICS_VERSION};
 
@@ -82,12 +83,33 @@ pub fn compute_report(
     process: Option<ProcessMetrics>,
 ) -> Result<QualityReport, QualityError> {
     let par = ParFile::parse(par_bytes).map_err(QualityError::Par)?;
+    compute_report_with_station(
+        cli_text,
+        par.fixed_monthly(),
+        &sha256_hex(par_bytes),
+        provenance,
+        process,
+    )
+}
+
+/// Compute a report against syntax-independent fixed-monthly station state.
+///
+/// A4a's modern station path supplies the required legacy-source SHA-256 from
+/// document lineage. This preserves the metrics-version-2 `par_sha256` bridge
+/// until A1 introduces generic station-input identities.
+pub(crate) fn compute_report_with_station(
+    cli_text: &str,
+    station: &FixedMonthly5323,
+    legacy_par_sha256: &str,
+    provenance: Option<Provenance>,
+    process: Option<ProcessMetrics>,
+) -> Result<QualityReport, QualityError> {
     let table = intake::parse_cli_table(cli_text).map_err(QualityError::Cli)?;
     let rows = &table.rows;
 
     let content = IdentityContent {
         tool: format!("cligen-rs {}", env!("CARGO_PKG_VERSION")),
-        par_sha256: sha256_hex(par_bytes),
+        par_sha256: legacy_par_sha256.to_owned(),
         cli_sha256: sha256_hex(cli_text.as_bytes()),
         days: rows.len() as u64,
         years: groups::distinct_years(rows),
@@ -102,7 +124,7 @@ pub fn compute_report(
         (None, None, None)
     } else {
         let decades = groups::decade_slices(rows);
-        let targets = targets::ParTargets::from_par(&par);
+        let targets = targets::ParTargets::from_station(station);
         (
             Some(groups::par_convergence(
                 rows,
