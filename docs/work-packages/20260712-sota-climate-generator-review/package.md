@@ -97,3 +97,4 @@ in `artifacts/gate-results.md`.
 - `artifacts/local-reading-copies.tsv`
 - `artifacts/source-evidence.md`
 - `artifacts/review.md`
+- `artifacts/handoff-claude-review.md`

@@ -59,3 +59,10 @@ Additional addendum checks:
 - Local Markdown links and `git diff --check` passed after the addendum.
 - Temporary PDF renders were removed, and no file under
   `references/copyrighted/` is tracked.
+
+## Claude review handoff dispatch
+
+After adding `handoff-claude-review.md`, the three repository commands were
+rerun on 2026-07-12. All exited 0; the result remained 108 passed, 0 failed,
+and 9 ignored evidence/long-sweep tests. The handoff's repository paths and
+relative package links were checked, and `git diff --check` passed.
