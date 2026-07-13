@@ -69,3 +69,13 @@ audited by `/root/acquired_map`, `/root/fulltext_annotations`, and
 | The local directory contained duplicate Katz and Wilks article files. | Kept one canonical checksum identity for each; did not delete or treat alternate wrappers as independent evidence. |
 | The USDA CLIGEN history note was distinct and relevant but uncataloged. | Added AB-39 with an explicit no-DOI note and context-only evidence status; retained the Fortran source as faithful-mode authority. |
 | RNG papers share the local directory but are outside this review. | Left them to the existing random-stream research; no duplicate bibliography entries were created. |
+
+## Independent Claude review
+
+Claude returned `ACCEPT WITH CORRECTIONS`, with no P1 finding. The independent
+record is preserved in [`review-claude.md`](review-claude.md); executor/operator
+decisions are separate in
+[`review-claude-disposition.md`](review-claude-disposition.md). All original
+P2 findings were accepted with the recorded precision changes, and
+CLAUDE-009 was promoted to operator P2 because time-to-peak lacked a promotion
+gate. No unresolved P1/P2 finding remains after disposition.

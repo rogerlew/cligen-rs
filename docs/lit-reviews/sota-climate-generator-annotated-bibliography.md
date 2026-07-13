@@ -86,8 +86,9 @@ itself a fitted low-frequency climate process.
 
 ### AB-06 — WEPP sensitivity to station-database change
 
-P. Srivastava et al. (2019), “Updated Climate Database and Impacts on WEPP
-Model Predictions,” *Journal of Soil and Water Conservation* 74(4), 334–349.
+A. Srivastava, D. C. Flanagan, J. R. Frankenberger, and B. A. Engel (2019),
+“Updated Climate Database and Impacts on WEPP Model Predictions,” *Journal of
+Soil and Water Conservation* 74(4), 334–349.
 DOI: [`10.2489/jswc.74.4.334`](https://doi.org/10.2489/jswc.74.4.334).
 **Access: local reading copy; not redistributed;** [USDA full text](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/JSWC-74-4-334-349.pdf).
 The study demonstrates that corrected/updated station inputs propagate
@@ -148,7 +149,7 @@ evolutionary comparison to point-scale CLIGEN.
 
 ### AB-11 — Semiparametric KNN generator
 
-A. Apipattanavis et al. (2007), “A Semiparametric Multivariate and Multisite
+S. Apipattanavis et al. (2007), “A Semiparametric Multivariate and Multisite
 Weather Generator,” *Water Resources Research* 43. DOI:
 [`10.1029/2006WR005714`](https://doi.org/10.1029/2006WR005714).
 **Access: link-only;** [publisher record](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2006WR005714).
@@ -178,10 +179,12 @@ Multi-Site Daily Precipitation Focusing on Extreme Events,” *Hydrology and
 Earth System Sciences* 22, 655–672. DOI:
 [`10.5194/hess-22-655-2018`](https://doi.org/10.5194/hess-22-655-2018).
 **Access: [archived PDF](../../references/open-access/evin-et-al-2018-gwex.pdf),
-CC BY 3.0.** GWEX combines higher-order occurrence, an extended-GPD margin,
-spatial tail dependence, temporal dependence, and disaggregation. Its key
-lesson for CLIGEN is that fitting daily tails without temporal dependence can
-still understate multi-day extremes.
+CC BY 3.0.** GWEX proper combines fourth-order occurrence, an extended-GPD
+margin, and MAR(1) precipitation amounts with Student-copula innovations; it
+does not disaggregate. GWEX_Disag instead uses first-order occurrence, models
+3-day amounts, and applies method-of-fragments disaggregation. Their common
+lesson for CLIGEN is that daily tails, temporal dependence, and aggregation
+behavior must be evaluated as coordinated model choices.
 
 ### AB-14 — GWEX temperature
 
@@ -307,7 +310,9 @@ N. Peleg et al. (2017), “An Advanced Stochastic Weather Generator for
 Simulating 2-D High-Resolution Climate Variables,” *Journal of Advances in
 Modeling Earth Systems* 9, 1595–1627. DOI:
 [`10.1002/2016MS000854`](https://doi.org/10.1002/2016MS000854).
-**Access: local reading copy; not redistributed;** [publisher record](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1002/2016MS000854).
+**Access: local reading copy inspected; article open access under CC
+BY-NC-ND 4.0; PDF intentionally not redistributed by this repository;**
+[publisher full text](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2016MS000854).
 The model produces precipitation/cloud fields at 2 km and 5 min and other
 variables at finer spatial and hourly scales. The paper notes the usual
 weather-generator risk of underrepresenting monthly/annual variability; the
@@ -337,8 +342,10 @@ Process: New Developments,” *Hydrology and Earth System Sciences* 24,
 [`10.5194/hess-24-2791-2020`](https://doi.org/10.5194/hess-24-2791-2020).
 **Access: [archived article](../../references/open-access/onof-wang-2020-bartlett-lewis.pdf)
 and [archived corrigendum](../../references/open-access/onof-wang-2023-bartlett-lewis-corrigendum.pdf),
-CC BY 4.0.** The corrigendum points to the MIT-licensed
-[`pyBL` archive](https://doi.org/10.5281/zenodo.7765663).
+CC BY 4.0.** The corrigendum points to the
+[`pyBL` v0.1.0-alpha archive](https://doi.org/10.5281/zenodo.7765663). That
+released snapshot carries an
+[MIT `LICENSE`](https://github.com/NTU-CompHydroMet-Lab/pyBL/blob/v0.1.0-alpha/LICENSE).
 The paper improves the point-process parameter domain and calibration of
 subhourly/hourly statistics. A fitted runtime sampler is feasible in Rust,
 but optimization should initially remain in an external, independently
@@ -537,6 +544,128 @@ multivariate dependence and explicit model provenance appear in this review,
 but it is historical context rather than faithful-mode authority: exact
 behavior remains governed by the vendored 5.32.3 Fortran under ADR-0001.
 
+## CLIGEN evaluation and parameter coverage
+
+### AB-40 — Yu storm-generation correction
+
+B. Yu (2000), “Improvement and Evaluation of CLIGEN for Storm Generation,”
+*Transactions of the ASAE* 43(2), 301–307. DOI:
+[`10.13031/2013.2705`](https://doi.org/10.13031/2013.2705).
+**Access: acquisition required;** [official ASABE record](https://elibrary.asabe.org/abstract.asp?aid=2705).
+Unrealistic CLIGEN 4.2 peak intensity exposed a software defect and led to a
+correction of the monthly maximum-30-minute rainfall-depth method, evaluated
+against breakpoint data and WEPP response. Bofu Yu's correction is embedded
+in the vendored faithful source, so this is primary algorithm-lineage evidence;
+it is not validation of the exact 5.32.3 binary or current station products.
+
+### AB-41 — CLIGEN storm descriptors and WEPP response
+
+X. C. Zhang and J. D. Garbrecht (2003), “Evaluation of CLIGEN Precipitation
+Parameters and Their Implication on WEPP Runoff and Erosion Prediction,”
+*Transactions of the ASAE* 46(2), 311–320. DOI:
+[`10.13031/2013.12982`](https://doi.org/10.13031/2013.12982).
+**Access: link-only;** [official ASABE record](https://elibrary.asabe.org/abstract.asp?aid=12982),
+[USDA full text](https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/EvalCligenPrecipParms.pdf).
+Earlier CLIGEN output produced durations that were too long for small storms
+and too short for large storms, with little of the observed dependence among
+depth, duration, and relative peak intensity. The resulting WEPP differences
+reached 35% for mean annual runoff and 47% for annual sediment yield on test
+sites. These are published bias priors, not vendored-5.32.3 acceptance values.
+
+### AB-42 — CLIGEN v5.3 storm evaluation in China
+
+W. Wang, D. C. Flanagan, S. Yin, and B. Yu (2018), “Assessment of CLIGEN
+Precipitation and Storm Pattern Generation in China,” *Catena* 169, 96–106.
+DOI: [`10.1016/j.catena.2018.05.024`](https://doi.org/10.1016/j.catena.2018.05.024).
+**Access: acquisition required;** [publisher record](https://www.sciencedirect.com/science/article/abs/pii/S0341816218301905).
+At 18 sites with daily and 1-minute observations, CLIGEN v5.3 reproduced daily
+precipitation well but showed storm-duration and peak-intensity biases that
+worsened for heavier events, along with erosivity and shorter-duration IDF
+bias. The reported version is not established as byte-identical to vendored
+5.32.3, so the results motivate rather than replace repository replication.
+
+### AB-43 — Hourly-data storm-parameter preparation
+
+W. Wang, S. Yin, D. C. Flanagan, and B. Yu (2018), “Comparing
+CLIGEN-Generated Storm Patterns with 1-Minute and Hourly Precipitation Data
+from China,” *Journal of Applied Meteorology and Climatology* 57(9),
+2005–2017. DOI:
+[`10.1175/JAMC-D-18-0079.1`](https://doi.org/10.1175/JAMC-D-18-0079.1).
+**Access: link-only;** [official AMS article](https://journals.ametsoc.org/view/journals/apme/57/9/jamc-d-18-0079.1.xml).
+This is fitting/data-availability evidence rather than another structural-bias
+study: substituting hourly-derived `TimePk` had little effect, while hourly
+`MX.5P` was biased low and a 1.40 correction brought it close to the 1-minute
+baseline. It supports a cheaper descriptor-calibration stage before a native
+subdaily replacement.
+
+### AB-44 — Central Chile storm-duration calibration
+
+G. P. Lobo, J. R. Frankenberger, D. C. Flanagan, and C. A. Bonilla (2015),
+“Evaluation and Improvement of the CLIGEN Model for Storm and Rainfall
+Erosivity Generation in Central Chile,” *Catena* 127, 206–213. DOI:
+[`10.1016/j.catena.2015.01.002`](https://doi.org/10.1016/j.catena.2015.01.002).
+**Access: acquisition required;** [publisher record](https://www.sciencedirect.com/science/article/abs/pii/S0341816215000065).
+The study used hourly rainfall from 30 sites to calibrate the input controlling
+storm duration without modifying CLIGEN equations, improving intensity and
+erosivity behavior. It is a direct precedent for testing descriptor-level
+recalibration before building a complete hyetograph generator.
+
+### AB-45 — International CLIGEN station parameters
+
+A. T. Fullhart, M. A. Nearing, G. Armendariz, and M. A. Weltz (2021),
+“Climate Benchmarks and Input Parameters Representing Locations in 68
+Countries for a Stochastic Weather Generator, CLIGEN,” *Earth System Science
+Data* 13(2), 435–446. DOI:
+[`10.5194/essd-13-435-2021`](https://doi.org/10.5194/essd-13-435-2021).
+**Access: [archived PDF](../../references/open-access/fullhart-et-al-2021-international-cligen-parameters.pdf),
+CC BY 4.0.** The accompanying products provide parameters for 12,703 station
+locations using 30-, 20-, or 10-year records (dataset DOI:
+[`10.15482/USDA.ADC/1518706`](https://doi.org/10.15482/USDA.ADC/1518706)).
+This materially expands coverage but uses estimated/surrogate inputs where
+observations are sparse and does not create spatially coherent trajectories.
+
+### AB-46 — Mainland China gridded CLIGEN parameters
+
+W. Wang, S. Yin, B. Yu, and S. Wang (2021), “CLIGEN Parameter Regionalization
+for Mainland China,” *Earth System Science Data* 13(6), 2945–2962. DOI:
+[`10.5194/essd-13-2945-2021`](https://doi.org/10.5194/essd-13-2945-2021).
+**Access: [archived PDF](../../references/open-access/wang-et-al-2021-china-cligen-parameters.pdf),
+CC BY 4.0.** Universal kriging regionalizes 13 parameter groups to a 10 km
+grid using daily temperature and daily/hourly precipitation from 2,405
+stations and solar radiation from 130; interpolated `SKEW P` was the weakest
+directly cross-validated gridded input parameter (NSE 0.78). The public dataset has DOI
+[`10.12275/bnu.clicia.CLIGEN.CN.gridinput.001`](https://doi.org/10.12275/bnu.clicia.CLIGEN.CN.gridinput.001),
+but no explicit dataset reuse license was verified. Independently running the
+grid cells still supplies no spatial weather coherence.
+
+### AB-47 — Africa and South America gridded CLIGEN parameters
+
+A. Fullhart et al. (2023; online 2022), “Gridded 20-Year Climate
+Parameterization of Africa and South America for a Stochastic Weather
+Generator (CLIGEN),” *Big Earth Data* 7(2), 349–374. DOI:
+[`10.1080/20964471.2022.2136610`](https://doi.org/10.1080/20964471.2022.2136610).
+**Access: [archived PDF](../../references/open-access/fullhart-et-al-2023-africa-south-america-cligen.pdf),
+CC BY 4.0.** The products provide 0.25° 20-year parameter grids for Africa and
+South America (dataset DOI:
+[`10.15482/USDA.ADC/1524754`](https://doi.org/10.15482/USDA.ADC/1524754),
+CC0). Regression/downscaling uncertainty is larger for subdaily precipitation
+and terrain/coastal gradients; the product expands coverage, not trajectory
+coherence or model structure.
+
+### AB-48 — Near-global gridded CLIGEN parameters
+
+A. T. Fullhart et al. (2024; online 2023), “Towards Global Coverage of Gridded
+Parameterization for CLImate GENerator (CLIGEN),” *Big Earth Data* 8(1),
+142–165. DOI:
+[`10.1080/20964471.2023.2291215`](https://doi.org/10.1080/20964471.2023.2291215).
+**Access: link-only, CC BY 4.0;** [publisher full text](https://www.tandfonline.com/doi/full/10.1080/20964471.2023.2291215).
+The combined products approach global land coverage and add a 114,150-file
+northern grid (dataset DOI:
+[`10.15482/USDA.ADC/1529311`](https://doi.org/10.15482/USDA.ADC/1529311),
+CC0). Surrogate wind parameters and extreme-rainfall uncertainty remain, and
+the product still parameterizes independent point generation rather than a
+spatial field model.
+
 ## Remaining source-acquisition queue
 
 The core papers previously requested for this review are already present in a
@@ -546,14 +675,17 @@ work-package evidence. The remaining queue reflects value to the next two
 
 | Priority | DOI | Request this source because |
 |---|---|---|
+| P1 | `10.13031/2013.2705` | Full text would strengthen source-line-to-publication traceability for the Bofu Yu correction embedded in faithful storm code. |
+| P1 | `10.1016/j.catena.2018.05.024` | Full text would support exact replication of the strongest published CLIGEN v5.3 descriptor evaluation. |
 | P1 | `10.1007/s00704-018-2404-x` | Temperature-generation comparisons can sharpen the rank-3 multivariate candidate set. |
 | P1 | `10.1016/j.scitotenv.2021.147609` | DWEPP connects high-resolution rainfall generation directly to erosion response. |
 | P1 | `10.1029/2006WR005714` | The K-nearest-neighbor generator is a practical nonparametric daily comparator. |
 | P2 | `10.1029/WR017i001p00182` | Richardson is the foundational wet/dry-conditioned multivariate daily model. |
 | P2 | `10.1175/1520-0450-39.5.610` | Parlange and Katz tests whether multivariate dependence changes hydrologic behavior. |
 | P2 | `10.1029/2017WR022473` | BayGEN supplies the clearest Bayesian parameter-uncertainty and multisite comparator. |
+| P2 | `10.1016/j.catena.2015.01.002` | Full text would support the lower-cost storm-duration recalibration benchmark for the descriptor study. |
 | P3 | `10.3354/cr010095` | LARS-WG documents a widely used series-based occurrence architecture. |
-| P3 | `10.3354/cr00731` | Early LARS validation helps interpret later series-based claims and limitations. |
+| P3 | `10.3354/cr00731` | The LARS-WG extremes evaluation supplies a point-scale daily extreme-event validation precedent. |
 
 When a source is supplied, place a local reading copy under
 `references/copyrighted/`, never under `open-access/`, unless its reusable

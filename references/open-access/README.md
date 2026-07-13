@@ -11,6 +11,11 @@ climate-emulator paper. Link-only entries in the bibliography remain valid
 primary sources when archiving would add little implementation evidence or
 redistribution terms have not been separately verified.
 
+The Fullhart/Wang CLIGEN parameter papers are included as coverage and fitting
+comparators. Their gridded parameter products do not imply spatial coherence
+among independently generated point trajectories, and article licenses do not
+automatically establish the license of every associated dataset.
+
 The articles retain their authors' and publishers' copyright. Their licenses
 permit redistribution subject to the recorded terms; this repository does not
 relicense them. In particular,

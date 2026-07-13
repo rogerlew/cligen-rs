@@ -70,6 +70,12 @@ scientific claims (`/root/fulltext_annotations`), and duplicates/context
 (`/root/extra_cligen_sources`). The addendum corrected the causal framing of
 the measured variance deficit and several model-specific annotations.
 
+An independent Claude review then returned `ACCEPT WITH CORRECTIONS` with no
+P1 finding. The review was committed unchanged before correction work. All P2
+findings were dispositioned, CLAUDE-009 was promoted to operator P2, and the
+corrections added CLIGEN storm-evaluation and global-parameter evidence without
+changing the top-eight order or first-study recommendation.
+
 ## Gates
 
 - `cargo fmt --check`
@@ -98,3 +104,5 @@ in `artifacts/gate-results.md`.
 - `artifacts/source-evidence.md`
 - `artifacts/review.md`
 - `artifacts/handoff-claude-review.md`
+- `artifacts/review-claude.md`
+- `artifacts/review-claude-disposition.md`

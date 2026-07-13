@@ -83,9 +83,10 @@ with field dependencies in the package
 
 **Measured:** Q3 found that faithful QC reduced annual precipitation
 dispersion by about 19% at 30 years and 11% at 100 years relative to
-`qc_filter: off`; `off` was closer to Daymet annual-total CV at 15 of 17
-stations. Even `off` under-dispersed observed monthly precipitation-total SD
-in 9–11 of 12 calendar months, while faithful under-dispersed all 12. See the
+`qc_filter: off`; in single-burn descriptive comparisons, `off` was closer to
+Daymet annual-total CV at 14 of 17 stations at 30 years and 15 of 17 at 100
+years. Even `off` under-dispersed observed monthly precipitation-total SD in
+9–11 of 12 calendar months, while faithful under-dispersed all 12. See the
 [`frontier analysis`](../work-packages/20260710-q3-qc-filter-dissection/artifacts/frontier-analysis.md)
 and
 [`monthly-SD addendum`](../work-packages/20260710-q3-qc-filter-dissection/artifacts/monthly-sd-addendum.md).
@@ -97,7 +98,13 @@ low-frequency conditioning can recover more (AB-02/03). The first study must
 therefore adjudicate daily precipitation structure against a year-level state
 rather than assume the latter is proved. The other absences above are
 **Structural** until an observed-data campaign measures their magnitude and
-downstream benefit.
+downstream benefit. Storm descriptors are an exception: published evaluations
+of earlier CLIGEN versions/configurations report duration and peak-intensity
+deficiencies (AB-40–42 and AB-44), AB-43 documents a lower-cost hourly parameter-
+fitting path, and the vendored faithful source incorporates Yu's corrections.
+Those studies establish prior bias directions and calibration options, but
+their magnitudes must be reproduced for the exact vendored 5.32.3
+implementation and current target datasets before benefit is inferred.
 
 Meyer's historical USDA description (AB-39) independently records CLIGEN's
 single-point monthly-parameter design, sparse daily coupling, and QC evolution.
@@ -114,13 +121,13 @@ dependence model, scenario mechanism, and validation system.
 |---|---|---|---|
 | Low-frequency/interannual variation | WeaGETS spectral correction (AB-09/10), Steinschneider–Brown wavelet-AR (AB-12), AWE-GEN annual AR (AB-22), `swxg` GMHMM (AB-18) | Explicit annual/monthly process conditioning daily generation | Output deficit measured; an explicit state is missing but not uniquely established as the cause |
 | Precipitation tails and multi-day extremes | GWEX E-GPD + temporal/spatial dependence (AB-13), AWE-GEN/Bartlett–Lewis (AB-22/24/25) | Tail-aware margins plus dependence across aggregation scales | Limited monthly transform and one-day occurrence state |
-| Cross-variable dependence | Richardson/Parlange–Katz (AB-01/04), AWE-GEN (AB-21/22), Rglimclim (AB-16), MSTWeatherGen (AB-17) | Wet/dry-conditioned or joint latent/copula/GLM residual models | Sparse/hard-coded; radiation independent of wetness |
+| Cross-variable dependence | Richardson/Parlange–Katz (AB-01/04), AWE-GEN family with physically linked variables rather than directly fitted cross-correlations in its precursor (AB-21/22), Rglimclim (AB-16), MSTWeatherGen (AB-17) | Wet/dry-conditioned or joint latent/copula/GLM residual models | Sparse/hard-coded; radiation independent of wetness |
 | Spell/weather-regime persistence | higher-order WeaGETS (AB-10), LARS series (AB-07), weather regimes (AB-29/30) | Higher-order, semi-Markov, HMM/regime, or block-resampled sequences | First-order two-state occurrence only |
 | Parameter uncertainty | BayGEN (AB-15), Bayesian GAMLSS/SBI (AB-19) | Posterior parameter draws propagated into ensembles | Fixed point estimates |
 | Subdaily storm process | AWE-GEN, hybrid Bartlett–Lewis, STORM v.2 (AB-21–26) | Minute/hourly intensity-duration-consistent rainfall, sometimes spatial | Scalar event descriptors only |
 | Multisite/gridded coherence | GWEX, BayGEN, MSTWeatherGen, California WGEN (AB-13/15/17/30) | Spatially coherent daily fields and regional extremes | Single station |
 | Controlled nonstationarity | Steinschneider regimes, California WGEN, SBI matching (AB-19/29–31) | Separate mean, variance, tail, thermodynamic, and dynamic changes | Fixed stationary monthly climate |
-| Global automated parameterization | EGGS-WG (AB-20) | Reanalysis-derived gridded parameters with low operator burden | Regional station databases/localization pipeline |
+| Global automated parameterization | Published CLIGEN station/gridded parameter products (AB-45–48), EGGS-WG (AB-20) | Observation/reanalysis-derived parameters with lower operator burden | Regional databases plus published global and continental parameter products; coverage is expanded, but weather trajectories are not spatially coherent |
 | Generative spatial downscaling | CorrDiff, spateGAN, consistency models (AB-36–38) | Ensembles conditioned on coarse trajectories | No external high-resolution forcing contract yet |
 
 Two findings should temper “SOTA” claims:
@@ -197,7 +204,8 @@ declared extension.
   whether annual anomalies alter occurrence, amount, or both; downstream
   runoff/erosion tests.
 - **Main risk:** improving one marginal tail can damage monthly totals, wet-day
-  fractions, spell behavior, and depth-duration-peak dependence.
+  fractions, spell behavior, and depth–duration–time-to-peak–peak-ratio
+  dependence.
 - **Coordination:** investigate daily tails, amount memory, and rank-6
   occurrence/spell persistence in one precipitation-structure study. Do not
   promote independently fitted components that have not been evaluated
@@ -224,15 +232,27 @@ declared extension.
 
 - **Evidence:** **Structural + Published.** CLIGEN emits daily depth plus three
   event descriptors, not one or more continuous intra-day hyetographs.
-  Storm/erosion work identifies short-duration maximum intensity as a major
-  driver (AB-24–28).
-- **WEPP value:** very high for event runoff, EI30/R-factor, and rare erosion.
+  CLIGEN-specific evaluations report duration, intensity, and descriptor-
+  dependence deficiencies for earlier versions/configurations (AB-40–42 and
+  AB-44),
+  while AB-43 supplies hourly-data fitting evidence; exact vendored 5.32.3
+  behavior still requires repository measurement. AB-28 identifies short-
+  duration maximum intensity as an important erosion driver, while AB-24–27
+  provide subdaily process and hazard-model precedents.
+- **WEPP value:** very high for event runoff and detachment through WEPP's
+  descriptor-derived hyetograph. EI30 and R-factor are erosivity-validation
+  metrics and inputs to RUSLE-type consumers, not direct WEPP inputs.
 - **Feasibility:** moderate for a fitted point-process runtime with external
   calibration; low-to-moderate for a complete native spatial storm engine.
-- **Required work:** timestamped subdaily output/forcing contract; high-
-  resolution gauge/radar corpus; multi-scale calibration; event segmentation;
-  Bartlett–Lewis/STORM/AWE-GEN benchmark; aggregation/mass-conservation rules;
-  WEPP consumer decision on hyetographs versus derived descriptors.
+- **Required work:** begin with a lower-cost descriptor-level replication
+  against breakpoint or 15-minute observations: daily depth, duration,
+  time-to-peak fraction, peak-intensity ratio, and their joint dependence.
+  Use that result to distinguish descriptor recalibration from the larger
+  true-hyetograph project. Then specify a timestamped subdaily output/forcing
+  contract, high-resolution gauge/radar corpus, multi-scale calibration, event
+  segmentation, Bartlett–Lewis/STORM/AWE-GEN benchmark, aggregation/mass-
+  conservation rules, and WEPP consumer decision on hyetographs versus
+  derived descriptors.
 - **Main risk:** daily station data cannot identify a subdaily model. A
   plausible-looking hyetograph without source and fitting lineage is not an
   improvement.
@@ -261,7 +281,7 @@ declared extension.
 
 - **Evidence:** **Structural + Published.** The first-order occurrence chain
   has only one-day state. Higher-order, semi-Markov, HMM, and regime systems
-  can represent longer persistence (AB-07/10/18/29).
+  can represent longer persistence (AB-07/10/29).
 - **WEPP value:** medium–high for drought, antecedent moisture, vegetation, and
   clusters of erosive days.
 - **Feasibility:** moderate; integration touches occurrence, amount masks,
@@ -315,6 +335,11 @@ the legacy observed seam substitutes only precipitation and Tmax/Tmin and
 would discard the producer's multivariate coherence. Porting GPU networks or
 a global atmosphere model into Rust would add a separate platform with little
 benefit to CLIGEN's station generator.
+
+Published global and continental CLIGEN parameter datasets (AB-45–48)
+demonstrate that external fitting and localization are already feasible at
+large scale. They expand geographic coverage but do not resolve the ranked
+stochastic-structure gaps or produce spatially coherent trajectories.
 
 ## 5. The first interannual candidate study
 
@@ -398,8 +423,8 @@ future package must preserve or deliberately extend.
 |---|---|---|
 | Priority 0 schema and I/O | [`par::ParFile`](../../crates/cligen/src/par/mod.rs), [`modes::DailyRow`](../../crates/cligen/src/modes.rs) | [`par_state_identity`](../../crates/cligen/tests/par_state_identity.rs), [`cli_parity`](../../crates/cligen/tests/cli_parity.rs), quality group A |
 | Rank 1 interannual state | Year loop in [`modes::run_to_cli`](../../crates/cligen/src/modes.rs), a new `GenerationProfile` | `.cli` parity, quality groups A/B/C/D plus the new low-frequency metrics |
-| Ranks 2 and 6 precipitation structure | [`daily::gen_precip`](../../crates/cligen/src/daily.rs), [`rng::draw_ranset_value`](../../crates/cligen/src/rng.rs) | [`daily_identity`](../../crates/cligen/tests/daily_identity.rs), RNG tap identity, quality groups A/B/D |
-| Rank 3 multivariate dependence | Temperature, dew-point, [`daily::gen_radiation`](../../crates/cligen/src/daily.rs), and `windg` stages | `daily_identity`, quality group C |
+| Ranks 2 and 6 precipitation structure | Private faithful code locations [`daily::gen_precip`](../../crates/cligen/src/daily.rs) and [`rng::draw_ranset_value`](../../crates/cligen/src/rng.rs); a future profile needs an explicit precipitation seam and separate extension RNG rather than cross-module calls to these internals | [`daily_identity`](../../crates/cligen/tests/daily_identity.rs), RNG tap identity, quality groups A/B/D |
+| Rank 3 multivariate dependence | Temperature/dew-point stages, private [`daily::gen_radiation`](../../crates/cligen/src/daily.rs), and `windg`; a future profile needs an explicit daily-context seam | `daily_identity`, quality group C |
 | Rank 4 subdaily events | [`storm::storm_block`](../../crates/cligen/src/storm.rs), `DailyRow`, and a new subdaily sink | [`storm_identity`](../../crates/cligen/tests/storm_identity.rs), quality groups C/D plus new intensity and erosion gates |
 | Rank 5 nonstationarity | `GenerationProfile` and `modes::run_to_cli` | [`runspec_cli`](../../crates/cligen/tests/runspec_cli.rs), `cli_parity`, quality groups A/B plus trend diagnostics |
 | Rank 7 fitted uncertainty | Extension RNG, profile, and output provenance | Deterministic quality runs, quality group P, and new fit/member identity gates |
@@ -456,6 +481,14 @@ For the annual-state study add:
 - cross-month anomaly covariance or preregistered low-rank summaries;
 - precipitation/Tmax/Tmin anomaly correlation and Tmax/Tmin correlation;
 - lag-one annual persistence and low-frequency spectral diagnostics;
+- monthly precipitation fraction on days with mean air temperature
+  `(Tmax + Tmin) / 2 <= 0 °C`, explicitly labeled as a precipitation-phase
+  proxy rather than a physical rain/snow partition;
+- winter precipitation–temperature co-occurrence and a versioned air-
+  temperature freeze–thaw proxy cycle count, with its threshold and transition
+  rule declared;
+- downstream WEPP snow accumulation/melt, rain-on-snow runoff, winter runoff,
+  and soil-loss responses at preregistered snow-dominated sites;
 - effects on daily range, dew point, spells, maxima, duration, and peak
   intensity through existing groups C/D.
 
@@ -463,17 +496,28 @@ For precipitation/event profiles later add:
 
 - wet/dry spell distributions across year boundaries;
 - wet-day amount autocorrelation and 1/3/5-day extremes;
-- maximum 5/10/30/60-minute intensity, event depth/duration, antecedent dry
-  time, EI30, and R-factor where data allow;
-- depth-duration-peak dependence and seasonal timing;
+- maximum 5/10/30/60-minute intensity, event depth and duration, time-to-peak-
+  fraction distribution, peak-intensity ratio, antecedent dry time, EI30, and
+  R-factor where data allow;
+- depth–duration–time-to-peak–peak-ratio dependence and seasonal timing;
 - spatial correlation/areal reduction for field models;
 - WEPP runoff, peak runoff, soil loss, and their tail/return-level behavior.
+
+For descriptor-only profiles, subdaily intensity and EI30 metrics must be
+calculated through a named, versioned WEPP disaggregation implementation.
+Native-subdaily profiles use their emitted series directly. Results derived
+through different disaggregation rules are not interchangeable without
+provenance.
 
 Promotion should retain 30- and 100-year horizons, use multiple independent
 burns with uncertainty intervals, and include held-out sites or periods.
 Monthly climatology preservation is a gate, not assumed. Distance from faithful
 output is compatibility information; scientific promotion follows the
 observed-climate and WEPP-response quality vector under ADR-0002.
+At snow-dominated sites, a candidate must not degrade the preregistered winter-
+process vector beyond its uncertainty bounds without an explicitly accepted
+tradeoff. Climate forcing proxies and downstream WEPP snow/frost responses
+must remain distinct because CLIGEN does not output snowpack or soil state.
 
 ## 9. Recommended work-package sequence
 

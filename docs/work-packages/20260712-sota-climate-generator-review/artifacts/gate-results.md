@@ -66,3 +66,29 @@ After adding `handoff-claude-review.md`, the three repository commands were
 rerun on 2026-07-12. All exited 0; the result remained 108 passed, 0 failed,
 and 9 ignored evidence/long-sweep tests. The handoff's repository paths and
 relative package links were checked, and `git diff --check` passed.
+
+## Independent-review disposition
+
+After dispositioning Claude's findings, the three repository commands were
+rerun on 2026-07-12. All exited 0; the result remained 108 passed, 0 failed,
+and 9 ignored evidence/long-sweep tests.
+
+Disposition-specific checks:
+
+- `review-claude.md` remains byte-identical to commit `b385310`, SHA-256
+  `aae936e136eb5c8bc2c0366457eb83c23d2f3fd7e50a530ca39899118a09d1a8`.
+- The bibliography contains 48 unique sequential identifiers, AB-01 through
+  AB-48, and every entry has a DOI or explicit no-DOI note.
+- The open corpus contains 17 PDFs and 17 manifest rows; all hashes matched and
+  every PDF parsed with Poppler.
+- The first pages of the three new AB-45–47 PDFs rendered and were visually
+  inspected; each article prints CC BY 4.0 terms consistent with the manifest.
+- All 10 canonical local-reading hashes still matched, and no path under
+  `references/copyrighted/` is tracked.
+- Relative links across 11 review/package/reference Markdown files resolved.
+- Three independent final audits covered the gap/disposition, bibliography/
+  access records, and new storm/global sources; no P1/P2 finding remained.
+- `git diff --check` passed and temporary PDF render files were removed.
+
+No production function changed, so the LLVM coverage/CRAP gates remain out of
+scope for this documentation and source-corpus correction.
