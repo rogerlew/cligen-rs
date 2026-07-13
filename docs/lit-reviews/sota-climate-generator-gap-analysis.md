@@ -521,10 +521,10 @@ must remain distinct because CLIGEN does not output snowpack or soil state.
 
 ## 9. Recommended work-package sequence
 
-This sequence is a research recommendation pending operator ratification. It
-does not silently reorder or add items to the canonical
-[`ROADMAP`](../ROADMAP.md); ratification should reconcile the roadmap before
-any package is dispatched from this sequence.
+The operator ratified this sequence on 2026-07-12. The canonical
+[`ROADMAP`](../ROADMAP.md) records the dependency order and keeps the
+station-file schema, station model, generation profile, and typed-output
+schema as independent compatibility axes.
 
 1. **Modern fixed-monthly station schema** — behaviorally inert, unit-explicit,
    provenance-bearing, exact legacy conversion, fail-closed variants.
