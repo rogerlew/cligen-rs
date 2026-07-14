@@ -1,0 +1,67 @@
+{
+  "closure_evidence_version": 1,
+  "package_id": "20260714-a5d0-successor-feasibility-calibration",
+  "status": "executed_hold_contract_incomplete",
+  "entries": [
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/package.md",
+      "sha256": "5930613d23e00a30b28a87022b94c93679dc170e0b84081501720141be77427b"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/evidence-lock-inputs-v1.json",
+      "sha256": "e14b088529cdb735666350a7ce1a42f616888ccbcc476ea46f4e431af9f94dbe"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/run-feasibility-fixtures.py",
+      "sha256": "a460e2b64542d30ff96a5b135ac314ff8e96c9d7d8c93cb71401ade053b51f91"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/feasibility-fixtures-v1.json",
+      "sha256": "ab98777eb03729e7173b9ab37272c7cdf32af83f3f9a042ce39edf45410c0d4c"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/feasibility-analysis.md",
+      "sha256": "3ff613603f9c4747c130399c1981d7a6925f8efdccfe2c2b5e3459baeb3402bd"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/evaluation-revision-4-plan.md",
+      "sha256": "2df34b8b971aa022a646a8053d984717c668a967300b3a8883cfc11b9cc9fb46"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/validation-corpus-plan.md",
+      "sha256": "1113c87004af445453fac09d767962ebe49e52c1efea2caee9ddd1f2dba3f92c"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/data-role-inventory-v1.json",
+      "sha256": "b82df4100d733c3b92cb409b819990ed4a1f18d0e382d2d17f25a86f70876586"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/candidate-contract-outline.md",
+      "sha256": "75647c42f0d5fe6a2ceae272d767521e52656b197c13bc1c61e24bc0c81b4fcf"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/exposure-ledger.md",
+      "sha256": "8c487619106a03097ada3b49c65c39c9bfb8c11f11d915abb43cb0484428cb71"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/go-hold-decision.md",
+      "sha256": "699a854e42dabfc2b94a9c64aac6ff66498a415e2f7660c3bbcebe57b233f36b"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/a5d0-decision-v1.json",
+      "sha256": "05af0c56da2fe9c60e0f1b966124c7eb79d2d08d5489f18836940938244703ad"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/verify-a5d0-package.py",
+      "sha256": "5d8cbb3b2e59dcec47c9e0abf734e0681a01a92acbb92bbd4c6f746616e191b0"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/review.md",
+      "sha256": "3e6b109b17008e340e88c0f15dd375bfb3a13d12ddf5ab8263e1b061fae9cbea"
+    },
+    {
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/gate-results.md",
+      "sha256": "4bb4b14556ce09561ccb397e306e0df0a793152aece8582b3642ae821e05c499"
+    }
+  ]
+}

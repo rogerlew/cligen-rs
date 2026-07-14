@@ -1,0 +1,55 @@
+{
+  "a5d0_decision_version": 1,
+  "package_id": "20260714-a5d0-successor-feasibility-calibration",
+  "status": "hold_contract_incomplete",
+  "decided_on": "2026-07-14",
+  "primary_blocker": {
+    "code": "contract_incomplete",
+    "finding": "No bounded repeat-safe, calendar-safe, common-prefix selector has been specified and demonstrated across actual faithful development libraries.",
+    "first_action": "Execute a development-only constrained-weight and repeat-safe path solver package on regenerated exposed A5a/A5b faithful-off libraries."
+  },
+  "secondary_blockers": [
+    {
+      "code": "evaluation_uncalibrated",
+      "finding": "Observation-scaled preservation gates, familywise faithful-clone calibration, bootstrap availability, and a numeric WEPP response rule are not executable and frozen."
+    },
+    {
+      "code": "confirmation_corpus",
+      "finding": "The repository contains zero untouched qualified A5d confirmation stations or sealed targets."
+    }
+  ],
+  "feasibility": {
+    "structural_capability_demonstrated_by_construction": true,
+    "capability_guaranteed_for_arbitrary_faithful_library": false,
+    "between_year_variance_ratio_in_fixture": 1.4000000000000001,
+    "physical_daily_values_modified_in_fixture": 0,
+    "simple_kernel_same_block_repeat_probability": 0.6777777777777777,
+    "candidate_contract_freeze_ready": false
+  },
+  "calibration": {
+    "minimum_independent_zero_failure_null_audits_for_95pct_upper_below_5pct": 59,
+    "upper_false_failure_bound_after_eight_zero_failure_trials": 0.31234397806636793,
+    "balanced_station_planning_floor": 28,
+    "balanced_required_improved_stations": 19,
+    "gate_1_revision_3_bootstrap_availability_fraction": 0.1105,
+    "gate_4_revision_3_bootstrap_availability_fraction": 0.004,
+    "numeric_wepp_acceptance_bound_registered": false
+  },
+  "exposure": {
+    "status": "clean",
+    "a5d_confirmation_candidate_outputs_accessed": 0,
+    "a5d_confirmation_target_values_accessed": 0
+  },
+  "public_surface_changes": {
+    "faithful_generation": false,
+    "generation_profile": false,
+    "station_document": false,
+    "station_model": false,
+    "runspec": false,
+    "provenance": false,
+    "typed_output": false,
+    "legacy_par": false
+  },
+  "candidate_identifiers_frozen": [],
+  "confirmation_campaign_authorized": false
+}

@@ -1,0 +1,58 @@
+{
+  "data_role_inventory_version": 1,
+  "status": "complete",
+  "observed_root": "references/observed/a5a-v1",
+  "raw_value_rows_opened_during_a5d0": false,
+  "existing_exposed_development": {
+    "daymet_station_count": 17,
+    "daymet_station_ids": [
+      "ak505769",
+      "al015478",
+      "az022664",
+      "az028619",
+      "az029654",
+      "ca042257",
+      "ca042319",
+      "co051660",
+      "fl083909",
+      "fl086997",
+      "id106388",
+      "mn214026",
+      "ms227840",
+      "nm294426",
+      "tx412797",
+      "ut429382",
+      "wy485345"
+    ],
+    "ghcn_station_count": 8,
+    "ghcn_station_ids": [
+      "USC00028619",
+      "USC00042319",
+      "USC00051660",
+      "USC00083909",
+      "USC00106388",
+      "USC00227840",
+      "USC00294426",
+      "USC00485345"
+    ],
+    "role": "development_and_calibration_only"
+  },
+  "untouched_confirmation": {
+    "station_count": 0,
+    "raw_objects_present": 0,
+    "qualification_manifest_present": false,
+    "sealed_target_artifact_present": false
+  },
+  "planning_floor": {
+    "primary_station_count": 28,
+    "primary_regimes": [
+      "arid",
+      "monsoonal",
+      "humid",
+      "cold"
+    ],
+    "stations_per_regime": 7,
+    "required_improved_stations": 19
+  },
+  "disposition": "hold_confirmation_corpus"
+}

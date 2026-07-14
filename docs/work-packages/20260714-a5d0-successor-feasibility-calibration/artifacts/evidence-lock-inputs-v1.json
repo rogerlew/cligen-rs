@@ -1,0 +1,104 @@
+{
+  "evidence_lock_version": 1,
+  "package_id": "20260714-a5d0-successor-feasibility-calibration",
+  "source_commit": "8d00f8c2108910f257b29c02341c0e1fca9e4dd9",
+  "frozen_on": "2026-07-14",
+  "boundary": "A5a/A5b/A5c evidence is exposed development evidence. No A5d candidate confirmation climate or WEPP output exists or is authorized by this lock.",
+  "entries": [
+    {
+      "role": "extension-authority",
+      "path": "docs/decisions/0002-quality-metrics-authority.md",
+      "sha256": "caaa454358a116c099c93f8d8cf47baa07cd027df2db25285a91a5717802e82c"
+    },
+    {
+      "role": "a5c-renewal-authority",
+      "path": "docs/decisions/0004-a5b-interannual-no-promotion.md",
+      "sha256": "959053ceeddc72992fefcd3272371354190b59387689cdcfd01dd01f9b430dcf"
+    },
+    {
+      "role": "accepted-a5-evaluation-revision-3",
+      "path": "docs/specifications/SPEC-A5-EVALUATION.md",
+      "sha256": "e8149a416cacc8ec57fa9a211d272993071e0c1cfc580d3b39601910e03aac88"
+    },
+    {
+      "role": "a5b-candidate-contract",
+      "path": "docs/specifications/SPEC-A5B-CANDIDATES.md",
+      "sha256": "ceaa94913b7d6d042dfe029381dab4575ba06355e66690c66600ac5cf19692fc"
+    },
+    {
+      "role": "accepted-experiment-report",
+      "path": "docs/reports/interannual-candidate-exp-001-report.md",
+      "sha256": "b1b7f0af0a1f8980183b5e4fa00222c5ae1ccfd29c4bd2b7f43c916652789f5b"
+    },
+    {
+      "role": "accepted-experiment-report-manifest",
+      "path": "docs/reports/interannual-candidate-exp-001-report.manifest.json",
+      "sha256": "48555636e9913ffb5fb57a7966482a29b2e5a62f54927809a80d00005547a85a"
+    },
+    {
+      "role": "post-acceptance-advisory",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/post-acceptance-advisory-review.md",
+      "sha256": "b85c5cb775b4356c587399a182c900ee49a477e8c6abb5e5e0aee6b3a4e689af"
+    },
+    {
+      "role": "a5c-machine-decision",
+      "path": "docs/work-packages/20260714-a5c-interannual-profile-adjudication/artifacts/a5c-decision-v1.json",
+      "sha256": "d032b41588478d5d67216553dcd43647b8e310f2cdf2bd292525e6bdb4dc51d6"
+    },
+    {
+      "role": "a5c-evidence-lock",
+      "path": "docs/work-packages/20260714-a5c-interannual-profile-adjudication/artifacts/evidence-lock-v1.json",
+      "sha256": "9f0e7232e3c860282a5ef36b82893c633a8fd756acb5a6000d6edd29bdb2686c"
+    },
+    {
+      "role": "a5c-adjudication",
+      "path": "docs/work-packages/20260714-a5c-interannual-profile-adjudication/artifacts/promotion-adjudication.md",
+      "sha256": "d074620ca06680ead66396f691c3947be087bac843358d2a62ea3efcd94d31dc"
+    },
+    {
+      "role": "a5b-analysis-evidence-manifest",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/analysis-evidence-v1.json",
+      "sha256": "d773542f6cf6eed39ca96e447bb84fd5f282e4f8483159de203fb1ae0426fd52"
+    },
+    {
+      "role": "a5b-canonical-climate-analysis",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/a5b-analysis-v1.json.gz",
+      "sha256": "540a72530d5a6b6b063a951d65c91cb0a903a474e14935a26c8ee88580fef78c"
+    },
+    {
+      "role": "a5b-canonical-wepp-analysis",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/a5b-wepp-analysis-v1.json",
+      "sha256": "221347acedbf0556ace91d3d64dce99d9e5407855d258f7e097f3bfab4ae873e"
+    },
+    {
+      "role": "a5a-corpus-config",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    {
+      "role": "a5a-observed-target-corpus",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/observed-target-corpus-v1.json",
+      "sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660"
+    },
+    {
+      "role": "a5a-baseline-analysis",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-analysis-v1.json",
+      "sha256": "7892cc2d8931623154c33f854db1170e46749e741d08a3843205131329934733"
+    },
+    {
+      "role": "a5a-baseline-run-manifest",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.json",
+      "sha256": "e6e12a08b7d552edd45481b929271af87530d2821b9b51d5cec066dc76867cbc"
+    },
+    {
+      "role": "scientific-report-standard",
+      "path": "docs/standards/scientific-report-standard.md",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "role": "scientific-report-authoring-protocol",
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    }
+  ]
+}

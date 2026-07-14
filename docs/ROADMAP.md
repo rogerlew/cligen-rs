@@ -16,31 +16,31 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-**Ratified 2026-07-12: file/schema modernization precedes the first
-model-structure study.** A5a and A5b completed on 2026-07-13. A5c is ready
-for dispatch.
+No package is currently ratified and awaiting dispatch.
 
-| Order | Item | Mechanism | Acceptance |
-|---|---|---|---|
-| 1 | **A5c — Interannual profile adjudication** | Apply ADR-0002 to the A5b evidence and record the conservative no-promotion result. | Record the exploratory-evidence boundary and the fact that no A5b candidate passed all climate gates at both horizons; faithful behavior remains the default, and any renewed candidate requires a new prospective study. |
+**A5d0 held** (2026-07-14,
+[`20260714-a5d0-successor-feasibility-calibration`](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md)):
+a constructive fixture proves complete-year selection can reallocate variance
+in some libraries, but no bounded repeat-safe, calendar-safe, common-prefix
+selector is specified or demonstrated on faithful development libraries. The
+package closes `HOLD-CONTRACT-INCOMPLETE`; evaluation calibration and an
+untouched confirmation corpus are separately held. No A5d candidate output or
+public surface was created. The first follow-on is a development-only
+constrained-weight and repeat-safe path solver package; confirmation remains
+forbidden.
 
-A5a supplies the fixed instrument, corpus, baseline, and evaluation contract.
-A5b executed seven independently versioned model/profile pairs against it and
-retained station-schema, station-model, generation-profile, and output-schema
-as independent axes. Its final evidence is exploratory under the documented
-successor-contract amendments: none of the seven candidates passed all six
-climate gates at both horizons, while the complete downstream evidence gate
-passed. No public profile was promoted.
-
-**A5b executed** (2026-07-13,
-[`20260713-a5b-interannual-candidate-spike`](work-packages/20260713-a5b-interannual-candidate-spike/package.md)):
-all 17 station fits, 1,904 candidate climates, the 2,000-replicate bootstrap,
-and 2,176 WEPP records completed. Rank-one SD performed poorly; the dynamic
-models exposed complementary low-frequency strengths, but every candidate
-failed monthly-contract, precipitation-structure, and descriptor guards.
-Downstream runoff/erosion changes were large. A5c therefore records no
-promotion; a later prospective A5d study should integrate monthly constraints
-and daily precipitation structure.
+The A5a–A5c sequence is complete. **A5c executed** (2026-07-14,
+[`20260714-a5c-interannual-profile-adjudication`](work-packages/20260714-a5c-interannual-profile-adjudication/package.md))
+and accepted [ADR-0004](decisions/0004-a5b-interannual-no-promotion.md): none
+of the seven independently versioned A5b candidates passed all climate gates
+at both horizons, so no public station model or generation profile was
+promoted. The evidence is exploratory for model selection and may support the
+conservative rejection only. `faithful_5_32_3` remains the default; station
+schema, station model, generation profile, provenance, and output versions
+remain independent and unchanged. Any successor requires a new prospective
+study, with analytic feasibility, monthly variance reallocation, integrated
+daily precipitation structure, prospectively calibrated guards, and complete
+downstream evidence.
 
 The preceding quality arc (ADR-0002, Q1-Q4) is complete. Both closing
 adjudications were ratified by the operator on 2026-07-10 on the R1-amended
@@ -116,7 +116,7 @@ operator direction. Each lands behind a versioned profile or specification.
 | A2 | **Native f64 mode** | Uniform-f64 engine; measured faithful↔native divergence characterization; the idiomatic destination architecture (faithful modules graduate to executable spec) | Divergence documented per variable; profile `native-f64-v1`; quality report ≥ faithful on groups A/B |
 | A3 | **Observed parquet input + single-pass substitution + leap-year imputation** (SPEC-OBSERVED-INPUT) | f64 parquet observed series; variable replacement in one pass; leap-day handling | Spec + fixtures; kills the flatfile→wepppyo3→flatfile round-trip |
 | A4b | **Station mutation and localization utilities** | Provenance-stamped PRISM localization, future-climate deltas, and mean/CV scaling against the modern station schema; no mutation operation selects generation behavior. | Every mutation is explicit and deterministic, carries complete lineage into output provenance, and produces a schema-valid declared station model. |
-| A5d+ | **Subsequent model-structure studies** | Daily precipitation structure; wet/dry-conditioned radiation; full subdaily forcing and external storm benchmarks; later scenario and multisite/spatial arcs. Single-storm generation remains a deprecated companion rather than part of the first interannual study. | Each study receives its own preregistered package and ADR-0002 adjudication; no component is promoted in isolation without its required dependence and downstream-response gates. |
+| A5d continuation | **Selector proof, evaluation calibration, confirmation corpus, then candidate implementation** | Resolve the three A5d0 holds in separate pre-confirmation packages: a development-library constrained selector proof; a new versioned null-calibrated evaluation and WEPP rule; and an untouched powered corpus. Only then freeze exactly one candidate. Wet/dry radiation, subdaily forcing, external storm benchmarks, and scenario/multisite/spatial arcs remain later studies. Single-storm generation remains deprecated. | Candidate execution remains forbidden until all three holds close and a new evidence freeze passes; every later study receives its own preregistration and ADR-0002 adjudication. |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
 **The faithful-mode port (items 1-8) is complete** (2026-07-09,

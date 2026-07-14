@@ -1,0 +1,128 @@
+{
+  "evidence_lock_version": 1,
+  "decision_id": "a5c-interannual-profile-adjudication-v1",
+  "frozen_at_commit": "8d00f8c2108910f257b29c02341c0e1fca9e4dd9",
+  "frozen_on": "2026-07-14",
+  "entries": [
+    {
+      "role": "decision-authority",
+      "path": "docs/decisions/0002-quality-metrics-authority.md",
+      "sha256": "caaa454358a116c099c93f8d8cf47baa07cd027df2db25285a91a5717802e82c"
+    },
+    {
+      "role": "evaluation-contract",
+      "path": "docs/specifications/SPEC-A5-EVALUATION.md",
+      "sha256": "e8149a416cacc8ec57fa9a211d272993071e0c1cfc580d3b39601910e03aac88"
+    },
+    {
+      "role": "candidate-contract",
+      "path": "docs/specifications/SPEC-A5B-CANDIDATES.md",
+      "sha256": "ceaa94913b7d6d042dfe029381dab4575ba06355e66690c66600ac5cf19692fc"
+    },
+    {
+      "role": "study-package",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/package.md",
+      "sha256": "9092a360775d3b1020bbbeca2b79ed2b15619e605e0f222de2a65646d27fd529"
+    },
+    {
+      "role": "study-results",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/results.md",
+      "sha256": "d0ad88ca2cf7455824a1d9642bd5d7850202e7de6b794e690cac81227e43c796"
+    },
+    {
+      "role": "study-evidence-manifest",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/analysis-evidence-v1.json",
+      "sha256": "d773542f6cf6eed39ca96e447bb84fd5f282e4f8483159de203fb1ae0426fd52"
+    },
+    {
+      "role": "study-review",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/review.md",
+      "sha256": "0f4c4ac17bc06d9cf75ed245481fafe02b770532234ce18365cb53d40edcfa26"
+    },
+    {
+      "role": "study-gates",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/gate-results.md",
+      "sha256": "1ed96cc51a5005201d2f6cdafda2c0791be7d665553a08401716c949cf6a0aff"
+    },
+    {
+      "role": "canonical-climate-analysis",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/a5b-analysis-v1.json.gz",
+      "sha256": "540a72530d5a6b6b063a951d65c91cb0a903a474e14935a26c8ee88580fef78c"
+    },
+    {
+      "role": "canonical-wepp-analysis",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/a5b-wepp-analysis-v1.json",
+      "sha256": "221347acedbf0556ace91d3d64dce99d9e5407855d258f7e097f3bfab4ae873e"
+    },
+    {
+      "role": "accepted-report",
+      "path": "docs/reports/interannual-candidate-exp-001-report.md",
+      "sha256": "b1b7f0af0a1f8980183b5e4fa00222c5ae1ccfd29c4bd2b7f43c916652789f5b"
+    },
+    {
+      "role": "accepted-report-manifest",
+      "path": "docs/reports/interannual-candidate-exp-001-report.manifest.json",
+      "sha256": "48555636e9913ffb5fb57a7966482a29b2e5a62f54927809a80d00005547a85a"
+    },
+    {
+      "role": "accepted-report-review",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/review.md",
+      "sha256": "9b4f9e55daff8f05f098d633a47ecfbb2c2d314eab23fa76ac56dbc0f10ba7a7"
+    },
+    {
+      "role": "post-acceptance-advisory",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/post-acceptance-advisory-review.md",
+      "sha256": "b85c5cb775b4356c587399a182c900ee49a477e8c6abb5e5e0aee6b3a4e689af"
+    },
+    {
+      "role": "public-generation-profile-spec",
+      "path": "docs/specifications/SPEC-GENERATION-PROFILES.md",
+      "sha256": "348703a719f12d515b88a1fe3ff81a5cd68aac6e69fda6af432491982e66e0e0"
+    },
+    {
+      "role": "public-runspec",
+      "path": "docs/specifications/SPEC-RUNSPEC.md",
+      "sha256": "71fec16423e938710c3180482ec2fdcb7ffa8f8417b4f89732e37918bf42b97e"
+    },
+    {
+      "role": "public-runspec-schema",
+      "path": "docs/specifications/runspec.schema.json",
+      "sha256": "d5fb94bd99c6fb97d4027abc226e65ed079d08b333bcea24e1e23e19ec8ef744"
+    },
+    {
+      "role": "public-provenance-spec",
+      "path": "docs/specifications/SPEC-PROVENANCE.md",
+      "sha256": "e82b098e5bdc2a6020636274ab0e33abeeed688dd75d8fb8f2ed4a8d4c7e7eff"
+    },
+    {
+      "role": "public-provenance-schema",
+      "path": "docs/specifications/provenance-v1.schema.json",
+      "sha256": "c1f2ef184547f6a6e11b1a62472dd40d860443cb69287e5c29b6c102aecdc941"
+    },
+    {
+      "role": "embedded-provenance-schema",
+      "path": "crates/cligen/schemas/provenance-v1.schema.json",
+      "sha256": "c1f2ef184547f6a6e11b1a62472dd40d860443cb69287e5c29b6c102aecdc941"
+    },
+    {
+      "role": "public-station-document-spec",
+      "path": "docs/specifications/SPEC-STATION-DOCUMENT.md",
+      "sha256": "bf4683b2a1330820ea06daece08db70f37e73aff9ec75a1c1184ac334204856c"
+    },
+    {
+      "role": "public-station-document-schema",
+      "path": "docs/specifications/station-document.schema.json",
+      "sha256": "9641e338a30f4cc65d0bde38842c4e9451e5816416af6740f1009dd53cf3cfe0"
+    },
+    {
+      "role": "public-typed-output-spec",
+      "path": "docs/specifications/SPEC-CLI-PARQUET.md",
+      "sha256": "8235d1ad950e2b2346ac5907cf72afde3be96f67ed0a8c864b3b30594947764a"
+    },
+    {
+      "role": "public-typed-output-fields",
+      "path": "docs/specifications/cli-parquet-v1.fields.json",
+      "sha256": "38a8d241d3228813c3899c9c68bcf6f7cdfad229226c5e27621b928e1e36d540"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "a5b_revision_3_observations": {
+    "bootstrap_total": 2000,
+    "gate_1_availability_fraction": 0.1105,
+    "gate_1_bootstrap_available": 221,
+    "gate_4_availability_fraction": 0.004,
+    "gate_4_bootstrap_available": 8,
+    "registered_numeric_wepp_acceptance_bound": false
+  },
+  "a5d0_feasibility_fixture_version": 1,
+  "calibration_power": {
+    "a5b_11_of_17_sign_tail_under_null": 0.1661529541015625,
+    "balanced_four_regime_sign_design": {
+      "null_one_sided_probability": 0.04357927665114403,
+      "power_if_true_improvement_probability_is_0_75": 0.8615464650711869,
+      "required_improved": 19,
+      "stations": 28,
+      "stations_per_four_primary_regimes": 7
+    },
+    "minimum_exact_sign_design": {
+      "null_one_sided_probability": 0.04656982421875,
+      "power_if_true_improvement_probability_is_0_75": 0.8036966850052067,
+      "required_improved": 16,
+      "stations": 23
+    },
+    "minimum_independent_null_trials_if_zero_failures": 59,
+    "target_familywise_false_failure_upper_bound": 0.05,
+    "upper_bound_after_eight_trials": 0.31234397806636793,
+    "upper_bound_after_minimum_trials": 0.049507609888227,
+    "zero_failures_one_sided_confidence": 0.95
+  },
+  "conclusion": {
+    "blocking_contract_questions": [
+      "No bounded repeat-safe selector with a prospectively adjudicated reuse ceiling and the required stationary and finite-prefix properties is specified.",
+      "No development-library optimization demonstrates simultaneous monthly constraints and complete Gate 1 improvement across stations.",
+      "Calendar-class and finite 30/100-year prefix behavior are not executable."
+    ],
+    "capability_guaranteed_for_arbitrary_faithful_library": false,
+    "production_contract_freeze_ready": false,
+    "structural_capability_demonstrated_by_construction": true
+  },
+  "evidence_boundary": "deterministic synthetic derivation only; no A5d candidate confirmation output",
+  "stationary_kernel_fixture": {
+    "expected_lag_one_covariance": 1.4000000000000001,
+    "interpretation": "The simple persistent kernel proves the dependence identity but has a high repeat probability and no adjudicated reuse ceiling; it is not a freeze-ready selector.",
+    "lag_one_covariance": 1.4,
+    "rho": 0.6,
+    "row_sum_max_abs_error": 0.0,
+    "same_block_repeat_probability": 0.6777777777777777,
+    "stationary_max_abs_error": 0.0,
+    "zero_frequency_power_ratio_vs_independent": 4.0
+  },
+  "status": "complete",
+  "structural_counterexample": {
+    "constant_within_year_variance": 1.0,
+    "interpretation": "Feasibility is a property of the realized library/constraints, not of block resampling in general.",
+    "result": "preserving mean and daily second moment fixes between-year variance"
+  },
+  "variance_reallocation_fixture": {
+    "baseline": {
+      "between_year_variance": 1.6666666666666665,
+      "daily_second_moment": 4.333333333333333,
+      "mean": 0.0,
+      "mean_within_year_variance": 2.6666666666666665,
+      "total_variance": 4.333333333333333
+    },
+    "baseline_weights": [
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666
+    ],
+    "between_year_variance_ratio": 1.4000000000000001,
+    "candidate": {
+      "between_year_variance": 2.3333333333333335,
+      "daily_second_moment": 4.333333333333333,
+      "mean": 0.0,
+      "mean_within_year_variance": 2.0,
+      "total_variance": 4.333333333333334
+    },
+    "candidate_weights": [
+      0.25,
+      0.25,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.08333333333333333,
+      0.08333333333333333
+    ],
+    "interpretation": "A fixed block library can reallocate variance when within-year variance differs across selectable states.",
+    "physical_daily_values_modified": 0
+  }
+}
