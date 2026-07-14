@@ -1,0 +1,985 @@
+{
+  "binary": {
+    "bytes": 15279568,
+    "path": "target/release/cligen",
+    "sha256": "13e85f851748047e83a39173d7722941606e73127d3ff52c968cdfd3514b20d6"
+  },
+  "canonical_library_role": "one nested burn-0 trajectory; repeats are determinism checks, not replicates",
+  "controls": {
+    "begin_year": 1,
+    "burn": 0,
+    "interpolation": "none",
+    "profile": "faithful_5_32_3",
+    "qc_filter": "off",
+    "years": 256
+  },
+  "development_library_manifest_schema_version": 1,
+  "development_only": true,
+  "freeze_sha256": "726c2c761d38f1fd3399de9e64d171a36921e00da09c0ae3824f4e4e6cbe6d10",
+  "records": [
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli",
+        "sha256": "8de634d4c8d186c2e619f255078e423967b379d2b12a9577bef24e0512beca55"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli.provenance.json",
+        "sha256": "a6e3a0f8f98e2e87e757664c5104c451aa1374c04b54316e8a21992f93e894c7"
+      },
+      "quality": {
+        "bytes": 1830585,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli.quality.json",
+        "sha256": "b31ed132834c65ca52e67f93966fcb92029515cfbbd806088104fc8d5c72d2e5"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ak505769-repeat-2.yaml",
+        "sha256": "67ce707c29fb19796a6b9c940704070f1c105236e18c3d5bd4ab4657259024bb"
+      },
+      "station_id": "ak505769",
+      "wall_seconds": 0.39158,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli",
+        "sha256": "c6ae0581736e10898c0f3c030f3aec92ee1a3b5122c5c53aaf435f56aa9f1186"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli.provenance.json",
+        "sha256": "9714badbc6ea01b030de582f40778cd5b41219eda036cf4638bc767c27d2cf80"
+      },
+      "quality": {
+        "bytes": 1823691,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli.quality.json",
+        "sha256": "8a7551d216791a392e5f6e6a73ec791fe05c3b5f037701282fe4fc3332cfb712"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/al015478-repeat-2.yaml",
+        "sha256": "78fffec279284b5e7aec8bf1edee98b6bdf76e3d55b964779af340693ef5b7a7"
+      },
+      "station_id": "al015478",
+      "wall_seconds": 0.372835,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli",
+        "sha256": "02f7a78f74c72a4582d3e57f43818508c6d8c8a6891dd46764d451f11b5f07d1"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli.provenance.json",
+        "sha256": "c07485ad9299071d1477d8342f4d6e16fa2f19949f1c4042057d7bc6470d0d3d"
+      },
+      "quality": {
+        "bytes": 1821203,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli.quality.json",
+        "sha256": "a28e52b5eea9688a5fda2838fe113f8291a2984312149b8b16e41141a6662e11"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az022664-repeat-2.yaml",
+        "sha256": "14492d486d6aedade3789099c418a53ee8b6f7ee82a965d519259c5783f30796"
+      },
+      "station_id": "az022664",
+      "wall_seconds": 0.369708,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli",
+        "sha256": "9df6772c4e2947f586f5f15fe901b676943216685663ad8698628b966a28bda3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli.provenance.json",
+        "sha256": "4445c6aa09e46c069b5160ac6635a0a870a3724420a8fb54338bd3b214b988e4"
+      },
+      "quality": {
+        "bytes": 1818604,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli.quality.json",
+        "sha256": "f373ada576e143492db34f889fe92fc1cccd8996f03b81cdd78ced905621753c"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az028619-repeat-2.yaml",
+        "sha256": "bfa0e04bb3c555a3d1c54f1c7dac3bdaaed801b57ce731ac68fc88de008c2a01"
+      },
+      "station_id": "az028619",
+      "wall_seconds": 0.349963,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli",
+        "sha256": "cec26b71616d9af55dbc1408ab8d42318d935c1ca65ef7fb514b9327e11e25ab"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli.provenance.json",
+        "sha256": "540b10e2690e75537a5265e434a1ce6f012743eeec6ac219a8f60e23ed5ac911"
+      },
+      "quality": {
+        "bytes": 1810704,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli.quality.json",
+        "sha256": "1f92dc679464c8667d4bb7da0954bcabe86c4dd150e99ead87c7f2b29d65dcdc"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az029654-repeat-2.yaml",
+        "sha256": "8a449d13625e5765ffd3cb9641cdc8a915a0ee92f1ecfa905c529f3ed5ba6b85"
+      },
+      "station_id": "az029654",
+      "wall_seconds": 0.351567,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli",
+        "sha256": "e25ec49dbeacd4cd9835ecf5d66cfe29f3bc82687ffefdbd8684d9b7b5f118e5"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli.provenance.json",
+        "sha256": "006e22f9708f3a8b8f1aedcd39b800d6cf1d0886e3c9b615d927f692d3d287a5"
+      },
+      "quality": {
+        "bytes": 1813995,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli.quality.json",
+        "sha256": "139dbc4a634140dcb1fa0ba3c8f97c50e6aae77ac1b3f19230afbc154e2fdd8e"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ca042257-repeat-2.yaml",
+        "sha256": "6c407e3705cc63e6b6183c9e20273516ba83ebdc62765da5cf59ffff23a06c80"
+      },
+      "station_id": "ca042257",
+      "wall_seconds": 0.349348,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli",
+        "sha256": "1fff2532cf077aa2003d44f9ba7db06a4191b401296082c68ae1732ceeda88ad"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli.provenance.json",
+        "sha256": "cbdd0f8a9558d7250cf592ec77c17f2af65cfb67e2a4219346d249869e1f3e59"
+      },
+      "quality": {
+        "bytes": 1811818,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli.quality.json",
+        "sha256": "333575c97253a4f6d5c1e375f61e5bd208e3329d028171170af8422a39192218"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ca042319-repeat-2.yaml",
+        "sha256": "4a20a9ae17ac5c24fbf808c499f52f6055bf54a11c3acd7fa93e2ad4d6761a62"
+      },
+      "station_id": "ca042319",
+      "wall_seconds": 0.367315,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli",
+        "sha256": "beb67ff1533fa294757c646244dc83dc00dca7bfc38446d619e30ac3d98b1d1c"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli.provenance.json",
+        "sha256": "6216161b23618b84f5fd4368fa9efe94bb2babc7003a756e41ae6a6257b12fae"
+      },
+      "quality": {
+        "bytes": 1831769,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli.quality.json",
+        "sha256": "7f2263f4454a28f614eb4f63ac143c3c6b2294d6a9ed5f4d39ac4fea1b8debc1"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/co051660-repeat-2.yaml",
+        "sha256": "93e1c5a9cefaaacc3ac59382ab5f51dc3b39447eb4bc7095ba61889a43ddb805"
+      },
+      "station_id": "co051660",
+      "wall_seconds": 0.385269,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli",
+        "sha256": "18dbafb042b7458aabbb5dac7c10e5f4907350fffb3479b0d606e846f9806e98"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli.provenance.json",
+        "sha256": "e7a311734dd83ce3ff128415fb32a38a10af9d214d8808c18fd7e2c3d7b799ac"
+      },
+      "quality": {
+        "bytes": 1823859,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli.quality.json",
+        "sha256": "426677c14f6cb2405ad249418e31ed72041005941aaf1401bda75207638975ce"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/fl083909-repeat-2.yaml",
+        "sha256": "1889466b276f9b9faef73e3bf5a52e467d7038d48873851f774b0866051befb0"
+      },
+      "station_id": "fl083909",
+      "wall_seconds": 0.383644,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli",
+        "sha256": "d123c7c5013480deb3a4af9244e015b92347c9eb8cabe3364b6d607e9b00c5f2"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli.provenance.json",
+        "sha256": "bbfb33432f350f2f273cf504c74df3392a7a7087fce5a8b387c1667091137878"
+      },
+      "quality": {
+        "bytes": 1824335,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli.quality.json",
+        "sha256": "697a4751726c1547be92d03591ee0d328b59a95c047356b38bc07d7d65460ef7"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/fl086997-repeat-2.yaml",
+        "sha256": "5e9e1a84b5a140aa7ee1e85f7bea7485453b5bfe9a6acc43c7bdfe35af14d8b9"
+      },
+      "station_id": "fl086997",
+      "wall_seconds": 0.382659,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli",
+        "sha256": "9e922f406cdb2e498018549353963c56faca38d4221ed2e2ad364cf8cf391dd6"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli.provenance.json",
+        "sha256": "9cb6e3546576ac6a7ebab09c02edc1df81c49e37667a11206a412ae7a92596a8"
+      },
+      "quality": {
+        "bytes": 1827609,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli.quality.json",
+        "sha256": "0cb510c20e8fe7047498761872e39dba3f6328597577799fa5dc26ac3cbbaafe"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/id106388-repeat-2.yaml",
+        "sha256": "b79ec6d9824b8c921b01819ae88806f13cb58f9cbee6b91bcf80eb84f943ab26"
+      },
+      "station_id": "id106388",
+      "wall_seconds": 0.377018,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli",
+        "sha256": "1ee7dca4fb2e454193b341f2faa9cc96b48714197fcece66cf26d6112dd245a7"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli.provenance.json",
+        "sha256": "ea049ef5ef459e5009d2b64b1e1a84437725b7ffd56a065f9c5ac38b61f516ce"
+      },
+      "quality": {
+        "bytes": 1830305,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli.quality.json",
+        "sha256": "291ccd171fb43ce5094ed913c98d071929089ae15e64849024292f9efe27728a"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/mn214026-repeat-2.yaml",
+        "sha256": "59612fff4448e6ad4458bba44e3500cf00f687bff02639c318290cc4d217b6b9"
+      },
+      "station_id": "mn214026",
+      "wall_seconds": 0.384563,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli",
+        "sha256": "83c5030799ca26bd42d76ec85d694fe3aea93ab1dfb075f518dd3a0f5937796f"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli.provenance.json",
+        "sha256": "5fe29453403d7332aae4267e513f25ec7d4a4ebc7ded786fec576141c9f19697"
+      },
+      "quality": {
+        "bytes": 1825572,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli.quality.json",
+        "sha256": "57862b9e0827357a351081a37059ff26b17b70d6d3549f99d4037fd6f35aed4a"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ms227840-repeat-2.yaml",
+        "sha256": "073cb261608c9e755527391b1c46ab13b61a8d2860d90bcc9a45dbf3cb95bb97"
+      },
+      "station_id": "ms227840",
+      "wall_seconds": 0.37528,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli",
+        "sha256": "b9b85d379a5eaf9fd38742b4f8c945e63a82b0484fa706bc9a3adb489bd11d95"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli.provenance.json",
+        "sha256": "5b39aa44bc323e191a5ecec51918a1044e39c667663c53984f292b8e167a055c"
+      },
+      "quality": {
+        "bytes": 1820733,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli.quality.json",
+        "sha256": "40d1f413bdeb1925ef903a5d62cf66a95e5f3ca6ffafbb1dd75717c51c0422ff"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/nm294426-repeat-2.yaml",
+        "sha256": "43198191fdf6d9d967bab09ece908e08c052167076a2870d1c7846b6737dd5f3"
+      },
+      "station_id": "nm294426",
+      "wall_seconds": 0.351931,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli",
+        "sha256": "5c65a9f99ab5403f5884d7c7d7de22676d46462df95acb1bedea871ad821a550"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli.provenance.json",
+        "sha256": "b89c1525a9d22155b0423cd1970d36d6732c7ea4f2b0f9b575111628339f19d1"
+      },
+      "quality": {
+        "bytes": 1821053,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli.quality.json",
+        "sha256": "c3dd8673e350dfe7803ad143d17a90980dccb2c8fc1d75cf1d24b6ca07933ced"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/tx412797-repeat-2.yaml",
+        "sha256": "0fe00e03706476d185d02d7792a3f05a6474fae413121b8f1c59662e9e1dc594"
+      },
+      "station_id": "tx412797",
+      "wall_seconds": 0.358505,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli",
+        "sha256": "00cefabfaa9577713e479977e3e05f46af6ee49fc44d7d721ff2e067f19174c3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli.provenance.json",
+        "sha256": "15a3382c018b8557017934baac5fc03975b63155f0d22b5a6d999b9a0be1c732"
+      },
+      "quality": {
+        "bytes": 1823569,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli.quality.json",
+        "sha256": "a327dcc61305f00d9392c5b2fbc158be69996a5bba55a0e95e21aefa55bfc971"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ut429382-repeat-2.yaml",
+        "sha256": "8b43f0191f32b8eb908489546121a61dc33904bc6f2f9b5275b51691d1373f83"
+      },
+      "station_id": "ut429382",
+      "wall_seconds": 0.356128,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli",
+        "sha256": "1a1bb283b725fc4f8fb7e01e0621dcc8031462f35991e6adcb881b370eb968c3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli.provenance.json",
+        "sha256": "bfd41f68157029a3a57e6834789f5f96e0a112519d733fa769c0a5e20a63c35f"
+      },
+      "quality": {
+        "bytes": 1830849,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli.quality.json",
+        "sha256": "ff0333fa5f819b95bc696a20518f9fd05f2730c7238395354a5aa9bb131c55ae"
+      },
+      "repetition": 2,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/wy485345-repeat-2.yaml",
+        "sha256": "e9a373402bc0887cf8188a62c1430c6f1ba9519863a17c4856c87fb17d0ba8e6"
+      },
+      "station_id": "wy485345",
+      "wall_seconds": 0.394696,
+      "years": 256
+    }
+  ],
+  "repeat_checks": [
+    {
+      "byte_identical": true,
+      "station_id": "ak505769"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "al015478"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "az022664"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "az028619"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "az029654"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "ca042257"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "ca042319"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "co051660"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "fl083909"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "fl086997"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "id106388"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "mn214026"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "ms227840"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "nm294426"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "tx412797"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "ut429382"
+    },
+    {
+      "byte_identical": true,
+      "station_id": "wy485345"
+    }
+  ],
+  "repeat_record_identities": [
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli",
+        "sha256": "8de634d4c8d186c2e619f255078e423967b379d2b12a9577bef24e0512beca55"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli.provenance.json",
+        "sha256": "a6e3a0f8f98e2e87e757664c5104c451aa1374c04b54316e8a21992f93e894c7"
+      },
+      "quality": {
+        "bytes": 1830585,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ak505769-256yr.cli.quality.json",
+        "sha256": "b31ed132834c65ca52e67f93966fcb92029515cfbbd806088104fc8d5c72d2e5"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ak505769-repeat-1.yaml",
+        "sha256": "67ce707c29fb19796a6b9c940704070f1c105236e18c3d5bd4ab4657259024bb"
+      },
+      "station_id": "ak505769",
+      "wall_seconds": 0.383777,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli",
+        "sha256": "c6ae0581736e10898c0f3c030f3aec92ee1a3b5122c5c53aaf435f56aa9f1186"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli.provenance.json",
+        "sha256": "9714badbc6ea01b030de582f40778cd5b41219eda036cf4638bc767c27d2cf80"
+      },
+      "quality": {
+        "bytes": 1823691,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/al015478-256yr.cli.quality.json",
+        "sha256": "8a7551d216791a392e5f6e6a73ec791fe05c3b5f037701282fe4fc3332cfb712"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/al015478-repeat-1.yaml",
+        "sha256": "78fffec279284b5e7aec8bf1edee98b6bdf76e3d55b964779af340693ef5b7a7"
+      },
+      "station_id": "al015478",
+      "wall_seconds": 0.37568,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli",
+        "sha256": "02f7a78f74c72a4582d3e57f43818508c6d8c8a6891dd46764d451f11b5f07d1"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli.provenance.json",
+        "sha256": "c07485ad9299071d1477d8342f4d6e16fa2f19949f1c4042057d7bc6470d0d3d"
+      },
+      "quality": {
+        "bytes": 1821203,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az022664-256yr.cli.quality.json",
+        "sha256": "a28e52b5eea9688a5fda2838fe113f8291a2984312149b8b16e41141a6662e11"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az022664-repeat-1.yaml",
+        "sha256": "14492d486d6aedade3789099c418a53ee8b6f7ee82a965d519259c5783f30796"
+      },
+      "station_id": "az022664",
+      "wall_seconds": 0.356496,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli",
+        "sha256": "9df6772c4e2947f586f5f15fe901b676943216685663ad8698628b966a28bda3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli.provenance.json",
+        "sha256": "4445c6aa09e46c069b5160ac6635a0a870a3724420a8fb54338bd3b214b988e4"
+      },
+      "quality": {
+        "bytes": 1818604,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az028619-256yr.cli.quality.json",
+        "sha256": "f373ada576e143492db34f889fe92fc1cccd8996f03b81cdd78ced905621753c"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az028619-repeat-1.yaml",
+        "sha256": "bfa0e04bb3c555a3d1c54f1c7dac3bdaaed801b57ce731ac68fc88de008c2a01"
+      },
+      "station_id": "az028619",
+      "wall_seconds": 0.351311,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli",
+        "sha256": "cec26b71616d9af55dbc1408ab8d42318d935c1ca65ef7fb514b9327e11e25ab"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli.provenance.json",
+        "sha256": "540b10e2690e75537a5265e434a1ce6f012743eeec6ac219a8f60e23ed5ac911"
+      },
+      "quality": {
+        "bytes": 1810704,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/az029654-256yr.cli.quality.json",
+        "sha256": "1f92dc679464c8667d4bb7da0954bcabe86c4dd150e99ead87c7f2b29d65dcdc"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/az029654-repeat-1.yaml",
+        "sha256": "8a449d13625e5765ffd3cb9641cdc8a915a0ee92f1ecfa905c529f3ed5ba6b85"
+      },
+      "station_id": "az029654",
+      "wall_seconds": 0.355665,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli",
+        "sha256": "e25ec49dbeacd4cd9835ecf5d66cfe29f3bc82687ffefdbd8684d9b7b5f118e5"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli.provenance.json",
+        "sha256": "006e22f9708f3a8b8f1aedcd39b800d6cf1d0886e3c9b615d927f692d3d287a5"
+      },
+      "quality": {
+        "bytes": 1813995,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042257-256yr.cli.quality.json",
+        "sha256": "139dbc4a634140dcb1fa0ba3c8f97c50e6aae77ac1b3f19230afbc154e2fdd8e"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ca042257-repeat-1.yaml",
+        "sha256": "6c407e3705cc63e6b6183c9e20273516ba83ebdc62765da5cf59ffff23a06c80"
+      },
+      "station_id": "ca042257",
+      "wall_seconds": 0.34314,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli",
+        "sha256": "1fff2532cf077aa2003d44f9ba7db06a4191b401296082c68ae1732ceeda88ad"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli.provenance.json",
+        "sha256": "cbdd0f8a9558d7250cf592ec77c17f2af65cfb67e2a4219346d249869e1f3e59"
+      },
+      "quality": {
+        "bytes": 1811818,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ca042319-256yr.cli.quality.json",
+        "sha256": "333575c97253a4f6d5c1e375f61e5bd208e3329d028171170af8422a39192218"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ca042319-repeat-1.yaml",
+        "sha256": "4a20a9ae17ac5c24fbf808c499f52f6055bf54a11c3acd7fa93e2ad4d6761a62"
+      },
+      "station_id": "ca042319",
+      "wall_seconds": 0.341733,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli",
+        "sha256": "beb67ff1533fa294757c646244dc83dc00dca7bfc38446d619e30ac3d98b1d1c"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli.provenance.json",
+        "sha256": "6216161b23618b84f5fd4368fa9efe94bb2babc7003a756e41ae6a6257b12fae"
+      },
+      "quality": {
+        "bytes": 1831769,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/co051660-256yr.cli.quality.json",
+        "sha256": "7f2263f4454a28f614eb4f63ac143c3c6b2294d6a9ed5f4d39ac4fea1b8debc1"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/co051660-repeat-1.yaml",
+        "sha256": "93e1c5a9cefaaacc3ac59382ab5f51dc3b39447eb4bc7095ba61889a43ddb805"
+      },
+      "station_id": "co051660",
+      "wall_seconds": 0.386739,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli",
+        "sha256": "18dbafb042b7458aabbb5dac7c10e5f4907350fffb3479b0d606e846f9806e98"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli.provenance.json",
+        "sha256": "e7a311734dd83ce3ff128415fb32a38a10af9d214d8808c18fd7e2c3d7b799ac"
+      },
+      "quality": {
+        "bytes": 1823859,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl083909-256yr.cli.quality.json",
+        "sha256": "426677c14f6cb2405ad249418e31ed72041005941aaf1401bda75207638975ce"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/fl083909-repeat-1.yaml",
+        "sha256": "1889466b276f9b9faef73e3bf5a52e467d7038d48873851f774b0866051befb0"
+      },
+      "station_id": "fl083909",
+      "wall_seconds": 0.377855,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli",
+        "sha256": "d123c7c5013480deb3a4af9244e015b92347c9eb8cabe3364b6d607e9b00c5f2"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli.provenance.json",
+        "sha256": "bbfb33432f350f2f273cf504c74df3392a7a7087fce5a8b387c1667091137878"
+      },
+      "quality": {
+        "bytes": 1824335,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/fl086997-256yr.cli.quality.json",
+        "sha256": "697a4751726c1547be92d03591ee0d328b59a95c047356b38bc07d7d65460ef7"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/fl086997-repeat-1.yaml",
+        "sha256": "5e9e1a84b5a140aa7ee1e85f7bea7485453b5bfe9a6acc43c7bdfe35af14d8b9"
+      },
+      "station_id": "fl086997",
+      "wall_seconds": 0.372912,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli",
+        "sha256": "9e922f406cdb2e498018549353963c56faca38d4221ed2e2ad364cf8cf391dd6"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli.provenance.json",
+        "sha256": "9cb6e3546576ac6a7ebab09c02edc1df81c49e37667a11206a412ae7a92596a8"
+      },
+      "quality": {
+        "bytes": 1827609,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/id106388-256yr.cli.quality.json",
+        "sha256": "0cb510c20e8fe7047498761872e39dba3f6328597577799fa5dc26ac3cbbaafe"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/id106388-repeat-1.yaml",
+        "sha256": "b79ec6d9824b8c921b01819ae88806f13cb58f9cbee6b91bcf80eb84f943ab26"
+      },
+      "station_id": "id106388",
+      "wall_seconds": 0.364256,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli",
+        "sha256": "1ee7dca4fb2e454193b341f2faa9cc96b48714197fcece66cf26d6112dd245a7"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli.provenance.json",
+        "sha256": "ea049ef5ef459e5009d2b64b1e1a84437725b7ffd56a065f9c5ac38b61f516ce"
+      },
+      "quality": {
+        "bytes": 1830305,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/mn214026-256yr.cli.quality.json",
+        "sha256": "291ccd171fb43ce5094ed913c98d071929089ae15e64849024292f9efe27728a"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/mn214026-repeat-1.yaml",
+        "sha256": "59612fff4448e6ad4458bba44e3500cf00f687bff02639c318290cc4d217b6b9"
+      },
+      "station_id": "mn214026",
+      "wall_seconds": 0.3785,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli",
+        "sha256": "83c5030799ca26bd42d76ec85d694fe3aea93ab1dfb075f518dd3a0f5937796f"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli.provenance.json",
+        "sha256": "5fe29453403d7332aae4267e513f25ec7d4a4ebc7ded786fec576141c9f19697"
+      },
+      "quality": {
+        "bytes": 1825572,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ms227840-256yr.cli.quality.json",
+        "sha256": "57862b9e0827357a351081a37059ff26b17b70d6d3549f99d4037fd6f35aed4a"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ms227840-repeat-1.yaml",
+        "sha256": "073cb261608c9e755527391b1c46ab13b61a8d2860d90bcc9a45dbf3cb95bb97"
+      },
+      "station_id": "ms227840",
+      "wall_seconds": 0.377348,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli",
+        "sha256": "b9b85d379a5eaf9fd38742b4f8c945e63a82b0484fa706bc9a3adb489bd11d95"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli.provenance.json",
+        "sha256": "5b39aa44bc323e191a5ecec51918a1044e39c667663c53984f292b8e167a055c"
+      },
+      "quality": {
+        "bytes": 1820733,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/nm294426-256yr.cli.quality.json",
+        "sha256": "40d1f413bdeb1925ef903a5d62cf66a95e5f3ca6ffafbb1dd75717c51c0422ff"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/nm294426-repeat-1.yaml",
+        "sha256": "43198191fdf6d9d967bab09ece908e08c052167076a2870d1c7846b6737dd5f3"
+      },
+      "station_id": "nm294426",
+      "wall_seconds": 0.350325,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli",
+        "sha256": "5c65a9f99ab5403f5884d7c7d7de22676d46462df95acb1bedea871ad821a550"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli.provenance.json",
+        "sha256": "b89c1525a9d22155b0423cd1970d36d6732c7ea4f2b0f9b575111628339f19d1"
+      },
+      "quality": {
+        "bytes": 1821053,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/tx412797-256yr.cli.quality.json",
+        "sha256": "c3dd8673e350dfe7803ad143d17a90980dccb2c8fc1d75cf1d24b6ca07933ced"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/tx412797-repeat-1.yaml",
+        "sha256": "0fe00e03706476d185d02d7792a3f05a6474fae413121b8f1c59662e9e1dc594"
+      },
+      "station_id": "tx412797",
+      "wall_seconds": 0.360037,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli",
+        "sha256": "00cefabfaa9577713e479977e3e05f46af6ee49fc44d7d721ff2e067f19174c3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli.provenance.json",
+        "sha256": "15a3382c018b8557017934baac5fc03975b63155f0d22b5a6d999b9a0be1c732"
+      },
+      "quality": {
+        "bytes": 1823569,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/ut429382-256yr.cli.quality.json",
+        "sha256": "a327dcc61305f00d9392c5b2fbc158be69996a5bba55a0e95e21aefa55bfc971"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/ut429382-repeat-1.yaml",
+        "sha256": "8b43f0191f32b8eb908489546121a61dc33904bc6f2f9b5275b51691d1373f83"
+      },
+      "station_id": "ut429382",
+      "wall_seconds": 0.354085,
+      "years": 256
+    },
+    {
+      "cli": {
+        "bytes": 6639755,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli",
+        "sha256": "1a1bb283b725fc4f8fb7e01e0621dcc8031462f35991e6adcb881b370eb968c3"
+      },
+      "days": 93502,
+      "provenance": {
+        "bytes": 2947,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli.provenance.json",
+        "sha256": "bfd41f68157029a3a57e6834789f5f96e0a112519d733fa769c0a5e20a63c35f"
+      },
+      "quality": {
+        "bytes": 1830849,
+        "path": "target/a5d1-selector-feasibility/libraries/canonical/wy485345-256yr.cli.quality.json",
+        "sha256": "ff0333fa5f819b95bc696a20518f9fd05f2730c7238395354a5aa9bb131c55ae"
+      },
+      "repetition": 1,
+      "runspec": {
+        "path": "target/a5d1-selector-feasibility/runspecs/wy485345-repeat-1.yaml",
+        "sha256": "e9a373402bc0887cf8188a62c1430c6f1ba9519863a17c4856c87fb17d0ba8e6"
+      },
+      "station_id": "wy485345",
+      "wall_seconds": 0.381919,
+      "years": 256
+    }
+  ],
+  "station_count": 17,
+  "synthetic_self_test": {
+    "dependence_finite": true,
+    "duplicate_key_rejected": true,
+    "leap_calendar": true,
+    "nonfinite_rejected": true
+  },
+  "total_retained_bytes": 112875835
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rogerlew.github.io/cligen-rs/schemas/a5d1-selector-feasibility-contract-v1.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "algorithms": {"items": {"type": "string"}, "minItems": 3, "type": "array", "uniqueItems": true},
+    "annual_marginal_vector": {"type": "object"},
+    "authority_map": {"type": "object"},
+    "calendar": {"type": "object"},
+    "contract_id": {"const": "a5d1-selector-feasibility-v1"},
+    "contract_schema_version": {"const": 1},
+    "development_only": {"const": true},
+    "feature_vector": {"type": "object"},
+    "generator": {"type": "object"},
+    "horizons": {"const": [30, 100]},
+    "library_realizations": {"items": {"type": "object"}, "minItems": 1, "type": "array"},
+    "marginal_solver": {"type": "object"},
+    "monthly_tolerances": {"type": "object"},
+    "path": {"type": "object"},
+    "pool_sizes": {"const": [128, 256]},
+    "preservation": {"type": "object"},
+    "resource_ceilings": {"type": "object"},
+    "selection_rule": {"type": "string"},
+    "station_count": {"const": 17},
+    "unparameterized_tolerances": {"type": "object"}
+  },
+  "required": [
+    "algorithms", "annual_marginal_vector", "authority_map", "calendar",
+    "contract_id", "contract_schema_version", "development_only",
+    "feature_vector", "generator", "horizons", "library_realizations",
+    "marginal_solver", "monthly_tolerances", "path", "pool_sizes",
+    "preservation", "resource_ceilings", "selection_rule", "station_count",
+    "unparameterized_tolerances"
+  ],
+  "type": "object"
+}

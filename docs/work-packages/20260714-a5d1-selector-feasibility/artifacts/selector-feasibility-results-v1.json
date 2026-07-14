@@ -1,0 +1,132 @@
+{
+  "actual_matrix_cells": 306,
+  "development_only": true,
+  "evidence": {
+    "contract_sha256": "7fec603c613a416578fd510768de789c3c8b4f07278f08b2137dd94fe62ceb0c",
+    "feature_manifest_sha256": "a219242f9edcaef961c3c4e44d9dbd0d6e37b502092264e602f3d478c55a9335",
+    "library_manifest_sha256": "b2abf191b8b8b724582f166541746c2f4bf7bb51b584637b18f6b20f9f5ca4e0",
+    "marginal_results_sha256": "fccbe964b6ff54bbd24d077e74f5aefdb6d83c3a63d5559db59ebbe4600ed879",
+    "path_results_sha256": "b15c638ab5a6d9ee0358b93bcc7f4999e56b44b22bed7d7495dfd8c7f063e321"
+  },
+  "expected_matrix_cells": 306,
+  "first_corrective_action": "A5d1b must diagnose the first common finite-path failure under the frozen marginal weights before introducing another path algorithm.",
+  "freeze_sha256": "dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22",
+  "marginal_by_pool": [
+    {
+      "all_station_pass": false,
+      "failure_counts": {
+        "aggregate_strict_improvement": 2,
+        "component_noninferiority": 1,
+        "solver_status_and_tie_break": 1
+      },
+      "pass_count": 13,
+      "pool_size": 128,
+      "station_count": 17
+    },
+    {
+      "all_station_pass": true,
+      "failure_counts": {},
+      "pass_count": 17,
+      "pool_size": 256,
+      "station_count": 17
+    }
+  ],
+  "path_by_global_contract": [
+    {
+      "actual_cells": 51,
+      "algorithm": "guarded_replacement",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "finite_prefix_marginal": 39,
+        "stationary_marginal_feasibility": 12
+      },
+      "pass_cells": 0,
+      "pool_size": 128,
+      "required_cells": 51
+    },
+    {
+      "actual_cells": 51,
+      "algorithm": "weighted_permutation",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "boundary_vector": 3,
+        "finite_prefix_marginal": 36,
+        "stationary_marginal_feasibility": 12
+      },
+      "pass_cells": 0,
+      "pool_size": 128,
+      "required_cells": 51
+    },
+    {
+      "actual_cells": 51,
+      "algorithm": "state_persistent_different_block",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "finite_prefix_marginal": 39,
+        "stationary_marginal_feasibility": 12
+      },
+      "pass_cells": 0,
+      "pool_size": 128,
+      "required_cells": 51
+    },
+    {
+      "actual_cells": 51,
+      "algorithm": "guarded_replacement",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "finite_prefix_marginal": 51
+      },
+      "pass_cells": 0,
+      "pool_size": 256,
+      "required_cells": 51
+    },
+    {
+      "actual_cells": 51,
+      "algorithm": "weighted_permutation",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "dependence_noninferiority": 2,
+        "finite_prefix_marginal": 49
+      },
+      "pass_cells": 0,
+      "pool_size": 256,
+      "required_cells": 51
+    },
+    {
+      "actual_cells": 51,
+      "algorithm": "state_persistent_different_block",
+      "all_station_seed_pass": false,
+      "failure_counts": {
+        "finite_prefix_marginal": 51
+      },
+      "pass_cells": 0,
+      "pool_size": 256,
+      "required_cells": 51
+    }
+  ],
+  "selected_global_contract": null,
+  "selector_feasibility_results_schema_version": 1,
+  "station_count": 17,
+  "station_ids": [
+    "ak505769",
+    "al015478",
+    "az022664",
+    "az028619",
+    "az029654",
+    "ca042257",
+    "ca042319",
+    "co051660",
+    "fl083909",
+    "fl086997",
+    "id106388",
+    "mn214026",
+    "ms227840",
+    "nm294426",
+    "tx412797",
+    "ut429382",
+    "wy485345"
+  ],
+  "structural_decision": "HOLD",
+  "terminal_status": "EXECUTED-HOLD-PATH-INFEASIBILITY",
+  "unique_matrix_cells": 306
+}

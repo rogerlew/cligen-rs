@@ -1,0 +1,163 @@
+{
+  "development_only": true,
+  "freeze_sha256": "9b408216af554a1f2b773e2ffd1560c731a245de1cf1e155b89b1dcbaaf03aa7",
+  "records": [
+    {
+      "blocks": 256,
+      "bytes": 3161428,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/ak505769-year-features-v1.json",
+      "sha256": "a627c784c6b3008946310d45fd628f9f0d8ca505bc86fbe46fd4dd14a70a58ff",
+      "station_id": "ak505769"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3140742,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/al015478-year-features-v1.json",
+      "sha256": "c4ecc1fcc66d2ea8c2c209b9fd931c3b2159629485251d8b55b842ab7aaf09e7",
+      "station_id": "al015478"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3081932,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/az022664-year-features-v1.json",
+      "sha256": "a1810ed638747da076d35f16a36ae9b778eb92182df392af83a145c13cd169e9",
+      "station_id": "az022664"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3070259,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/az028619-year-features-v1.json",
+      "sha256": "9ae46c3d4f972e418608133bb1adac2df70e0ed971bea85c2eff45fc89debdc9",
+      "station_id": "az028619"
+    },
+    {
+      "blocks": 256,
+      "bytes": 2998735,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/az029654-year-features-v1.json",
+      "sha256": "fca0cd2a3a600fdf447a0f3932a2c234e0b41d1d391a2b53b0ed190128732abf",
+      "station_id": "az029654"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3012765,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/ca042257-year-features-v1.json",
+      "sha256": "0eda2c851fd908ef9f11ccaa861cbde870d7c05f4fbab8b17e59d8b21820884c",
+      "station_id": "ca042257"
+    },
+    {
+      "blocks": 256,
+      "bytes": 2992980,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/ca042319-year-features-v1.json",
+      "sha256": "506f8cf7c03a380dc2c19a5fe142347880c9c703fae20e03e3217222002ba13e",
+      "station_id": "ca042319"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3164453,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/co051660-year-features-v1.json",
+      "sha256": "985e505b982d2e917f6bc76b94c976c995968e50486de4b3b318b8e6e70d73cc",
+      "station_id": "co051660"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3148000,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/fl083909-year-features-v1.json",
+      "sha256": "8ac5766a945bc8797a993f1f8fa5238969aef9e3e6e705bb8d2321d4f34a6e64",
+      "station_id": "fl083909"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3135628,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/fl086997-year-features-v1.json",
+      "sha256": "757085df77e756b0efb4b3aef78e7ad16facb3a4629d0473e15045fda5d5f8fc",
+      "station_id": "fl086997"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3120158,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/id106388-year-features-v1.json",
+      "sha256": "db28ebeeef96e8d7f90e5d7a623e4674348240797429e37b17c48cdaa2e99e6b",
+      "station_id": "id106388"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3156056,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/mn214026-year-features-v1.json",
+      "sha256": "3e066ed9ef66166c4453a12e58a82e1e3e1a93b49c8f6981005301a4bf2e353b",
+      "station_id": "mn214026"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3134382,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/ms227840-year-features-v1.json",
+      "sha256": "382e5527b5c96d29e2a0ec7d181bb5085d1dd41465ee72929f56f2b3ad954835",
+      "station_id": "ms227840"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3063997,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/nm294426-year-features-v1.json",
+      "sha256": "e480b956c2a65f4853bd1beab2da8a890d5a4a0de6df50d81d086858b9314d6a",
+      "station_id": "nm294426"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3075303,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/tx412797-year-features-v1.json",
+      "sha256": "e67ab251691b3707cd734a3e582df1727fccef59a3e949287769bfaeb9d58eff",
+      "station_id": "tx412797"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3066559,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/ut429382-year-features-v1.json",
+      "sha256": "c3f6f99dc5b0f4c5849e317bd0da6e5a6da14be3dc93d470ad4f9c9309269bb8",
+      "station_id": "ut429382"
+    },
+    {
+      "blocks": 256,
+      "bytes": 3161598,
+      "common_blocks": 194,
+      "leap_blocks": 62,
+      "path": "target/a5d1-selector-feasibility/features/wy485345-year-features-v1.json",
+      "sha256": "5aac0d8b0cec094dd46abf82c1a8bf6420e436e2d8556fd39b5a6cb30561dedb",
+      "station_id": "wy485345"
+    }
+  ],
+  "source_library_manifest_sha256": "3fb90dd6e996ddb330ed2c9ed2740000b4e89d2154901e86e13d6143ad361172",
+  "station_count": 17,
+  "wall_seconds": 5.548091,
+  "year_feature_manifest_schema_version": 1
+}

@@ -1,0 +1,15 @@
+{
+  "amendment_id": "a5d1-freeze-amendment-004",
+  "corrections": [
+    "define transition ownership explicitly for unordered marginal weights, realized finite paths, and the separate boundary vector",
+    "retain within-block destination-month transition constraints in the marginal linear program because unordered weights do not define a predecessor coupling",
+    "replay every realized Jan 1 cross-block transition against the fitted January P(W|D) and P(W|W) surface at 30 and 100 years",
+    "include fitted January boundary-transition excess in the finite-path objective and pass decision",
+    "numerically reconstruct all marginal solves, path metrics, first-failure classifications, aggregate summaries, and the terminal decision in the strict verifier"
+  ],
+  "invalidated_outcome": "The v4 execution and its 0/306 complete path passes are excluded from terminal evidence. Although a diagnostic January replay did not change the full-pass count, v4 optimized an incomplete registered fitted-monthly transition vector.",
+  "prior_outcomes_disclosed": true,
+  "review_authority": "independent accuracy/numerical review with bounded scientific and consistency rechecks",
+  "superseded_freeze_sha256": "9b408216af554a1f2b773e2ffd1560c731a245de1cf1e155b89b1dcbaaf03aa7",
+  "type": "prospective-v5-contract-correction-after-invalidated-development-outcomes"
+}

@@ -1,0 +1,493 @@
+{
+  "authority_inputs": [
+    {
+      "bytes": 6120,
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "bytes": 5870,
+      "path": "docs/decisions/0002-quality-metrics-authority.md",
+      "sha256": "caaa454358a116c099c93f8d8cf47baa07cd027df2db25285a91a5717802e82c"
+    },
+    {
+      "bytes": 3587,
+      "path": "docs/decisions/0004-a5b-interannual-no-promotion.md",
+      "sha256": "959053ceeddc72992fefcd3272371354190b59387689cdcfd01dd01f9b430dcf"
+    },
+    {
+      "bytes": 8074,
+      "path": "docs/standards/rust-scientific-coding-standard.md",
+      "sha256": "24b3391cae87b819c13f00db089048e14578737ab98a28d846c9ab8d9c6fa87a"
+    },
+    {
+      "bytes": 4854,
+      "path": "docs/work-packages/20260714-a5c-interannual-profile-adjudication/artifacts/a5c-decision-v1.json",
+      "sha256": "d032b41588478d5d67216553dcd43647b8e310f2cdf2bd292525e6bdb4dc51d6"
+    },
+    {
+      "bytes": 5358,
+      "path": "docs/work-packages/20260714-a5c-interannual-profile-adjudication/artifacts/evidence-lock-v1.json",
+      "sha256": "9f0e7232e3c860282a5ef36b82893c633a8fd756acb5a6000d6edd29bdb2686c"
+    },
+    {
+      "bytes": 2330,
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/a5d0-decision-v1.json",
+      "sha256": "05af0c56da2fe9c60e0f1b966124c7eb79d2d08d5489f18836940938244703ad"
+    },
+    {
+      "bytes": 3356,
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/artifacts/closure-evidence-v1.json",
+      "sha256": "281f538ab137f47c49fb142e2a3948a3f011431997d859bc1c90ba03a6687aa6"
+    },
+    {
+      "bytes": 10116,
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    {
+      "bytes": 14120366,
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/observed-target-corpus-v1.json",
+      "sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660"
+    },
+    {
+      "bytes": 1262,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/pre-solver-freeze-amendment-002.json",
+      "sha256": "88175c47da9c3cc2a4ae329038b6a1e81bd8cc7660aa2fb340be3343db3cf3fc"
+    }
+  ],
+  "contract": {
+    "bytes": 5023,
+    "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/selector-feasibility-contract-v1.json",
+    "sha256": "4c92856c2eb77044555caae12aafb03495158ae70945456e0c5eb8297bef3f53"
+  },
+  "contract_schema": {
+    "bytes": 1617,
+    "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/selector-feasibility-contract-v1.schema.json",
+    "sha256": "5c99d08fd0111c995457ace538b34d652ac12567e5b8ca6e4d9160f29eac0ac5"
+  },
+  "development_only": true,
+  "evidence_lock_schema_version": 1,
+  "exposure": {
+    "allowlist": [
+      "accepted authorities and public generator inputs",
+      "17 A5a/A5b exposed station and Daymet development records",
+      "A5b Fourier/EOF development identities",
+      "regenerated faithful-off libraries",
+      "A5d1 synthetic fixtures"
+    ],
+    "confirmation_objects_accessed": 0,
+    "confirmation_target_values_accessed": 0,
+    "confirmation_wepp_responses_accessed": 0
+  },
+  "fixtures": {
+    "bytes": 1107,
+    "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/synthetic-feasibility-fixtures-v1.json",
+    "sha256": "fa68cec3af90af91258066de741a4acb63fc3ce09675da127918687166b05085"
+  },
+  "generator_binary": {
+    "bytes": 15279568,
+    "path": "target/release/cligen",
+    "sha256": "13e85f851748047e83a39173d7722941606e73127d3ff52c968cdfd3514b20d6"
+  },
+  "production_source_changes": 0,
+  "public_surface_changes": 0,
+  "runtime": {
+    "numpy": "1.26.4",
+    "platform": "macOS-26.4.1-arm64-arm-64bit",
+    "python": "3.12.7",
+    "scipy": "1.13.1",
+    "solver": "scipy.optimize.linprog(method=highs)"
+  },
+  "source_commit": "f676a8e6ab09f4e399b27afe57bcd30938bb592f",
+  "station_count": 17,
+  "stations": [
+    {
+      "bundle": {
+        "bytes": 106475,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/ak505769.a5b.station.json",
+        "sha256": "d7bb71b08c18da9c254f1afdf19d2ab4301b4be76a9faf527de62bf7524bf148"
+      },
+      "daymet": {
+        "bytes": 137486,
+        "decompressed_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+        "path": "references/observed/a5a-v1/daymet/ak505769.csv.gz",
+        "sha256": "bc1c62b617ca2e497a5b31917ac076c39b2c44643e6be337b0d9702756529b44"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "84e8c13cf0dc56e1cfefdc8604caddeb49d443548c3f1bc42af95c4fb68fa886",
+        "payload_sha256": "9c94d45cb384efcbf3c78d95ffb86722dd50402a63f0e8d17cccd8d0f9a821be"
+      },
+      "par_sha256": "e7d098b968dc12e9af4996ac7147d2589326ca4d4a1b048b65331ad94784cef9",
+      "role": "exposed_development_only",
+      "station_id": "ak505769"
+    },
+    {
+      "bundle": {
+        "bytes": 136861,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/al015478.a5b.station.json",
+        "sha256": "52ce969b9326e356fa1e12a7616267645e49f6b891d8e33c7b4107f3a514a2f8"
+      },
+      "daymet": {
+        "bytes": 134410,
+        "decompressed_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+        "path": "references/observed/a5a-v1/daymet/al015478.csv.gz",
+        "sha256": "15eea2203390ce0ed4ba409648ade03ee58e3843eb4e236461e377badeb5464c"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "bccb66eb0c6c63d31b0d0fa1fdd35d75fc2b42bcf05cca7aafa15c527c964aec",
+        "payload_sha256": "c0fca0b60b1ebbb4cc62942173b9a692325967611255466046489e60d87411a3"
+      },
+      "par_sha256": "72e5f2996711a7450f20769685c1eab266822e4106a2006e2da38b40636e5b22",
+      "role": "exposed_development_only",
+      "station_id": "al015478"
+    },
+    {
+      "bundle": {
+        "bytes": 136386,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/az022664.a5b.station.json",
+        "sha256": "ab8cbc27ea1a6eac24de1e6124895ed2b969689b9bab5a0b88f09231d619d1de"
+      },
+      "daymet": {
+        "bytes": 127291,
+        "decompressed_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+        "path": "references/observed/a5a-v1/daymet/az022664.csv.gz",
+        "sha256": "b01c06f84ca0109ccdc0a6f1573f97d8426ea0a7a3a107919039ced5b7ab22eb"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "d2e66936262d31d47423fd283482b0b8746cbbcdb4db6bc7accea9d0b882ecaf",
+        "payload_sha256": "64ebe4b72dd68cd2a4aff816d8401a8058ccabab11ba23b1ec62179b7d285e57"
+      },
+      "par_sha256": "c5b2ab45cc5dede6e8f956adf01a5bf1661486dbeec698274737658ae9908bed",
+      "role": "exposed_development_only",
+      "station_id": "az022664"
+    },
+    {
+      "bundle": {
+        "bytes": 136495,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/az028619.a5b.station.json",
+        "sha256": "313a8e9aa37d753fbcad81d65c327b416720f3cf20cd900e7407313c45394af6"
+      },
+      "daymet": {
+        "bytes": 127661,
+        "decompressed_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+        "path": "references/observed/a5a-v1/daymet/az028619.csv.gz",
+        "sha256": "8b3f561fbce04fe9e0723086230b1c3bd4c26b6681111e861cb5b20c620fef7c"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "a9075e3ebb36dfa349c5c681aaa4c266e71b18e2785d22ec07ced46b6a9858fb",
+        "payload_sha256": "1059958d0d5fb79a8d71d4eb4cbf842dd88fc1f63d69564ecb131e14137bdb04"
+      },
+      "par_sha256": "aa7934170a1b863872acb115d3df03ba44afb4e930a755ff9a01d97898413a93",
+      "role": "exposed_development_only",
+      "station_id": "az028619"
+    },
+    {
+      "bundle": {
+        "bytes": 136402,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/az029654.a5b.station.json",
+        "sha256": "6895285509bbf6b23049e4b61e745847abd3dbe084edde7dbcde6d4d61154c50"
+      },
+      "daymet": {
+        "bytes": 123666,
+        "decompressed_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+        "path": "references/observed/a5a-v1/daymet/az029654.csv.gz",
+        "sha256": "994f796fd4bc20326bd6bacffba446949a65e56a5cc78534ae6c796aad49b3da"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "435a10aef5d595882de4128edee07e957ac8fad7b1bf7302605ba9ee120a140a",
+        "payload_sha256": "20052943784600245564f44f7222cafeab601a16bbce3efe078763b66ef6f460"
+      },
+      "par_sha256": "e9bb37c83f0fbf449e32ce9f926e5da5f3c4ec2c2f83496284664a252df56fd0",
+      "role": "exposed_development_only",
+      "station_id": "az029654"
+    },
+    {
+      "bundle": {
+        "bytes": 136390,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/ca042257.a5b.station.json",
+        "sha256": "c82f054c5ac17cff65f13dbf4ac51c7271f406f5d87b21127f6bbf02fe158416"
+      },
+      "daymet": {
+        "bytes": 124905,
+        "decompressed_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+        "path": "references/observed/a5a-v1/daymet/ca042257.csv.gz",
+        "sha256": "67c87cdfc52567cff3036aa2821046754e17de40c66b05af03c18be09b0be055"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "dc377d9a30105b928a3f4e02712086881e133ff7a2276a28f5b9d51a84f01629",
+        "payload_sha256": "4a1fe57976b7b7afc2c5dbfff54e911b6e146eac3a699f6474cef9be370df9e6"
+      },
+      "par_sha256": "c3c4e82d5850f8a646185080a923f6efb5f090dffa73ad1efbbd532f4915b43d",
+      "role": "exposed_development_only",
+      "station_id": "ca042257"
+    },
+    {
+      "bundle": {
+        "bytes": 128544,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/ca042319.a5b.station.json",
+        "sha256": "93d974d9e4eb4d0786e45a2292088e72bf49a759db6be5324e65038f3c89fce8"
+      },
+      "daymet": {
+        "bytes": 125173,
+        "decompressed_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+        "path": "references/observed/a5a-v1/daymet/ca042319.csv.gz",
+        "sha256": "80e5f4bd9a7a4c679087c0021bbdef4b5e84bde17a1b1c03cda081e4b0373e9a"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "2693aa051c18f7a7c207543ef70b6a7ae9bf673a27cbb7a532edea3b6a1cc8e0",
+        "payload_sha256": "79a7b2129781e512362f8beeab35ba3a581c96c1b2f1549e89e8e17aadf601ac"
+      },
+      "par_sha256": "b86e94a89da7a40bf28da7700ca35db7cb1e49ddf3309dc7e9c22ba74af82838",
+      "role": "exposed_development_only",
+      "station_id": "ca042319"
+    },
+    {
+      "bundle": {
+        "bytes": 121378,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/co051660.a5b.station.json",
+        "sha256": "98a80f5da05d5fec83f12e89b15c2ee8952cf4d8988a8cb517dc258b994c1a71"
+      },
+      "daymet": {
+        "bytes": 135104,
+        "decompressed_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+        "path": "references/observed/a5a-v1/daymet/co051660.csv.gz",
+        "sha256": "2048d37fa7ec06c5d400e81a71522057972db43407d2d0a73cd54103206547f5"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "1665ec1ee1ad2265a5ba656bad246bbe308ec721060ff35b9373e94f298f6f1c",
+        "payload_sha256": "2052715e2d433fd31b866c2aafdf4cb7d88f0f36800eaddd7d10227ab76eb488"
+      },
+      "par_sha256": "89b4a81d6d42cceb63100a0884d3d2bb820fe0fb5c7f5628b09a1d01cc6d4208",
+      "role": "exposed_development_only",
+      "station_id": "co051660"
+    },
+    {
+      "bundle": {
+        "bytes": 137001,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/fl083909.a5b.station.json",
+        "sha256": "ae770292d9aa6340379d2108904d886b367360e69ad122e5a808a8029d0e69c6"
+      },
+      "daymet": {
+        "bytes": 132674,
+        "decompressed_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+        "path": "references/observed/a5a-v1/daymet/fl083909.csv.gz",
+        "sha256": "993e9bd0e0f7ca3bd4759ddb4e0a3ae67eedff0602310929c877492bb42a2db0"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "b9b5bae0ee5d7ab0362c71f3bfe404a76833c863cdf484c546a840a3dfb3854d",
+        "payload_sha256": "96a4fbc49ddead3294ba0a363a523c8a094806a5612edda5f4eb2129f81454a0"
+      },
+      "par_sha256": "3e3ec7098f0e8fdb7d35cbf01226cf30d4eaa623921d7bc08c7c35b7da13c143",
+      "role": "exposed_development_only",
+      "station_id": "fl083909"
+    },
+    {
+      "bundle": {
+        "bytes": 129082,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/fl086997.a5b.station.json",
+        "sha256": "cc215e1c66b28dc18db136018911a922a65d85c474fc8e907a55aeb81460bca7"
+      },
+      "daymet": {
+        "bytes": 134185,
+        "decompressed_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+        "path": "references/observed/a5a-v1/daymet/fl086997.csv.gz",
+        "sha256": "c2ebc5eff186ef3a500f39450b177214f17403563ca8058a2892502ff053c203"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "4dce3d9f854483942168d7501c1224781fe45143b9f88f16a89a0d1107f59675",
+        "payload_sha256": "0b9261f78a077b69455ec828f4bb151ee3e5738d4800230fdf7bd8ce4a31675e"
+      },
+      "par_sha256": "25966ee2ac57e9badf2da1a53bf8684d9c335af8b6d88a335265aec105b93044",
+      "role": "exposed_development_only",
+      "station_id": "fl086997"
+    },
+    {
+      "bundle": {
+        "bytes": 121164,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/id106388.a5b.station.json",
+        "sha256": "fc0b8dca2d73c8c1bb21f30089eefa7053c98693264f9b4f57f49c329a26ca22"
+      },
+      "daymet": {
+        "bytes": 133675,
+        "decompressed_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+        "path": "references/observed/a5a-v1/daymet/id106388.csv.gz",
+        "sha256": "7ef87124b8876c0f2d02a5d83b6d2db6f422087b7c34c3182dfd7b23a4553931"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "aaf4ee50975f815de9cc467578e10ea23c0e802f22cba09e2cb11b3b9876c50d",
+        "payload_sha256": "e1e7699e5b82fa1dd2136e650e284d5f95dd2a32c5a6a77f75deaa3d079017dd"
+      },
+      "par_sha256": "63d7d5185480279d7160d1b7301c54cc2ab2396e6aac8218a5c28c89bd9f7b65",
+      "role": "exposed_development_only",
+      "station_id": "id106388"
+    },
+    {
+      "bundle": {
+        "bytes": 106644,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/mn214026.a5b.station.json",
+        "sha256": "f1b8a421df9a1c42625e4ba7d4057acbd2e9854d17de04c5aacccbeb54c78c12"
+      },
+      "daymet": {
+        "bytes": 138913,
+        "decompressed_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+        "path": "references/observed/a5a-v1/daymet/mn214026.csv.gz",
+        "sha256": "e7063f6d11dc2e42fa69298916d90d477e017cc3f88b428e8a9d54eaccd01e89"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "8f1f1c6eba06ae2201290a70505e1cc097706e9dfe97858333b6ab3ced5f2921",
+        "payload_sha256": "9514f748563a9b9a6812139b663dc28ff047620fbad81b783b10a83b947e17ed"
+      },
+      "par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+      "role": "exposed_development_only",
+      "station_id": "mn214026"
+    },
+    {
+      "bundle": {
+        "bytes": 136890,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/ms227840.a5b.station.json",
+        "sha256": "e7b553607d402bd285be854bba85e5c925c22ade6f4bafb6e3606586acc8a17a"
+      },
+      "daymet": {
+        "bytes": 134148,
+        "decompressed_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+        "path": "references/observed/a5a-v1/daymet/ms227840.csv.gz",
+        "sha256": "e36bdb1947bcacce926da90f38296f573770affe8a80b26e2aca8bddc6e49837"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "c6753152d17547cf7a3e23360af8b7fe2459939738316606a9f25e8600d63d18",
+        "payload_sha256": "e8de7271cd340fe370b27c97a5bce20be4e570ecf72abb6ddea49851458b8faa"
+      },
+      "par_sha256": "6e52d824b8a74df205f8a2af70ab6c7436143eafe57b61d94dc75a1b8dcf10ba",
+      "role": "exposed_development_only",
+      "station_id": "ms227840"
+    },
+    {
+      "bundle": {
+        "bytes": 136535,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/nm294426.a5b.station.json",
+        "sha256": "44cc80eaaa97d09597e0f898e09665114bc25d26ecaa9db7d8ca190e80d04b86"
+      },
+      "daymet": {
+        "bytes": 127283,
+        "decompressed_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+        "path": "references/observed/a5a-v1/daymet/nm294426.csv.gz",
+        "sha256": "09a585077ee5370007251a110a468807dd4c8452bc0b5b9d45383568a7a68190"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "99a5ebee1b61b8291cc9403dd7841af443f019bef4f725d080878e33a279189f",
+        "payload_sha256": "be901967cc31828924bcbee3a2655acad4c2a67dd6e31dbe05aa1b1430da2fc0"
+      },
+      "par_sha256": "fe111991a7d9d336c55fb9fd7455c2e217e64fbca1879a221ecbf9f2edae32ad",
+      "role": "exposed_development_only",
+      "station_id": "nm294426"
+    },
+    {
+      "bundle": {
+        "bytes": 136405,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/tx412797.a5b.station.json",
+        "sha256": "a7607036efdabff434c51b3f156017d5666bc1a31f16efd55884ffb9f6df8d19"
+      },
+      "daymet": {
+        "bytes": 126706,
+        "decompressed_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+        "path": "references/observed/a5a-v1/daymet/tx412797.csv.gz",
+        "sha256": "a5b27363e8b5337873e343f206e3a98ee0349aeb287a69c2e9fc291659603e41"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "76a37c7d7e552eda7e86791991c3ad64c0b186f075cb77357104aa92d3eda1f4",
+        "payload_sha256": "0318596c7d29c424ec057c411f3e97fff8c1f3f68b9780b7fd7b5f39ba8385e8"
+      },
+      "par_sha256": "1017f58cbc19ef615e805529ffe2173afa253b228fb3d6c8c3572d25029cadce",
+      "role": "exposed_development_only",
+      "station_id": "tx412797"
+    },
+    {
+      "bundle": {
+        "bytes": 136385,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/ut429382.a5b.station.json",
+        "sha256": "b53e052229f88489b79dfcc1cafd7512da3133c038c88742a71dd3d4cf4bdf1b"
+      },
+      "daymet": {
+        "bytes": 127892,
+        "decompressed_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+        "path": "references/observed/a5a-v1/daymet/ut429382.csv.gz",
+        "sha256": "7b9006627e78c5a9f01a4f52e33d51711b90aef7f55a3e008141b516f2b4ea75"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "3e6c0cfb482752b5cd094945c29b0b459feef49b3a74a8ee465af2f082f0746f",
+        "payload_sha256": "284be6cdb9429f8f41c307108d45bf1e5e07eedd45932686d3995808bd43ee0b"
+      },
+      "par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+      "role": "exposed_development_only",
+      "station_id": "ut429382"
+    },
+    {
+      "bundle": {
+        "bytes": 128902,
+        "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/evidence-v1/station-bundles/wy485345.a5b.station.json",
+        "sha256": "588444f4d4af2ff6834d999db49b16f365336b87d68b09059b9d05b9e485dc30"
+      },
+      "daymet": {
+        "bytes": 136701,
+        "decompressed_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+        "path": "references/observed/a5a-v1/daymet/wy485345.csv.gz",
+        "sha256": "01e6d7ce50f5d821f0ba6666003e6e2f3b433b7e5fb69244b8c39d31a3149c9a"
+      },
+      "fourier_eof": {
+        "fit_identity_sha256": "a1a7f5ac6bdb5b9c1d4c80de30f57c23a7716f9e3c4c23efe4ea916b013ab42f",
+        "payload_sha256": "91e36afb1f0be4ee61de089e106aa42cfedc268d3b287697b09c90d262ec979a"
+      },
+      "par_sha256": "cd96b091abd0a6adc772a276322386f7f2d8ce03a452a0ba07a33946ff338dc2",
+      "role": "exposed_development_only",
+      "station_id": "wy485345"
+    }
+  ],
+  "tooling": [
+    {
+      "bytes": 10798,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/a5d1_common.py",
+      "sha256": "1e8a76f75a32113a96a2b4ca11541c9270d5ebcfe5d242fa3c668e2a5acdc90e"
+    },
+    {
+      "bytes": 8126,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/freeze-a5d1.py",
+      "sha256": "8a6746aafe9ee7ef311114e296bc18e486b48d692a41f95150637729891dc3d6"
+    },
+    {
+      "bytes": 7136,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/build-development-libraries.py",
+      "sha256": "565b180f380e31d737aa3dfe96e01af0c9b2213df762727a002ae45b7dee7096"
+    },
+    {
+      "bytes": 10539,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/build-year-features.py",
+      "sha256": "b017f5525af96e5a8c7394152cc29a1bd641a8d885dfe453ad6a4c1fb6294feb"
+    },
+    {
+      "bytes": 17142,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/solve-selector-feasibility.py",
+      "sha256": "bdb521af8e148495a51b56b3f14d00e5650541f8ebeccc0afea9730159cb7bc7"
+    },
+    {
+      "bytes": 17355,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/run-path-feasibility.py",
+      "sha256": "3611e6d86785e9ce194b78f68c9cc9a600c1b192c805dd9230920861f8662a4c"
+    },
+    {
+      "bytes": 2391,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/run-synthetic-fixtures.py",
+      "sha256": "854ed9950be24e5a85a3c931168bd29b1648b86c365eb51ba12623fc6eeb6a94"
+    },
+    {
+      "bytes": 8227,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/finalize-a5d1.py",
+      "sha256": "9ea5e603f209c9c17b4aa3e3352ae0625c18ba5bd80db4665cad88e5f04368a5"
+    },
+    {
+      "bytes": 8850,
+      "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/verify-a5d1-package.py",
+      "sha256": "99f6710b460037dbb5a94209f8e3633c9c93303699e23cbed84d1f303001c1c9"
+    }
+  ]
+}

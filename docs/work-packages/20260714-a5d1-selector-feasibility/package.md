@@ -1,8 +1,8 @@
 # A5d1 Development-Library Selector Feasibility
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-PATH-INFEASIBILITY`
 Date: 2026-07-14
-Evidence mode: Mixed (planned)
+Evidence mode: Mixed (ran/static/derived)
 
 ## Objective
 
@@ -273,6 +273,38 @@ relaxation is permitted.
    P1/P2 correction.
 3. Emit a strict package verifier, machine decision, immutable closure
    manifest, gate record, and roadmap/catalog disposition.
+
+## Execution result
+
+The controlling v6 experiment froze 306 unique cells at
+`dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22`
+after retaining and invalidating the v2–v5 development attempts. The v6
+library was generated twice at all 17 stations with byte-identical climate,
+quality, and provenance outputs. All 15 synthetic fixtures passed.
+
+Stationary marginal weights passed at 13/17 stations for the 128-year pool and
+17/17 for the 256-year pool. At pool 256, all exact annual-mean, leap-mass,
+maximum-weight, fitted-monthly, unparameterized, component-noninferiority, and
+aggregate centered-improvement rules passed.
+
+No finite path passed the complete contract. At the marginally eligible
+256-year pool, 151/153 station-seed-algorithm cells first failed the combined
+30-/100-year finite-prefix marginal replay and two first failed dependence
+noninferiority. All 306 cells passed calendar, reuse/cooldown, positive-weight
+selection, exact physical-row identity, and physical common-prefix checks.
+The aggregate January transition correction is included in path construction
+and replay, not applied post hoc.
+
+The terminal decision is therefore the scoped
+`EXECUTED-HOLD-PATH-INFEASIBILITY`: none of the three frozen algorithms under
+the frozen tolerances, seeds, iteration ceiling, 17 exposed stations, and one
+burn-0 library realizes the full contract. This is not a proof that all
+complete-block selectors are infeasible.
+
+The first corrective action is A5d1b: diagnose the 30-/100-year empirical
+block-multiset realization failure under the valid 256-year weights before
+freezing another path algorithm. A5d2 and A5d3 remain independent required
+packages; A5d4 remains blocked, and confirmation remains unauthorized.
 
 ## Execution & dispatch
 

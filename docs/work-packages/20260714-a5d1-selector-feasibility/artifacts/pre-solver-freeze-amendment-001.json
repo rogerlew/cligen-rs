@@ -1,0 +1,22 @@
+{
+  "amendment_id": "a5d1-freeze-amendment-001",
+  "changed_fields": [
+    "repeat generation writes both runs to one canonical output pathname",
+    "retained canonical record is the second whole-file-identical run"
+  ],
+  "forbidden_changes": [
+    "feature vector",
+    "target authority",
+    "constraint formula",
+    "tolerance",
+    "objective",
+    "pool size",
+    "algorithm",
+    "path seed",
+    "selection rule"
+  ],
+  "observation_before_amendment": "The first station's two CLI files differed only in the output pathname printed in the header because the determinism runs used different output paths. No year-feature, solver, certificate, selected path, or matrix result had been created or inspected.",
+  "reason": "Whole-file repeat identity requires an identical effective output pathname because CLIGEN records that pathname in the CLI header.",
+  "superseded_freeze_sha256": "822797695050ba780044d00de6adbcb2547264fec5f1555544a027117bfd60ac",
+  "type": "procedural-evidence-correction-before-feature-or-solver-outcomes"
+}

@@ -1,0 +1,22 @@
+{
+  "amendment_id": "a5d1-freeze-amendment-002",
+  "changed_fields": [
+    "uniform precipitation-bin reference denominator",
+    "uniform storm-descriptor reference denominator"
+  ],
+  "defect": "For months whose mean wet-day count per block was below one, the v2 implementation divided uniform aggregate bin and descriptor numerators by one rather than by the actual positive aggregate wet-day denominator. Uniform weights therefore failed constraints whose declared authority was those same uniform weights.",
+  "forbidden_changes": [
+    "feature vector",
+    "target authority",
+    "tolerance",
+    "objective",
+    "pool size",
+    "algorithm",
+    "path seed",
+    "selection rule"
+  ],
+  "invalidated_outcome": "The complete v2 execution is retained but excluded from the A5d1 decision because its uniform-reference formulas did not implement the frozen ratio semantics.",
+  "reason": "A reference ratio must use numerator sum divided by its actual positive denominator sum. The correction fails closed if that denominator is zero and makes no discretionary scientific change.",
+  "superseded_freeze_sha256": "351b46ff2e0d2d92c9424ff6412822ae56911cca94b3a0b8e71dc8159b39500a",
+  "type": "implementation-defect-correction-before-terminal-adjudication"
+}

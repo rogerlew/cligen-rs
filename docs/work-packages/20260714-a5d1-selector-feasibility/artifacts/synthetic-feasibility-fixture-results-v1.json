@@ -1,0 +1,98 @@
+{
+  "count": 15,
+  "fixture_identity_sha256": "5e87a7fc15beb0374de53e04744e173d4eb61a187963821a4693ca411e27596b",
+  "fixture_results_schema_version": 1,
+  "pass_count": 15,
+  "records": [
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "positive_weights",
+      "pass": true
+    },
+    {
+      "actual": "infeasible",
+      "expected": "infeasible",
+      "id": "infeasible_weight_cap",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "near_tolerance_inside",
+      "pass": true
+    },
+    {
+      "actual": "reject",
+      "expected": "reject",
+      "id": "near_tolerance_outside",
+      "pass": true
+    },
+    {
+      "actual": "exhausted",
+      "expected": "exhausted",
+      "id": "calendar_exhaustion",
+      "pass": true
+    },
+    {
+      "actual": "exhausted",
+      "expected": "exhausted",
+      "id": "reuse_exhaustion",
+      "pass": true
+    },
+    {
+      "actual": "bounded_failure",
+      "expected": "bounded_failure",
+      "id": "iteration_ceiling",
+      "pass": true
+    },
+    {
+      "actual": "reject",
+      "expected": "reject",
+      "id": "tampered_certificate",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "centered_raw_linearization",
+      "pass": true
+    },
+    {
+      "actual": "reject",
+      "expected": "reject",
+      "id": "zero_weight_selection",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "directional_boundary",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "independent_prefix_render",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "january_aggregate_with_boundary",
+      "pass": true
+    },
+    {
+      "actual": "pass",
+      "expected": "pass",
+      "id": "january_zero_boundary_denominator",
+      "pass": true
+    },
+    {
+      "actual": "reject",
+      "expected": "reject",
+      "id": "january_aggregate_outside",
+      "pass": true
+    }
+  ]
+}

@@ -17,17 +17,19 @@ axes. A revision of one does not imply a revision of another.
 ## Active queue
 
 **Operator-ordered 2026-07-14: resolve the A5d0 holds as independent work
-packages before any confirmation candidate exists.** A5d1 is scaffolded as
-the next package. A5d2 and A5d3 may begin from the A5d0 evidence independently;
+packages before any confirmation candidate exists.** A5d1 established
+stationary selector feasibility but held on finite-path realization. A5d1b is
+therefore the next structural package. A5d2 and A5d3 may begin independently;
 before A5d4, the corpus power result must be revalidated against A5d2's frozen
-metric/composite identity. A5d4 depends on successful closure of all three.
+metric/composite identity. A5d4 depends on a successful structural selector
+and successful closure of A5d2/A5d3.
 
 | Order | Work package | Dependency and mechanism | Acceptance |
 |---|---|---|---|
-| 1 | **[A5d1 — Selector feasibility](work-packages/20260714-a5d1-selector-feasibility/package.md)** (`SCAFFOLDED`) | Regenerate hash-bound `faithful_5_32_3 + qc_filter: off` year libraries for the 17 exposed development stations; freeze and solve the complete constrained-weight problem; compare predeclared bounded repeat-safe/calendar-safe path algorithms. | One globally fixed research algorithm, contract, tolerance set, and deterministic fitting/selection rule is structurally feasible at all 17 stations; station-specific fitted weights/coefficients are permitted outputs of that common rule. Selected physical rows remain bitwise unchanged, the frozen monthly/daily and annual-vector rules pass, and one bounded 100-year path supplies the exact selected-index and physical-row prefix for 30 years. Otherwise close on a named hold. |
+| 1 | **A5d1b — Finite-path realization diagnosis** (planned package `YYYYMMDD-a5d1b-finite-path-realization`) | Start from A5d1's valid 256-year stationary weights. Diagnose why empirical 30-/100-year block multisets fail the finite marginal replay in 151/153 eligible cells, distinguish discrete-feasibility limits from search/construction defects, then prospectively freeze any corrected path algorithm. | Either one bounded global construction realizes the complete frozen marginal/path/invariant contract at all 17 stations and every required seed, or the package closes on a sharper mathematical, algorithmic, or resource hold. No tolerance relaxation or confirmation evidence is permitted. |
 | 2 | **A5d2 — Successor evaluation calibration** (planned package `YYYYMMDD-a5d2-evaluation-calibration`) | Create a separately versioned `SPEC-A5D-EVALUATION`; implement observation-scaled preservation guards, faithful-clone null calibration, bootstrap-availability rules, and a numeric WEPP reference/criterion. Revision 3 remains immutable. | Every climate and downstream rule is numeric, executable at both horizons, uncertainty-available under its frozen floor, and supported by a defensible null-independence/audit design before candidate confirmation output. |
 | 3 | **A5d3 — Confirmation corpus qualification and seal** (planned package `YYYYMMDD-a5d3-confirmation-corpus`) | Run calibration-only spatial/composite power analysis; select stations from metadata only; acquire, qualify, hash, and seal an untouched primary corpus and new long-record sensitivity set. The 28-station design remains only a planning floor. | Fit, development, null-calibration, confirmation, and sensitivity roles are disjoint; the actual powered count is justified against the frozen A5d2 metric identity; target construction is reproducible and sealed with zero value exposure. |
-| 4 | **A5d4 — Candidate freeze review** (planned package `YYYYMMDD-a5d4-candidate-freeze-review`) | Bind the immutable A5d1 selector, A5d2 evaluation, and A5d3 corpus records; pin exactly one experimental candidate, exact executable, coefficient schema/bundle and fitting identity, comparison/null identities, replicate counts, seeds, complete climate/WEPP matrix, verifier, and synthetic conformance evidence. | A later campaign can execute without discretionary post-exposure choices. A5d4 does not run or score confirmation output and changes no public default or profile enum. |
+| 4 | **A5d4 — Candidate freeze review** (planned package `YYYYMMDD-a5d4-candidate-freeze-review`) | Bind the immutable structural selector, A5d2 evaluation, and A5d3 corpus records; pin exactly one experimental candidate, exact executable, coefficient schema/bundle and fitting identity, comparison/null identities, replicate counts, seeds, complete climate/WEPP matrix, verifier, and synthetic conformance evidence. | A later campaign can execute without discretionary post-exposure choices. A5d4 does not run or score confirmation output and changes no public default or profile enum. |
 
 The downstream confirmation run is a separately dispatched
 `YYYYMMDD-a5d5-candidate-confirmation-campaign`. It is named here as an
@@ -35,6 +37,18 @@ evidence-freeze barrier, not scaffolded or authorized. Wet/dry-conditioned
 radiation, full subdaily forcing, external storm benchmarking, and
 multisite/spatial generation remain later studies. Single-storm generation
 remains deprecated.
+
+**A5d1 held** (2026-07-14,
+[`20260714-a5d1-selector-feasibility`](work-packages/20260714-a5d1-selector-feasibility/package.md)):
+one global 256-year constrained-weight rule passed the complete stationary
+marginal contract at all 17 exposed development stations, but none of 306
+registered finite paths passed the combined contract. At the eligible pool,
+151/153 cells first failed 30-/100-year finite-prefix marginal realization and
+two first failed dependence noninferiority. Physical rows, calendar, reuse,
+positive-weight selection, and exact 30-year prefixes passed throughout. The
+package closes `EXECUTED-HOLD-PATH-INFEASIBILITY`, scoped to the three frozen
+algorithms, tolerances, and one burn-0 library. A5d1b is the first corrective
+action; no candidate or confirmation work is authorized.
 
 **A5d0 held** (2026-07-14,
 [`20260714-a5d0-successor-feasibility-calibration`](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md)):

@@ -1,0 +1,453 @@
+{
+  "cell_count": 34,
+  "contract_sha256": "7fec603c613a416578fd510768de789c3c8b4f07278f08b2137dd94fe62ceb0c",
+  "development_only": true,
+  "feature_manifest_sha256": "a219242f9edcaef961c3c4e44d9dbd0d6e37b502092264e602f3d478c55a9335",
+  "freeze_sha256": "dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22",
+  "marginal_results_schema_version": 1,
+  "pass_count": 30,
+  "records": [
+    {
+      "actual_aggregate_distance": 5.340969600015045,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ak505769-pool-128-marginal-certificate-v1.json",
+        "sha256": "ed709d71228a64a54e41e4d9b106de3d1e1bb65c5a84f4ff83e3e48fb5f836a4"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "ak505769",
+      "wall_seconds": 0.031123
+    },
+    {
+      "actual_aggregate_distance": 3.657768826118285,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/al015478-pool-128-marginal-certificate-v1.json",
+        "sha256": "f70bb634cd30001d6a0d82b6e333b506e3757e260fc95487a32ff6f0274a4053"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "al015478",
+      "wall_seconds": 0.034772
+    },
+    {
+      "actual_aggregate_distance": 4.250982647589524,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az022664-pool-128-marginal-certificate-v1.json",
+        "sha256": "80d35e67bb6ab129c84de46c2dc94c0a95fcc068f3add7435eb4391290462801"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "az022664",
+      "wall_seconds": 0.050405
+    },
+    {
+      "actual_aggregate_distance": 4.4318031819818104,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az028619-pool-128-marginal-certificate-v1.json",
+        "sha256": "025d7d98d22a591c9e190feb0eb00a4bf309143a356d547b6b52af58c453c784"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "az028619",
+      "wall_seconds": 0.056589
+    },
+    {
+      "actual_aggregate_distance": 5.207432828754048,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az029654-pool-128-marginal-certificate-v1.json",
+        "sha256": "b66505ec7c2dce491639ff972e09aa6a8ed6ae02c53c8b16147d8431eab350ae"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "az029654",
+      "wall_seconds": 0.063663
+    },
+    {
+      "actual_aggregate_distance": 5.786637149589028,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ca042257-pool-128-marginal-certificate-v1.json",
+        "sha256": "efd9950855b1ace21838bc748bb1ae5a9574e32a919d15e28e2d31abac224d10"
+      },
+      "first_failed_criterion": "aggregate_strict_improvement",
+      "marginal_pass": false,
+      "pool_size": 128,
+      "station_id": "ca042257",
+      "wall_seconds": 0.082448
+    },
+    {
+      "actual_aggregate_distance": 5.1283576312070585,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ca042319-pool-128-marginal-certificate-v1.json",
+        "sha256": "b252521a103f33426aa594e41e460621c44d079848053b30a99f2c8c16ba973a"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "ca042319",
+      "wall_seconds": 0.063324
+    },
+    {
+      "actual_aggregate_distance": 5.463072542317777,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/co051660-pool-128-marginal-certificate-v1.json",
+        "sha256": "98b80d29977a36616b574ec8634639646955561a2e9e0016ad41e9ab2026cf9b"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "co051660",
+      "wall_seconds": 0.06009
+    },
+    {
+      "actual_aggregate_distance": 3.5898181615491436,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/fl083909-pool-128-marginal-certificate-v1.json",
+        "sha256": "dee251c461865de86aa2d19b9e558af6767cbb7048bed29e836d919e9e2eb4f4"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "fl083909",
+      "wall_seconds": 0.038467
+    },
+    {
+      "actual_aggregate_distance": 4.248169119108967,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/fl086997-pool-128-marginal-certificate-v1.json",
+        "sha256": "af563bb81c7b11928828dcd43b6a049e810aeb997ce755b9a29f323d704e1b65"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "fl086997",
+      "wall_seconds": 0.047315
+    },
+    {
+      "actual_aggregate_distance": 4.931312175837443,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/id106388-pool-128-marginal-certificate-v1.json",
+        "sha256": "5d4ec95466b675ad25d29b97c0642813951648844c2cde1010e26a36ac6e886f"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "id106388",
+      "wall_seconds": 0.056693
+    },
+    {
+      "actual_aggregate_distance": 4.659867967016126,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/mn214026-pool-128-marginal-certificate-v1.json",
+        "sha256": "01a14c0e672334e103bcea4aa7e8873cb022278b7ac7af0a9f8d6a71a30ce60b"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "mn214026",
+      "wall_seconds": 0.048662
+    },
+    {
+      "actual_aggregate_distance": 4.576255671332025,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ms227840-pool-128-marginal-certificate-v1.json",
+        "sha256": "1f6982baef08905d3d49e48882b160b6a88cfb3ecba50f9de94e60658cc368a6"
+      },
+      "first_failed_criterion": "component_noninferiority",
+      "marginal_pass": false,
+      "pool_size": 128,
+      "station_id": "ms227840",
+      "wall_seconds": 0.033944
+    },
+    {
+      "actual_aggregate_distance": 4.545246224628931,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/nm294426-pool-128-marginal-certificate-v1.json",
+        "sha256": "aa65ce927efbd6b6038045e8a01240b785215a282968c4a25ee5301373ba5eca"
+      },
+      "first_failed_criterion": "solver_status_and_tie_break",
+      "marginal_pass": false,
+      "pool_size": 128,
+      "station_id": "nm294426",
+      "wall_seconds": 0.058784
+    },
+    {
+      "actual_aggregate_distance": 5.471233574646506,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/tx412797-pool-128-marginal-certificate-v1.json",
+        "sha256": "c3f4a20cbaaac679e45eacfafaaa7b57cd82854d86b12c27b89c3caed421ff19"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "tx412797",
+      "wall_seconds": 0.039996
+    },
+    {
+      "actual_aggregate_distance": 5.721934888789046,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ut429382-pool-128-marginal-certificate-v1.json",
+        "sha256": "8f6b6e9f7fed7c8f1b8fbe47baf096c67e2312cbf5aef761310a72eae0b693d3"
+      },
+      "first_failed_criterion": "aggregate_strict_improvement",
+      "marginal_pass": false,
+      "pool_size": 128,
+      "station_id": "ut429382",
+      "wall_seconds": 0.072797
+    },
+    {
+      "actual_aggregate_distance": 5.386262494786149,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/wy485345-pool-128-marginal-certificate-v1.json",
+        "sha256": "fb159170ec2782eb9c0da401fa2f9e03949395a93b19ce65e41c3ad149348201"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 128,
+      "station_id": "wy485345",
+      "wall_seconds": 0.047651
+    },
+    {
+      "actual_aggregate_distance": 3.778596446007623,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ak505769-pool-256-marginal-certificate-v1.json",
+        "sha256": "5c488d8df91d89a6df7d61584f967ffa60fe2bc4430f0fa2cea02d6d991c0b2a"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "ak505769",
+      "wall_seconds": 0.141375
+    },
+    {
+      "actual_aggregate_distance": 2.4132650065002115,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/al015478-pool-256-marginal-certificate-v1.json",
+        "sha256": "f9e6eedf5d7ff581c0690a929bf5893763c6d19f79ad2e90892f0eb36d308e9e"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "al015478",
+      "wall_seconds": 0.335521
+    },
+    {
+      "actual_aggregate_distance": 2.1126231030385396,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az022664-pool-256-marginal-certificate-v1.json",
+        "sha256": "f7ef07aacb5744e8cd910c24cf0578ce0e39c35d68383f042becbe0ad6f596e3"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "az022664",
+      "wall_seconds": 0.231782
+    },
+    {
+      "actual_aggregate_distance": 2.914958956926252,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az028619-pool-256-marginal-certificate-v1.json",
+        "sha256": "b697ccdc26e98ab8e1a251e35eaedbaca5ba837e95b377c4df1034b280e78f8c"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "az028619",
+      "wall_seconds": 0.209866
+    },
+    {
+      "actual_aggregate_distance": 3.9231042921700148,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/az029654-pool-256-marginal-certificate-v1.json",
+        "sha256": "b6dcb273f7a064b8cf58b5a9e073221fa61e71b911a62c5ba4e001985b4e075b"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "az029654",
+      "wall_seconds": 0.282847
+    },
+    {
+      "actual_aggregate_distance": 4.823971333173817,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ca042257-pool-256-marginal-certificate-v1.json",
+        "sha256": "46f820edc3f5e5659a291bcfb3cb67577f8510d07282f127267aea18cc811daa"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "ca042257",
+      "wall_seconds": 0.249549
+    },
+    {
+      "actual_aggregate_distance": 3.6235305738153643,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ca042319-pool-256-marginal-certificate-v1.json",
+        "sha256": "584f73e80e2cf0dd7ea9a2344141d8c3f5b64cd4ee8c24149269679f7e16ca6b"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "ca042319",
+      "wall_seconds": 0.267175
+    },
+    {
+      "actual_aggregate_distance": 4.082463500161976,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/co051660-pool-256-marginal-certificate-v1.json",
+        "sha256": "7f8513b92ddd3c42d5a7e8f8720e8f23d6d9a70005b74a0dc75da4b89e061cda"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "co051660",
+      "wall_seconds": 0.238294
+    },
+    {
+      "actual_aggregate_distance": 2.248872703277429,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/fl083909-pool-256-marginal-certificate-v1.json",
+        "sha256": "214ad5c3eb5d26020b16d61a2be1392d95bcc26f52e1f10cae78000a191f8b20"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "fl083909",
+      "wall_seconds": 0.240196
+    },
+    {
+      "actual_aggregate_distance": 3.0094338972566637,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/fl086997-pool-256-marginal-certificate-v1.json",
+        "sha256": "70b2ba3b33207428dca4a50df4eb50dbd277b04a2d1eb1ce0852b73df4650fee"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "fl086997",
+      "wall_seconds": 0.108303
+    },
+    {
+      "actual_aggregate_distance": 4.0023000129463835,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/id106388-pool-256-marginal-certificate-v1.json",
+        "sha256": "465ad300156a1fe2d72791863162fa26a622ac65f207353f3d0714b31744f0cd"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "id106388",
+      "wall_seconds": 0.13457
+    },
+    {
+      "actual_aggregate_distance": 3.6687658390507454,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/mn214026-pool-256-marginal-certificate-v1.json",
+        "sha256": "cb58584badf9d468f9032734b1073f2b57b4a24cc67d249431a7fa4be35111af"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "mn214026",
+      "wall_seconds": 0.261344
+    },
+    {
+      "actual_aggregate_distance": 2.8127226161752206,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ms227840-pool-256-marginal-certificate-v1.json",
+        "sha256": "caa18f44295f65a98b199651d9b6defbee03d44c2fa5582db2c956b2a393a03f"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "ms227840",
+      "wall_seconds": 0.08987
+    },
+    {
+      "actual_aggregate_distance": 2.93464827757682,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/nm294426-pool-256-marginal-certificate-v1.json",
+        "sha256": "bd59b7b1a62f73ff53b874b92cdf5fcc30bed2fb1d4ab58abf3d9e47da092692"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "nm294426",
+      "wall_seconds": 0.267298
+    },
+    {
+      "actual_aggregate_distance": 3.9670099637980143,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/tx412797-pool-256-marginal-certificate-v1.json",
+        "sha256": "62364bb9de63a30a2ad67edcb28c2ae3c6cd8d9244a83457d2659299c3a690be"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "tx412797",
+      "wall_seconds": 0.317489
+    },
+    {
+      "actual_aggregate_distance": 4.899625771100145,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/ut429382-pool-256-marginal-certificate-v1.json",
+        "sha256": "ff488bf30d62a3f131710a273e6bfef839502c1b25c1b6b1b7ec8dcf89ef6bbe"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "ut429382",
+      "wall_seconds": 0.288226
+    },
+    {
+      "actual_aggregate_distance": 3.9649867785110406,
+      "baseline_aggregate_distance": 6.0,
+      "certificate": {
+        "path": "target/a5d1-selector-feasibility/certificates/wy485345-pool-256-marginal-certificate-v1.json",
+        "sha256": "5b95f0630d50382c4773180fb0bf4b6d1577e79bed7bc192bcf76a058348373c"
+      },
+      "first_failed_criterion": null,
+      "marginal_pass": true,
+      "pool_size": 256,
+      "station_id": "wy485345",
+      "wall_seconds": 0.257753
+    }
+  ]
+}

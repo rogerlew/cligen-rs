@@ -1,0 +1,158 @@
+{
+  "algorithms": [
+    "guarded_replacement",
+    "weighted_permutation",
+    "state_persistent_different_block"
+  ],
+  "annual_marginal_vector": {
+    "components": [
+      "precip_total_mm.variance",
+      "tmax_mean_c.variance",
+      "tmin_mean_c.variance",
+      "precip_total_mm_x_tmax_mean_c.covariance",
+      "precip_total_mm_x_tmin_mean_c.covariance",
+      "tmax_mean_c_x_tmin_mean_c.covariance"
+    ],
+    "linearization": "stationary selected annual means equal the uniform pool means; raw targets are uniform mean products plus detrended Daymet variance/covariance",
+    "noninferiority": "each normalized centered component <= its uniform-library component + 1e-7 + 2e-12 replay guard",
+    "strict_improvement": "aggregate normalized centered L1 distance <= 0.95 times uniform-library distance"
+  },
+  "authority_map": {
+    "annual_marginal_improvement": "detrended centered variance/covariance from exposed Daymet 1980-2009 fit-period annual series",
+    "fitted_monthly_surface": "accepted A5a station .par bytes represented by A5b base_station parameters",
+    "path_dependence_improvement": "identically detrended exposed Daymet, chronological baseline, and candidate annual series",
+    "unparameterized_preservation": "uniform faithful_5_32_3 plus qc_filter off development library"
+  },
+  "boundary_vector": {
+    "components": [
+      "dry_to_dry_fraction",
+      "dry_to_wet_fraction",
+      "wet_to_dry_fraction",
+      "wet_to_wet_fraction",
+      "dry_spell_continuation_days_per_boundary",
+      "wet_spell_continuation_days_per_boundary"
+    ],
+    "horizons": [30, 100],
+    "reference": "chronological uniform faithful-off prefix"
+  },
+  "calendar": {
+    "path_policy": "Gregorian source and destination years have identical 365/366-day class",
+    "stationary_leap_weight": 0.24,
+    "relabeling": "day and month remain unchanged; destination year is relabeled in a separately rendered daily segment"
+  },
+  "contract_id": "a5d1-selector-feasibility-v4",
+  "contract_schema_version": 4,
+  "development_only": true,
+  "feature_vector": {
+    "annual": [
+      "precip_total_mm",
+      "tmax_mean_c",
+      "tmin_mean_c",
+      "raw second moments",
+      "raw cross moments",
+      "centered variance/covariance"
+    ],
+    "boundary": [
+      "first_day_wet",
+      "last_day_wet",
+      "leading_same-state_spell_days",
+      "trailing_same-state_spell_days"
+    ],
+    "monthly": [
+      "day and wet-day counts",
+      "precipitation and temperature first/second raw sums",
+      "within-block wet transition numerators/denominators attributed to the destination month",
+      "precipitation support bins [0,1), [1,5), [5,20), [20,infinity) mm",
+      "daily precipitation-temperature and Tmax-Tmin raw cross sums",
+      "wet-day duration, time-to-peak, and peak-ratio first/second raw sums",
+      "temperature-ordering violations"
+    ]
+  },
+  "finite_prefix": {
+    "horizons": [30, 100],
+    "marginal_rule": "replay fitted-monthly, unparameterized, annual-mean, and centered annual improvement constraints on empirical block frequencies at each horizon; additionally combine within-block January counts with each realized Jan 1 cross-block transition and replay the aggregate January probabilities against the fitted surface",
+    "temperature_ordering_violations": 0
+  },
+  "generator": {
+    "begin_year": 1,
+    "burn": 0,
+    "generation_profile": "faithful_5_32_3",
+    "interpolation": "none",
+    "mode": "continuous",
+    "qc_filter": "off",
+    "years": 256
+  },
+  "horizons": [30, 100],
+  "library_realizations": [
+    {
+      "burn": 0,
+      "id": "canonical-burn-0",
+      "role": "one canonical nested library, not an independent replicate"
+    }
+  ],
+  "marginal_solver": {
+    "algorithm": "scipy.optimize.linprog(method=highs)",
+    "ambiguous_status": "fail_closed",
+    "certificate": "primal weights plus independently recomputed centered targets, constraints, and objective",
+    "deterministic_tie_break": "second solve within 1e-9 of optimum minimizing index-weighted weights",
+    "independent_replay_tolerance": 2e-7,
+    "max_weight": 0.01,
+    "positive_weight_threshold": 1e-12,
+    "stationary_mean_rule": "precipitation, Tmax, and Tmin annual means equal their uniform-pool means",
+    "numerical_precision": "IEEE-754 binary64",
+    "objective": "normalized L1 distance to six centered detrended-Daymet variance/covariance targets"
+  },
+  "monthly_tolerances": {
+    "precipitation_transition_probability_absolute": 0.05,
+    "precipitation_wet_fraction_absolute": 0.04,
+    "precipitation_wet_mean_relative": 0.20,
+    "precipitation_wet_raw_second_relative": 0.30,
+    "temperature_mean_c_absolute": 1.0,
+    "temperature_raw_second_scale_relative": 0.20
+  },
+  "path": {
+    "cooldown_years": 5,
+    "exact_block_max_reuse": 2,
+    "iterations_per_path": 1500,
+    "noninferiority": "each identically detrended dependence component <= chronological component + 0.10 normalized units",
+    "objective_order": [
+      "finite-prefix marginal violation",
+      "boundary-vector violation",
+      "detrended dependence distance"
+    ],
+    "path_seeds": [104729, 130363, 155921],
+    "strict_improvement": "aggregate detrended dependence distance <= 0.95 times chronological baseline distance",
+    "target_years": 100,
+    "thirty_year_rule": "strict separately rendered first 30 years of the constructed 100-year path",
+    "zero_weight_selection": "forbidden"
+  },
+  "pool_sizes": [128, 256],
+  "preservation": {
+    "annual_mean_precipitation_relative": 0.08,
+    "annual_mean_temperature_c_absolute": 0.75,
+    "boundary_spell_mean_relative": 0.20,
+    "boundary_transition_absolute": 0.04,
+    "daily_cross_correlation_absolute": 0.15,
+    "precipitation_bin_fraction_absolute": 0.03,
+    "storm_descriptor_raw_moment_relative": 0.20,
+    "temperature_ordering_violations": 0
+  },
+  "resource_ceilings": {
+    "library_storage_bytes": 1073741824,
+    "peak_rss_bytes": 2147483648,
+    "solver_seconds_per_station_pool": 120,
+    "total_wall_seconds": 7200
+  },
+  "selection_rule": "Choose the first pool in ascending order, then the first algorithm in declared order, only if all 17 stations and all three seeds pass stationary marginal, finite-prefix marginal at both horizons, detrended dependence, boundary-vector, calendar, reuse, render, and physical identity rules; otherwise issue the most specific hold.",
+  "station_count": 17,
+  "transition_ownership": {
+    "boundary_vector": "the same realized cross-block pairs additionally preserve directional transition and spell-continuation contributions relative to the chronological uniform prefix",
+    "finite_path": "all adjacent daily pairs are covered; every realized Jan 1 cross-block pair is attributed to January, combined with within-block January counts, and the aggregate probability is replayed against the fitted station surface; boundary-only ratios are diagnostic",
+    "stationary_marginal": "the unordered marginal weights constrain only within-block destination-month pairs because they do not define a predecessor coupling"
+  },
+  "unparameterized_tolerances": {
+    "daily_cross_raw_moment_relative": 0.20,
+    "precipitation_bin_fraction_absolute": 0.03,
+    "storm_descriptor_raw_moment_relative": 0.20
+  }
+}

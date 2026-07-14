@@ -1,0 +1,20 @@
+{
+  "amendment_id": "a5d1-freeze-amendment-003",
+  "corrections": [
+    "fix stationary annual means to uniform-pool means and target centered detrended-Daymet variance/covariance",
+    "constrain stationary leap-class mass to 0.24 and maximum block weight to 0.01",
+    "forbid selecting zero-weight blocks",
+    "detrend observed, chronological-baseline, and candidate dependence series identically",
+    "replay fitted-monthly, unparameterized, annual-mean, and centered marginal constraints on both finite prefixes",
+    "replace endpoint-equality proxy with directional transitions and spell-continuation contributions at both horizons",
+    "attribute monthly wet transitions to the destination month",
+    "independently render and compare 30-/100-year destination daily segments",
+    "apply and record bounded deterministic tie solving and numerical replay guards",
+    "retain detailed certificates and paths in a deterministic public evidence archive"
+  ],
+  "invalidated_outcome": "The v3 execution and its 68 nominal path passes are excluded from terminal evidence. It did not establish centered variance/covariance improvement or finite-prefix preservation.",
+  "prior_outcomes_disclosed": true,
+  "review_authority": "independent accuracy/numerical, scientific-validity, and consistency/exposure reviews",
+  "superseded_freeze_sha256": "61e557154cd3e4e4b6ee31b068c0e7b61e9df04d2880d7cd25d27dd2e83d45fc",
+  "type": "prospective-v4-contract-correction-after-invalidated-development-outcomes"
+}

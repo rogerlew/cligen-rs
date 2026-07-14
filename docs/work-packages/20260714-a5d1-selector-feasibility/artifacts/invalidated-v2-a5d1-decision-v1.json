@@ -1,0 +1,15 @@
+{
+  "a5d1_decision_schema_version": 1,
+  "a5d2_required": true,
+  "a5d3_required": true,
+  "a5d4_required": true,
+  "confirmation_authorized": false,
+  "decision": "HOLD",
+  "development_only": true,
+  "first_corrective_action": "A5d1a must diagnose which frozen station-surface or annual-marginal constraints exclude a common pool before any selector-family expansion or tolerance change.",
+  "freeze_sha256": "351b46ff2e0d2d92c9424ff6412822ae56911cca94b3a0b8e71dc8159b39500a",
+  "public_candidate_authorized": false,
+  "results_sha256": "5edb09da10ab9a9e9b021e16d0535564ca437f4bdf5e5ec59788c950539798ce",
+  "selected_global_contract": null,
+  "terminal_status": "EXECUTED-HOLD-STRUCTURAL-INFEASIBILITY"
+}

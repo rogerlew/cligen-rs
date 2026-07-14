@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rogerlew.github.io/cligen-rs/schemas/a5d1-selector-feasibility-contract-v3.schema.json",
+  "$defs": {
+    "positive": {"exclusiveMinimum": 0, "type": "number"},
+    "nonnegative": {"minimum": 0, "type": "number"},
+    "string_array": {"items": {"minLength": 1, "type": "string"}, "minItems": 1, "type": "array", "uniqueItems": true}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "algorithms": {"const": ["guarded_replacement", "weighted_permutation", "state_persistent_different_block"]},
+    "annual_marginal_vector": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {"$ref": "#/$defs/string_array"},
+        "linearization": {"type": "string"},
+        "noninferiority": {"type": "string"},
+        "strict_improvement": {"type": "string"}
+      },
+      "required": ["components", "linearization", "noninferiority", "strict_improvement"],
+      "type": "object"
+    },
+    "authority_map": {
+      "additionalProperties": false,
+      "properties": {
+        "annual_marginal_improvement": {"type": "string"},
+        "fitted_monthly_surface": {"type": "string"},
+        "path_dependence_improvement": {"type": "string"},
+        "unparameterized_preservation": {"type": "string"}
+      },
+      "required": ["annual_marginal_improvement", "fitted_monthly_surface", "path_dependence_improvement", "unparameterized_preservation"],
+      "type": "object"
+    },
+    "boundary_vector": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {"$ref": "#/$defs/string_array"},
+        "horizons": {"const": [30, 100]},
+        "reference": {"type": "string"}
+      },
+      "required": ["components", "horizons", "reference"],
+      "type": "object"
+    },
+    "calendar": {
+      "additionalProperties": false,
+      "properties": {
+        "path_policy": {"type": "string"},
+        "stationary_leap_weight": {"exclusiveMaximum": 1, "exclusiveMinimum": 0, "type": "number"},
+        "relabeling": {"type": "string"}
+      },
+      "required": ["path_policy", "stationary_leap_weight", "relabeling"],
+      "type": "object"
+    },
+    "contract_id": {"const": "a5d1-selector-feasibility-v3"},
+    "contract_schema_version": {"const": 3},
+    "development_only": {"const": true},
+    "feature_vector": {
+      "additionalProperties": false,
+      "properties": {
+        "annual": {"$ref": "#/$defs/string_array"},
+        "boundary": {"$ref": "#/$defs/string_array"},
+        "monthly": {"$ref": "#/$defs/string_array"}
+      },
+      "required": ["annual", "boundary", "monthly"],
+      "type": "object"
+    },
+    "finite_prefix": {
+      "additionalProperties": false,
+      "properties": {
+        "horizons": {"const": [30, 100]},
+        "marginal_rule": {"type": "string"},
+        "temperature_ordering_violations": {"const": 0}
+      },
+      "required": ["horizons", "marginal_rule", "temperature_ordering_violations"],
+      "type": "object"
+    },
+    "generator": {
+      "additionalProperties": false,
+      "properties": {
+        "begin_year": {"const": 1},
+        "burn": {"const": 0},
+        "generation_profile": {"const": "faithful_5_32_3"},
+        "interpolation": {"const": "none"},
+        "mode": {"const": "continuous"},
+        "qc_filter": {"const": "off"},
+        "years": {"const": 256}
+      },
+      "required": ["begin_year", "burn", "generation_profile", "interpolation", "mode", "qc_filter", "years"],
+      "type": "object"
+    },
+    "horizons": {"const": [30, 100]},
+    "library_realizations": {
+      "const": [{"burn": 0, "id": "canonical-burn-0", "role": "one canonical nested library, not an independent replicate"}]
+    },
+    "marginal_solver": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {"const": "scipy.optimize.linprog(method=highs)"},
+        "ambiguous_status": {"const": "fail_closed"},
+        "certificate": {"type": "string"},
+        "deterministic_tie_break": {"type": "string"},
+        "independent_replay_tolerance": {"$ref": "#/$defs/positive"},
+        "max_weight": {"exclusiveMaximum": 1, "exclusiveMinimum": 0, "type": "number"},
+        "numerical_precision": {"const": "IEEE-754 binary64"},
+        "objective": {"type": "string"},
+        "positive_weight_threshold": {"$ref": "#/$defs/positive"},
+        "stationary_mean_rule": {"type": "string"}
+      },
+      "required": ["algorithm", "ambiguous_status", "certificate", "deterministic_tie_break", "independent_replay_tolerance", "max_weight", "numerical_precision", "objective", "positive_weight_threshold", "stationary_mean_rule"],
+      "type": "object"
+    },
+    "monthly_tolerances": {
+      "additionalProperties": false,
+      "properties": {
+        "precipitation_transition_probability_absolute": {"$ref": "#/$defs/nonnegative"},
+        "precipitation_wet_fraction_absolute": {"$ref": "#/$defs/nonnegative"},
+        "precipitation_wet_mean_relative": {"$ref": "#/$defs/nonnegative"},
+        "precipitation_wet_raw_second_relative": {"$ref": "#/$defs/nonnegative"},
+        "temperature_mean_c_absolute": {"$ref": "#/$defs/nonnegative"},
+        "temperature_raw_second_scale_relative": {"$ref": "#/$defs/nonnegative"}
+      },
+      "required": ["precipitation_transition_probability_absolute", "precipitation_wet_fraction_absolute", "precipitation_wet_mean_relative", "precipitation_wet_raw_second_relative", "temperature_mean_c_absolute", "temperature_raw_second_scale_relative"],
+      "type": "object"
+    },
+    "path": {
+      "additionalProperties": false,
+      "properties": {
+        "cooldown_years": {"minimum": 0, "type": "integer"},
+        "exact_block_max_reuse": {"minimum": 1, "type": "integer"},
+        "iterations_per_path": {"minimum": 1, "type": "integer"},
+        "noninferiority": {"type": "string"},
+        "objective_order": {"const": ["finite-prefix marginal violation", "boundary-vector violation", "detrended dependence distance"]},
+        "path_seeds": {"const": [104729, 130363, 155921]},
+        "strict_improvement": {"type": "string"},
+        "target_years": {"const": 100},
+        "thirty_year_rule": {"type": "string"},
+        "zero_weight_selection": {"const": "forbidden"}
+      },
+      "required": ["cooldown_years", "exact_block_max_reuse", "iterations_per_path", "noninferiority", "objective_order", "path_seeds", "strict_improvement", "target_years", "thirty_year_rule", "zero_weight_selection"],
+      "type": "object"
+    },
+    "pool_sizes": {"const": [128, 256]},
+    "preservation": {
+      "additionalProperties": false,
+      "properties": {
+        "annual_mean_precipitation_relative": {"$ref": "#/$defs/nonnegative"},
+        "annual_mean_temperature_c_absolute": {"$ref": "#/$defs/nonnegative"},
+        "boundary_spell_mean_relative": {"$ref": "#/$defs/nonnegative"},
+        "boundary_transition_absolute": {"$ref": "#/$defs/nonnegative"},
+        "daily_cross_correlation_absolute": {"$ref": "#/$defs/nonnegative"},
+        "precipitation_bin_fraction_absolute": {"$ref": "#/$defs/nonnegative"},
+        "storm_descriptor_raw_moment_relative": {"$ref": "#/$defs/nonnegative"},
+        "temperature_ordering_violations": {"const": 0}
+      },
+      "required": ["annual_mean_precipitation_relative", "annual_mean_temperature_c_absolute", "boundary_spell_mean_relative", "boundary_transition_absolute", "daily_cross_correlation_absolute", "precipitation_bin_fraction_absolute", "storm_descriptor_raw_moment_relative", "temperature_ordering_violations"],
+      "type": "object"
+    },
+    "resource_ceilings": {
+      "additionalProperties": false,
+      "properties": {
+        "library_storage_bytes": {"minimum": 1, "type": "integer"},
+        "peak_rss_bytes": {"minimum": 1, "type": "integer"},
+        "solver_seconds_per_station_pool": {"$ref": "#/$defs/positive"},
+        "total_wall_seconds": {"$ref": "#/$defs/positive"}
+      },
+      "required": ["library_storage_bytes", "peak_rss_bytes", "solver_seconds_per_station_pool", "total_wall_seconds"],
+      "type": "object"
+    },
+    "selection_rule": {"minLength": 1, "type": "string"},
+    "station_count": {"const": 17},
+    "transition_ownership": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary_vector": {"type": "string"},
+        "finite_path": {"type": "string"},
+        "stationary_marginal": {"type": "string"}
+      },
+      "required": ["boundary_vector", "finite_path", "stationary_marginal"],
+      "type": "object"
+    },
+    "unparameterized_tolerances": {
+      "additionalProperties": false,
+      "properties": {
+        "daily_cross_raw_moment_relative": {"$ref": "#/$defs/nonnegative"},
+        "precipitation_bin_fraction_absolute": {"$ref": "#/$defs/nonnegative"},
+        "storm_descriptor_raw_moment_relative": {"$ref": "#/$defs/nonnegative"}
+      },
+      "required": ["daily_cross_raw_moment_relative", "precipitation_bin_fraction_absolute", "storm_descriptor_raw_moment_relative"],
+      "type": "object"
+    }
+  },
+  "required": ["algorithms", "annual_marginal_vector", "authority_map", "boundary_vector", "calendar", "contract_id", "contract_schema_version", "development_only", "feature_vector", "finite_prefix", "generator", "horizons", "library_realizations", "marginal_solver", "monthly_tolerances", "path", "pool_sizes", "preservation", "resource_ceilings", "selection_rule", "station_count", "transition_ownership", "unparameterized_tolerances"],
+  "type": "object"
+}

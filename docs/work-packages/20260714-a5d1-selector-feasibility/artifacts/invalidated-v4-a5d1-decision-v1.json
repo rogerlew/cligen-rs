@@ -1,0 +1,15 @@
+{
+  "a5d1_decision_schema_version": 1,
+  "a5d2_required": true,
+  "a5d3_required": true,
+  "a5d4_required": true,
+  "confirmation_authorized": false,
+  "decision": "HOLD",
+  "development_only": true,
+  "first_corrective_action": "A5d1b must diagnose the first common finite-path failure under the frozen marginal weights before introducing another path algorithm.",
+  "freeze_sha256": "9b408216af554a1f2b773e2ffd1560c731a245de1cf1e155b89b1dcbaaf03aa7",
+  "public_candidate_authorized": false,
+  "results_sha256": "eb16a718694ee593f79757137490c3ea86efcfe14eba6a4420c8352bc65176ed",
+  "selected_global_contract": null,
+  "terminal_status": "EXECUTED-HOLD-PATH-INFEASIBILITY"
+}

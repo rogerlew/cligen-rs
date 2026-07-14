@@ -1,0 +1,512 @@
+{
+  "development_only": true,
+  "freeze_sha256": "351b46ff2e0d2d92c9424ff6412822ae56911cca94b3a0b8e71dc8159b39500a",
+  "frozen_results_unchanged": true,
+  "marginal_infeasibility_diagnostics_schema_version": 1,
+  "record_count": 6,
+  "records": [
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "jun.uniform.bin_1_5.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "jun.uniform.bin_1_5.upper",
+          "native_slack": 0.05115557944663131,
+          "normalized_slack": 0.05115557944663131
+        },
+        {
+          "constraint": "jun.uniform.bin_0_1.upper",
+          "native_slack": 0.05052494178138466,
+          "normalized_slack": 0.03196516680514649
+        },
+        {
+          "constraint": "apr.uniform.bin_0_1.upper",
+          "native_slack": 0.058104827784780176,
+          "normalized_slack": 0.0287736689742025
+        },
+        {
+          "constraint": "may.uniform.p_tmax.lower",
+          "native_slack": 7.2380726559060165,
+          "normalized_slack": 0.025379514806284215
+        },
+        {
+          "constraint": "may.uniform.p_tmin.lower",
+          "native_slack": 3.8304914534262875,
+          "normalized_slack": 0.023664172203810337
+        },
+        {
+          "constraint": "may.uniform.bin_0_1.upper",
+          "native_slack": 0.03822493952297914,
+          "normalized_slack": 0.022207662758448304
+        },
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.03430411650494206,
+          "normalized_slack": 0.013658476149784073
+        },
+        {
+          "constraint": "may.fitted.wet_mean.upper",
+          "native_slack": 0.05646609843150516,
+          "normalized_slack": 0.009625340657218252
+        },
+        {
+          "constraint": "may.uniform.peak_ratio.first.upper",
+          "native_slack": 0.13288922261883168,
+          "normalized_slack": 0.007164322265318777
+        },
+        {
+          "constraint": "may.uniform.duration.first.upper",
+          "native_slack": 0.030122412269861898,
+          "normalized_slack": 0.0070320422588771156
+        }
+      ],
+      "minimum_normalized_total_slack": 0.2617062076429259,
+      "phase_one_status": "optimal",
+      "pool_size": 128,
+      "station_id": "az029654",
+      "violated_constraint_count": 19
+    },
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "may.uniform.bin_1_5.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.10914559986949306,
+          "normalized_slack": 0.03872127711556295
+        },
+        {
+          "constraint": "jun.uniform.bin_0_1.upper",
+          "native_slack": 0.03775914591726657,
+          "normalized_slack": 0.023654907387481015
+        },
+        {
+          "constraint": "jun.uniform.bin_5_20.upper",
+          "native_slack": 0.022282485008724016,
+          "normalized_slack": 0.022282485008724016
+        },
+        {
+          "constraint": "jun.uniform.bin_1_5.upper",
+          "native_slack": 0.03943625198762013,
+          "normalized_slack": 0.01600050797012608
+        },
+        {
+          "constraint": "jun.uniform.duration.first.upper",
+          "native_slack": 0.04025761263061901,
+          "normalized_slack": 0.011705346407100099
+        },
+        {
+          "constraint": "jun.uniform.peak_ratio.first.upper",
+          "native_slack": 0.1346046424241895,
+          "normalized_slack": 0.00923945026303396
+        },
+        {
+          "constraint": "jun.uniform.p_tmax.lower",
+          "native_slack": 1.9529306602029917,
+          "normalized_slack": 0.0037444789579183973
+        },
+        {
+          "constraint": "jun.uniform.time_to_peak.first.upper",
+          "native_slack": 0.001390645752974308,
+          "normalized_slack": 0.001006483559396975
+        }
+      ],
+      "minimum_normalized_total_slack": 0.1263549366693435,
+      "phase_one_status": "optimal",
+      "pool_size": 128,
+      "station_id": "ca042257",
+      "violated_constraint_count": 8
+    },
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "may.uniform.bin_1_5.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.08725330233227545,
+          "normalized_slack": 0.03391770741779415
+        },
+        {
+          "constraint": "jun.uniform.p_tmin.lower",
+          "native_slack": 23.755312499999988,
+          "normalized_slack": 0.03365467839299428
+        },
+        {
+          "constraint": "jun.uniform.p_tmax.lower",
+          "native_slack": 37.6305,
+          "normalized_slack": 0.03335181263319387
+        },
+        {
+          "constraint": "jul.uniform.bin_0_1.upper",
+          "native_slack": 0.013866989624831048,
+          "normalized_slack": 0.009134287113927409
+        }
+      ],
+      "minimum_normalized_total_slack": 0.11005848555790972,
+      "phase_one_status": "optimal",
+      "pool_size": 128,
+      "station_id": "ca042319",
+      "violated_constraint_count": 4
+    },
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "jun.uniform.bin_1_5.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "jun.uniform.bin_1_5.upper",
+          "native_slack": 0.12314435494556947,
+          "normalized_slack": 0.0794800193275156
+        },
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.13850814922686064,
+          "normalized_slack": 0.03655774311497476
+        },
+        {
+          "constraint": "apr.uniform.bin_0_1.upper",
+          "native_slack": 0.0725798977587422,
+          "normalized_slack": 0.03434718616207853
+        },
+        {
+          "constraint": "may.uniform.duration.first.upper",
+          "native_slack": 0.040204673745302226,
+          "normalized_slack": 0.009650810590725912
+        },
+        {
+          "constraint": "may.uniform.peak_ratio.first.upper",
+          "native_slack": 0.14878877072009178,
+          "normalized_slack": 0.00811874953200262
+        },
+        {
+          "constraint": "jun.uniform.duration.first.upper",
+          "native_slack": 0.05665010639310149,
+          "normalized_slack": 0.006636780481353302
+        },
+        {
+          "constraint": "may.fitted.wet_given_wet.lower",
+          "native_slack": 0.017802018941654056,
+          "normalized_slack": 0.005836727521853789
+        },
+        {
+          "constraint": "jun.uniform.p_tmax.lower",
+          "native_slack": 0.39345181638223004,
+          "normalized_slack": 0.001469271362939575
+        },
+        {
+          "constraint": "jun.uniform.peak_ratio.second.lower",
+          "native_slack": 6.05732895145657,
+          "normalized_slack": 0.0008218532179180279
+        },
+        {
+          "constraint": "jun.uniform.time_to_peak.first.upper",
+          "native_slack": 0.00034519729683800155,
+          "normalized_slack": 0.0002847354942342067
+        }
+      ],
+      "minimum_normalized_total_slack": 0.1832427166879179,
+      "phase_one_status": "optimal",
+      "pool_size": 256,
+      "station_id": "az029654",
+      "violated_constraint_count": 11
+    },
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "jun.uniform.bin_1_5.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "jun.uniform.bin_1_5.upper",
+          "native_slack": 0.09468983544940991,
+          "normalized_slack": 0.04094972274317342
+        },
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.0767560186336385,
+          "normalized_slack": 0.026496144512151373
+        },
+        {
+          "constraint": "jun.uniform.bin_5_20.upper",
+          "native_slack": 0.01067223701663101,
+          "normalized_slack": 0.006009353942146619
+        },
+        {
+          "constraint": "jun.uniform.duration.first.upper",
+          "native_slack": 0.018067931049362378,
+          "normalized_slack": 0.003772195231235845
+        },
+        {
+          "constraint": "jun.uniform.p_tmax.lower",
+          "native_slack": 3.2033795401325382,
+          "normalized_slack": 0.0029333358195811937
+        },
+        {
+          "constraint": "jun.fitted.wet_raw_second.upper",
+          "native_slack": 2.7443978405837406,
+          "normalized_slack": 0.002814986603416251
+        },
+        {
+          "constraint": "jun.fitted.wet_mean.upper",
+          "native_slack": 0.049633953502471385,
+          "normalized_slack": 0.001763671666328081
+        }
+      ],
+      "minimum_normalized_total_slack": 0.08473941051803277,
+      "phase_one_status": "optimal",
+      "pool_size": 256,
+      "station_id": "ca042257",
+      "violated_constraint_count": 7
+    },
+    {
+      "constraint_group_ablation": {
+        "daymet_annual_only": {
+          "constraint_count": 24,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_only": {
+          "constraint_count": 216,
+          "feasible": true,
+          "status": 0
+        },
+        "fitted_monthly_plus_daymet_annual": {
+          "constraint_count": 240,
+          "feasible": true,
+          "status": 0
+        },
+        "preservation_without_daymet_annual": {
+          "constraint_count": 534,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_only": {
+          "constraint_count": 318,
+          "feasible": false,
+          "status": 2
+        },
+        "uniform_preservation_plus_daymet_annual": {
+          "constraint_count": 342,
+          "feasible": false,
+          "status": 2
+        }
+      },
+      "first_failed_constraint": "jun.uniform.bin_0_1.upper",
+      "interpretation": "Diagnostic only; no frozen tolerance, outcome, or decision was changed.",
+      "largest_conflicts": [
+        {
+          "constraint": "jun.uniform.bin_0_1.upper",
+          "native_slack": 0.08001931904598329,
+          "normalized_slack": 0.03142055597854427
+        },
+        {
+          "constraint": "jun.uniform.bin_5_20.upper",
+          "native_slack": 0.04691089716655464,
+          "normalized_slack": 0.02737823653711013
+        },
+        {
+          "constraint": "may.uniform.bin_1_5.upper",
+          "native_slack": 0.05609674062333633,
+          "normalized_slack": 0.021039565165808283
+        },
+        {
+          "constraint": "jun.uniform.duration.first.upper",
+          "native_slack": 0.024737238995065386,
+          "normalized_slack": 0.009146695875417039
+        },
+        {
+          "constraint": "jun.uniform.peak_ratio.second.lower",
+          "native_slack": 0.6419440614093488,
+          "normalized_slack": 0.00345649935201213
+        },
+        {
+          "constraint": "aug.uniform.bin_1_5.upper",
+          "native_slack": 0.008891084327008174,
+          "normalized_slack": 0.0032785745386524727
+        },
+        {
+          "constraint": "jun.fitted.wet_mean.upper",
+          "native_slack": 0.06295106797927313,
+          "normalized_slack": 0.0032490538409550938
+        },
+        {
+          "constraint": "jun.uniform.bin_1_5.upper",
+          "native_slack": 0.003863603312444196,
+          "normalized_slack": 0.002385400463017833
+        },
+        {
+          "constraint": "jun.uniform.p_tmax.lower",
+          "native_slack": 1.9777307258108383,
+          "normalized_slack": 0.0017426349009365628
+        },
+        {
+          "constraint": "jun.uniform.time_to_peak.second.lower",
+          "native_slack": 0.0011060735566115882,
+          "normalized_slack": 0.0011060735566115882
+        }
+      ],
+      "minimum_normalized_total_slack": 0.10420329020906542,
+      "phase_one_status": "optimal",
+      "pool_size": 256,
+      "station_id": "ca042319",
+      "violated_constraint_count": 10
+    }
+  ]
+}

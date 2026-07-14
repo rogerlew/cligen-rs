@@ -1,0 +1,26 @@
+{
+  "exact_member_matches_after_runtime_exclusion": 51,
+  "exact_semantic_match": false,
+  "excluded_fields": [
+    "wall_seconds",
+    "total_wall_seconds",
+    "path_record.sha256"
+  ],
+  "first_archive_sha256": "18c2be90b1d431ca1dd4bf031b274b0413c3363fa0ebf0c01d1580c34cdc73b0",
+  "first_semantic_sha256": "aeb0844bfd1d0af12018e6e3ff65f4825ce8cda0c8625136933f57ee11ae166e",
+  "freeze_sha256": "dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22",
+  "maximum_absolute_difference": 3.1086244689504383e-15,
+  "maximum_relative_difference": 1.1668401909538008e-12,
+  "numeric_comparisons": 141064,
+  "numeric_mismatch_count": 0,
+  "numeric_mismatch_examples": [],
+  "numeric_tolerance_relative_and_absolute": 2e-10,
+  "path_count": 306,
+  "post_result_closure_evidence": true,
+  "replay_archive_sha256": "44c4792feef434f6279c4186edc00ca28909fa8077c151d0a4dc38285663a1ed",
+  "replay_semantic_sha256": "0f3f81ab8478a156e8e093fd9275fcaea12a4f6be437df4e64b5b6a9d9fce3fd",
+  "semantic_equivalent": true,
+  "semantic_replay_audit_schema_version": 1,
+  "structural_mismatch_count": 0,
+  "structural_mismatch_examples": []
+}

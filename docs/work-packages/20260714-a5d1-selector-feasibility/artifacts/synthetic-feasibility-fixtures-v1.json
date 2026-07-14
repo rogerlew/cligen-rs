@@ -1,0 +1,20 @@
+{
+  "fixture_schema_version": 1,
+  "fixtures": [
+    {"expected": "pass", "id": "positive_weights", "kind": "weights", "max_weight": 0.6, "weights": [0.5, 0.5]},
+    {"expected": "infeasible", "id": "infeasible_weight_cap", "kind": "weights", "max_weight": 0.4, "weights": [0.5, 0.5]},
+    {"expected": "pass", "id": "near_tolerance_inside", "kind": "tolerance", "residual": 9.99999e-8, "tolerance": 1e-7},
+    {"expected": "reject", "id": "near_tolerance_outside", "kind": "tolerance", "residual": 1.00001e-7, "tolerance": 1e-7},
+    {"available_leap_blocks": 0, "expected": "exhausted", "id": "calendar_exhaustion", "kind": "calendar", "target_has_leap_year": true},
+    {"expected": "exhausted", "id": "reuse_exhaustion", "kind": "reuse", "max_reuse": 2, "pool_size": 2, "target_years": 5},
+    {"expected": "bounded_failure", "id": "iteration_ceiling", "iterations_allowed": 0, "kind": "iteration"},
+    {"certificate_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "expected": "reject", "id": "tampered_certificate", "kind": "certificate", "payload": {"pass": true}},
+    {"expected": "pass", "fixed_mean": 10.0, "id": "centered_raw_linearization", "kind": "centered", "raw_second": 104.0, "target_variance": 4.0},
+    {"expected": "reject", "id": "zero_weight_selection", "kind": "zero_weight", "selected": [0, 1], "weights": [0.5, 0.0, 0.5]},
+    {"expected": "pass", "id": "directional_boundary", "kind": "boundary", "states": [[false, false], [false, true], [true, false], [true, true]]},
+    {"expected": "pass", "id": "independent_prefix_render", "kind": "render", "thirty": "abc", "hundred": "abcdef"},
+    {"boundary_denominator": 2, "boundary_numerator": 1, "expected": "pass", "id": "january_aggregate_with_boundary", "kind": "january_transition", "target": 0.4, "tolerance": 0.05, "within_denominator": 10, "within_numerator": 4},
+    {"boundary_denominator": 0, "boundary_numerator": 0, "expected": "pass", "id": "january_zero_boundary_denominator", "kind": "january_transition", "target": 0.4, "tolerance": 0.05, "within_denominator": 10, "within_numerator": 4},
+    {"boundary_denominator": 2, "boundary_numerator": 2, "expected": "reject", "id": "january_aggregate_outside", "kind": "january_transition", "target": 0.4, "tolerance": 0.05, "within_denominator": 8, "within_numerator": 4}
+  ]
+}

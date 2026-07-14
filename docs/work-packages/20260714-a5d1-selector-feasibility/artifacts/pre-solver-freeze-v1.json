@@ -1,0 +1,2190 @@
+{
+  "algorithms": [
+    "guarded_replacement",
+    "weighted_permutation",
+    "state_persistent_different_block"
+  ],
+  "confirmation_objects_in_scope": 0,
+  "contract_schema_sha256": "5c99d08fd0111c995457ace538b34d652ac12567e5b8ca6e4d9160f29eac0ac5",
+  "contract_sha256": "4c92856c2eb77044555caae12aafb03495158ae70945456e0c5eb8297bef3f53",
+  "development_only": true,
+  "evidence_lock_sha256": "96422af85e952144d203c368aade915c5092ee0e507b3d817286c555ca70fb90",
+  "expected_unique_cells": 306,
+  "fixture_sha256": "fa68cec3af90af91258066de741a4acb63fc3ce09675da127918687166b05085",
+  "freeze_sha256": "822797695050ba780044d00de6adbcb2547264fec5f1555544a027117bfd60ac",
+  "library_realizations": [
+    {
+      "burn": 0,
+      "id": "canonical-burn-0",
+      "role": "one canonical nested library, not an independent replicate"
+    }
+  ],
+  "matrix": [
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ak505769"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "al015478"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az022664"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az028619"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "az029654"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042257"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ca042319"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "co051660"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl083909"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "fl086997"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "id106388"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "mn214026"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ms227840"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "nm294426"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "tx412797"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "ut429382"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 128,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "guarded_replacement",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "weighted_permutation",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 104729,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 130363,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    },
+    {
+      "algorithm": "state_persistent_different_block",
+      "library_realization": "canonical-burn-0",
+      "path_seed": 155921,
+      "pool_size": 256,
+      "station_id": "wy485345"
+    }
+  ],
+  "outcome_files_existing_at_freeze": [],
+  "path_seeds": [
+    104729,
+    130363,
+    155921
+  ],
+  "pool_sizes": [
+    128,
+    256
+  ],
+  "pre_solver_freeze_schema_version": 1,
+  "selection_rule": "Choose the first pool in ascending order, then the first algorithm in declared order, only if all 17 stations and all three path seeds pass both marginal and path contracts; otherwise issue the most specific hold.",
+  "state": "FROZEN-BEFORE-ACTUAL-LIBRARY-OUTCOMES",
+  "tool_hashes": {
+    "a5d1_common.py": "a4c87a927bc0d08519c4299b6035d59776329b0315cc03f68903fc3298912386",
+    "build-development-libraries.py": "e9afe721103ffa19570af10a368f729a470b0a9df3c353f3192c4323066a4dab",
+    "build-year-features.py": "b017f5525af96e5a8c7394152cc29a1bd641a8d885dfe453ad6a4c1fb6294feb",
+    "finalize-a5d1.py": "9ea5e603f209c9c17b4aa3e3352ae0625c18ba5bd80db4665cad88e5f04368a5",
+    "freeze-a5d1.py": "c421d9f91367cff43c6857d16f16e0cb5b59993e467f5b5e7377d9cf9392b112",
+    "run-path-feasibility.py": "3611e6d86785e9ce194b78f68c9cc9a600c1b192c805dd9230920861f8662a4c",
+    "run-synthetic-fixtures.py": "854ed9950be24e5a85a3c931168bd29b1648b86c365eb51ba12623fc6eeb6a94",
+    "solve-selector-feasibility.py": "a4df25d4d8eb9c27173bbea4727cf00032334393079f536e68f38611b93be9c3",
+    "verify-a5d1-package.py": "9279a3ba365e35114853010d86927c45bdc4de45759c25600475775fdefb11b6"
+  }
+}

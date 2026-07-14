@@ -1,0 +1,94 @@
+{
+  "ceiling_checks": {
+    "library_storage": true,
+    "peak_rss": true,
+    "solver_per_station_pool": true,
+    "total_wall": true
+  },
+  "contract_sha256": "7fec603c613a416578fd510768de789c3c8b4f07278f08b2137dd94fe62ceb0c",
+  "feature_manifest_sha256": "a219242f9edcaef961c3c4e44d9dbd0d6e37b502092264e602f3d478c55a9335",
+  "feature_stage_internal_seconds": 5.811852,
+  "first_execution_stage_wall_upper_bound_seconds": 592.82,
+  "freeze_sha256": "dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22",
+  "library_canonical_recorded_max_seconds": 0.455013,
+  "library_canonical_recorded_sum_seconds": 6.596716,
+  "library_manifest_sha256": "b2abf191b8b8b724582f166541746c2f4bf7bb51b584637b18f6b20f9f5ca4e0",
+  "library_repeat_recorded_max_seconds": 0.386395,
+  "library_repeat_recorded_sum_seconds": 6.190601,
+  "library_retained_bytes": 112875835,
+  "locked_path_tool_sha256": "a348a561ba0f97110920340b385b5bd4687ff8b179a9f9db55c2d985883b5ff9",
+  "marginal_max_cell_seconds": 0.335521,
+  "marginal_recorded_sum_seconds": 4.808181,
+  "marginal_results_sha256": "fccbe964b6ff54bbd24d077e74f5aefdb6d83c3a63d5559db59ebbe4600ed879",
+  "maximum_resident_set_bytes": 400883712,
+  "post_result_closure_evidence": true,
+  "published_path_max_cell_seconds": 4.274422,
+  "published_path_recorded_sum_seconds": 555.276861,
+  "published_path_results_sha256": "b15c638ab5a6d9ee0358b93bcc7f4999e56b44b22bed7d7495dfd8c7f063e321",
+  "published_path_total_seconds": 558.810149,
+  "resource_ceilings": {
+    "library_storage_bytes": 1073741824,
+    "peak_rss_bytes": 2147483648,
+    "solver_seconds_per_station_pool": 120,
+    "total_wall_seconds": 7200
+  },
+  "resource_evidence_schema_version": 1,
+  "semantic_replay": {
+    "audit_path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/semantic-replay-audit-v1.json",
+    "audit_sha256": "add1822bc0c235b81679d328d64bd360fdd219108e693ebb017d4052eb70d868",
+    "exact_match": false,
+    "first_sha256": "aeb0844bfd1d0af12018e6e3ff65f4825ce8cda0c8625136933f57ee11ae166e",
+    "match": true,
+    "maximum_absolute_difference": 3.1086244689504383e-15,
+    "maximum_relative_difference": 1.1668401909538008e-12,
+    "numeric_mismatch_count": 0,
+    "numeric_tolerance_relative_and_absolute": 2e-10,
+    "replay_archive_sha256": "44c4792feef434f6279c4186edc00ca28909fa8077c151d0a4dc38285663a1ed",
+    "replay_sha256": "0f3f81ab8478a156e8e093fd9275fcaea12a4f6be437df4e64b5b6a9d9fce3fd",
+    "structural_mismatch_count": 0
+  },
+  "timed_commands": [
+    {
+      "command": "python3 artifacts/build-development-libraries.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 183517184,
+      "real_seconds": 20.80,
+      "role": "first_execution_library"
+    },
+    {
+      "command": "python3 artifacts/build-year-features.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 275922944,
+      "real_seconds": 5.97,
+      "role": "first_execution_features"
+    },
+    {
+      "command": "python3 artifacts/solve-selector-feasibility.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 400883712,
+      "real_seconds": 6.86,
+      "role": "first_execution_marginal"
+    },
+    {
+      "command": "python3 artifacts/run-path-feasibility.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 206389248,
+      "real_seconds": 559.19,
+      "role": "first_execution_path"
+    },
+    {
+      "command": "python3 artifacts/run-path-feasibility.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 177995776,
+      "real_seconds": 1107.38,
+      "role": "diagnostic_replay_unretained"
+    },
+    {
+      "command": "python3 artifacts/run-path-feasibility.py",
+      "exit_status": 0,
+      "maximum_resident_set_bytes": 185991168,
+      "real_seconds": 1599.82,
+      "role": "retained_semantic_replay"
+    }
+  ]
+}

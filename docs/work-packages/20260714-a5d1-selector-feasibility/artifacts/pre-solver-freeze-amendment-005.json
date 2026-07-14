@@ -1,0 +1,14 @@
+{
+  "amendment_id": "a5d1-freeze-amendment-005",
+  "corrections": [
+    "replace the v5 boundary-subset fitted-surface gate with the accepted aggregate January transition statistic",
+    "combine within-block January numerators and denominators with realized Dec 31 to Jan 1 path pairs at both horizons",
+    "retain boundary-only January ratios as diagnostics and retain the separately registered directional boundary and spell-continuation guard",
+    "fail closed only if a combined conditioning denominator is zero; a zero boundary-only denominator is diagnostically unavailable rather than a failure"
+  ],
+  "invalidated_outcome": "V5 was stopped after 65 of 306 path records when bounded scientific review identified an uncalibrated boundary-subset constraint that could create a false hold. No aggregate or decision was issued.",
+  "prior_outcomes_disclosed": true,
+  "review_authority": "bounded independent scientific-validity and accuracy/numerical design rechecks",
+  "superseded_freeze_sha256": "726c2c761d38f1fd3399de9e64d171a36921e00da09c0ae3824f4e4e6cbe6d10",
+  "type": "prospective-v6-contract-correction-after-stopped-partial-v5-execution"
+}
