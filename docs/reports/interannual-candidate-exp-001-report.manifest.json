@@ -1,0 +1,284 @@
+{
+  "report_manifest_version": 1,
+  "report_id": "interannual-candidate-exp-001",
+  "report_revision": 2,
+  "status": "ACCEPTED",
+  "report": {
+    "path": "docs/reports/interannual-candidate-exp-001-report.md",
+    "sha256": "b1b7f0af0a1f8980183b5e4fa00222c5ae1ccfd29c4bd2b7f43c916652789f5b"
+  },
+  "governance": [
+    {
+      "role": "standard",
+      "path": "docs/standards/scientific-report-standard.md",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "role": "protocol",
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "role": "template",
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "required_sections": [
+    "Abstract",
+    "Introduction",
+    "Hypotheses",
+    "Methods",
+    "Analysis",
+    "Results",
+    "Limitations and validity",
+    "Conclusions",
+    "Reproducibility and data availability",
+    "References"
+  ],
+  "study_facts": {
+    "stations": 17,
+    "candidates": 7,
+    "horizons_years": [
+      30,
+      100
+    ],
+    "replicate_records_per_cell": 8,
+    "candidate_horizon_rows": 14,
+    "candidate_climates": 1904,
+    "observed_bootstrap_replicates": 2000,
+    "wepp_response_records": 2176,
+    "wepp_execution_records": 2176,
+    "eligible_candidate_horizon_rows": 0,
+    "promoted_candidates": 0,
+    "evidence_classification": "exploratory for model selection"
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "provenance": "retrospective mapping",
+      "outcome": "Not supported",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E06",
+        "E10"
+      ]
+    },
+    {
+      "id": "H2",
+      "provenance": "retrospective mapping",
+      "outcome": "Not supported; no candidate met H1, although six passed Gate 2",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E06",
+        "E10"
+      ]
+    },
+    {
+      "id": "H3",
+      "provenance": "retrospective mapping",
+      "outcome": "Not supported; every candidate failed Gates 3–5",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E06",
+        "E10",
+        "E11"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/a5b-pre-registration.md",
+      "sha256": "ee2f29dfc6e1843affe4734260347abb54336d7a3ce74c652b230a2264b95021",
+      "role": "research questions and prospective matrix"
+    },
+    {
+      "id": "E02",
+      "path": "docs/specifications/SPEC-A5-EVALUATION.md",
+      "sha256": "e8149a416cacc8ec57fa9a211d272993071e0c1cfc580d3b39601910e03aac88",
+      "role": "evaluation and gate contract revision 3"
+    },
+    {
+      "id": "E03",
+      "path": "docs/specifications/SPEC-A5B-CANDIDATES.md",
+      "sha256": "ceaa94913b7d6d042dfe029381dab4575ba06355e66690c66600ac5cf19692fc",
+      "role": "candidate and overlay contract revision 1"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260713-a5b-coefficient-source-assessment/artifacts/daily-source-assessment.md",
+      "sha256": "0db230fe9c56e81f10990673cb963a10a527366ca849c45cfa2af0eeb0dc14cc",
+      "role": "coefficient-source decision and limitations"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/package.md",
+      "sha256": "9092a360775d3b1020bbbeca2b79ed2b15619e605e0f222de2a65646d27fd529",
+      "role": "executed experiment record"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/results.md",
+      "sha256": "d0ad88ca2cf7455824a1d9642bd5d7850202e7de6b794e690cac81227e43c796",
+      "role": "accepted human-readable results"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/analysis-evidence-v1.json",
+      "sha256": "d773542f6cf6eed39ca96e447bb84fd5f282e4f8483159de203fb1ae0426fd52",
+      "role": "canonical analysis identities"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/gate-results.md",
+      "sha256": "1ed96cc51a5005201d2f6cdafda2c0791be7d665553a08401716c949cf6a0aff",
+      "role": "execution and verification record"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/review.md",
+      "sha256": "0f4c4ac17bc06d9cf75ed245481fafe02b770532234ce18365cb53d40edcfa26",
+      "role": "independent closure and access-boundary disposition"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/a5b-analysis-v1.json.gz",
+      "sha256": "540a72530d5a6b6b063a951d65c91cb0a903a474e14935a26c8ee88580fef78c",
+      "role": "canonical climate analysis archive"
+    },
+    {
+      "id": "E11",
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/a5b-wepp-analysis-v1.json",
+      "sha256": "221347acedbf0556ace91d3d64dce99d9e5407855d258f7e097f3bfab4ae873e",
+      "role": "canonical downstream analysis"
+    },
+    {
+      "id": "E12",
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720",
+      "role": "third-party data provenance and reuse notice"
+    },
+    {
+      "id": "E13",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/post-acceptance-advisory-review.md",
+      "sha256": "b85c5cb775b4356c587399a182c900ee49a477e8c6abb5e5e0aee6b3a4e689af",
+      "role": "post-acceptance gate-calibration and successor-design advisory"
+    }
+  ],
+  "references": [
+    {
+      "id": "R01",
+      "citation": "Richardson (1981), Water Resources Research 17(1):182-190",
+      "doi_or_no_doi": "10.1029/WR017i001p00182",
+      "url": "https://doi.org/10.1029/WR017i001p00182"
+    },
+    {
+      "id": "R02",
+      "citation": "Katz and Parlange (1998), Journal of Climate 11:591-601",
+      "doi_or_no_doi": "10.1175/1520-0442(1998)011<0591:OPISMO>2.0.CO;2",
+      "url": "https://doi.org/10.1175/1520-0442(1998)011%3C0591:OPISMO%3E2.0.CO;2"
+    },
+    {
+      "id": "R03",
+      "citation": "Wilks and Wilby (1999), Progress in Physical Geography 23(3):329-357",
+      "doi_or_no_doi": "10.1177/030913339902300302",
+      "url": "https://doi.org/10.1177/030913339902300302"
+    },
+    {
+      "id": "R04",
+      "citation": "Meyer (undated), General Description of the CLIGEN Model and its History",
+      "doi_or_no_doi": "No DOI",
+      "url": "https://www.ars.usda.gov/ARSUserFiles/50201000/WEPP/cligen/CLIGENDescription.pdf"
+    },
+    {
+      "id": "R05",
+      "citation": "Meyer, Renschler, and Vining (2008), Hydrological Processes 22(8):1069-1079",
+      "doi_or_no_doi": "10.1002/hyp.6668",
+      "url": "https://doi.org/10.1002/hyp.6668"
+    },
+    {
+      "id": "R06",
+      "citation": "Chen, Brissette, and Leconte (2010), Journal of Hydrology 388:480-490",
+      "doi_or_no_doi": "10.1016/j.jhydrol.2010.05.032",
+      "url": "https://doi.org/10.1016/j.jhydrol.2010.05.032"
+    },
+    {
+      "id": "R07",
+      "citation": "Steinschneider and Brown (2013), Water Resources Research 49:7205-7220",
+      "doi_or_no_doi": "10.1002/wrcr.20528",
+      "url": "https://doi.org/10.1002/wrcr.20528"
+    },
+    {
+      "id": "R08",
+      "citation": "Fatichi, Ivanov, and Caporali (2011), Advances in Water Resources 34:448-467",
+      "doi_or_no_doi": "10.1016/j.advwatres.2010.12.013",
+      "url": "https://doi.org/10.1016/j.advwatres.2010.12.013"
+    },
+    {
+      "id": "R09",
+      "citation": "Yu (2000), Transactions of the ASAE 43(2):301-307",
+      "doi_or_no_doi": "10.13031/2013.2705",
+      "url": "https://doi.org/10.13031/2013.2705"
+    },
+    {
+      "id": "R10",
+      "citation": "Zhang and Garbrecht (2003), Transactions of the ASAE 46(2):311-320",
+      "doi_or_no_doi": "10.13031/2013.12982",
+      "url": "https://doi.org/10.13031/2013.12982"
+    },
+    {
+      "id": "R11",
+      "citation": "Wang et al. (2018), Catena 169:96-106",
+      "doi_or_no_doi": "10.1016/j.catena.2018.05.024",
+      "url": "https://doi.org/10.1016/j.catena.2018.05.024"
+    },
+    {
+      "id": "R12",
+      "citation": "Srivastava et al. (2019), Journal of Soil and Water Conservation 74(4):334-349",
+      "doi_or_no_doi": "10.2489/jswc.74.4.334",
+      "url": "https://doi.org/10.2489/jswc.74.4.334"
+    },
+    {
+      "id": "R13",
+      "citation": "Thornton et al. (2022), Daymet V4 R1 dataset",
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "id": "R14",
+      "citation": "Thornton et al. (2021), Scientific Data 8:190",
+      "doi_or_no_doi": "10.1038/s41597-021-00973-0",
+      "url": "https://doi.org/10.1038/s41597-021-00973-0"
+    },
+    {
+      "id": "R15",
+      "citation": "Menne et al. (2012), GHCN-Daily Version 3",
+      "doi_or_no_doi": "10.7289/V5D21VHZ",
+      "url": "https://doi.org/10.7289/V5D21VHZ"
+    }
+  ],
+  "reviews": [
+    {
+      "lens": "accuracy",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/review.md",
+      "sha256": "9b4f9e55daff8f05f098d633a47ecfbb2c2d314eab23fa76ac56dbc0f10ba7a7",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "scientific-validity",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/review.md",
+      "sha256": "9b4f9e55daff8f05f098d633a47ecfbb2c2d314eab23fa76ac56dbc0f10ba7a7",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "consistency-public-safety",
+      "path": "docs/work-packages/20260714-interannual-candidate-exp-001-report/artifacts/review.md",
+      "sha256": "9b4f9e55daff8f05f098d633a47ecfbb2c2d314eab23fa76ac56dbc0f10ba7a7",
+      "verdict": "ACCEPT"
+    }
+  ]
+}
