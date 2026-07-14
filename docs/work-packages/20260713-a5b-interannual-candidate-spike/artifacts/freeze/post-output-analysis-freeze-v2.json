@@ -1,0 +1,37 @@
+{
+  "boundary": {
+    "candidate_climate_output_present": true,
+    "candidate_metric_values_inspected": true,
+    "climate_analysis_output_present": true,
+    "wepp_analysis_output_absent": true,
+    "wepp_response_output_present": true
+  },
+  "corrected_artifacts": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b-v3.py": {"bytes": 113667, "sha256": "ae24b694d1dec328bd54105714870ae30b53e87c0bdbbf87c92557cabb6cbb9a"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-output-analysis-amendment-v2.md": {"bytes": 3544, "sha256": "1d57f64f17a764865721758d55029a82cf6ec17b6487fb7f71b475d847db614d"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v9.py": {"bytes": 112740, "sha256": "e6a7a27dd9f9c057ee2b125bf585a303aa2dabc42eed47056e517a38f1a7ddaf"}
+  },
+  "created_utc": "2026-07-14T08:35:14Z",
+  "failed_analysis": {
+    "analyzer_version": 2,
+    "candidate_metric_values_inspected": true,
+    "cause": "generated_sample_count_compared_as_frozen_target_identity",
+    "climate_failure_count": 48713,
+    "invalid_invariant": "candidate_target_count_equals_baseline_target_count",
+    "retained_rules": [
+      "station_parameter_identity",
+      "embedded_target_value",
+      "embedded_target_scale",
+      "registered_count_sufficiency"
+    ],
+    "status": "completed_with_incomplete_evidence"
+  },
+  "immutable_anchors": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/a5b-analysis-v2-incomplete.json.gz": {"bytes": 6734305, "sha256": "28dc5e768cb77d7efead1a1367d836891b201e56437bced38b3d8dc8a28efde7"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b-v2.py": {"bytes": 111913, "sha256": "2151a2a396151161f536fb267c6b8c9de95187846803e0f5efb047f3f38c53d3"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-output-analysis-freeze-v1.json": {"bytes": 2194, "sha256": "d528bb5d62d793dfd4949064ff71e04b7a0be49d2bc962bd4813482ce4b5663f"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v8.py": {"bytes": 112238, "sha256": "7254ecd3a4f4f0ab581f0e2a2c7472ff3d435793184c0756040b39d22e156950"}
+  },
+  "post_output_analysis_freeze_version": 2,
+  "status": "passed"
+}

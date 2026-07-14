@@ -1,0 +1,316 @@
+{
+  "a5a_pinned_artifacts": {
+    "docs/specifications/a5-climate-gate-metrics-v1.json": "37d2e36fe84a7fafbc2dafdea553a5702fe94677de23a6ba45ac4a4946572d95",
+    "docs/specifications/a5-climate-gate-metrics-v1.schema.json": "f17b6a3896df1226b60a6e1f181089568cab918488d6564caa4ec12baf83be2c",
+    "docs/specifications/a5-wepp-response-v1.schema.json": "7d006023684f2079ce09e5ab1af21e1154a417eb4295ebf1a02c40d7f7a2e70d",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-analysis-v1.json": "7892cc2d8931623154c33f854db1170e46749e741d08a3843205131329934733",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-analysis-v1.schema.json": "0b0c1558f8bdc557855a7442315796d45bfddd56ff9528bd5d5d2905af0d50ba",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.json": "e6e12a08b7d552edd45481b929271af87530d2821b9b51d5cec066dc76867cbc",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.schema.json": "54b2ac2a780efcde70c403d75a0a42899200c315a0d47dd6927959649f03c450",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/observed-bootstrap-v1-golden.json": "d38a730371a847e78fb9563821ea7efffa24f364787f902f555634a32f8c2ec2",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/observed-bootstrap-v1.py": "d154773bb8bd5265e8423360b69fc6acb0cec8cc64280cdee5c1ac705df8d649",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/verify-a5-climate-gate-metrics-v1.py": "ae1ef7f06b4afef94910af656f2077ee2029698a42e9223f3a8099a61dac1ac0",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/verify-baseline-evidence.py": "9a3fbdb4d35ec693db6bad916b1cb941c3c3ebec93340a05899f103f269b32f1",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/verify-wepp-response-schema.py": "05e7a085f146e264c3b34e3f7c04f498f0f4d3dd0c9b0cd17a0f8176221b683b",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/wepp-response-protocol.md": "9cd770d18c04dfde877c91e03304697b107d117bf2e52cc94f1f83e3d99c5800"
+  },
+  "a5b_frozen_artifacts": {
+    "Cargo.lock": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "Cargo.toml": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+    "crates/cligen/Cargo.toml": "8e8e8668cd5ae93da7ce95fe528f0ce267698fe90326576525de534069f5dfd6",
+    "crates/cligen/src/bin/cligen-a5b-overlay.rs": "05cc96dcf12a7855d883aef573c16f8e6a4691beece58c0bfe20a222ea102ec9",
+    "crates/cligen/src/bin/cligen-quality-estimator.rs": "7753fa87f73400850f4f27119f8ac588b6732a6baf140973a89d1b7f3a1f7dff",
+    "crates/cligen/src/lib.rs": "5de6ababfbcafda98ee2f18bd153c230fce0771733812d99a1f7d806c3fb8abb",
+    "crates/cligen/src/quality/estimators.rs": "b806c392171104e5d526a2f908b9a9a0bf4892e4097173fb73183f9f30fe8cf2",
+    "crates/cligen/src/quality/mod.rs": "bf0076607d3658911178c67dde0acd2fc1938827c0c29ec998d45dffc6f6300c",
+    "docs/specifications/SPEC-A5-EVALUATION.md": "e8149a416cacc8ec57fa9a211d272993071e0c1cfc580d3b39601910e03aac88",
+    "docs/specifications/SPEC-A5B-CANDIDATES.md": "ceaa94913b7d6d042dfe029381dab4575ba06355e66690c66600ac5cf19692fc",
+    "docs/specifications/a5b-augmented-station-v1.schema.json": "b7c5419cbaa78c36ef6f6a57291b501854a0e61253f3b93bd0144e7b34d679cc",
+    "docs/specifications/a5b-candidate-evidence-v1.schema.json": "d9e79bb171a9f8c383b349cb112a4a09b329cadf9cac3417ab4cf2e6f5046e69",
+    "docs/specifications/a5b-overlay-plan-v1.schema.json": "7e1c68d0737d05fe9f5876ec84a890b88adf1977df38ba30049194e52e608a21",
+    "docs/specifications/a5b-run-record-v1.schema.json": "efa2cab87ec75c935ed0631b67422bf2d2a8b894c5438bdad88877e1de68828a",
+    "docs/specifications/provenance-v1.schema.json": "c1f2ef184547f6a6e11b1a62472dd40d860443cb69287e5c29b6c102aecdc941",
+    "docs/specifications/quality-report-s2-m3.schema.json": "c7c8ff4140d4a810144ad12897493cd923ed95007fbf6e9230d1930f020503b7",
+    "docs/specifications/station-document.schema.json": "9641e338a30f4cc65d0bde38842c4e9451e5816416af6740f1009dd53cf3cfe0",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/a5b-pre-registration.md": "ee2f29dfc6e1843affe4734260347abb54336d7a3ce74c652b230a2264b95021",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/build_targets.py": "7c8c7428627f55817d81afcb2eb7ef60011ace46349181e4d92b7b1f89efd9e0",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68",
+    "docs/work-packages/20260713-a5b-coefficient-source-assessment/artifacts/daily-source-assessment.md": "0db230fe9c56e81f10990673cb963a10a527366ca849c45cfa2af0eeb0dc14cc",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b.py": "65c0394db9f35de63f95ca1e3c545e3ab0990c2b9bf9aac0ac8d4dcce2e8706a",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/fit-a5b-models.py": "d4c641d01c096390392296bbcfa59a72292887ea65668008f53aeca8ddb418de",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/pre-output-amendments.md": "b1ace23b844034f4e18bbef6ca9a409a2c6df9ef020f71c43b8e193de386a7f3",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/verify-accepted-a5a-baseline.py": "8f217cd6b4d96a62bc69a7e23ebda2695206ef80253f7f458ab8e539ada2e431",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/verify-pre-candidate-freeze.py": "9625ee1fd0e8f875d19a79e87f9745feaadcf5bee608255ba51f612eff851a97",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/generate-a5b-plan.py": "a33749a51e9023faa74be66ba466c08efab0ec7b0e2f911b8c3623280591e8f6",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/run-a5b-matrix.py": "c37517765faf1cbcf68b2f5106c1e2f39e9ee3e3b95de1e28083fa14082e2702",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/verify-a5b-evidence.py": "3a79ab2d34f3ee44d4b6269195852c198d75856b19ba81dd7e183686063ac445",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp.py": "efc31d71d6f43e4fd08324deeb0f8eeed422179b736617d2f038c9a601a97aee",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/run-wepp-matrix.py": "b8ce1efb272539d67c8ef1224e991180478b29e476b0551921458cf2fa132543",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/wepp-campaign-v1.md": "d4649bc37d7878a67be517c6e50656e415715678f09211b7484c57c85c3a482c",
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/package.md": "c452f5035167f365cc75f79f086d0ef9fe84bf74535865a0f77ae6d64371e8c4",
+    "rust-toolchain.toml": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+  },
+  "additional_bootstrap_vectors": {
+    "non_divisor_bounded_draw": {
+      "bound": 10,
+      "injected_draws": [
+        "18446744073709551615",
+        "7"
+      ],
+      "modulo_first_draw_result": 5,
+      "rejection_sampled_result": 7
+    },
+    "order_sensitive": {
+      "sample_indices": [
+        14,
+        15,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        8
+      ],
+      "sorted_weighted_statistic": 1360,
+      "weighted_statistic": 1121
+    }
+  },
+  "analysis_helper_release": {
+    "binary": {
+      "bytes": 619040,
+      "path": "target/release/cligen-quality-estimator",
+      "sha256": "b2c9175101bcd109c52bc67b3e91c32fcffcf7b89ff543616376d6651b25b1ad"
+    },
+    "build": {
+      "cargo_version_verbose": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)\nrelease: 1.95.0\ncommit-hash: f2d3ce0bd7f24a49f8f72d9000448f8838c4e850\ncommit-date: 2026-03-21\nhost: aarch64-apple-darwin\nlibgit2: 1.9.2 (sys:0.20.4 vendored)\nlibcurl: 8.7.1 (sys:0.4.83+curl-8.15.0 system ssl:(SecureTransport) LibreSSL/3.3.6)\nssl: OpenSSL 3.5.4 30 Sep 2025\nos: Mac OS 26.4.1 [64-bit]",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--offline",
+        "--release",
+        "--bin",
+        "cligen-quality-estimator"
+      ],
+      "cwd": ".",
+      "forbidden_environment_absent": [
+        "RUSTFLAGS",
+        "CARGO_ENCODED_RUSTFLAGS",
+        "RUSTC_WRAPPER",
+        "RUSTC_WORKSPACE_WRAPPER",
+        "CARGO_TARGET_DIR",
+        "CARGO_BUILD_TARGET"
+      ],
+      "locked": true,
+      "offline": true,
+      "profile": "release",
+      "rustc_version_verbose": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: aarch64-apple-darwin\nrelease: 1.95.0\nLLVM version: 22.1.2"
+    },
+    "built_before_candidate_output": true,
+    "contract_id": "a5b-analysis-helper-release-v1",
+    "sources": {
+      "Cargo.lock": {
+        "bytes": 52632,
+        "sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39"
+      },
+      "Cargo.toml": {
+        "bytes": 187,
+        "sha256": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d"
+      },
+      "crates/cligen/Cargo.toml": {
+        "bytes": 1596,
+        "sha256": "8e8e8668cd5ae93da7ce95fe528f0ce267698fe90326576525de534069f5dfd6"
+      },
+      "crates/cligen/src/bin/cligen-quality-estimator.rs": {
+        "bytes": 1220,
+        "sha256": "7753fa87f73400850f4f27119f8ac588b6732a6baf140973a89d1b7f3a1f7dff"
+      },
+      "crates/cligen/src/lib.rs": {
+        "bytes": 1108,
+        "sha256": "5de6ababfbcafda98ee2f18bd153c230fce0771733812d99a1f7d806c3fb8abb"
+      },
+      "crates/cligen/src/quality/estimators.rs": {
+        "bytes": 10248,
+        "sha256": "b806c392171104e5d526a2f908b9a9a0bf4892e4097173fb73183f9f30fe8cf2"
+      },
+      "crates/cligen/src/quality/mod.rs": {
+        "bytes": 9274,
+        "sha256": "bf0076607d3658911178c67dde0acd2fc1938827c0c29ec998d45dffc6f6300c"
+      },
+      "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/build_targets.py": {
+        "bytes": 24447,
+        "sha256": "7c8c7428627f55817d81afcb2eb7ef60011ace46349181e4d92b7b1f89efd9e0"
+      },
+      "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json": {
+        "bytes": 10116,
+        "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+      },
+      "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py": {
+        "bytes": 10979,
+        "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+      },
+      "rust-toolchain.toml": {
+        "bytes": 86,
+        "sha256": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+      }
+    }
+  },
+  "candidate_output_absent": true,
+  "matrix_contract": {
+    "candidates": 7,
+    "expected_runs": 1904,
+    "horizons": [
+      30,
+      100
+    ],
+    "replicates": 8,
+    "stations": 17
+  },
+  "pre_candidate_freeze_version": 1,
+  "schema_identities": {
+    "docs/specifications/a5b-augmented-station-v1.schema.json": "b7c5419cbaa78c36ef6f6a57291b501854a0e61253f3b93bd0144e7b34d679cc",
+    "docs/specifications/a5b-candidate-evidence-v1.schema.json": "d9e79bb171a9f8c383b349cb112a4a09b329cadf9cac3417ab4cf2e6f5046e69",
+    "docs/specifications/a5b-overlay-plan-v1.schema.json": "7e1c68d0737d05fe9f5876ec84a890b88adf1977df38ba30049194e52e608a21",
+    "docs/specifications/a5b-run-record-v1.schema.json": "efa2cab87ec75c935ed0631b67422bf2d2a8b894c5438bdad88877e1de68828a"
+  },
+  "status": "passed",
+  "verifier_results": [
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/verify-a5-climate-gate-metrics-v1.py"
+      ],
+      "last_line": "}",
+      "output_sha256": "4db391150a1ac75a0e3aabbcbffac9790e735251b077549fc528574e960408cf",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/observed-bootstrap-v1.py"
+      ],
+      "last_line": "}",
+      "output_sha256": "d3d1592e4a59a53716e204b0bd5c6210918815caac3775492152dc06cba6d392",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/verify-wepp-response-schema.py"
+      ],
+      "last_line": "WEPP response contract: Draft 2020-12 valid; 4 positive and 28 negative structural/semantic/parser vectors pass; 0 external records validate",
+      "output_sha256": "c513b5986719513cbeff372c79e096b9f15ef1075f2998f3b5ff614c6054b22f",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/verify-accepted-a5a-baseline.py",
+        "--self-test"
+      ],
+      "last_line": "}",
+      "output_sha256": "d707284ccbb06e67c31916cbf2f120b45e6059cf8d1461a3f860c6009167e132",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/verify_offline.py"
+      ],
+      "last_line": "verified 52 hashes; 17 Q3-identical Daymet + 8 new GHCN snapshots; 102 coverage rows; 17 schema negatives; schema-valid byte-identical rebuild",
+      "output_sha256": "fb6f33b86766d09aa1bbc87abd84b4deb3937df248e38206031d8145beb10e63",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/fit/fit-a5b-models.py",
+        "--self-test"
+      ],
+      "last_line": "{\"candidate_count\": 7, \"golden_sha256\": \"35e5b359017cacf2a8ec9a9a97c988eb447a5db90346f671cafa77dc18552293\", \"hmm_penalized_objective_policy\": \"ok\", \"mutations_rejected\": 10, \"self_test\": \"ok\", \"spectral_dft_repetitions\": 65}",
+      "output_sha256": "d6e9c1aa95d547f9bd66722f02af54cfd890c69d7ab533680c8d2d8f9154a1bc",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/generate-a5b-plan.py",
+        "--self-test"
+      ],
+      "last_line": "generate-a5b-plan self-test: PASS",
+      "output_sha256": "411433258b33c2ea40f4cdb527d1280cd88fa99b0090d028d34639442f2a88ff",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/run-a5b-matrix.py",
+        "--self-test"
+      ],
+      "last_line": "{\"archive_sha256\": \"850366ee85b5a0ee80f500c93c2d44970005ad2ce552c7d170887a6b340bcacd\", \"manifest_sha256\": \"e4bb73897b17df902a2aea862fe362aee251e21cbe91b1713f217b9ebb946ffc\", \"matrix_runs\": 1904, \"mutations_rejected\": 14, \"plans\": 952, \"self_test\": \"ok\"}",
+      "output_sha256": "def83720fd6c9d30cb41d40a99d6fcf39646dbd41fcc732aa9fc5331511f09e7",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/runtime/verify-a5b-evidence.py",
+        "--self-test"
+      ],
+      "last_line": "}",
+      "output_sha256": "3334919f11a94c428fb61900c769c34b0920fe786bdca319b8223b1196b3235e",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b.py",
+        "--self-test"
+      ],
+      "last_line": "}",
+      "output_sha256": "5b240b0a04e9a1c0d6664f4c64a9291f5c5b3bb4b19fc1cda7a1d47310c5b331",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/run-wepp-matrix.py",
+        "--self-test"
+      ],
+      "last_line": "}",
+      "output_sha256": "af6c19c326f9d8ce133607c7fd5b195f0ad1ea4688e0af79c149f10a766f3699",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/opt/homebrew/anaconda3/bin/python3",
+        "/Users/roger/src/cligen-rs/docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp.py",
+        "--self-test"
+      ],
+      "last_line": "}",
+      "output_sha256": "2bec40f44edbf8903a0ebeec3f57dbc162707efe677c5c3757f7e21e50a81606",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--bin",
+        "cligen-a5b-overlay"
+      ],
+      "last_line": "     Running unittests src/bin/cligen-a5b-overlay.rs (target/debug/deps/cligen_a5b_overlay-24703bd12400c6e7)",
+      "output_sha256": "d5f660be8a625ea4ca0193ed792c8ac99fec902ae5b98c8a04f13af069b86336",
+      "returncode": 0
+    }
+  ]
+}

@@ -1,1 +1,5 @@
 *.pdf binary
+docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/*evidence-*.tar.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/a5b-analysis-*.json.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/evidence-v1/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/a5b-wepp-analysis-v1.json filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,431 @@
+{
+  "a5a_source_manifest": {
+    "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+    "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+  },
+  "calendar_transform": "noleap_365_v1",
+  "corpus_config": {
+    "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+    "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+  },
+  "fit_period": [
+    1980,
+    2009
+  ],
+  "heldout_period": [
+    2010,
+    2025
+  ],
+  "source_manifest_version": 1,
+  "source_snapshot_id": "daymet_v4r1_a5a17_fit1980_2009_noleap_v1",
+  "stations": [
+    {
+      "archive_bytes": 125173,
+      "archive_path": "references/observed/a5a-v1/daymet/ca042319.csv.gz",
+      "archive_sha256": "80e5f4bd9a7a4c679087c0021bbdef4b5e84bde17a1b1c03cda081e4b0373e9a",
+      "configured_decompressed_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+      "decompressed_bytes": 427325,
+      "decompressed_sha256": "8efb4820497edcb77952c333c8b6862b61822f6e205c86ff934e8daf1e6407c9",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": -68,
+        "latitude_deg": 36.47,
+        "longitude_deg": -116.87,
+        "tile": 11372,
+        "x_m": -1441865.06,
+        "y_m": -493734.65
+      },
+      "station_id": "ca042319"
+    },
+    {
+      "archive_bytes": 123666,
+      "archive_path": "references/observed/a5a-v1/daymet/az029654.csv.gz",
+      "archive_sha256": "994f796fd4bc20326bd6bacffba446949a65e56a5cc78534ae6c796aad49b3da",
+      "configured_decompressed_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+      "decompressed_bytes": 427217,
+      "decompressed_sha256": "8bdbd9067c13afd5d98f2ab8fc0f72918e842c9d76611f8e932938142d1ef71a",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 94,
+        "latitude_deg": 32.83,
+        "longitude_deg": -114.4,
+        "tile": 11013,
+        "x_m": -1299923.9,
+        "y_m": -916915.97
+      },
+      "station_id": "az029654"
+    },
+    {
+      "archive_bytes": 127892,
+      "archive_path": "references/observed/a5a-v1/daymet/ut429382.csv.gz",
+      "archive_sha256": "7b9006627e78c5a9f01a4f52e33d51711b90aef7f55a3e008141b516f2b4ea75",
+      "configured_decompressed_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+      "decompressed_bytes": 423384,
+      "decompressed_sha256": "a6afc26f680e07ef833f279efdae82dedef668522cb079915c84689311dcf31c",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1287,
+        "latitude_deg": 40.72,
+        "longitude_deg": -114.03,
+        "tile": 11733,
+        "x_m": -1126087.22,
+        "y_m": -93664.05
+      },
+      "station_id": "ut429382"
+    },
+    {
+      "archive_bytes": 124905,
+      "archive_path": "references/observed/a5a-v1/daymet/ca042257.csv.gz",
+      "archive_sha256": "67c87cdfc52567cff3036aa2821046754e17de40c66b05af03c18be09b0be055",
+      "configured_decompressed_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+      "decompressed_bytes": 425390,
+      "decompressed_sha256": "b7c53f815f47bd79c643f2e93ccba4410eccc2d7b7623aae12bfa846ae2e482d",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 581,
+        "latitude_deg": 34.87,
+        "longitude_deg": -116.78,
+        "tile": 11192,
+        "x_m": -1468393.72,
+        "y_m": -662587.46
+      },
+      "station_id": "ca042257"
+    },
+    {
+      "archive_bytes": 127291,
+      "archive_path": "references/observed/a5a-v1/daymet/az022664.csv.gz",
+      "archive_sha256": "b01c06f84ca0109ccdc0a6f1573f97d8426ea0a7a3a107919039ced5b7ab22eb",
+      "configured_decompressed_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+      "decompressed_bytes": 425447,
+      "decompressed_sha256": "db373f91e5fca896d1628c3c6f6ea2248c59104d6edf050c91a89c3775122bb2",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1241,
+        "latitude_deg": 31.45,
+        "longitude_deg": -109.6,
+        "tile": 10836,
+        "x_m": -886077.43,
+        "y_m": -1126946.21
+      },
+      "station_id": "az022664"
+    },
+    {
+      "archive_bytes": 127661,
+      "archive_path": "references/observed/a5a-v1/daymet/az028619.csv.gz",
+      "archive_sha256": "8b3f561fbce04fe9e0723086230b1c3bd4c26b6681111e861cb5b20c620fef7c",
+      "configured_decompressed_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+      "decompressed_bytes": 425241,
+      "decompressed_sha256": "0ddea0940c9522295f4a623e9bd41f767458492332b0515f6eadbd17683eafdf",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1363,
+        "latitude_deg": 31.72,
+        "longitude_deg": -110.07,
+        "tile": 10835,
+        "x_m": -925745.21,
+        "y_m": -1092922.35
+      },
+      "station_id": "az028619"
+    },
+    {
+      "archive_bytes": 127283,
+      "archive_path": "references/observed/a5a-v1/daymet/nm294426.csv.gz",
+      "archive_sha256": "09a585077ee5370007251a110a468807dd4c8452bc0b5b9d45383568a7a68190",
+      "configured_decompressed_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+      "decompressed_bytes": 426109,
+      "decompressed_sha256": "651860e3bef8e240d5813787d99c6427b5166855fed5b9b2111ea912e9877e12",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1322,
+        "latitude_deg": 32.62,
+        "longitude_deg": -106.73,
+        "tile": 11017,
+        "x_m": -611719.02,
+        "y_m": -1027281.69
+      },
+      "station_id": "nm294426"
+    },
+    {
+      "archive_bytes": 126706,
+      "archive_path": "references/observed/a5a-v1/daymet/tx412797.csv.gz",
+      "archive_sha256": "a5b27363e8b5337873e343f206e3a98ee0349aeb287a69c2e9fc291659603e41",
+      "configured_decompressed_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+      "decompressed_bytes": 425970,
+      "decompressed_sha256": "7004871173c64bfd3d4cea903423e70c4891661c006e9ecc532d8b68273daac8",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1192,
+        "latitude_deg": 31.8,
+        "longitude_deg": -106.4,
+        "tile": 10837,
+        "x_m": -588550.47,
+        "y_m": -1117656.26
+      },
+      "station_id": "tx412797"
+    },
+    {
+      "archive_bytes": 134410,
+      "archive_path": "references/observed/a5a-v1/daymet/al015478.csv.gz",
+      "archive_sha256": "15eea2203390ce0ed4ba409648ade03ee58e3843eb4e236461e377badeb5464c",
+      "configured_decompressed_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+      "decompressed_bytes": 429781,
+      "decompressed_sha256": "e5bd127cab51c1167562a13e8ee74a59ea660aeb0130ecbf227a83c6f27e461c",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 68,
+        "latitude_deg": 30.68,
+        "longitude_deg": -88.25,
+        "tile": 10846,
+        "x_m": 1095008.55,
+        "y_m": -1183930.89
+      },
+      "station_id": "al015478"
+    },
+    {
+      "archive_bytes": 134148,
+      "archive_path": "references/observed/a5a-v1/daymet/ms227840.csv.gz",
+      "archive_sha256": "e36bdb1947bcacce926da90f38296f573770affe8a80b26e2aca8bddc6e49837",
+      "configured_decompressed_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+      "decompressed_bytes": 430072,
+      "decompressed_sha256": "089135e612db9cb47010712e98d3faff7ef078892a24a052985e53889e4b2e81",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 56,
+        "latitude_deg": 30.63,
+        "longitude_deg": -89.05,
+        "tile": 10846,
+        "x_m": 1021607.39,
+        "y_m": -1199440.36
+      },
+      "station_id": "ms227840"
+    },
+    {
+      "archive_bytes": 134185,
+      "archive_path": "references/observed/a5a-v1/daymet/fl086997.csv.gz",
+      "archive_sha256": "c2ebc5eff186ef3a500f39450b177214f17403563ca8058a2892502ff053c203",
+      "configured_decompressed_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+      "decompressed_bytes": 430120,
+      "decompressed_sha256": "1ed0ae5f87316df6770d4813a24f46dedd9eadde25936e9f26cce37144e4083d",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 30,
+        "latitude_deg": 30.47,
+        "longitude_deg": -87.2,
+        "tile": 10847,
+        "x_m": 1195596.63,
+        "y_m": -1191994.51
+      },
+      "station_id": "fl086997"
+    },
+    {
+      "archive_bytes": 132674,
+      "archive_path": "references/observed/a5a-v1/daymet/fl083909.csv.gz",
+      "archive_sha256": "993e9bd0e0f7ca3bd4759ddb4e0a3ae67eedff0602310929c877492bb42a2db0",
+      "configured_decompressed_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+      "decompressed_bytes": 434231,
+      "decompressed_sha256": "cfee80546eb551305a0dac2828ab7607c6debc5304e3d53bd9d187d6cbc8fcd6",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 8,
+        "latitude_deg": 25.83,
+        "longitude_deg": -80.28,
+        "tile": 10310,
+        "x_m": 1950753.12,
+        "y_m": -1559105.5
+      },
+      "station_id": "fl083909"
+    },
+    {
+      "archive_bytes": 135104,
+      "archive_path": "references/observed/a5a-v1/daymet/co051660.csv.gz",
+      "archive_sha256": "2048d37fa7ec06c5d400e81a71522057972db43407d2d0a73cd54103206547f5",
+      "configured_decompressed_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+      "decompressed_bytes": 428689,
+      "decompressed_sha256": "44df42794a1511ca461e95e6ca0258dd7b026f701f5b623600a49437dbf359ef",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 3578,
+        "latitude_deg": 39.38,
+        "longitude_deg": -106.2,
+        "tile": 11557,
+        "x_m": -510075.51,
+        "y_m": -311724.48
+      },
+      "station_id": "co051660"
+    },
+    {
+      "archive_bytes": 136701,
+      "archive_path": "references/observed/a5a-v1/daymet/wy485345.csv.gz",
+      "archive_sha256": "01e6d7ce50f5d821f0ba6666003e6e2f3b433b7e5fb69244b8c39d31a3149c9a",
+      "configured_decompressed_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+      "decompressed_bytes": 428624,
+      "decompressed_sha256": "85c747bf5cbeaafe58d57319525db1088b9e8679c429292ecd0d773d4a82c81b",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 2496,
+        "latitude_deg": 44.57,
+        "longitude_deg": -110.4,
+        "tile": 12095,
+        "x_m": -785788.47,
+        "y_m": 268338.95
+      },
+      "station_id": "wy485345"
+    },
+    {
+      "archive_bytes": 138913,
+      "archive_path": "references/observed/a5a-v1/daymet/mn214026.csv.gz",
+      "archive_sha256": "e7063f6d11dc2e42fa69298916d90d477e017cc3f88b428e8a9d54eaccd01e89",
+      "configured_decompressed_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+      "decompressed_bytes": 430679,
+      "decompressed_sha256": "4920b067443a08596f2953d00c187cdf8a85e68b243e84a331c97bc748522168",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 353,
+        "latitude_deg": 48.57,
+        "longitude_deg": -93.38,
+        "tile": 12464,
+        "x_m": 467285.87,
+        "y_m": 662549.58
+      },
+      "station_id": "mn214026"
+    },
+    {
+      "archive_bytes": 137486,
+      "archive_path": "references/observed/a5a-v1/daymet/ak505769.csv.gz",
+      "archive_sha256": "bc1c62b617ca2e497a5b31917ac076c39b2c44643e6be337b0d9702756529b44",
+      "configured_decompressed_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+      "decompressed_bytes": 433290,
+      "decompressed_sha256": "5accbcfccb1f3383604ae22a26b8e9cd99a3056959fe49244e69fb87a1727f4b",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 100,
+        "latitude_deg": 62.97,
+        "longitude_deg": -155.62,
+        "tile": 13693,
+        "x_m": -2671912.84,
+        "y_m": 3143283.63
+      },
+      "station_id": "ak505769"
+    },
+    {
+      "archive_bytes": 133675,
+      "archive_path": "references/observed/a5a-v1/daymet/id106388.csv.gz",
+      "archive_sha256": "7ef87124b8876c0f2d02a5d83b6d2db6f422087b7c34c3182dfd7b23a4553931",
+      "configured_decompressed_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+      "decompressed_bytes": 421830,
+      "decompressed_sha256": "160e95147a40f746e651a7caacad8333e129f76f84c96a2e7de4880ef898cc97",
+      "fit_rows": 10950,
+      "fit_years": 30,
+      "full_years": [
+        1980,
+        2025
+      ],
+      "post_fit_rows": 5840,
+      "returned_grid": {
+        "elevation_m": 1180,
+        "latitude_deg": 44.97,
+        "longitude_deg": -116.28,
+        "tile": 12092,
+        "x_m": -1217217.63,
+        "y_m": 380844.88
+      },
+      "station_id": "id106388"
+    }
+  ]
+}

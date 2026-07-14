@@ -1,0 +1,51 @@
+{
+  "boundary": {
+    "candidate_climate_output_present": true,
+    "candidate_response_values_inspected": true,
+    "wepp_response_output_absent": true
+  },
+  "created_utc": "2026-07-14T06:17:26Z",
+  "diagnostic_identities": {
+    "v5_zero_record": {
+      "cli": {"bytes": 779050, "sha256": "e1b0a25f7c09125ca2ac295b5ceb9e6d0b0a34e06598370d200036cfa641c416"},
+      "coordinate": {"horizon_years": 30, "legacy_burn": 503, "profile_id": "faithful_off", "replicate": 3, "station_id": "ca042319"},
+      "element": {"bytes": 138613, "sha256": "2480929b4bdb86ceebde23f4084ab955a82afd35868fe6146d51f15c87791fda"},
+      "event_hydrology": {"bytes": 4050, "sha256": "5819b40d07863382b22a07f254f806d8327ddadb5f25bae8157670cd01fedd39"},
+      "stderr": {"bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+      "stdout": {"bytes": 6261, "sha256": "3426f6f9ac0b0f0b1d781cae488197a7612c0a1253447347337929200623fe41"}
+    },
+    "v6_effint_overflow": {
+      "cli": {"bytes": 778946, "sha256": "5cac86f2708a830863294f76b6321b1cd67e67eaa1190d1c969c7b64b82fecf9"},
+      "coordinate": {"horizon_years": 30, "legacy_burn": 17, "profile_id": "full_monthly_covariance", "replicate": 1, "station_id": "az022664"},
+      "element": {"bytes": 149749, "sha256": "27d4c58fbee84ed343939e1f25846e89f6f15cef3e2ecc0cd037e4da756e360d"},
+      "event_hydrology": {"bytes": 139966, "sha256": "ea9c1671350aa23699a0921bf3010dacb01f629c28226f24bf82cb943179e6fe"},
+      "stderr": {"bytes": 0, "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+      "stdout": {"bytes": 11019, "sha256": "8f75554b4ebe3354b214869cc8c55b82f13792d87673775f49c92667486a9494"}
+    }
+  },
+  "immutable_anchors": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-climate-wepp-amendment-v1.md": {"bytes": 4211, "sha256": "9d81596b8a57fbca02f252d5717c55601285bbf4a16eb21b5005da224c247c49"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-climate-wepp-freeze-v1.json": {"bytes": 3252, "sha256": "01b6f52a9fdb2d85ac8f05072c5e2e0131fcf74220050e28c7e5337c4d45fa8a"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/pre-candidate-freeze-v1.json": {"bytes": 17791, "sha256": "9f75398e8a18a728102449111ee104fc3158c287407ade97eaf3cf71a7bee267"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v5.py": {"bytes": 103799, "sha256": "35a6d9e94b8ba860baa7072279547488770465d8b7ce9ce1b877de5c7f467eb6"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp.py": {"bytes": 101164, "sha256": "efc31d71d6f43e4fd08324deeb0f8eeed422179b736617d2f038c9a601a97aee"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/run-wepp-matrix-v5.py": {"bytes": 215848, "sha256": "ad05db7edaf6806180022adaf79592e46ee54d1c7a1beb3cd6a20d1271af16b3"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/run-wepp-matrix.py": {"bytes": 206458, "sha256": "b8ce1efb272539d67c8ef1224e991180478b29e476b0551921458cf2fa132543"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/wepp-campaign-v1.md": {"bytes": 21955, "sha256": "d4649bc37d7878a67be517c6e50656e415715678f09211b7484c57c85c3a482c"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/wepp-campaign-v2.md": {"bytes": 23105, "sha256": "62ec7d8ec410bdf517559c96c509c7acac0418e99283f69aac558aa3795b88c2"}
+  },
+  "mutable_input_anchor": {
+    "candidate_cli_bytes_removed_after_wepp": false,
+    "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/candidate-evidence-manifest-v1.json",
+    "pre_wepp_bytes": 2822764,
+    "pre_wepp_sha256": "b52d20b6e472995491ae3d81433f54a709a2a53c65c8b4753957c0ecb0193b50"
+  },
+  "post_climate_wepp_freeze_version": 2,
+  "status": "passed",
+  "v6_artifacts": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-climate-wepp-amendment-v2.md": {"bytes": 4779, "sha256": "f6a0376ac912000f06b7d56b352419a4c6709af8d2fe9c5ed08cd7eb0f5de89b"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v6.py": {"bytes": 107910, "sha256": "0c643d8d9d9a9645c6fbad4c44e6703d11d84efbdea8b3f91f8bfb57ac4dbe35"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/run-wepp-matrix-v6.py": {"bytes": 225878, "sha256": "4f126e8e8d80c78f613a172e76b79549b21f873dc0ad9ff41e9493618941851e"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/wepp-campaign-v3.md": {"bytes": 24540, "sha256": "38764cda4d06b24a7708ecda044eb5ccb816aec93c0cab0aa5d59c6fade707ea"}
+  }
+}

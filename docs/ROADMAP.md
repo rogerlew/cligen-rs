@@ -17,21 +17,30 @@ axes. A revision of one does not imply a revision of another.
 ## Active queue
 
 **Ratified 2026-07-12: file/schema modernization precedes the first
-model-structure study.** A5a completed on 2026-07-13; A5b is ready for
-dispatch, and A5c opens only after A5b is accepted.
+model-structure study.** A5a and A5b completed on 2026-07-13. A5c is ready
+for dispatch.
 
 | Order | Item | Mechanism | Acceptance |
 |---|---|---|---|
-| 1 | **A5b — Interannual candidate spike** | Fit outside the faithful generator and compare a monthly-SD/rank-one baseline, canonical monthly covariance, Fourier/EOF coefficients, vector AR, HMM, and a spectral benchmark, plus a narrow higher-order precipitation occurrence/amount-dependence counterfactual. This is an experiment, not a promoted profile. | Same corpus, fixed burn trajectories, independent extension realization seeds, horizons, fitting periods, and quality vector for every candidate; parameter counts and failure modes reported; no candidate silently changes faithful mode. |
-| 2 | **A5c — Interannual profile adjudication** | Apply ADR-0002 to the candidate evidence and either promote one declared station-model/profile pair or record a hold. | Promotion requires an evidence-supported versioned model and profile with complete provenance and no material regression in preregistered climate or downstream WEPP metrics; otherwise faithful behavior remains the default and the study closes without promotion. |
+| 1 | **A5c — Interannual profile adjudication** | Apply ADR-0002 to the A5b evidence and record the conservative no-promotion result. | Record the exploratory-evidence boundary and the fact that no A5b candidate passed all climate gates at both horizons; faithful behavior remains the default, and any renewed candidate requires a new prospective study. |
 
-A5a now supplies the fixed instrument, corpus, baseline, and evaluation
-contract for A5b. Any interannual parameterization must declare a separate
-station-model identifier with required fields; station-schema, station-model,
-generation-profile, and output-schema versions remain independent.
-A5b's conformance harness also carries the two nonblocking A5a review actions:
-add an order-sensitive bootstrap toy statistic and a non-divisor bounded-draw
-vector before candidate output is read.
+A5a supplies the fixed instrument, corpus, baseline, and evaluation contract.
+A5b executed seven independently versioned model/profile pairs against it and
+retained station-schema, station-model, generation-profile, and output-schema
+as independent axes. Its final evidence is exploratory under the documented
+successor-contract amendments: none of the seven candidates passed all six
+climate gates at both horizons, while the complete downstream evidence gate
+passed. No public profile was promoted.
+
+**A5b executed** (2026-07-13,
+[`20260713-a5b-interannual-candidate-spike`](work-packages/20260713-a5b-interannual-candidate-spike/package.md)):
+all 17 station fits, 1,904 candidate climates, the 2,000-replicate bootstrap,
+and 2,176 WEPP records completed. Rank-one SD performed poorly; the dynamic
+models exposed complementary low-frequency strengths, but every candidate
+failed monthly-contract, precipitation-structure, and descriptor guards.
+Downstream runoff/erosion changes were large. A5c therefore records no
+promotion; a later prospective A5d study should integrate monthly constraints
+and daily precipitation structure.
 
 The preceding quality arc (ADR-0002, Q1-Q4) is complete. Both closing
 adjudications were ratified by the operator on 2026-07-10 on the R1-amended

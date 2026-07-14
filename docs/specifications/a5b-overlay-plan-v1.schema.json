@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5b-overlay-plan-v1.schema.json",
+  "title": "A5b finite-run annual overlay plan revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan_schema_version",
+    "station_id",
+    "station_model",
+    "candidate_profile",
+    "extension_seed",
+    "coefficient_payload_sha256",
+    "state_table_sha256",
+    "normalization",
+    "annual_states"
+  ],
+  "properties": {
+    "plan_schema_version": { "const": 1 },
+    "station_id": { "type": "string", "pattern": "^[a-z]{2}[0-9]{6}$" },
+    "station_model": {
+      "enum": [
+        "interannual_rank_one_monthly_sd_v1",
+        "interannual_full_monthly_covariance_v1",
+        "interannual_fourier_eof_v1",
+        "interannual_fourier_eof_var1_v1",
+        "interannual_fourier_eof_hmm2_v1",
+        "interannual_fourier_eof_spectral_v1",
+        "interannual_fourier_eof_precip_counterfactual_v1"
+      ]
+    },
+    "candidate_profile": {
+      "enum": [
+        "a5b_rank_one_monthly_sd_v1",
+        "a5b_full_monthly_covariance_v1",
+        "a5b_fourier_eof_v1",
+        "a5b_vector_ar_v1",
+        "a5b_gaussian_hmm_v1",
+        "a5b_spectral_random_phase_v1",
+        "a5b_fourier_eof_precip_counterfactual_v1"
+      ]
+    },
+    "extension_seed": { "type": "string", "pattern": "^0x[0-9a-f]{16}$" },
+    "coefficient_payload_sha256": { "$ref": "#/$defs/sha256" },
+    "state_table_sha256": { "$ref": "#/$defs/sha256" },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fixed_years", "precipitation_clip_count", "temperature_centered"],
+      "properties": {
+        "fixed_years": { "const": 128 },
+        "precipitation_clip_count": { "type": "integer", "minimum": 0 },
+        "temperature_centered": { "const": true }
+      }
+    },
+    "annual_states": {
+      "type": "array",
+      "minItems": 128,
+      "maxItems": 128,
+      "items": { "$ref": "#/$defs/annual_state" }
+    },
+    "counterfactual": { "$ref": "#/$defs/counterfactual" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "candidate_profile": { "const": "a5b_fourier_eof_precip_counterfactual_v1" }
+        }
+      },
+      "then": { "required": ["counterfactual"] },
+      "else": { "not": { "required": ["counterfactual"] } }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "month_vector": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "type": "number" }
+    },
+    "annual_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["simulation_year", "precip_factor", "tmax_delta_c", "tmin_delta_c"],
+      "properties": {
+        "simulation_year": { "type": "integer", "minimum": 1, "maximum": 99999 },
+        "precip_factor": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "type": "number", "minimum": 0.05, "maximum": 20.0 }
+        },
+        "tmax_delta_c": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "type": "number", "minimum": -30.0, "maximum": 30.0 }
+        },
+        "tmin_delta_c": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "type": "number", "minimum": -30.0, "maximum": 30.0 }
+        }
+      }
+    },
+    "counterfactual": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["second_order_prob", "amount_rank_rho", "rng_state"],
+      "properties": {
+        "second_order_prob": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "type": "number", "exclusiveMinimum": 0.0, "exclusiveMaximum": 1.0 }
+          }
+        },
+        "amount_rank_rho": {
+          "type": "array",
+          "minItems": 12,
+          "maxItems": 12,
+          "items": { "type": "number", "minimum": -0.95, "maximum": 0.95 }
+        },
+        "rng_state": { "type": "string", "pattern": "^0x[0-9a-f]{16}$" }
+      }
+    }
+  }
+}

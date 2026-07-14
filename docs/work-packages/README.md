@@ -39,3 +39,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260712-a1-typed-output-provenance](20260712-a1-typed-output-provenance/package.md) | EXECUTED-COMPLETE |
 | [20260712-a5a-quality-v3-observed-corpus](20260712-a5a-quality-v3-observed-corpus/package.md) | EXECUTED-COMPLETE |
 | [20260713-a5b-coefficient-source-assessment](20260713-a5b-coefficient-source-assessment/package.md) | EXECUTED-COMPLETE |
+| [20260713-a5b-interannual-candidate-spike](20260713-a5b-interannual-candidate-spike/package.md) | EXECUTED-COMPLETE |

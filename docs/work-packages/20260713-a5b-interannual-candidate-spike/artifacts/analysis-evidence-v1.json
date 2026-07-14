@@ -1,0 +1,27 @@
+{
+  "a5b_analysis_evidence_manifest_version": 1,
+  "climate_analysis": {
+    "archive_bytes": 6563160,
+    "archive_path": "climate/a5b-analysis-v1.json.gz",
+    "archive_sha256": "540a72530d5a6b6b063a951d65c91cb0a903a474e14935a26c8ee88580fef78c",
+    "compression": "gzip-rfc1952-level-9-mtime-zero",
+    "content_bytes": 135677893,
+    "content_media_type": "application/json",
+    "content_sha256": "7243a51bbb81782d14e8faea1b4d3f01566e7f1c5071b159ca1e6f85dd88f0ac",
+    "status": "complete"
+  },
+  "post_wepp_candidate_manifest": {
+    "path": "climate/candidate-evidence-manifest-v1.json",
+    "sha256": "6c74128a2d1a3017834474f858fb2ceebe52d5bbe2b39fb3dada953c8440cd06"
+  },
+  "wepp_analysis": {
+    "bytes": 29845878,
+    "path": "wepp/a5b-wepp-analysis-v1.json",
+    "sha256": "221347acedbf0556ace91d3d64dce99d9e5407855d258f7e097f3bfab4ae873e",
+    "status": "complete"
+  },
+  "wepp_campaign": {
+    "path": "wepp/evidence-v1/wepp-response-campaign-v1.json",
+    "sha256": "4399d2250d699cc2c05c4a7cf0d1bac37dcbeeed0bfe19aa49e57a24c2311d09"
+  }
+}

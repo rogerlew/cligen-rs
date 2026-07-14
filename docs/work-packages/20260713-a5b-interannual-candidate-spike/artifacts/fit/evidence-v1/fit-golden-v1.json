@@ -1,0 +1,38 @@
+{
+  "bundle_aggregate_sha256": "d9eaf56a63c8fe201c486aa8525c6090b24d7fcb6373d4386b16b0cfa5ca8c58",
+  "bundle_sha256": {
+    "ak505769": "d7bb71b08c18da9c254f1afdf19d2ab4301b4be76a9faf527de62bf7524bf148",
+    "al015478": "52ce969b9326e356fa1e12a7616267645e49f6b891d8e33c7b4107f3a514a2f8",
+    "az022664": "ab8cbc27ea1a6eac24de1e6124895ed2b969689b9bab5a0b88f09231d619d1de",
+    "az028619": "313a8e9aa37d753fbcad81d65c327b416720f3cf20cd900e7407313c45394af6",
+    "az029654": "6895285509bbf6b23049e4b61e745847abd3dbe084edde7dbcde6d4d61154c50",
+    "ca042257": "c82f054c5ac17cff65f13dbf4ac51c7271f406f5d87b21127f6bbf02fe158416",
+    "ca042319": "93d974d9e4eb4d0786e45a2292088e72bf49a759db6be5324e65038f3c89fce8",
+    "co051660": "98a80f5da05d5fec83f12e89b15c2ee8952cf4d8988a8cb517dc258b994c1a71",
+    "fl083909": "ae770292d9aa6340379d2108904d886b367360e69ad122e5a808a8029d0e69c6",
+    "fl086997": "cc215e1c66b28dc18db136018911a922a65d85c474fc8e907a55aeb81460bca7",
+    "id106388": "fc0b8dca2d73c8c1bb21f30089eefa7053c98693264f9b4f57f49c329a26ca22",
+    "mn214026": "f1b8a421df9a1c42625e4ba7d4057acbd2e9854d17de04c5aacccbeb54c78c12",
+    "ms227840": "e7b553607d402bd285be854bba85e5c925c22ade6f4bafb6e3606586acc8a17a",
+    "nm294426": "44cc80eaaa97d09597e0f898e09665114bc25d26ecaa9db7d8ca190e80d04b86",
+    "tx412797": "a7607036efdabff434c51b3f156017d5666bc1a31f16efd55884ffb9f6df8d19",
+    "ut429382": "b53e052229f88489b79dfcc1cafd7512da3133c038c88742a71dd3d4cf4bdf1b",
+    "wy485345": "588444f4d4af2ff6834d999db49b16f365336b87d68b09059b9d05b9e485dc30"
+  },
+  "candidate_order": [
+    "rank_one_monthly_sd",
+    "full_monthly_covariance",
+    "fourier_eof",
+    "vector_ar",
+    "gaussian_hmm",
+    "spectral_random_phase",
+    "precip_counterfactual"
+  ],
+  "diagnostics_sha256": "418c75a128fdc98583d41c060d059e53ebe4c856cf48a4379ef46b400af25460",
+  "fit_golden_version": 1,
+  "fit_manifest_sha256": "0477a5e1dd4b99731524422737cf96f822c7329f6aaededf9955e5bda0572d80",
+  "fit_recipe_id": "a5b_monthly_state_fit_v1",
+  "implementation_base_commit": "10df134607fcf9c22d27aa38a0e27b457f7c176c",
+  "source_manifest_sha256": "98fd479720e4ae64eaa51edb09fc7e07d79a3651446f4e986cd63c71f249f6df",
+  "station_count": 17
+}

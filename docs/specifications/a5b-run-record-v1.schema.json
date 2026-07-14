@@ -1,0 +1,233 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5b-run-record-v1.schema.json",
+  "title": "A5b experimental candidate run record revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_record_schema_version",
+    "matrix",
+    "contracts",
+    "inputs",
+    "runtime",
+    "outputs",
+    "execution"
+  ],
+  "properties": {
+    "run_record_schema_version": { "const": 1 },
+    "matrix": { "$ref": "#/$defs/matrix_key" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "inputs": { "$ref": "#/$defs/inputs" },
+    "runtime": { "$ref": "#/$defs/runtime" },
+    "outputs": { "$ref": "#/$defs/outputs" },
+    "execution": { "$ref": "#/$defs/execution" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "path": { "type": "string", "minLength": 1 },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["member", "sha256", "bytes"],
+      "properties": {
+        "member": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "matrix_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "station_id",
+        "regime",
+        "candidate_id",
+        "station_model",
+        "generation_profile",
+        "horizon_years",
+        "replicate",
+        "legacy_burn",
+        "extension_seed"
+      ],
+      "properties": {
+        "station_id": { "type": "string", "pattern": "^[a-z]{2}[0-9]{6}$" },
+            "regime": {
+              "enum": ["arid", "monsoonal", "humid", "cold", "fixture"]
+            },
+        "candidate_id": {
+          "enum": [
+            "rank_one_monthly_sd",
+            "full_monthly_covariance",
+            "fourier_eof",
+            "vector_ar",
+            "gaussian_hmm",
+            "spectral_random_phase",
+            "precip_counterfactual"
+          ]
+        },
+        "station_model": {
+          "enum": [
+            "interannual_rank_one_monthly_sd_v1",
+            "interannual_full_monthly_covariance_v1",
+            "interannual_fourier_eof_v1",
+            "interannual_fourier_eof_var1_v1",
+            "interannual_fourier_eof_hmm2_v1",
+            "interannual_fourier_eof_spectral_v1",
+            "interannual_fourier_eof_precip_counterfactual_v1"
+          ]
+        },
+        "generation_profile": {
+          "enum": [
+            "a5b_rank_one_monthly_sd_v1",
+            "a5b_full_monthly_covariance_v1",
+            "a5b_fourier_eof_v1",
+            "a5b_vector_ar_v1",
+            "a5b_gaussian_hmm_v1",
+            "a5b_spectral_random_phase_v1",
+            "a5b_fourier_eof_precip_counterfactual_v1"
+          ]
+        },
+        "horizon_years": { "enum": [30, 100] },
+        "replicate": { "type": "integer", "minimum": 0, "maximum": 7 },
+        "legacy_burn": { "enum": [0, 17, 101, 503, 1009, 5003, 10007, 50021] },
+        "extension_seed": { "type": "string", "pattern": "^0x[0-9a-f]{16}$" }
+      }
+    },
+    "contract_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_spec",
+        "evaluation_spec",
+        "metric_manifest",
+        "metric_schema",
+        "metric_verifier",
+        "bootstrap_reference",
+        "bootstrap_golden",
+        "quality_schema",
+        "station_schema",
+        "base_station_schema",
+        "plan_schema",
+        "run_record_schema",
+        "wepp_schema",
+        "wepp_protocol",
+        "wepp_verifier"
+      ],
+      "properties": {
+        "candidate_spec": { "$ref": "#/$defs/contract_identity" },
+        "evaluation_spec": { "$ref": "#/$defs/contract_identity" },
+        "metric_manifest": { "$ref": "#/$defs/contract_identity" },
+        "metric_schema": { "$ref": "#/$defs/contract_identity" },
+        "metric_verifier": { "$ref": "#/$defs/contract_identity" },
+        "bootstrap_reference": { "$ref": "#/$defs/contract_identity" },
+        "bootstrap_golden": { "$ref": "#/$defs/contract_identity" },
+        "quality_schema": { "$ref": "#/$defs/contract_identity" },
+        "station_schema": { "$ref": "#/$defs/contract_identity" },
+        "base_station_schema": { "$ref": "#/$defs/contract_identity" },
+        "plan_schema": { "$ref": "#/$defs/contract_identity" },
+        "run_record_schema": { "$ref": "#/$defs/contract_identity" },
+        "wepp_schema": { "$ref": "#/$defs/contract_identity" },
+        "wepp_protocol": { "$ref": "#/$defs/contract_identity" },
+        "wepp_verifier": { "$ref": "#/$defs/contract_identity" }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpus_schema_version",
+        "corpus_content_sha256",
+        "legacy_par",
+        "augmented_station",
+        "coefficient_payload_sha256",
+        "fit_identity_sha256",
+        "plan",
+        "base_runspec_sha256",
+        "base_provenance_sha256",
+        "base_cli_sha256",
+        "base_run_id"
+      ],
+      "properties": {
+        "corpus_schema_version": { "const": 1 },
+        "corpus_content_sha256": { "$ref": "#/$defs/sha256" },
+        "legacy_par": { "$ref": "#/$defs/artifact" },
+        "augmented_station": { "$ref": "#/$defs/artifact" },
+        "coefficient_payload_sha256": { "$ref": "#/$defs/sha256" },
+        "fit_identity_sha256": { "$ref": "#/$defs/sha256" },
+        "plan": { "$ref": "#/$defs/artifact" },
+        "base_runspec_sha256": { "$ref": "#/$defs/sha256" },
+        "base_provenance_sha256": { "$ref": "#/$defs/sha256" },
+        "base_cli_sha256": { "$ref": "#/$defs/sha256" },
+        "base_run_id": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_generation_profile",
+        "base_qc_filter",
+        "extension_prng",
+        "extension_domain_sha256",
+        "cligen_binary",
+        "overlay_binary",
+        "implementation_commit"
+      ],
+      "properties": {
+        "base_generation_profile": { "const": "faithful_5_32_3" },
+        "base_qc_filter": { "const": "off" },
+        "extension_prng": { "const": "splitmix64_box_muller_v1" },
+        "extension_domain_sha256": { "$ref": "#/$defs/sha256" },
+        "cligen_binary": { "$ref": "#/$defs/artifact" },
+        "overlay_binary": { "$ref": "#/$defs/artifact" },
+        "implementation_commit": { "$ref": "#/$defs/git_commit" }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_cli", "quality_report", "overlay_diagnostics"],
+      "properties": {
+        "candidate_cli": { "$ref": "#/$defs/artifact" },
+        "quality_report": { "$ref": "#/$defs/artifact" },
+        "overlay_diagnostics": { "$ref": "#/$defs/artifact" }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host_os",
+        "host_arch",
+        "wall_time_ms",
+        "precipitation_clip_count",
+        "precipitation_render_limit_adjustment_count",
+        "temperature_order_repair_count",
+        "dewpoint_cap_count",
+        "counterfactual_month_count",
+        "sealed"
+      ],
+      "properties": {
+        "host_os": { "type": "string", "minLength": 1 },
+        "host_arch": { "type": "string", "minLength": 1 },
+        "wall_time_ms": { "type": "integer", "minimum": 0 },
+        "precipitation_clip_count": { "type": "integer", "minimum": 0 },
+        "precipitation_render_limit_adjustment_count": { "type": "integer", "minimum": 0 },
+        "temperature_order_repair_count": { "type": "integer", "minimum": 0 },
+        "dewpoint_cap_count": { "type": "integer", "minimum": 0 },
+        "counterfactual_month_count": { "type": "integer", "minimum": 0 },
+        "sealed": { "const": true }
+      }
+    }
+  }
+}

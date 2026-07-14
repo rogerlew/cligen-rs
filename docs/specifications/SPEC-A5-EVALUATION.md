@@ -1,6 +1,6 @@
 # SPEC-A5-EVALUATION — Interannual Candidate Evaluation Contract
 
-Status: active (revision 2)
+Status: active (revision 3)
 Surface: A5b candidate matrices and A5c promotion adjudication
 
 ## Purpose
@@ -207,6 +207,45 @@ baseline. The complete 544-run A5a baseline and its analysis must be
 regenerated under revision 2; no earlier report, summary, cell set, bootstrap
 draw, or pass claim may be reused. No A5b candidate output may be read until
 the replacement baseline and all five artifact identities validate.
+
+## 2026-07-13 A5b experimental-lineage amendment
+
+Revision 2 requires a separately identified candidate station model and
+generation profile while the accepted quality envelope and provenance v1
+vocabularies are intentionally closed to the A1 public surfaces. Before any
+candidate output, A5b prospectively resolves that incompatibility as follows:
+
+- A5b remains an external model-structure spike under
+  `SPEC-A5B-CANDIDATES` revision 1. It consumes exact pre-format rows from a
+  `faithful_5_32_3 + qc_filter: off` run and cannot alter or advance faithful
+  generator state.
+- Candidate quality is computed through the public post-hoc quality surface.
+  Reports remain exactly `quality_report_schema_version = 2` and
+  `metrics_version = 3`, with `identity.provenance: null`, `process: null`,
+  and the base `fixed_monthly_5_32_3` parameter identity used for the fixed
+  monthly-contract targets.
+- A strict, separately versioned `a5b_run_record_v1` binds the candidate
+  station-model/profile, coefficient payload, fit/source lineage, independent
+  extension seed and PRNG, base typed-run/runspec identity, candidate CLI,
+  post-hoc report, runtime, and diagnostics. Gate 7 requires this record and
+  its cross-hash verifier; it does not require candidate claims to fit inside
+  public provenance v1.
+- The candidate command echo declares its A5b profile and extension seed.
+  Candidate Parquet is prohibited because typed-output revision 1 does not
+  contain the A5b profile vocabulary.
+- Public station-document, runspec, generation-profile, provenance, and typed-
+  output versions are unchanged. A5c must create independently versioned
+  public surfaces for a promoted model, if any.
+- In a candidate WEPP response record, the inherited
+  `climate.provenance_sha256` field binds the strict A5b run-record bytes.
+  Faithful baseline records continue to bind provenance v1. The response
+  remains explicit about this experimental-lineage meaning.
+
+This amendment changes lineage representation only. It does not change the
+17-station corpus, fit/held-out periods, seven candidate families, horizons,
+replicate records, metric vector, baseline-eligible cell set, aggregation,
+decision bounds, uncertainty procedure, or downstream response obligation.
+No post-hoc report is represented as trusted run provenance.
 
 ## Downstream WEPP response record
 

@@ -1,0 +1,30 @@
+{
+  "boundary": {
+    "analysis_output_absent": true,
+    "candidate_climate_output_present": true,
+    "candidate_metric_values_inspected": false,
+    "wepp_response_output_present": true
+  },
+  "corrected_artifacts": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b-v2.py": {"bytes": 111913, "sha256": "2151a2a396151161f536fb267c6b8c9de95187846803e0f5efb047f3f38c53d3"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-output-analysis-amendment-v1.md": {"bytes": 2910, "sha256": "b97e0cf0596e72d4b10de04ac4179ac1aa45b86aaddac2d53c9e92bce99f8c87"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v8.py": {"bytes": 112238, "sha256": "7254ecd3a4f4f0ab581f0e2a2c7472ff3d435793184c0756040b39d22e156950"}
+  },
+  "created_utc": "2026-07-14T08:08:35Z",
+  "failed_analysis": {
+    "analyzer_version": 1,
+    "candidate_metric_values_inspected": false,
+    "cause": "sequence_emptiness_predicate_applied_to_numpy_array",
+    "corrected_functions": ["conventional_median", "nearest_rank"],
+    "failure": "The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()",
+    "status": "failed_closed_before_analysis_output"
+  },
+  "immutable_anchors": {
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/analyze-a5b.py": {"bytes": 107714, "sha256": "65c0394db9f35de63f95ca1e3c545e3ab0990c2b9bf9aac0ac8d4dcce2e8706a"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/post-climate-wepp-freeze-v3.json": {"bytes": 3094, "sha256": "f99a4771c1ad7c1b063bdc2ede834733a1b66d950ffc2cccf6d9ee30504893b2"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/pre-candidate-freeze-v1.json": {"bytes": 17791, "sha256": "9f75398e8a18a728102449111ee104fc3158c287407ade97eaf3cf71a7bee267"},
+    "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/analyze-wepp-v7.py": {"bytes": 108247, "sha256": "567f713b50ef3f63f292561fc7c0f6c7f5bb8557b70660617cb3d16fa56932eb"}
+  },
+  "post_output_analysis_freeze_version": 1,
+  "status": "passed"
+}
