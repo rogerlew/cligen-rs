@@ -16,7 +16,25 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-No package is currently ratified and awaiting dispatch.
+**Operator-ordered 2026-07-14: resolve the A5d0 holds as independent work
+packages before any confirmation candidate exists.** A5d1 is scaffolded as
+the next package. A5d2 and A5d3 may begin from the A5d0 evidence independently;
+before A5d4, the corpus power result must be revalidated against A5d2's frozen
+metric/composite identity. A5d4 depends on successful closure of all three.
+
+| Order | Work package | Dependency and mechanism | Acceptance |
+|---|---|---|---|
+| 1 | **[A5d1 — Selector feasibility](work-packages/20260714-a5d1-selector-feasibility/package.md)** (`SCAFFOLDED`) | Regenerate hash-bound `faithful_5_32_3 + qc_filter: off` year libraries for the 17 exposed development stations; freeze and solve the complete constrained-weight problem; compare predeclared bounded repeat-safe/calendar-safe path algorithms. | One globally fixed research algorithm, contract, tolerance set, and deterministic fitting/selection rule is structurally feasible at all 17 stations; station-specific fitted weights/coefficients are permitted outputs of that common rule. Selected physical rows remain bitwise unchanged, the frozen monthly/daily and annual-vector rules pass, and one bounded 100-year path supplies the exact selected-index and physical-row prefix for 30 years. Otherwise close on a named hold. |
+| 2 | **A5d2 — Successor evaluation calibration** (planned package `YYYYMMDD-a5d2-evaluation-calibration`) | Create a separately versioned `SPEC-A5D-EVALUATION`; implement observation-scaled preservation guards, faithful-clone null calibration, bootstrap-availability rules, and a numeric WEPP reference/criterion. Revision 3 remains immutable. | Every climate and downstream rule is numeric, executable at both horizons, uncertainty-available under its frozen floor, and supported by a defensible null-independence/audit design before candidate confirmation output. |
+| 3 | **A5d3 — Confirmation corpus qualification and seal** (planned package `YYYYMMDD-a5d3-confirmation-corpus`) | Run calibration-only spatial/composite power analysis; select stations from metadata only; acquire, qualify, hash, and seal an untouched primary corpus and new long-record sensitivity set. The 28-station design remains only a planning floor. | Fit, development, null-calibration, confirmation, and sensitivity roles are disjoint; the actual powered count is justified against the frozen A5d2 metric identity; target construction is reproducible and sealed with zero value exposure. |
+| 4 | **A5d4 — Candidate freeze review** (planned package `YYYYMMDD-a5d4-candidate-freeze-review`) | Bind the immutable A5d1 selector, A5d2 evaluation, and A5d3 corpus records; pin exactly one experimental candidate, exact executable, coefficient schema/bundle and fitting identity, comparison/null identities, replicate counts, seeds, complete climate/WEPP matrix, verifier, and synthetic conformance evidence. | A later campaign can execute without discretionary post-exposure choices. A5d4 does not run or score confirmation output and changes no public default or profile enum. |
+
+The downstream confirmation run is a separately dispatched
+`YYYYMMDD-a5d5-candidate-confirmation-campaign`. It is named here as an
+evidence-freeze barrier, not scaffolded or authorized. Wet/dry-conditioned
+radiation, full subdaily forcing, external storm benchmarking, and
+multisite/spatial generation remain later studies. Single-storm generation
+remains deprecated.
 
 **A5d0 held** (2026-07-14,
 [`20260714-a5d0-successor-feasibility-calibration`](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md)):
@@ -116,7 +134,6 @@ operator direction. Each lands behind a versioned profile or specification.
 | A2 | **Native f64 mode** | Uniform-f64 engine; measured faithful↔native divergence characterization; the idiomatic destination architecture (faithful modules graduate to executable spec) | Divergence documented per variable; profile `native-f64-v1`; quality report ≥ faithful on groups A/B |
 | A3 | **Observed parquet input + single-pass substitution + leap-year imputation** (SPEC-OBSERVED-INPUT) | f64 parquet observed series; variable replacement in one pass; leap-day handling | Spec + fixtures; kills the flatfile→wepppyo3→flatfile round-trip |
 | A4b | **Station mutation and localization utilities** | Provenance-stamped PRISM localization, future-climate deltas, and mean/CV scaling against the modern station schema; no mutation operation selects generation behavior. | Every mutation is explicit and deterministic, carries complete lineage into output provenance, and produces a schema-valid declared station model. |
-| A5d continuation | **Selector proof, evaluation calibration, confirmation corpus, then candidate implementation** | Resolve the three A5d0 holds in separate pre-confirmation packages: a development-library constrained selector proof; a new versioned null-calibrated evaluation and WEPP rule; and an untouched powered corpus. Only then freeze exactly one candidate. Wet/dry radiation, subdaily forcing, external storm benchmarks, and scenario/multisite/spatial arcs remain later studies. Single-storm generation remains deprecated. | Candidate execution remains forbidden until all three holds close and a new evidence freeze passes; every later study receives its own preregistration and ADR-0002 adjudication. |
 | A6 | **PyO3 surface** (SPEC-PYO3) | Python bindings, Arrow zero-copy hand-off | wepppy consumes without flatfiles |
 
 **The faithful-mode port (items 1-8) is complete** (2026-07-09,
