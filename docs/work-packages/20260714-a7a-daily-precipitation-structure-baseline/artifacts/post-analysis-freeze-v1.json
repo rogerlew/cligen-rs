@@ -1,0 +1,26 @@
+{
+  "amendment": {
+    "path": "post-analysis-amendment-004.md",
+    "sha256": "2a0e1b6e9eb4e78b17bfb0d12cbad05ffef68c70f094ace8037965b2ddc52ee3"
+  },
+  "current_sources": {
+    "analyze-a7a.py": "def24ec7aa1f647f6709e433036b68db2da2a3f7918c132a829dc3998c817199",
+    "freeze-post-analysis-a7a.py": "37cbc8e0f0db8146eb4c37c134833158fa42d145dcdefd865ad714543ccb3f77",
+    "post-analysis-amendment-004.md": "2a0e1b6e9eb4e78b17bfb0d12cbad05ffef68c70f094ace8037965b2ddc52ee3",
+    "verify-a7a.py": "f11302c94fd2de6ba600438d9626d945686a2f5b509e196fdd458d9df65863b8"
+  },
+  "outputs": {
+    "a7a-analysis-v1.json": "425ce817f0167d3c65df57b8fa6f77d333c94a7fa59bfa7eef771322f99366a0",
+    "a7a-decision-v1.json": "4f82ab9b61942bced8ef546018a02e561e443df515cf8a1ba4eeeaab3ab38b15",
+    "findings.md": "641d8d5d3f1e91611095d6ea1d27c9cc0ec3b5749139a8061b07c03be00491bf"
+  },
+  "post_analysis_freeze_schema_version": 1,
+  "prior_freeze": {
+    "path": "pre-analysis-freeze-v4.json",
+    "sha256": "5e106beff33f9bb25b3e1567d1abff99bf2381ac75bff913ea904f2de2fe4d2d"
+  },
+  "superseded_source_hashes": {
+    "analyze-a7a.py": "d10e5ef3d7218ec3a7ea22a2a361a3ee8206fa2084429c1d2fab39813d54d920",
+    "verify-a7a.py": "d1636afe042efb6b0cb755641af9879f863343d438b74a4220dfbdb1908fda15"
+  }
+}

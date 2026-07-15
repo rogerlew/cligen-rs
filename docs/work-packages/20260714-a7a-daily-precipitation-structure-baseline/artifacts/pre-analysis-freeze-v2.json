@@ -1,0 +1,52 @@
+{
+  "access_boundary": "Frozen before any A7a seasonal aggregation, higher-order occurrence residual, trajectory-null comparison, gap ranking, propagation diagnostic, or terminal decision was produced; parent A5a evidence was already exposed.",
+  "amendment": {
+    "path": "pre-analysis-amendment-001.md",
+    "sha256": "f3c3184fc2c0d10c6f2967a6a6e9057a65869577a5e29c8dd484b07a2d553277"
+  },
+  "amends_freeze": {
+    "path": "pre-analysis-freeze-v1.json",
+    "sha256": "588ca1c9dc6fe9c169b7e679d5193d31d2e4552c73289eb0082dd4a4992684c3"
+  },
+  "freeze_schema_version": 2,
+  "frozen_sources": {
+    "analyze-a7a.py": "0818b58fa4be2fdbd212375231a94908899d258c1d462a9fc8095f3c466b97c2",
+    "claim-evidence-ledger.md": "b359232fb31e3cf69d967a0c5ca8c641d532e4ccd153cd0bc963206e60d7ca12",
+    "design.md": "e6530e2acffb64df55378b068b3438888ac492b6340306e3b59afab1d0cb9a70",
+    "freeze-a7a.py": "6bff0b3a4a3b4d772c203ce275a090a7ef04963b3a9789964c5d4ec1bdfa580d",
+    "measurement-contract-v1.json": "5d8a226dbec1dfa70f9f8e15e43296467999b4a17cfc711ec4b4b190dfcefde7",
+    "pre-analysis-amendment-001.md": "f3c3184fc2c0d10c6f2967a6a6e9057a65869577a5e29c8dd484b07a2d553277",
+    "verify-a7a.py": "3a6a1fcaee184ebb8c237e8ecb6894584ba643e7439c7e73cd024e5d50d1eb73"
+  },
+  "parent_inputs": {
+    "a5a_baseline_archive": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz",
+      "sha256": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe"
+    },
+    "a5a_baseline_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.json",
+      "sha256": "e6e12a08b7d552edd45481b929271af87530d2821b9b51d5cec066dc76867cbc"
+    },
+    "corpus_common": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py",
+      "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+    },
+    "corpus_config": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    "observed_source_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    "observed_targets": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/observed-target-corpus-v1.json",
+      "sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660"
+    },
+    "third_party_notice": {
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+    }
+  },
+  "source_commit": "d27a008e91a4853044aed5207d02a3aeb631ac8c"
+}

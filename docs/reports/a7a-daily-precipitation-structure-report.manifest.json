@@ -1,0 +1,241 @@
+{
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "role": "faithful source-authority boundary",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/measurement-contract-v1.json",
+      "role": "frozen metrics, null, ranking, and decision rules",
+      "sha256": "fad73c12491b865a78bb2d98192935b146a32874129b39973c5a3b141793180e"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/design.md",
+      "role": "measurement and interpretation boundary",
+      "sha256": "69f8bbe6ff380b76e88ecf4e510bc132e2ba49869fc7cf00f9139c9567bd4d91"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-freeze-v4.json",
+      "role": "final pre-outcome freeze and amendment chain",
+      "sha256": "5e106beff33f9bb25b3e1567d1abff99bf2381ac75bff913ea904f2de2fe4d2d"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-amendment-005.md",
+      "role": "review-triggered arithmetic and component-support corrections",
+      "sha256": "829fb9f8d0bed3a28c981c807eb5db0ce06383eee4cf7ca92e32b91c5ad928d4"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-freeze-v2.json",
+      "role": "corrected outputs and preserved first-result identities",
+      "sha256": "6d96b72fdf5fe844d2924aecf7b93611bdcef8dbd0adaaf573d1ba035ca5b6d3"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-analysis-v1.json",
+      "role": "canonical comparison, QC, and propagation analysis",
+      "sha256": "45342c8763c3d079c81f8a9b3910882bdd82f2557dfb420a80d5a4bfefa2b1ad"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-decision-v1.json",
+      "role": "ranked families, qualifiers, and terminal result",
+      "sha256": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.json",
+      "role": "retained stream and quality-report identities",
+      "sha256": "e6e12a08b7d552edd45481b929271af87530d2821b9b51d5cec066dc76867cbc"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "role": "archived observed-source identities and availability",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    {
+      "id": "E11",
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "role": "third-party dataset citation and use boundary",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+    },
+    {
+      "id": "E12",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/claim-evidence-ledger.md",
+      "role": "frozen claim permissions and prohibitions",
+      "sha256": "487d5ec2250fdce516bfe24adaa79084bc75e49d8e22ca428417bfa987f32638"
+    },
+    {
+      "id": "E13",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/review.md",
+      "role": "consolidated three-lens review",
+      "sha256": "1559345c7415e0823c4f70989c9b11695624b73176832795b28c9a5f9afbd22e"
+    },
+    {
+      "id": "E14",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/gate-results.md",
+      "role": "package, report, repository, and public-safety gates",
+      "sha256": "dc22689ad187f94b28b37d6df3fe3ede23da5291e62a82029c3e3e4c7a2af475"
+    },
+    {
+      "id": "E15",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md",
+      "role": "authorized scope and package disposition",
+      "sha256": "5c80ce139fd858edcfe950df96194177df5924baba9eb4c01eb528c2137ba78a"
+    },
+    {
+      "id": "E16",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/reference-corpus-amendment-006.md",
+      "role": "stable reference identity and audited corpus additions",
+      "sha256": "f8f873884a1314a8632be4d90c3ed649adb118e42d7084d1423e2a1aebc0ac0f"
+    }
+  ],
+  "governance": [
+    {
+      "path": "docs/standards/scientific-report-standard.md",
+      "role": "standard",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "role": "protocol",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "role": "template",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "hypotheses": [
+    {
+      "evidence_ids": ["E02", "E05", "E07", "E08"],
+      "id": "H1",
+      "outcome": "Supported; gap terminal reached",
+      "provenance": "amended"
+    },
+    {
+      "evidence_ids": ["E02", "E05", "E07", "E08"],
+      "id": "H2",
+      "outcome": "Ranking produced; stability not tested",
+      "provenance": "amended"
+    },
+    {
+      "evidence_ids": ["E02", "E07"],
+      "id": "H3",
+      "outcome": "Positive descriptive associations; no pass/fail",
+      "provenance": "amended"
+    },
+    {
+      "evidence_ids": ["E02", "E07"],
+      "id": "H4",
+      "outcome": "Mixed directional differences; no materiality test",
+      "provenance": "amended"
+    }
+  ],
+  "references": [
+    {
+      "citation": "Richardson (1981), stochastic simulation of daily precipitation, temperature, and solar radiation",
+      "doi_or_no_doi": "10.1029/WR017i001p00182",
+      "id": "R01",
+      "url": "https://doi.org/10.1029/WR017i001p00182"
+    },
+    {
+      "citation": "Katz and Parlange (1998), overdispersion in stochastic precipitation modeling",
+      "doi_or_no_doi": "10.1175/1520-0442(1998)011<0591:OPISMO>2.0.CO;2",
+      "id": "R02",
+      "url": "https://doi.org/10.1175/1520-0442(1998)011%3C0591:OPISMO%3E2.0.CO;2"
+    },
+    {
+      "citation": "Thornton et al. (2022), Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 4 R1, Version 4.1 [17 single-pixel extracts], accessed 2026-07-12",
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "id": "R03",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "citation": "Menne et al. (2012), overview of the GHCN-Daily database",
+      "doi_or_no_doi": "10.1175/JTECH-D-11-00103.1",
+      "id": "R04",
+      "url": "https://doi.org/10.1175/JTECH-D-11-00103.1"
+    },
+    {
+      "citation": "Menne et al. (2012), Global Historical Climatology Network-Daily Version 3 [eight-station U.S. Cooperative Network subset], accessed 2026-07-12",
+      "doi_or_no_doi": "10.7289/V5D21VHZ",
+      "id": "R05",
+      "url": "https://doi.org/10.7289/V5D21VHZ"
+    },
+    {
+      "citation": "ORNL DAAC (2026), Daymet Daily V4 R1 guide",
+      "doi_or_no_doi": "No DOI",
+      "id": "R06",
+      "url": "https://daac.ornl.gov/DAYMET/guides/Daymet_Daily_V4R1.html"
+    }
+  ],
+  "report": {
+    "path": "docs/reports/a7a-daily-precipitation-structure-report.md",
+    "sha256": "1ebece39de2b1528eec91c76b5067c9000c8b600de9ab68821b853e9b1774bc4"
+  },
+  "report_id": "a7a-daily-precipitation-structure",
+  "report_manifest_version": 1,
+  "report_revision": 1,
+  "required_sections": [
+    "Abstract",
+    "Introduction",
+    "Hypotheses",
+    "Methods",
+    "Analysis",
+    "Results",
+    "Limitations and validity",
+    "Conclusions",
+    "Reproducibility and data availability",
+    "References"
+  ],
+  "reviews": [
+    {
+      "lens": "accuracy",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/review.md",
+      "sha256": "1559345c7415e0823c4f70989c9b11695624b73176832795b28c9a5f9afbd22e",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "scientific-validity",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/review.md",
+      "sha256": "1559345c7415e0823c4f70989c9b11695624b73176832795b28c9a5f9afbd22e",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "consistency-public-safety",
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/review.md",
+      "sha256": "1559345c7415e0823c4f70989c9b11695624b73176832795b28c9a5f9afbd22e",
+      "verdict": "ACCEPT"
+    }
+  ],
+  "status": "ACCEPTED",
+  "study_facts": {
+    "analysis_id": "a7a_daily_precipitation_structure_v1",
+    "source_commit": "d27a008e91a4853044aed5207d02a3aeb631ac8c",
+    "generation_profile": "faithful_5_32_3",
+    "observed_period": "1980--2025",
+    "stations": 17,
+    "ghcn_sensitivity_stations": 8,
+    "qc_arms": 2,
+    "burn_offsets": 8,
+    "horizons_years": [30, 100],
+    "generated_100_year_streams": 272,
+    "nested_horizon_records": 544,
+    "retained_quality_reports": 544,
+    "quality_report_overlap_checks": 24480,
+    "observed_overlap_checks": 1125,
+    "wet_day_threshold_mm": 1.0,
+    "core_families": 5,
+    "qualifying_families": ["spell_structure", "higher_order_occurrence"],
+    "terminal_decision": "DAILY-PRECIPITATION-GAP-MEASURED"
+  }
+}

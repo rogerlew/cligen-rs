@@ -32,18 +32,7 @@ package after a failed or held predecessor. Every item remains unscaffolded
 until separately dispatched, and each scientific contract must be frozen
 before its candidate output is generated or inspected.
 
-1. **A7a — daily precipitation-structure baseline.** Freeze a measurement-only
-   contract on the existing 17-station Daymet/GHCN corpus before producing the
-   new derived analysis. Quantify seasonal wet/dry spell distributions,
-   higher-order occurrence residuals, wet-day amount lag-one dependence,
-   wet-day upper tails, 1/3/5-day maxima, and the propagation of daily
-   clustering into monthly and annual dispersion. Compare faithful and
-   `qc_filter: off` at both 30- and 100-year horizons, reusing hash-identical
-   retained output where available. This package adds no candidate model and
-   no public quality schema. It exits either
-   `DAILY-PRECIPITATION-GAP-MEASURED` or
-   `NO-DAILY-STRUCTURE-PRIORITY`; only the former permits A7b.
-2. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
+1. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
    measured-gap decision, compare one small declared set of integrated daily
    mechanisms: second-order or semi-Markov occurrence and an
    occurrence-conditioned wet-day amount model with limited persistence and a
@@ -55,7 +44,7 @@ before its candidate output is generated or inspected.
    count optimization, or post-generation repair. The package selects exactly
    one bounded A7c mechanism or exits `STOP-PRECIPITATION-LINE`; it does not
    implement a tournament of near misses.
-3. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
+2. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
    register one generation profile and evaluation contract before code or
    output, then integrate only the selected occurrence/amount mechanism at the
    daily precipitation seam. Run the dry, cold, and wet exposed development
@@ -67,7 +56,7 @@ before its candidate output is generated or inspected.
    confirmation is in scope. Only a complete three-station climate pass may
    return `CONTINUE-A7D`; every other scientific outcome closes the tested
    mechanism.
-4. **A7d — conditional corpus confirmation and residual adjudication.** Only
+3. **A7d — conditional corpus confirmation and residual adjudication.** Only
    after `CONTINUE-A7D`, freeze a new confirmation package before accessing
    confirmation output. Expand the one unchanged A7c mechanism to the full
    17-station corpus, GHCN sensitivity, both horizons, a faithful-clone null
@@ -81,6 +70,15 @@ before its candidate output is generated or inspected.
    moment reallocation, more than one empirically justified factor if needed,
    hierarchical/regional pooling, and a new package identifier; none is
    roadmapped yet.
+
+A7a completed the measurement-only baseline and returned
+`DAILY-PRECIPITATION-GAP-MEASURED`. Seasonal spell structure and higher-order
+occurrence residuals crossed every registered Daymet-off, faithful, and GHCN-
+off breadth guard at both horizons. This permits A7b as the first active item;
+it does not select a mechanism, predict feasibility, or authorize production
+code. The accepted evidence is retained in the
+[A7a work package](work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md)
+and [public report](reports/a7a-daily-precipitation-structure-report.md).
 
 A5f0 supplied the pivot into this queue. Its derived-only attribution returned
 `RETIRE-SCALAR-IID-MECHANISM` for the exact

@@ -1,0 +1,184 @@
+{
+  "analysis_id": "a7a_daily_precipitation_structure_v1",
+  "calendar_rules": {
+    "daymet": "noleap_365",
+    "generated": "proleptic_gregorian",
+    "ghcn": "proleptic_gregorian",
+    "missing_day": "breaks adjacency, spells, triples, and rolling windows"
+  },
+  "comparison": {
+    "burn_offsets": [0, 17, 101, 503, 1009, 5003, 10007, 50021],
+    "generated_horizons_years": [30, 100],
+    "generation_profile": "faithful_5_32_3",
+    "observed_period": [1980, 2025],
+    "primary_source": "daymet-v4-r1",
+    "qc_filters": ["faithful", "off"],
+    "sensitivity_source": "ghcn-daily-snapshot-2026-07-12",
+    "wet_day_threshold_mm": 1.0
+  },
+  "decision": {
+    "core_families": [
+      "spell_structure",
+      "higher_order_occurrence",
+      "wet_amount_dependence",
+      "wet_amount_upper_tail",
+      "multiday_extremes"
+    ],
+    "daymet_off_min_material_stations_each_horizon": 12,
+    "faithful_min_material_stations_each_horizon": 10,
+    "gap_terminal": "DAILY-PRECIPITATION-GAP-MEASURED",
+    "ghcn_off_min_material_stations_each_horizon": 5,
+    "no_gap_terminal": "NO-DAILY-STRUCTURE-PRIORITY",
+    "qualifying_rule": "at least one core family satisfies all three breadth thresholds at both horizons"
+  },
+  "distance": {
+    "absolute_families": [
+      "higher_order_occurrence",
+      "wet_amount_dependence"
+    ],
+    "family_reducer": "conventional median across common finite components",
+    "log_ratio_families": [
+      "spell_structure",
+      "wet_amount_upper_tail",
+      "multiday_extremes",
+      "monthly_dispersion",
+      "annual_dispersion"
+    ],
+    "material_rule": "observed-to-eight-trajectory-center family distance is greater than the maximum of eight leave-one-trajectory-out distances plus 1e-12",
+    "unavailable_cell_rule": "if common finite components are below the family minimum, the cell is unavailable, has null distance and severity, and is non-material for every breadth count",
+    "trajectory_center": "componentwise conventional median of eight burn trajectories",
+    "trajectory_null": "maximum leave-one-burn-out family distance; descriptive bounded spread, not a confidence interval"
+  },
+  "families": {
+    "annual_dispersion": {
+      "components": ["annual precipitation-total sample SD"],
+      "minimum_common_components": 1,
+      "role": "propagation diagnostic"
+    },
+    "higher_order_occurrence": {
+      "components": ["four seasons x DD/DW/WD/WW second-order wet-probability residual"],
+      "minimum_common_components": 8,
+      "minimum_history_count": 25,
+      "role": "core"
+    },
+    "monthly_dispersion": {
+      "components": ["12 calendar-month precipitation-total sample SD values"],
+      "minimum_common_components": 10,
+      "role": "propagation diagnostic"
+    },
+    "multiday_extremes": {
+      "components": ["1/3/5-day annual maxima x p50/p90/p95"],
+      "minimum_common_components": 9,
+      "role": "core"
+    },
+    "spell_structure": {
+      "components": ["four seasons x wet/dry spell length x p50/p90/p95"],
+      "minimum_common_components": 24,
+      "role": "core"
+    },
+    "wet_amount_dependence": {
+      "components": ["four seasons x adjacent-wet-day Pearson/Spearman"],
+      "minimum_common_components": 6,
+      "minimum_pair_count": 8,
+      "role": "core"
+    },
+    "wet_amount_upper_tail": {
+      "components": ["four seasons x wet-day amount p95/p99"],
+      "minimum_common_components": 8,
+      "role": "core"
+    }
+  },
+  "hypotheses": [
+    {
+      "decision_rule": "terminal decision rule in this contract",
+      "id": "H1",
+      "provenance": "amended",
+      "scope": "at least one core daily family is systemically material against Daymet and corroborated by faithful and GHCN surfaces"
+    },
+    {
+      "decision_rule": "rank by minimum Daymet-off material count, then faithful count, GHCN count, and median observed/null severity",
+      "id": "H2",
+      "provenance": "amended",
+      "scope": "core daily gap families have a stable severity ordering"
+    },
+    {
+      "decision_rule": "report Spearman association and joint-material counts without a pass/fail or causal interpretation",
+      "id": "H3",
+      "provenance": "amended",
+      "scope": "daily clustering error co-localizes with monthly or annual dispersion error"
+    },
+    {
+      "decision_rule": "report station counts where qc_filter off has smaller, equal, or larger Daymet distance than faithful",
+      "id": "H4",
+      "provenance": "amended",
+      "scope": "QC filtering materially changes daily-family agreement"
+    }
+  ],
+  "inputs": {
+    "a5a_baseline_archive": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz",
+      "sha256": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe"
+    },
+    "a5a_baseline_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-run-manifest-v1.json",
+      "sha256": "e6e12a08b7d552edd45481b929271af87530d2821b9b51d5cec066dc76867cbc"
+    },
+    "corpus_common": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py",
+      "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+    },
+    "corpus_config": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    "observed_source_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    "observed_targets": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/observed-target-corpus-v1.json",
+      "sha256": "4d0987bb172aef76f3f3a48704bf9df78a375d9d562a145f435800042b5b5660"
+    },
+    "third_party_notice": {
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+    }
+  },
+  "minimum_records": {
+    "generated_100_year_streams": 272,
+    "generated_nested_horizon_records": 544,
+    "ghcn_stations": 8,
+    "primary_stations": 17,
+    "retained_quality_reports": 544
+  },
+  "numeric_rules": {
+    "correlation": "Pearson and average-tie-rank Spearman; null if fewer than two pairs or either variance is zero",
+    "quantile": "empirical inverse-CDF nearest rank sorted[ceil(p*n)-1]",
+    "rounding": "machine evidence retains binary64 JSON values; report rounds counts exactly, correlations to 3 decimals, percentages to 1 decimal, and distances/severity ratios to 3 significant decimals",
+    "sample_sd": "denominator n-1; null for n < 2"
+  },
+  "ranking": {
+    "families": [
+      "spell_structure",
+      "higher_order_occurrence",
+      "wet_amount_dependence",
+      "wet_amount_upper_tail",
+      "multiday_extremes"
+    ],
+    "order": [
+      "minimum Daymet-off material-station count across 30/100 years descending",
+      "minimum faithful material-station count across 30/100 years descending",
+      "minimum GHCN-off material-station count across 30/100 years descending",
+      "median Daymet-off observed-distance/null-ceiling ratio across available station-horizon cells descending",
+      "family identifier ascending"
+    ]
+  },
+  "schema_version": 1,
+  "seasons": {
+    "DJF": [12, 1, 2],
+    "JJA": [6, 7, 8],
+    "MAM": [3, 4, 5],
+    "SON": [9, 10, 11]
+  },
+  "source_commit": "d27a008e91a4853044aed5207d02a3aeb631ac8c"
+}

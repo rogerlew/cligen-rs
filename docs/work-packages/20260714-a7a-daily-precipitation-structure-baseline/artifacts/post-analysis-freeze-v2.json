@@ -1,0 +1,36 @@
+{
+  "amendment": {
+    "path": "post-analysis-amendment-005.md",
+    "sha256": "829fb9f8d0bed3a28c981c807eb5db0ce06383eee4cf7ca92e32b91c5ad928d4"
+  },
+  "current_sources": {
+    "analyze-a7a.py": "6f4a1e242949b4de4bcdeea0e0a05642cd8455606ff62b8de71442198c8782ac",
+    "freeze-post-analysis-a7a-v2.py": "8bd0483c5b1082d67740ed4e4a6a571d04dc981d1cb8232503f48ef17fa1f309",
+    "post-analysis-amendment-005.md": "829fb9f8d0bed3a28c981c807eb5db0ce06383eee4cf7ca92e32b91c5ad928d4",
+    "verify-a7a.py": "6653a08aa4cec78d95e2071a807dd5d793cb14147e687d77fbcfd8e6aeda58b8"
+  },
+  "outputs": {
+    "a7a-analysis-v1.json": "45342c8763c3d079c81f8a9b3910882bdd82f2557dfb420a80d5a4bfefa2b1ad",
+    "a7a-decision-v1.json": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f",
+    "findings.md": "4fb3cc87f70c690f26e20a14b4ef839e24c2d52c0bc4019a09be3ca3b2296f57"
+  },
+  "post_analysis_freeze_schema_version": 2,
+  "prior_outputs": {
+    "a7a-analysis-v1.json": "425ce817f0167d3c65df57b8fa6f77d333c94a7fa59bfa7eef771322f99366a0",
+    "a7a-decision-v1.json": "4f82ab9b61942bced8ef546018a02e561e443df515cf8a1ba4eeeaab3ab38b15",
+    "findings.md": "641d8d5d3f1e91611095d6ea1d27c9cc0ec3b5749139a8061b07c03be00491bf"
+  },
+  "prior_post_freeze": {
+    "path": "post-analysis-freeze-v1.json",
+    "sha256": "281295c719cfc77441d2c321b3dca5b160c7f71b1b8b6e1c9090f2ce03508cb0"
+  },
+  "review_corrections": [
+    "pooled Daymet-off station-horizon severity aggregation",
+    "explicit extended-real zero-null severity policy",
+    "observation-supported null component parity"
+  ],
+  "superseded_source_hashes": {
+    "analyze-a7a.py": "def24ec7aa1f647f6709e433036b68db2da2a3f7918c132a829dc3998c817199",
+    "verify-a7a.py": "f11302c94fd2de6ba600438d9626d945686a2f5b509e196fdd458d9df65863b8"
+  }
+}

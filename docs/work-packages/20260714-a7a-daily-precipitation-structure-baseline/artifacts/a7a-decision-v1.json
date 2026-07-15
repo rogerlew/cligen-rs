@@ -1,0 +1,132 @@
+{
+  "analysis_id": "a7a_daily_precipitation_structure_v1",
+  "decision_rule": {
+    "core_families": [
+      "spell_structure",
+      "higher_order_occurrence",
+      "wet_amount_dependence",
+      "wet_amount_upper_tail",
+      "multiday_extremes"
+    ],
+    "daymet_off_min_material_stations_each_horizon": 12,
+    "faithful_min_material_stations_each_horizon": 10,
+    "gap_terminal": "DAILY-PRECIPITATION-GAP-MEASURED",
+    "ghcn_off_min_material_stations_each_horizon": 5,
+    "no_gap_terminal": "NO-DAILY-STRUCTURE-PRIORITY",
+    "qualifying_rule": "at least one core family satisfies all three breadth thresholds at both horizons"
+  },
+  "qualifying_families": [
+    "spell_structure",
+    "higher_order_occurrence"
+  ],
+  "ranking": [
+    {
+      "daymet_off_counts_30_100": [
+        16,
+        15
+      ],
+      "daymet_off_median_severity_ratio": 2.216109713648248,
+      "daymet_off_min": 15,
+      "faithful_counts_30_100": [
+        15,
+        17
+      ],
+      "faithful_min": 15,
+      "family": "wet_amount_dependence",
+      "ghcn_off_counts_30_100": [
+        0,
+        5
+      ],
+      "ghcn_off_min": 0,
+      "qualifying": false,
+      "rank": 1
+    },
+    {
+      "daymet_off_counts_30_100": [
+        14,
+        16
+      ],
+      "daymet_off_median_severity_ratio": "infinity",
+      "daymet_off_min": 14,
+      "faithful_counts_30_100": [
+        15,
+        16
+      ],
+      "faithful_min": 15,
+      "family": "spell_structure",
+      "ghcn_off_counts_30_100": [
+        5,
+        7
+      ],
+      "ghcn_off_min": 5,
+      "qualifying": true,
+      "rank": 2
+    },
+    {
+      "daymet_off_counts_30_100": [
+        12,
+        14
+      ],
+      "daymet_off_median_severity_ratio": 1.5301515663753722,
+      "daymet_off_min": 12,
+      "faithful_counts_30_100": [
+        11,
+        16
+      ],
+      "faithful_min": 11,
+      "family": "higher_order_occurrence",
+      "ghcn_off_counts_30_100": [
+        5,
+        7
+      ],
+      "ghcn_off_min": 5,
+      "qualifying": true,
+      "rank": 3
+    },
+    {
+      "daymet_off_counts_30_100": [
+        7,
+        14
+      ],
+      "daymet_off_median_severity_ratio": 1.47208832532624,
+      "daymet_off_min": 7,
+      "faithful_counts_30_100": [
+        11,
+        17
+      ],
+      "faithful_min": 11,
+      "family": "wet_amount_upper_tail",
+      "ghcn_off_counts_30_100": [
+        0,
+        2
+      ],
+      "ghcn_off_min": 0,
+      "qualifying": false,
+      "rank": 4
+    },
+    {
+      "daymet_off_counts_30_100": [
+        4,
+        9
+      ],
+      "daymet_off_median_severity_ratio": 0.8607577779687747,
+      "daymet_off_min": 4,
+      "faithful_counts_30_100": [
+        6,
+        12
+      ],
+      "faithful_min": 6,
+      "family": "multiday_extremes",
+      "ghcn_off_counts_30_100": [
+        2,
+        6
+      ],
+      "ghcn_off_min": 2,
+      "qualifying": false,
+      "rank": 5
+    }
+  ],
+  "schema_version": 1,
+  "source_commit": "d27a008e91a4853044aed5207d02a3aeb631ac8c",
+  "terminal_decision": "DAILY-PRECIPITATION-GAP-MEASURED"
+}
