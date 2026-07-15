@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_class": {"const": "latent_regime_marked_v1"},
+    "configuration_id": {"pattern": "^[a-z0-9._-]+$", "type": "string"},
+    "hidden_states": {"maximum": 4, "minimum": 3, "type": "integer"},
+    "pooling_strength": {"exclusiveMinimum": 0, "type": "number"},
+    "tail_quantile": {"exclusiveMaximum": 1, "exclusiveMinimum": 0.5, "type": "number"}
+  },
+  "required": ["candidate_class", "configuration_id", "hidden_states", "pooling_strength", "tail_quantile"],
+  "type": "object"
+}

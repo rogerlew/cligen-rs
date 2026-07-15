@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "candidate_class": {"const": "alternating_renewal_marked_v1"},
+    "configuration_id": {"pattern": "^[a-z0-9._-]+$", "type": "string"},
+    "pooling_strength": {"exclusiveMinimum": 0, "type": "number"},
+    "tail_quantile": {"exclusiveMaximum": 1, "exclusiveMinimum": 0.5, "type": "number"}
+  },
+  "required": ["candidate_class", "configuration_id", "pooling_strength", "tail_quantile"],
+  "type": "object"
+}

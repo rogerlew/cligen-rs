@@ -1,0 +1,8 @@
+{
+  "candidate_development_scores_accessed": false,
+  "freeze_id": "a9c-stage-survival-v1",
+  "full_development": "All short-screen survivors receive four-burn 100-year evaluation.",
+  "pareto_replay": "Every nondominated full configuration, up to four total, receives the additional burns needed for one eight-burn replay; earlier identical burn results are reused rather than rerun.",
+  "schema_version": 1,
+  "short_screen": "Within each class, configurations must be complete and mandatory-stratum-available; the two lowest median normalized distances survive, with exact ties broken by configuration_id. The complete short-screen ledger remains published."
+}

@@ -14,3 +14,4 @@ each accepted report with a strict manifest verified by `verify-report.py`.
 | [A5d1b finite-path realization](a5d1b-finite-path-realization-report.md) | 1 | ACCEPTED | [A5d1b](../work-packages/20260714-a5d1b-finite-path-realization/package.md) |
 | [A5e0 direct annual-state pilot](a5e0-direct-annual-state-pilot-report.md) | 1 | ACCEPTED | [A5e0](../work-packages/20260714-a5e0-direct-annual-state-pilot/package.md) |
 | [A7a daily precipitation-structure baseline](a7a-daily-precipitation-structure-report.md) | 1 | ACCEPTED | [A7a](../work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md) |
+| [A9c observed-development availability](a9c-observed-development-availability-report.md) | 1 | ACCEPTED | [A9c](../work-packages/20260715-a9c-observed-development/package.md) |

@@ -1,0 +1,88 @@
+{
+  "amendment_policy": "After either candidate implementation is run on observed development data, any change to this artifact makes the campaign exploratory and ineligible for an A9d freeze.",
+  "baseline": {
+    "burn_pairing": "same integer burn; no claim of draw-level common random numbers across different probability laws",
+    "generation_profile": "faithful_5_32_3",
+    "implementation": "current dispatch cligen-rs faithful runtime",
+    "parameter_archive": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+    "role": "development comparator only"
+  },
+  "burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007],
+  "campaign_id": "a9c-observed-development-v1",
+  "candidate_laws": {
+    "alternating_renewal_marked_v1": {
+      "amount": "seasonal station/stratum/global-shrunk lognormal body, empirical-threshold generalized-Pareto excess, lag-one Gaussian-copula residual memory indexed by run position and antecedent dry gap",
+      "context": "monthly wet/dry bivariate temperature residual law and stratum event-context law",
+      "event_marks": "joint transformed-Gaussian duration/time-to-peak/peak-ratio law conditional on log depth, season harmonics, antecedent dry gap, and cold context",
+      "occurrence": "observable alternating wet/dry semi-Markov state with month-of-spell-start discrete empirical-Bayes duration distributions on support 1..60 plus an explicit overflow bin",
+      "state": "no hidden regime"
+    },
+    "latent_regime_marked_v1": {
+      "amount": "state-season station/stratum/global-shrunk zero-inflated lognormal-tail emissions with lag-one residual memory",
+      "context": "state-season joint temperature and event-context emissions",
+      "event_marks": "joint transformed-Gaussian marks conditional on hidden state, depth, season harmonics, and cold context",
+      "occurrence": "finite hidden semi-Markov state with empirical-Bayes dwell laws and state-transition law; every state has clipped interior wet probability in [0.02,0.98]",
+      "state": "fit by Bernoulli/Gaussian HMM EM followed by canonical wet-probability/amount ordering and explicit Viterbi dwell estimation; observed wet/dry spells may cross hidden-state boundaries"
+    }
+  },
+  "configuration_grid": [
+    {"candidate_class": "alternating_renewal_marked_v1", "configuration_id": "renewal-p050-q095", "pooling_strength": 50.0, "tail_quantile": 0.95},
+    {"candidate_class": "alternating_renewal_marked_v1", "configuration_id": "renewal-p150-q095", "pooling_strength": 150.0, "tail_quantile": 0.95},
+    {"candidate_class": "alternating_renewal_marked_v1", "configuration_id": "renewal-p050-q090", "pooling_strength": 50.0, "tail_quantile": 0.9},
+    {"candidate_class": "alternating_renewal_marked_v1", "configuration_id": "renewal-p150-q090", "pooling_strength": 150.0, "tail_quantile": 0.9},
+    {"candidate_class": "latent_regime_marked_v1", "configuration_id": "latent-k3-p050-q095", "hidden_states": 3, "pooling_strength": 50.0, "tail_quantile": 0.95},
+    {"candidate_class": "latent_regime_marked_v1", "configuration_id": "latent-k4-p050-q095", "hidden_states": 4, "pooling_strength": 50.0, "tail_quantile": 0.95},
+    {"candidate_class": "latent_regime_marked_v1", "configuration_id": "latent-k3-p150-q090", "hidden_states": 3, "pooling_strength": 150.0, "tail_quantile": 0.9},
+    {"candidate_class": "latent_regime_marked_v1", "configuration_id": "latent-k4-p150-q090", "hidden_states": 4, "pooling_strength": 150.0, "tail_quantile": 0.9}
+  ],
+  "fit": {
+    "hierarchy": "station within frozen primary stratum within global",
+    "maximum_em_iterations": 100,
+    "optimizer": "deterministic bounded grid; no adaptive proposal after full-development access",
+    "tolerance": 1e-08,
+    "wet_thresholds": ["wet0", "r1mm"]
+  },
+  "gate_calibration": {
+    "alpha_familywise": 0.05,
+    "candidate_inputs_allowed": false,
+    "method": "paired same-observed-law year-block and event bootstrap; maximum standardized absolute difference within family/horizon; registry absolute floor lower bound",
+    "replicates_per_family_horizon": 500,
+    "rng": "NumPy Philox with SHA-256 domain a9c-null-v1 and replicate/family/horizon identity"
+  },
+  "horizons_years": [30, 100],
+  "monthly_reconciliation": {
+    "absolute_tolerance": 1e-08,
+    "month_lengths": [28, 29, 30, 31],
+    "quadrature": "deterministic distribution recursion or 200000-path fit-only Monte Carlo with fixed a9c-reconciliation-v1 Philox identity",
+    "relative_tolerance": 0.005
+  },
+  "objective_registry": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+  "resource_limits": {
+    "analytic_proposals_per_class": 4096,
+    "campaign_wall_hours": 72,
+    "full_configurations_per_class": 64,
+    "memory_gib": 12,
+    "pareto_replays": 8,
+    "retained_gib": 50,
+    "screen_configurations_per_class": 256,
+    "stage_wall_hours": 24,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "selection_rule": [
+    "reject hard-infeasible, incomplete, or mandatory-stratum-ineligible fits",
+    "reject familywise material degradation in any mandatory family, stratum, or horizon",
+    "maximize worst regime-by-mandatory-family standardized improvement",
+    "maximize materially improved family count",
+    "minimize median normalized distance",
+    "minimize effective fitted parameter count",
+    "break exact tie by ascending candidate-class ID"
+  ],
+  "selection_rule_id": "a9_lexicographic_pareto_v1",
+  "stages": [
+    {"burn_count": 0, "configuration_limit_per_class": 4, "horizon_years": 0, "stage": "analytic_support"},
+    {"burn_count": 2, "configuration_limit_per_class": 4, "horizon_years": 30, "stage": "short_screen"},
+    {"burn_count": 4, "configuration_limit_per_class": 2, "horizon_years": 100, "stage": "full_development"},
+    {"burn_count": 8, "configuration_limit_total": 4, "horizon_years": 100, "stage": "pareto_replay"}
+  ]
+}

@@ -32,7 +32,17 @@ candidate, accessed no confirmation target, and changed no production runtime.
 The accepted record and freeze-ready successor handoff are in the
 [A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
-There is no active authorized package. A9b completed on 2026-07-15 with
+There is no active authorized package. A9c completed on 2026-07-15 with
+`HOLD-A9C-GATE-CALIBRATION`. It materialized 64 normalized observed role
+objects, 180 exact USCRN station-year identities, and 7,000 candidate-blind
+null replicates without confirmation access. Its hot-arid development sites
+had 136 and 97 events, leaving 0/2 available stations for mandatory storm
+time-to-peak, peak-ratio, and joint-dependence objectives. Five fits completed,
+but no development score or candidate ranking was accessed. The accepted
+record is in the
+[A9c work package](work-packages/20260715-a9c-observed-development/package.md).
+
+A9b completed on 2026-07-15 with
 `HARNESS-READY-A9C`. Its
 [accepted package](work-packages/20260715-a9b-calibration-harness/package.md)
 implements and independently replays the synthetic-only research harness:
@@ -42,20 +52,15 @@ mock plugins, monthly/objective/null/Pareto machinery, bounded append-only
 optimization, and FX-001--FX-020. It accessed no observed target, ranked no
 candidate, and changed no production runtime.
 
-The next eligible item is **A9c — observed development comparison**, but it
-remains unscaffolded and unauthorized pending a separate operator dispatch.
 Its context-complete boundary is frozen in the
 [A9c handoff](work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md).
-A9c would implement the two actual research probability laws, materialize
-disjoint fit/development/gate roles without confirmation access, calibrate
-candidate-blind gates, run the frozen multi-regime objective and resource
-campaign, and freeze at most one candidate for A9d. It still adds no runtime
-profile.
 
-The later conditional sequence is A9c development-only comparison of the two
-genuinely distinct model classes, A9d locked one-shot climate confirmation,
-and A9e Rust runtime pilot. Those packages remain unscaffolded and unauthorized
-until their predecessor returns the registered continuation terminal. A9 does
+The recommended next action is a separately authorized metadata-only re-entry
+design that proves an event-development roster/period can supply at least two
+stations per mandatory stratum at the 150/200-event support floors. It remains
+unscaffolded and must treat every A9c object as exposed development evidence.
+A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
+unauthorized because A9c did not return a continuation terminal. A9 does
 not inherit an A8c candidate, coefficient, threshold, station classification,
 or confirmation claim. A future production-promotion decision still requires
 separately roadmapped downstream evidence under ADR-0004; the present sequence

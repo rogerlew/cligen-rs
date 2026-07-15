@@ -1,0 +1,104 @@
+{
+  "amendment_policy": "Any post-series-access change to station, period, source, transform, pooling, objective, threshold recipe, or selection rule is exploratory and cannot support CANDIDATE-FROZEN-READY-A9D.",
+  "calendar_rules": {
+    "daymet": "daymet_official_365_v1: Daymet yday maps in civil order; leap years retain February 29 and omit December 31; no shift or imputation",
+    "simulation": "proleptic Gregorian with nested first-30-years prefix of each 100-year burn",
+    "uscrn": "UTC source identity; fixed local-standard-time day boundary derived from frozen station longitude; no daylight-saving shift"
+  },
+  "candidate_classes": [
+    "alternating_renewal_marked_v1",
+    "latent_regime_marked_v1"
+  ],
+  "confirmation_prohibition": {
+    "roster": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+    "station_count": 18,
+    "target_period": "2010-01-01/2025-12-31",
+    "series_access_allowed": false
+  },
+  "daymet": {
+    "development_period": "2010-01-01/2025-12-31",
+    "fit_period": "1980-01-01/2009-12-31",
+    "product": "Daymet V4 R1 single-pixel daily",
+    "raw_archive": "references/observed/a8a-v1/daymet",
+    "source_manifest": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json",
+    "stations": [
+      {"cold_arid_cross_tag": false, "primary_stratum": "hot_arid", "station_id": "az026481"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "hot_arid", "station_id": "ca040442"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "hot_arid", "station_id": "ca042713"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "hot_arid", "station_id": "nv264436"},
+      {"cold_arid_cross_tag": true, "primary_stratum": "arid_boundary", "station_id": "nv262631"},
+      {"cold_arid_cross_tag": true, "primary_stratum": "arid_boundary", "station_id": "nv269171"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "monsoonal_transition", "station_id": "az028820"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "monsoonal_transition", "station_id": "nm290234"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "monsoonal_transition", "station_id": "tx413280"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "monsoonal_transition", "station_id": "tx417262"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "non_monsoonal_semi_arid", "station_id": "id101022"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "non_monsoonal_semi_arid", "station_id": "mt243996"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "non_monsoonal_semi_arid", "station_id": "ne257665"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "non_monsoonal_semi_arid", "station_id": "or350412"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "humid", "station_id": "la160549"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "humid", "station_id": "sc381544"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "cold", "station_id": "me171175"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "cold", "station_id": "mn212248"},
+      {"cold_arid_cross_tag": true, "primary_stratum": "cold", "station_id": "co050130"},
+      {"cold_arid_cross_tag": true, "primary_stratum": "cold", "station_id": "wy487845"}
+    ],
+    "variables": ["prcp", "tmax", "tmin"]
+  },
+  "event_definition": "a9_uscrn_event_6h_v1: 72 consecutive valid zero five-minute precipitation intervals separate events; missing separation intervals invalidate the event; cross-day events remain whole",
+  "freeze_id": "a9c-data-role-freeze-v1",
+  "frozen_before_station_series_access": true,
+  "gate_calibration": {
+    "candidate_access_prohibited": true,
+    "replicates_per_family_horizon": 500,
+    "source": "synthetic_same_model_null_v1"
+  },
+  "pooling": "station within one frozen primary stratum within global; cold-arid is a cross-tag only",
+  "qc_and_completeness": {
+    "annual": "all 12 complete months required",
+    "daily": "each named variable is valid only when every required source field is present and passes its product QC; variables are evaluated separately",
+    "month": "at least 90 percent of expected valid days and no missing run longer than three days; no full-month rescaling",
+    "uscrn_fields": "whitespace-separated 23-field Subhourly01 format; derived precipitation and air temperature are valid when not at the documented negative missing sentinel; solar, relative humidity, wetness, and 1.5 m wind additionally require QC flag 0",
+    "uscrn_precip_daily": "all expected five-minute precipitation intervals for the local-standard date must be present and valid; a 0000 interval is assigned to the preceding local-standard civil date because it ends that day's final five-minute period",
+    "winter": "December of the preceding year through February; all three months required"
+  },
+  "resource_limits": {
+    "analytic_proposals_per_class": 4096,
+    "campaign_wall_hours": 72,
+    "classes": 2,
+    "full_configurations_per_class": 64,
+    "memory_gib": 12,
+    "pareto_replays": 8,
+    "retained_gib": 50,
+    "screen_configurations_per_class": 256,
+    "stage_wall_hours": 24,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "selection_rule": "a9_lexicographic_pareto_v1",
+  "uscrn": {
+    "development_period": "2018-01-01/2024-12-31",
+    "fit_period": "2010-01-01/2017-12-31",
+    "product": "NOAA NCEI USCRN Subhourly01 format 01 five-minute",
+    "source_root": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01",
+    "stations": [
+      {"primary_stratum": "hot_arid", "station_id": "ca_stovepipe_wells_1_sw", "source_name": "CA_Stovepipe_Wells_1_SW"},
+      {"primary_stratum": "hot_arid", "station_id": "az_yuma_27_ene", "source_name": "AZ_Yuma_27_ENE"},
+      {"cold_arid_cross_tag": true, "primary_stratum": "arid_boundary", "station_id": "nv_baker_5_w", "source_name": "NV_Baker_5_W"},
+      {"cold_arid_cross_tag": false, "primary_stratum": "arid_boundary", "station_id": "id_murphy_10_w", "source_name": "ID_Murphy_10_W"},
+      {"primary_stratum": "monsoonal_transition", "station_id": "az_tucson_11_w", "source_name": "AZ_Tucson_11_W"},
+      {"primary_stratum": "monsoonal_transition", "station_id": "nm_las_cruces_20_n", "source_name": "NM_Las_Cruces_20_N"},
+      {"primary_stratum": "non_monsoonal_semi_arid", "station_id": "ne_harrison_20_sse", "source_name": "NE_Harrison_20_SSE"},
+      {"primary_stratum": "non_monsoonal_semi_arid", "station_id": "ks_oakley_19_ssw", "source_name": "KS_Oakley_19_SSW"},
+      {"primary_stratum": "humid", "station_id": "al_fairhope_3_ne", "source_name": "AL_Fairhope_3_NE"},
+      {"primary_stratum": "humid", "station_id": "la_lafayette_13_se", "source_name": "LA_Lafayette_13_SE"},
+      {"primary_stratum": "cold", "station_id": "me_limestone_4_nnw", "source_name": "ME_Limestone_4_NNW"},
+      {"primary_stratum": "cold", "station_id": "mn_sandstone_6_w", "source_name": "MN_Sandstone_6_W"}
+    ],
+    "variables": ["precip_5min_mm", "air_temperature_c", "solar_radiation_w_m2", "relative_humidity_pct", "wetness", "wind_speed_1_5m_m_s"]
+  },
+  "wet_thresholds": {
+    "r1mm": "precipitation >= 1.0 mm/day",
+    "wet0": "precipitation > 0.0 mm/day"
+  }
+}

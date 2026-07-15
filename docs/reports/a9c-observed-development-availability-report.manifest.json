@@ -1,0 +1,167 @@
+{
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-freeze-v1.json",
+      "role": "pre-access station, period, source, calendar, QC, and resource freeze",
+      "sha256": "9e50169157a91bf8a351e961dd53a3f11a9b33d18cf294baab1e13423dbc7814"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/observed-source-manifest-v1.json",
+      "role": "exact observed source, normalized object, and confirmation-nonaccess identities",
+      "sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/gate-calibration-availability-v1.json",
+      "role": "canonical mandatory availability matrix and A9c terminal",
+      "sha256": "c6cddc8fc26afd6429a814953568ca75ad4b6047c22d7e25c408e01265782b57"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/null-thresholds-v1.json",
+      "role": "candidate-blind numeric null thresholds and replicate identity",
+      "sha256": "6bc762369beff5416e79f8872f8b4cb7300ba0589b7a8e75ecf2f3a462fa6c6c"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/fit-attempt-inventory-v1.json",
+      "role": "partial immutable fit inventory and zero-score boundary",
+      "sha256": "a07702cdbfd4879e00af25ebe39a4c598b5c1987922e3521eba24a138c41af25"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/pre-ranking-corrections.md",
+      "role": "pre-ranking correction and access history",
+      "sha256": "bfe6f03fc7121f0bd469c8bc1ce0b7148870939485b1f1e400155c31462a34c7"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-manifest-v1.json",
+      "role": "strict role firewall and metadata-only confirmation roster",
+      "sha256": "379060ae0fa8ca6bb411d6a47ffa723c4fc3abbdd0f18eaca09cdf4fec388540"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md",
+      "role": "A9c execution, objective, resource, selection, and terminal contract",
+      "sha256": "cded9c74c35913a3da327a907b5ea2e1681b776a123ea387f4c03599858e05b7"
+    }
+  ],
+  "governance": [
+    {
+      "path": "docs/standards/scientific-report-standard.md",
+      "role": "standard",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "role": "protocol",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "role": "template",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "hypotheses": [
+    {
+      "evidence_ids": ["E01", "E03", "E08"],
+      "id": "H1",
+      "outcome": "Not supported; mandatory hot-arid storm availability failed",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E03", "E04", "E08"],
+      "id": "H2",
+      "outcome": "Partially supported; numeric thresholds complete but availability gate failed",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E03", "E05", "E08"],
+      "id": "H3",
+      "outcome": "Not evaluated; upstream hold prohibited ranking",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E02", "E03", "E07"],
+      "id": "H4",
+      "outcome": "Supported; zero confirmation series access",
+      "provenance": "preregistered"
+    }
+  ],
+  "references": [
+    {
+      "citation": "Thornton et al. (2022), Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 4 R1",
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "id": "R01",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "citation": "Palecki et al. (2015), U.S. Climate Reference Network Processed Data from USCRN Database Version 2",
+      "doi_or_no_doi": "10.7289/V5MS3QR9",
+      "id": "R02",
+      "url": "https://doi.org/10.7289/V5MS3QR9"
+    }
+  ],
+  "report": {
+    "path": "docs/reports/a9c-observed-development-availability-report.md",
+    "sha256": "6a4d500225f34e83c63259d566725ef79d054549a0c9b5b83e44ec8c2483032b"
+  },
+  "report_id": "a9c-observed-development-availability",
+  "report_manifest_version": 1,
+  "report_revision": 1,
+  "required_sections": [
+    "Abstract",
+    "Introduction",
+    "Hypotheses",
+    "Methods",
+    "Analysis",
+    "Results",
+    "Limitations and validity",
+    "Conclusions",
+    "Reproducibility and data availability",
+    "References"
+  ],
+  "reviews": [
+    {
+      "lens": "accuracy",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
+      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "scientific-validity",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
+      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "consistency-public-safety",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
+      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "verdict": "ACCEPT"
+    }
+  ],
+  "status": "ACCEPTED",
+  "study_facts": {
+    "complete_fit_artifacts": 5,
+    "confirmation_series_accessed": false,
+    "daymet_stations": 20,
+    "development_period": "2010--2025 Daymet; 2018--2024 USCRN",
+    "development_scores_accessed": false,
+    "failed_mandatory_cells": 3,
+    "fit_period": "1980--2009 Daymet; 2010--2017 USCRN",
+    "hot_arid_available_stations": 0,
+    "hot_arid_event_counts": [136, 97],
+    "hot_arid_required_stations": 2,
+    "normalized_observed_objects": 64,
+    "null_replicates": 7000,
+    "source_commit": "4e918ecd5d2b37eaa99ae365677f423080069480",
+    "terminal": "HOLD-A9C-GATE-CALIBRATION",
+    "uscrn_development_stations": 12,
+    "uscrn_source_station_years": 180
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "candidate_development_scores_accessed": false,
+  "candidate_implementation_status": "research implementations completed through five immutable fits; ranking stopped at upstream availability hold",
+  "dependencies": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1"
+  },
+  "dispatch_commit": "4e918ecd5d2b37eaa99ae365677f423080069480",
+  "files": [
+    {
+      "bytes": 1517,
+      "path": ".gitattributes",
+      "sha256": "0608e0fa25f7bc728c5559a4a5c3fbc53616a27f990ce216e17a10066ac19ec0"
+    },
+    {
+      "bytes": 81,
+      "path": "research/a9c/__init__.py",
+      "sha256": "9440ab39fc91c8650a79dadbe90b9598a7727b9e3027ca4869c4cf0f95de72ab"
+    },
+    {
+      "bytes": 26286,
+      "path": "research/a9c/data.py",
+      "sha256": "d8f727658b67c93acb3562b5e664733aff5a297d6e2dd6ca4af63c15c1fc4d35"
+    },
+    {
+      "bytes": 47764,
+      "path": "research/a9c/models.py",
+      "sha256": "3b683c4c74ad06e52b72befff678adcf206a51cdc161df2c7686b9c0c4d599d2"
+    },
+    {
+      "bytes": 9814,
+      "path": "research/a9c/nulls.py",
+      "sha256": "70df640b42e86ab1a0d019366e324fc454d171d8b78c7ca0e2c7298435482fdd"
+    },
+    {
+      "bytes": 7723,
+      "path": "research/a9c/run.py",
+      "sha256": "c542304fb2194d765e69e1ce3d4f3ba8b2d5d9bc8c58d82e3ec17a9c55812ada"
+    },
+    {
+      "bytes": 28,
+      "path": "research/a9c/requirements.txt",
+      "sha256": "5a81cde5d4f409222788b0a0da88fff0acdb160f45ab8839d9661cff6aa10424"
+    },
+    {
+      "bytes": 26,
+      "path": "research/a9c/tests/__init__.py",
+      "sha256": "c3dbd88b24ff253e562045576902f7d3ff9ca2334503c278bbcb4775cb70b676"
+    },
+    {
+      "bytes": 1588,
+      "path": "research/a9c/tests/test_data.py",
+      "sha256": "7811fbfc417648e211a5aa94049d83647b2b24c7c8cacbabb3e1783a4f75ba83"
+    },
+    {
+      "bytes": 769,
+      "path": "research/a9c/tests/test_models.py",
+      "sha256": "570509f06543ebd627bc6d7eaafc6d98c9ddee4f4c1495c54118396f02db06a2"
+    },
+    {
+      "bytes": 5098,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/analyze-a9c-availability.py",
+      "sha256": "d43cd4ce4c960b50edfa691cbae4bb757495552292e07b8625005b849381bd81"
+    },
+    {
+      "bytes": 2741,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/capture-a9c-source.py",
+      "sha256": "8624781c1008fe3f4c96a17f95d18f4eab7d99d37fa6df70e3b66f3f28241045"
+    },
+    {
+      "bytes": 8758,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/prepare-a9c-roles.py",
+      "sha256": "59ab833265a51ce23140b4f7e196830e873447337fa91337ca2036b109425ac4"
+    },
+    {
+      "bytes": 4945,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/verify-a9c.py",
+      "sha256": "969258dd3f1c2f10520ac3dea8c3518bd952f0771f94dfc23910d1d99845170c"
+    },
+    {
+      "bytes": 7261,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-freeze-v1.json",
+      "sha256": "9e50169157a91bf8a351e961dd53a3f11a9b33d18cf294baab1e13423dbc7814"
+    },
+    {
+      "bytes": 5969,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/campaign-freeze-v1.json",
+      "sha256": "6f8daef04a182673074d3a719c403b768d8e06052d42151123cc6e8c5beb7004"
+    },
+    {
+      "bytes": 664,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/stage-survival-freeze-v1.json",
+      "sha256": "5fa7bf4958df3577733744d607f1a8e143300fcd5db61b73b3f3556fe3c4bff5"
+    },
+    {
+      "bytes": 527,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/schemas/alternating-renewal-marked-v1.config.schema.json",
+      "sha256": "2c034549211c9842b05fd1d6cd66b7d43061f30d1ae6bd4be112155208d35a8f"
+    },
+    {
+      "bytes": 608,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/schemas/latent-regime-marked-v1.config.schema.json",
+      "sha256": "38f2a55cc3ce3bf730d30427d7a10a8a19c71a1583159c2711e9a4ae1944105c"
+    }
+  ],
+  "manifest_id": "a9c-implementation-v1",
+  "platform": {
+    "machine": "arm64",
+    "python": "3.12.7",
+    "system": "Darwin"
+  },
+  "production_runtime_changed": false,
+  "schema_version": 1
+}
