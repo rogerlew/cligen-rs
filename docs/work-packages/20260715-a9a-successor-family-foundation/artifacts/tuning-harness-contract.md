@@ -1,6 +1,6 @@
 # A9 tuning-harness contract
 
-Status: scaffolded requirements; no harness or optimizer selected
+Status: executed optimizer-neutral contract; no optimizer implementation selected
 
 ## Purpose and firewall
 
@@ -137,6 +137,20 @@ feasibility filters and a later scalar or lexicographic selection rule, but:
 - Re-running a completed evaluation from the same artifacts reproduces exact
   engineering identities and metric bytes within declared numeric formats.
 
+### Frozen random-field contract
+
+Simulation common random numbers use Philox4x32-10. A9b must publish golden
+vectors for the exact encoding before observed tuning. The domain is
+`cligen-rs/a9-crn/v1\0`; SHA-256 over length-prefixed campaign, site, burn,
+component, Gregorian date, and variate-slot identities supplies key/counter
+material. Occurrence, amount-body, amount-tail, event, latent-state, and daily-
+context components own stable namespaces. A rejected or optional draw cannot
+shift another component or date.
+
+Fit, optimizer, parameter/member, and simulation domains are distinct. Their
+artifacts record algorithm, version, full seed material, and derivation. No A9
+domain consumes faithful `RANDN`, QC, or Rust faithful-state draws.
+
 ## Synthetic and adverse fixtures
 
 Before observed tuning, A9b must implement fixtures for:
@@ -194,7 +208,7 @@ or reinterpret missing values.
 
 ## Resource governance
 
-A9a must turn “enough tuning” into bounded execution by specifying:
+Resource governance requires:
 
 - maximum candidate evaluations by fidelity stage;
 - maximum simulations and retained bytes per configuration;
@@ -207,3 +221,66 @@ A9a must turn “enough tuning” into bounded execution by specifying:
 
 Resource exhaustion produces a typed incomplete result, not silent pruning or
 a scientific failure score.
+
+The first development ceiling is fixed as follows; a later benchmark may
+reduce it but cannot increase it after candidate outcomes are visible:
+
+| Stage | Per candidate class | Station/burn/horizon policy |
+|---|---:|---|
+| analytic/support | 4,096 parameter proposals | no stochastic simulation |
+| short screening | 256 configurations | six frozen anchor stations, two burns, 30-year prefix |
+| full development | 64 configurations | complete development strata, four burns, one nested 100-year run |
+| Pareto replay | eight configurations | complete development strata, eight burns, one nested 100-year run |
+
+At most two candidate classes enter this campaign. A configuration rejected by
+a hard analytic constraint does not consume a simulation slot but remains in
+the append-only log. The executor uses at most eight worker processes, 12 GiB
+aggregate resident memory, 24 hours per stage, 72 hours for the full campaign,
+and 50 GiB retained output. Raw daily streams are retained only for fixtures,
+failures under investigation, and the eight Pareto replays per class; all
+attempts retain metrics and hashes. Artifacts at or above 10 MiB use Git LFS;
+reproducible scratch streams remain outside Git.
+
+Failure retries are limited to one byte-identical replay for infrastructure
+errors. A second failure returns `evaluation_incomplete`; parameters, seed,
+site, burn, and worker placement cannot change. Checkpoints are content-
+addressed after every completed configuration.
+
+## Gate calibration and frozen selection
+
+Gate calibration uses 500 paired same-model/null replicates per horizon and
+the versioned objective registry. Within each metric family and horizon, the
+95th percentile of the maximum paired degradation defines the stochastic
+noninferiority allowance, bounded below by the registry's absolute measurement
+floor. The analogous improvement tail defines material improvement. Candidate
+outputs are prohibited until the null artifact, exact numeric thresholds, and
+their hash are frozen.
+
+The complete Pareto vector is always published. The A9c selection rule is:
+
+1. reject hard-infeasible, incomplete, or mandatory-stratum-ineligible fits;
+2. reject a familywise material degradation in any mandatory family, stratum,
+   or horizon;
+3. maximize the worst regime-by-mandatory-family standardized improvement;
+4. maximize materially improved families;
+5. minimize median normalized distance;
+6. minimize effective fitted parameter count; and
+7. break an exact tie by candidate-class ID.
+
+Final A9c replay uses eight burns. A9d confirmation uses twelve newly derived
+burn identities and one 100-year stream per site/burn, with the 30-year prefix
+evaluated from that same stream. A9d runs once and cannot feed the optimizer.
+
+## Append-only evaluation state
+
+Every attempted configuration has one state:
+
+- `hard_infeasible` with exact failed constraints;
+- `evaluation_complete` with full objective availability/vector;
+- `evaluation_incomplete` with typed simulator/resource/infrastructure cause;
+  or
+- `dominated` as a derived label that never removes the underlying record.
+
+Logs form a hash chain over canonical records. Resuming verifies the chain and
+checkpoint hashes. A report may compact views, but the evidence archive retains
+every proposal, failure, and dominated configuration.

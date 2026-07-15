@@ -1,11 +1,13 @@
 # A9a — Stochastic Successor-Family Foundation
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-15
 Evidence mode: Static and derived planning
 Scaffolding authorization: operator authorized on 2026-07-15
 Execution authorization: conditional on successful A8c1 retirement and a
 separate operator dispatch
+Execution dispatch: operator authorized A9a on 2026-07-15 from clean `main`
+at `5c7f5d271b93e953986b88f7987044c5270d6c61`, targeting `main`
 
 ## Objective
 
@@ -277,3 +279,43 @@ candidate substitution, or model implementation.
 - During execution: authority/exposure manifests, foundation specification,
   fit-artifact and objective schemas, fixture plan, A9b handoff, consolidated
   review, and gate results.
+
+## Execution outcome
+
+A9a executed after A8c1 returned
+`A8C-ROUTED-DAILY-RUNTIME-RETIRED`. It returns
+`FOUNDATION-READY-A9B` with no production or vendored-reference change.
+
+The accepted authority set is frozen as 25 exact repository files. Ten source
+records expose 37 prior station IDs and 14 prior model identifiers as
+development-only evidence. No confirmation target series was acquired or
+read. A metadata-only 18-site USCRN roster has three sites in each of six
+mandatory primary strata, excludes prior target sites by at least 75 km, and
+has at least 150 km within-stratum separation. Its 2010--2025 target bytes
+remain inaccessible until a future A9d seal; a metadata climate-zone crosswalk
+must validate the frozen labels without substitution before target access.
+
+The family envelope now fixes two structurally distinct research class slots:
+an explicit alternating semi-Markov observed-spell law and a hidden semi-Markov
+joint marked-emission law. Both jointly cover occurrence/spells, wet-amount
+body/tail/memory, event descriptors, and daily meteorological context. Neither
+has a year-level state or runtime fallback. `wet0` and `r1mm` semantics are
+separate and fixed. USCRN five-minute data supports descriptor-level event and
+compound evidence under `a9_uscrn_event_6h_v1`, without authorizing native
+subdaily or single-storm generation.
+
+The optimizer-neutral research contract includes independent fit/optimizer/
+member/simulation identities, counter-based Philox common random numbers,
+analytic monthly-moment reconciliation, staged resource ceilings, append-only
+attempts, 500-replicate familywise null calibration, a 31-objective registry,
+Pareto reporting, a frozen lexicographic development rule, and one-shot locked
+confirmation. Three research schemas and 20 synthetic/adverse fixture groups
+make the A9b handoff executable. A9b remains unscaffolded and requires a
+separate operator dispatch.
+
+Consolidated review is `ACCEPT` with zero open P1/P2 findings. Package-specific
+verification, link/schema checks, `git diff --check`, formatting, Clippy, and
+the full Rust test suite pass. Coverage/CRAP is not triggered because no
+production function changed.
+
+Terminal: `FOUNDATION-READY-A9B`.

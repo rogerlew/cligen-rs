@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rogerlew/cligen-rs/blob/main/docs/specifications/a9-data-role-manifest-v1.schema.json",
+  "title": "A9 data-role manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "created_at",
+    "confirmation_access_state",
+    "roles",
+    "exposed_logical_records",
+    "access_log"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "manifest_id": { "$ref": "#/$defs/id" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "confirmation_access_state": {
+      "enum": ["metadata_only", "sealed", "consumed", "invalidated"]
+    },
+    "freeze_sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "roles": {
+      "type": "array",
+      "minItems": 4,
+      "items": { "$ref": "#/$defs/role" }
+    },
+    "exposed_logical_records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/logicalRecord" }
+    },
+    "access_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["timestamp", "actor", "action", "object_sha256"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "actor": { "type": "string", "minLength": 1 },
+          "action": {
+            "enum": [
+              "metadata_read",
+              "target_acquired_sealed",
+              "confirmation_consumed",
+              "campaign_invalidated"
+            ]
+          },
+          "object_sha256": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "permitted_use", "records"],
+      "properties": {
+        "role": {
+          "enum": [
+            "coefficient_fit",
+            "development",
+            "gate_calibration",
+            "confirmation"
+          ]
+        },
+        "permitted_use": { "type": "string", "minLength": 1 },
+        "records": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/logicalRecord" }
+        }
+      }
+    },
+    "logicalRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "product_version",
+        "station_id",
+        "variables",
+        "calendar",
+        "day_boundary",
+        "period_start",
+        "period_end",
+        "object_sha256",
+        "logical_sha256",
+        "access_state"
+      ],
+      "properties": {
+        "source_id": { "$ref": "#/$defs/id" },
+        "product_version": { "type": "string", "minLength": 1 },
+        "station_id": { "$ref": "#/$defs/id" },
+        "variables": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "calendar": { "type": "string", "minLength": 1 },
+        "day_boundary": { "type": "string", "minLength": 1 },
+        "period_start": { "type": "string", "format": "date" },
+        "period_end": { "type": "string", "format": "date" },
+        "object_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "logical_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "access_state": {
+          "enum": ["available", "metadata_only", "sealed", "consumed"]
+        }
+      }
+    }
+  }
+}

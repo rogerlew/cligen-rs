@@ -1,0 +1,782 @@
+{
+  "aggregation": {
+    "mandatory_strata": [
+      "hot_arid",
+      "arid_boundary",
+      "monsoonal_transition",
+      "non_monsoonal_semi_arid",
+      "humid",
+      "cold"
+    ],
+    "minimum_available_stations_per_stratum": 2,
+    "selection_rule": "a9_lexicographic_pareto_v1",
+    "station_to_stratum": "median_with_uncertainty"
+  },
+  "horizons_years": [
+    30,
+    100
+  ],
+  "null_calibration": {
+    "baseline_zero_rule": "Use the objective's absolute floor or its separate zero-mass and positive-scale distances; division by a zero baseline is prohibited.",
+    "candidate_access_prohibited": true,
+    "familywise_alpha": 0.05,
+    "method": "paired_max_statistic_quantile",
+    "replicates": 500
+  },
+  "objectives": [
+    {
+      "aggregation": "all rows and hashes must match",
+      "baseline_zero": "not_applicable",
+      "direction": "must_pass",
+      "distance": "exact byte equality",
+      "estimator": "repeat the identical run from the sealed manifest",
+      "family": "engineering",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "eng_deterministic_replay",
+      "minimum_support": "every run",
+      "normalization": "none",
+      "required_variables": [
+        "all_output_fields"
+      ],
+      "selection_role": "hard_invariant",
+      "statistic": "deterministic replay identity",
+      "target_units": "bytes",
+      "unavailable_rule": "failure",
+      "uncertainty": "none"
+    },
+    {
+      "aggregation": "all dates and support checks must pass",
+      "baseline_zero": "not_applicable",
+      "direction": "must_pass",
+      "distance": "violation count",
+      "estimator": "Gregorian continuity and registered field-support validator",
+      "family": "engineering",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "eng_calendar_and_support",
+      "minimum_support": "every row",
+      "normalization": "none",
+      "required_variables": [
+        "date",
+        "precipitation",
+        "storm_descriptors",
+        "daily_context"
+      ],
+      "selection_role": "hard_invariant",
+      "statistic": "calendar, finite-value, and support validity",
+      "target_units": "count",
+      "unavailable_rule": "failure",
+      "uncertainty": "none"
+    },
+    {
+      "aggregation": "all required identities present and hash-valid",
+      "baseline_zero": "not_applicable",
+      "direction": "must_pass",
+      "distance": "missing or mismatched identity count",
+      "estimator": "schema plus SHA-256 validation",
+      "family": "engineering",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "eng_provenance_completeness",
+      "minimum_support": "every fit, run, metric, and parent artifact",
+      "normalization": "none",
+      "required_variables": [
+        "provenance"
+      ],
+      "selection_role": "hard_invariant",
+      "statistic": "provenance and role-boundary completeness",
+      "target_units": "count",
+      "unavailable_rule": "failure",
+      "uncertainty": "none"
+    },
+    {
+      "absolute_floor": 0.01,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "two_part_zero_mass_and_positive_scale",
+      "direction": "minimize_distance",
+      "distance": "Euclidean difference in wet0 and r1mm wet-day proportions",
+      "estimator": "Gregorian monthly counts at precipitation greater than 0.0 mm and at least 1.0 mm, each divided by valid days",
+      "family": "occurrence_spell",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "occ_monthly_wet_frequency",
+      "minimum_support": "12 observed years and at least 90 percent valid days per retained month",
+      "normalization": "null-calibrated observed binomial scale with 0.01 absolute floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "monthly wet0 and r1mm wet-day frequency vector",
+      "target_units": "two proportions",
+      "unavailable_rule": "cell unavailable; fewer than two stations makes the stratum fail availability",
+      "uncertainty": "moving-block observed bootstrap and paired burn interval"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "integrated absolute survival-function difference over durations 1 through 30 days",
+      "estimator": "Kaplan-Meier survival at the r1mm threshold with year-boundary spells retained and record edges censored; wet0 is a secondary reported sensitivity",
+      "family": "occurrence_spell",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "occ_wet_spell_survival",
+      "minimum_support": "50 complete wet spells per season pooled over observed years",
+      "normalization": "paired-null 95th-percentile scale with 0.02 absolute floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "wet-spell duration survival",
+      "target_units": "integrated probability",
+      "unavailable_rule": "season unavailable; no pooling after outcome access",
+      "uncertainty": "stationary year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "integrated absolute survival-function difference over durations 1 through 60 days",
+      "estimator": "Kaplan-Meier survival at the r1mm threshold with year-boundary spells retained and record edges censored; wet0 is a secondary reported sensitivity",
+      "family": "occurrence_spell",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "occ_dry_spell_survival",
+      "minimum_support": "50 complete dry spells per season pooled over observed years",
+      "normalization": "paired-null 95th-percentile scale with 0.02 absolute floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "dry-spell duration survival",
+      "target_units": "integrated probability",
+      "unavailable_rule": "season unavailable; no pooling after outcome access",
+      "uncertainty": "stationary year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.01,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "Euclidean distance over observed wet/dry triplet probabilities after first-order residualization",
+      "estimator": "eight r1mm triplet-frequency residuals from the fitted first-order transition surface with wet0 reported as a sensitivity",
+      "family": "occurrence_spell",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "occ_higher_order_residual",
+      "minimum_support": "500 valid three-day windows per season",
+      "normalization": "paired-null scale with 0.01 probability floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "higher-order occurrence residual vector",
+      "target_units": "probability",
+      "unavailable_rule": "cell unavailable",
+      "uncertainty": "moving-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute log-ratio of positive means",
+      "estimator": "arithmetic mean of positive daily precipitation",
+      "family": "wet_amount",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "amt_monthly_wet_mean",
+      "minimum_support": "25 observed wet days per month across at least 12 years",
+      "normalization": "absolute log-ratio with 0.02 floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "monthly mean wet-day amount",
+      "target_units": "mm/day",
+      "unavailable_rule": "cell unavailable; a structurally all-dry month is represented by wet-frequency zero, not an invented amount",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.05,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute difference in coefficient of variation",
+      "estimator": "sample SD divided by mean over positive daily precipitation",
+      "family": "wet_amount",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "amt_monthly_wet_cv",
+      "minimum_support": "40 observed wet days per month and positive mean",
+      "normalization": "paired-null scale with 0.05 absolute floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "monthly wet-day amount CV",
+      "target_units": "ratio",
+      "unavailable_rule": "cell unavailable",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.05,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute Fisher-z difference",
+      "estimator": "Spearman correlation of adjacent positive wet-day amounts",
+      "family": "wet_amount",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "amt_adjacent_wet_dependence",
+      "minimum_support": "100 adjacent-wet pairs per station-season or 25 station pairs plus a frozen hierarchical group with at least 500 pairs",
+      "normalization": "paired-null scale with 0.05 correlation floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "adjacent-wet amount dependence",
+      "target_units": "correlation",
+      "unavailable_rule": "fit_ineligible unless the pre-fit pooling rule applies",
+      "uncertainty": "spell-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.1,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "weighted quantile and exceedance-probability distance",
+      "estimator": "empirical 0.90, 0.95, and 0.99 quantiles plus generalized-Pareto exceedance diagnostics",
+      "family": "wet_amount",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "amt_upper_tail",
+      "minimum_support": "300 wet days and at least 30 registered threshold exceedances",
+      "normalization": "observed median wet amount with 0.1 mm floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "wet-amount upper-tail vector",
+      "target_units": "mm and probability",
+      "unavailable_rule": "tail component unavailable; body metrics remain separate",
+      "uncertainty": "year-block bootstrap with tail-fit interval and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "dry-gap bin then season then station then stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "weighted absolute difference in conditional log means",
+      "estimator": "mean positive amount following dry gaps of 1, 2-3, 4-7, and 8+ days",
+      "family": "wet_amount",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "amt_dry_gap_memory",
+      "minimum_support": "25 wet events in each retained gap bin",
+      "normalization": "overall observed wet-amount log scale",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "secondary",
+      "statistic": "dry-gap-conditioned wet-amount memory",
+      "target_units": "log mm/day",
+      "unavailable_rule": "unsupported bins unavailable and reported",
+      "uncertainty": "event-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "two_part_zero_mass_and_positive_scale",
+      "direction": "minimize_distance",
+      "distance": "absolute difference in zero-total month probability",
+      "estimator": "fraction of complete Gregorian months with zero precipitation",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_zero_month_frequency",
+      "minimum_support": "12 complete observed years",
+      "normalization": "paired-null scale with 0.02 probability floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "zero-precipitation month frequency",
+      "target_units": "proportion",
+      "unavailable_rule": "cell unavailable",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "two_part_zero_mass_and_positive_scale",
+      "direction": "minimize_distance",
+      "distance": "absolute log-ratio of positive monthly means with separate zero mass",
+      "estimator": "mean of complete monthly precipitation totals",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_monthly_total_mean",
+      "minimum_support": "12 complete observed years",
+      "normalization": "absolute log-ratio with 0.02 floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "monthly total precipitation mean",
+      "target_units": "mm/month",
+      "unavailable_rule": "zero-only months use the two-part rule",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.05,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "two_part_zero_mass_and_positive_scale",
+      "direction": "minimize_distance",
+      "distance": "absolute CV difference with separate zero-only handling",
+      "estimator": "sample SD divided by mean of complete monthly totals",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_monthly_total_cv",
+      "minimum_support": "12 complete observed years and positive monthly mean",
+      "normalization": "paired-null scale with 0.05 CV floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "monthly total precipitation CV",
+      "target_units": "ratio",
+      "unavailable_rule": "zero-only months use zero-mass evidence and have no positive CV",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 1,
+      "aggregation": "station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "Frobenius norm of shrinkage covariance difference",
+      "estimator": "Ledoit-Wolf covariance of 12 monthly-total anomalies",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_cross_month_covariance",
+      "minimum_support": "20 complete observed years",
+      "normalization": "observed covariance Frobenius norm with 1 mm squared floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "secondary",
+      "statistic": "cross-month precipitation covariance",
+      "target_units": "mm^2",
+      "unavailable_rule": "unavailable below record-length support; never imputed",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.03,
+      "aggregation": "station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute CV difference",
+      "estimator": "sample SD divided by mean of complete annual totals",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_annual_total_cv",
+      "minimum_support": "12 complete observed years and positive annual mean",
+      "normalization": "paired-null scale with 0.03 CV floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "annual precipitation-total CV",
+      "target_units": "ratio",
+      "unavailable_rule": "station unavailable",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.1,
+      "aggregation": "station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute Fisher-z difference",
+      "estimator": "bias-corrected lag-one correlation of annual precipitation anomalies",
+      "family": "aggregate",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "agg_annual_lag1",
+      "minimum_support": "20 complete observed years",
+      "normalization": "paired-null scale with 0.10 correlation floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "secondary",
+      "statistic": "annual precipitation lag-one persistence",
+      "target_units": "correlation",
+      "unavailable_rule": "unavailable below record-length support",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 1e-06,
+      "aggregation": "station then stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "report_only",
+      "distance": "integrated log-periodogram difference over periods 2 through 15 years",
+      "estimator": "multitaper spectrum of detrended annual totals",
+      "family": "aggregate",
+      "horizons_years": [
+        100
+      ],
+      "id": "agg_low_frequency_spectrum",
+      "minimum_support": "30 complete observed years",
+      "normalization": "integrated observed spectral power with numerical epsilon",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "report_only",
+      "statistic": "low-frequency annual-total spectrum",
+      "target_units": "normalized power",
+      "unavailable_rule": "unavailable for the 2010-2025 USCRN confirmation period",
+      "uncertainty": "frequency-domain bootstrap and burn interval"
+    },
+    {
+      "absolute_floor": 1,
+      "aggregation": "duration then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "weighted relative difference for 1-, 3-, and 5-day annual maxima plus quantile distance",
+      "estimator": "annual maxima and L-moment GEV sensitivity with no extrapolated pass/fail beyond observed support",
+      "family": "extreme",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "ext_annual_1_3_5_day_maxima",
+      "minimum_support": "15 complete observed years",
+      "normalization": "observed median annual maximum with 1 mm floor",
+      "required_variables": [
+        "precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "annual 1-, 3-, and 5-day precipitation maxima",
+      "target_units": "mm",
+      "unavailable_rule": "duration/site unavailable below support",
+      "uncertainty": "year bootstrap, tail-fit interval, and paired burns"
+    },
+    {
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "energy distance on log duration",
+      "estimator": "USCRN five-minute event segmentation a9_uscrn_event_6h_v1",
+      "family": "storm_descriptor",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "storm_duration",
+      "minimum_support": "150 valid events per station or 50 station events plus a frozen group with at least 1000 events from five sites",
+      "normalization": "paired-null energy-distance scale",
+      "required_variables": [
+        "subhourly_precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "event duration distribution",
+      "target_units": "hours",
+      "unavailable_rule": "fit_ineligible unless the pre-fit pooling rule applies",
+      "uncertainty": "event-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "Cramer-von Mises distance on the unit interval plus boundary-mass difference",
+      "estimator": "earliest five-minute peak midpoint divided by event duration",
+      "family": "storm_descriptor",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "storm_time_to_peak",
+      "minimum_support": "150 valid events under a9_uscrn_event_6h_v1",
+      "normalization": "paired-null scale with 0.02 boundary-mass floor",
+      "required_variables": [
+        "subhourly_precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "event time-to-peak fraction distribution",
+      "target_units": "fraction",
+      "unavailable_rule": "station unavailable; a point mass at zero is a measured failure, not repaired",
+      "uncertainty": "event-block bootstrap and paired burns"
+    },
+    {
+      "aggregation": "season then station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "energy distance on log peak ratio",
+      "estimator": "maximum five-minute rate divided by event-mean rate",
+      "family": "storm_descriptor",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "storm_peak_ratio",
+      "minimum_support": "150 valid events under a9_uscrn_event_6h_v1",
+      "normalization": "paired-null energy-distance scale",
+      "required_variables": [
+        "subhourly_precipitation"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "event peak-intensity ratio distribution",
+      "target_units": "ratio",
+      "unavailable_rule": "station unavailable",
+      "uncertainty": "event-block bootstrap and paired burns"
+    },
+    {
+      "aggregation": "station then mandatory stratum",
+      "baseline_zero": "not_applicable",
+      "direction": "minimize_distance",
+      "distance": "energy distance after rank-normalizing depth, duration, time-to-peak, peak ratio, season, and antecedent dry time",
+      "estimator": "joint event-vector empirical distribution",
+      "family": "storm_descriptor",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "storm_joint_dependence",
+      "minimum_support": "200 valid events and 25 events above the registered deep-event threshold",
+      "normalization": "paired-null multivariate energy-distance scale",
+      "required_variables": [
+        "subhourly_precipitation",
+        "air_temperature"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "joint event descriptor and depth dependence",
+      "target_units": "rank space",
+      "unavailable_rule": "station unavailable",
+      "uncertainty": "event-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.25,
+      "aggregation": "month then station then mandatory stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "Euclidean difference in wet-minus-dry Tmax and Tmin means and SDs",
+      "estimator": "daily temperature summaries conditioned on precipitation greater than 0.0 mm",
+      "family": "compound_context",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "ctx_wet_dry_temperature",
+      "minimum_support": "100 wet and 100 dry valid days per retained season",
+      "normalization": "observed seasonal temperature SD with 0.25 C floor",
+      "required_variables": [
+        "precipitation",
+        "tmax",
+        "tmin"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "wet/dry-conditioned Tmax and Tmin mean/SD vector",
+      "target_units": "C",
+      "unavailable_rule": "cell unavailable",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.25,
+      "aggregation": "season then station then stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute wet-minus-dry conditional mean difference",
+      "estimator": "daily mean relative humidity and derived dew point conditioned on wetness",
+      "family": "compound_context",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "ctx_wet_dry_humidity",
+      "minimum_support": "200 wet and 200 dry overlapping valid days",
+      "normalization": "observed seasonal SD with 1 percentage-point or 0.25 C floor",
+      "required_variables": [
+        "precipitation",
+        "relative_humidity",
+        "air_temperature"
+      ],
+      "selection_role": "secondary",
+      "statistic": "wet/dry-conditioned humidity and dew-point context",
+      "target_units": "percent and C",
+      "unavailable_rule": "variable/site unavailable; station-contract values are not substituted",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.1,
+      "aggregation": "season then station then stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute wet-minus-dry daily-energy mean difference",
+      "estimator": "sum of valid five-minute global solar flux times interval duration by local-standard day",
+      "family": "compound_context",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "ctx_wet_dry_solar",
+      "minimum_support": "200 wet and 200 dry days with at least 90 percent valid five-minute solar intervals",
+      "normalization": "observed seasonal daily-energy SD with 0.1 MJ/m2 floor",
+      "required_variables": [
+        "precipitation",
+        "solar_radiation"
+      ],
+      "selection_role": "secondary",
+      "statistic": "wet/dry-conditioned solar radiation",
+      "target_units": "MJ/m2/day",
+      "unavailable_rule": "cell unavailable",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.1,
+      "aggregation": "season then station then stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute wet/event-minus-dry wind-speed mean and upper-quantile difference",
+      "estimator": "USCRN 1.5 m five-minute wind aggregated by local-standard day and event",
+      "family": "compound_context",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "ctx_wet_event_wind_speed",
+      "minimum_support": "200 wet/event and 200 dry valid days; good QC flag only",
+      "normalization": "observed seasonal wind-speed SD with 0.1 m/s floor",
+      "required_variables": [
+        "precipitation",
+        "wind_speed_1_5m"
+      ],
+      "selection_role": "secondary",
+      "statistic": "wet/event-conditioned 1.5 m wind speed",
+      "target_units": "m/s",
+      "unavailable_rule": "wind direction is unavailable and 1.5 m speed is not converted to 10 m",
+      "uncertainty": "year-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.02,
+      "aggregation": "winter season then station then cold stratum",
+      "baseline_zero": "two_part_zero_mass_and_positive_scale",
+      "direction": "minimize_distance",
+      "distance": "absolute difference in precipitation fraction on mean-air-temperature at or below 0 C days",
+      "estimator": "precipitation sum on cold-context days divided by winter precipitation sum",
+      "family": "winter_proxy",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "winter_cold_wet_fraction",
+      "minimum_support": "12 complete winters and positive winter precipitation",
+      "normalization": "paired-null scale with 0.02 proportion floor",
+      "required_variables": [
+        "precipitation",
+        "tmax",
+        "tmin"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "cold-context precipitation fraction",
+      "target_units": "proportion",
+      "unavailable_rule": "cell unavailable; explicitly not a rain/snow partition",
+      "uncertainty": "winter-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 1,
+      "aggregation": "winter season then station then cold stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute difference in annual transition count",
+      "estimator": "count sign changes of daily mean air temperature across 0 C after excluding missing days",
+      "family": "winter_proxy",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "winter_freeze_transition_count",
+      "minimum_support": "12 complete winters with at least 90 percent valid days",
+      "normalization": "paired-null scale with one-transition floor",
+      "required_variables": [
+        "tmax",
+        "tmin"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "air-temperature freeze-transition count",
+      "target_units": "transitions/winter",
+      "unavailable_rule": "cell unavailable; explicitly not soil freeze/thaw",
+      "uncertainty": "winter-block bootstrap and paired burns"
+    },
+    {
+      "absolute_floor": 0.05,
+      "aggregation": "winter season then station then cold stratum",
+      "baseline_zero": "absolute_floor",
+      "direction": "minimize_distance",
+      "distance": "absolute Fisher-z correlation difference",
+      "estimator": "Spearman correlation of daily precipitation and mean air temperature on winter wet days",
+      "family": "winter_proxy",
+      "horizons_years": [
+        30,
+        100
+      ],
+      "id": "winter_precip_temperature_dependence",
+      "minimum_support": "100 winter wet days over at least 12 winters",
+      "normalization": "paired-null scale with 0.05 correlation floor",
+      "required_variables": [
+        "precipitation",
+        "tmax",
+        "tmin"
+      ],
+      "selection_role": "mandatory",
+      "statistic": "winter precipitation-temperature dependence",
+      "target_units": "correlation",
+      "unavailable_rule": "station unavailable",
+      "uncertainty": "winter-block bootstrap and paired burns"
+    }
+  ],
+  "registry_id": "a9_objective_registry_v1",
+  "schema_version": 1
+}

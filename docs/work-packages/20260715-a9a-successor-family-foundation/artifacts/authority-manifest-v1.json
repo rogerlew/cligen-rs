@@ -1,0 +1,158 @@
+{
+  "captured_at": "2026-07-15T14:13:23-07:00",
+  "dispatch_commit": "5c7f5d271b93e953986b88f7987044c5270d6c61",
+  "files": [
+    {
+      "authority_id": "a5d0_package",
+      "bytes": 13643,
+      "path": "docs/work-packages/20260714-a5d0-successor-feasibility-calibration/package.md",
+      "sha256": "5930613d23e00a30b28a87022b94c93679dc170e0b84081501720141be77427b"
+    },
+    {
+      "authority_id": "a5f0_decision",
+      "bytes": 1978,
+      "path": "docs/work-packages/20260714-a5f0-annual-state-failure-attribution/artifacts/a5f0-decision-v1.json",
+      "sha256": "c1d6c73097e14d4e98b6021632a03055667d1932732d0bbae9806024dfb7f064"
+    },
+    {
+      "authority_id": "a5f0_package",
+      "bytes": 7283,
+      "path": "docs/work-packages/20260714-a5f0-annual-state-failure-attribution/package.md",
+      "sha256": "a341d383fded0bb85c239ac9a5bde05bfb5f0fc905044707168ff5701951b7a0"
+    },
+    {
+      "authority_id": "a7a_decision",
+      "bytes": 3045,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-decision-v1.json",
+      "sha256": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f"
+    },
+    {
+      "authority_id": "a7a_package",
+      "bytes": 8276,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md",
+      "sha256": "5c80ce139fd858edcfe950df96194177df5924baba9eb4c01eb528c2137ba78a"
+    },
+    {
+      "authority_id": "a7a_report",
+      "bytes": 21102,
+      "path": "docs/reports/a7a-daily-precipitation-structure-report.md",
+      "sha256": "1ebece39de2b1528eec91c76b5067c9000c8b600de9ab68821b853e9b1774bc4"
+    },
+    {
+      "authority_id": "a7b_decision",
+      "bytes": 1758,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/a7b-decision-v1.json",
+      "sha256": "263a0e6788afcc7a49b07be9879ddabbc58adbe3188a73145c2f06b861a778a8"
+    },
+    {
+      "authority_id": "a7b_equivalence_review",
+      "bytes": 2732,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/post-analysis-equivalence-review.md",
+      "sha256": "d8b376b3d83adbfc49f8ec0cd7a84d37e4ac3dc635e850b9876a3fa32af00fa7"
+    },
+    {
+      "authority_id": "a7b_package",
+      "bytes": 8220,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md",
+      "sha256": "a50a17e96aa5cca6bc8ea0a282d6610473468934dac34d7daff066b00ef1f06a"
+    },
+    {
+      "authority_id": "a8a_decision",
+      "bytes": 1675,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-decision-v1.json",
+      "sha256": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58"
+    },
+    {
+      "authority_id": "a8a_package",
+      "bytes": 8293,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/package.md",
+      "sha256": "47bf3540b4fedc78a2c0215062a67b0acd4b6b5a4d96af3c722247292c55cee7"
+    },
+    {
+      "authority_id": "a8b_decision",
+      "bytes": 767,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/a8b-decision-v1.json",
+      "sha256": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb"
+    },
+    {
+      "authority_id": "a8b_package",
+      "bytes": 8568,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/package.md",
+      "sha256": "f551172fda326fb44ff7e9a88c9beb6dab3cd037afa03422d39a1c47a8a2c981"
+    },
+    {
+      "authority_id": "a8c1_package",
+      "bytes": 10108,
+      "path": "docs/work-packages/20260715-a8c1-routed-daily-retirement/package.md",
+      "sha256": "c788219fdb765648ec808122fba2e09172cd945c2168fd2d7840ddb34a54ab7b"
+    },
+    {
+      "authority_id": "a8c_decision",
+      "bytes": 496,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-decision-v1.json",
+      "sha256": "d393b16ea076a6f14d46b57f383ba4ec26014b766661985f9d2922f1fa5bc827"
+    },
+    {
+      "authority_id": "a8c_package",
+      "bytes": 9588,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/package.md",
+      "sha256": "69a59bc5168adccb078bad9c8eee8301e4b0fbcafa94e141f2b8f75d812a08e5"
+    },
+    {
+      "authority_id": "a8c_review",
+      "bytes": 5931,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/review.md",
+      "sha256": "17676de3595b6bc41ed94bb172f2124ce19e31d0e1b9757f17e588c049d01726"
+    },
+    {
+      "authority_id": "adr_0001",
+      "bytes": 6120,
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "authority_id": "adr_0002",
+      "bytes": 5870,
+      "path": "docs/decisions/0002-quality-metrics-authority.md",
+      "sha256": "caaa454358a116c099c93f8d8cf47baa07cd027df2db25285a91a5717802e82c"
+    },
+    {
+      "authority_id": "adr_0004",
+      "bytes": 3587,
+      "path": "docs/decisions/0004-a5b-interannual-no-promotion.md",
+      "sha256": "959053ceeddc72992fefcd3272371354190b59387689cdcfd01dd01f9b430dcf"
+    },
+    {
+      "authority_id": "daily_source_assessment",
+      "bytes": 33161,
+      "path": "docs/work-packages/20260713-a5b-coefficient-source-assessment/artifacts/daily-source-assessment.md",
+      "sha256": "0db230fe9c56e81f10990673cb963a10a527366ca849c45cfa2af0eeb0dc14cc"
+    },
+    {
+      "authority_id": "rust_scientific_standard",
+      "bytes": 8074,
+      "path": "docs/standards/rust-scientific-coding-standard.md",
+      "sha256": "24b3391cae87b819c13f00db089048e14578737ab98a28d846c9ab8d9c6fa87a"
+    },
+    {
+      "authority_id": "scientific_authoring_protocol",
+      "bytes": 6399,
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "authority_id": "scientific_report_standard",
+      "bytes": 5945,
+      "path": "docs/standards/scientific-report-standard.md",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "authority_id": "sota_gap_analysis",
+      "bytes": 37510,
+      "path": "docs/lit-reviews/sota-climate-generator-gap-analysis.md",
+      "sha256": "537357912e65c7df77840cd33d790697a73a0a62b6fc237cd5c6778d79b68e89"
+    }
+  ],
+  "predecessor_terminal": "A8C-ROUTED-DAILY-RUNTIME-RETIRED",
+  "schema_version": 1
+}

@@ -22,28 +22,31 @@ candidate rescue with a calibration-first successor family.** File/I/O,
 openWEPP, WEPPcloud, PyO3, and other consumer-integration work remains deferred;
 it is not a prerequisite for this research sequence.
 
-The ordered active queue is:
+There is no active authorized package. A9a completed on 2026-07-15 with
+`FOUNDATION-READY-A9B`. It froze a joint occurrence/amount/event/context family
+envelope, two structurally distinct research class slots, optimizer-neutral
+fit and tuning contracts, a 31-objective registry, six-regime applicability,
+an exact metadata-only 18-site USCRN confirmation roster, a development/
+confirmation firewall, and 20 synthetic/adverse fixture groups. It selected no
+candidate, accessed no confirmation target, and changed no production runtime.
+The accepted record and freeze-ready successor handoff are in the
+[A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
-1. **A9a — successor-family foundation.** With A8c1 closed, specify a new
-   joint precipitation/event/daily-context model family and an optimizer-
-   neutral calibration harness. A9a must derive its requirements from the
-   accepted A5--A8 records and SOTA review; define fit, development,
-   gate-calibration, and untouched-confirmation evidence roles; cover arid,
-   arid-boundary, monsoonal, other semi-arid, humid, and cold regimes without
-   runtime climate classification; and separate tunable development from one-
-   shot locked adjudication. It changes no production generator and selects no
-   candidate. The package is
-   [scaffolded](work-packages/20260715-a9a-successor-family-foundation/package.md).
+The next eligible item is **A9b — calibration-harness implementation**, but it
+remains unscaffolded and unauthorized pending a separate operator dispatch.
+A9b is synthetic/tooling-only: it implements schemas, canonical hashes, the
+data-role firewall, counter-based random fields, mock class plugins, objective
+calibration, append-only optimization evidence, and the registered fixtures.
+It does not fit observed climate or add a runtime profile.
 
-The conditional successor sequence is A9b calibration-harness implementation,
-A9c development-only comparison of genuinely distinct model classes, A9d
-locked held-out climate confirmation, and A9e Rust runtime pilot. Those
-packages remain unscaffolded and unauthorized until their predecessor returns
-the registered continuation terminal. A9 does not inherit an A8c candidate,
-coefficient, threshold, station classification, or confirmation claim. A
-future production-promotion decision still requires separately roadmapped
-downstream evidence under ADR-0004; the present sequence neither performs nor
-waives openWEPP/WEPPcloud integration.
+The later conditional sequence is A9c development-only comparison of the two
+genuinely distinct model classes, A9d locked one-shot climate confirmation,
+and A9e Rust runtime pilot. Those packages remain unscaffolded and unauthorized
+until their predecessor returns the registered continuation terminal. A9 does
+not inherit an A8c candidate, coefficient, threshold, station classification,
+or confirmation claim. A future production-promotion decision still requires
+separately roadmapped downstream evidence under ADR-0004; the present sequence
+neither performs nor waives openWEPP/WEPPcloud integration.
 
 **Operator correction 2026-07-14: stop the selector/count-construction
 escalation and return to the model question left open by A5c.** The A5d0-A5d1b

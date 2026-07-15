@@ -1,0 +1,308 @@
+{
+  "access_boundary": {
+    "confirmation_target_series_accessed": false,
+    "metadata_accessed": [
+      {
+        "accessed_at": "2026-07-15T14:13:23-07:00",
+        "content_sha256": "a34e22a2356200602d9a1e67b0a160456d46b860d13610789e5da64b2b271f71",
+        "description": "official USCRN station listing HTML",
+        "url": "https://www.ncei.noaa.gov/access/crn/station-listing"
+      },
+      {
+        "accessed_at": "2026-07-15T14:13:23-07:00",
+        "content_sha256": "0a973b423f503a6c48557b21f14f648149d4d8f4f209b9bad34dbc52f7748e2c",
+        "description": "official USCRN product documentation page",
+        "url": "https://www.ncei.noaa.gov/access/crn/qcdatasets.html"
+      },
+      {
+        "accessed_at": "2026-07-15T14:13:23-07:00",
+        "content_sha256": "a86a32c6d8a0d1f5d3e2724e8e98b237cc714a64858da9a8822da900e9f4f5f3",
+        "description": "official Subhourly01 format and quality documentation",
+        "url": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01/README.txt"
+      },
+      {
+        "accessed_at": "2026-07-15T14:13:23-07:00",
+        "content_sha256": "cf1525e5a98d071d736c32e799ff80657c1f6a599f3f55433efce7e698c86938",
+        "description": "official Subhourly01 field headers",
+        "url": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01/headers.txt"
+      }
+    ],
+    "prohibited_until_a9d_freeze": [
+      "USCRN Daily01 station-year data for the selected sites and target period",
+      "USCRN Subhourly01 station-year data for the selected sites and target period",
+      "derived station climate summaries, event descriptors, completeness rates, or QC pass rates",
+      "replacement-site search after any selected target is accessed"
+    ]
+  },
+  "corpus_id": "a9_uscrn_confirmation_metadata_v1",
+  "fit_period": {
+    "calendar": "daymet_official_365_v1",
+    "end": "2009-12-31",
+    "product": "Daymet V4 R1 exact single-pixel objects to be acquired and hashed after the candidate recipe is frozen",
+    "start": "1980-01-01"
+  },
+  "pre_target_gates": {
+    "active_crn_required": true,
+    "exact_station_count": 18,
+    "minimum_distance_from_exposed_target_station_km": 75,
+    "minimum_stations_per_stratum": 3,
+    "minimum_within_stratum_distance_km": 150,
+    "no_substitution": true,
+    "operational_on_or_before": "2008-12-31T23:59:59Z",
+    "stratum_crosswalk": "Before target acquisition, A9c must bind a hash-pinned metadata-only climate-zone/seasonality crosswalk and verify each frozen primary label. A mismatch ends in a data-partition hold; it does not open replacement selection."
+  },
+  "schema_version": 1,
+  "stations": [
+    {
+      "closed_at": null,
+      "elevation_ft": 3284,
+      "latitude": 36.62,
+      "longitude": -116.02,
+      "nearest_exposed_distance_km": 77.743,
+      "nearest_exposed_station_id": "ca042319",
+      "network": "CRN",
+      "operational_at": "2004-03-28T21:00:00Z",
+      "primary_stratum": "hot_arid",
+      "station_id": "nv_mercury_3_ssw",
+      "station_name": "NV Mercury 3 SSW"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 2724,
+      "latitude": 31.62,
+      "longitude": -102.81,
+      "nearest_exposed_distance_km": 80.263,
+      "nearest_exposed_station_id": "tx413280",
+      "network": "CRN",
+      "operational_at": "2003-05-21T15:00:00Z",
+      "primary_stratum": "hot_arid",
+      "station_id": "tx_monahans_6_ene",
+      "station_name": "TX Monahans 6 ENE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 3494,
+      "latitude": 29.35,
+      "longitude": -103.21,
+      "nearest_exposed_distance_km": 114.499,
+      "nearest_exposed_station_id": "tx417262",
+      "network": "CRN",
+      "operational_at": "2007-02-24T16:00:00Z",
+      "primary_stratum": "hot_arid",
+      "station_id": "tx_panther_junction_2_n",
+      "station_name": "TX Panther Junction 2 N"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 6062,
+      "latitude": 40.24,
+      "longitude": -108.97,
+      "nearest_exposed_distance_km": 151.459,
+      "nearest_exposed_station_id": "wy487845",
+      "network": "CRN",
+      "operational_at": "2004-07-21T15:00:00Z",
+      "primary_stratum": "arid_boundary",
+      "station_id": "co_dinosaur_2_e",
+      "station_name": "CO Dinosaur 2 E"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 6204,
+      "latitude": 38.3,
+      "longitude": -111.29,
+      "nearest_exposed_distance_km": 327.197,
+      "nearest_exposed_station_id": "nv262631",
+      "network": "CRN",
+      "operational_at": "2007-10-02T23:00:00Z",
+      "primary_stratum": "arid_boundary",
+      "station_id": "ut_torrey_7_e",
+      "station_name": "UT Torrey 7 E"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 4847,
+      "latitude": 34.36,
+      "longitude": -106.89,
+      "nearest_exposed_distance_km": 80.597,
+      "nearest_exposed_station_id": "nm290234",
+      "network": "CRN",
+      "operational_at": "2003-05-24T15:00:00Z",
+      "primary_stratum": "arid_boundary",
+      "station_id": "nm_socorro_20_n",
+      "station_name": "NM Socorro 20 N"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 8716,
+      "latitude": 35.86,
+      "longitude": -106.52,
+      "nearest_exposed_distance_km": 90.522,
+      "nearest_exposed_station_id": "nm290234",
+      "network": "CRN",
+      "operational_at": "2004-08-01T01:00:00Z",
+      "primary_stratum": "monsoonal_transition",
+      "station_id": "nm_los_alamos_13_w",
+      "station_name": "NM Los Alamos 13 W"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 8034,
+      "latitude": 37.26,
+      "longitude": -108.5,
+      "nearest_exposed_distance_km": 235.013,
+      "nearest_exposed_station_id": "co050130",
+      "network": "CRN",
+      "operational_at": "2005-11-02T23:00:00Z",
+      "primary_stratum": "monsoonal_transition",
+      "station_id": "co_cortez_8_se",
+      "station_name": "CO Cortez 8 SE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 5990,
+      "latitude": 35.76,
+      "longitude": -112.34,
+      "nearest_exposed_distance_km": 257.304,
+      "nearest_exposed_station_id": "nv264436",
+      "network": "CRN",
+      "operational_at": "2008-06-26T02:00:00Z",
+      "primary_stratum": "monsoonal_transition",
+      "station_id": "az_williams_35_nnw",
+      "station_name": "AZ Williams 35 NNW"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 5390,
+      "latitude": 40.81,
+      "longitude": -104.76,
+      "nearest_exposed_distance_km": 152.546,
+      "nearest_exposed_station_id": "ne257665",
+      "network": "CRN",
+      "operational_at": "2003-07-06T22:00:00Z",
+      "primary_stratum": "non_monsoonal_semi_arid",
+      "station_id": "co_nunn_7_nne",
+      "station_name": "CO Nunn 7 NNE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 3740,
+      "latitude": 42.07,
+      "longitude": -101.45,
+      "nearest_exposed_distance_km": 179.128,
+      "nearest_exposed_station_id": "ne257665",
+      "network": "CRN",
+      "operational_at": "2004-09-12T01:00:00Z",
+      "primary_stratum": "non_monsoonal_semi_arid",
+      "station_id": "ne_whitman_5_ene",
+      "station_name": "NE Whitman 5 ENE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 4583,
+      "latitude": 43.47,
+      "longitude": -119.69,
+      "nearest_exposed_distance_km": 212.424,
+      "nearest_exposed_station_id": "or350412",
+      "network": "CRN",
+      "operational_at": "2003-07-03T04:00:00Z",
+      "primary_stratum": "non_monsoonal_semi_arid",
+      "station_id": "or_riley_10_wsw",
+      "station_name": "OR Riley 10 WSW"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 193,
+      "latitude": 32.46,
+      "longitude": -87.24,
+      "nearest_exposed_distance_km": 219.839,
+      "nearest_exposed_station_id": "al015478",
+      "network": "CRN",
+      "operational_at": "2005-05-26T13:00:00Z",
+      "primary_stratum": "humid",
+      "station_id": "al_selma_13_wnw",
+      "station_name": "AL Selma 13 WNW"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 374,
+      "latitude": 32.34,
+      "longitude": -89.07,
+      "nearest_exposed_distance_km": 190.153,
+      "nearest_exposed_station_id": "ms227840",
+      "network": "CRN",
+      "operational_at": "2002-11-03T09:00:00Z",
+      "primary_stratum": "humid",
+      "station_id": "ms_newton_5_ene",
+      "station_name": "MS Newton 5 ENE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 317,
+      "latitude": 33.36,
+      "longitude": -81.33,
+      "nearest_exposed_distance_km": 131.415,
+      "nearest_exposed_station_id": "sc381544",
+      "network": "CRN",
+      "operational_at": "2002-07-13T14:00:00Z",
+      "primary_stratum": "humid",
+      "station_id": "sc_blackville_3_w",
+      "station_name": "SC Blackville 3 W"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 1140,
+      "latitude": 64.97,
+      "longitude": -147.51,
+      "nearest_exposed_distance_km": 453.48,
+      "nearest_exposed_station_id": "ak505769",
+      "network": "CRN",
+      "operational_at": "2002-08-09T22:00:00Z",
+      "primary_stratum": "cold",
+      "station_id": "ak_fairbanks_11_ne",
+      "station_name": "AK Fairbanks 11 NE"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 1150,
+      "latitude": 48.31,
+      "longitude": -95.87,
+      "nearest_exposed_distance_km": 185.933,
+      "nearest_exposed_station_id": "mn214026",
+      "network": "CRN",
+      "operational_at": "2003-08-20T20:00:00Z",
+      "primary_stratum": "cold",
+      "station_id": "mn_goodridge_12_nnw",
+      "station_name": "MN Goodridge 12 NNW"
+    },
+    {
+      "closed_at": null,
+      "elevation_ft": 4555,
+      "latitude": 48.74,
+      "longitude": -113.43,
+      "nearest_exposed_distance_km": 269.699,
+      "nearest_exposed_station_id": "mt243996",
+      "network": "CRN",
+      "operational_at": "2003-09-25T02:00:00Z",
+      "primary_stratum": "cold",
+      "station_id": "mt_st_mary_1_ssw",
+      "station_name": "MT St. Mary 1 SSW"
+    }
+  ],
+  "stratum_counts": {
+    "arid_boundary": 3,
+    "cold": 3,
+    "hot_arid": 3,
+    "humid": 3,
+    "monsoonal_transition": 3,
+    "non_monsoonal_semi_arid": 3
+  },
+  "target_period": {
+    "calendar": "Gregorian local standard time for event/daily aggregation; UTC retained",
+    "end": "2025-12-31",
+    "products": [
+      "USCRN Daily01",
+      "USCRN Subhourly01 format 01 / 05-minute"
+    ],
+    "start": "2010-01-01"
+  }
+}

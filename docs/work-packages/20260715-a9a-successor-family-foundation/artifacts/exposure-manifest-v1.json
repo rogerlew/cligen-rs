@@ -1,0 +1,346 @@
+{
+  "a9a_confirmation_target_accessed": false,
+  "candidate_outputs_and_thresholds_are_development_only": true,
+  "exposed_model_ids": [
+    "rank_one_monthly_sd",
+    "full_monthly_covariance",
+    "fourier_eof",
+    "vector_ar",
+    "gaussian_hmm",
+    "spectral_random_phase",
+    "precip_counterfactual",
+    "a5e0_direct_annual_state_v1",
+    "a5e0_direct_monthly_loading_fit_v1",
+    "o2_logqspline_gaussian_copula_v1",
+    "sm2_logqspline_gaussian_copula_v1",
+    "bounded_eof2_copula_ar1_reallocation_v1",
+    "legacy_daily_only_v1",
+    "a8c_routed_daily_v1"
+  ],
+  "exposed_periods": [
+    {
+      "period": "1980-01-01/2009-12-31",
+      "role": "A5/A8 coefficient fit and exposed development",
+      "sources": [
+        "Daymet V4 R1",
+        "available GHCN-Daily sensitivities"
+      ]
+    },
+    {
+      "period": "2010-01-01/2025-12-31",
+      "role": "A5/A7/A8 evaluation and exposed development",
+      "sources": [
+        "Daymet V4 R1",
+        "available GHCN-Daily sensitivities"
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "source_records": [
+    {
+      "bytes": 10116,
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496",
+      "source_id": "a5_corpus_config"
+    },
+    {
+      "bytes": 5479,
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/manifest-v1.json",
+      "sha256": "cfc27da46ff842547e8bd3134e599a26ab394a9042ed13c820de744649294cae",
+      "source_id": "a5_corpus_manifest"
+    },
+    {
+      "bytes": 47113,
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec",
+      "source_id": "a5_source_manifest"
+    },
+    {
+      "bytes": 2822763,
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/climate/candidate-evidence-manifest-v1.json",
+      "sha256": "6c74128a2d1a3017834474f858fb2ceebe52d5bbe2b39fb3dada953c8440cd06",
+      "source_id": "a5b_candidate_manifest"
+    },
+    {
+      "bytes": 17791,
+      "path": "docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/freeze/pre-candidate-freeze-v1.json",
+      "sha256": "9f75398e8a18a728102449111ee104fc3158c287407ade97eaf3cf71a7bee267",
+      "source_id": "a5b_pre_candidate_freeze"
+    },
+    {
+      "bytes": 18460,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json",
+      "sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+      "source_id": "a8a_panel"
+    },
+    {
+      "bytes": 28748,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json",
+      "sha256": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae",
+      "source_id": "a8a_source_manifest"
+    },
+    {
+      "bytes": 4173,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/feasibility-contract-v1.json",
+      "sha256": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b",
+      "source_id": "a8b_feasibility_contract"
+    },
+    {
+      "bytes": 2677,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/closure-manifest-v1.json",
+      "sha256": "d8cd5de5ff5ccf79e2f56a4a6d2c6584c511d8957619760cecc9f44765d06b3a",
+      "source_id": "a8c_closure_manifest"
+    },
+    {
+      "bytes": 7624,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/pilot-contract-v1.json",
+      "sha256": "7434b499691d472a77579fac896918e61c9b7bd738180d90c4bc498d48a3bfdf",
+      "source_id": "a8c_pilot_contract"
+    }
+  ],
+  "stations": [
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "ak505769"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "al015478"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a",
+        "A8b"
+      ],
+      "station_id": "az022664"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8c"
+      ],
+      "station_id": "az026481"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a",
+        "A8b"
+      ],
+      "station_id": "az028619"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8c"
+      ],
+      "station_id": "az028820"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a",
+        "A8b"
+      ],
+      "station_id": "az029654"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8b",
+        "A8c"
+      ],
+      "station_id": "ca040442"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a",
+        "A8b"
+      ],
+      "station_id": "ca042257"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a",
+        "A8b"
+      ],
+      "station_id": "ca042319"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8b"
+      ],
+      "station_id": "ca042713"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8c"
+      ],
+      "station_id": "co050130"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "co051660"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "fl083909"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "fl086997"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8c"
+      ],
+      "station_id": "id101022"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "id106388"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8c"
+      ],
+      "station_id": "la160549"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "me171175"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "mn212248"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "mn214026"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "ms227840"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "mt243996"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "ne257665"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "nm290234"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "nm294426"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "nv262631"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8b"
+      ],
+      "station_id": "nv264436"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "nv269171"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8b"
+      ],
+      "station_id": "or350412"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "sc381544"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "tx412797"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "tx413280"
+    },
+    {
+      "prior_packages": [
+        "A8a",
+        "A8b"
+      ],
+      "station_id": "tx417262"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "ut429382"
+    },
+    {
+      "prior_packages": [
+        "A5a/A5b/A7a"
+      ],
+      "station_id": "wy485345"
+    },
+    {
+      "prior_packages": [
+        "A8a"
+      ],
+      "station_id": "wy487845"
+    }
+  ],
+  "summary": {
+    "exposed_model_ids": 14,
+    "exposed_source_records": 10,
+    "exposed_station_ids": 37
+  }
+}
