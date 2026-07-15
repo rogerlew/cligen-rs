@@ -26,24 +26,13 @@ continuation. The immutable A5d0-A5d1b records retain their evidence and
 outcome-time recommendations, but this operator direction supersedes those
 recommendations.
 
-The active queue is the ordered A5f1/A7 sequence below. Roadmapping fixes the
+The active queue is the ordered A7 sequence below. Roadmapping fixes the
 dependency order and scope boundaries; it does not authorize a downstream
 package after a failed or held predecessor. Every item remains unscaffolded
 until separately dispatched, and each scientific contract must be frozen
 before its candidate output is generated or inspected.
 
-1. **A5f1 — retired A5e0 runtime cleanup.** Audit the release/API exposure of
-   the experimental `pub mod a5e0`, example runner, generator hook, and
-   A5e0-only support code. If the surface has not shipped, remove it from the
-   current crate; if it has shipped, use an explicit semver-safe deprecation
-   disposition rather than silently breaking consumers. Preserve the closed
-   specification, schemas, reports, work-package artifacts, source commit,
-   and Git history as the reproducibility record. Retain a generic RNG or
-   diagnostic primitive only when it has an independently documented use.
-   This package generates no climate and adds no replacement mechanism. It
-   exits `A5E0-RUNTIME-RETIRED` with faithful parity and public-surface checks
-   passing.
-2. **A7a — daily precipitation-structure baseline.** Freeze a measurement-only
+1. **A7a — daily precipitation-structure baseline.** Freeze a measurement-only
    contract on the existing 17-station Daymet/GHCN corpus before producing the
    new derived analysis. Quantify seasonal wet/dry spell distributions,
    higher-order occurrence residuals, wet-day amount lag-one dependence,
@@ -54,7 +43,7 @@ before its candidate output is generated or inspected.
    no public quality schema. It exits either
    `DAILY-PRECIPITATION-GAP-MEASURED` or
    `NO-DAILY-STRUCTURE-PRIORITY`; only the former permits A7b.
-3. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
+2. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
    measured-gap decision, compare one small declared set of integrated daily
    mechanisms: second-order or semi-Markov occurrence and an
    occurrence-conditioned wet-day amount model with limited persistence and a
@@ -66,7 +55,7 @@ before its candidate output is generated or inspected.
    count optimization, or post-generation repair. The package selects exactly
    one bounded A7c mechanism or exits `STOP-PRECIPITATION-LINE`; it does not
    implement a tournament of near misses.
-4. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
+3. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
    register one generation profile and evaluation contract before code or
    output, then integrate only the selected occurrence/amount mechanism at the
    daily precipitation seam. Run the dry, cold, and wet exposed development
@@ -78,7 +67,7 @@ before its candidate output is generated or inspected.
    confirmation is in scope. Only a complete three-station climate pass may
    return `CONTINUE-A7D`; every other scientific outcome closes the tested
    mechanism.
-5. **A7d — conditional corpus confirmation and residual adjudication.** Only
+4. **A7d — conditional corpus confirmation and residual adjudication.** Only
    after `CONTINUE-A7D`, freeze a new confirmation package before accessing
    confirmation output. Expand the one unchanged A7c mechanism to the full
    17-station corpus, GHCN sensitivity, both horizons, a faithful-clone null
@@ -104,6 +93,12 @@ realized/expected slope ratio 0.994). No one parameter seam met the frozen
 five-of-six localization rule. The disposition is descriptive on the exposed
 three-station development surface; it is not causal proof and does not reject
 annual-state models generally.
+
+A5f1 then retired the unshipped A5e0 runtime from current `main`: crates.io has
+no `cligen` crate, repository releases predate A5e0, and the exact historical
+implementation remains reachable at `1ca40bb`. The closed specification,
+schemas, report, and work-package evidence remain in place; no accepted public
+interface or faithful behavior changed.
 
 A5e0 remains immutably retained with status
 `EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`: its specification, implementation, and

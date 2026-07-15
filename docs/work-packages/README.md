@@ -47,3 +47,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260714-a5d1b-finite-path-realization](20260714-a5d1b-finite-path-realization/package.md) | EXECUTED-HOLD-COUNT-SEARCH-BOUNDED |
 | [20260714-a5e0-direct-annual-state-pilot](20260714-a5e0-direct-annual-state-pilot/package.md) | EXECUTED-HOLD-PROSPECTIVE-BOUNDARY |
 | [20260714-a5f0-annual-state-failure-attribution](20260714-a5f0-annual-state-failure-attribution/package.md) | EXECUTED-COMPLETE |
+| [20260714-a5f1-retired-a5e0-runtime-cleanup](20260714-a5f1-retired-a5e0-runtime-cleanup/package.md) | EXECUTED-COMPLETE |

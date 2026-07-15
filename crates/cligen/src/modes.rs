@@ -524,31 +524,12 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
 /// Execute after SPEC-RUNSPEC has resolved and validated station syntax,
 /// retaining the typed pre-format projections used by every output writer.
 pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<GeneratedRun, RunError> {
-    run_to_cli_resolved_inner(inp, None)
-}
-
-/// Execute the package-local A5e0 research seam without adding a public
-/// generation-profile variant.
-pub(crate) fn run_to_cli_resolved_a5e0(
-    inp: &ResolvedRunInputs<'_>,
-    extension: &mut crate::a5e0::A5e0Runtime,
-) -> Result<GeneratedRun, RunError> {
-    run_to_cli_resolved_inner(inp, Some(extension))
-}
-
-fn run_to_cli_resolved_inner(
-    inp: &ResolvedRunInputs<'_>,
-    mut extension: Option<&mut crate::a5e0::A5e0Runtime>,
-) -> Result<GeneratedRun, RunError> {
     use crate::output::{HeaderInputs, LegacyCliHeader};
 
     // Seeds + burn (cligen.f:723-737).
     let mut bk7 = Cbk7State::default();
     let mut process = ProcessCounters::default();
     bk7.burn_observed(inp.burn, &mut process);
-    if let Some(extension) = extension.as_deref_mut() {
-        extension.partition_faithful_streams(&mut bk7);
-    }
     // Station intake: both declared syntaxes converge before RNG/state setup.
     let station = inp.station;
     let mut bk1 = Cbk1State::default();
@@ -558,9 +539,6 @@ fn run_to_cli_resolved_inner(
         ..CinterpState::default()
     };
     let out = crate::par::sta_parms_fixed(station, &mut bk7, &mut bk1, &mut bk9, &mut ci);
-    if let Some(extension) = extension.as_deref_mut() {
-        extension.bind_base(&bk1, &bk7);
-    }
     let mut bk4 = Cbk4State {
         iopt: inp.iopt,
         ..Cbk4State::default()
@@ -659,9 +637,6 @@ fn run_to_cli_resolved_inner(
             ntd = 366;
         }
         st.ccl1.zero_year();
-        if let Some(extension) = extension.as_deref_mut() {
-            extension.before_year(&mut st.bk1, &mut st.bk7);
-        }
         let exit = day_gen(
             nbt,
             iyear,
@@ -689,9 +664,6 @@ fn run_to_cli_resolved_inner(
             break;
         }
         iyear += 1;
-    }
-    if let Some(extension) = extension {
-        extension.capture_final_seeds(&st.bk7);
     }
     Ok(GeneratedRun {
         header,

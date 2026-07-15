@@ -34,111 +34,6 @@ use crate::quality::process::{DiagnosticQc, ProcessCounters};
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct SeedState(pub [i32; 4]);
 
-const SEED_MODULUS: u64 = 10_000_000_000;
-
-/// Advance one source RNG state by an exact number of raw recurrence updates.
-///
-/// The mixed-radix Fortran state is one integer modulo 10^10. The source's
-/// cross-word additions make each complete raw update multiplication by
-/// 100003, not merely by the visible per-word factor three. This research
-/// support seam is used only to allocate A5e0's declared, nonoverlapping
-/// faithful substreams; it does not alter the source `randn` path.
-pub(crate) fn advance_seed_raw(seed: &mut SeedState, updates: u64) {
-    if updates == 0 {
-        return;
-    }
-    let encoded = encode_seed(*seed);
-    let multiplier = modular_power(100_003, updates, SEED_MODULUS);
-    *seed = decode_seed(modular_product(encoded, multiplier, SEED_MODULUS));
-}
-
-/// Period of a canonical state under the raw source recurrence.
-pub(crate) fn seed_period(seed: SeedState) -> u64 {
-    let reduced_modulus = SEED_MODULUS / greatest_common_divisor(encode_seed(seed), SEED_MODULUS);
-    let mut value = reduced_modulus;
-    let mut power_two = 0u32;
-    let mut power_five = 0u32;
-    while value.is_multiple_of(2) {
-        value /= 2;
-        power_two += 1;
-    }
-    while value.is_multiple_of(5) {
-        value /= 5;
-        power_five += 1;
-    }
-    debug_assert_eq!(value, 1);
-    least_common_multiple(
-        order_mod_power_two(power_two),
-        order_mod_power_five(power_five),
-    )
-}
-
-fn encode_seed(seed: SeedState) -> u64 {
-    let [first, second, third, fourth] = seed.0;
-    debug_assert!((0..1000).contains(&first));
-    // k10's source DATA state has second = 103. The first recurrence
-    // normalizes it through the base-100 carry; its encoded residue is valid.
-    debug_assert!(second >= 0);
-    debug_assert!((0..1000).contains(&third));
-    debug_assert!((0..100).contains(&fourth));
-    (first as u64 + 1_000 * second as u64 + 100_000 * third as u64 + 100_000_000 * fourth as u64)
-        % SEED_MODULUS
-}
-
-fn decode_seed(mut encoded: u64) -> SeedState {
-    let first = (encoded % 1_000) as i32;
-    encoded /= 1_000;
-    let second = (encoded % 100) as i32;
-    encoded /= 100;
-    let third = (encoded % 1_000) as i32;
-    encoded /= 1_000;
-    let fourth = (encoded % 100) as i32;
-    SeedState([first, second, third, fourth])
-}
-
-fn modular_power(mut base: u64, mut exponent: u64, modulus: u64) -> u64 {
-    let mut result = 1u64;
-    while exponent != 0 {
-        if exponent & 1 == 1 {
-            result = modular_product(result, base, modulus);
-        }
-        base = modular_product(base, base, modulus);
-        exponent >>= 1;
-    }
-    result
-}
-
-fn modular_product(left: u64, right: u64, modulus: u64) -> u64 {
-    ((left as u128 * right as u128) % modulus as u128) as u64
-}
-
-fn greatest_common_divisor(mut left: u64, mut right: u64) -> u64 {
-    while right != 0 {
-        (left, right) = (right, left % right);
-    }
-    left
-}
-
-fn least_common_multiple(left: u64, right: u64) -> u64 {
-    left / greatest_common_divisor(left, right) * right
-}
-
-fn order_mod_power_two(power: u32) -> u64 {
-    match power {
-        0 | 1 => 1,
-        2 | 3 => 2,
-        _ => 1u64 << (power - 2),
-    }
-}
-
-fn order_mod_power_five(power: u32) -> u64 {
-    if power == 0 {
-        1
-    } else {
-        4 * 5u64.pow(power - 1)
-    }
-}
-
 /// Uniform (0, 1) deviate — faithful `randn` (`cligen.f:1980-2019`).
 ///
 /// # Numerics
@@ -153,50 +48,30 @@ fn order_mod_power_five(power: u32) -> u64 {
 // cligen.f:1994-2009.
 #[allow(clippy::assign_op_pattern)]
 pub fn randn(k: &mut SeedState) -> f32 {
+    let k = &mut k.0;
     loop {
-        let v = raw_step_value(k);
+        k[3] = 3 * k[3] + k[1];
+        k[2] = 3 * k[2] + k[0];
+        k[1] = 3 * k[1];
+        k[0] = 3 * k[0];
+        let mut i = k[0] / 1000;
+        k[0] -= i * 1000;
+        k[1] += i;
+        i = k[1] / 100;
+        k[1] -= 100 * i;
+        k[2] += i;
+        i = k[2] / 1000;
+        k[2] -= i * 1000;
+        k[3] += i;
+        i = k[3] / 100;
+        k[3] -= 100 * i;
+        let v = ((((k[0] as f32) * 0.001 + k[1] as f32) * 0.01 + k[2] as f32) * 0.001
+            + k[3] as f32)
+            * 0.01;
         if v > 0.0 && v < 1.0 {
             return v;
         }
     }
-}
-
-#[allow(clippy::assign_op_pattern)]
-fn raw_step_value(state: &mut SeedState) -> f32 {
-    let k = &mut state.0;
-    k[3] = 3 * k[3] + k[1];
-    k[2] = 3 * k[2] + k[0];
-    k[1] = 3 * k[1];
-    k[0] = 3 * k[0];
-    let mut i = k[0] / 1000;
-    k[0] -= i * 1000;
-    k[1] += i;
-    i = k[1] / 100;
-    k[1] -= 100 * i;
-    k[2] += i;
-    i = k[2] / 1000;
-    k[2] -= i * 1000;
-    k[3] += i;
-    i = k[3] / 100;
-    k[3] -= 100 * i;
-    ((((k[0] as f32) * 0.001 + k[1] as f32) * 0.01 + k[2] as f32) * 0.001 + k[3] as f32) * 0.01
-}
-
-/// Exact raw recurrence updates needed to return `draws` source uniforms.
-///
-/// This includes updates rejected by the source's rounded open-interval check
-/// and is used only in A5e0 substream evidence.
-pub(crate) fn raw_updates_for_returned(mut seed: SeedState, draws: u64) -> u64 {
-    let mut returned = 0;
-    let mut updates = 0;
-    while returned < draws {
-        let value = raw_step_value(&mut seed);
-        updates += 1;
-        if value > 0.0 && value < 1.0 {
-            returned += 1;
-        }
-    }
-    updates
 }
 
 /// Return one source uniform and record that returned deviate for group P.
@@ -584,11 +459,7 @@ fn counterfactual_would_reject(
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        advance_seed_raw, randn, ranset_month_days, raw_step_value, raw_updates_for_returned,
-        seed_period, SeedState,
-    };
-    use crate::cbk7::Cbk7State;
+    use super::ranset_month_days;
 
     #[test]
     fn source_february_rule_includes_single_storm_ordinals() {
@@ -596,66 +467,5 @@ mod tests {
         assert_eq!(ranset_month_days(2, 366), 29);
         assert_eq!(ranset_month_days(2, 45), 29);
         assert_eq!(ranset_month_days(6, 166), 30);
-    }
-
-    #[test]
-    fn exact_skip_matches_raw_recurrence_and_known_vector() {
-        let initial = Cbk7State::default().k1;
-        let mut iterated = initial;
-        for _ in 0..17 {
-            let _ = raw_step_value(&mut iterated);
-        }
-        let mut skipped = initial;
-        advance_seed_raw(&mut skipped, 17);
-        assert_eq!(skipped, iterated);
-        assert_eq!(skipped, SeedState([467, 35, 440, 48]));
-    }
-
-    #[test]
-    fn zero_skip_preserves_source_k10_representation() {
-        let mut seed = Cbk7State::default().k10;
-        let original = seed;
-        advance_seed_raw(&mut seed, 0);
-        assert_eq!(seed, original);
-        assert_eq!(seed, SeedState([22, 103, 82, 4]));
-    }
-
-    #[test]
-    fn canonical_periods_match_the_partition_proof() {
-        let state = Cbk7State::default();
-        let periods = [
-            state.k1, state.k2, state.k3, state.k4, state.k5, state.k6, state.k7, state.k8,
-            state.k9, state.k10,
-        ]
-        .map(seed_period);
-        assert_eq!(
-            periods,
-            [
-                500_000_000,
-                100_000_000,
-                500_000_000,
-                100_000_000,
-                100_000_000,
-                500_000_000,
-                500_000_000,
-                100_000_000,
-                12_500_000,
-                250_000_000,
-            ]
-        );
-        assert!(periods.into_iter().all(|period| period >= 24 * 500_000));
-    }
-
-    #[test]
-    fn raw_update_evidence_counts_source_endpoint_rejections() {
-        let initial = Cbk7State::default().k1;
-        let updates = raw_updates_for_returned(initial, 10_000);
-        let mut replay = initial;
-        for _ in 0..10_000 {
-            let _ = randn(&mut replay);
-        }
-        let mut skipped = initial;
-        advance_seed_raw(&mut skipped, updates);
-        assert_eq!(skipped, replay);
     }
 }
