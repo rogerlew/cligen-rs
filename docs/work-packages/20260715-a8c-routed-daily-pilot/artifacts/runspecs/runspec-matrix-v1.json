@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "template": "runspec-template-v1.yaml",
+  "station_ids": [
+    "az026481",
+    "ca040442",
+    "az028820",
+    "id101022",
+    "la160549",
+    "co050130"
+  ],
+  "burns": [0, 101, 1009, 10007],
+  "runs_per_station_burn": [
+    {
+      "name": "candidate-100",
+      "station_kind": "document",
+      "years": 100,
+      "generation_profile": "a8c_routed_daily_v1",
+      "repeat_count": 2
+    },
+    {
+      "name": "candidate-30",
+      "station_kind": "document",
+      "years": 30,
+      "generation_profile": "a8c_routed_daily_v1",
+      "repeat_count": 1
+    },
+    {
+      "name": "faithful-100",
+      "station_kind": "par",
+      "years": 100,
+      "generation_profile": "faithful_5_32_3",
+      "repeat_count": 1
+    }
+  ],
+  "expected_process_count": 96,
+  "retained_stream_count": 48
+}

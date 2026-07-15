@@ -52,3 +52,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260714-a7b-analytic-precipitation-feasibility](20260714-a7b-analytic-precipitation-feasibility/package.md) | EXECUTED-COMPLETE |
 | [20260715-a8a-dry-regime-applicability](20260715-a8a-dry-regime-applicability/package.md) | EXECUTED-COMPLETE |
 | [20260715-a8b-secondary-year-fallback](20260715-a8b-secondary-year-fallback/package.md) | EXECUTED-COMPLETE |
+| [20260715-a8c-routed-daily-pilot](20260715-a8c-routed-daily-pilot/package.md) | EXECUTED-COMPLETE |

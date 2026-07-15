@@ -36,6 +36,7 @@ pub mod provenance;
 pub mod qc;
 pub mod quality;
 pub mod rng;
+mod routed_precip;
 pub mod runspec;
 pub mod station;
 pub mod stations;

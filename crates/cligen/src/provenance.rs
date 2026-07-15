@@ -39,6 +39,12 @@ impl SchemaIdentityV1 {
         Self::new("org.openwepp.cligen.station", "1")
     }
 
+    /// Explicit routed A8c station JSON.
+    #[must_use]
+    pub fn modern_station_v2() -> Self {
+        Self::new("org.openwepp.cligen.station", "2")
+    }
+
     /// Legacy observed `.prn` text.
     #[must_use]
     pub fn legacy_observed() -> Self {
@@ -122,6 +128,8 @@ impl SourceAuthorityV1 {
 pub enum StationModelV1 {
     #[serde(rename = "fixed_monthly_5_32_3")]
     FixedMonthly5323,
+    #[serde(rename = "a8c_integrated_daily_v1")]
+    A8cIntegratedDailyV1,
 }
 
 /// Honest fit-state vocabulary for current station artifacts.
@@ -129,6 +137,8 @@ pub enum StationModelV1 {
 pub enum FitStatusV1 {
     #[serde(rename = "unreported")]
     Unreported,
+    #[serde(rename = "reported")]
+    Reported,
 }
 
 /// Explicit fit identity; revision 1 never invents a fitter or dataset.
@@ -170,6 +180,15 @@ impl FitIdentityV1 {
             id: None,
         }
     }
+
+    /// Declare a fit identity supplied by a validated station document.
+    #[must_use]
+    pub fn reported(id: String) -> Self {
+        Self {
+            status: FitStatusV1::Reported,
+            id: Some(id),
+        }
+    }
 }
 
 /// Selected station input and syntax-independent model identity.
@@ -192,6 +211,8 @@ pub enum GenerationProfileV1 {
     Faithful5323,
     #[serde(rename = "fast_batch_v0")]
     FastBatchV0,
+    #[serde(rename = "a8c_routed_daily_v1")]
+    A8cRoutedDailyV1,
 }
 
 /// QC conditioning policy, absent when the selected profile has no knob.
@@ -230,6 +251,8 @@ pub enum RngSchemeV1 {
     CligenRandn5323,
     #[serde(rename = "splitmix64_monthly_v0")]
     SplitMix64MonthlyV0,
+    #[serde(rename = "cligen_randn_5_32_3_plus_splitmix64_daily_v1")]
+    CligenRandn5323PlusSplitMix64DailyV1,
 }
 
 /// Generation choices duplicated from the canonical effective runspec.
@@ -684,7 +707,11 @@ fn validate_station(
     station: &StationProvenanceV1,
     runspec: &EffectiveRunspecV1,
 ) -> Result<(), ProvenanceError> {
-    validate_station_schema(&station.input_schema, runspec.station.selector)?;
+    validate_station_schema(
+        &station.input_schema,
+        runspec.station.selector,
+        runspec.generation_profile,
+    )?;
     validate_hash("station.input_sha256", &station.input_sha256)?;
     validate_hash(
         "station.parameter_set_sha256",
@@ -694,12 +721,7 @@ fn validate_station(
         "station.legacy_source_sha256",
         &station.legacy_source_sha256,
     )?;
-    if station.fit != FitIdentityV1::unreported() {
-        return Err(invalid(
-            "station.fit",
-            "revision 1 requires {status: unreported, id: null}",
-        ));
-    }
+    validate_fit(&station.fit, runspec.generation_profile, station.model)?;
     if station.collection != StationCollectionIdentityV1::unreported() {
         return Err(invalid(
             "station.collection",
@@ -724,9 +746,13 @@ fn validate_station(
 fn validate_station_schema(
     schema: &SchemaIdentityV1,
     selector: StationSelectorV1,
+    profile: GenerationProfileV1,
 ) -> Result<(), ProvenanceError> {
     let expected = match selector {
         StationSelectorV1::LegacyPar => SchemaIdentityV1::legacy_station(),
+        StationSelectorV1::StationDocument if profile == GenerationProfileV1::A8cRoutedDailyV1 => {
+            SchemaIdentityV1::modern_station_v2()
+        }
         StationSelectorV1::StationDocument => SchemaIdentityV1::modern_station(),
     };
     if schema != &expected {
@@ -736,6 +762,36 @@ fn validate_station_schema(
         ));
     }
     Ok(())
+}
+
+fn validate_fit(
+    fit: &FitIdentityV1,
+    profile: GenerationProfileV1,
+    model: StationModelV1,
+) -> Result<(), ProvenanceError> {
+    let expected = match (profile, model) {
+        (GenerationProfileV1::A8cRoutedDailyV1, StationModelV1::A8cIntegratedDailyV1) => {
+            FitIdentityV1::reported(crate::station::A8A_FIT_ID.to_owned())
+        }
+        (GenerationProfileV1::A8cRoutedDailyV1, StationModelV1::FixedMonthly5323) => {
+            FitIdentityV1::reported(crate::station::A8B_FIT_ID.to_owned())
+        }
+        (_, StationModelV1::FixedMonthly5323) => FitIdentityV1::unreported(),
+        (_, StationModelV1::A8cIntegratedDailyV1) => {
+            return Err(invalid(
+                "station.model",
+                "a8c_integrated_daily_v1 requires generation profile a8c_routed_daily_v1",
+            ));
+        }
+    };
+    if fit == &expected {
+        Ok(())
+    } else {
+        Err(invalid(
+            "station.fit",
+            "does not match the generation profile and station model",
+        ))
+    }
 }
 
 fn validate_generation(
@@ -756,6 +812,7 @@ fn validate_generation(
     let expected_rng = match generation.profile {
         GenerationProfileV1::Faithful5323 => RngSchemeV1::CligenRandn5323,
         GenerationProfileV1::FastBatchV0 => RngSchemeV1::SplitMix64MonthlyV0,
+        GenerationProfileV1::A8cRoutedDailyV1 => RngSchemeV1::CligenRandn5323PlusSplitMix64DailyV1,
     };
     if generation.rng_scheme != expected_rng {
         return Err(invalid(
@@ -772,6 +829,14 @@ fn validate_generation(
             "generation.qc_policy",
             "fast_batch_v0 has no QC policy knob",
         )),
+        GenerationProfileV1::A8cRoutedDailyV1
+            if generation.qc_policy != Some(QcPolicyV1::Faithful) =>
+        {
+            Err(invalid(
+                "generation.qc_policy",
+                "a8c_routed_daily_v1 requires faithful QC",
+            ))
+        }
         _ => Ok(()),
     }
 }
@@ -842,6 +907,10 @@ fn validate_profile_qc(
         (GenerationProfileV1::FastBatchV0, Some(_)) => Err(invalid(
             "effective_runspec.qc_filter",
             "fast_batch_v0 has no QC policy knob",
+        )),
+        (GenerationProfileV1::A8cRoutedDailyV1, Some(QcPolicyV1::Off) | None) => Err(invalid(
+            "effective_runspec.qc_filter",
+            "a8c_routed_daily_v1 requires faithful QC",
         )),
         _ => Ok(()),
     }

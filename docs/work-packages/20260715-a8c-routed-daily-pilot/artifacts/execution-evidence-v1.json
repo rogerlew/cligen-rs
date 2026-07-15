@@ -1,0 +1,915 @@
+{
+  "analysis_id": "a8c_routed_daily_pilot_v1",
+  "binary_sha256": "70a812f7b23480e0472f614917f2a4529e8ad74fab0589a0d27bb6630125df83",
+  "cells": [
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-candidate-100.cli",
+        "cli_sha256": "b990ae11a2fd7bc93608eea5cf0bd28ab22d313020a81df8ed209e1b9a7bb1f1",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "15144f0a3f00f13eed62b00453f6927ad1e420894f236e7ab3adbc2de97a30a7",
+        "row_count": 36524,
+        "row_sha256": "6452ff3719bf4ef38ef92cf1a67464d8fe50e02700e1569e29c6ea59d1b96714"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-faithful-100.cli",
+        "cli_sha256": "7fa59021cd43d2dc1d71d1b2de2437f238e7297572ddf9c9fc3f4925cfe55f5f",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "0e5c6721ef2f490f0442f16ad68a07130aa605dccf43ec38f80eace4d0c44680",
+        "row_count": 36524,
+        "row_sha256": "701188cb788aad35ec02b1359fc258eb968b7a5bc78420c9601a096988e60d6d"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "648b9ed7ba0dffbe9a8326e02c954ca1a8c1660e41384ff0a5f453b2a6b5ef95",
+        "candidate-30": "f2f8e66351f68fde1edc8aebff599338b93ecc1bc8d34adb328825da235f61a9",
+        "faithful-100": "cab0105b5c74b82764ca3920935c4eeea991e3393251278dd42edd34b42c3068"
+      },
+      "station_id": "az026481"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-candidate-100.cli",
+        "cli_sha256": "a5f6112c65b0ec26d6825f33df97ba9325cb21603f071ef6d42acc66594ca0ff",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "a1a3c372ee22c2f56df526b7567f9919c156444e9582cab0a0cb74d520f1b40c",
+        "row_count": 36524,
+        "row_sha256": "5792f1d34621288d73e1f8019dc47b55c0682a7bcccfa790e3d03f8c6e20671e"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-faithful-100.cli",
+        "cli_sha256": "e7047dba7d673aae636badb871f6c572b75cf2b1d8dec9f910e24f5706653073",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "cf40e5125dc242ef976d90f07ec3dbd5ee25c18bbefbf81ff54a623a4cc6f4e9",
+        "row_count": 36524,
+        "row_sha256": "6a02f4354c2bb10adfd3c99eadffbe96fa317bbeb9568f39f29de786c6a7cabd"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "2696de641cca2dee6c71fb9afb2653349de04ec77ed1cdca49c875ea09fb1b0e",
+        "candidate-30": "b20179d24bb017dea9f739dfaa68cb39a877b38a1b70c75a97a75442920dd77b",
+        "faithful-100": "1d84076a742f70adcd06f496fc54153edbf9ed0f44d7ed190a9729d20723cdfb"
+      },
+      "station_id": "az026481"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-candidate-100.cli",
+        "cli_sha256": "c64b74b1bb2a26b4767e8c7ee79a7ac7114a3a0e4e49a46660702ee95ff916b0",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "16df9b23b294db2906697ef46f10e95f56c62cc7f6a838bb2ca31fa825077a26",
+        "row_count": 36524,
+        "row_sha256": "c181a10424182723e7cc367d3ed2e5ce55cf985da3ef2d02d2cb8aa96f1a19a8"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-faithful-100.cli",
+        "cli_sha256": "36a810c5520194c57819b299ccba5d358fd9ee9fda064da52d0bd8cb79e07085",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "4087beab1687a1bd1c5f2c03fee052570851dc60e03c60a538ff116886c90c67",
+        "row_count": 36524,
+        "row_sha256": "419396590d0beb37d69d7908e6f5e3a89349405b95a0647fc0a835bc791641ef"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "186163bd008bef5c0a63e559c4f1b2c5bbeea425a4c736ad9cabf4ee73845a12",
+        "candidate-30": "f37942ab90677f05a12c909d5665c38dce14ddaa09c5243012529d44d6acd0aa",
+        "faithful-100": "766cc3a6b18f2746725412591451cf1949d181774dc422c2c6e6786191e3367d"
+      },
+      "station_id": "az026481"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-candidate-100.cli",
+        "cli_sha256": "d787280db4c6b0f2804228ac850a24027b23dee88ed7ca27426156cbabcced9f",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "121480acd5ac3e5183dd68929941a4a90829353e6a85a82a84a8282c922aca83",
+        "row_count": 36524,
+        "row_sha256": "052432c1481b3d35880c95cd94f0c5d364ace44de38ce03ecf60555449fba1b3"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-faithful-100.cli",
+        "cli_sha256": "f302f67f142b67a6c2106cc17a9e215d06563cb72b4a070a5daabfa54b15cf84",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "d4b9c40b23cdde09eef73baa5f30f4b9140a67222a836634bf2d1edd7f883b88",
+        "row_count": 36524,
+        "row_sha256": "f621417defebddc70cb04095f8f4e758fa9d500b643918a193c73b203287f8eb"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "9231c3464a32695115b270b30a624342cc6b48d307c35983fbadb46db5aacb63",
+        "candidate-30": "57c8d8626c192564df4898f632d63916ec68cc3bad864d61c5e88682d135d90d",
+        "faithful-100": "87244dff21eddd1b79ae59cf3c0c553d234bddd82858f695f4a5c293ea2e9792"
+      },
+      "station_id": "az026481"
+    },
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-candidate-100.cli",
+        "cli_sha256": "5febb3a55976b6c809bfeb8425496235e6fbe105a49b9407d41acb7564698120",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "554e3e5c53d9d931007203978357add89d9456c767de4f51557bf9f79d1efa2b",
+        "row_count": 36524,
+        "row_sha256": "393538b8528dc170664bca1d0f8226a92f2af470c284ae18c783959476f1db66"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-faithful-100.cli",
+        "cli_sha256": "5e679f713211a1fe3cf10a66e20f9f7948450f0cc37b2c76dae658782722ff2f",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "e950752159156f7d35db04a3709133430c35a4de86189237eb0e610d70f2936d",
+        "row_count": 36524,
+        "row_sha256": "b388ef21063d24ba5155f25ed5a160790559acd4e43a36427113c194f3439225"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "38910b6c6b9fc49074811b7952ce606d5d95e5ce01557cf292e44f21d63e1fe8",
+        "candidate-30": "0574f4bb7256ec94575c9479aaad0dc8be79abc9deb9e458ff7a63e665621e9d",
+        "faithful-100": "12e6a217eb1f6514dc0fa7c6d52ef80db14ed6740421a6fa21076c93b6247c50"
+      },
+      "station_id": "az028820"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-candidate-100.cli",
+        "cli_sha256": "27648c8c3167ad2b4affe31a2994742e12d7d7e3a29b490b377b60d918f058c6",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "beda6296e2e1742fd71669b4355b0d2a02405e5e6e028a05eb6c4df241227cfe",
+        "row_count": 36524,
+        "row_sha256": "3be8037616aaab413f1b3fc53f1dcfa89f3e31b20707cae21b044373bf24f7fb"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-faithful-100.cli",
+        "cli_sha256": "e5f940530b0451f56567ffd5dd865e736427a3a87f638c27a5edd2a81e10d70c",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "f28957a2bc5f13a5e97fcc5d3bd6200b44cfb7029f63b84c82e46e4f75be1a91",
+        "row_count": 36524,
+        "row_sha256": "8c1a16098bd5747da53d6a9b4aa5e79ba268efdbc7028cf647821d049415006b"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "f2e51a8ea9eb81069c85813ab34431bc9fedaaa8604adf8a8b12dbd62e681178",
+        "candidate-30": "87a8df1bbfa4074119e495e9c00bbebf6f01cd0e88838437ecb70c9e30b6c9a4",
+        "faithful-100": "b8d217bcf9562c6812fe3760c7c8d88e5e1601c2444688e1594f4fb4617f4c89"
+      },
+      "station_id": "az028820"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-candidate-100.cli",
+        "cli_sha256": "8020f6f621beb4c74c32a4a00d9b27f3184493839b95b7e273622540cea12381",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "681513d00c6c4eae1cc1c886541d3430df457a1490999b32c15dd0c9c6e4c108",
+        "row_count": 36524,
+        "row_sha256": "91e09e9682447cf324ae0da40bdafa34045ab175801b712841887869930cfbc1"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-faithful-100.cli",
+        "cli_sha256": "6b154f2624e0c22e8643322ebecda80649475c8b5b4fe3f4491f5e52c5e1c225",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "103be73eacbff3ec7df849ea47be174d0652dc10f236d8e77e27f79d3edc8c65",
+        "row_count": 36524,
+        "row_sha256": "2b6e70b987bab484f0ea7fcdde89fc0917ecb3699a63447217315492b369fb44"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "997573a7ca0eb0f51602b957015ab5ae121724905ff41f7c716a27bb208cdae1",
+        "candidate-30": "5ad1814cc982b8f24f1aa9fb47a2c6bd447ed4f6e9f3158a9f4280b96aab4e4c",
+        "faithful-100": "ebf2e7cde86a65330c0a4669df1aa97b676e6270a7704d88d8ea916182471b55"
+      },
+      "station_id": "az028820"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-candidate-100.cli",
+        "cli_sha256": "e7f73fea502a45b375bdfc1e18f0af3b2beacee7a5d69ca161b3e35d6b3c6a75",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "974827bb4ac2f78c2e48de245c4b75af6aea6457952d11ffdf74cd430df8558b",
+        "row_count": 36524,
+        "row_sha256": "d3b8bc20e1a1b59c144c454b918a2b7f77f44684d0f39049457e57e6cec169d2"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-faithful-100.cli",
+        "cli_sha256": "353b3a2e4149fbc04f464099ec9ee22aa072cf3700e225202c0e75df1a69984a",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "1d1d0236afb0a9ab9f5cc0f35b2b8ad26cbef3b6077083aa86b84a440fd8e2e9",
+        "row_count": 36524,
+        "row_sha256": "2d52b3a8349fdc9abcbf96d41c1bd8dabcc6662b9dd9deacd255b591806db64b"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "e0046a67e20ea74826d08b1a97aad24b2fe64338aaf631eb91a8daeeae0fdd02",
+        "candidate-30": "5d2aa02b1f625d774069bd89f3688d6ee5bd0c5d5d3d7b1a104171c72fb55f73",
+        "faithful-100": "4b470ffdbfb5cb9778c56fada4d514657012aef4d927f0526edad82e37ea2349"
+      },
+      "station_id": "az028820"
+    },
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-candidate-100.cli",
+        "cli_sha256": "d38029cf9238bcfb27bf7c7cca2de18036ed55fd7e510f916244737eb8c4e00d",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "431138637dc087ec51d8724161955abb9fcf7175fc722e9bf896830838d2528d",
+        "row_count": 36524,
+        "row_sha256": "b6ad19612044e45fd30a051af88c16d896610b3f5d6fd3391bfd3356ce2a28a1"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": null,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-faithful-100.cli",
+        "cli_sha256": "a141943de4c619f091f4c26edb3b4b9514cd434e2a1b9afdddbc2ff9902d6482",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "fa7562146944dd4fea2cce2a5804647556de4c7259602f51f75528df70c7c699",
+        "row_count": 36524,
+        "row_sha256": "b6ad19612044e45fd30a051af88c16d896610b3f5d6fd3391bfd3356ce2a28a1"
+      },
+      "fallback_typed_row_identity": true,
+      "provenance": {
+        "fit_id": "legacy_daily_only_v1",
+        "input_schema_version": 2,
+        "model": "fixed_monthly_5_32_3",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "legacy_daily_fallback",
+      "runspec_sha256": {
+        "candidate-100": "f0db48c61adef9936fb0f74233ec5d4630b5f7a869034e3fbe7d766563d641e0",
+        "candidate-30": "e07bd8e1dd2b5c16511962bd2e96d452ba48388918ab2259ad1e0883236d257b",
+        "faithful-100": "c7143e97b214f05052c410c0e9c4952a52660a5575bd1d14fc1176ee3fa64414"
+      },
+      "station_id": "ca040442"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-candidate-100.cli",
+        "cli_sha256": "a7601ecdcac614d50b6a21baecccbf045f88a3293c6bbcbe21a4315a02f564e9",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "e16583750104f9c5a38e16a3bd74dce9ac21c5eacbd26d05a9bda00609d5984b",
+        "row_count": 36524,
+        "row_sha256": "166b449705f86bf27f1ab11b37cfbe0a22caad9cd6d9474e295508be26a5b6dd"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": null,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-faithful-100.cli",
+        "cli_sha256": "0dd959d825d1b4f3f2794402e5154ce8baa54701deb0f8acee0030a808b542d8",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "4e59311ab29eb83099af5771d0f0aa03873c5c70d50215542ea13a8080307bdf",
+        "row_count": 36524,
+        "row_sha256": "166b449705f86bf27f1ab11b37cfbe0a22caad9cd6d9474e295508be26a5b6dd"
+      },
+      "fallback_typed_row_identity": true,
+      "provenance": {
+        "fit_id": "legacy_daily_only_v1",
+        "input_schema_version": 2,
+        "model": "fixed_monthly_5_32_3",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "legacy_daily_fallback",
+      "runspec_sha256": {
+        "candidate-100": "5b85c1d83dcabd048271a7a65939d091f4384c89aa6d086b103d1d6d395a6174",
+        "candidate-30": "02a8da8bca44e4750c53c976a58afbdc9fe56ea140a958f8a7ceddca9a323934",
+        "faithful-100": "016f3ca2833d0c60962c394e4131846d9632f58b6b72edd4e4d6206d8b31d5c2"
+      },
+      "station_id": "ca040442"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-candidate-100.cli",
+        "cli_sha256": "67de24d5007955081919fe2adb397f7cdbae3687e17e1eb61ddbe4d174435e68",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "0c130273e3baa563cc9bbb23aa4ff3869db58d9bcba1cf997f59902b6020859f",
+        "row_count": 36524,
+        "row_sha256": "b8b2940c6e3e4f1075edf80084be47cdfbfbd1d77f868de603bda64e47fca396"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": null,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-faithful-100.cli",
+        "cli_sha256": "a8a2ac057779df47fa4eef15551f5fd5f4495c62a642eff7a26de56cdea4e172",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "875c806791bff7c5ec818e48092b427b9875ba06e2a1c467670546421752b8c7",
+        "row_count": 36524,
+        "row_sha256": "b8b2940c6e3e4f1075edf80084be47cdfbfbd1d77f868de603bda64e47fca396"
+      },
+      "fallback_typed_row_identity": true,
+      "provenance": {
+        "fit_id": "legacy_daily_only_v1",
+        "input_schema_version": 2,
+        "model": "fixed_monthly_5_32_3",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "legacy_daily_fallback",
+      "runspec_sha256": {
+        "candidate-100": "c50dc450732e42ce421bfdebfdcb0b5c385732632571ff239a199c14c449733e",
+        "candidate-30": "8e0b7c3b0caec329d059ecd235886e24b61cebc7ca501a25b1966c3e5cbba31e",
+        "faithful-100": "60c94e0d9666cc774b244522b1a2d58d7bac715034acd009dc582c9b599d3f82"
+      },
+      "station_id": "ca040442"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-candidate-100.cli",
+        "cli_sha256": "3424a7e09c018386e96dc14c719dc2a07932b422c96db7181fe80c3a76688826",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "415e1a27053165793a61b4d04edd72957c3b23581ffd4788a49c6c8b69f6add4",
+        "row_count": 36524,
+        "row_sha256": "9ba687e1f9d3afd9327b547b07aa87787a34bf5a7ac395755675b19c08aa2f61"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": null,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-faithful-100.cli",
+        "cli_sha256": "c06123a6dc0576a3358d1fb5f7b557c202c4756acb7fd2041e2c1c83c8df166b",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "67365a921f64ad8f16ee0633d0f0bd5e63c3727c1e055fae609046ceb57319e6",
+        "row_count": 36524,
+        "row_sha256": "9ba687e1f9d3afd9327b547b07aa87787a34bf5a7ac395755675b19c08aa2f61"
+      },
+      "fallback_typed_row_identity": true,
+      "provenance": {
+        "fit_id": "legacy_daily_only_v1",
+        "input_schema_version": 2,
+        "model": "fixed_monthly_5_32_3",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "legacy_daily_fallback",
+      "runspec_sha256": {
+        "candidate-100": "e655d1decbb459fc1e6816f1c41022ac55cc071b9b3794b59dd65edb1810b933",
+        "candidate-30": "aad17b8a88f8360f7c579dc26dc17c5d3b530a90169c5beaefb59e3b838925ed",
+        "faithful-100": "24e1f63e14f22b09888a545bbab18c7d8baa119d92fb3af6214303414c9cd575"
+      },
+      "station_id": "ca040442"
+    },
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-candidate-100.cli",
+        "cli_sha256": "2469af6567e09ed2063217a180e944ae9efb0b2bb4b07047f7414241034fa913",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "dd27d1da852dfcf94ea801ba435c4a70fcdafde243a7ca8400975cfb4cfe9e15",
+        "row_count": 36524,
+        "row_sha256": "112a6891d484ba21074346590c30492fa0069e068dfd11a7ceadeef8aa132f3b"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-faithful-100.cli",
+        "cli_sha256": "648df79c0a70e77b5d3ad6954fdc81248a9b00b7051f56fc3eccf8b98b3e60d6",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "6ca894abdad74701a90ce8f589502240fbcca900daab0901729bb4635802b208",
+        "row_count": 36524,
+        "row_sha256": "959ebf6b885c9b3cbf6468edb5b4d803c1e740bd8ccd21c7bb2cbe9166d2bcb1"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "0ba67d14a0327b94b0e14d70601afd2e8aa53b1c82a0581be83beb5d49c3e940",
+        "candidate-30": "28570b176f762a614a31346f531b403a58b45f7f99fa0ae1f3afea32890004b7",
+        "faithful-100": "a87b30ffaf45dd9e9e2563031bd29c47e6a0b0bcf68edfe13a42ff0d28f60c7d"
+      },
+      "station_id": "co050130"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-candidate-100.cli",
+        "cli_sha256": "9bc0357a35f329dfb52018b6a1878c09f2127b2cf1e0557cf365cc11edf2735f",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "0db143804ca335f7f55bd7c4ed27bb7a5db07a93458e873545ebc329b9f44968",
+        "row_count": 36524,
+        "row_sha256": "8dac3340fa8f38405d6bcfd573479a1036d84ee0c4d3a8325711f3bf367a45bd"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": false,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-faithful-100.cli",
+        "cli_sha256": "eecfe5be9e26225205713a12b98595c97aec5b9a43ebd238c33eb79e7c51d9c0",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "2f4cad44ebeb08c85ca080de69d9dbd4e980f369ca41e650ce5a813f7f91e314",
+        "row_count": 36524,
+        "row_sha256": "926c68ad9e80fc4a6668f493d1821bd0db151c3aad0cb7729ce6f5b4f835a5c1"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "d545a3b784563261ee2ed856453e8c070c707d5efcba8f1fb5c589c080a427a5",
+        "candidate-30": "1f7f3b490fb23009639f7796bd28b994a1bcb4ffe97c57eb64624109a38f9ebb",
+        "faithful-100": "6b3d591c3ead1a6942c854feefd1ff82ea565a7157519973b14c3f567bac3831"
+      },
+      "station_id": "co050130"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-candidate-100.cli",
+        "cli_sha256": "d78f485e01fcd216a67b38a4c48648b55ebb76b18847340cd84359dc7ec278ca",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "c09b1b3b0f24de4f937dde817d5ae994a265b2f88fdd2b9d27d67578f97d2275",
+        "row_count": 36524,
+        "row_sha256": "3833b09388e764ef87ef2f1c9eb2f1e3c0bae550339456fea5b254db2e0872d7"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-faithful-100.cli",
+        "cli_sha256": "de13b2ca4003c944c613fe68dcb897ed5027626b49b1a45656bd1ea86663b43e",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "d628fd6adfd06b6483c71a91694a4dae80fdb73232e22d033523db91efe79937",
+        "row_count": 36524,
+        "row_sha256": "ea421c6827f42834b7f16aafc39c7fdc9e0a73e5c1117b4b06a75d832abee61a"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "2b657a1a6f9bddf053977662ac4058ffab8fba4e5d34196aa20c732b34b24510",
+        "candidate-30": "df947600d555dadd5167f7c0fcac28f9038b3a532773b261ef0d51dc0d59949d",
+        "faithful-100": "19020eace7a5643759c6e6cd700f24b8d25a9277bc0cfb072fc1dc122c8fb12b"
+      },
+      "station_id": "co050130"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-candidate-100.cli",
+        "cli_sha256": "0c0dde124137df2e85bf1854197d9290a03de93a3a1ac2d542f87c36ea39f6d8",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "f3d058d7d869ee0b783dd2a66b671c20228fcdfd71e01e852a4392ff6e766645",
+        "row_count": 36524,
+        "row_sha256": "739c36e6f6d36633ccdaee9fc5f314e763ccd7027bc4e9648dc680291da79934"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-faithful-100.cli",
+        "cli_sha256": "9dbed892a005cf69f9832518651ce628e3763e793d5555b2cac82b88bfe21485",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "6a05ee1bbe5db80cbf3c25f867d62c07423dc75b0140237a0e5d00c7485340f4",
+        "row_count": 36524,
+        "row_sha256": "8ad2e9478cf88618a83032e03d94934056f4ecd75d627381ef5644c6a757bec1"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "e6fe66ee4534bd9a729c0cfe4bd0ceb27c9e5b6128a5fe9765ad873076183f4c",
+        "candidate-30": "67c05925787637a303073e5e6f572fd2b1186c1ee221b2e6af3461eb858461d5",
+        "faithful-100": "156bb1e8379980a4fc907aab25061ac00b19a46683fd885108b2eddba019e466"
+      },
+      "station_id": "co050130"
+    },
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-candidate-100.cli",
+        "cli_sha256": "273330d126cfbcfe8bf58bcb3c5df656fbf0414c48244f81c281c1de28f6403a",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "0cfbb32561e3854c5d3c66f4cd133155ad2a066b4b24cd9b6cea6ed97b79ff5d",
+        "row_count": 36524,
+        "row_sha256": "7340b0d1d0b05830dd61cb0fc87ba9acfa7816c04b15187e06a05b13d1978f81"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": false,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-faithful-100.cli",
+        "cli_sha256": "85b38aa2b4313355278e6b898304c5e0fe370fa9828c2bb9e83f462560a776c4",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "e2d1aa00607fd2cefe9c48374f88b8a14296ac14e3be486c25d6b6fc5b5e6c78",
+        "row_count": 36524,
+        "row_sha256": "943f12963b19fa911cdecc920ab27f595a0d79ce36f8249ec9c079f621e27dc6"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "d005d485f7987dc189f3aa39f2301df79a3cb43272eb897e0aba0772d86cb6ce",
+        "candidate-30": "51ccd6e33758792a3c26144ef97df5e0021f4968945fa24e7a55d5270a2b6bd2",
+        "faithful-100": "be2c83370ef7bcd09f0a035252f0f1274dce90fc5b319a0d4051e6b3d922938e"
+      },
+      "station_id": "id101022"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-candidate-100.cli",
+        "cli_sha256": "5538e4210bdd38dd0d4922b42e92e1cbde4e7184580bc6f471b44f2995027196",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "95c24ff37dd54a3e3321b4e8901be6874169aa38f0ada4f7589e4af067baf729",
+        "row_count": 36524,
+        "row_sha256": "89cb970bfc5fbf1f450f783860f6a617e57134e6a0fbfc9087af8dd4267f19ca"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-faithful-100.cli",
+        "cli_sha256": "9d39f7b31eaf99add1dee394873a718ec3dae6316b5892df7a14a6487799a8c2",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "e6fab535540cb0f8a5796ffbeba31246028b4d68317c3378de53117130d6fde3",
+        "row_count": 36524,
+        "row_sha256": "6910329ca613e9625af677883595feb58827496952d874dd9898745048082d8e"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "19ed667487f752c5d6e33e38c4ede560e491ba04ccff54b71996bf444df31f89",
+        "candidate-30": "2405a89df6fbbc93e07ca5842e67ea6b4bbbdae2105d2025d8484293b7320f9e",
+        "faithful-100": "5f41a09e62298fc21f508b697a8206b582a0da08c2d553a8c9acffeb13c2a42b"
+      },
+      "station_id": "id101022"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-candidate-100.cli",
+        "cli_sha256": "24eec61ea2f39b2057064c73f4fcacc46fda4a7fb17246ddc2315a48a884cdab",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "c919167c1860e22913a640ab53e4ad2fe9061b995c0a840a357500a4dc26922f",
+        "row_count": 36524,
+        "row_sha256": "a2a79f4d15ce623525d2a995babe10d1f666e56921cbb97c3c0729b109c0d288"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-faithful-100.cli",
+        "cli_sha256": "ab6ba420db0ed503a598819445a4aa2629346feabcb7c08bf62f7403e64fa10d",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "c62514013ef327d6fa20e5b4c226898a5ad926d29d59af3d140ae5af5caa2b3a",
+        "row_count": 36524,
+        "row_sha256": "969fb6afeb6672a6eda8d6e90049ac20b19487250701e06d5aefdf1729268895"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "fbdf6464267b22430cdbb8fd5bb76eb0d557daaedaf0ef9874637d8dbdb19814",
+        "candidate-30": "1667ff78399903c133451b1489a428a8e668e303af0f55c1e32a72d6b7ef4af0",
+        "faithful-100": "a9ed43b4b91b6eff27537b95d07c95dad4a208289805930331c4742d7a3b5056"
+      },
+      "station_id": "id101022"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-candidate-100.cli",
+        "cli_sha256": "c05f58e063afe219337bffd43333713e3f0e336c16fb8a87fb44a2ba2914fd3f",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "cd8168adeceaff7432062622a7b3a02345cde2fbd879bcabb7323f95fec5aea4",
+        "row_count": 36524,
+        "row_sha256": "62c95e7b10f20b498a50a7de4e5cdc2d5f27ba19ab78ccedfe42173e14df6b32"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-faithful-100.cli",
+        "cli_sha256": "9c79a9ad2deb340089e84135ec2eda93f8873c0a3dc61b53a862a00827940bac",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "c7b250167c11b16131f0b0aa8dc5db5d531b3883836d0054bfe84f29ba04f0c2",
+        "row_count": 36524,
+        "row_sha256": "1378a3e68a782ad0afc1b3412450f968e1a2379da920c5ba2bd589331dc5020e"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "a7fe43efd9c275fe347609e8a19b07d6a6adb8f04a1949fea1ae6f423a2939d3",
+        "candidate-30": "7dc7bb08e480816e28607facb6204f94942e87a190b7c82e31c93a894107d27e",
+        "faithful-100": "097896dafa7dfc30f26c428f20b32e8b2f7ffe3241d35a4fba3084472f9a94b8"
+      },
+      "station_id": "id101022"
+    },
+    {
+      "burn": 0,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-candidate-100.cli",
+        "cli_sha256": "4b42f1400c917bbe45f78f5ea4128fab49e3070c980feff69654ae3e9b3ea958",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-candidate-100.cli.provenance.json",
+        "provenance_sha256": "2aefbeb8f772290573118023d488ab8abf5be138c99c7be6868e20bbd58e5171",
+        "row_count": 36524,
+        "row_sha256": "af328cde0c1154b99b92b9072c48dfcea0b6a2ab3a5daf3be5001b5045109cec"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-faithful-100.cli",
+        "cli_sha256": "e1c7e5f82a645c7fcdd2d2370032335b0b3400488fa040ddb0262a401b1aab10",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-faithful-100.cli.provenance.json",
+        "provenance_sha256": "bb281376f8c0f0385387b46d4f4e0ac48311680cdf07323ad517b5fb50050fe5",
+        "row_count": 36524,
+        "row_sha256": "12664c1fbe77736bdbe61a39179e06f2bfaae6015873d4bc6b13c3b2af429bad"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "9af72c977ebba3e7c4187f41b30abb5240401ab646ba7968769ce0f6987d1e77",
+        "candidate-30": "e69d6c8f9e1cc9e2eb9ce9745ba615249525b3a90cd126b2cc219260133abda4",
+        "faithful-100": "039cebbcfd2f5a8178e198dfc24f3e7cf2bacef86a934dbeb9b67ffb477c627c"
+      },
+      "station_id": "la160549"
+    },
+    {
+      "burn": 101,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-candidate-100.cli",
+        "cli_sha256": "45da1c4c40a2870ec822eb07926f3136493d5ff7005e54bacef5d2a6e0fdc227",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-candidate-100.cli.provenance.json",
+        "provenance_sha256": "77e2e4647dd60e8147b114c1de1b3f64b85954673ab87b429dbfb1a561be2bad",
+        "row_count": 36524,
+        "row_sha256": "6dfbafd3b15cf9063bfa68824306f0a86222f50fd41f6531a61bab43a71de131"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-faithful-100.cli",
+        "cli_sha256": "ae627c4401d2ed377be5c7601bedec82f09f9cf4e5d35cd4d3cdceddb46428a3",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-faithful-100.cli.provenance.json",
+        "provenance_sha256": "e602460e1db77f9645091b8fa86f2256bfdccd1050db058cc1e0165f0968adcc",
+        "row_count": 36524,
+        "row_sha256": "9962d770c609c6e7a6cc37a6912096d6354346cc465eb0694546f1a57b528216"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "15ea9e1e12107b79b2d9a9fe1cce546af5cba09ede4af7c3b692fab2c29a9dbc",
+        "candidate-30": "6ee770e4285479be2a4e2ab04791f19c2670768199c7373fb31615ef78fa896b",
+        "faithful-100": "6d017bbf6283da1e3e8dd5f08a49f029a2b71de40f6f2417405affd5beb8253c"
+      },
+      "station_id": "la160549"
+    },
+    {
+      "burn": 1009,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-candidate-100.cli",
+        "cli_sha256": "ddb1f8d86957aa8d1f8a8e10b1dcc753fcf2fd1d9ccc0e5b9823ff7364fb78fa",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-candidate-100.cli.provenance.json",
+        "provenance_sha256": "e5141028bb40f018433de074e24927700cd21008169757ce77fbc5ac65c9709d",
+        "row_count": 36524,
+        "row_sha256": "4488743bf08b75e18c67e4962c9e297418b69a022eaa16a8f087fb87dd8d6a90"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-faithful-100.cli",
+        "cli_sha256": "897f9976d0164d62828426970260ee36ab81ae2fa6e55eed78af2c81c3e85ab4",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-faithful-100.cli.provenance.json",
+        "provenance_sha256": "030caf2115dcd23432245363195a64e80fdd38f250a424b45fac18712abfb67a",
+        "row_count": 36524,
+        "row_sha256": "f1340dd3a86ea404475840b771cae8f374aab08a226f8e75212f3ce5a493d644"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "ab2eaf89c877e68ee5c0a474012b8214b776bdc8e6033ab2128e44dbfc134a85",
+        "candidate-30": "90baea34c95032c9660c794575448e72b228f1076f0bd6f2eef969faa1b90af5",
+        "faithful-100": "c96ce88d2f29ec6989979ab093cede3e293c0b46cdc3066d409058cac7a8e6fa"
+      },
+      "station_id": "la160549"
+    },
+    {
+      "burn": 10007,
+      "candidate": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-candidate-100.cli",
+        "cli_sha256": "8945893eb8b81209f96db81b426f19538a8fbfef017e1a208b4c45ada1226eb6",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-candidate-100.cli.provenance.json",
+        "provenance_sha256": "6d5fc00689d5dd90fba3227ad0716bfddfb2cb0908bf38ac9f64f46eadf72159",
+        "row_count": 36524,
+        "row_sha256": "4981233aae521fc1fe95e7245472aeee8e97df2f0bd178dd4163108c55c54c35"
+      },
+      "candidate_30_year_row_prefix": true,
+      "candidate_byte_replay": true,
+      "cross_variable_exact": true,
+      "faithful": {
+        "cli_path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-faithful-100.cli",
+        "cli_sha256": "1c93695fe66a7987a46fd454a697320b64770cafeccd0042a4877cd8422a9de8",
+        "provenance_path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-faithful-100.cli.provenance.json",
+        "provenance_sha256": "b93c1dcb6584056f0a9461d3c5e8cefa7cd83e379c1cd1fc6f77d157dc58f283",
+        "row_count": 36524,
+        "row_sha256": "6053f96bb7c084213e82cf1fcc8efca72eb9f595712dea4c9a1e3fd71fdc21d4"
+      },
+      "fallback_typed_row_identity": null,
+      "provenance": {
+        "fit_id": "a8a_o2_logqspline_gaussian_copula_v1",
+        "input_schema_version": 2,
+        "model": "a8c_integrated_daily_v1",
+        "profile": "a8c_routed_daily_v1",
+        "rng_scheme": "cligen_randn_5_32_3_plus_splitmix64_daily_v1"
+      },
+      "route": "integrated_daily",
+      "runspec_sha256": {
+        "candidate-100": "b33d64aa205736c42727cb286c2b73a9a2e61ed12eb2e628ee5b44cee280d447",
+        "candidate-30": "115fa1d051ccdee1efef3290b2cb8d5027a45412d7254ae2c33c8af5f4a499b9",
+        "faithful-100": "5156d894d09d2c35519e8ee927c116dd94448dc70cad8adeb35eb12b8dd136df"
+      },
+      "station_id": "la160549"
+    }
+  ],
+  "contract_sha256": "7434b499691d472a77579fac896918e61c9b7bd738180d90c4bc498d48a3bfdf",
+  "execution_counts": {
+    "cells": 24,
+    "processes": 96,
+    "retained_streams": 48
+  },
+  "freeze_sha256": "40e48be2f10bf36f1488e664f8b3b4bf9fc44bb1f4627a28b1ca3316c850f74e",
+  "input_hashes": {
+    "a7a_analyzer": "6f4a1e242949b4de4bcdeea0e0a05642cd8455606ff62b8de71442198c8782ac",
+    "a7a_measurement_contract": "fad73c12491b865a78bb2d98192935b146a32874129b39973c5a3b141793180e",
+    "a8a_analysis": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b",
+    "a8a_decision": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58",
+    "a8a_panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a8a_selected_parameters": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122",
+    "a8a_source_manifest": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae",
+    "a8b_decision": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb",
+    "corpus_common": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+  },
+  "matrix_sha256": "55604a7e7344902f51577f778683f04687792a9b8839ec8ddb0af297f5025fcd",
+  "schema_version": 1,
+  "source_commit": "046eba3c8d4508c84522c6dbd7cec4d39f094563"
+}

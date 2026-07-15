@@ -1,0 +1,16 @@
+cligen_runspec: 1
+station:
+  __STATION_KIND__: __STATION_PATH__
+mode: continuous
+simulation:
+  begin_year: 1
+  years: __YEARS__
+  interpolation: none
+rng:
+  burn: __BURN__
+generation_profile: __GENERATION_PROFILE__
+qc_filter: faithful
+output:
+  cli: __OUTPUT_CLI__
+  overwrite: true
+  quality: false

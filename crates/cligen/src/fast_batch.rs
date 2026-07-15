@@ -34,7 +34,9 @@ impl MonthlyBatchBackend {
     /// Construct the selected backend after the faithful burn and warm draws.
     pub fn from_profile(profile: GenerationProfile, qc: QcFilter, seeds: &Cbk7State) -> Self {
         match profile {
-            GenerationProfile::Faithful5323 => Self::Faithful(RansetState::default(), qc),
+            GenerationProfile::Faithful5323 | GenerationProfile::A8cRoutedDailyV1 => {
+                Self::Faithful(RansetState::default(), qc)
+            }
             GenerationProfile::FastBatchV0 => Self::FastBatchV0(FastBatchState::from_seeds(seeds)),
         }
     }

@@ -1,0 +1,489 @@
+{
+  "archive": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-retained-streams-v1.tar.gz",
+  "archive_bytes": 27481991,
+  "archive_sha256": "ee50d033c6022f9988fc4734cd892d518866dd7df7a35aba24448399ee47edae",
+  "execution_evidence_sha256": "2a171c134d00d84c3ef5c481d171e214b1ec444231a61e274ec856fcc95f8e37",
+  "members": [
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-candidate-100.cli",
+      "sha256": "b990ae11a2fd7bc93608eea5cf0bd28ab22d313020a81df8ed209e1b9a7bb1f1"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-candidate-100.cli.provenance.json",
+      "sha256": "15144f0a3f00f13eed62b00453f6927ad1e420894f236e7ab3adbc2de97a30a7"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-faithful-100.cli",
+      "sha256": "7fa59021cd43d2dc1d71d1b2de2437f238e7297572ddf9c9fc3f4925cfe55f5f"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn0-faithful-100.cli.provenance.json",
+      "sha256": "0e5c6721ef2f490f0442f16ad68a07130aa605dccf43ec38f80eace4d0c44680"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-candidate-100.cli",
+      "sha256": "d787280db4c6b0f2804228ac850a24027b23dee88ed7ca27426156cbabcced9f"
+    },
+    {
+      "bytes": 3161,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "121480acd5ac3e5183dd68929941a4a90829353e6a85a82a84a8282c922aca83"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-faithful-100.cli",
+      "sha256": "f302f67f142b67a6c2106cc17a9e215d06563cb72b4a070a5daabfa54b15cf84"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "d4b9c40b23cdde09eef73baa5f30f4b9140a67222a836634bf2d1edd7f883b88"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-candidate-100.cli",
+      "sha256": "c64b74b1bb2a26b4767e8c7ee79a7ac7114a3a0e4e49a46660702ee95ff916b0"
+    },
+    {
+      "bytes": 3156,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "16df9b23b294db2906697ef46f10e95f56c62cc7f6a838bb2ca31fa825077a26"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-faithful-100.cli",
+      "sha256": "36a810c5520194c57819b299ccba5d358fd9ee9fda064da52d0bd8cb79e07085"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "4087beab1687a1bd1c5f2c03fee052570851dc60e03c60a538ff116886c90c67"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-candidate-100.cli",
+      "sha256": "a5f6112c65b0ec26d6825f33df97ba9325cb21603f071ef6d42acc66594ca0ff"
+    },
+    {
+      "bytes": 3151,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-candidate-100.cli.provenance.json",
+      "sha256": "a1a3c372ee22c2f56df526b7567f9919c156444e9582cab0a0cb74d520f1b40c"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-faithful-100.cli",
+      "sha256": "e7047dba7d673aae636badb871f6c572b75cf2b1d8dec9f910e24f5706653073"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/az026481-burn101-faithful-100.cli.provenance.json",
+      "sha256": "cf40e5125dc242ef976d90f07ec3dbd5ee25c18bbefbf81ff54a623a4cc6f4e9"
+    },
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-candidate-100.cli",
+      "sha256": "5febb3a55976b6c809bfeb8425496235e6fbe105a49b9407d41acb7564698120"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-candidate-100.cli.provenance.json",
+      "sha256": "554e3e5c53d9d931007203978357add89d9456c767de4f51557bf9f79d1efa2b"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-faithful-100.cli",
+      "sha256": "5e679f713211a1fe3cf10a66e20f9f7948450f0cc37b2c76dae658782722ff2f"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn0-faithful-100.cli.provenance.json",
+      "sha256": "e950752159156f7d35db04a3709133430c35a4de86189237eb0e610d70f2936d"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-candidate-100.cli",
+      "sha256": "e7f73fea502a45b375bdfc1e18f0af3b2beacee7a5d69ca161b3e35d6b3c6a75"
+    },
+    {
+      "bytes": 3161,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "974827bb4ac2f78c2e48de245c4b75af6aea6457952d11ffdf74cd430df8558b"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-faithful-100.cli",
+      "sha256": "353b3a2e4149fbc04f464099ec9ee22aa072cf3700e225202c0e75df1a69984a"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "1d1d0236afb0a9ab9f5cc0f35b2b8ad26cbef3b6077083aa86b84a440fd8e2e9"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-candidate-100.cli",
+      "sha256": "8020f6f621beb4c74c32a4a00d9b27f3184493839b95b7e273622540cea12381"
+    },
+    {
+      "bytes": 3156,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "681513d00c6c4eae1cc1c886541d3430df457a1490999b32c15dd0c9c6e4c108"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-faithful-100.cli",
+      "sha256": "6b154f2624e0c22e8643322ebecda80649475c8b5b4fe3f4491f5e52c5e1c225"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "103be73eacbff3ec7df849ea47be174d0652dc10f236d8e77e27f79d3edc8c65"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-candidate-100.cli",
+      "sha256": "27648c8c3167ad2b4affe31a2994742e12d7d7e3a29b490b377b60d918f058c6"
+    },
+    {
+      "bytes": 3151,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-candidate-100.cli.provenance.json",
+      "sha256": "beda6296e2e1742fd71669b4355b0d2a02405e5e6e028a05eb6c4df241227cfe"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-faithful-100.cli",
+      "sha256": "e5f940530b0451f56567ffd5dd865e736427a3a87f638c27a5edd2a81e10d70c"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/az028820-burn101-faithful-100.cli.provenance.json",
+      "sha256": "f28957a2bc5f13a5e97fcc5d3bd6200b44cfb7029f63b84c82e46e4f75be1a91"
+    },
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-candidate-100.cli",
+      "sha256": "d38029cf9238bcfb27bf7c7cca2de18036ed55fd7e510f916244737eb8c4e00d"
+    },
+    {
+      "bytes": 3118,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-candidate-100.cli.provenance.json",
+      "sha256": "431138637dc087ec51d8724161955abb9fcf7175fc722e9bf896830838d2528d"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-faithful-100.cli",
+      "sha256": "a141943de4c619f091f4c26edb3b4b9514cd434e2a1b9afdddbc2ff9902d6482"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn0-faithful-100.cli.provenance.json",
+      "sha256": "fa7562146944dd4fea2cce2a5804647556de4c7259602f51f75528df70c7c699"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-candidate-100.cli",
+      "sha256": "3424a7e09c018386e96dc14c719dc2a07932b422c96db7181fe80c3a76688826"
+    },
+    {
+      "bytes": 3142,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "415e1a27053165793a61b4d04edd72957c3b23581ffd4788a49c6c8b69f6add4"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-faithful-100.cli",
+      "sha256": "c06123a6dc0576a3358d1fb5f7b557c202c4756acb7fd2041e2c1c83c8df166b"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "67365a921f64ad8f16ee0633d0f0bd5e63c3727c1e055fae609046ceb57319e6"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-candidate-100.cli",
+      "sha256": "67de24d5007955081919fe2adb397f7cdbae3687e17e1eb61ddbe4d174435e68"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "0c130273e3baa563cc9bbb23aa4ff3869db58d9bcba1cf997f59902b6020859f"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-faithful-100.cli",
+      "sha256": "a8a2ac057779df47fa4eef15551f5fd5f4495c62a642eff7a26de56cdea4e172"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "875c806791bff7c5ec818e48092b427b9875ba06e2a1c467670546421752b8c7"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-candidate-100.cli",
+      "sha256": "a7601ecdcac614d50b6a21baecccbf045f88a3293c6bbcbe21a4315a02f564e9"
+    },
+    {
+      "bytes": 3132,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-candidate-100.cli.provenance.json",
+      "sha256": "e16583750104f9c5a38e16a3bd74dce9ac21c5eacbd26d05a9bda00609d5984b"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-faithful-100.cli",
+      "sha256": "0dd959d825d1b4f3f2794402e5154ce8baa54701deb0f8acee0030a808b542d8"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/ca040442-burn101-faithful-100.cli.provenance.json",
+      "sha256": "4e59311ab29eb83099af5771d0f0aa03873c5c70d50215542ea13a8080307bdf"
+    },
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-candidate-100.cli",
+      "sha256": "2469af6567e09ed2063217a180e944ae9efb0b2bb4b07047f7414241034fa913"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-candidate-100.cli.provenance.json",
+      "sha256": "dd27d1da852dfcf94ea801ba435c4a70fcdafde243a7ca8400975cfb4cfe9e15"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-faithful-100.cli",
+      "sha256": "648df79c0a70e77b5d3ad6954fdc81248a9b00b7051f56fc3eccf8b98b3e60d6"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn0-faithful-100.cli.provenance.json",
+      "sha256": "6ca894abdad74701a90ce8f589502240fbcca900daab0901729bb4635802b208"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-candidate-100.cli",
+      "sha256": "0c0dde124137df2e85bf1854197d9290a03de93a3a1ac2d542f87c36ea39f6d8"
+    },
+    {
+      "bytes": 3161,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "f3d058d7d869ee0b783dd2a66b671c20228fcdfd71e01e852a4392ff6e766645"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-faithful-100.cli",
+      "sha256": "9dbed892a005cf69f9832518651ce628e3763e793d5555b2cac82b88bfe21485"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "6a05ee1bbe5db80cbf3c25f867d62c07423dc75b0140237a0e5d00c7485340f4"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-candidate-100.cli",
+      "sha256": "d78f485e01fcd216a67b38a4c48648b55ebb76b18847340cd84359dc7ec278ca"
+    },
+    {
+      "bytes": 3156,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "c09b1b3b0f24de4f937dde817d5ae994a265b2f88fdd2b9d27d67578f97d2275"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-faithful-100.cli",
+      "sha256": "de13b2ca4003c944c613fe68dcb897ed5027626b49b1a45656bd1ea86663b43e"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "d628fd6adfd06b6483c71a91694a4dae80fdb73232e22d033523db91efe79937"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-candidate-100.cli",
+      "sha256": "9bc0357a35f329dfb52018b6a1878c09f2127b2cf1e0557cf365cc11edf2735f"
+    },
+    {
+      "bytes": 3151,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-candidate-100.cli.provenance.json",
+      "sha256": "0db143804ca335f7f55bd7c4ed27bb7a5db07a93458e873545ebc329b9f44968"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-faithful-100.cli",
+      "sha256": "eecfe5be9e26225205713a12b98595c97aec5b9a43ebd238c33eb79e7c51d9c0"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/co050130-burn101-faithful-100.cli.provenance.json",
+      "sha256": "2f4cad44ebeb08c85ca080de69d9dbd4e980f369ca41e650ce5a813f7f91e314"
+    },
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-candidate-100.cli",
+      "sha256": "273330d126cfbcfe8bf58bcb3c5df656fbf0414c48244f81c281c1de28f6403a"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-candidate-100.cli.provenance.json",
+      "sha256": "0cfbb32561e3854c5d3c66f4cd133155ad2a066b4b24cd9b6cea6ed97b79ff5d"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-faithful-100.cli",
+      "sha256": "85b38aa2b4313355278e6b898304c5e0fe370fa9828c2bb9e83f462560a776c4"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn0-faithful-100.cli.provenance.json",
+      "sha256": "e2d1aa00607fd2cefe9c48374f88b8a14296ac14e3be486c25d6b6fc5b5e6c78"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-candidate-100.cli",
+      "sha256": "c05f58e063afe219337bffd43333713e3f0e336c16fb8a87fb44a2ba2914fd3f"
+    },
+    {
+      "bytes": 3161,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "cd8168adeceaff7432062622a7b3a02345cde2fbd879bcabb7323f95fec5aea4"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-faithful-100.cli",
+      "sha256": "9c79a9ad2deb340089e84135ec2eda93f8873c0a3dc61b53a862a00827940bac"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "c7b250167c11b16131f0b0aa8dc5db5d531b3883836d0054bfe84f29ba04f0c2"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-candidate-100.cli",
+      "sha256": "24eec61ea2f39b2057064c73f4fcacc46fda4a7fb17246ddc2315a48a884cdab"
+    },
+    {
+      "bytes": 3156,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "c919167c1860e22913a640ab53e4ad2fe9061b995c0a840a357500a4dc26922f"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-faithful-100.cli",
+      "sha256": "ab6ba420db0ed503a598819445a4aa2629346feabcb7c08bf62f7403e64fa10d"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "c62514013ef327d6fa20e5b4c226898a5ad926d29d59af3d140ae5af5caa2b3a"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-candidate-100.cli",
+      "sha256": "5538e4210bdd38dd0d4922b42e92e1cbde4e7184580bc6f471b44f2995027196"
+    },
+    {
+      "bytes": 3151,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-candidate-100.cli.provenance.json",
+      "sha256": "95c24ff37dd54a3e3321b4e8901be6874169aa38f0ada4f7589e4af067baf729"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-faithful-100.cli",
+      "sha256": "9d39f7b31eaf99add1dee394873a718ec3dae6316b5892df7a14a6487799a8c2"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/id101022-burn101-faithful-100.cli.provenance.json",
+      "sha256": "e6fab535540cb0f8a5796ffbeba31246028b4d68317c3378de53117130d6fde3"
+    },
+    {
+      "bytes": 2594385,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-candidate-100.cli",
+      "sha256": "4b42f1400c917bbe45f78f5ea4128fab49e3070c980feff69654ae3e9b3ea958"
+    },
+    {
+      "bytes": 3137,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-candidate-100.cli.provenance.json",
+      "sha256": "2aefbeb8f772290573118023d488ab8abf5be138c99c7be6868e20bbd58e5171"
+    },
+    {
+      "bytes": 2594288,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-faithful-100.cli",
+      "sha256": "e1c7e5f82a645c7fcdd2d2370032335b0b3400488fa040ddb0262a401b1aab10"
+    },
+    {
+      "bytes": 2916,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn0-faithful-100.cli.provenance.json",
+      "sha256": "bb281376f8c0f0385387b46d4f4e0ac48311680cdf07323ad517b5fb50050fe5"
+    },
+    {
+      "bytes": 2594397,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-candidate-100.cli",
+      "sha256": "8945893eb8b81209f96db81b426f19538a8fbfef017e1a208b4c45ada1226eb6"
+    },
+    {
+      "bytes": 3161,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-candidate-100.cli.provenance.json",
+      "sha256": "6d5fc00689d5dd90fba3227ad0716bfddfb2cb0908bf38ac9f64f46eadf72159"
+    },
+    {
+      "bytes": 2594300,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-faithful-100.cli",
+      "sha256": "1c93695fe66a7987a46fd454a697320b64770cafeccd0042a4877cd8422a9de8"
+    },
+    {
+      "bytes": 2940,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn10007-faithful-100.cli.provenance.json",
+      "sha256": "b93c1dcb6584056f0a9461d3c5e8cefa7cd83e379c1cd1fc6f77d157dc58f283"
+    },
+    {
+      "bytes": 2594395,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-candidate-100.cli",
+      "sha256": "ddb1f8d86957aa8d1f8a8e10b1dcc753fcf2fd1d9ccc0e5b9823ff7364fb78fa"
+    },
+    {
+      "bytes": 3156,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-candidate-100.cli.provenance.json",
+      "sha256": "e5141028bb40f018433de074e24927700cd21008169757ce77fbc5ac65c9709d"
+    },
+    {
+      "bytes": 2594298,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-faithful-100.cli",
+      "sha256": "897f9976d0164d62828426970260ee36ab81ae2fa6e55eed78af2c81c3e85ab4"
+    },
+    {
+      "bytes": 2935,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn1009-faithful-100.cli.provenance.json",
+      "sha256": "030caf2115dcd23432245363195a64e80fdd38f250a424b45fac18712abfb67a"
+    },
+    {
+      "bytes": 2594393,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-candidate-100.cli",
+      "sha256": "45da1c4c40a2870ec822eb07926f3136493d5ff7005e54bacef5d2a6e0fdc227"
+    },
+    {
+      "bytes": 3151,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-candidate-100.cli.provenance.json",
+      "sha256": "77e2e4647dd60e8147b114c1de1b3f64b85954673ab87b429dbfb1a561be2bad"
+    },
+    {
+      "bytes": 2594296,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-faithful-100.cli",
+      "sha256": "ae627c4401d2ed377be5c7601bedec82f09f9cf4e5d35cd4d3cdceddb46428a3"
+    },
+    {
+      "bytes": 2930,
+      "path": "target/a8c-routed-daily-pilot/streams/la160549-burn101-faithful-100.cli.provenance.json",
+      "sha256": "e602460e1db77f9645091b8fa86f2256bfdccd1050db058cc1e0165f0968adcc"
+    }
+  ],
+  "schema_version": 1
+}

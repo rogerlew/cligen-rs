@@ -1,0 +1,18 @@
+{
+  "analysis_id": "a8c_routed_daily_pilot_v1",
+  "analysis_sha256": "1819a51649eedc89c4584d28b43bd0aec0b81b6f61cfcb29150e46ad88920423",
+  "failed_gate_groups": [
+    "engineering",
+    "monthly_moments",
+    "storm_winter"
+  ],
+  "gate_groups": {
+    "daily_targets": true,
+    "engineering": false,
+    "monthly_moments": false,
+    "storm_winter": false
+  },
+  "schema_version": 1,
+  "source_commit": "046eba3c8d4508c84522c6dbd7cec4d39f094563",
+  "terminal_decision": "STOP-A8-ROUTED-DAILY"
+}

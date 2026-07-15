@@ -955,9 +955,12 @@ fn validate_identity_provenance(report: &QualityReport) -> Result<(), QualityErr
         "identity.content.station_source_sha256",
         "must equal provenance.station.legacy_source_sha256",
     )?;
+    let expected_station_model = match provenance.station.model {
+        StationModelV1::FixedMonthly5323 => "fixed_monthly_5_32_3",
+        StationModelV1::A8cIntegratedDailyV1 => "a8c_integrated_daily_v1",
+    };
     ensure(
-        content.station_model == "fixed_monthly_5_32_3"
-            && provenance.station.model == StationModelV1::FixedMonthly5323,
+        content.station_model == expected_station_model,
         "identity.content.station_model",
         "must agree with provenance.station.model",
     )?;
@@ -2332,6 +2335,9 @@ fn validate_process_profile(
         provenance.generation.qc_policy,
     ) {
         (GenerationProfileV1::Faithful5323, Some(QcPolicyV1::Faithful)) => {
+            (Some("faithful"), false)
+        }
+        (GenerationProfileV1::A8cRoutedDailyV1, Some(QcPolicyV1::Faithful)) => {
             (Some("faithful"), false)
         }
         (GenerationProfileV1::Faithful5323, Some(QcPolicyV1::Off)) => (Some("off"), true),

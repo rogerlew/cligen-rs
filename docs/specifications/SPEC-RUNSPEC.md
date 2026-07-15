@@ -1,6 +1,7 @@
 # SPEC-RUNSPEC — The `inp.yaml` Run Specification and `cligen` CLI Surface
 
-Status: active (rev 7 — A1 adds optional `output.parquet`, mandatory text
+Status: active (rev 8 — A8c adds the explicitly paired routed pilot profile;
+rev 7 — A1 adds optional `output.parquet`, mandatory text
 provenance, and the portable canonical-effective-runspec contract; rev 6 — A4a adds exactly-one `station.par` or
 `station.document`, with the station-document version independent of this
 runspec revision; rev 5 — `qc_filter: faithful | off` accepted
@@ -174,7 +175,7 @@ output:
 | `simulation.begin_year` | integer 1–99,999 where accepted |
 | `simulation.years` | integer ≥ 1 whose final year is ≤ 99,999 |
 | `rng.burn` | integer 0–2,147,483,647 (faithful signed-32-bit control/header domain) |
-| `generation_profile` | closed enum: `faithful_5_32_3` (default) or the explicitly labeled extension `fast_batch_v0` (SPEC-GENERATION-PROFILES) |
+| `generation_profile` | closed enum: `faithful_5_32_3` (default), `fast_batch_v0`, or the non-default `a8c_routed_daily_v1` pilot (SPEC-GENERATION-PROFILES) |
 | `qc_filter` | closed enum: `faithful` (default) or `off` (rev 5); rejected under `generation_profile: fast_batch_v0` |
 | `*.date` | month 1..12, day valid for the month under the **source's** calendar rules for the mode; storm year −9,999..99,999 (legacy `i5`) |
 | `amount_in`, `duration_h`, `max_intensity_in_per_h` | finite f32-convertible input, > 0 |
@@ -183,6 +184,11 @@ output:
 | `output.overwrite` | boolean |
 | `output.quality` | boolean, default true (rev 4) |
 | parent blocks (`simulation`, `rng`) | omissible when every member is optional/defaulted; mode-conditional blocks (`observed`, `single_storm`, `design_storm`) required for their mode and **rejected under any other mode** |
+
+`a8c_routed_daily_v1` requires `station.document` revision 2, `mode:
+continuous`, interpolation `none`, and `qc_filter: faithful`. It rejects
+legacy `.par`, revision-1 documents, observed/storm modes, and implicit route
+selection. Conversely, existing profiles reject revision-2 routed documents.
 
 Anything else — unknown fields anywhere, wrong types, out-of-domain
 values, or an explicit YAML/JSON `null` where a field type is non-null — is a

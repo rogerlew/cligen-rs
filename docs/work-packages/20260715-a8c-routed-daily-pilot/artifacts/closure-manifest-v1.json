@@ -1,0 +1,27 @@
+{
+  "closed_files_sha256": {
+    ".gitattributes": "52ab6cdc68b01a592d3fcc7accf20077b07d79318b0234f747d6c0e2c5fdb6b1",
+    "crates/cligen/schemas/provenance-v1.schema.json": "dc9e997222f416ae67ef5644f854deebe7c13505a1b1eb4e78ef1f46a6ecfc15",
+    "crates/cligen/schemas/quality-report-s2-m3.schema.json": "766c830cd7535143919c3e9f92dc3121bf3caceb3103b2e08ceeb6bdebff89f2",
+    "crates/cligen/src/quality/mod.rs": "1aa23716984854eadf9c49762fb7d4fec028ca28d3a8de94d59c40f4c2be8843",
+    "crates/cligen/src/quality/report.rs": "7dcefa51da4ad2300372a43b53db32af0900d33fc80db3ebb686d5e149312af0",
+    "crates/cligen/src/runspec.rs": "2a44042be285fe36d943de905950baea26cb5e84889c016e0ba6c0e98b6e9566",
+    "crates/cligen/tests/a8c_routed_daily.rs": "80d89b0e7e8d689b8d1c0f5eeaef3b6d40ca810782d5aa334ddee436b3503b0d",
+    "docs/ROADMAP.md": "90d60f646ae6e7b1637e9e1d15f65949a759da94a18eccefe8b7b229314470d0",
+    "docs/specifications/README.md": "074a2d231e59376995277d97cf9577a931489e4efae15b1f89f191c051848aa1",
+    "docs/specifications/SPEC-A8C-ROUTED-DAILY.md": "fdd27ddc76ca675c2be4f9d2c47a9847337ed375d1cc66709e694b90bc0a1107",
+    "docs/specifications/SPEC-QUALITY-REPORT.md": "97650812e13d783150eb2ca905386b76af32343561b932154dcd29bf03885e45",
+    "docs/specifications/quality-report-s2-m3.schema.json": "766c830cd7535143919c3e9f92dc3121bf3caceb3103b2e08ceeb6bdebff89f2",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-retained-streams-v1.tar.gz": "ee50d033c6022f9988fc4734cd892d518866dd7df7a35aba24448399ee47edae",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/analyze-a8c.py": "56d7b720d9d787c8a2867b29e36cd2029101351e52953a69cf63dc0b349db79a",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/archive-a8c-evidence.py": "4706cd1bb42d2b1d7a8c28d55b9ef62532c28e09a932e8f0a4ac4d92ef624ba5",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/retained-streams-manifest-v1.json": "2ed40275241748286255d030c6e2facd82a55990af9669fe925e00e8dda86963",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/verify-a8c.py": "e47cff76801ef8dbc61e9b3f616a4d0c060b9c97ddd75df381b88b44c92a3f62",
+    "docs/work-packages/20260715-a8c-routed-daily-pilot/package.md": "69a59bc5168adccb078bad9c8eee8301e4b0fbcafa94e141f2b8f75d812a08e5",
+    "docs/work-packages/README.md": "32a8fa8ff655ee08854b36fd25495beb370aabd930f62f92b7dc16ebb7a7346b"
+  },
+  "decision_sha256": "d393b16ea076a6f14d46b57f383ba4ec26014b766661985f9d2922f1fa5bc827",
+  "pre_analysis_freeze_sha256": "2d1acf61d2be6f023d5e13f06dd6d60cb6df4a709ef753356d0159cfa7d1ec08",
+  "schema_version": 1,
+  "status": "CLOSED-AFTER-STOP-A8-ROUTED-DAILY"
+}

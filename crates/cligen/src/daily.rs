@@ -59,6 +59,7 @@ use crate::libm_pinned::{
 use crate::monthlies::{fouri2, ryf2};
 use crate::quality::process::ProcessCounters;
 use crate::rng::randn_observed;
+use crate::routed_precip::DailyPrecipitationBackend;
 
 use crate::acm::AcmState;
 
@@ -342,6 +343,40 @@ pub fn clgen(
     acm: &mut AcmState,
     process: &mut ProcessCounters,
 ) -> ClgenEvents {
+    let mut daily_precipitation = DailyPrecipitationBackend::Faithful;
+    clgen_routed(
+        ntd,
+        iyear,
+        bk1,
+        bk3,
+        bk4,
+        bk5,
+        bk7,
+        ci,
+        cr,
+        batch,
+        &mut daily_precipitation,
+        acm,
+        process,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn clgen_routed(
+    ntd: i32,
+    iyear: i32,
+    bk1: &mut Cbk1State,
+    bk3: &Cbk3State,
+    bk4: &Cbk4State,
+    bk5: &mut Cbk5State,
+    bk7: &mut Cbk7State,
+    ci: &CinterpState,
+    cr: &mut Crandom3State,
+    batch: &mut MonthlyBatchBackend,
+    daily_precipitation: &mut DailyPrecipitationBackend,
+    acm: &mut AcmState,
+    process: &mut ProcessCounters,
+) -> ClgenEvents {
     let mo = bk4.mo;
     let ida = bk3.ida;
     bk7.rmx = solar_rmx(ida, bk7);
@@ -356,7 +391,14 @@ pub fn clgen(
     }
 
     if bk7.nsim != 0 {
-        gen_precip(ntd, mo, ida, bk5, bk7, ci, cr, process);
+        if daily_precipitation.uses_legacy_daily() {
+            gen_precip(ntd, mo, ida, bk5, bk7, ci, cr, process);
+        } else {
+            let amount = daily_precipitation
+                .generate_integrated(mo as usize - 1, bk7.rst[mo as usize - 1][0]);
+            bk5.r[(ida - 1) as usize] = amount;
+            bk7.l = if amount > 0.0 { 1 } else { 2 };
+        }
     }
 
     if bk7.msim == 0 {

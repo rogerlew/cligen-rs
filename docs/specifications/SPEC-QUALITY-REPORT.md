@@ -248,6 +248,13 @@ evaluation must not mutate generation state.
 }
 ```
 
+For the explicit A8c development profile, `station_model` may instead be
+`a8c_integrated_daily_v1` and `station_parameter_set_sha256` identifies the
+complete revision-2 routed parameter payload. This expands an independently
+versioned model-identity vocabulary; it does not change quality schema 2 or
+metrics version 3. Existing profiles retain `fixed_monthly_5_32_3` and their
+existing bytes.
+
 The implementation package publishes the full combination JSON Schema
 (`docs/specifications/quality-report-s2-m3.schema.json`) with this structure;
 unknown fields are rejected. `quality-report-v2.schema.json` remains the

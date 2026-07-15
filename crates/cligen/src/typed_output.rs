@@ -30,7 +30,7 @@ impl ClimateIdentityV1 {
             &self.station_parameter_set_sha256,
         )?;
         match self.generation_profile.as_str() {
-            "faithful_5_32_3" | "fast_batch_v0" => Ok(()),
+            "faithful_5_32_3" | "fast_batch_v0" | "a8c_routed_daily_v1" => Ok(()),
             value => Err(TypedOutputError::InvalidIdentity(format!(
                 "unsupported generation_profile {value:?}"
             ))),

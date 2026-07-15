@@ -126,6 +126,7 @@ pub fn compute_report(
         cli_text,
         par.fixed_monthly(),
         &sha256_hex(par_bytes),
+        None,
         provenance,
         process,
     )
@@ -140,12 +141,16 @@ pub(crate) fn compute_report_with_station(
     cli_text: &str,
     station: &FixedMonthly5323,
     station_source_sha256: &str,
+    run_station_identity: Option<(&str, &str)>,
     provenance: Option<Provenance>,
     process: Option<ProcessMetrics>,
 ) -> Result<QualityReport, QualityError> {
     let table = intake::parse_cli_table(cli_text).map_err(QualityError::Cli)?;
     let rows = &table.rows;
-    let parameter_set_sha256 = parameter_set_sha256(station).map_err(QualityError::Station)?;
+    let base_parameter_set_sha256 = parameter_set_sha256(station).map_err(QualityError::Station)?;
+    let (station_model, parameter_set_sha256) = run_station_identity
+        .map(|(model, identity)| (model.to_owned(), identity.to_owned()))
+        .unwrap_or_else(|| ("fixed_monthly_5_32_3".to_owned(), base_parameter_set_sha256));
     let cli_sha256 = sha256_hex(cli_text.as_bytes());
     if let Some(value) = &provenance {
         validate_report_provenance(
@@ -159,7 +164,7 @@ pub(crate) fn compute_report_with_station(
 
     let content = IdentityContent {
         tool: format!("cligen-rs {}", env!("CARGO_PKG_VERSION")),
-        station_model: "fixed_monthly_5_32_3".to_owned(),
+        station_model,
         station_parameter_set_sha256: parameter_set_sha256,
         station_source_sha256: station_source_sha256.to_owned(),
         cli_sha256,

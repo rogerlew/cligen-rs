@@ -9,3 +9,4 @@ docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/*.tar.gz fil
 docs/work-packages/20260714-a5d1b-finite-path-realization/** whitespace=-blank-at-eof
 docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/** whitespace=-blank-at-eof
 references/observed/a8a-v1/**/*.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-retained-streams-v1.tar.gz filter=lfs diff=lfs merge=lfs -text

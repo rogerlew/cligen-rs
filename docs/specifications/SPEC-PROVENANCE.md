@@ -1,6 +1,7 @@
 # SPEC-PROVENANCE — Generated Climate Artifact Provenance
 
-Status: active (revision 1; A1)
+Status: active (revision 2; A8c adds independently versioned station/profile
+vocabularies while retaining envelope schema version 1)
 Surface: deterministic provenance shared by text companions, Parquet metadata,
 and run-emitted quality reports.
 
@@ -45,9 +46,9 @@ paths.
 
 | Axis | Revision-1 values |
 |---|---|
-| Station input schema | `cligen_par` / `5.32.3`, or `org.openwepp.cligen.station` / `1` |
-| Station model | `fixed_monthly_5_32_3` |
-| Generation profile | `faithful_5_32_3` or `fast_batch_v0` |
+| Station input schema | `cligen_par` / `5.32.3`, or `org.openwepp.cligen.station` / `1` or `/2` |
+| Station model | `fixed_monthly_5_32_3` or `a8c_integrated_daily_v1` |
+| Generation profile | `faithful_5_32_3`, `fast_batch_v0`, or `a8c_routed_daily_v1` |
 | Text output schema | `org.openwepp.cligen.cli.text` / `1` |
 | Parquet output schema | `org.openwepp.cligen.cli.parquet` / `1` |
 | Provenance schema | `1` |
@@ -56,6 +57,12 @@ A change to one cell does not imply a change to another. The Parquet library
 version belongs to producer/writer identity, not the climate output schema.
 Faithful generation uses `cligen_randn_5_32_3`; the retired experimental
 profile truthfully names `splitmix64_monthly_v0`.
+The A8c routed profile names
+`cligen_randn_5_32_3_plus_splitmix64_daily_v1`. Its station fit is reported as
+the validated revision-2 `fit_id`; existing profiles retain the exact
+`unreported` fit object. These are additions on independent versioned axes,
+not a structural envelope change, so `provenance_schema_version` remains `1`
+and existing faithful provenance bytes are unchanged.
 
 ## Station and fit identity
 
@@ -66,14 +73,23 @@ document's declaration-ordered `parameters` object (`StationParameters`),
 excluding schema/model/units/lineage; it is identical when legacy and modern
 syntaxes represent the same model. `legacy_source_sha256` is the A4a lineage source.
 
-Current artifacts do not report their fitter, target dataset, or fit revision.
-Revision 1 therefore requires:
+Existing faithful and retired experimental-profile artifacts do not report
+their fitter, target dataset, or fit revision. They therefore require:
 
 ```json
 "fit": { "status": "unreported", "id": null }
 ```
 
-No path, station name, or source hash is relabeled as a scientific fit method.
+The A8c profile instead requires one exact model/fit pair carried by its
+validated revision-2 station document:
+
+| Station model | Required reported fit ID |
+|---|---|
+| `a8c_integrated_daily_v1` | `a8a_o2_logqspline_gaussian_copula_v1` |
+| `fixed_monthly_5_32_3` | `legacy_daily_only_v1` |
+
+No path, station name, or source hash is relabeled as a scientific fit method,
+and an A8c model or reported fit is invalid under any other generation profile.
 
 Path-only runs also cannot prove that selected bytes came from a synced
 SPEC-STATION-DB release. Revision 1 therefore requires

@@ -1,0 +1,3930 @@
+{
+  "analysis_id": "a8c_routed_daily_pilot_v1",
+  "contract_sha256": "7434b499691d472a77579fac896918e61c9b7bd738180d90c4bc498d48a3bfdf",
+  "daily_distances": [
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.07161080464753396,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.006482090052630982,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.08024629317627122,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.03091487132110918,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.09669125207668973,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.013282053878489214,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.13379765694252183,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.015119358527038752,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.03334568724933614,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.008779304869812734,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.06698966048173946,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.022409884994078637,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.08876556423566095,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.015445098979262124,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.056972129674608823,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.0335148982349787,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.06284962930143274,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.0092237700023102,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.03334568724933607,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.027971299658291416,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.11265991536840267,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.017624928596966266,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.10829307538402536,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.00924003821268124,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.07374199423453445,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.006113886705316436,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.056972129674608886,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.02628107359038849,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.09179894057677968,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.014493636155266144,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.019418103126969018,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az026481",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.17913175331193515,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 13,
+      "distance": 0.044242735209980344,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.17913175331193515,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 13,
+      "distance": 0.044242735209980344,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.20273255405408214,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 13,
+      "distance": 0.04926488636287191,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.20273255405408214,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 13,
+      "distance": 0.04926488636287191,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.17108512886792532,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 12,
+      "distance": 0.02195875899529398,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.17108512886792532,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 12,
+      "distance": 0.02195875899529398,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.13878538142373015,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 13,
+      "distance": 0.022932288861576416,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.13878538142373015,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 13,
+      "distance": 0.022932288861576416,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.16916290263526793,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 13,
+      "distance": 0.024159320198024567,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.16916290263526793,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 13,
+      "distance": 0.024159320198024567,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.13913511913471713,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 13,
+      "distance": 0.037081596592842186,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.13913511913471713,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 13,
+      "distance": 0.037081596592842186,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.23164233949849528,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 13,
+      "distance": 0.029698645553439235,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.23164233949849528,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 13,
+      "distance": 0.029698645553439235,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.10946946001608887,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 13,
+      "distance": 0.029579473832690356,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.10946946001608887,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 13,
+      "distance": 0.029579473832690356,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "ca040442",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.17275082167030356,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.00739796899358118,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.12894324987904132,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.01888645662710542,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.19149612612805292,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.009594906384428975,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.22957262878589407,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.03401178592942174,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.04983124727159431,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.016921712348417522,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.25225516233075895,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.027580808926093322,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.06717402626553932,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.019847765833293646,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.2876820724517809,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.024129764484983884,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.09618594632372801,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.01009388143688477,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.190683778264552,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.010217308080841966,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.1579264747092386,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.011336297797373704,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.20273255405408225,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.03460114219298738,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.10934460048241482,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.008514960294165125,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.1603714673563345,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.014158578831863833,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.044806079344843576,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.014025755377124173,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.13577634526094873,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.025306100012260878,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "az028820",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.1403611107583605,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.00864513645755366,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.25541281188299525,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.037717613472124226,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.10070178233890192,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.01772896338911098,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.016502419424408873,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.09534490323223563,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.01051093199352321,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.2876820724517809,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.02474782892665782,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.05791590776256088,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.007479793770205662,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.2750231684596359,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.017351067366154688,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.15280988656922412,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.008809935329266466,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.01576652056316355,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.11602416482858474,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.017291978302830413,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.013545684574458941,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.08988036796614052,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.005304617802251582,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.020659803053035178,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.07229061440555377,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.004701966196783237,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.00827445132459853,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "id101022",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.008263758384035341,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.02454879158465792,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.009852123812521735,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.02914306166721864,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.01746758220288877,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.07381799940303227,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.0174878189367125,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.012629248902371326,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.01123772163729908,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.005817346533916357,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.024228796219753435,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.005814388170182802,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.021485379692060796,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.0038243116055524107,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.07381799940303227,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.02253686204356102,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.007310141151091756,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.023116792582158374,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "la160549",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.027827891977706742,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.005448546035190266,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.04021078365528712,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.023173457446706413,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.0168080967146914,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.06307564266345003,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.010553317886729432,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.04213017180886999,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.013761477535810113,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.10829307538402533,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.01094608359768899,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.014261075335904205,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.051310393958352955,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.012960001985928407,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.014493768436626094,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.004288924442693687,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 0,
+      "common_components": 24,
+      "distance": 0.0748396895162523,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 0,
+      "common_components": 16,
+      "distance": 0.017336395945319064,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.04744937091139785,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.009644076926806383,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 101,
+      "common_components": 24,
+      "distance": 0.02844553495019006,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 101,
+      "common_components": 16,
+      "distance": 0.007478973060021515,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.011075173508561131,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 1009,
+      "common_components": 24,
+      "distance": 0.09495895184294462,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 1009,
+      "common_components": 16,
+      "distance": 0.012332477456671577,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.011837045406756203,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "candidate"
+    },
+    {
+      "burn": 10007,
+      "common_components": 24,
+      "distance": 0.08675243702227954,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    },
+    {
+      "burn": 10007,
+      "common_components": 16,
+      "distance": 0.007509203255494493,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "station_id": "co050130",
+      "variant": "faithful"
+    }
+  ],
+  "daily_summaries_and_gates": [
+    {
+      "candidate_median_distance": 0.08018818444159745,
+      "faithful_median_distance": 0.07361797682900534,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": -0.08924732647642473,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median_distance": 0.011030679374150974,
+      "faithful_median_distance": 0.02666237815759391,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": 0.5862829898761583,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median_distance": 0.08277046740565706,
+      "faithful_median_distance": 0.04515890846197248,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": -0.832871303241455,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median_distance": 0.011858703078788172,
+      "faithful_median_distance": 0.022849588358678754,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": 0.481010209346551,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median_distance": 0.17510844108993023,
+      "faithful_median_distance": 0.17510844108993023,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median_distance": 0.03358751203577838,
+      "faithful_median_distance": 0.03358751203577838,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median_distance": 0.15414901088499253,
+      "faithful_median_distance": 0.15414901088499253,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median_distance": 0.029639059693064795,
+      "faithful_median_distance": 0.029639059693064795,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median_distance": 0.11996242396792145,
+      "faithful_median_distance": 0.2409138955583265,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": 0.502052699409869,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median_distance": 0.013258309366423249,
+      "faithful_median_distance": 0.025855286705538605,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": 0.4872108935623169,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median_distance": 0.10276527340307141,
+      "faithful_median_distance": 0.17552762281044326,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": 0.4145350358100033,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median_distance": 0.010715089617129237,
+      "faithful_median_distance": 0.019732339422062355,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": 0.4569782432817419,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median_distance": 0.09802334278556878,
+      "faithful_median_distance": 0.2813526204557084,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": 0.6515996807607485,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median_distance": 0.009578034225538434,
+      "faithful_median_distance": 0.021049448146406254,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": 0.5449745685055558,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median_distance": 0.10295226639736263,
+      "faithful_median_distance": 0.28768207245178085,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": 0.6421317966741958,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median_distance": 0.007057276565759024,
+      "faithful_median_distance": 0.014656102568811245,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": 0.5184752199553255,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median_distance": 0.0,
+      "faithful_median_distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": 0.0,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median_distance": 0.01124068635744653,
+      "faithful_median_distance": 0.02101830526068521,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": 0.46519539905663754,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median_distance": 0.0,
+      "faithful_median_distance": 0.0,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": 0.0,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median_distance": 0.005815867352049579,
+      "faithful_median_distance": 0.022826827312859697,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": 0.7452178845382881,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median_distance": 0.013913945988853371,
+      "faithful_median_distance": 0.0571930183109015,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "relative_improvement": 0.7567195017892376,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median_distance": 0.014011276435857159,
+      "faithful_median_distance": 0.011953042791808699,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "relative_improvement": -0.17219327997879727,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median_distance": 0.007246884218313047,
+      "faithful_median_distance": 0.08079606326926592,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "relative_improvement": 0.9103064688416609,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median_distance": 0.010359625217683757,
+      "faithful_median_distance": 0.009920840356083035,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "relative_improvement": -0.044228598168266894,
+      "station_id": "co050130"
+    },
+    {
+      "available_stations": 6,
+      "family": "spell_structure",
+      "horizon_years": 30,
+      "median_relative_improvement": 0.2510263497049345,
+      "nonworse_fraction": 0.8333333333333334,
+      "pass": true
+    },
+    {
+      "available_stations": 6,
+      "family": "spell_structure",
+      "horizon_years": 100,
+      "median_relative_improvement": 0.20726751790500164,
+      "nonworse_fraction": 0.8333333333333334,
+      "pass": true
+    },
+    {
+      "available_stations": 6,
+      "family": "higher_order_occurrence",
+      "horizon_years": 30,
+      "median_relative_improvement": 0.47620314630947724,
+      "nonworse_fraction": 0.8333333333333334,
+      "pass": true
+    },
+    {
+      "available_stations": 6,
+      "family": "higher_order_occurrence",
+      "horizon_years": 100,
+      "median_relative_improvement": 0.46899422631414645,
+      "nonworse_fraction": 0.8333333333333334,
+      "pass": true
+    }
+  ],
+  "engineering_gates": {
+    "candidate_30_year_row_prefix": true,
+    "candidate_byte_replay": true,
+    "cross_variable_exact": false,
+    "fallback_typed_row_identity": true,
+    "profile_station_rng_provenance": true
+  },
+  "execution_evidence_sha256": "2a171c134d00d84c3ef5c481d171e214b1ec444231a61e274ec856fcc95f8e37",
+  "guard_summary": {
+    "cold_wet_count": 5941,
+    "cold_wet_normalized_peak_exact": true,
+    "storm_descriptor_gate": false,
+    "storm_finite_and_bounds": true
+  },
+  "input_hashes": {
+    "a7a_analyzer": "6f4a1e242949b4de4bcdeea0e0a05642cd8455606ff62b8de71442198c8782ac",
+    "a7a_measurement_contract": "fad73c12491b865a78bb2d98192935b146a32874129b39973c5a3b141793180e",
+    "a8a_analysis": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b",
+    "a8a_decision": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58",
+    "a8a_panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a8a_selected_parameters": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122",
+    "a8a_source_manifest": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae",
+    "a8b_decision": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb",
+    "corpus_common": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+  },
+  "monthly_cells": [
+    {
+      "errors": {
+        "monthly_total_mean": 0.050578501503684266,
+        "monthly_total_variance": 0.014203050884985953,
+        "wet_amount_mean": 0.07475790246591758,
+        "wet_fraction": 0.017392876329677495
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.10834390669784566,
+        "monthly_total_variance": 0.2269426911307042,
+        "wet_amount_mean": 0.14662720932345627,
+        "wet_fraction": 0.037151375619714114
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.027670220944283258,
+        "monthly_total_variance": 0.21410368147372172,
+        "wet_amount_mean": 0.03376931440055341,
+        "wet_fraction": 0.007282507232962962
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.11248026256834066,
+        "monthly_total_variance": 0.11492858074724517,
+        "wet_amount_mean": 0.05493783333540033,
+        "wet_fraction": 0.0029938267062593824
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.21211161178008908,
+        "monthly_total_variance": 0.29278858759052656,
+        "wet_amount_mean": 0.29446709235160656,
+        "wet_fraction": 0.004052935484383159
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.20931759282575071,
+        "monthly_total_variance": 0.4261303057500138,
+        "wet_amount_mean": 1.166547331113686,
+        "wet_fraction": 0.011451889598843024
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.22372979344162539,
+        "monthly_total_variance": 0.14758415689573046,
+        "wet_amount_mean": 0.04816320680180393,
+        "wet_fraction": 0.03687773931571016
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.14046978824874892,
+        "monthly_total_variance": 0.2364568183548621,
+        "wet_amount_mean": 0.08204650723703186,
+        "wet_fraction": 0.0344256155395017
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.010904422520892666,
+        "monthly_total_variance": 0.04097639623389594,
+        "wet_amount_mean": 0.04570441268399155,
+        "wet_fraction": 0.005784312281779072
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.03556203225692472,
+        "monthly_total_variance": 0.04156018843914265,
+        "wet_amount_mean": 0.20921378861617845,
+        "wet_fraction": 0.012801508739549342
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.052256197512642884,
+        "monthly_total_variance": 0.0663596523429604,
+        "wet_amount_mean": 0.1488370850257723,
+        "wet_fraction": 0.014811829992137454
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.046393724582731215,
+        "monthly_total_variance": 0.12421046522814663,
+        "wet_amount_mean": 0.07935358472414596,
+        "wet_fraction": 0.015298137928327377
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04762398173355309,
+        "monthly_total_variance": 0.14753592466120685,
+        "wet_amount_mean": 0.06612780174933057,
+        "wet_fraction": 0.015860618265161358
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01904725906400521,
+        "monthly_total_variance": 0.13929324865049417,
+        "wet_amount_mean": 0.1898265643311922,
+        "wet_fraction": 0.02988871972037266
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07430050952609984,
+        "monthly_total_variance": 0.174723296355681,
+        "wet_amount_mean": 0.003110862951103603,
+        "wet_fraction": 0.009760503519725225
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07448823256338058,
+        "monthly_total_variance": 0.09223529029829136,
+        "wet_amount_mean": 0.012702123845677267,
+        "wet_fraction": 0.005645062182629508
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.011180575502679447,
+        "monthly_total_variance": 0.04076800263846165,
+        "wet_amount_mean": 0.2614272609725938,
+        "wet_fraction": 0.009267989247824019
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.10207021683041446,
+        "monthly_total_variance": 0.13983610855738277,
+        "wet_amount_mean": 0.9119725134031914,
+        "wet_fraction": 0.01086855626550969
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.08340819560573713,
+        "monthly_total_variance": 0.06751006749311492,
+        "wet_amount_mean": 0.06361619197350506,
+        "wet_fraction": 0.020560535014634895
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02452918525238295,
+        "monthly_total_variance": 0.06929216917370043,
+        "wet_amount_mean": 0.15413497893331268,
+        "wet_fraction": 0.026334217690039352
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00640884336780565,
+        "monthly_total_variance": 0.046484520814338716,
+        "wet_amount_mean": 0.032914573511161734,
+        "wet_fraction": 0.00328431228177907
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.1568285177462068,
+        "monthly_total_variance": 0.1205321303302565,
+        "wet_amount_mean": 0.26713914084303725,
+        "wet_fraction": 0.008097207664280529
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04380677282479127,
+        "monthly_total_variance": 0.029704801438550945,
+        "wet_amount_mean": 0.1919804088276326,
+        "wet_fraction": 0.016728496658804118
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.043368150532143844,
+        "monthly_total_variance": 0.14905139278525775,
+        "wet_amount_mean": 0.07825525217931767,
+        "wet_fraction": 0.014679858358434897
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "az026481"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.044983111059739275,
+        "monthly_total_variance": 0.17605968719081924,
+        "wet_amount_mean": 0.272123529888387,
+        "wet_fraction": 0.059761675825448585
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.009245788447775679,
+        "monthly_total_variance": 0.31335852810476356,
+        "wet_amount_mean": 0.014576828515564935,
+        "wet_fraction": 0.0017929824723700305
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.011858620019954169,
+        "monthly_total_variance": 0.06124384932497756,
+        "wet_amount_mean": 0.2720563554544206,
+        "wet_fraction": 0.04605199840609375
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.11062504026631047,
+        "monthly_total_variance": 0.09599018681896358,
+        "wet_amount_mean": 0.41821760312446565,
+        "wet_fraction": 0.03079365261828272
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.15847899421631034,
+        "monthly_total_variance": 0.4340543930544966,
+        "wet_amount_mean": 0.4135982524467584,
+        "wet_fraction": 0.025759013282732446
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.22631060475218512,
+        "monthly_total_variance": 0.22963764127241357,
+        "wet_amount_mean": 0.2148814684072747,
+        "wet_fraction": 0.004542483350764051
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": null,
+        "monthly_total_variance": null,
+        "wet_amount_mean": null,
+        "wet_fraction": 0.0
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.13722377008556674,
+        "monthly_total_variance": 0.5626607108338804,
+        "wet_amount_mean": 0.699176782124817,
+        "wet_fraction": 0.0059907831725559595
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0031963137293417048,
+        "monthly_total_variance": 0.19832513599775875,
+        "wet_amount_mean": 0.3683167300617978,
+        "wet_fraction": 0.00910256366170134
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.051931873696847465,
+        "monthly_total_variance": 0.2773963260763323,
+        "wet_amount_mean": 0.4836714773290918,
+        "wet_fraction": 0.018843115150119008
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07728838795388272,
+        "monthly_total_variance": 0.08079111661224862,
+        "wet_amount_mean": 0.42369578336435304,
+        "wet_fraction": 0.03147661437875281
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07052905939190497,
+        "monthly_total_variance": 0.14935397156720584,
+        "wet_amount_mean": 0.5133853384488664,
+        "wet_fraction": 0.06970854142969646
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.010161984146872156,
+        "monthly_total_variance": 0.02789262480644337,
+        "wet_amount_mean": 0.31807302371532453,
+        "wet_fraction": 0.059761675825448585
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0776794110775523,
+        "monthly_total_variance": 0.17701457132177917,
+        "wet_amount_mean": 0.02581157010975803,
+        "wet_fraction": 0.015806677700654498
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04787266174098681,
+        "monthly_total_variance": 0.04461722506874749,
+        "wet_amount_mean": 0.3158253044323129,
+        "wet_fraction": 0.045648772599642146
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06297387948508137,
+        "monthly_total_variance": 0.09237350983757885,
+        "wet_amount_mean": 0.4294919459091839,
+        "wet_fraction": 0.03590476372939384
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.03911897023213976,
+        "monthly_total_variance": 0.04683826488585528,
+        "wet_amount_mean": 0.44452974890803515,
+        "wet_fraction": 0.018742884250474386
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.08251306557997114,
+        "monthly_total_variance": 0.09059940091584413,
+        "wet_amount_mean": 0.38771120239162254,
+        "wet_fraction": 0.004264705572986274
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": null,
+        "monthly_total_variance": null,
+        "wet_amount_mean": null,
+        "wet_fraction": 0.0
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.14734570049208398,
+        "monthly_total_variance": 0.21955220547771512,
+        "wet_amount_mean": 1.2055117781589353,
+        "wet_fraction": 0.005856374570405422
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0794559984094052,
+        "monthly_total_variance": 0.10970288261225988,
+        "wet_amount_mean": 0.43190833979160315,
+        "wet_fraction": 0.00860256366170134
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.05983763932586895,
+        "monthly_total_variance": 0.04380092125241708,
+        "wet_amount_mean": 0.487856583911221,
+        "wet_fraction": 0.018547416225387824
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.016491595000147394,
+        "monthly_total_variance": 0.06916044136659474,
+        "wet_amount_mean": 0.42776242387598773,
+        "wet_fraction": 0.03692105882319725
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00712967483844462,
+        "monthly_total_variance": 0.021746505664817856,
+        "wet_amount_mean": 0.5612024740826129,
+        "wet_fraction": 0.06629456293507281
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "ca040442"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.030994130081527155,
+        "monthly_total_variance": 0.010510634669723158,
+        "wet_amount_mean": 0.12105781532628111,
+        "wet_fraction": 0.02347796515276157
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01609957082635971,
+        "monthly_total_variance": 0.0938288859559199,
+        "wet_amount_mean": 0.02277775266258934,
+        "wet_fraction": 0.008133281722889296
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01169963868058739,
+        "monthly_total_variance": 0.263307179545943,
+        "wet_amount_mean": 0.02909926576006478,
+        "wet_fraction": 0.0022716911370427584
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06806179586678447,
+        "monthly_total_variance": 0.047805458339517305,
+        "wet_amount_mean": 0.31848752719497186,
+        "wet_fraction": 0.01515981763122213
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.12185767077264699,
+        "monthly_total_variance": 0.15377152514493486,
+        "wet_amount_mean": 0.10683461817669615,
+        "wet_fraction": 0.0007622615047451903
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.011274180943012488,
+        "monthly_total_variance": 0.3619340127308595,
+        "wet_amount_mean": 0.31379088303769337,
+        "wet_fraction": 0.01854701032270578
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.1227375022709291,
+        "monthly_total_variance": 0.13372322455012278,
+        "wet_amount_mean": 0.01389547786437723,
+        "wet_fraction": 0.03722594081905267
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.11394777916776422,
+        "monthly_total_variance": 0.13207341232674386,
+        "wet_amount_mean": 0.04060663852630954,
+        "wet_fraction": 0.02395635879868735
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02856966729677799,
+        "monthly_total_variance": 0.21641110970026994,
+        "wet_amount_mean": 0.03618169933705382,
+        "wet_fraction": 0.010198411177886058
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0094139808802204,
+        "monthly_total_variance": 0.09773010333412677,
+        "wet_amount_mean": 0.1465467248514216,
+        "wet_fraction": 0.013617398214328447
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01678954773836788,
+        "monthly_total_variance": 0.09611489759595371,
+        "wet_amount_mean": 0.12204428429305846,
+        "wet_fraction": 0.013055556619924219
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07432534656112862,
+        "monthly_total_variance": 0.08950380566413878,
+        "wet_amount_mean": 0.18119476262876236,
+        "wet_fraction": 0.034737605796483176
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.028103507050158596,
+        "monthly_total_variance": 0.05925888446625065,
+        "wet_amount_mean": 0.11546875240319254,
+        "wet_fraction": 0.02251022321727769
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01839705386723955,
+        "monthly_total_variance": 0.0984208513082727,
+        "wet_amount_mean": 0.0695268977067985,
+        "wet_fraction": 0.009285490317796824
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07927624713819521,
+        "monthly_total_variance": 0.20089381329215902,
+        "wet_amount_mean": 0.008751941976177844,
+        "wet_fraction": 0.009018631443602404
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06683446597531184,
+        "monthly_total_variance": 0.17515408980407837,
+        "wet_amount_mean": 0.3087958364369456,
+        "wet_fraction": 0.021493150964555466
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.008851032228963277,
+        "monthly_total_variance": 0.09147371614911586,
+        "wet_amount_mean": 0.1294418210067997,
+        "wet_fraction": 0.0077783905370032574
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01682889645512491,
+        "monthly_total_variance": 0.08398290373547804,
+        "wet_amount_mean": 0.27275920296853334,
+        "wet_fraction": 0.015519232544928006
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06904442544477385,
+        "monthly_total_variance": 0.07917401523139521,
+        "wet_amount_mean": 9.02309500657159e-05,
+        "wet_fraction": 0.023704435442708616
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.022548367508472146,
+        "monthly_total_variance": 0.048028686454725245,
+        "wet_amount_mean": 0.020394480794699903,
+        "wet_fraction": 0.01371442331481637
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00814755234790339,
+        "monthly_total_variance": 0.11908503536097734,
+        "wet_amount_mean": 0.01934347941426639,
+        "wet_fraction": 0.004892855622330494
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.12652176010042174,
+        "monthly_total_variance": 0.16461374315370844,
+        "wet_amount_mean": 0.2435694040017083,
+        "wet_fraction": 0.010767935848737059
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04454128767535007,
+        "monthly_total_variance": 0.013708673352163985,
+        "wet_amount_mean": 0.1077761967124888,
+        "wet_fraction": 0.014583334397702
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.020463270897398432,
+        "monthly_total_variance": 0.032717360782015176,
+        "wet_amount_mean": 0.1972589332811275,
+        "wet_fraction": 0.029576315473902534
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "az028820"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0034872350285521706,
+        "monthly_total_variance": 0.0891111228313199,
+        "wet_amount_mean": 0.12485941771849533,
+        "wet_fraction": 0.04863253950837654
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.014501733079036242,
+        "monthly_total_variance": 0.015757203445979417,
+        "wet_amount_mean": 0.07542005525120246,
+        "wet_fraction": 0.03964974419519873
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.020540157262666964,
+        "monthly_total_variance": 0.21853058580491921,
+        "wet_amount_mean": 0.051373697636829016,
+        "wet_fraction": 0.014162426312239074
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.028580478727268124,
+        "monthly_total_variance": 0.15876414936070468,
+        "wet_amount_mean": 0.16134998024129926,
+        "wet_fraction": 0.05759370340731623
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.026279652161064464,
+        "monthly_total_variance": 0.07950191049045084,
+        "wet_amount_mean": 0.11397529215088024,
+        "wet_fraction": 0.024193536745564875
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06750122960600363,
+        "monthly_total_variance": 0.14013012672685235,
+        "wet_amount_mean": 0.0515733523107942,
+        "wet_fraction": 0.0006132776238894355
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.19415689052567633,
+        "monthly_total_variance": 0.43221886492949374,
+        "wet_amount_mean": 0.02696481273308863,
+        "wet_fraction": 0.024001533564099203
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.19279469630512472,
+        "monthly_total_variance": 0.23848032037722766,
+        "wet_amount_mean": 0.6265858538617237,
+        "wet_fraction": 0.046603814008375224
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04092928366070526,
+        "monthly_total_variance": 0.14770825675407348,
+        "wet_amount_mean": 0.2349779236794305,
+        "wet_fraction": 0.03029914424107466
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.05130540577838727,
+        "monthly_total_variance": 0.21124579344454833,
+        "wet_amount_mean": 0.024534558026725935,
+        "wet_fraction": 0.015716596468236865
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01625270242454061,
+        "monthly_total_variance": 0.04131062209905449,
+        "wet_amount_mean": 0.0012694758151030232,
+        "wet_fraction": 0.005833320597298131
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.016182730447979188,
+        "monthly_total_variance": 0.04989572989026442,
+        "wet_amount_mean": 0.09519752138920862,
+        "wet_fraction": 0.04484572355207567
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.025190348931860382,
+        "monthly_total_variance": 0.07633903598260734,
+        "wet_amount_mean": 0.10344392319565075,
+        "wet_fraction": 0.05185834595998945
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0013453519871928028,
+        "monthly_total_variance": 0.0881426282349978,
+        "wet_amount_mean": 0.08990699243875841,
+        "wet_fraction": 0.03915840415486305
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.016866013111509863,
+        "monthly_total_variance": 0.049351897992448025,
+        "wet_amount_mean": 0.057686976273149906,
+        "wet_fraction": 0.027657049968153047
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.058150720288396095,
+        "monthly_total_variance": 0.046796517272221554,
+        "wet_amount_mean": 0.12882857301955186,
+        "wet_fraction": 0.05795481451842735
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.008120967571529017,
+        "monthly_total_variance": 0.028508652011281034,
+        "wet_amount_mean": 0.10030322441470109,
+        "wet_fraction": 0.025887085132661636
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.034176695328534505,
+        "monthly_total_variance": 0.06755389508015383,
+        "wet_amount_mean": 0.04849013979639908,
+        "wet_fraction": 0.00408116682055501
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.08341134069571256,
+        "monthly_total_variance": 0.13200147563936707,
+        "wet_amount_mean": 0.05919469489309144,
+        "wet_fraction": 0.01636712496194867
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07213515034520526,
+        "monthly_total_variance": 0.1010316202366702,
+        "wet_amount_mean": 0.6633740845247481,
+        "wet_fraction": 0.0415231688470849
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04330226368805302,
+        "monthly_total_variance": 0.14803027118532192,
+        "wet_amount_mean": 0.19081738472382248,
+        "wet_fraction": 0.027326922018852437
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.030069571338830127,
+        "monthly_total_variance": 0.042723106815749076,
+        "wet_amount_mean": 0.08214902571506946,
+        "wet_fraction": 0.010743478188666972
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.033971762907550725,
+        "monthly_total_variance": 0.00675332314985602,
+        "wet_amount_mean": 0.003066872876841729,
+        "wet_fraction": 0.010333320597298135
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.013034784816730085,
+        "monthly_total_variance": 0.051362909936550516,
+        "wet_amount_mean": 0.10411886467097381,
+        "wet_fraction": 0.04643174505745201
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "id101022"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.022604126806689346,
+        "monthly_total_variance": 0.002448392876943121,
+        "wet_amount_mean": 0.044509480081044814,
+        "wet_fraction": 0.02201023215580572
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.016239572123218804,
+        "monthly_total_variance": 0.11637743241155493,
+        "wet_amount_mean": 0.03970472363452126,
+        "wet_fraction": 0.01930341826094295
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01616600562940636,
+        "monthly_total_variance": 0.016145046643519886,
+        "wet_amount_mean": 0.056351491808485005,
+        "wet_fraction": 0.011007895811232349
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02832188274830484,
+        "monthly_total_variance": 0.03049352108108799,
+        "wet_amount_mean": 0.0847130911354893,
+        "wet_fraction": 0.02635802310153748
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07078013908281916,
+        "monthly_total_variance": 0.06648244123780032,
+        "wet_amount_mean": 0.0801299375863325,
+        "wet_fraction": 0.0026881720430107503
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.029756927077650125,
+        "monthly_total_variance": 0.0183585178605175,
+        "wet_amount_mean": 0.003869679649980288,
+        "wet_fraction": 0.010506095550284145
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.10597213862152331,
+        "monthly_total_variance": 0.244521494622167,
+        "wet_amount_mean": 0.06839382008379538,
+        "wet_fraction": 0.016959929495512283
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07180301519038994,
+        "monthly_total_variance": 0.09804447204791232,
+        "wet_amount_mean": 0.022799330421866264,
+        "wet_fraction": 0.020274497152592996
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.038251124476343504,
+        "monthly_total_variance": 0.27928101772192643,
+        "wet_amount_mean": 0.0015555830196332856,
+        "wet_fraction": 0.01096618263592769
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01090373790428871,
+        "monthly_total_variance": 0.15337085866617858,
+        "wet_amount_mean": 0.030073915097555432,
+        "wet_fraction": 0.004325510459812276
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.007666420875727102,
+        "monthly_total_variance": 0.10705773374550726,
+        "wet_amount_mean": 0.016266861991088347,
+        "wet_fraction": 0.002807019607732386
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02642627356438758,
+        "monthly_total_variance": 0.06695428003148506,
+        "wet_amount_mean": 0.07099160941448882,
+        "wet_fraction": 0.027256809368128188
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.021255250660841746,
+        "monthly_total_variance": 0.10469672310925339,
+        "wet_amount_mean": 0.03670360623410523,
+        "wet_fraction": 0.019348941833225053
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.026781722513084073,
+        "monthly_total_variance": 0.004672512961039524,
+        "wet_amount_mean": 0.06424483139343276,
+        "wet_fraction": 0.013615433505548946
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02747247099999823,
+        "monthly_total_variance": 0.015297163800839335,
+        "wet_amount_mean": 0.040841033918810506,
+        "wet_fraction": 0.01880359473596349
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.05635695697586192,
+        "monthly_total_variance": 0.03880884497227751,
+        "wet_amount_mean": 0.06598333034139185,
+        "wet_fraction": 0.028913578657093042
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.022678624526299703,
+        "monthly_total_variance": 0.08551147382035595,
+        "wet_amount_mean": 0.03980058835308351,
+        "wet_fraction": 0.004677419354838702
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.007047671173965925,
+        "monthly_total_variance": 0.0010350267699130796,
+        "wet_amount_mean": 0.024990646070972688,
+        "wet_fraction": 0.007144984439172997
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.03868766470223375,
+        "monthly_total_variance": 0.10417827383235773,
+        "wet_amount_mean": 0.037832013847274526,
+        "wet_fraction": 0.00037390799013592435
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02641828255244359,
+        "monthly_total_variance": 0.09447938533729897,
+        "wet_amount_mean": 0.01563121180558149,
+        "wet_fraction": 0.016833636937539198
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.01947962604488258,
+        "monthly_total_variance": 0.20930324385262952,
+        "wet_amount_mean": 0.012873092433897181,
+        "wet_fraction": 0.002355071524816621
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06906685510961924,
+        "monthly_total_variance": 0.1316533942483992,
+        "wet_amount_mean": 0.0832896196675131,
+        "wet_fraction": 0.0030889513200273166
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.03264567618832558,
+        "monthly_total_variance": 0.025646473663247255,
+        "wet_amount_mean": 0.0021664082590507642,
+        "wet_fraction": 0.009307019607732392
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.015214913621513743,
+        "monthly_total_variance": 0.05740991273663145,
+        "wet_amount_mean": 0.07140935221908475,
+        "wet_fraction": 0.024246056679956107
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "la160549"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.05150806217006912,
+        "monthly_total_variance": 0.0280336077590976,
+        "wet_amount_mean": 0.3412963400283488,
+        "wet_fraction": 0.04483803485783264
+      },
+      "horizon_years": 30,
+      "month": 1,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04030323945621492,
+        "monthly_total_variance": 0.019198871699921984,
+        "wet_amount_mean": 0.5038661044092317,
+        "wet_fraction": 0.057700058477175103
+      },
+      "horizon_years": 30,
+      "month": 2,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02150537478289606,
+        "monthly_total_variance": 0.22754763920029944,
+        "wet_amount_mean": 0.5399497215078228,
+        "wet_fraction": 0.0674731119115523
+      },
+      "horizon_years": 30,
+      "month": 3,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0243974759296789,
+        "monthly_total_variance": 0.08518612678559682,
+        "wet_amount_mean": 0.3494786579041641,
+        "wet_fraction": 0.05388888252087129
+      },
+      "horizon_years": 30,
+      "month": 4,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00011865621378229987,
+        "monthly_total_variance": 0.06260114412297725,
+        "wet_amount_mean": 0.19333210531010406,
+        "wet_fraction": 0.036428355139954766
+      },
+      "horizon_years": 30,
+      "month": 5,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.008850103789585588,
+        "monthly_total_variance": 0.25792794505398237,
+        "wet_amount_mean": 0.3490737973287687,
+        "wet_fraction": 0.04777777404098975
+      },
+      "horizon_years": 30,
+      "month": 6,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.1146109775088662,
+        "monthly_total_variance": 0.08878145825519239,
+        "wet_amount_mean": 0.16389742586944178,
+        "wet_fraction": 0.07555074832940456
+      },
+      "horizon_years": 30,
+      "month": 7,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.1403460507402117,
+        "monthly_total_variance": 0.16033398199688317,
+        "wet_amount_mean": 0.14652707388293212,
+        "wet_fraction": 0.09206465049647203
+      },
+      "horizon_years": 30,
+      "month": 8,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.013222606100399305,
+        "monthly_total_variance": 0.10779654491550399,
+        "wet_amount_mean": 0.11793332479085075,
+        "wet_fraction": 0.030726493522181986
+      },
+      "horizon_years": 30,
+      "month": 9,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00497499311331196,
+        "monthly_total_variance": 0.00010258417488725541,
+        "wet_amount_mean": 0.11224696224784114,
+        "wet_fraction": 0.01946802309507345
+      },
+      "horizon_years": 30,
+      "month": 10,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.058462590053974826,
+        "monthly_total_variance": 0.09950901578863443,
+        "wet_amount_mean": 0.2999916520518064,
+        "wet_fraction": 0.04352339413472234
+      },
+      "horizon_years": 30,
+      "month": 11,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.032144290590574866,
+        "monthly_total_variance": 0.01473887453300944,
+        "wet_amount_mean": 0.5742721135879956,
+        "wet_fraction": 0.06225512123059179
+      },
+      "horizon_years": 30,
+      "month": 12,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.02572214031189711,
+        "monthly_total_variance": 0.093835969602572,
+        "wet_amount_mean": 0.37687990727021453,
+        "wet_fraction": 0.04416599184707995
+      },
+      "horizon_years": 100,
+      "month": 1,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.053186927770219175,
+        "monthly_total_variance": 0.09397223062158634,
+        "wet_amount_mean": 0.527707256228029,
+        "wet_fraction": 0.057304979695539535
+      },
+      "horizon_years": 100,
+      "month": 2,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.04028024869392264,
+        "monthly_total_variance": 0.05840017039893921,
+        "wet_amount_mean": 0.4895935182866249,
+        "wet_fraction": 0.06916666029864907
+      },
+      "horizon_years": 100,
+      "month": 3,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06764491279614067,
+        "monthly_total_variance": 0.03657747402896289,
+        "wet_amount_mean": 0.3198566700905584,
+        "wet_fraction": 0.05641666029864907
+      },
+      "horizon_years": 100,
+      "month": 4,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0011154158378666487,
+        "monthly_total_variance": 0.04247389577992439,
+        "wet_amount_mean": 0.21419735031956927,
+        "wet_fraction": 0.0397079250324279
+      },
+      "horizon_years": 100,
+      "month": 5,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.022652407839630174,
+        "monthly_total_variance": 0.00970289477001685,
+        "wet_amount_mean": 0.34220490416897953,
+        "wet_fraction": 0.04902777404098975
+      },
+      "horizon_years": 100,
+      "month": 6,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.06595304214496274,
+        "monthly_total_variance": 0.07699238310459047,
+        "wet_amount_mean": 0.16987914925367542,
+        "wet_fraction": 0.06555074832940458
+      },
+      "horizon_years": 100,
+      "month": 7,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.05157937405995484,
+        "monthly_total_variance": 0.014565326270894336,
+        "wet_amount_mean": 0.2193077412059281,
+        "wet_fraction": 0.0822528225394828
+      },
+      "horizon_years": 100,
+      "month": 8,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.0024614628946054663,
+        "monthly_total_variance": 0.11685489723335257,
+        "wet_amount_mean": 0.09516280916272285,
+        "wet_fraction": 0.024532049077737567
+      },
+      "horizon_years": 100,
+      "month": 9,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07593379058141114,
+        "monthly_total_variance": 0.0637112405386118,
+        "wet_amount_mean": 0.19121966797689566,
+        "wet_fraction": 0.017640066105826135
+      },
+      "horizon_years": 100,
+      "month": 10,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.07278097053585991,
+        "monthly_total_variance": 0.1446735727767969,
+        "wet_amount_mean": 0.29787427478189427,
+        "wet_fraction": 0.04399561635694456
+      },
+      "horizon_years": 100,
+      "month": 11,
+      "station_id": "co050130"
+    },
+    {
+      "errors": {
+        "monthly_total_mean": 0.00538401999378975,
+        "monthly_total_variance": 0.009732677607212243,
+        "wet_amount_mean": 0.5273622388636158,
+        "wet_fraction": 0.056341142735968144
+      },
+      "horizon_years": 100,
+      "month": 12,
+      "station_id": "co050130"
+    }
+  ],
+  "monthly_gates": [
+    {
+      "available_cells": 72,
+      "horizon_years": 30,
+      "metric": "wet_fraction",
+      "pass": true,
+      "passing_fraction": 0.9861111111111112,
+      "threshold": 0.08
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 30,
+      "metric": "wet_amount_mean",
+      "pass": false,
+      "passing_fraction": 0.6527777777777778,
+      "threshold": 0.2
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 30,
+      "metric": "monthly_total_mean",
+      "pass": false,
+      "passing_fraction": 0.9305555555555556,
+      "threshold": 0.2
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 30,
+      "metric": "monthly_total_variance",
+      "pass": false,
+      "passing_fraction": 0.9166666666666666,
+      "threshold": 0.35
+    },
+    {
+      "available_cells": 72,
+      "horizon_years": 100,
+      "metric": "wet_fraction",
+      "pass": false,
+      "passing_fraction": 0.8611111111111112,
+      "threshold": 0.05
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 100,
+      "metric": "wet_amount_mean",
+      "pass": false,
+      "passing_fraction": 0.5,
+      "threshold": 0.12
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 100,
+      "metric": "monthly_total_mean",
+      "pass": false,
+      "passing_fraction": 0.9444444444444444,
+      "threshold": 0.12
+    },
+    {
+      "available_cells": 71,
+      "horizon_years": 100,
+      "metric": "monthly_total_variance",
+      "pass": false,
+      "passing_fraction": 0.9861111111111112,
+      "threshold": 0.25
+    }
+  ],
+  "pre_analysis_freeze_sha256": "2d1acf61d2be6f023d5e13f06dd6d60cb6df4a709ef753356d0159cfa7d1ec08",
+  "schema_version": 1,
+  "source_commit": "046eba3c8d4508c84522c6dbd7cec4d39f094563",
+  "storm_descriptor_comparisons": [
+    {
+      "candidate_median": 1.62,
+      "descriptor": "duration",
+      "faithful_median": 1.61,
+      "horizon_years": 30,
+      "log_ratio": 0.00619197024792098,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.11,
+      "horizon_years": 30,
+      "log_ratio": null,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 3.99,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.03,
+      "horizon_years": 30,
+      "log_ratio": 0.009975145056819509,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 1.6,
+      "descriptor": "duration",
+      "faithful_median": 1.62,
+      "horizon_years": 100,
+      "log_ratio": 0.012422519998557209,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.1,
+      "horizon_years": 100,
+      "log_ratio": null,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 3.96,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.0,
+      "horizon_years": 100,
+      "log_ratio": 0.01005033585350145,
+      "station_id": "az026481"
+    },
+    {
+      "candidate_median": 1.27,
+      "descriptor": "duration",
+      "faithful_median": 1.27,
+      "horizon_years": 30,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 0.07,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.07,
+      "horizon_years": 30,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 3.965,
+      "descriptor": "normalized_peak",
+      "faithful_median": 3.965,
+      "horizon_years": 30,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 1.27,
+      "descriptor": "duration",
+      "faithful_median": 1.27,
+      "horizon_years": 100,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 0.07,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.07,
+      "horizon_years": 100,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 4.02,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.02,
+      "horizon_years": 100,
+      "log_ratio": 0.0,
+      "station_id": "ca040442"
+    },
+    {
+      "candidate_median": 1.68,
+      "descriptor": "duration",
+      "faithful_median": 1.68,
+      "horizon_years": 30,
+      "log_ratio": 0.0,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.11,
+      "horizon_years": 30,
+      "log_ratio": null,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 3.99,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.02,
+      "horizon_years": 30,
+      "log_ratio": 0.007490671729157402,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 1.67,
+      "descriptor": "duration",
+      "faithful_median": 1.68,
+      "horizon_years": 100,
+      "log_ratio": 0.005970166986503796,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.11,
+      "horizon_years": 100,
+      "log_ratio": null,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 3.98,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.0,
+      "horizon_years": 100,
+      "log_ratio": 0.005012541823544286,
+      "station_id": "az028820"
+    },
+    {
+      "candidate_median": 2.52,
+      "descriptor": "duration",
+      "faithful_median": 2.51,
+      "horizon_years": 30,
+      "log_ratio": 0.003976148379639417,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.06,
+      "horizon_years": 30,
+      "log_ratio": null,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 3.09,
+      "descriptor": "normalized_peak",
+      "faithful_median": 3.03,
+      "horizon_years": 30,
+      "log_ratio": 0.019608471388376337,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 2.49,
+      "descriptor": "duration",
+      "faithful_median": 2.52,
+      "horizon_years": 100,
+      "log_ratio": 0.01197619104671565,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.06,
+      "horizon_years": 100,
+      "log_ratio": null,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 3.1,
+      "descriptor": "normalized_peak",
+      "faithful_median": 3.09,
+      "horizon_years": 100,
+      "log_ratio": 0.00323102058144654,
+      "station_id": "id101022"
+    },
+    {
+      "candidate_median": 1.93,
+      "descriptor": "duration",
+      "faithful_median": 1.94,
+      "horizon_years": 30,
+      "log_ratio": 0.005167970158442561,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.17,
+      "horizon_years": 30,
+      "log_ratio": null,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 3.97,
+      "descriptor": "normalized_peak",
+      "faithful_median": 4.01,
+      "horizon_years": 30,
+      "log_ratio": 0.010025146619378707,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 1.91,
+      "descriptor": "duration",
+      "faithful_median": 1.92,
+      "horizon_years": 100,
+      "log_ratio": 0.0052219439811517126,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.17,
+      "horizon_years": 100,
+      "log_ratio": null,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 3.97,
+      "descriptor": "normalized_peak",
+      "faithful_median": 3.97,
+      "horizon_years": 100,
+      "log_ratio": 0.0,
+      "station_id": "la160549"
+    },
+    {
+      "candidate_median": 1.27,
+      "descriptor": "duration",
+      "faithful_median": 1.25,
+      "horizon_years": 30,
+      "log_ratio": 0.015873349156290163,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.08,
+      "horizon_years": 30,
+      "log_ratio": null,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median": 2.96,
+      "descriptor": "normalized_peak",
+      "faithful_median": 2.91,
+      "horizon_years": 30,
+      "log_ratio": 0.0170361871525678,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median": 1.26,
+      "descriptor": "duration",
+      "faithful_median": 1.26,
+      "horizon_years": 100,
+      "log_ratio": 0.0,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median": 0.0,
+      "descriptor": "time_to_peak",
+      "faithful_median": 0.08,
+      "horizon_years": 100,
+      "log_ratio": null,
+      "station_id": "co050130"
+    },
+    {
+      "candidate_median": 2.94,
+      "descriptor": "normalized_peak",
+      "faithful_median": 2.91,
+      "horizon_years": 100,
+      "log_ratio": 0.010256500167189061,
+      "station_id": "co050130"
+    }
+  ]
+}

@@ -49,11 +49,9 @@ pooling. The accepted A7 record is retained in the
 [A7a public report](reports/a7a-daily-precipitation-structure-report.md), and
 [A7b work package](work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md).
 
-The active queue is now the conditional A8c development pilot. This is not an
-A7 rescue: A7b's whole-domain stop remains final, its thresholds are not
-relaxed, and its two isomorphic occurrence parameterizations count as one
-mechanism. Each package must freeze its corpus, model, estimators, and decision
-rule before accessing its own candidate or confirmation output.
+There is no active A8 item. A8c completed with
+`STOP-A8-ROUTED-DAILY`; A7b's whole-domain stop remains final, and no A8d
+confirmation is authorized.
 
 A8a completed on 2026-07-15 with `CONTINUE-A8B-DRY-PARTITION`. Its prospective
 20-station confirmation found 15 `integrated_daily` and five
@@ -72,23 +70,24 @@ so boundary stations retain legacy daily behavior with no secondary year state
 or additional RNG. The accepted record is retained in the
 [A8b work package](work-packages/20260715-a8b-secondary-year-fallback/package.md).
 
-1. **A8c — bounded explicit-routing development pilot.** Accept A8b's
-   explicit legacy-only fallback, then specify the station-model applicability
-   class, generation behavior, and provenance before implementation. The
-   station document must explicitly declare `integrated_daily` or
-   `legacy_daily_fallback`; missing or unknown classification fails closed.
-   Runtime never estimates aridity, inspects generated output, or silently
-   switches paths. Integrate the daily mechanism only for eligible stations;
-   boundary stations retain the unmodified legacy daily machinery. Evaluate
-   fixed arid, monsoonal, semi-arid, humid, and cold development members with
-   separate path-level faithful controls at both horizons. Require faithful-
-   mode byte identity, deterministic replay, monthly moment budgets, improved
-   registered daily targets, storm/winter/cross-variable guards, and stable
-   provenance. No full-corpus promotion, WEPP confirmation, or public-default
-   change is authorized; a complete pilot may only support a separately
-   roadmapped confirmation study.
+A8c's explicit six-station routed pilot completed on 2026-07-15. All replay,
+nested-horizon, fallback, provenance, and faithful-regression checks passed,
+and both registered daily target families improved at both horizons. The
+candidate stopped because wet-amount means missed the monthly budget broadly,
+integrated time-to-peak medians collapsed to zero, and changing precipitation
+occurrence propagated through CLIGEN's wet/dry-conditioned Boise dew-point and
+Alamosa wind-speed paths. These are model-structure results, not a fallback or
+runtime hold. The exact record is retained in the
+[A8c work package](work-packages/20260715-a8c-routed-daily-pilot/package.md).
 
-Monsoonal climates therefore remain a mandatory stratum in A8c. Their
+No A8d confirmation, WEPP response study, threshold relaxation, coefficient
+retuning, or public-default change follows. A future precipitation proposal
+requires a new operator roadmap and package family; it must jointly specify
+wet-amount calibration, precipitation-conditioned downstream variables, and
+storm time-to-peak semantics before implementation rather than treating them
+as post-generation guards.
+
+Monsoonal climates were a mandatory stratum in A8c. Their
 annual precipitation alone is not a safe routing variable: seasonal
 concentration can leave dry-season occurrence states weakly identified even
 when annual totals appear adequate. A8a found no excess monsoonal instability,

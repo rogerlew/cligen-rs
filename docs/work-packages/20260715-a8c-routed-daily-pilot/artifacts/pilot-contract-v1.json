@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "analysis_id": "a8c_routed_daily_pilot_v1",
+  "source_commit": "046eba3c8d4508c84522c6dbd7cec4d39f094563",
+  "parent": {
+    "a8a_terminal": "CONTINUE-A8B-DRY-PARTITION",
+    "a8a_analysis_sha256": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b",
+    "a8a_decision_sha256": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58",
+    "a8b_terminal": "USE-LEGACY-DAILY-FALLBACK",
+    "a8b_decision_sha256": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb"
+  },
+  "inputs": {
+    "a7a_measurement_contract": {
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/measurement-contract-v1.json",
+      "sha256": "fad73c12491b865a78bb2d98192935b146a32874129b39973c5a3b141793180e"
+    },
+    "a7a_analyzer": {
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/analyze-a7a.py",
+      "sha256": "6f4a1e242949b4de4bcdeea0e0a05642cd8455606ff62b8de71442198c8782ac"
+    },
+    "corpus_common": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py",
+      "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+    },
+    "a8a_panel": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json",
+      "sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+    },
+    "a8a_source_manifest": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json",
+      "sha256": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae"
+    },
+    "a8a_selected_parameters": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+      "sha256": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122"
+    },
+    "a8a_analysis": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-analysis-v1.json",
+      "sha256": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b"
+    },
+    "a8a_decision": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-decision-v1.json",
+      "sha256": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58"
+    },
+    "a8b_decision": {
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/a8b-decision-v1.json",
+      "sha256": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb"
+    }
+  },
+  "profile": {
+    "id": "a8c_routed_daily_v1",
+    "qc_filter": "faithful",
+    "interpolation": "none",
+    "mode": "continuous",
+    "occurrence_state_order": ["DD", "DW", "WD", "WW"],
+    "initial_occurrence_state": "DD",
+    "amount_state_reset": "after_every_dry_day",
+    "extension_draws_per_calendar_day": {
+      "occurrence": 1,
+      "amount": 1
+    },
+    "post_generation_repair": false
+  },
+  "stations": [
+    {
+      "station_id": "az026481",
+      "stratum": "hot_arid_integrated",
+      "route": "integrated_daily",
+      "parameter_sha256": "551bf0d62f432b78b1216ff40ddd1d50f6079714a59a0e8878a8843446b9d78e"
+    },
+    {
+      "station_id": "ca040442",
+      "stratum": "hot_arid_boundary",
+      "route": "legacy_daily_fallback",
+      "parameter_sha256": "793e49c905127709eb1212e343dd8971ce35e0622e4d3dcbca4cbcb4e86d1b7f"
+    },
+    {
+      "station_id": "az028820",
+      "stratum": "monsoonal_transition",
+      "route": "integrated_daily",
+      "parameter_sha256": "d82d9b3b13a320d2fcd9140eaec7bdef8ee2871efff2b09003aecbcf8d53df01"
+    },
+    {
+      "station_id": "id101022",
+      "stratum": "non_monsoonal_semi_arid",
+      "route": "integrated_daily",
+      "parameter_sha256": "bd598feb17eb654202db7e656bd0a72ce0777c200256bcef77cde8cf2e551d54"
+    },
+    {
+      "station_id": "la160549",
+      "stratum": "humid_negative_control",
+      "route": "integrated_daily",
+      "parameter_sha256": "803e2cca83c2378e648de5e9758f1eb5d4a7c5cfe4b24362d055edf18a5fadc8"
+    },
+    {
+      "station_id": "co050130",
+      "stratum": "cold_arid",
+      "route": "integrated_daily",
+      "parameter_sha256": "c5d7e5a48cd7ccae6433dc9db908411af808a5b96a1016b3225b8ed18e5f46b0"
+    }
+  ],
+  "execution": {
+    "begin_year": 1,
+    "horizons_years": [30, 100],
+    "burns": [0, 101, 1009, 10007],
+    "nested_horizons": true,
+    "wet_day_threshold_mm": 1.0,
+    "observed_period": [1980, 2025],
+    "observed_source": "daymet_v4_r1_archived_by_a8a"
+  },
+  "estimator_rules": {
+    "daily_family_distance": "A7a measurement-contract-v1 family_distance, evaluated per burn against the station's archived Daymet metrics; conventional median across burns",
+    "relative_improvement": "(faithful_distance-candidate_distance)/faithful_distance; zero when both distances are zero; unavailable otherwise",
+    "daily_family_summary": "conventional median of station relative improvements and fraction of available stations with improvement >= 0, separately by family and horizon",
+    "monthly_targets": "A8a full-record legacy cell: stationary_wet_fraction, wet_mean_mm, days*wet_fraction*wet_mean_mm, and legacy_target_dimensionless_variance*wet_mean_mm^2",
+    "monthly_observed_wet_definition": "generated precipitation_mm >= 1.0",
+    "monthly_pooling": "sample mean and sample variance across complete generated station-month totals from all four burns",
+    "storm_wet_definition": "generated precipitation_mm > 0",
+    "cold_wet_definition": "precipitation_mm > 0 and tmax_c <= 0",
+    "storm_descriptor_comparison": "pool wet days across burns by station and horizon; absolute natural-log ratio of conventional medians for duration, time-to-peak, and normalized peak; zero when both medians are zero and infinity when exactly one is zero",
+    "finite_epsilon": 1e-12
+  },
+  "engineering_gates": {
+    "faithful_golden_identity": true,
+    "fallback_typed_row_identity": true,
+    "candidate_byte_replay": true,
+    "candidate_30_year_row_prefix_of_100_year": true,
+    "two_extension_draws_per_integrated_day": true,
+    "zero_extension_draws_per_fallback_day": true,
+    "stable_profile_station_and_rng_provenance": true
+  },
+  "monthly_moment_gates": {
+    "aggregation": "pool_years_across_four_burns_by_station_month_horizon",
+    "wet_fraction_absolute_error_max": {"30": 0.08, "100": 0.05},
+    "wet_amount_mean_relative_error_max": {"30": 0.20, "100": 0.12},
+    "monthly_total_mean_relative_error_max": {"30": 0.20, "100": 0.12},
+    "monthly_total_variance_relative_error_max": {"30": 0.35, "100": 0.25},
+    "required_station_month_fraction": {"30": 0.90, "100": 0.95}
+  },
+  "daily_target_gates": {
+    "families": ["spell_structure", "higher_order_occurrence"],
+    "comparison": "candidate_and_faithful_component_distance_to_archived_daymet",
+    "center": "median_across_burns",
+    "required_median_relative_improvement_each_family_horizon": 0.0,
+    "required_nonworse_station_horizon_fraction": 0.70
+  },
+  "guard_gates": {
+    "cross_variable_exact_fields": ["tmax", "tmin", "solar_radiation", "wind_speed", "wind_direction", "dew_point"],
+    "storm_fields_finite": true,
+    "wet_duration_hours_bounds": [0.0, 24.0],
+    "wet_time_to_peak_bounds": [0.0, 0.99],
+    "wet_normalized_peak_min": 1.01,
+    "cold_wet_normalized_peak_exact": 1.01,
+    "storm_descriptor_median_log_ratio_max": 0.50
+  },
+  "decision_priority": [
+    "HOLD_ON_INPUT_FREEZE_OR_IMPLEMENTATION_DEFECT",
+    "STOP_A8_ROUTED_DAILY_IF_ANY_ENGINEERING_OR_SCIENTIFIC_GUARD_FAILS",
+    "RECOMMEND_A8D_CONFIRMATION_ONLY_IF_ALL_GUARDS_PASS"
+  ]
+}

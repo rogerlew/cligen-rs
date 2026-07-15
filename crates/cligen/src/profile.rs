@@ -16,6 +16,9 @@ pub enum GenerationProfile {
     /// Experimental four-lane monthly batch producer with no `ranset` QC.
     #[serde(rename = "fast_batch_v0")]
     FastBatchV0,
+    /// A8c non-default daily-precipitation pilot with an explicit station route.
+    #[serde(rename = "a8c_routed_daily_v1")]
+    A8cRoutedDailyV1,
 }
 
 impl GenerationProfile {
@@ -26,6 +29,7 @@ impl GenerationProfile {
         match self {
             Self::Faithful5323 => "faithful_5_32_3",
             Self::FastBatchV0 => "fast_batch_v0",
+            Self::A8cRoutedDailyV1 => "a8c_routed_daily_v1",
         }
     }
 
@@ -35,6 +39,7 @@ impl GenerationProfile {
         match self {
             Self::Faithful5323 => "faithful-5.32.3",
             Self::FastBatchV0 => "fast-batch-v0",
+            Self::A8cRoutedDailyV1 => "a8c-routed-daily-v1",
         }
     }
 
@@ -43,10 +48,10 @@ impl GenerationProfile {
     pub fn command_echo(self, echo: String) -> String {
         match self {
             Self::Faithful5323 => echo,
-            Self::FastBatchV0 if echo.is_empty() => {
+            Self::FastBatchV0 | Self::A8cRoutedDailyV1 if echo.is_empty() => {
                 format!("--generation-profile {}", self.provenance_name())
             }
-            Self::FastBatchV0 => {
+            Self::FastBatchV0 | Self::A8cRoutedDailyV1 => {
                 format!("{echo} --generation-profile {}", self.provenance_name())
             }
         }
