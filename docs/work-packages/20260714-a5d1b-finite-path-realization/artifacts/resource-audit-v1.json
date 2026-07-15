@@ -1,0 +1,31 @@
+{
+  "call_status_counts": {
+    "0": 10,
+    "1": 40,
+    "2": 2
+  },
+  "confirmation_objects_accessed": 0,
+  "controlling_solver_call_count": 52,
+  "development_only": true,
+  "independently_accepted_incumbent_call_count": 18,
+  "maximum_call_wall_seconds": 3.009906,
+  "maximum_station_wall_seconds": 11.638102,
+  "measured_peak_rss_bytes": 562397184,
+  "peak_rss_ceiling_bytes": 2147483648,
+  "peak_rss_pass": true,
+  "raw_incumbent_call_count": 19,
+  "resource_audit_schema_version": 1,
+  "retained_artifact_ceiling_bytes": 1073741824,
+  "retained_outcome_evidence_bytes": 67339,
+  "retained_outcome_evidence_file_count": 16,
+  "retained_outcome_evidence_scope": "Controlling and invalidated count/path/result/decision/replay aggregates, detailed manifests, and detailed archives; terminal prose and source tools are checked separately at closure.",
+  "retained_outcome_evidence_pass": true,
+  "solver_time_limit_option_seconds": 3,
+  "station_budget_scheduler_pass_count": 17,
+  "station_budget_seconds": 120,
+  "total_solver_wall_ceiling_seconds": 7200,
+  "total_solver_wall_seconds": 138.488182,
+  "total_solver_wall_pass": true,
+  "wall_calls_exceeding_solver_option": 40,
+  "wall_time_interpretation": "The three-second value is a HiGHS time_limit option, not a hard process-wall ceiling; wrapper and solver overhead are included in recorded wall_seconds."
+}

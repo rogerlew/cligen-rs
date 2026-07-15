@@ -1,0 +1,37 @@
+{
+  "algorithm_changed": false,
+  "changed_tool_hashes": {
+    "a5d1b_common.py": {
+      "after": "15d37a8683260f604dc2b4e6f079481d6934668c110c342ae6aa109e79cc073c",
+      "before": "50a7534abf1274d7a5ee1a8abe3adb5082dd90e116c807718ff67e2c0695d17e"
+    },
+    "solve-count-feasibility.py": {
+      "after": "02c9043f3cd74ea5ab10f97b242130e1b81ed356a87079aaf1faff42cb7ce37c",
+      "before": "40c30f3434304d5bd45793699ddb6387c4b0488bb5b3d4e720e6295bf3cd9abc"
+    },
+    "verify-a5d1b-package.py": {
+      "after": "8473964d15b09be93f90601abafbef4fb1cbd2327589a157473a0c93ee9f9c55",
+      "before": "ad0d298d43c35382e29f6d303bd49c492d5fff112787014e59bbf82265a8a764"
+    }
+  },
+  "classification": "implementation-only null-safe optional solver metadata serialization",
+  "contract_changed": false,
+  "correction": "Treat scipy OptimizeResult.mip_gap=None as JSON null instead of converting None to float.",
+  "matrix_changed": false,
+  "outcome_access_before_amendment": {
+    "confirmation_objects_accessed": 0,
+    "count_aggregate_files_written": 0,
+    "count_certificate_files_written": 0,
+    "first_count_station": "ak505769",
+    "inherited_diagnostic_result": {
+      "path": "inherited-path-diagnostics-v1.json",
+      "sha256": "0d5dacaa95271a27f609b513615887ef8a9ae1d3a4e71fd4d3cc44d81f6d74f4"
+    },
+    "linear_solver_call_completed": true,
+    "solver_status_or_objective_emitted": false
+  },
+  "parent_freeze_sha256": "2d8955fe0ee9c8d335ed6a66a6e7cd91f9253c1391925651562d7d4d5627ed8b",
+  "pre_outcome_freeze_amendment_schema_version": 1,
+  "tolerance_changed": false,
+  "trigger": "The first ak505769 joint linear MILP completed, then serialization raised TypeError before status, objective, certificate, or aggregate was emitted."
+}

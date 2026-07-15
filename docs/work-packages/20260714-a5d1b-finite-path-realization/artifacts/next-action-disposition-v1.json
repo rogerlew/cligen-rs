@@ -1,0 +1,15 @@
+{
+  "development_only": true,
+  "machine_first_corrective_action": "Diagnose the first common exact count-replay obstruction and separate MILP linear status from bounded nonlinear construction failure.",
+  "next_action_disposition_schema_version": 1,
+  "reason_for_refinement": "Independent review showed that 16 joint branches and all 16 attempted 30-year-only branches ended without an independently accepted incumbent, so most branches never reached nonlinear centered replay. The successor must first improve linear integer-feasibility search and work allocation.",
+  "refined_first_corrective_action": "Prospectively freeze a count-feasibility localization package that scales and audits the linear rows, retains and independently replays every incumbent, reallocates the 120-second station budget beyond a single three-second initial call, and compares an alternative integer-feasibility formulation. Localize nonlinear centered replay only after a count vector exists; keep ordering, confirmation, and candidate promotion blocked until joint exact witnesses pass all 17 stations.",
+  "review_findings_dispositioned": [
+    "ACC-001",
+    "ACC-003",
+    "SCI-003",
+    "SCI-004"
+  ],
+  "terminal_decision_changed": false,
+  "terminal_status": "EXECUTED-HOLD-COUNT-SEARCH-BOUNDED"
+}

@@ -1,0 +1,19 @@
+{
+  "development_only": true,
+  "fixture_schema_version": 1,
+  "fixtures": [
+    {"expected": "pass", "id": "valid_nested_counts"},
+    {"expected": "reject", "id": "nonnested_counts"},
+    {"expected": "reject", "id": "calendar_count_mutation"},
+    {"expected": "reject", "id": "maximum_reuse_mutation"},
+    {"expected": "reject", "id": "zero_weight_support_mutation"},
+    {"expected": "pass", "id": "deterministic_calendar_cooldown_placement"},
+    {"expected": "infeasible_status", "id": "synthetic_integer_infeasible"},
+    {"expected": "pass", "id": "count_only_exact_replay"},
+    {"expected": "reject", "id": "count_only_centered_mutation"},
+    {"expected": "reject", "id": "duplicate_json_key"},
+    {"expected": "reject", "id": "nonfinite_json_number"},
+    {"expected": "reject", "id": "overflow_json_number"}
+  ]
+}
+

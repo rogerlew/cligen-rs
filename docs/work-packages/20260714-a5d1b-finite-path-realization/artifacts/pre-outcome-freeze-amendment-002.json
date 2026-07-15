@@ -1,0 +1,37 @@
+{
+  "algorithm_changed": false,
+  "changed_tool_hashes": {
+    "a5d1b_common.py": {
+      "after": "19a0f8688a642a5b817672720a7be0ca434ddb2737d7b02dacc928a344e8dfcd",
+      "before": "15d37a8683260f604dc2b4e6f079481d6934668c110c342ae6aa109e79cc073c"
+    },
+    "solve-count-feasibility.py": {
+      "after": "87a325bd43b40bf4765fd860464eab9448402f6b0641fcebd7a0181a8bed5027",
+      "before": "02c9043f3cd74ea5ab10f97b242130e1b81ed356a87079aaf1faff42cb7ce37c"
+    },
+    "verify-a5d1b-package.py": {
+      "after": "5be9f68505ebb99004c88277cf7696b4048031deb656af51e9e4da18026b6602",
+      "before": "8473964d15b09be93f90601abafbef4fb1cbd2327589a157473a0c93ee9f9c55"
+    }
+  },
+  "classification": "implementation-only null-safe optional solver metadata serialization",
+  "contract_changed": false,
+  "correction": "Treat scipy OptimizeResult.mip_node_count=None as JSON null; all optional HiGHS diagnostic fields are now nullable.",
+  "matrix_changed": false,
+  "outcome_access_before_amendment": {
+    "confirmation_objects_accessed": 0,
+    "count_aggregate_files_written": 0,
+    "count_certificate_files_written": 0,
+    "first_count_station": "ak505769",
+    "inherited_diagnostic_result": {
+      "path": "inherited-path-diagnostics-v1.json",
+      "sha256": "0d5dacaa95271a27f609b513615887ef8a9ae1d3a4e71fd4d3cc44d81f6d74f4"
+    },
+    "linear_solver_calls_completed": 2,
+    "solver_status_or_objective_emitted": false
+  },
+  "parent_freeze_sha256": "79605130ee56ab6cdda6558c8cc730ed8512f2d533e8c0103bbd8e1e0288c470",
+  "pre_outcome_freeze_amendment_schema_version": 1,
+  "tolerance_changed": false,
+  "trigger": "The amended first ak505769 joint linear MILP completed, then serialization raised TypeError on mip_node_count=None before status, objective, certificate, or aggregate was emitted."
+}

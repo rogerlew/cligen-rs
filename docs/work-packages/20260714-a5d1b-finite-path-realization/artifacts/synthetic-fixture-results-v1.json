@@ -1,0 +1,69 @@
+{
+  "actual_count": 12,
+  "development_only": true,
+  "expected_count": 12,
+  "pass_count": 12,
+  "records": [
+    {
+      "fixture_id": "valid_nested_counts",
+      "observation": "{'integer': True, 'nested_and_reuse': True, 'positive_support': True, 'calendar': {'30': {'common': 23, 'leap': 7, 'pass': True}, '100': {'common': 76, 'leap': 24, 'pass': True}}, 'pass': True}",
+      "pass": true
+    },
+    {
+      "fixture_id": "nonnested_counts",
+      "observation": "c30 not <= c100",
+      "pass": true
+    },
+    {
+      "fixture_id": "calendar_count_mutation",
+      "observation": "30-year leap/common total changed",
+      "pass": true
+    },
+    {
+      "fixture_id": "maximum_reuse_mutation",
+      "observation": "count exceeds two",
+      "pass": true
+    },
+    {
+      "fixture_id": "zero_weight_support_mutation",
+      "observation": "selected zero stationary weight",
+      "pass": true
+    },
+    {
+      "fixture_id": "deterministic_calendar_cooldown_placement",
+      "observation": "deterministic exact placement",
+      "pass": true
+    },
+    {
+      "fixture_id": "synthetic_integer_infeasible",
+      "observation": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is At lower/fixed bound)",
+      "pass": true
+    },
+    {
+      "fixture_id": "count_only_exact_replay",
+      "observation": "0.0",
+      "pass": true
+    },
+    {
+      "fixture_id": "count_only_centered_mutation",
+      "observation": "2.6099999999999985",
+      "pass": true
+    },
+    {
+      "fixture_id": "duplicate_json_key",
+      "observation": "duplicate rejected",
+      "pass": true
+    },
+    {
+      "fixture_id": "nonfinite_json_number",
+      "observation": "NaN rejected",
+      "pass": true
+    },
+    {
+      "fixture_id": "overflow_json_number",
+      "observation": "overflow rejected",
+      "pass": true
+    }
+  ],
+  "synthetic_fixture_results_schema_version": 1
+}

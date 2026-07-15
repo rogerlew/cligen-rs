@@ -1,0 +1,11 @@
+{
+  "actual_cells": 0,
+  "development_only": true,
+  "executed": false,
+  "expected_cells_if_executed": 51,
+  "freeze_sha256": "10270c0b324a814caa2cff76363dac43dbd36c2fff95a6eed5787baa9067260c",
+  "ordered_path_results_schema_version": 1,
+  "pass_count": 0,
+  "reason": "count_gate_not_complete",
+  "records": []
+}

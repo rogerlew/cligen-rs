@@ -1,0 +1,98 @@
+{
+  "archive": {
+    "bytes": 6959,
+    "path": "detailed-evidence-v1.tar.gz",
+    "sha256": "8e9020d09b99c01d770cebe85f5761d3c432e72158de5da2704f8f385012eb16"
+  },
+  "detailed_evidence_manifest_schema_version": 1,
+  "development_only": true,
+  "freeze_sha256": "10270c0b324a814caa2cff76363dac43dbd36c2fff95a6eed5787baa9067260c",
+  "member_count": 17,
+  "members": [
+    {
+      "bytes": 2586,
+      "member": "counts/ak505769-nested-count-certificate-v1.json",
+      "sha256": "de35b0ab37d928400251d299c703f4a29cabe74344c229fd91372818dfc23970"
+    },
+    {
+      "bytes": 8766,
+      "member": "counts/al015478-nested-count-certificate-v1.json",
+      "sha256": "e0d5b4860dd51bf061954946f70a8f2ac85aede89757030bf298196ffc65e8b1"
+    },
+    {
+      "bytes": 3006,
+      "member": "counts/az022664-nested-count-certificate-v1.json",
+      "sha256": "94eece9a2a7e8926be34731ebbb658bd5ed30d4c131802d419af064747d8005f"
+    },
+    {
+      "bytes": 2586,
+      "member": "counts/az028619-nested-count-certificate-v1.json",
+      "sha256": "d6fc60f0ba151bf432fa957110baa83599479758c921f0658e56398b001f7e61"
+    },
+    {
+      "bytes": 2609,
+      "member": "counts/az029654-nested-count-certificate-v1.json",
+      "sha256": "3f24c6ea619282b3cc7dd6014cf3f1d925ae0e860228b485b2f9fb012351d76a"
+    },
+    {
+      "bytes": 2587,
+      "member": "counts/ca042257-nested-count-certificate-v1.json",
+      "sha256": "3882e87c02db6d6f897e259fbf61f75b20e595ca474f739e1300bcacbc434b49"
+    },
+    {
+      "bytes": 2584,
+      "member": "counts/ca042319-nested-count-certificate-v1.json",
+      "sha256": "8bcd7a919e52ae509b0f3b6a8d13629cc0b11f9cde506a861b337c6804e7a6fc"
+    },
+    {
+      "bytes": 3002,
+      "member": "counts/co051660-nested-count-certificate-v1.json",
+      "sha256": "f0a68486ed730f32996da0a8b6796f3988c6f5ded12abb3c3f86502dca383570"
+    },
+    {
+      "bytes": 8769,
+      "member": "counts/fl083909-nested-count-certificate-v1.json",
+      "sha256": "1907f5c75631f7e696706f702a0473043d7259b05e5ac65c48fe7f206f102b5b"
+    },
+    {
+      "bytes": 8765,
+      "member": "counts/fl086997-nested-count-certificate-v1.json",
+      "sha256": "f53e9e4eaea72383b2fe08d6c9a9e09c1206a9321e8a80cd340ce6091c55e0c2"
+    },
+    {
+      "bytes": 3005,
+      "member": "counts/id106388-nested-count-certificate-v1.json",
+      "sha256": "4f6085dd4a72ed7bf3648dd0b9b9c748b67f3f1cb22091ac4200bc68d0919691"
+    },
+    {
+      "bytes": 8751,
+      "member": "counts/mn214026-nested-count-certificate-v1.json",
+      "sha256": "d20472702cbb42505e30c6562463ad0a0ef7940cb6cd53d3c958dc7a98195c22"
+    },
+    {
+      "bytes": 8771,
+      "member": "counts/ms227840-nested-count-certificate-v1.json",
+      "sha256": "deecdd432cd3988f4e749e1f74c5b94fad30d6da8514269885cc518d1aa54d8c"
+    },
+    {
+      "bytes": 3006,
+      "member": "counts/nm294426-nested-count-certificate-v1.json",
+      "sha256": "f573e0963426181fede2f36697c62b9bb431927e543485be4c91e80a096c488d"
+    },
+    {
+      "bytes": 2586,
+      "member": "counts/tx412797-nested-count-certificate-v1.json",
+      "sha256": "f4d761c99aade65266e2e3ede11e68f5fdd0d5a094789bf178683a42095c6ea4"
+    },
+    {
+      "bytes": 2586,
+      "member": "counts/ut429382-nested-count-certificate-v1.json",
+      "sha256": "79c8b0bb4fe397904b43e4e5f70f2d031c375db3bcf01ef3f44b9bb86fffd275"
+    },
+    {
+      "bytes": 8722,
+      "member": "counts/wy485345-nested-count-certificate-v1.json",
+      "sha256": "8ca70bf9418193de9690b7121681b004f133bbcaa11e8988ba279f3e6b739c1c"
+    }
+  ]
+}

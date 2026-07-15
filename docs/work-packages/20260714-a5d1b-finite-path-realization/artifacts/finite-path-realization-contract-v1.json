@@ -1,0 +1,86 @@
+{
+  "algorithm": {
+    "count_id": "joint_nested_milp_sequential_centering_v1",
+    "count_iterations": 12,
+    "count_objective": "minimize L1 distance from inherited stationary weights with deterministic index tie break",
+    "count_solver": "scipy.optimize.milp using HiGHS",
+    "ordering_acceptance": "deterministic seeded simulated annealing; retain lexicographically best exact replay",
+    "ordering_id": "nested_count_annealed_order_v1",
+    "ordering_iterations": 30000,
+    "ordering_temperature_end": 0.0001,
+    "ordering_temperature_start": 1.0
+  },
+  "contract_id": "a5d1b-finite-path-realization-v1",
+  "contract_schema_version": 1,
+  "development_only": true,
+  "diagnostic": {
+    "eligible_a5d1_cells": 153,
+    "order_dependent_gates": [
+      "aggregate_january_transition",
+      "boundary_vector",
+      "dependence_noninferiority",
+      "dependence_strict_improvement",
+      "cooldown"
+    ],
+    "order_independent_gates": [
+      "monthly_and_unparameterized_preservation",
+      "annual_mean_preservation",
+      "centered_component_noninferiority",
+      "centered_aggregate_strict_improvement",
+      "temperature_ordering",
+      "calendar_count",
+      "maximum_reuse",
+      "positive_weight_support"
+    ]
+  },
+  "horizons": [30, 100],
+  "inherited": {
+    "a5d1_contract_sha256": "7fec603c613a416578fd510768de789c3c8b4f07278f08b2137dd94fe62ceb0c",
+    "a5d1_decision_sha256": "2f4dda993a866ff7f19332f659acfb10645203c01592c55b1fd8f6e27f321826",
+    "a5d1_detailed_archive_sha256": "18c2be90b1d431ca1dd4bf031b274b0413c3363fa0ebf0c01d1580c34cdc73b0",
+    "a5d1_feature_manifest_sha256": "a219242f9edcaef961c3c4e44d9dbd0d6e37b502092264e602f3d478c55a9335",
+    "a5d1_freeze_sha256": "dd38484dca7da633ed30854c16074fa66b2a7a7fdd53b05253277125cdd99d22",
+    "a5d1_library_manifest_sha256": "b2abf191b8b8b724582f166541746c2f4bf7bb51b584637b18f6b20f9f5ca4e0",
+    "a5d1_marginal_results_sha256": "fccbe964b6ff54bbd24d077e74f5aefdb6d83c3a63d5559db59ebbe4600ed879",
+    "a5d1_path_results_sha256": "b15c638ab5a6d9ee0358b93bcc7f4999e56b44b22bed7d7495dfd8c7f063e321"
+  },
+  "matrix": {
+    "count_station_cells": 17,
+    "ordered_path_cells": 51,
+    "path_seeds": [104729, 130363, 155921],
+    "pool_size": 256,
+    "station_count": 17
+  },
+  "nested_count_constraints": {
+    "calendar_counts": {
+      "100": {"common": 76, "leap": 24},
+      "30": {"common": 23, "leap": 7}
+    },
+    "count_30_le_count_100": true,
+    "exact_block_max_reuse": 2,
+    "positive_weight_threshold": 1e-12,
+    "preservation_constraints": "A5d1 v4 preservation rows without tolerance relaxation",
+    "replay_tolerance": 2e-7
+  },
+  "no_witness_diagnostics": {
+    "infeasible_status_is_proof": false,
+    "run_separate_horizons_after_joint_no_witness": true,
+    "terminal_wording": "bounded search hold unless an independently replayable proof exists"
+  },
+  "ordering_constraints": {
+    "cooldown_years": 5,
+    "exact_30_year_prefix": true,
+    "physical_value_interventions": 0,
+    "same_calendar_class_swaps_only": true
+  },
+  "resource_ceilings": {
+    "count_solver_seconds_per_call": 3,
+    "count_solver_seconds_per_station": 120,
+    "ordering_seconds_per_path": 120,
+    "peak_rss_bytes": 2147483648,
+    "retained_artifact_bytes": 1073741824,
+    "total_wall_seconds": 7200
+  },
+  "selection_rule": "Run ordering only if all 17 exact count replays pass. Select the single frozen algorithm only if all 51 ordered cells pass every unchanged A5d1 v4 gate and invariant; otherwise issue the narrowest registered hold.",
+  "source_commit": "08db78cb5365b2f961599421826a600dae1c765a"
+}

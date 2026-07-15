@@ -5,3 +5,5 @@ docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/evide
 docs/work-packages/20260713-a5b-interannual-candidate-spike/artifacts/wepp/a5b-wepp-analysis-v1.json filter=lfs diff=lfs merge=lfs -text
 docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/*detailed-evidence*.tar.gz filter=lfs diff=lfs merge=lfs -text
 docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/replay-evidence-v1.tar.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/*.tar.gz filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260714-a5d1b-finite-path-realization/** whitespace=-blank-at-eof

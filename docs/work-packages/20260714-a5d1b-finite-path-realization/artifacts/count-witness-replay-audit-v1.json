@@ -1,0 +1,26 @@
+{
+  "count_witness_replay_audit_schema_version": 1,
+  "development_only": true,
+  "joint_exact_pass_count": 1,
+  "mutation_self_test_rejected": true,
+  "pass": true,
+  "separate_horizon_replay": {
+    "100": {
+      "attempted": 16,
+      "exact": 14,
+      "incumbent": 15,
+      "linear": 14,
+      "optimal": 9,
+      "witness_records": 14
+    },
+    "30": {
+      "attempted": 16,
+      "exact": 0,
+      "incumbent": 0,
+      "linear": 0,
+      "optimal": 0,
+      "witness_records": 0
+    }
+  },
+  "station_count": 17
+}

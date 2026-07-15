@@ -1,0 +1,310 @@
+{
+  "actual_station_count": 17,
+  "count_feasibility_results_schema_version": 1,
+  "count_pass_count": 1,
+  "development_only": true,
+  "expected_station_count": 17,
+  "freeze_sha256": "1844f7ed8231737039784362b7da15799515953c4cbc4f7178b7f6d058406055",
+  "initial_incumbent_present_count": 1,
+  "initial_solver_optimal_count": 0,
+  "initial_solver_status_counts": {
+    "1": 17
+  },
+  "linear_necessary_system_witness_count": 1,
+  "maximum_station_wall_seconds": 11.638102,
+  "peak_rss_bytes": 562397184,
+  "peak_rss_unit": "bytes_on_macos",
+  "records": [
+    {
+      "certificate": {
+        "bytes": 9677,
+        "path": "target/a5d1b-finite-path-realization/counts/ak505769-nested-count-certificate-v1.json",
+        "sha256": "c01f71126b9fabb2b8d89b26d09a8fdabd63b16eb580a90d29ee06cb0cc1fcf8"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "ak505769",
+      "wall_seconds": 9.1442
+    },
+    {
+      "certificate": {
+        "bytes": 9652,
+        "path": "target/a5d1b-finite-path-realization/counts/al015478-nested-count-certificate-v1.json",
+        "sha256": "d6203e40abfd6dd2846f3c523611a4549f8dee72481b80e940906139b5ddbe0f"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "al015478",
+      "wall_seconds": 6.283155
+    },
+    {
+      "certificate": {
+        "bytes": 9659,
+        "path": "target/a5d1b-finite-path-realization/counts/az022664-nested-count-certificate-v1.json",
+        "sha256": "18196da5cd82a6164b0d5e0405b52ba55f2d15396d9196ce2946d8ecfff5aa91"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "az022664",
+      "wall_seconds": 8.294591
+    },
+    {
+      "certificate": {
+        "bytes": 9672,
+        "path": "target/a5d1b-finite-path-realization/counts/az028619-nested-count-certificate-v1.json",
+        "sha256": "9629b01a00328f6938e25319f69ea99a33463c0d98bf86812354f42245d4d3fa"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "az028619",
+      "wall_seconds": 9.204072
+    },
+    {
+      "certificate": {
+        "bytes": 3890,
+        "path": "target/a5d1b-finite-path-realization/counts/az029654-nested-count-certificate-v1.json",
+        "sha256": "b4a3802c37f7037cf6bca1faf2610237ccd1a95173c71a7c6a7ab0ad48be7b20"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "az029654",
+      "wall_seconds": 6.292029
+    },
+    {
+      "certificate": {
+        "bytes": 9666,
+        "path": "target/a5d1b-finite-path-realization/counts/ca042257-nested-count-certificate-v1.json",
+        "sha256": "58b709c0e36bfbb2eba4fe627e9d9511755b538fbcb3767a5dd6b11b958645d9"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "ca042257",
+      "wall_seconds": 9.146331
+    },
+    {
+      "certificate": {
+        "bytes": 9637,
+        "path": "target/a5d1b-finite-path-realization/counts/ca042319-nested-count-certificate-v1.json",
+        "sha256": "88b4a0b260e306a4ec00e6bf24a3ecc71ae0c9598604be0ce30d4558b31405bf"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "ca042319",
+      "wall_seconds": 9.146899
+    },
+    {
+      "certificate": {
+        "bytes": 10523,
+        "path": "target/a5d1b-finite-path-realization/counts/co051660-nested-count-certificate-v1.json",
+        "sha256": "77277840568b626028e8775454e941515584fac87665039d004009f5498bf654"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "co051660",
+      "wall_seconds": 9.479763
+    },
+    {
+      "certificate": {
+        "bytes": 9676,
+        "path": "target/a5d1b-finite-path-realization/counts/fl083909-nested-count-certificate-v1.json",
+        "sha256": "b4afcbca512ea591ee88823355ab07ef706973ee09aefa133cb1bb77466e61d0"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "fl083909",
+      "wall_seconds": 6.304543
+    },
+    {
+      "certificate": {
+        "bytes": 10494,
+        "path": "target/a5d1b-finite-path-realization/counts/fl086997-nested-count-certificate-v1.json",
+        "sha256": "69daf4f391bce89a6608969dc30bf66a9ebf40ec6d08a703d3e7194c84e36289"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "fl086997",
+      "wall_seconds": 8.770612
+    },
+    {
+      "certificate": {
+        "bytes": 10506,
+        "path": "target/a5d1b-finite-path-realization/counts/id106388-nested-count-certificate-v1.json",
+        "sha256": "a1b820f416d5a25178335ee481ce3e3c9b062a1751114912e3347bac88b79a99"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "id106388",
+      "wall_seconds": 11.638102
+    },
+    {
+      "certificate": {
+        "bytes": 9637,
+        "path": "target/a5d1b-finite-path-realization/counts/mn214026-nested-count-certificate-v1.json",
+        "sha256": "cef4557167ee624648cd1569bd538139ffc915a2d3e1636b8b69111eb27078cc"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "mn214026",
+      "wall_seconds": 8.327257
+    },
+    {
+      "certificate": {
+        "bytes": 9661,
+        "path": "target/a5d1b-finite-path-realization/counts/ms227840-nested-count-certificate-v1.json",
+        "sha256": "2dc8c3074276bd68e43b81d693ab5b21b55640de95e9a85ea1a11b3a6c362933"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "ms227840",
+      "wall_seconds": 6.405412
+    },
+    {
+      "certificate": {
+        "bytes": 9655,
+        "path": "target/a5d1b-finite-path-realization/counts/nm294426-nested-count-certificate-v1.json",
+        "sha256": "0ccbce250bf95f76536bd684a5f5d28179b4be91ec5104bdcc861f8c6845a83b"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "nm294426",
+      "wall_seconds": 7.764661
+    },
+    {
+      "certificate": {
+        "bytes": 9628,
+        "path": "target/a5d1b-finite-path-realization/counts/tx412797-nested-count-certificate-v1.json",
+        "sha256": "ae6c026ac81471aaef0acc8276cbaba63622cb410b046384aa088e9e4dc992c6"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "tx412797",
+      "wall_seconds": 9.181283
+    },
+    {
+      "certificate": {
+        "bytes": 3919,
+        "path": "target/a5d1b-finite-path-realization/counts/ut429382-nested-count-certificate-v1.json",
+        "sha256": "8f839a04c8c270c94bce37144a95fbdce7202996b201680bf315458c88d59a51"
+      },
+      "count_pass": false,
+      "first_exact_iteration": null,
+      "initial_incumbent_present": false,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": false,
+      "station_budget_scheduler_pass": true,
+      "station_id": "ut429382",
+      "wall_seconds": 9.185624
+    },
+    {
+      "certificate": {
+        "bytes": 10971,
+        "path": "target/a5d1b-finite-path-realization/counts/wy485345-nested-count-certificate-v1.json",
+        "sha256": "0da417dd900359c87c9274525e9075f8308970f9ebc1e1d34faba49e17905144"
+      },
+      "count_pass": true,
+      "first_exact_iteration": 0,
+      "initial_incumbent_present": true,
+      "initial_solver_status": 1,
+      "initial_solver_success": false,
+      "linear_necessary_system_witness": true,
+      "station_budget_scheduler_pass": true,
+      "station_id": "wy485345",
+      "wall_seconds": 3.075438
+    }
+  ],
+  "separate_horizon_summary": {
+    "100": {
+      "attempted_station_count": 16,
+      "exact_pass_count": 14,
+      "incumbent_present_count": 15,
+      "linear_necessary_system_witness_count": 14,
+      "optimal_status_count": 9
+    },
+    "30": {
+      "attempted_station_count": 16,
+      "exact_pass_count": 0,
+      "incumbent_present_count": 0,
+      "linear_necessary_system_witness_count": 0,
+      "optimal_status_count": 0
+    }
+  },
+  "station_budget_scheduler_pass_count": 17,
+  "total_wall_seconds": 138.488182,
+  "unique_station_count": 17
+}

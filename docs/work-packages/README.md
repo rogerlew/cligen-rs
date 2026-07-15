@@ -44,3 +44,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260714-a5c-interannual-profile-adjudication](20260714-a5c-interannual-profile-adjudication/package.md) | EXECUTED-COMPLETE |
 | [20260714-a5d0-successor-feasibility-calibration](20260714-a5d0-successor-feasibility-calibration/package.md) | EXECUTED-HOLD-CONTRACT-INCOMPLETE |
 | [20260714-a5d1-selector-feasibility](20260714-a5d1-selector-feasibility/package.md) | EXECUTED-HOLD-PATH-INFEASIBILITY |
+| [20260714-a5d1b-finite-path-realization](20260714-a5d1b-finite-path-realization/package.md) | EXECUTED-HOLD-COUNT-SEARCH-BOUNDED |

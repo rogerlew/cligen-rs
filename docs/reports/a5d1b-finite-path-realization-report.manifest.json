@@ -1,0 +1,71 @@
+{
+  "evidence": [
+    {"id": "E01", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/finite-path-realization-contract-v1.json", "role": "prospective scientific contract", "sha256": "7c87fa8e08f4c264b3f30bf671c6e879ab6c31309cf1217c1ade92e42d1c3d52"},
+    {"id": "E02", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/evidence-lock-inputs-v1.json", "role": "input identities and access boundary", "sha256": "61ff04a5f266a6f3d543ca16b282bc266f232494a07fb30b5daaf478e5ea9fde"},
+    {"id": "E03", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/pre-outcome-freeze-v1.json", "role": "root prospective freeze", "sha256": "ed291375bb4ad67b512a17c57d871b42ecc78a209450b103d58ea4dc97af087c"},
+    {"id": "E04", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/pre-outcome-freeze-amendment-001.json", "role": "first pre-result serialization amendment", "sha256": "ae53ccee3e2bb9af09b22e7bc41c6f9ced0924b24334e84f78caed97d9eb0dd6"},
+    {"id": "E05", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/pre-outcome-freeze-v2.json", "role": "intermediate freeze chronology", "sha256": "3ed76f72cdaeb1ed6fb63a2c2bb34aa0e2038b5dbb12eb56a5b807f4f73be086"},
+    {"id": "E06", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/pre-outcome-freeze-amendment-002.json", "role": "second pre-result serialization amendment", "sha256": "57b55f7f4fdd14a7e9beff96c8a8dac1fdfd02fdd3fe9e8b2ab70b3ce2952b2e"},
+    {"id": "E07", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/pre-outcome-freeze-v3.json", "role": "pre-v3-run tool identity", "sha256": "f5e4a3a5f100c275ec15881b46badc808a95ed1d9f517839e47b97375a6d1dfe"},
+    {"id": "E08", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/post-outcome-correction-amendment-003.json", "role": "v3 invalidation and incumbent correction", "sha256": "5a907f4db5e240c2fb84160e3e4c487b5e8e5f38d4e1a2bca02be051d024d3f4"},
+    {"id": "E09", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/corrected-execution-freeze-v4.json", "role": "corrected execution freeze before v4 certificates", "sha256": "560d229b707507bf05c0ac58ff0ba68ff86876f41979424a59b6fd76a0c11684"},
+    {"id": "E10", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/post-outcome-correction-amendment-004.json", "role": "aggregate-only post-outcome correction", "sha256": "23b7bc39ceffc38327c6d4c61cc9e52aadf3a80d134931d3e74f56e34473c39e"},
+    {"id": "E11", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/corrected-execution-freeze-v5.json", "role": "controlling execution freeze", "sha256": "b4691f423b3ef248fe42f0622678072faf075281fc0d1b16180cfc74ce0607a2"},
+    {"id": "E12", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/inherited-path-diagnostics-v1.json", "role": "inherited path count-order decomposition", "sha256": "0d5dacaa95271a27f609b513615887ef8a9ae1d3a4e71fd4d3cc44d81f6d74f4"},
+    {"id": "E13", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/count-feasibility-results-v1.json", "role": "controlling count aggregate", "sha256": "a094e5c11b7d5e5c49e94efb3822085d45ffd315dcd40aa83ee316fc6375e4c9"},
+    {"id": "E14", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/count-witness-replay-audit-v1.json", "role": "independent joint and separate witness replay", "sha256": "70814abebe2dd06f79ea87331809aa4454cbb8138d42ea439950a9f9e79f734a"},
+    {"id": "E15", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/ordered-path-results-v1.json", "role": "conditional ordering skip", "sha256": "dd788bb4d8dc9f339deae8bec9ae4e5fde74c7042ecbf4db70126c8b85d210b9"},
+    {"id": "E16", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/a5d1b-results-v1.json", "role": "terminal aggregate result", "sha256": "a9aec842f6075b7c2c5310aea982dcd539c84de04ea9838b99f398e0fc6b871e"},
+    {"id": "E17", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/a5d1b-decision-v1.json", "role": "machine decision and authorization boundary", "sha256": "bc5ac8003120032e26bb72b789b56a6c9eb13c0eaf64f160cee2740235446bf4"},
+    {"id": "E18", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/detailed-evidence-manifest-v1.json", "role": "controlling certificate archive membership", "sha256": "21f6223c5d94d30ce6bf7a0d837ac577c50848ce29d16aa88c5f20fe6f5eb49b"},
+    {"id": "E19", "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/selector-feasibility-contract-v4.json", "role": "inherited finite path authority", "sha256": "7fec603c613a416578fd510768de789c3c8b4f07278f08b2137dd94fe62ceb0c"},
+    {"id": "E20", "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/marginal-results-v1.json", "role": "predecessor stationary machine result", "sha256": "fccbe964b6ff54bbd24d077e74f5aefdb6d83c3a63d5559db59ebbe4600ed879"},
+    {"id": "E21", "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/path-results-v1.json", "role": "predecessor finite path machine result", "sha256": "b15c638ab5a6d9ee0358b93bcc7f4999e56b44b22bed7d7495dfd8c7f063e321"},
+    {"id": "E22", "path": "docs/work-packages/20260714-a5d1-selector-feasibility/artifacts/a5d1-decision-v1.json", "role": "predecessor machine decision", "sha256": "2f4dda993a866ff7f19332f659acfb10645203c01592c55b1fd8f6e27f321826"},
+    {"id": "E23", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/inherited-a5d1-hash-advisory.md", "role": "predecessor narrative hash disposition", "sha256": "bcee72d2d411ea7f73dccd4a2b047ba6871966e011c8387871d81827739adbb1"},
+    {"id": "E24", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/next-action-disposition-v1.json", "role": "reviewed successor action refinement", "sha256": "50ae61b886b3fc20482053d104978ddd880d8d215c8a70844367c545f2218b97"},
+    {"id": "E25", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/resource-audit-v1.json", "role": "solver and retained-evidence resource audit", "sha256": "028b95d80f8a97d25269ca98e1d7a4fe085ea43a0666dcd8c5514a5d6166f993"},
+    {"id": "E26", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/inherited-a5d1-hash-advisory-addendum.md", "role": "append-only predecessor hash qualification", "sha256": "8ebaccf5bada855f44563e639175e31f17ecbf5176f07d42b424e132e4d13a73"}
+  ],
+  "governance": [
+    {"path": "docs/standards/scientific-report-standard.md", "role": "standard", "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"},
+    {"path": "docs/standards/scientific-report-authoring-protocol.md", "role": "protocol", "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"},
+    {"path": "docs/reports/templates/scientific-experiment-report.md", "role": "template", "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"}
+  ],
+  "hypotheses": [
+    {"evidence_ids": ["E01", "E03", "E08", "E11", "E13", "E14", "E16", "E17"], "id": "H1", "outcome": "Not demonstrated globally under the registered bound; 1/17 exact joint witnesses", "provenance": "preregistered"},
+    {"evidence_ids": ["E01", "E15", "E16", "E17"], "id": "H2", "outcome": "Not evaluated; the H1 all-station gate failed and ordering was skipped", "provenance": "preregistered"},
+    {"evidence_ids": ["E01", "E15", "E16", "E17"], "id": "H3", "outcome": "Not evaluated; no A5d1b ordered path was constructed", "provenance": "preregistered"}
+  ],
+  "references": [
+    {"citation": "Thornton et al. (2022), Daymet V4 R1 dataset", "doi_or_no_doi": "10.3334/ORNLDAAC/2129", "id": "R01", "url": "https://doi.org/10.3334/ORNLDAAC/2129"}
+  ],
+  "report": {"path": "docs/reports/a5d1b-finite-path-realization-report.md", "sha256": "892f6553eba495921644ef737dbe99ebd9a766157915704963c9054996fbe439"},
+  "report_id": "a5d1b-finite-path-realization",
+  "report_manifest_version": 1,
+  "report_revision": 1,
+  "required_sections": ["Abstract", "Introduction", "Hypotheses", "Methods", "Analysis", "Results", "Limitations and validity", "Conclusions", "Reproducibility and data availability", "References"],
+  "reviews": [
+    {"lens": "accuracy", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/review.md", "sha256": "4f527b65aac90df8bd0b28d17a7d0ab039a4b42c6025223f79f5f363e476e433", "verdict": "ACCEPT"},
+    {"lens": "scientific-validity", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/review.md", "sha256": "4f527b65aac90df8bd0b28d17a7d0ab039a4b42c6025223f79f5f363e476e433", "verdict": "ACCEPT"},
+    {"lens": "consistency-public-safety", "path": "docs/work-packages/20260714-a5d1b-finite-path-realization/artifacts/review.md", "sha256": "4f527b65aac90df8bd0b28d17a7d0ab039a4b42c6025223f79f5f363e476e433", "verdict": "ACCEPT"}
+  ],
+  "status": "ACCEPTED",
+  "study_facts": {
+    "stations": 17,
+    "horizons_years": [30, 100],
+    "inherited_eligible_path_cells": 153,
+    "inherited_count_only_both_horizon_passes": 2,
+    "count_station_cells": 17,
+    "joint_raw_incumbents": 1,
+    "joint_independently_accepted_incumbents": 1,
+    "joint_exact_count_witnesses": 1,
+    "separate_30_year_exact_witnesses": 0,
+    "separate_100_year_raw_incumbents": 15,
+    "separate_100_year_independently_accepted_incumbents": 14,
+    "separate_100_year_exact_witnesses": 14,
+    "ordered_path_cells_executed": 0,
+    "path_seeds": 3,
+    "confirmation_objects_accessed": 0
+  }
+}

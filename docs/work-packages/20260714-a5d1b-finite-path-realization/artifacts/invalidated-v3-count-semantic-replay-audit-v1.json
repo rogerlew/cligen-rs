@@ -1,0 +1,118 @@
+{
+  "count_semantic_replay_audit_schema_version": 1,
+  "development_only": true,
+  "freeze_sha256": "10270c0b324a814caa2cff76363dac43dbd36c2fff95a6eed5787baa9067260c",
+  "maximum_absolute_difference": 7.821271408303687e-12,
+  "maximum_relative_difference": 7.821271408303687e-12,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "numeric_comparisons": 1985,
+  "pass": true,
+  "semantic_match_count": 17,
+  "station_count": 17,
+  "stations": [
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "ak505769"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "al015478"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "az022664"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "az028619"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "az029654"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "ca042257"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "ca042319"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "co051660"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "fl083909"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "fl086997"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "id106388"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "mn214026"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "ms227840"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "nm294426"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "tx412797"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "ut429382"
+    },
+    {
+      "published_count_pass": false,
+      "repeat_count_pass": false,
+      "semantic_match": true,
+      "station_id": "wy485345"
+    }
+  ],
+  "wall_seconds": 150.898522
+}

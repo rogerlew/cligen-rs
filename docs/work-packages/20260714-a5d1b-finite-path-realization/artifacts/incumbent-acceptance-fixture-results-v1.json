@@ -1,0 +1,61 @@
+{
+  "actual_count": 4,
+  "development_only": true,
+  "expected_count": 4,
+  "incumbent_acceptance_fixture_results_schema_version": 1,
+  "pass_count": 4,
+  "records": [
+    {
+      "expected_acceptance": true,
+      "fixture_id": "status1_valid_integral_incumbent",
+      "observed_acceptance": true,
+      "pass": true,
+      "replay": {
+        "maximum_bound_violation": 0.0,
+        "maximum_constraint_violation": 0.0,
+        "maximum_integrality_residual": 0.0,
+        "pass": true,
+        "reason": "accepted"
+      }
+    },
+    {
+      "expected_acceptance": false,
+      "fixture_id": "status1_fractional_integer_variable",
+      "observed_acceptance": false,
+      "pass": true,
+      "replay": {
+        "maximum_bound_violation": 0.0,
+        "maximum_constraint_violation": 0.25,
+        "maximum_integrality_residual": 0.5,
+        "pass": false,
+        "reason": "independent_primal_replay_failed"
+      }
+    },
+    {
+      "expected_acceptance": false,
+      "fixture_id": "status1_primal_constraint_violation",
+      "observed_acceptance": false,
+      "pass": true,
+      "replay": {
+        "maximum_bound_violation": 0.0,
+        "maximum_constraint_violation": 0.75,
+        "maximum_integrality_residual": 0.0,
+        "pass": false,
+        "reason": "independent_primal_replay_failed"
+      }
+    },
+    {
+      "expected_acceptance": false,
+      "fixture_id": "status1_no_incumbent",
+      "observed_acceptance": false,
+      "pass": true,
+      "replay": {
+        "maximum_bound_violation": null,
+        "maximum_constraint_violation": null,
+        "maximum_integrality_residual": null,
+        "pass": false,
+        "reason": "no_incumbent"
+      }
+    }
+  ]
+}

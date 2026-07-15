@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "additionalProperties": false,
+      "properties": {
+        "count_id": {"const": "joint_nested_milp_sequential_centering_v1"},
+        "count_iterations": {"const": 12},
+        "count_objective": {"type": "string", "minLength": 1},
+        "count_solver": {"const": "scipy.optimize.milp using HiGHS"},
+        "ordering_acceptance": {"type": "string", "minLength": 1},
+        "ordering_id": {"const": "nested_count_annealed_order_v1"},
+        "ordering_iterations": {"const": 30000},
+        "ordering_temperature_end": {"const": 0.0001},
+        "ordering_temperature_start": {"const": 1.0}
+      },
+      "required": ["count_id", "count_iterations", "count_objective", "count_solver", "ordering_acceptance", "ordering_id", "ordering_iterations", "ordering_temperature_end", "ordering_temperature_start"],
+      "type": "object"
+    },
+    "contract_id": {"const": "a5d1b-finite-path-realization-v1"},
+    "contract_schema_version": {"const": 1},
+    "development_only": {"const": true},
+    "diagnostic": {
+      "additionalProperties": false,
+      "properties": {
+        "eligible_a5d1_cells": {"const": 153},
+        "order_dependent_gates": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+        "order_independent_gates": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+      },
+      "required": ["eligible_a5d1_cells", "order_dependent_gates", "order_independent_gates"],
+      "type": "object"
+    },
+    "horizons": {"const": [30, 100]},
+    "inherited": {
+      "additionalProperties": false,
+      "properties": {
+        "a5d1_contract_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_decision_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_detailed_archive_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_feature_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_freeze_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_library_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_marginal_results_sha256": {"$ref": "#/$defs/sha256"},
+        "a5d1_path_results_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "required": ["a5d1_contract_sha256", "a5d1_decision_sha256", "a5d1_detailed_archive_sha256", "a5d1_feature_manifest_sha256", "a5d1_freeze_sha256", "a5d1_library_manifest_sha256", "a5d1_marginal_results_sha256", "a5d1_path_results_sha256"],
+      "type": "object"
+    },
+    "matrix": {
+      "additionalProperties": false,
+      "properties": {
+        "count_station_cells": {"const": 17},
+        "ordered_path_cells": {"const": 51},
+        "path_seeds": {"const": [104729, 130363, 155921]},
+        "pool_size": {"const": 256},
+        "station_count": {"const": 17}
+      },
+      "required": ["count_station_cells", "ordered_path_cells", "path_seeds", "pool_size", "station_count"],
+      "type": "object"
+    },
+    "nested_count_constraints": {
+      "additionalProperties": false,
+      "properties": {
+        "calendar_counts": {
+          "additionalProperties": false,
+          "properties": {
+            "100": {"$ref": "#/$defs/calendar100"},
+            "30": {"$ref": "#/$defs/calendar30"}
+          },
+          "required": ["100", "30"],
+          "type": "object"
+        },
+        "count_30_le_count_100": {"const": true},
+        "exact_block_max_reuse": {"const": 2},
+        "positive_weight_threshold": {"const": 1e-12},
+        "preservation_constraints": {"type": "string", "minLength": 1},
+        "replay_tolerance": {"const": 2e-7}
+      },
+      "required": ["calendar_counts", "count_30_le_count_100", "exact_block_max_reuse", "positive_weight_threshold", "preservation_constraints", "replay_tolerance"],
+      "type": "object"
+    },
+    "no_witness_diagnostics": {
+      "additionalProperties": false,
+      "properties": {
+        "infeasible_status_is_proof": {"const": false},
+        "run_separate_horizons_after_joint_no_witness": {"const": true},
+        "terminal_wording": {"type": "string", "minLength": 1}
+      },
+      "required": ["infeasible_status_is_proof", "run_separate_horizons_after_joint_no_witness", "terminal_wording"],
+      "type": "object"
+    },
+    "ordering_constraints": {
+      "additionalProperties": false,
+      "properties": {
+        "cooldown_years": {"const": 5},
+        "exact_30_year_prefix": {"const": true},
+        "physical_value_interventions": {"const": 0},
+        "same_calendar_class_swaps_only": {"const": true}
+      },
+      "required": ["cooldown_years", "exact_30_year_prefix", "physical_value_interventions", "same_calendar_class_swaps_only"],
+      "type": "object"
+    },
+    "resource_ceilings": {
+      "additionalProperties": false,
+      "properties": {
+        "count_solver_seconds_per_call": {"const": 3},
+        "count_solver_seconds_per_station": {"const": 120},
+        "ordering_seconds_per_path": {"const": 120},
+        "peak_rss_bytes": {"const": 2147483648},
+        "retained_artifact_bytes": {"const": 1073741824},
+        "total_wall_seconds": {"const": 7200}
+      },
+      "required": ["count_solver_seconds_per_call", "count_solver_seconds_per_station", "ordering_seconds_per_path", "peak_rss_bytes", "retained_artifact_bytes", "total_wall_seconds"],
+      "type": "object"
+    },
+    "selection_rule": {"type": "string", "minLength": 1},
+    "source_commit": {"$ref": "#/$defs/gitsha"}
+  },
+  "required": ["algorithm", "contract_id", "contract_schema_version", "development_only", "diagnostic", "horizons", "inherited", "matrix", "nested_count_constraints", "no_witness_diagnostics", "ordering_constraints", "resource_ceilings", "selection_rule", "source_commit"],
+  "type": "object",
+  "$defs": {
+    "calendar100": {
+      "additionalProperties": false,
+      "properties": {"common": {"const": 76}, "leap": {"const": 24}},
+      "required": ["common", "leap"],
+      "type": "object"
+    },
+    "calendar30": {
+      "additionalProperties": false,
+      "properties": {"common": {"const": 23}, "leap": {"const": 7}},
+      "required": ["common", "leap"],
+      "type": "object"
+    },
+    "gitsha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

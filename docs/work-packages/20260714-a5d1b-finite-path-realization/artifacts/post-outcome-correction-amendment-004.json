@@ -1,0 +1,45 @@
+{
+  "algorithm_implementation_changed": false,
+  "classification": "post-outcome aggregate-only missing-import correction",
+  "correction": "Import the repository ROOT constant used only while reading completed station certificates to form aggregate separate-horizon counts.",
+  "historical_v4_tool_directory": "history/v4-tools",
+  "historical_v4_tool_hashes": {
+    "a5d1b_common.py": "da4a5036361e6154e769aa2ba8ef00c60d3ed025922b248dc70ba687f8698729",
+    "amend-freeze-a5d1b-v3.py": "f28f675a6f82806d43a012e5be42b6bc108379567d6353bb665eb392fd94ef89",
+    "amend-freeze-a5d1b-v4.py": "b5b6a5fdb8ff8a242e20ac26f1e1f1e8c7d217ef03978ed71df46cd202c75e2a",
+    "amend-freeze-a5d1b.py": "6d7208513645bfd8fc5686e390ecc4b263e81626d9b53dea6772d532485ad0a3",
+    "archive-detailed-evidence.py": "cd247371e6bbbd172ba851cab22ddab250d545ada35245047f84326d14114379",
+    "construct-ordered-paths.py": "0ebb49e9c2097d1ac33e9af23d20b41b80bf14ac9b83097d098b4b2fbcc17986",
+    "diagnose-inherited-paths.py": "5061e61ccf4e630e2d959948f637421c5983713b93ffa0164f4c225ad4d89f71",
+    "finalize-a5d1b.py": "15fe5b5d0ec5c5474ac91211abe9732663e98bf9a5a8a062dd9cef25a9efa2d6",
+    "freeze-a5d1b.py": "193de30d9ecec6e50480c96072276791dd5e9ea8317be3d5575655428f06c14d",
+    "run-incumbent-acceptance-fixtures.py": "ad321ab5c39679967142782d5ab9fb669057b3b8d1d979dea9ad03e0e53cfb56",
+    "run-synthetic-fixtures.py": "b782cb86fff584698d457acbd72671506440b4984b5d403190b2a5a0c0855447",
+    "solve-count-feasibility.py": "afb19f8732978a3b22aad905c8593f41f6029f633db64de8217b5ac33256da77",
+    "verify-a5d1b-package.py": "ee743f70b67b326a492b97121a7a18204a1e036f3fc7472f65a853e91120d20f",
+    "verify-count-witnesses.py": "f9bea9cebe063fdc9a9deb827ba1d20e8d34d315f668eb8437dbe80dcdbbc4bd"
+  },
+  "matrix_changed": false,
+  "parent_freeze_sha256": "242e26cb9b4750309919339e3e0dd2243dd3ccd3df570fc368b54753bfce3957",
+  "post_outcome_correction_amendment_schema_version": 1,
+  "scientific_contract_changed": false,
+  "tolerance_changed": false,
+  "trigger": "All 17 corrected v4 station certificates were written; aggregate construction then raised NameError because ROOT was not imported. No count aggregate, ordered path, terminal result, or decision was emitted.",
+  "v4_outcome_exposure": {
+    "confirmation_objects_accessed": 0,
+    "count_aggregate_files_written": 0,
+    "count_certificate_files_written": 17,
+    "invalidated_certificate_archive": {
+      "bytes": 11440,
+      "path": "invalidated-v4-count-certificates-v1.tar.gz",
+      "sha256": "a1c96742218401e7d7806f39b5cde166cc6115bd0b3f844b79ef8f51988bd289"
+    },
+    "invalidated_certificate_manifest": {
+      "bytes": 3522,
+      "path": "invalidated-v4-count-certificates-manifest-v1.json",
+      "sha256": "b17cfe0682db0849b01b171b7f58eaf3c92ad57dfec37d3786dcee4104e5a98c"
+    },
+    "ordered_path_files_written": 0,
+    "terminal_result_files_written": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "a5d1b_results_schema_version": 1,
+  "count_pass_count": 0,
+  "development_only": true,
+  "evidence": {
+    "contract_sha256": "7c87fa8e08f4c264b3f30bf671c6e879ab6c31309cf1217c1ade92e42d1c3d52",
+    "count_results_sha256": "bed8a7956d41550b7e4c17b9ce4c1e102985d9e24645b804fa02ecaee074fcc3",
+    "detailed_archive_sha256": "8e9020d09b99c01d770cebe85f5761d3c432e72158de5da2704f8f385012eb16",
+    "detailed_manifest_sha256": "c8ef949d7e4cece040c862aaf2c030c7d6541ff3f14caf7654fa40685f8951e8",
+    "diagnostics_sha256": "0d5dacaa95271a27f609b513615887ef8a9ae1d3a4e71fd4d3cc44d81f6d74f4",
+    "path_results_sha256": "dcb927f318b59984a17b7c1ed38f76f078e2de59085e2d7cbd143091e00d7516"
+  },
+  "first_corrective_action": "Diagnose the first common exact count-replay obstruction and separate MILP linear status from bounded nonlinear construction failure.",
+  "freeze_sha256": "10270c0b324a814caa2cff76363dac43dbd36c2fff95a6eed5787baa9067260c",
+  "inherited_count_only_both_pass": 2,
+  "inherited_diagnostic_cells": 153,
+  "ordered_execution": false,
+  "ordered_path_actual_cells": 0,
+  "ordered_path_pass_count": 0,
+  "selected_algorithm": null,
+  "station_count": 17,
+  "structural_decision": "HOLD",
+  "terminal_status": "EXECUTED-HOLD-COUNT-SEARCH-BOUNDED"
+}

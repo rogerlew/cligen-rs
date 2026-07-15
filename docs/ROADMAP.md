@@ -16,50 +16,45 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-**Operator-ordered 2026-07-14: resolve the A5d0 holds as independent work
-packages before any confirmation candidate exists.** A5d1 established
-stationary selector feasibility but held on finite-path realization. A5d1b is
-therefore the next structural package. A5d2 and A5d3 may begin independently;
-before A5d4, the corpus power result must be revalidated against A5d2's frozen
-metric/composite identity. A5d4 depends on a successful structural selector
-and successful closure of A5d2/A5d3.
+**Operator correction 2026-07-14: stop the selector/count-construction
+escalation and return to the model question left open by A5c.** The A5d0-A5d1b
+complete-year selector branch is closed as exploratory evidence rather than a
+production prerequisite. A5d1c and the unscaffolded A5d2-A5d5 roadmap items are
+cancelled, and their identifiers will not be reused. Useful evaluation and
+corpus concepts may be proposed afresh only after a development candidate earns
+continuation. The immutable A5d0-A5d1b records retain their evidence and
+outcome-time recommendations, but this operator direction supersedes those
+recommendations.
+
+The queue now contains one bounded, production-shaped pilot and one
+conditional development expansion. It starts from A5c and
+[ADR-0004](decisions/0004-a5b-interannual-no-promotion.md), not from the A5d1b
+integer-count hold.
 
 | Order | Work package | Dependency and mechanism | Acceptance |
 |---|---|---|---|
-| 1 | **A5d1b — Finite-path realization diagnosis** (planned package `YYYYMMDD-a5d1b-finite-path-realization`) | Start from A5d1's valid 256-year stationary weights. Diagnose why empirical 30-/100-year block multisets fail the finite marginal replay in 151/153 eligible cells, distinguish discrete-feasibility limits from search/construction defects, then prospectively freeze any corrected path algorithm. | Either one bounded global construction realizes the complete frozen marginal/path/invariant contract at all 17 stations and every required seed, or the package closes on a sharper mathematical, algorithmic, or resource hold. No tolerance relaxation or confirmation evidence is permitted. |
-| 2 | **A5d2 — Successor evaluation calibration** (planned package `YYYYMMDD-a5d2-evaluation-calibration`) | Create a separately versioned `SPEC-A5D-EVALUATION`; implement observation-scaled preservation guards, faithful-clone null calibration, bootstrap-availability rules, and a numeric WEPP reference/criterion. Revision 3 remains immutable. | Every climate and downstream rule is numeric, executable at both horizons, uncertainty-available under its frozen floor, and supported by a defensible null-independence/audit design before candidate confirmation output. |
-| 3 | **A5d3 — Confirmation corpus qualification and seal** (planned package `YYYYMMDD-a5d3-confirmation-corpus`) | Run calibration-only spatial/composite power analysis; select stations from metadata only; acquire, qualify, hash, and seal an untouched primary corpus and new long-record sensitivity set. The 28-station design remains only a planning floor. | Fit, development, null-calibration, confirmation, and sensitivity roles are disjoint; the actual powered count is justified against the frozen A5d2 metric identity; target construction is reproducible and sealed with zero value exposure. |
-| 4 | **A5d4 — Candidate freeze review** (planned package `YYYYMMDD-a5d4-candidate-freeze-review`) | Bind the immutable structural selector, A5d2 evaluation, and A5d3 corpus records; pin exactly one experimental candidate, exact executable, coefficient schema/bundle and fitting identity, comparison/null identities, replicate counts, seeds, complete climate/WEPP matrix, verifier, and synthetic conformance evidence. | A later campaign can execute without discretionary post-exposure choices. A5d4 does not run or score confirmation output and changes no public default or profile enum. |
+| 1 | **A5e0 — Direct annual-latent-state pilot** (planned package `YYYYMMDD-a5e0-direct-annual-state-pilot`) | Freeze one intentionally rank-one mechanism before outcomes: draw one independent scalar annual state and apply it through separate fixed monthly loadings at the precipitation-occurrence, precipitation-amount, Tmax-mean, and Tmin-mean generator seams before daily draws. Store loadings directly as monthly values in a versioned development-only coefficient bundle; defer Fourier/EOF compression, serial persistence, and public station-schema changes. Use a dedicated extension RNG, establish and compensate the monthly variance budget, and generate fresh daily climate rather than select library years. Evaluate independent paired 30-/100-year replicates at three predeclared exposed development stations representing wet, dry, and cold regimes. | Unchanged faithful-profile output remains byte-identical, and the experimental path passes deterministic replay/provenance, fail-closed input, calendar/value validity, and same-seed 30-year-prefix gates. At both horizons, a prospectively frozen ensemble-level rule must show a useful interannual signal without material monthly/daily degradation or catastrophic degradation in any represented regime; otherwise close this mechanism. No default change, user-facing promotion, or confirmation data. |
+| 2 | **A5e1 — Conditional development expansion** (planned package `YYYYMMDD-a5e1-annual-state-development-expansion`) | Authorized only by an A5e0 continuation decision. Retain the frozen mechanism, fitting procedure, generator seams, and evaluation semantics; fit the other exposed development stations prospectively; expand evaluation to all 17 stations; and add a bounded downstream WEPP screen without confirmation exposure. | Population- and regime-level evidence either warrants separately roadmapping a candidate freeze and confirmation campaign or closes the line. Success is not conditioned on every station, seed, or finite realization passing every climate metric. |
 
-The downstream confirmation run is a separately dispatched
-`YYYYMMDD-a5d5-candidate-confirmation-campaign`. It is named here as an
-evidence-freeze barrier, not scaffolded or authorized. Wet/dry-conditioned
-radiation, full subdaily forcing, external storm benchmarking, and
-multisite/spatial generation remain later studies. Single-storm generation
-remains deprecated.
+Exact per-output gates are limited to engineering invariants: faithful-mode
+identity, deterministic replay and provenance, fail-closed inputs, valid
+calendars and values, and the same-seed 30-year output being the prefix of its
+100-year output. Climate moments, dependence, storm descriptors, and winter
+behavior are ensemble evaluation targets. Exact finite-path marginal replay,
+nested optimized counts, path annealing, and all-station/all-seed climate gates
+are not production requirements.
 
-**A5d1 held** (2026-07-14,
-[`20260714-a5d1-selector-feasibility`](work-packages/20260714-a5d1-selector-feasibility/package.md)):
-one global 256-year constrained-weight rule passed the complete stationary
-marginal contract at all 17 exposed development stations, but none of 306
-registered finite paths passed the combined contract. At the eligible pool,
-151/153 cells first failed 30-/100-year finite-prefix marginal realization and
-two first failed dependence noninferiority. Physical rows, calendar, reuse,
-positive-weight selection, and exact 30-year prefixes passed throughout. The
-package closes `EXECUTED-HOLD-PATH-INFEASIBILITY`, scoped to the three frozen
-algorithms, tolerances, and one burn-0 library. A5d1b is the first corrective
-action; no candidate or confirmation work is authorized.
+No confirmation package is planned, scaffolded, or authorized until A5e1
+succeeds. Wet/dry-conditioned radiation, full subdaily forcing, external storm
+benchmarking, and multisite/spatial generation remain later studies.
+Single-storm generation remains deprecated.
 
-**A5d0 held** (2026-07-14,
-[`20260714-a5d0-successor-feasibility-calibration`](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md)):
-a constructive fixture proves complete-year selection can reallocate variance
-in some libraries, but no bounded repeat-safe, calendar-safe, common-prefix
-selector is specified or demonstrated on faithful development libraries. The
-package closes `HOLD-CONTRACT-INCOMPLETE`; evaluation calibration and an
-untouched confirmation corpus are separately held. No A5d candidate output or
-public surface was created. The first follow-on is a development-only
-constrained-weight and repeat-safe path solver package; confirmation remains
-forbidden.
+The closed selector exploration remains in the work-package catalog:
+[A5d0](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md),
+[A5d1](work-packages/20260714-a5d1-selector-feasibility/package.md), and
+[A5d1b](work-packages/20260714-a5d1b-finite-path-realization/package.md). Its
+stationary-weight result and finite-path failures remain useful evidence, but
+its count-search holds do not block A5e0.
 
 The A5a–A5c sequence is complete. **A5c executed** (2026-07-14,
 [`20260714-a5c-interannual-profile-adjudication`](work-packages/20260714-a5c-interannual-profile-adjudication/package.md))
@@ -69,10 +64,10 @@ at both horizons, so no public station model or generation profile was
 promoted. The evidence is exploratory for model selection and may support the
 conservative rejection only. `faithful_5_32_3` remains the default; station
 schema, station model, generation profile, provenance, and output versions
-remain independent and unchanged. Any successor requires a new prospective
-study, with analytic feasibility, monthly variance reallocation, integrated
-daily precipitation structure, prospectively calibrated guards, and complete
-downstream evidence.
+remain independent and unchanged. Any successor considered for promotion
+requires a new prospective study with analytic feasibility, monthly variance
+reallocation, integrated daily precipitation structure, prospectively
+calibrated guards, and complete downstream evidence.
 
 The preceding quality arc (ADR-0002, Q1-Q4) is complete. Both closing
 adjudications were ratified by the operator on 2026-07-10 on the R1-amended
@@ -140,7 +135,7 @@ byte identity was untouched throughout.
 
 ## Other deferred augmentations
 
-These remain outside the ratified five-package sequence and may reorder on
+These remain outside the active interannual sequence and may reorder on
 operator direction. Each lands behind a versioned profile or specification.
 
 | # | Item | Mechanism | Acceptance |

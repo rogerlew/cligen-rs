@@ -11,3 +11,4 @@ each accepted report with a strict manifest verified by `verify-report.py`.
 | Report | Revision | Status | Experiment |
 |---|---:|---|---|
 | [Interannual candidate experiment 001](interannual-candidate-exp-001-report.md) | 2 | ACCEPTED | [A5b](../work-packages/20260713-a5b-interannual-candidate-spike/package.md) |
+| [A5d1b finite-path realization](a5d1b-finite-path-realization-report.md) | 1 | ACCEPTED | [A5d1b](../work-packages/20260714-a5d1b-finite-path-realization/package.md) |
