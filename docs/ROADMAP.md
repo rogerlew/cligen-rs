@@ -26,19 +26,29 @@ continuation. The immutable A5d0-A5d1b records retain their evidence and
 outcome-time recommendations, but this operator direction supersedes those
 recommendations.
 
-The active queue is empty. A5e0 executed and is retained in the
-[work-package catalog](work-packages/README.md) with decision
-`EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`. Its exploratory intended-signal ratios
-worsened at all three stations and both horizons, but the exact specification,
-implementation, and analyzer were not immutably bound at the claimed
-prospective boundary, so the climate-only `CLOSE-MECHANISM` mapping is not a
-ratified terminal scientific decision. No default or public interface changed.
+The active queue is empty. A5f0 executed as a derived-only attribution of the
+retained A5e0 evidence and returned `RETIRE-SCALAR-IID-MECHANISM` for the exact
+`a5e0_direct_annual_state_v1` mechanism and
+`a5e0_direct_monthly_loading_fit_v1` recipe. Cross-month dependence supplied
+70.6% and 67.9% of positive H1-family degradation at 30 and 100 years, one
+component represented only 11.9–16.5% of fit-period annual-feature variance,
+and all 96 active loadings responded with the expected sign (global median
+realized/expected slope ratio 0.994). No one parameter seam met the frozen
+five-of-six localization rule. The disposition is descriptive on the exposed
+three-station development surface; it is not causal proof and does not reject
+annual-state models generally.
+
+A5e0 remains immutably retained with status
+`EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`: its specification, implementation, and
+analyzer were not bound at the claimed prospective boundary, so A5f0 does not
+retroactively ratify its climate decision. No default or public interface
+changed.
 
 The conditional A5e1 expansion is removed from the queue and remains
-unscaffolded and unauthorized. This roadmap does not replace the hold with a
-repair chain. A future operator may propose a new, cleanly frozen reproduction
-only if the exact scalar-IID mechanism still warrants investment after the
-unfavorable exploratory result.
+unscaffolded and unauthorized. A5f0 found no basis for a bounded seam ablation,
+so no repair or clean-reproduction chain follows. Any future interannual work
+must begin with an operator choice of a materially different model structure
+and a new prospective package; no such package is planned here.
 
 Exact per-output gates are limited to engineering invariants: faithful-mode
 identity, deterministic replay and provenance, fail-closed inputs, valid
@@ -57,9 +67,12 @@ The closed selector exploration remains in the work-package catalog:
 [A5d0](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md),
 [A5d1](work-packages/20260714-a5d1-selector-feasibility/package.md), and
 [A5d1b](work-packages/20260714-a5d1b-finite-path-realization/package.md), and
-[A5e0](work-packages/20260714-a5e0-direct-annual-state-pilot/package.md). The selector branch's
-stationary-weight result and finite-path failures remain useful evidence, but
-its count-search holds do not govern the A5e0 evidence-boundary disposition.
+[A5e0](work-packages/20260714-a5e0-direct-annual-state-pilot/package.md), with
+the derived disposition in
+[A5f0](work-packages/20260714-a5f0-annual-state-failure-attribution/package.md).
+The selector branch's stationary-weight result and finite-path failures remain
+useful evidence, but its count-search holds do not govern the A5e0
+evidence-boundary disposition or A5f0's mechanism-specific retirement.
 
 The A5a–A5c sequence is complete. **A5c executed** (2026-07-14,
 [`20260714-a5c-interannual-profile-adjudication`](work-packages/20260714-a5c-interannual-profile-adjudication/package.md))

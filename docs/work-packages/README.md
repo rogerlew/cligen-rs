@@ -46,3 +46,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260714-a5d1-selector-feasibility](20260714-a5d1-selector-feasibility/package.md) | EXECUTED-HOLD-PATH-INFEASIBILITY |
 | [20260714-a5d1b-finite-path-realization](20260714-a5d1b-finite-path-realization/package.md) | EXECUTED-HOLD-COUNT-SEARCH-BOUNDED |
 | [20260714-a5e0-direct-annual-state-pilot](20260714-a5e0-direct-annual-state-pilot/package.md) | EXECUTED-HOLD-PROSPECTIVE-BOUNDARY |
+| [20260714-a5f0-annual-state-failure-attribution](20260714-a5f0-annual-state-failure-attribution/package.md) | EXECUTED-COMPLETE |
