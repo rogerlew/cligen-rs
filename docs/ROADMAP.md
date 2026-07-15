@@ -16,6 +16,43 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
+**Operator direction 2026-07-15: continue stochastic climate-generator
+development, retire the stopped A8c runtime first, and replace incremental
+candidate rescue with a calibration-first successor family.** File/I/O,
+openWEPP, WEPPcloud, PyO3, and other consumer-integration work remains deferred;
+it is not a prerequisite for this research sequence.
+
+The ordered active queue is:
+
+1. **A8c1 — routed-daily runtime retirement.** Remove the unpromoted
+   `a8c_routed_daily_v1` generation profile and its model-specific station,
+   runtime, schema, provenance, and quality-report surfaces while preserving
+   the complete A8a--A8c scientific record and faithful behavior. Compatibility
+   axes are adjudicated independently: a generic seam survives only if the
+   retirement audit proves it has a non-A8c contract and consumer. This package
+   is [scaffolded](work-packages/20260715-a8c1-routed-daily-retirement/package.md)
+   and executes first.
+2. **A9a — successor-family foundation.** After A8c1 closes, specify a new
+   joint precipitation/event/daily-context model family and an optimizer-
+   neutral calibration harness. A9a must derive its requirements from the
+   accepted A5--A8 records and SOTA review; define fit, development,
+   gate-calibration, and untouched-confirmation evidence roles; cover arid,
+   arid-boundary, monsoonal, other semi-arid, humid, and cold regimes without
+   runtime climate classification; and separate tunable development from one-
+   shot locked adjudication. It changes no production generator and selects no
+   candidate. The package is
+   [scaffolded](work-packages/20260715-a9a-successor-family-foundation/package.md).
+
+The conditional successor sequence is A9b calibration-harness implementation,
+A9c development-only comparison of genuinely distinct model classes, A9d
+locked held-out climate confirmation, and A9e Rust runtime pilot. Those
+packages remain unscaffolded and unauthorized until their predecessor returns
+the registered continuation terminal. A9 does not inherit an A8c candidate,
+coefficient, threshold, station classification, or confirmation claim. A
+future production-promotion decision still requires separately roadmapped
+downstream evidence under ADR-0004; the present sequence neither performs nor
+waives openWEPP/WEPPcloud integration.
+
 **Operator correction 2026-07-14: stop the selector/count-construction
 escalation and return to the model question left open by A5c.** The A5d0-A5d1b
 complete-year selector branch is closed as exploratory evidence rather than a
@@ -49,9 +86,10 @@ pooling. The accepted A7 record is retained in the
 [A7a public report](reports/a7a-daily-precipitation-structure-report.md), and
 [A7b work package](work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md).
 
-There is no active A8 item. A8c completed with
-`STOP-A8-ROUTED-DAILY`; A7b's whole-domain stop remains final, and no A8d
-confirmation is authorized.
+The scientific A8 generation line remains closed: A8c completed with
+`STOP-A8-ROUTED-DAILY`, A7b's whole-domain stop remains final, and no A8d
+confirmation is authorized. A8c1 is retirement hygiene, not scientific
+continuation or reinterpretation of that stop.
 
 A8a completed on 2026-07-15 with `CONTINUE-A8B-DRY-PARTITION`. Its prospective
 20-station confirmation found 15 `integrated_daily` and five
@@ -81,11 +119,10 @@ runtime hold. The exact record is retained in the
 [A8c work package](work-packages/20260715-a8c-routed-daily-pilot/package.md).
 
 No A8d confirmation, WEPP response study, threshold relaxation, coefficient
-retuning, or public-default change follows. A future precipitation proposal
-requires a new operator roadmap and package family; it must jointly specify
-wet-amount calibration, precipitation-conditioned downstream variables, and
-storm time-to-peak semantics before implementation rather than treating them
-as post-generation guards.
+retuning, or public-default change follows. A9 is the separately roadmapped
+new family: before implementation it must jointly specify wet-amount
+calibration, precipitation-conditioned downstream variables, and storm
+time-to-peak semantics rather than treating them as post-generation guards.
 
 Monsoonal climates were a mandatory stratum in A8c. Their
 annual precipitation alone is not a safe routing variable: seasonal
