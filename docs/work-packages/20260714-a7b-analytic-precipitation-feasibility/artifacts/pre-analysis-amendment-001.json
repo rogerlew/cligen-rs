@@ -1,0 +1,12 @@
+{
+  "amended_file": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/analyze-a7b.py",
+  "amended_sha256": "28423983ebc540cc1f546ea3a3e2cd170fbe6117b6b3c7619706970f74652112",
+  "amendment_id": "a7b_pre_analysis_amendment_001",
+  "classification": "bounded-parent-input-schema-defect-before-outcome-access",
+  "failure": "The analyzer queried root key terminal; the frozen A7a decision stores the value at root key terminal_decision.",
+  "first_invocation_reached_candidate_data": false,
+  "original_sha256": "504d48e1b57cab114011223b3227be5a2754e9973acbd207fa51f3cb74d56e4f",
+  "outcome_artifacts_existed_at_amendment": false,
+  "schema_version": 1,
+  "semantic_change": "Replace a7a.get(\"terminal\") with a7a.get(\"terminal_decision\"); no candidate, fit, numeric, threshold, ranking, or interpretation rule changed."
+}

@@ -49,3 +49,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260714-a5f0-annual-state-failure-attribution](20260714-a5f0-annual-state-failure-attribution/package.md) | EXECUTED-COMPLETE |
 | [20260714-a5f1-retired-a5e0-runtime-cleanup](20260714-a5f1-retired-a5e0-runtime-cleanup/package.md) | EXECUTED-COMPLETE |
 | [20260714-a7a-daily-precipitation-structure-baseline](20260714-a7a-daily-precipitation-structure-baseline/package.md) | EXECUTED-COMPLETE |
+| [20260714-a7b-analytic-precipitation-feasibility](20260714-a7b-analytic-precipitation-feasibility/package.md) | EXECUTED-COMPLETE |

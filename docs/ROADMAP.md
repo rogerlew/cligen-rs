@@ -26,59 +26,104 @@ continuation. The immutable A5d0-A5d1b records retain their evidence and
 outcome-time recommendations, but this operator direction supersedes those
 recommendations.
 
-The active queue is the ordered A7 sequence below. Roadmapping fixes the
-dependency order and scope boundaries; it does not authorize a downstream
-package after a failed or held predecessor. Every item remains unscaffolded
-until separately dispatched, and each scientific contract must be frozen
-before its candidate output is generated or inspected.
+There is no active A7 item. A7b completed the prospective analytic comparison
+and returned `STOP-PRECIPITATION-LINE`. Review showed that its second-order and
+two-phase semi-Markov candidates are two parameterizations of the same
+four-state binary process, not independent model classes. Both registered
+parameterizations cleared the 184-cell corpus-breadth floor with 192/204
+feasible cells, but each reached only 31/36 mandatory dry/cold/wet development
+cells rather than the required 36/36. Death Valley supplied all five
+development failures: its JJA season lacked the registered adjacent-wet-pair
+and long-wet-state exposure, and its April and December cells exceeded the
+frozen normalized-tail-error bound. No mechanism was selected.
 
-1. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
-   measured-gap decision, compare one small declared set of integrated daily
-   mechanisms: second-order or semi-Markov occurrence and an
-   occurrence-conditioned wet-day amount model with limited persistence and a
-   tail-aware marginal. Before any generator output, prove or numerically
-   certify stationary monthly wet fraction, wet-day amount mean/variance,
-   monthly-total moment budgets, valid probabilities/support, fit
-   identifiability, and deterministic RNG ownership. Reject mechanisms that
-   add variance on top of the monthly contract or require path selection,
-   count optimization, or post-generation repair. The package selects exactly
-   one bounded A7c mechanism or exits `STOP-PRECIPITATION-LINE`; it does not
-   implement a tournament of near misses.
-2. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
-   register one generation profile and evaluation contract before code or
-   output, then integrate only the selected occurrence/amount mechanism at the
-   daily precipitation seam. Run the dry, cold, and wet exposed development
-   stations with fixed replicate membership at both horizons. Require monthly
-   wet fraction and moment preservation, improved spell/tail/multi-day targets,
-   unchanged faithful mode, storm/winter/cross-variable guards, deterministic
-   replay/provenance, and explicit intervention-rate ceilings. No annual
-   latent state, selector, optimized year library, public promotion, or WEPP
-   confirmation is in scope. Only a complete three-station climate pass may
-   return `CONTINUE-A7D`; every other scientific outcome closes the tested
-   mechanism.
-3. **A7d — conditional corpus confirmation and residual adjudication.** Only
-   after `CONTINUE-A7D`, freeze a new confirmation package before accessing
-   confirmation output. Expand the one unchanged A7c mechanism to the full
-   17-station corpus, GHCN sensitivity, both horizons, a faithful-clone null
-   for guard calibration, and the complete WEPP campaign with prospectively
-   declared response and intervention-rate bounds. Adjudicate the candidate
-   and then measure the low-frequency deficit remaining after daily
-   precipitation structure is corrected. Promotion, closure, and residual-
-   gap findings remain separate decisions. A residual may justify proposing a
-   new interannual design study, but it cannot resurrect A5 candidates or
-   automatically authorize code. Any such future study must use integrated
-   moment reallocation, more than one empirically justified factor if needed,
-   hierarchical/regional pooling, and a new package identifier; none is
-   roadmapped yet.
+The conditional A7c integrated pilot and A7d corpus confirmation are removed
+from the queue, remain unscaffolded, and are not authorized. Relaxing A7b's
+prospective gates or choosing the higher-ranked near miss would convert a stop
+rule into outcome-time selection, so this roadmap does neither. Any future
+precipitation proposal requires a new operator roadmap and package identifier;
+it must explain how the arid-station identifiability boundary is handled
+without post-generation repair, fixed-count search, or unregistered data
+pooling. The accepted A7 record is retained in the
+[A7a work package](work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md),
+[A7a public report](reports/a7a-daily-precipitation-structure-report.md), and
+[A7b work package](work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md).
 
-A7a completed the measurement-only baseline and returned
-`DAILY-PRECIPITATION-GAP-MEASURED`. Seasonal spell structure and higher-order
-occurrence residuals crossed every registered Daymet-off, faithful, and GHCN-
-off breadth guard at both horizons. This permits A7b as the first active item;
-it does not select a mechanism, predict feasibility, or authorize production
-code. The accepted evidence is retained in the
-[A7a work package](work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md)
-and [public report](reports/a7a-daily-precipitation-structure-report.md).
+The active queue is now the conditional A8 dry-regime applicability sequence.
+It is a new study, not an A7 rescue: A7b's whole-domain stop remains final, its
+thresholds are not relaxed, and its two isomorphic occurrence
+parameterizations count as one mechanism. Roadmapping fixes dependency and
+scope but does not authorize a downstream package after a failed predecessor.
+Each package must freeze its corpus, model, estimators, and decision rule before
+accessing its own candidate or confirmation output.
+
+1. **A8a — dry-regime applicability boundary and confirmation corpus.** Use
+   the already exposed A5a dry panel as development evidence: Death Valley,
+   Yuma, Wendover, and Daggett for arid climates, plus Douglas, Tombstone,
+   Jornada, and El Paso for monsoonal transition. Before retrieving new daily
+   data, select a disjoint confirmation panel from the public station
+   collection with at least four stations in each of hot-arid, cold-arid,
+   non-monsoonal semi-arid, and monsoonal-transition strata, plus at least four
+   humid/cold negative controls. Freeze geographic-separation, record-length,
+   source-availability, and no-substitution rules. Define a conservative,
+   station-level applicability classifier from climate aridity descriptors and
+   model-support evidence: seasonal wet-day counts, adjacent-wet-pair and
+   long-wet-state exposure, distinct wet amounts, amount-tail/variance-retention
+   margins, and monthly variance-reallocation slack. Migration requires every
+   seasonal lower-confidence bound to clear its registered guard; an ambiguous
+   station is assigned to fallback, never selected by generated output. Test
+   partition stability under held-out stations, shortened records, year-block
+   resampling, and Daymet/GHCN sensitivity where both are available. As part of
+   the same frozen analysis, apply the one unique A7b four-state construction
+   analytically to the held-out panel and require every station classified
+   `integrated_daily` to meet its stationary, identifiability, amount-tail, and
+   moment-budget gates; generate no candidate climate. Return exactly
+   `CONTINUE-A8B-DRY-PARTITION` with a confirmed classifier, explicit
+   applicability classes, and one scoped eligible-domain daily mechanism, or
+   `STOP-DRY-REGIME-PARTITION`. A monsoonal-specific successor may be proposed
+   only if a prospectively registered interaction test shows that the shared
+   classifier is unstable for the monsoonal stratum; A8a does not automatically
+   fork a parallel campaign.
+2. **A8b — secondary year-to-year fallback feasibility.** Only after
+   `CONTINUE-A8B-DRY-PARTITION`, accept A8a's scoped eligible-domain daily
+   mechanism without reopening its partition or selection. For the fallback
+   domain, retain the legacy daily occurrence/storm machinery and compare a
+   small prospectively declared set of secondary year-to-year mechanisms,
+   including an explicit legacy-only null. Do not reuse the retired A5
+   scalar-IID mechanism. Any interannual candidate must reallocate, rather than
+   add, monthly variance; preserve declared monthly wet fraction and amount
+   budgets; have bounded identifiable parameters; own a fixed,
+   domain-separated RNG stream; and require no path selection, fixed-count
+   optimization, or output repair. A8b may return
+   `USE-LEGACY-DAILY-FALLBACK`, select exactly one certified interannual
+   fallback, or stop the routed pilot. Failure of the optional interannual
+   mechanism must not force a hidden fallback or invalidate an otherwise
+   certified explicit legacy-only boundary path.
+3. **A8c — bounded explicit-routing development pilot.** Only after A8b
+   returns an explicit legacy-only or certified interannual fallback
+   disposition, specify the station-model applicability class, generation
+   behavior, and provenance before implementation. The
+   station document must explicitly declare `integrated_daily`,
+   `legacy_daily_fallback`, or the one selected interannual-fallback identity;
+   missing or unknown classification fails closed. Runtime never estimates
+   aridity, inspects generated output, or silently switches paths. Integrate
+   the daily mechanism only for eligible stations; boundary stations retain
+   the legacy daily machinery, optionally under the independently selected
+   year-to-year mechanism. Evaluate fixed arid, monsoonal, semi-arid, humid,
+   and cold development members with separate path-level faithful controls at
+   both horizons. Require faithful-mode byte identity, deterministic replay,
+   monthly moment budgets, improved registered daily or interannual targets,
+   storm/winter/cross-variable guards, and stable provenance. No full-corpus
+   promotion, WEPP confirmation, or public-default change is authorized; a
+   complete pilot may only support a separately roadmapped confirmation study.
+
+Monsoonal climates therefore share A8a--A8c as a mandatory applicability
+stratum. Their annual precipitation alone is not a safe routing variable:
+seasonal concentration can leave dry-season occurrence states weakly
+identified even when annual totals appear adequate. A separate monsoonal
+sequence would duplicate corpus, routing, and fallback work and is not
+roadmapped unless A8a's frozen interaction test demonstrates a distinct,
+stable applicability boundary that the shared classifier cannot represent.
 
 A5f0 supplied the pivot into this queue. Its derived-only attribution returned
 `RETIRE-SCALAR-IID-MECHANISM` for the exact
@@ -106,9 +151,11 @@ changed.
 
 The conditional A5e1 expansion is removed from the queue and remains
 unscaffolded and unauthorized. A5f0 found no basis for a bounded seam ablation,
-so no repair or clean-reproduction chain follows. A7 tests the published
+so no repair or clean-reproduction chain follows. A7a measured the published
 competing explanation that daily precipitation structure contributes to the
-aggregate deficit. It is not an A5 repair and does not inherit an A5 candidate.
+aggregate deficit; A7b then found no registered mechanism feasible across the
+complete development surface. A7 was not an A5 repair and did not inherit an
+A5 candidate.
 
 Exact per-output gates are limited to engineering invariants: faithful-mode
 identity, deterministic replay and provenance, fail-closed inputs, valid
@@ -118,8 +165,8 @@ behavior are ensemble evaluation targets. Exact finite-path marginal replay,
 nested optimized counts, path annealing, and all-station/all-seed climate gates
 are not production requirements.
 
-A7d is a conditional roadmap item, not a scaffolded or authorized confirmation
-package; it exists only if A7c returns `CONTINUE-A7D`. Wet/dry-conditioned
+A7c and A7d are closed, unscaffolded conditional concepts rather than active
+roadmap items because A7b did not select a mechanism. Wet/dry-conditioned
 radiation, full subdaily forcing, external storm benchmarking, and
 multisite/spatial generation remain later studies.
 Single-storm generation remains deprecated.

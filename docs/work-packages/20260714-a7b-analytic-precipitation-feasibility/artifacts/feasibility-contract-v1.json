@@ -1,0 +1,105 @@
+{
+  "analysis_id": "a7b_analytic_precipitation_feasibility_v1",
+  "amount_model": {
+    "copula": "within-wet-spell Gaussian copula; reset after dry",
+    "copula_from_spearman": "rho = 2*sin(pi*spearman/6)",
+    "marginal": "positive normalized log-quantile linear spline",
+    "quantile_probabilities": [0.0, 0.01, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.99, 1.0],
+    "wet_day_threshold_mm": 1.0
+  },
+  "candidates": [
+    {
+      "candidate_id": "o2_logqspline_gaussian_copula_v1",
+      "occurrence_states": ["DD", "DW", "WD", "WW"],
+      "recenter": "one common logit shift on four wet probabilities",
+      "terminal": "SELECT-O2-LOGQSPLINE-GAUSSIAN-COPULA-A7C"
+    },
+    {
+      "candidate_id": "sm2_logqspline_gaussian_copula_v1",
+      "occurrence_states": ["D1", "D2+", "W1", "W2+"],
+      "recenter": "one positive wet / negative dry common logit shift on four continuation probabilities",
+      "terminal": "SELECT-SM2-LOGQSPLINE-GAUSSIAN-COPULA-A7C"
+    }
+  ],
+  "comparison": {
+    "development_stations": ["ca042319", "co051660", "ms227840"],
+    "month_lengths": [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
+    "observed_period": [1980, 2025],
+    "primary_source": "daymet-v4-r1-a5a-snapshot",
+    "seasons": {
+      "DJF": [12, 1, 2],
+      "JJA": [6, 7, 8],
+      "MAM": [3, 4, 5],
+      "SON": [9, 10, 11]
+    }
+  },
+  "decision": {
+    "corpus_feasible_cells_min": 184,
+    "development_feasible_cells_required": 36,
+    "no_candidate_terminal": "STOP-PRECIPITATION-LINE",
+    "selection_order": [
+      "development feasible cells descending",
+      "corpus feasible cells descending",
+      "median station occurrence log-loss improvement descending",
+      "median wet-amount variance retention descending",
+      "median p95/p99 log-tail error ascending",
+      "candidate identifier ascending"
+    ]
+  },
+  "fit_rules": {
+    "jeffreys_pseudocount": 0.5,
+    "maximum_absolute_spearman": 0.95,
+    "minimum_adjacent_wet_pairs_per_station_season": 25,
+    "minimum_distinct_wet_amounts_per_station_season": 20,
+    "minimum_occurrence_exposure_per_state_and_station_season": 25,
+    "minimum_wet_amounts_per_station_season": 60
+  },
+  "inputs": {
+    "a7a_decision": {
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-decision-v1.json",
+      "sha256": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f"
+    },
+    "baseline_archive": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz",
+      "sha256": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe"
+    },
+    "corpus_common": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py",
+      "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+    },
+    "corpus_config": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    "source_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    "third_party_notice": {
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+    }
+  },
+  "numeric_rules": {
+    "budget_relative_tolerance": 1e-8,
+    "gauss_hermite_order": 20,
+    "gauss_legendre_order": 96,
+    "maximum_tail_log_error": 0.7,
+    "minimum_probability": 0.001,
+    "minimum_wet_amount_variance_retention": 0.25,
+    "root_absolute_tolerance": 1e-12,
+    "root_maximum_lambda": 32.0,
+    "stationary_wet_fraction_absolute_tolerance": 1e-10
+  },
+  "rng_ownership": {
+    "amount_draws_per_calendar_day": 1,
+    "amount_state_reset": "after every dry day",
+    "domain_separated_streams": ["precip_occurrence_v1", "precip_amount_v1"],
+    "occurrence_draws_per_calendar_day": 1,
+    "path_or_count_selection": false,
+    "post_generation_repair": false,
+    "total_draws_per_calendar_day": 2
+  },
+  "schema_version": 1,
+  "source_commit": "3e18728b4c63c17be922e98199948c1b7da8002e"
+}

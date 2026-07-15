@@ -1,0 +1,26 @@
+{
+  "freeze_id": "a7b_pre_analysis_freeze_v1",
+  "freeze_status": "FROZEN-BEFORE-A7B-OUTCOME",
+  "frozen_files_sha256": {
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/analyze-a7b.py": "28423983ebc540cc1f546ea3a3e2cd170fbe6117b6b3c7619706970f74652112",
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/design.md": "94b2233ab97d743bf3437d25a76a318bed00a76dc7f2c7b7c28ccc7252187cb4",
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/feasibility-contract-v1.json": "21e3ff616683aab15eeb41b233a78ba29f428161212e44bdfffbf201006470f3",
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/freeze-a7b.py": "fe3119a159cfefcdc5ac2908707c9113e85e41483a26020c5a55a51cd437766c",
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/pre-analysis-amendment-001.json": "7adce3319f4185d0fd5e998df8fc5c6032dbb1df6d2f6a133fd556c84a10f1b3",
+    "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/verify-a7b.py": "dfcd7d4b8466f146fd33c9e122044f0a462355e2ea02f57d25e43d60bdfc3e54"
+  },
+  "amendments": [
+    "a7b_pre_analysis_amendment_001"
+  ],
+  "input_files_sha256": {
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68",
+    "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec",
+    "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-decision-v1.json": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f",
+    "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+  },
+  "method_boundary": "Any change to a frozen file after this record invalidates A7b output; outcome-time threshold changes are prohibited.",
+  "schema_version": 1,
+  "source_commit": "3e18728b4c63c17be922e98199948c1b7da8002e"
+}

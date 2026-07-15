@@ -1,0 +1,46 @@
+{
+  "analysis_id": "a7b_analytic_precipitation_feasibility_v1",
+  "candidate_summaries": [
+    {
+      "candidate_id": "o2_logqspline_gaussian_copula_v1",
+      "corpus_feasible_cells": 192,
+      "development_feasible_cells": 31,
+      "infeasibility_reason_counts": {
+        "insufficient_adjacent_wet_pairs": 6,
+        "insufficient_occurrence_exposure_WW": 3,
+        "tail_log_error": 4,
+        "wet_amount_variance_retention": 2
+      },
+      "median_station_occurrence_log_loss_improvement": 47.8764370636618,
+      "median_tail_log_error": 0.1463238796408467,
+      "median_wet_amount_variance_retention": 0.6645803438900308,
+      "qualifies": false,
+      "total_cells": 204
+    },
+    {
+      "candidate_id": "sm2_logqspline_gaussian_copula_v1",
+      "corpus_feasible_cells": 192,
+      "development_feasible_cells": 31,
+      "infeasibility_reason_counts": {
+        "insufficient_adjacent_wet_pairs": 6,
+        "insufficient_occurrence_exposure_W2+": 3,
+        "tail_log_error": 4,
+        "wet_amount_variance_retention": 2
+      },
+      "median_station_occurrence_log_loss_improvement": 47.870379528136255,
+      "median_tail_log_error": 0.1463238796408467,
+      "median_wet_amount_variance_retention": 0.6645803438900317,
+      "qualifies": false,
+      "total_cells": 204
+    }
+  ],
+  "decision_contract_sha256": "deaed586b4bc04c6877a8cb1cf6e6477fb11cc435a1acadd73cbbe1c6898fdc8",
+  "interpretation": "Analytic feasibility authorizes only a separately frozen A7c development pilot; it is not evidence of generated-climate improvement.",
+  "ranking": [
+    "o2_logqspline_gaussian_copula_v1",
+    "sm2_logqspline_gaussian_copula_v1"
+  ],
+  "schema_version": 1,
+  "selected_candidate": null,
+  "terminal": "STOP-PRECIPITATION-LINE"
+}
