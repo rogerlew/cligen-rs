@@ -26,8 +26,75 @@ continuation. The immutable A5d0-A5d1b records retain their evidence and
 outcome-time recommendations, but this operator direction supersedes those
 recommendations.
 
-The active queue is empty. A5f0 executed as a derived-only attribution of the
-retained A5e0 evidence and returned `RETIRE-SCALAR-IID-MECHANISM` for the exact
+The active queue is the ordered A5f1/A7 sequence below. Roadmapping fixes the
+dependency order and scope boundaries; it does not authorize a downstream
+package after a failed or held predecessor. Every item remains unscaffolded
+until separately dispatched, and each scientific contract must be frozen
+before its candidate output is generated or inspected.
+
+1. **A5f1 — retired A5e0 runtime cleanup.** Audit the release/API exposure of
+   the experimental `pub mod a5e0`, example runner, generator hook, and
+   A5e0-only support code. If the surface has not shipped, remove it from the
+   current crate; if it has shipped, use an explicit semver-safe deprecation
+   disposition rather than silently breaking consumers. Preserve the closed
+   specification, schemas, reports, work-package artifacts, source commit,
+   and Git history as the reproducibility record. Retain a generic RNG or
+   diagnostic primitive only when it has an independently documented use.
+   This package generates no climate and adds no replacement mechanism. It
+   exits `A5E0-RUNTIME-RETIRED` with faithful parity and public-surface checks
+   passing.
+2. **A7a — daily precipitation-structure baseline.** Freeze a measurement-only
+   contract on the existing 17-station Daymet/GHCN corpus before producing the
+   new derived analysis. Quantify seasonal wet/dry spell distributions,
+   higher-order occurrence residuals, wet-day amount lag-one dependence,
+   wet-day upper tails, 1/3/5-day maxima, and the propagation of daily
+   clustering into monthly and annual dispersion. Compare faithful and
+   `qc_filter: off` at both 30- and 100-year horizons, reusing hash-identical
+   retained output where available. This package adds no candidate model and
+   no public quality schema. It exits either
+   `DAILY-PRECIPITATION-GAP-MEASURED` or
+   `NO-DAILY-STRUCTURE-PRIORITY`; only the former permits A7b.
+3. **A7b — analytic precipitation-model feasibility.** Conditional on A7a's
+   measured-gap decision, compare one small declared set of integrated daily
+   mechanisms: second-order or semi-Markov occurrence and an
+   occurrence-conditioned wet-day amount model with limited persistence and a
+   tail-aware marginal. Before any generator output, prove or numerically
+   certify stationary monthly wet fraction, wet-day amount mean/variance,
+   monthly-total moment budgets, valid probabilities/support, fit
+   identifiability, and deterministic RNG ownership. Reject mechanisms that
+   add variance on top of the monthly contract or require path selection,
+   count optimization, or post-generation repair. The package selects exactly
+   one bounded A7c mechanism or exits `STOP-PRECIPITATION-LINE`; it does not
+   implement a tournament of near misses.
+4. **A7c — bounded integrated precipitation pilot.** Conditional on A7b,
+   register one generation profile and evaluation contract before code or
+   output, then integrate only the selected occurrence/amount mechanism at the
+   daily precipitation seam. Run the dry, cold, and wet exposed development
+   stations with fixed replicate membership at both horizons. Require monthly
+   wet fraction and moment preservation, improved spell/tail/multi-day targets,
+   unchanged faithful mode, storm/winter/cross-variable guards, deterministic
+   replay/provenance, and explicit intervention-rate ceilings. No annual
+   latent state, selector, optimized year library, public promotion, or WEPP
+   confirmation is in scope. Only a complete three-station climate pass may
+   return `CONTINUE-A7D`; every other scientific outcome closes the tested
+   mechanism.
+5. **A7d — conditional corpus confirmation and residual adjudication.** Only
+   after `CONTINUE-A7D`, freeze a new confirmation package before accessing
+   confirmation output. Expand the one unchanged A7c mechanism to the full
+   17-station corpus, GHCN sensitivity, both horizons, a faithful-clone null
+   for guard calibration, and the complete WEPP campaign with prospectively
+   declared response and intervention-rate bounds. Adjudicate the candidate
+   and then measure the low-frequency deficit remaining after daily
+   precipitation structure is corrected. Promotion, closure, and residual-
+   gap findings remain separate decisions. A residual may justify proposing a
+   new interannual design study, but it cannot resurrect A5 candidates or
+   automatically authorize code. Any such future study must use integrated
+   moment reallocation, more than one empirically justified factor if needed,
+   hierarchical/regional pooling, and a new package identifier; none is
+   roadmapped yet.
+
+A5f0 supplied the pivot into this queue. Its derived-only attribution returned
+`RETIRE-SCALAR-IID-MECHANISM` for the exact
 `a5e0_direct_annual_state_v1` mechanism and
 `a5e0_direct_monthly_loading_fit_v1` recipe. Cross-month dependence supplied
 70.6% and 67.9% of positive H1-family degradation at 30 and 100 years, one
@@ -46,9 +113,9 @@ changed.
 
 The conditional A5e1 expansion is removed from the queue and remains
 unscaffolded and unauthorized. A5f0 found no basis for a bounded seam ablation,
-so no repair or clean-reproduction chain follows. Any future interannual work
-must begin with an operator choice of a materially different model structure
-and a new prospective package; no such package is planned here.
+so no repair or clean-reproduction chain follows. A7 tests the published
+competing explanation that daily precipitation structure contributes to the
+aggregate deficit. It is not an A5 repair and does not inherit an A5 candidate.
 
 Exact per-output gates are limited to engineering invariants: faithful-mode
 identity, deterministic replay and provenance, fail-closed inputs, valid
@@ -58,9 +125,10 @@ behavior are ensemble evaluation targets. Exact finite-path marginal replay,
 nested optimized counts, path annealing, and all-station/all-seed climate gates
 are not production requirements.
 
-No confirmation package is planned, scaffolded, or authorized. Wet/dry-
-conditioned radiation, full subdaily forcing, external storm benchmarking,
-and multisite/spatial generation remain later studies.
+A7d is a conditional roadmap item, not a scaffolded or authorized confirmation
+package; it exists only if A7c returns `CONTINUE-A7D`. Wet/dry-conditioned
+radiation, full subdaily forcing, external storm benchmarking, and
+multisite/spatial generation remain later studies.
 Single-storm generation remains deprecated.
 
 The closed selector exploration remains in the work-package catalog:
@@ -153,7 +221,7 @@ byte identity was untouched throughout.
 
 ## Other deferred augmentations
 
-These remain outside the active interannual sequence and may reorder on
+These remain outside the active A7 precipitation sequence and may reorder on
 operator direction. Each lands behind a versioned profile or specification.
 
 | # | Item | Mechanism | Acceptance |
