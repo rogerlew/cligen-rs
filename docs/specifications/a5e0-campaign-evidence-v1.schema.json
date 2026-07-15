@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5e0-campaign-evidence-v1.schema.json",
+  "title": "A5e0 direct annual-state campaign evidence revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["campaign_schema", "status", "identity", "contracts", "inputs", "feasibility", "matrix", "runs", "hypotheses", "decision", "execution", "outputs"],
+  "properties": {
+    "campaign_schema": { "const": "a5e0_campaign_evidence_v1" },
+    "status": { "const": "sealed" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work_package", "research_profile", "source_commit", "implementation_commit", "implementation_tree", "fit_recipe", "observed_snapshot"],
+      "properties": {
+        "work_package": { "const": "20260714-a5e0-direct-annual-state-pilot" },
+        "research_profile": { "const": "a5e0_direct_annual_state_v1" },
+        "source_commit": { "$ref": "#/$defs/git_commit" },
+        "implementation_commit": { "oneOf": [{ "$ref": "#/$defs/git_commit" }, { "type": "null" }] },
+        "implementation_tree": { "$ref": "#/$defs/artifact" },
+        "fit_recipe": { "const": "a5e0_direct_monthly_loading_fit_v1" },
+        "observed_snapshot": { "const": "daymet_v4r1_a5a17_fit1980_2009_noleap_v1" }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "minProperties": 3,
+      "additionalProperties": { "$ref": "#/$defs/artifact" }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cargo_lock", "executable", "quality_executable", "fitter", "analyzer", "verifier", "source_manifest", "matrix_index", "coefficient_bundle", "stations", "daymet"],
+      "properties": {
+        "cargo_lock": { "$ref": "#/$defs/artifact" },
+        "executable": { "$ref": "#/$defs/artifact" },
+        "quality_executable": { "$ref": "#/$defs/artifact" },
+        "fitter": { "$ref": "#/$defs/artifact" },
+        "analyzer": { "$ref": "#/$defs/artifact" },
+        "verifier": { "$ref": "#/$defs/artifact" },
+        "source_manifest": { "$ref": "#/$defs/artifact" },
+        "matrix_index": { "$ref": "#/$defs/artifact" },
+        "coefficient_bundle": { "oneOf": [{ "$ref": "#/$defs/artifact" }, { "type": "null" }] },
+        "stations": { "$ref": "#/$defs/three_artifacts" },
+        "daymet": { "$ref": "#/$defs/three_artifacts" }
+      }
+    },
+    "feasibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checks", "artifact"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL"] },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["check", "status", "detail"],
+            "properties": {
+              "check": { "type": "string", "minLength": 1 },
+              "status": { "enum": ["PASS", "FAIL"] },
+              "detail": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "artifact": { "$ref": "#/$defs/artifact" }
+      }
+    },
+    "matrix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stations", "arms", "replicates", "physical_run_years", "nested_horizons", "expected_physical_runs", "expected_cells", "conformance"],
+      "properties": {
+        "stations": { "$ref": "#/$defs/station_order" },
+        "arms": {
+          "type": "array",
+          "prefixItems": [{ "const": "research_baseline" }, { "const": "candidate" }],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "replicates": { "const": 8 },
+        "physical_run_years": { "const": 100 },
+        "nested_horizons": {
+          "type": "array",
+          "prefixItems": [{ "const": 30 }, { "const": 100 }],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "expected_physical_runs": { "const": 48 },
+        "expected_cells": { "const": 96 },
+        "conformance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["zero_bundle", "baseline_cli", "baseline_diagnostics", "candidate_cli", "candidate_diagnostics"],
+          "properties": {
+            "zero_bundle": { "$ref": "#/$defs/artifact" },
+            "baseline_cli": { "$ref": "#/$defs/artifact" },
+            "baseline_diagnostics": { "$ref": "#/$defs/artifact" },
+            "candidate_cli": { "$ref": "#/$defs/artifact" },
+            "candidate_diagnostics": { "$ref": "#/$defs/artifact" }
+          }
+        }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "minItems": 48,
+      "maxItems": 48,
+      "items": { "$ref": "#/$defs/run" }
+    },
+    "hypotheses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["h0", "h1", "h2", "h3", "h4"],
+      "properties": {
+        "h0": { "$ref": "#/$defs/hypothesis" },
+        "h1": { "$ref": "#/$defs/hypothesis" },
+        "h2": { "$ref": "#/$defs/hypothesis" },
+        "h3": { "$ref": "#/$defs/hypothesis" },
+        "h4": { "$ref": "#/$defs/hypothesis" }
+      }
+    },
+    "decision": { "enum": ["CONTINUE-A5E1", "CLOSE-MECHANISM", "EXECUTED-HOLD-IMPLEMENTATION", "EXECUTED-HOLD-EVIDENCE", "EXECUTED-HOLD-REPRODUCIBILITY", "EXECUTED-HOLD-PROSPECTIVE-BOUNDARY"] },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_utc", "completed_utc", "wall_time_seconds", "host", "rustc_version", "python_version", "failures"],
+      "properties": {
+        "started_utc": { "type": "string", "format": "date-time" },
+        "completed_utc": { "type": "string", "format": "date-time" },
+        "wall_time_seconds": { "type": "number", "minimum": 0 },
+        "host": { "type": "string", "minLength": 1 },
+        "rustc_version": { "type": "string", "minLength": 1 },
+        "python_version": { "type": "string", "minLength": 1 },
+        "failures": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["analysis", "descriptor_subfamily_audit"],
+      "properties": {
+        "analysis": { "$ref": "#/$defs/artifact" },
+        "descriptor_subfamily_audit": { "$ref": "#/$defs/artifact" }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "station_order": {
+      "type": "array",
+      "prefixItems": [{ "const": "ca042319" }, { "const": "co051660" }, { "const": "ms227840" }],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "three_artifacts": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "summary", "artifact"],
+      "properties": {
+        "status": { "enum": ["PASS", "FAIL", "NOT_EVALUATED"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "artifact": { "oneOf": [{ "$ref": "#/$defs/artifact" }, { "type": "null" }] }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "station_id", "arm", "replicate", "master_seed", "faithful_segment", "faithful_raw_skip", "years", "annual_state_sha256", "cli", "quality", "diagnostics"],
+      "properties": {
+        "run_id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+        "station_id": { "enum": ["ca042319", "co051660", "ms227840"] },
+        "arm": { "enum": ["research_baseline", "candidate"] },
+        "replicate": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "master_seed": { "type": "string", "pattern": "^0x[0-9a-f]{16}$" },
+        "faithful_segment": { "type": "integer", "minimum": 0, "maximum": 23 },
+        "faithful_raw_skip": { "type": "integer", "multipleOf": 500000, "minimum": 0, "maximum": 11500000 },
+        "years": { "const": 100 },
+        "annual_state_sha256": { "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "cli": { "$ref": "#/$defs/artifact" },
+        "quality": { "$ref": "#/$defs/artifact" },
+        "diagnostics": { "$ref": "#/$defs/artifact" }
+      }
+    }
+  }
+}

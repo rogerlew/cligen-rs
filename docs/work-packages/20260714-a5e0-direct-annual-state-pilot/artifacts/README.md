@@ -1,26 +1,27 @@
 # A5e0 artifact inventory
 
-Status: `SCAFFOLDED-NO-EVIDENCE`
+Status: `EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`
 
-This directory currently contains no A5e0 model output, fitted coefficient
-bundle, climate score, decision, or confirmation evidence. Scaffolding does
-not authorize execution or public promotion.
+This directory contains the retained compact evidence for the exploratory
+A5e0 execution. The climate-only analysis maps H1--H3 to `CLOSE-MECHANISM`,
+but the controlling campaign record includes H4 and holds because the exact
+prospective freeze was not demonstrated. Nothing here authorizes public
+promotion, A5e1, or confirmation access.
 
-Execution is expected to retain only the compact evidence needed to reproduce
-the pilot:
+The retained evidence is limited to:
 
 - the single registered pilot spec and its coefficient/campaign schemas;
 - analytic variance-budget derivation and deterministic fixtures;
 - one three-station coefficient bundle;
 - one hash-bound campaign-evidence record containing all 48 run records,
-  aggregate results, and the machine-readable
-  `CONTINUE-A5E1`/`CLOSE-MECHANISM` decision;
+  aggregate results, the post-output implementation identity, and the
+  machine-readable `EXECUTED-HOLD-PROSPECTIVE-BOUNDARY` decision;
 - one consolidated review and one gate record; and
 - the accepted public report manifest, stored with its report under
   `docs/reports/`.
 
-Freeze amendments, certificate chains, and confirmation-exposure ledgers are
-not part of A5e0.
+No backdated freeze, certificate chain, or confirmation-exposure ledger was
+created.
 
 Raw `.cli`, quality-report, and intermediate fit files belong under
 `target/a5e0/` and are not committed. A retained archive must be indispensable,

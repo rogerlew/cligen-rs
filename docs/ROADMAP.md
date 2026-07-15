@@ -26,15 +26,19 @@ continuation. The immutable A5d0-A5d1b records retain their evidence and
 outcome-time recommendations, but this operator direction supersedes those
 recommendations.
 
-The queue now contains one bounded, production-shaped pilot and one
-conditional development expansion. It starts from A5c and
-[ADR-0004](decisions/0004-a5b-interannual-no-promotion.md), not from the A5d1b
-integer-count hold.
+The active queue is empty. A5e0 executed and is retained in the
+[work-package catalog](work-packages/README.md) with decision
+`EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`. Its exploratory intended-signal ratios
+worsened at all three stations and both horizons, but the exact specification,
+implementation, and analyzer were not immutably bound at the claimed
+prospective boundary, so the climate-only `CLOSE-MECHANISM` mapping is not a
+ratified terminal scientific decision. No default or public interface changed.
 
-| Order | Work package | Dependency and mechanism | Acceptance |
-|---|---|---|---|
-| 1 | **A5e0 — Direct annual-latent-state pilot** ([scaffolded package](work-packages/20260714-a5e0-direct-annual-state-pilot/package.md)) | Freeze one intentionally rank-one mechanism before outcomes: draw one independent scalar annual state and apply it through separate fixed monthly loadings at the precipitation-occurrence, precipitation-amount, Tmax-mean, and Tmin-mean generator seams before daily draws. Store loadings directly as monthly values in a versioned development-only coefficient bundle; defer Fourier/EOF compression, serial persistence, and public station-schema changes. Use a dedicated extension RNG, establish and compensate the monthly variance budget, and generate fresh daily climate rather than select library years. Evaluate independent paired 30-/100-year replicates at three predeclared exposed development stations representing wet, dry, and cold regimes. | Unchanged faithful-profile output remains byte-identical, and the experimental path passes deterministic replay/provenance, fail-closed input, calendar/value validity, and same-seed 30-year-prefix gates. At both horizons, a prospectively frozen ensemble-level rule must show a useful interannual signal without material monthly/daily degradation or catastrophic degradation in any represented regime; otherwise close this mechanism. No default change, user-facing promotion, or confirmation data. |
-| 2 | **A5e1 — Conditional development expansion** (planned package `YYYYMMDD-a5e1-annual-state-development-expansion`) | Authorized only by an A5e0 continuation decision. Retain the frozen mechanism, fitting procedure, generator seams, and evaluation semantics; fit the other exposed development stations prospectively; expand evaluation to all 17 stations; and add a bounded downstream WEPP screen without confirmation exposure. | Population- and regime-level evidence either warrants separately roadmapping a candidate freeze and confirmation campaign or closes the line. Success is not conditioned on every station, seed, or finite realization passing every climate metric. |
+The conditional A5e1 expansion is removed from the queue and remains
+unscaffolded and unauthorized. This roadmap does not replace the hold with a
+repair chain. A future operator may propose a new, cleanly frozen reproduction
+only if the exact scalar-IID mechanism still warrants investment after the
+unfavorable exploratory result.
 
 Exact per-output gates are limited to engineering invariants: faithful-mode
 identity, deterministic replay and provenance, fail-closed inputs, valid
@@ -44,17 +48,18 @@ behavior are ensemble evaluation targets. Exact finite-path marginal replay,
 nested optimized counts, path annealing, and all-station/all-seed climate gates
 are not production requirements.
 
-No confirmation package is planned, scaffolded, or authorized until A5e1
-succeeds. Wet/dry-conditioned radiation, full subdaily forcing, external storm
-benchmarking, and multisite/spatial generation remain later studies.
+No confirmation package is planned, scaffolded, or authorized. Wet/dry-
+conditioned radiation, full subdaily forcing, external storm benchmarking,
+and multisite/spatial generation remain later studies.
 Single-storm generation remains deprecated.
 
 The closed selector exploration remains in the work-package catalog:
 [A5d0](work-packages/20260714-a5d0-successor-feasibility-calibration/package.md),
 [A5d1](work-packages/20260714-a5d1-selector-feasibility/package.md), and
-[A5d1b](work-packages/20260714-a5d1b-finite-path-realization/package.md). Its
+[A5d1b](work-packages/20260714-a5d1b-finite-path-realization/package.md), and
+[A5e0](work-packages/20260714-a5e0-direct-annual-state-pilot/package.md). The selector branch's
 stationary-weight result and finite-path failures remain useful evidence, but
-its count-search holds do not block A5e0.
+its count-search holds do not govern the A5e0 evidence-boundary disposition.
 
 The A5a–A5c sequence is complete. **A5c executed** (2026-07-14,
 [`20260714-a5c-interannual-profile-adjudication`](work-packages/20260714-a5c-interannual-profile-adjudication/package.md))

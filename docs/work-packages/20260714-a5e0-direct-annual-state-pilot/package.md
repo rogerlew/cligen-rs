@@ -1,9 +1,9 @@
 # A5e0 — Direct Annual-Latent-State Pilot
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`
 Date: 2026-07-14
-Evidence mode: Mixed (planned; no A5e0 result exists at scaffold)
-Execution authorization: not authorized by this scaffold
+Evidence mode: Mixed
+Execution authorization: operator authorized execution on 2026-07-14
 
 ## Objective
 
@@ -353,11 +353,39 @@ authorize tuning against A5e0 outcomes.
 
 ## Execution & dispatch
 
-This turn scaffolds only; it does not execute A5e0 or inspect A5e0 candidate
-output. A later kickoff must name `/Users/roger/src/cligen-rs`, the exact source
-commit on `main`, and push target `main`. No side branch is authorized. The
-lead is the sole editor; delegated agents are read-only. Execution does not
-commit or push without separate operator direction.
+The scaffold turn did not execute A5e0. The operator subsequently authorized
+execution from the repository on `main`. No side branch was used. The lead was
+the sole editor and delegated agents were read-only. Execution did not commit
+or push because no such instruction accompanied the kickoff.
+
+## Execution result
+
+H0 passed its recorded analytic checks. The 48-run matrix and 96 arm/horizon
+cells completed, and independent replay found no disagreement in product
+hashes, aggregation arithmetic, formatted-row prefixes, or realized RNG
+states. The provisional H1--H3 analysis found:
+
+- H1 failed at both horizons: three-station median candidate/baseline error
+  ratios were 1.2076 at 30 years and 1.2665 at 100 years, versus the 0.90
+  continuation limit; every station ratio exceeded 1.0 at both horizons;
+- H2 passed at 30 years and failed at 100 years because the monthly-station-
+  contract median was 1.1451 versus its 1.10 limit; and
+- H3 passed at both horizons under both the scaffold's composite descriptor
+  reading and the specification's per-subfamily reading.
+
+That climate-only mapping is `CLOSE-MECHANISM`, but it is not the terminal
+package decision. The named execution-base commit contains the scaffold, not
+the exact specification, fitter, implementation, or analyzer, and their exact
+pre-output hashes were not independently sealed. The fitter, runtime intake,
+formatted-prefix check, and RNG evidence also did not demonstrate every H4
+obligation in its predeclared form. H4 therefore fails and the controlling
+decision is `EXECUTED-HOLD-PROSPECTIVE-BOUNDARY`.
+
+The implementation and outputs are retained as exploratory evidence only.
+There was no post-output tuning, public-profile promotion, confirmation
+access, commit, or push. A5e1 remains unauthorized. This package does not
+scaffold a repair campaign; the default next action is to stop this mechanism
+unless an operator later dispatches a clean prospective reproduction.
 
 ## Gates
 
@@ -437,12 +465,13 @@ relaxation, or post-outcome mechanism repair follows.
 Every hold names the exact blocker. A failed scientific hypothesis is not a
 hold.
 
-## Planned artifacts
+## Retained artifacts
 
-The scaffold creates only an inventory. Execution will produce the one pilot
-spec with its two schemas, one three-station coefficient bundle, one combined
-campaign-evidence record, one consolidated review, one gate record, and the
-accepted report files required by the report protocol. No freeze amendments,
-certificate chain, or confirmation-exposure ledger is authorized. Raw climate
-outputs remain reproducible working data under `target/a5e0/`; only
-indispensable retained archives use Git LFS.
+Execution produced the pilot spec and two schemas, one three-station
+coefficient bundle, feasibility and analysis records, one combined campaign-
+evidence record, one post-output descriptor-rule audit, one consolidated
+review, one gate record, and the report files required by the report protocol.
+The campaign record explicitly binds a post-output implementation-tree
+snapshot rather than fabricating an implementation commit or prospective
+freeze. Raw climate outputs remain reproducible working data under
+`target/a5e0/`; no A5e0 LFS archive is required.

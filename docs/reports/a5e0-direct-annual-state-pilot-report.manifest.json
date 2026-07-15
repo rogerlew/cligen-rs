@@ -1,0 +1,207 @@
+{
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "role": "faithful source-authority boundary",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "id": "E02",
+      "path": "docs/specifications/SPEC-A5E0-PILOT.md",
+      "role": "intended mechanism and disclosed access boundary",
+      "sha256": "bc729f8abc5f5f0ac63e85fa6f39a97d8bd7b76493b2ad0c2d779713aca92d1f"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "role": "Daymet source identities and periods",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    {
+      "id": "E04",
+      "path": "references/observed/a5a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "role": "third-party data citation and license boundary",
+      "sha256": "4fb5006ee77a7f47fbf74a99d3539e586134c50d72f371e73623fd7eaca5f720"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/a5e0-coefficients-v1.json",
+      "role": "fitted coefficients and diagnostics",
+      "sha256": "0e8f9becff361c911e1a6f13cdd2779e15dc6cf0723e7f636d298f69d9044a1d"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/a5e0-feasibility-v1.json",
+      "role": "exploratory analytic feasibility result",
+      "sha256": "19254af806d0a3503d6624382e4eb8fd1508431bd2b4a218328f975b56b7ae27"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/a5e0-campaign-evidence-v1.json",
+      "role": "retained run identity and terminal hold",
+      "sha256": "ca810ec0bfb676fe045dd97bcc9efc9cb076e152f505c533097c5ca2415d16b2"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/a5e0-analysis-v1.json",
+      "role": "canonical H1-H3 analysis",
+      "sha256": "e70615e70d9b52cbaa49f91591cf0b62e30e04710f2dce49da4992241dd8e815"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/a5e0-descriptor-rule-audit-v1.json",
+      "role": "post-output descriptor-rule reconciliation",
+      "sha256": "a979233a2e915ce70bc3818bb0dd8b7af940e6c9262073279fb36b94bedd2aa0"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/package.md",
+      "role": "terminal package disposition",
+      "sha256": "563fbf0fa67fe5ef231b3fac30e12aa928c4afda54b7314b28693d13b111d61a"
+    },
+    {
+      "id": "E11",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/gate-results.md",
+      "role": "mechanical and scientific gate record",
+      "sha256": "fd1a50348b2749a85f90e74d59f7077a505824ecdc3313547b648d64c64cdb07"
+    },
+    {
+      "id": "E12",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/review.md",
+      "role": "consolidated three-lens review",
+      "sha256": "ab90224bb0f1edb3b4e93bd74ee854c496e64a1f948850fefb766d684ee544d3"
+    },
+    {
+      "id": "E13",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/claim-evidence-ledger.md",
+      "role": "independent extraction and finding dispositions",
+      "sha256": "26551fd609513e6fce0743efb47d8fe0b20ba66b3d8dac998f9f2215824cdf0a"
+    }
+  ],
+  "governance": [
+    {
+      "path": "docs/standards/scientific-report-standard.md",
+      "role": "standard",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "role": "protocol",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "role": "template",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "hypotheses": [
+    {
+      "evidence_ids": ["E05", "E06", "E07"],
+      "id": "H0",
+      "outcome": "Passed analytically; exploratory only",
+      "provenance": "exploratory"
+    },
+    {
+      "evidence_ids": ["E07", "E08", "E13"],
+      "id": "H1",
+      "outcome": "Failed at both horizons; exploratory only",
+      "provenance": "exploratory"
+    },
+    {
+      "evidence_ids": ["E07", "E08", "E13"],
+      "id": "H2",
+      "outcome": "Passed at 30 years and failed at 100 years; exploratory only",
+      "provenance": "exploratory"
+    },
+    {
+      "evidence_ids": ["E08", "E09", "E13"],
+      "id": "H3",
+      "outcome": "Passed under both rule readings; exploratory only",
+      "provenance": "exploratory"
+    },
+    {
+      "evidence_ids": ["E07", "E11", "E13"],
+      "id": "H4",
+      "outcome": "Failed; prospective boundary and required evidence were not demonstrated",
+      "provenance": "exploratory"
+    }
+  ],
+  "references": [
+    {
+      "citation": "Katz and Parlange (1998), overdispersion in stochastic precipitation models",
+      "doi_or_no_doi": "10.1175/1520-0442(1998)011<0591:OPISMO>2.0.CO;2",
+      "id": "R01",
+      "url": "https://doi.org/10.1175/1520-0442(1998)011%3C0591:OPISMO%3E2.0.CO;2"
+    },
+    {
+      "citation": "Thornton et al. (2022), Daymet V4 R1 dataset",
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "id": "R02",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "citation": "Thornton et al. (2021), Daymet gridded data and uncertainty",
+      "doi_or_no_doi": "10.1038/s41597-021-00973-0",
+      "id": "R03",
+      "url": "https://doi.org/10.1038/s41597-021-00973-0"
+    }
+  ],
+  "report": {
+    "path": "docs/reports/a5e0-direct-annual-state-pilot-report.md",
+    "sha256": "3563ffe0c8d3a3a7f1d1d49ea059b22fcdb8d30e95fc6d69e70c332e9f59868b"
+  },
+  "report_id": "a5e0-direct-annual-state-pilot",
+  "report_manifest_version": 1,
+  "report_revision": 1,
+  "required_sections": [
+    "Abstract",
+    "Introduction",
+    "Hypotheses",
+    "Methods",
+    "Analysis",
+    "Results",
+    "Limitations and validity",
+    "Conclusions",
+    "Reproducibility and data availability",
+    "References"
+  ],
+  "reviews": [
+    {
+      "lens": "accuracy",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/review.md",
+      "sha256": "ab90224bb0f1edb3b4e93bd74ee854c496e64a1f948850fefb766d684ee544d3",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "scientific-validity",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/review.md",
+      "sha256": "ab90224bb0f1edb3b4e93bd74ee854c496e64a1f948850fefb766d684ee544d3",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "consistency-public-safety",
+      "path": "docs/work-packages/20260714-a5e0-direct-annual-state-pilot/artifacts/review.md",
+      "sha256": "ab90224bb0f1edb3b4e93bd74ee854c496e64a1f948850fefb766d684ee544d3",
+      "verdict": "ACCEPT"
+    }
+  ],
+  "status": "ACCEPTED",
+  "study_facts": {
+    "research_profile": "a5e0_direct_annual_state_v1",
+    "source_commit": "27e5e7754bdfafcca649a71d0f5576910433d0d3",
+    "implementation_commit": "none; post-output tree snapshot only",
+    "stations": 3,
+    "arms": 2,
+    "replicates": 8,
+    "primary_runs": 48,
+    "horizons_years": [30, 100],
+    "arm_horizon_cells": 96,
+    "fit_period": "1980--2009",
+    "evaluation_period": "2010--2025",
+    "decision": "EXECUTED-HOLD-PROSPECTIVE-BOUNDARY",
+    "confirmation_objects_accessed": 0,
+    "raw_products_committed": false
+  }
+}

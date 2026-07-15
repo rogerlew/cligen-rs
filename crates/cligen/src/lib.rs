@@ -8,6 +8,7 @@
 //! `docs/port/fortran-decomposition.md`; every port module carries its
 //! attribution header, symbol glossary, and precision map.
 
+pub mod a5e0;
 pub mod acm;
 pub mod calendar;
 pub mod cbk1;

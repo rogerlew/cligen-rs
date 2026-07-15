@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/rogerlew/cligen-rs/main/docs/specifications/a5e0-coefficients-v1.schema.json",
+  "title": "A5e0 direct annual-state coefficient bundle revision 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["coefficient_schema", "identity", "source", "numerics", "stations"],
+  "properties": {
+    "coefficient_schema": { "const": "a5e0_direct_annual_state_coefficients_v1" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["research_profile", "fit_recipe", "source_commit", "fitter_sha256"],
+      "properties": {
+        "research_profile": { "const": "a5e0_direct_annual_state_v1" },
+        "fit_recipe": { "const": "a5e0_direct_monthly_loading_fit_v1" },
+        "source_commit": { "$ref": "#/$defs/git_commit" },
+        "fitter_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_snapshot", "fit_years", "calendar", "wet_threshold_mm", "station_order"],
+      "properties": {
+        "observed_snapshot": { "const": "daymet_v4r1_a5a17_fit1980_2009_noleap_v1" },
+        "fit_years": {
+          "type": "array",
+          "prefixItems": [{ "const": 1980 }, { "const": 2009 }],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "calendar": { "const": "noleap_365_v1" },
+        "wet_threshold_mm": { "const": 0.254 },
+        "station_order": { "$ref": "#/$defs/station_order" }
+      }
+    },
+    "numerics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["python", "numpy", "scipy", "quadrature_nodes", "root_method", "root_xtol", "root_maxfev"],
+      "properties": {
+        "python": { "type": "string", "minLength": 1 },
+        "numpy": { "type": "string", "minLength": 1 },
+        "scipy": { "type": "string", "minLength": 1 },
+        "quadrature_nodes": { "const": 32 },
+        "root_method": { "const": "hybr" },
+        "root_xtol": { "const": 1e-12 },
+        "root_maxfev": { "const": 20000 }
+      }
+    },
+    "stations": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/station" }
+    }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "station_order": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "ca042319" },
+        { "const": "co051660" },
+        { "const": "ms227840" }
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "months": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "type": "number" }
+    },
+    "signs": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "enum": [-1, 1] }
+    },
+    "four_month_arrays": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["occurrence", "amount", "tmax", "tmin"],
+      "properties": {
+        "occurrence": { "$ref": "#/$defs/months" },
+        "amount": { "$ref": "#/$defs/months" },
+        "tmax": { "$ref": "#/$defs/months" },
+        "tmin": { "$ref": "#/$defs/months" }
+      }
+    },
+    "four_sign_arrays": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["occurrence", "amount", "tmax", "tmin"],
+      "properties": {
+        "occurrence": { "$ref": "#/$defs/signs" },
+        "amount": { "$ref": "#/$defs/signs" },
+        "tmax": { "$ref": "#/$defs/signs" },
+        "tmin": { "$ref": "#/$defs/signs" }
+      }
+    },
+    "station": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["station_id", "regime", "base_station", "base_par_sha256", "daymet", "loadings", "derived", "diagnostics"],
+      "properties": {
+        "station_id": { "enum": ["ca042319", "co051660", "ms227840"] },
+        "regime": { "enum": ["dry", "cold", "wet"] },
+        "base_station": { "$ref": "#/$defs/artifact" },
+        "base_par_sha256": { "$ref": "#/$defs/sha256" },
+        "daymet": { "$ref": "#/$defs/artifact" },
+        "loadings": { "$ref": "#/$defs/four_month_arrays" },
+        "derived": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["occurrence_intercepts", "amount_center", "amount_residual_sd_in", "tmax_residual_sd_f", "tmin_residual_sd_f"],
+          "properties": {
+            "occurrence_intercepts": { "$ref": "#/$defs/months" },
+            "amount_center": { "$ref": "#/$defs/months" },
+            "amount_residual_sd_in": { "$ref": "#/$defs/months" },
+            "tmax_residual_sd_f": { "$ref": "#/$defs/months" },
+            "tmin_residual_sd_f": { "$ref": "#/$defs/months" }
+          }
+        },
+        "diagnostics": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["feature_sample_sd", "base_sampling_sd", "component_sign", "occurrence_max_abs_count_error", "amount_max_relative_mean_error", "amount_max_relative_second_moment_error", "minimum_amount_residual_variance", "minimum_temperature_residual_variance", "minimum_occurrence_probability", "maximum_occurrence_probability"],
+          "properties": {
+            "feature_sample_sd": { "$ref": "#/$defs/four_month_arrays" },
+            "base_sampling_sd": { "$ref": "#/$defs/four_month_arrays" },
+            "component_sign": { "$ref": "#/$defs/four_sign_arrays" },
+            "occurrence_max_abs_count_error": { "type": "number", "minimum": 0, "maximum": 1e-10 },
+            "amount_max_relative_mean_error": { "type": "number", "minimum": 0, "maximum": 1e-10 },
+            "amount_max_relative_second_moment_error": { "type": "number", "minimum": 0, "maximum": 1e-10 },
+            "minimum_amount_residual_variance": { "type": "number", "minimum": 0 },
+            "minimum_temperature_residual_variance": { "type": "number", "minimum": 0 },
+            "minimum_occurrence_probability": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 },
+            "maximum_occurrence_probability": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}
