@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "optimizer_restart": {
+      "attempts": 6,
+      "budget_exhaustion_records": 2,
+      "checkpoint_verified": true,
+      "corrupt_resume": "CONTENT_HASH_MISMATCH",
+      "first_retry": true,
+      "memory_exhaustion": true,
+      "replay_payload_identity": true,
+      "resumed_checkpoint_verified": true,
+      "second_retry": false,
+      "stale_checkpoint": "CHECKPOINT_LOG_COUNT",
+      "states": [
+        "dominated",
+        "evaluation_complete",
+        "evaluation_incomplete",
+        "hard_infeasible"
+      ],
+      "wall_exhaustion": true
+    },
+    "storage": {
+      "large_fixture": {
+        "reason": "registered raw evidence",
+        "require_lfs": true,
+        "retain_raw": true
+      },
+      "lfs_covered": true,
+      "metrics_and_hash_retained": true,
+      "ordinary_raw": {
+        "reason": "derived metrics and hashes only",
+        "require_lfs": false,
+        "retain_raw": false
+      },
+      "scratch_deletion": {
+        "deleted": true,
+        "existed": true,
+        "object_sha256": "0c2725e0d4ae4ae669bdd6c88b253997198efb67d962d217c52e6cbfd318fe0c",
+        "path": "scratch.bin"
+      },
+      "threshold_bytes": 10485760
+    }
+  },
+  "schema_version": 1
+}

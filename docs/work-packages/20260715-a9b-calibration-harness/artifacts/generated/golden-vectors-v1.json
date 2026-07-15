@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "vectors": {
+    "canonicalization": {
+      "canonical_hex": "7b0a20202261223a207b0a202020202266696e697465223a20312e32352c0a202020202275746638223a2022ce94220a20207d2c0a2020227a223a205b0a20202020332c0a20202020322c0a20202020310a20205d0a7d0a",
+      "input": {
+        "a": {
+          "finite": 1.25,
+          "utf8": "Δ"
+        },
+        "z": [
+          3,
+          2,
+          1
+        ]
+      },
+      "sha256": "3a57228902e7b982ff20f5e4242373e21313b785e570c55ecf50f98320149d10"
+    },
+    "daymet_calendar": {
+      "leap": {
+        "365": "2020-12-30",
+        "58": "2020-02-27",
+        "59": "2020-02-28",
+        "60": "2020-02-29",
+        "61": "2020-03-01"
+      },
+      "missing_leap_day": {
+        "available_fraction": 0.9972602739726028,
+        "complete": true,
+        "expected_days": 365,
+        "longest_missing_run": 1,
+        "missing_days": 1
+      },
+      "ordinary": {
+        "365": "2019-12-31",
+        "58": "2019-02-27",
+        "59": "2019-02-28",
+        "60": "2019-03-01"
+      }
+    },
+    "event_segmentation": {
+      "events": [
+        {
+          "cold_context": true,
+          "depth_mm": 4.0,
+          "duration_minutes": 365.0,
+          "end": "2021-01-01T05:55:00",
+          "peak_ratio": 36.49999999999999,
+          "season": "winter",
+          "start": "2020-12-31T23:50:00",
+          "time_to_peak_fraction": 0.00684931506849315
+        },
+        {
+          "cold_context": false,
+          "depth_mm": 1.0,
+          "duration_minutes": 5.0,
+          "end": "2021-01-01T12:00:00",
+          "peak_ratio": 1.0,
+          "season": "winter",
+          "start": "2021-01-01T11:55:00",
+          "time_to_peak_fraction": 0.5
+        }
+      ],
+      "invalid_missing_events": 2,
+      "rule": "a9_uscrn_event_6h_v1"
+    },
+    "monthly_moments": [
+      {
+        "days": 28,
+        "dependent": {
+          "covariance_contribution": 16.1,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 28,
+          "occurrence_amount_variance": 645.12,
+          "total_mean": 67.2,
+          "total_variance": 661.22
+        },
+        "independent": {
+          "covariance_contribution": 0.0,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 28,
+          "occurrence_amount_variance": 645.12,
+          "total_mean": 67.2,
+          "total_variance": 645.12
+        },
+        "omitted_covariance": "MONTHLY_VARIANCE_MISMATCH"
+      },
+      {
+        "days": 29,
+        "dependent": {
+          "covariance_contribution": 16.7,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 29,
+          "occurrence_amount_variance": 668.16,
+          "total_mean": 69.6,
+          "total_variance": 684.86
+        },
+        "independent": {
+          "covariance_contribution": 0.0,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 29,
+          "occurrence_amount_variance": 668.16,
+          "total_mean": 69.6,
+          "total_variance": 668.16
+        },
+        "omitted_covariance": "MONTHLY_VARIANCE_MISMATCH"
+      },
+      {
+        "days": 30,
+        "dependent": {
+          "covariance_contribution": 17.3,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 30,
+          "occurrence_amount_variance": 691.1999999999999,
+          "total_mean": 72.0,
+          "total_variance": 708.4999999999999
+        },
+        "independent": {
+          "covariance_contribution": 0.0,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 30,
+          "occurrence_amount_variance": 691.1999999999999,
+          "total_mean": 72.0,
+          "total_variance": 691.1999999999999
+        },
+        "omitted_covariance": "MONTHLY_VARIANCE_MISMATCH"
+      },
+      {
+        "days": 31,
+        "dependent": {
+          "covariance_contribution": 17.9,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 31,
+          "occurrence_amount_variance": 714.24,
+          "total_mean": 74.39999999999999,
+          "total_variance": 732.14
+        },
+        "independent": {
+          "covariance_contribution": 0.0,
+          "daily_mean": 2.4,
+          "daily_variance": 23.04,
+          "days": 31,
+          "occurrence_amount_variance": 714.24,
+          "total_mean": 74.39999999999999,
+          "total_variance": 714.24
+        },
+        "omitted_covariance": "MONTHLY_VARIANCE_MISMATCH"
+      }
+    ],
+    "objective_estimators": {
+      "absolute_floor": 5.0,
+      "candidate_access_prohibited": true,
+      "null_replicates": 500,
+      "pareto_frontier": [
+        "a",
+        "b"
+      ],
+      "selected": "a",
+      "thresholds": {
+        "aggregate:100": 0.0195,
+        "aggregate:30": 0.029249999999999998,
+        "occurrence_spell:100": 0.02497384942688774,
+        "occurrence_spell:30": 0.03998263860240052
+      },
+      "two_part": 4.0
+    },
+    "quadrature": {
+      "id": "composite_simpson_4096_v1",
+      "order": 4096,
+      "tolerance": 1e-10,
+      "x_squared_0_1": 0.3333333333333333
+    },
+    "rng": {
+      "components": {
+        "amount-body": [
+          "0xd1c6777e",
+          "0x4cbf041c",
+          "0xd1e360c0",
+          "0xc5a4dfe4"
+        ],
+        "amount-tail": [
+          "0xb8f7b079",
+          "0xd6830823",
+          "0xc48dc488",
+          "0x9e7a3478"
+        ],
+        "daily-context": [
+          "0x0d9571f8",
+          "0x7292702e",
+          "0x1a332e71",
+          "0xd7a2ed92"
+        ],
+        "event": [
+          "0xbbe158ab",
+          "0xecd41da7",
+          "0x20682f56",
+          "0x7b0e47b9"
+        ],
+        "latent-state": [
+          "0x4bc9f631",
+          "0xc64b976b",
+          "0x270dcab6",
+          "0x9c54336d"
+        ],
+        "occurrence": [
+          "0xff374f44",
+          "0x9f80934c",
+          "0x570e5507",
+          "0x16beb6cc"
+        ]
+      },
+      "encoding_hex": "636c6967656e2d72732f61392d63726e2f7631000000000863616d706169676e0000000473697465000000066275726e2d300000000a6f6363757272656e63650000000a323030312d30312d3031000000087765745f67617465",
+      "faithful_state_after": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "faithful_state_before": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "random123_zero": [
+        "0x6627e8d5",
+        "0xe169c58d",
+        "0xbc57ac4c",
+        "0x9b00dbd8"
+      ],
+      "research_domain_seed_hex": {
+        "fit": "bb738283f505932e7bf18096ff84cbd39a92d42c93a20208b0685ed520fb1c03",
+        "optimizer": "4ceca1392f5c0fb9c47f8f5ef7681902cb253104b0f707ef385d843032a7930a",
+        "parameter_member": "cccd42fd30d003233e3f695889ce7951b28b569196bca78806efa432bbfcc874",
+        "synthetic_fixture": "936b6987b32e6640b526214c60758f32afb7b4db5152c64d90cc9f95d6110907"
+      },
+      "sha256_counter": [
+        "0xf28251bf",
+        "0x541deac2",
+        "0xeed7258d",
+        "0x404563ce"
+      ],
+      "sha256_key": [
+        "0x8e0fb9c6",
+        "0x0f8a45c1"
+      ],
+      "words": [
+        "0x6176e49b",
+        "0x378753b8",
+        "0x0db9844a",
+        "0xa8a947a7"
+      ]
+    }
+  }
+}

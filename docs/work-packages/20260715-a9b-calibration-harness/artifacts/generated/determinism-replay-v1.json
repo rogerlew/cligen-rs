@@ -1,0 +1,39 @@
+{
+  "byte_identical": true,
+  "comparisons": [
+    {
+      "byte_identical": true,
+      "original_sha256": "4acbea30ed31bebfe695f5b6d15a71c666d0db27392352c66c53ce17d48ab3be",
+      "path": "fixture-results-v1.json",
+      "replay_sha256": "4acbea30ed31bebfe695f5b6d15a71c666d0db27392352c66c53ce17d48ab3be"
+    },
+    {
+      "byte_identical": true,
+      "original_sha256": "e07841649ec4d47070e7ae9c2f26352fc8ecc90a6c1e27e57b9abc1e06748a61",
+      "path": "golden-vectors-v1.json",
+      "replay_sha256": "e07841649ec4d47070e7ae9c2f26352fc8ecc90a6c1e27e57b9abc1e06748a61"
+    },
+    {
+      "byte_identical": true,
+      "original_sha256": "29a48e94c2f2adb1776f322123a226f8e13f1869c511a02e5f503b8f5cf7c7cc",
+      "path": "recovery-tolerances-v1.json",
+      "replay_sha256": "29a48e94c2f2adb1776f322123a226f8e13f1869c511a02e5f503b8f5cf7c7cc"
+    },
+    {
+      "byte_identical": true,
+      "original_sha256": "6c906125f4bd6bd669f920e776806fb53787284eb4fbfd3e51b6fe4758c9ffd1",
+      "path": "resource-restart-v1.json",
+      "replay_sha256": "6c906125f4bd6bd669f920e776806fb53787284eb4fbfd3e51b6fe4758c9ffd1"
+    },
+    {
+      "byte_identical": true,
+      "original_sha256": "19c96b90862a7b753e4e7a4fdf966f65352fdedeab05ba972e60f658c88c538e",
+      "path": "role-firewall-mutations-v1.json",
+      "replay_sha256": "19c96b90862a7b753e4e7a4fdf966f65352fdedeab05ba972e60f658c88c538e"
+    }
+  ],
+  "files_replayed": 5,
+  "observed_target_access": false,
+  "replay_id": "a9b-full-fixture-replay-v1",
+  "schema_version": 1
+}

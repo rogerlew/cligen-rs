@@ -1,0 +1,83 @@
+{
+  "dispatch": {
+    "branch": "main",
+    "commit": "795f76775135044f7643e44f1f08cca1136e7236",
+    "target": "main"
+  },
+  "files": [
+    {
+      "bytes": 14176,
+      "path": "docs/specifications/SPEC-A9-RESEARCH-FOUNDATION.md",
+      "sha256": "463935b2bdf4c7dac9b31ec5a618461980db12545d7a9d1b9f81ebdc30adea27"
+    },
+    {
+      "bytes": 11782,
+      "path": "docs/specifications/a9-fit-artifact-v1.schema.json",
+      "sha256": "5b13ebf3cf8b230c67afcf0c59c7c2e13bd69760b370fcab8d04214bfd8d84cd"
+    },
+    {
+      "bytes": 4783,
+      "path": "docs/specifications/a9-objective-registry-v1.schema.json",
+      "sha256": "c6ec5e43e5d05b3b8672fa6b1f5b737d4cdb4202a7630db822dc852fa96fb23f"
+    },
+    {
+      "bytes": 3818,
+      "path": "docs/specifications/a9-data-role-manifest-v1.schema.json",
+      "sha256": "3550aa510d8498d1f66f86544021480d5e5879a8c8e77677b2b7939ae799abe9"
+    },
+    {
+      "bytes": 6048,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/a9b-handoff.md",
+      "sha256": "10d5f16aa3c0f3a2ff8346e9dcc848a21aa44bc34b5c955e42e86e621d486717"
+    },
+    {
+      "bytes": 13186,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/model-family-envelope.md",
+      "sha256": "2d217bb1b428fe9941b31ad740481bd283d6da5b25279a6d4e5371afab55a673"
+    },
+    {
+      "bytes": 13110,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/tuning-harness-contract.md",
+      "sha256": "e4824121970b876de22c730795e98643943b4430ab962695e9495f4e9cc31e44"
+    },
+    {
+      "bytes": 16488,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/data-and-evaluation-plan.md",
+      "sha256": "68424495aae6113b3263a741768f00d5426e459741fc9b4aead9a8fdbc02c830"
+    },
+    {
+      "bytes": 30881,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+      "sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7"
+    },
+    {
+      "bytes": 8580,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/fixture-plan.md",
+      "sha256": "5dd6b1d0b1b815a7b1d64773fdfa790f7c0cfe78c31a34a222d06e84c4561694"
+    },
+    {
+      "bytes": 6400,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/authority-manifest-v1.json",
+      "sha256": "10a0101f3d7cd31115ce84c7488f0a7e6b6e5678bdf94afcbc372670a78cb4c8"
+    },
+    {
+      "bytes": 7738,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/exposure-manifest-v1.json",
+      "sha256": "c884e7b8c826826bbf485c6a4bad600bc60e56702651e845e8a1819f50fa38e3"
+    },
+    {
+      "bytes": 10400,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+      "sha256": "121a5141477ca23ad26fb6618edf8f71c85e72eda11bec893a81e7895a9dd5e8"
+    },
+    {
+      "bytes": 17254,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/package.md",
+      "sha256": "b368557bcae536335238d645a6eaf258df1cbaf1f30cc7ce52afeabdfcaf16c1"
+    }
+  ],
+  "manifest_id": "a9b-predecessor-v1",
+  "observed_target_access": false,
+  "predecessor_terminal": "FOUNDATION-READY-A9B",
+  "schema_version": 1
+}

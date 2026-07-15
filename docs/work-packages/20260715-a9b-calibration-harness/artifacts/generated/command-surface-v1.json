@@ -1,0 +1,241 @@
+{
+  "commands": {
+    "calibrate-gates": {
+      "candidate_access_prohibited": true,
+      "method": "paired_max_statistic_quantile",
+      "schema_version": 1,
+      "thresholds": {
+        "aggregate:100": 0.00485,
+        "aggregate:30": 0.0097
+      }
+    },
+    "confirm": {
+      "freeze_sha256": "5d2688a372c4b01c6daec3e38101270527d0ad24aa1aa7de7ec939221c03fed6",
+      "manifest_id": "a9b-synthetic-role-manifest-v1",
+      "status": "consumed"
+    },
+    "evaluate": {
+      "command": "evaluate",
+      "objectives": {
+        "distance": 0.5
+      },
+      "role": "development",
+      "schema_version": 1,
+      "status": "evaluation_complete"
+    },
+    "fit": {
+      "candidate_class": {
+        "id": "alternating_renewal_marked_v1",
+        "schema_sha256": "fe58886cc708994e308c5329576844706e7b751e2387dd7e77640b34593bc96b",
+        "schema_version": 1,
+        "source_sha256": "39ebe64514995f0fab878d2ad64acfc528bcfc2bc77748c6aa51723ad5f15859"
+      },
+      "content_sha256": "7e3cc8bd58606fc06ca26d8199bcfd95cc9449bee8772cfc2b75ab4bb6f13173",
+      "diagnostics": {
+        "effective_exposures": {
+          "adjacent_wet_pairs": 25,
+          "dry_days": 100,
+          "events": 50,
+          "wet_days": 100
+        },
+        "hard_checks": [
+          {
+            "id": "support",
+            "status": "pass",
+            "tolerance": null,
+            "value": "pass"
+          }
+        ],
+        "identifiability": {
+          "details_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+          "method": "synthetic_oracle",
+          "status": "pass"
+        },
+        "monthly_moment_checks": [
+          {
+            "id": "month-28",
+            "month_length_days": 28,
+            "quadrature_id": "composite_simpson_4096_v1",
+            "status": "pass",
+            "tolerance": 1e-10,
+            "value": 0.0
+          }
+        ],
+        "uncertainty": {
+          "details_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+          "member_id": null,
+          "method": "synthetic"
+        }
+      },
+      "fit_id": "a9b-synthetic-fit-v1",
+      "fit_role": "coefficient_fit",
+      "fit_status": "fit_valid",
+      "model_family_id": "a9_joint_daily_event_family_v1",
+      "optimizer": {
+        "configuration_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "evaluation_budget": 10,
+        "id": "a9b_deterministic_exhaustive_v1",
+        "memory_bytes": 1000000,
+        "parameter_bounds_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "stopping_rule": "exhaustive",
+        "version": "1",
+        "wall_time_seconds": 10
+      },
+      "parameters": [
+        {
+          "name": "amount_mean_mm",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 6.0
+        },
+        {
+          "name": "amount_memory",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.25
+        },
+        {
+          "name": "dry_end_base",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.22
+        },
+        {
+          "name": "duration_age_slope",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.35
+        },
+        {
+          "name": "seasonal_amplitude",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.25
+        },
+        {
+          "name": "tail_probability",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.08
+        },
+        {
+          "name": "wet_end_base",
+          "support": "candidate_config_schema_v1",
+          "unit": "research_parameter",
+          "value": 0.42
+        }
+      ],
+      "pooling": {
+        "membership_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "rule_id": "a9_hierarchical_pool_v1",
+        "selected_before_fit": true
+      },
+      "preprocessing": {
+        "detrending": "none",
+        "event_segmentation_id": "a9_uscrn_event_6h_v1",
+        "missingness_rule": "fail_closed",
+        "recipe_id": "synthetic-v1",
+        "recipe_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "wet_thresholds_mm": {
+          "r1mm_inclusive": 1.0,
+          "wet0_exclusive": 0.0
+        }
+      },
+      "provenance": {
+        "created_at": "2026-07-15T12:00:00Z",
+        "data_role_manifest_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "git_commit": "795f76775135044f7643e44f1f08cca1136e7236",
+        "git_dirty": true,
+        "objective_registry_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+        "parent_hashes": [
+          "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2"
+        ],
+        "software_version": "0.1.0-a9b"
+      },
+      "rng": {
+        "fit": {
+          "algorithm": "Python MT19937",
+          "domain": "fit",
+          "seed_hex": "0000000000000001",
+          "version": "3.12"
+        },
+        "optimizer": {
+          "algorithm": "Python MT19937",
+          "domain": "optimizer",
+          "seed_hex": "0000000000000002",
+          "version": "3.12"
+        },
+        "parameter_member": {
+          "algorithm": "SHA-256",
+          "domain": "parameter_member",
+          "seed_hex": "0000000000000003",
+          "version": "1"
+        }
+      },
+      "schema_version": 1,
+      "sources": [
+        {
+          "accessed_at": "2026-07-15T12:00:00Z",
+          "calendar": "proleptic_gregorian",
+          "day_boundary": "utc",
+          "logical_sha256": "8f1d0720972437754ced078a21b31a546ac95641e6276c5c9c61c6468d3032c3",
+          "missingness": "none",
+          "object_sha256": "b3cc0475bb78a5026098858e9889acf666d31062d513d303314eca31d36e72f2",
+          "period_end": "2100-12-31",
+          "period_start": "2001-01-01",
+          "product": "a9b-fixture",
+          "source_id": "synthetic-source",
+          "station_id": "synthetic-site",
+          "units": {
+            "precipitation_mm": "mm"
+          },
+          "variables": [
+            "precipitation_mm"
+          ],
+          "version": "1"
+        }
+      ],
+      "station_scope": {
+        "group_id": null,
+        "scope": "station",
+        "stations": [
+          {
+            "elevation_m": 0.0,
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "station_id": "synthetic-site"
+          }
+        ]
+      },
+      "status_reason": null
+    },
+    "optimize": {
+      "attempts": 3,
+      "pareto_frontier": [
+        "4d1b78d6c777a36ed80ad83029202a88c887d9a701878c43b9296a1f35630a3b",
+        "adeb31dddd7861800185f84519174ef1795dd7a0ac5912c131f0ca73bcf6906b"
+      ],
+      "status": "complete"
+    },
+    "run-fixtures": {
+      "artifact_sha256": "4acbea30ed31bebfe695f5b6d15a71c666d0db27392352c66c53ce17d48ab3be",
+      "fixtures_passed": 20,
+      "status": "PASS"
+    },
+    "validate": {
+      "artifact_sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7",
+      "kind": "objective",
+      "status": "valid",
+      "top_level_type": "dict"
+    },
+    "verify-log": {
+      "attempts": 3,
+      "head_sha256": "160161d744a8481ca9b555364a2e7cf46c2eae5c60bfd9b9938f65c4452a70e6",
+      "status": "valid"
+    }
+  },
+  "observed_target_access": false,
+  "schema_version": 1,
+  "surface_id": "a9b-command-surface-v1",
+  "synthetic_only": true
+}

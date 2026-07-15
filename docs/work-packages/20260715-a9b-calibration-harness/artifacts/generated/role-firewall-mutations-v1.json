@@ -1,0 +1,30 @@
+{
+  "mutations": {
+    "role_firewall": {
+      "concurrent_lock": "CONFIRMATION_LOCKED",
+      "copy": "CONFIRMATION_BYTES_REJECTED",
+      "logical_hash": "CONFIRMATION_LOGICAL_HASH_REJECTED",
+      "metadata_confirm": "CONFIRMATION_NOT_SEALED",
+      "object_hash": "CONFIRMATION_OBJECT_HASH_REJECTED",
+      "path": "CONFIRMATION_PATH_REJECTED",
+      "record_key": "CONFIRMATION_RECORD_KEY_REJECTED",
+      "rename": "CONFIRMATION_BYTES_REJECTED",
+      "second_confirmation": "CONFIRMATION_NOT_SEALED",
+      "symlink": "CONFIRMATION_PATH_REJECTED"
+    },
+    "schema_and_nonfinite": {
+      "content_hash": "CONTENT_HASH_MISMATCH",
+      "duplicate": "DUPLICATE_JSON_KEY",
+      "exposed_confirmation": "EXPOSED_CONFIRMATION_RECORD",
+      "immutable": "IMMUTABLE_ARTIFACT_EXISTS",
+      "infinity": "NONFINITE_JSON",
+      "invalid_hash": "SCHEMA_VALIDATION_FAILED",
+      "nan": "NONFINITE_JSON",
+      "reversed_period": "REVERSED_PERIOD",
+      "unknown": "SCHEMA_VALIDATION_FAILED",
+      "wrong_calendar": "CALENDAR_MISMATCH",
+      "wrong_unit": "UNIT_MISMATCH"
+    }
+  },
+  "schema_version": 1
+}

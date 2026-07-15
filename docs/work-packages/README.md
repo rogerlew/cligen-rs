@@ -55,3 +55,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260715-a8c-routed-daily-pilot](20260715-a8c-routed-daily-pilot/package.md) | EXECUTED-COMPLETE |
 | [20260715-a8c1-routed-daily-retirement](20260715-a8c1-routed-daily-retirement/package.md) | EXECUTED-COMPLETE |
 | [20260715-a9a-successor-family-foundation](20260715-a9a-successor-family-foundation/package.md) | EXECUTED-COMPLETE |
+| [20260715-a9b-calibration-harness](20260715-a9b-calibration-harness/package.md) | EXECUTED-COMPLETE |

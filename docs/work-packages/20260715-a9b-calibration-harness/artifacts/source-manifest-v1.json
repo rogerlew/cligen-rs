@@ -1,0 +1,196 @@
+{
+  "dispatch_commit": "795f76775135044f7643e44f1f08cca1136e7236",
+  "generated_evidence": [
+    {
+      "bytes": 7681,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/command-surface-v1.json",
+      "sha256": "9e8f4f20b26ea2a83746b2ddd0640cd878e78779eeef2a8e9e21ccd5fd6fff10"
+    },
+    {
+      "bytes": 1525,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/determinism-replay-v1.json",
+      "sha256": "c044d1af46dcbbffd02af5d7ddf2d9106cd7b5db5edc0d4e24c37e91eaa4e727"
+    },
+    {
+      "bytes": 11467,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/fixture-results-v1.json",
+      "sha256": "4acbea30ed31bebfe695f5b6d15a71c666d0db27392352c66c53ce17d48ab3be"
+    },
+    {
+      "bytes": 7179,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/golden-vectors-v1.json",
+      "sha256": "e07841649ec4d47070e7ae9c2f26352fc8ecc90a6c1e27e57b9abc1e06748a61"
+    },
+    {
+      "bytes": 7346,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/recovery-tolerances-v1.json",
+      "sha256": "29a48e94c2f2adb1776f322123a226f8e13f1869c511a02e5f503b8f5cf7c7cc"
+    },
+    {
+      "bytes": 1225,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/resource-restart-v1.json",
+      "sha256": "6c906125f4bd6bd669f920e776806fb53787284eb4fbfd3e51b6fe4758c9ffd1"
+    },
+    {
+      "bytes": 1111,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/generated/role-firewall-mutations-v1.json",
+      "sha256": "19c96b90862a7b753e4e7a4fdf966f65352fdedeab05ba972e60f658c88c538e"
+    }
+  ],
+  "manifest_id": "a9b-source-v1",
+  "observed_target_access": false,
+  "research_only": true,
+  "runtime": {
+    "executable": "/opt/homebrew/anaconda3/bin/python3",
+    "implementation": "CPython",
+    "machine": "arm64",
+    "math_backend": "CPython math module / host libm; research f64 only",
+    "platform": "macOS-26.4.1-arm64-arm-64bit",
+    "python": "3.12.7"
+  },
+  "schema_dependencies": {
+    "attrs": "23.1.0",
+    "jsonschema": "4.23.0",
+    "jsonschema-specifications": "2023.7.1",
+    "referencing": "0.30.2",
+    "rpds-py": "0.10.6"
+  },
+  "schema_version": 1,
+  "source_files": [
+    {
+      "bytes": 2589,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/capture-a9b-source.py",
+      "sha256": "d7048fa30d4f95b7e6ea862531d961c93fc0661edf6821f96208490bb97d05fd"
+    },
+    {
+      "bytes": 6352,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/exercise-a9b-commands.py",
+      "sha256": "2093bb28dffe36b5cc579528160f2dba32ce1b7fcb71b1515b4d715be9f64170"
+    },
+    {
+      "bytes": 1876,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/verify-a9b-replay.py",
+      "sha256": "e8a92912e0d7422e1adb87e7e32ee632a35ddf2176de264ace652cee334e3cf0"
+    },
+    {
+      "bytes": 8558,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/verify-a9b.py",
+      "sha256": "d959b82b7dbe427f4f971b2bdab0cc9a7e9d015e945019b3c260909a1dbc037c"
+    },
+    {
+      "bytes": 69,
+      "path": "research/__init__.py",
+      "sha256": "8fd98a09ebe901b7890dc3be92af7afaabb5953ac4ae7d7af049022c1d3af0e6"
+    },
+    {
+      "bytes": 2100,
+      "path": "research/a9_harness/README.md",
+      "sha256": "029b56ad194a2f67addb73c06b0e2effd365b19df0748a9ab801f339966d126d"
+    },
+    {
+      "bytes": 159,
+      "path": "research/a9_harness/__init__.py",
+      "sha256": "1ca2ddf0f07aa48c27d5bd7e22e587687e6a6ec210e4c298eadd39b8853790c6"
+    },
+    {
+      "bytes": 124,
+      "path": "research/a9_harness/__main__.py",
+      "sha256": "eecc1c5ac2e8256e5e91a076c0bfd7c693530853b389f96a568d94729834ca7c"
+    },
+    {
+      "bytes": 402,
+      "path": "research/a9_harness/a9-harness",
+      "sha256": "da80fbadd05c8eebcf0f38131d7e2eebd77a69c17a62c6c874794cc4595cc949"
+    },
+    {
+      "bytes": 5193,
+      "path": "research/a9_harness/artifacts.py",
+      "sha256": "8984d0c1b6eab9439b5c40ee6045fa69ec1e62374d802f8ab3c6dd3880263c43"
+    },
+    {
+      "bytes": 2592,
+      "path": "research/a9_harness/calendar.py",
+      "sha256": "17dd254689f2c9d7e7bfc7951e516259de473a84a11365842eb8289f9f34541a"
+    },
+    {
+      "bytes": 14492,
+      "path": "research/a9_harness/candidates.py",
+      "sha256": "39ebe64514995f0fab878d2ad64acfc528bcfc2bc77748c6aa51723ad5f15859"
+    },
+    {
+      "bytes": 6004,
+      "path": "research/a9_harness/canonical.py",
+      "sha256": "845787578b85de09031d59f667d5cdca1e65d450a40b992bc9171d80f2fd8f7e"
+    },
+    {
+      "bytes": 13643,
+      "path": "research/a9_harness/cli.py",
+      "sha256": "47070133cfd700f941e6b9aab595d30b23108a94f8e294cda981606b156dc8e0"
+    },
+    {
+      "bytes": 1625,
+      "path": "research/a9_harness/context.py",
+      "sha256": "409aa5129b4b292bc66e75b6b20470752e1a12e90ee31e15d488b40fcc0914b0"
+    },
+    {
+      "bytes": 667,
+      "path": "research/a9_harness/errors.py",
+      "sha256": "de6667f0771f958f4a4109a449de72f0762016d7dd5fc306c744ee302d27d4c4"
+    },
+    {
+      "bytes": 5587,
+      "path": "research/a9_harness/events.py",
+      "sha256": "46205b960d148d615b3be0cd856be9bfa160f273e64cc1c2d689c341c72f2040"
+    },
+    {
+      "bytes": 50733,
+      "path": "research/a9_harness/fixtures.py",
+      "sha256": "4e53f68e487969f41adf86fd7cfccfc1c4cc13357656adcdb0ff76cb521820d5"
+    },
+    {
+      "bytes": 3307,
+      "path": "research/a9_harness/log.py",
+      "sha256": "ccad7fcfdb999e6f00272298480294251800ac5db36635e88d51754cc9b0bb94"
+    },
+    {
+      "bytes": 3302,
+      "path": "research/a9_harness/moments.py",
+      "sha256": "d19bb28c8d26fb48a8c56b2d7193c51631aa043a4ea09bf191e98fc94ddd5c4a"
+    },
+    {
+      "bytes": 5923,
+      "path": "research/a9_harness/objectives.py",
+      "sha256": "e398e8f12c2e5c20b004e30660cc8c77a8983a8a353489ed43c95641244a7992"
+    },
+    {
+      "bytes": 5928,
+      "path": "research/a9_harness/optimizer.py",
+      "sha256": "496a4ca001d9113effe537ed2698807e20bbd710889f3dc51d0b8b17eb00aa06"
+    },
+    {
+      "bytes": 105,
+      "path": "research/a9_harness/requirements.txt",
+      "sha256": "26eda9609d0979b39c261252e3a34781c021a3f5ddd499553d8cc13e81c7b22e"
+    },
+    {
+      "bytes": 3603,
+      "path": "research/a9_harness/rng.py",
+      "sha256": "1d34b09534a9a51664f1d29490e850a5701c775e704358f0eaea7a734da7856f"
+    },
+    {
+      "bytes": 6955,
+      "path": "research/a9_harness/roles.py",
+      "sha256": "f2639491ba67dcc374beea5c046302972371e97606910d74f48df435ce1f05e6"
+    },
+    {
+      "bytes": 25,
+      "path": "research/a9_harness/tests/__init__.py",
+      "sha256": "70fe5d4b98b7054d1ce7db3626fdc668f385bed468870dc7bfc7ba772f066de1"
+    },
+    {
+      "bytes": 1927,
+      "path": "research/a9_harness/tests/test_harness.py",
+      "sha256": "c495a6ffa139072158041298fba48323a1607a844f808665329f32237c658761"
+    }
+  ]
+}

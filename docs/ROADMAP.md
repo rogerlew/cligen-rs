@@ -32,12 +32,25 @@ candidate, accessed no confirmation target, and changed no production runtime.
 The accepted record and freeze-ready successor handoff are in the
 [A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
-The next eligible item is **A9b — calibration-harness implementation**, but it
+There is no active authorized package. A9b completed on 2026-07-15 with
+`HARNESS-READY-A9C`. Its
+[accepted package](work-packages/20260715-a9b-calibration-harness/package.md)
+implements and independently replays the synthetic-only research harness:
+strict schemas/canonical hashes, immutable fits, the data-role firewall,
+hash-chained one-shot access, Philox random fields, two structurally distinct
+mock plugins, monthly/objective/null/Pareto machinery, bounded append-only
+optimization, and FX-001--FX-020. It accessed no observed target, ranked no
+candidate, and changed no production runtime.
+
+The next eligible item is **A9c — observed development comparison**, but it
 remains unscaffolded and unauthorized pending a separate operator dispatch.
-A9b is synthetic/tooling-only: it implements schemas, canonical hashes, the
-data-role firewall, counter-based random fields, mock class plugins, objective
-calibration, append-only optimization evidence, and the registered fixtures.
-It does not fit observed climate or add a runtime profile.
+Its context-complete boundary is frozen in the
+[A9c handoff](work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md).
+A9c would implement the two actual research probability laws, materialize
+disjoint fit/development/gate roles without confirmation access, calibrate
+candidate-blind gates, run the frozen multi-regime objective and resource
+campaign, and freeze at most one candidate for A9d. It still adds no runtime
+profile.
 
 The later conditional sequence is A9c development-only comparison of the two
 genuinely distinct model classes, A9d locked one-shot climate confirmation,

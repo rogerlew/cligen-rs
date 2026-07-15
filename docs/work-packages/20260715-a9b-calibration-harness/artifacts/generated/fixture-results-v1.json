@@ -1,0 +1,372 @@
+{
+  "fixtures_executed": 20,
+  "fixtures_expected": 20,
+  "fixtures_passed": 20,
+  "observed_target_access": false,
+  "results": [
+    {
+      "evidence": {
+        "candidate_class": "alternating_renewal_marked_v1",
+        "four_fit_pass": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "joint_coverage": 0.9325
+      },
+      "evidence_sha256": "318ab0137be154c97fcfb05641ff092f3cbb838b952494a47b63478b23e0f39a",
+      "fixture_id": "FX-001",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "candidate_class": "latent_regime_marked_v1",
+        "canonical_state_order": "ascending wet probability",
+        "four_fit_pass": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "joint_coverage": 0.9575
+      },
+      "evidence_sha256": "ac2640afaff9fa93abb59435ce1e428c3332f5e74209f02db4c022ee656d5225",
+      "fixture_id": "FX-002",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "bijective_parameter_relabeling": false,
+        "degenerate_rejection": "MODEL_CLASS_EQUIVALENCE",
+        "latent_occupancy_equals_observed_spell_type": false,
+        "latent_state": "hidden semi-Markov occupancy; wet and dry emissions in every state",
+        "renewal_state": "observable alternating spell type; wet iff wet state; no hidden artifact",
+        "status": "non_isomorphic"
+      },
+      "evidence_sha256": "85387c3999a6ec7f84d29e912ae31221b1d6b15dcbe137364a5f0655f9bcaae4",
+      "fixture_id": "FX-003",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "classification": "finite_data_ambiguity",
+        "hidden_and_observed_parameters_reported_separately": true,
+        "latent_observable": {
+          "duration_law": "geometric",
+          "wet_amount_mean_mm": 5.0,
+          "wet_probability": 0.3
+        },
+        "renewal_observable": {
+          "duration_law": "geometric",
+          "wet_amount_mean_mm": 5.0,
+          "wet_probability": 0.3
+        },
+        "structural_identity_claim": false
+      },
+      "evidence_sha256": "84c8ce367be7f9fb65a5e1d8169bb0cae364ccb15caea9e88d83467ea79d6b50",
+      "fixture_id": "FX-004",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "finite_score": 2.5,
+        "fit_status": "fit_ineligible",
+        "occurrence_available": true,
+        "positive_amount_status": "unavailable",
+        "zero_month_available": true
+      },
+      "evidence_sha256": "789b5c728b0c76095c9261ab71ed072813623cac5e6531700ca6d7cb2452075d",
+      "fixture_id": "FX-005",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "above": "fit_valid",
+        "below": "fit_ineligible",
+        "borrowed": [
+          "amount_memory",
+          "event_descriptor"
+        ],
+        "membership_mutation": "POOL_MEMBERSHIP_FROZEN"
+      },
+      "evidence_sha256": "aa3afb7f5c50a124d5b5fa6eeadc0a48d2929207747d90aeca12c7f5dabbab32",
+      "fixture_id": "FX-006",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "invalid_proposal": "hard_infeasible",
+        "reason": "CANDIDATE_PARAMETER_SUPPORT",
+        "tail_29": "unavailable",
+        "tail_30": "available"
+      },
+      "evidence_sha256": "d168eb9f55bcbbda5d5cf05da81ae24dcb3fc58a660100fa02bd042df4e9334a",
+      "fixture_id": "FX-007",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "covariance_omission_rejected": true,
+        "month_lengths": [
+          28,
+          29,
+          30,
+          31
+        ],
+        "quadrature": 0.3333333333333333
+      },
+      "evidence_sha256": "138ba2925f72240059cbee8ca66880c9fc2bef483bb69b1df3845e3703372bd5",
+      "fixture_id": "FX-008",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "base": {
+          "depth_peak_ratio_correlation": 1.0,
+          "joint_dependence_available": true,
+          "time_to_peak_boundary_mass": 0.0,
+          "time_to_peak_pass": true
+        },
+        "clipping_or_tie_repair": false,
+        "collapsed": {
+          "depth_peak_ratio_correlation": 1.0,
+          "joint_dependence_available": true,
+          "time_to_peak_boundary_mass": 1.0,
+          "time_to_peak_pass": false
+        },
+        "severed": {
+          "depth_peak_ratio_correlation": 0.3684210526315789,
+          "joint_dependence_available": true,
+          "time_to_peak_boundary_mass": 0.0,
+          "time_to_peak_pass": true
+        }
+      },
+      "evidence_sha256": "b996ac8a89d345d54e789132765a540b171a6a51789720ec0683acf846f50298",
+      "fixture_id": "FX-009",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "cross_midnight": true,
+        "event_count": 2,
+        "invalid_missing_events": 2,
+        "phase_label": false
+      },
+      "evidence_sha256": "d0a96de82b23de927f02f301864fee3880a0fde8b26971372174d0cd2d67dfcf",
+      "fixture_id": "FX-010",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "declared_mutations_deterministic": true,
+        "provenance_fields": {
+          "humidity": [
+            "wet0",
+            "wet_amount_mm"
+          ],
+          "radiation": [
+            "wet0"
+          ],
+          "temperature": [
+            "wet0",
+            "seasonal_state"
+          ],
+          "wind": [
+            "event_duration_minutes"
+          ]
+        },
+        "rejection": "UNDECLARED_CONTEXT_FIELD",
+        "undeclared_unchanged": true
+      },
+      "evidence_sha256": "33660362cc63d689ccc012b5fd1a83b1e45f51462877e3ce73a876ad87db5ca7",
+      "fixture_id": "FX-011",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "leap": {
+          "365": "2020-12-30",
+          "58": "2020-02-27",
+          "59": "2020-02-28",
+          "60": "2020-02-29",
+          "61": "2020-03-01"
+        },
+        "missing_leap_day": {
+          "available_fraction": 0.9972602739726028,
+          "complete": true,
+          "expected_days": 365,
+          "longest_missing_run": 1,
+          "missing_days": 1
+        },
+        "ordinary": {
+          "365": "2019-12-31",
+          "58": "2019-02-27",
+          "59": "2019-02-28",
+          "60": "2019-03-01"
+        }
+      },
+      "evidence_sha256": "e15f1064dc37da96ed744bed6d19b7d1b2abb4f60729cfa0c8b52bf5d77d9c6c",
+      "fixture_id": "FX-012",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "content_hash": "CONTENT_HASH_MISMATCH",
+        "duplicate": "DUPLICATE_JSON_KEY",
+        "exposed_confirmation": "EXPOSED_CONFIRMATION_RECORD",
+        "immutable": "IMMUTABLE_ARTIFACT_EXISTS",
+        "infinity": "NONFINITE_JSON",
+        "invalid_hash": "SCHEMA_VALIDATION_FAILED",
+        "nan": "NONFINITE_JSON",
+        "reversed_period": "REVERSED_PERIOD",
+        "unknown": "SCHEMA_VALIDATION_FAILED",
+        "wrong_calendar": "CALENDAR_MISMATCH",
+        "wrong_unit": "UNIT_MISMATCH"
+      },
+      "evidence_sha256": "ae3676291b4ab9635beb00d6a29888905290f2aa088c317403a114ba2a17930b",
+      "fixture_id": "FX-013",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "domain_collisions": 0,
+        "draw_shift": false,
+        "faithful_state_unchanged": true,
+        "reference_vector": true
+      },
+      "evidence_sha256": "8baee9b7493b2aa6370c1df7dcb3d55a74d340152631b799a957d491370bb731",
+      "fixture_id": "FX-014",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "byte_identical_prefix": true,
+        "horizon_parameter_rejection": "CANDIDATE_CONFIG_FIELDS",
+        "rows_100": 36525,
+        "rows_30": 10958
+      },
+      "evidence_sha256": "cbd9e6ae012880b42b0c9e29167298667aaa814ff76a4fe6730d136c958bb9b7",
+      "fixture_id": "FX-015",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "append_only_access_records": 2,
+        "atomic_consumption": true,
+        "metadata_state_unchanged": true,
+        "one_shot": true,
+        "rejections": {
+          "concurrent_lock": "CONFIRMATION_LOCKED",
+          "copy": "CONFIRMATION_BYTES_REJECTED",
+          "logical_hash": "CONFIRMATION_LOGICAL_HASH_REJECTED",
+          "metadata_confirm": "CONFIRMATION_NOT_SEALED",
+          "object_hash": "CONFIRMATION_OBJECT_HASH_REJECTED",
+          "path": "CONFIRMATION_PATH_REJECTED",
+          "record_key": "CONFIRMATION_RECORD_KEY_REJECTED",
+          "rename": "CONFIRMATION_BYTES_REJECTED",
+          "second_confirmation": "CONFIRMATION_NOT_SEALED",
+          "symlink": "CONFIRMATION_PATH_REJECTED"
+        }
+      },
+      "evidence_sha256": "c57d03bc78939c9ad439c9037844ff533b40ccdf965b6b76c00a985ae1d4678e",
+      "fixture_id": "FX-016",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "absolute_floor": 5.0,
+        "candidate_access_prohibited": true,
+        "favorable_zero": false,
+        "finite": true,
+        "null_replicates": 500,
+        "pareto_frontier": [
+          "a",
+          "b"
+        ],
+        "selected": "a",
+        "thresholds": {
+          "aggregate:100": 0.0195,
+          "aggregate:30": 0.029249999999999998,
+          "occurrence_spell:100": 0.02497384942688774,
+          "occurrence_spell:30": 0.03998263860240052
+        },
+        "two_part": 4.0
+      },
+      "evidence_sha256": "15447fbde30f93f0beb84186bb695e12491b048458f2c76dcec7fe5696494d5f",
+      "fixture_id": "FX-017",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "objective_registry_entries": 31,
+        "one_unavailable": {
+          "arid_boundary": true,
+          "cold": false
+        },
+        "two_unavailable": {
+          "arid_boundary": false,
+          "cold": false
+        },
+        "unavailable_counted_as_pass": false
+      },
+      "evidence_sha256": "6fccb3dbc3f2a7537e2f821a84e3cde4e3e12dfd17fd5f6e4a6f6a36192f2980",
+      "fixture_id": "FX-018",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "attempts": 6,
+        "budget_exhaustion_records": 2,
+        "checkpoint_verified": true,
+        "corrupt_resume": "CONTENT_HASH_MISMATCH",
+        "first_retry": true,
+        "memory_exhaustion": true,
+        "replay_payload_identity": true,
+        "resumed_checkpoint_verified": true,
+        "second_retry": false,
+        "stale_checkpoint": "CHECKPOINT_LOG_COUNT",
+        "states": [
+          "dominated",
+          "evaluation_complete",
+          "evaluation_incomplete",
+          "hard_infeasible"
+        ],
+        "wall_exhaustion": true
+      },
+      "evidence_sha256": "fbf225a769e7f6f04a148f761d785a4ee2297f316044bfc7d02f18d987acaa82",
+      "fixture_id": "FX-019",
+      "status": "PASS"
+    },
+    {
+      "evidence": {
+        "large_fixture": {
+          "reason": "registered raw evidence",
+          "require_lfs": true,
+          "retain_raw": true
+        },
+        "lfs_covered": true,
+        "metrics_and_hash_retained": true,
+        "ordinary_raw": {
+          "reason": "derived metrics and hashes only",
+          "require_lfs": false,
+          "retain_raw": false
+        },
+        "scratch_deletion": {
+          "deleted": true,
+          "existed": true,
+          "object_sha256": "0c2725e0d4ae4ae669bdd6c88b253997198efb67d962d217c52e6cbfd318fe0c",
+          "path": "scratch.bin"
+        },
+        "threshold_bytes": 10485760
+      },
+      "evidence_sha256": "246815bd3b2b2ae73ccbc2b4ab81eca873b53a0b9baea3f8b5a675a1ecd01f77",
+      "fixture_id": "FX-020",
+      "status": "PASS"
+    }
+  ],
+  "schema_version": 1,
+  "source_fixture_plan_sha256": "5dd6b1d0b1b815a7b1d64773fdfa790f7c0cfe78c31a34a222d06e84c4561694",
+  "status": "PASS",
+  "suite_id": "a9b-fx-001-020-v1"
+}
