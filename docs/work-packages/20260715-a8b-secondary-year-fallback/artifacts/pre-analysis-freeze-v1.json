@@ -1,0 +1,26 @@
+{
+  "a8a_parent_terminal": "CONTINUE-A8B-DRY-PARTITION",
+  "a8b_candidate_outputs_present_at_freeze": false,
+  "frozen_files_sha256": {
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/analyze-a8b.py": "386cde256d0e6fbc1677b954d6f5bad43f4ed784f19417844c5c5a938c6474a2",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/design.md": "802699c78e66ba8072dca622ac1ad7d83780af085bdbe528565f57343c5b68e3",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/feasibility-contract-v1.json": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/freeze-a8b.py": "2e8f20eccc588ded3560da363747b8c94d2c120f4fafb2aea3fc1b20a3f2d381",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/verify-a8b.py": "f34f9651dfe9695d85ede16d76a9b8268e16f8cac6f44957c1ad5accc2f00a1d"
+  },
+  "input_files_sha256": {
+    "docs/decisions/0004-a5b-interannual-no-promotion.md": "959053ceeddc72992fefcd3272371354190b59387689cdcfd01dd01f9b430dcf",
+    "docs/work-packages/20260714-a5f0-annual-state-failure-attribution/artifacts/a5f0-decision-v1.json": "c1d6c73097e14d4e98b6021632a03055667d1932732d0bbae9806024dfb7f064",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-analysis-v1.json": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-decision-v1.json": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analysis-contract-v1.json": "cfe57a125d9f25a2b7d3ad8206280b87858747e92cb6fe2c9a385078f49f3263",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analyze-a8a.py": "8e1ea5df400639e42971c9717f1605aea360ccc784290cff40e479c18d57432e",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/pre-analysis-freeze-v2.json": "6a1ea6123715cfe2c02aad233e0668792fcf81688de1fe931b6157695cb73656",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae"
+  },
+  "method_boundary": "Exact parent classes, corpus, alternatives, fit, pooled EOF rank, variance budget, held-out metrics, thresholds, RNG ownership, and terminal priority frozen before any A8b annual aggregate or candidate coefficient was computed",
+  "schema_version": 1,
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3",
+  "status": "FROZEN-BEFORE-A8B-CANDIDATE-FIT"
+}

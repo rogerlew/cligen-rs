@@ -1,0 +1,109 @@
+{
+  "alternatives": [
+    {
+      "candidate_id": "legacy_daily_only_v1",
+      "kind": "explicit_null",
+      "rng_draws": 0
+    },
+    {
+      "candidate_id": "bounded_eof2_copula_ar1_reallocation_v1",
+      "kind": "bounded_precipitation_amount_year_state",
+      "retired_a5_identifier": false
+    }
+  ],
+  "analysis_id": "a8b_secondary_year_fallback_feasibility_v1",
+  "corpus": {
+    "development_station_count": 5,
+    "expected_development_station_ids": [
+      "az022664",
+      "az028619",
+      "az029654",
+      "ca042257",
+      "ca042319"
+    ],
+    "expected_total_station_count": 10,
+    "heldout_station_count": 5,
+    "expected_heldout_station_ids": [
+      "ca040442",
+      "ca042713",
+      "nv264436",
+      "or350412",
+      "tx417262"
+    ],
+    "training_period": [1980, 2009],
+    "validation_period": [2010, 2025]
+  },
+  "decision": {
+    "candidate_terminal": "SELECT-BOUNDED-EOF2-AR1-REALLOCATION",
+    "minimum_joint_station_improvements": 6,
+    "null_terminal": "USE-LEGACY-DAILY-FALLBACK",
+    "pooled_improvement_ratio_max": 0.95,
+    "stop_terminal": "STOP-A8-ROUTED-PILOT"
+  },
+  "inputs": {
+    "a5f0_decision": {
+      "path": "docs/work-packages/20260714-a5f0-annual-state-failure-attribution/artifacts/a5f0-decision-v1.json",
+      "sha256": "c1d6c73097e14d4e98b6021632a03055667d1932732d0bbae9806024dfb7f064"
+    },
+    "a8a_analysis": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-analysis-v1.json",
+      "sha256": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b"
+    },
+    "a8a_analysis_contract": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analysis-contract-v1.json",
+      "sha256": "cfe57a125d9f25a2b7d3ad8206280b87858747e92cb6fe2c9a385078f49f3263"
+    },
+    "a8a_analyzer": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analyze-a8a.py",
+      "sha256": "8e1ea5df400639e42971c9717f1605aea360ccc784290cff40e479c18d57432e"
+    },
+    "a8a_decision": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-decision-v1.json",
+      "sha256": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58"
+    },
+    "a8a_freeze": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/pre-analysis-freeze-v2.json",
+      "sha256": "6a1ea6123715cfe2c02aad233e0668792fcf81688de1fe931b6157695cb73656"
+    },
+    "a8a_panel": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json",
+      "sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+    },
+    "a8a_source_manifest": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json",
+      "sha256": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae"
+    },
+    "adr_0004": {
+      "path": "docs/decisions/0004-a5b-interannual-no-promotion.md",
+      "sha256": "959053ceeddc72992fefcd3272371354190b59387689cdcfd01dd01f9b430dcf"
+    }
+  },
+  "mechanism": {
+    "allocation_fraction": 0.5,
+    "eigenvalue_tie_tolerance": 1e-12,
+    "eof_rank": 2,
+    "gaussian_copula_rho_absolute_max": 0.8,
+    "minimum_allocated_months_per_station": 9,
+    "minimum_eof_explained_fraction": 0.2,
+    "minimum_station_scale": 0.1,
+    "minimum_wet_amount_mean_fraction": 0.25,
+    "residual_variance_retention_min": 0.25,
+    "scale_safety_factor": 0.95,
+    "shrinkage_to_diagonal": 0.25,
+    "wet_day_threshold_mm": 1.0
+  },
+  "numeric": {
+    "absolute_zero_tolerance": 1e-14,
+    "monthly_budget_relative_tolerance": 1e-10,
+    "stationary_tolerance": 1e-12
+  },
+  "parent_required_terminal": "CONTINUE-A8B-DRY-PARTITION",
+  "rng": {
+    "draw_contract": "two independent stationary-normal initialization draws and two independent standard-normal innovation draws per simulated year",
+    "namespace": "cligen.extension.a8b.precipitation.year_state.v1",
+    "output_transform": "sqrt(3) * (2 * standard_normal_cdf(z) - 1)",
+    "path_dependent_draw_count": false
+  },
+  "schema_version": 1,
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3"
+}

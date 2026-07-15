@@ -1,0 +1,60 @@
+{
+  "analysis_id": "a8a_dry_regime_applicability_v1",
+  "classification_counts": {
+    "integrated_daily": 15,
+    "legacy_daily_fallback": 5
+  },
+  "development_actual_classes": {
+    "az022664": "legacy_daily_fallback",
+    "az028619": "legacy_daily_fallback",
+    "az029654": "legacy_daily_fallback",
+    "ca042257": "legacy_daily_fallback",
+    "ca042319": "legacy_daily_fallback",
+    "nm294426": "integrated_daily",
+    "tx412797": "integrated_daily",
+    "ut429382": "integrated_daily"
+  },
+  "ghcn_support_agreement": {
+    "agreement_fraction": 1.0,
+    "eligible_station_count": 2,
+    "terminal_gate": false
+  },
+  "guards": {
+    "confirmation_cardinality": true,
+    "development_reproduced": true,
+    "dry_fallback_breadth": true,
+    "dry_integrated_breadth": true,
+    "integrated_analytic_pass": true,
+    "monsoonal_shared_boundary": true,
+    "negative_controls_integrated": true,
+    "shortened_window_agreement": true
+  },
+  "monsoonal_instability_rate": 0.1875,
+  "monsoonal_separate_study_justified": false,
+  "other_dry_instability_rate": 0.1875,
+  "schema_version": 1,
+  "shortened_window_agreement": 0.85,
+  "stratum_counts": {
+    "cold_arid": {
+      "integrated_daily": 4,
+      "legacy_daily_fallback": 0
+    },
+    "hot_arid": {
+      "integrated_daily": 1,
+      "legacy_daily_fallback": 3
+    },
+    "monsoonal_transition": {
+      "integrated_daily": 3,
+      "legacy_daily_fallback": 1
+    },
+    "negative_control": {
+      "integrated_daily": 4,
+      "legacy_daily_fallback": 0
+    },
+    "non_monsoonal_semi_arid": {
+      "integrated_daily": 3,
+      "legacy_daily_fallback": 1
+    }
+  },
+  "terminal": "CONTINUE-A8B-DRY-PARTITION"
+}

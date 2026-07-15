@@ -1,0 +1,26 @@
+{
+  "analysis_contract_sha256": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b",
+  "candidate_eligible": false,
+  "candidate_id": "bounded_eof2_copula_ar1_reallocation_v1",
+  "coefficient_schema": "a8b_bounded_eof2_reallocation_coefficients_v1",
+  "fit_failure": {
+    "code": "zero_training_monthly_scale",
+    "context": {
+      "months": [
+        6
+      ],
+      "station_id": "ca042713"
+    }
+  },
+  "fit_status": "INFEASIBLE-BEFORE-COEFFICIENTS",
+  "rng": {
+    "draw_contract": "two independent stationary-normal initialization draws and two independent standard-normal innovation draws per simulated year",
+    "namespace": "cligen.extension.a8b.precipitation.year_state.v1",
+    "output_transform": "sqrt(3) * (2 * standard_normal_cdf(z) - 1)",
+    "path_dependent_draw_count": false
+  },
+  "schema_version": 1,
+  "shared_model": null,
+  "stations": [],
+  "use_authorization": "none; candidate infeasible"
+}

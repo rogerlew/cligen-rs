@@ -1,0 +1,22 @@
+{
+  "daily_source_files_present_at_freeze": false,
+  "frozen_files_sha256": {
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/acquire-a8a.py": "8e65db18db802397a0eefdf02efda3e21373f62ef1503b11edcd57eed192d88f",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analysis-contract-v1.json": "cfe57a125d9f25a2b7d3ad8206280b87858747e92cb6fe2c9a385078f49f3263",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analyze-a8a.py": "0a67f9c642a1c272d202d49e5634c4bab825f91e74c8bc9fc162f03a3f3b085f",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/freeze-a8a.py": "da1b8031337309185f4be3b99690ef568cc77a384bd6d8a185fb571e1da94857",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/inventory-stations.py": "b309295315510a80bc102ef2ec512e6113e82c06cc6ac9909c78136da4d03e13",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/select-panel.py": "902ec58d4ac4489f86da95fb08686321a40d4df3058b253b08983c31946f6ce5",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selection-contract-v1.json": "6e443fb1f70da3a117edc11abca722a17a948ab0872116b681fc505f29edcdb3",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/station-inventory-v1.json": "150d29c0c1936a721d58df17c30543c05b468b6ac76bd49ec77b0493fce6d5fe",
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/verify-a8a.py": "1b609434afe55d74a87269ae34633bcbbc990600119cc183d723d122a12e6d05",
+    "references/observed/a8a-v1/README.md": "a3b86f07c087ec74655b272036997a77a4a2a677be809c8012fa8c0c49f98a61",
+    "references/observed/a8a-v1/THIRD_PARTY_DATA_NOTICE.md": "d17f0b155b152a9a02e610065541164aa13f43ba1f704edfc8452948a05245a1"
+  },
+  "method_boundary": "Exact panel, sources, classifier, bootstrap, analytic mechanism, stability, and terminal rules frozen before any new Daymet/GHCN record access",
+  "schema_version": 1,
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3",
+  "status": "FROZEN-BEFORE-NEW-DAILY-DATA"
+}

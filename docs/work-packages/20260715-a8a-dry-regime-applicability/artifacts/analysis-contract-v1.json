@@ -1,0 +1,105 @@
+{
+  "analysis_id": "a8a_dry_regime_applicability_v1",
+  "bootstrap": {
+    "lower_quantile": 0.05,
+    "replicates": 1000,
+    "sampler": "domain-separated SplitMix64 year-block resampling with replacement",
+    "seed_u64": 11892122168853627811
+  },
+  "classifier": {
+    "fallback_class": "legacy_daily_fallback",
+    "integrated_class": "integrated_daily",
+    "integrated_rule": "all four seasonal full fits identifiable; every bootstrap lower support bound clears the frozen A7b count gate; all twelve full-record analytic cells feasible",
+    "missing_class_behavior": "fail closed",
+    "runtime_inference": false
+  },
+  "decision": {
+    "confirmation_station_count": 20,
+    "dry_fallback_min": 4,
+    "dry_integrated_min": 4,
+    "expected_development_classes": {
+      "az022664": "legacy_daily_fallback",
+      "az028619": "legacy_daily_fallback",
+      "az029654": "legacy_daily_fallback",
+      "ca042257": "legacy_daily_fallback",
+      "ca042319": "legacy_daily_fallback",
+      "nm294426": "integrated_daily",
+      "tx412797": "integrated_daily",
+      "ut429382": "integrated_daily"
+    },
+    "monsoonal_instability_excess_max": 0.25,
+    "negative_control_integrated_required": 4,
+    "pass_terminal": "CONTINUE-A8B-DRY-PARTITION",
+    "shortened_window_agreement_min": 0.75,
+    "stop_terminal": "STOP-DRY-REGIME-PARTITION"
+  },
+  "inputs": {
+    "a5a_baseline_archive": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/baseline-evidence-v1.tar.gz",
+      "sha256": "2fca565b8c3f83632e73050984dce0c619352ac4bb76deed86fb3928f8de15fe"
+    },
+    "a5a_corpus_config": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus-config-v1.json",
+      "sha256": "a1981943ffc5cc9e5a48e2685c93410c5fb881fdc405b9ebfdcf8744ba2bc496"
+    },
+    "a5a_source_manifest": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/source-manifest-v1.json",
+      "sha256": "50e64236622766c94e0e5b97ee35906210d5793aa9ec70250ea5f0fb5dfe07ec"
+    },
+    "a7b_analysis": {
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/a7b-analysis-v1.json",
+      "sha256": "f460055a7978932747ed0bb969d89917c00067af7500f3d0fd833d7af1321d3b"
+    },
+    "a7b_analyzer": {
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/analyze-a7b.py",
+      "sha256": "28423983ebc540cc1f546ea3a3e2cd170fbe6117b6b3c7619706970f74652112"
+    },
+    "a7b_contract": {
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/feasibility-contract-v1.json",
+      "sha256": "21e3ff616683aab15eeb41b233a78ba29f428161212e44bdfffbf201006470f3"
+    },
+    "corpus_common": {
+      "path": "docs/work-packages/20260712-a5a-quality-v3-observed-corpus/artifacts/corpus/corpus_common.py",
+      "sha256": "0f09724cc42d604a9b3535d517fababb99b9720a155a49653b82b9e280711b68"
+    },
+    "panel": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json",
+      "sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+    },
+    "selected_parameters": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+      "sha256": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122"
+    },
+    "selection_contract": {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selection-contract-v1.json",
+      "sha256": "6e443fb1f70da3a117edc11abca722a17a948ab0872116b681fc505f29edcdb3"
+    },
+    "third_party_notice": {
+      "path": "references/observed/a8a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "d17f0b155b152a9a02e610065541164aa13f43ba1f704edfc8452948a05245a1"
+    }
+  },
+  "mechanism": {
+    "candidate_id": "o2_logqspline_gaussian_copula_v1",
+    "interpretation": "the one unique four-state occurrence mechanism established by the A7b equivalence review; no SM2 duplicate",
+    "rng_ownership": "static A7b two-stream/two-draw-per-calendar-day contract only; no runtime is implemented"
+  },
+  "schema_version": 1,
+  "shortened_windows": [[1980, 2009], [1985, 2014], [1990, 2019], [1996, 2025]],
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3",
+  "sources": {
+    "daymet_expected_record_count": 16790,
+    "ghcn_coordinate_tolerance_km": 25.0,
+    "ghcn_minimum_prcp_coverage": 0.9,
+    "ghcn_sensitivity": "descriptive support-rule agreement only; point/grid disagreement is not a terminal gate",
+    "period": [1980, 2025],
+    "primary": "Daymet V4 R1 single-pixel",
+    "wet_day_threshold_mm": 1.0
+  },
+  "stability": {
+    "monsoonal_group": ["monsoonal_transition"],
+    "other_dry_groups": ["cold_arid", "hot_arid", "non_monsoonal_semi_arid"],
+    "shortened_class_rule": "all seasonal point support gates and all twelve analytic cells pass within the window; no bootstrap",
+    "year_block_rule": "within-year support contributions only; cross-year occurrence/pair transitions excluded from resampling"
+  }
+}

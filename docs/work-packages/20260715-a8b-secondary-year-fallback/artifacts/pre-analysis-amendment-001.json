@@ -1,0 +1,29 @@
+{
+  "access_boundary": {
+    "a8b_annual_aggregates_computed_in_memory": true,
+    "candidate_coefficient_artifact_present": false,
+    "candidate_fit_reached": "per-station training monthly standardization",
+    "decision_artifact_present": false,
+    "metric_artifact_present": false
+  },
+  "amended_files": {
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/analyze-a8b.py": {
+      "amended_sha256": "dfcdccdd9ffb3e25495ae9d40d3a005d4212dc369b1caabe2c44205ffc41f469",
+      "original_sha256": "386cde256d0e6fbc1677b954d6f5bad43f4ed784f19417844c5c5a938c6474a2"
+    },
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/verify-a8b.py": {
+      "amended_sha256": "352d3e32f2da9e785bb4d5bbdaff52fac3e899800837026a036b13af94e379fd",
+      "original_sha256": "f34f9651dfe9695d85ede16d76a9b8268e16f8cac6f44957c1ad5accc2f00a1d"
+    }
+  },
+  "amendment_id": "a8b_pre_analysis_amendment_001",
+  "classification": "bounded-fail-closed-reporting-amendment-after-fit-input-before-outcome",
+  "failure": {
+    "code": "zero_training_monthly_scale",
+    "message": "The frozen candidate fitter stopped at ca042713 because at least one 1980--2009 monthly-total column has zero sample standard deviation and the registered station-month standardization is undefined."
+  },
+  "original_freeze_sha256": "b66f0c8d3788e0230db5958c301a7a4a68d2448d1bd871eb83676daf5bc9fdfc",
+  "schema_version": 1,
+  "semantic_change": "Represent the already fail-closed candidate-fit exception as structured candidate infeasibility and apply the prospectively registered legacy-only null terminal. No station, period, candidate, standardization, coefficient, threshold, metric, guard, or terminal priority changes; the zero-scale month is not dropped, imputed, pooled, or repaired.",
+  "selection_effect": "The optional candidate remains ineligible. The amendment cannot select or improve it and publishes no candidate coefficient."
+}

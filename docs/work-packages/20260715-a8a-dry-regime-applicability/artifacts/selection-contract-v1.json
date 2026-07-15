@@ -1,0 +1,92 @@
+{
+  "catalog": {
+    "collection": "us-2015",
+    "collection_version": "2026.07",
+    "sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211",
+    "station_count": 2765
+  },
+  "descriptor_source_boundary": "Only the public station SQLite catalog and legacy .par bytes may be read before the panel and analysis freeze; Daymet/GHCN daily records are prohibited.",
+  "exposed_station_ids": [
+    "ak505769",
+    "al015478",
+    "az022664",
+    "az028619",
+    "az029654",
+    "ca042257",
+    "ca042319",
+    "co051660",
+    "fl083909",
+    "fl086997",
+    "id106388",
+    "mn214026",
+    "ms227840",
+    "nm294426",
+    "tx412797",
+    "ut429382",
+    "wy485345"
+  ],
+  "geographic_rules": {
+    "minimum_within_stratum_pair_distance_km": 150.0,
+    "selection_intent": "geographically separated descriptor spread; exact identities are frozen and no station substitution is permitted"
+  },
+  "inventory": {
+    "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/station-inventory-v1.json",
+    "sha256": "150d29c0c1936a721d58df17c30543c05b468b6ac76bd49ec77b0493fce6d5fe"
+  },
+  "minimum_catalog_years": 40.0,
+  "schema_version": 1,
+  "selected_strata": {
+    "cold_arid": {
+      "bounds": {
+        "annual_expected_precip_mm_max": 300.0,
+        "annual_tmean_c_max": 10.0,
+        "longitude_max": -102.0
+      },
+      "station_ids": ["co050130", "nv262631", "nv269171", "wy487845"]
+    },
+    "hot_arid": {
+      "bounds": {
+        "annual_expected_precip_mm_max": 220.0,
+        "annual_tmean_c_min": 17.0,
+        "longitude_max": -108.0
+      },
+      "station_ids": ["az026481", "ca040442", "ca042713", "nv264436"]
+    },
+    "monsoonal_transition": {
+      "bounds": {
+        "annual_expected_precip_mm": [180.0, 500.0],
+        "july_september_precip_fraction_min": 0.38,
+        "latitude": [28.0, 37.0],
+        "longitude": [-112.0, -100.0]
+      },
+      "station_ids": ["az028820", "nm290234", "tx413280", "tx417262"]
+    },
+    "negative_control": {
+      "bounds": {
+        "cold_humid": {
+          "annual_expected_precip_mm_min": 700.0,
+          "annual_tmean_c_max": 8.0
+        },
+        "warm_humid": {
+          "annual_expected_precip_mm_min": 1000.0,
+          "annual_tmean_c_min": 17.0
+        }
+      },
+      "station_ids": ["la160549", "me171175", "mn212248", "sc381544"],
+      "subgroups": {
+        "cold_humid": ["me171175", "mn212248"],
+        "warm_humid": ["la160549", "sc381544"]
+      }
+    },
+    "non_monsoonal_semi_arid": {
+      "bounds": {
+        "annual_expected_precip_mm": [250.0, 500.0],
+        "july_september_precip_fraction_max": 0.34,
+        "longitude_max": -100.0
+      },
+      "station_ids": ["id101022", "mt243996", "ne257665", "or350412"]
+    }
+  },
+  "selection_status": "FROZEN-BEFORE-NEW-DAILY-DATA",
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3"
+}

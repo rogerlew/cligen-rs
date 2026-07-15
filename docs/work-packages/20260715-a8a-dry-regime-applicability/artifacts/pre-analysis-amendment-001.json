@@ -1,0 +1,31 @@
+{
+  "acquisition_boundary": {
+    "daymet_station_archives_present": 0,
+    "ghcn_station_archives_present": 0,
+    "ghcn_station_list_archive_sha256": "047a5de7be283a324a0709dbf7a6184a28b5bf5af8c0c446ae1bc33bce7d220b",
+    "ghcn_station_list_source_sha256": "fedc8bbe92f9b1eee0a57f8886e5e022965a542efa60710c01b47a838120b18d",
+    "outcome_artifacts_present": false,
+    "source_manifest_present": false
+  },
+  "amended_files": {
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/acquire-a8a.py": {
+      "amended_sha256": "ff7b7d3350430d192b2b071d479b18b7e787cb4994c427d56e13332b2a3c82a7",
+      "original_sha256": "8e65db18db802397a0eefdf02efda3e21373f62ef1503b11edcd57eed192d88f"
+    },
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analyze-a8a.py": {
+      "amended_sha256": "8e1ea5df400639e42971c9717f1605aea360ccc784290cff40e479c18d57432e",
+      "original_sha256": "0a67f9c642a1c272d202d49e5634c4bab825f91e74c8bc9fc162f03a3f3b085f"
+    },
+    "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/verify-a8a.py": {
+      "amended_sha256": "2cc03fb0ea773521ce5f45d95a3a85969bd60416af15c804c50ad09d6046d9de",
+      "original_sha256": "1b609434afe55d74a87269ae34633bcbbc990600119cc183d723d122a12e6d05"
+    }
+  },
+  "amendment_id": "a8a_pre_analysis_amendment_001",
+  "classification": "bounded-source-parser-defect-after-metadata-before-daily-station-access",
+  "failure": "The official GHCN station-list snapshot contains UTF-8 station-name characters, while the frozen parser required ASCII and stopped before requesting any Daymet or GHCN station archive.",
+  "original_freeze_sha256": "dd22e50d90db1c49cafa53ad3d54d0fdee486fe7f67e3227685a5881cb9031d5",
+  "schema_version": 1,
+  "semantic_change": "Decode the official fixed-width station list as strict UTF-8 instead of ASCII; point acquisition, parser coordinate fields, selected stations, sources, periods, classifier, bootstrap, analytic mechanism, thresholds, guards, and terminal rules are unchanged. Analyzer and verifier changes only bind outputs to the successor freeze hash.",
+  "station_list_field_note": "Identifier, latitude, longitude, elevation, and state fields remain ASCII numeric/code fields; the observed non-ASCII bytes occur in station-name text. Strict UTF-8 preserves fixed-width character positions and fails closed on malformed input."
+}

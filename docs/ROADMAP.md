@@ -49,81 +49,51 @@ pooling. The accepted A7 record is retained in the
 [A7a public report](reports/a7a-daily-precipitation-structure-report.md), and
 [A7b work package](work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md).
 
-The active queue is now the conditional A8 dry-regime applicability sequence.
-It is a new study, not an A7 rescue: A7b's whole-domain stop remains final, its
-thresholds are not relaxed, and its two isomorphic occurrence
-parameterizations count as one mechanism. Roadmapping fixes dependency and
-scope but does not authorize a downstream package after a failed predecessor.
-Each package must freeze its corpus, model, estimators, and decision rule before
-accessing its own candidate or confirmation output.
+The active queue is now the conditional A8c development pilot. This is not an
+A7 rescue: A7b's whole-domain stop remains final, its thresholds are not
+relaxed, and its two isomorphic occurrence parameterizations count as one
+mechanism. Each package must freeze its corpus, model, estimators, and decision
+rule before accessing its own candidate or confirmation output.
 
-1. **A8a — dry-regime applicability boundary and confirmation corpus.** Use
-   the already exposed A5a dry panel as development evidence: Death Valley,
-   Yuma, Wendover, and Daggett for arid climates, plus Douglas, Tombstone,
-   Jornada, and El Paso for monsoonal transition. Before retrieving new daily
-   data, select a disjoint confirmation panel from the public station
-   collection with at least four stations in each of hot-arid, cold-arid,
-   non-monsoonal semi-arid, and monsoonal-transition strata, plus at least four
-   humid/cold negative controls. Freeze geographic-separation, record-length,
-   source-availability, and no-substitution rules. Define a conservative,
-   station-level applicability classifier from climate aridity descriptors and
-   model-support evidence: seasonal wet-day counts, adjacent-wet-pair and
-   long-wet-state exposure, distinct wet amounts, amount-tail/variance-retention
-   margins, and monthly variance-reallocation slack. Migration requires every
-   seasonal lower-confidence bound to clear its registered guard; an ambiguous
-   station is assigned to fallback, never selected by generated output. Test
-   partition stability under held-out stations, shortened records, year-block
-   resampling, and Daymet/GHCN sensitivity where both are available. As part of
-   the same frozen analysis, apply the one unique A7b four-state construction
-   analytically to the held-out panel and require every station classified
-   `integrated_daily` to meet its stationary, identifiability, amount-tail, and
-   moment-budget gates; generate no candidate climate. Return exactly
-   `CONTINUE-A8B-DRY-PARTITION` with a confirmed classifier, explicit
-   applicability classes, and one scoped eligible-domain daily mechanism, or
-   `STOP-DRY-REGIME-PARTITION`. A monsoonal-specific successor may be proposed
-   only if a prospectively registered interaction test shows that the shared
-   classifier is unstable for the monsoonal stratum; A8a does not automatically
-   fork a parallel campaign.
-2. **A8b — secondary year-to-year fallback feasibility.** Only after
-   `CONTINUE-A8B-DRY-PARTITION`, accept A8a's scoped eligible-domain daily
-   mechanism without reopening its partition or selection. For the fallback
-   domain, retain the legacy daily occurrence/storm machinery and compare a
-   small prospectively declared set of secondary year-to-year mechanisms,
-   including an explicit legacy-only null. Do not reuse the retired A5
-   scalar-IID mechanism. Any interannual candidate must reallocate, rather than
-   add, monthly variance; preserve declared monthly wet fraction and amount
-   budgets; have bounded identifiable parameters; own a fixed,
-   domain-separated RNG stream; and require no path selection, fixed-count
-   optimization, or output repair. A8b may return
-   `USE-LEGACY-DAILY-FALLBACK`, select exactly one certified interannual
-   fallback, or stop the routed pilot. Failure of the optional interannual
-   mechanism must not force a hidden fallback or invalidate an otherwise
-   certified explicit legacy-only boundary path.
-3. **A8c — bounded explicit-routing development pilot.** Only after A8b
-   returns an explicit legacy-only or certified interannual fallback
-   disposition, specify the station-model applicability class, generation
-   behavior, and provenance before implementation. The
-   station document must explicitly declare `integrated_daily`,
-   `legacy_daily_fallback`, or the one selected interannual-fallback identity;
-   missing or unknown classification fails closed. Runtime never estimates
-   aridity, inspects generated output, or silently switches paths. Integrate
-   the daily mechanism only for eligible stations; boundary stations retain
-   the legacy daily machinery, optionally under the independently selected
-   year-to-year mechanism. Evaluate fixed arid, monsoonal, semi-arid, humid,
-   and cold development members with separate path-level faithful controls at
-   both horizons. Require faithful-mode byte identity, deterministic replay,
-   monthly moment budgets, improved registered daily or interannual targets,
-   storm/winter/cross-variable guards, and stable provenance. No full-corpus
-   promotion, WEPP confirmation, or public-default change is authorized; a
-   complete pilot may only support a separately roadmapped confirmation study.
+A8a completed on 2026-07-15 with `CONTINUE-A8B-DRY-PARTITION`. Its prospective
+20-station confirmation found 15 `integrated_daily` and five
+`legacy_daily_fallback` classifications, reproduced all eight development
+dispositions, integrated all four negative controls, reached 0.850
+shortened-window agreement, and passed all analytic and terminal guards.
+Monsoonal and other-dry instability were both 0.1875, so A8a does not justify a
+separate monsoonal campaign. The accepted record is retained in the
+[A8a work package](work-packages/20260715-a8a-dry-regime-applicability/package.md).
 
-Monsoonal climates therefore share A8a--A8c as a mandatory applicability
-stratum. Their annual precipitation alone is not a safe routing variable:
-seasonal concentration can leave dry-season occurrence states weakly
-identified even when annual totals appear adequate. A separate monsoonal
-sequence would duplicate corpus, routing, and fallback work and is not
-roadmapped unless A8a's frozen interaction test demonstrates a distinct,
-stable applicability boundary that the shared classifier cannot represent.
+A8b completed on 2026-07-15 with `USE-LEGACY-DAILY-FALLBACK`. Its exact pooled
+two-EOF/AR(1) candidate failed before coefficients because the frozen
+1980--2009 El Centro June-total scale is exactly zero; A8b did not drop or
+repair the cell and opened no replacement search. The explicit null certified,
+so boundary stations retain legacy daily behavior with no secondary year state
+or additional RNG. The accepted record is retained in the
+[A8b work package](work-packages/20260715-a8b-secondary-year-fallback/package.md).
+
+1. **A8c — bounded explicit-routing development pilot.** Accept A8b's
+   explicit legacy-only fallback, then specify the station-model applicability
+   class, generation behavior, and provenance before implementation. The
+   station document must explicitly declare `integrated_daily` or
+   `legacy_daily_fallback`; missing or unknown classification fails closed.
+   Runtime never estimates aridity, inspects generated output, or silently
+   switches paths. Integrate the daily mechanism only for eligible stations;
+   boundary stations retain the unmodified legacy daily machinery. Evaluate
+   fixed arid, monsoonal, semi-arid, humid, and cold development members with
+   separate path-level faithful controls at both horizons. Require faithful-
+   mode byte identity, deterministic replay, monthly moment budgets, improved
+   registered daily targets, storm/winter/cross-variable guards, and stable
+   provenance. No full-corpus promotion, WEPP confirmation, or public-default
+   change is authorized; a complete pilot may only support a separately
+   roadmapped confirmation study.
+
+Monsoonal climates therefore remain a mandatory stratum in A8c. Their
+annual precipitation alone is not a safe routing variable: seasonal
+concentration can leave dry-season occurrence states weakly identified even
+when annual totals appear adequate. A8a found no excess monsoonal instability,
+so a separate sequence would duplicate corpus, routing, and fallback work and
+is not roadmapped.
 
 A5f0 supplied the pivot into this queue. Its derived-only attribution returned
 `RETIRE-SCALAR-IID-MECHANISM` for the exact

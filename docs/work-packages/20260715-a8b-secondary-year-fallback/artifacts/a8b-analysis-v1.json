@@ -1,0 +1,51 @@
+{
+  "analysis_contract_sha256": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b",
+  "analysis_id": "a8b_secondary_year_fallback_feasibility_v1",
+  "candidate_skill": {
+    "candidate_lag_error": null,
+    "candidate_to_null_annual_covariance_error_ratio": null,
+    "candidate_to_null_offdiagonal_rmse_ratio": null,
+    "joint_station_improvement_count": 0,
+    "null_lag_error": null,
+    "validation_score_lag_spearman": null
+  },
+  "execution_counts": {
+    "alternatives": 2,
+    "fallback_stations": 10,
+    "monthly_budget_cells": 0,
+    "training_station_years": 300,
+    "validation_station_years": 160
+  },
+  "fit_failure": {
+    "code": "zero_training_monthly_scale",
+    "context": {
+      "months": [
+        6
+      ],
+      "station_id": "ca042713"
+    }
+  },
+  "parent": {
+    "development_fallback_station_ids": [
+      "az022664",
+      "az028619",
+      "az029654",
+      "ca042257",
+      "ca042319"
+    ],
+    "heldout_fallback_station_ids": [
+      "ca040442",
+      "ca042713",
+      "nv264436",
+      "or350412",
+      "tx417262"
+    ],
+    "terminal": "CONTINUE-A8B-DRY-PARTITION",
+    "valid": true
+  },
+  "pre_analysis_freeze_sha256": "dcd2ecf84b5f3e99cf3f93c6d800e65dd673f4f6cd53e8be164f557165d4e3bf",
+  "schema_version": 1,
+  "shared_fit": null,
+  "station_results": [],
+  "terminal": "USE-LEGACY-DAILY-FALLBACK"
+}

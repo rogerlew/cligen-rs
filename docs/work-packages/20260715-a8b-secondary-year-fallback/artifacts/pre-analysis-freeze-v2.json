@@ -1,0 +1,33 @@
+{
+  "a8a_parent_terminal": "CONTINUE-A8B-DRY-PARTITION",
+  "a8b_candidate_outputs_present_at_freeze": false,
+  "amendments": [
+    "a8b_pre_analysis_amendment_001"
+  ],
+  "fit_input_access_before_amendment": {
+    "a8b_annual_aggregates_computed_in_memory": true,
+    "candidate_coefficient_artifact_present": false,
+    "candidate_fit_reached": "per-station training monthly standardization",
+    "decision_artifact_present": false,
+    "metric_artifact_present": false
+  },
+  "freeze_id": "a8b_pre_analysis_freeze_v2",
+  "frozen_files_sha256": {
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/amend-freeze-a8b.py": "c1643515ee9f9aade7d38140bd0d4f0366783ab0d4ed7668fd8e89460b2b04f1",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/analyze-a8b.py": "dfcdccdd9ffb3e25495ae9d40d3a005d4212dc369b1caabe2c44205ffc41f469",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/design.md": "802699c78e66ba8072dca622ac1ad7d83780af085bdbe528565f57343c5b68e3",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/feasibility-contract-v1.json": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/freeze-a8b.py": "2e8f20eccc588ded3560da363747b8c94d2c120f4fafb2aea3fc1b20a3f2d381",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-amendment-001.json": "3baa2e005fa99f99309185cc5f1a6dd1de3a5097062314aeaa64b35bb2b1bc4e",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-freeze-v1.json": "b66f0c8d3788e0230db5958c301a7a4a68d2448d1bd871eb83676daf5bc9fdfc",
+    "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/verify-a8b.py": "352d3e32f2da9e785bb4d5bbdaff52fac3e899800837026a036b13af94e379fd"
+  },
+  "method_boundary": "The v1 corpus, alternatives, fit, zero-scale failure, budgets, metrics, thresholds, RNG, and terminal priority remain unchanged; v2 only binds structured reporting of candidate infeasibility and the registered null.",
+  "prior_freeze": {
+    "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-freeze-v1.json",
+    "sha256": "b66f0c8d3788e0230db5958c301a7a4a68d2448d1bd871eb83676daf5bc9fdfc"
+  },
+  "schema_version": 2,
+  "source_commit": "26f581b99b425ef9699ec85d9322ff72b0b8bdd3",
+  "status": "FROZEN-BEFORE-A8B-CANDIDATE-FIT"
+}

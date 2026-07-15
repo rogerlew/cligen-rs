@@ -1,0 +1,28 @@
+{
+  "analysis_id": "a8b_secondary_year_fallback_feasibility_v1",
+  "candidate_eligible": false,
+  "candidate_guards": {
+    "all_station_budgets_feasible": false,
+    "annual_covariance_improvement": false,
+    "cross_month_covariance_improvement": false,
+    "eof_representation": false,
+    "joint_station_breadth": false,
+    "minimum_allocated_months": false,
+    "persistence_not_degraded": false,
+    "station_scale_bounds": false
+  },
+  "fit_failure": {
+    "code": "zero_training_monthly_scale",
+    "context": {
+      "months": [
+        6
+      ],
+      "station_id": "ca042713"
+    }
+  },
+  "null_certified": true,
+  "parent_valid": true,
+  "schema_version": 1,
+  "selected_alternative": "legacy_daily_only_v1",
+  "terminal": "USE-LEGACY-DAILY-FALLBACK"
+}

@@ -1,0 +1,642 @@
+{
+  "access_date": "2026-07-15",
+  "analysis_contract_sha256": "cfe57a125d9f25a2b7d3ad8206280b87858747e92cb6fe2c9a385078f49f3263",
+  "ghcn_station_list": {
+    "archive_path": "references/observed/a8a-v1/metadata/ghcnd-stations.txt.gz",
+    "archive_sha256": "047a5de7be283a324a0709dbf7a6184a28b5bf5af8c0c446ae1bc33bce7d220b",
+    "source_bytes": 11395053,
+    "source_sha256": "fedc8bbe92f9b1eee0a57f8886e5e022965a542efa60710c01b47a838120b18d",
+    "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt"
+  },
+  "panel_sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+  "pre_analysis_freeze_sha256": "6a1ea6123715cfe2c02aad233e0668792fcf81688de1fe931b6157695cb73656",
+  "schema_version": 1,
+  "stations": [
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 125859,
+          "archive_path": "references/observed/a8a-v1/daymet/az026481.csv.gz",
+          "archive_sha256": "a36653bca9edf6d85a2be97bafd3ffac95c76dc466b7a5991abd3098e0c74219",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "3a0d8fa2f098fd3b090bcd970853b6659d89ab7a394e7dfda0395e1a6386af93",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 336,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426917,
+          "source_sha256": "2dbc74d61a959f43fc6671b4cd8014608a3382dc707b4c82f9bc4976e9b31a1e",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=33.43&lon=-112.03&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00026481"
+        }
+      },
+      "station_id": "az026481",
+      "stratum": "hot_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 127723,
+          "archive_path": "references/observed/a8a-v1/daymet/az028820.csv.gz",
+          "archive_sha256": "43911d557d0a2c5a745776af98c6d52e280dff04f8a2a8651ab2cc630420e846",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "d59da52075b9e4cd986de840726cff817ec8f40b051cd267c7694559045e9092",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 799,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 425891,
+          "source_sha256": "310f7e8a5fd397aac8cb9f78e3a0b293d3c90c0f94689401f267093c1444fefb",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=32.18&lon=-110.88&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00028820"
+        }
+      },
+      "station_id": "az028820",
+      "stratum": "monsoonal_transition"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 125804,
+          "archive_path": "references/observed/a8a-v1/daymet/ca040442.csv.gz",
+          "archive_sha256": "8763b72ceae5ef4dc47e8e71f7d52ae1e29036f88c6085c714ac90981815decf",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "7340f4170e0a59cd7876d45334e834a33bd31a9972f37d99b55c2af074485348",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 137,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 424808,
+          "source_sha256": "e996dbb22e86c455b9d11ef3c2d86c649fe0c7654fb039de53642cdeb885a77e",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=35.42&lon=-119.05&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00040442"
+        }
+      },
+      "station_id": "ca040442",
+      "stratum": "hot_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 123065,
+          "archive_path": "references/observed/a8a-v1/daymet/ca042713.csv.gz",
+          "archive_sha256": "5a052c0180e0501056fe7b0dadc73b48d6cae70fdedb905edfaf7aad23f7b1bd",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "c5af74f1ecdd998e2ddcf54d0994dacf281f9122d062894d86b2baabb7432a79",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": -11,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 427155,
+          "source_sha256": "4a09539484dd7cccc590810561887c4ac5a7ff45746c2d3c3df5c0cdb15e8b9e",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=32.78&lon=-115.57&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "archive_bytes": 672319,
+          "archive_path": "references/observed/a8a-v1/ghcn/USC00042713.csv.gz",
+          "archive_sha256": "7b41171e16e07fc8a2a2e660303347b0308fa24ddd70f2fb72672106aeaa63b9",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "coordinate_separation_km": 1.516712328254497,
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-15",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "93bcf02a779569fd0009b479d42ba9d925ff0d7a3bffb3f299fa2cc08e4a8f1a",
+          "fixed_window_prcp_count": 16222,
+          "fixed_window_prcp_coverage": 0.96548029996429,
+          "retrieval_date": "2026-07-15",
+          "sensitivity_eligible": true,
+          "source_bytes": 672319,
+          "source_sha256": "7b41171e16e07fc8a2a2e660303347b0308fa24ddd70f2fb72672106aeaa63b9",
+          "station_identifier": "USC00042713",
+          "station_metadata": {
+            "elevation_m": -9.1,
+            "latitude": 32.7667,
+            "longitude": -115.5664,
+            "name": "EL CENTRO 2 SSW",
+            "state": "CA"
+          },
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00042713.csv.gz"
+        }
+      },
+      "station_id": "ca042713",
+      "stratum": "hot_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 129439,
+          "archive_path": "references/observed/a8a-v1/daymet/co050130.csv.gz",
+          "archive_sha256": "518baceb81c0b947df5e7b7b83edcd4f811e640e292e5217ddbb7e21e9b57390",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "6df867ffa222b09cddcb6124db9e215984482439e86355b5089a9e7555761c65",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 2296,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426024,
+          "source_sha256": "6d2b87a28651867f686d2c9b6668b1876a36676eb9bd9b8be8d99abfe659374a",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=37.43&lon=-105.85&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00050130"
+        }
+      },
+      "station_id": "co050130",
+      "stratum": "cold_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 131818,
+          "archive_path": "references/observed/a8a-v1/daymet/id101022.csv.gz",
+          "archive_sha256": "9dd7079d40aa813cc17dfb31715625058d363ca963e09412b0d8706c4e136b86",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "c2d2cfedc4a3153f4f0890c9d66cbe74ef72a875e6a56d3b0ad3ff9eb86274de",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 868,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 421653,
+          "source_sha256": "8a6299d23fedc7457331f15943fc2390e78ac2a8c14d7b2cb466244c013ff4fe",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=43.57&lon=-116.22&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00101022"
+        }
+      },
+      "station_id": "id101022",
+      "stratum": "non_monsoonal_semi_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 134167,
+          "archive_path": "references/observed/a8a-v1/daymet/la160549.csv.gz",
+          "archive_sha256": "10b3b435a8b8b650db1f828a90ed6cef9da5eb2def864a1da373a64367ce8133",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "6d60bb60e3923da3019a1d4ed0aab620cde7029a5d3ee606a1d8aeb2d2d32d31",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 21,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 429466,
+          "source_sha256": "72a738668cbca9fcf16dd1d29b19c046c91deb34c93d3c0ee533edc8ecedbdc8",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=30.53&lon=-91.15&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00160549"
+        }
+      },
+      "station_id": "la160549",
+      "stratum": "negative_control"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 140406,
+          "archive_path": "references/observed/a8a-v1/daymet/me171175.csv.gz",
+          "archive_sha256": "2aa22a065a414b846ca75cde1e23cdb87759b3f35a202e67fd0ffeb295270ee0",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "8fe70191eedf48c5439ba528e71cdbed80358024a1d63e59e68491fe8a147736",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 174,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 428979,
+          "source_sha256": "004a3d17ef8203bfa65ceddcd96eb9f3320800b4bb30ba7d89fc2f9fdb97462b",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=46.87&lon=-68.02&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00171175"
+        }
+      },
+      "station_id": "me171175",
+      "stratum": "negative_control"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 137372,
+          "archive_path": "references/observed/a8a-v1/daymet/mn212248.csv.gz",
+          "archive_sha256": "444a5935a273715d17de281a17a98b204bb7b15196aebe1ad78dff4d9f8f0f08",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "98e416a6ba183bb222a807f06e7c3c84d02d3a9d76fa34ce2b2026af129e7f02",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 424,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 429313,
+          "source_sha256": "8b7a8f72ed864245ee113e74565dc67e98689eac312f48b92da8e8a021acea26",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=46.83&lon=-92.18&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00212248"
+        }
+      },
+      "station_id": "mn212248",
+      "stratum": "negative_control"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 132384,
+          "archive_path": "references/observed/a8a-v1/daymet/mt243996.csv.gz",
+          "archive_sha256": "7ddcf3c3d1615aa0b8e681b738ab004ce2e4e10695517a9a9041b97763c53804",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "f96f08efd9af7e76cd3e5e4adbf921b6c20217238cc3a4869e93684d5ec63340",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 776,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426766,
+          "source_sha256": "cbe4c1589cf04bfaada19dc8aa64302c7bb0682caa1ae71d5fcc8199ada1a28d",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=48.55&lon=-109.77&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00243996"
+        }
+      },
+      "station_id": "mt243996",
+      "stratum": "non_monsoonal_semi_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 132195,
+          "archive_path": "references/observed/a8a-v1/daymet/ne257665.csv.gz",
+          "archive_sha256": "671bd9c3cb4c0bb6a86ec3be36fb5f4c4fe9b09707969ab80d0665aa790d8fd0",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "22f3351ec6e0b2a24755dca29ae8f6c52730591690e6433def1ed46b09d70396",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 1191,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426355,
+          "source_sha256": "6fab22e9c794d22351fe81ee1ddcb14d64c60bf77c6996695cfbb7df59f9b77e",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=41.87&lon=-103.6&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00257665"
+        }
+      },
+      "station_id": "ne257665",
+      "stratum": "non_monsoonal_semi_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 128623,
+          "archive_path": "references/observed/a8a-v1/daymet/nm290234.csv.gz",
+          "archive_sha256": "d44c5a77cde9891fbcd82e44482937b538cd4ae4e1c3674019804cfe1ae9b162",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "9637e1eedf79fe844da235d9e363f5e63d6b23985bdc15882a6e059857509cca",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 1590,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 425272,
+          "source_sha256": "09715094aca1575a214c5f4eeed461c52ee35727b1f6b0c9ceeba6de97646383",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=35.05&lon=-106.62&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00290234"
+        }
+      },
+      "station_id": "nm290234",
+      "stratum": "monsoonal_transition"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 129562,
+          "archive_path": "references/observed/a8a-v1/daymet/nv262631.csv.gz",
+          "archive_sha256": "b4eed4549cd03c81df2c92958a26e4898f2782ab6906c7ec04f4452fec9528ae",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "0ba509394216ff0d7b09eb01d8bee3c727746f050ce3b2970daa6b4a9401256e",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 1919,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 423834,
+          "source_sha256": "1e58b5ccf3c97bf0a339d85a71a41f22321f145d1b6ae4420852ea4dda2765e6",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=39.28&lon=-114.85&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00262631"
+        }
+      },
+      "station_id": "nv262631",
+      "stratum": "cold_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 125616,
+          "archive_path": "references/observed/a8a-v1/daymet/nv264436.csv.gz",
+          "archive_sha256": "0f0559eb4389d06dbf7d81e1cbb8179d7655e909e7a50bca219633551c8d5672",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "fc49cc4880d76a92e8c52afe4fe1c44afc889ed90e50dc90887c9ef0e8315f5c",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 672,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 425445,
+          "source_sha256": "1be7c1c287fff55dde067680ff876cdbcf2c17d3dc15e7a60b310e5e83eeac89",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=36.08&lon=-115.17&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00264436"
+        }
+      },
+      "station_id": "nv264436",
+      "stratum": "hot_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 129223,
+          "archive_path": "references/observed/a8a-v1/daymet/nv269171.csv.gz",
+          "archive_sha256": "194e2c801e64a2989376b3a3f98fe12afbcd09f88146f7f955ded8a59f31cef9",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "5640a1cedf74412cc98676b5f40171aaecf1f9e960c4ef4799bbcfbe83500168",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 1322,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 422563,
+          "source_sha256": "8a86ffed6580cb44ef5a832ff02caa80e90c56c7a3c16154aa7f34452a639e6c",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=40.97&lon=-117.73&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00269171"
+        }
+      },
+      "station_id": "nv269171",
+      "stratum": "cold_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 131805,
+          "archive_path": "references/observed/a8a-v1/daymet/or350412.csv.gz",
+          "archive_sha256": "b7dd75140f5a3024165001f928bd466856d9c0d98cdfb7f46b214e87ce44dd53",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "cf94f44195994202493f4002807467967dafb58fa41a1f9bd8798743bda747df",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 1027,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 420490,
+          "source_sha256": "4350916d6f055353ce58c841d2e5d2be633a04bae885aa4673e3a6ca1b24c3d4",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=44.83&lon=-117.82&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00350412"
+        }
+      },
+      "station_id": "or350412",
+      "stratum": "non_monsoonal_semi_arid"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 134047,
+          "archive_path": "references/observed/a8a-v1/daymet/sc381544.csv.gz",
+          "archive_sha256": "1330066ec54f3a00b6eeb0f18c67b3975d792038bce581ebe5713933584ac9e2",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "c611d7c6ae91d76e8f79ad04c791a1207369887cde8323438c1b45adc8b9bd1b",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 12,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 428668,
+          "source_sha256": "9a2be4d2b11bb072b7561126f32bfc2bc152fafc6da8527fe519f690a287066b",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=32.9&lon=-80.03&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00381544"
+        }
+      },
+      "station_id": "sc381544",
+      "stratum": "negative_control"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 126868,
+          "archive_path": "references/observed/a8a-v1/daymet/tx413280.csv.gz",
+          "archive_sha256": "fe147d67a2197f49942c95364fd3e08fd426e14aa09fe3e3086f1fac40633c5c",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "66708dcd92ee3bb8d4528e7b99a508db9e9bfde00fd68a562387e803c64adab6",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 896,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426398,
+          "source_sha256": "a9a5f83b9dd30ecc90ba1b0f7cb53adcdbce08300959f5819fddadf78671e6e6",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=30.9&lon=-102.87&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "archive_bytes": 632072,
+          "archive_path": "references/observed/a8a-v1/ghcn/USC00413280.csv.gz",
+          "archive_sha256": "e2d15973396dc201695ea4680183ce145f49f541f713821e1db607a36ca45f4e",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "coordinate_separation_km": 4.3955538823853555,
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-15",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "84805df55e8cbb54bd42dfc30acc0557531dcde0bc6da89cbf212319089372e3",
+          "fixed_window_prcp_count": 15249,
+          "fixed_window_prcp_coverage": 0.9075705273181764,
+          "retrieval_date": "2026-07-15",
+          "sensitivity_eligible": true,
+          "source_bytes": 632072,
+          "source_sha256": "e2d15973396dc201695ea4680183ce145f49f541f713821e1db607a36ca45f4e",
+          "station_identifier": "USC00413280",
+          "station_metadata": {
+            "elevation_m": 926.0,
+            "latitude": 30.9072,
+            "longitude": -102.9153,
+            "name": "FT STOCKTON",
+            "state": "TX"
+          },
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00413280.csv.gz"
+        }
+      },
+      "station_id": "tx413280",
+      "stratum": "monsoonal_transition"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 126087,
+          "archive_path": "references/observed/a8a-v1/daymet/tx417262.csv.gz",
+          "archive_sha256": "7b6adde8bce54cac56f1febcadb3a25a1fc7b866dd4f22a6eb85e4c542e6d338",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "8616ba265b9a9780b1d7d08680be1c3eae8bb374e3378488af3b3c5bd2ef80ad",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 778,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 426680,
+          "source_sha256": "e5c1cc36fa1a0814a68544c50c4787431dcf7058a5f74355db85fdf96fbdb8a2",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=29.55&lon=-104.37&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "archive_bytes": 550675,
+          "archive_path": "references/observed/a8a-v1/ghcn/USC00417262.csv.gz",
+          "archive_sha256": "95304b3f1c9e43d75ab13cb687417c6ff153c4bfe4e9ae7950338907ac85ce35",
+          "availability": "available",
+          "calendar": "proleptic_gregorian",
+          "coordinate_separation_km": 2.3501204783532827,
+          "dataset": "GHCN-Daily",
+          "dataset_version": "snapshot-2026-07-15",
+          "doi": "10.7289/V5D21VHZ",
+          "fixed_window_logical_records_sha256": "aeea5517973cd13a6bee7498b7f7e3cf93195515c60cf7d6e852766c6cb79b0c",
+          "fixed_window_prcp_count": 10925,
+          "fixed_window_prcp_coverage": 0.6502202118795382,
+          "retrieval_date": "2026-07-15",
+          "sensitivity_eligible": false,
+          "source_bytes": 550675,
+          "source_sha256": "95304b3f1c9e43d75ab13cb687417c6ff153c4bfe4e9ae7950338907ac85ce35",
+          "station_identifier": "USC00417262",
+          "station_metadata": {
+            "elevation_m": 795.5,
+            "latitude": 29.5711,
+            "longitude": -104.3714,
+            "name": "PRESIDIO",
+            "state": "TX"
+          },
+          "upstream_url": "https://www.ncei.noaa.gov/pub/data/ghcn/daily/by_station/USC00417262.csv.gz"
+        }
+      },
+      "station_id": "tx417262",
+      "stratum": "monsoonal_transition"
+    },
+    {
+      "sources": {
+        "daymet": {
+          "archive_bytes": 130392,
+          "archive_path": "references/observed/a8a-v1/daymet/wy487845.csv.gz",
+          "archive_sha256": "cdaa59b54354b70637fe5fd7d8636f6c815216588a576bddbd387954afbe37d0",
+          "availability": "available",
+          "calendar": "noleap_365",
+          "dataset": "Daymet",
+          "dataset_version": "V4 R1 / 4.1",
+          "doi": "10.3334/ORNLDAAC/2129",
+          "fixed_window_logical_records_sha256": "5ba73ad6124cefda648b2c956e076c022d70fd03e67c3a067776e6075ca9e69d",
+          "fixed_window_record_count": 16790,
+          "grid_elevation_m": 2040,
+          "retrieval_date": "2026-07-15",
+          "source_bytes": 425044,
+          "source_sha256": "9931517751060357e09f9379bf919fdc69a6cd3d061036725042a5a61cd55df8",
+          "upstream_url": "https://daymet.ornl.gov/single-pixel/api/data?lat=41.6&lon=-109.07&vars=prcp,tmax,tmin"
+        },
+        "ghcn": {
+          "availability": "unavailable",
+          "reason": "candidate U.S. Cooperative identifier absent from official station list",
+          "station_identifier": "USC00487845"
+        }
+      },
+      "station_id": "wy487845",
+      "stratum": "cold_arid"
+    }
+  ]
+}
