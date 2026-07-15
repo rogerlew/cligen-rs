@@ -1,10 +1,10 @@
 # A8c1 — Routed-Daily Runtime Retirement
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-15
 Evidence mode: Mixed
 Scaffolding authorization: operator authorized on 2026-07-15
-Execution authorization: requires separate operator dispatch
+Execution authorization: operator dispatched on 2026-07-15
 
 ## Objective
 
@@ -119,6 +119,13 @@ The release-exposure decision precedes destructive source edits. If the A8c
 surface shipped, stop at `EXECUTED-HOLD-RELEASE-EXPOSURE`; do not infer that an
 experimental label makes removal semver-safe.
 
+Execution began from clean `main` at
+`49a67775d22f0452bbf65f0a1ad35435e0d340f9`, a documented descendant of the
+A8c implementation commit. The exposure audit returned `REMOVAL-SUPPORTED`.
+All A8c-specific runtime surfaces were removed, shared files were restored to
+the exact pre-A8c comparator, and publication was not requested by this
+dispatch.
+
 ## Gates
 
 - official registry/release/tag audit supports removal;
@@ -163,6 +170,26 @@ Legitimate holds are:
   A8c-specific or independently generic.
 
 No hold authorizes partial retirement, A8c repair, or A9 implementation.
+
+## Execution result
+
+`EXECUTED-COMPLETE` with terminal
+`A8C-ROUTED-DAILY-RUNTIME-RETIRED`.
+
+- 27 current-interface surfaces were dispositioned: four A8c-only files were
+  deleted, 22 shared/current files were restored byte-for-byte to the pre-A8c
+  comparator, and the specification registry now retains only a retired
+  historical A8c entry.
+- All 148 frozen A7/A8, observed-source, LFS-configuration, public-report, and
+  A9a scaffold records retain their exact baseline identities.
+- The accepted A8c archive remains Git-LFS-managed and content-verifiable; the
+  implementation commit remains reachable.
+- Faithful golden parity, revision-1 station parity, Cargo package-surface,
+  full repository, coverage, and CRAP gates pass.
+- Consolidated review found zero open P1/P2 findings.
+
+A9a remains scaffolded and unexecuted. This terminal satisfies its predecessor
+condition but does not constitute its separate execution dispatch.
 
 ## Artifacts
 

@@ -355,8 +355,7 @@
       "type": "string",
       "enum": [
         "faithful_5_32_3",
-        "fast_batch_v0",
-        "a8c_routed_daily_v1"
+        "fast_batch_v0"
       ],
       "default": "faithful_5_32_3"
     },

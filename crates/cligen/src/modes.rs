@@ -32,7 +32,7 @@ use crate::cbk9::Cbk9State;
 use crate::ccl1::Ccl1State;
 use crate::cinterp::CinterpState;
 use crate::crandom3::Crandom3State;
-use crate::daily::{clgen_routed, r5monb, windg, ClgenEvents};
+use crate::daily::{clgen, r5monb, windg, ClgenEvents};
 use crate::deviates::DstgState;
 use crate::fast_batch::MonthlyBatchBackend;
 use crate::libm_pinned::{cosf_pinned, sinf_pinned};
@@ -42,8 +42,6 @@ use crate::profile::{GenerationProfile, QcFilter};
 use crate::quality::process::ProcessCounters;
 use crate::quality::report::ProcessMetrics;
 use crate::rng::randn_observed;
-use crate::routed_precip::DailyPrecipitationBackend;
-use crate::station::A8cDailyPrecipitation;
 use crate::storm::{storm_block, wet_day_duration, SingleStormParams};
 
 use crate::acm::AcmState;
@@ -98,7 +96,6 @@ pub struct GenState {
     pub ci: CinterpState,
     pub cr: Crandom3State,
     pub batch: MonthlyBatchBackend,
-    pub(crate) daily_precipitation: DailyPrecipitationBackend,
     pub acm: AcmState,
     pub dg: DstgState,
     pub daygen: DayGenState,
@@ -131,19 +128,7 @@ pub fn generation_setup(
     ci: CinterpState,
     ylt: f32,
 ) -> GenState {
-    generation_setup_with_process(
-        bk1,
-        bk4,
-        bk7,
-        bk9,
-        ci,
-        ylt,
-        GenerationProfile::Faithful5323,
-        QcFilter::Faithful,
-        ProcessCounters::default(),
-        None,
-    )
-    .expect("faithful generation setup has no extension route")
+    generation_setup_with_profile(bk1, bk4, bk7, bk9, ci, ylt, GenerationProfile::Faithful5323)
 }
 
 /// Generation setup with an explicit profile-owned monthly batch backend.
@@ -169,9 +154,7 @@ pub fn generation_setup_with_profile(
         profile,
         QcFilter::Faithful,
         ProcessCounters::default(),
-        None,
     )
-    .expect("direct generation setup does not accept routed profiles")
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -185,9 +168,7 @@ fn generation_setup_with_process(
     profile: GenerationProfile,
     qc: QcFilter,
     mut process: ProcessCounters,
-    daily_route: Option<&A8cDailyPrecipitation>,
-) -> Result<GenState, RunError> {
-    validate_daily_route(profile, daily_route)?;
+) -> GenState {
     let bk5 = Cbk5State {
         sml: 0.0, // cligen.f:865
         ..Cbk5State::default()
@@ -227,8 +208,7 @@ fn generation_setup_with_process(
     bk7.msim = 1; // cligen.f:901-902
     bk7.nsim = 1;
     let batch = MonthlyBatchBackend::from_profile(profile, qc, &bk7);
-    let daily_precipitation = DailyPrecipitationBackend::from_route(daily_route, &bk7);
-    Ok(GenState {
+    GenState {
         bk1,
         bk3: Cbk3State::default(),
         bk4,
@@ -239,29 +219,10 @@ fn generation_setup_with_process(
         ci,
         cr,
         batch,
-        daily_precipitation,
         acm: AcmState::default(),
         dg: DstgState::default(),
         daygen: DayGenState::default(),
         process,
-    })
-}
-
-fn validate_daily_route(
-    profile: GenerationProfile,
-    daily_route: Option<&A8cDailyPrecipitation>,
-) -> Result<(), RunError> {
-    match (profile, daily_route) {
-        (GenerationProfile::A8cRoutedDailyV1, None) => Err(RunError::InvalidInput {
-            field: "station.daily_precipitation.route",
-            message: "is required for generation_profile a8c_routed_daily_v1",
-        }),
-        (GenerationProfile::A8cRoutedDailyV1, Some(_)) => Ok(()),
-        (_, Some(_)) => Err(RunError::InvalidInput {
-            field: "station.daily_precipitation.route",
-            message: "is accepted only with generation_profile a8c_routed_daily_v1",
-        }),
-        (_, None) => Ok(()),
     }
 }
 
@@ -339,7 +300,7 @@ pub fn day_gen(
             if st.ci.interp == 1 {
                 lintrp(mo, jd, ntd, &mut st.ci);
             }
-            let events = clgen_routed(
+            let events = clgen(
                 ntd,
                 iyear,
                 &mut st.bk1,
@@ -350,7 +311,6 @@ pub fn day_gen(
                 &st.ci,
                 &mut st.cr,
                 &mut st.batch,
-                &mut st.daily_precipitation,
                 &mut st.acm,
                 &mut st.process,
             );
@@ -504,7 +464,6 @@ pub(crate) struct ResolvedRunInputs<'a> {
     pub(crate) begin_year: Option<i32>,
     pub(crate) years: Option<i32>,
     pub(crate) station: &'a crate::station::FixedMonthly5323,
-    pub(crate) daily_precipitation: Option<&'a A8cDailyPrecipitation>,
     pub(crate) prn_bytes: Option<&'a [u8]>,
     pub(crate) storm: Option<crate::storm::SingleStormParams>,
     pub(crate) version: f32,
@@ -554,7 +513,6 @@ pub fn run_to_cli(inp: &RunInputs<'_>) -> Result<RunOutput, RunError> {
         begin_year: inp.begin_year,
         years: inp.years,
         station: par.fixed_monthly(),
-        daily_precipitation: None,
         prn_bytes: inp.prn_bytes,
         storm: inp.storm,
         version: inp.version,
@@ -623,8 +581,7 @@ pub(crate) fn run_to_cli_resolved(inp: &ResolvedRunInputs<'_>) -> Result<Generat
         inp.generation_profile,
         inp.qc_filter,
         process,
-        inp.daily_precipitation,
-    )?;
+    );
 
     // ---- wxr_gen ----
     let mut nbt = 1;
@@ -722,7 +679,6 @@ fn process_qc_filter(profile: GenerationProfile, qc: QcFilter) -> Option<String>
     match profile {
         GenerationProfile::Faithful5323 => Some(qc.provenance_name().to_owned()),
         GenerationProfile::FastBatchV0 => None,
-        GenerationProfile::A8cRoutedDailyV1 => Some(qc.provenance_name().to_owned()),
     }
 }
 
@@ -810,7 +766,6 @@ mod generated_run_tests {
             begin_year: (iopt == 5).then_some(1),
             years: (iopt == 5).then_some(1),
             station: par.fixed_monthly(),
-            daily_precipitation: None,
             prn_bytes: prn_bytes.as_deref(),
             storm: None,
             version: 5.3230,

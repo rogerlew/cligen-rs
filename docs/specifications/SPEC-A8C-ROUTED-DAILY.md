@@ -1,16 +1,23 @@
 # SPEC-A8C-ROUTED-DAILY — Explicit Routed Daily Precipitation v1
 
-Status: implemented experimental profile; A8c campaign stopped (revision 1)
-Surface: station-document revision 2, generation profile
-`a8c_routed_daily_v1`, and the daily precipitation runtime seam.
+Status: retired historical specification; runtime retired by A8c1 (revision 1)
+Surface: former station-document revision 2, generation profile
+`a8c_routed_daily_v1`, and daily precipitation runtime seam.
+
+This document preserves the exact contract used by the accepted A8c pilot. It
+is not a current interface specification: A8c1 removed every producer,
+consumer, accepted schema branch, and runtime implementation from `main` after
+confirming that none had shipped. The implementation remains reproducible from
+Git commit `fdd35f60241f25663614db46142bfe3683c6ce5f` and the retained A8c
+evidence; new work must define a new contract rather than reuse these IDs.
 
 ## Producers and consumers
 
-The A8c station builder produces revision-2 station documents. The runspec
-resolver validates them and the generator consumes their declared route. Text,
-Parquet, quality, and provenance consumers receive the selected station-model
-and generation-profile identities. This is an extension under ADR-0001; it is
-not part of faithful CLIGEN 5.32.3.
+For the historical A8c implementation, the station builder produced revision-2
+station documents. The runspec resolver validated them and the generator
+consumed their declared route. Text, Parquet, quality, and provenance consumers
+received the selected station-model and generation-profile identities. This
+was an extension under ADR-0001; it was not part of faithful CLIGEN 5.32.3.
 
 ## Compatibility axes
 
@@ -146,6 +153,6 @@ Pilot success may only recommend a separately scoped confirmation package; it
 does not authorize full-corpus or WEPP claims.
 
 The executed A8c pilot returned `STOP-A8-ROUTED-DAILY`. This specification is
-retained to define the explicit experimental surface and reproduce its evidence;
-the profile is not recommended for production generation, no A8d confirmation
-is authorized, and faithful mode remains the default.
+retained only to define the historical experimental surface and reproduce its
+evidence. The profile is no longer accepted or implemented on current `main`,
+no A8d confirmation is authorized, and faithful mode remains the default.

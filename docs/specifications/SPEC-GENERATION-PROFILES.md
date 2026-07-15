@@ -1,6 +1,6 @@
 # SPEC-GENERATION-PROFILES — Declared Generator Behavior Profiles
 
-Status: active (rev 5; A8c adds the explicit routed daily pilot; A1 distinguishes canonical structured profile IDs from
+Status: active (rev 4; A1 distinguishes canonical structured profile IDs from
 legacy command-marker spelling; rev 3 adds the `qc_filter` policy knob under
 ADR-0002; v1 design draft linked below)
 Surface: the `generation_profile` and `qc_filter` selectors in a rev-1
@@ -23,7 +23,6 @@ values are:
 |---|---|---|
 | `faithful_5_32_3` | Default source-authority port. | Existing legacy-compatible header behavior is preserved for golden byte identity. |
 | `fast_batch_v0` | Experimental, non-faithful four-lane monthly uniform-batch producer. | The writer appends `--generation-profile fast-batch-v0` to the CLI header command line. |
-| `a8c_routed_daily_v1` | Non-default A8c daily-precipitation pilot. Requires a revision-2 station document with an explicit integrated or fallback route, continuous mode, interpolation `none`, and faithful QC. | The writer appends `--generation-profile a8c-routed-daily-v1`; structured provenance names the routed RNG scheme and declared station model. |
 
 Unknown values fail closed at YAML parsing. A profile can never be selected
 implicitly by host, build target, or environment variable.
@@ -64,13 +63,6 @@ implicit behavior.
 The combination `generation_profile: faithful_5_32_3` +
 `qc_filter: faithful` is the byte-identity surface; every other
 combination is a declared extension measured under ADR-0002.
-
-`a8c_routed_daily_v1` keeps the faithful QC-conditioned monthly batch for all
-source parameters and adds two domain-separated daily streams only on the
-eligible integrated route. Its fallback delegates to faithful daily
-precipitation and consumes no extension RNG. Full semantics and pairing rules
-are in [SPEC-A8C-ROUTED-DAILY](SPEC-A8C-ROUTED-DAILY.md). It is a development
-pilot, not a default or promotion.
 
 ## Profile evolution
 

@@ -420,7 +420,6 @@ fn station_input_schema(provenance: &ArtifactProvenanceV1) -> String {
 fn station_model(provenance: &ArtifactProvenanceV1) -> &'static str {
     match provenance.station.model {
         StationModelV1::FixedMonthly5323 => "fixed_monthly_5_32_3",
-        StationModelV1::A8cIntegratedDailyV1 => "a8c_integrated_daily_v1",
     }
 }
 
@@ -428,7 +427,6 @@ fn generation_profile(provenance: &ArtifactProvenanceV1) -> &'static str {
     match provenance.generation.profile {
         GenerationProfileV1::Faithful5323 => "faithful_5_32_3",
         GenerationProfileV1::FastBatchV0 => "fast_batch_v0",
-        GenerationProfileV1::A8cRoutedDailyV1 => "a8c_routed_daily_v1",
     }
 }
 

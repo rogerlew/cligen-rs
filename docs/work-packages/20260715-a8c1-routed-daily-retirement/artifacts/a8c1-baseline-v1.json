@@ -1,0 +1,1009 @@
+{
+  "captured_at_utc": "2026-07-15T20:33:45.229643+00:00",
+  "counts": {
+    "mutable_status_documents": 4,
+    "preserved_records": 148,
+    "removal_surfaces": 27
+  },
+  "implementation_commit": "fdd35f60241f25663614db46142bfe3683c6ce5f",
+  "mutable_status_documents": [
+    {
+      "bytes": 17634,
+      "path": "docs/ROADMAP.md",
+      "sha256": "f97c9380c786846171b4c7b022d0c2ec26f3a4be647b499626aaa40f8a982c4d"
+    },
+    {
+      "bytes": 6771,
+      "path": "docs/specifications/SPEC-A8C-ROUTED-DAILY.md",
+      "sha256": "fdd27ddc76ca675c2be4f9d2c47a9847337ed375d1cc66709e694b90bc0a1107"
+    },
+    {
+      "bytes": 4550,
+      "path": "docs/work-packages/README.md",
+      "sha256": "3582f1fb1ed483bb199e75b9a0e2dce3fce0742ec4b361e937b7f66ecac916e4"
+    },
+    {
+      "bytes": 8819,
+      "path": "docs/work-packages/20260715-a8c1-routed-daily-retirement/package.md",
+      "sha256": "81fe236dd42bedcd916d561d1181fa16d34c16d336509f4a94cebecc78f8642f"
+    }
+  ],
+  "pre_a8c_comparator_commit": "046eba3c8d4508c84522c6dbd7cec4d39f094563",
+  "preserved_records": [
+    {
+      "bytes": 1302,
+      "path": ".gitattributes",
+      "sha256": "52ab6cdc68b01a592d3fcc7accf20077b07d79318b0234f747d6c0e2c5fdb6b1"
+    },
+    {
+      "bytes": 9690,
+      "path": "docs/reports/a7a-daily-precipitation-structure-report.manifest.json",
+      "sha256": "9b0fa6aaad1550c8e5d9699b5d7d46034e0e8630a5c1504161ce891fd85ea6ef"
+    },
+    {
+      "bytes": 21102,
+      "path": "docs/reports/a7a-daily-precipitation-structure-report.md",
+      "sha256": "1ebece39de2b1528eec91c76b5067c9000c8b600de9ab68821b853e9b1774bc4"
+    },
+    {
+      "bytes": 441,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/README.md",
+      "sha256": "dba138383eb0dbcaf933a2da6f5f254d415b5636e797acc896fad3e02855abcd"
+    },
+    {
+      "bytes": 3406161,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-analysis-v1.json",
+      "sha256": "45342c8763c3d079c81f8a9b3910882bdd82f2557dfb420a80d5a4bfefa2b1ad"
+    },
+    {
+      "bytes": 3045,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/a7a-decision-v1.json",
+      "sha256": "c5aab286d5fffb8a61bb3bb50ac228f636d6da97f6e0880973f478073e0b1c0f"
+    },
+    {
+      "bytes": 1335,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/analysis-amendment-003.md",
+      "sha256": "952237ca71907e57da26b05a0fa6f1d3b422afedd1a3497e0e937ddaa0386ac8"
+    },
+    {
+      "bytes": 48038,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/analyze-a7a.py",
+      "sha256": "6f4a1e242949b4de4bcdeea0e0a05642cd8455606ff62b8de71442198c8782ac"
+    },
+    {
+      "bytes": 3704,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/claim-evidence-ledger.md",
+      "sha256": "487d5ec2250fdce516bfe24adaa79084bc75e49d8e22ca428417bfa987f32638"
+    },
+    {
+      "bytes": 3757,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/design.md",
+      "sha256": "69f8bbe6ff380b76e88ecf4e510bc132e2ba49869fc7cf00f9139c9567bd4d91"
+    },
+    {
+      "bytes": 744,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/findings.md",
+      "sha256": "4fb3cc87f70c690f26e20a14b4ef839e24c2d52c0bc4019a09be3ca3b2296f57"
+    },
+    {
+      "bytes": 3015,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/freeze-a7a.py",
+      "sha256": "5b2e85cdf5233a0b15bcd5f963bbe1c30cda01fefcfc96175dd3d76c056a9ebd"
+    },
+    {
+      "bytes": 2526,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/freeze-post-analysis-a7a-v2.py",
+      "sha256": "8bd0483c5b1082d67740ed4e4a6a571d04dc981d1cb8232503f48ef17fa1f309"
+    },
+    {
+      "bytes": 2269,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/freeze-post-analysis-a7a.py",
+      "sha256": "37cbc8e0f0db8146eb4c37c134833158fa42d145dcdefd865ad714543ccb3f77"
+    },
+    {
+      "bytes": 3321,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/gate-results.md",
+      "sha256": "dc22689ad187f94b28b37d6df3fe3ede23da5291e62a82029c3e3e4c7a2af475"
+    },
+    {
+      "bytes": 7633,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/measurement-contract-v1.json",
+      "sha256": "fad73c12491b865a78bb2d98192935b146a32874129b39973c5a3b141793180e"
+    },
+    {
+      "bytes": 1278,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-amendment-004.md",
+      "sha256": "2a0e1b6e9eb4e78b17bfb0d12cbad05ffef68c70f094ace8037965b2ddc52ee3"
+    },
+    {
+      "bytes": 2213,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-amendment-005.md",
+      "sha256": "829fb9f8d0bed3a28c981c807eb5db0ce06383eee4cf7ca92e32b91c5ad928d4"
+    },
+    {
+      "bytes": 1273,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-freeze-v1.json",
+      "sha256": "281295c719cfc77441d2c321b3dca5b160c7f71b1b8b6e1c9090f2ce03508cb0"
+    },
+    {
+      "bytes": 1785,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/post-analysis-freeze-v2.json",
+      "sha256": "6d96b72fdf5fe844d2924aecf7b93611bdcef8dbd0adaaf573d1ba035ca5b6d3"
+    },
+    {
+      "bytes": 1141,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-amendment-001.md",
+      "sha256": "f3c3184fc2c0d10c6f2967a6a6e9057a65869577a5e29c8dd484b07a2d553277"
+    },
+    {
+      "bytes": 1213,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-amendment-002.md",
+      "sha256": "d056aedf2c66482dd509578cc36ec2679f0f766b00230320c89e48c79ded3d0f"
+    },
+    {
+      "bytes": 2539,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-freeze-v1.json",
+      "sha256": "588ca1c9dc6fe9c169b7e679d5193d31d2e4552c73289eb0082dd4a4992684c3"
+    },
+    {
+      "bytes": 2942,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-freeze-v2.json",
+      "sha256": "f28c4b6dd0df7fb091a3d71ad84b61a6113de4721f99b8e66bb1a8ce482ef2ba"
+    },
+    {
+      "bytes": 3047,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-freeze-v3.json",
+      "sha256": "fd2d6bf3e1553e369e9a741e33c3598a6169ce561227852e9ab0bdfa7cfc0317"
+    },
+    {
+      "bytes": 3144,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/pre-analysis-freeze-v4.json",
+      "sha256": "5e106beff33f9bb25b3e1567d1abff99bf2381ac75bff913ea904f2de2fe4d2d"
+    },
+    {
+      "bytes": 1686,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/reference-corpus-amendment-006.md",
+      "sha256": "f8f873884a1314a8632be4d90c3ed649adb118e42d7084d1423e2a1aebc0ac0f"
+    },
+    {
+      "bytes": 8057,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/review.md",
+      "sha256": "1559345c7415e0823c4f70989c9b11695624b73176832795b28c9a5f9afbd22e"
+    },
+    {
+      "bytes": 10428,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/artifacts/verify-a7a.py",
+      "sha256": "6653a08aa4cec78d95e2071a807dd5d793cb14147e687d77fbcfd8e6aeda58b8"
+    },
+    {
+      "bytes": 8276,
+      "path": "docs/work-packages/20260714-a7a-daily-precipitation-structure-baseline/package.md",
+      "sha256": "5c80ce139fd858edcfe950df96194177df5924baba9eb4c01eb528c2137ba78a"
+    },
+    {
+      "bytes": 1010,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/README.md",
+      "sha256": "92b26c08dbce3cf2ba7802641a95f97cbf4aba798fd4364a3b6d27554cc6aa18"
+    },
+    {
+      "bytes": 1121323,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/a7b-analysis-v1.json",
+      "sha256": "f460055a7978932747ed0bb969d89917c00067af7500f3d0fd833d7af1321d3b"
+    },
+    {
+      "bytes": 1758,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/a7b-decision-v1.json",
+      "sha256": "263a0e6788afcc7a49b07be9879ddabbc58adbe3188a73145c2f06b861a778a8"
+    },
+    {
+      "bytes": 40070,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/analyze-a7b.py",
+      "sha256": "28423983ebc540cc1f546ea3a3e2cd170fbe6117b6b3c7619706970f74652112"
+    },
+    {
+      "bytes": 4517,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/design.md",
+      "sha256": "94b2233ab97d743bf3437d25a76a318bed00a76dc7f2c7b7c28ccc7252187cb4"
+    },
+    {
+      "bytes": 4331,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/feasibility-contract-v1.json",
+      "sha256": "21e3ff616683aab15eeb41b233a78ba29f428161212e44bdfffbf201006470f3"
+    },
+    {
+      "bytes": 667,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/findings.md",
+      "sha256": "93a8d1b8c09a064eca565de8ae115794d370e2bb4f4c998a05356dc5902e5eeb"
+    },
+    {
+      "bytes": 3101,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/freeze-a7b.py",
+      "sha256": "fe3119a159cfefcdc5ac2908707c9113e85e41483a26020c5a55a51cd437766c"
+    },
+    {
+      "bytes": 4485,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/gate-results.md",
+      "sha256": "9b58926f6a80049ceabfaad6230fd182f8ad8e3b6f50b59a2213c2a395639845"
+    },
+    {
+      "bytes": 2732,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/post-analysis-equivalence-review.md",
+      "sha256": "d8b376b3d83adbfc49f8ec0cd7a84d37e4ac3dc635e850b9876a3fa32af00fa7"
+    },
+    {
+      "bytes": 850,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/pre-analysis-amendment-001.json",
+      "sha256": "7adce3319f4185d0fd5e998df8fc5c6032dbb1df6d2f6a133fd556c84a10f1b3"
+    },
+    {
+      "bytes": 2464,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/pre-analysis-freeze-v1.json",
+      "sha256": "58c324fd9b86ebecf046a1591fd3ef9cc663cd713146721bf983a36bd76141bc"
+    },
+    {
+      "bytes": 5160,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/review.md",
+      "sha256": "636f6657c45cbfb8feb8577f02faa2292c596f7ddd2ad0d87adbfdc46381e234"
+    },
+    {
+      "bytes": 17517,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/verify-a7b.py",
+      "sha256": "dfcd7d4b8466f146fd33c9e122044f0a462355e2ea02f57d25e43d60bdfc3e54"
+    },
+    {
+      "bytes": 5443,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/artifacts/verify-equivalence.py",
+      "sha256": "e0e11841d2c93b84eef677aa3082c8b25be843d6c007ba18cd3163f2eee5e3e5"
+    },
+    {
+      "bytes": 8220,
+      "path": "docs/work-packages/20260714-a7b-analytic-precipitation-feasibility/package.md",
+      "sha256": "a50a17e96aa5cca6bc8ea0a282d6610473468934dac34d7daff066b00ef1f06a"
+    },
+    {
+      "bytes": 894,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/README.md",
+      "sha256": "dff9b87927a9f8d028bcac9485b72859d09c4807eeca711f37cb331b92d44893"
+    },
+    {
+      "bytes": 1175231,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-analysis-v1.json",
+      "sha256": "78b9b9bb5cd5172459bfb27ba13f7b20ca2cec5af19cab9547c425c7a6e6e89b"
+    },
+    {
+      "bytes": 1675,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/a8a-decision-v1.json",
+      "sha256": "1299b6db479c6e57519e5a863183fe49966b75a317850c14e0945f49a211eb58"
+    },
+    {
+      "bytes": 11508,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/acquire-a8a.py",
+      "sha256": "ff7b7d3350430d192b2b071d479b18b7e787cb4994c427d56e13332b2a3c82a7"
+    },
+    {
+      "bytes": 4838,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/amend-freeze-a8a.py",
+      "sha256": "dcabf0bc6644c745713b303ae3cc2e944531a05eecc246da74d652aa733fc4b0"
+    },
+    {
+      "bytes": 5092,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analysis-contract-v1.json",
+      "sha256": "cfe57a125d9f25a2b7d3ad8206280b87858747e92cb6fe2c9a385078f49f3263"
+    },
+    {
+      "bytes": 30409,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/analyze-a8a.py",
+      "sha256": "8e1ea5df400639e42971c9717f1605aea360ccc784290cff40e479c18d57432e"
+    },
+    {
+      "bytes": 571,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/findings.md",
+      "sha256": "3d659e2c737b8db46babfd9e6f186d01183b3584b18f016297ee9122f2278efd"
+    },
+    {
+      "bytes": 3931,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/freeze-a8a.py",
+      "sha256": "da1b8031337309185f4be3b99690ef568cc77a384bd6d8a185fb571e1da94857"
+    },
+    {
+      "bytes": 2385,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/gate-results.md",
+      "sha256": "64026c1954e88bc16e4d2b8b3c688129e0f0bcd2c275f89f5973ab834039a8b4"
+    },
+    {
+      "bytes": 5382,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/inventory-stations.py",
+      "sha256": "b309295315510a80bc102ef2ec512e6113e82c06cc6ac9909c78136da4d03e13"
+    },
+    {
+      "bytes": 18460,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/panel-v1.json",
+      "sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+    },
+    {
+      "bytes": 2383,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/pre-analysis-amendment-001.json",
+      "sha256": "a9e15a586f6d051609cff2db1ae72e51bbde48dc7e4edc00f7ea31395012cf32"
+    },
+    {
+      "bytes": 2402,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/pre-analysis-freeze-v1.json",
+      "sha256": "dd22e50d90db1c49cafa53ad3d54d0fdee486fe7f67e3227685a5881cb9031d5"
+    },
+    {
+      "bytes": 3481,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/pre-analysis-freeze-v2.json",
+      "sha256": "6a1ea6123715cfe2c02aad233e0668792fcf81688de1fe931b6157695cb73656"
+    },
+    {
+      "bytes": 6180,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/review.md",
+      "sha256": "690795ee2268cf9d3d1051351807486fe57ef56f7f7c3918ad403b953a458265"
+    },
+    {
+      "bytes": 7140,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/select-panel.py",
+      "sha256": "902ec58d4ac4489f86da95fb08686321a40d4df3058b253b08983c31946f6ce5"
+    },
+    {
+      "bytes": 42844,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+      "sha256": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122"
+    },
+    {
+      "bytes": 2881,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selection-contract-v1.json",
+      "sha256": "6e443fb1f70da3a117edc11abca722a17a948ab0872116b681fc505f29edcdb3"
+    },
+    {
+      "bytes": 28748,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/source-manifest-v1.json",
+      "sha256": "b7e1e31b619b15aff5c153f2724403fee8b63149b0d70d664ca9614fa9e167ae"
+    },
+    {
+      "bytes": 1910616,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/station-inventory-v1.json",
+      "sha256": "150d29c0c1936a721d58df17c30543c05b468b6ac76bd49ec77b0493fce6d5fe"
+    },
+    {
+      "bytes": 11404,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/verify-a8a.py",
+      "sha256": "2cc03fb0ea773521ce5f45d95a3a85969bd60416af15c804c50ad09d6046d9de"
+    },
+    {
+      "bytes": 8293,
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/package.md",
+      "sha256": "47bf3540b4fedc78a2c0215062a67b0acd4b6b5a4d96af3c722247292c55cee7"
+    },
+    {
+      "bytes": 793,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/README.md",
+      "sha256": "e6e8888e9a155ff8b8aa98567d0d3207344b06851b6bd736c92f13a99ae11ab8"
+    },
+    {
+      "bytes": 1361,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/a8b-analysis-v1.json",
+      "sha256": "c235e9a96f10c9df9df94c89b1929a54b630b8e2c8eef4055d0acce830dbdcc9"
+    },
+    {
+      "bytes": 937,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/a8b-coefficients-v1.json",
+      "sha256": "4015e85261e0f9c01d094938113f7b958b32bdd47e6794ed3fa7e0e5afa42ef4"
+    },
+    {
+      "bytes": 767,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/a8b-decision-v1.json",
+      "sha256": "b227951faa72287afd859fb9872eb75aa559714ab6b5efd2303560b73e5a1efb"
+    },
+    {
+      "bytes": 3962,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/amend-freeze-a8b.py",
+      "sha256": "c1643515ee9f9aade7d38140bd0d4f0366783ab0d4ed7668fd8e89460b2b04f1"
+    },
+    {
+      "bytes": 32720,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/analyze-a8b.py",
+      "sha256": "dfcdccdd9ffb3e25495ae9d40d3a005d4212dc369b1caabe2c44205ffc41f469"
+    },
+    {
+      "bytes": 5696,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/design.md",
+      "sha256": "802699c78e66ba8072dca622ac1ad7d83780af085bdbe528565f57343c5b68e3"
+    },
+    {
+      "bytes": 4173,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/feasibility-contract-v1.json",
+      "sha256": "59dcb9f53a9f551d7eb296e1413697e7e1f1b577a60774af870caf2a6520bf1b"
+    },
+    {
+      "bytes": 604,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/findings.md",
+      "sha256": "864bb2c37260884956a9d3c3b25e94f6961b7e762492dc4eab636f777d7c1480"
+    },
+    {
+      "bytes": 5285,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/freeze-a8b.py",
+      "sha256": "2e8f20eccc588ded3560da363747b8c94d2c120f4fafb2aea3fc1b20a3f2d381"
+    },
+    {
+      "bytes": 2565,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/gate-results.md",
+      "sha256": "ab093376c1280722cdae84a8fda5bff89d3017bfff92130bbaf1a4a3dd2fa183"
+    },
+    {
+      "bytes": 1942,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-amendment-001.json",
+      "sha256": "3baa2e005fa99f99309185cc5f1a6dd1de3a5097062314aeaa64b35bb2b1bc4e"
+    },
+    {
+      "bytes": 2785,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-freeze-v1.json",
+      "sha256": "b66f0c8d3788e0230db5958c301a7a4a68d2448d1bd871eb83676daf5bc9fdfc"
+    },
+    {
+      "bytes": 2431,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/pre-analysis-freeze-v2.json",
+      "sha256": "dcd2ecf84b5f3e99cf3f93c6d800e65dd673f4f6cd53e8be164f557165d4e3bf"
+    },
+    {
+      "bytes": 4870,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/review.md",
+      "sha256": "61daefbd0fa3dce88dd70f3091c09b8e09ead962b2d24deed146d3347e1681e1"
+    },
+    {
+      "bytes": 13813,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/artifacts/verify-a8b.py",
+      "sha256": "352d3e32f2da9e785bb4d5bbdaff52fac3e899800837026a036b13af94e379fd"
+    },
+    {
+      "bytes": 8568,
+      "path": "docs/work-packages/20260715-a8b-secondary-year-fallback/package.md",
+      "sha256": "f551172fda326fb44ff7e9a88c9beb6dab3cd037afa03422d39a1c47a8a2c981"
+    },
+    {
+      "bytes": 107068,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-analysis-v1.json",
+      "sha256": "1819a51649eedc89c4584d28b43bd0aec0b81b6f61cfcb29150e46ad88920423"
+    },
+    {
+      "bytes": 496,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-decision-v1.json",
+      "sha256": "d393b16ea076a6f14d46b57f383ba4ec26014b766661985f9d2922f1fa5bc827"
+    },
+    {
+      "bytes": 27481991,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-retained-streams-v1.tar.gz",
+      "sha256": "ee50d033c6022f9988fc4734cd892d518866dd7df7a35aba24448399ee47edae"
+    },
+    {
+      "bytes": 1891,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/amend-freeze-a8c.py",
+      "sha256": "ae986e9e83dddd3f3b96250d0bd307d23bf376c4e1b74b3ce0ffc2262520e626"
+    },
+    {
+      "bytes": 24849,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/analyze-a8c.py",
+      "sha256": "56d7b720d9d787c8a2867b29e36cd2029101351e52953a69cf63dc0b349db79a"
+    },
+    {
+      "bytes": 4582,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/archive-a8c-evidence.py",
+      "sha256": "4706cd1bb42d2b1d7a8c28d55b9ef62532c28e09a932e8f0a4ac4d92ef624ba5"
+    },
+    {
+      "bytes": 4471,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/build-stations.py",
+      "sha256": "ff3437d436e5f54a7489fdcd025571b923cf7aad62651e08e75881283a1305a5"
+    },
+    {
+      "bytes": 2677,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/closure-manifest-v1.json",
+      "sha256": "d8cd5de5ff5ccf79e2f56a4a6d2c6584c511d8957619760cecc9f44765d06b3a"
+    },
+    {
+      "bytes": 13588,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/execute-a8c.py",
+      "sha256": "e958888698f2543db6f6c29d47698130f9527765791fef3e5477d8e1d067de62"
+    },
+    {
+      "bytes": 48048,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/execution-evidence-v1.json",
+      "sha256": "2a171c134d00d84c3ef5c481d171e214b1ec444231a61e274ec856fcc95f8e37"
+    },
+    {
+      "bytes": 349,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/findings.md",
+      "sha256": "ff4f54cec5a1b7e1c06ffc160ffeb564a2419ac8883c89a50f271af4c9dd28c7"
+    },
+    {
+      "bytes": 3438,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/freeze-a8c.py",
+      "sha256": "dcfe5680c8248282116ff23932ba92682434d476acbd5ebd30a98b2faa4353ac"
+    },
+    {
+      "bytes": 2332,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/freeze-closure-a8c.py",
+      "sha256": "a586cf513d92520cd8987e3df960cc574d59265cae4e714a91f1002f0ecd4aed"
+    },
+    {
+      "bytes": 4614,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/gate-results.md",
+      "sha256": "067ec4eee112724dcf325928120afac888572f1d22eb3797ee149367903a2c0f"
+    },
+    {
+      "bytes": 7624,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/pilot-contract-v1.json",
+      "sha256": "7434b499691d472a77579fac896918e61c9b7bd738180d90c4bc498d48a3bfdf"
+    },
+    {
+      "bytes": 1364,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/post-generation-pre-outcome-amendment-001.md",
+      "sha256": "198f70cb5e881a9bf9da35969d99bb38cbedb0f403d00abf31e8981a96c5c87c"
+    },
+    {
+      "bytes": 6172,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/pre-analysis-freeze-v2.json",
+      "sha256": "2d1acf61d2be6f023d5e13f06dd6d60cb6df4a709ef753356d0159cfa7d1ec08"
+    },
+    {
+      "bytes": 5342,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/pre-execution-freeze-v1.json",
+      "sha256": "40e48be2f10bf36f1488e664f8b3b4bf9fc44bb1f4627a28b1ca3316c850f74e"
+    },
+    {
+      "bytes": 21129,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/retained-streams-manifest-v1.json",
+      "sha256": "2ed40275241748286255d030c6e2facd82a55990af9669fe925e00e8dda86963"
+    },
+    {
+      "bytes": 5931,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/review.md",
+      "sha256": "17676de3595b6bc41ed94bb172f2124ce19e31d0e1b9757f17e588c049d01726"
+    },
+    {
+      "bytes": 824,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/runspecs/runspec-matrix-v1.json",
+      "sha256": "55604a7e7344902f51577f778683f04687792a9b8839ec8ddb0af297f5025fcd"
+    },
+    {
+      "bytes": 300,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/runspecs/runspec-template-v1.yaml",
+      "sha256": "1cfaab18c4b94036cb563889930e3da23837d3b596c6dfcd75ba755424dfd19c"
+    },
+    {
+      "bytes": 26670,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/az026481.station.json",
+      "sha256": "9194e888a0c554aa0d5c787ac117e405ae0a126d176ffc0429b93ef3ad29f347"
+    },
+    {
+      "bytes": 26715,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/az028820.station.json",
+      "sha256": "c2ae089c07e29e7b924f29a088097a5dabb22701543892b50ed9aec723540199"
+    },
+    {
+      "bytes": 21676,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/ca040442.station.json",
+      "sha256": "fc943873938e2ba4488f0c4cb4f8fd01bc73dbb4a8bc23808ebfce8b65dabbe8"
+    },
+    {
+      "bytes": 26663,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/co050130.station.json",
+      "sha256": "e51f443ff904cabfb139b1dddc603c22cd72ef8f3d5fb624acf315635b008b17"
+    },
+    {
+      "bytes": 26699,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/id101022.station.json",
+      "sha256": "4f75999c56f745f623df7237037ef97bbe912d8eddcbdb313943dbe06a5399d8"
+    },
+    {
+      "bytes": 26676,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/stations/la160549.station.json",
+      "sha256": "881d21f1f0d6dd3ee0ca07c2148e487686febd26042fdf03931fc0f802cd1e16"
+    },
+    {
+      "bytes": 5789,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/verify-a8c.py",
+      "sha256": "e47cff76801ef8dbc61e9b3f616a4d0c060b9c97ddd75df381b88b44c92a3f62"
+    },
+    {
+      "bytes": 9588,
+      "path": "docs/work-packages/20260715-a8c-routed-daily-pilot/package.md",
+      "sha256": "69a59bc5168adccb078bad9c8eee8301e4b0fbcafa94e141f2b8f75d812a08e5"
+    },
+    {
+      "bytes": 747,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/README.md",
+      "sha256": "a5698e1d49b3b703bf7b26d7079a9a42dc4edf97c0176cd15adcbdcf483447e2"
+    },
+    {
+      "bytes": 9735,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/data-and-evaluation-plan.md",
+      "sha256": "e70b0d5cd7f0d634bb38ef2180f122305545b056de08ad0e21419362b6374dae"
+    },
+    {
+      "bytes": 12940,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/evidence-to-requirements-ledger.md",
+      "sha256": "9f7f868bafbd56b2672a62566626952034460b4de4d67227a74bc459a8ae4e90"
+    },
+    {
+      "bytes": 7346,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/model-family-envelope.md",
+      "sha256": "8de627d34223c65477271cebd7300de890e4f1f73eba999c90916aab0afc897f"
+    },
+    {
+      "bytes": 9080,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/tuning-harness-contract.md",
+      "sha256": "5e7f6e60d630ac7200ea3da5133088e8d7c6166d84a5cefad6240de5520f14bf"
+    },
+    {
+      "bytes": 14889,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/package.md",
+      "sha256": "43fc7d501c8fc7c52ca80feba4d7cce2c8c819dccf40c8e785a2c1332facdf03"
+    },
+    {
+      "bytes": 1097,
+      "path": "references/observed/a8a-v1/README.md",
+      "sha256": "a3b86f07c087ec74655b272036997a77a4a2a677be809c8012fa8c0c49f98a61"
+    },
+    {
+      "bytes": 2448,
+      "path": "references/observed/a8a-v1/THIRD_PARTY_DATA_NOTICE.md",
+      "sha256": "d17f0b155b152a9a02e610065541164aa13f43ba1f704edfc8452948a05245a1"
+    },
+    {
+      "bytes": 125859,
+      "path": "references/observed/a8a-v1/daymet/az026481.csv.gz",
+      "sha256": "a36653bca9edf6d85a2be97bafd3ffac95c76dc466b7a5991abd3098e0c74219"
+    },
+    {
+      "bytes": 127723,
+      "path": "references/observed/a8a-v1/daymet/az028820.csv.gz",
+      "sha256": "43911d557d0a2c5a745776af98c6d52e280dff04f8a2a8651ab2cc630420e846"
+    },
+    {
+      "bytes": 125804,
+      "path": "references/observed/a8a-v1/daymet/ca040442.csv.gz",
+      "sha256": "8763b72ceae5ef4dc47e8e71f7d52ae1e29036f88c6085c714ac90981815decf"
+    },
+    {
+      "bytes": 123065,
+      "path": "references/observed/a8a-v1/daymet/ca042713.csv.gz",
+      "sha256": "5a052c0180e0501056fe7b0dadc73b48d6cae70fdedb905edfaf7aad23f7b1bd"
+    },
+    {
+      "bytes": 129439,
+      "path": "references/observed/a8a-v1/daymet/co050130.csv.gz",
+      "sha256": "518baceb81c0b947df5e7b7b83edcd4f811e640e292e5217ddbb7e21e9b57390"
+    },
+    {
+      "bytes": 131818,
+      "path": "references/observed/a8a-v1/daymet/id101022.csv.gz",
+      "sha256": "9dd7079d40aa813cc17dfb31715625058d363ca963e09412b0d8706c4e136b86"
+    },
+    {
+      "bytes": 134167,
+      "path": "references/observed/a8a-v1/daymet/la160549.csv.gz",
+      "sha256": "10b3b435a8b8b650db1f828a90ed6cef9da5eb2def864a1da373a64367ce8133"
+    },
+    {
+      "bytes": 140406,
+      "path": "references/observed/a8a-v1/daymet/me171175.csv.gz",
+      "sha256": "2aa22a065a414b846ca75cde1e23cdb87759b3f35a202e67fd0ffeb295270ee0"
+    },
+    {
+      "bytes": 137372,
+      "path": "references/observed/a8a-v1/daymet/mn212248.csv.gz",
+      "sha256": "444a5935a273715d17de281a17a98b204bb7b15196aebe1ad78dff4d9f8f0f08"
+    },
+    {
+      "bytes": 132384,
+      "path": "references/observed/a8a-v1/daymet/mt243996.csv.gz",
+      "sha256": "7ddcf3c3d1615aa0b8e681b738ab004ce2e4e10695517a9a9041b97763c53804"
+    },
+    {
+      "bytes": 132195,
+      "path": "references/observed/a8a-v1/daymet/ne257665.csv.gz",
+      "sha256": "671bd9c3cb4c0bb6a86ec3be36fb5f4c4fe9b09707969ab80d0665aa790d8fd0"
+    },
+    {
+      "bytes": 128623,
+      "path": "references/observed/a8a-v1/daymet/nm290234.csv.gz",
+      "sha256": "d44c5a77cde9891fbcd82e44482937b538cd4ae4e1c3674019804cfe1ae9b162"
+    },
+    {
+      "bytes": 129562,
+      "path": "references/observed/a8a-v1/daymet/nv262631.csv.gz",
+      "sha256": "b4eed4549cd03c81df2c92958a26e4898f2782ab6906c7ec04f4452fec9528ae"
+    },
+    {
+      "bytes": 125616,
+      "path": "references/observed/a8a-v1/daymet/nv264436.csv.gz",
+      "sha256": "0f0559eb4389d06dbf7d81e1cbb8179d7655e909e7a50bca219633551c8d5672"
+    },
+    {
+      "bytes": 129223,
+      "path": "references/observed/a8a-v1/daymet/nv269171.csv.gz",
+      "sha256": "194e2c801e64a2989376b3a3f98fe12afbcd09f88146f7f955ded8a59f31cef9"
+    },
+    {
+      "bytes": 131805,
+      "path": "references/observed/a8a-v1/daymet/or350412.csv.gz",
+      "sha256": "b7dd75140f5a3024165001f928bd466856d9c0d98cdfb7f46b214e87ce44dd53"
+    },
+    {
+      "bytes": 134047,
+      "path": "references/observed/a8a-v1/daymet/sc381544.csv.gz",
+      "sha256": "1330066ec54f3a00b6eeb0f18c67b3975d792038bce581ebe5713933584ac9e2"
+    },
+    {
+      "bytes": 126868,
+      "path": "references/observed/a8a-v1/daymet/tx413280.csv.gz",
+      "sha256": "fe147d67a2197f49942c95364fd3e08fd426e14aa09fe3e3086f1fac40633c5c"
+    },
+    {
+      "bytes": 126087,
+      "path": "references/observed/a8a-v1/daymet/tx417262.csv.gz",
+      "sha256": "7b6adde8bce54cac56f1febcadb3a25a1fc7b866dd4f22a6eb85e4c542e6d338"
+    },
+    {
+      "bytes": 130392,
+      "path": "references/observed/a8a-v1/daymet/wy487845.csv.gz",
+      "sha256": "cdaa59b54354b70637fe5fd7d8636f6c815216588a576bddbd387954afbe37d0"
+    },
+    {
+      "bytes": 672319,
+      "path": "references/observed/a8a-v1/ghcn/USC00042713.csv.gz",
+      "sha256": "7b41171e16e07fc8a2a2e660303347b0308fa24ddd70f2fb72672106aeaa63b9"
+    },
+    {
+      "bytes": 632072,
+      "path": "references/observed/a8a-v1/ghcn/USC00413280.csv.gz",
+      "sha256": "e2d15973396dc201695ea4680183ce145f49f541f713821e1db607a36ca45f4e"
+    },
+    {
+      "bytes": 550675,
+      "path": "references/observed/a8a-v1/ghcn/USC00417262.csv.gz",
+      "sha256": "95304b3f1c9e43d75ab13cb687417c6ff153c4bfe4e9ae7950338907ac85ce35"
+    },
+    {
+      "bytes": 2609427,
+      "path": "references/observed/a8a-v1/metadata/ghcnd-stations.txt.gz",
+      "sha256": "047a5de7be283a324a0709dbf7a6184a28b5bf5af8c0c446ae1bc33bce7d220b"
+    }
+  ],
+  "removal_surfaces": [
+    {
+      "bytes": 26880,
+      "comparator": {
+        "bytes": 23090,
+        "sha256": "c1f2ef184547f6a6e11b1a62472dd40d860443cb69287e5c29b6c102aecdc941"
+      },
+      "path": "crates/cligen/schemas/provenance-v1.schema.json",
+      "sha256": "dc9e997222f416ae67ef5644f854deebe7c13505a1b1eb4e78ef1f46a6ecfc15"
+    },
+    {
+      "bytes": 62639,
+      "comparator": {
+        "bytes": 62611,
+        "sha256": "c7c8ff4140d4a810144ad12897493cd923ed95007fbf6e9230d1930f020503b7"
+      },
+      "path": "crates/cligen/schemas/quality-report-s2-m3.schema.json",
+      "sha256": "766c830cd7535143919c3e9f92dc3121bf3caceb3103b2e08ceeb6bdebff89f2"
+    },
+    {
+      "bytes": 19664,
+      "comparator": {
+        "bytes": 18567,
+        "sha256": "ba26137dc1b54d06977bfa31cd5a67c398c0ecce6287bc92571ab507c8fcb2bc"
+      },
+      "path": "crates/cligen/src/daily.rs",
+      "sha256": "634a0503cac5aceda0b848803eb67f3487b023fb867ba53c35bd142dafefc57c"
+    },
+    {
+      "bytes": 6449,
+      "comparator": {
+        "bytes": 6380,
+        "sha256": "861eb8d2152407a55c07d3ff399fd073a24de08c344a7e008f7092195a860cbc"
+      },
+      "path": "crates/cligen/src/fast_batch.rs",
+      "sha256": "f5912daa33b278c7b895d963a926b2e39be7c5dcaf7e98abf7a9a18c47addf44"
+    },
+    {
+      "bytes": 1127,
+      "comparator": {
+        "bytes": 1108,
+        "sha256": "5de6ababfbcafda98ee2f18bd153c230fce0771733812d99a1f7d806c3fb8abb"
+      },
+      "path": "crates/cligen/src/lib.rs",
+      "sha256": "10aed3dd0a456bbcd5ec1d00cbf743c31f954c7cbc4522081856cbbe56ff9f16"
+    },
+    {
+      "bytes": 29390,
+      "comparator": {
+        "bytes": 27670,
+        "sha256": "4e31db928046f5323a0377b2bf48168e9c412ed9352b02a201589e3331cfeaa5"
+      },
+      "path": "crates/cligen/src/modes.rs",
+      "sha256": "af530c8255ef6f4902ddfae27605e2c3e4486780c551f45964a5df9840e6cea0"
+    },
+    {
+      "bytes": 31058,
+      "comparator": {
+        "bytes": 30911,
+        "sha256": "1b90903851e6593ddaef7bc42319296e9e2806cfd0a6cf35c2c5774f17b08324"
+      },
+      "path": "crates/cligen/src/parquet_output.rs",
+      "sha256": "8ab45762de068f953a2487af39dc0b2456599d05c0fb2765afefada0aaa96783"
+    },
+    {
+      "bytes": 3699,
+      "comparator": {
+        "bytes": 3378,
+        "sha256": "d6a35dd4cd2cbaa4bafe4dc151930755caa9bd8f4f253e193647b26171d312dd"
+      },
+      "path": "crates/cligen/src/profile.rs",
+      "sha256": "8d571559061acbc5d45c99494a32f339b58392311b9c8ca44ade261f615e86c8"
+    },
+    {
+      "bytes": 48955,
+      "comparator": {
+        "bytes": 46498,
+        "sha256": "14c27effb8658c82acb61378730e63330c7e5c0c56d89378e9de8db03cd511e0"
+      },
+      "path": "crates/cligen/src/provenance.rs",
+      "sha256": "44fe62a1277cc4f46fd5cfa7fdb777cad195c148dc92624642b45e14cda0e9ce"
+    },
+    {
+      "bytes": 9541,
+      "comparator": {
+        "bytes": 9274,
+        "sha256": "bf0076607d3658911178c67dde0acd2fc1938827c0c29ec998d45dffc6f6300c"
+      },
+      "path": "crates/cligen/src/quality/mod.rs",
+      "sha256": "1aa23716984854eadf9c49762fb7d4fec028ca28d3a8de94d59c40f4c2be8843"
+    },
+    {
+      "bytes": 87918,
+      "comparator": {
+        "bytes": 87649,
+        "sha256": "33220eebc7a1551501575ba7b747864d30bb106d4fc5ffe7fbe8dd86c4e6620e"
+      },
+      "path": "crates/cligen/src/quality/report.rs",
+      "sha256": "7dcefa51da4ad2300372a43b53db32af0900d33fc80db3ebb686d5e149312af0"
+    },
+    {
+      "bytes": 12074,
+      "comparator": null,
+      "path": "crates/cligen/src/routed_precip.rs",
+      "sha256": "a12aa175073cdaf002bd6fd9c1d19d25e346d23c2e47f02266f1a10de411845f"
+    },
+    {
+      "bytes": 73665,
+      "comparator": {
+        "bytes": 67921,
+        "sha256": "12adcb0d745b45c9e0e98be02e22cc85f587252e702f7841b0a047f0ee43ca46"
+      },
+      "path": "crates/cligen/src/runspec.rs",
+      "sha256": "2a44042be285fe36d943de905950baea26cb5e84889c016e0ba6c0e98b6e9566"
+    },
+    {
+      "bytes": 11164,
+      "comparator": null,
+      "path": "crates/cligen/src/station/document_v2.rs",
+      "sha256": "6ec2158cec441e8345833072b7d7205db3d603363337974157f67161963d7ce8"
+    },
+    {
+      "bytes": 1217,
+      "comparator": {
+        "bytes": 910,
+        "sha256": "59a02316be4e78c990c4f0d8b3585ba79dec91312f5c8cc998badf99a6b1c017"
+      },
+      "path": "crates/cligen/src/station/mod.rs",
+      "sha256": "c095ee46a06557e98913f3df05e096de3582bc56e46312e6f63f40559f6b5d63"
+    },
+    {
+      "bytes": 11104,
+      "comparator": {
+        "bytes": 11080,
+        "sha256": "394cb165b228c459b9615f9488948e45ff6fe36981581e175cbe823fb0396cf5"
+      },
+      "path": "crates/cligen/src/typed_output.rs",
+      "sha256": "b4ddd2846681c0670234cadeb421db8abd51fd7de9df954c6ad9abe2dc88db0b"
+    },
+    {
+      "bytes": 7549,
+      "comparator": null,
+      "path": "crates/cligen/tests/a8c_routed_daily.rs",
+      "sha256": "80d89b0e7e8d689b8d1c0f5eeaef3b6d40ca810782d5aa334ddee436b3503b0d"
+    },
+    {
+      "bytes": 5811,
+      "comparator": {
+        "bytes": 5414,
+        "sha256": "637e63c35dc84c0dc4c8d6e12ea81d967dfdc02e024f82370dace76e350c0c6a"
+      },
+      "path": "docs/specifications/README.md",
+      "sha256": "074a2d231e59376995277d97cf9577a931489e4efae15b1f89f191c051848aa1"
+    },
+    {
+      "bytes": 6916,
+      "comparator": {
+        "bytes": 6106,
+        "sha256": "348703a719f12d515b88a1fe3ff81a5cd68aac6e69fda6af432491982e66e0e0"
+      },
+      "path": "docs/specifications/SPEC-GENERATION-PROFILES.md",
+      "sha256": "7a6c3fa0219625da54f74bba8ade430ac90419839e8d8bae66319b4abef2df0f"
+    },
+    {
+      "bytes": 9856,
+      "comparator": {
+        "bytes": 8901,
+        "sha256": "e82b098e5bdc2a6020636274ab0e33abeeed688dd75d8fb8f2ed4a8d4c7e7eff"
+      },
+      "path": "docs/specifications/SPEC-PROVENANCE.md",
+      "sha256": "adf86e0a26b911af62473f867d5d248a62d5e1509589984de2ece2514a26389d"
+    },
+    {
+      "bytes": 16501,
+      "comparator": {
+        "bytes": 16106,
+        "sha256": "8ee3c47c4a6af007aa2b2eb9d3095d5ad94e1676e36ae62469c243b2e523395f"
+      },
+      "path": "docs/specifications/SPEC-QUALITY-REPORT.md",
+      "sha256": "97650812e13d783150eb2ca905386b76af32343561b932154dcd29bf03885e45"
+    },
+    {
+      "bytes": 21051,
+      "comparator": {
+        "bytes": 20677,
+        "sha256": "71fec16423e938710c3180482ec2fdcb7ffa8f8417b4f89732e37918bf42b97e"
+      },
+      "path": "docs/specifications/SPEC-RUNSPEC.md",
+      "sha256": "24bce2c31f1a2f1ecd0f596ab1c4c53b262eac92029a8159d86dd36521b81906"
+    },
+    {
+      "bytes": 9709,
+      "comparator": {
+        "bytes": 9068,
+        "sha256": "bf4683b2a1330820ea06daece08db70f37e73aff9ec75a1c1184ac334204856c"
+      },
+      "path": "docs/specifications/SPEC-STATION-DOCUMENT.md",
+      "sha256": "56e68ba88ae1f3e686dab1c205737facb26bc9eeb0bfb1581c85fb4907221c06"
+    },
+    {
+      "bytes": 26880,
+      "comparator": {
+        "bytes": 23090,
+        "sha256": "c1f2ef184547f6a6e11b1a62472dd40d860443cb69287e5c29b6c102aecdc941"
+      },
+      "path": "docs/specifications/provenance-v1.schema.json",
+      "sha256": "dc9e997222f416ae67ef5644f854deebe7c13505a1b1eb4e78ef1f46a6ecfc15"
+    },
+    {
+      "bytes": 62639,
+      "comparator": {
+        "bytes": 62611,
+        "sha256": "c7c8ff4140d4a810144ad12897493cd923ed95007fbf6e9230d1930f020503b7"
+      },
+      "path": "docs/specifications/quality-report-s2-m3.schema.json",
+      "sha256": "766c830cd7535143919c3e9f92dc3121bf3caceb3103b2e08ceeb6bdebff89f2"
+    },
+    {
+      "bytes": 10322,
+      "comparator": {
+        "bytes": 10291,
+        "sha256": "d5fb94bd99c6fb97d4027abc226e65ed079d08b333bcea24e1e23e19ec8ef744"
+      },
+      "path": "docs/specifications/runspec.schema.json",
+      "sha256": "57f801736d0be5af6cf54cbc148ec56ee880226fed5f85812f9292b86ff42041"
+    },
+    {
+      "bytes": 4402,
+      "comparator": null,
+      "path": "docs/specifications/station-document-v2.schema.json",
+      "sha256": "42f1fde9e847e2ffc5907557ed2fe68c342f12ea3533fcf87d2068c2cad96697"
+    }
+  ],
+  "schema_version": 1,
+  "source_commit": "49a67775d22f0452bbf65f0a1ad35435e0d340f9"
+}

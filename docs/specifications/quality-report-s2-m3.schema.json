@@ -414,7 +414,7 @@
           "type": "string"
         },
         "station_model": {
-          "enum": ["fixed_monthly_5_32_3", "a8c_integrated_daily_v1"]
+          "const": "fixed_monthly_5_32_3"
         },
         "station_parameter_set_sha256": {
           "type": "string",

@@ -29,8 +29,7 @@ use crate::provenance::{
 };
 use crate::quality::{self, QualityError};
 use crate::station::{
-    parameter_set_sha256, routed_parameter_set_sha256, A8cDailyPrecipitation, FixedMonthly5323,
-    StationDocumentError, StationDocumentV1, StationDocumentV2, StationModelIdV2,
+    parameter_set_sha256, FixedMonthly5323, StationDocumentError, StationDocumentV1,
 };
 use crate::storm::SingleStormParams;
 use crate::typed_output::{ClimateIdentityV1, ClimateRowV1, TypedOutputError};
@@ -366,7 +365,6 @@ pub struct PreparedRun {
     /// SPEC-RUNSPEC rev 4 `output.quality` (default true).
     pub quality: bool,
     station: FixedMonthly5323,
-    daily_precipitation: Option<A8cDailyPrecipitation>,
     station_provenance: StationProvenanceV1,
     effective_runspec: EffectiveRunspecV1,
     observed_input: Option<ObservedInputV1>,
@@ -413,7 +411,6 @@ impl PreparedRun {
             begin_year: self.begin_year,
             years: self.years,
             station: &self.station,
-            daily_precipitation: self.daily_precipitation.as_ref(),
             prn_bytes: self.prn_bytes.as_deref(),
             storm: self.storm,
             version: 5.3230,
@@ -490,7 +487,6 @@ impl PreparedRun {
             &legacy_cli,
             &self.station,
             &self.station_provenance.legacy_source_sha256,
-            Some(self.quality_station_identity()),
             Some(provenance),
             Some(generated.process),
         )
@@ -769,7 +765,6 @@ impl PreparedRun {
             legacy_cli,
             &self.station,
             &self.station_provenance.legacy_source_sha256,
-            Some(self.quality_station_identity()),
             Some(provenance.clone()),
             Some(process.clone()),
         )
@@ -777,14 +772,6 @@ impl PreparedRun {
         let bytes = report.to_json_bytes().map_err(RunspecError::Quality)?;
         let path = self.quality_sidecar_path();
         write_atomic_companion(&path, &bytes, "output.quality")
-    }
-
-    fn quality_station_identity(&self) -> (&'static str, &str) {
-        let model = match self.station_provenance.model {
-            StationModelV1::FixedMonthly5323 => "fixed_monthly_5_32_3",
-            StationModelV1::A8cIntegratedDailyV1 => "a8c_integrated_daily_v1",
-        };
-        (model, &self.station_provenance.parameter_set_sha256)
     }
 
     fn open_output(&self) -> Result<File, RunspecError> {
@@ -856,7 +843,6 @@ fn provenance_profile(profile: GenerationProfile) -> GenerationProfileV1 {
     match profile {
         GenerationProfile::Faithful5323 => GenerationProfileV1::Faithful5323,
         GenerationProfile::FastBatchV0 => GenerationProfileV1::FastBatchV0,
-        GenerationProfile::A8cRoutedDailyV1 => GenerationProfileV1::A8cRoutedDailyV1,
     }
 }
 
@@ -864,65 +850,16 @@ fn provenance_rng(profile: GenerationProfile) -> RngSchemeV1 {
     match profile {
         GenerationProfile::Faithful5323 => RngSchemeV1::CligenRandn5323,
         GenerationProfile::FastBatchV0 => RngSchemeV1::SplitMix64MonthlyV0,
-        GenerationProfile::A8cRoutedDailyV1 => RngSchemeV1::CligenRandn5323PlusSplitMix64DailyV1,
     }
 }
 
 fn provenance_qc(profile: GenerationProfile, qc: QcFilter) -> Option<QcPolicyV1> {
     match profile {
         GenerationProfile::FastBatchV0 => None,
-        GenerationProfile::Faithful5323 | GenerationProfile::A8cRoutedDailyV1 => Some(match qc {
+        GenerationProfile::Faithful5323 => Some(match qc {
             QcFilter::Faithful => QcPolicyV1::Faithful,
             QcFilter::Off => QcPolicyV1::Off,
         }),
-    }
-}
-
-fn validate_profile_station(
-    profile: GenerationProfile,
-    qc: QcFilter,
-    mode: RunMode,
-    interpolation: i32,
-    station: &ResolvedStation,
-) -> Result<(), RunspecError> {
-    match profile {
-        GenerationProfile::A8cRoutedDailyV1 => {
-            if station.daily_precipitation.is_none() {
-                return Err(invalid(
-                    "station.document",
-                    "a8c_routed_daily_v1 requires a revision-2 routed station document",
-                ));
-            }
-            if qc != QcFilter::Faithful {
-                return Err(invalid(
-                    "qc_filter",
-                    "a8c_routed_daily_v1 requires faithful",
-                ));
-            }
-            if mode != RunMode::Continuous {
-                return Err(invalid(
-                    "mode",
-                    "a8c_routed_daily_v1 supports continuous mode only",
-                ));
-            }
-            if interpolation != 0 {
-                return Err(invalid(
-                    "simulation.interpolation",
-                    "a8c_routed_daily_v1 requires none",
-                ));
-            }
-            Ok(())
-        }
-        GenerationProfile::Faithful5323 | GenerationProfile::FastBatchV0 => {
-            if station.daily_precipitation.is_some() {
-                Err(invalid(
-                    "station.document",
-                    "revision-2 routed documents require generation_profile a8c_routed_daily_v1",
-                ))
-            } else {
-                Ok(())
-            }
-        }
     }
 }
 
@@ -977,13 +914,10 @@ struct StationSelection<'a> {
 #[derive(Debug)]
 struct ResolvedStation {
     model: FixedMonthly5323,
-    daily_precipitation: Option<A8cDailyPrecipitation>,
     legacy_par_sha256: String,
     input_schema: SchemaIdentityV1,
     input_sha256: String,
     parameter_set_sha256: String,
-    model_id: StationModelV1,
-    fit: FitIdentityV1,
 }
 
 #[derive(Debug)]
@@ -1061,13 +995,6 @@ impl RunspecDocument {
         });
         let generation_profile = self.generation_profile;
         let qc_filter = self.qc_filter.unwrap_or_default();
-        validate_profile_station(
-            generation_profile,
-            qc_filter,
-            mode,
-            fields.interpolation,
-            &station,
-        )?;
         let command_echo = qc_filter.command_echo(generation_profile.command_echo(command_echo));
         let provenance_mode = provenance_mode(mode);
         let provenance_profile = provenance_profile(generation_profile);
@@ -1080,9 +1007,9 @@ impl RunspecDocument {
         let station_provenance = StationProvenanceV1 {
             input_schema: station.input_schema.clone(),
             input_sha256: station.input_sha256.clone(),
-            model: station.model_id,
+            model: StationModelV1::FixedMonthly5323,
             parameter_set_sha256: station.parameter_set_sha256.clone(),
-            fit: station.fit.clone(),
+            fit: FitIdentityV1::unreported(),
             collection: StationCollectionIdentityV1::unreported(),
             legacy_source_sha256: station.legacy_par_sha256.clone(),
         };
@@ -1136,7 +1063,6 @@ impl RunspecDocument {
             qc_filter,
             quality: output.quality.unwrap_or(true),
             station: station.model,
-            daily_precipitation: station.daily_precipitation,
             station_provenance,
             effective_runspec,
             observed_input,
@@ -1892,41 +1818,17 @@ fn read_legacy_station(path: &Path) -> Result<ResolvedStation, RunspecError> {
         .map_err(|error| station_document_error("station.par", path, error))?;
     Ok(ResolvedStation {
         model: par.into_fixed_monthly(),
-        daily_precipitation: None,
         legacy_par_sha256: document.lineage.source_sha256,
         input_schema: SchemaIdentityV1::legacy_station(),
         input_sha256,
         parameter_set_sha256,
-        model_id: StationModelV1::FixedMonthly5323,
-        fit: FitIdentityV1::unreported(),
     })
 }
 
 fn read_station_document(path: &Path) -> Result<ResolvedStation, RunspecError> {
     let bytes = fs::read(path).map_err(|error| input_error("station.document", path, error))?;
     let input_sha256 = quality::sha256_hex(&bytes);
-    let version = station_document_version(&bytes)
-        .map_err(|error| station_document_error("station.document", path, error))?;
-    match version {
-        1 => read_station_document_v1(path, &bytes, input_sha256),
-        2 => read_station_document_v2(path, &bytes, input_sha256),
-        _ => Err(station_document_error(
-            "station.document",
-            path,
-            StationDocumentError::Validation {
-                field_path: "station_schema_version".to_owned(),
-                message: "must equal 1 or 2".to_owned(),
-            },
-        )),
-    }
-}
-
-fn read_station_document_v1(
-    path: &Path,
-    bytes: &[u8],
-    input_sha256: String,
-) -> Result<ResolvedStation, RunspecError> {
-    let document = StationDocumentV1::parse_json(bytes)
+    let document = StationDocumentV1::parse_json(&bytes)
         .map_err(|error| station_document_error("station.document", path, error))?;
     let legacy_par_sha256 = document.lineage.source_sha256.clone();
     let model = document
@@ -1936,67 +1838,11 @@ fn read_station_document_v1(
         .map_err(|error| station_document_error("station.document", path, error))?;
     Ok(ResolvedStation {
         model,
-        daily_precipitation: None,
         legacy_par_sha256,
         input_schema: SchemaIdentityV1::modern_station(),
         input_sha256,
         parameter_set_sha256,
-        model_id: StationModelV1::FixedMonthly5323,
-        fit: FitIdentityV1::unreported(),
     })
-}
-
-fn read_station_document_v2(
-    path: &Path,
-    bytes: &[u8],
-    input_sha256: String,
-) -> Result<ResolvedStation, RunspecError> {
-    let document = StationDocumentV2::parse_json(bytes)
-        .map_err(|error| station_document_error("station.document", path, error))?;
-    let legacy_par_sha256 = document.lineage.source_sha256.clone();
-    let parameter_set_sha256 = routed_parameter_set_sha256(&document)
-        .map_err(|error| station_document_error("station.document", path, error))?;
-    let model = document
-        .to_base_model()
-        .map_err(|error| station_document_error("station.document", path, error))?;
-    let model_id = match document.station_model {
-        StationModelIdV2::FixedMonthly5323 => StationModelV1::FixedMonthly5323,
-        StationModelIdV2::A8cIntegratedDailyV1 => StationModelV1::A8cIntegratedDailyV1,
-    };
-    let fit = FitIdentityV1::reported(document.daily_precipitation.fit_id.clone());
-    Ok(ResolvedStation {
-        model,
-        daily_precipitation: Some(document.daily_precipitation),
-        legacy_par_sha256,
-        input_schema: SchemaIdentityV1::modern_station_v2(),
-        input_sha256,
-        parameter_set_sha256,
-        model_id,
-        fit,
-    })
-}
-
-fn station_document_version(bytes: &[u8]) -> Result<u32, StationDocumentError> {
-    #[derive(Deserialize)]
-    struct VersionProbe {
-        station_schema_version: u32,
-    }
-
-    let mut deserializer = serde_json::Deserializer::from_slice(bytes);
-    let probe: VersionProbe =
-        serde_path_to_error::deserialize(&mut deserializer).map_err(|error| {
-            StationDocumentError::Parse {
-                field_path: normalized_parse_path(error.path().to_string()),
-                source: error.into_inner(),
-            }
-        })?;
-    deserializer
-        .end()
-        .map_err(|source| StationDocumentError::Parse {
-            field_path: "document".to_owned(),
-            source,
-        })?;
-    Ok(probe.station_schema_version)
 }
 
 fn normalized_parse_path(path: String) -> String {

@@ -40,7 +40,6 @@
     { "$ref": "#/$defs/artifact_contract" },
     { "$ref": "#/$defs/station_selector_contract" },
     { "$ref": "#/$defs/profile_contract" },
-    { "$ref": "#/$defs/station_fit_contract" },
     { "$ref": "#/$defs/qc_contract" },
     { "$ref": "#/$defs/interpolation_contract" }
   ],
@@ -240,12 +239,8 @@
       "oneOf": [
         {
           "properties": {
-            "generation": { "properties": { "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] } } },
             "effective_runspec": {
-              "properties": {
-                "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
-                "station": { "properties": { "selector": { "const": "par" } } }
-              }
+              "properties": { "station": { "properties": { "selector": { "const": "par" } } } }
             },
             "station": {
               "properties": {
@@ -258,35 +253,13 @@
         },
         {
           "properties": {
-            "generation": { "properties": { "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] } } },
             "effective_runspec": {
-              "properties": {
-                "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
-                "station": { "properties": { "selector": { "const": "document" } } }
-              }
+              "properties": { "station": { "properties": { "selector": { "const": "document" } } } }
             },
             "station": {
               "properties": {
                 "input_schema": {
                   "properties": { "id": { "const": "org.openwepp.cligen.station" }, "version": { "const": "1" } }
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "generation": { "properties": { "profile": { "const": "a8c_routed_daily_v1" } } },
-            "effective_runspec": {
-              "properties": {
-                "generation_profile": { "const": "a8c_routed_daily_v1" },
-                "station": { "properties": { "selector": { "const": "document" } } }
-              }
-            },
-            "station": {
-              "properties": {
-                "input_schema": {
-                  "properties": { "id": { "const": "org.openwepp.cligen.station" }, "version": { "const": "2" } }
                 }
               }
             }
@@ -306,64 +279,6 @@
           "properties": {
             "generation": { "properties": { "profile": { "const": "fast_batch_v0" } } },
             "effective_runspec": { "properties": { "generation_profile": { "const": "fast_batch_v0" } } }
-          }
-        },
-        {
-          "properties": {
-            "generation": { "properties": { "profile": { "const": "a8c_routed_daily_v1" } } },
-            "effective_runspec": { "properties": { "generation_profile": { "const": "a8c_routed_daily_v1" } } }
-          }
-        }
-      ]
-    },
-    "station_fit_contract": {
-      "oneOf": [
-        {
-          "properties": {
-            "generation": { "properties": { "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] } } },
-            "station": {
-              "properties": {
-                "model": { "const": "fixed_monthly_5_32_3" },
-                "fit": {
-                  "properties": {
-                    "status": { "const": "unreported" },
-                    "id": { "type": "null" }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "generation": { "properties": { "profile": { "const": "a8c_routed_daily_v1" } } },
-            "station": {
-              "properties": {
-                "model": { "const": "a8c_integrated_daily_v1" },
-                "fit": {
-                  "properties": {
-                    "status": { "const": "reported" },
-                    "id": { "const": "a8a_o2_logqspline_gaussian_copula_v1" }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "properties": {
-            "generation": { "properties": { "profile": { "const": "a8c_routed_daily_v1" } } },
-            "station": {
-              "properties": {
-                "model": { "const": "fixed_monthly_5_32_3" },
-                "fit": {
-                  "properties": {
-                    "status": { "const": "reported" },
-                    "id": { "const": "legacy_daily_only_v1" }
-                  }
-                }
-              }
-            }
           }
         }
       ]
@@ -426,15 +341,6 @@
             "id": { "const": "org.openwepp.cligen.station" },
             "version": { "const": "1" }
           }
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["id", "version"],
-          "properties": {
-            "id": { "const": "org.openwepp.cligen.station" },
-            "version": { "const": "2" }
-          }
         }
       ]
     },
@@ -467,8 +373,8 @@
       "additionalProperties": false,
       "required": ["status", "id"],
       "properties": {
-        "status": { "enum": ["unreported", "reported"] },
-        "id": { "type": ["string", "null"] }
+        "status": { "const": "unreported" },
+        "id": { "type": "null" }
       }
     },
     "station_collection": {
@@ -497,7 +403,7 @@
       "properties": {
         "input_schema": { "$ref": "#/$defs/station_input_schema" },
         "input_sha256": { "$ref": "#/$defs/sha256" },
-        "model": { "enum": ["fixed_monthly_5_32_3", "a8c_integrated_daily_v1"] },
+        "model": { "const": "fixed_monthly_5_32_3" },
         "parameter_set_sha256": { "$ref": "#/$defs/sha256" },
         "fit": { "$ref": "#/$defs/fit" },
         "collection": { "$ref": "#/$defs/station_collection" },
@@ -516,7 +422,7 @@
         "burn_per_stream"
       ],
       "properties": {
-        "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0", "a8c_routed_daily_v1"] },
+        "profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
         "qc_policy": {
           "type": ["string", "null"],
           "enum": ["faithful", "off", null]
@@ -528,7 +434,7 @@
           "enum": ["none", "linear", "fourier", "monthly_mean_preserving"]
         },
         "rng_scheme": {
-          "enum": ["cligen_randn_5_32_3", "splitmix64_monthly_v0", "cligen_randn_5_32_3_plus_splitmix64_daily_v1"]
+          "enum": ["cligen_randn_5_32_3", "splitmix64_monthly_v0"]
         },
         "burn_per_stream": { "type": "integer", "minimum": 0, "maximum": 2147483647 }
       },
@@ -548,15 +454,6 @@
             "properties": {
               "qc_policy": { "type": "null" },
               "rng_scheme": { "const": "splitmix64_monthly_v0" }
-            }
-          }
-        },
-        {
-          "if": { "properties": { "profile": { "const": "a8c_routed_daily_v1" } } },
-          "then": {
-            "properties": {
-              "qc_policy": { "const": "faithful" },
-              "rng_scheme": { "const": "cligen_randn_5_32_3_plus_splitmix64_daily_v1" }
             }
           }
         }
@@ -706,7 +603,7 @@
           "enum": ["none", "linear", "fourier", "monthly_mean_preserving"]
         },
         "burn": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
-        "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0", "a8c_routed_daily_v1"] },
+        "generation_profile": { "enum": ["faithful_5_32_3", "fast_batch_v0"] },
         "qc_filter": {
           "type": ["string", "null"],
           "enum": ["faithful", "off", null]

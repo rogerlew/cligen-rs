@@ -24,15 +24,7 @@ it is not a prerequisite for this research sequence.
 
 The ordered active queue is:
 
-1. **A8c1 — routed-daily runtime retirement.** Remove the unpromoted
-   `a8c_routed_daily_v1` generation profile and its model-specific station,
-   runtime, schema, provenance, and quality-report surfaces while preserving
-   the complete A8a--A8c scientific record and faithful behavior. Compatibility
-   axes are adjudicated independently: a generic seam survives only if the
-   retirement audit proves it has a non-A8c contract and consumer. This package
-   is [scaffolded](work-packages/20260715-a8c1-routed-daily-retirement/package.md)
-   and executes first.
-2. **A9a — successor-family foundation.** After A8c1 closes, specify a new
+1. **A9a — successor-family foundation.** With A8c1 closed, specify a new
    joint precipitation/event/daily-context model family and an optimizer-
    neutral calibration harness. A9a must derive its requirements from the
    accepted A5--A8 records and SOTA review; define fit, development,
@@ -88,8 +80,15 @@ pooling. The accepted A7 record is retained in the
 
 The scientific A8 generation line remains closed: A8c completed with
 `STOP-A8-ROUTED-DAILY`, A7b's whole-domain stop remains final, and no A8d
-confirmation is authorized. A8c1 is retirement hygiene, not scientific
-continuation or reinterpretation of that stop.
+confirmation is authorized.
+
+A8c1 completed the unshipped-runtime retirement on 2026-07-15. It removed the
+`a8c_routed_daily_v1` profile, revision-2 routed station input, model-specific
+generation, provenance, quality, schema, and test surfaces while restoring the
+shared runtime to its pre-A8c shape. The exact A7/A8 scientific record, A8c LFS
+archive, and historical implementation commit remain verifiable. This was
+retirement hygiene, not scientific continuation or reinterpretation of the A8c
+stop.
 
 A8a completed on 2026-07-15 with `CONTINUE-A8B-DRY-PARTITION`. Its prospective
 20-station confirmation found 15 `integrated_daily` and five

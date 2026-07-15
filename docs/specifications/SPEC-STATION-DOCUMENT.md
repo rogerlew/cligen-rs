@@ -1,20 +1,9 @@
 # SPEC-STATION-DOCUMENT — Modern Fixed-Monthly Station Document
 
-Status: active (revision 2; A8c adds an explicit routed extension while
-revision 1 remains unchanged)
+Status: active (revision 1; A4a)
 Surface: deterministic `*.station.json`, its Draft 2020-12
 [`station-document.schema.json`](station-document.schema.json), the
 syntax-independent `FixedMonthly5323` model, and legacy conversion.
-
-Revision 1 is the fixed-monthly compatibility document described below and
-remains byte/schema stable. Revision 2 is accepted only with the non-default
-`a8c_routed_daily_v1` pilot profile. It retains the exact revision-1 units,
-lineage, and parameters, adds the explicit `daily_precipitation` route and
-coefficients, and is normatively specified by
-[SPEC-A8C-ROUTED-DAILY](SPEC-A8C-ROUTED-DAILY.md) and
-[station-document-v2.schema.json](station-document-v2.schema.json). Missing
-or unknown routing information fails closed; existing profiles reject
-revision-2 documents.
 
 ## Purpose and authority
 
