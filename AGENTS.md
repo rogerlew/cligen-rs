@@ -51,6 +51,57 @@ read it before writing port code. Summary:
 - Completed roadmap items move from `docs/ROADMAP.md` to the work-package
   catalog.
 
+## Autonomy and campaign continuity
+
+Agents are expected to advance the operator's scientific objective, not merely
+administer the current package. Apply the repository's safeguards without
+turning them into avoidable handoffs.
+
+- Before declaring a package blocked or asking what comes next, inspect the
+  roadmap, the package catalog, recent related packages and dispositions, and
+  relevant git history. Established campaign decisions and transition patterns
+  are working context, not questions to return to the operator.
+- Treat an instruction to scaffold or execute a campaign stage as authority to
+  perform its ordinary, reversible, in-repository follow-through: complete the
+  evidence record, update the roadmap and catalog, and scaffold or execute the
+  directly required bounded corrective successor when the intended scientific
+  stage remains reachable. Do not stop at the first administrative boundary.
+- A `HOLD` disposition records what the evidence does not yet support. It is not
+  automatically a command to stop work. Preserve the hold and its artifacts,
+  then continue with the simplest in-scope successor that addresses the failed
+  prerequisite. Stop only when the evidence establishes a genuinely terminal
+  result or the next step requires a material scientific, product, licensing,
+  external-data, or destructive-action decision that has not already been made.
+- Confirmation firewalls constrain access to reserved confirmation evidence;
+  they do not prohibit development work. If no candidate is available, leave
+  confirmation data untouched, close the confirmation package honestly, and
+  continue under a new development-package identifier. A later confirmation
+  attempt also receives a new identifier so versions and audit records remain
+  independent.
+- Do not create package theater: a package whose only result is restating an
+  already-known unmet prerequisite is insufficient unless the audit itself
+  produces necessary evidence. If such a package is required for traceability,
+  close it minimally and proceed to the corrective scientific work in the same
+  campaign sequence.
+- Prefer the least complex mechanism that can answer the frozen hypothesis.
+  Accept and document known data limitations when the operator has already
+  judged them fit for purpose. Do not respond to sparse evidence by adding
+  selectors, fallback layers, estimands, or model families unless a simpler
+  bounded test has failed and the added complexity has a stated falsifiable
+  purpose.
+- Make reasonable choices autonomously when they are reversible and consistent
+  with recorded decisions. Record the assumption in the work package. Ask the
+  operator only when alternatives would materially change the scientific claim,
+  public interface, compatibility contract, cost, or irreversible state.
+- Report genuine blockers with the evidence already gathered, the exact
+  condition that prevents progress, and the smallest decision needed. Do not
+  present routine uncertainty, an unfulfilled gate, or the existence of another
+  work package as a blocker.
+- Execution is end-to-end: inspect inputs, implement or analyze, run the required
+  gates, write artifacts and dispositions, reconcile roadmap/catalog state, and
+  identify or begin the established successor. A passing command log alone is
+  not package completion.
+
 ## Gates (every package)
 
 ```
