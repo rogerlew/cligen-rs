@@ -1,0 +1,81 @@
+{
+  "access_boundary": {
+    "candidate_development_outputs_accessed": false,
+    "confirmation_series_accessed": false,
+    "daily_or_subdaily_station_series_accessed": false,
+    "permitted_inputs": [
+      "hash-pinned official USCRN station-listing metadata already committed by A9c",
+      "hash-pinned A8a legacy CLIGEN parameter/catalog metadata inventory",
+      "hash-pinned A9a locked confirmation metadata roster"
+    ],
+    "prohibited_before_roster_terminal": [
+      "new or retained USCRN Daily01 or Subhourly01 values, summaries, quality counts, or event counts",
+      "Daymet, GHCN, PRISM, or gridMET daily values at proposed new locations",
+      "candidate fits, outputs, scores, or null thresholds",
+      "locked confirmation target paths, bytes, summaries, or quality queries"
+    ]
+  },
+  "crosswalk": {
+    "distance_method": "haversine_sphere_radius_6371.0088_km",
+    "hot_arid_bounds": {
+      "annual_expected_precip_mm_max_inclusive": 220.0,
+      "annual_tmean_c_min_inclusive": 17.0,
+      "longitude_max_inclusive": -108.0
+    },
+    "maximum_nearest_descriptor_distance_km_inclusive": 75.0,
+    "method": "nearest A8a us-2015 legacy parameter/catalog station; ties resolve by ascending station_id",
+    "scope_note": "This is the existing A8a metadata descriptor stratum, not a PET-based physical aridity classification."
+  },
+  "freeze_id": "a9c2-metadata-roster-freeze-v1",
+  "frozen_at": "2026-07-16T00:25:28Z",
+  "frozen_before_inventory_evaluation": true,
+  "inputs": [
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/source-documents/stations.tsv",
+      "role": "official_uscrn_station_listing_snapshot",
+      "sha256": "036cb5c72fa3623879c89a1bf88992291d0420dd74ab84a40229437b03c713e0"
+    },
+    {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selection-contract-v1.json",
+      "role": "hot_arid_semantics_authority",
+      "sha256": "6e443fb1f70da3a117edc11abca722a17a948ab0872116b681fc505f29edcdb3"
+    },
+    {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/station-inventory-v1.json",
+      "role": "legacy_parameter_catalog_descriptor_inventory",
+      "sha256": "150d29c0c1936a721d58df17c30543c05b468b6ac76bd49ec77b0493fce6d5fe"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+      "role": "locked_confirmation_metadata_roster",
+      "sha256": "121a5141477ca23ad26fb6618edf8f71c85e72eda11bec893a81e7895a9dd5e8"
+    }
+  ],
+  "network_base_rule": {
+    "commissioning_on_or_before": "2010-01-01T00:00:00Z",
+    "country": "US",
+    "network": "USCRN",
+    "operation": "Operational",
+    "status": "Commissioned"
+  },
+  "partition_rule": {
+    "exclude_all_locked_confirmation_station_ids": true,
+    "minimum_distance_from_every_locked_confirmation_station_km_inclusive": 75.0
+  },
+  "retention_rule": {
+    "accepted_station_cap": null,
+    "minimum_accepted_locations": 5,
+    "outcome_based_ranking_or_substitution": false,
+    "required_retained_station_ids": [
+      "az_yuma_27_ene",
+      "ca_stovepipe_wells_1_sw"
+    ],
+    "retain_every_passing_station": true
+  },
+  "schema_version": 1,
+  "source_commit": "493f8c4cb66f3db2b4eb227d615f33e31b2b5cf7",
+  "terminal_rule": {
+    "fewer_than_five_or_missing_required_retained_site": "HOLD-A9C2-HOT-ARID-ROSTER",
+    "otherwise": "ROSTER-READY"
+  }
+}

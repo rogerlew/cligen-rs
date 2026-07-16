@@ -1,0 +1,14 @@
+{
+  "accepted_station_count": 2,
+  "distance_method": "haversine_sphere_radius_6371.0088_km",
+  "inventory_sha256": "cd4d7e9e43872cc0e016efd320cf07978f48f07e65b9b3add6496c21b6037baa",
+  "pair_count": 1,
+  "pairs": [
+    {
+      "distance_km": 498.859,
+      "station_a": "az_yuma_27_ene",
+      "station_b": "ca_stovepipe_wells_1_sw"
+    }
+  ],
+  "schema_version": 1
+}

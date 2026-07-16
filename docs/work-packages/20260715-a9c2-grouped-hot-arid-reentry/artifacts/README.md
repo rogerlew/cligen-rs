@@ -1,29 +1,41 @@
 # A9c2 artifacts
 
-Scaffolded records:
+Prospective and scaffold records:
 
 - `context-and-design-contract.md` — context-complete prospective design;
 - `predecessor-manifest-v1.json` — exact committed predecessor hashes; and
-- `execution-kickoff.md` — future branch-complete dispatch template;
+- `execution-kickoff.md` — retained pre-dispatch kickoff template;
 - `verify-scaffold.py` — deterministic scaffold verifier; and
-- `gate-results.md` — recorded scaffold validation.
+- `gate-results.md` — recorded pre-dispatch scaffold validation.
 
-Execution must add, at minimum:
+Executed metadata-roster records:
 
-- metadata inventory with complete inclusion/exclusion ledger;
-- pre-access role, roster, spatial, grouping, formula, resampling, calibration,
-  resource, candidate, and amendment freezes;
-- a versioned SPEC-A9 grouped-evaluation amendment, complete A9c2 objective
-  registry, and symmetric fit-side identifiability/convergence contract;
-- exact source/access/exposure manifests proving zero confirmation access;
-- support-only counts and candidate-blind precision/power calibration curves;
-- new group-availability and seven-family null thresholds;
-- complete fit, structural, reconciliation, optimizer, resource, and failure
-  inventories for both candidate classes;
-- 31-objective station/group/stratum/horizon results, heterogeneity guards,
-  Pareto frontier, and selection trace;
-- a candidate freeze or named hold;
-- public report, consolidated review, verification, and gate results.
+- `execution-dispatch-v1.json` — exact source commit, branch, and operator
+  execution authority;
+- `metadata-roster-freeze-v1.json` — pre-inventory sources, crosswalk,
+  partition, retention, access, and terminal rules;
+- `inventory-a9c2-roster.py` — deterministic metadata-only census;
+- `hot-arid-roster-inventory-v1.json` — all 113 included/excluded metadata-base
+  sites, one reason per site, access flags, and terminal;
+- `accepted-site-distances-v1.json` — complete pairwise distance for the two
+  accepted sites;
+- `report-evidence-freeze-v1.json` and `claim-evidence-ledger.md` — report
+  evidence identities, claims, hypotheses, and scope limits;
+- `review.md` — independent report lenses, findings, dispositions, and
+  accepted terminal review;
+- `post-acceptance-operator-disposition.md` — retained A9c2 terminal,
+  functional-adequacy decision, accepted limitations, and successor boundary;
+- `verify-a9c2.py` — deterministic executed-hold verifier; and
+- `execution-gate-results.md` — revision-1 execution commands and outcomes;
+  and
+- `post-acceptance-gate-results.md` — revision-2 disposition, report, roadmap,
+  and repository revalidation.
 
-Large retained evidence uses Git LFS. The scaffold contains no newly acquired
-station metadata or station-year series and authorizes none.
+The roster returned `HOLD-A9C2-HOT-ARID-ROSTER` with two accepted sites against
+five required. The registered first-hold stop means no grouped-evaluation
+amendment, objective registry, station series, support/power calibration,
+candidate fit/output, null calibration, comparison, selection, or A9d freeze
+was created. The later operator disposition accepts those two sites for a
+future, separately executed comparison and retires the five-site successor
+entry floor; it does not retroactively pass A9c2. Large retained evidence would
+use Git LFS; this execution created no new large artifact.

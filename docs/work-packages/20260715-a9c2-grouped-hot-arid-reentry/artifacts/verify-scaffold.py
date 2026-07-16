@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the context-complete, unexecuted A9c2 scaffold."""
+"""Verify the preserved A9c2 scaffold authorities and pre-access boundary."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 PACKAGE = Path(__file__).resolve().parents[1]
 ARTIFACTS = PACKAGE / "artifacts"
+
+sys.dont_write_bytecode = True
 
 
 def sha256(path: Path) -> str:
@@ -38,8 +40,12 @@ def main() -> None:
 
     package = (PACKAGE / "package.md").read_text()
     context = (ARTIFACTS / "context-and-design-contract.md").read_text()
-    require("Status: `SCAFFOLDED`" in package, "package status")
-    require("Only scaffolding is authorized" in package, "dispatch boundary")
+    require(
+        "Status: `SCAFFOLDED`" in package
+        or "Status: `EXECUTED-HOLD-HOT-ARID-ROSTER`" in package,
+        "package status",
+    )
+    require("first outcome-bearing gate" in package, "preserved dispatch boundary")
     require("at least five" in package and "at least five" in context, "roster floor")
     require("station-balanced" in package and "Station-balanced" in context, "group estimator")
     require("a9c2-objective-registry-v1.json" in context, "versioned registry")
@@ -70,7 +76,10 @@ def main() -> None:
         ).returncode,
         "production/reference diff",
     )
-    print(f"PASS: {len(manifest['files'])} predecessors; A9c revision 2; A9c2 scaffold-only; local LFS")
+    print(
+        f"PASS: {len(manifest['files'])} predecessors; A9c revision 2; "
+        "A9c2 scaffold authorities; local LFS"
+    )
 
 
 if __name__ == "__main__":

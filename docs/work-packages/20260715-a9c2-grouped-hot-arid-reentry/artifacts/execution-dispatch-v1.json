@@ -1,0 +1,14 @@
+{
+  "branch": "main",
+  "candidate_development_outputs_accessed": false,
+  "confirmation_series_accessed": false,
+  "dispatch_date": "2026-07-15",
+  "execution_authorized": true,
+  "manifest_id": "a9c2-execution-dispatch-v1",
+  "operator_instruction": "Execute a9c2",
+  "repository": "cligen-rs repository root",
+  "schema_version": 1,
+  "source_commit": "493f8c4cb66f3db2b4eb227d615f33e31b2b5cf7",
+  "source_state": "clean main equal to origin/main before generated Python cache cleanup",
+  "target_branch": "main"
+}

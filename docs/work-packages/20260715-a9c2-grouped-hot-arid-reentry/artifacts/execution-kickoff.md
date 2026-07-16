@@ -2,10 +2,9 @@
 
 Status: template only; not dispatched
 
-Execute
-`/Users/roger/src/cligen-rs/docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/`
-from the then-current clean `origin/main` in
-`/Users/roger/src/cligen-rs`, using branch `main` and pushing only to `main`.
+From the repository root, execute
+`docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/` from the then-
+current clean `origin/main`, using branch `main` and pushing only to `main`.
 
 Read `AGENTS.md`, the package, every package-local artifact, and every exact
 file in `predecessor-manifest-v1.json` before acting. Verify all predecessor

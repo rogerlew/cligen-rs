@@ -1,10 +1,12 @@
 # A9c2 — Grouped Hot-Arid Re-entry and Observed Comparison
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-HOT-ARID-ROSTER`
 Date: 2026-07-15
 Evidence mode: Mixed
 Scaffolding authorization: operator direction on 2026-07-15 from committed
 `main` at `3122afc81b3fa0790d19974b6803f56a81c1b2ae`
+Execution authorization: operator direction on 2026-07-15 from clean `main`
+at `493f8c4cb66f3db2b4eb227d615f33e31b2b5cf7`
 
 ## Objective
 
@@ -100,16 +102,68 @@ conversation memory.
 
 ## Execution & dispatch
 
-Only scaffolding is authorized. No A9c2 station metadata inventory beyond
-already committed records, station-year access, support query, fitting,
-simulation, candidate evaluation, confirmation access, A9d freeze, commit, or
-push is authorized by this package.
+The operator dispatched execution on 2026-07-15 from clean `main` equal to
+`origin/main` at
+`493f8c4cb66f3db2b4eb227d615f33e31b2b5cf7`, with `main` as the only push
+target. The execution record contains a repository-logical name rather than an
+operator-specific path. No side branch was created.
 
-When the operator separately dispatches execution, the kickoff must name
-`/Users/roger/src/cligen-rs`, start from the then-current clean `origin/main`,
-use branch `main`, and push only to `main`. Before any station-series access,
-execution must replace the scaffold marker with exact source commit and role/
-campaign freeze hashes. A side branch is not an authorized package record.
+Execution stopped at the first outcome-bearing gate. It read only the four
+hash-bound metadata authorities permitted by the prospective roster freeze.
+It did not access daily/subdaily station series, candidate outputs, or locked
+confirmation target series, and it did not proceed to the grouped objective
+amendment, support calibration, fitting, simulation, comparison, A9d freeze,
+commit, or push.
+
+## Execution outcome
+
+The complete official station-listing snapshot contained 255 rows. The frozen
+country/network/status/operation/commissioning rule retained 113 metadata-base
+USCRN sites. Nearest-neighbor crosswalking against all 2,765 A8a legacy
+parameter/catalog descriptors found three matches to the exact A8a hot-arid
+screen:
+
+- `az_yuma_27_ene` — accepted;
+- `ca_stovepipe_wells_1_sw` — accepted; and
+- `nv_mercury_3_ssw` — excluded because it is a locked confirmation ID.
+
+The single-reason ledger contains 17 locked confirmation IDs in the metadata
+base, 94 nonmatches, and two accepted sites. The locked roster has 18 sites;
+AK Fairbanks 11 NE is outside the metadata base because it was commissioned
+after the cutoff. Both required retained sites pass and are 498.859 km apart,
+but the accepted count is 2 against the prospectively frozen minimum of 5.
+
+Execution therefore returns `HOLD-A9C2-HOT-ARID-ROSTER`. The locked
+confirmation metadata roster was read only for IDs and coordinates needed to
+enforce the partition; no confirmation target series was read or summarized.
+No A9c2 objective registry, SPEC-A9 amendment, support/power calibration,
+candidate fit, null threshold, objective score, selection trace, or A9d seal
+exists. The accepted public report is
+[A9c2 hot-arid roster feasibility](../../reports/a9c2-hot-arid-roster-feasibility-report.md).
+
+At initial closure, the first corrective action was an operator decision on a
+separately governed corpus-feasibility package. The post-acceptance disposition
+below supersedes that recommendation without changing the census or terminal.
+
+## Post-acceptance operator disposition
+
+On 2026-07-15, the operator declared the two accepted locations functionally
+adequate for continuation of the stochastic-generator research campaign. The
+five-site floor is retired as a successor entry requirement. The decision
+accepts limited spatial generalization and weak two-site heterogeneity
+diagnostics rather than requiring another station/network search.
+
+The exact decision and successor constraints are recorded in
+[post-acceptance-operator-disposition.md](artifacts/post-acceptance-operator-disposition.md).
+It preserves the A9c2 `2/5` arithmetic and hold while roadmapping an
+unscaffolded A9c3 two-site grouped observed-development comparison. Precision
+and power remain uncertainty diagnostics; they do not become another corpus-
+construction gate. A nonfinite estimator, candidate failure, or model-
+comparison failure remains a legitimate future hold.
+
+The disposition authorizes roadmap revision and future scaffolding only. It
+does not authorize A9c3 execution, confirmation access, runtime promotion, or
+consumer integration.
 
 ## Gates
 
@@ -178,13 +232,33 @@ Every hold retains negative evidence and authorizes neither roster repair nor
 A9d/A9e continuation. The operator-selected identifier is A9c2; it does not
 imply that an A9c1 package exists or is required.
 
+Terminal: `HOLD-A9C2-HOT-ARID-ROSTER`.
+
 ## Artifacts
 
 - `artifacts/context-and-design-contract.md` — context-complete scientific,
   grouping, access, reuse, and execution contract.
 - `artifacts/predecessor-manifest-v1.json` — exact committed authority hashes.
 - `artifacts/execution-kickoff.md` — branch-complete future dispatch template;
-  not an execution authorization.
-- `artifacts/verify-scaffold.py` and `gate-results.md` — exact predecessor,
-  boundary, report, LFS, and repository validation.
+  retained as the pre-dispatch scaffold record.
+- `artifacts/execution-dispatch-v1.json` — exact execution authorization,
+  branch, source commit, and access boundary.
+- `artifacts/metadata-roster-freeze-v1.json` — prospective metadata,
+  crosswalk, partition, retention, and terminal rules.
+- `artifacts/inventory-a9c2-roster.py` and
+  `hot-arid-roster-inventory-v1.json` — deterministic census and complete
+  disposition ledger.
+- `artifacts/accepted-site-distances-v1.json` — complete accepted-pair distance
+  ledger.
+- `artifacts/report-evidence-freeze-v1.json`, `claim-evidence-ledger.md`, and
+  `review.md` — report freeze, accepted claims, independent review, and
+  dispositions.
+- `artifacts/post-acceptance-operator-disposition.md` — immutable A9c2
+  boundary, accepted two-site limitations, and bounded A9c3 direction.
+- `artifacts/verify-scaffold.py` and `gate-results.md` — pre-dispatch scaffold
+  validation.
+- `artifacts/verify-a9c2.py` and `execution-gate-results.md` — executed-hold,
+  public-report, access-boundary, and repository validation.
+- `artifacts/post-acceptance-gate-results.md` — revision-2 report,
+  disposition, roadmap, and repository revalidation.
 - `artifacts/README.md` — artifact inventory and expected execution outputs.

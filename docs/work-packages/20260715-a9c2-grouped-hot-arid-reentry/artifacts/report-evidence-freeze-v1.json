@@ -1,0 +1,150 @@
+{
+  "access_history": {
+    "candidate_development_outputs_accessed": false,
+    "confirmation_series_accessed": false,
+    "daily_or_subdaily_station_series_accessed": false,
+    "outcome_access": "The metadata roster inventory was evaluated only after metadata-roster-freeze-v1.json was written."
+  },
+  "amendments": [
+    {
+      "at": "2026-07-16T00:34:50Z",
+      "reason": "Independent extraction requested hash-pinning the census executable and publishing the context-contract's accepted-site distance. Both additions are outcome-neutral and precede report drafting."
+    },
+    {
+      "at": "2026-07-16T00:39:28Z",
+      "reason": "Independent public-safety extraction replaced the operator-specific absolute repository path in the dispatch record with a repository-logical identifier before report drafting."
+    }
+  ],
+  "canonical_evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/context-and-design-contract.md",
+      "role": "prospective A9c2 roster and stop contract",
+      "sha256": "ba55da5f54c925708bdb6b4d148a89f25bf21345cf5b2cf7f03263b9628a79c0"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/execution-dispatch-v1.json",
+      "role": "operator execution and exact source-commit record",
+      "sha256": "83975bc4a005ec74a79a80450efd3da46cf22d8f67cf6b154f8b355c680b3a0f"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/metadata-roster-freeze-v1.json",
+      "role": "prospective station, crosswalk, partition, retention, and terminal rules",
+      "sha256": "859aec318c87d02d648812511664050d87eb42cb19888ccee5671b4267401757"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/hot-arid-roster-inventory-v1.json",
+      "role": "canonical complete metadata census and A9c2 terminal",
+      "sha256": "cd4d7e9e43872cc0e016efd320cf07978f48f07e65b9b3add6496c21b6037baa"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selection-contract-v1.json",
+      "role": "A8a hot-arid descriptor-stratum bounds",
+      "sha256": "6e443fb1f70da3a117edc11abca722a17a948ab0872116b681fc505f29edcdb3"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/station-inventory-v1.json",
+      "role": "A8a legacy parameter/catalog metadata inventory",
+      "sha256": "150d29c0c1936a721d58df17c30543c05b468b6ac76bd49ec77b0493fce6d5fe"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/source-documents/stations.tsv",
+      "role": "hash-pinned official USCRN station-listing snapshot",
+      "sha256": "036cb5c72fa3623879c89a1bf88992291d0420dd74ab84a40229437b03c713e0"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+      "role": "locked metadata-only confirmation roster and spatial partition",
+      "sha256": "121a5141477ca23ad26fb6618edf8f71c85e72eda11bec893a81e7895a9dd5e8"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/post-acceptance-operator-disposition.md",
+      "role": "immutable A9c boundary and prospective A9c2 rationale",
+      "sha256": "c300a5cb479188b3e5224766d842c5b34f4a9e48c919bc35647692c7e2813937"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/inventory-a9c2-roster.py",
+      "role": "deterministic metadata-census implementation",
+      "sha256": "1d832ce8655bbe3632fdf7a857661f918604080ff40597328fb4a8a22ca83123"
+    },
+    {
+      "id": "E11",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/accepted-site-distances-v1.json",
+      "role": "complete accepted-site pairwise distance ledger",
+      "sha256": "2b3f0eb8d93d85910ff5fe7d696957798222c96aaa9fe0fbffbe9c20c89f9a33"
+    }
+  ],
+  "claims": [
+    {
+      "class": "Ran",
+      "evidence_ids": ["E03", "E04"],
+      "id": "C01",
+      "text": "The frozen census evaluated 113 active, operational USCRN sites commissioned by the 2010 fit start."
+    },
+    {
+      "class": "Ran",
+      "evidence_ids": ["E04"],
+      "id": "C02",
+      "text": "Exactly three metadata-base sites matched the A8a hot-arid descriptor crosswalk: Yuma, Stovepipe Wells, and Mercury."
+    },
+    {
+      "class": "Ran",
+      "evidence_ids": ["E03", "E04", "E08"],
+      "id": "C03",
+      "text": "Mercury is a locked confirmation station, leaving two accepted development sites against the frozen minimum of five."
+    },
+    {
+      "class": "Ran",
+      "evidence_ids": ["E01", "E04"],
+      "id": "C04",
+      "text": "A9c2 therefore returns HOLD-A9C2-HOT-ARID-ROSTER at the first registered hold."
+    },
+    {
+      "class": "Ran",
+      "evidence_ids": ["E02", "E03", "E04", "E10"],
+      "id": "C05",
+      "text": "The recorded execution accessed no daily/subdaily station series, candidate output, or confirmation series."
+    },
+    {
+      "class": "Interpretation",
+      "evidence_ids": ["E04", "E05", "E06"],
+      "id": "C06",
+      "text": "The result establishes infeasibility only for the exact A8a descriptor semantics, metadata sources, pre-2010 active-USCRN rule, and locked partition; it is not a physical census of all hot-arid climates."
+    },
+    {
+      "class": "Derived",
+      "evidence_ids": ["E04", "E11"],
+      "id": "C07",
+      "text": "The two accepted sites are 498.859 km apart under the frozen haversine method."
+    }
+  ],
+  "external_references": [
+    {
+      "citation": "NOAA National Centers for Environmental Information, U.S. Climate Reference Network Station Listings",
+      "doi_or_no_doi": "No DOI",
+      "id": "R01",
+      "url": "https://www.ncei.noaa.gov/access/crn/station-listing"
+    }
+  ],
+  "freeze_id": "a9c2-report-evidence-freeze-v1",
+  "frozen_at": "2026-07-16T00:31:23Z",
+  "hypothesis_provenance_vocabulary": [
+    "preregistered",
+    "amended",
+    "retrospective mapping",
+    "exploratory"
+  ],
+  "question": "Can the frozen A9c2 metadata rule supply at least five confirmation-safe hot-arid USCRN development locations while retaining Yuma and Stovepipe Wells?",
+  "report_id": "a9c2-hot-arid-roster-feasibility",
+  "schema_version": 1,
+  "source_commit": "493f8c4cb66f3db2b4eb227d615f33e31b2b5cf7"
+}

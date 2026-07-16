@@ -62,17 +62,33 @@ Its context-complete boundary is frozen in the
 [A9c handoff](work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md).
 
 The [A9c2 grouped hot-arid re-entry](work-packages/20260715-a9c2-grouped-hot-arid-reentry/package.md)
-is scaffolded but not authorized for execution. It combines the prospective
-design freeze and fresh comparison under one new campaign identity; there is
-no intervening A9c1 package. A9c2 retains both exposed A9c hot-arid locations,
-adds every eligible metadata-selected location to reach at least five, gives
-stations equal total weight in grouped storm objectives, calibrates support
-candidate-blind at the actual design, and then refits and reruns both classes
-across all six strata. Outcome-selected station substitution remains
-prohibited.
+completed on 2026-07-15 with `HOLD-A9C2-HOT-ARID-ROSTER`. Its prospectively
+frozen metadata census reduced 255 station-listing rows to 113 active,
+operational, cutoff-eligible USCRN sites. Only Yuma, Stovepipe Wells, and
+Mercury matched the exact A8a hot-arid descriptor screen; Mercury is a locked
+confirmation station, leaving two accepted development sites against five
+required. No station series, candidate output, or confirmation target series
+was accessed, so grouped calibration and the fresh model comparison were not
+reached. The accepted result is also documented in the
+[A9c2 public report](reports/a9c2-hot-arid-roster-feasibility-report.md).
+
+There is no active successor package. Continuing the stochastic-generator
+campaign no longer requires another corpus-expansion study. By operator
+disposition on 2026-07-15, Yuma and Stovepipe Wells are functionally adequate
+hot-arid development evidence for research continuation. This accepts limited
+spatial generalization and two-site heterogeneity diagnostics; it does not
+retroactively pass A9c2 or establish that the eventual model is adequate.
+
+The next roadmapped item is A9c3, a two-site grouped observed-development
+comparison. It remains unscaffolded and unauthorized. A9c3 must retain the two
+sites without substitution, use equal station weighting, preserve actual event
+frequencies, publish site-specific and pooled uncertainty, treat precision and
+power as diagnostics rather than a new roster gate, refit both candidate
+classes under a fresh campaign identity, and state the two-site generalization
+limit in every downstream handoff.
 
 A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
-unauthorized because A9c did not return a continuation terminal. A9 does
+unauthorized because no A9c3 candidate has been selected or sealed. A9 does
 not inherit an A8c candidate, coefficient, threshold, station classification,
 or confirmation claim. A future production-promotion decision still requires
 separately roadmapped downstream evidence under ADR-0004; the present sequence
