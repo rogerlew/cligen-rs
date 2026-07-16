@@ -1,0 +1,74 @@
+{
+  "aggregation": {
+    "family_statistic": "within each mandatory stratum, maximum root-mean-square objective distance; selection tests every stratum row against one familywise threshold calibrated as the maximum over all objectives and all six strata",
+    "generated_station_weights": "equal within each frozen Daymet contributor stratum",
+    "observed_station_weights": "0.5 for each of the two frozen USCRN development stations per stratum",
+    "station_pairing": "unpaired group-to-group comparison; no Daymet-to-USCRN station identity mapping is asserted"
+  },
+  "amends": {
+    "objective_ids": [
+      "storm_duration",
+      "storm_time_to_peak",
+      "storm_peak_ratio",
+      "storm_joint_dependence"
+    ],
+    "scope": "A9c3 development and selection only",
+    "source_objective_registry": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+    "source_objective_registry_sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7"
+  },
+  "boundary_rule": "candidate_minus_faithful greater than the frozen threshold is material degradation; equality is non-degradation",
+  "construct_status": "amended exploratory grouped construct; not confirmatory evidence for the original A9a site-season distances",
+  "distance": "root-mean-square componentwise difference between equal-weight generated and observed group vectors after division by the candidate-blind station-year bootstrap component scale",
+  "finite_and_unavailable_rule": "no favorable zero and no imputation; an empty stratum, empty required transform, undefined rank correlation, or nonfinite component returns HOLD-A9C3-GROUP-ESTIMATOR",
+  "normalization": {
+    "component_scale": "bootstrap standard deviation of the first independent grouped estimate for the same horizon/stratum/objective/component",
+    "lower_bound": 0.02,
+    "zero_baseline": "the 0.02 component-scale lower bound applies, including log peak-ratio quantiles equal to zero"
+  },
+  "objectives": [
+    {
+      "component_count": 3,
+      "id": "storm_duration",
+      "quantile_method": "NumPy linear",
+      "statistic": "q10, median, and q90 of log duration minutes over all retained events within station; then equal-station mean"
+    },
+    {
+      "boundary_mass": "values are clipped to [1e-6, 1-1e-6] before logit; clipping counts are disclosed by station and season",
+      "component_count": 3,
+      "id": "storm_time_to_peak",
+      "quantile_method": "NumPy linear",
+      "statistic": "q10, median, and q90 of logit time-to-peak fraction over all retained events within station; then equal-station mean"
+    },
+    {
+      "component_count": 3,
+      "id": "storm_peak_ratio",
+      "quantile_method": "NumPy linear",
+      "statistic": "q10, median, and q90 of log peak ratio after enforcing the registered support peak ratio >= 1; then equal-station mean"
+    },
+    {
+      "component_count": 15,
+      "id": "storm_joint_dependence",
+      "rank_method": "average ranks divided by n+1",
+      "statistic": "upper triangle of the six-variable Pearson correlation matrix on ranks of log1p depth, log duration, logit time-to-peak, log peak ratio, seasonal phase in [0,1), and log1p antecedent dry hours; then equal-station mean",
+      "variables": [
+        "log1p_depth_mm",
+        "log_duration_min",
+        "logit_time_to_peak_fraction",
+        "log_peak_ratio",
+        "seasonal_phase",
+        "log1p_antecedent_dry_hours"
+      ]
+    }
+  ],
+  "resampling": {
+    "block_boundary": "retain each source event's antecedent dry-hour value computed in continuous source chronology; the first event in the complete source record is left-censored and omitted only from the joint-dependence vector; resampled block adjacency does not create or replace an antecedent gap",
+    "diagnostic_replicates": 2000,
+    "selection_threshold_replicates_per_horizon": 500,
+    "station_weighting": "equal after resampling",
+    "unit": "complete Local Standard Time station-year within station; every event in a selected year is retained"
+  },
+  "schema_version": 1,
+  "season_rule": "seasonal cells are not pass/fail units in A9c3; complete-record marginals are used and seasonal phase remains in the joint vector. Station-season counts and summaries remain mandatory diagnostics.",
+  "selection_role": "mandatory storm_descriptor family",
+  "threshold": "candidate-blind 95th-percentile higher-order statistic of the maximum root-mean-square standardized objective distance over all four objectives and six strata, separately for 30 and 100 years"
+}

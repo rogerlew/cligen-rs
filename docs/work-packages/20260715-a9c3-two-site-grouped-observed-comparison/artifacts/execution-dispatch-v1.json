@@ -1,0 +1,10 @@
+{
+  "branch": "main",
+  "commit_or_push_authorized": false,
+  "execution_authorized": true,
+  "operator_instruction": "commit and push. scaffold and execute A9c3",
+  "repository": "cligen-rs",
+  "schema_version": 1,
+  "source_commit": "a0e24f0866f4536c168bfd809cb957d91e6d8bf3",
+  "target_branch": "main"
+}

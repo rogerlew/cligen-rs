@@ -1,0 +1,216 @@
+{
+  "baseline": {
+    "build": "fresh isolated cargo build --release --locked --bin cligen during evaluation; receipt binds source commit/tree, Cargo.lock, Cargo/rustc versions, command/profile, and executed binary SHA-256",
+    "generation_profile": "faithful_5_32_3",
+    "parameter_archive": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+    "qc_filter": "faithful",
+    "role": "development comparator only"
+  },
+  "burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007],
+  "burn_and_prefix_rule": {
+    "full_development": "first four ordered burns",
+    "nested_horizons": "one 100-year stream per site/configuration/burn; the 30-year result is its exact prefix",
+    "pareto_replay": "all eight ordered burns",
+    "short_screen": "first two ordered burns",
+    "stage_reuse": "a deterministic stream identity may be reused at later fidelity; no new burn replaces a failed or unfavorable burn"
+  },
+  "campaign_id": "a9c3-two-site-grouped-observed-v1",
+  "candidate_configuration_source": "docs/work-packages/20260715-a9c-observed-development/artifacts/campaign-freeze-v1.json",
+  "candidate_fit_rule": "refit all eight frozen configurations from the coefficient_fit roles; no A9c fit artifact is reused as an A9c3 fit",
+  "candidate_fit_side_amendment": {
+    "daily_fit_eligibility": "retain the exact class-specific A9c requirements: at least 15 years, at least 300 wet and 300 dry days, renewal at least 50 wet and 50 dry spells, latent at least 100 assigned days per state",
+    "event_fit_identifiability": "retain A9c global borrowing eligibility of at least 1000 fit events from at least five sites and at least 100 fit events per stratum",
+    "evaluation_floor_removed": "the A9c 150/200 development-event availability floors do not apply",
+    "hierarchy": "station within frozen stratum within global, unchanged from A9c",
+    "pooling_and_shrinkage": "retain registered pooling strengths 50 or 150 from each configuration and the event-law stratum-to-global shrinkage scale of 150; these are fit regularization scales, not observed-development availability floors",
+    "silent_substitution_or_site_drop": false
+  },
+  "confirmation_series_access_allowed": false,
+  "daily_development": {
+    "calendar": "daymet_official_365_v1",
+    "period": "2010-01-01/2025-12-31",
+    "source": "Daymet V4 R1 normalized A9c development objects",
+    "generated_calendar": "proleptic Gregorian 2001-2100 with leap days",
+    "observed_generated_calendar_comparison": "no date pairing or leap-day imputation; compute registered month/season/year distributional summaries on each source's own valid civil calendar, then compare summaries",
+    "station_count": 20
+  },
+  "fresh_rng_identity": {
+    "baseline": "faithful CLIGEN burn identities listed in this freeze; no A9 random field",
+    "candidate": "A9 Philox4x32-10 random-field contract with the exact simulation campaign a9c/a9c3-{configuration_id}; component/date/slot ownership unchanged",
+    "fit_optimizer_parameter_member": "fit, optimizer, and hierarchical parameter-member selection are deterministic and have no RNG stream; each records a separate SHA-256 identity over an a9c3 domain, configuration/source inputs, or fitted-detail content as applicable"
+  },
+  "grouped_storm_amendment": {
+    "actual_event_frequencies_preserved": true,
+    "arbitrary_station_event_floors": false,
+    "component_aggregation": "root-mean-square standardized component difference within objective; each stratum row takes the maximum of its four objective distances; the familywise threshold calibration takes the maximum over all objective/stratum rows",
+    "construct_change": "The sparse hot-arid successor replaces the original site-season distribution distances with complete-record transformed summaries. This amended construct is exploratory, avoids empty seasonal cells and arbitrary count floors, and cannot be described as confirming the original A9a storm hypotheses.",
+    "distance": "For each objective, subtract the equal-weight observed group vector from the equal-weight generated group vector, divide componentwise by the candidate-blind station-year bootstrap scale with a 0.02 lower bound, and take root mean square. Boundary equality is non-degradation when candidate minus faithful equals the frozen threshold.",
+    "estimands": {
+      "storm_duration": "equal-station mean of station log-duration median, q10, and q90",
+      "storm_joint_dependence": "equal-station mean of finite pairwise rank correlations over log depth, log duration, logit time-to-peak, log peak ratio, seasonal phase, and log antecedent dry time",
+      "storm_peak_ratio": "equal-station mean of station log peak-ratio median, q10, and q90",
+      "storm_time_to_peak": "equal-station mean of station logit time-to-peak median, q10, and q90"
+    },
+    "finite_estimator_failure": "HOLD-A9C3-GROUP-ESTIMATOR",
+    "objective_amendment": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/grouped-storm-objective-amendment-v1.json",
+    "objective_amendment_sha256": "18d9a0f53d5e9e2983d2255be7e59be6b9bc895803406db496c3f45ae80282c5",
+    "generated_contributors": {
+      "arid_boundary": ["nv262631", "nv269171"],
+      "cold": ["co050130", "me171175", "mn212248", "wy487845"],
+      "hot_arid": ["az026481", "ca040442", "ca042713", "nv264436"],
+      "humid": ["la160549", "sc381544"],
+      "monsoonal_transition": ["az028820", "nm290234", "tx413280", "tx417262"],
+      "non_monsoonal_semi_arid": ["id101022", "mt243996", "ne257665", "or350412"]
+    },
+    "generated_weighting": "equal weight for every frozen generated contributor within stratum, identical for faithful CLIGEN and both candidates",
+    "missing_and_nonfinite_rule": "no imputation and no favorable zero; any nonfinite group component or a stratum with no events returns HOLD-A9C3-GROUP-ESTIMATOR",
+    "observed_sites": [
+      "az_yuma_27_ene",
+      "ca_stovepipe_wells_1_sw"
+    ],
+    "observed_contributors": {
+      "arid_boundary": ["id_murphy_10_w", "nv_baker_5_w"],
+      "cold": ["me_limestone_4_nnw", "mn_sandstone_6_w"],
+      "hot_arid": ["az_yuma_27_ene", "ca_stovepipe_wells_1_sw"],
+      "humid": ["al_fairhope_3_ne", "la_lafayette_13_se"],
+      "monsoonal_transition": ["az_tucson_11_w", "nm_las_cruces_20_n"],
+      "non_monsoonal_semi_arid": ["ks_oakley_19_ssw", "ne_harrison_20_sse"]
+    },
+    "observed_weighting_all_strata": "equal weight for the two frozen USCRN development stations in each stratum; within a station every observed event is retained at its actual frequency",
+    "season_rule": "complete-record marginal summaries replace seasonal cells; seasonal phase and antecedent dry time remain explicit dimensions of the amended joint-dependence vector",
+    "site_season_disclosure": "publish event counts and transformed marginal summaries for every observed site and DJF/MAM/JJA/SON cell, plus the pooled result and either-site-removal sensitivity; these are diagnostics, not support floors",
+    "site_weights": {
+      "az_yuma_27_ene": 0.5,
+      "ca_stovepipe_wells_1_sw": 0.5
+    }
+  },
+  "horizons_years": [30, 100],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "provenance": "preregistered",
+      "rule": "both actual classes produce at least one valid fresh fit and remain structurally non-isomorphic"
+    },
+    {
+      "id": "H2",
+      "provenance": "amended",
+      "rule": "all four equal-weight two-site hot-arid storm estimators are finite; precision and power are reported but do not impose a roster floor"
+    },
+    {
+      "id": "H3",
+      "provenance": "preregistered",
+      "rule": "the frozen selector identifies at most one class after rejecting hard failures, incomplete mandatory evidence, and material degradation"
+    },
+    {
+      "id": "H4",
+      "provenance": "preregistered",
+      "rule": "zero locked confirmation station-year series are accessed"
+    }
+  ],
+  "historical_threshold_non_reuse": "A9c null-threshold values are not relabeled as A9c3 values; A9c3 reruns all seven family-by-horizon numeric gates under a9c3 domains before fitting",
+  "all_family_threshold_calibration": {
+    "candidate_inputs_allowed": false,
+    "families": ["occurrence_spell", "wet_amount", "aggregate", "extreme", "storm_descriptor", "compound_context", "winter_proxy"],
+    "horizons_years": [30, 100],
+    "non_storm_method": "A9c paired same-observed-law year-block maximum statistic, rerun with SHA-256 domain a9c3-null-v1",
+    "replicates_per_family_horizon": 500,
+    "threshold_count": 14
+  },
+  "objective_registry": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+  "objective_evaluator": {
+    "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/objective-evaluator-freeze-v1.json",
+    "sha256": "79c5cadae1f33dc09b2363ed9b1113c2ddbfae5ffca9e0e21297617a2929791f"
+  },
+  "precision_power_diagnostic": {
+    "candidate_inputs_allowed": false,
+    "confidence_interval": "bootstrap percentile 2.5 and 97.5 percent",
+    "minimum_detectable_shift": "two-sided alpha 0.05, target power 0.80, normal approximation on each scalar transformed estimand",
+    "replicates": 2000,
+    "multiplicity": "report every component; no component-specific pass is inferred",
+    "resampling_unit": "complete Local Standard Time station-years within station, independently by station, retaining all events in a selected year and equal station weights",
+    "rng": "NumPy Philox; SHA-256 domain a9c3-grouped-bootstrap-v1 plus replicate and station identity",
+    "selection_role": "diagnostic; no universal power floor"
+  },
+  "grouped_storm_threshold_calibration": {
+    "candidate_inputs_allowed": false,
+    "horizons_years": [30, 100],
+    "method": "500 paired independent station-year block-bootstrap group estimates per horizon; root-mean-square standardized distance within objective, maximum across all four objectives and six strata; 95th-percentile higher order statistic",
+    "replicates_per_horizon": 500,
+    "scale": "bootstrap standard deviation of the first group estimate by stratum/objective/component, lower-bounded at 0.02"
+  },
+  "monthly_reconciliation": {
+    "absolute_tolerance": 1e-08,
+    "fit_path_method": "two independent draws of at least 200000 full fitted-process month paths per retained fit, each balanced over every fitted station and calendar month under distinct target and heldout members of the a9c3-monthly-reconciliation-v1 Philox domain; compare target all-lag daily variance/covariance moments evaluated by monthly_moments with heldout direct 28/29/30/31-day total moments",
+    "month_lengths": [28, 29, 30, 31],
+    "relative_tolerance": 0.005,
+    "uncertainty_tolerance": "the larger of absolute tolerance, relative tolerance, and 3.290527 times the combined target/heldout Monte Carlo standard error, separately for mean and variance",
+    "source": "inherited unchanged from the A9c campaign freeze",
+    "terminal": "HOLD-A9C3-MONTHLY-RECONCILIATION"
+  },
+  "resource_limits": {
+    "analytic_proposals_per_class": 4096,
+    "campaign_wall_hours": 72,
+    "full_configurations_per_class": 64,
+    "memory_gib": 12,
+    "pareto_replays": 8,
+    "retained_gib": 50,
+    "screen_configurations_per_class": 256,
+    "stage_wall_hours": 24,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "selection_rule_id": "a9_lexicographic_pareto_v1",
+  "source_commit": "a0e24f0866f4536c168bfd809cb957d91e6d8bf3",
+  "stages": [
+    {
+      "burn_count": 0,
+      "configuration_limit_per_class": 4,
+      "horizon_years": 0,
+      "stage": "fit_and_structural"
+    },
+    {
+      "burn_count": 2,
+      "configuration_limit_per_class": 4,
+      "horizon_years": 30,
+      "stage": "short_screen"
+    },
+    {
+      "burn_count": 4,
+      "configuration_limit_per_class": 2,
+      "horizon_years": 100,
+      "stage": "full_development"
+    },
+    {
+      "burn_count": 8,
+      "configuration_limit_per_class": 1,
+      "horizon_years": 100,
+      "stage": "pareto_replay"
+    }
+  ],
+  "stage_promotion": {
+    "full_development": "within each class order short-screen records by complete first, then ascending median normalized family distance, then ascending configuration_id; retain first two",
+    "hard_failure": "a hard failure never advances and remains in the attempt inventory",
+    "pareto_replay": "within each class order full-development records by complete first, then ascending material-degradation count, then ascending median normalized family distance, then ascending configuration_id; retain first one",
+    "short_screen_evidence": "all 20 frozen generated contributors, both first burns, 30-year prefix, all seven family summaries",
+    "ties": "ascending configuration_id",
+    "unavailable": "mandatory unavailable evidence sorts after every complete record and cannot be treated as zero distance"
+  },
+  "materially_improved_family_count": "count a family once only when it materially improves in at least one mandatory stratum at both 30 and 100 years and has no material degradation row",
+  "storm_development": {
+    "period": "2018-01-01/2024-12-31",
+    "source": "NOAA USCRN Subhourly01 normalized A9c development objects",
+    "station_count": 12
+  },
+  "terminals": [
+    "CANDIDATE-FROZEN-READY-A9D",
+    "HOLD-A9C3-PREDECESSOR-INTEGRITY",
+    "HOLD-A9C3-DATA-ROLE",
+    "HOLD-A9C3-GROUP-ESTIMATOR",
+    "HOLD-A9C3-MODEL-CLASS-EQUIVALENCE",
+    "HOLD-A9C3-FIT-APPLICABILITY",
+    "HOLD-A9C3-MONTHLY-RECONCILIATION",
+    "HOLD-A9C3-NO-SELECTABLE-CANDIDATE",
+    "HOLD-A9C3-RESOURCE-BOUND"
+  ],
+  "two_site_generalization_limit": "Hot-arid storm evidence is limited to Yuma and Stovepipe Wells; no physical or spatial universality claim is permitted."
+}

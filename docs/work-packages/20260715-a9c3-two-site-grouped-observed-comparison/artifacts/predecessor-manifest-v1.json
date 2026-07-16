@@ -1,0 +1,85 @@
+{
+  "files": [
+    {
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+      "role": "31-objective registry and selection rule",
+      "sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/campaign-freeze-v1.json",
+      "role": "A9c candidate-class and configuration authority",
+      "sha256": "6f8daef04a182673074d3a719c403b768d8e06052d42151123cc6e8c5beb7004"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-freeze-v1.json",
+      "role": "pre-access station, source, calendar, and period authority",
+      "sha256": "9e50169157a91bf8a351e961dd53a3f11a9b33d18cf294baab1e13423dbc7814"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-manifest-v1.json",
+      "role": "observed role firewall",
+      "sha256": "379060ae0fa8ca6bb411d6a47ffa723c4fc3abbdd0f18eaca09cdf4fec388540"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/observed-source-manifest-v1.json",
+      "role": "normalized observed-object identities",
+      "sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/null-thresholds-v1.json",
+      "role": "historical A9c threshold method and non-reuse boundary",
+      "sha256": "6bc762369beff5416e79f8872f8b4cb7300ba0589b7a8e75ecf2f3a462fa6c6c"
+    },
+    {
+      "path": "docs/work-packages/20260715-a8a-dry-regime-applicability/artifacts/selected-parameters-v1.tar.gz",
+      "role": "faithful comparator parameter archive",
+      "sha256": "9d24e5566e103a04a389c76a1becb678d885b766a01fc386940b35201e2d3122"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/data-and-evaluation-plan.md",
+      "role": "data, gate, calendar, and confirmation plan",
+      "sha256": "68424495aae6113b3263a741768f00d5426e459741fc9b4aead9a8fdbc02c830"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/model-family-envelope.md",
+      "role": "candidate factorization and fit hierarchy authority",
+      "sha256": "2d217bb1b428fe9941b31ad740481bd283d6da5b25279a6d4e5371afab55a673"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/post-acceptance-operator-disposition.md",
+      "role": "two-site risk acceptance and successor direction",
+      "sha256": "c6dfd39da313549664aafb17c0a7ac9e2f684e3162d39af028d3480d8fe7615a"
+    },
+    {
+      "path": "docs/reports/a9c2-hot-arid-roster-feasibility-report.manifest.json",
+      "role": "accepted A9c2 public evidence identity",
+      "sha256": "1d07b33bc7f11518ad138ad547b12889315841c4716930b450a88a8d4691f6ec"
+    },
+    {
+      "path": "research/a9c/data.py",
+      "role": "observed normalization implementation",
+      "sha256": "d8f727658b67c93acb3562b5e664733aff5a297d6e2dd6ca4af63c15c1fc4d35"
+    },
+    {
+      "path": "research/a9c/models.py",
+      "role": "actual candidate fit and simulation implementation",
+      "sha256": "3b683c4c74ad06e52b72befff678adcf206a51cdc161df2c7686b9c0c4d599d2"
+    },
+    {
+      "path": "research/a9c/nulls.py",
+      "role": "candidate-blind paired block-bootstrap calibration method",
+      "sha256": "70df640b42e86ab1a0d019366e324fc454d171d8b78c7ca0e2c7298435482fdd"
+    },
+    {
+      "path": "research/a9_harness/objectives.py",
+      "role": "Pareto and lexicographic selection implementation",
+      "sha256": "e398e8f12c2e5c20b004e30660cc8c77a8983a8a353489ed43c95641244a7992"
+    }
+  ],
+  "historical_terminals": {
+    "a9c": "HOLD-A9C-GATE-CALIBRATION",
+    "a9c2": "HOLD-A9C2-HOT-ARID-ROSTER"
+  },
+  "schema_version": 1,
+  "source_commit": "a0e24f0866f4536c168bfd809cb957d91e6d8bf3"
+}

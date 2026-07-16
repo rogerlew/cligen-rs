@@ -72,20 +72,25 @@ was accessed, so grouped calibration and the fresh model comparison were not
 reached. The accepted result is also documented in the
 [A9c2 public report](reports/a9c2-hot-arid-roster-feasibility-report.md).
 
-There is no active successor package. Continuing the stochastic-generator
-campaign no longer requires another corpus-expansion study. By operator
-disposition on 2026-07-15, Yuma and Stovepipe Wells are functionally adequate
-hot-arid development evidence for research continuation. This accepts limited
-spatial generalization and two-site heterogeneity diagnostics; it does not
-retroactively pass A9c2 or establish that the eventual model is adequate.
+There is no active successor package. A9c3 completed on 2026-07-15 with
+`HOLD-A9C3-NO-SELECTABLE-CANDIDATE`. Its equal-weight Yuma/Stovepipe estimator
+was finite at the actual 136/97 event frequencies, and four renewal plus two
+latent configurations entered the short screen. Every one of 240 candidate
+site/burn prefixes violated physical support, so zero configurations advanced
+to full development or Pareto replay and no candidate was sealed. The accepted
+record is in the
+[A9c3 work package](work-packages/20260715-a9c3-two-site-grouped-observed-comparison/package.md)
+and [public report](reports/a9c3-two-site-grouped-observed-comparison-report.md).
 
-The next roadmapped item is A9c3, a two-site grouped observed-development
-comparison. It remains unscaffolded and unauthorized. A9c3 must retain the two
-sites without substitution, use equal station weighting, preserve actual event
-frequencies, publish site-specific and pooled uncertainty, treat precision and
-power as diagnostics rather than a new roster gate, refit both candidate
-classes under a fresh campaign identity, and state the two-site generalization
-limit in every downstream handoff.
+The next recommended package is A9c4, a bounded context-support and evidence-
+completeness correction. It remains unscaffolded and unauthorized. Before new
+candidate output it must decompose A9c3's 19 unavailable mandatory rows by
+observed, faithful, and candidate cause and establish that the evidence surface
+can yield a complete candidate or freeze a prospective amendment. It should
+then place solar radiation and wind on nonnegative support and humidity on
+bounded support inside both research models. Holding the other mechanisms
+fixed is only diagnostic isolation; A9c3's 8--18 degradation rows remain
+unresolved. No new selector structure or corpus-expansion campaign is implied.
 
 A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
 unauthorized because no A9c3 candidate has been selected or sealed. A9 does

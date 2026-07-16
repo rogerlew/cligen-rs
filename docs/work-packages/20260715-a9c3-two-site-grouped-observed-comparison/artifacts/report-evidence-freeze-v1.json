@@ -1,0 +1,130 @@
+{
+  "access_boundary": {
+    "confirmation_metadata_accessed": true,
+    "confirmation_target_series_accessed": false,
+    "result_access_at_freeze": "A9c3 canonical calibration, fit, baseline, and evaluation outcomes complete",
+    "wording": "zero locked confirmation target-series access"
+  },
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/execution-dispatch-v1.json",
+      "role": "operator dispatch and exact source-commit boundary",
+      "sha256": "e86dedd520d9036accd9bb7d0b81f6306ee93ad875e76aff727da1313dcf8f7d"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/design-freeze-v1.json",
+      "role": "prospective campaign, hypotheses, staged comparison, and terminal rules",
+      "sha256": "cafe91e4d3bdbd6f1c6827bab56205b77336ceea4c5ec497dbf88b068d12314c"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/grouped-storm-objective-amendment-v1.json",
+      "role": "amended two-site storm estimands, weighting, uncertainty, and scope",
+      "sha256": "18d9a0f53d5e9e2983d2255be7e59be6b9bc895803406db496c3f45ae80282c5"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/objective-evaluator-freeze-v1.json",
+      "role": "pre-score objective-specific availability, estimator, distance, and aggregation rules",
+      "sha256": "79c5cadae1f33dc09b2363ed9b1113c2ddbfae5ffca9e0e21297617a2929791f"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/grouped-calibration-v1.json",
+      "role": "canonical candidate-blind grouped calibration and finite-estimator evidence",
+      "sha256": "2ab7a6228ca96d0106f95b080b0c8103101860246b067714d0a1b4ddf5365c0d"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/fit-execution-v1.json",
+      "role": "fresh fit inventory, applicability, monthly reconciliation, and resource evidence",
+      "sha256": "efbbbc2517239800815a652d443647ae8523fcdcf1fe13edc730a79a2a319359"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/structural-audit-v1.json",
+      "role": "candidate-class non-isomorphism and recovery audit",
+      "sha256": "3bb1ad02cc4d2fe7ec7f9de5c961f6eead427e386f80e91422a1879781c0d999"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/faithful-baseline-v1.json",
+      "role": "fresh faithful Rust comparator build, output identities, and engineering checks",
+      "sha256": "10e91291183cdf0978d1012a6254db77f2320fc593bb6ac5ae0137c8fcac3f34"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/evaluation-v1.json",
+      "role": "canonical short-screen results, attempt inventory, selection boundary, and terminal",
+      "sha256": "e0e6748b4712b4ed4ef1bd0de63f3058d14ce1449a6aaa3db7c579d964588751"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/pre-score-fit-closeout-correction.md",
+      "role": "prospective-to-scoring harness correction and access chronology",
+      "sha256": "dc13783b079a3337ccd255029a7fe6a784a7e08d97fa71c4405acbc5eef71dd1"
+    },
+    {
+      "id": "E11",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/observed-source-manifest-v1.json",
+      "role": "exact Daymet and USCRN role, period, normalized-object, and access identities",
+      "sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b"
+    },
+    {
+      "id": "E12",
+      "path": "research/a9c3/experiment.py",
+      "role": "deterministic A9c3 calibration, fitting, generation, evaluation, and verification implementation",
+      "sha256": "fca8f54ba332cb5c4c75f7fb7d89225546c741be484bbef81f418c3aedd8c0f1"
+    },
+    {
+      "id": "E13",
+      "path": "docs/work-packages/20260715-a9c2-grouped-hot-arid-reentry/artifacts/post-acceptance-operator-disposition.md",
+      "role": "accepted two-site limitation and A9c3 successor obligations",
+      "sha256": "c6dfd39da313549664aafb17c0a7ac9e2f684e3162d39af028d3480d8fe7615a"
+    },
+    {
+      "id": "E14",
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "role": "faithful-mode source-authority decision",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "id": "E15",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/post-outcome-methods-deviation.md",
+      "role": "outcome-time short-screen horizon correction and monthly-auditability disclosure",
+      "sha256": "a85e257881001b78549796d6c65615fb94ebbcca2334d61f93055c2fb378482d"
+    }
+  ],
+  "external_references": [
+    {
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "id": "R01",
+      "scope": "Daymet V4 R1 / dataset version 4.1 identity and data context",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "doi_or_no_doi": "10.7289/V5MS3QR9",
+      "id": "R02",
+      "scope": "USCRN processed-data identity and citation",
+      "url": "https://doi.org/10.7289/V5MS3QR9"
+    },
+    {
+      "doi_or_no_doi": "No DOI",
+      "id": "R03",
+      "scope": "executed lowercase Subhourly01 format 01 and OAP 2.1.1 documentation",
+      "url": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01/readme.txt"
+    },
+    {
+      "doi_or_no_doi": "10.1175/BAMS-D-12-00170.1",
+      "id": "R04",
+      "scope": "USCRN network context and requested written-use citation",
+      "url": "https://doi.org/10.1175/BAMS-D-12-00170.1"
+    }
+  ],
+  "question": "Can either prospectively registered successor class produce a selectable research candidate on the frozen exposed six-regime development surface after replacing only A9c's hot-arid storm support floors with the amended equal-weight two-site estimator?",
+  "report_id": "a9c3-two-site-grouped-observed-comparison",
+  "schema_version": 1,
+  "source_commit": "a0e24f0866f4536c168bfd809cb957d91e6d8bf3"
+}
