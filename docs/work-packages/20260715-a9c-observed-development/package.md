@@ -128,7 +128,7 @@ The hot-arid development stations supplied 136 and 97 valid events. The
 objective registry therefore yields 0/2 available hot-arid stations for
 mandatory time-to-peak and peak-ratio objectives (150 events required) and
 joint dependence (200 required), producing three failed mandatory cells.
-Global borrowing remains valid only for duration under its distinct rule.
+Global borrowing remains valid only for duration under its distinct A9c rule.
 
 No development score, 31-objective candidate vector, Pareto frontier,
 lexicographic selection, A9d freeze, or confirmation station-year series was
@@ -137,12 +137,21 @@ passed gates. The accepted public report and consolidated review describe the
 availability hold without making a candidate-quality claim. No production
 crate, generation profile, station schema, or vendored Fortran source changed.
 
-The first follow-on action, if separately authorized, is a new metadata-only
-re-entry design that prospectively demonstrates two event-development sites
-per mandatory stratum can meet the 150/200-event support floors. It may not
-amend A9c outcomes or use the locked confirmation series.
-
 Terminal: `HOLD-A9C-GATE-CALIBRATION`. A9d and A9e remain unauthorized.
+
+## Post-acceptance disposition
+
+On 2026-07-15, operator review determined that the station floors were
+uncalibrated design choices rather than evidence that the two sites'
+observations are deficient. This corrects the interpretation without changing
+the frozen arithmetic or terminal.
+
+The first follow-on is the scaffolded A9c2 campaign. If separately authorized,
+it will freeze at least five metadata-selected hot-arid development locations,
+a station-balanced group estimator, site/year-block resampling, and candidate-
+blind precision/power availability before accessing new series or scores. It
+will refit and rerun the full comparison under a new campaign identity. It may
+not amend A9c outcomes or use the locked confirmation series.
 
 ## Artifacts
 
@@ -159,7 +168,9 @@ Terminal: `HOLD-A9C-GATE-CALIBRATION`. A9d and A9e remain unauthorized.
 - `artifacts/gate-results.md` — scientific, reproduction, and repository gate
   outcomes at the registered hold.
 - `artifacts/review.md` — accepted consolidated review with zero open P1/P2.
-- `artifacts/reentry-requirements.md` — recommendation-only future design
-  boundary.
+- `artifacts/reentry-requirements.md` — operator-dispositioned A9c2 design and
+  execution boundary.
+- `artifacts/post-acceptance-operator-disposition.md` — revision-2 scientific
+  interpretation and prospective A9c2 direction, preserving the A9c terminal.
 - `artifacts/large/` — LFS-managed normalized observed and retained campaign
   evidence at or above the package retention threshold.

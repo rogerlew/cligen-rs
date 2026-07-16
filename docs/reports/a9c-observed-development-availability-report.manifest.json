@@ -47,6 +47,12 @@
       "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md",
       "role": "A9c execution, objective, resource, selection, and terminal contract",
       "sha256": "cded9c74c35913a3da327a907b5ea2e1681b776a123ea387f4c03599858e05b7"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/post-acceptance-operator-disposition.md",
+      "role": "post-acceptance interpretation correction and prospective A9c2 direction",
+      "sha256": "c300a5cb479188b3e5224766d842c5b34f4a9e48c919bc35647692c7e2813937"
     }
   ],
   "governance": [
@@ -68,9 +74,9 @@
   ],
   "hypotheses": [
     {
-      "evidence_ids": ["E01", "E03", "E08"],
+      "evidence_ids": ["E01", "E03", "E08", "E09"],
       "id": "H1",
-      "outcome": "Not supported; mandatory hot-arid storm availability failed",
+      "outcome": "Not supported under the registered station-floor design; no data-deficiency inference",
       "provenance": "preregistered"
     },
     {
@@ -108,11 +114,11 @@
   ],
   "report": {
     "path": "docs/reports/a9c-observed-development-availability-report.md",
-    "sha256": "6a4d500225f34e83c63259d566725ef79d054549a0c9b5b83e44ec8c2483032b"
+    "sha256": "a7852d292a82cd870bb8e8db63c0b438cc6cb317d9915ba8f6bde251b83ac7b0"
   },
   "report_id": "a9c-observed-development-availability",
   "report_manifest_version": 1,
-  "report_revision": 1,
+  "report_revision": 2,
   "required_sections": [
     "Abstract",
     "Introduction",
@@ -129,19 +135,19 @@
     {
       "lens": "accuracy",
       "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
-      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "sha256": "c84235f07139b46b02f8b649bdd4c6840f0f3dba0281c3601849ae8e4a486383",
       "verdict": "ACCEPT"
     },
     {
       "lens": "scientific-validity",
       "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
-      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "sha256": "c84235f07139b46b02f8b649bdd4c6840f0f3dba0281c3601849ae8e4a486383",
       "verdict": "ACCEPT"
     },
     {
       "lens": "consistency-public-safety",
       "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
-      "sha256": "89b098fdc4e2247812d16a19abd3df16d553aa20d727d02c21bc0ade8d4042f0",
+      "sha256": "c84235f07139b46b02f8b649bdd4c6840f0f3dba0281c3601849ae8e4a486383",
       "verdict": "ACCEPT"
     }
   ],

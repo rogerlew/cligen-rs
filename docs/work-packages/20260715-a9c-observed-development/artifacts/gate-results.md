@@ -1,6 +1,6 @@
 # A9c gate results
 
-Date: 2026-07-15  
+Date: 2026-07-15
 Terminal: `HOLD-A9C-GATE-CALIBRATION`
 
 ## Scientific and evidence gates
@@ -16,10 +16,14 @@ Terminal: `HOLD-A9C-GATE-CALIBRATION`
   frozen thresholds.
 - PASS — all five fits completed before the stop validate against the official
   fit schema and self-hash.
-- HOLD — hot-arid development event support is 136 events at AZ Yuma 27 ENE
+- HOLD UNDER FROZEN A9C RULES — hot-arid development event support is 136 events at AZ Yuma 27 ENE
   and 97 at CA Stovepipe Wells 1 SW. Both stations miss the 150-event floors
   for time-to-peak and peak ratio and the 200-event floor for joint
   dependence. Three mandatory cells therefore have 0/2 available stations.
+- DISPOSITIONED — those per-station floors were not derived from an A9 power
+  or precision calibration. Report revision 2 treats the outcome as a design-
+  rule mismatch and directs candidate-blind grouped support calibration in
+  A9c2; no A9c result is recalculated.
 - NOT RUN BY DESIGN — candidate development scoring, the 31-objective
   candidate vector, Pareto ranking, selector replay, A9d freeze, and
   confirmation evaluation are downstream of the first failed gate.

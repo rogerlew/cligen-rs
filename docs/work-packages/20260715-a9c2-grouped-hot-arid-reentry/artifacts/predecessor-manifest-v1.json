@@ -1,0 +1,95 @@
+{
+  "a9c_historical_terminal": "HOLD-A9C-GATE-CALIBRATION",
+  "a9c_report_revision": 2,
+  "a9c2_execution_authorized": false,
+  "files": [
+    {
+      "bytes": 14176,
+      "path": "docs/specifications/SPEC-A9-RESEARCH-FOUNDATION.md",
+      "sha256": "463935b2bdf4c7dac9b31ec5a618461980db12545d7a9d1b9f81ebdc30adea27"
+    },
+    {
+      "bytes": 13186,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/model-family-envelope.md",
+      "sha256": "2d217bb1b428fe9941b31ad740481bd283d6da5b25279a6d4e5371afab55a673"
+    },
+    {
+      "bytes": 30881,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+      "sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7"
+    },
+    {
+      "bytes": 16488,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/data-and-evaluation-plan.md",
+      "sha256": "68424495aae6113b3263a741768f00d5426e459741fc9b4aead9a8fdbc02c830"
+    },
+    {
+      "bytes": 10400,
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+      "sha256": "121a5141477ca23ad26fb6618edf8f71c85e72eda11bec893a81e7895a9dd5e8"
+    },
+    {
+      "bytes": 8495,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/package.md",
+      "sha256": "26b52664e2bf0552351fee5152f1c7b3349e9db3822f30f00e13f76818721245"
+    },
+    {
+      "bytes": 8230,
+      "path": "docs/work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md",
+      "sha256": "cded9c74c35913a3da327a907b5ea2e1681b776a123ea387f4c03599858e05b7"
+    },
+    {
+      "bytes": 8791,
+      "path": "docs/work-packages/20260715-a9c-observed-development/package.md",
+      "sha256": "47a874521e04522d72daca9813c56fef8ee37283f50a9ca4181b419cc38533af"
+    },
+    {
+      "bytes": 12642,
+      "path": "docs/reports/a9c-observed-development-availability-report.md",
+      "sha256": "a7852d292a82cd870bb8e8db63c0b438cc6cb317d9915ba8f6bde251b83ac7b0"
+    },
+    {
+      "bytes": 6701,
+      "path": "docs/reports/a9c-observed-development-availability-report.manifest.json",
+      "sha256": "e22545bd38f99890e2500d0933e5b844d92830c79d48968154b81cfe000de7d2"
+    },
+    {
+      "bytes": 7654,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/review.md",
+      "sha256": "c84235f07139b46b02f8b649bdd4c6840f0f3dba0281c3601849ae8e4a486383"
+    },
+    {
+      "bytes": 2211,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/post-acceptance-operator-disposition.md",
+      "sha256": "c300a5cb479188b3e5224766d842c5b34f4a9e48c919bc35647692c7e2813937"
+    },
+    {
+      "bytes": 1726,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/reentry-requirements.md",
+      "sha256": "1015bc06fbe074b7a29010e8659dac8beab0b7ecdde7b40f92a207569d937509"
+    },
+    {
+      "bytes": 6648,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/gate-calibration-availability-v1.json",
+      "sha256": "c6cddc8fc26afd6429a814953568ca75ad4b6047c22d7e25c408e01265782b57"
+    },
+    {
+      "bytes": 7261,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-freeze-v1.json",
+      "sha256": "9e50169157a91bf8a351e961dd53a3f11a9b33d18cf294baab1e13423dbc7814"
+    },
+    {
+      "bytes": 5969,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/campaign-freeze-v1.json",
+      "sha256": "6f8daef04a182673074d3a719c403b768d8e06052d42151123cc6e8c5beb7004"
+    },
+    {
+      "bytes": 4181,
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/implementation-manifest-v1.json",
+      "sha256": "ccf8fb579b49de4bee87f42dd37b1e0920865ba6926ec0de6892b3f2f57f7cde"
+    }
+  ],
+  "manifest_id": "a9c2-predecessor-v1",
+  "schema_version": 1,
+  "scaffold_base_commit": "3122afc81b3fa0790d19974b6803f56a81c1b2ae"
+}

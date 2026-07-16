@@ -3,7 +3,7 @@
 Report ID: `a9c-observed-development-availability`
 Status: `ACCEPTED`
 Date: 2026-07-15
-Revision: 1
+Revision: 2
 Authors: cligen-rs project contributors
 Evidence mode: Mixed
 Experiment record: [A9c work package](../work-packages/20260715-a9c-observed-development/package.md)
@@ -17,12 +17,16 @@ generator classes. It materialized 40 role-separated Daymet objects and 24
 USCRN logical objects from 180 exact station-year source files, calibrated
 7,000 candidate-blind null replicates, and retained five valid fit artifacts
 before the mandatory availability gate stopped execution. The two hot-arid
-development stations contained 136 and 97 valid events. Both therefore missed
-the 150-event station minimum for time-to-peak and peak-ratio objectives and
-the 200-event minimum for joint dependence, leaving 0/2 available hot-arid
+development stations contained 136 and 97 valid events. Under the frozen
+150-event station minimum for time-to-peak and peak-ratio objectives and the
+200-event minimum for joint dependence, this left 0/2 available hot-arid
 stations in three mandatory cells. The registered terminal is
 `HOLD-A9C-GATE-CALIBRATION`. No development score, Pareto comparison, candidate
-selection, or confirmation series was accessed [E03] [E04] [E05].
+Post-acceptance operator disposition identified the station-level counts as
+uncalibrated design rules, not evidence that the two sites' observations are
+deficient. The operator directed a prospectively expanded, station-balanced
+group design for A9c2; this interpretation changes neither the A9c arithmetic
+nor its terminal [E09].
 
 ## Introduction
 
@@ -33,11 +37,13 @@ Daymet V4 R1 was selected for daily precipitation and temperature fitting,
 while NOAA USCRN Subhourly01 supplied five-minute event descriptors and
 compound context [R01] [R02].
 
-The question reached in this report is narrower than candidate quality: could
-the frozen observed development roles support every mandatory objective before
-model ranking? The role and campaign freezes required at least two available
-stations per mandatory stratum and prohibited replacement, threshold changes,
-or confirmation access after series outcomes became visible [E01] [E07].
+The question reached in this report is narrower than candidate quality: did
+the frozen observed-development roles pass every registered availability rule
+before model ranking? The role and campaign freezes required at least two
+available stations per mandatory stratum and prohibited replacement,
+threshold changes, or confirmation access after series outcomes became visible
+[E01] [E07]. Revision 2 distinguishes that procedural result from an empirical
+claim about the amount of information in hot-arid storms [E09].
 
 ## Hypotheses
 
@@ -47,7 +53,7 @@ be evaluated.
 
 | ID | Provenance | Scope and comparison | Decision rule | Outcome | Result |
 |---|---|---|---|---|---|
-| H1 | preregistered | Observed development supports mandatory objectives in all six strata | At least two available stations per mandatory stratum and objective | Not supported; mandatory hot-arid storm availability failed | [Results](#availability-terminal) |
+| H1 | preregistered | Observed development passes the registered mandatory-objective availability rules in all six strata | At least two available stations per mandatory stratum and objective | Not supported under the registered station-floor design; no data-deficiency inference | [Results](#availability-terminal) |
 | H2 | preregistered | Candidate-blind numeric gates and availability can both be frozen | 500 paired null identities per family/horizon plus complete mandatory availability | Partially supported; numeric thresholds complete but availability gate failed | [Results](#null-calibration) |
 | H3 | preregistered | At most one candidate can survive the frozen selector | Execute ranking only after all upstream gates pass | Not evaluated; upstream hold prohibited ranking | [Results](#candidate-boundary) |
 | H4 | preregistered | Confirmation targets remain untouched throughout A9c | Zero confirmation station-year series access | Supported; zero confirmation series access | [Results](#confirmation-firewall) |
@@ -94,17 +100,20 @@ Subhourly01 data [R01] [R02].
 
 ### Availability rules
 
-The objective registry makes storm duration available with 150 station events
+The objective registry made storm duration available with 150 station events
 or with at least 50 station events plus a frozen group containing at least
 1,000 events from five sites. Time-to-peak and peak ratio each require 150
 station events. Joint dependence requires 200 valid events plus deep-event
 support. Every mandatory stratum requires two available stations. Unavailable
-is not a zero or a pass [E03] [E08].
+is not a zero or a pass [E03] [E08]. These were prospective A9 rules. A9a did
+not derive the 150/200 values from a power or precision study for these hot-
+arid stations [E09].
 
 ## Analysis
 
-The analysis counted valid normalized events per station and applied each
-objective's support rule before any candidate development evaluation. It then
+The analysis counted valid normalized events per station and mechanically
+applied each objective's registered support rule before any candidate
+development evaluation. It then
 aggregated Boolean station availability by objective and primary stratum. The
 global development hierarchy contained 6,835 events across 12 sites, so the
 duration borrowing rule was available. That rule does not replace the explicit
@@ -121,11 +130,15 @@ written, and no candidate input entered calibration [E04].
 ### Availability terminal
 
 The hot-arid stations AZ Yuma 27 ENE and CA Stovepipe Wells 1 SW supplied 136
-and 97 development events. Consequently, hot-arid availability was 0/2 for
+and 97 development events, or 19.4 and 13.9 events per station-year over the
+seven-year development window. Consequently, under the frozen rules hot-arid
+availability was 0/2 for
 `storm_time_to_peak`, 0/2 for `storm_peak_ratio`, and 0/2 for
 `storm_joint_dependence`. These are three failed mandatory stratum/objective
 cells. Duration remained available through the frozen global borrowing rule.
-The first failed upstream gate returns `HOLD-A9C-GATE-CALIBRATION` [E03].
+The first failed upstream gate returns `HOLD-A9C-GATE-CALIBRATION` [E03]. The
+operator's later design disposition does not retroactively turn any failed
+cell into a pass [E09].
 
 ### Null calibration
 
@@ -161,27 +174,33 @@ used a candidate development score [E06]. The interrupted fit means A9c did
 not complete the structural cross-fit or monthly reconciliation campaign.
 
 Construct validity is limited by the selected 2018--2024 development window,
-the six-hour event separator, strict missingness, and the registry's station-
-level minima. Global borrowing legitimately supports duration but cannot be
-generalized to time-to-peak, peak ratio, or joint dependence. The terminal is
-an evidence-design result, not a climate-model failure.
+the six-hour event separator, strict missingness, and the registry's
+uncalibrated station-level minima. Global borrowing legitimately supports
+duration under A9c's rules but cannot be retroactively generalized to
+time-to-peak, peak ratio, or joint dependence. The terminal is a mismatch
+between the registered evaluation design and observed hot-arid event
+frequency, not a climate-model failure or proof of intrinsically inadequate
+observations [E09].
 
 External validity is limited to these 12 USCRN development sites, the exact
-station-year bytes, and the frozen objective registry. A longer prospectively
-selected period or a larger hot-arid roster may provide adequate support, but
-that is a future design proposition, not an A9c result. Confirmation sites,
-production Rust, openWEPP, and WEPPcloud were not evaluated.
+station-year bytes, and the frozen objective registry. An expanded hot-arid
+roster and station-balanced group estimator may use sparse events more
+appropriately, but its precision, power, and sensitivity to site heterogeneity
+remain future A9c2 questions. Confirmation sites, production Rust, openWEPP,
+and WEPPcloud were not evaluated.
 
 ## Conclusions
 
-A9c cannot legally rank the successor candidates because the frozen hot-arid
-development evidence does not meet mandatory station-level storm support.
-The correct outcome is `HOLD-A9C-GATE-CALIBRATION`, not a relaxed threshold or
-post-outcome station substitution. The next scientific action, if authorized,
-is a new metadata-first package that freezes an event-development period and
-hot-arid roster demonstrably capable of the 150/200-event support targets
-without touching A9 confirmation targets. Existing A9c observations and fit
-artifacts remain exposed development evidence.
+A9c cannot legally rank the successor candidates because its frozen hot-arid
+development roles do not pass the registered station-level availability
+rules. The historical outcome remains `HOLD-A9C-GATE-CALIBRATION`; revision 2
+does not relax an A9c threshold or substitute an A9c station. It corrects the
+follow-on interpretation: the 150/200 counts were not calibrated facts about
+hot-arid sufficiency. A9c2 should freeze more hot-arid locations, equalize
+station influence in grouped event objectives, and calibrate availability
+candidate-blind at the actual design before a fresh full comparison. Existing
+A9c observations and fits remain exposed, and the confirmation roster remains
+untouched [E09].
 
 ## Reproducibility and data availability
 
@@ -192,6 +211,11 @@ replicates are managed through Git LFS; their compressed and logical SHA-256
 identities are checked independently. Raw USCRN annual bytes are identified in
 the access ledger but are not redistributed. Public NOAA and ORNL records
 retain their source citations. Copyrighted reading copies are not linked.
+
+Revision 2 retains the revision-1 accepted report hash and post-acceptance
+operator disposition in the experiment package. All original machine evidence
+is unchanged; the revised report and consolidated review are rehashed and
+reverified [E09].
 
 ## References
 
@@ -209,3 +233,4 @@ retain their source citations. Copyrighted reading copies are not linked.
 - [E06] A9c pre-ranking correction record.
 - [E07] A9c strict data-role manifest and confirmation firewall.
 - [E08] A9c predecessor handoff and objective boundary.
+- [E09] A9c post-acceptance operator disposition and immutable-boundary record.

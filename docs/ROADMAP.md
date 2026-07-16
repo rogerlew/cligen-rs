@@ -32,7 +32,7 @@ candidate, accessed no confirmation target, and changed no production runtime.
 The accepted record and freeze-ready successor handoff are in the
 [A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
-There is no active authorized package. A9c completed on 2026-07-15 with
+There is no active execution authorization. A9c completed on 2026-07-15 with
 `HOLD-A9C-GATE-CALIBRATION`. It materialized 64 normalized observed role
 objects, 180 exact USCRN station-year identities, and 7,000 candidate-blind
 null replicates without confirmation access. Its hot-arid development sites
@@ -41,6 +41,12 @@ time-to-peak, peak-ratio, and joint-dependence objectives. Five fits completed,
 but no development score or candidate ranking was accessed. The accepted
 record is in the
 [A9c work package](work-packages/20260715-a9c-observed-development/package.md).
+
+Post-acceptance operator disposition retains that terminal and arithmetic but
+corrects the follow-on interpretation: the 150/200 station floors were
+prospective design choices, not empirically calibrated minimum sample sizes
+for sparse hot-arid sites. The A9c report is revised to revision 2. This does
+not retroactively pass a cell, rank a candidate, or alter A9a/A9b history.
 
 A9b completed on 2026-07-15 with
 `HARNESS-READY-A9C`. Its
@@ -55,10 +61,16 @@ candidate, and changed no production runtime.
 Its context-complete boundary is frozen in the
 [A9c handoff](work-packages/20260715-a9b-calibration-harness/artifacts/a9c-handoff.md).
 
-The recommended next action is a separately authorized metadata-only re-entry
-design that proves an event-development roster/period can supply at least two
-stations per mandatory stratum at the 150/200-event support floors. It remains
-unscaffolded and must treat every A9c object as exposed development evidence.
+The [A9c2 grouped hot-arid re-entry](work-packages/20260715-a9c2-grouped-hot-arid-reentry/package.md)
+is scaffolded but not authorized for execution. It combines the prospective
+design freeze and fresh comparison under one new campaign identity; there is
+no intervening A9c1 package. A9c2 retains both exposed A9c hot-arid locations,
+adds every eligible metadata-selected location to reach at least five, gives
+stations equal total weight in grouped storm objectives, calibrates support
+candidate-blind at the actual design, and then refits and reruns both classes
+across all six strata. Outcome-selected station substitution remains
+prohibited.
+
 A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
 unauthorized because A9c did not return a continuation terminal. A9 does
 not inherit an A8c candidate, coefficient, threshold, station classification,

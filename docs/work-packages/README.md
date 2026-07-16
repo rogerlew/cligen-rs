@@ -57,3 +57,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260715-a9a-successor-family-foundation](20260715-a9a-successor-family-foundation/package.md) | EXECUTED-COMPLETE |
 | [20260715-a9b-calibration-harness](20260715-a9b-calibration-harness/package.md) | EXECUTED-COMPLETE |
 | [20260715-a9c-observed-development](20260715-a9c-observed-development/package.md) | EXECUTED-HOLD-GATE-CALIBRATION |
+| [20260715-a9c2-grouped-hot-arid-reentry](20260715-a9c2-grouped-hot-arid-reentry/package.md) | SCAFFOLDED |
