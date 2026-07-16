@@ -1,11 +1,12 @@
 # A10 Neural Point-Weather Successor Feasibility Study Plan
 
-Status: `PLANNING`
+Status: `PLANNING — INDEPENDENTLY REVIEWED`
 Date: 2026-07-16
 Study class: research-only stochastic climate-generator feasibility study
 Expected execution record:
 `docs/work-packages/YYYYMMDD-a10-neural-point-weather-successor/`
 Production effect: none; `faithful_5_32_3` remains the default
+Review: [independent review and disposition](a10-study-plan-review.md)
 
 ## Executive decision
 
@@ -140,7 +141,7 @@ runtime?
 | O1 | Build a leakage-safe, role-explicit regional corpus large enough for neural fitting while preserving the existing development and locked-confirmation firewalls. |
 | O2 | Establish a pinned, restartable, offline GPU training environment on the I-CREWS `gpu-volatile` nodes. |
 | O3 | Implement one compact neural state-space family with exact mixed discrete/continuous output support and stable long-horizon state evolution. |
-| O4 | Test whether hierarchical station/regime conditioning improves sparse-climate generalization relative to an otherwise identical no-pooling ablation. |
+| O4 | Test whether hierarchical partial pooling improves sparse-climate generalization relative to an otherwise identical complete-pooling, transferable-descriptor-only ablation. |
 | O5 | Compare the neural family against faithful CLIGEN and `renewal-p010-q090` using 30- and 100-year nested streams and the existing climate-quality vocabulary. |
 | O6 | Define and execute a prospective regime-level applicability rule with an explicit faithful fallback for unsupported fits. |
 | O7 | Seal at most one complete model, weight set, preprocessing contract, and applicability policy before any locked confirmation target is read. |
@@ -188,8 +189,8 @@ SHA-256 content identity before it can enter a scored stage.
 | S09 | Candidate bundle | frozen model spec, preprocessing, weights, portable CPU-inference/export object, generation seed contract, fit corpus, software/environment, applicability policy |
 | S10 | Generated stream | candidate/baseline identity, station, member/burn, start date, horizon, exact RNG/member identity, output hash |
 | S11 | Evaluation | objective registry, thresholds, missingness policy, stream manifest, complete climate and runtime scores, selector trace, resources |
-| S12 | Applicability map | station fit disposition and evidence; never a runtime classifier inferred from output |
-| S13 | Confirmation seal | candidate bundle, target manifest, burns, evaluation rule, and atomic sealed-to-consumed transition |
+| S12 | Applicability map | separate station technical eligibility, regime climate applicability, and derived routing evidence; never a runtime classifier inferred from output |
+| S13 | Confirmation seal | candidate bundle, target metadata/acquisition-request manifest, burns, evaluation rule, and atomic sealed-to-consumed transition with post-access target hashes |
 | S14 | Public report | accepted result, claim-evidence ledger, review, manifests, limits, and final terminal |
 
 The station-document schema, neural model ID, fit/checkpoint schema, generation
@@ -223,8 +224,11 @@ Required components:
    - exact reset, initialization, and stationary/warm-up semantics.
 3. **Spatial/station conditioning**
    - continuous latitude, longitude, elevation, and climate descriptors;
-   - learned station or spatial-tile embedding;
-   - shared global and regime components with regularized station deviations;
+   - a complete-pooling path using only transferable descriptors;
+   - for the partial-pooling candidate, shared global/regime components and
+     regularized fit-station deviations;
+   - an explicit unseen-station rule that uses transferable descriptors and
+     the prior/global-regime mean, never a missing station embedding;
    - no runtime lookup of a mutable training database.
 4. **Precipitation occurrence**
    - explicit dry mass through a Bernoulli/categorical/hurdle head;
@@ -325,9 +329,16 @@ for an eventual server or native-runtime integration. The comparison uses:
   the same physical host;
 - one pinned physical CPU core and one computational thread per process;
 - identical CPU affinity and declared thread-control environment;
-- model/station state initialized before the warm-generation timer;
+- model loading, immutable station conditioning, and initial-state construction
+  completed before the warm-generation timer, with no generation RNG advance,
+  latent transition, requested-date inference, or requested-output
+  materialization permitted before timing;
 - at least two untimed warm-ups and nine alternating timed samples per
   station, horizon, and implementation;
+- a prospectively frozen common repetition count or minimum timed duration,
+  machine-quiescence acceptance rule, contamination rejection rule, and one
+  deterministic rerun rule applied identically to candidate and faithful
+  measurements;
 - median elapsed monotonic wall time, with raw samples retained;
 - validation that every timed stream is complete, finite, support-valid, and
   has the requested dates and row count; and
@@ -355,10 +366,12 @@ limit.
 
 A second single-station end-to-end benchmark measures process start, model
 load, station conditioning, generation, and equivalent output serialization.
-It uses the same 30/100-year manifest and ratio classes. The overall runtime
-classification is the worse of the warm-generation and cold-start
-classifications. No persistent-process or cache assumption exempts a 10×
-cold-start result from failure.
+It uses the same 30/100-year manifest but is a separately reported deployment
+diagnostic. The operator's exact 5× warning and 10× failure rule applies only
+to warm stochastic generation. M3 may freeze absolute cold-start,
+initialization, memory, and model-size safeguards before candidate timing; it
+may not extend the faithful-relative ratio rule to cold start without a new
+operator decision.
 
 The benchmark also records peak RSS, export/weight bytes, initialization time,
 and generated station-years per second. M3 freezes absolute memory and model-
@@ -381,16 +394,22 @@ The development comparison contains at least these four systems:
 | ID | System | Purpose |
 |---|---|---|
 | B0 | `faithful_5_32_3` | compatibility baseline and research fallback |
-| B1 | A9d `renewal-p010-q090` | strongest completed parametric successor comparator; not promoted or relabeled |
-| N0 | Neural family without station/regime pooling | isolates benefit attributable to shared neural flexibility |
-| N1 | Neural family with frozen hierarchical station/regime conditioning | tests partial pooling and spatial generalization |
+| B1 | A9d `renewal-p010-q090` | strongest completed parametric successor comparator on inherited common A9 cells; not promoted or relabeled |
+| N0 | Complete-pooling neural family | one shared model conditioned only on transferable spatial/climate descriptors; no station/tile identity, embedding, or station deviation |
+| N1 | Hierarchical partial-pooling neural family | otherwise identical N0 architecture plus frozen regime hierarchy and regularized fit-station deviations; unseen stations use the declared prior/global-regime mean |
+
+B1 is used only on source objects and scored cells covered by its accepted A9
+identity. An expanded-panel renewal fit would be a new comparator with a new
+fit/model identity and cannot inherit the B1 label. Missing B1 evidence is
+unavailable, never favorable.
 
 Optional ablations must answer a registered question. Permitted examples are:
 
 - remove the annual/seasonal latent innovation;
 - remove the storm head while retaining daily generation;
 - replace the tail-capable amount head with a simple positive distribution; or
-- remove station embeddings while retaining continuous location descriptors.
+- remove fit-station deviations while retaining transferable location and
+  climate descriptors.
 
 The initial screen is capped at one architecture family and a bounded set of
 width/depth/state/pooling configurations. Diffusion, GAN, Transformer-only,
@@ -419,30 +438,47 @@ Primary regimes remain:
 Cross-tags such as cold-arid remain reporting attributes, not new mutable fit
 groups.
 
-### 6.2 Fit dispositions
+### 6.2 Technical and climate dispositions
 
-Every requested station fit receives exactly one disposition:
+Station technical eligibility and regime climate applicability are separate
+axes.
 
-- `neural_applicable` — the frozen candidate bundle and station conditioning
-  satisfy the registered applicability rule;
-- `faithful_fallback` — the neural fit is valid but the climate regime or
-  station evidence does not earn neural applicability;
+Every requested station receives exactly one pre-output technical disposition:
+
+- `conditioning_eligible` — required inputs exist and the frozen candidate can
+  initialize its declared unseen/known-station conditioning path;
 - `fit_ineligible` — required source fields or fit exposure are absent;
-- `fit_failed` — training, conditioning, or numerical validation failed; or
+- `fit_failed` — fitting, conditioning, export, or numerical validation
+  failed; or
 - `not_evaluated` — outside the frozen study surface.
 
-The first two are prospective routing outcomes. The latter three cannot be
-silently converted to another neural fit. A production system may eventually
-choose whether `fit_ineligible` maps to faithful behavior, but A10 reports the
-distinction rather than collapsing it.
+Every primary regime receives exactly one development climate disposition:
+
+- `neural_applicable` — the complete frozen regime rule passes at both
+  horizons; or
+- `faithful_fallback` — the regime does not earn neural applicability.
+
+Station outcomes contribute to the prospectively frozen regime aggregate; they
+cannot be used after output to exclude unfavorable stations from an otherwise
+applicable regime. A station-level climate exception is prohibited unless its
+rule was separately frozen before any development output. Technical
+ineligibility/failure remains visible and cannot be relabeled as neural
+applicability.
 
 ### 6.3 Routing semantics
 
-- Routing is materialized in a signed/hash-bound fit artifact before runtime.
+- Routing is materialized in a signed/hash-bound artifact after development as
+  the conjunction of pre-output station technical eligibility and frozen
+  regime climate applicability.
 - Runtime never infers regime from coordinates, annual precipitation, model
   confidence, generated output, or a failed coefficient calculation.
-- `faithful_fallback` invokes an exact faithful station model and declares the
-  fallback in provenance.
+- A station routes to neural generation only when it is
+  `conditioning_eligible` and its regime is `neural_applicable`.
+- Every other requested station remains explicitly ineligible for neural
+  routing. Where an exact faithful station artifact exists, the routed research
+  composition invokes it and declares the technical or regime fallback reason
+  in provenance; absence of such an artifact remains unavailable rather than
+  inferred.
 - A10 evaluates the routed research composition but does not ship it.
 - Monsoonal climates are evaluated as a mandatory stratum; they do not receive
   a separate campaign unless evidence shows a distinct unresolved mechanism.
@@ -454,18 +490,31 @@ remain simpler than the accumulated A5/A9 selectors:
 
 1. universal engineering invariants are hard gates;
 2. each regime receives one candidate-blind standardized primary climate
-   score at each horizon;
-3. a small registered set of precipitation aggregate/extreme, winter, and
-   physical-context guards prevents catastrophic local degradation;
-4. a regime is applicable only if both horizons pass;
-5. a frozen minimum regime/station breadth is required before any candidate
+   score at each horizon on paired common cells;
+3. for candidate `C`, faithful B0, and renewal B1, M3 freezes the lower-is-
+   better paired differences `D0 = score(C) - score(B0)` and
+   `D1 = score(C) - score(B1)` plus strictly positive material-improvement
+   thresholds `delta0 > 0` and `delta1 > 0`; a regime passes the primary rule
+   only when `D0 <= -delta0` and `D1 <= -delta1` at both horizons;
+4. a small registered set of precipitation aggregate/extreme, winter, and
+   physical-context guards requires noninferiority to both baselines under
+   candidate-blind margins and prevents catastrophic local degradation;
+5. inherited B1 comparison uses only common A9 cells; expanded A10-only cells
+   remain visible guards/reporting evidence and cannot compensate for missing
+   or unfavorable paired B1 evidence;
+6. a regime is applicable only if its complete primary and guard rules pass at
+   both horizons without post-output station exclusions;
+7. a frozen minimum regime/station breadth is required before any candidate
    can seal; and
-6. unsupported regimes remain visible and route to the declared fallback.
+8. unsupported regimes remain visible and route to the declared fallback when
+   a faithful station artifact exists.
 
 Candidate-blind bootstrap/null evidence must calibrate the primary score and
-guards. Missing evidence is never zero or favorable. The work package may
-ratify exact weights, thresholds, and breadth after corpus inventory but before
-candidate output; it may not tune them from development outcomes.
+paired material-improvement thresholds, guard noninferiority margins, and
+uncertainty rule. Missing evidence is never zero or favorable. The work package
+may ratify exact weights, thresholds, margins, and breadth after corpus
+inventory but before candidate output; it may not tune them from development
+outcomes.
 
 ## 7. Corpus requirements
 
@@ -476,7 +525,7 @@ The preferred source roles are:
 
 | Source | Primary A10 role | Important boundary |
 |---|---|---|
-| Daymet V4 R1 | broad daily fit surface for precipitation, Tmax, Tmin, shortwave radiation, vapor pressure, day length, and seasonal/spatial conditioning | gridded estimate; 365-day product semantics; no wind field; fit-source lineage is not independent of all station comparisons |
+| Daymet V4 R1 | broad daily fit surface for precipitation, Tmax, Tmin, shortwave radiation, vapor pressure, day length, and seasonal/spatial conditioning | gridded estimate; 365 records/year with February 29 retained and leap-year December 31 omitted; no wind field; fit-source lineage is not independent of all station comparisons |
 | USCRN | point daily/subhourly fit and evaluation for precipitation, temperature, RH, radiation, wind, and storm descriptors | shorter record, irregular field availability, local-standard-time semantics; confirmation stations remain locked |
 | gridMET | optional wind/daily-sequencing auxiliary and sensitivity | not the canonical low-frequency precipitation/temperature truth; its monthly P/T signal is largely PRISM-constrained |
 | PRISM AN daily | optional CONUS precipitation/temperature fit-source sensitivity | begins in 1981, licensing and product-update boundaries must be retained |
@@ -496,8 +545,8 @@ Every normalized object has exactly one role:
 | Role | Permitted use |
 |---|---|
 | `candidate_fit` | gradient updates, fit-only normalization, station/regime representations |
-| `fit_validation` | early stopping and training diagnostics; never final candidate comparison |
-| `development` | bounded configuration screening, ablation comparison, applicability selection |
+| `fit_validation` | early stopping, bounded M5 configuration screening, ablation comparison, and training diagnostics; never final candidate comparison |
+| `development` | M6 full finalist comparison and applicability adjudication only |
 | `confirmation_metadata` | station identity, coordinates, stratum, availability planning; no target values |
 | `confirmation_locked` | one-shot final evaluation only after candidate and confirmation seals |
 | `source_sensitivity` | robustness reporting; cannot silently replace the primary target |
@@ -529,6 +578,23 @@ The corpus manifest must prevent easy spatial leakage from gridded products.
   architecture selection, early stopping, thresholds, or diagnostics.
 - Source sensitivities use independently named partitions and cannot feed the
   primary optimizer after development access.
+
+M1 must freeze a `calendar_transform_id` for every source before sharding.
+Daymet's official calendar retains February 29 and omits December 31 in leap
+years; it is not a generic 365-day no-leap calendar. The transform contract
+must state:
+
+- how February 29 and the absent leap-year December 31 are represented in
+  training masks and civil-date features;
+- which civil month owns every source record;
+- whether any inherited A5 relabeling is used only as a separately identified
+  sensitivity;
+- how monthly and annual aggregations treat unavailable civil days; and
+- how the fitted model produces complete Gregorian generation calendars
+  without fabricating an observed Daymet value.
+
+Silent post-February relabeling, silent observation fabrication, or mixing two
+calendar transforms under one corpus identity is prohibited.
 
 ### 7.4 Coverage requirements
 
@@ -566,7 +632,7 @@ missingness at the observed event frequencies.
 
 The normalized daily record should provide, where sourced:
 
-- date and declared calendar/day boundary;
+- date, declared calendar/day boundary, and `calendar_transform_id`;
 - precipitation amount and measurement completeness;
 - Tmax, Tmin, and any source temperature summaries;
 - vapor pressure and/or relative humidity with derivation identity;
@@ -592,11 +658,13 @@ Before GPU training, retain:
 - normalized schema and field glossary;
 - canonical source/normalized manifests with hashes;
 - spatial-tile and role-partition manifests;
+- calendar-transform contract and transform sensitivity identities;
 - variable/regime/month/year availability cube;
 - leakage audit;
 - training-shard index and per-shard hashes;
 - fit-only normalization statistics;
-- confirmation-metadata seal and target-access state; and
+- confirmation-metadata/acquisition-request seal and target-access state,
+  without unread target-byte hashes; and
 - an offline transfer manifest for the cluster.
 
 Raw third-party data and routine training shards do not belong in Git. Small
@@ -807,7 +875,8 @@ Before development output, freeze:
 - one screen training seed;
 - internal validation promotion ordering;
 - at most two configurations per pooling class entering full development; and
-- at most one pooled and one no-pooling finalist entering all-burn replay.
+- at most one partial-pooling and one complete-pooling finalist entering
+  all-burn replay.
 
 Development data may select among frozen configurations but may not generate
 new hyperparameter proposals. If all configurations fail for an engineering
@@ -846,7 +915,8 @@ candidate.
 - nested streams: each 30-year output is the exact prefix of its 100-year
   member;
 - regimes: all six primary regimes;
-- baselines: B0 and B1;
+- baselines: B0 everywhere supported and accepted B1 only on inherited common
+  A9 cells; any expanded-panel renewal refit receives a new identity;
 - candidates: bounded N0/N1 configurations;
 - training-seed robustness: at least three refits for finalists;
 - generation members/burns: frozen before scored output and sufficient to
@@ -882,7 +952,7 @@ Report:
 - calibration of predictive probabilities/quantiles;
 - hidden-state occupancy, persistence, and collapse diagnostics;
 - station/tile embedding norms and shrinkage contribution;
-- no-pooling versus pooling generalization;
+- complete-pooling versus partial-pooling generalization;
 - train/validation/development gap;
 - training-seed variance;
 - long-run marginal/state stability;
@@ -900,16 +970,20 @@ The evaluation publishes:
 
 - raw and median warm-generation times for both implementations;
 - `R_gen` and every `R_regime` at 30 and 100 years;
-- cold-start ratios and overall worst-case classification;
-- `PASS`, `WARN`, or `FAIL` from unrounded ratios;
+- normative warm-generation `PASS`, `WARN`, or `FAIL` from unrounded ratios;
+- separately labeled cold-start times/ratios and absolute-safeguard results,
+  with no 5×/10× classification;
+- timed duration/repetition counts, quiescence/contamination decisions,
+  measurement dispersion, and any deterministic rerun trace;
 - peak RSS, model/export size, initialization time, and station-years/second;
 - CPU and GPU capacity diagnostics kept distinct from the normative result;
   and
 - completeness/support checks for every timed output.
 
-A runtime `FAIL` is a hard candidate rejection. A runtime `WARN` is not hidden
-by superior climate scores and remains attached to any development or
-confirmation success terminal.
+A normative warm-generation runtime `FAIL` is a hard candidate rejection. A
+normative runtime `WARN` is not hidden by superior climate scores and remains
+attached to any development or confirmation success terminal. Cold-start
+diagnostics are adjudicated only by separately frozen absolute safeguards.
 
 ### 10.6 Candidate selection
 
@@ -918,13 +992,14 @@ The candidate-blind selector must be finalized at M3. Its required ordering is:
 1. reject engineering invariant, provenance, or generation-runtime failures;
 2. reject corpus/firewall violations;
 3. reject candidates with incomplete required evidence;
-4. assign per-regime applicability using both horizons and the frozen primary
-   score/guards;
+4. assign per-regime applicability using both horizons, paired material
+   improvement over B0 and B1 on common cells, and the frozen noninferiority
+   guards;
 5. reject candidates below the frozen applicability breadth;
 6. order survivors by applicable-regime breadth, then primary climate score,
    then runtime class (`PASS` before `WARN`), training-seed stability, exact
    runtime ratio, model size, and stable configuration ID; and
-7. seal at most one exact candidate bundle.
+7. select at most one exact candidate identity for M7 sealing.
 
 Fallback cells remain in the published matrix. They are not scored as neural
 improvements and cannot inflate the neural candidate's applicability score.
@@ -937,16 +1012,20 @@ Before confirmation target access, seal:
 - exact candidate model/spec/weights/environment;
 - fit and development corpus identities;
 - station preprocessing and applicability map;
-- confirmation roster and target object manifest;
+- confirmation roster and metadata/acquisition-request manifest (station IDs,
+  period, source/version, expected fields, retrieval rule, and access
+  procedure), without unread target-byte hashes;
 - burns/members and horizons;
 - evaluation code, objectives, thresholds, missingness, and final rule;
 - target custodian and atomic access procedure; and
 - terminal vocabulary.
 
-If no candidate seals, confirmation remains metadata-only and A10 closes at
-its development terminal. If one seals, confirmation is consumed once. A
-failure is final for that candidate; confirmation cannot tune weights,
-thresholds, preprocessing, or applicability.
+If M6 selects no candidate, confirmation remains metadata-only and A10 closes
+at its development hold. If M6 selects a candidate but M7 cannot seal it, A10
+closes at `HOLD-A10-CONFIRMATION-SEAL` without target access. If M7 seals one
+candidate, confirmation may be consumed once. A scientific failure is final
+for that candidate; confirmation cannot tune weights, thresholds,
+preprocessing, or applicability.
 
 ## 11. Hypothesis registry
 
@@ -958,15 +1037,15 @@ output access. The planning hypotheses are:
 | H1 | prospective | The expanded corpus satisfies role, leakage, variable, regime, calendar, and source-identity gates without accessing locked confirmation targets. |
 | H2 | prospective | The pinned GPU environment can train, checkpoint, interrupt, resume, and reproduce registered generation streams within the resource bound. |
 | H3 | prospective | At least one neural configuration passes all hard engineering gates, remains below the 10× faithful generation-runtime failure boundary, and generates stable nested 30/100-year climates. |
-| H4 | prospective | Hierarchical station/regime conditioning improves held-out spatial generalization over the no-pooling ablation under the frozen comparison rule. |
+| H4 | prospective | Hierarchical partial pooling improves held-out spatial generalization over the otherwise identical complete-pooling, transferable-descriptor-only ablation under the frozen comparison rule. |
 | H5 | prospective | At least one candidate earns the frozen minimum applicability breadth and outperforms both faithful CLIGEN and the A9 renewal comparator under the registered regime-level climate rule. |
-| H6 | prospective | The selector seals at most one exact candidate bundle and publishes every unsupported/fallback regime. |
+| H6 | prospective | The selector chooses at most one exact candidate identity for M7 sealing and publishes every unsupported/fallback regime. |
 | H7 | prospective | Confirmation target data remain scientifically unread unless the candidate and confirmation seals are complete. |
 | H8 | conditional prospective | If a candidate seals, the one-shot confirmation returns exactly one pass or final-failure terminal without feedback into training. |
 
 Failure to support H4 does not automatically reject a neural candidate if the
-no-pooling version independently satisfies H5. It does reject the claim that
-spatial/hierarchical pooling supplied the improvement.
+complete-pooling version independently satisfies H5. It does reject the claim
+that hierarchical partial pooling supplied the improvement.
 
 ## 12. Gated milestones
 
@@ -1013,6 +1092,9 @@ Work:
 - define spatial tiles and role partitions;
 - acquire permitted fit data;
 - normalize fields/calendars without reading confirmation targets;
+- freeze and test each source's `calendar_transform_id`, including Daymet leap-
+  year February 29/absent December 31 behavior and complete Gregorian
+  generation semantics;
 - build shards, manifests, notices, availability cube, and leakage audit;
 - determine whether optional sources are scientifically and legally needed.
 
@@ -1021,6 +1103,7 @@ Artifacts:
 - source and normalized manifests;
 - partition/role freeze;
 - normalized schema and glossary;
+- calendar-transform contract and test vectors;
 - coverage/availability analysis;
 - leakage audit;
 - training-shard and transfer manifests;
@@ -1030,6 +1113,8 @@ Gate:
 
 - six-regime fit coverage is explicit;
 - every required field has source/units/calendar/missingness;
+- every source calendar transform is explicit, Gregorian generation is
+  complete, and no missing Daymet civil day is fabricated as an observation;
 - spatial and role leakage checks pass;
 - actual event frequencies are preserved;
 - locked confirmation remains metadata-only;
@@ -1049,10 +1134,11 @@ Work:
 - verify allocation/partition/QOS, driver, L40 identity, filesystem, local
   scratch, wall-time, signals, and requeue behavior;
 - build the offline pinned environment;
-- run one-GPU forward/backward/data-loader smoke;
-- run two-GPU distributed smoke;
-- measure checkpoint write/read and execute a forced-interruption restart
-  drill;
+- run one-GPU and two-GPU framework/collective smoke with a small synthetic
+  environment harness;
+- measure storage-level checkpoint write/read and execute a synthetic
+  Slurm/signal forced-interruption restart drill; this proves environment,
+  storage, and job-control behavior, not A10 model-state equivalence;
 - reconstruct the environment from its lock/image.
 
 Artifacts:
@@ -1068,7 +1154,7 @@ Gate:
 
 - one- and two-GPU tests pass;
 - offline reconstruction passes;
-- checkpoint/resume is valid under an actual interruption;
+- the synthetic environment/storage harness survives an actual interruption;
 - durable/local storage behavior is understood;
 - no credential or operator-specific path appears in public artifacts.
 
@@ -1088,6 +1174,12 @@ Work:
   schema, long-horizon invariants, objective registry, thresholds,
   applicability rule, stage promotion, burns/members, generation-runtime
   benchmark/hosts/limits, and resources;
+- freeze paired common-cell improvement estimands against B0/B1, strictly
+  positive improvement thresholds, noninferiority guards, and B1 identity/
+  availability rules;
+- freeze benchmark repetition/minimum-duration logic, machine-quiescence and
+  contamination rules, deterministic rerun behavior, warm initialization
+  boundary, and separate absolute cold-start/resource safeguards;
 - implement schemas/specifications for every new interface surface.
 
 Artifacts:
@@ -1097,6 +1189,7 @@ Artifacts:
 - generation-performance benchmark contract and representative workload
   manifest;
 - candidate-blind calibration;
+- paired-baseline and comparator-identity registry;
 - objective/applicability registry;
 - design freeze and test vectors.
 
@@ -1104,6 +1197,8 @@ Gate:
 
 - all schemas fail closed;
 - selector arithmetic and missingness behavior pass synthetic tests;
+- paired B0/B1 differences, improvement thresholds, noninferiority guards, and
+  missing-comparator behavior pass synthetic tests;
 - exact configuration and resource bounds are finite;
 - the runtime ratio arithmetic classifies exactly 5× as `WARN` and exactly
   10× as `FAIL`;
@@ -1127,6 +1222,9 @@ Work:
   and support transforms;
 - generate 1/30/100-year smoke streams;
 - verify nested prefixes and batch/order-independent generation identity;
+- execute an actual A10 model/optimizer/scheduler/scaler/RNG/sampler/data-
+  cursor forced-interruption resume and compare it with the uninterrupted
+  control under the frozen equivalence rule;
 - run the normative CPU benchmark against faithful generation for the
   qualified architecture on the bounded real-data subset.
 
@@ -1135,6 +1233,7 @@ Artifacts:
 - research source and tests;
 - fixture checkpoints/streams;
 - support and long-horizon audit;
+- A10 interruption/resume equivalence receipt;
 - preliminary CPU generation-performance receipt;
 - qualification receipt.
 
@@ -1143,7 +1242,8 @@ Gate:
 - unit/integration tests pass;
 - all hard invariants pass;
 - no clipping/repair path exists;
-- restart and generation identities pass;
+- authoritative A10 interruption/resume equivalence and generation identities
+  pass;
 - the CPU export exists and the preliminary normative ratio is below 10×;
 - a 100-year stream completes within measured resource bounds.
 
@@ -1162,8 +1262,8 @@ Work:
 
 - train every registered N0/N1 configuration once;
 - record every attempt, checkpoint, failure, and resource trace;
-- compare internal-validation proper scores, support, stability, training
-  diagnostics, and pooling/no-pooling generalization;
+- compare fit-validation proper scores, support, stability, training
+  diagnostics, and complete-/partial-pooling generalization;
 - benchmark generation runtime for every configuration eligible for
   promotion;
 - promote only under the frozen rule.
@@ -1184,7 +1284,7 @@ Gate:
   boundary, with any 5× warning retained;
 - no role/firewall violation;
 - training and generation remain within resource limits;
-- promotion uses internal validation, not development outcomes.
+- promotion uses `fit_validation`, not development outcomes.
 
 Failure terminal: `HOLD-A10-NO-VALID-NEURAL-FIT`,
 `HOLD-A10-GENERATION-RUNTIME`, or `HOLD-A10-RESOURCE-BOUND`.
@@ -1219,15 +1319,18 @@ Artifacts:
 
 Gate:
 
-- at most one candidate meets hard gates, minimum applicability breadth,
-  climate rule, stability rule, and the below-10× generation-runtime rule;
+- zero or more candidates may meet hard gates, minimum applicability breadth,
+  the paired-both-baselines climate rule, stability rule, and the below-10×
+  generation-runtime rule;
+- if multiple candidates qualify, the frozen deterministic ordering selects
+  exactly one and all survivor results remain published;
 - a 5× or greater runtime warning remains explicit and influences ordering;
 - unsupported regimes remain explicit;
 - no confirmation target has been read.
 
 Development terminals:
 
-- `CANDIDATE-SEALED-READY-A10-CONFIRMATION`; or
+- `CANDIDATE-SELECTED-READY-A10-SEAL`; or
 - `HOLD-A10-NO-APPLICABLE-CANDIDATE`.
 
 The latter closes the scientific study at development. It does not trigger an
@@ -1237,14 +1340,14 @@ automatic rescue or another A10-suffixed package.
 
 Entry:
 
-- exactly one M6 candidate qualifies.
+- M6 selects exactly one candidate under the frozen ordering.
 
 Work:
 
 - freeze the exact candidate bundle, station conditioning/preprocessing,
   CPU inference/export and runtime receipt, applicability map, fallback
-  policy, environment, confirmation roster, target manifest, members,
-  objectives, thresholds, final rule, and access procedure;
+  policy, environment, confirmation roster, metadata/acquisition-request
+  manifest, members, objectives, thresholds, final rule, and access procedure;
 - verify that no target value influenced any frozen object.
 
 Artifacts:
@@ -1256,12 +1359,16 @@ Artifacts:
 
 Gate:
 
-- all identities complete and immutable;
+- all candidate and confirmation-metadata/acquisition identities complete and
+  immutable; unread target-byte hashes are neither required nor claimed;
 - exactly one candidate;
 - target remains sealed/unread;
 - candidate weights can be reconstructed and generated.
 
-Failure terminal: `HOLD-A10-CONFIRMATION-SEAL`.
+M7 terminals:
+
+- `CANDIDATE-SEALED-READY-A10-CONFIRMATION`; or
+- `HOLD-A10-CONFIRMATION-SEAL`.
 
 ### M8 — One-shot confirmation
 
@@ -1271,8 +1378,12 @@ Entry:
 
 Work:
 
-- atomically transition target state from sealed to consumed;
-- acquire/verify the exact target objects if not already under custodian seal;
+- atomically transition target state from `sealed` to `access_in_progress`
+  before opening target bytes; transition to `consumed` as soon as any target
+  data byte is read, even if later acquisition, hash, parsing, or execution
+  checks fail;
+- acquire/verify the exact target objects against the sealed metadata/request
+  and record their content hashes in the consumed-target manifest;
 - generate the frozen confirmation streams;
 - run the frozen final rule once;
 - prohibit any feedback into training or applicability.
@@ -1280,31 +1391,41 @@ Work:
 Artifacts:
 
 - consumed-target manifest;
+- target-access state and operational-attempt receipt;
 - confirmation streams/identities;
 - complete confirmation evaluation;
 - final decision.
 
 Final scientific terminals:
 
-- `CONFIRMATION-PASS-READY-A10-RUNTIME-STUDY`; or
+- `CONFIRMATION-PASS-READY-A10-PRODUCTION-IMPLEMENTATION-STUDY`; or
 - `CONFIRMATION-FAIL-A10-FINAL`.
 
-Neither terminal changes production by itself.
+An acquisition, identity, environment, or execution failure before a valid
+scientific score returns `HOLD-A10-CONFIRMATION-EXECUTION`, not a scientific
+failure. An `access_in_progress` attempt may roll back to `sealed` only when a
+verifier proves that no target data byte was opened; if any byte was read or
+access is uncertain, the terminal state is conservatively `consumed`. Its
+receipt records the proof and terminal access state; no terminal may leave
+`access_in_progress` unresolved. The hold authorizes neither tuning nor an
+automatic retry. No terminal changes production by itself.
 
 ### M9 — Report, review, cleanup, and handoff
 
 Entry:
 
-- M6 development hold or M8 final decision exists.
+- any terminal hold from M0--M8 or an M8 final scientific decision exists.
 
 Work:
 
 - author the public scientific report under the repository report standard;
 - conduct independent accuracy, scientific-validity, and consistency/public-
   safety review;
-- verify artifact/LFS/external-object identities;
-- verify performance classification and reproduce the final benchmark from
-  its manifest;
+- verify artifact/LFS/external-object identities for artifacts actually
+  reached and record every unreached artifact class as `not_reached`;
+- if M4 or later was reached, verify the applicable performance classification
+  and reproduce the latest valid benchmark from its manifest; otherwise record
+  performance evidence as `not_reached` rather than pass/unavailable;
 - remove nonretained cluster caches/checkpoints;
 - reconcile roadmap/catalog state;
 - record the smallest evidence-supported next action without automatically
@@ -1323,8 +1444,12 @@ Gate:
 - zero open P1/P2 review findings;
 - package/report verifiers pass;
 - repository gates pass;
-- source data and confirmation access remain license-safe and auditable;
-- cluster cleanup preserves required replay evidence.
+- source data and confirmation access reached by the study remain license-safe
+  and auditable, with exact target-access state if M8 began;
+- conditional evidence requirements agree with the highest completed
+  milestone and use `not_reached` for later stages; and
+- cluster cleanup, when cluster work occurred, preserves required replay
+  evidence.
 
 ## 13. Repository and cluster layout
 
