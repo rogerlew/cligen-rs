@@ -1,0 +1,274 @@
+{
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/design-freeze-v1.json",
+      "role": "prospective A9d design, evidence surface, grid, hypotheses, selector, and confirmation firewall",
+      "sha256": "65b7d6d5e8f2702d6f02ce16da63500bfd333411b247e22378ad9d158b0a8622"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-output-fit-amendment.md",
+      "role": "prospective amount-only calibration amendment before fit and output",
+      "sha256": "3f7384fba5c3e70f1a7559ddaf09e7dd50a8d3b39c2fc515cb31dfa9168f9a3b"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-score-predecessor-closeout.md",
+      "role": "pre-score predecessor-manifest closeout chronology",
+      "sha256": "a4afcf6ea16aef8c55e0e48316cd8a0274852a6ac10c51c3897615ba511d5761"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/predecessor-manifest-v1.json",
+      "role": "exact 22-file predecessor and comparator-authority identity",
+      "sha256": "a20c9b2556bd7ba670591b5f7c1626bce2560f2a4da160bb50cd7e84981abbe7"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/calibration-v1.json",
+      "role": "inherited candidate-blind thresholds, storm scales, and diagnostics",
+      "sha256": "f4ac72ae26f3dd54a646d721a6a72426426ffeceb88b6b11d55fd2302456963d"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/fit-execution-v1.json",
+      "role": "18 fresh fit identities, calibration and reconciliation summaries, and resources",
+      "sha256": "22921b34d2abd19cd8978f6a7270ada147240ee526b65b466e540f8f91e43fac"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/structural-audit-v1.json",
+      "role": "class recovery and non-isomorphism evidence",
+      "sha256": "5971544976b615934af72ab21c7406705d617f8b76f19b3e868a184da2d31e22"
+    },
+    {
+      "id": "E08",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-runtime-v1.json",
+      "role": "hash-bound inherited evaluator mechanics subject to the recorded A9d override precedence",
+      "sha256": "6848978736d3bb6350f5b87963231915170949a650f2c70564cf1dc6dd33eb77"
+    },
+    {
+      "id": "E09",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-faithful-baseline-v1.json",
+      "role": "fresh faithful comparator build and 160 output identities",
+      "sha256": "fc4b23720f581d793581d2baadf6c67b02b363911debc411eba077315efe6eb1"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-evaluation-v1.json",
+      "role": "canonical staged scores, engineering attempts, support audit, selector, and terminal",
+      "sha256": "989495ee63e2b4c4a39c91bac97c0702d2eb6b2fd462991f9ac037338d7748c8"
+    },
+    {
+      "id": "E11",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-result-v1.json",
+      "role": "compact selection, access, and terminal record",
+      "sha256": "9853f7c29520715ddbe5fb9a1c749b0843c0b197b3e25d939bf2c33873385ac0"
+    },
+    {
+      "id": "E12",
+      "path": "docs/reports/a9c4-context-support-completeness-report.manifest.json",
+      "role": "accepted predecessor evidence-surface authority",
+      "sha256": "1babadcf60ffd353c3c0a89c381885a91a77883936e2cad846971e3e0103c1e5"
+    },
+    {
+      "id": "E13",
+      "path": "research/a9d/campaign.py",
+      "role": "exact executed A9d research adapter",
+      "sha256": "4fb3ee3c052d702b9108599ba1603fb73f23ddb42a9612d7bce3fee192c24acc"
+    },
+    {
+      "id": "E14",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/post-outcome-runtime-metadata-discrepancies.md",
+      "role": "authority precedence and bounded disclosure for stale inherited runtime fields",
+      "sha256": "e4ed77be27204f94d54128f750443fdfa039d70ffcf81d660acb2f2dfde431ce"
+    },
+    {
+      "id": "E15",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-confirmation-protocol-correction.md",
+      "role": "unused conditional confirmation fit-period correction before target access",
+      "sha256": "d51e16eb265bfd51da6ea35ddb294a7740513271f7da58172886e0d149bf6261"
+    },
+    {
+      "id": "E16",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/report-evidence-freeze-v1.json",
+      "role": "report source identities and access chronology",
+      "sha256": "a5360e6d98fde4d0eabedc77b5470cf9bd5d7d09838e0d83a59cb5a267284510"
+    },
+    {
+      "id": "E17",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/claim-evidence-ledger.md",
+      "role": "frozen report claim and hypothesis crosswalk",
+      "sha256": "b48ce6c1caa267ff5edbe1de0bcc5020b31db963bf17f1cb08c9607768636a3d"
+    },
+    {
+      "id": "E18",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/confirmation-baseline-crosswalk-v1.json",
+      "role": "metadata-only conditional confirmation comparator crosswalk",
+      "sha256": "68121f7e64aa2551f8c439a32adaad67ccb3876aac515c697accf463a0b2a7d0"
+    },
+    {
+      "id": "E19",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/confirmation-baseline-parameters-v1.tar.gz",
+      "role": "18 selected faithful comparator parameter files",
+      "sha256": "8c54818c7ba0d0b03388203dde36879aad21287ce4a78f4482716b18b5a6e9e0"
+    },
+    {
+      "id": "E20",
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "role": "faithful-mode source-authority decision",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    }
+  ],
+  "governance": [
+    {
+      "path": "docs/standards/scientific-report-standard.md",
+      "role": "standard",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "role": "protocol",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "role": "template",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "hypotheses": [
+    {
+      "evidence_ids": ["E01", "E10"],
+      "id": "H1",
+      "outcome": "Supported: the 92/19 accepted surface was preserved at both horizons",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E01", "E10", "E13"],
+      "id": "H2",
+      "outcome": "Partially supported: 720 strict short-prefix audits passed, but later-stage output lacked the same strict audit",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E02", "E06", "E07", "E08"],
+      "id": "H3",
+      "outcome": "Supported under the pre-output amended amount-only calibration rule",
+      "provenance": "amended"
+    },
+    {
+      "evidence_ids": ["E01", "E08", "E10", "E11"],
+      "id": "H4",
+      "outcome": "Supported as safety rule and outcome: zero candidates qualified for sealing",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E01", "E10", "E11"],
+      "id": "H5",
+      "outcome": "Supported: zero confirmation target-series access",
+      "provenance": "preregistered"
+    },
+    {
+      "evidence_ids": ["E01", "E10", "E11", "E15"],
+      "id": "H6",
+      "outcome": "Not evaluated: no development candidate sealed",
+      "provenance": "preregistered"
+    }
+  ],
+  "references": [
+    {
+      "citation": "Thornton et al. (2022), Daymet: Daily Surface Weather Data on a 1-km Grid for North America, Version 4 R1; accessed 2026-07-15",
+      "doi_or_no_doi": "10.3334/ORNLDAAC/2129",
+      "id": "R01",
+      "url": "https://doi.org/10.3334/ORNLDAAC/2129"
+    },
+    {
+      "citation": "Palecki et al. (2015), U.S. Climate Reference Network Processed Data from USCRN Database Version 2; accessed 2026-07-15",
+      "doi_or_no_doi": "10.7289/V5MS3QR9",
+      "id": "R02",
+      "url": "https://doi.org/10.7289/V5MS3QR9"
+    },
+    {
+      "citation": "NOAA NCEI, USCRN/USRCRN Subhourly01 file documentation; accessed 2026-07-15",
+      "doi_or_no_doi": "No DOI",
+      "id": "R03",
+      "url": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01/readme.txt"
+    },
+    {
+      "citation": "Diamond et al. (2013), U.S. Climate Reference Network after One Decade of Operations: Status and Assessment",
+      "doi_or_no_doi": "10.1175/BAMS-D-12-00170.1",
+      "id": "R04",
+      "url": "https://doi.org/10.1175/BAMS-D-12-00170.1"
+    }
+  ],
+  "report": {
+    "path": "docs/reports/a9d-successor-development-confirmation-report.md",
+    "sha256": "dde287fdd88d363b43894a041143ce6fc1cbc7cb3c6852c2f7cb37ea6160b34d"
+  },
+  "report_id": "a9d-successor-development-confirmation",
+  "report_manifest_version": 1,
+  "report_revision": 1,
+  "required_sections": [
+    "Abstract",
+    "Introduction",
+    "Hypotheses",
+    "Methods",
+    "Analysis",
+    "Results",
+    "Limitations and validity",
+    "Conclusions",
+    "Reproducibility and data availability",
+    "References"
+  ],
+  "reviews": [
+    {
+      "lens": "accuracy",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/review.md",
+      "sha256": "de4861ff5c1c9f17d3d2d8652cd2f92ceb20bcb850793a988ba1dcec8d553567",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "scientific-validity",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/review.md",
+      "sha256": "de4861ff5c1c9f17d3d2d8652cd2f92ceb20bcb850793a988ba1dcec8d553567",
+      "verdict": "ACCEPT"
+    },
+    {
+      "lens": "consistency-public-safety",
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/review.md",
+      "sha256": "de4861ff5c1c9f17d3d2d8652cd2f92ceb20bcb850793a988ba1dcec8d553567",
+      "verdict": "ACCEPT"
+    }
+  ],
+  "status": "ACCEPTED",
+  "study_facts": {
+    "accepted_retained_cells_per_horizon": 92,
+    "accounted_campaign_wall_seconds": 8599.665161916986,
+    "campaign_id": "a9d-successor-development-confirmation-v1",
+    "candidate_classes": 2,
+    "candidate_freezes": 0,
+    "configuration_grid": 18,
+    "confirmation_target_series_accessed": false,
+    "development_burns": 8,
+    "development_daily_sites": 20,
+    "development_horizons_years": [30, 100],
+    "development_storm_role_objects": 12,
+    "engineering_attempt_streams": 1040,
+    "excluded_former_mandatory_cells_per_horizon": 19,
+    "faithful_baseline_runs": 160,
+    "fresh_valid_fits": 18,
+    "full_development_configurations": 4,
+    "latent_replay_degradation_rows": 17,
+    "maximum_rss_bytes": 5652234240,
+    "pareto_replay_configurations": 2,
+    "renewal_replay_degradation_rows": 3,
+    "report_only_objective_rows_per_horizon": 61,
+    "selected_candidates": 0,
+    "short_screen_configurations": 18,
+    "source_commit": "1d0350eed8549067eca41047c0eef43949822c69",
+    "strict_context_audit_prefixes": 720,
+    "strict_context_violations": 0,
+    "terminal": "HOLD-A9D-NO-SELECTABLE-CANDIDATE"
+  }
+}

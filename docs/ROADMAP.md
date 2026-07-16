@@ -22,15 +22,26 @@ candidate rescue with a calibration-first successor family.** File/I/O,
 openWEPP, WEPPcloud, PyO3, and other consumer-integration work remains deferred;
 it is not a prerequisite for this research sequence.
 
-There is no active authorized package. A9a completed on 2026-07-15 with
-`FOUNDATION-READY-A9B`. It froze a joint occurrence/amount/event/context family
-envelope, two structurally distinct research class slots, optimizer-neutral
-fit and tuning contracts, a 31-objective registry, six-regime applicability,
-an exact metadata-only 18-site USCRN confirmation roster, a development/
-confirmation firewall, and 20 synthetic/adverse fixture groups. It selected no
-candidate, accessed no confirmation target, and changed no production runtime.
-The accepted record and freeze-ready successor handoff are in the
-[A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
+There is no active authorized package. A9d completed on 2026-07-15 with
+`HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
+confirmation package. Eighteen fresh configurations entered an 18/4/2 staged
+development funnel on the prospectively accepted 92-cell surface. Both model
+classes fit and remained structurally distinct; all 720 strict short-prefix
+context audits passed. The renewal and latent replay finalists nevertheless
+retained three and 17 material-degradation rows, respectively, so the unchanged
+selector sealed no candidate. No confirmation target series was accessed and
+the conditional confirmation was not run. The accepted record is in the
+[A9d work package](work-packages/20260715-a9d-successor-development-confirmation/package.md)
+and [public report](reports/a9d-successor-development-confirmation-report.md).
+
+A9a completed on 2026-07-15 with `FOUNDATION-READY-A9B`. It froze a joint
+occurrence/amount/event/context family envelope, two structurally distinct
+research class slots, optimizer-neutral fit and tuning contracts, a
+31-objective registry, six-regime applicability, an exact metadata-only
+18-site USCRN confirmation roster, a development/confirmation firewall, and 20
+synthetic/adverse fixture groups. It selected no candidate, accessed no
+confirmation target, and changed no production runtime. The accepted record is
+in the [A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
 There is no active execution authorization. A9c completed on 2026-07-15 with
 `HOLD-A9C-GATE-CALIBRATION`. It materialized 64 normalized observed role
@@ -72,7 +83,7 @@ was accessed, so grouped calibration and the fresh model comparison were not
 reached. The accepted result is also documented in the
 [A9c2 public report](reports/a9c2-hot-arid-roster-feasibility-report.md).
 
-There is no active successor package. The
+The predecessor completeness package is the
 [A9c4 completeness correction](work-packages/20260715-a9c4-context-support-completeness/package.md)
 completed on 2026-07-15 with `HOLD-A9C4-COMPLETENESS-SURFACE`. Its pre-output
 audit retained 92 of 111 originally applicable mandatory 30-year cells: 68
@@ -84,12 +95,12 @@ regimes. No corrected fit, output, evaluation, or candidate freeze occurred.
 The accepted result is documented in the
 [A9c4 public report](reports/a9c4-context-support-completeness-report.md).
 
-A successor must prospectively choose whether to accept the 92-cell surface
-with its explicit regime/family limits, replace sparse-data estimands while
-preserving their scientific questions, or expand observed evidence. It should
-then test the already specified bounded context laws without adding selector
-or model complexity. That decision remains unscaffolded and unauthorized and
-cannot relabel A9c4 H1.
+A9d prospectively chose to accept A9c4's 92-cell surface with its explicit
+limits and tested the already specified bounded context laws without adding a
+selector or model class. This preserves A9c4's terminal and H1 while resolving
+its successor choice. The earlier prerequisite-only A9d draft was an
+uncommitted administrative detour and was superseded by the operator's direct
+one-package dispatch; it is not an immutable package record or catalog item.
 
 A9c3 completed on 2026-07-15 with
 `HOLD-A9C3-NO-SELECTABLE-CANDIDATE`. Its equal-weight Yuma/Stovepipe estimator
@@ -101,8 +112,8 @@ record is in the
 [A9c3 work package](work-packages/20260715-a9c3-two-site-grouped-observed-comparison/package.md)
 and [public report](reports/a9c3-two-site-grouped-observed-comparison-report.md).
 
-A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
-unauthorized because no successor candidate has been selected or sealed. A9 does
+A9e Rust runtime work remains unscaffolded because no successor candidate was
+selected or sealed. A9 does
 not inherit an A8c candidate, coefficient, threshold, station classification,
 or confirmation claim. ADR-0002 requires separately roadmapped downstream
 evidence for any future extension-quality or production decision. ADR-0004

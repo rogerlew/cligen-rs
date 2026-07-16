@@ -13,3 +13,5 @@ docs/work-packages/20260715-a8c-routed-daily-pilot/artifacts/a8c-retained-stream
 docs/work-packages/20260715-a9b-calibration-harness/artifacts/large/** filter=lfs diff=lfs merge=lfs -text
 docs/work-packages/20260715-a9c-observed-development/artifacts/large/** filter=lfs diff=lfs merge=lfs -text
 docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/fits/detail/** filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/fits/detail/** filter=lfs diff=lfs merge=lfs -text
+docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/large/** filter=lfs diff=lfs merge=lfs -text

@@ -18,3 +18,4 @@ each accepted report with a strict manifest verified by `verify-report.py`.
 | [A9c2 hot-arid roster feasibility](a9c2-hot-arid-roster-feasibility-report.md) | 2 | ACCEPTED | [A9c2](../work-packages/20260715-a9c2-grouped-hot-arid-reentry/package.md) |
 | [A9c3 two-site grouped observed-development comparison](a9c3-two-site-grouped-observed-comparison-report.md) | 1 | ACCEPTED | [A9c3](../work-packages/20260715-a9c3-two-site-grouped-observed-comparison/package.md) |
 | [A9c4 context support and evidence completeness](a9c4-context-support-completeness-report.md) | 1 | ACCEPTED | [A9c4](../work-packages/20260715-a9c4-context-support-completeness/package.md) |
+| [A9d successor development and locked-confirmation decision](a9d-successor-development-confirmation-report.md) | 1 | ACCEPTED | [A9d](../work-packages/20260715-a9d-successor-development-confirmation/package.md) |

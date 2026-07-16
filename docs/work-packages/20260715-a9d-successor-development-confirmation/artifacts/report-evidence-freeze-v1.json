@@ -1,0 +1,95 @@
+{
+  "access_chronology": [
+    "The design freeze and dispatch preceded corrected A9d candidate output.",
+    "The occurrence-calibration amendment preceded every A9d fit and candidate output artifact.",
+    "The predecessor-manifest closeout followed fitting but preceded faithful baseline and candidate score output.",
+    "The runtime metadata discrepancy disclosure followed the development terminal and changes no canonical machine artifact.",
+    "The conditional confirmation-period correction followed the development terminal but preceded any confirmation target access.",
+    "No confirmation target station-year series was acquired, parsed, summarized, or scored."
+  ],
+  "campaign_id": "a9d-successor-development-confirmation-v1",
+  "evidence": [
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/execution-dispatch-v1.json",
+      "sha256": "1bc3a3746a3bda9dc3a91c158edde1c797b5dd147090e0e6064ed1bcbcdf8fdf"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/design-freeze-v1.json",
+      "sha256": "65b7d6d5e8f2702d6f02ce16da63500bfd333411b247e22378ad9d158b0a8622"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-output-fit-amendment.md",
+      "sha256": "3f7384fba5c3e70f1a7559ddaf09e7dd50a8d3b39c2fc515cb31dfa9168f9a3b"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-score-predecessor-closeout.md",
+      "sha256": "a4afcf6ea16aef8c55e0e48316cd8a0274852a6ac10c51c3897615ba511d5761"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/predecessor-manifest-v1.json",
+      "sha256": "a20c9b2556bd7ba670591b5f7c1626bce2560f2a4da160bb50cd7e84981abbe7"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/calibration-v1.json",
+      "sha256": "f4ac72ae26f3dd54a646d721a6a72426426ffeceb88b6b11d55fd2302456963d"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/fit-execution-v1.json",
+      "sha256": "22921b34d2abd19cd8978f6a7270ada147240ee526b65b466e540f8f91e43fac"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/structural-audit-v1.json",
+      "sha256": "5971544976b615934af72ab21c7406705d617f8b76f19b3e868a184da2d31e22"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-runtime-v1.json",
+      "sha256": "6848978736d3bb6350f5b87963231915170949a650f2c70564cf1dc6dd33eb77"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-faithful-baseline-v1.json",
+      "sha256": "fc4b23720f581d793581d2baadf6c67b02b363911debc411eba077315efe6eb1"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-evaluation-v1.json",
+      "sha256": "989495ee63e2b4c4a39c91bac97c0702d2eb6b2fd462991f9ac037338d7748c8"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/development-result-v1.json",
+      "sha256": "9853f7c29520715ddbe5fb9a1c749b0843c0b197b3e25d939bf2c33873385ac0"
+    },
+    {
+      "path": "research/a9d/campaign.py",
+      "sha256": "4fb3ee3c052d702b9108599ba1603fb73f23ddb42a9612d7bce3fee192c24acc"
+    },
+    {
+      "path": "research/a9d/tests/test_campaign.py",
+      "sha256": "c8544c35943fb42ef5f41b800c5bfd8b7f15e2e59ccf4115d37e11b6ef8cad9e"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/post-outcome-runtime-metadata-discrepancies.md",
+      "sha256": "e4ed77be27204f94d54128f750443fdfa039d70ffcf81d660acb2f2dfde431ce"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/pre-confirmation-protocol-correction.md",
+      "sha256": "d51e16eb265bfd51da6ea35ddb294a7740513271f7da58172886e0d149bf6261"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/claim-evidence-ledger.md",
+      "sha256": "b48ce6c1caa267ff5edbe1de0bcc5020b31db963bf17f1cb08c9607768636a3d"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/confirmation-baseline-crosswalk-v1.json",
+      "sha256": "68121f7e64aa2551f8c439a32adaad67ccb3876aac515c697accf463a0b2a7d0"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9d-successor-development-confirmation/artifacts/confirmation-baseline-parameters-v1.tar.gz",
+      "sha256": "8c54818c7ba0d0b03388203dde36879aad21287ce4a78f4482716b18b5a6e9e0"
+    }
+  ],
+  "evidence_mode": "Mixed",
+  "freeze_id": "a9d-report-evidence-freeze-v1",
+  "report_id": "a9d-successor-development-confirmation",
+  "schema_version": 1,
+  "source_commit": "1d0350eed8549067eca41047c0eef43949822c69",
+  "terminal": "HOLD-A9D-NO-SELECTABLE-CANDIDATE"
+}
