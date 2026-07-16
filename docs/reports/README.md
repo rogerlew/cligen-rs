@@ -17,3 +17,4 @@ each accepted report with a strict manifest verified by `verify-report.py`.
 | [A9c observed-development availability](a9c-observed-development-availability-report.md) | 2 | ACCEPTED | [A9c](../work-packages/20260715-a9c-observed-development/package.md) |
 | [A9c2 hot-arid roster feasibility](a9c2-hot-arid-roster-feasibility-report.md) | 2 | ACCEPTED | [A9c2](../work-packages/20260715-a9c2-grouped-hot-arid-reentry/package.md) |
 | [A9c3 two-site grouped observed-development comparison](a9c3-two-site-grouped-observed-comparison-report.md) | 1 | ACCEPTED | [A9c3](../work-packages/20260715-a9c3-two-site-grouped-observed-comparison/package.md) |
+| [A9c4 context support and evidence completeness](a9c4-context-support-completeness-report.md) | 1 | ACCEPTED | [A9c4](../work-packages/20260715-a9c4-context-support-completeness/package.md) |

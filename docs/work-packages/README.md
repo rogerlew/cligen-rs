@@ -59,3 +59,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260715-a9c-observed-development](20260715-a9c-observed-development/package.md) | EXECUTED-HOLD-GATE-CALIBRATION |
 | [20260715-a9c2-grouped-hot-arid-reentry](20260715-a9c2-grouped-hot-arid-reentry/package.md) | EXECUTED-HOLD-HOT-ARID-ROSTER |
 | [20260715-a9c3-two-site-grouped-observed-comparison](20260715-a9c3-two-site-grouped-observed-comparison/package.md) | EXECUTED-HOLD-NO-SELECTABLE-CANDIDATE |
+| [20260715-a9c4-context-support-completeness](20260715-a9c4-context-support-completeness/package.md) | EXECUTED-HOLD-COMPLETENESS-SURFACE |

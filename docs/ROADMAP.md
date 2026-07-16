@@ -72,7 +72,26 @@ was accessed, so grouped calibration and the fresh model comparison were not
 reached. The accepted result is also documented in the
 [A9c2 public report](reports/a9c2-hot-arid-roster-feasibility-report.md).
 
-There is no active successor package. A9c3 completed on 2026-07-15 with
+There is no active successor package. The
+[A9c4 completeness correction](work-packages/20260715-a9c4-context-support-completeness/package.md)
+completed on 2026-07-15 with `HOLD-A9C4-COMPLETENESS-SURFACE`. Its pre-output
+audit retained 92 of 111 originally applicable mandatory 30-year cells: 68
+non-storm cells through observed/faithful common support and 24 storm cells
+through the inherited grouped policy. The other 19 lacked the required two
+observed contributors. Wet amount and compound context consequently failed
+the frozen breadth guard in arid-boundary, hot-arid, and monsoonal-transition
+regimes. No corrected fit, output, evaluation, or candidate freeze occurred.
+The accepted result is documented in the
+[A9c4 public report](reports/a9c4-context-support-completeness-report.md).
+
+A successor must prospectively choose whether to accept the 92-cell surface
+with its explicit regime/family limits, replace sparse-data estimands while
+preserving their scientific questions, or expand observed evidence. It should
+then test the already specified bounded context laws without adding selector
+or model complexity. That decision remains unscaffolded and unauthorized and
+cannot relabel A9c4 H1.
+
+A9c3 completed on 2026-07-15 with
 `HOLD-A9C3-NO-SELECTABLE-CANDIDATE`. Its equal-weight Yuma/Stovepipe estimator
 was finite at the actual 136/97 event frequencies, and four renewal plus two
 latent configurations entered the short screen. Every one of 240 candidate
@@ -82,22 +101,14 @@ record is in the
 [A9c3 work package](work-packages/20260715-a9c3-two-site-grouped-observed-comparison/package.md)
 and [public report](reports/a9c3-two-site-grouped-observed-comparison-report.md).
 
-The next recommended package is A9c4, a bounded context-support and evidence-
-completeness correction. It remains unscaffolded and unauthorized. Before new
-candidate output it must decompose A9c3's 19 unavailable mandatory rows by
-observed, faithful, and candidate cause and establish that the evidence surface
-can yield a complete candidate or freeze a prospective amendment. It should
-then place solar radiation and wind on nonnegative support and humidity on
-bounded support inside both research models. Holding the other mechanisms
-fixed is only diagnostic isolation; A9c3's 8--18 degradation rows remain
-unresolved. No new selector structure or corpus-expansion campaign is implied.
-
 A9d locked confirmation and A9e Rust runtime work remain unscaffolded and
-unauthorized because no A9c3 candidate has been selected or sealed. A9 does
+unauthorized because no successor candidate has been selected or sealed. A9 does
 not inherit an A8c candidate, coefficient, threshold, station classification,
-or confirmation claim. A future production-promotion decision still requires
-separately roadmapped downstream evidence under ADR-0004; the present sequence
-neither performs nor waives openWEPP/WEPPcloud integration.
+or confirmation claim. ADR-0002 requires separately roadmapped downstream
+evidence for any future extension-quality or production decision. ADR-0004
+continues to prohibit promotion or post-hoc rescue of the evaluated A5b
+candidates; it does not govern every successor. The present sequence neither
+performs nor waives openWEPP/WEPPcloud integration.
 
 **Operator correction 2026-07-14: stop the selector/count-construction
 escalation and return to the model question left open by A5c.** The A5d0-A5d1b

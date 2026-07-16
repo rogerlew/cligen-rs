@@ -1,0 +1,103 @@
+{
+  "evidence": [
+    {
+      "id": "E01",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/execution-dispatch-v1.json",
+      "role": "operator dispatch and source-commit boundary",
+      "sha256": "89b1d75694b633804d4567bdc48f6ddfd5bda774122bc9e061d7410b8066786e"
+    },
+    {
+      "id": "E02",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/design-freeze-v1.json",
+      "role": "prospective completeness, support-correction, hypothesis, and terminal rules",
+      "sha256": "d84648d1412bce32c3e128290315ccecb8667d3d31cf9a042a68502cd53f060f"
+    },
+    {
+      "id": "E03",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/predecessor-manifest-v1.json",
+      "role": "accepted predecessor identity boundary",
+      "sha256": "1e793dc486ff76fe410d313f21273fca5bd2275cc28226d70e245abc4518ba89"
+    },
+    {
+      "id": "E04",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/availability-audit-v1.json",
+      "role": "canonical source-specific mandatory-cell availability audit",
+      "sha256": "34799a34aed2a1f3d29db831101f34de2a69cd1fd909be69565fd7ad21c64306"
+    },
+    {
+      "id": "E05",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/evidence-mask-v1.json",
+      "role": "candidate-blind common-support mask and breadth decision",
+      "sha256": "5e3f3f500d2a3b4bf649dee3da1ef14e531697e0d2c6262c3093d9f7a6b02cba"
+    },
+    {
+      "id": "E06",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/post-audit-closeout-correction.md",
+      "role": "post-audit deterministic mask-closeout correction and access chronology",
+      "sha256": "50db72a77dbe97da42ff20b5d5cae495aec2a8881ca2ffad31d3d512104696e0"
+    },
+    {
+      "id": "E07",
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/evaluation-v1.json",
+      "role": "accepted A9c3 historical statuses and comparison terminal",
+      "sha256": "e0e6748b4712b4ed4ef1bd0de63f3058d14ce1449a6aaa3db7c579d964588751"
+    },
+    {
+      "id": "E08",
+      "path": "docs/reports/a9c3-two-site-grouped-observed-comparison-report.manifest.json",
+      "role": "accepted predecessor report identity and bounded residual uncertainty",
+      "sha256": "e9b3b9f0bcc72da343db76b24c7dd7758a70ec53d133080d124add5abbcee50c"
+    },
+    {
+      "id": "E09",
+      "path": "research/a9c4/audit.py",
+      "role": "source-specific audit and deterministic mask-closeout implementation",
+      "sha256": "1526f1225cf222e4f66632131ec04c87707ac6546e613ec4f43bb5b6b5f1043c"
+    },
+    {
+      "id": "E10",
+      "path": "docs/work-packages/20260715-a9c-observed-development/artifacts/observed-source-manifest-v1.json",
+      "role": "exact Daymet and USCRN role, period, normalized-object, and access identities",
+      "sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b"
+    },
+    {
+      "id": "E11",
+      "path": "docs/decisions/0001-source-code-authority-port.md",
+      "role": "faithful-mode source-authority decision",
+      "sha256": "635a8fe8b8c4a6e3b70ff326dd1b3c2b511cb5084cf6c5d969ea443c31186bfa"
+    },
+    {
+      "id": "E12",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/claim-evidence-ledger.md",
+      "role": "frozen report claim and hypothesis crosswalk",
+      "sha256": "5e93bf4d1d4b67525a2624804d17a1c05aeae562df199672f6b982d33dafa0c4"
+    },
+    {
+      "id": "E13",
+      "path": "docs/work-packages/20260715-a9c4-context-support-completeness/artifacts/post-outcome-methods-deviation.md",
+      "role": "independently detected historical storm-count labeling deviation",
+      "sha256": "d9c1f37e354d10d53ec7bf914a31d5d14ae36c81856293fe45ee12b00b46274d"
+    }
+  ],
+  "governance": [
+    {
+      "path": "docs/standards/scientific-report-standard.md",
+      "role": "standard",
+      "sha256": "9bb2cd855a53ae5e02b2af90b302d8c66ec6523efd3114dff7c1c175d29bb87f"
+    },
+    {
+      "path": "docs/standards/scientific-report-authoring-protocol.md",
+      "role": "protocol",
+      "sha256": "159a2ca5b05f910f1d2be8bae50e28838b5e7a3560dba6f6015793ddacb0e30b"
+    },
+    {
+      "path": "docs/reports/templates/scientific-experiment-report.md",
+      "role": "template",
+      "sha256": "429377139af0f243750306058e4947186bd41fb226ba26ae627c7322917bc069"
+    }
+  ],
+  "hypothesis_provenance": "all H1-H5 rules were frozen before source-specific audit outcome access",
+  "report_id": "a9c4-context-support-completeness",
+  "schema_version": 1,
+  "source_commit": "08d1bf84989bb057537648c65b9ed0e9df104883"
+}

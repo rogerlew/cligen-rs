@@ -1,0 +1,105 @@
+{
+  "campaign_id": "a9c4-context-support-completeness-v1",
+  "candidate_configuration_source": "docs/work-packages/20260715-a9c-observed-development/artifacts/campaign-freeze-v1.json",
+  "candidate_fit_rule": "freshly refit all eight frozen configurations; no A9c3 fit is reused as an A9c4 fit",
+  "confirmation_series_access_allowed": false,
+  "context_correction": {
+    "air_temperature_c": {
+      "fit_space": "identity",
+      "generated_support": "real",
+      "law": "Gaussian"
+    },
+    "relative_humidity_pct": {
+      "boundary_epsilon_fraction": 0.000001,
+      "fit_space": "logit(clamp(observed_fraction, epsilon, 1-epsilon))",
+      "generated_inverse": "100*logistic(z)",
+      "generated_support": "strictly between 0 and 100 percent",
+      "law": "logit-normal"
+    },
+    "solar_radiation_w_m2": {
+      "fit_space": "log(max(observed, positive_epsilon))",
+      "generated_inverse": "exp(z)",
+      "generated_support": "strictly positive",
+      "law": "lognormal",
+      "positive_epsilon": 0.000001
+    },
+    "wind_speed_1_5m_m_s": {
+      "fit_space": "log(max(observed, positive_epsilon))",
+      "generated_inverse": "exp(z)",
+      "generated_support": "strictly positive",
+      "law": "lognormal",
+      "positive_epsilon": 0.000001
+    },
+    "realized_output_clipping_or_repair": false,
+    "scope": "event-law context marginals only; occurrence, amount, daily temperature, storm descriptors, hierarchy, and dependence structures are unchanged"
+  },
+  "evidence_completeness": {
+    "audit_horizon_years": 30,
+    "audit_burns": [0, 101],
+    "candidate_blind_mask_inputs": ["observed", "faithful"],
+    "candidate_history_role": "A9c3 candidate availability is decomposed and published for diagnosis only; it cannot select a retained cell",
+    "cell_key": ["objective_id", "stratum", "horizon_years"],
+    "excluded_cell_role": "report_only_not_evaluated; publish source counts and no candidate or baseline selection score",
+    "historical_candidate_scope": "all six A9c3 fit-valid configurations",
+    "minimum_common_station_contributors": 2,
+    "prospective_mask_rule": "retain a non-storm mandatory cell exactly when at least two stations in its stratum have available observed features and at least one available faithful feature in each frozen audit burn; storm and engineering cells retain the A9c3 rules",
+    "candidate_gate": "every retained mandatory cell must have at least two candidate stations available in every burn used by the stage; otherwise the configuration is incomplete",
+    "favorable_missing_value": false,
+    "breadth_guard": "each non-engineering objective family must retain at least one mandatory cell in every originally applicable stratum; winter_proxy applies only to cold; otherwise HOLD-A9C4-COMPLETENESS-SURFACE",
+    "mask_freeze_precedes_corrected_candidate_output": true
+  },
+  "inherited_unchanged": {
+    "burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007],
+    "candidate_classes": ["alternating_renewal_marked_v1", "latent_regime_marked_v1"],
+    "daily_development_station_count": 20,
+    "grouped_storm_estimator": "A9c3 equal-weight two-site estimator and actual event frequencies",
+    "horizons_years": [30, 100],
+    "objective_registry": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+    "selection_rule_id": "a9_lexicographic_pareto_v1",
+    "stage_limits": "A9c3 short 4/class, full 2/class, replay 1/class",
+    "thresholds": "A9c3 candidate-blind family-by-horizon thresholds and storm component scales"
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "rule": "the pre-output audit fully decomposes every A9c3 short-screen mandatory cell and freezes a breadth-complete candidate-blind mask"
+    },
+    {
+      "id": "H2",
+      "rule": "all A9c4 generated event context values satisfy structural solar, wind, and humidity support with no output repair"
+    },
+    {
+      "id": "H3",
+      "rule": "both actual classes retain at least one fresh valid fit and remain structurally non-isomorphic"
+    },
+    {
+      "id": "H4",
+      "rule": "the frozen selector identifies at most one class after rejecting hard failures, incomplete retained mandatory evidence, and material degradation"
+    },
+    {
+      "id": "H5",
+      "rule": "zero locked confirmation station-year series are accessed"
+    }
+  ],
+  "resource_limits": {
+    "campaign_wall_hours": 72,
+    "memory_gib": 12,
+    "retained_gib": 50,
+    "stage_wall_hours": 24,
+    "workers": 8
+  },
+  "schema_version": 1,
+  "source_commit": "08d1bf84989bb057537648c65b9ed0e9df104883",
+  "terminals": [
+    "CANDIDATE-FROZEN-READY-A9D",
+    "HOLD-A9C4-PREDECESSOR-INTEGRITY",
+    "HOLD-A9C4-DATA-ROLE",
+    "HOLD-A9C4-COMPLETENESS-SURFACE",
+    "HOLD-A9C4-CONTEXT-SUPPORT",
+    "HOLD-A9C4-MODEL-CLASS-EQUIVALENCE",
+    "HOLD-A9C4-FIT-APPLICABILITY",
+    "HOLD-A9C4-MONTHLY-RECONCILIATION",
+    "HOLD-A9C4-NO-SELECTABLE-CANDIDATE",
+    "HOLD-A9C4-RESOURCE-BOUND"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "files": [
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/design-freeze-v1.json",
+      "role": "accepted A9c3 campaign contract",
+      "sha256": "cafe91e4d3bdbd6f1c6827bab56205b77336ceea4c5ec497dbf88b068d12314c"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/grouped-calibration-v1.json",
+      "role": "candidate-blind thresholds and grouped scales",
+      "sha256": "2ab7a6228ca96d0106f95b080b0c8103101860246b067714d0a1b4ddf5365c0d"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/grouped-storm-objective-amendment-v1.json",
+      "role": "accepted grouped storm construct",
+      "sha256": "18d9a0f53d5e9e2983d2255be7e59be6b9bc895803406db496c3f45ae80282c5"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/objective-evaluator-freeze-v1.json",
+      "role": "A9c3 evaluator authority",
+      "sha256": "79c5cadae1f33dc09b2363ed9b1113c2ddbfae5ffca9e0e21297617a2929791f"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/fit-execution-v1.json",
+      "role": "historical candidate inventory",
+      "sha256": "efbbbc2517239800815a652d443647ae8523fcdcf1fe13edc730a79a2a319359"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/faithful-baseline-v1.json",
+      "role": "faithful comparison provenance",
+      "sha256": "10e91291183cdf0978d1012a6254db77f2320fc593bb6ac5ae0137c8fcac3f34"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9c3-two-site-grouped-observed-comparison/artifacts/evaluation-v1.json",
+      "role": "historical availability and outcome record",
+      "sha256": "e0e6748b4712b4ed4ef1bd0de63f3058d14ce1449a6aaa3db7c579d964588751"
+    },
+    {
+      "path": "docs/reports/a9c3-two-site-grouped-observed-comparison-report.manifest.json",
+      "role": "accepted public evidence identity",
+      "sha256": "e9b3b9f0bcc72da343db76b24c7dd7758a70ec53d133080d124add5abbcee50c"
+    },
+    {
+      "path": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/objective-registry-v1.json",
+      "role": "31-objective registry and selection rule",
+      "sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7"
+    },
+    {
+      "path": "research/a9c/models.py",
+      "role": "historical candidate fit and simulation implementation",
+      "sha256": "3b683c4c74ad06e52b72befff678adcf206a51cdc161df2c7686b9c0c4d599d2"
+    },
+    {
+      "path": "research/a9c3/experiment.py",
+      "role": "historical campaign and evaluator implementation",
+      "sha256": "fca8f54ba332cb5c4c75f7fb7d89225546c741be484bbef81f418c3aedd8c0f1"
+    }
+  ],
+  "historical_terminal": "HOLD-A9C3-NO-SELECTABLE-CANDIDATE",
+  "schema_version": 1,
+  "source_commit": "08d1bf84989bb057537648c65b9ed0e9df104883"
+}

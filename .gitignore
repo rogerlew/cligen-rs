@@ -1,6 +1,8 @@
 /target
 **/*.rs.bk
 .DS_Store
+__pycache__/
+*.py[cod]
 # work-package raw run trees (fixture captures commit manifests, not raw runs)
 docs/work-packages/**/raw/
 # fixture-harness evidence: binaries and byte-identical rerun copies stay local (hashes committed)
