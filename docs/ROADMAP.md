@@ -36,16 +36,22 @@ confirmation firewall, and froze A10M2's one-GPU-hour ceiling. Its accepted
 record is the
 [A10M0 work package](work-packages/20260716-a10m0-dispatch-predecessor-freeze/package.md).
 
-The active execution is
-[A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md).
-It will validate the supervised SSH path, I-CREWS-priority `gpu-icrews`
-authorization, typed L40 CUDA execution, a pinned offline PyTorch environment,
-one- and two-GPU operation, durable/local storage, and synthetic interruption/
-resume under a hard 1-GPU-hour ceiling. Scaffold-time read-only live evidence
-is retained; no Slurm job, remote environment installation, or signal has yet
-been executed. The operator authorized execution, and A10M0 now supplies the
-accepted predecessor terminal. The A10M2 execution dispatch will name the
-published A10M0 commit before the first remote write.
+The
+[A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md)
+executed on 2026-07-16 and closed at `EXECUTED-HOLD-CUDA-ENVIRONMENT`.
+It proved the supervised SSH path, I-CREWS-priority `gpu-icrews`
+authorization, typed L40 allocation, driver/toolkit identity, and Ceph/XFS
+storage split. Its first J1 exposed a login/compute module-registry mismatch;
+after a published amendment, CUDA 12.8 `nvcc` reached but crashed its host
+`gcc` by `SIGILL` and reported an unsupported host OS. The two attempts used
+20 requested GPU-minutes and one second of actual allocation. The fail-closed
+ladder correctly left J2--J4b unsubmitted and cleaned the exact remote run.
+
+A10M3 is not authorized. The smallest external correction is a Lemhi
+administrator-validated CUDA 12.8 host compiler on `node03`; the
+login-advertised GCC 11.2 path is the first bounded candidate. A future compute
+attempt requires explicit package/resource authority because A10M2's retry
+allowance is exhausted.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

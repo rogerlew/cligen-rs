@@ -62,4 +62,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260715-a9c4-context-support-completeness](20260715-a9c4-context-support-completeness/package.md) | EXECUTED-HOLD-COMPLETENESS-SURFACE |
 | [20260715-a9d-successor-development-confirmation](20260715-a9d-successor-development-confirmation/package.md) | EXECUTED-HOLD-NO-SELECTABLE-CANDIDATE |
 | [20260716-a10m0-dispatch-predecessor-freeze](20260716-a10m0-dispatch-predecessor-freeze/package.md) | EXECUTED-COMPLETE |
-| [20260716-a10m2-lemhi-gpu-integration](20260716-a10m2-lemhi-gpu-integration/package.md) | SCAFFOLDED |
+| [20260716-a10m2-lemhi-gpu-integration](20260716-a10m2-lemhi-gpu-integration/package.md) | EXECUTED-HOLD-CUDA-ENVIRONMENT |

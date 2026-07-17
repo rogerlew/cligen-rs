@@ -1,6 +1,6 @@
 # A10M2 — Lemhi GPU Integration and Restartability Readiness
 
-Status: `EXECUTING`
+Status: `EXECUTED-HOLD-CUDA-ENVIRONMENT`
 Date: 2026-07-16
 Evidence mode: Mixed
 Scaffolding authorization: operator direction on 2026-07-16 from clean
@@ -193,14 +193,36 @@ Legitimate holds are:
 A hold preserves its evidence and names the smallest corrective decision. It
 does not automatically authorize a suffixed rescue package.
 
+## Result
+
+Terminal: `EXECUTED-HOLD-CUDA-ENVIRONMENT`.
+
+Live execution proved MFA-bootstrapped noninteractive access, I-CREWS
+authorization, typed L40 scheduling on `node03`, one visible NVIDIA L40 with
+driver 610.43.02, the CUDA 12.8 toolkit identity, Ceph durable storage, and an
+XFS `TMPDIR`. It did not prove a runnable CUDA kernel. The first J1 attempt
+exposed a login/compute Lmod registry mismatch. The published amendment used
+the advertised canonical CUDA path directly; `nvcc` then crashed its host
+`gcc` with `SIGILL` and reported an unsupported host OS.
+
+The two attempts requested 20 GPU-minutes and used one second of allocation.
+The only retry allowance is exhausted. J2--J4b were not submitted, no
+framework assets were downloaded, and the exact remote run directory was
+removed after evidence retrieval. The smallest corrective action is for the
+cluster administrator to validate a supported host compiler on `node03`
+(the advertised GCC 11.2 path is the first bounded candidate) and provide a
+compute-node-valid CUDA environment; a new attempt requires explicit package
+authority.
+
 ## Artifacts
 
 - `artifacts/preflight.md` — sanitized read-only evidence available at
   scaffolding time.
 - `artifacts/README.md` — planned artifact registry and naming contract.
 - `kickoff-prompt.md` — execution dispatch template with branch/push rules.
-- Planned execution evidence: dispatch/design freeze, live inventory,
-  environment lock and asset manifest, CUDA/PyTorch/NCCL/signal sources and
-  Slurm scripts, raw sanitized logs, `sacct`/`scontrol` receipts, attempt and
-  resource ledgers, checkpoint hashes, cleanup receipt, independent review,
-  gate results, terminal, and A10M3 handoff.
+- Executed dispatch/design freeze, amendment, live inventory, exact job
+  sources, raw sanitized J1 logs and source hashes, attempt/resource ledgers,
+  cleanup receipt, review, gates, terminal, and A10M3 non-handoff are indexed
+  by `artifacts/README.md`.
+- Framework assets and J2/J3/J4 logs are intentionally absent because the
+  fail-closed ladder stopped at J1.

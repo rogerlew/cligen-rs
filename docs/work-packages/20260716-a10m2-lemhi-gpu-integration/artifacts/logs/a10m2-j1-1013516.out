@@ -1,0 +1,7 @@
+job=J1
+cuda_visible_device_count=1
+NVIDIA L40, 610.43.02, 46068 MiB
+Build cuda_12.8.r12.8/compiler.35583870_0
+durable_fs_type=ceph
+local_root_source=TMPDIR
+local_fs_type=xfs
