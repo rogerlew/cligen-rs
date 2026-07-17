@@ -29,16 +29,23 @@ ad hoc suffixed rescue package. This supersedes the reviewed plan's original
 single-package topology without changing milestone order, scientific rules,
 or confirmation access.
 
-The active scaffold is
+The required A10M0 predecessor freeze completed on 2026-07-16 with
+`A10M0-PREDECESSORS-FROZEN`. It hashed 20 governing authorities, hydrated and
+replayed the A9d LFS evidence without changing its hold, preserved the
+confirmation firewall, and froze A10M2's one-GPU-hour ceiling. Its accepted
+record is the
+[A10M0 work package](work-packages/20260716-a10m0-dispatch-predecessor-freeze/package.md).
+
+The active execution is
 [A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md).
 It will validate the supervised SSH path, I-CREWS-priority `gpu-icrews`
 authorization, typed L40 CUDA execution, a pinned offline PyTorch environment,
 one- and two-GPU operation, durable/local storage, and synthetic interruption/
 resume under a hard 1-GPU-hour ceiling. Scaffold-time read-only live evidence
 is retained; no Slurm job, remote environment installation, or signal has yet
-been executed. Execution awaits a kickoff naming the current `origin/main`
-commit, referencing an accepted A10M0 predecessor terminal, and confirming the
-frozen resource envelope.
+been executed. The operator authorized execution, and A10M0 now supplies the
+accepted predecessor terminal. The A10M2 execution dispatch will name the
+published A10M0 commit before the first remote write.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
