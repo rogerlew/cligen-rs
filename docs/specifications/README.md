@@ -32,6 +32,7 @@ machinery without an ADR.
 | [SPEC-STATION-DOCUMENT](SPEC-STATION-DOCUMENT.md) | Modern fixed-monthly station JSON + shared typed model ([JSON Schema](station-document.schema.json)) | active (rev 1; A4a) |
 | [SPEC-A8C-ROUTED-DAILY](SPEC-A8C-ROUTED-DAILY.md) | Historical A8c station route, integrated daily precipitation mechanism, fallback, RNG, and pilot boundary | **RETIRED** (rev 1; runtime and accepted schemas removed by A8c1) |
 | [SPEC-A9-RESEARCH-FOUNDATION](SPEC-A9-RESEARCH-FOUNDATION.md) | Research-only successor fit, objective, data-role, RNG, calibration, and confirmation contracts ([fit schema](a9-fit-artifact-v1.schema.json), [objective schema](a9-objective-registry-v1.schema.json), [data-role schema](a9-data-role-manifest-v1.schema.json)) | research-only (rev 1; A9a; no accepted runtime identifier) |
+| [SPEC-A10-CORPUS](SPEC-A10-CORPUS.md) | Research-only normalized corpus, roles, shards, and offline transfer manifests | research-only (rev 1; A10M1; no accepted runtime identifier) |
 | [SPEC-CLI-TEXT](SPEC-CLI-TEXT.md) | Frozen `.cli` text output + mandatory provenance companion | active (rev 1; A1) |
 | [SPEC-CLI-DIFF](SPEC-CLI-DIFF.md) | `.cli` field-wise trajectory differ | active |
 | [SPEC-CLI-PARQUET](SPEC-CLI-PARQUET.md) | Parametric typed row stream + `.cli.parquet` output ([field manifest](cli-parquet-v1.fields.json)) | active (rev 1; A1) |

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.invalid/schemas/a10-corpus-object-v1.schema.json",
+  "title": "A10 research corpus object v1",
+  "type": "object",
+  "required": ["calendar_transform_id", "regime", "role", "schema_version", "source_id"],
+  "properties": {
+    "calendar_transform_id": {
+      "enum": ["daymet_official_365_v1", "uscrn_daily01_lst_v1", "uscrn_subhourly01_lst_v1"]
+    },
+    "dates": {"type": "array", "items": {"type": "string", "format": "date"}},
+    "events": {"type": "array", "items": {"type": "object"}},
+    "fields": {
+      "type": "object",
+      "additionalProperties": {"type": "array", "items": {"type": ["number", "null"]}}
+    },
+    "point_id": {"type": "string", "minLength": 1},
+    "records": {"type": "array", "items": {"type": "object"}},
+    "regime": {
+      "enum": ["hot_arid", "arid_boundary", "monsoonal_transition", "non_monsoonal_semi_arid", "humid", "cold"]
+    },
+    "role": {
+      "enum": ["candidate_fit", "fit_validation", "development", "confirmation_metadata", "confirmation_locked", "source_sensitivity", "synthetic_fixture"]
+    },
+    "schema_version": {"const": 1},
+    "source_id": {
+      "enum": ["daymet_v4r1_single_pixel", "uscrn_daily01", "uscrn_subhourly01"]
+    },
+    "source_observed": {"type": "array", "items": {"type": "boolean"}},
+    "station_id": {"type": "string", "minLength": 1},
+    "tile_id": {"type": "string", "minLength": 1},
+    "units": {"type": "object", "additionalProperties": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"source_id": {"const": "daymet_v4r1_single_pixel"}}},
+      "then": {"required": ["dates", "fields", "point_id", "source_observed", "tile_id", "units"]}
+    },
+    {
+      "if": {"properties": {"source_id": {"const": "uscrn_daily01"}}},
+      "then": {"required": ["records", "station_id", "units"]}
+    },
+    {
+      "if": {"properties": {"source_id": {"const": "uscrn_subhourly01"}}},
+      "then": {"required": ["events", "station_id"]}
+    }
+  ],
+  "additionalProperties": true
+}

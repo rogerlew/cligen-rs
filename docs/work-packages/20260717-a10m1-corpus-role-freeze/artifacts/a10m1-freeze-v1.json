@@ -1,0 +1,45 @@
+{
+  "calendar_transforms": ["daymet_official_365_v1", "uscrn_daily01_lst_v1", "uscrn_subhourly01_lst_v1"],
+  "confirmation_roster": "docs/work-packages/20260715-a9a-successor-family-foundation/artifacts/confirmation-metadata-selection-v1.json",
+  "daymet": {
+    "fit_end_year": 2009,
+    "fit_start_year": 1980,
+    "grid_step_degrees": 0.25,
+    "max_requests": 2400,
+    "minimum_distance_locked_km": 100,
+    "per_regime_candidate_fit": 200,
+    "per_regime_fit_validation": 40,
+    "service": "https://daymet.ornl.gov/single-pixel/api/data",
+    "tile_degrees": 1.0,
+    "variables": ["prcp", "tmax", "tmin", "srad", "vp", "swe", "dayl"]
+  },
+  "development_role_freeze": "docs/work-packages/20260715-a9c-observed-development/artifacts/data-role-freeze-v1.json",
+  "event_definition": "a10_uscrn_event_6h_v1: 72 consecutive valid zero five-minute precipitation intervals separate events; missing intervals invalidate separation and active events",
+  "freeze_id": "a10m1-corpus-freeze-v1",
+  "regime_frames": {
+    "arid_boundary": [[38.0, 43.75, -117.0, -108.0]],
+    "cold": [[44.0, 48.75, -104.75, -88.0]],
+    "hot_arid": [[32.0, 36.75, -116.75, -112.0], [29.0, 33.75, -107.5, -102.0]],
+    "humid": [[30.5, 34.75, -91.75, -81.0], [35.0, 38.0, -87.75, -77.5]],
+    "monsoonal_transition": [[31.5, 37.5, -112.0, -103.0]],
+    "non_monsoonal_semi_arid": [[37.0, 47.0, -105.0, -99.0]]
+  },
+  "resource_limits": {
+    "download_bytes": 42949672960,
+    "local_wall_seconds": 28800,
+    "normalized_bytes": 10737418240
+  },
+  "roles": ["candidate_fit", "fit_validation", "development", "confirmation_metadata", "confirmation_locked", "source_sensitivity", "synthetic_fixture"],
+  "schema_version": 1,
+  "uscrn": {
+    "daily_end_year": 2025,
+    "daily_max_station_year_requests": 2500,
+    "daily_root": "https://www.ncei.noaa.gov/pub/data/uscrn/products/daily01",
+    "daily_start_year": 2010,
+    "event_stations_per_regime": 4,
+    "station_table": "https://www.ncei.noaa.gov/pub/data/uscrn/products/stations.tsv",
+    "subhourly_max_station_year_requests": 384,
+    "subhourly_root": "https://www.ncei.noaa.gov/pub/data/uscrn/products/subhourly01",
+    "validation_stations_per_regime": 4
+  }
+}
