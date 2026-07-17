@@ -11,6 +11,9 @@
 set -euo pipefail
 python=/opt/modules/devel/python/3.8.11/bin/python3.8
 test -x "$python"
+unset PYTHONPATH PYTHONHOME
+export PYTHONNOUSERSITE=1
+export LD_LIBRARY_PATH=/opt/modules/devel/python/3.8.11/lib
 test -s checkpoints/c3-state.json
 result_dir="results/c3b/${SLURM_JOB_ID}"
 mkdir -p "$result_dir"

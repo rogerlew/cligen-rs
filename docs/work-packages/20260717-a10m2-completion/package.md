@@ -147,3 +147,6 @@ second before its first output. Amendment 01 prospectively adds P0 to identify
 the compute-node precondition. P0 (`1013670`) proved the login-visible Python
 3.11 path absent and compute Python 3.8.11 valid. Amendment 02 freezes the
 compute-valid framework ABI before C1-02; no later base job has been submitted.
+C1-02 (`1013671`) then passed in 76 seconds. Amendment 03 isolates Python and
+loader paths prospectively for unsubmitted C2/C3 after a non-gating ambient
+NumPy probe warning; it changes no test, framework, or resource.

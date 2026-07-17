@@ -13,7 +13,9 @@ python_root=/opt/modules/devel/python/3.8.11
 test -x "$python_root/bin/python3.8"
 test -x runtime/pytorch/bin/torchrun
 export PATH="$python_root/bin:/usr/bin:/bin"
-export LD_LIBRARY_PATH="$python_root/lib:${LD_LIBRARY_PATH:-}"
+unset PYTHONPATH PYTHONHOME
+export PYTHONNOUSERSITE=1
+export LD_LIBRARY_PATH="$python_root/lib"
 export OMP_NUM_THREADS=4
 export NCCL_DEBUG=WARN
 result_dir="results/c2/${SLURM_JOB_ID}"
