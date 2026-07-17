@@ -111,12 +111,22 @@ exposed that the foundation did not settle an exhausted failed matrix for
 collection/cleanup; the corrective implementation and regression fixture are
 part of revision 2.
 
-Revision 2 is a prospective new toolkit run, not an automatic resubmission of
+Revision 2 was a prospective new toolkit run, not an automatic resubmission of
 the exhausted Slurm intent. It removes only the invalid `_sqlite3.__file__`
 assumption, retains native linkage proof through NumPy's compiled extension,
 adds an atomic failure evidence receipt, and authorizes one fresh 20-minute
 attempt under a fresh resource budget. Across both runs, the package ceiling is
-40 requested GPU-minutes; there is still no retry within either frozen run.
+40 requested GPU-minutes; there was no retry within either frozen run. Its job
+`1013746` failed after 92 seconds because the harness compared the unchanged
+NumPy dot product for `[0,1,2]` to 121 rather than its correct value 5. The
+repaired exhausted-matrix path collected the structured failure receipt and
+both Slurm logs, cleaned the exact remote run, and closed normally.
+
+Revision 3 corrects only that prospective arithmetic assertion and writes the
+complete per-gate evidence before evaluating the aggregate verdict, so any
+further failure is localized. It uses a third distinct run and 20-GPU-minute
+budget. The package-wide ceiling is 60 requested GPU-minutes across three
+single-attempt runs. No fourth run or retry is authorized.
 
 ## Artifacts
 

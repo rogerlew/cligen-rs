@@ -73,3 +73,14 @@ Revision 2 uses a new run ID and new 20-GPU-minute budget. The package-wide
 ceiling is therefore 40 requested GPU-minutes across two single-attempt runs.
 No scientific, confirmation, performance, multi-GPU, or training scope is
 added.
+
+## Revision 3 prospective correction
+
+Revision 2's aggregate smoke reached all environment-dependent gates but the
+harness did not publish their individual values before exiting. Static
+arithmetic localizes its known failure: the matrix product was computed before
+the shared NumPy tensor changed `array[0,0]`, so `product[0,0]` is 5, not 121.
+Revision 3 corrects only that expected value and publishes individual gate
+values before aggregate failure. It uses a third distinct run and fresh
+20-GPU-minute budget, bringing the package ceiling to 60 requested GPU-minutes.
+No fourth run is authorized.

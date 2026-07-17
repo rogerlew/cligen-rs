@@ -70,7 +70,7 @@ def main() -> None:
         "isolated_environment": not os.environ.get("PYTHONPATH") and not os.environ.get("PYTHONHOME") and not os.environ.get("LD_LIBRARY_PATH"),
         "multiprocessing_spawn": process.exitcode == 0 and child_result == ((3, 11), 42),
         "native_linkage": all(linked_without_missing(path) for path in native_paths),
-        "numpy": np.__version__ == "2.2.6" and float(product[0, 0]) == 121.0,
+        "numpy": np.__version__ == "2.2.6" and float(product[0, 0]) == 5.0,
         "numpy_torch_interop": float(array[0, 0]) == 11.0 and float(shared[0, 0]) == 11.0,
         "one_l40": torch.cuda.device_count() == 1 and "L40" in torch.cuda.get_device_name(0),
         "ssl": bool(ssl.OPENSSL_VERSION),
@@ -79,8 +79,6 @@ def main() -> None:
         "torch_cuda_tensor": torch.__version__ == "2.7.1+cu128" and parameter.is_cuda,
         "venv": isinstance(venv.EnvBuilder(with_pip=True), venv.EnvBuilder),
     }
-    if not all(gates.values()):
-        raise SystemExit("smoke gate failed")
     evidence = {
         "classification": "development-only",
         "cuda_runtime": torch.version.cuda,
@@ -89,9 +87,11 @@ def main() -> None:
         "python_implementation": sys.implementation.name,
         "python_version": ".".join(map(str, sys.version_info[:3])),
         "torch_version": torch.__version__,
-        "verdict": "PASS",
+        "verdict": "PASS" if all(gates.values()) else "FAIL",
     }
     options.output.write_text(json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if not all(gates.values()):
+        raise SystemExit("smoke gate failed")
 
 
 if __name__ == "__main__":

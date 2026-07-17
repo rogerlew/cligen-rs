@@ -14,22 +14,30 @@ write_failure_receipt() {
   status=$?
   trap - EXIT
   if [ "$status" -ne 0 ] && [ -x "$runtime_root/bin/python3" ]; then
-    "$runtime_root/bin/python3" - "$final" "$status" <<'PY' || true
+    "$runtime_root/bin/python3" - "$partial" "$final" "$status" <<'PY' || true
 import json
 import os
 import sys
 
-final, status = sys.argv[1:]
+partial, final, status = sys.argv[1:]
 temporary = final + ".failure"
-with open(temporary, "w", encoding="utf-8") as stream:
-    json.dump({
+if os.path.exists(partial):
+    with open(partial, encoding="utf-8") as stream:
+        evidence = json.load(stream)
+else:
+    evidence = {
         "classification": "development-only",
-        "exit_code": int(status),
         "gates": {"job_completed": False},
         "verdict": "FAIL",
-    }, stream, indent=2, sort_keys=True)
+    }
+evidence["exit_code"] = int(status)
+evidence["verdict"] = "FAIL"
+with open(temporary, "w", encoding="utf-8") as stream:
+    json.dump(evidence, stream, indent=2, sort_keys=True)
     stream.write("\n")
 os.replace(temporary, final)
+if os.path.exists(partial):
+    os.unlink(partial)
 PY
   fi
   exit "$status"
