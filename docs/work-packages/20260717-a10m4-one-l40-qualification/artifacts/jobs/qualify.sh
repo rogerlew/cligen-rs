@@ -70,7 +70,7 @@ tar -xJf "$run_root/rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz" -C "$job_local"
   --prefix="$job_local/rust-toolchain" --disable-ldconfig >/dev/null
 mkdir -p "$job_local/source/.cargo"
 printf '%s\n' '[source.crates-io]' 'replace-with = "vendored-sources"' '' \
-  '[source.vendored-sources]' 'directory = "../../vendor"' >"$job_local/source/.cargo/config.toml"
+  '[source.vendored-sources]' 'directory = "../vendor"' >"$job_local/source/.cargo/config.toml"
 export PATH="$job_local/rust-toolchain/bin:/usr/bin:/bin"
 case "$(rustc --version)" in "rustc 1.92.0 "*) ;; *) exit 101 ;; esac
 case "$(cargo --version)" in "cargo 1.92.0 "*) ;; *) exit 101 ;; esac
