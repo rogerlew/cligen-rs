@@ -61,12 +61,15 @@ Excluded:
 
 | Job | Partition / GRES | CPU / memory / time | Purpose |
 |---|---|---|---|
+| P0 (amended) | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | localize C1's pre-output compute precondition |
 | C1 | `gpu-icrews`, `gpu:l40:1` | 4 CPU, 16 GB, 15 min | corrected CUDA, offline framework, one-GPU, and stage 2 |
 | C2 | `gpu-icrews`, `gpu:l40:2` | 8 CPU, 32 GB, 5 min | two-rank NCCL/DDP |
 | C3a | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | Slurm signal and durable checkpoint |
 | C3b | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | manual resume and control comparison |
 
-The base matrix requests 35 GPU-minutes. At most one exact retry after a
+The original base matrix requests 35 GPU-minutes. Amendment 01 adds P0 after
+C1-01 failed before its first output. C1-01, P0, a corrected C1, and the
+remaining base jobs total at most 55 GPU-minutes. At most one exact retry after a
 documented infrastructure transient is allowed, and only when cumulative
 requested use remains at or below 60 GPU-minutes. No scientific failure is
 rerun. Jobs are sequential and later jobs are not submitted after a hard
@@ -136,3 +139,9 @@ smallest corrective action.
 - `artifacts/logs/` — sanitized execution and accounting evidence;
 - terminal, review, ledgers, cleanup, gates, and A10M3 handoff are produced
   during execution.
+
+## Execution note
+
+C1-01 (`1013668`) received one typed L40 on `node03` and failed after one
+second before its first output. Amendment 01 prospectively adds P0 to identify
+the compute-node precondition; no later base job has been submitted.
