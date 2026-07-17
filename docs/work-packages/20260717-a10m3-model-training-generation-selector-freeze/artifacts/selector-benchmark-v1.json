@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "freeze_id": "a10m3-selector-benchmark-v1",
+  "comparators": [
+    {"id": "B0", "identity": "faithful_5_32_3", "scope": "all_supported_cells"},
+    {"id": "B1", "identity": "renewal-p010-q090", "scope": "accepted_a9d_inherited_common_cells_only"}
+  ],
+  "objective": {
+    "registry_sha256": "d6390b574c144195136d8847e712f22d9b62915650ed7b6d41bdabffb8d2a5b7",
+    "families": ["occurrence_spell", "wet_amount", "aggregate", "extreme", "storm_descriptor", "compound_context", "winter_proxy"],
+    "within_family": "equal_weight_mandatory_available_common_cells",
+    "between_family": "equal_weight",
+    "missing_required": "regime_fail",
+    "paired_bootstrap_replicates": 500,
+    "confidence": 0.95
+  },
+  "applicability": {
+    "horizons_years": [30, 100],
+    "material_improvement_delta_b0": 0.1,
+    "material_improvement_delta_b1": 0.1,
+    "paired_upper_95_max": 0.0,
+    "guard_families": ["occurrence_spell", "aggregate_extreme", "compound_context", "winter_proxy"],
+    "guard_upper_95_max": 0.0,
+    "minimum_regimes": 4,
+    "requires_dry_regime": true,
+    "requires_humid_or_cold": true,
+    "fallback": "faithful_only_visible_not_scored"
+  },
+  "representative_workload": [
+    {"regime": "hot_arid", "station_id": "az026481"},
+    {"regime": "arid_boundary", "station_id": "nv262631"},
+    {"regime": "monsoonal_transition", "station_id": "az028820"},
+    {"regime": "non_monsoonal_semi_arid", "station_id": "id101022"},
+    {"regime": "humid", "station_id": "la160549"},
+    {"regime": "cold", "station_id": "me171175"}
+  ],
+  "benchmark": {
+    "normative_host": "lemhi_gpu_icrews_allocated_l40_compute_node_with_gpu_hidden_for_cpu_timing",
+    "controller": "rmm_macos_arm64_apple_m1_16gb_not_timed",
+    "host_pairing": "same_quiescent_host_one_physical_core_fixed_affinity",
+    "warmups": 2,
+    "alternating_timed_samples": 9,
+    "minimum_timed_seconds": 1.0,
+    "maximum_discarded_contaminated_trials": 2,
+    "dispersion_mad_over_median_max": 0.1,
+    "deterministic_reruns_on_dispersion": 1,
+    "warm_ratio_pass_below": 5.0,
+    "warm_ratio_warn_at_or_above": 5.0,
+    "warm_ratio_fail_at_or_above": 10.0,
+    "warm_30y_seconds_per_station_max": 10.0,
+    "warm_100y_seconds_per_station_max": 30.0,
+    "cold_start_seconds_max": 15.0,
+    "peak_rss_bytes_max": 2147483648,
+    "export_bytes_max": 262144000
+  },
+  "selection_order": ["hard_gates", "applicable_regime_count_desc", "primary_score_asc", "runtime_class_pass_before_warn", "training_seed_sd_asc", "runtime_ratio_asc", "model_bytes_asc", "candidate_id_asc"],
+  "maximum_selected_for_m7": 1
+}

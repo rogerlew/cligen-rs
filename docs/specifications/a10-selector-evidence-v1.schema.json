@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.local/specifications/a10-selector-evidence-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["candidate_id", "hard_gates_pass", "regimes", "primary_score", "runtime_class", "training_seed_sd", "runtime_ratio", "model_bytes"],
+  "properties": {
+    "candidate_id": {"type": "string", "minLength": 1},
+    "hard_gates_pass": {"type": "boolean"},
+    "regimes": {"type": "array", "minItems": 1, "maxItems": 6, "items": {"$ref": "#/$defs/regime"}},
+    "primary_score": {"type": "number"},
+    "runtime_class": {"enum": ["PASS", "WARN", "FAIL"]},
+    "training_seed_sd": {"type": "number", "minimum": 0},
+    "runtime_ratio": {"type": "number", "minimum": 0},
+    "model_bytes": {"type": "integer", "minimum": 1}
+  },
+  "$defs": {
+    "comparator": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "available", "delta", "upper_95"],
+      "properties": {"id": {"enum": ["B0", "B1"]}, "available": {"type": "boolean"}, "delta": {"type": "number"}, "upper_95": {"type": "number"}}
+    },
+    "guard": {
+      "type": "object", "additionalProperties": false,
+      "required": ["family", "available", "upper_95"],
+      "properties": {"family": {"enum": ["occurrence_spell", "aggregate_extreme", "compound_context", "winter_proxy"]}, "available": {"type": "boolean"}, "upper_95": {"type": "number"}}
+    },
+    "horizon": {
+      "type": "object", "additionalProperties": false,
+      "required": ["years", "comparators", "guards"],
+      "properties": {
+        "years": {"enum": [30, 100]},
+        "comparators": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/comparator"}},
+        "guards": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/guard"}}
+      }
+    },
+    "regime": {
+      "type": "object", "additionalProperties": false,
+      "required": ["regime", "horizons"],
+      "properties": {
+        "regime": {"enum": ["hot_arid", "arid_boundary", "monsoonal_transition", "non_monsoonal_semi_arid", "humid", "cold"]},
+        "horizons": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/horizon"}}
+      }
+    }
+  }
+}

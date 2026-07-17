@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.local/specifications/a10-fit-checkpoint-v1.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "checkpoint_id", "model_id", "epoch", "global_step", "training_seed", "payload_sha256", "payload_bytes", "state", "corpus_cursor", "created_utc"],
+  "properties": {
+    "schema_version": {"const": 1}, "checkpoint_id": {"type": "string", "minLength": 1},
+    "model_id": {"type": "string", "minLength": 1}, "epoch": {"type": "integer", "minimum": 0},
+    "global_step": {"type": "integer", "minimum": 0}, "training_seed": {"type": "integer", "minimum": 0},
+    "payload_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "payload_bytes": {"type": "integer", "minimum": 1}, "created_utc": {"type": "string", "minLength": 1},
+    "state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["model", "optimizer", "scheduler", "scaler", "rng", "sampler"],
+      "properties": {"model": {"const": true}, "optimizer": {"const": true}, "scheduler": {"const": true}, "scaler": {"const": true}, "rng": {"const": true}, "sampler": {"const": true}}
+    },
+    "corpus_cursor": {
+      "type": "object", "additionalProperties": false, "required": ["epoch_order_sha256", "next_batch"],
+      "properties": {"epoch_order_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "next_batch": {"type": "integer", "minimum": 0}}
+    }
+  }
+}

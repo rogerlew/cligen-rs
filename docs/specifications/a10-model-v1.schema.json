@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.local/specifications/a10-model-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_id", "family_id", "pooling_class", "configuration_id", "configuration_sha256", "parameter_count", "architecture", "corpus_manifest_sha256", "normalization_sha256"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "model_id": {"type": "string", "minLength": 1},
+    "family_id": {"const": "neural_point_weather_state_space_v1"},
+    "pooling_class": {"enum": ["N0_complete", "N1_partial"]},
+    "configuration_id": {"const": "lemhi-a10-py311-l40-v1"},
+    "configuration_sha256": {"const": "0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179"},
+    "parameter_count": {"type": "integer", "minimum": 1, "maximum": 50000000},
+    "architecture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["latent_dim", "width", "depth", "tail_head"],
+      "properties": {
+        "latent_dim": {"enum": [32, 64]}, "width": {"const": 128},
+        "depth": {"enum": [2, 3]}, "tail_head": {"enum": ["lognormal", "gpd"]}
+      }
+    },
+    "corpus_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "normalization_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

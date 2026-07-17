@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.local/specifications/a10-generated-stream-v1.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "stream_id", "model_id", "model_sha256", "station_id", "regime", "burn_id", "member_id", "horizon_years", "rng", "row_count", "stream_sha256", "prefix_30_sha256"],
+  "properties": {
+    "schema_version": {"const": 1}, "stream_id": {"type": "string", "minLength": 1}, "model_id": {"type": "string", "minLength": 1},
+    "model_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "station_id": {"type": "string", "minLength": 1},
+    "regime": {"enum": ["hot_arid", "arid_boundary", "monsoonal_transition", "non_monsoonal_semi_arid", "humid", "cold"]},
+    "burn_id": {"type": "integer", "minimum": 0}, "member_id": {"type": "integer", "minimum": 0}, "horizon_years": {"const": 100},
+    "rng": {
+      "type": "object", "additionalProperties": false, "required": ["algorithm", "key", "counter_layout"],
+      "properties": {"algorithm": {"const": "random123_philox4x32_10"}, "key": {"type": "string", "minLength": 1}, "counter_layout": {"const": "station,burn,member,date,draw"}}
+    },
+    "row_count": {"enum": [36524, 36525]}, "stream_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "prefix_30_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

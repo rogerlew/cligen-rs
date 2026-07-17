@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "calibration_id": "a10m3-candidate-blind-calibration-v1",
+  "candidate_fit_count_at_freeze": 0,
+  "candidate_output_count_at_freeze": 0,
+  "confirmation_target_access": false,
+  "source": {
+    "a9_null_thresholds_sha256": "6bc762369beff5416e79f8872f8b4cb7300ba0589b7a8e75ecf2f3a462fa6c6c",
+    "method": "reuse frozen family-horizon paired-null scales solely for standardization",
+    "replicates_per_family_horizon": 500,
+    "familywise_alpha": 0.05
+  },
+  "material_improvement": {
+    "units": "null-standardized primary-score units",
+    "b0_delta": 0.1,
+    "b1_delta": 0.1,
+    "rationale": "A strictly positive ten-percent-of-one-null-scale margin, combined with a nonpositive paired 95-percent upper bound, prevents noise-equivalent equality from counting as improvement."
+  },
+  "noninferiority": {
+    "upper_95_max": 0.0,
+    "missing_is_favorable": false
+  },
+  "immutability": "Any numeric change after the first candidate fit or output creates a new development package and cannot support the frozen A10 claim."
+}

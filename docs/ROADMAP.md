@@ -125,8 +125,8 @@ now:
    uses the toolkit, a pinned Linux x86-64 runtime, offline dependency
    reconstruction including NumPy, and a bounded one-L40 validation, and
    reached `A10-LEMHI-PY311-SMOKE-READY`; and
-3. **Next:** dispatch A10M3 now that both operational predecessors have reached
-   their registered ready terminals. Its prospective design MUST bind
+3. **Complete (2026-07-17):** A10M3 reached `A10M3-DESIGN-FROZEN` after
+   binding
    canonical configuration `lemhi-a10-py311-l40-v1` and semantic SHA-256
    `0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179`
    under
@@ -141,10 +141,20 @@ CPython, standard-library, native-linkage, NumPy, PyTorch, CUDA, one-L40,
 offline-install, and cleanup gates under the toolkit. Its three single-attempt
 runs used 60 requested and 4.75 actual GPU-minutes; the first two are retained
 harness failures, and the final run passed in 100 seconds. All exact remote
-roots were removed. A10M3 is now the next roadmap edge; confirmation access
-remains prohibited. The accepted stack is the current canonical A10 Lemhi
-single-L40 Python configuration; A10M2's Python 3.8 stack is legacy
-explicit-only and cannot be selected automatically.
+roots were removed. A10M3 subsequently froze the research model, fit,
+generation, benchmark, selector, and 560-L40-GPU-hour ceiling without a cluster
+allocation or candidate/confirmation access. The accepted stack is the current
+canonical A10 Lemhi single-L40 Python configuration; A10M2's Python 3.8 stack
+is legacy explicit-only and cannot be selected automatically.
+
+**Next:** scaffold and execute A10M4 as a bounded one-L40 qualification of the
+real A10M1 loader, one frozen model configuration's forward/backward step,
+atomic checkpoint/resume, stateless nested generation, portable CPU export,
+and resource telemetry. A10M4 must consume the exact
+[A10M3 package](work-packages/20260717-a10m3-model-training-generation-selector-freeze/package.md)
+and canonical configuration. It may not train or score a development
+candidate, expand the 12-configuration grid, change selector thresholds, or
+access confirmation targets.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
