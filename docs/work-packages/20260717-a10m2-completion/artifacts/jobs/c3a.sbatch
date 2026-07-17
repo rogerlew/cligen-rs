@@ -10,7 +10,7 @@
 #SBATCH --error=logs/%x-%j.err
 
 set -euo pipefail
-python=/opt/modules/devel/python/3.11.11/bin/python
+python=/opt/modules/devel/python/3.8.11/bin/python3.8
 test -x "$python"
 mkdir -p checkpoints results/c3a
 nvidia-smi --query-gpu=name --format=csv,noheader

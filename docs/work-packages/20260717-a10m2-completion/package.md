@@ -20,8 +20,8 @@ Included:
 - noninteractive use of an operator-bootstrapped VPN/SSH control path;
 - direct CUDA 12.8 with explicit `/usr/bin/g++`, followed by the unchanged
   CUDA allocation/transfer/kernel check;
-- a completely hashed Linux x86-64 Python 3.11 / PyTorch 2.7.1 CUDA 12.8
-  wheelhouse, reconstructed without compute-node network access;
+- a completely hashed compute-valid Linux x86-64 Python 3.8 / PyTorch 2.4.1
+  CUDA 12.4 wheelhouse, reconstructed without compute-node network access;
 - one-L40 tensor, autograd, optimizer, checkpoint, and reload checks;
 - A10M2D2 stage 2 using all 98 accepted A10M1 v2 objects (223,799,545
   bytes): Ceph-to-job-local many-object and archive staging, SHA-256, bounded
@@ -144,4 +144,6 @@ smallest corrective action.
 
 C1-01 (`1013668`) received one typed L40 on `node03` and failed after one
 second before its first output. Amendment 01 prospectively adds P0 to identify
-the compute-node precondition; no later base job has been submitted.
+the compute-node precondition. P0 (`1013670`) proved the login-visible Python
+3.11 path absent and compute Python 3.8.11 valid. Amendment 02 freezes the
+compute-valid framework ABI before C1-02; no later base job has been submitted.

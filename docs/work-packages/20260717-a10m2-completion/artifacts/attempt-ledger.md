@@ -3,7 +3,12 @@
 | Attempt | Job ID | State | Requested | Classification |
 |---|---:|---|---:|---|
 | C1-01 | 1013668 | `FAILED`, `1:0`, 1 s | 15 GPU-min | preamble failure before first output; no scientific gate reached |
+| P0-01 | 1013670 | `COMPLETED`, `0:0`, 0 s | 5 GPU-min | Python 3.11 absent; Python 3.8.11, CUDA, compiler, local root, and L40 valid |
 
 C1-01 allocated `node03` and one typed L40. Empty logs plus 4,908 KiB batch
 MaxRSS localize the failure to the frozen executable/job-local preconditions.
 Amendment 01 authorizes bounded P0 before any functional retry.
+
+P0 localized the failed precondition to the login-only Python 3.11 path.
+Amendment 02 freezes the compute-valid Python 3.8 / PyTorch CUDA 12.4 lock and
+source compatibility changes before C1-02.

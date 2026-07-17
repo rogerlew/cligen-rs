@@ -121,6 +121,8 @@ def main() -> None:
     parser.add_argument("--wheel-dir", type=Path, required=True)
     parser.add_argument("--environment-dir", type=Path, required=True)
     parser.add_argument("--asset-dir", type=Path, required=True)
+    parser.add_argument("--platform-label", required=True)
+    parser.add_argument("--pytorch-index", required=True)
     args = parser.parse_args()
     args.environment_dir.mkdir(parents=True, exist_ok=True)
     args.asset_dir.mkdir(parents=True, exist_ok=True)
@@ -132,6 +134,13 @@ def main() -> None:
         args.manifest, args.environment_dir / "a10m1-transfer-manifest.json"
     )
     build_wheelhouse(args.wheel_dir, args.environment_dir, wheelhouse)
+    wheel_manifest_path = args.environment_dir / "wheelhouse-manifest.json"
+    wheel_manifest = json.loads(wheel_manifest_path.read_text(encoding="utf-8"))
+    wheel_manifest["platform"] = args.platform_label
+    wheel_manifest["resolver_sources"][0] = args.pytorch_index
+    wheel_manifest_path.write_text(
+        json.dumps(wheel_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     wheel_record = {
         "bytes": wheelhouse.stat().st_size,
         "sha256": sha256(wheelhouse),

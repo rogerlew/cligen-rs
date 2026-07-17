@@ -21,3 +21,7 @@ Date: 2026-07-17 PDT
 
 No remote write, environment installation, or Slurm submission occurred while
 producing this scaffold evidence.
+
+The scaffold's Python 3.11 lock was later rejected by compute-node P0 before
+installation. Amendment 02 and the current `environment/` directory supersede
+that selection while preserving the original evidence in commit `8b7e751`.

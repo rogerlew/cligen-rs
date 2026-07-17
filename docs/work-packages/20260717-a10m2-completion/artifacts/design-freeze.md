@@ -15,14 +15,17 @@ Frozen prospectively on 2026-07-17 PDT before remote mutation or allocation.
 
 ## Environment
 
-- Python: `/opt/modules/devel/python/3.11.11/bin/python`.
+- Python: amended after P0 to
+  `/opt/modules/devel/python/3.8.11/bin/python3.8`; see Amendment 02.
 - CUDA toolkit: `/usr/local/cuda-12.8`.
 - Host compiler: `/usr/bin/g++` via `nvcc -ccbin`.
-- Framework: official Linux x86-64 `torch==2.7.1+cu128` plus its declared
-  NVIDIA CUDA/NCCL and Triton Linux releases and pure-Python dependency
-  closure. The PyTorch CUDA 12.8 index and authoritative PyPI release files
+- Framework: amended after P0 to official Linux x86-64
+  `torch==2.4.1+cu124` plus its declared NVIDIA CUDA/NCCL and Triton Linux
+  releases and pure-Python dependency closure. The PyTorch CUDA 12.4 index and
+  authoritative PyPI release files
   are the only resolver sources; each version and SHA-256 is frozen under
-  `environment/` before staging.
+  `environment/` before C1-02 staging. The original CPython 3.11 selection is
+  rejected historical evidence in commit `8b7e751` and was never installed.
 - Installation must use `--no-index`, the verified job-local wheelhouse, and
   `--require-hashes`; compute-node network access is prohibited.
 

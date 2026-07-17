@@ -37,7 +37,7 @@ def main() -> None:
     reloaded = torch.nn.Linear(4, 2).to(device)
     payload = torch.load(checkpoint, map_location=device, weights_only=True)
     reloaded.load_state_dict(payload["model"])
-    for expected, actual in zip(model.parameters(), reloaded.parameters(), strict=True):
+    for expected, actual in zip(model.parameters(), reloaded.parameters()):
         if not torch.equal(expected, actual):
             raise RuntimeError("checkpoint reload differs")
 

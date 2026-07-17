@@ -9,9 +9,9 @@
 #SBATCH --error=logs/%x-%j.err
 
 set -euo pipefail
-python_root=/opt/modules/devel/python/3.11.11
+python_root=/opt/modules/devel/python/3.8.11
 cuda_root=/usr/local/cuda-12.8
-python="$python_root/bin/python"
+python="$python_root/bin/python3.8"
 test -x "$python"
 test -x "$cuda_root/bin/nvcc"
 test -x /usr/bin/g++

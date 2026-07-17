@@ -9,8 +9,8 @@
 #SBATCH --error=logs/%x-%j.err
 
 set -euo pipefail
-python_root=/opt/modules/devel/python/3.11.11
-test -x "$python_root/bin/python"
+python_root=/opt/modules/devel/python/3.8.11
+test -x "$python_root/bin/python3.8"
 test -x runtime/pytorch/bin/torchrun
 export PATH="$python_root/bin:/usr/bin:/bin"
 export LD_LIBRARY_PATH="$python_root/lib:${LD_LIBRARY_PATH:-}"
