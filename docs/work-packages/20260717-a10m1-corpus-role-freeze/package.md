@@ -1,8 +1,9 @@
 # A10M1 — Corpus Inventory, Acquisition, Normalization, and Role Freeze
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Mixed
+Terminal: `A10M1-CORPUS-READY`
 
 ## Objective
 
@@ -61,6 +62,11 @@ Large public source objects and training shards live under the package's
 ignored `raw/` tree. Git retains their hashes, retrieval identities, schemas,
 and evidence, not the third-party bytes.
 
+Execution began from published scaffold `399e2ee`; the exact pre-series role
+partition was published at `7536707`. The failed v1 tile surface was preserved,
+and the value-blind v2 repair freeze was published at `cdedd00` before v2
+materialization. No Lemhi connection, Slurm job, or GPU allocation was used.
+
 ## Gates
 
 - at least 200 `candidate_fit` Daymet locations per primary regime and at
@@ -90,6 +96,23 @@ meet source, coverage, calendar, leakage, or integrity requirements closes
 `EXECUTED-HOLD-A10-CORPUS`. A source whose rights do not permit the declared
 retention or public evidence closes `EXECUTED-HOLD-A10-DATA-RIGHTS`.
 
+## Result
+
+All exit criteria passed on corpus v2. The accepted surface contains 1,200
+Daymet fit and 240 tile-held validation locations across 351 nonleaking tiles,
+24 eligible USCRN daily stations, 14 event stations with 21,495 actual events,
+32 hash-pinned inherited development objects, and 98 verified offline transfer
+objects totaling 223,799,545 bytes. Calendar tests preserve 15,768,000 observed
+values per Daymet field and mark 11,520 leap-year December 31 absences without
+fabrication. Confirmation access is false and every overlap list is empty.
+
+The first Daymet selection is retained as failed evidence because three of
+four globally ambiguous boundary tiles entered opposite roles. The v2
+correction excluded all four and restored exact quotas from 25 deterministic
+surplus points with their prepublished roles; it read no climate value for
+selection and made no new request. Both v1 and v2 external hashes verify at
+distinct paths, but only v2 is authorized downstream.
+
 ## Artifacts
 
 - `artifacts/design-freeze.md` — prospective acquisition, sampling, role, and
@@ -106,3 +129,14 @@ retention or public evidence closes `EXECUTED-HOLD-A10-DATA-RIGHTS`.
 - execution manifests, coverage/availability analysis, leakage audit,
   transfer index, gate results, review, and verification — produced during
   execution.
+- `artifacts/execution-receipt.md`, `coverage-availability-analysis.md`, and
+  `leakage-audit.md` — human-readable execution and gate evidence.
+- `artifacts/source-manifest-v1.json`, `normalized-manifest-v1.json`,
+  `availability-cube-v1.json`, `normalization-statistics-v1.json`, and
+  `offline-transfer-manifest-v1.json` — accepted machine-readable evidence.
+- `artifacts/daymet-selected-v1.json` / `daymet-shard-manifest-v1.json` —
+  preserved invalidated selection; not authorized for training.
+- `artifacts/daymet-tile-repair-freeze-v2.json`, `daymet-selected-v2.json`, and
+  `daymet-shard-manifest-v2.json` — accepted value-blind repair and v2 corpus.
+- `artifacts/verification.md`, `review.md`, `gate-results.md`, and
+  `a10m3-handoff.md` — closure, review, and bounded successor handoff.

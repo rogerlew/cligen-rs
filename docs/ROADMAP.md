@@ -36,6 +36,21 @@ confirmation firewall, and froze A10M2's one-GPU-hour ceiling. Its accepted
 record is the
 [A10M0 work package](work-packages/20260716-a10m0-dispatch-predecessor-freeze/package.md).
 
+A10M1 completed on 2026-07-17 with `A10M1-CORPUS-READY`. Its accepted v2
+surface freezes 1,200 Daymet fit plus 240 tile-held validation locations across
+six regimes and 351 nonleaking tiles, 24 eligible USCRN daily plus 14 event
+stations, 32 inherited development objects, exact calendar/missingness and
+fit-only normalization surfaces, and a 98-object / 223,799,545-byte offline
+transfer manifest. The first Daymet selection remains explicit failed evidence:
+its leakage audit found cross-frame role disagreement in boundary tiles, so v2
+excluded all four ambiguous tiles and restored quotas from prepublished,
+role-labeled surplus without reading values or reacquiring data. Confirmation
+target access remained false. The accepted record and downstream restrictions
+are in the
+[A10M1 work package](work-packages/20260717-a10m1-corpus-role-freeze/package.md).
+A10M1 completion does not authorize A10M3 while `A10M2-COMPUTE-READY` remains
+absent.
+
 The
 [A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md)
 executed on 2026-07-16 and closed at `EXECUTED-HOLD-CUDA-ENVIRONMENT`.

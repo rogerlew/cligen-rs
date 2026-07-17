@@ -97,3 +97,16 @@ availability; it cannot read or rank climate values or derived statistics.
 The v1 selection and shards remain immutable invalid evidence. V2 receives new
 selection, shard, and coverage identities within the same cohesive A10M1
 package.
+
+## A7 — distinct external v1/v2 shard paths
+
+Date: 2026-07-17
+Series-access state: all permitted sources complete; confirmation access false.
+
+Independent closure inspection found that v2 materialization initially reused
+the external v1 shard pathnames. V2 hashes were correct, but the v1 manifest's
+historical paths then resolved to v2 bytes. The materializer now retains v1 at
+`raw/training/daymet/` and v2 at `raw/training/daymet-v2/`; both selections
+are deterministically rematerialized from the already retained source objects.
+No source is reacquired and neither selection, role, value, nor object content
+changes. Both valid and invalidated evidence can now be hash-verified in place.

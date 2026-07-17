@@ -463,6 +463,7 @@ def write_daymet_shards(
     selected_path: Path,
     shard_manifest_path: Path,
     coverage_path: Path,
+    shard_directory: str,
 ) -> None:
     shard_manifest = []
     aggregate_availability: Counter[tuple[str, str, str, int, int, str]] = Counter()
@@ -485,7 +486,7 @@ def write_daymet_shards(
                 target["count"] += summary["count"]; target["sum"] += summary["sum"]; target["sum_squares"] += summary["sum_squares"]
                 target["minimum"] = summary["minimum"] if target["minimum"] is None else min(target["minimum"], summary["minimum"])
                 target["maximum"] = summary["maximum"] if target["maximum"] is None else max(target["maximum"], summary["maximum"])
-        path = RAW / "training/daymet" / f"daymet-{shard_index // 24:03d}.tar.gz"
+        path = RAW / "training" / shard_directory / f"daymet-{shard_index // 24:03d}.tar.gz"
         identity = deterministic_tar_gz(path, objects)
         identity.update({"object_count": len(points), "point_ids": [row["point_id"] for row in points], "schema_version": 1, "source_id": "daymet_v4r1_single_pixel"})
         shard_manifest.append(identity)
@@ -537,7 +538,7 @@ def acquire_daymet() -> None:
             points = [row for row in partition["daymet_candidate_locations"] if row["regime"] == regime and row["role"] == role and previous.get(row["point_id"], {}).get("status") == "accepted"]
             selected.extend(points[:target])
     selected.sort(key=lambda row: (row["regime"], row["role"], row["order"]))
-    write_daymet_shards(freeze, selected, ARTIFACTS / "daymet-selected-v1.json", ARTIFACTS / "daymet-shard-manifest-v1.json", RAW / "daymet/coverage-v1.json")
+    write_daymet_shards(freeze, selected, ARTIFACTS / "daymet-selected-v1.json", ARTIFACTS / "daymet-shard-manifest-v1.json", RAW / "daymet/coverage-v1.json", "daymet")
 
 
 def freeze_daymet_v2() -> None:
@@ -581,7 +582,7 @@ def acquire_daymet_v2() -> None:
         raw_path = RAW / "daymet/source" / f"{point['point_id']}.csv.gz"
         if not raw_path.exists(): raise FileNotFoundError(raw_path)
         with gzip.open(raw_path, "rb") as stream: parse_daymet(stream.read(), point, freeze)
-    write_daymet_shards(freeze, repair["proposed_locations"], ARTIFACTS / "daymet-selected-v2.json", ARTIFACTS / "daymet-shard-manifest-v2.json", RAW / "daymet/coverage-v2.json")
+    write_daymet_shards(freeze, repair["proposed_locations"], ARTIFACTS / "daymet-selected-v2.json", ARTIFACTS / "daymet-shard-manifest-v2.json", RAW / "daymet/coverage-v2.json", "daymet-v2")
 
 
 def uscrn_url(root: str, product: str, year: int, station: str) -> str:
@@ -822,7 +823,7 @@ def finalize() -> None:
             normalization_statistics.append({"count": row["count"], "field": row["field"], "maximum": row["maximum"], "mean": row["sum"] / row["count"], "minimum": row["minimum"], "regime": row["regime"], "source_id": source_id, "standard_deviation": math.sqrt(variance)})
     coverage_summary = {
         "daymet": [{"locations": daymet_counts[(regime, role)], "regime": regime, "role": role, "tiles": len(daymet_tiles[(regime, role)])} for regime in freeze["regime_frames"] for role in ("candidate_fit", "fit_validation")],
-        "uscrn": [{"event_count": event_counts[(regime, role)], "objects": uscrn_counts[(regime, role, source)], "regime": regime, "role": role, "source_id": source} for regime in freeze["regime_frames"] for role in ("candidate_fit", "fit_validation") for source in ("uscrn_daily01", "uscrn_subhourly01")],
+        "uscrn": [{"event_count": event_counts[(regime, role)] if source == "uscrn_subhourly01" else None, "objects": uscrn_counts[(regime, role, source)], "regime": regime, "role": role, "source_id": source} for regime in freeze["regime_frames"] for role in ("candidate_fit", "fit_validation") for source in ("uscrn_daily01", "uscrn_subhourly01")],
         "zero_event_stations": zero_event,
     }
     source_manifest = {
