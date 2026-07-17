@@ -29,6 +29,15 @@ with open(temporary, "w", encoding="utf-8") as stream:
     json.dump(value, stream, indent=2, sort_keys=True); stream.write("\n")
 os.replace(temporary, final)
 if os.path.exists(partial): os.unlink(partial)
+root = os.path.dirname(final)
+for name in ("benchmark.json", "checkpoint.json", "resource.json"):
+    destination = os.path.join(root, name)
+    if not os.path.exists(destination):
+        temporary = destination + ".failure"
+        with open(temporary, "w", encoding="utf-8") as stream:
+            json.dump({"status": "unavailable_due_to_failed_attempt"}, stream, sort_keys=True)
+            stream.write("\n")
+        os.replace(temporary, destination)
 PY
   fi
   exit "$status"

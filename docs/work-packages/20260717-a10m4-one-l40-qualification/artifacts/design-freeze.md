@@ -81,5 +81,7 @@ staged via `.part`, SHA-256 verified, and promoted before submission.
   inputs, while development target series remain prohibited.
 - Do not classify M4 runtime ratios under the M3 selector.
 - A Slurm `COMPLETED` state is insufficient without the structured gate receipt.
+- A failed attempt atomically supplies explicit unavailable placeholders for
+  later-stage allowlisted receipts so the exhausted matrix remains collectable.
 - Any failed/ambiguous attempt is reconciled and collected before amendment;
   no invented retry or remote path is allowed.
