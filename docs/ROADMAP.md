@@ -22,7 +22,25 @@ candidate rescue with a calibration-first successor family.** File/I/O,
 openWEPP, WEPPcloud, PyO3, and other consumer-integration work remains deferred;
 it is not a prerequisite for this research sequence.
 
-There is no active authorized package. A9d completed on 2026-07-15 with
+**Operator direction 2026-07-16: execute A10 as one cohesive package per
+planned milestone, `A10M0` through `A10M9`.** Ordinary iteration remains inside
+its owning milestone package; a failed gate does not automatically create an
+ad hoc suffixed rescue package. This supersedes the reviewed plan's original
+single-package topology without changing milestone order, scientific rules,
+or confirmation access.
+
+The active scaffold is
+[A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md).
+It will validate the supervised SSH path, I-CREWS-priority `gpu-icrews`
+authorization, typed L40 CUDA execution, a pinned offline PyTorch environment,
+one- and two-GPU operation, durable/local storage, and synthetic interruption/
+resume under a hard 1-GPU-hour ceiling. Scaffold-time read-only live evidence
+is retained; no Slurm job, remote environment installation, or signal has yet
+been executed. Execution awaits a kickoff naming the current `origin/main`
+commit, referencing an accepted A10M0 predecessor terminal, and confirming the
+frozen resource envelope.
+
+A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
 confirmation package. Eighteen fresh configurations entered an 18/4/2 staged
 development funnel on the prospectively accepted 92-cell surface. Both model
@@ -43,7 +61,7 @@ synthetic/adverse fixture groups. It selected no candidate, accessed no
 confirmation target, and changed no production runtime. The accepted record is
 in the [A9a work package](work-packages/20260715-a9a-successor-family-foundation/package.md).
 
-There is no active execution authorization. A9c completed on 2026-07-15 with
+A9c completed on 2026-07-15 with
 `HOLD-A9C-GATE-CALIBRATION`. It materialized 64 normalized observed role
 objects, 180 exact USCRN station-year identities, and 7,000 candidate-blind
 null replicates without confirmation access. Its hot-arid development sites

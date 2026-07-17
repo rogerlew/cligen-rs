@@ -1,6 +1,6 @@
 # A10 Study Plan Independent Review and Disposition
 
-Status: `ACCEPTED`
+Status: `ACCEPTED — OPERATOR-AMENDED PACKAGE TOPOLOGY`
 Date: 2026-07-16
 Review target: commit `0ed827f8d0b7ffea025aa989a57aeee2646d8668`
 Dispositioned plan SHA-256:
@@ -22,8 +22,39 @@ rechecked. Final open counts are:
 
 The corrections do not reverse the A10 pivot, change faithful-mode authority,
 authorize production integration, access confirmation target values, or add
-another work package. They make the existing single-package study executable
-and prospectively testable.
+another work package. They made the then-existing single-package study
+executable and prospectively testable.
+
+## Post-review operator amendments
+
+The review target, commit, and SHA-256 above remain the immutable identity of
+the plan version the independent reviewer accepted. They do not claim byte
+identity with later operator amendments.
+
+On 2026-07-16, after observing that the A9 campaign had accumulated too many
+ad hoc corrective packages, the operator replaced A10's monolithic package
+topology with one cohesive package per planned milestone: `A10M0` through
+`A10M9`. This supersedes the review's statements that all milestones live in
+one package. It does not change milestone order, hypotheses, data roles,
+selector semantics, confirmation access, resource ceiling, or production
+scope. Ordinary iteration remains inside its owning milestone package, and a
+hold does not automatically authorize a suffixed rescue package. Every
+milestone package receives its own dispatch, evidence, review, terminal, and
+immutable downstream handoff.
+
+The same-day operational amendment also recorded the supervised MFA/SSH
+bootstrap and the `rmm` orchestration environment. A live Lemhi preflight then
+superseded stale public infrastructure details: I-CREWS access is exposed
+through the group-restricted `gpu-icrews` partition; `node03` reports four L40
+GPUs, `node04` reports four RTX A6000 GPUs, and the alternate module tree
+offers CUDA 12.8 and Python 3.11.11. These are operational observations to be
+reproduced and sealed by A10M2, not retrospective claims by the original
+reviewer.
+
+The original scientific review remains accepted. Each milestone package must
+review its local design and its predecessor handoff before execution; package-
+topology and live-environment changes are not silently attributed to the
+original independent review.
 
 ## Review independence and method
 
@@ -114,7 +145,10 @@ The independent reviewer confirmed that:
   requirements are thorough;
 - official C3+3 and NVIDIA sources support the recorded L40, memory, volatile-
   partition, and offline-compute facts; and
-- the single M0--M9 package structure avoids intermediate-package theater.
+- the then-reviewed single M0--M9 package structure avoided intermediate-
+  package theater; the later operator amendment replaces it with one package
+  per milestone while retaining the same anti-fragmentation rule inside each
+  milestone.
 
 ## Verification record
 

@@ -1,10 +1,10 @@
 # A10 Neural Point-Weather Successor Feasibility Study Plan
 
-Status: `PLANNING — INDEPENDENTLY REVIEWED`
+Status: `PLANNING — INDEPENDENTLY REVIEWED; OPERATOR-AMENDED`
 Date: 2026-07-16
 Study class: research-only stochastic climate-generator feasibility study
-Expected execution record:
-`docs/work-packages/YYYYMMDD-a10-neural-point-weather-successor/`
+Expected execution records:
+`docs/work-packages/YYYYMMDD-a10m<M>-<milestone-slug>/`
 Production effect: none; `faithful_5_32_3` remains the default
 Review: [independent review and disposition](a10-study-plan-review.md)
 
@@ -47,11 +47,14 @@ new hypotheses, a new candidate-blind selector, and a new development record.
 The applicability rule, fallback semantics, corpus roles, and confirmation
 firewall must be frozen before development output is accessed.
 
-A10 is one substantive work package with internal gated milestones. Passing a
-milestone authorizes the next ordinary stage of that package; it does not
-create A10a/A10b/A10xyz administrative packages. A new operator decision is
-needed only if execution would materially expand the scientific question,
-license exposure, external cost, public interface, or production scope.
+A10 executes as ten milestone-scoped work packages, `A10M0` through `A10M9`.
+Each package owns one complete milestone and its internal iteration; passing
+its gate authorizes dispatch of the next package. This bounded topology
+replaces A9-style ad hoc suffix proliferation without recreating a monolithic
+execution record. Sub-milestone packages are not created merely to authorize
+ordinary work. A new operator decision is needed only if execution would
+materially expand the scientific question, license exposure, external cost,
+public interface, or production scope.
 
 ## 1. Why the campaign is pivoting
 
@@ -139,7 +142,7 @@ runtime?
 | ID | Objective |
 |---|---|
 | O1 | Build a leakage-safe, role-explicit regional corpus large enough for neural fitting while preserving the existing development and locked-confirmation firewalls. |
-| O2 | Establish a pinned, restartable, offline GPU training environment on the I-CREWS `gpu-volatile` nodes. |
+| O2 | Establish a pinned, restartable, offline GPU training environment through the I-CREWS-priority `gpu-icrews` partition. |
 | O3 | Implement one compact neural state-space family with exact mixed discrete/continuous output support and stable long-horizon state evolution. |
 | O4 | Test whether hierarchical partial pooling improves sparse-climate generalization relative to an otherwise identical complete-pooling, transferable-descriptor-only ablation. |
 | O5 | Compare the neural family against faithful CLIGEN and `renewal-p010-q090` using 30- and 100-year nested streams and the existing climate-quality vocabulary. |
@@ -164,8 +167,8 @@ A10 does not:
 - claim future-climate nonstationarity or climate-change scenario skill;
 - treat the public repository license as relicensing Daymet, USCRN, gridMET,
   or any derived third-party data; or
-- create intermediate A10 work packages merely to authorize ordinary study
-  milestones.
+- split a milestone into intermediate packages merely to authorize ordinary
+  iteration or create corrective suffix packages without new evidence.
 
 A10 does require a research CPU-inference/export prototype and controlled
 generation benchmark. This is feasibility evidence, not a production Rust
@@ -178,7 +181,7 @@ SHA-256 content identity before it can enter a scored stage.
 
 | Object ID | Object | Required identity |
 |---|---|---|
-| S01 | Study design | plan version, work-package dispatch, source commit, hypotheses, stage limits, resource bounds |
+| S01 | Study design | plan version, milestone-package dispatch chain, source commits, hypotheses, stage limits, resource bounds |
 | S02 | Corpus manifest | source product/version, access date, role, station/grid identity, period, variables, units, calendar, transformations, notices, content hashes |
 | S03 | Partition manifest | fit, internal validation, development, confirmation-metadata, and locked confirmation memberships plus spatial/temporal exclusion rules |
 | S04 | Normalization contract | field definitions, missingness, day boundary, transformations, masks, scaling statistics, fit-only derivation rules |
@@ -202,7 +205,7 @@ profile, and typed-output schema remain independent version axes.
 
 Working research identifier: `neural_point_weather_state_space_v0`.
 
-The identifier is provisional until the work package freezes the model
+The identifier is provisional until A10M3 freezes the model
 specification. `v0` is research-only and must not appear as a public production
 profile.
 
@@ -255,7 +258,7 @@ Required components:
 The initial model should remain small enough for inference on one 48-GB L40
 and for deterministic 100-year research generation without distributed
 inference. The planning target is at most 50 million trainable parameters;
-the work package must justify a larger model before training it. This
+A10M3 must justify a larger model before training it. This
 parameter cap is subordinate to the generation-runtime gate: a smaller model
 that still reaches the 10× failure boundary is not operationally feasible.
 
@@ -313,7 +316,7 @@ seal if representative stochastic generation takes 10× or more of the
 
 #### Normative comparison
 
-The work package freezes a representative station manifest spanning all six
+A10M3 freezes a representative station manifest spanning all six
 primary regimes before candidate timing. Each workload generates the same
 date range and number of daily fields through both systems. The primary
 workload is a 100-year single-station stochastic stream; a 30-year stream is
@@ -511,7 +514,7 @@ remain simpler than the accumulated A5/A9 selectors:
 
 Candidate-blind bootstrap/null evidence must calibrate the primary score and
 paired material-improvement thresholds, guard noninferiority margins, and
-uncertainty rule. Missing evidence is never zero or favorable. The work package
+uncertainty rule. Missing evidence is never zero or favorable. A10M3
 may ratify exact weights, thresholds, margins, and breadth after corpus
 inventory but before candidate output; it may not tune them from development
 outcomes.
@@ -677,20 +680,27 @@ object identity and retrieval procedure.
 
 ### 8.1 Available hardware
 
-The C3+3 documentation, checked 2026-07-16, lists the I-CREWS priority
-`gpu-volatile` nodes:
+The public C3+3 GPU guide, checked 2026-07-16, is stale relative to the live
+Slurm configuration: it lists two L40 GPUs each on `node03` and `node04` and
+describes I-CREWS priority through `gpu-volatile`. A same-day read-only live
+inventory instead reports the dedicated group-restricted `gpu-icrews`
+partition on:
 
 | Node | GPUs | Host memory | CPU threads/cores |
 |---|---:|---:|---:|
-| `node03` | 2 × NVIDIA L40 | 512 GB | 64 |
-| `node04` | 2 × NVIDIA L40 | 512 GB | 64 |
+| `node03` | 4 × NVIDIA L40 | 512 GB | 64 configured, 62 effective |
+| `node04` | 4 × NVIDIA RTX A6000 | 512 GB | 64 configured |
 
-NVIDIA specifies 48 GB GDDR6 ECC memory per L40. Two GPUs on one node
-therefore provide 96 GB aggregate device memory for distributed training, not
-one unified 96-GB allocation. The published L40 interface is PCIe and does not
-provide NVLink. The first A10 implementation should avoid cross-node training;
-one- and two-GPU jobs on a single node are sufficient for the intended compact
-model.
+The `gpu-icrews` partition has `AllowGroups=icrews`, priority tier 20, and
+contains `node03` and `node04`; `gpu-volatile` has priority tier 10. Slurm uses
+partition-priority preemption with cancel semantics. A10 requests typed
+`gpu:l40` resources so L40 qualification routes to `node03`, and it never
+deliberately triggers preemption as a test. NVIDIA specifies 48 GB GDDR6 ECC
+memory per L40. Two allocated GPUs therefore provide 96 GB aggregate device
+memory for distributed training, not one unified 96-GB allocation. The
+published L40 interface is PCIe and does not provide NVLink. The first A10
+implementation should avoid cross-node training; one- and two-GPU jobs on one
+node are sufficient for the intended compact model.
 
 Sources:
 
@@ -701,14 +711,16 @@ Sources:
 
 ### 8.2 Operational constraints
 
-- The partition is volatile. Jobs may be interrupted at any time, including
-  for I-CREWS priority scheduling. Checkpointing is a correctness requirement,
-  not an optimization.
+- I-CREWS priority is implemented through `gpu-icrews`, but jobs remain subject
+  to scheduler and administrative interruption. Checkpointing is a correctness
+  requirement, not an optimization.
 - Compute nodes do not have internet access. Data, packages, model code,
   pretrained assets if any, and documentation must be staged before submission.
 - Lemhi uses Slurm. Batch scripts and exact resource requests are committed.
-- The documented user storage allowance is up to 25 TB on the Lustre file
-  system. A10 must still impose a much smaller study-specific retention budget.
+- The live home directory is on Ceph. Any project, quota, high-throughput, or
+  scratch path beyond that home must be discovered and measured rather than
+  inferred from the public guide. A10 imposes a bounded study-specific
+  retention budget regardless of available capacity.
 - GPU nodes have local drives. Shard staging and scratch cleanup behavior must
   be measured rather than assumed; `$SLURM_TMPDIR` availability is a readiness
   check.
@@ -816,6 +828,12 @@ Preferred research stack: pinned Python plus PyTorch and CUDA, selected after
 the live compatibility smoke test. The plan does not pin incidental current
 versions before seeing the installed driver.
 
+The 2026-07-16 preflight found alternate modules `cuda/12.8`,
+`python/3.8.11`, and `python/3.11.11`; the public guide's `cuda/12.2` example
+was not present. A10M2 first proves the live CUDA compiler/driver path without
+a framework, then selects and reconstructs a compatible pinned PyTorch stack
+offline. The preflight observation is not itself the environment lock.
+
 The environment must include:
 
 - a lockfile or fully resolved package manifest;
@@ -882,22 +900,23 @@ valid checkpoint.
 ### 8.6 Data staging
 
 1. Build and hash normalized shards off the compute node.
-2. Copy the immutable shard set and environment assets to Lustre.
+2. Copy the immutable shard set and environment assets to verified durable
+   project storage.
 3. Verify every shard against the transfer manifest.
 4. At job start, optionally stage assigned shards to node-local storage.
 5. Verify local copies before training.
-6. Write checkpoints and compact metrics to durable Lustre paths, never only
-   local scratch.
+6. Write checkpoints and compact metrics to verified durable project/Ceph
+   paths, never only local scratch.
 7. Remove local scratch at normal exit and leave a cleanup marker after
    interruption recovery.
 
-Training code must tolerate a missing local cache by reading verified Lustre
+Training code must tolerate a missing local cache by reading verified durable
 objects. It must not redownload or regenerate a different shard inside a GPU
 job.
 
 ### 8.7 Initial resource bound
 
-The work package may ratify a smaller bound before training. Any expansion
+A10M3 may ratify a smaller bound before training. Any expansion
 beyond this planning envelope requires a recorded justification before the
 additional jobs:
 
@@ -955,8 +974,8 @@ Permitted auxiliary targets include:
 - hidden-state stability/regularization.
 
 Every loss term records units, normalization, weight, missingness rule, and
-gradient contribution. The work package must demonstrate that an auxiliary
-loss does not dominate through scale alone.
+gradient contribution. A10M3 freezes this requirement; A10M4 must demonstrate
+that an auxiliary loss does not dominate through scale alone.
 
 ### 9.3 Bounded configuration search
 
@@ -1123,8 +1142,8 @@ preprocessing, or applicability.
 
 ## 11. Hypothesis registry
 
-Exact quantitative thresholds are frozen in the work package before relevant
-output access. The planning hypotheses are:
+Exact quantitative thresholds are frozen in their owning milestone package
+before relevant output access. The planning hypotheses are:
 
 | ID | Provenance | Hypothesis |
 |---|---|---|
@@ -1143,15 +1162,29 @@ that hierarchical partial pooling supplied the improvement.
 
 ## 12. Gated milestones
 
-All milestones live inside the single A10 work package. Artifacts are retained
-at each boundary so an interruption does not erase the scientific chronology.
+Each milestone lives in one separately cataloged work package named `A10M0`
+through `A10M9`. A package owns all ordinary iteration required to reach its
+one milestone gate, closes with an immutable terminal and handoff, and never
+silently absorbs work from a later milestone. The next package is dispatched
+only from the accepted predecessor state. M1 and M2 may execute in parallel
+after M0 because neither consumes the other's outputs, but M4 requires both.
+
+This topology is deliberately coarse. A failed attempt, unfulfilled gate, or
+routine correction remains inside the active milestone package. Closing a
+hold does not automatically create an `A10M2a`/`A10M2b`-style rescue package;
+a corrective successor requires evidence that the milestone's frozen
+hypothesis remains reachable and a new bounded mechanism is necessary.
+Artifacts are retained at every package boundary so an interruption does not
+erase the scientific chronology.
 
 ### M0 — Dispatch and predecessor freeze
 
+Package identity: `A10M0`.
+
 Entry:
 
-- operator authorizes execution of the single A10 study package from a named
-  commit/branch.
+- operator authorizes the `A10M0` package from a named commit/branch and push
+  target.
 
 Work:
 
@@ -1174,6 +1207,8 @@ Gate:
 Failure terminal: `HOLD-A10-PREDECESSOR-INTEGRITY`.
 
 ### M1 — Corpus inventory, acquisition, normalization, and role freeze
+
+Package identity: `A10M1`.
 
 Entry:
 
@@ -1217,6 +1252,8 @@ Gate:
 Failure terminal: `HOLD-A10-CORPUS` or `HOLD-A10-DATA-RIGHTS`.
 
 ### M2 — Cluster and restartability readiness
+
+Package identity: `A10M2`.
 
 Entry:
 
@@ -1264,6 +1301,8 @@ Failure terminal: `HOLD-A10-COMPUTE-ENVIRONMENT`.
 
 ### M3 — Model, training, generation, and selector freeze
 
+Package identity: `A10M3`.
+
 Entry:
 
 - M1 coverage is known and M2 capability is known;
@@ -1310,6 +1349,8 @@ Failure terminal: `HOLD-A10-DESIGN-INCOMPLETE`.
 
 ### M4 — Local and single-GPU implementation qualification
 
+Package identity: `A10M4`.
+
 Entry:
 
 - M1--M3 pass.
@@ -1354,6 +1395,8 @@ Failure terminal: `HOLD-A10-IMPLEMENTATION` or
 
 ### M5 — Bounded GPU architecture and pooling screen
 
+Package identity: `A10M5`.
+
 Entry:
 
 - M4 passes;
@@ -1392,6 +1435,8 @@ Failure terminal: `HOLD-A10-NO-VALID-NEURAL-FIT`,
 `HOLD-A10-GENERATION-RUNTIME`, or `HOLD-A10-RESOURCE-BOUND`.
 
 ### M6 — Full development and applicability adjudication
+
+Package identity: `A10M6`.
 
 Entry:
 
@@ -1436,9 +1481,11 @@ Development terminals:
 - `HOLD-A10-NO-APPLICABLE-CANDIDATE`.
 
 The latter closes the scientific study at development. It does not trigger an
-automatic rescue or another A10-suffixed package.
+automatic rescue or corrective M6 successor package.
 
 ### M7 — Candidate and confirmation seal
+
+Package identity: `A10M7`.
 
 Entry:
 
@@ -1473,6 +1520,8 @@ M7 terminals:
 - `HOLD-A10-CONFIRMATION-SEAL`.
 
 ### M8 — One-shot confirmation
+
+Package identity: `A10M8`.
 
 Entry:
 
@@ -1513,6 +1562,8 @@ receipt records the proof and terminal access state; no terminal may leave
 automatic retry. No terminal changes production by itself.
 
 ### M9 — Report, review, cleanup, and handoff
+
+Package identity: `A10M9`.
 
 Entry:
 
@@ -1559,14 +1610,11 @@ Expected repository layout:
 
 ```text
 docs/planning/a10-study-plan.md
-docs/work-packages/YYYYMMDD-a10-neural-point-weather-successor/
+docs/work-packages/YYYYMMDD-a10m<M>-<milestone-slug>/
   package.md
   artifacts/
-    design-*.json
-    corpus-*.json
-    environment-*.json
-    fits/
-    evaluations/
+    <milestone-owned evidence>
+    handoff.md
     review.md
     gate-results.md
 docs/specifications/
@@ -1653,7 +1701,7 @@ should not be triggered during feasibility work.
 | Fallback hides model gaps | routed composition looks better than neural model | report neural-only and routed results separately; fallback does not count as neural improvement |
 | Development overfitting | selected model fails confirmation | bounded grid, internal fit validation, frozen development rule, locked one-shot confirmation |
 | GPU nondeterminism | irreproducible weights/results | environment receipt, deterministic settings, multi-seed stability, exact generation RNG contract |
-| Volatile-node interruption | lost progress or corrupted state | 15-minute atomic checkpoints, forced-restart gate, durable Lustre state |
+| GPU-node interruption | lost progress or corrupted state | 15-minute atomic checkpoints, forced-restart gate, durable project/Ceph state |
 | No compute-node internet | failed job/environment drift | offline environment and wheel/image cache, preflight completeness test |
 | Storage growth | unmanageable evidence/cost | 2-TB retention cap, shard manifests, rolling checkpoints, cleanup receipt |
 | Model too large or slow for deployment | research success cannot transfer | <=50M planning target, portable CPU export, single-core faithful-relative benchmark, 5× warning, 10× hard failure |
@@ -1711,7 +1759,7 @@ below are true:
   preliminary below-10× gate;
 - offline environment reconstructs on the live node;
 - one-GPU and two-GPU smoke tests pass;
-- node-local/Lustre staging is measured and verified;
+- node-local/Ceph/project staging is measured and verified;
 - forced interruption and resume pass;
 - checkpoint interval and cleanup behavior pass;
 - telemetry and complete attempt inventory are enabled;
@@ -1719,14 +1767,17 @@ below are true:
 - a dry-run Slurm submission produces the expected environment, resource, and
   artifact receipts.
 
-Once these gates pass, ordinary training, screening, development evaluation,
-candidate sealing, and conditional confirmation proceed autonomously inside
-the single dispatched work package under their frozen rules.
+Once these gates pass, `A10M5` may be dispatched. Training, screening,
+development evaluation, candidate sealing, confirmation, and closeout then
+proceed through their separately dispatched milestone packages and immutable
+handoffs under the frozen rules.
 
 ## 18. References and governing records
 
 Repository evidence:
 
+- [A10M2 Lemhi GPU integration scaffold](../work-packages/20260716-a10m2-lemhi-gpu-integration/package.md)
+- [A10M2 scaffold-time live preflight](../work-packages/20260716-a10m2-lemhi-gpu-integration/artifacts/preflight.md)
 - [A9d accepted report](../reports/a9d-successor-development-confirmation-report.md)
 - [A9d work package](../work-packages/20260715-a9d-successor-development-confirmation/package.md)
 - [A9 model-family envelope](../work-packages/20260715-a9a-successor-family-foundation/artifacts/model-family-envelope.md)
@@ -1749,7 +1800,7 @@ External infrastructure references, checked 2026-07-16:
 - NVIDIA. [L40 datasheet](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/support-guide/NVIDIA-L40-Datasheet-January-2023.pdf).
 
 Literature references for the ML boundary and candidate comparison remain in
-the repository's annotated bibliography. A10's work package must refresh any
-model-specific literature needed for the frozen architecture rather than
-claiming that forecast/downscaling papers directly validate a point-weather
-generator.
+the repository's annotated bibliography. The relevant A10 milestone package
+must refresh any model-specific literature needed for the frozen architecture
+rather than claiming that forecast/downscaling papers directly validate a
+point-weather generator.
