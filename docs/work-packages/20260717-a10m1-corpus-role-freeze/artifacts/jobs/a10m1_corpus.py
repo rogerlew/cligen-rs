@@ -241,7 +241,12 @@ def build_daymet_candidates(freeze: dict[str, Any]) -> list[dict[str, Any]]:
                     if coordinate in seen:
                         continue
                     seen.add(coordinate)
-                    if any(haversine_km(*coordinate, *other) < minimum for other in prohibited):
+                    if any(
+                        abs(coordinate[0] - other[0]) <= 1.0
+                        and abs(coordinate[1] - other[1]) <= 1.5
+                        and haversine_km(*coordinate, *other) < minimum
+                        for other in prohibited
+                    ):
                         continue
                     tile = f"{math.floor(coordinate[0]):+03d}_{math.floor(coordinate[1]):+04d}"
                     tile_hash = stable_key(freeze["freeze_id"], regime, tile)
@@ -253,6 +258,7 @@ def build_daymet_candidates(freeze: dict[str, Any]) -> list[dict[str, Any]]:
                         "tile_id": tile,
                         "order": stable_key(freeze["freeze_id"], regime, role, point_id),
                     })
+                lat += step
     candidates.sort(key=lambda row: (row["regime"], row["role"], row["order"]))
     return candidates
 
