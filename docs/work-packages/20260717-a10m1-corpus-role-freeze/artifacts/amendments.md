@@ -55,3 +55,19 @@ ledger and count against the 2,400-request ceiling; the same frozen points may
 be retried because the rejection diagnosed request encoding, not source
 unavailability. The fit period, points, variables, roles, and target selection
 are unchanged.
+
+## A5 — live Daymet day-length header spelling
+
+Date: 2026-07-17
+Series-access state: 216 rejected Daymet requests total; a separate permitted
+two-year response for one already-requested fit point was read only through
+its CSV header and discarded. No USCRN or confirmation target series was
+accessed.
+
+With the corrected `years` query, responses contained the required 10,950
+rows, but the live CSV header identifies day length as `dayl (s)` rather than
+the guide's semantic unit spelling `s/day`. The parser now binds the exact
+source key `dayl (s)` while normalized objects and the field glossary retain
+the unambiguous `s/day` unit. All 144 responses in this wave were rejected
+before retention; they remain in the request ledger and count against the
+ceiling. The source variable and normalized meaning are unchanged.

@@ -63,7 +63,7 @@ DAYMET_FIELDS = {
     "srad": "srad (W/m^2)",
     "vp": "vp (Pa)",
     "swe": "swe (kg/m^2)",
-    "dayl": "dayl (s/day)",
+    "dayl": "dayl (s)",
 }
 DAYMET_UNITS = {
     "prcp": "mm/day",
