@@ -1,6 +1,6 @@
 # SPEC-LEMHI-AGENT-TOOLKIT — Lemhi Agent Workflow Toolkit
 
-Status: authoritative revision 1 design; implementation pending
+Status: authoritative revision 1; foundation implemented 2026-07-17
 Owning package:
 [20260717-a10-lemhi-toolkit-foundation](../work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
 

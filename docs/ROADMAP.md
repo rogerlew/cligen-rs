@@ -116,21 +116,22 @@ remains prohibited.
 and a CPython 3.11 smoke gate before A10M3.** The required forward sequence is
 now:
 
-1. execute the
+1. **Complete (2026-07-17):** execute the
    [A10 Lemhi toolkit foundation](work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
    against the authoritative
    [toolkit specification](specifications/SPEC-LEMHI-AGENT-TOOLKIT.md);
-2. scaffold and execute a separate CPython 3.11 Lemhi smoke package using the
-   toolkit, a pinned Linux x86-64 runtime, offline dependency reconstruction
-   including NumPy, and a bounded one-L40 validation; and
+2. **Next:** scaffold and execute a separate CPython 3.11 Lemhi smoke package
+   using the toolkit, a pinned Linux x86-64 runtime, offline dependency
+   reconstruction including NumPy, and a bounded one-L40 validation; and
 3. dispatch A10M3 only after both predecessors reach their registered ready
    terminals.
 
 This ordering does not revoke `A10M1-CORPUS-READY` or
 `A10M2-COMPUTE-READY`; it adds operational prerequisites before the scientific
-milestone. The toolkit scaffold performs no remote write or allocation, the
-Python 3.11 claim remains unproved until its own package, and confirmation
-access remains prohibited.
+milestone. Foundation execution reached `LEMHI-TOOLKIT-FOUNDATION-READY` using
+deterministic local fixtures and a recording command adapter; it performed no
+remote write or allocation. The Python 3.11 claim remains unproved until its
+own package, and confirmation access remains prohibited.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

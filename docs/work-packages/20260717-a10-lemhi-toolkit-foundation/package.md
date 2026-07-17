@@ -1,9 +1,10 @@
 # A10 Lemhi Toolkit Foundation
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
-Evidence mode: Static
-Starting branch and push target: clean `main` at `b25eb39`, push `main`
+Evidence mode: Deterministic fixtures (no live cluster)
+Scaffold base: clean `main` at `b25eb39`
+Execution base and push target: clean `main` at `fc2f820`, push `main`
 
 ## Objective
 
@@ -35,7 +36,7 @@ Included:
 
 Excluded:
 
-- implementing or installing the toolkit in this scaffold;
+- live installation outside this repository;
 - downloading or selecting a portable Python distribution;
 - remote writes, Slurm submissions, GPU allocations, or a Python 3.11 claim;
 - candidate training, A10M3 execution, or confirmation-target access;
@@ -71,16 +72,15 @@ Excluded:
    HPC safety/reproducibility review.
 4. Record each finding and its disposition; revise the specification where an
    accepted finding changes the normative contract.
-5. Run documentation and repository gates. Leave this implementation package
-   `SCAFFOLDED` until the operator dispatches execution.
+5. On operator dispatch, implement the minimum vertical slice, execute its
+   deterministic hostile fixtures, and close only after repository gates pass.
 
 ## Execution and dispatch
 
-The future implementation executor must start from the current `origin/main`
-named by its kickoff prompt and push only to `main`. Execution may create
-repository-local toolkit code and deterministic fixtures. It receives no
-implicit authority for remote writes or allocations; any live validation must
-be separately frozen and dispatched.
+The implementation executor started from `fc2f820` on `main` and retained
+`main` as the push target. Execution created repository-local toolkit code and
+deterministic fixtures. It received no authority for remote writes or
+allocations and performed none; live validation remains separately dispatched.
 
 The two scaffold reviewers are read-only. They may inspect the package,
 specification, guide, and predecessor evidence, but may not edit files or
@@ -130,10 +130,10 @@ The scaffold is ready for implementation dispatch when:
 - no accepted P1/P2 finding remains unresolved; and
 - all static and repository gates pass.
 
-Future package execution reaches `EXECUTED-COMPLETE` only after the minimum
-vertical slice and its deterministic fixtures satisfy the specification. It
-does not establish Python 3.11 support; that belongs to the separate smoke
-package.
+Package execution reached `EXECUTED-COMPLETE` after the minimum vertical slice,
+the injected live-command renderer, and deterministic hostile fixtures
+satisfied the foundation gates. It does not establish Python 3.11 support;
+that belongs to the separate smoke package.
 
 Legitimate execution holds are:
 
@@ -153,4 +153,34 @@ Legitimate execution holds are:
   `artifacts/hpc-safety-review-round2.md` — fresh convergence reviews;
 - `artifacts/review-disposition-round2.md` — round-2 dispositions and final
   convergence verification; and
-- `artifacts/scaffold-gates.md` — validation receipt.
+- `artifacts/scaffold-gates.md` — validation receipt;
+- `artifacts/implementation-evidence.md` — implemented surface, acceptance
+  disposition, environment, and deliberately unproved live claims; and
+- `artifacts/execution-gates.md` — package-specific and repository gate receipt.
+
+## Execution result
+
+Terminal: `LEMHI-TOOLKIT-FOUNDATION-READY`
+
+The repository now contains a standard-library Python 3.9-compatible control
+plane, declarative profile/provider records, fixed POSIX remote scripts, an
+OpenSSH/Slurm adapter, a persistent hostile fixture adapter, a CLI for every
+normative lifecycle operation, private state and authority-wide append-only
+resource accounting, JCS publication records, quarantine/sanitization, and
+canonical marker cleanup. All production command-rendering paths executed
+through an injected recording runner; the complete lifecycle executed against
+temporary filesystem, scheduler, and transfer fixtures.
+
+Twenty-one deterministic tests cover warm-master expiry, login/compute scope,
+stale capability and platform drift, provider incompatibility and no-fallback,
+partial transfer, response loss, ambiguous submission, cross-run concurrency,
+parallel/retry/cancel/expected-nonzero attempts, prospective amendments,
+resource persistence, shell/path/archive attacks, sanitization, cleanup races,
+missing accounting, canonical records, and immutable historical receipts.
+
+The execution machine was `rmm`, an M1 Mac mini with 16 GB memory, macOS, and
+the system CPython 3.9.6. No Lemhi capability, CPython 3.11 runtime, CUDA,
+PyTorch, performance, or scientific claim is inferred from fixture success.
+The next authorized roadmap edge is to scaffold and separately dispatch the
+bounded CPython 3.11 Lemhi smoke package; A10M3 remains gated behind that live
+terminal.

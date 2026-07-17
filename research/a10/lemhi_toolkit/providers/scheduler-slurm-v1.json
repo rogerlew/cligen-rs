@@ -1,0 +1,27 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["scheduler"],
+  "does_not_establish": ["cuda", "framework", "scientific_gate"],
+  "emits_probe_fields": [],
+  "failure_codes": ["RESOURCE_CEILING", "SUBMISSION_OUTCOME_UNKNOWN", "JOB_TERMINAL_MISMATCH"],
+  "implementation_version": "1.0.0",
+  "name": "scheduler-slurm-v1",
+  "network_phase": "login-control",
+  "operations": {
+    "cancel": "slurm-exact-cancel-v1",
+    "observe": "slurm-accounting-v1",
+    "submit": "slurm-token-submit-v1"
+  },
+  "provider_api_version": 1,
+  "provider_class": "scheduler",
+  "provides": {
+    "scheduler_submission": "token-reconciled"
+  },
+  "required_commands": ["sbatch", "squeue", "sacct", "scancel"],
+  "requires": {
+    "scheduler": "slurm",
+    "target_platform": "linux-x86_64-glibc"
+  },
+  "side_effect_classes": ["bounded-slurm-allocation"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

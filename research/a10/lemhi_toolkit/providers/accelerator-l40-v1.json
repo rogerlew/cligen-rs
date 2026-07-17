@@ -1,0 +1,27 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["accelerator_class"],
+  "does_not_establish": ["cuda_runtime", "driver_floor", "framework_abi", "performance"],
+  "emits_probe_fields": [],
+  "failure_codes": ["PLATFORM_MISMATCH", "GATE_FAILED"],
+  "implementation_version": "1.0.0",
+  "name": "accelerator-l40-v1",
+  "network_phase": "compute-offline",
+  "operations": {
+    "request": "slurm-typed-gres-l40-v1",
+    "validate": "compute-device-gate-v1"
+  },
+  "provider_api_version": 1,
+  "provider_class": "accelerator",
+  "provides": {
+    "accelerator_request": "gpu:l40"
+  },
+  "required_commands": ["nvidia-smi"],
+  "requires": {
+    "accelerator_class": "nvidia-l40",
+    "scheduler": "slurm",
+    "target_platform": "linux-x86_64-glibc"
+  },
+  "side_effect_classes": ["bounded-slurm-allocation"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

@@ -1,0 +1,9 @@
+{
+  "allowed_roots": ["/absolute/operator/allowlisted/source"],
+  "authority_id": "example-authority",
+  "confirmation_classification": "development-only",
+  "package_id": "example-package",
+  "resource_budget_id": "example-budget",
+  "resource_ceiling_gpu_minutes": 30,
+  "source_commit": "0000000"
+}

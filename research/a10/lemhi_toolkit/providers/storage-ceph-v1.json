@@ -1,0 +1,26 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["durable_storage"],
+  "does_not_establish": ["quota", "power_loss_durability"],
+  "emits_probe_fields": [],
+  "failure_codes": ["EVIDENCE_INCOMPLETE", "CLEANUP_INCOMPLETE"],
+  "implementation_version": "1.0.0",
+  "name": "storage-ceph-v1",
+  "network_phase": "durable-cluster-storage",
+  "operations": {
+    "cleanup": "owner-marker-clean-v1",
+    "collect": "tar-quarantine-v1"
+  },
+  "provider_api_version": 1,
+  "provider_class": "storage",
+  "provides": {
+    "job_local_cleanup": "scheduler_purged"
+  },
+  "required_commands": ["tar", "sha256sum"],
+  "requires": {
+    "durable_storage": "ceph-home",
+    "target_platform": "linux-x86_64-glibc"
+  },
+  "side_effect_classes": ["durable-run-root", "private-quarantine"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

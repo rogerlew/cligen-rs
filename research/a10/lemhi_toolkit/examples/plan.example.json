@@ -1,0 +1,55 @@
+{
+  "assets": [
+    {
+      "bytes": 1234,
+      "license_provenance": "repository-license",
+      "local_path": "/absolute/operator/allowlisted/source/smoke.sh",
+      "logical_name": "smoke.sh",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source_class": "repository-owned",
+      "target_platform": "linux-x86_64-glibc"
+    }
+  ],
+  "authority_id": "example-authority",
+  "confirmation_classification": "development-only",
+  "evidence_allowlist": [
+    "evidence.json",
+    "slurm/smoke.0.err",
+    "slurm/smoke.0.out"
+  ],
+  "job_local_cleanup": "scheduler_purged",
+  "jobs": [
+    {
+      "cpus": 2,
+      "expected_exit_code": 0,
+      "gpus": 1,
+      "gres": "gpu:l40:1",
+      "max_attempts": 1,
+      "memory_mb": 4096,
+      "partition": "icrews",
+      "retry_on": [],
+      "role": "smoke",
+      "script": "smoke.sh",
+      "time_limit_minutes": 10
+    }
+  ],
+  "package_id": "example-package",
+  "providers": [
+    "research/a10/lemhi_toolkit/providers/transport-scp-v1.json",
+    "research/a10/lemhi_toolkit/providers/scheduler-slurm-v1.json",
+    "research/a10/lemhi_toolkit/providers/storage-ceph-v1.json",
+    "research/a10/lemhi_toolkit/providers/accelerator-l40-v1.json"
+  ],
+  "remote_run_root": "runs/example-run",
+  "required_capability_scope": "login",
+  "resource_budget_id": "example-budget",
+  "run_id": "example-run",
+  "source_commit": "0000000",
+  "stop_rules": {
+    "ambiguity": "stop",
+    "gate_failure": "authorized-retry-only",
+    "resource_ceiling": "stop"
+  },
+  "submission_mode": "operator-explicit",
+  "target_platform": "linux-x86_64-glibc"
+}
