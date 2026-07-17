@@ -21,6 +21,7 @@ from research.a10.lemhi_toolkit.core import (
     read_json,
     read_record,
     sha256_bytes,
+    sha256_file,
     validate_archive,
     validate_relative_path,
     validate_shell_scalar,
@@ -364,6 +365,26 @@ class FoundationAcceptance(ToolkitFixture):
 
 
 class SerializationAndFirewall(ToolkitFixture):
+    def test_canonical_a10_configuration_binds_all_repository_inputs(self) -> None:
+        path = REPOSITORY_ROOT / "research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v1.json"
+        record = read_json(path)
+        self.assertEqual(record["configuration_id"], "lemhi-a10-py311-l40-v1")
+        self.assertEqual(record["configuration_status"], "current-canonical")
+        recorded = record.pop("configuration_semantic_sha256")
+        self.assertEqual(sha256_bytes(canonical_bytes(record)), recorded)
+        pinned = [record["toolkit_profile"], *record["provider_stack"]]
+        pinned.extend((record["framework"]["requirements_lock"], record["framework"]["wheel_manifest"]))
+        pinned.append({
+            "path": record["evidence"]["gate_receipt_path"],
+            "sha256": record["evidence"]["gate_receipt_sha256"],
+        })
+        for item in pinned:
+            target = REPOSITORY_ROOT / item["path"]
+            self.assertTrue(target.is_file() and not target.is_symlink())
+            self.assertEqual(sha256_file(target), item["sha256"])
+            if "bytes" in item:
+                self.assertEqual(target.stat().st_size, item["bytes"])
+
     def test_jcs_unicode_escaping_duplicates_and_history(self) -> None:
         value = {"\U0001f600": "line\nquote\"", "\ue000": 1, "a": [True, None]}
         expected = '{"a":[true,null],"😀":"line\\nquote\\\"","":1}'.encode()

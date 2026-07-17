@@ -1,0 +1,137 @@
+{
+  "configuration_id": "lemhi-a10-py311-l40-v1",
+  "configuration_semantic_sha256": "0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179",
+  "configuration_status": "current-canonical",
+  "control_contract": {
+    "authentication": "operator-bootstrapped-warm-mfa-control-masters",
+    "controller": "rmm-macos-arm64",
+    "interactive_fallback": false,
+    "transport_mode": "openssh-batchmode"
+  },
+  "evidence": {
+    "accepted_source_commit": "bd063b0",
+    "gate_count": 19,
+    "gate_receipt_path": "docs/work-packages/20260717-a10-lemhi-python311-smoke/artifacts/toolkit/run-3/evidence/evidence.json",
+    "gate_receipt_sha256": "4a8347a5468a6ef26cee27767bed4d97b7bdfd2c1a86af1dfc7309cea8c5afcc",
+    "package": "docs/work-packages/20260717-a10-lemhi-python311-smoke/package.md",
+    "terminal": "A10-LEMHI-PY311-SMOKE-READY"
+  },
+  "framework": {
+    "cuda_runtime": "12.8",
+    "numpy": "2.2.6",
+    "pytorch": "2.7.1+cu128",
+    "requirements_lock": {
+      "bytes": 2676,
+      "path": "docs/work-packages/20260717-a10-lemhi-python311-smoke/artifacts/environment/requirements.lock",
+      "sha256": "87dcc51e95945d1b152174a592bdb76d57fbe8cae0eb95ed5fdf9045c8fe6647"
+    },
+    "wheel_count": 26,
+    "wheel_manifest": {
+      "bytes": 7267,
+      "path": "docs/work-packages/20260717-a10-lemhi-python311-smoke/artifacts/environment/wheel-manifest.json",
+      "sha256": "f70271b551bde1544167eaaa8513ee2d37907deba0109021ba1dcee2c74347cb"
+    },
+    "wheelhouse": {
+      "bytes": 3865978880,
+      "sha256": "30344178212946f5a37df03a6ccdc82025d198c07467adf55d87b9d5918e730e"
+    }
+  },
+  "invalidation_triggers": [
+    "accelerator-class-or-visible-device-count-change",
+    "cluster-profile-or-provider-definition-change",
+    "compute-node-os-architecture-or-glibc-change",
+    "driver-or-cuda-compatibility-change",
+    "partition-gres-or-storage-contract-change",
+    "portable-runtime-artifact-or-final-prefix-change",
+    "requirements-lock-wheel-manifest-or-wheelhouse-change",
+    "toolkit-major-record-or-provider-api-change"
+  ],
+  "isolation_contract": {
+    "clear_environment": [
+      "LD_LIBRARY_PATH",
+      "PYTHONHOME",
+      "PYTHONPATH"
+    ],
+    "network_during_compute": "prohibited",
+    "pip_install": "--no-index --require-hashes",
+    "python_no_user_site": true,
+    "venv_final_run_relative_path": "runtime/environment"
+  },
+  "legacy_fallback": {
+    "automatic_fallback": false,
+    "configuration": "python-3.8.11-torch-2.4.1-cu124-a10m2",
+    "status": "legacy-explicit-only"
+  },
+  "not_established": [
+    "a10m3-scientific-claims",
+    "administrator-supported-cluster-default",
+    "multi-gpu-behavior",
+    "performance-or-throughput",
+    "preemption-requeue-behavior",
+    "production-durability",
+    "training-readiness"
+  ],
+  "platform_contract": {
+    "accelerator": "nvidia-l40",
+    "architecture": "x86_64",
+    "driver_at_validation": "610.43.02",
+    "glibc_at_validation": "2.28",
+    "os": "linux",
+    "platform": "linux-x86_64-glibc"
+  },
+  "provider_stack": [
+    {
+      "path": "research/a10/lemhi_toolkit/providers/transport-scp-v1.json",
+      "sha256": "68225b64e0c996469d131098dc9095699df8eb038a836a9d5b19e3bc37c7faba"
+    },
+    {
+      "path": "research/a10/lemhi_toolkit/providers/scheduler-slurm-v1.json",
+      "sha256": "b323db82553e6267f4643779d05e8cef586164ff01b9912e30a822b75cafbcb3"
+    },
+    {
+      "path": "research/a10/lemhi_toolkit/providers/storage-ceph-v1.json",
+      "sha256": "d1d55c7a93fb5544699ef98b82639abaecc5b1be5355c6b30880dc38d31acc58"
+    },
+    {
+      "path": "research/a10/lemhi_toolkit/providers/accelerator-l40-v1.json",
+      "sha256": "a9ba352fba8acee0c55b2bbd7b8fcba97ac68997213dff692f47a76b7dccba67"
+    },
+    {
+      "path": "research/a10/lemhi_toolkit/providers/runtime-cpython311-portable-v1.json",
+      "sha256": "eca7dfb8ca778fc6a56e5fbfa5f76d3f6c73e2291364a1668f41b0485740cb17"
+    },
+    {
+      "path": "research/a10/lemhi_toolkit/providers/framework-pytorch271-cu128-numpy226-v1.json",
+      "sha256": "b81b67f1f4219d50b1c6da886fbec2f70646b199dd9a555e1b35638ed4750f0d"
+    }
+  ],
+  "runtime": {
+    "abi": "cp311",
+    "artifact": "cpython-3.11.15+20260510-x86_64-unknown-linux-gnu-install_only.tar.gz",
+    "artifact_bytes": 48850850,
+    "artifact_sha256": "14b5843a3492925dab6fdb7cca7d09af83ddf1fe2851f72cf9b1edc8ed2b1db7",
+    "distribution": "python-build-standalone-20260510",
+    "final_run_relative_path": "runtime/cpython",
+    "implementation": "cpython",
+    "license_provenance": "MPL-2.0 distribution with embedded CPython provenance",
+    "version": "3.11.15"
+  },
+  "scheduler_contract": {
+    "cpus_per_task": 4,
+    "gres": "gpu:l40:1",
+    "gpus": 1,
+    "memory_mb": 16384,
+    "partition": "gpu-icrews",
+    "requeue": false
+  },
+  "schema_version": "lemhi-canonical-configuration-1",
+  "storage_contract": {
+    "durable": "ceph-home-run-root",
+    "job_local": "scheduler-purged-tmpdir",
+    "staging": "part-sha256-promote"
+  },
+  "toolkit_profile": {
+    "path": "research/a10/lemhi_toolkit/profiles/lemhi-v1.json",
+    "sha256": "ad7782d1910fd5fdcb838a2b6219e6c2793264d67749d47ad95ecfa59f50e03f"
+  }
+}

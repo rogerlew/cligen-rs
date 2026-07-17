@@ -151,3 +151,8 @@ earlier harness failures remain explicit development evidence and consumed
 their registered allocations; neither is rewritten as a platform failure.
 Detailed identities, elapsed allocation, corrections, and scope boundaries are
 in [execution.md](artifacts/execution.md).
+
+By operator direction after acceptance, this passing stack is the evidence
+basis for canonical configuration `lemhi-a10-py311-l40-v1`. The designation
+does not alter this package's original scope or results; its separate
+configuration record and specification govern later consumers.

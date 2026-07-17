@@ -126,7 +126,11 @@ now:
    reconstruction including NumPy, and a bounded one-L40 validation, and
    reached `A10-LEMHI-PY311-SMOKE-READY`; and
 3. **Next:** dispatch A10M3 now that both operational predecessors have reached
-   their registered ready terminals.
+   their registered ready terminals. Its prospective design MUST bind
+   canonical configuration `lemhi-a10-py311-l40-v1` and semantic SHA-256
+   `0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179`
+   under
+   [SPEC-LEMHI-CANONICAL-CONFIGURATION](specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
 
 This ordering does not revoke `A10M1-CORPUS-READY` or
 `A10M2-COMPUTE-READY`; it adds operational prerequisites before the scientific
@@ -138,7 +142,9 @@ offline-install, and cleanup gates under the toolkit. Its three single-attempt
 runs used 60 requested and 4.75 actual GPU-minutes; the first two are retained
 harness failures, and the final run passed in 100 seconds. All exact remote
 roots were removed. A10M3 is now the next roadmap edge; confirmation access
-remains prohibited.
+remains prohibited. The accepted stack is the current canonical A10 Lemhi
+single-L40 Python configuration; A10M2's Python 3.8 stack is legacy
+explicit-only and cannot be selected automatically.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

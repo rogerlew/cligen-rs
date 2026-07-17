@@ -1,9 +1,10 @@
 # C3+3 Lemhi GPU computing for agents
 
 This is the operational runbook for agent-driven Lemhi GPU work from `rmm`.
-It consolidates the live evidence from A10M2 and A10M2D1. Live cluster state
-was observed on 2026-07-16 and must be rechecked before each new resource
-commitment; public C3+3 documentation has demonstrably drifted.
+It consolidates the live evidence from A10M2, A10M2D1, and the CPython 3.11
+toolkit smoke. Live cluster state was observed on 2026-07-16 and 2026-07-17
+and must be rechecked before each new resource commitment; public C3+3
+documentation has demonstrably drifted.
 
 ## Agent authoring authority
 
@@ -227,7 +228,46 @@ wheelhouses, model assets, licenses, and manifests before submission. The
 completion package validated the specific offline framework contract below;
 it did not validate arbitrary packages or candidate training.
 
-## Validated offline framework and runtime contract
+## Current canonical A10 Python/L40 configuration
+
+The current canonical configuration is
+[`lemhi-a10-py311-l40-v1`](../research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v1.json),
+semantic SHA-256
+`0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179`.
+Its governing policy is
+[SPEC-LEMHI-CANONICAL-CONFIGURATION](specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
+
+This is the default for A10M3 and later single-L40 Python work:
+
+- portable CPython 3.11.15, ABI `cp311`, from the exact pinned
+  python-build-standalone artifact;
+- NumPy 2.2.6 and PyTorch 2.7.1+cu128 from the exact 26-wheel, 3,865,978,880
+  byte offline wheelhouse;
+- `gpu-icrews` with typed `gpu:l40:1`, one GPU, and no requeue;
+- final Ceph runtime and virtual-environment prefixes, with wheel expansion in
+  scheduler-purged job-local storage;
+- `PYTHONPATH`, `PYTHONHOME`, and `LD_LIBRARY_PATH` cleared,
+  `PYTHONNOUSERSITE=1`, and pip restricted to `--no-index --require-hashes`;
+  and
+- warm-MFA toolkit control, hash-promoted transfer, authenticated structured
+  evidence, sanitized collection, and exact marked-root cleanup.
+
+The accepted smoke authenticated 19 gates: exact interpreter/ABI, standard
+library, subprocess and spawned multiprocessing, compiled-extension linkage,
+NumPy arithmetic, NumPy/PyTorch interop, CUDA visibility, exactly one L40,
+tensor/autograd/checkpoint behavior, offline installation, and cleanup.
+
+Every consuming A10 package must record both the configuration ID and semantic
+hash before submission. Do not silently resolve newer packages, use ambient
+modules, move the environment, choose an untyped GPU, or fall back to Python
+3.8. Any invalidation trigger in the canonical record requires a new
+versioned candidate and a fresh bounded smoke before further commitments.
+
+This canonical designation is scoped. It is not a performance, multi-GPU,
+training-readiness, requeue, production-durability, A10M3-science, or
+administrator-support claim.
+
+## Legacy A10M2 offline framework and runtime contract
 
 The login-visible Python 3.11.11 environment was not available on `node03`.
 The compute node exposed Python 3.8.11 at
@@ -237,10 +277,12 @@ wheel closure contained 23 fully hashed Linux x86-64 wheels and reconstructed
 runtime was CUDA 12.4 with cuDNN 9.1 and NCCL 2.20.5, running under the
 CUDA-12.8-capable 610.43.02 driver.
 
-That exact stack passed one-L40 tensor/autograd/optimizer/checkpoint/reload,
+That exact Python 3.8 stack passed one-L40 tensor/autograd/optimizer/checkpoint/reload,
 two-L40 NCCL all-reduce and one-step DDP, and a Slurm `USR1` checkpoint plus
-manual resume/control-equivalence drill. It is a proved M2 capability stack,
-not an automatic product selection for later milestones.
+manual resume/control-equivalence drill. It is a proved M2 capability stack
+and now serves as an explicit legacy fallback only. It is not the default for
+later milestones, and a failed or missing canonical asset must never select it
+automatically.
 
 Operational rules learned during reconstruction:
 

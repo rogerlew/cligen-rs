@@ -36,6 +36,16 @@ The first live consumer is the separately dispatched CPython 3.11 smoke
 package. Foundation acceptance itself uses no VPN, remote write, Slurm job, or
 GPU allocation.
 
+## Canonical A10 configuration
+
+The current default for A10 single-L40 Python consumers is the versioned
+[`lemhi-a10-py311-l40-v1`](configurations/lemhi-a10-py311-l40-v1.json)
+record, governed by
+[`SPEC-LEMHI-CANONICAL-CONFIGURATION`](../../../docs/specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
+Consumers bind both its ID and semantic SHA-256. Provider, artifact,
+scheduler, storage, or isolation drift fails closed and requires a new
+versioned record plus a fresh smoke; Python 3.8 is legacy explicit-only.
+
 ## Command sequence
 
 Run commands from the repository root. The common prefix is intentionally

@@ -672,4 +672,5 @@ Repository gates from `AGENTS.md` also apply. Production functions added under
    durability, and A10M3 scientific claims.
 3. Dispatch A10M3 only after both the toolkit foundation and Python 3.11 smoke
    reach their registered ready terminals. A10M3 remains a separate scientific
-   package and retains the confirmation firewall.
+   package, binds the current configuration governed by
+   `SPEC-LEMHI-CANONICAL-CONFIGURATION`, and retains the confirmation firewall.
