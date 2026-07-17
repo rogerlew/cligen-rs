@@ -295,7 +295,8 @@ def parse_station_table(freeze: dict[str, Any], path: Path) -> list[dict[str, An
             regime = regime_for(freeze, latitude, longitude)
             if regime is None: reasons.append("outside_primary_frames")
             inventory.append({
-                "commissioning": row["COMMISSIONING"], "elevation_ft": float(row["ELEVATION"]),
+                "commissioning": row["COMMISSIONING"],
+                "elevation_ft": None if row["ELEVATION"] == "UN" else float(row["ELEVATION"]),
                 "exclusion_reasons": reasons, "latitude": latitude, "longitude": longitude,
                 "network": row["NETWORK"], "regime": regime,
                 "source_name": source_name(row["STATE"], row["LOCATION"], row["VECTOR"]),
