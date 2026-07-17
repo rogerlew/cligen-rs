@@ -1,6 +1,6 @@
 # A10M2 Completion — Lemhi Compute Readiness
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `c5dadd0`, push `main`
@@ -137,8 +137,15 @@ smallest corrective action.
 - `artifacts/environment/` — framework lock, wheel hashes, and notices;
 - `artifacts/jobs/` — exact staged and submitted sources;
 - `artifacts/logs/` — sanitized execution and accounting evidence;
-- terminal, review, ledgers, cleanup, gates, and A10M3 handoff are produced
-  during execution.
+- `artifacts/logs/execution-summary.md` — sanitized per-attempt evidence;
+- `artifacts/scheduler-receipt.md` and `artifacts/resource-ledger.md` — Slurm
+  accounting and the frozen one-GPU-hour ledger;
+- `artifacts/transfer-receipt.md` and `artifacts/stage2-result.md` — verified
+  transfer and storage-path observations;
+- `artifacts/cleanup.md`, `artifacts/gates.md`, and `artifacts/review.md` —
+  closure evidence; and
+- `artifacts/terminal.md` and `artifacts/a10m3-handoff.md` — terminal
+  disposition and bounded successor contract.
 
 ## Execution note
 
@@ -153,3 +160,20 @@ NumPy probe warning; it changes no test, framework, or resource.
 C2-01 (`1013672`) saw two L40s but a stale moved-venv `torchrun` shebang failed
 before import. Amendment 04 switches to interpreter-module launch and reduces
 the still-unrun limits; the complete planned ledger is 53 GPU-minutes.
+
+## Result
+
+Terminal: `A10M2-COMPUTE-READY`
+
+C1-02 passed the corrected CUDA smoke, hashed offline framework
+reconstruction, one-L40 framework check, and 98-object stage-2 storage test.
+C2-02 passed two-L40 NCCL all-reduce and DDP after the published entrypoint
+correction. C3a received Slurm `USR1` and atomically published the registered
+checkpoint; C3b resumed it and exactly matched the uninterrupted control.
+
+The seven allocations consumed 53 requested and 2.0167 actual GPU-minutes.
+Evidence retrieval and its SHA-256 were verified before the exact remote run
+was removed; the post-cleanup queue was empty. No confirmation target was
+accessed. The retained limitations and A10M3 constraints are recorded in the
+[terminal](artifacts/terminal.md) and
+[handoff](artifacts/a10m3-handoff.md).

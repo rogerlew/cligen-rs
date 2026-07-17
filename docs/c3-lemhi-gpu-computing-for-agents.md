@@ -178,6 +178,27 @@ scp -o BatchMode=yes local-file lemhi:relative/remote/path/
    paths, passwords, Duo material, or unrestricted environment dumps in
    committed evidence.
 
+## Transfer expectations from `rmm`
+
+A10M2D2 measured a sustained warm-master SCP upload rate of 10.054 MiB/s and
+download rate of 4.727 MiB/s across its registered cases. A 1,024-file tree
+was 40.16 times slower to upload and 14.14 times slower to download than its
+tar archive. Bundle small immutable objects before crossing the WAN.
+
+The completion package's real uploads were consistent with that envelope:
+the 214 MiB corpus archive averaged 7.052 MiB/s and the active 2.69 GiB
+wheelhouse averaged 11.376 MiB/s. These are planning observations, not a
+service guarantee. Routine single archives up to roughly 10 GiB are workable
+in the observed window; roughly 50 GiB or larger should use resumable or
+administrator-supported managed transport after a separate investigation.
+
+SCP interruption can leave a partial object at its final requested name.
+Always upload to `.part`, verify the remote byte count and SHA-256, and then
+rename atomically. The installed `rsync` pair successfully resumed an
+interrupted transfer; prefer it when restartability matters. Neither shared
+Ceph free space nor an 8 GiB successful package proves the account quota, and
+Globus availability remains unproved.
+
 ## Live Lemhi inventory established by A10M2
 
 The following was observed, not inferred from the older GPU workshop:
@@ -202,9 +223,47 @@ make a job nonpreemptible or exempt it from scheduler policy. Use typed
 class, and `node04` is not an L40 node in the live configuration.
 
 Compute nodes do not have internet access. Stage source, data, packages,
-wheelhouses, model assets, licenses, and manifests before submission. A10M2
-did not reach framework selection, so no PyTorch, Python, NCCL, or training
-environment is currently validated by these two packages.
+wheelhouses, model assets, licenses, and manifests before submission. The
+completion package validated the specific offline framework contract below;
+it did not validate arbitrary packages or candidate training.
+
+## Validated offline framework and runtime contract
+
+The login-visible Python 3.11.11 environment was not available on `node03`.
+The compute node exposed Python 3.8.11 at
+`/opt/modules/devel/python/3.8.11/bin/python3.8`. The successful immutable
+wheel closure contained 23 fully hashed Linux x86-64 wheels and reconstructed
+`torch==2.4.1+cu124` without network access. `pip check` passed. The observed
+runtime was CUDA 12.4 with cuDNN 9.1 and NCCL 2.20.5, running under the
+CUDA-12.8-capable 610.43.02 driver.
+
+That exact stack passed one-L40 tensor/autograd/optimizer/checkpoint/reload,
+two-L40 NCCL all-reduce and one-step DDP, and a Slurm `USR1` checkpoint plus
+manual resume/control-equivalence drill. It is a proved M2 capability stack,
+not an automatic product selection for later milestones.
+
+Operational rules learned during reconstruction:
+
+1. Build and verify the complete wheelhouse on `rmm`; transfer an archive as
+   `.part`, verify its SHA-256 remotely, then promote it.
+2. Install only with `--no-index --require-hashes` from that wheelhouse and
+   run `pip check` before use.
+3. Create a virtual environment at its final remote path. Moving it leaves
+   entrypoint shebangs such as `torchrun` pointing at the old path.
+4. Isolate `PYTHONPATH`, `PYTHONHOME`, user site packages, and ambient loader
+   paths. Invoke distributed launch as `python -m torch.distributed.run`
+   through the selected environment rather than a moved console script.
+5. PyTorch emitted a NumPy initialization warning even after ambient-path
+   isolation. NumPy is not in this frozen closure and no NumPy conversion was
+   exercised. Any later NumPy use must add, hash, and test it explicitly.
+
+The stage-2 storage check verified all 98 A10M1 objects on Ceph and XFS,
+archive and many-object staging, a 64 MiB checkpoint-style copy-back, durable
+fallback, and exact local cleanup. Because the mandatory Ceph hash pass
+preceded timed copies, its rates describe a warm cache path only. Do not use
+them as cold-I/O, data-loader, or training-throughput estimates. The copy-back
+was verified after atomic rename but did not separately instrument `fsync`;
+add explicit synchronization before making power-loss-durability claims.
 
 ## Known-good CUDA compiler contract
 
@@ -402,13 +461,14 @@ Treat published documentation as a hypothesis. Timestamp live `sinfo`,
 `scontrol`, module, compiler, CPU, driver, and filesystem observations in each
 new package.
 
-### A job is accepted but the research stack is still unproved
+### A job is accepted but the requested research claim is still unproved
 
 A10M2/A10M2D1 proved transport, priority-partition access, typed L40
-allocation, CUDA 12.8 compilation under two explicit compilers, and the CUDA
-kernel smoke. They did not validate PyTorch, offline environment
-reconstruction, NCCL/DDP, signal handling, checkpoint/restart, requeue, or
-training. Do not promote a CUDA-smoke result into those claims.
+allocation, CUDA compilation, and the kernel smoke. The completion package
+separately proved its frozen offline PyTorch stack, NCCL/DDP, signal handling,
+and manual checkpoint/restart drill. It did not test Slurm requeue, candidate
+training, scaling, cold storage performance, or production durability. Do not
+promote a lower-level smoke result into any of those claims.
 
 ## Evidence sources
 
@@ -419,6 +479,10 @@ training. Do not promote a CUDA-smoke result into those claims.
 - [A10M2D1 configuration matrix](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/artifacts/configuration-results.md)
 - [A10M2D1 root cause](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/artifacts/root-cause.md)
 - [A10M2D1 documentation drift](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/artifacts/documentation-drift.md)
+- [A10M2D2 transfer characterization](work-packages/20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md)
+- [A10M2 completion package](work-packages/20260717-a10m2-completion/package.md)
+- [A10M2 completion terminal](work-packages/20260717-a10m2-completion/artifacts/terminal.md)
+- [A10M2 stage-2 result](work-packages/20260717-a10m2-completion/artifacts/stage2-result.md)
 - [SSH keepalive implementation](../research/a10/cluster/ssh-keepalive.sh)
 - [C3+3 GPU workshop](https://docs.c3plus3.org/docs/workshops/Cluster/GPU_Nodes.html)
 - [C3+3 current partition guide](https://docs.c3plus3.org/docs/help/Tutorials/Partitions.html)

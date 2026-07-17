@@ -48,8 +48,7 @@ role-labeled surplus without reading values or reacquiring data. Confirmation
 target access remained false. The accepted record and downstream restrictions
 are in the
 [A10M1 work package](work-packages/20260717-a10m1-corpus-role-freeze/package.md).
-A10M1 completion does not authorize A10M3 while `A10M2-COMPUTE-READY` remains
-absent.
+A10M1 and the later A10M2 completion now satisfy both A10M3 entry conditions.
 
 The
 [A10M2 Lemhi GPU integration and restartability readiness](work-packages/20260716-a10m2-lemhi-gpu-integration/package.md)
@@ -62,7 +61,8 @@ after a published amendment, CUDA 12.8 `nvcc` reached but crashed its host
 20 requested GPU-minutes and one second of actual allocation. The fail-closed
 ladder correctly left J2--J4b unsubmitted and cleaned the exact remote run.
 
-A10M3 is not authorized. The operator explicitly authorized the
+At that terminal, A10M3 was not authorized. The operator explicitly
+authorized the
 [A10M2D1 Lemhi CUDA drift diagnostic](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/package.md)
 on 2026-07-16; it completed at `A10M2D1-ROOT-CAUSE-LOCALIZED`. One six-second
 L40 job proved that `node03` is AMD EPYC without the tested AVX-512 features,
@@ -72,8 +72,8 @@ runtime. That ambient compiler and its login-built RPATH-bearing binary die by
 and pass the unchanged CUDA 12.8 smoke from either build side. Compute-node
 Lmod also still cannot resolve the login-visible CUDA module. The simplest
 observed correction is direct CUDA 12.8 plus explicit `/usr/bin/g++`, pending
-administrator support. A10M2 remains immutable, and framework testing and
-A10M3 remain unauthorized.
+administrator support. A10M2 remains immutable; its corrective continuation
+is recorded separately.
 
 The operator authorized the
 [A10M2D2 rmm-to-Lemhi SCP characterization](work-packages/20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md),
@@ -91,25 +91,25 @@ quota remained unproven, so neither finding may be inferred from shared Ceph
 capacity. Later time-window replication and real artifact sizes remain
 explicit follow-up rather than assumptions.
 
-Stage 2 is now a required forward M2 readiness gate: measure and verify
-Ceph-to-job-local staging, representative shard layout, bounded local read,
-durable checkpoint-style copy-back, cache fallback, and exact local cleanup.
-It must share the next authorized GPU-bearing A10M2 continuation allocation;
-no standalone L40 I/O job or new stage-2 package is authorized. Its byte/time
-envelope must use the A10M2D2 rates and small-file findings plus the A10M1
-transfer manifest when available. Every staged or copied-back object requires
-hash verification; destination existence is insufficient after the observed
-SCP partial-file behavior. Framework, NCCL/DDP, restart, training, and A10M3
-remain unauthorized until their own dispatch and prerequisite gates.
+Stage 2 was the required forward M2 readiness gate: verify Ceph-to-job-local
+staging, representative shard layout, bounded local read, durable-class
+checkpoint copy-back, cache fallback, and exact local cleanup. The A10M2
+completion satisfied it inside C1-02 using A10M1's full accepted manifest.
+Every staged and copied-back object was hash verified. Its measured rates are
+warm-cache diagnostics because the required durable hash pass preceded timed
+copies; they are not cold-path or training-throughput claims.
 
-The operator dispatched the bounded
+The operator scaffolded and executed the bounded
 [A10M2 completion package](work-packages/20260717-a10m2-completion/package.md)
-on 2026-07-17. It preserves the original A10M2 hold and D1/D2 evidence while
-freezing the corrected direct-CUDA compiler path, an offline CUDA 12.8
-framework stack, A10M1's accepted 98-object stage-2 input, two-GPU NCCL/DDP,
-and signal/resume checks under a new hard one-GPU-hour ledger. It must publish
-its scaffold before remote mutation and remains the only authorized route to
-`A10M2-COMPUTE-READY`; A10M3 stays unauthorized until this package closes.
+on 2026-07-17. It closed at `A10M2-COMPUTE-READY` while preserving the
+original A10M2 hold and D1/D2 evidence. It proved direct CUDA 12.8 with OS
+GCC, hashed offline Python 3.8.11 / PyTorch 2.4.1+cu124 reconstruction,
+one-L40 framework behavior, the full 98-object stage-2 path, two-L40
+NCCL/DDP, and Slurm signal/checkpoint/manual-resume equivalence. Seven
+allocations used 53 requested and 2.0167 actual GPU-minutes; the exact remote
+run was removed after verified evidence retrieval. With A10M1 already ready,
+A10M3 is now authorized only as a separately scaffolded and dispatched
+package; confirmation access remains prohibited.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
