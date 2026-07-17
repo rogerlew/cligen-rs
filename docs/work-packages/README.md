@@ -64,3 +64,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260716-a10m0-dispatch-predecessor-freeze](20260716-a10m0-dispatch-predecessor-freeze/package.md) | EXECUTED-COMPLETE |
 | [20260716-a10m2-lemhi-gpu-integration](20260716-a10m2-lemhi-gpu-integration/package.md) | EXECUTED-HOLD-CUDA-ENVIRONMENT |
 | [20260716-a10m2d1-lemhi-cuda-drift-diagnostic](20260716-a10m2d1-lemhi-cuda-drift-diagnostic/package.md) | EXECUTED-COMPLETE |
+| [20260716-a10m2d2-rmm-lemhi-scp-characterization](20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md) | SCAFFOLDED |

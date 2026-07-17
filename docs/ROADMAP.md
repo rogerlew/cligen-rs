@@ -60,6 +60,27 @@ observed correction is direct CUDA 12.8 plus explicit `/usr/bin/g++`, pending
 administrator support. A10M2 remains immutable, and framework testing and
 A10M3 remain unauthorized.
 
+The operator authorized scaffolding the
+[A10M2D2 rmm-to-Lemhi SCP characterization](work-packages/20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md)
+on 2026-07-16. Stage 1 will measure the warm MFA-bootstrapped `rmm`/UI-VPN/SCP
+path to durable Lemhi Ceph storage with synthetic fixtures, bidirectional
+integrity, single-file and small-file/archive behavior, compression controls,
+intentional interruption/partial-file characterization, conditional rsync
+resume, live capacity/quota visibility, alternative-transport inventory, and a
+5-GiB logical-transfer ceiling. It uses no Slurm or GPU resource and is not yet
+dispatched for execution. Later time-window replication, actual environment/
+shard/checkpoint sizes, and managed Globus discovery remain explicit follow-up
+rather than unmeasured assumptions.
+
+Stage 2 is now a required forward M2 readiness gate: measure and verify
+Ceph-to-job-local staging, representative shard layout, bounded local read,
+durable checkpoint-style copy-back, cache fallback, and exact local cleanup.
+It must share the next authorized GPU-bearing A10M2 continuation allocation;
+no standalone L40 I/O job or new stage-2 package is authorized. Its byte/time
+envelope will be frozen from A10M2D2 results and the A10M1 transfer manifest
+when available. Framework, NCCL/DDP, restart, training, and A10M3 remain
+unauthorized until their own dispatch and prerequisite gates.
+
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
 confirmation package. Eighteen fresh configurations entered an 18/4/2 staged
