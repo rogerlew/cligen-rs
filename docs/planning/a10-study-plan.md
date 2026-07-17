@@ -716,6 +716,100 @@ Sources:
   and filesystem paths must be verified on the live system before production
   jobs.
 
+#### 8.2.1 SSH authentication and agent bootstrap
+
+Until the C3+3 administrator explicitly confirms a different supported
+mechanism, A10 assumes that the `login-ui` gateway requires interactive
+password and Duo authentication for every cold SSH connection. A live
+public-key-only probe on 2026-07-16 showed that the gateway offered only
+`keyboard-interactive` authentication. The destination `lemhi` host offered
+`publickey,password` and accepted the operator's RSA key. Therefore the
+gateway, not the destination key or destination `authorized_keys`
+permissions, is the current noninteractive-access boundary.
+
+A10 cluster work uses a supervised bootstrap followed by SSH connection
+multiplexing:
+
+```sh
+# Run interactively; the first command requires password and Duo.
+ssh -MNf login-ui
+ssh -MNf lemhi
+
+# Verify that both persistent masters exist.
+ssh -O check login-ui
+ssh -O check lemhi
+```
+
+For a long supervised session, the repository keep-alive can run in a
+dedicated terminal after bootstrap:
+
+```sh
+research/a10/cluster/ssh-keepalive.sh
+```
+
+It sends only the multiplex control operation `ssh -O check` at a bounded
+interval. This refreshes the existing masters but cannot create a cold SSH
+connection or solicit credentials. It exits if either master is unavailable.
+Set `A10_SSH_KEEPALIVE_INTERVAL_SECONDS` or pass `--interval` to override the
+five-minute default; use `--once` for a readiness check.
+
+The operator-local SSH configuration supplies the aliases, `ProxyJump`, key,
+`ControlMaster`, `ControlPath`, and bounded `ControlPersist` lifetime. Those
+settings, control sockets, usernames, and absolute home paths are local
+operational state and are not committed.
+
+After bootstrap, agents and automation must use noninteractive mode and a
+finite connection timeout:
+
+```sh
+ssh -o BatchMode=yes -o ConnectTimeout=10 lemhi '<command>'
+```
+
+If either master is absent or expired, automation fails closed and reports
+that human bootstrap is required. It must not wait for a password prompt,
+attempt Duo, store passwords or Duo material, or use `sshpass`/`expect` to
+automate interactive authentication. Network loss, host sleep, master expiry,
+or gateway restart may require another supervised bootstrap. `scp`, `sftp`,
+and `rsync` may reuse the same configured `lemhi` alias after bootstrap.
+
+This assumption permits supervised A10 execution but does not claim unattended
+cold-start access. Any later administrator-approved public-key, SSH
+certificate, or other noninteractive gateway mechanism must be verified and
+recorded before replacing this runbook.
+
+#### 8.2.2 Local orchestration environment
+
+As of 2026-07-16, the active A10 operator control host is `rmm`, a Mac mini
+(`Macmini9,1`) with an Apple M1 CPU (8 cores: 4 performance and 4 efficiency),
+16 GB memory, and `arm64` architecture. It runs macOS 26.5.2 (build `25F84`,
+Darwin 25.5.0) with `/bin/zsh` as the operator shell.
+
+`rmm` was selected for this session because Lemhi access requires University
+of Idaho VPN connectivity available from this machine. Both an active VPN
+route and the supervised SSH master bootstrap are prerequisites for agent
+access. `rmm` is an orchestration and staging host; it is not automatically an
+A10 scientific-compute host or the normative CPU benchmark host.
+
+All repository work and scientific evidence predating this session were
+produced on other machines. Existing artifacts retain their recorded
+provenance and must not be retroactively attributed to `rmm`. New evidence
+records identify the actual execution host rather than inferring it from the
+machine that commits or transfers the result.
+
+Current local-tooling constraints are:
+
+- no Rust/Cargo toolchain is installed on `rmm`; repository Cargo gates cannot
+  be claimed on this host until a toolchain is installed and recorded, and
+  must otherwise run on another identified environment;
+- GitHub CLI credentials are held in the macOS Keychain. A restricted agent
+  subprocess may report authentication failure when it cannot access the
+  keyring even though host-context authentication is valid; verification and
+  publishing therefore require approved host-context credential access; and
+- SSH control sockets are operator-local host state. Restricted subprocesses
+  may require approved host-context access to reuse them. Keys, socket paths,
+  Keychain material, VPN credentials, and machine hardware identifiers beyond
+  the non-sensitive inventory above are not committed.
+
 ### 8.3 Software environment
 
 Preferred research stack: pinned Python plus PyTorch and CUDA, selected after
@@ -1133,6 +1227,9 @@ Work:
 
 - verify allocation/partition/QOS, driver, L40 identity, filesystem, local
   scratch, wall-time, signals, and requeue behavior;
+- verify the current gateway-authentication assumption, perform the supervised
+  SSH bootstrap, and demonstrate a `BatchMode=yes` command through the
+  persistent `lemhi` master without another credential prompt;
 - build the offline pinned environment;
 - run one-GPU and two-GPU framework/collective smoke with a small synthetic
   environment harness;
@@ -1144,6 +1241,8 @@ Work:
 Artifacts:
 
 - cluster inventory receipt;
+- local orchestration and VPN-reachability receipt, clearly separated from
+  scientific-compute and benchmark-host provenance;
 - environment lock/image manifest;
 - Slurm scripts and runbook;
 - smoke benchmarks;
@@ -1153,6 +1252,9 @@ Artifacts:
 Gate:
 
 - one- and two-GPU tests pass;
+- the supervised SSH bootstrap runbook succeeds, post-bootstrap agent access
+  is noninteractive, and a missing master fails closed without soliciting or
+  storing credentials;
 - offline reconstruction passes;
 - the synthetic environment/storage harness survives an actual interruption;
 - durable/local storage behavior is understood;
