@@ -47,11 +47,14 @@ after a published amendment, CUDA 12.8 `nvcc` reached but crashed its host
 20 requested GPU-minutes and one second of actual allocation. The fail-closed
 ladder correctly left J2--J4b unsubmitted and cleaned the exact remote run.
 
-A10M3 is not authorized. The smallest external correction is a Lemhi
-administrator-validated CUDA 12.8 host compiler on `node03`; the
-login-advertised GCC 11.2 path is the first bounded candidate. A future compute
-attempt requires explicit package/resource authority because A10M2's retry
-allowance is exhausted.
+A10M3 is not authorized. The operator explicitly authorized the
+[A10M2D1 Lemhi CUDA drift diagnostic](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/package.md)
+on 2026-07-16. This bounded successor will sleuth module/documentation drift,
+compare the ambient architecture-targeted Spack compiler with OS GCC 8.5 and
+advertised GCC 11.2, and test login-prebuilt versus node-built binaries in one
+five-minute L40 job. Its hard ceiling is 10 requested GPU-minutes including
+one exact infrastructure-transient rerun. It does not reopen A10M2, authorize
+A10M3, or proceed to framework testing.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
