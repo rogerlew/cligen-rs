@@ -9,9 +9,10 @@
 #SBATCH --error=logs/%x-%j.err
 
 set -euo pipefail
-module purge
-module use /opt/modules/modulefiles
-module load cuda/12.8
+cuda_root=/usr/local/cuda-12.8
+test -x "$cuda_root/bin/nvcc"
+export PATH="$cuda_root/bin:$PATH"
+export LD_LIBRARY_PATH="$cuda_root/lib64:${LD_LIBRARY_PATH:-}"
 
 result_dir="results/j1/${SLURM_JOB_ID}"
 mkdir -p "$result_dir"

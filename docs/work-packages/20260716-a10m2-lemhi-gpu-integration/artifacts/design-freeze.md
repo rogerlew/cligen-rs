@@ -31,3 +31,11 @@ Frozen before the first remote write or Slurm submission on 2026-07-16 PDT.
 
 No test accesses A10 corpus or confirmation series, trains a candidate,
 deliberately preempts a job, or makes a throughput/scaling claim.
+
+## Amendment
+
+[Amendment 01](amendment-01-compute-module-registry.md) prospectively replaces
+Lmod lookup with the same modulefiles' canonical installation paths after the
+first J1 attempt established that the login and compute registries differ.
+It changes no selected version, test, or resource request and caps the amended
+matrix at 50 requested GPU-minutes with no retry remaining.

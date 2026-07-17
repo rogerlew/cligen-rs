@@ -9,9 +9,10 @@
 #SBATCH --error=logs/%x-%j.err
 
 set -euo pipefail
-module purge
-module use /opt/modules/modulefiles
-module load python/3.11.11
+python_root=/opt/modules/devel/python/3.11.11
+test -x "$python_root/bin/python"
+export PATH="$python_root/bin:$PATH"
+export LD_LIBRARY_PATH="$python_root/lib:${LD_LIBRARY_PATH:-}"
 test -s checkpoints/j4-state.json
 result_dir="results/j4b/${SLURM_JOB_ID}"
 mkdir -p "$result_dir"
