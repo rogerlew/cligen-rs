@@ -168,6 +168,18 @@ class FoundationAcceptance(ToolkitFixture):
         toolkit.submit("smoke", 1)
         self.assertTrue(toolkit.observe("smoke", 1)["passed"])
 
+    def test_exhausted_failed_role_settles_for_evidence_and_cleanup(self) -> None:
+        jobs = self.plan("exhausted")["jobs"]
+        jobs[0]["max_attempts"] = 1
+        jobs[0]["retry_on"] = []
+        toolkit = self.toolkit("exhausted", scenario={"results": {"smoke": {"gates": {"registered": False}}}})
+        self.verified(toolkit, self.plan("exhausted", jobs=jobs))
+        toolkit.submit("smoke", 0)
+        self.assertFalse(toolkit.observe("smoke", 0)["passed"])
+        self.assertEqual(read_json(toolkit.private_path)["run_state"], "MATRIX_SETTLED")
+        self.assertTrue(toolkit.collect()["download_promoted"])
+        self.assertTrue(toolkit.clean()["remote_absent"])
+
     def test_cancel_is_exact_and_requires_terminal_observation(self) -> None:
         toolkit = self.toolkit("cancel")
         self.verified(toolkit, self.plan("cancel"))

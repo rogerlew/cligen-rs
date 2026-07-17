@@ -24,7 +24,7 @@ the hashed distribution archives; this package makes no relicensing claim.
 - confirmation classification: `development-only`;
 - partition/GRES: `gpu-icrews` / `gpu:l40:1`;
 - one attempt, 4 CPUs, 16,384 MiB, 20 minutes, one GPU;
-- cumulative ceiling: 20 requested GPU-minutes;
+- revision-1 ceiling: 20 requested GPU-minutes;
 - allowlist: `evidence.json`, `slurm/smoke.0.out`, and
   `slurm/smoke.0.err`;
 - no retry, network, confirmation target, performance inference, or A10M3
@@ -58,3 +58,18 @@ the login/compute ISA and moved-venv traps observed in A10M2 and A10M2D1.
   booleans from the exact structured `evidence.json` gate receipt.
 - Do not broaden allocation or retry after a failure. Collect the bounded
   evidence possible, clean exactly, and close at a registered hold.
+
+## Revision 2 prospective correction
+
+The first run exhausted its one attempt on a test-harness assumption:
+`_sqlite3` is statically linked in the selected portable runtime and therefore
+has no `__file__`. Before another allocation, revision 2 removes only that
+invalid native-path member; NumPy's compiled `_multiarray_umath` remains the
+native `ldd` gate. It also makes a failed job emit an atomic structured failure
+receipt and makes the controller settle an exhausted failed role so evidence
+and exact cleanup remain reachable.
+
+Revision 2 uses a new run ID and new 20-GPU-minute budget. The package-wide
+ceiling is therefore 40 requested GPU-minutes across two single-attempt runs.
+No scientific, confirmation, performance, multi-GPU, or training scope is
+added.

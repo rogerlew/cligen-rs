@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import _sqlite3
 import ctypes
 import json
 import multiprocessing
@@ -42,7 +41,7 @@ def main() -> None:
     process.start()
     child_result = queue.get(timeout=10)
     process.join(timeout=10)
-    native_paths = [Path(np._core._multiarray_umath.__file__), Path(_sqlite3.__file__)]
+    native_paths = [Path(np._core._multiarray_umath.__file__)]
 
     array = np.arange(9, dtype=np.float32).reshape(3, 3)
     product = array @ array.T

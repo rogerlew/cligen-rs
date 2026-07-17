@@ -978,7 +978,16 @@ class Toolkit:
                 )
                 required_roles = {item["role"] for item in plan["jobs"]}
                 passed_roles = {item["job_role"] for item in state["attempts"].values() if item.get("state") == "RESULT_VALIDATED" and item.get("passed")}
-                if required_roles <= passed_roles:
+                exhausted_roles = {
+                    planned["role"]
+                    for planned in plan["jobs"]
+                    if len([
+                        item
+                        for item in state["attempts"].values()
+                        if item.get("job_role") == planned["role"] and item.get("state") == "RESULT_VALIDATED"
+                    ]) >= planned["max_attempts"]
+                }
+                if required_roles <= passed_roles | exhausted_roles:
                     self._event(state, "MATRIX_ACTIVE", "MATRIX_SETTLED", plan_id=state["current_plan_id"])
                     state["run_state"] = "MATRIX_SETTLED"
                 self._save_ledger(ledger)

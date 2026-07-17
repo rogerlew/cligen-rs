@@ -10,6 +10,32 @@ job_local=${TMPDIR:-/tmp}/a10-python311-smoke-$SLURM_JOB_ID
 partial=$run_root/evidence.json.part
 final=$run_root/evidence.json
 
+write_failure_receipt() {
+  status=$?
+  trap - EXIT
+  if [ "$status" -ne 0 ] && [ -x "$runtime_root/bin/python3" ]; then
+    "$runtime_root/bin/python3" - "$final" "$status" <<'PY' || true
+import json
+import os
+import sys
+
+final, status = sys.argv[1:]
+temporary = final + ".failure"
+with open(temporary, "w", encoding="utf-8") as stream:
+    json.dump({
+        "classification": "development-only",
+        "exit_code": int(status),
+        "gates": {"job_completed": False},
+        "verdict": "FAIL",
+    }, stream, indent=2, sort_keys=True)
+    stream.write("\n")
+os.replace(temporary, final)
+PY
+  fi
+  exit "$status"
+}
+trap write_failure_receipt EXIT
+
 unset PYTHONPATH PYTHONHOME LD_LIBRARY_PATH
 export PYTHONNOUSERSITE=1
 export PIP_NO_INDEX=1

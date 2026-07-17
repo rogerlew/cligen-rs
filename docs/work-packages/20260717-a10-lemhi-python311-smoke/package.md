@@ -88,7 +88,7 @@ The job clears Python and loader inheritance, uses `--no-index` and
   Python/loader paths are absent;
 - the structured evidence gate is authenticated by the toolkit, all evidence
   is allowlisted/sanitized, and both job-local and exact remote cleanup pass;
-- all 21 toolkit tests, `git diff --check`, `cargo fmt --check`,
+- all 22 toolkit tests, `git diff --check`, `cargo fmt --check`,
   `cargo clippy --all-targets -- -D warnings`, and `cargo test` pass.
 
 ## Exit criteria
@@ -97,8 +97,26 @@ The job clears Python and loader inheritance, uses `--no-index` and
 gate above. A runtime/ABI incompatibility closes honestly at
 `EXECUTED-HOLD-PYTHON311-PORTABILITY`; a framework/CUDA incompatibility at
 `EXECUTED-HOLD-FRAMEWORK-ABI`; an authentication, transfer, scheduler, or
-cleanup failure at the corresponding bounded operational hold. No retry or
-broader resource request is authorized by this package.
+cleanup failure at the corresponding bounded operational hold. Beyond the two
+prospectively frozen single-attempt runs below, no retry or broader resource
+request is authorized by this package.
+
+The first frozen run, source commit `1135a98`, used job `1013742` and failed
+after 93 seconds because the test assumed the portable build's statically
+linked `_sqlite3` module exposed `__file__`. Runtime extraction, venv creation,
+the hash-locked 26-wheel installation, and `pip check` had already completed.
+This is retained failed development evidence, not a Python portability hold.
+The exact remote run was recovered and verified absent. The failure also
+exposed that the foundation did not settle an exhausted failed matrix for
+collection/cleanup; the corrective implementation and regression fixture are
+part of revision 2.
+
+Revision 2 is a prospective new toolkit run, not an automatic resubmission of
+the exhausted Slurm intent. It removes only the invalid `_sqlite3.__file__`
+assumption, retains native linkage proof through NumPy's compiled extension,
+adds an atomic failure evidence receipt, and authorizes one fresh 20-minute
+attempt under a fresh resource budget. Across both runs, the package ceiling is
+40 requested GPU-minutes; there is still no retry within either frozen run.
 
 ## Artifacts
 
