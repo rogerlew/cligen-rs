@@ -1,0 +1,8 @@
+{
+  "classification": "development-only",
+  "exit_code": 1,
+  "gates": {
+    "job_completed": false
+  },
+  "verdict": "FAIL"
+}

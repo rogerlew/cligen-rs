@@ -1,0 +1,30 @@
+{
+  "classification": "development-only",
+  "cuda_runtime": "12.8",
+  "gates": {
+    "abi_cp311": true,
+    "autograd_update": true,
+    "checkpoint_reload": true,
+    "ctypes": true,
+    "cuda_available": true,
+    "exact_python": true,
+    "isolated_environment": true,
+    "job_local_cleanup": true,
+    "multiprocessing_spawn": true,
+    "native_linkage": true,
+    "numpy": true,
+    "numpy_torch_interop": true,
+    "offline_hash_install": true,
+    "one_l40": true,
+    "sqlite": true,
+    "ssl": true,
+    "subprocess": true,
+    "torch_cuda_tensor": true,
+    "venv": true
+  },
+  "numpy_version": "2.2.6",
+  "python_implementation": "cpython",
+  "python_version": "3.11.15",
+  "torch_version": "2.7.1+cu128",
+  "verdict": "PASS"
+}

@@ -120,19 +120,25 @@ now:
    [A10 Lemhi toolkit foundation](work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
    against the authoritative
    [toolkit specification](specifications/SPEC-LEMHI-AGENT-TOOLKIT.md);
-2. **In execution:** the
+2. **Complete (2026-07-17):** the
    [CPython 3.11 Lemhi smoke package](work-packages/20260717-a10-lemhi-python311-smoke/package.md)
    uses the toolkit, a pinned Linux x86-64 runtime, offline dependency
-   reconstruction including NumPy, and a bounded one-L40 validation; and
-3. dispatch A10M3 only after both predecessors reach their registered ready
-   terminals.
+   reconstruction including NumPy, and a bounded one-L40 validation, and
+   reached `A10-LEMHI-PY311-SMOKE-READY`; and
+3. **Next:** dispatch A10M3 now that both operational predecessors have reached
+   their registered ready terminals.
 
 This ordering does not revoke `A10M1-CORPUS-READY` or
 `A10M2-COMPUTE-READY`; it adds operational prerequisites before the scientific
 milestone. Foundation execution reached `LEMHI-TOOLKIT-FOUNDATION-READY` using
 deterministic local fixtures and a recording command adapter; it performed no
-remote write or allocation. The Python 3.11 claim remains unproved until its
-own package, and confirmation access remains prohibited.
+remote write or allocation. The smoke package subsequently authenticated 19
+CPython, standard-library, native-linkage, NumPy, PyTorch, CUDA, one-L40,
+offline-install, and cleanup gates under the toolkit. Its three single-attempt
+runs used 60 requested and 4.75 actual GPU-minutes; the first two are retained
+harness failures, and the final run passed in 100 seconds. All exact remote
+roots were removed. A10M3 is now the next roadmap edge; confirmation access
+remains prohibited.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

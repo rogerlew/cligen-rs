@@ -1,8 +1,8 @@
 # A10 Lemhi CPython 3.11 Smoke
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
-Evidence mode: Mixed (local asset construction and live Lemhi execution)
+Evidence mode: Ran (local asset construction and live Lemhi execution)
 Scaffold base: clean `main` at `cd537ce`
 Execution branch and push target: `main`
 
@@ -138,5 +138,16 @@ single-attempt runs. No fourth run or retry is authorized.
 - `artifacts/environment/wheel-manifest.json` — exact wheel identities
   materialized by the builder;
 - `artifacts/jobs/smoke.sh` and `smoke.py` — bounded compute job; and
-- `artifacts/execution.md` and `artifacts/toolkit/` — live receipts and final
-  disposition, created during execution.
+- `artifacts/execution.md`, `artifacts/execution-gates.md`, and
+  `artifacts/toolkit/` — live receipts, final validation, and disposition.
+
+## Execution result
+
+Terminal: `A10-LEMHI-PY311-SMOKE-READY`
+
+The third and final frozen run authenticated all 19 registered gates, collected
+sanitized evidence, removed the exact remote root, and closed normally. The two
+earlier harness failures remain explicit development evidence and consumed
+their registered allocations; neither is rewritten as a platform failure.
+Detailed identities, elapsed allocation, corrections, and scope boundaries are
+in [execution.md](artifacts/execution.md).
