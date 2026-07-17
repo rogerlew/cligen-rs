@@ -108,8 +108,29 @@ one-L40 framework behavior, the full 98-object stage-2 path, two-L40
 NCCL/DDP, and Slurm signal/checkpoint/manual-resume equivalence. Seven
 allocations used 53 requested and 2.0167 actual GPU-minutes; the exact remote
 run was removed after verified evidence retrieval. With A10M1 already ready,
-A10M3 is now authorized only as a separately scaffolded and dispatched
-package; confirmation access remains prohibited.
+the original A10M3 entry conditions were satisfied; the later operator
+direction below adds two operational prerequisites. Confirmation access
+remains prohibited.
+
+**Operator direction 2026-07-17: insert an extensible Lemhi workflow toolkit
+and a CPython 3.11 smoke gate before A10M3.** The required forward sequence is
+now:
+
+1. execute the
+   [A10 Lemhi toolkit foundation](work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
+   against the authoritative
+   [toolkit specification](specifications/SPEC-LEMHI-AGENT-TOOLKIT.md);
+2. scaffold and execute a separate CPython 3.11 Lemhi smoke package using the
+   toolkit, a pinned Linux x86-64 runtime, offline dependency reconstruction
+   including NumPy, and a bounded one-L40 validation; and
+3. dispatch A10M3 only after both predecessors reach their registered ready
+   terminals.
+
+This ordering does not revoke `A10M1-CORPUS-READY` or
+`A10M2-COMPUTE-READY`; it adds operational prerequisites before the scientific
+milestone. The toolkit scaffold performs no remote write or allocation, the
+Python 3.11 claim remains unproved until its own package, and confirmation
+access remains prohibited.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
