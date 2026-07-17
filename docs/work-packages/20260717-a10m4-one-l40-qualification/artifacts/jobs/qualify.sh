@@ -65,11 +65,15 @@ tar -xf "$run_root/corpus.tar" -C "$job_local"
 tar -xzf "$run_root/source.tar.gz" -C "$job_local"
 tar -xzf "$run_root/cargo-vendor.tar.gz" -C "$job_local"
 tar -xzf "$run_root/selected-parameters-v1.tar.gz" -C "$job_local/parameters"
-tar -xJf "$run_root/cargo-1.92.0-x86_64-unknown-linux-gnu.tar.xz" -C "$job_local"
+tar -xJf "$run_root/rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz" -C "$job_local"
+"$job_local/rust-1.92.0-x86_64-unknown-linux-gnu/install.sh" \
+  --prefix="$job_local/rust-toolchain" --disable-ldconfig >/dev/null
 mkdir -p "$job_local/source/.cargo"
 printf '%s\n' '[source.crates-io]' 'replace-with = "vendored-sources"' '' \
   '[source.vendored-sources]' 'directory = "../../vendor"' >"$job_local/source/.cargo/config.toml"
-export PATH="$job_local/cargo-1.92.0-x86_64-unknown-linux-gnu/cargo/bin:/usr/bin:/bin"
+export PATH="$job_local/rust-toolchain/bin:/usr/bin:/bin"
+case "$(rustc --version)" in "rustc 1.92.0 "*) ;; *) exit 101 ;; esac
+case "$(cargo --version)" in "cargo 1.92.0 "*) ;; *) exit 101 ;; esac
 (cd "$job_local/source" && cargo build --release --locked --offline -p cligen --bin cligen)
 faithful_binary=$job_local/source/target/release/cligen
 test -x "$faithful_binary"

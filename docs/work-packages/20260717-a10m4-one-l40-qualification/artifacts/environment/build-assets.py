@@ -22,13 +22,13 @@ SMOKE_BUILDER = REPO / (
     "docs/work-packages/20260717-a10-lemhi-python311-smoke/"
     "artifacts/environment/build_assets.py"
 )
-CARGO = {
-    "filename": "cargo-1.92.0-x86_64-unknown-linux-gnu.tar.xz",
-    "bytes": 10_788_340,
-    "sha256": "e5e12be2c7126a7036c8adf573078a28b92611f5767cc9bd0a6f7c83081df103",
+RUST_TOOLCHAIN = {
+    "filename": "rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz",
+    "bytes": 192_171_372,
+    "sha256": "d2ccef59dd9f7439f2c694948069f789a044dc1addcc0803613232af8f88ee0c",
     "url": (
         "https://static.rust-lang.org/dist/2025-12-11/"
-        "cargo-1.92.0-x86_64-unknown-linux-gnu.tar.xz"
+        "rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz"
     ),
 }
 
@@ -153,8 +153,8 @@ def main() -> None:
         check=True,
     )
 
-    cargo = root / CARGO["filename"]
-    download(CARGO, cargo)
+    rust_toolchain = root / RUST_TOOLCHAIN["filename"]
+    download(RUST_TOOLCHAIN, rust_toolchain)
     corpus = root / "corpus.tar"
     build_corpus(corpus)
     source = root / "source.tar.gz"
@@ -179,7 +179,7 @@ def main() -> None:
 
     names = [
         "runtime.tar.gz", "wheelhouse.tar", "requirements.lock",
-        CARGO["filename"], "corpus.tar", "source.tar.gz",
+        RUST_TOOLCHAIN["filename"], "corpus.tar", "source.tar.gz",
         "cargo-vendor.tar.gz", "selected-parameters-v1.tar.gz",
         "qualify.py", "qualify.sh", "evidence.schema.json",
     ]
