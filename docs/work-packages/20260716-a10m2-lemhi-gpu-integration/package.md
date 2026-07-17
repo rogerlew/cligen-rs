@@ -1,6 +1,6 @@
 # A10M2 — Lemhi GPU Integration and Restartability Readiness
 
-Status: `SCAFFOLDED`
+Status: `EXECUTING`
 Date: 2026-07-16
 Evidence mode: Mixed
 Scaffolding authorization: operator direction on 2026-07-16 from clean
@@ -126,6 +126,13 @@ MFA remains human-supervised. The executor uses only pre-existing SSH masters
 and noninteractive commands with `BatchMode=yes`; it never receives or stores
 password or Duo material. The repository keep-alive may preserve a bootstrapped
 session but cannot create one.
+
+Execution was dispatched by the operator's `Execute A10M2` instruction from
+published `origin/main` commit
+`922e81f3530d827f591265fe80c3520e76c61ce9`, whose accepted A10M0 predecessor
+terminal is `A10M0-PREDECESSORS-FROZEN`. The frozen J1--J4b matrix and hard
+one-GPU-hour ceiling are authorized. The exact receipt is retained in
+`artifacts/dispatch.md`.
 
 ## Gates
 
