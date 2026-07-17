@@ -1,0 +1,8 @@
+source_commit=5d8abbe61df810d4a11dc4ab92fa686214be25a1
+remote_run=a10m2d2-5d8abbe61df8
+logical_ceiling_bytes=5368709120
+ProductName:		macOS
+ProductVersion:		26.5.2
+BuildVersion:		25F84
+arm64
+OpenSSH_10.2p1, LibreSSL 3.3.6

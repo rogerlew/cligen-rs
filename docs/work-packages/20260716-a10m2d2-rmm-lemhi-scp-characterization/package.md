@@ -1,10 +1,13 @@
 # A10M2D2 — rmm-to-Lemhi SCP Transfer Characterization
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-16
 Evidence mode: Mixed
 Scaffolding authorization: operator direction on 2026-07-16 from clean
 `main` at `7e76c1a5689750252f38162b057bab7742e0d935`, targeting `main`
+Execution authorization: operator direction on 2026-07-16 from published
+`main` at `5d8abbe61df810d4a11dc4ab92fa686214be25a1`, targeting `main`
+Terminal: `A10M2D2-SCP-EXPECTATIONS-FROZEN`
 
 ## Objective
 
@@ -114,15 +117,15 @@ Excluded:
 ## Execution & dispatch
 
 Scaffolded on `main` at
-`7e76c1a5689750252f38162b057bab7742e0d935`; push target is `main`. This
-scaffold performs no fixture generation, remote write, transfer, or Slurm
-submission.
+`7e76c1a5689750252f38162b057bab7742e0d935` and dispatched from published
+`main` at `5d8abbe61df810d4a11dc4ab92fa686214be25a1`; push target is `main`.
+The operator supplied only VPN connectivity and interactive MFA bootstrap.
+Agents did not receive or automate password/Duo material.
 
-Execution requires a kickoff naming the then-current published `origin/main`,
-approving the 5-GiB logical round-trip ceiling, and confirming that stage 1 is
-an operator-supervised warm-SCP characterization. The operator supplies only
-VPN connectivity and interactive MFA bootstrap. Agents never receive or
-automate password/Duo material.
+The frozen one-pass driver completed on 2026-07-16 with 5,206,187,008 logical
+bytes, 27 passing registered integrity verdicts, one expected timeout, verified
+rsync recovery, zero Slurm/GPU use, and exact local/remote cleanup. Results and
+limitations are in `artifacts/execution/summary.md` and the terminal record.
 
 ## Gates
 
@@ -180,5 +183,7 @@ Legitimate holds are:
 - `artifacts/stage2-roadmap-handoff.md` — future shared-allocation M2 gate.
 - `artifacts/jobs/measure_command.py` — monotonic command timer.
 - `artifacts/jobs/run_stage1.sh` — bounded `rmm` orchestrator.
+- `artifacts/execution/` — sanitized raw evidence, analysis, review, gates, and
+  terminal disposition.
 - `artifacts/README.md` — execution artifact registry.
 - `kickoff-prompt.md` — bounded execution dispatch template.

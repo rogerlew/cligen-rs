@@ -25,6 +25,17 @@ It must also consume the stage-1 alternative-transport and interruption
 findings: use a resumable transport for large durable staging only if the
 measured SCP expectations and administrator-supported options justify it.
 
+A10M2D2 now freezes the planning inputs for that decision. The observed S1024
+rates were 10.054 MiB/s upload to Ceph and 4.727 MiB/s download to `rmm`.
+Routine single archives up to approximately 10 GiB are reasonable on this warm
+path; approximately 50 GiB or larger warrants resumable rsync or managed
+transport investigation. Direct transfer of 1,024 small files was 40.16 times
+slower to upload and 14.14 times slower to download than their tar archive, so
+Stage 2 should use a bundled immutable input unless a real A10M1 shard layout
+must be measured explicitly. Every staged and copied-back object still requires
+SHA-256 verification because interrupted SCP exposed a partial object at the
+requested destination name.
+
 The future package freezes its bytes and time from A10M2D2 results and, where
 available, the A10M1 transfer manifest. No stage-2 resource or execution is
 authorized by this handoff.

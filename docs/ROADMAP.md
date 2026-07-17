@@ -60,26 +60,32 @@ observed correction is direct CUDA 12.8 plus explicit `/usr/bin/g++`, pending
 administrator support. A10M2 remains immutable, and framework testing and
 A10M3 remain unauthorized.
 
-The operator authorized scaffolding the
-[A10M2D2 rmm-to-Lemhi SCP characterization](work-packages/20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md)
-on 2026-07-16. Stage 1 will measure the warm MFA-bootstrapped `rmm`/UI-VPN/SCP
-path to durable Lemhi Ceph storage with synthetic fixtures, bidirectional
-integrity, single-file and small-file/archive behavior, compression controls,
-intentional interruption/partial-file characterization, conditional rsync
-resume, live capacity/quota visibility, alternative-transport inventory, and a
-5-GiB logical-transfer ceiling. It uses no Slurm or GPU resource and is not yet
-dispatched for execution. Later time-window replication, actual environment/
-shard/checkpoint sizes, and managed Globus discovery remain explicit follow-up
-rather than unmeasured assumptions.
+The operator authorized the
+[A10M2D2 rmm-to-Lemhi SCP characterization](work-packages/20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md),
+which completed on 2026-07-16 at `A10M2D2-SCP-EXPECTATIONS-FROZEN`. All 27
+registered integrity verdicts passed across 4.849 GiB of logical traffic with
+exact cleanup and no Slurm/GPU use. Sustained warm-path rates were 10.054
+MiB/s upload and 4.727 MiB/s download. A 1,024-file tree was 40.16 times slower
+to upload and 14.14 times slower to download than its tar archive; A10 should
+bundle small immutable objects. Interrupted SCP exposed an incomplete object
+at its requested name, while the installed rsync pair resumed and verified it.
+Routine single archives up to about 10 GiB are reasonable in the observed
+window; about 50 GiB or larger warrants resumable or administrator-supported
+managed transport investigation. The Globus CLI was absent and per-account
+quota remained unproven, so neither finding may be inferred from shared Ceph
+capacity. Later time-window replication and real artifact sizes remain
+explicit follow-up rather than assumptions.
 
 Stage 2 is now a required forward M2 readiness gate: measure and verify
 Ceph-to-job-local staging, representative shard layout, bounded local read,
 durable checkpoint-style copy-back, cache fallback, and exact local cleanup.
 It must share the next authorized GPU-bearing A10M2 continuation allocation;
 no standalone L40 I/O job or new stage-2 package is authorized. Its byte/time
-envelope will be frozen from A10M2D2 results and the A10M1 transfer manifest
-when available. Framework, NCCL/DDP, restart, training, and A10M3 remain
-unauthorized until their own dispatch and prerequisite gates.
+envelope must use the A10M2D2 rates and small-file findings plus the A10M1
+transfer manifest when available. Every staged or copied-back object requires
+hash verification; destination existence is insufficient after the observed
+SCP partial-file behavior. Framework, NCCL/DDP, restart, training, and A10M3
+remain unauthorized until their own dispatch and prerequisite gates.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

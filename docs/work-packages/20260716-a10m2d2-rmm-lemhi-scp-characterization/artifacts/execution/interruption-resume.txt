@@ -1,0 +1,5 @@
+scp_interrupt_status=124
+scp_partial_name=interrupted-256m.bin
+scp_partial_bytes=9011200
+rsync_resume_status=0
+rsync_resume_integrity=pass

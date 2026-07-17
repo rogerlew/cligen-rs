@@ -1,6 +1,6 @@
 # A10M2D2 artifact registry
 
-Scaffolded evidence:
+Frozen evidence:
 
 - `design-freeze.md` — fixed authority, safety, and transfer envelope;
 - `test-matrix.md` — exact payload/repetition matrix and accounting;
@@ -10,11 +10,11 @@ Scaffolded evidence:
 - `stage2-roadmap-handoff.md` — future Ceph/compute staging gate; and
 - `jobs/` — bounded local orchestrator and monotonic command timer.
 
-Execution adds dispatch and source manifests; safe local/remote preflight;
-fixture manifest; raw timing/status TSV; integrity ledger; summary and
-projections; interruption/resume receipt; alternative-transport inventory;
-resource/traffic ledger; cleanup receipt; review; gate results; terminal; and
-an updated stage-2 handoff.
+Execution evidence is complete under `execution/`: dispatch and control-master
+receipts; sanitized remote preflight; fixture and small-file manifests; raw
+timing/status TSV and integrity ledger; summary and projections;
+interruption/resume receipt; alternative-transport inventory; traffic/resource
+ledger; cleanup receipt; review; gate results; and terminal disposition.
 
 Never retain fixtures, partial transfers, usernames, absolute user paths,
 credentials, sockets, VPN details, unrestricted environment dumps, or verbose

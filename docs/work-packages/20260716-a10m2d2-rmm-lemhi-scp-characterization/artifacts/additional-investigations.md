@@ -12,6 +12,15 @@
 - default versus SSH compression for incompressible/compressible content; and
 - within-session repeat variation at 16 and 256 MiB.
 
+All included investigations completed. The shared Ceph filesystem exposed
+capacity but no usable per-account quota record. Rsync was present and
+successfully resumed and verified the interrupted destination; Globus CLI was
+absent on both endpoints, which does not rule out a managed endpoint. Bundling
+1,024 files as tar improved elapsed upload/download by 40.16/14.14 times.
+Compression did not help random content and was inconsistent even for the
+compressible control. S256 variation was modest enough that no immediate
+later-window replay is recommended.
+
 ## Routed to stage 2
 
 - Ceph-to-job-local and job-local-to-Ceph throughput;

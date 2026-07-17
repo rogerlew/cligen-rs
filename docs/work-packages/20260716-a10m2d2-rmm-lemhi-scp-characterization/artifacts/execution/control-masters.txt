@@ -1,0 +1,10 @@
+launch_login_ui=master-running
+launch_lemhi=master-running
+post_execution_login_ui=master-running
+post_execution_lemhi=master-running
+
+The launch checks succeeded before remote write. The frozen driver redirected
+only stdout, while `ssh -O check` reports on stderr, so the original capture
+was empty. The sanitized states above record the observed launch output and an
+independent post-execution recheck; process identifiers and socket paths are
+intentionally omitted.

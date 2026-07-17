@@ -1,0 +1,3 @@
+/usr/bin/sha256sum
+Filesystem         1024-blocks         Used    Available Capacity Mounted on
+<ceph-filesystem> 1028281012224 368474132480 659806879744      36% /ceph

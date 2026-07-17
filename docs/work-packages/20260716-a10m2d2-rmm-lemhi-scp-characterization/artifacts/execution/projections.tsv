@@ -1,0 +1,9 @@
+size_gib	direction	s1024_mib_per_second	projected_seconds	projected_human
+1	upload	10.053817	101.852	1m 42s
+1	download	4.727178	216.620	3m 37s
+10	upload	10.053817	1018.519	16m 59s
+10	download	4.727178	2166.197	36m 06s
+50	upload	10.053817	5092.593	1h 24m 53s
+50	download	4.727178	10830.986	3h 00m 31s
+100	upload	10.053817	10185.186	2h 49m 45s
+100	download	4.727178	21661.973	6h 01m 02s
