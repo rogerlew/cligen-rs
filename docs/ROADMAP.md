@@ -102,6 +102,15 @@ hash verification; destination existence is insufficient after the observed
 SCP partial-file behavior. Framework, NCCL/DDP, restart, training, and A10M3
 remain unauthorized until their own dispatch and prerequisite gates.
 
+The operator dispatched the bounded
+[A10M2 completion package](work-packages/20260717-a10m2-completion/package.md)
+on 2026-07-17. It preserves the original A10M2 hold and D1/D2 evidence while
+freezing the corrected direct-CUDA compiler path, an offline CUDA 12.8
+framework stack, A10M1's accepted 98-object stage-2 input, two-GPU NCCL/DDP,
+and signal/resume checks under a new hard one-GPU-hour ledger. It must publish
+its scaffold before remote mutation and remains the only authorized route to
+`A10M2-COMPUTE-READY`; A10M3 stays unauthorized until this package closes.
+
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
 confirmation package. Eighteen fresh configurations entered an 18/4/2 staged

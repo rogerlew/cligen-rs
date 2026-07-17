@@ -66,3 +66,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260716-a10m2d1-lemhi-cuda-drift-diagnostic](20260716-a10m2d1-lemhi-cuda-drift-diagnostic/package.md) | EXECUTED-COMPLETE |
 | [20260716-a10m2d2-rmm-lemhi-scp-characterization](20260716-a10m2d2-rmm-lemhi-scp-characterization/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10m1-corpus-role-freeze](20260717-a10m1-corpus-role-freeze/package.md) | EXECUTED-COMPLETE |
+| [20260717-a10m2-completion](20260717-a10m2-completion/package.md) | SCAFFOLDED |
