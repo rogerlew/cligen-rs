@@ -63,17 +63,17 @@ Excluded:
 |---|---|---|---|
 | P0 (amended) | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | localize C1's pre-output compute precondition |
 | C1 | `gpu-icrews`, `gpu:l40:1` | 4 CPU, 16 GB, 15 min | corrected CUDA, offline framework, one-GPU, and stage 2 |
-| C2 | `gpu-icrews`, `gpu:l40:2` | 8 CPU, 32 GB, 5 min | two-rank NCCL/DDP |
-| C3a | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | Slurm signal and durable checkpoint |
-| C3b | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, 5 min | manual resume and control comparison |
+| C2 | `gpu-icrews`, `gpu:l40:2` | 8 CPU, 32 GB, amended to 2 min | two-rank NCCL/DDP |
+| C3a | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, amended to 2 min | Slurm signal and durable checkpoint |
+| C3b | `gpu-icrews`, `gpu:l40:1` | 2 CPU, 8 GB, amended to 2 min | manual resume and control comparison |
 
-The original base matrix requests 35 GPU-minutes. Amendment 01 adds P0 after
-C1-01 failed before its first output. C1-01, P0, a corrected C1, and the
-remaining base jobs total at most 55 GPU-minutes. At most one exact retry after a
-documented infrastructure transient is allowed, and only when cumulative
-requested use remains at or below 60 GPU-minutes. No scientific failure is
-rerun. Jobs are sequential and later jobs are not submitted after a hard
-failure.
+The original base matrix requests 35 GPU-minutes. Amendment 01 added P0 after
+C1-01 failed before its first output. Amendment 04 shortened the still-unrun
+jobs after C2-01's pre-import entrypoint failure; all submitted and planned
+attempts total 53 GPU-minutes. Any exact infrastructure retry remains allowed
+only when cumulative requested use stays at or below 60 GPU-minutes. No
+scientific failure is rerun. Jobs are sequential and later jobs are not
+submitted after a hard failure.
 
 ## Plan
 
@@ -150,3 +150,6 @@ compute-valid framework ABI before C1-02; no later base job has been submitted.
 C1-02 (`1013671`) then passed in 76 seconds. Amendment 03 isolates Python and
 loader paths prospectively for unsubmitted C2/C3 after a non-gating ambient
 NumPy probe warning; it changes no test, framework, or resource.
+C2-01 (`1013672`) saw two L40s but a stale moved-venv `torchrun` shebang failed
+before import. Amendment 04 switches to interpreter-module launch and reduces
+the still-unrun limits; the complete planned ledger is 53 GPU-minutes.
