@@ -1,6 +1,6 @@
 # A10M2D1 — Lemhi CUDA Environment Drift Diagnosis
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-16
 Evidence mode: Mixed
 Scaffolding authorization: operator direction on 2026-07-16 from clean
@@ -103,6 +103,11 @@ only.
 MFA remains human-supervised. Automation may use only existing SSH control
 masters with `BatchMode=yes`; it never receives or stores password/Duo
 material.
+
+Executed from clean published `main` at
+`3bc543f2404bc6a2d6ab81931f6eb7e9eb033029` on 2026-07-16. D1 job
+`1013558` completed in six seconds with one L40 and no retry. The package
+closed at `A10M2D1-ROOT-CAUSE-LOCALIZED`; see `artifacts/terminal.md`.
 
 ## Gates
 

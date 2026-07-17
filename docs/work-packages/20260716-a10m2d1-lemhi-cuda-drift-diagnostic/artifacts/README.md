@@ -7,14 +7,18 @@ Scaffolded evidence:
 - `test-matrix.md` — exact comparison matrix and interpretation rules; and
 - `jobs/` — self-contained diagnostic sources.
 
-Execution adds:
+Executed evidence:
 
-- dispatch and source manifests;
-- sanitized login and D1 inventory/probe/compile/run logs;
-- binary hashes and configuration status table;
-- Slurm/accounting and resource ledgers;
-- documentation-drift and root-cause reports;
-- cleanup receipt, review, gate results, terminal, and A10M2 handoff.
+- `dispatch.md` and `logs/source-manifest.sha256` freeze the dispatch and
+  staged source identity;
+- `logs/` retains sanitized login and D1 inventory/probe/compile/run evidence
+  plus source and binary manifests;
+- `configuration-results.md` and `root-cause.md` interpret the comparison;
+- `documentation-drift.md` classifies the published claims;
+- `resource-ledger.md` and `cleanup.md` retain accounting and cleanup;
+- `review.md` and `gates.md` record acceptance checks; and
+- `terminal.md` and `a10m2-handoff.md` close the package and bound the next
+  correction.
 
 Never retain credentials, usernames, control sockets, absolute user paths,
 unrestricted environments, core files, large caches, or confirmation data.

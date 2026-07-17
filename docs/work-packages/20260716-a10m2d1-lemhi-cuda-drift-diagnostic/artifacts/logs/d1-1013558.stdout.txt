@@ -1,0 +1,46 @@
+=== bounded node inventory ===
+Architecture:        x86_64
+Thread(s) per core:  2
+Core(s) per socket:  16
+Socket(s):           2
+Vendor ID:           AuthenticAMD
+CPU family:          25
+Model:               1
+Model name:          AMD EPYC 7313 16-Core Processor
+Linux 4.18.0-553.137.1.el8_10.x86_64
+NVIDIA L40, 610.43.02, 46068 MiB
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+=== module visibility ===
+test	status	detail
+cpu-avx	0	present
+cpu-avx2	0	present
+cpu-avx512f	1	absent
+cpu-avx512dq	1	absent
+cpu-avx512bw	1	absent
+cpu-avx512vl	1	absent
+gpu-allocation	0	one-L40
+M0-directory	0	present
+M0-is-avail	1	cache-bypassed
+M0-load	1	cache-bypassed
+ambient-driver	132	/lfs/software/production2/spack/opt/spack/linux-skylake_avx512/gcc-12.5.0-gwcwav5xd6y6jvjdzhb2jiuyaqgpmtqw/bin/g++
+ambient-preprocess	132	macros
+ambient-cc1	127	missing
+system-driver	0	/usr/bin/g++
+system-preprocess	0	macros
+system-cc1	0	executable
+advertised-driver	0	/opt/modules/devel/gcc/11.2.0/bin/g++
+advertised-preprocess	0	macros
+advertised-cc1	0	executable
+C0-node-compile	1	node03
+C1-node-compile	0	node03
+C1-node-run	0	node-built
+C2-node-compile	0	node03
+C2-node-run	0	node-built
+C0-login-run	132	prestaged
+C1-login-run	0	prestaged
+C2-login-run	0	prestaged
+d1=complete

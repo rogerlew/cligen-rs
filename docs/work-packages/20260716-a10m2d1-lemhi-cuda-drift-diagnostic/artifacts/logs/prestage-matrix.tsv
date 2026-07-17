@@ -1,0 +1,4 @@
+configuration	compiler	compile_status	binary_sha256
+C0-login	/lfs/software/production2/spack/opt/spack/linux-skylake_avx512/gcc-12.5.0-gwcwav5xd6y6jvjdzhb2jiuyaqgpmtqw/bin/g++	0	2248582cd92c47e0dbba488cb50d94bdd7dd13f08904a3e95799bd8f481720cc
+C1-login	/usr/bin/g++	0	a87327d75cb9949048bb1444844cc87577b12b1a1ea5422036220f374b6ba3ef
+C2-login	/opt/modules/devel/gcc/11.2.0/bin/g++	0	cd0124466dc3db3ae954f58b413c0839befba6fc7f8c224be3f6356f0bba39f1

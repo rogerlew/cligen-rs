@@ -49,12 +49,16 @@ ladder correctly left J2--J4b unsubmitted and cleaned the exact remote run.
 
 A10M3 is not authorized. The operator explicitly authorized the
 [A10M2D1 Lemhi CUDA drift diagnostic](work-packages/20260716-a10m2d1-lemhi-cuda-drift-diagnostic/package.md)
-on 2026-07-16. This bounded successor will sleuth module/documentation drift,
-compare the ambient architecture-targeted Spack compiler with OS GCC 8.5 and
-advertised GCC 11.2, and test login-prebuilt versus node-built binaries in one
-five-minute L40 job. Its hard ceiling is 10 requested GPU-minutes including
-one exact infrastructure-transient rerun. It does not reopen A10M2, authorize
-A10M3, or proceed to framework testing.
+on 2026-07-16; it completed at `A10M2D1-ROOT-CAUSE-LOCALIZED`. One six-second
+L40 job proved that `node03` is AMD EPYC without the tested AVX-512 features,
+while the Intel login host defaults to a `linux-skylake_avx512` Spack GCC and
+runtime. That ambient compiler and its login-built RPATH-bearing binary die by
+`SIGILL` on `node03`; explicit OS GCC 8.5 and advertised GCC 11.2 both compile
+and pass the unchanged CUDA 12.8 smoke from either build side. Compute-node
+Lmod also still cannot resolve the login-visible CUDA module. The simplest
+observed correction is direct CUDA 12.8 plus explicit `/usr/bin/g++`, pending
+administrator support. A10M2 remains immutable, and framework testing and
+A10M3 remain unauthorized.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

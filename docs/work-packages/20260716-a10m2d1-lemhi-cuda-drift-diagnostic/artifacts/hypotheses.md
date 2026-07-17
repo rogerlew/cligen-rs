@@ -18,3 +18,16 @@ H2 is the leading hypothesis, but it cannot be accepted solely from the Spack
 directory name. H1 already has one observation but must be reproduced with
 cache bypass and directory checks. H4/H5/H6 are configuration hypotheses, not
 claims of institutional support.
+
+## Execution classification
+
+| ID | Verdict | Evidence |
+|---|---|---|
+| H1 | Supported | `/opt/modules/modulefiles` existed on `node03`, but cache-bypassed `is-avail` and `load` both failed for `cuda/12.8`; the same module was visible on the login host. This is registry/visibility drift, not directory absence. |
+| H2 | Supported | The login CPU was Intel Skylake with AVX-512; `node03` was AMD EPYC 7313 with AVX/AVX2 and no tested AVX-512 feature. Ambient GCC and preprocessing died by `SIGILL` on the node, and its login-built binary also died by `SIGILL`. Explicit generic compiler paths survived. |
+| H3 | Not supported independently | The ambient tree worked on the AVX-512 login host and failed consistently at the ISA boundary. No evidence indicated random corruption. The exact faulting instruction or library was not captured, so a narrower component attribution remains untested. |
+| H4 | Supported | CUDA 12.8 plus `/usr/bin/g++` 8.5 compiled and passed the unchanged smoke both node-built and login-built. |
+| H5 | Supported | CUDA 12.8 plus advertised GCC 11.2 compiled and passed the unchanged smoke both node-built and login-built. |
+| H6 | Supported with qualification | Compile-before-submit worked for C1 and C2, but not for ambient C0 because its binary retained the architecture-targeted Spack runtime. Prestaging alone is insufficient; compiler/runtime selection is part of the contract. |
+| H7 | Supported | The ambient compiler died before normal preprocessing while both explicit GNU versions compiled. The `unsupported OS` line was secondary to `SIGILL`, not a CUDA GNU-version rejection. |
+| H8 | Supported | Four valid C1/C2 binaries each saw one L40, compute capability 8.9, and passed allocation, transfer, kernel, synchronization, copy-back, checksum, and error gates. |
