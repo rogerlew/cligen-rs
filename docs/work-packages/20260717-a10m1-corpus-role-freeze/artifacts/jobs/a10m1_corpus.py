@@ -355,10 +355,17 @@ def inventory() -> None:
 
 
 def daymet_url(freeze: dict[str, Any], point: dict[str, Any]) -> str:
+    years = ",".join(
+        str(year)
+        for year in range(
+            freeze["daymet"]["fit_start_year"],
+            freeze["daymet"]["fit_end_year"] + 1,
+        )
+    )
     query = urllib.parse.urlencode({
         "lat": point["latitude"], "lon": point["longitude"],
         "vars": ",".join(freeze["daymet"]["variables"]),
-        "start": freeze["daymet"]["fit_start_year"], "end": freeze["daymet"]["fit_end_year"],
+        "years": years,
     }, safe=",")
     return freeze["daymet"]["service"] + "?" + query
 
@@ -458,7 +465,11 @@ def acquire_daymet() -> None:
         if previous.get(point["point_id"], {}).get("status") == "accepted":
             accepted_counts[(point["regime"], point["role"])] += 1
     targets = {"candidate_fit": freeze["daymet"]["per_regime_candidate_fit"], "fit_validation": freeze["daymet"]["per_regime_fit_validation"]}
-    candidates = [row for row in partition["daymet_candidate_locations"] if row["point_id"] not in previous]
+    candidates = [
+        row
+        for row in partition["daymet_candidate_locations"]
+        if previous.get(row["point_id"], {}).get("status") != "accepted"
+    ]
     attempted = len(previous)
     while any(accepted_counts[(regime, role)] < target for regime in freeze["regime_frames"] for role, target in targets.items()):
         batch = []

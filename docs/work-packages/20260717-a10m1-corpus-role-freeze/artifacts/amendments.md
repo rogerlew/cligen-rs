@@ -37,3 +37,21 @@ advanced longitude but omitted the latitude increment. The loop now advances
 latitude by the already frozen 0.25-degree step after each longitude row. This
 implements the published finite lattice; it does not change that lattice or
 any scientific/access rule.
+
+## A4 — documented Daymet multi-year query form
+
+Date: 2026-07-17
+Series-access state: 72 Daymet requests returned full-period responses; all
+were rejected before retention or normalization. No USCRN or confirmation
+target series was accessed.
+
+The first request batch encoded the frozen integer years as `start=1980` and
+`end=2009`. The live service treated those as invalid date values, ignored the
+range, and returned 16,790 rows (all current years) rather than 10,950. The
+official web-service guide specifies either ISO date strings or the
+comma-separated `years` parameter. Requests now use the documented explicit
+`years=1980,...,2009` form. The 72 rejected access identities remain in the
+ledger and count against the 2,400-request ceiling; the same frozen points may
+be retried because the rejection diagnosed request encoding, not source
+unavailability. The fit period, points, variables, roles, and target selection
+are unchanged.
