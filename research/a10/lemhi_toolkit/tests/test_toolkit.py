@@ -82,7 +82,7 @@ class ToolkitFixture(unittest.TestCase):
         return {
             "assets": [{
                 "bytes": self.script.stat().st_size,
-                "license_provenance": "repository-license",
+                "license_provenance": "repository license with human-readable provenance",
                 "local_path": str(self.script),
                 "logical_name": "job.sh",
                 "sha256": sha256_bytes(self.script.read_bytes()),

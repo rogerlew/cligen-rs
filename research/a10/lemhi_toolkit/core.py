@@ -203,6 +203,12 @@ def validate_shell_scalar(value: Any, field: str) -> str:
     return value
 
 
+def validate_record_text(value: Any, field: str, *, maximum_length: int = 500) -> str:
+    require(isinstance(value, str) and 0 < len(value) <= maximum_length, "AUTHORITY_INVALID", field)
+    require(not any(ord(char) < 32 or ord(char) == 127 for char in value), "AUTHORITY_INVALID", field)
+    return value
+
+
 def _is_relative_to(path: Path, root: Path) -> bool:
     try:
         path.relative_to(root)
@@ -779,7 +785,7 @@ class Toolkit:
                     "bytes": size,
                     "sha256": digest,
                     "source_class": asset["source_class"],
-                    "license_provenance": validate_shell_scalar(asset["license_provenance"], "license provenance"),
+                    "license_provenance": validate_record_text(asset["license_provenance"], "license provenance"),
                 })
             self._event(state, "PLANNED", "PREPARED", plan_id=state["current_plan_id"])
             state["run_state"] = "PREPARED"
