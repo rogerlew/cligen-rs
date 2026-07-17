@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["classification", "configuration_id", "configuration_semantic_sha256", "gates", "generation", "model_record", "runtime_interpretation", "verdict"],
+  "properties": {
+    "classification": {"const": "development-only-implementation-qualification"},
+    "configuration_id": {"const": "lemhi-a10-py311-l40-v1"},
+    "configuration_semantic_sha256": {"const": "0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179"},
+    "gates": {"type": "object", "minProperties": 16, "additionalProperties": {"type": "boolean"}},
+    "generation": {"type": "array", "minItems": 6, "maxItems": 6},
+    "model_record": {"type": "object"},
+    "runtime_interpretation": {"const": "qualification-diagnostic-only-no-selector-classification"},
+    "verdict": {"enum": ["PASS", "FAIL"]}
+  }
+}

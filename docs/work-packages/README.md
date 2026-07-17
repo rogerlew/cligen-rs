@@ -71,3 +71,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260717-a10-lemhi-python311-smoke](20260717-a10-lemhi-python311-smoke/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10-lemhi-canonical-configuration](20260717-a10-lemhi-canonical-configuration/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10m3-model-training-generation-selector-freeze](20260717-a10m3-model-training-generation-selector-freeze/package.md) | EXECUTED-COMPLETE |
+| [20260717-a10m4-one-l40-qualification](20260717-a10m4-one-l40-qualification/package.md) | SCAFFOLDED |

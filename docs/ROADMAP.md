@@ -147,7 +147,7 @@ allocation or candidate/confirmation access. The accepted stack is the current
 canonical A10 Lemhi single-L40 Python configuration; A10M2's Python 3.8 stack
 is legacy explicit-only and cannot be selected automatically.
 
-**Next:** scaffold and execute A10M4 as a bounded one-L40 qualification of the
+**In execution:** A10M4 is a bounded one-L40 qualification of the
 real A10M1 loader, one frozen model configuration's forward/backward step,
 atomic checkpoint/resume, stateless nested generation, portable CPU export,
 and resource telemetry. A10M4 must consume the exact
