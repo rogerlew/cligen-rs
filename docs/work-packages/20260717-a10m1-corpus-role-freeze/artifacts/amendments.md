@@ -71,3 +71,29 @@ source key `dayl (s)` while normalized objects and the field glossary retain
 the unambiguous `s/day` unit. All 144 responses in this wave were rejected
 before retention; they remain in the request ledger and count against the
 ceiling. The source variable and normalized meaning are unchanged.
+
+## A6 — fail-closed boundary-tile repair version
+
+Date: 2026-07-17
+Series-access state: the v1 permitted Daymet and USCRN fit sources have been
+accessed and normalized; confirmation access remains false. No Daymet climate
+value was inspected to define this correction.
+
+The first full leakage audit invalidated `daymet-selected-v1`: four geographic
+tile IDs have opposite roles in the complete published candidate partition,
+and three appeared in v1. This arose because the tile-role hash included the
+regime even where two sampling frames share a boundary. Roles may not be
+relabeled and the gate may not be waived.
+
+The bounded v2 correction therefore excludes all four ambiguous tiles,
+retains every unaffected v1 location under its original role, and restores the
+exact per-regime quotas using 25 surplus accepted candidates that already
+carry the required role in the published pre-series partition. A stricter
+fresh-replacement construction was attempted before writing the v2 freeze but
+was impossible because all eligible hot-arid validation candidates had already
+been requested. V2 makes no new request. Its deterministic selection uses only
+the published partition order, tile, role, access-ledger status, and source
+availability; it cannot read or rank climate values or derived statistics.
+The v1 selection and shards remain immutable invalid evidence. V2 receives new
+selection, shard, and coverage identities within the same cohesive A10M1
+package.

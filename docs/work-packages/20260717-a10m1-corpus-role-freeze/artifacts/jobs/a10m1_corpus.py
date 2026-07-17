@@ -55,6 +55,7 @@ A8A_MANIFEST = REPO / (
 )
 DAYMET_LEDGER = ARTIFACTS / "daymet-access-v1.ndjson"
 USCRN_LEDGER = ARTIFACTS / "uscrn-access-v1.ndjson"
+DAYMET_REPAIR_PATH = ARTIFACTS / "daymet-tile-repair-freeze-v2.json"
 USER_AGENT = "cligen-rs-a10m1-corpus-v1"
 DAYMET_FIELDS = {
     "prcp": "prcp (mm/day)",
@@ -456,52 +457,13 @@ def deterministic_tar_gz(path: Path, objects: list[tuple[str, bytes]]) -> dict[s
     return {"bytes": path.stat().st_size, "path": str(path.relative_to(REPO)), "sha256": sha256_path(path)}
 
 
-def acquire_daymet() -> None:
-    freeze = read_json(FREEZE_PATH)
-    partition = read_json(PARTITION_PATH)
-    previous = {row["point_id"]: row for row in load_ledger(DAYMET_LEDGER)}
-    accepted_counts = Counter()
-    for point in partition["daymet_candidate_locations"]:
-        if previous.get(point["point_id"], {}).get("status") == "accepted":
-            accepted_counts[(point["regime"], point["role"])] += 1
-    targets = {"candidate_fit": freeze["daymet"]["per_regime_candidate_fit"], "fit_validation": freeze["daymet"]["per_regime_fit_validation"]}
-    candidates = [
-        row
-        for row in partition["daymet_candidate_locations"]
-        if previous.get(row["point_id"], {}).get("status") != "accepted"
-    ]
-    attempted = len(previous)
-    while any(accepted_counts[(regime, role)] < target for regime in freeze["regime_frames"] for role, target in targets.items()):
-        batch = []
-        for point in candidates:
-            key = (point["regime"], point["role"])
-            if accepted_counts[key] >= targets[point["role"]]:
-                continue
-            batch.append(point)
-            if len(batch) >= 72:
-                break
-        if not batch or attempted + len(batch) > freeze["daymet"]["max_requests"]:
-            raise RuntimeError(f"Daymet target unavailable within request ceiling: {dict(accepted_counts)}")
-        batch_ids = {row["point_id"] for row in batch}
-        candidates = [row for row in candidates if row["point_id"] not in batch_ids]
-        records = []
-        with ThreadPoolExecutor(max_workers=12) as executor:
-            futures = {executor.submit(request_one_daymet, freeze, point): point for point in batch}
-            for future in as_completed(futures):
-                record = future.result(); records.append(record)
-                if record["status"] == "accepted":
-                    point = futures[future]
-                    accepted_counts[(point["regime"], point["role"])] += 1
-        append_ledger(DAYMET_LEDGER, sorted(records, key=lambda row: row["point_id"]))
-        previous.update({row["point_id"]: row for row in records})
-        attempted += len(batch)
-        print(f"Daymet requests={attempted} accepted={sum(accepted_counts.values())}", flush=True)
-    selected = []
-    for regime in freeze["regime_frames"]:
-        for role, target in targets.items():
-            points = [row for row in partition["daymet_candidate_locations"] if row["regime"] == regime and row["role"] == role and previous.get(row["point_id"], {}).get("status") == "accepted"]
-            selected.extend(points[:target])
-    selected.sort(key=lambda row: (row["regime"], row["role"], row["order"]))
+def write_daymet_shards(
+    freeze: dict[str, Any],
+    selected: list[dict[str, Any]],
+    selected_path: Path,
+    shard_manifest_path: Path,
+    coverage_path: Path,
+) -> None:
     shard_manifest = []
     aggregate_availability: Counter[tuple[str, str, str, int, int, str]] = Counter()
     aggregate_stats: dict[tuple[str, str, str], dict[str, Any]] = {}
@@ -527,14 +489,99 @@ def acquire_daymet() -> None:
         identity = deterministic_tar_gz(path, objects)
         identity.update({"object_count": len(points), "point_ids": [row["point_id"] for row in points], "schema_version": 1, "source_id": "daymet_v4r1_single_pixel"})
         shard_manifest.append(identity)
-    write_json(ARTIFACTS / "daymet-selected-v1.json", {"locations": selected, "schema_version": 1}, replace=True)
-    write_json(ARTIFACTS / "daymet-shard-manifest-v1.json", {"schema_version": 1, "shards": shard_manifest}, replace=True)
-    write_json(RAW / "daymet/coverage-v1.json", {
+    write_json(selected_path, {"locations": selected, "schema_version": 1}, replace=True)
+    write_json(shard_manifest_path, {"schema_version": 1, "shards": shard_manifest}, replace=True)
+    write_json(coverage_path, {
         "availability": [{"count": count, "field": field_name, "month": month, "regime": regime, "role": role, "state": state, "year": year} for (regime, role, field_name, year, month, state), count in sorted(aggregate_availability.items())],
         "schema_version": 1,
         "statistics": [{**summary, "field": field_name, "regime": regime, "role": role} for (regime, role, field_name), summary in sorted(aggregate_stats.items())],
     }, replace=True)
     print(f"PASS Daymet: {len(selected)} locations in {len(shard_manifest)} shards")
+
+
+def acquire_daymet() -> None:
+    freeze = read_json(FREEZE_PATH)
+    partition = read_json(PARTITION_PATH)
+    previous = {row["point_id"]: row for row in load_ledger(DAYMET_LEDGER)}
+    accepted_counts = Counter()
+    for point in partition["daymet_candidate_locations"]:
+        if previous.get(point["point_id"], {}).get("status") == "accepted":
+            accepted_counts[(point["regime"], point["role"])] += 1
+    targets = {"candidate_fit": freeze["daymet"]["per_regime_candidate_fit"], "fit_validation": freeze["daymet"]["per_regime_fit_validation"]}
+    candidates = [row for row in partition["daymet_candidate_locations"] if previous.get(row["point_id"], {}).get("status") != "accepted"]
+    attempted = len(previous)
+    while any(accepted_counts[(regime, role)] < target for regime in freeze["regime_frames"] for role, target in targets.items()):
+        batch = []
+        for point in candidates:
+            key = (point["regime"], point["role"])
+            if accepted_counts[key] >= targets[point["role"]]: continue
+            batch.append(point)
+            if len(batch) >= 72: break
+        if not batch or attempted + len(batch) > freeze["daymet"]["max_requests"]:
+            raise RuntimeError(f"Daymet target unavailable within request ceiling: {dict(accepted_counts)}")
+        batch_ids = {row["point_id"] for row in batch}
+        candidates = [row for row in candidates if row["point_id"] not in batch_ids]
+        records = []
+        with ThreadPoolExecutor(max_workers=12) as executor:
+            futures = {executor.submit(request_one_daymet, freeze, point): point for point in batch}
+            for future in as_completed(futures):
+                record = future.result(); records.append(record)
+                if record["status"] == "accepted":
+                    point = futures[future]; accepted_counts[(point["regime"], point["role"])] += 1
+        append_ledger(DAYMET_LEDGER, sorted(records, key=lambda row: row["point_id"]))
+        previous.update({row["point_id"]: row for row in records}); attempted += len(batch)
+        print(f"Daymet requests={attempted} accepted={sum(accepted_counts.values())}", flush=True)
+    selected = []
+    for regime in freeze["regime_frames"]:
+        for role, target in targets.items():
+            points = [row for row in partition["daymet_candidate_locations"] if row["regime"] == regime and row["role"] == role and previous.get(row["point_id"], {}).get("status") == "accepted"]
+            selected.extend(points[:target])
+    selected.sort(key=lambda row: (row["regime"], row["role"], row["order"]))
+    write_daymet_shards(freeze, selected, ARTIFACTS / "daymet-selected-v1.json", ARTIFACTS / "daymet-shard-manifest-v1.json", RAW / "daymet/coverage-v1.json")
+
+
+def freeze_daymet_v2() -> None:
+    if DAYMET_REPAIR_PATH.exists(): raise FileExistsError(DAYMET_REPAIR_PATH)
+    freeze = read_json(FREEZE_PATH); partition = read_json(PARTITION_PATH)
+    selected_v1 = read_json(ARTIFACTS / "daymet-selected-v1.json")["locations"]
+    tile_roles: dict[str, set[str]] = defaultdict(set)
+    for point in partition["daymet_candidate_locations"]: tile_roles[point["tile_id"]].add(point["role"])
+    conflicted = sorted(tile for tile, roles in tile_roles.items() if len(roles) > 1)
+    kept = [point for point in selected_v1 if point["tile_id"] not in conflicted]
+    targets = {"candidate_fit": freeze["daymet"]["per_regime_candidate_fit"], "fit_validation": freeze["daymet"]["per_regime_fit_validation"]}
+    counts = Counter((row["regime"], row["role"]) for row in kept)
+    accepted = {row["point_id"] for row in load_ledger(DAYMET_LEDGER) if row["status"] == "accepted"}
+    kept_ids = {row["point_id"] for row in kept}
+    replacements = []
+    for regime in freeze["regime_frames"]:
+        for role, target in targets.items():
+            needed = target - counts[(regime, role)]
+            choices = [row for row in partition["daymet_candidate_locations"] if row["regime"] == regime and row["role"] == role and row["tile_id"] not in conflicted and row["point_id"] in accepted and row["point_id"] not in kept_ids]
+            if len(choices) < needed: raise RuntimeError(f"accepted repair choices unavailable: {regime}/{role}")
+            replacements.extend(choices[:needed])
+    proposed = sorted(kept + replacements, key=lambda row: (row["regime"], row["role"], row["order"]))
+    proposed_tile_roles: dict[str, set[str]] = defaultdict(set)
+    for point in proposed: proposed_tile_roles[point["tile_id"]].add(point["role"])
+    if any(len(roles) > 1 for roles in proposed_tile_roles.values()): raise ValueError("v2 tile leakage")
+    write_json(DAYMET_REPAIR_PATH, {
+        "conflicted_tiles_excluded": conflicted, "freeze_id": "a10m1-daymet-tile-repair-v2",
+        "freeze_sha256": sha256_path(FREEZE_PATH), "invalidated_selected_v1_sha256": sha256_path(ARTIFACTS / "daymet-selected-v1.json"),
+        "kept_locations": kept, "proposed_locations": proposed, "replacement_locations": replacements,
+        "replacement_selection_used_climate_values": False,
+        "replacement_series_previously_accessed": True, "schema_version": 2,
+    })
+    print(f"PASS v2 repair freeze: excluded {len(conflicted)} tiles; {len(replacements)} surplus replacements")
+
+
+def acquire_daymet_v2() -> None:
+    freeze = read_json(FREEZE_PATH); repair = read_json(DAYMET_REPAIR_PATH)
+    if repair["replacement_series_previously_accessed"] is not True: raise ValueError("repair access state")
+    if repair["replacement_selection_used_climate_values"] is not False: raise ValueError("repair selection state")
+    for point in repair["replacement_locations"]:
+        raw_path = RAW / "daymet/source" / f"{point['point_id']}.csv.gz"
+        if not raw_path.exists(): raise FileNotFoundError(raw_path)
+        with gzip.open(raw_path, "rb") as stream: parse_daymet(stream.read(), point, freeze)
+    write_daymet_shards(freeze, repair["proposed_locations"], ARTIFACTS / "daymet-selected-v2.json", ARTIFACTS / "daymet-shard-manifest-v2.json", RAW / "daymet/coverage-v2.json")
 
 
 def uscrn_url(root: str, product: str, year: int, station: str) -> str:
@@ -738,10 +785,10 @@ def inherited_objects() -> list[dict[str, Any]]:
 
 def finalize() -> None:
     freeze = read_json(FREEZE_PATH); partition = read_json(PARTITION_PATH)
-    daymet_shards = read_json(ARTIFACTS / "daymet-shard-manifest-v1.json")["shards"]
+    daymet_shards = read_json(ARTIFACTS / "daymet-shard-manifest-v2.json")["shards"]
     uscrn_objects = read_json(ARTIFACTS / "uscrn-normalized-manifest-v1.json")["objects"]
     inherited = inherited_objects()
-    selected = read_json(ARTIFACTS / "daymet-selected-v1.json")["locations"]
+    selected = read_json(ARTIFACTS / "daymet-selected-v2.json")["locations"]
     daymet_counts = Counter((row["regime"], row["role"]) for row in selected)
     daymet_tiles = defaultdict(set)
     for row in selected: daymet_tiles[(row["regime"], row["role"])].add(row["tile_id"])
@@ -764,7 +811,7 @@ def finalize() -> None:
         "tile_role_splits": sorted(key for key, roles in tile_roles.items() if len(roles) != 1),
     }
     if any(leakage.values()): raise ValueError(f"leakage: {leakage}")
-    daymet_coverage = read_json(RAW / "daymet/coverage-v1.json")
+    daymet_coverage = read_json(RAW / "daymet/coverage-v2.json")
     uscrn_coverage = read_json(RAW / "uscrn/coverage-v1.json")
     availability_cube = {"rows": [{**row, "source_id": "daymet_v4r1_single_pixel"} for row in daymet_coverage["availability"]] + [{**row, "source_id": "uscrn_daily01"} for row in uscrn_coverage["availability"]], "schema_version": 1}
     normalization_statistics = []
@@ -835,7 +882,7 @@ def verify() -> None:
 
 def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("self-test", "inventory", "acquire-daymet", "acquire-uscrn", "finalize", "verify"))
+    parser.add_argument("mode", choices=("self-test", "inventory", "acquire-daymet", "freeze-daymet-v2", "acquire-daymet-v2", "acquire-uscrn", "finalize", "verify"))
     args = parser.parse_args(argv)
     globals()[args.mode.replace("-", "_")]()
     return 0
