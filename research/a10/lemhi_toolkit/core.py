@@ -319,7 +319,7 @@ class Adapter(Protocol):
     def verify(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> None: ...
     def submit(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], token: str) -> str: ...
     def reconcile(self, profile: dict[str, Any], token: str) -> list[str]: ...
-    def observe(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
+    def observe(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
     def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
@@ -584,7 +584,7 @@ class Toolkit:
         return semantic
 
     @staticmethod
-    def _validate_jobs(jobs: Any, logical_assets: set[str]) -> set[str]:
+    def _validate_jobs(jobs: Any, logical_assets: set[str], evidence_allowlist: set[str]) -> set[str]:
         require(isinstance(jobs, list) and jobs, "PLAN_DRIFT", "jobs")
         roles: set[str] = set()
         for job in jobs:
@@ -605,6 +605,8 @@ class Toolkit:
             require(len(set(retry_on)) == len(retry_on), "PLAN_DRIFT", "duplicate retry classes")
             require(set(retry_on) <= {"cancelled", "gate-failed", "scheduler-failure"}, "PLAN_DRIFT", "retry classes")
             require(job["max_attempts"] == 1 or retry_on, "PLAN_DRIFT", "retries require classes")
+            gate_receipt = validate_relative_path(job.get("gate_receipt"), "gate receipt")
+            require(gate_receipt in evidence_allowlist, "PLAN_DRIFT", "gate receipt is not evidence-allowlisted")
         return roles
 
     def plan(self, plan_input: dict[str, Any]) -> str:
@@ -665,7 +667,7 @@ class Toolkit:
                 "PLAN_DRIFT",
                 "stop rules",
             )
-            roles = self._validate_jobs(jobs, logical_assets)
+            roles = self._validate_jobs(jobs, logical_assets, set(validated_evidence))
             semantic = self._semantic_plan(plan_input, providers)
             plan_id = sha256_bytes(canonical_bytes(semantic))
             revision = {"revision": 0, "plan_id": plan_id, "semantic": semantic}
@@ -718,7 +720,11 @@ class Toolkit:
                 "stop_rules",
             ):
                 require(replacement.get(field) == prior.get(field), "PLAN_DRIFT", f"immutable field changed: {field}")
-            self._validate_jobs(replacement.get("jobs"), {asset["logical_name"] for asset in prior["assets"]})
+            self._validate_jobs(
+                replacement.get("jobs"),
+                {asset["logical_name"] for asset in prior["assets"]},
+                set(prior["evidence_allowlist"]),
+            )
             attempts = state.get("attempts", {})
             started_roles = {item["job_role"] for item in attempts.values() if item.get("state") != "REGISTERED"}
             prior_jobs = {item["role"]: item for item in prior.get("jobs", [])}
@@ -944,15 +950,15 @@ class Toolkit:
                 state = self._load_state()
                 attempt = state.get("attempts", {}).get(key)
                 require(isinstance(attempt, dict) and attempt.get("state") == "SUBMITTED", "PLAN_DRIFT", key)
-                result = self.adapter.observe(self.profile, attempt["job_id"])
+                plan = self._current_plan(state)
+                job = next(item for item in plan["jobs"] if item["role"] == job_role)
+                result = self.adapter.observe(self.profile, plan, job, attempt["job_id"])
                 require(result.get("terminal") is True, "JOB_TERMINAL_MISMATCH", key)
                 require(result.get("state") in TERMINAL_JOB_STATES, "JOB_TERMINAL_MISMATCH", key)
                 require("actual_gpu_minutes" in result, "EVIDENCE_INCOMPLETE", "accounting availability must be explicit")
                 require(result["actual_gpu_minutes"] is None or (isinstance(result["actual_gpu_minutes"], int) and result["actual_gpu_minutes"] >= 0), "EVIDENCE_INCOMPLETE", "accounting")
                 attempt["state"] = "TERMINAL_OBSERVED"
                 self._event(state, "SUBMITTED", "TERMINAL_OBSERVED", scope="attempt", plan_id=attempt["plan_id"], job_role=job_role, attempt_index=attempt_index)
-                plan = self._current_plan(state)
-                job = next(item for item in plan["jobs"] if item["role"] == job_role)
                 gates = result.get("gates")
                 passed = result.get("exit_code") == job.get("expected_exit_code", 0) and isinstance(gates, dict) and bool(gates) and all(value is True for value in gates.values())
                 attempt.update({"state": "RESULT_VALIDATED", "result": result, "passed": passed})

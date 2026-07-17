@@ -272,7 +272,8 @@ The private run plan additionally records:
 - exact remote run root and permitted job-local root pattern;
 - job matrix, typed GRES, partition, time/memory/CPU limits, cumulative
   resource ceiling, stop ladder, and retry classes;
-- registered tests and their pass expressions;
+- registered tests, their pass expressions, and one exact allowlisted
+  structured gate-receipt path per job role;
 - evidence allowlist and sanitization rules; and
 - cleanup targets and prerequisites.
 
@@ -313,6 +314,11 @@ A job receipt records the frozen job role and attempt index, Slurm job ID,
 requested resources, node and accelerator classes, terminal state, exit code,
 elapsed allocation, available accounting, registered gate results, and log
 hashes. Missing accounting is recorded as unavailable, not zero.
+For a scheduler-success exit, registered gate results MUST be parsed from the
+job role's exact regular, nonsymlink gate-receipt file under the marked run
+root. Scheduler state or controller-generated placeholder gates MUST NOT
+substitute for that receipt. The controller records its content hash and
+accepts only a nonempty string-to-boolean gate object.
 
 ### 6.6 Collection and cleanup receipts
 
@@ -479,7 +485,8 @@ GRES, CPU, memory, time, output, and error settings. The toolkit MUST:
 - maintain requested and actual GPU-minute ledgers separately;
 - prevent submission that would exceed the frozen cumulative ceiling;
 - implement the package's sequential/parallel and stop ladder exactly;
-- classify terminal state from Slurm accounting plus registered result gates;
+- classify terminal state from Slurm accounting plus the authenticated exact
+  allowlisted gate receipt registered for that job role;
 - treat absent GPU memory, energy, or child-process accounting as unavailable;
   and
 - wait for terminal accounting to settle, count every registered requeue or

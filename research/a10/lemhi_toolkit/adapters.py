@@ -157,8 +157,8 @@ class FixtureAdapter:
             return list(forced)
         return list(self._backend()["tokens"].get(token, []))
 
-    def observe(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:
-        del profile
+    def observe(self, profile: dict[str, Any], plan: dict[str, Any], planned_job: dict[str, Any], job_id: str) -> dict[str, Any]:
+        del profile, plan, planned_job
         self.check_masters({})
         job = self._backend()["jobs"].get(job_id)
         require(isinstance(job, dict), "JOB_TERMINAL_MISMATCH", job_id)
@@ -306,13 +306,28 @@ class OpenSSHSlurmAdapter:
         output = self._remote_script(profile, "reconcile.sh", [token]).decode("utf-8")
         return [line for line in output.splitlines() if line.isdigit()]
 
-    def observe(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:
+    def observe(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], job_id: str) -> dict[str, Any]:
         output = self._remote_script(profile, "observe.sh", [validate_shell_scalar(job_id, "job_id")]).decode("utf-8")
         try:
             value = json.loads(output)
         except json.JSONDecodeError as error:
             raise ToolkitError("EVIDENCE_INCOMPLETE", "invalid accounting response") from error
         require(isinstance(value, dict), "EVIDENCE_INCOMPLETE", "invalid accounting response")
+        if value.get("terminal") is True and value.get("exit_code") == job.get("expected_exit_code", 0):
+            receipt = self._remote_script(
+                profile,
+                "read_gate.sh",
+                [profile["remote_base"], plan["remote_run_root"], job["gate_receipt"]],
+            )
+            try:
+                evidence = json.loads(receipt)
+            except json.JSONDecodeError as error:
+                raise ToolkitError("EVIDENCE_INCOMPLETE", "invalid gate receipt") from error
+            gates = evidence.get("gates") if isinstance(evidence, dict) else None
+            require(isinstance(gates, dict) and gates, "EVIDENCE_INCOMPLETE", "gate receipt has no gates")
+            require(all(isinstance(name, str) and isinstance(passed, bool) for name, passed in gates.items()), "EVIDENCE_INCOMPLETE", "invalid gates")
+            value["gates"] = gates
+            value["gate_receipt_sha256"] = sha256_bytes(receipt)
         return value
 
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:

@@ -1,0 +1,29 @@
+{
+  "assets": ["runtime.tar.gz"],
+  "consumes_probe_fields": ["platform", "glibc", "architecture"],
+  "does_not_establish": ["framework_abi", "cuda_runtime", "performance"],
+  "emits_probe_fields": ["python_version", "python_abi"],
+  "failure_codes": ["ASSET_IDENTITY_MISMATCH", "PLATFORM_MISMATCH", "GATE_FAILED"],
+  "implementation_version": "1.0.0",
+  "name": "runtime-cpython311-portable-v1",
+  "network_phase": "compute-offline",
+  "operations": {
+    "install": "portable-runtime-exact-prefix-v1",
+    "validate": "python311-stdlib-native-smoke-v1"
+  },
+  "provider_api_version": 1,
+  "provider_class": "runtime",
+  "provides": {
+    "python_abi": "cp311",
+    "python_runtime": "portable-cpython-3.11"
+  },
+  "required_commands": ["tar", "ldd"],
+  "requires": {
+    "target_arch": "x86_64",
+    "target_libc": "glibc",
+    "target_os": "linux",
+    "target_platform": "linux-x86_64-glibc"
+  },
+  "side_effect_classes": ["durable-run-root", "scheduler-purged-job-local"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

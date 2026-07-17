@@ -61,6 +61,24 @@ class ToolkitFixture(unittest.TestCase):
         self.temporary.cleanup()
 
     def plan(self, run_id: str, *, jobs: list[dict] | None = None) -> dict:
+        selected_jobs = jobs or [
+            {
+                "cpus": 2,
+                "expected_exit_code": 0,
+                "gate_receipt": "evidence.json",
+                "gpus": 1,
+                "gres": "gpu:l40:1",
+                "max_attempts": 2,
+                "memory_mb": 1024,
+                "partition": "icrews",
+                "retry_on": ["gate-failed"],
+                "role": "smoke",
+                "script": "job.sh",
+                "time_limit_minutes": 10,
+            }
+        ]
+        for job in selected_jobs:
+            job.setdefault("gate_receipt", "evidence.json")
         return {
             "assets": [{
                 "bytes": self.script.stat().st_size,
@@ -75,22 +93,7 @@ class ToolkitFixture(unittest.TestCase):
             "confirmation_classification": self.authority["confirmation_classification"],
             "evidence_allowlist": ["evidence.json", "slurm/smoke.0.out", "slurm/smoke.0.err", "slurm/positive.0.out", "slurm/positive.0.err", "slurm/negative.0.out", "slurm/negative.0.err"],
             "job_local_cleanup": "scheduler_purged",
-            "jobs": jobs
-            or [
-                {
-                    "cpus": 2,
-                    "expected_exit_code": 0,
-                    "gpus": 1,
-                    "gres": "gpu:l40:1",
-                    "max_attempts": 2,
-                    "memory_mb": 1024,
-                    "partition": "icrews",
-                    "retry_on": ["gate-failed"],
-                    "role": "smoke",
-                    "script": "job.sh",
-                    "time_limit_minutes": 10,
-                }
-            ],
+            "jobs": selected_jobs,
             "package_id": self.authority["package_id"],
             "providers": PROVIDERS,
             "remote_run_root": f"runs/{run_id}",
@@ -430,6 +433,8 @@ class RecordingRunner:
             output = b"1000\n"
         elif stdin and b"ElapsedRaw" in stdin:
             output = b'{"terminal":true,"state":"COMPLETED","exit_code":0,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"unavailable"}\n'
+        elif stdin and b'gate_receipt=$3' in stdin:
+            output = b'{"gates":{"runtime":true,"framework":true}}\n'
         elif stdin and b"tar --format" in stdin:
             output = json.dumps({"bytes": len(self.archive), "logical_name": "evidence.tar", "sha256": sha256_bytes(self.archive)}, separators=(",", ":")).encode()
         elif arguments[0] == "scp" and arguments[-1].endswith(".part") and arguments[-2].startswith("lemhi:"):
@@ -453,7 +458,7 @@ class LiveAdapterCommandPaths(ToolkitFixture):
         job = dict(job); job["attempt_index"] = 0
         self.assertEqual(adapter.submit(self.profile, plan, job, "a" * 32), "1000")
         self.assertEqual(adapter.reconcile(self.profile, "a" * 32), ["1000"])
-        self.assertTrue(adapter.observe(self.profile, "1000")["terminal"])
+        self.assertTrue(adapter.observe(self.profile, plan, job, "1000")["terminal"])
         self.assertTrue(adapter.cancel(self.profile, "1000")["acknowledged"])
         quarantine = self.root / "quarantine"; quarantine.mkdir()
         self.assertTrue(adapter.collect(self.profile, plan, quarantine)["download_promoted"])
