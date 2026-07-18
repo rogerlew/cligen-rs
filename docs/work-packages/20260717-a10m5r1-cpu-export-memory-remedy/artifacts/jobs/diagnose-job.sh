@@ -26,7 +26,8 @@ tar -xf "$run_root/wheelhouse.tar" -C "$job_local/wheels"
 
 /usr/bin/time -v -o "$work/build.time-v.txt" \
   "$environment/bin/python" "$run_root/diagnose.py" build --work "$work"
-for variant in import-only load-only eager jit-default jit-unoptimized jit-mkldnn-off jit-frozen; do
+for variant in import-only load-only eager jit-default jit-current-nondeterministic \
+  jit-unoptimized jit-mkldnn-off jit-frozen; do
   /usr/bin/time -v -o "$work/$variant.time-v.txt" \
     "$environment/bin/python" "$run_root/diagnose.py" worker \
       --work "$work" --variant "$variant" --result "$work/$variant.json"
