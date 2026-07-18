@@ -239,6 +239,30 @@ class StateSpace(nn.Module):
         return self.head(states), states
 
 
+class StreamingExport(nn.Module):
+    """Inference surface that carries the GRU state across bounded chunks."""
+
+    def __init__(self, model: StateSpace) -> None:
+        super().__init__()
+        self.encoder = model.encoder
+        self.embedding = model.embedding
+        self.transition = model.transition
+        self.head = model.head
+        self.validation_index = model.validation_index
+
+    def forward(
+        self,
+        features: torch.Tensor,
+        station: torch.Tensor,
+        hidden: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        encoded = self.encoder(features)
+        if self.embedding is not None:
+            encoded = encoded + self.embedding(station).unsqueeze(1)
+        states, next_hidden = self.transition(encoded.float(), hidden)
+        return self.head(states), next_hidden
+
+
 def batch(records: list[Record], selections: list[tuple[int, int]], device: torch.device, validation_index: int) -> tuple[torch.Tensor, ...]:
     feature_rows, precip_rows, target_rows, station_rows = [], [], [], []
     for record_index, start_index in selections:
@@ -496,16 +520,20 @@ def generation_features(years: int, latitude: float, longitude: float, elevation
     return output
 
 
-def candidate_stream(model: StateSpace, tail_head: str, station: tuple[str, str, float, float, float], years: int) -> tuple[str, bytes, bool]:
+def candidate_stream(model: StreamingExport, tail_head: str, station: tuple[str, str, float, float, float], years: int) -> tuple[str, bytes, bool]:
     _, station_id, latitude, longitude, elevation = station
     days = days_for_years(years)
     words = philox_words(station_id, 101, 0, days)
     uniforms = (words.astype(np.float64) + 0.5) / 4294967296.0
     features = torch.from_numpy(generation_features(years, latitude, longitude, elevation)).unsqueeze(0)
     index = torch.tensor([model.validation_index], dtype=torch.long)
-    with torch.no_grad():
-        heads, _ = model(features, index)
-    heads = heads.squeeze(0).numpy().astype(np.float64)
+    hidden = torch.zeros((1, 1, model.transition.hidden_size), dtype=torch.float32)
+    chunks: list[np.ndarray] = []
+    with torch.inference_mode():
+        for start in range(0, days, 365):
+            heads, hidden = model(features[:, start : start + 365], index, hidden)
+            chunks.append(heads.squeeze(0).numpy())
+    heads = np.concatenate(chunks, axis=0).astype(np.float64)
     probability = 1.0 / (1.0 + np.exp(-heads[:, 0]))
     wet = uniforms[:, 0] < probability
     scale = np.log1p(np.exp(heads[:, 2])) + 1e-4
@@ -637,10 +665,18 @@ def main() -> None:
     options.output.mkdir(parents=True, exist_ok=True)
     configure(147031)
     model, train, checkpoint = training(options, definition, options.output)
-    model = model.cpu().eval()
+    model = StreamingExport(model.cpu().eval()).eval()
     torch.cuda.empty_cache()
     export = options.output / "model-export.pt"
-    traced = torch.jit.trace(model, (torch.zeros((1, 8, 13)), torch.tensor([model.validation_index])), strict=True)
+    traced = torch.jit.trace(
+        model,
+        (
+            torch.zeros((1, 8, 13)),
+            torch.tensor([model.validation_index]),
+            torch.zeros((1, 1, model.transition.hidden_size)),
+        ),
+        strict=True,
+    )
     traced.save(str(export))
     os.environ["CUDA_VISIBLE_DEVICES"] = ""
     cold_started = time.perf_counter()
@@ -659,12 +695,15 @@ def main() -> None:
             (
                 "import resource,sys,torch\n"
                 "m=torch.jit.load(sys.argv[1],map_location='cpu')\n"
+                "x=torch.zeros((1,36525,13));s=torch.tensor([int(sys.argv[2])]);"
+                "h=torch.zeros((1,1,int(sys.argv[3])))\n"
                 "with torch.inference_mode():\n"
-                " m(torch.zeros((1,36525,13)),torch.tensor([int(sys.argv[2])]))\n"
+                " for i in range(0,x.shape[1],365): _,h=m(x[:,i:i+365],s,h)\n"
                 "print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024)"
             ),
             str(export),
             str(model.validation_index),
+            str(model.transition.hidden_size),
         ],
         env={**os.environ, "CUDA_VISIBLE_DEVICES": "", "OMP_NUM_THREADS": "1"},
         capture_output=True,
