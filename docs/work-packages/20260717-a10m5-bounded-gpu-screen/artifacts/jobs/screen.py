@@ -693,7 +693,11 @@ def main() -> None:
             sys.executable,
             "-c",
             (
-                "import resource,sys,torch\n"
+                "import os,resource,sys\n"
+                "os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\n"
+                "import torch\n"
+                "torch.set_num_threads(1)\n"
+                "torch.set_num_interop_threads(1)\n"
                 "m=torch.jit.load(sys.argv[1],map_location='cpu')\n"
                 "x=torch.zeros((1,36525,13));s=torch.tensor([int(sys.argv[2])]);"
                 "h=torch.zeros((1,1,int(sys.argv[3])))\n"
@@ -705,7 +709,13 @@ def main() -> None:
             str(model.validation_index),
             str(model.transition.hidden_size),
         ],
-        env={**os.environ, "CUDA_VISIBLE_DEVICES": "", "OMP_NUM_THREADS": "1"},
+        env={
+            **os.environ,
+            "CUDA_VISIBLE_DEVICES": "",
+            "OMP_NUM_THREADS": "1",
+            "MKL_NUM_THREADS": "1",
+            "OPENBLAS_NUM_THREADS": "1",
+        },
         capture_output=True,
         text=True,
         check=True,
