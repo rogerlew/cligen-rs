@@ -1,8 +1,10 @@
 # SPEC-LEMHI-AGENT-TOOLKIT — Lemhi Agent Workflow Toolkit
 
-Status: authoritative revision 1; foundation implemented 2026-07-17
-Owning package:
-[20260717-a10-lemhi-toolkit-foundation](../work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
+Status: authoritative revision 2; hardening implemented 2026-07-17
+Owning packages:
+[foundation](../work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
+and
+[A10M4O1 hardening](../work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md)
 
 ## 1. Surface
 
@@ -656,7 +658,7 @@ fixtures proving at least:
 Repository gates from `AGENTS.md` also apply. Production functions added under
 `crates/` trigger the coverage/CRAP gate from their first implementation.
 
-## 16. Required roadmap sequence
+## 16. Historical foundation sequence
 
 1. Execute the toolkit-foundation implementation and fixtures against this
    specification.
@@ -674,3 +676,137 @@ Repository gates from `AGENTS.md` also apply. Production functions added under
    reach their registered ready terminals. A10M3 remains a separate scientific
    package, binds the current configuration governed by
    `SPEC-LEMHI-CANONICAL-CONFIGURATION`, and retains the confirmation firewall.
+
+## 17. Revision-2 operational hardening
+
+This section is normative and supersedes revision-1 language where the two
+conflict. Revision-1 records, providers, and completed runs remain readable
+without reinterpretation. New hardened runs MUST use
+`lemhi-toolkit-record-2`, producer `lemhi-toolkit-hardening-2`, and an ordered
+all-v2 provider stack under `lemhi-toolkit-provider-2`. A v2 execution stack
+MUST NOT mix v1 providers. The recognized classes are `runtime`, `framework`,
+`transport`, `scheduler`, `storage`, `accelerator`, and `toolchain`.
+
+### 17.1 Authority revisions and ledger lifecycle
+
+A live v2 authority binds the absolute private ledger anchor, genesis hash,
+starting branch, push target, immutable resource class and ceiling, published
+source lineage, scheduler authority token, and last reviewed ledger-head
+checkpoint. The live CLI derives the anchor from authority and MUST NOT accept
+an arbitrary state root.
+
+Only a separately authorized `initialize-authority` operation may create
+genesis. It MUST atomically prove the canonical anchor absent, prove no
+predecessor or scheduler/resource evidence exists, create genesis, and bind
+its path and hash into the authority. `derive-run` creates an immutable
+authority revision and run seed while preserving authority, package, budget,
+resource class, ceiling, branch, and push target. It accepts only an already
+published source commit and binds predecessor hashes. It cannot initialize a
+ledger, submit, allocate, amend a completed attempt, or reset accounting.
+
+Published authority revisions checkpoint reviewed ledger heads. Missing,
+malformed, copied, truncated-before-checkpoint, alternate-path, or
+caller-stale state fails. Before every live reservation or submission, exact
+scheduler accounting keyed by the immutable authority token MUST reconcile
+against the ledger. Unavailable, ambiguous, missing, or restoration-indicating
+accounting holds before spending. A local chain cannot by itself detect
+wholesale restoration of both the ledger and its local head to a valid prefix;
+the toolkit MUST disclose this trust boundary and MUST NOT claim otherwise.
+
+### 17.2 Toolchain, layout, and environment closure
+
+The v2 `toolchain` provider binds coupled executables, target standard
+libraries, compiler/runtime paths, target platform, licenses, offline rule,
+archive/layout assertions, loader checks, and registered build smoke. A Rust
+closure includes exact `cargo`, `rustc`, target standard library, host C/C++
+compiler, Cargo vendor root relative to extracted source, and offline metadata
+and build probes. Controller prepare validates archive layout, safe extraction,
+and vendor relationships. Compute preflight validates exact versions, paths,
+loader resolution, compiler invocation, and bounded build smoke. Presence
+alone is never sufficient, and providers remain declarative data.
+
+The v2 plan declares `required_job_environment`. Slurm starts with
+`--export=NONE` or a provider-proved equivalent. The wrapper reconstructs only
+registered Slurm/device variables and exact public operational values, sets
+exact path/compiler/cache/temp state, rejects ambient overrides, and publishes
+only allowed names and safe values or value hashes. Deterministic CUDA work
+requires `CUBLAS_WORKSPACE_CONFIG=:4096:8` before the first Python/framework
+import.
+
+### 17.3 Job-local admission, supervision, and recovery
+
+New v2 storage providers use `toolkit_recoverable`; `scheduler_purged` is
+historical-only and cannot authorize a hardened plan. Primary admission
+reserves both primary charge and a frozen recovery contingency. Recovery
+attempts, resources, wall time, retries, exact-node rule, and stop conditions
+are fixed prospectively. Ambiguous cleanup retains the reserve; verified
+absence releases it.
+
+Admission accepts only provider-declared canonical job-local bases with
+filesystem, owner, and permission assertions. Required bytes and inodes cover
+expanded assets, products, checkpoints, a fixed margin, and a minimum free
+floor. Claims serialize per base and recheck before major expansion. Capacity
+or cleanup failure never authorizes deletion of unrelated content.
+
+Every attempt uses a content-addressed immutable path and marker binding
+authority, budget, run, plan revision, role, attempt, scheduler job ID, node,
+base, target, and UID. The toolkit process supervisor creates a child process
+group, forwards catchable signals, waits for children/steps, writes durable
+status atomically, performs local cleanup even when publication fails, and
+records absence. Cleanup or status uncertainty dominates application exit as
+`CLEANUP_INCOMPLETE`.
+
+Recovery derives the node only from authenticated terminal accounting and
+first proves the original job, all steps, and requeues absent from `squeue`
+and settled in `sacct`. On that node it validates UID, marker, ancestors,
+filesystem identity, and canonical target twice, runs one exact bounded
+deletion, and proves absence. Any unavailable node, accounting ambiguity,
+marker/path drift, or failed proof remains `CLEANUP_INCOMPLETE`.
+
+### 17.4 Evidence projection
+
+Collection authenticates a private `RAW_COLLECTED` record before publication
+projection. It binds raw hashes, exact gates, and cleanup-authorizing marker
+data. Projection failure holds publication without erasing cleanup authority,
+and projection cannot change gate results.
+
+Text projection rejects reserved token syntax and invalid UTF-8, uses typed
+replacements ordered by descending byte length, and replaces paths only when
+they are exact or descendants—not sibling prefixes. JSON is parsed with
+duplicate-key rejection and transformed structurally by field type. Binary
+evidence is allowed unchanged only by exact schema/hash or excluded. The
+private transformation receipt binds sanitizer version, token counts,
+sanitized hashes, and raw-parent hashes. The forbidden-value scan runs after
+projection and rejects unknown sensitive material.
+
+### 17.5 Transfer telemetry and immutable manifests
+
+V2 transfer receipts record integer `elapsed_ns`, bytes, method, final
+identity, and exactly one state: `uploaded`, `resumed`, or
+`already_verified`. Integer rate computation MUST be overflow-safe. A skip
+immediately revalidates remote identity. Resume is allowed only when the
+provider proves range integrity; otherwise an SCP partial is verified and
+atomically replaced or removed before full retry. SSH masters are rechecked
+before transfer and after long transfers.
+
+Within one authority/run lineage, assets use content-addressed immutable
+identities and an append-only revision manifest. Same-name/different-hash and
+parallel claims serialize or fail deterministically; referenced identities
+cannot be overwritten. Cross-run and cross-authority caching remains excluded
+until quota, ownership, concurrency, garbage collection, and licensing are
+separately designed.
+
+### 17.6 Canonical transition
+
+Configuration semantics, smoke evidence, and designation are separate
+immutable records. Successor semantics use
+`lemhi-canonical-configuration-semantics-2`; a separately dispatched bounded
+smoke produces `lemhi-canonical-smoke-attestation-1`; only a later
+`lemhi-canonical-designation-index-1` revision may change which immutable hash
+is current. Historical v1 status means status at issuance. Failed smoke holds
+without mutating any record or falling back to v1 storage semantics.
+
+The required forward sequence is A10M4O1 hardening, immutable successor
+semantics, bounded smoke, immutable attestation, designation-index revision,
+then A10M5. The 5x/10x scientific runtime thresholds are outside this revision
+and remain unchanged.

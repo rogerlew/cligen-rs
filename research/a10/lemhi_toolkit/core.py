@@ -15,7 +15,9 @@ from pathlib import Path
 from typing import Any, Callable, Iterator, Protocol
 
 SCHEMA_VERSION = "lemhi-toolkit-record-1"
+SCHEMA_VERSION_V2 = "lemhi-toolkit-record-2"
 PRODUCER_VERSION = "lemhi-toolkit-foundation-1"
+PRODUCER_VERSION_V2 = "lemhi-toolkit-hardening-2"
 SAFE_INTEGER = 9_007_199_254_740_991
 ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9._-]{0,95}$")
 SEGMENT_PATTERN = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9._+=-]{0,254}$")
@@ -144,10 +146,10 @@ def read_json(path: Path) -> dict[str, Any]:
 
 
 def read_record(path: Path) -> dict[str, Any]:
-    """Read and authenticate a revision-1 publication record without rewriting it."""
+    """Read and authenticate a supported publication record without rewriting it."""
 
     value = read_json(path)
-    require(value.get("schema_version") == SCHEMA_VERSION, "EVIDENCE_INCOMPLETE", "unsupported record major version")
+    require(value.get("schema_version") in {SCHEMA_VERSION, SCHEMA_VERSION_V2}, "EVIDENCE_INCOMPLETE", "unsupported record major version")
     recorded = value.get("record_sha256")
     require(isinstance(recorded, str) and HEX64_PATTERN.fullmatch(recorded) is not None, "EVIDENCE_INCOMPLETE", "record hash missing")
     semantic = dict(value)
@@ -325,6 +327,7 @@ class Adapter(Protocol):
     def verify(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> None: ...
     def submit(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], token: str) -> str: ...
     def reconcile(self, profile: dict[str, Any], token: str) -> list[str]: ...
+    def reconcile_authority(self, profile: dict[str, Any], authority_token: str) -> list[str]: ...
     def observe(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
@@ -396,6 +399,17 @@ class Toolkit:
             require(resolved_root != Path(resolved_root.anchor), "AUTHORITY_INVALID", "filesystem root cannot be allowlisted")
         self.authority_sha256 = sha256_bytes(canonical_bytes(authority))
         self.profile_sha256 = sha256_bytes(canonical_bytes(profile))
+        self.record_schema_version = profile.get("record_schema_version", SCHEMA_VERSION)
+        require(self.record_schema_version in {SCHEMA_VERSION, SCHEMA_VERSION_V2}, "AUTHORITY_INVALID", "record schema version")
+        self.producer_version = PRODUCER_VERSION_V2 if self.record_schema_version == SCHEMA_VERSION_V2 else PRODUCER_VERSION
+        self.provider_api_version = profile.get("provider_api_version", 1)
+        require(self.provider_api_version in {1, 2}, "PROVIDER_UNAVAILABLE", "provider API version")
+        if self.provider_api_version == 2:
+            anchor = authority.get("ledger_anchor")
+            require(isinstance(anchor, str) and Path(anchor).is_absolute(), "AUTHORITY_INVALID", "v2 ledger anchor")
+            require(Path(anchor).resolve() == self.ledger_path, "AUTHORITY_INVALID", "state root differs from authority ledger anchor")
+            revision_hash = authority.get("authority_revision_sha256")
+            require(isinstance(revision_hash, str) and HEX64_PATTERN.fullmatch(revision_hash) is not None, "AUTHORITY_INVALID", "authority revision hash")
 
     @property
     def run_dir(self) -> Path:
@@ -427,14 +441,14 @@ class Toolkit:
 
     def _common(self, record_type: str, *, plan_id: str | None = None) -> dict[str, Any]:
         value: dict[str, Any] = {
-            "schema_version": SCHEMA_VERSION,
+            "schema_version": self.record_schema_version,
             "record_type": record_type,
             "authority_id": self.authority_id,
             "run_id": self.run_id,
             "package_id": self.package_id,
             "source_commit": self.source_commit,
             "created_at": self.clock(),
-            "producer_version": PRODUCER_VERSION,
+            "producer_version": self.producer_version,
         }
         if plan_id is not None:
             value["plan_id"] = plan_id
@@ -495,6 +509,8 @@ class Toolkit:
                 require(state.get("run_state") == "AUTHORITY_CHECKED", "PLAN_DRIFT", "doctor already passed")
                 return state
             self.adapter.check_masters(self.profile)
+            if self.provider_api_version == 2:
+                self._load_ledger()
             state = {
                 "authority_id": self.authority_id,
                 "resource_budget_id": self.budget_id,
@@ -542,7 +558,7 @@ class Toolkit:
             relative_path = validate_relative_path(relative, "provider path")
             path = validate_allowed_file(self.provider_root / relative_path, [self.provider_root])
             provider = read_json(path)
-            require(provider.get("provider_api_version") == 1, "PROVIDER_UNAVAILABLE", str(path))
+            require(provider.get("provider_api_version") == self.provider_api_version, "PROVIDER_UNAVAILABLE", str(path))
             required_fields = {
                 "provider_class",
                 "name",
@@ -559,7 +575,11 @@ class Toolkit:
             }
             require(required_fields <= provider.keys(), "PROVIDER_UNAVAILABLE", f"incomplete provider {path}")
             validate_id(provider.get("name"), "provider name")
-            require(provider.get("provider_class") in {"runtime", "framework", "transport", "scheduler", "storage", "accelerator"}, "PROVIDER_UNAVAILABLE", str(path))
+            allowed_classes = {"runtime", "framework", "transport", "scheduler", "storage", "accelerator"}
+            if self.provider_api_version == 2:
+                allowed_classes.add("toolchain")
+                require(provider.get("executes_provider_code") is False, "PROVIDER_UNAVAILABLE", "v2 providers are declarative")
+            require(provider.get("provider_class") in allowed_classes, "PROVIDER_UNAVAILABLE", str(path))
             require(isinstance(provider.get("supported_platforms"), list) and self.profile.get("platform") in provider["supported_platforms"], "PLATFORM_MISMATCH", str(path))
             requirements = provider.get("requires", {})
             provides = provider.get("provides", {})
@@ -643,6 +663,26 @@ class Toolkit:
             validate_relative_path(plan_input.get("remote_run_root"), "remote_run_root")
             require(plan_input["remote_run_root"] == f"runs/{self.run_id}", "CLEANUP_TARGET_INVALID", "run root must be runs/<run_id>")
             providers = self._load_providers(plan_input)
+            if self.provider_api_version == 2:
+                from .hardening import close_job_environment, validate_v2_provider_stack
+
+                validate_v2_provider_stack(providers)
+                require(plan_input.get("authority_revision_sha256") == self.authority["authority_revision_sha256"], "AUTHORITY_INVALID", "authority revision")
+                require(plan_input.get("scheduler_authority_token") == self.authority["scheduler_authority_token"], "AUTHORITY_INVALID", "scheduler authority token")
+                require(plan_input.get("job_local_cleanup") == "toolkit_recoverable", "PLAN_DRIFT", "v2 job-local cleanup")
+                recovery = plan_input.get("recovery_contingency")
+                require(isinstance(recovery, dict), "PLAN_DRIFT", "recovery contingency")
+                for field in ("gpu_minutes", "max_attempts", "time_limit_minutes"):
+                    require(isinstance(recovery.get(field), int) and recovery[field] > 0, "PLAN_DRIFT", f"recovery {field}")
+                require(recovery.get("exact_node_only") is True and recovery.get("ambiguity") == "retain-reserve", "PLAN_DRIFT", "recovery stop rules")
+                capacity = plan_input.get("job_local_capacity")
+                require(isinstance(capacity, dict), "PLAN_DRIFT", "job-local capacity")
+                for field in ("expanded_asset_bytes", "product_bytes", "checkpoint_bytes", "margin_bytes", "minimum_free_bytes", "required_inodes"):
+                    require(isinstance(capacity.get(field), int) and capacity[field] >= 0, "PLAN_DRIFT", f"capacity {field}")
+                required_environment = plan_input.get("required_job_environment")
+                require(isinstance(required_environment, dict), "PLAN_DRIFT", "required job environment")
+                require({"PATH", "TMPDIR"} <= required_environment.keys(), "PLAN_DRIFT", "exact PATH and TMPDIR required")
+                close_job_environment(required_environment, {}, {}, deterministic_cuda=plan_input.get("deterministic_cuda") is True)
             evidence_allowlist = plan_input.get("evidence_allowlist")
             require(isinstance(evidence_allowlist, list) and evidence_allowlist, "AUTHORITY_INVALID", "evidence allowlist")
             validated_evidence = [validate_relative_path(item, "evidence allowlist") for item in evidence_allowlist]
@@ -811,6 +851,10 @@ class Toolkit:
                 require(receipt.get("bytes") == prepared["bytes"], "TRANSFER_INCOMPLETE", "byte identity")
                 require(receipt.get("sha256") == prepared["sha256"], "TRANSFER_INCOMPLETE", "hash identity")
                 require(receipt.get("promoted") is True, "TRANSFER_INCOMPLETE", "partial not promoted")
+                if self.provider_api_version == 2:
+                    require(isinstance(receipt.get("elapsed_ns"), int) and receipt["elapsed_ns"] > 0, "TRANSFER_INCOMPLETE", "integer telemetry")
+                    require(receipt.get("state") in {"uploaded", "resumed", "already_verified"}, "TRANSFER_INCOMPLETE", "transfer state")
+                    require(receipt.get("identity_sha256") == prepared["sha256"], "TRANSFER_INCOMPLETE", "v2 identity")
             self._event(state, "PREPARED", "STAGED", plan_id=state["current_plan_id"])
             state["run_state"] = "STAGED"
             state["transfer_receipts"] = receipts
@@ -834,6 +878,11 @@ class Toolkit:
             self._write_publication("verify.json", receipt)
 
     def _load_ledger(self) -> dict[str, Any]:
+        if self.provider_api_version == 2:
+            from .hardening import LedgerAnchor
+
+            checkpoint = self.authority.get("ledger_head_checkpoint")
+            return LedgerAnchor(self.ledger_path, self.authority_id, self.budget_id, self.authority["resource_ceiling_gpu_minutes"]).load(checkpoint=checkpoint)
         if self.ledger_path.exists():
             ledger = read_json(self.ledger_path)
             require(ledger.get("resource_budget_id") == self.budget_id, "AUTHORITY_INVALID", "ledger budget identity")
@@ -854,17 +903,22 @@ class Toolkit:
     def _reserved_total(ledger: dict[str, Any]) -> int:
         latest: dict[str, dict[str, Any]] = {}
         for item in ledger["entries"]:
-            latest[item["token"]] = item
+            if "token" in item:
+                latest[item["token"]] = item
         return sum(item["requested_gpu_minutes"] for item in latest.values() if item["status"] in {"reserved", "submitted", "settled", "ambiguous"})
 
-    @staticmethod
-    def _append_ledger_transition(ledger: dict[str, Any], token: str, status: str, **updates: Any) -> None:
-        prior = next((item for item in reversed(ledger["entries"]) if item["token"] == token), None)
+    def _append_ledger_transition(self, ledger: dict[str, Any], token: str, status: str, **updates: Any) -> None:
+        prior = next((item for item in reversed(ledger["entries"]) if item.get("token") == token), None)
         require(prior is not None, "AUTHORITY_INVALID", "ledger token missing")
         event = dict(prior)
         event.update(updates)
         event["status"] = status
         event["sequence"] = len(ledger["entries"])
+        if self.provider_api_version == 2:
+            event.pop("event_sha256", None)
+            event["predecessor_sha256"] = ledger["head_sha256"]
+            event["event_sha256"] = sha256_bytes(canonical_bytes(event))
+            ledger["head_sha256"] = event["event_sha256"]
         ledger["entries"].append(event)
 
     def submit(self, job_role: str, attempt_index: int) -> str:
@@ -872,6 +926,17 @@ class Toolkit:
         require(isinstance(attempt_index, int) and attempt_index >= 0, "PLAN_DRIFT", "attempt index")
         self.adapter.check_masters(self.profile)
         with directory_lock(self.budget_lock):
+            if self.provider_api_version == 2:
+                ledger_for_reconciliation = self._load_ledger()
+                observed_job_ids = self.adapter.reconcile_authority(self.profile, self.authority["scheduler_authority_token"])
+                require(isinstance(observed_job_ids, list) and all(isinstance(item, str) and item.isdigit() for item in observed_job_ids), "AUTHORITY_RECONCILIATION_REQUIRED", "invalid scheduler accounting")
+                registered_job_ids = {
+                    item["job_id"]
+                    for item in ledger_for_reconciliation["entries"]
+                    if isinstance(item.get("job_id"), str)
+                }
+                observed = set(observed_job_ids)
+                require(observed == registered_job_ids, "AUTHORITY_RECONCILIATION_REQUIRED", "scheduler and ledger job identities differ")
             with directory_lock(self.run_lock):
                 state = self._load_state()
                 self._require_state(state, {"VERIFIED", "MATRIX_ACTIVE"})
@@ -897,7 +962,29 @@ class Toolkit:
                     require(retry_class in job.get("retry_on", []), "PLAN_DRIFT", f"retry class not authorized: {retry_class}")
                 requested = job["gpus"] * job["time_limit_minutes"]
                 ledger = self._load_ledger()
-                require(self._reserved_total(ledger) + requested <= ledger["ceiling_gpu_minutes"], "RESOURCE_CEILING", key)
+                recovery_requested = 0
+                recovery_token = None
+                if self.provider_api_version == 2 and not state.get("recovery_token"):
+                    recovery_requested = plan["recovery_contingency"]["gpu_minutes"]
+                    recovery_token = sha256_bytes(f"{self.authority_id}:{self.run_id}:recovery".encode())[:32]
+                require(self._reserved_total(ledger) + requested + recovery_requested <= ledger["ceiling_gpu_minutes"], "RESOURCE_CEILING", key)
+                if recovery_token is not None:
+                    recovery_entry = {
+                        "authority_id": self.authority_id,
+                        "run_id": self.run_id,
+                        "plan_id": state["current_plan_id"],
+                        "job_role": "toolkit-recovery",
+                        "attempt_index": 0,
+                        "token": recovery_token,
+                        "requested_gpu_minutes": recovery_requested,
+                        "status": "reserved",
+                        "sequence": len(ledger["entries"]),
+                        "predecessor_sha256": ledger["head_sha256"],
+                    }
+                    recovery_entry["event_sha256"] = sha256_bytes(canonical_bytes(recovery_entry))
+                    ledger["head_sha256"] = recovery_entry["event_sha256"]
+                    ledger["entries"].append(recovery_entry)
+                    state["recovery_token"] = recovery_token
                 token = sha256_bytes(f"{self.authority_id}:{state['current_plan_id']}:{job_role}:{attempt_index}".encode())[:32]
                 entry = {
                     "authority_id": self.authority_id,
@@ -910,6 +997,10 @@ class Toolkit:
                     "status": "reserved",
                     "sequence": len(ledger["entries"]),
                 }
+                if self.provider_api_version == 2:
+                    entry["predecessor_sha256"] = ledger["head_sha256"]
+                    entry["event_sha256"] = sha256_bytes(canonical_bytes(entry))
+                    ledger["head_sha256"] = entry["event_sha256"]
                 ledger["entries"].append(entry)
                 self._save_ledger(ledger)
                 prior = state["run_state"]
@@ -1036,31 +1127,75 @@ class Toolkit:
                 )
                 archive_path.unlink()
             forbidden = tuple(self.profile.get("forbidden_publication_substrings", []))
+            evidence_paths = [path for path in quarantine.rglob("*") if path.is_file()]
+            logical_paths: list[tuple[Path, str]] = []
+            for path in evidence_paths:
+                if logical_name and str(path.relative_to(quarantine)) == logical_name:
+                    logical = logical_name
+                elif _is_relative_to(path, quarantine / "extracted"):
+                    logical = str(path.relative_to(quarantine / "extracted"))
+                else:
+                    logical = str(path.relative_to(quarantine))
+                require(logical in allowed_evidence, "ALLOWLIST_VIOLATION", f"unregistered evidence: {logical}")
+                require(path.stat().st_size <= self.profile.get("max_evidence_file_bytes", 10_000_000), "EVIDENCE_INCOMPLETE", str(path))
+                logical_paths.append((path, logical))
+            if self.provider_api_version == 2:
+                from .hardening import create_raw_collected
+
+                cleanup_marker_sha256 = result.get("cleanup_marker_sha256")
+                gates = {
+                    f"{attempt['job_role']}.{name}": passed
+                    for attempt in state.get("attempts", {}).values()
+                    if isinstance(attempt.get("result", {}).get("gates"), dict)
+                    for name, passed in attempt["result"]["gates"].items()
+                }
+                raw = create_raw_collected(
+                    self.authority_id,
+                    self.run_id,
+                    state["current_plan_id"],
+                    [{"logical_name": logical, "bytes": path.stat().st_size, "sha256": sha256_file(path)} for path, logical in logical_paths],
+                    gates,
+                    cleanup_marker_sha256,
+                )
+                state["raw_collected"] = raw
+                state["collection"] = result
+                self._save_state(state)
             sanitized_files: list[dict[str, Any]] = []
-            for path in quarantine.rglob("*"):
-                if path.is_file():
-                    if logical_name and str(path.relative_to(quarantine)) == logical_name:
-                        logical = logical_name
-                    elif _is_relative_to(path, quarantine / "extracted"):
-                        logical = str(path.relative_to(quarantine / "extracted"))
-                    else:
-                        logical = str(path.relative_to(quarantine))
-                    require(logical in allowed_evidence, "ALLOWLIST_VIOLATION", f"unregistered evidence: {logical}")
-                    require(path.stat().st_size <= self.profile.get("max_evidence_file_bytes", 10_000_000), "EVIDENCE_INCOMPLETE", str(path))
+            projection_receipts: list[dict[str, Any]] = []
+            for path, logical in logical_paths:
+                if self.provider_api_version == 2:
+                    from .hardening import project_evidence
+
+                    media_type = "application/json" if path.suffix == ".json" else "text/plain"
+                    projected, projection = project_evidence(
+                        path.read_bytes(),
+                        media_type=media_type,
+                        replacements=plan.get("evidence_replacements", []),
+                        forbidden=forbidden,
+                        raw_parent_sha256=sha256_file(path),
+                    )
+                    projection_receipts.append({"logical_name": logical, **projection})
+                else:
                     try:
                         text = path.read_text(encoding="utf-8")
                     except UnicodeDecodeError as error:
                         raise ToolkitError("SANITIZATION_FAILED", f"non-text evidence: {path.name}") from error
                     require(not any(item and item in text for item in forbidden), "SANITIZATION_FAILED", path.name)
-                    destination = self.publication_dir / "evidence" / logical
-                    destination.parent.mkdir(parents=True, exist_ok=True)
-                    temporary = destination.with_name(f".{destination.name}.part")
+                    projected = text.encode("utf-8")
+                destination = self.publication_dir / "evidence" / logical
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                temporary = destination.with_name(f".{destination.name}.part")
+                if self.provider_api_version == 2:
+                    temporary.write_bytes(projected)
+                else:
                     temporary.write_text(text, encoding="utf-8")
-                    os.replace(temporary, destination)
-                    sanitized_files.append({"logical_name": logical, "bytes": destination.stat().st_size, "sha256": sha256_file(destination)})
+                os.replace(temporary, destination)
+                sanitized_files.append({"logical_name": logical, "bytes": destination.stat().st_size, "sha256": sha256_file(destination)})
             self._event(state, "MATRIX_SETTLED", "COLLECTED", plan_id=state["current_plan_id"])
             state["run_state"] = "COLLECTED"
             state["collection"] = result
+            if projection_receipts:
+                state["projection_receipts"] = projection_receipts
             self._save_state(state)
             receipt = self._common("collection_receipt", plan_id=state["current_plan_id"])
             receipt.update(result)
@@ -1068,22 +1203,36 @@ class Toolkit:
             self._write_publication("collection.json", receipt)
             return receipt
 
+    def _clean_locked(self) -> dict[str, Any]:
+        state = self._load_state()
+        self._require_state(state, {"COLLECTED"})
+        result = self.adapter.clean(self.profile, self._current_plan(state))
+        require(result.get("remote_absent") is True, "CLEANUP_INCOMPLETE", "remote run remains")
+        allowed_cleanup = {"verified_absent"} if self.provider_api_version == 2 else {"scheduler_purged", "verified_absent"}
+        require(result.get("job_local_cleanup") in allowed_cleanup, "CLEANUP_INCOMPLETE", "job-local cleanup")
+        if self.provider_api_version == 2:
+            recovery_token = state.get("recovery_token")
+            require(isinstance(recovery_token, str), "CLEANUP_INCOMPLETE", "recovery reserve missing")
+            ledger = self._load_ledger()
+            self._append_ledger_transition(ledger, recovery_token, "released", release_reason="verified-cleanup")
+            self._save_ledger(ledger)
+        self._event(state, "COLLECTED", "CLEANED", plan_id=state["current_plan_id"])
+        state["run_state"] = "CLEANED"
+        state["cleanup"] = result
+        self._save_state(state)
+        receipt = self._common("cleanup_receipt", plan_id=state["current_plan_id"])
+        receipt.update({"remote_root_hash": sha256_bytes(self._current_plan(state)["remote_run_root"].encode()), **result})
+        self._write_publication("cleanup.json", receipt)
+        return receipt
+
     def clean(self) -> dict[str, Any]:
         self.adapter.check_masters(self.profile)
+        if self.provider_api_version == 2:
+            with directory_lock(self.budget_lock):
+                with directory_lock(self.run_lock):
+                    return self._clean_locked()
         with directory_lock(self.run_lock):
-            state = self._load_state()
-            self._require_state(state, {"COLLECTED"})
-            result = self.adapter.clean(self.profile, self._current_plan(state))
-            require(result.get("remote_absent") is True, "CLEANUP_INCOMPLETE", "remote run remains")
-            require(result.get("job_local_cleanup") in {"scheduler_purged", "verified_absent"}, "CLEANUP_INCOMPLETE", "job-local cleanup")
-            self._event(state, "COLLECTED", "CLEANED", plan_id=state["current_plan_id"])
-            state["run_state"] = "CLEANED"
-            state["cleanup"] = result
-            self._save_state(state)
-            receipt = self._common("cleanup_receipt", plan_id=state["current_plan_id"])
-            receipt.update({"remote_root_hash": sha256_bytes(self._current_plan(state)["remote_run_root"].encode()), **result})
-            self._write_publication("cleanup.json", receipt)
-            return receipt
+            return self._clean_locked()
 
     def close(self) -> dict[str, Any]:
         with directory_lock(self.run_lock):

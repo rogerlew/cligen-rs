@@ -160,18 +160,30 @@ amendments remain in the
 No development or confirmation target series was read, no fitted weights were
 retained, and the diagnostic timing ratios received no selector classification.
 
-**Next:** execute the
-[A10M4O1 operational-hardening package](work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md)
-to incorporate A10M4's toolchain, deterministic-environment, job-local
-cleanup/recovery, sanitization, authority-continuation, and transfer lessons
-into the agent guide and Lemhi toolkit. The exact sequence is A10M4O1
-hardening, immutable successor semantic contract, separately dispatched
-bounded candidate smoke, immutable smoke attestation, canonical-index
-promotion, then A10M5. Provider/storage changes invalidate `v1` for new
-commitments while its bytes remain historical status-at-issuance evidence. A
-failed smoke holds A10M5 and cannot fall back to `v1` storage semantics. The
-frozen 5x/10x runtime criteria are not changed here and remain a separate
-prospective scientific decision.
+**Complete (2026-07-17):**
+[A10M4O1 operational hardening](work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md)
+reached `A10M4O1-TOOLKIT-HARDENED` through local injected fixtures with no
+remote action or allocation. Toolkit revision 2 now freezes an all-v2
+provider/record stack, complete native toolchain closure, `--export=NONE`
+deterministic environments, toolkit-recoverable job-local supervision and
+reserved recovery, raw-before-projection evidence, immutable authority
+revisions with ledger checkpoints and pre-spend accounting reconciliation,
+integer transfer telemetry, and append-only within-run asset manifests. All 23
+historical foundation tests and 21 hardening tests pass. Canonical v1 remains
+byte-immutable status-at-issuance history.
+
+The package published immutable successor semantics
+`lemhi-a10-py311-l40-v2-candidate` at SHA-256
+`5addee9c5db3592ee247eab2b5266ed5567fd9aaf24ed78dcb321ecbb001e22d`.
+It created no smoke attestation or designation. The frozen 5x/10x runtime
+criteria remain unchanged and require a separate prospective scientific
+decision.
+
+**Next:** separately dispatch the bounded
+[canonical-v2 smoke package](work-packages/20260717-a10-lemhi-canonical-v2-smoke/package.md).
+Its exact sequence is candidate smoke, immutable smoke attestation, local
+canonical-designation-index revision, then A10M5. A failed smoke holds A10M5
+and cannot mutate the candidate or fall back to v1 storage semantics.
 
 After hardening and the successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions

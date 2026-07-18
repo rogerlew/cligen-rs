@@ -33,7 +33,10 @@ def main() -> None:
     roadmap = (ROOT / "docs/ROADMAP.md").read_text(encoding="utf-8")
     catalog = (ROOT / "docs/work-packages/README.md").read_text(encoding="utf-8")
 
-    require("Status: `SCAFFOLDED`" in package, "package status")
+    require(
+        "Status: `SCAFFOLDED`" in package or "Status: `EXECUTED-COMPLETE`" in package,
+        "package status",
+    )
     require("A10M4O1-TOOLKIT-HARDENED" in package, "terminal")
     require("No remote write or allocation is authorized" in package_words, "dispatch boundary")
     require("5x/10x" in package and "separate prospective" in package, "runtime defer")
@@ -87,7 +90,11 @@ def main() -> None:
         "canonical v1 changed during scaffold",
     )
 
-    require("A10M4O1 operational-hardening package" in roadmap, "roadmap transition")
+    require(
+        "A10M4O1 operational-hardening package" in roadmap
+        or "A10M4O1 operational hardening" in roadmap,
+        "roadmap transition",
+    )
     require("20260717-a10m4o1-lemhi-operational-hardening" in catalog, "catalog entry")
     require("confirmation target access" in package, "confirmation firewall")
 

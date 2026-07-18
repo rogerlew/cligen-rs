@@ -1,0 +1,30 @@
+{
+  "assets": ["rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz", "cargo-vendor.tar.gz"],
+  "consumes_probe_fields": ["platform", "architecture", "glibc"],
+  "does_not_establish": ["scientific-correctness", "performance", "cross-run-cache"],
+  "emits_probe_fields": ["rustc_version", "cargo_version", "host_cxx_version"],
+  "executes_provider_code": false,
+  "failure_codes": ["ASSET_IDENTITY_MISMATCH", "PLATFORM_MISMATCH", "GATE_FAILED"],
+  "implementation_version": "2.0.0",
+  "name": "toolchain-rust192-linux-x86-64-v2",
+  "network_phase": "controller-prepare-and-compute-offline",
+  "operations": {"prepare": "rust-archive-layout-v2", "validate": "rust-offline-build-closure-v2"},
+  "provider_api_version": 2,
+  "provider_class": "toolchain",
+  "provides": {"native_build_toolchain": "rust-1.92.0-linux-x86_64"},
+  "required_commands": ["tar", "ldd", "/usr/bin/g++"],
+  "requires": {"target_arch": "x86_64", "target_libc": "glibc", "target_os": "linux", "target_platform": "linux-x86_64-glibc"},
+  "side_effect_classes": ["marked-job-local-root"],
+  "supported_platforms": ["linux-x86_64-glibc"],
+  "toolchain_contract": {
+    "cargo_path": "toolchain/bin/cargo",
+    "host_cxx_path": "/usr/bin/g++",
+    "license_provenance": "Rust distribution and vendored crates retain upstream license metadata",
+    "offline_build_probe": "cargo-build-locked-offline-v2",
+    "offline_metadata_probe": "cargo-metadata-locked-offline-v2",
+    "rustc_path": "toolchain/bin/rustc",
+    "target_std_path": "toolchain/lib/rustlib/x86_64-unknown-linux-gnu/lib",
+    "target_triple": "x86_64-unknown-linux-gnu",
+    "vendor_root_relative_to_source": "vendor"
+  }
+}

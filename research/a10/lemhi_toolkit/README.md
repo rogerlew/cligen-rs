@@ -21,16 +21,17 @@ unplanned allocations, or protected confirmation data.
    `ssh -O check lemhi`. Toolkit remote operations repeat these checks using
    `BatchMode=yes`; failure is `AUTH_BOOTSTRAP_REQUIRED` and never an
    interactive fallback.
-3. Copy `examples/authority.example.json` outside the repository, replace its
-   values with the dispatched package identity and exact source commit, and
-   allowlist only the individual local roots needed by that package.
+3. For a hardened dispatch, copy `examples/authority-v2.example.json` outside
+   the repository and run the exclusive `initialize-authority` operation once.
+   Later source corrections use `derive-run`; they never choose another ledger
+   root or reset the budget. Revision-1 examples remain historical fixtures.
 4. Create a private plan from `examples/plan.example.json`. The target is
    Linux x86-64 glibc even though dependency resolution is controlled from
    macOS arm64. Every local asset path must be absolute, regular, singly linked,
    and beneath an authority allowlist root.
-5. Put `--state-root` outside the repository in a mode-restricted location.
-   Private state must survive through exact reconciliation and cleanup. `close`
-   removes it after sanitized publication receipts are durable.
+5. A live revision-2 authority owns its absolute mode-restricted ledger anchor;
+   the CLI rejects `--state-root`. Fixture adapters may inject a temporary
+   root. Private state survives exact reconciliation and cleanup.
 
 The first live consumer is the separately dispatched CPython 3.11 smoke
 package. Foundation acceptance itself uses no VPN, remote write, Slurm job, or
@@ -42,9 +43,11 @@ The current default for A10 single-L40 Python consumers is the versioned
 [`lemhi-a10-py311-l40-v1`](configurations/lemhi-a10-py311-l40-v1.json)
 record, governed by
 [`SPEC-LEMHI-CANONICAL-CONFIGURATION`](../../../docs/specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
-Consumers bind both its ID and semantic SHA-256. Provider, artifact,
-scheduler, storage, or isolation drift fails closed and requires a new
-versioned record plus a fresh smoke; Python 3.8 is legacy explicit-only.
+Revision 1 is immutable status-at-issuance history. A10M4O1 publishes an
+immutable revision-2 semantic candidate, but it is not current until a
+separately dispatched smoke emits a passing attestation and a later
+designation-index revision advances the pointer. Python 3.8 remains legacy
+explicit-only.
 
 ## Command sequence
 
@@ -87,6 +90,21 @@ The committed profile selects an ordered SCP, Slurm, Ceph, and L40 provider
 stack. Definitions are declarative JSON and content-hashed into every plan.
 Adding a runtime or framework means adding a versioned provider record and an
 explicit plan amendment or new plan; provider failure is not a fallback signal.
+
+Revision-2 plans use `lemhi-v2.json`, an all-v2 provider stack including the
+toolchain provider, `toolkit_recoverable` storage, `--export=NONE` environment
+closure, a frozen recovery contingency, typed raw-evidence projection, integer
+transfer telemetry, and append-only content-addressed manifests. Useful
+operator-facing commands are:
+
+```text
+initialize-authority --output /private/authority.json
+derive-run --input /private/derivation.json --output /private/revision.json
+```
+
+The first is authorized exactly once for a new dispatch. The second preserves
+authority, budget, class, ceiling, branch, and push target and accepts only a
+published source lineage. Neither command authenticates, submits, or allocates.
 
 ## Foundation verification
 

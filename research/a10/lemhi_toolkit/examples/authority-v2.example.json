@@ -1,0 +1,18 @@
+{
+  "allowed_roots": ["/absolute/operator/allowlisted/source"],
+  "authority_id": "example-v2-authority",
+  "confirmation_classification": "development-only",
+  "genesis_authorized": true,
+  "ledger_anchor": "/private/absolute/lemhi-state/authorities/example-v2-budget/ledger.json",
+  "package_id": "example-v2-package",
+  "predecessor_evidence": [],
+  "published_source_commits": ["0000000"],
+  "push_target": "main",
+  "resource_budget_id": "example-v2-budget",
+  "resource_ceiling_gpu_minutes": 20,
+  "resource_class": "one-l40",
+  "scheduler_authority_token": "example-v2-authority-token",
+  "scheduler_evidence": [],
+  "source_commit": "0000000",
+  "starting_branch": "main"
+}

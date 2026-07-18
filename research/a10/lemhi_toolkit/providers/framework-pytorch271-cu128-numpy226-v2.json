@@ -1,0 +1,19 @@
+{
+  "assets": ["wheelhouse.tar", "requirements.lock", "wheel-manifest.json"],
+  "consumes_probe_fields": ["python_abi", "accelerator_class"],
+  "does_not_establish": ["performance", "multi_gpu", "training_readiness"],
+  "emits_probe_fields": ["torch_version", "numpy_version", "cuda_available"],
+  "executes_provider_code": false,
+  "failure_codes": ["ASSET_IDENTITY_MISMATCH", "PLATFORM_MISMATCH", "GATE_FAILED"],
+  "implementation_version": "2.0.0",
+  "name": "framework-pytorch271-cu128-numpy226-v2",
+  "network_phase": "compute-offline",
+  "operations": {"install": "pip-no-index-require-hashes-v2", "validate": "numpy-pytorch-one-l40-smoke-v2"},
+  "provider_api_version": 2,
+  "provider_class": "framework",
+  "provides": {"framework_abi": "torch-2.7.1-cu128-cp311", "numpy_abi": "numpy-2.2.6-cp311"},
+  "required_commands": ["nvidia-smi"],
+  "requires": {"accelerator_request": "gpu:l40", "python_abi": "cp311", "target_platform": "linux-x86_64-glibc"},
+  "side_effect_classes": ["marked-job-local-root", "bounded-slurm-allocation"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

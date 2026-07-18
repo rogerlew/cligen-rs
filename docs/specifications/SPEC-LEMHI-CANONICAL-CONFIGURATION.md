@@ -1,6 +1,6 @@
 # Lemhi canonical agent configuration
 
-Status: authoritative (revision 1)
+Status: authoritative (revision 2)
 
 ## Surface
 
@@ -81,6 +81,27 @@ smoke again. A passing replacement receives a new configuration ID; the old
 record becomes `superseded` but remains immutable for historical consumers.
 
 Changing only prose outside the record does not change its identity. Changing
-any semantic record field requires recomputing the semantic hash and, unless
-the field is evidence-only lineage that does not alter execution, a new
-configuration version and smoke package.
+any semantic record field requires a new immutable semantic record and smoke
+package; evidence and designation are never inserted back into that record.
+
+## Revision-2 immutable transition model
+
+The v1 record is immutable historical status-at-issuance evidence. Its
+embedded `current-canonical` value is not edited when a successor is assessed.
+New configuration semantics use schema
+`lemhi-canonical-configuration-semantics-2` and contain no mutable smoke or
+promotion state. The lowercase semantic SHA-256 is computed after removing
+only `configuration_semantic_sha256`.
+
+A bounded live validation produces a separate immutable
+`lemhi-canonical-smoke-attestation-1` record binding the exact configuration
+ID and semantic hash. Passing evidence does not itself change the default.
+Only a subsequent `lemhi-canonical-designation-index-1` revision may designate
+the attested hash current and the prior hash superseded. A failed smoke is
+retained as failed evidence, cannot mutate the candidate, cannot advance the
+index, and cannot silently restore v1's invalidated storage semantics.
+
+The candidate introduced by A10M4O1 remains noncurrent until its separately
+dispatched smoke and designation revision pass. Consumers MUST resolve the
+current configuration through the designation index once that index exists;
+historical records remain directly addressable by exact ID and hash.

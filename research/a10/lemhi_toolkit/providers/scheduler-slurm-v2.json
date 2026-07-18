@@ -1,0 +1,19 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["scheduler"],
+  "does_not_establish": ["scientific_gate", "cleanup_without-settlement"],
+  "emits_probe_fields": [],
+  "executes_provider_code": false,
+  "failure_codes": ["AUTHORITY_RECONCILIATION_REQUIRED", "RESOURCE_CEILING", "SUBMISSION_OUTCOME_UNKNOWN", "JOB_TERMINAL_MISMATCH"],
+  "implementation_version": "2.0.0",
+  "name": "scheduler-slurm-v2",
+  "network_phase": "login-control",
+  "operations": {"cancel": "slurm-exact-cancel-v2", "observe": "slurm-settled-accounting-v2", "submit": "slurm-export-none-token-submit-v2"},
+  "provider_api_version": 2,
+  "provider_class": "scheduler",
+  "provides": {"scheduler_submission": "authority-reconciled-token-v2"},
+  "required_commands": ["sbatch", "squeue", "sacct", "scancel"],
+  "requires": {"scheduler": "slurm", "target_platform": "linux-x86_64-glibc"},
+  "side_effect_classes": ["bounded-slurm-allocation", "bounded-recovery-allocation"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

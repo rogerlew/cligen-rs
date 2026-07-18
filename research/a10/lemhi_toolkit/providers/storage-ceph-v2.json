@@ -1,0 +1,20 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["durable_storage"],
+  "does_not_establish": ["quota", "physical-erasure", "power-loss-durability"],
+  "emits_probe_fields": [],
+  "executes_provider_code": false,
+  "failure_codes": ["JOB_LOCAL_CAPACITY", "CLEANUP_TARGET_INVALID", "CLEANUP_INCOMPLETE"],
+  "implementation_version": "2.0.0",
+  "name": "storage-ceph-toolkit-recoverable-v2",
+  "network_phase": "durable-and-job-local",
+  "operations": {"admit": "job-local-serialized-capacity-v2", "cleanup": "supervisor-marker-clean-v2", "recover": "settled-exact-node-recovery-v2"},
+  "provider_api_version": 2,
+  "provider_class": "storage",
+  "provides": {"job_local_cleanup": "toolkit_recoverable"},
+  "required_commands": ["df", "stat", "tar", "sha256sum"],
+  "requires": {"durable_storage": "ceph-home", "target_platform": "linux-x86_64-glibc"},
+  "side_effect_classes": ["durable-run-root", "marked-job-local-root", "private-quarantine"],
+  "storage_contract": {"admission_lock": "per-canonical-base", "minimum_free_floor_required": true, "owner_marker_version": 2},
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

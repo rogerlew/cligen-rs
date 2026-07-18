@@ -1,0 +1,96 @@
+{
+  "configuration_id": "lemhi-a10-py311-l40-v2-candidate",
+  "configuration_semantic_sha256": "5addee9c5db3592ee247eab2b5266ed5567fd9aaf24ed78dcb321ecbb001e22d",
+  "control_contract": {
+    "authentication": "operator-bootstrapped-warm-mfa-control-masters",
+    "controller": "rmm-macos-arm64",
+    "interactive_fallback": false,
+    "provider_api_version": 2,
+    "record_schema_version": "lemhi-toolkit-record-2",
+    "transport_mode": "openssh-batchmode"
+  },
+  "deterministic_environment": {
+    "clear_ambient": true,
+    "required": {
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "PATH": "<RUN_ROOT>/runtime/cpython/bin:<JOB_LOCAL_ROOT>/toolchain/bin:/usr/bin:/bin",
+      "PYTHONNOUSERSITE": "1",
+      "TMPDIR": "<JOB_LOCAL_ROOT>/tmp"
+    },
+    "slurm_export": "NONE"
+  },
+  "framework": {
+    "cuda_runtime": "12.8",
+    "numpy": "2.2.6",
+    "pytorch": "2.7.1+cu128",
+    "requirements_lock_sha256": "87dcc51e95945d1b152174a592bdb76d57fbe8cae0eb95ed5fdf9045c8fe6647",
+    "wheel_manifest_sha256": "f70271b551bde1544167eaaa8513ee2d37907deba0109021ba1dcee2c74347cb",
+    "wheelhouse_bytes": 3865978880,
+    "wheelhouse_sha256": "30344178212946f5a37df03a6ccdc82025d198c07467adf55d87b9d5918e730e"
+  },
+  "not_established": [
+    "a10m5-scientific-claims",
+    "administrator-supported-cluster-default",
+    "cross-run-cache",
+    "multi-gpu-behavior",
+    "performance-or-throughput",
+    "production-durability"
+  ],
+  "platform_contract": {
+    "accelerator": "nvidia-l40",
+    "architecture": "x86_64",
+    "glibc_floor": "2.28",
+    "os": "linux",
+    "platform": "linux-x86_64-glibc"
+  },
+  "provider_stack": [
+    {"path": "research/a10/lemhi_toolkit/providers/transport-scp-v2.json", "sha256": "4492c2b05f79586dad42660b3e4fef610003dfd19b7970dbe55c51bddfce5396"},
+    {"path": "research/a10/lemhi_toolkit/providers/scheduler-slurm-v2.json", "sha256": "b0d372b0f7d097b1cf7af617289745d54de8f94813e0f6636e63a5aab526595c"},
+    {"path": "research/a10/lemhi_toolkit/providers/storage-ceph-v2.json", "sha256": "58eed857bec220e28e6d1e0672ecce89a388aed88b6876aec882f51071887dba"},
+    {"path": "research/a10/lemhi_toolkit/providers/accelerator-l40-v2.json", "sha256": "bcd176537ab57b9eb718dd892c269af0fb755553767a4c8ae0ab15fd92979547"},
+    {"path": "research/a10/lemhi_toolkit/providers/runtime-cpython311-portable-v2.json", "sha256": "a5d8b9ea9d9722acfa0daf774f389a7186159a1abb10cf75421ce4b05a04a25d"},
+    {"path": "research/a10/lemhi_toolkit/providers/framework-pytorch271-cu128-numpy226-v2.json", "sha256": "59579451e2ce17c76be4d8532cd32518325c3cc8567a190b36e3ad9f36156acc"},
+    {"path": "research/a10/lemhi_toolkit/providers/toolchain-rust192-linux-x86_64-v2.json", "sha256": "12c3b22c8ad495d939705737003bb009004b42cb711c2f16980b78fd6dd81cb6"}
+  ],
+  "runtime": {
+    "abi": "cp311",
+    "artifact_bytes": 48850850,
+    "artifact_sha256": "14b5843a3492925dab6fdb7cca7d09af83ddf1fe2851f72cf9b1edc8ed2b1db7",
+    "distribution": "python-build-standalone-20260510",
+    "final_run_relative_path": "runtime/cpython",
+    "version": "3.11.15"
+  },
+  "scheduler_contract": {
+    "gres": "gpu:l40:1",
+    "partition": "gpu-icrews",
+    "requeue": false,
+    "recovery_contingency_required": true,
+    "scheduler_accounting_reconciliation": "authority-token-before-spend"
+  },
+  "schema_version": "lemhi-canonical-configuration-semantics-2",
+  "storage_contract": {
+    "admission": "serialized-expanded-bytes-inodes-margin-floor",
+    "durable": "ceph-home-run-root",
+    "job_local": "toolkit_recoverable",
+    "owner_marker_version": 2,
+    "recovery": "settled-exact-node-double-validation"
+  },
+  "toolchain": {
+    "cargo": "1.92.0",
+    "host_cxx": "/usr/bin/g++",
+    "rust_archive_bytes": 192171372,
+    "rust_archive_sha256": "d2ccef59dd9f7439f2c694948069f789a044dc1addcc0803613232af8f88ee0c",
+    "rustc": "1.92.0",
+    "target_triple": "x86_64-unknown-linux-gnu",
+    "vendor_archive_bytes": 35822885,
+    "vendor_archive_sha256": "13d7f41f3e0d8b45254a1e6070db5b814d54327e9201ccbe22a57269168f0d3c"
+  },
+  "toolkit_profile": {
+    "path": "research/a10/lemhi_toolkit/profiles/lemhi-v2.json",
+    "sha256": "988c52f157a32455973fd10caea18773db59a7a04724b784125c319307db5c93"
+  },
+  "validation_contract": {
+    "designation_requires": "lemhi-canonical-smoke-attestation-1",
+    "smoke_package": "docs/work-packages/20260717-a10-lemhi-canonical-v2-smoke/package.md"
+  }
+}

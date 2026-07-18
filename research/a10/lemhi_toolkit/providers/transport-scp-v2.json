@@ -1,0 +1,19 @@
+{
+  "assets": [],
+  "consumes_probe_fields": ["platform"],
+  "does_not_establish": ["throughput", "compute_network", "range_integrity"],
+  "emits_probe_fields": [],
+  "executes_provider_code": false,
+  "failure_codes": ["AUTH_BOOTSTRAP_REQUIRED", "TRANSFER_INCOMPLETE"],
+  "implementation_version": "2.0.0",
+  "name": "transport-scp-v2",
+  "network_phase": "control-to-durable",
+  "operations": {"download": "scp-download-telemetry-v2", "upload": "scp-part-hash-promote-v2"},
+  "provider_api_version": 2,
+  "provider_class": "transport",
+  "provides": {"transfer_identity": "sha256-promoted-v2"},
+  "required_commands": ["ssh", "scp", "sha256sum"],
+  "requires": {"target_platform": "linux-x86_64-glibc", "transport": "scp"},
+  "side_effect_classes": ["durable-run-root"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

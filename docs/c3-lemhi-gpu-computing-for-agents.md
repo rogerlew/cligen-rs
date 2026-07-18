@@ -420,6 +420,103 @@ directory. Copy durable results and receipts back to the Ceph working directory
 before job exit. `$SLURM_TMPDIR` was not guaranteed in A10M2; retain the
 `TMPDIR`/`/tmp` fallback and record the actual filesystem.
 
+## A10M4 operational hardening
+
+A10M4 turned several plausible operational assumptions into observed failure
+evidence. For new commitments, agents must use the revision-2 toolkit contract
+rather than copying A10M4's corrective shell fragments.
+
+### Validate closures, not visible components
+
+Cargo without `rustc`, a compiler without its target standard library, and a
+vendor directory at the wrong extracted depth are incomplete closures. Native
+build packages must declare the toolchain provider and validate twice:
+
+1. on `rmm`, inspect the archive, safe extraction layout, source/vendor
+   relationship, target libraries, licenses, and offline metadata command; and
+2. in the allocated compute preflight, validate exact executable paths and
+   versions, loader resolution, compiler invocation, vendor root relative to
+   source, and the registered bounded build smoke.
+
+Never inherit the login host's architecture-targeted Spack compiler or treat
+file presence as execution proof.
+
+### Start jobs from a closed environment
+
+Hardened Slurm submission uses `--export=NONE` or a provider-proved equivalent.
+The toolkit wrapper reconstructs only registered scheduler/device variables
+and the plan's exact `PATH`, compiler, cache, temporary-directory, and public
+operational values. Ambient overrides fail. Deterministic CUDA work sets
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` before Python or a CUDA framework is
+imported. Evidence records the allowlisted contract, never `env` wholesale.
+
+### Treat job-local state as toolkit-recoverable
+
+The A10M4 failures left marked trees on persistent node-local `/tmp`; the
+assumption that Slurm purged them was false. New work must declare
+`toolkit_recoverable` storage. Primary admission checks the provider-declared
+base, filesystem, owner, permissions, expanded bytes/inodes, outputs,
+checkpoints, fixed margin, and free-space floor while holding a per-base claim.
+It reserves a bounded recovery contingency before primary submission.
+
+The toolkit supervisor owns the attempt process group, forwards catchable
+signals, waits, atomically publishes status, cleans on every catchable exit,
+and proves absence. Application or status-write failure never disables local
+cleanup. `SIGKILL`, node loss, ambiguous scheduler state, or failed absence
+proof yields `CLEANUP_INCOMPLETE` and retains the reserve.
+
+Recovery is a separately registered Slurm role, never direct compute-node SSH.
+It derives the exact node from authenticated terminal accounting, proves all
+original jobs/steps/requeues absent and settled, then validates UID, marker,
+ancestors, filesystem, and target twice before one bounded exact deletion. If
+the node is unavailable or any identity differs, stop; never delete by user,
+job name, prefix, wildcard, or process scan.
+
+### Continue authority without resetting accounting
+
+Do not hand-edit a new authority ID or choose a fresh state root when a source
+correction needs a new run. Revision 2 gives each dispatch one exclusive
+`initialize-authority`, canonical private ledger anchor, published head
+checkpoints, and immutable authority revisions produced by `derive-run`.
+Authority, package, budget, resource class/ceiling, branch, and push target do
+not change. Every live reservation/submission reconciles the authority token
+against Slurm accounting before spending.
+
+A local hash chain cannot detect restoration of both itself and its saved head
+to an older valid prefix. Therefore missing or ambiguous external accounting
+holds the authority; agents must not represent the local chain as rollback
+proof.
+
+### Separate raw collection from publication
+
+Authenticated retrieval first creates a private `RAW_COLLECTED` receipt that
+binds raw hashes, gates, and cleanup-authorizing markers. Publication then
+performs typed, boundary-aware projection. Paths match only exact roots or
+descendants, longest roots are replaced first, reserved token syntax and
+invalid UTF-8 fail, and JSON is parsed and transformed structurally. A final
+forbidden-value scan still rejects unregistered leaks. Projection failure
+holds publication but preserves exact cleanup authority and cannot alter gate
+results.
+
+### Transfer once only within a run lineage
+
+Transfer receipts use integer nanoseconds and record `uploaded`, `resumed`, or
+`already_verified`. A skip immediately revalidates the remote hash. SCP
+partials are replaced or removed unless a provider proves range-safe resume.
+Within one run lineage, immutable content-addressed assets may feed multiple
+matrix jobs through an append-only manifest. This does not solve A10M4's
+4.83-GB cross-run retransfers; cross-run caching remains deferred pending
+quota, ownership, concurrency, garbage collection, and licensing policy.
+
+### Application-owned preflight checklist
+
+The toolkit authenticates declared gates but cannot infer scientific meaning.
+An A10 package must additionally prove fully observed input windows under the
+corpus missingness contract; checkpoint every cursor needed for the next
+batch; deserialize checkpoints and CPU RNG state on CPU before explicit
+relocation; and validate output completeness with a format-aware parser or a
+byte-pinned fixture. Guessed line counts are not completeness evidence.
+
 ## Submission and evidence lifecycle
 
 An authorized agent should follow this sequence:

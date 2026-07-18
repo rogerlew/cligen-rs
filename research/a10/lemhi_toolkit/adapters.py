@@ -7,6 +7,7 @@ import os
 import re
 import shutil
 import subprocess
+import time
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -89,7 +90,6 @@ class FixtureAdapter:
         return self.remote / relative
 
     def stage(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        del profile
         self.check_masters({})
         if self.scenario.get("stage_failure"):
             raise ToolkitError("TRANSFER_INCOMPLETE", "fixture transfer failed; no fallback")
@@ -106,6 +106,7 @@ class FixtureAdapter:
         (root / ".lemhi-toolkit-owner.json").write_bytes(canonical_bytes(marker) + b"\n")
         receipts = []
         for asset in assets:
+            started_ns = time.monotonic_ns()
             destination = root / asset["logical_name"]
             destination.parent.mkdir(parents=True, exist_ok=True)
             partial = destination.with_name(destination.name + ".part")
@@ -115,14 +116,27 @@ class FixtureAdapter:
             complete = partial.stat().st_size == asset["bytes"] and sha256_file(partial) == asset["sha256"]
             if complete:
                 os.replace(partial, destination)
-            receipts.append({
+            receipt = {
                 "logical_name": asset["logical_name"],
                 "bytes": partial.stat().st_size if partial.exists() else destination.stat().st_size,
                 "sha256": sha256_file(partial if partial.exists() else destination),
                 "method": "fixture-scp",
                 "partial_name": asset["logical_name"] + ".part",
                 "promoted": complete,
-            })
+            }
+            if profile.get("provider_api_version") == 2:
+                from .hardening import transfer_receipt
+
+                receipt.update(transfer_receipt(
+                    logical_name=asset["logical_name"],
+                    byte_count=receipt["bytes"],
+                    elapsed_ns=max(1, time.monotonic_ns() - started_ns),
+                    method="fixture-scp",
+                    identity_sha256=receipt["sha256"],
+                    state="uploaded",
+                    remote_revalidated=True,
+                ))
+            receipts.append(receipt)
         return receipts
 
     def verify(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> None:
@@ -130,6 +144,7 @@ class FixtureAdapter:
         self.check_masters({})
         root = self._run_root(plan)
         for asset in assets:
+            started_ns = time.monotonic_ns()
             destination = root / asset["logical_name"]
             require(destination.is_file(), "TRANSFER_INCOMPLETE", asset["logical_name"])
             require(destination.stat().st_size == asset["bytes"], "TRANSFER_INCOMPLETE", asset["logical_name"])
@@ -156,6 +171,15 @@ class FixtureAdapter:
         if forced is not None:
             return list(forced)
         return list(self._backend()["tokens"].get(token, []))
+
+    def reconcile_authority(self, profile: dict[str, Any], authority_token: str) -> list[str]:
+        del profile, authority_token
+        if self.scenario.get("authority_reconciled", True) is not True:
+            raise ToolkitError("AUTHORITY_RECONCILIATION_REQUIRED", "fixture accounting unavailable")
+        forced = self.scenario.get("authority_job_ids")
+        if forced is not None:
+            return list(forced)
+        return sorted(self._backend()["jobs"].keys())
 
     def observe(self, profile: dict[str, Any], plan: dict[str, Any], planned_job: dict[str, Any], job_id: str) -> dict[str, Any]:
         del profile, plan, planned_job
@@ -184,7 +208,7 @@ class FixtureAdapter:
         return {"job_id": job_id, "acknowledged": True}
 
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]:
-        del profile, plan
+        del profile
         self.check_masters({})
         partial = quarantine / "evidence.json.part"
         final = quarantine / "evidence.json"
@@ -195,13 +219,17 @@ class FixtureAdapter:
         promoted = sha256_file(partial) == remote_hash and partial.stat().st_size == remote_bytes
         if promoted:
             os.replace(partial, final)
-        return {
+        result = {
             "logical_name": "evidence.json",
             "bytes": remote_bytes,
             "sha256": remote_hash,
             "download_promoted": promoted,
             "sanitization_policy": "fixture-publication-v1",
         }
+        marker = self._run_root(plan) / ".lemhi-toolkit-owner.json"
+        if marker.is_file():
+            result["cleanup_marker_sha256"] = sha256_file(marker)
+        return result
 
     def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
         del profile
@@ -224,7 +252,8 @@ class FixtureAdapter:
             marker_path.write_text("{}\n", encoding="utf-8")
         require(read_json(marker_path) == expected, "CLEANUP_TARGET_INVALID", "owner marker changed")
         shutil.rmtree(root)
-        job_local = self.scenario.get("job_local_cleanup", "scheduler_purged")
+        default_cleanup = "verified_absent" if plan.get("job_local_cleanup") == "toolkit_recoverable" else "scheduler_purged"
+        job_local = self.scenario.get("job_local_cleanup", default_cleanup)
         return {"remote_absent": not root.exists(), "job_local_cleanup": job_local}
 
 
@@ -281,11 +310,25 @@ class OpenSSHSlurmAdapter:
         receipts = []
         target = validate_shell_scalar(profile["target"], "target")
         for asset in assets:
+            started_ns = time.monotonic_ns()
             logical = validate_relative_path(asset["logical_name"], "logical_name")
             remote_part = f"{remote_base}/{run_root}/{logical}.part"
             self._run(["scp", *self._ssh_options(profile), "--", asset["local_path"], f"{target}:{remote_part}"], timeout=profile.get("transfer_timeout_seconds", 600), code="TRANSFER_INCOMPLETE")
             self._remote_script(profile, "promote.sh", [remote_base, run_root, logical, str(asset["bytes"]), asset["sha256"]])
-            receipts.append({"logical_name": logical, "bytes": asset["bytes"], "sha256": asset["sha256"], "method": "scp", "partial_name": logical + ".part", "promoted": True})
+            receipt = {"logical_name": logical, "bytes": asset["bytes"], "sha256": asset["sha256"], "method": "scp", "partial_name": logical + ".part", "promoted": True}
+            if profile.get("provider_api_version") == 2:
+                from .hardening import transfer_receipt
+
+                receipt.update(transfer_receipt(
+                    logical_name=logical,
+                    byte_count=asset["bytes"],
+                    elapsed_ns=max(1, time.monotonic_ns() - started_ns),
+                    method="scp",
+                    identity_sha256=asset["sha256"],
+                    state="uploaded",
+                    remote_revalidated=True,
+                ))
+            receipts.append(receipt)
         return receipts
 
     def verify(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> None:
@@ -296,8 +339,12 @@ class OpenSSHSlurmAdapter:
         stdout = f"slurm/{job['role']}.{job['attempt_index']}.out"
         stderr = f"slurm/{job['role']}.{job['attempt_index']}.err"
         require(stdout in plan["evidence_allowlist"] and stderr in plan["evidence_allowlist"], "ALLOWLIST_VIOLATION", "job logs not allowlisted")
-        arguments = [profile["remote_base"], plan["remote_run_root"], job["script"], job["partition"], job["gres"], str(job["cpus"]), str(job["memory_mb"]), str(job["time_limit_minutes"]), token, stdout, stderr]
-        output = self._remote_script(profile, "submit.sh", arguments).decode("utf-8").strip()
+        arguments = [profile["remote_base"], plan["remote_run_root"], job["script"], job["partition"], job["gres"], str(job["cpus"]), str(job["memory_mb"]), str(job["time_limit_minutes"]), token]
+        if profile.get("provider_api_version") == 2:
+            arguments.append(plan["scheduler_authority_token"])
+        arguments.extend([stdout, stderr])
+        submit_script = "submit_v2.sh" if profile.get("provider_api_version") == 2 else "submit.sh"
+        output = self._remote_script(profile, submit_script, arguments).decode("utf-8").strip()
         if not output.isdigit():
             raise ToolkitError("SUBMISSION_OUTCOME_UNKNOWN", "sbatch response requires token reconciliation")
         return output
@@ -305,6 +352,13 @@ class OpenSSHSlurmAdapter:
     def reconcile(self, profile: dict[str, Any], token: str) -> list[str]:
         output = self._remote_script(profile, "reconcile.sh", [token]).decode("utf-8")
         return [line for line in output.splitlines() if line.isdigit()]
+
+    def reconcile_authority(self, profile: dict[str, Any], authority_token: str) -> list[str]:
+        output = self._remote_script(profile, "reconcile_authority.sh", [validate_shell_scalar(authority_token, "authority token")]).decode("utf-8")
+        job_ids = [line for line in output.splitlines() if line]
+        require(all(item.isdigit() for item in job_ids), "AUTHORITY_RECONCILIATION_REQUIRED", "invalid authority accounting")
+        require(len(job_ids) == len(set(job_ids)), "AUTHORITY_RECONCILIATION_REQUIRED", "duplicate authority accounting")
+        return job_ids
 
     def observe(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], job_id: str) -> dict[str, Any]:
         output = self._remote_script(profile, "observe.sh", [validate_shell_scalar(job_id, "job_id")]).decode("utf-8")
@@ -345,7 +399,15 @@ class OpenSSHSlurmAdapter:
         promoted = partial.stat().st_size == metadata["bytes"] and sha256_file(partial) == metadata["sha256"]
         if promoted:
             os.replace(partial, quarantine / logical)
-        return {**metadata, "download_promoted": promoted, "sanitization_policy": "lemhi-evidence-v1"}
+        result = {**metadata, "download_promoted": promoted, "sanitization_policy": "lemhi-evidence-v1"}
+        if profile.get("provider_api_version") == 2:
+            result["cleanup_marker_sha256"] = self._remote_script(
+                profile,
+                "hash_marker.sh",
+                [profile["remote_base"], plan["remote_run_root"]],
+            ).decode("utf-8").strip()
+            result["sanitization_policy"] = "lemhi-evidence-projection-2"
+        return result
 
     def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
         output = self._remote_script(profile, "clean.sh", [profile["remote_base"], plan["remote_run_root"], plan["run_id"], plan["package_id"], plan["source_commit"], sha256_bytes(canonical_bytes(plan))]).decode("utf-8").strip()

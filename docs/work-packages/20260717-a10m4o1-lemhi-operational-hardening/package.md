@@ -1,9 +1,10 @@
 # A10M4O1 — Lemhi Operational Hardening
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Mixed
-Starting branch and push target: clean `main` at `d9f3a6c`, push `main`
+Scaffold start: clean `main` at `d9f3a6c`
+Execution start and push target: clean `main` at `0bdac01`, push `main`
 
 ## Objective
 
@@ -147,3 +148,19 @@ claim for new commitments.
 - `artifacts/scaffold-gates.md` — scaffold validation; and
 - execution evidence, terminal, and canonical-smoke handoff — populated only
   when the package is later executed.
+
+## Disposition
+
+Executed locally on `rmm` with injected adapters and temporary files. The
+package reached `A10M4O1-TOOLKIT-HARDENED`. It amended both authoritative
+specifications and the Lemhi agent guide; implemented revision-2 records,
+providers, authority/ledger handling, deterministic environment closure,
+toolchain validation, recovery reservation, process supervision, evidence
+projection, transfer telemetry, and immutable manifests; preserved the v1
+read path and bytes; published immutable semantic candidate
+`lemhi-a10-py311-l40-v2-candidate`; and scaffolded the separately dispatched
+bounded live smoke.
+
+No VPN, SSH, Slurm, GPU, remote write, development target, or confirmation
+access occurred. The candidate is not current and no smoke attestation or
+designation index exists.

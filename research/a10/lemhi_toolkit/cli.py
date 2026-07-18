@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from .adapters import FixtureAdapter, OpenSSHSlurmAdapter
-from .core import Toolkit, ToolkitError, canonical_bytes, read_json
+from .core import Toolkit, ToolkitError, atomic_write, canonical_bytes, read_json, require, sha256_bytes
+from .hardening import LedgerAnchor, derive_authority_revision
 
 ERROR_ACTIONS = {
     "AUTH_BOOTSTRAP_REQUIRED": "operator must launch and verify both warm SSH masters",
@@ -20,15 +21,20 @@ ERROR_ACTIONS = {
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="lemhi-toolkit")
-    parser.add_argument("--state-root", type=Path, required=True)
+    parser.add_argument("--state-root", type=Path)
     parser.add_argument("--authority", type=Path, required=True)
-    parser.add_argument("--profile", type=Path, required=True)
+    parser.add_argument("--profile", type=Path)
     parser.add_argument("--provider-root", type=Path, default=Path.cwd())
-    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-id")
     parser.add_argument("--adapter", choices=("fixture", "live"), default="live")
     parser.add_argument("--fixture-root", type=Path)
     parser.add_argument("--scenario", type=Path)
     subcommands = parser.add_subparsers(dest="command", required=True)
+    initialize = subcommands.add_parser("initialize-authority")
+    initialize.add_argument("--output", type=Path, required=True)
+    derive = subcommands.add_parser("derive-run")
+    derive.add_argument("--input", type=Path, required=True)
+    derive.add_argument("--output", type=Path, required=True)
     for command in ("doctor", "probe", "prepare", "stage", "verify", "collect", "clean", "close"):
         subcommands.add_parser(command)
     plan = subcommands.add_parser("plan")
@@ -62,7 +68,47 @@ def main(arguments: list[str] | None = None) -> int:
     options = parser.parse_args(arguments)
     try:
         authority = read_json(options.authority)
+        if options.command == "initialize-authority":
+            anchor_path = Path(authority["ledger_anchor"])
+            anchor = LedgerAnchor(
+                anchor_path,
+                authority["authority_id"],
+                authority["resource_budget_id"],
+                authority["resource_ceiling_gpu_minutes"],
+            )
+            genesis = anchor.initialize(
+                authorized=authority.get("genesis_authorized") is True,
+                predecessor_evidence=authority.get("predecessor_evidence", []),
+                scheduler_evidence=authority.get("scheduler_evidence", []),
+            )
+            initialized = dict(authority)
+            initialized.pop("genesis_authorized", None)
+            initialized.pop("predecessor_evidence", None)
+            initialized.pop("scheduler_evidence", None)
+            initialized.update({
+                "schema_version": "lemhi-authority-revision-2",
+                "authority_revision": 0,
+                "ledger_genesis_sha256": genesis,
+                "ledger_head_checkpoint": genesis,
+            })
+            initialized["authority_revision_sha256"] = sha256_bytes(canonical_bytes(initialized))
+            atomic_write(options.output, initialized, private=True)
+            _output({"authority_revision_sha256": initialized["authority_revision_sha256"], "ledger_head_checkpoint": genesis})
+            return 0
+        if options.command == "derive-run":
+            revision = derive_authority_revision(authority, read_json(options.input))
+            atomic_write(options.output, revision, private=True)
+            _output({"authority_revision_sha256": revision["authority_revision_sha256"], "run_id": revision["run_id"]})
+            return 0
+        require(options.profile is not None, "AUTHORITY_INVALID", "--profile is required")
+        require(options.run_id is not None, "AUTHORITY_INVALID", "--run-id is required")
         profile = read_json(options.profile)
+        if profile.get("provider_api_version") == 2:
+            require(options.state_root is None or options.adapter == "fixture", "AUTHORITY_INVALID", "live v2 state root comes from authority ledger anchor")
+            state_root = Path(authority["ledger_anchor"]).resolve().parents[2]
+        else:
+            require(options.state_root is not None, "AUTHORITY_INVALID", "--state-root is required for revision 1")
+            state_root = options.state_root
         if options.adapter == "fixture":
             if options.fixture_root is None:
                 parser.error("--fixture-root is required for fixture adapter")
@@ -72,7 +118,7 @@ def main(arguments: list[str] | None = None) -> int:
             scripts = Path(__file__).with_name("remote")
             adapter = OpenSSHSlurmAdapter(scripts)
         toolkit = Toolkit(
-            options.state_root,
+            state_root,
             authority,
             profile,
             options.run_id,
