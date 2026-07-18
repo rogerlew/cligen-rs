@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.invalid/specifications/a10-capacity-screen-v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "classification", "phase", "row_id", "amount_family", "capacity_id", "training_seed", "parameter_count", "validation_primary_nll", "validation_tail_score", "validation_stability", "gpu_fit_wall_seconds", "export_bytes", "cold_start_seconds", "peak_rss_bytes", "runtime_ratio_max", "gates", "valid", "verdict"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "classification": {"const": "a10m5r3-development-only-family-capacity-screen"},
+    "phase": {"enum": ["family", "capacity", "frontier"]},
+    "row_id": {"type": "string", "minLength": 1},
+    "amount_family": {"enum": ["lognormal_wet_v2", "gamma_wet_v2", "lognormal_body_gpd_excess_v2"]},
+    "capacity_id": {"enum": ["FAMILY", "P0", "P1", "P2", "P3", "P4"]},
+    "training_seed": {"enum": [147031, 271828, 314159]},
+    "parameter_count": {"type": "integer", "minimum": 1, "maximum": 50000000},
+    "validation_primary_nll": {"type": "number"},
+    "validation_tail_score": {"type": "number", "minimum": 0},
+    "validation_stability": {"type": "number", "minimum": 0},
+    "gpu_fit_wall_seconds": {"type": "number", "minimum": 0},
+    "export_bytes": {"type": "integer", "minimum": 1},
+    "cold_start_seconds": {"type": "number", "minimum": 0},
+    "peak_rss_bytes": {"type": "integer", "minimum": 1},
+    "runtime_ratio_max": {"type": "number", "minimum": 0},
+    "gates": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "boolean"}},
+    "valid": {"type": "boolean"},
+    "verdict": {"enum": ["PASS", "FAIL"]}
+  }
+}

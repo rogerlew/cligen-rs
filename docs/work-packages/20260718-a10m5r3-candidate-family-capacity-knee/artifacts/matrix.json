@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "amount_families": ["lognormal_wet_v2", "gamma_wet_v2", "lognormal_body_gpd_excess_v2"],
+  "registered_seeds": [147031, 271828, 314159],
+  "family_architecture": {"pooling_class": "N0_complete", "latent_dim": 64, "width": 128, "depth": 2},
+  "splice_threshold_mm": 20.0,
+  "capacity_ladder": [
+    {"capacity_id": "P0", "latent_dim": 32, "width": 128, "depth": 2, "nominal_parameters": 35000},
+    {"capacity_id": "P1", "latent_dim": 80, "width": 160, "depth": 2, "nominal_parameters": 100000},
+    {"capacity_id": "P2", "latent_dim": 144, "width": 288, "depth": 2, "nominal_parameters": 300000},
+    {"capacity_id": "P3", "latent_dim": 272, "width": 544, "depth": 2, "nominal_parameters": 1000000},
+    {"capacity_id": "P4", "latent_dim": 480, "width": 960, "depth": 2, "nominal_parameters": 3000000}
+  ],
+  "family_jobs": 9,
+  "capacity_jobs": 5,
+  "frontier_jobs": 4,
+  "primary_gpu_minutes": 540,
+  "recovery_gpu_minutes": 5,
+  "total_gpu_minutes": 545,
+  "protected_roles_opened": []
+}
