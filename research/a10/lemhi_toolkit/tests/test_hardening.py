@@ -219,9 +219,31 @@ class EvidenceProjectionTests(HardeningFixture):
     def test_json_projection_is_structural_and_rejects_duplicates(self) -> None:
         projected, receipt = project_evidence(b'{"path":"/ceph/home/user/run/file"}', media_type="application/json", replacements=self.replacements(), forbidden=["/ceph/home/"], raw_parent_sha256=HEX_A)
         self.assertEqual(json.loads(projected)["path"], "<REMOTE_RUN_ROOT>/file")
-        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-2")
+        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-3")
         with self.assertRaisesRegex(ToolkitError, "INVALID_JSON"):
             project_evidence(b'{"a":1,"a":2}', media_type="application/json", replacements=[], forbidden=[], raw_parent_sha256=HEX_A)
+
+    def test_json_projection_accepts_finite_scientific_numbers(self) -> None:
+        projected, _ = project_evidence(
+            b'{"elapsed":1.0,"score":-3.25e-4}',
+            media_type="application/json",
+            replacements=[],
+            forbidden=[],
+            raw_parent_sha256=HEX_A,
+        )
+        self.assertEqual(
+            json.loads(projected),
+            {"elapsed": 1.0, "score": -3.25e-4},
+        )
+        for raw in (b'{"score":NaN}', b'{"score":Infinity}', b'{"score":1e999}'):
+            with self.subTest(raw=raw), self.assertRaisesRegex(ToolkitError, "INVALID_JSON"):
+                project_evidence(
+                    raw,
+                    media_type="application/json",
+                    replacements=[],
+                    forbidden=[],
+                    raw_parent_sha256=HEX_A,
+                )
 
 
 class LedgerAndLineageTests(HardeningFixture):

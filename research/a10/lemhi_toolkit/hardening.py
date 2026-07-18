@@ -22,7 +22,6 @@ from .core import (
     atomic_write,
     canonical_bytes,
     directory_lock,
-    loads_strict,
     read_json,
     require,
     sha256_bytes,
@@ -34,7 +33,7 @@ from .core import (
 RECORD_SCHEMA_V2 = "lemhi-toolkit-record-2"
 PRODUCER_V2 = "lemhi-toolkit-hardening-2"
 PROVIDER_API_V2 = 2
-SANITIZER_VERSION = "lemhi-evidence-projection-2"
+SANITIZER_VERSION = "lemhi-evidence-projection-3"
 RESERVED_TOKEN = re.compile(r"<[A-Z][A-Z0-9_]*(?:_[0-9]+)?>")
 ENVIRONMENT_NAME = re.compile(r"^[A-Z][A-Z0-9_]{0,63}$")
 ALLOWED_PROVIDER_CLASSES = {
@@ -201,6 +200,29 @@ def _replace_text(text: str, replacements: list[dict[str, str]]) -> tuple[str, d
     return output, counts
 
 
+def _loads_evidence_json(text: str) -> Any:
+    """Parse scientific JSON strictly while admitting finite JSON numbers."""
+
+    def object_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        value: dict[str, Any] = {}
+        for key, item in pairs:
+            require(key not in value, "INVALID_JSON", f"duplicate key: {key}")
+            value[key] = item
+        return value
+
+    def invalid_constant(value: str) -> None:
+        raise ToolkitError("INVALID_JSON", f"non-finite number prohibited: {value}")
+
+    try:
+        return json.loads(
+            text,
+            object_pairs_hook=object_pairs,
+            parse_constant=invalid_constant,
+        )
+    except json.JSONDecodeError as error:
+        raise ToolkitError("INVALID_JSON", str(error)) from error
+
+
 def project_evidence(
     raw: bytes,
     *,
@@ -228,7 +250,7 @@ def project_evidence(
     except UnicodeDecodeError as error:
         raise ToolkitError("SANITIZATION_FAILED", "invalid UTF-8 evidence") from error
     if media_type == "application/json":
-        value = loads_strict(text)
+        value = _loads_evidence_json(text)
 
         counts: dict[str, int] = {item["token"]: 0 for item in normalized}
 
@@ -244,7 +266,19 @@ def project_evidence(
                 return {key: visit(item) for key, item in node.items()}
             return node
 
-        projected_bytes = canonical_bytes(visit(value)) + b"\n"
+        try:
+            projected_bytes = (
+                json.dumps(
+                    visit(value),
+                    allow_nan=False,
+                    ensure_ascii=False,
+                    separators=(",", ":"),
+                    sort_keys=True,
+                ).encode("utf-8")
+                + b"\n"
+            )
+        except (TypeError, ValueError) as error:
+            raise ToolkitError("INVALID_JSON", str(error)) from error
     elif media_type == "text/plain":
         projected, counts = _replace_text(text, normalized)
         projected_bytes = projected.encode("utf-8")
