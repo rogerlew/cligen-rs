@@ -8,13 +8,23 @@
       "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
       "source_class": "repository-owned",
       "target_platform": "linux-x86_64-glibc"
+    },
+    {
+      "bytes": 1641,
+      "executable": true,
+      "license_provenance": "repository-license",
+      "local_path": "/absolute/operator/allowlisted/source/recover_job_local_v2.sh",
+      "logical_name": "recover_job_local_v2.sh",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source_class": "repository-owned",
+      "target_platform": "linux-x86_64-glibc"
     }
   ],
   "authority_id": "example-v2-authority",
   "authority_revision_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
   "confirmation_classification": "development-only",
   "deterministic_cuda": true,
-  "evidence_allowlist": ["evidence.json", "slurm/smoke.0.err", "slurm/smoke.0.out"],
+  "evidence_allowlist": ["evidence.json", "recovery.json", "slurm/smoke.0.err", "slurm/smoke.0.out", "slurm/toolkit-recovery.0.err", "slurm/toolkit-recovery.0.out"],
   "evidence_replacements": [],
   "job_local_capacity": {
     "checkpoint_bytes": 1048576,
@@ -53,9 +63,16 @@
   ],
   "recovery_contingency": {
     "ambiguity": "retain-reserve",
+    "cpus": 2,
     "exact_node_only": true,
+    "gate_receipt": "recovery.json",
     "gpu_minutes": 5,
+    "gpus": 1,
+    "gres": "gpu:l40:1",
     "max_attempts": 1,
+    "memory_mb": 1024,
+    "partition": "gpu-icrews",
+    "script": "recover_job_local_v2.sh",
     "time_limit_minutes": 5
   },
   "remote_run_root": "runs/example-v2-run",

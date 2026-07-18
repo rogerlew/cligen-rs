@@ -73,6 +73,9 @@ stage
 verify
 submit --job-role smoke --attempt-index 0
 observe --job-role smoke --attempt-index 0
+# Only when observe authenticates unresolved job-local cleanup:
+recover --job-role smoke --attempt-index 0
+observe-recovery
 collect
 clean
 close
@@ -88,6 +91,14 @@ creates a prospective revision; it cannot mutate a started role, immutable
 asset, remote root, authority, confirmation classification, or resource
 ledger. A failed or ambiguous submission must be reconciled from retained
 private state, never retried by inventing another run or plan.
+
+`recover` is not a generic retry or cleanup command. It consumes the single
+prospectively reserved contingency only after the original attempt and all
+steps have settled, submits to the exact authenticated original node, and
+revalidates the UID, filesystem device, canonical target, and marker twice.
+`observe-recovery` must authenticate the recovery gate receipt and accounting
+before `collect` or `clean`; ambiguity retains both private state and the
+reserve as `CLEANUP_INCOMPLETE`.
 
 The committed profile selects an ordered SCP, Slurm, Ceph, and L40 provider
 stack. Definitions are declarative JSON and content-hashed into every plan.

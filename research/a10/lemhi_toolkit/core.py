@@ -329,9 +329,11 @@ class Adapter(Protocol):
     def reconcile(self, profile: dict[str, Any], token: str) -> list[str]: ...
     def reconcile_authority(self, profile: dict[str, Any], authority_token: str) -> list[str]: ...
     def observe(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], job_id: str) -> dict[str, Any]: ...
+    def recover(self, profile: dict[str, Any], plan: dict[str, Any], attempt: dict[str, Any], token: str) -> str: ...
+    def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]: ...
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
-    def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
+    def clean(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any] | None = None) -> dict[str, Any]: ...
     def abort(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
 
 
@@ -497,7 +499,7 @@ class Toolkit:
             "input_record_hashes": sorted(set(input_hashes)),
             "result_record_hashes": [],
         })
-        if scope == "attempt":
+        if scope in {"attempt", "recovery"}:
             event.update({"job_role": job_role, "attempt_index": attempt_index})
         events.append(self._finalize(event))
 
@@ -677,6 +679,18 @@ class Toolkit:
                 for field in ("gpu_minutes", "max_attempts", "time_limit_minutes"):
                     require(isinstance(recovery.get(field), int) and recovery[field] > 0, "PLAN_DRIFT", f"recovery {field}")
                 require(recovery.get("exact_node_only") is True and recovery.get("ambiguity") == "retain-reserve", "PLAN_DRIFT", "recovery stop rules")
+                for field in ("cpus", "memory_mb", "gpus"):
+                    require(isinstance(recovery.get(field), int) and recovery[field] > 0, "PLAN_DRIFT", f"recovery {field}")
+                require(recovery["gpu_minutes"] == recovery["gpus"] * recovery["time_limit_minutes"], "PLAN_DRIFT", "recovery charge")
+                require(recovery["max_attempts"] == 1, "PLAN_DRIFT", "exactly one recovery attempt")
+                validate_id(recovery.get("partition"), "recovery partition")
+                require(isinstance(recovery.get("gres"), str) and re.fullmatch(r"[A-Za-z0-9_]+:[A-Za-z0-9_]+:[1-9][0-9]*", recovery["gres"]) is not None, "PLAN_DRIFT", "recovery gres")
+                recovery_script = validate_relative_path(recovery.get("script"), "recovery script")
+                require(recovery_script in {asset["logical_name"] for asset in plan_input.get("assets", []) if isinstance(asset, dict) and asset.get("executable") is True}, "PLAN_DRIFT", "recovery script must be an executable frozen asset")
+                recovery_gate = validate_relative_path(recovery.get("gate_receipt"), "recovery gate receipt")
+                require(recovery_gate in plan_input.get("evidence_allowlist", []), "PLAN_DRIFT", "recovery gate receipt is not evidence-allowlisted")
+                for stream in ("slurm/toolkit-recovery.0.out", "slurm/toolkit-recovery.0.err"):
+                    require(stream in plan_input.get("evidence_allowlist", []), "PLAN_DRIFT", "recovery logs are not evidence-allowlisted")
                 capacity = plan_input.get("job_local_capacity")
                 require(isinstance(capacity, dict), "PLAN_DRIFT", "job-local capacity")
                 for field in ("expanded_asset_bytes", "product_bytes", "checkpoint_bytes", "margin_bytes", "minimum_free_bytes", "required_inodes"):
@@ -1110,6 +1124,167 @@ class Toolkit:
             self._write_publication(f"cancel-{key}.json", receipt)
             return result
 
+    def recover(self, job_role: str, attempt_index: int) -> str:
+        """Submit the one reserved marker-bound recovery on the original node."""
+        key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
+        self.adapter.check_masters(self.profile)
+        require(self.provider_api_version == 2, "PLAN_DRIFT", "recovery requires provider revision 2")
+        with directory_lock(self.budget_lock):
+            ledger = self._load_ledger()
+            observed_job_ids = self.adapter.reconcile_authority(
+                self.profile, self.authority["scheduler_authority_token"]
+            )
+            registered_job_ids = {
+                item["job_id"]
+                for item in ledger["entries"]
+                if isinstance(item.get("job_id"), str)
+            }
+            require(
+                set(observed_job_ids) == registered_job_ids,
+                "AUTHORITY_RECONCILIATION_REQUIRED",
+                "scheduler and ledger job identities differ",
+            )
+            with directory_lock(self.run_lock):
+                state = self._load_state()
+                self._require_state(state, {"MATRIX_SETTLED"})
+                require("recovery" not in state, "PLAN_DRIFT", "recovery already registered")
+                attempt = state.get("attempts", {}).get(key)
+                require(
+                    isinstance(attempt, dict)
+                    and attempt.get("state") == "RESULT_VALIDATED",
+                    "PLAN_DRIFT",
+                    "recovery source is not settled",
+                )
+                result = attempt.get("result")
+                require(isinstance(result, dict), "EVIDENCE_INCOMPLETE", "recovery source result")
+                gates = result.get("gates")
+                require(
+                    isinstance(gates, dict) and gates.get("job_local_cleanup") is False,
+                    "PLAN_DRIFT",
+                    "recovery requires unresolved job-local cleanup",
+                )
+                recovery_target = result.get("recovery_target")
+                require(isinstance(recovery_target, dict), "EVIDENCE_INCOMPLETE", "recovery target")
+                require(
+                    recovery_target.get("job_id") == attempt.get("job_id")
+                    and recovery_target.get("node") == result.get("node"),
+                    "CLEANUP_TARGET_INVALID",
+                    "scheduler and marker recovery identity differ",
+                )
+                recovery_token = state.get("recovery_token")
+                require(isinstance(recovery_token, str), "RESOURCE_CEILING", "recovery reserve missing")
+                latest = next(
+                    (item for item in reversed(ledger["entries"]) if item.get("token") == recovery_token),
+                    None,
+                )
+                require(
+                    isinstance(latest, dict) and latest.get("status") == "reserved",
+                    "RESOURCE_CEILING",
+                    "recovery reserve is not available",
+                )
+                try:
+                    job_id = self.adapter.recover(
+                        self.profile, self._current_plan(state), attempt, recovery_token
+                    )
+                except ToolkitError as error:
+                    if error.code != "SUBMISSION_OUTCOME_UNKNOWN":
+                        raise
+                    matches = self.adapter.reconcile(self.profile, recovery_token)
+                    require(
+                        len(matches) == 1,
+                        "SUBMISSION_OUTCOME_UNKNOWN",
+                        "recovery submission token is ambiguous",
+                    )
+                    job_id = matches[0]
+                require(job_id.isdigit(), "SUBMISSION_OUTCOME_UNKNOWN", "recovery job ID")
+                self._append_ledger_transition(ledger, recovery_token, "submitted", job_id=job_id)
+                state["recovery"] = {
+                    "attempt_index": 0,
+                    "job_id": job_id,
+                    "job_role": "toolkit-recovery",
+                    "original_attempt_index": attempt_index,
+                    "original_job_id": attempt["job_id"],
+                    "original_job_role": job_role,
+                    "original_node": recovery_target["node"],
+                    "state": "SUBMITTED",
+                    "target_sha256": sha256_bytes(recovery_target["target"].encode()),
+                    "token": recovery_token,
+                }
+                self._event(
+                    state,
+                    "RESERVED",
+                    "SUBMITTED",
+                    scope="recovery",
+                    plan_id=state["current_plan_id"],
+                    job_role="toolkit-recovery",
+                    attempt_index=0,
+                )
+                self._save_ledger(ledger)
+                self._save_state(state)
+                return job_id
+
+    def observe_recovery(self) -> dict[str, Any]:
+        """Settle and authenticate the registered exact-node recovery job."""
+        self.adapter.check_masters(self.profile)
+        require(self.provider_api_version == 2, "PLAN_DRIFT", "recovery requires provider revision 2")
+        with directory_lock(self.budget_lock):
+            with directory_lock(self.run_lock):
+                state = self._load_state()
+                self._require_state(state, {"MATRIX_SETTLED"})
+                recovery = state.get("recovery")
+                require(
+                    isinstance(recovery, dict) and recovery.get("state") == "SUBMITTED",
+                    "PLAN_DRIFT",
+                    "recovery is not submitted",
+                )
+                result = self.adapter.observe_recovery(
+                    self.profile, self._current_plan(state), recovery
+                )
+                require(
+                    result.get("terminal") is True
+                    and result.get("state") in TERMINAL_JOB_STATES,
+                    "JOB_TERMINAL_MISMATCH",
+                    "recovery",
+                )
+                require(
+                    isinstance(result.get("actual_gpu_minutes"), int)
+                    and result["actual_gpu_minutes"] >= 0,
+                    "EVIDENCE_INCOMPLETE",
+                    "recovery accounting",
+                )
+                gates = result.get("gates")
+                passed = (
+                    result.get("exit_code") == 0
+                    and isinstance(gates, dict)
+                    and bool(gates)
+                    and all(value is True for value in gates.values())
+                )
+                require(passed, "CLEANUP_INCOMPLETE", "exact-node recovery did not prove absence")
+                recovery.update({"state": "RESULT_VALIDATED", "passed": True, "result": result})
+                self._event(
+                    state,
+                    "SUBMITTED",
+                    "RESULT_VALIDATED",
+                    scope="recovery",
+                    plan_id=state["current_plan_id"],
+                    job_role="toolkit-recovery",
+                    attempt_index=0,
+                )
+                ledger = self._load_ledger()
+                self._append_ledger_transition(
+                    ledger,
+                    recovery["token"],
+                    "settled",
+                    actual_gpu_minutes=result["actual_gpu_minutes"],
+                    absence_proof="JOB_LOCAL_ABSENT",
+                )
+                self._save_ledger(ledger)
+                self._save_state(state)
+                receipt = self._common("recovery_receipt", plan_id=state["current_plan_id"])
+                receipt.update({"job_id": recovery["job_id"], "passed": True, "result": result})
+                self._write_publication("recovery.json", receipt)
+                return receipt
+
     def collect(self) -> dict[str, Any]:
         self.adapter.check_masters(self.profile)
         with directory_lock(self.run_lock):
@@ -1212,7 +1387,14 @@ class Toolkit:
     def _clean_locked(self) -> dict[str, Any]:
         state = self._load_state()
         self._require_state(state, {"COLLECTED"})
-        result = self.adapter.clean(self.profile, self._current_plan(state))
+        recovery = state.get("recovery")
+        if recovery is not None:
+            require(
+                isinstance(recovery, dict) and recovery.get("state") == "RESULT_VALIDATED",
+                "CLEANUP_INCOMPLETE",
+                "recovery is not settled",
+            )
+        result = self.adapter.clean(self.profile, self._current_plan(state), recovery)
         require(result.get("remote_absent") is True, "CLEANUP_INCOMPLETE", "remote run remains")
         allowed_cleanup = {"verified_absent"} if self.provider_api_version == 2 else {"scheduler_purged", "verified_absent"}
         require(result.get("job_local_cleanup") in allowed_cleanup, "CLEANUP_INCOMPLETE", "job-local cleanup")
@@ -1220,7 +1402,8 @@ class Toolkit:
             recovery_token = state.get("recovery_token")
             require(isinstance(recovery_token, str), "CLEANUP_INCOMPLETE", "recovery reserve missing")
             ledger = self._load_ledger()
-            self._append_ledger_transition(ledger, recovery_token, "released", release_reason="verified-cleanup")
+            if recovery is None:
+                self._append_ledger_transition(ledger, recovery_token, "released", release_reason="verified-cleanup")
             self._save_ledger(ledger)
         self._event(state, "COLLECTED", "CLEANED", plan_id=state["current_plan_id"])
         state["run_state"] = "CLEANED"

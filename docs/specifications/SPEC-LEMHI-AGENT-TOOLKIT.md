@@ -157,6 +157,8 @@ commands differently:
 | `submit` | reserve resources and perform an at-most-once frozen submission |
 | `observe` | obtain scheduler terminal state and registered gate results |
 | `cancel` | cancel one exact registered job under an authorized stop/abort rule |
+| `recover` | consume the one reserved recovery attempt on the authenticated original node |
+| `observe-recovery` | settle recovery accounting and authenticate exact target absence |
 | `collect` | retrieve, hash, and sanitize package evidence |
 | `clean` | remove exact registered ephemeral roots after collection proof |
 | `close` | classify the run and emit the terminal summary |
@@ -772,6 +774,17 @@ and settled in `sacct`. On that node it validates UID, marker, ancestors,
 filesystem identity, and canonical target twice, runs one exact bounded
 deletion, and proves absence. Any unavailable node, accounting ambiguity,
 marker/path drift, or failed proof remains `CLEANUP_INCOMPLETE`.
+
+The frozen recovery contingency declares its exact script asset, partition,
+typed GRES, GPU count, CPUs, memory, wall time, gate receipt, and the fixed
+`slurm/toolkit-recovery.0.{out,err}` evidence paths. Its GPU-minute charge MUST
+equal GPU count times wall-time minutes, and v2 currently admits exactly one
+attempt. `recover` is legal only after the source attempt is terminal and its
+authenticated gate receipt says `job_local_cleanup=false`; it reconciles the
+whole authority before submission and consumes the existing reserve rather
+than creating a new charge. `observe-recovery` requires successful scheduler
+accounting, exact-node agreement, the original job identity, the target-path
+hash, and all registered recovery gates before cleanup can continue.
 
 ### 17.4 Evidence projection
 

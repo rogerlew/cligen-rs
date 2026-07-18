@@ -192,13 +192,49 @@ class FixtureAdapter:
         configured = self.scenario.get("results", {}).get(job["role"], {})
         if job["cancelled"]:
             return {"terminal": True, "state": "CANCELLED", "exit_code": 1, "gates": {"cancelled": False}, "actual_gpu_minutes": 0}
-        return {
+        result = {
             "terminal": configured.get("terminal", True),
             "state": configured.get("state", "COMPLETED"),
             "exit_code": configured.get("exit_code", job["job"].get("expected_exit_code", 0)),
             "gates": configured.get("gates", {"registered": True}),
             "actual_gpu_minutes": configured.get("actual_gpu_minutes"),
             "accounting": "unavailable" if configured.get("actual_gpu_minutes") is None else "available",
+        }
+        if "node" in configured:
+            result["node"] = configured["node"]
+        if "recovery_target" in configured:
+            result["recovery_target"] = configured["recovery_target"]
+        return result
+
+    def recover(self, profile: dict[str, Any], plan: dict[str, Any], attempt: dict[str, Any], token: str) -> str:
+        del profile, plan, attempt
+        recovery_job = {
+            "expected_exit_code": 0,
+            "gpus": 1,
+            "role": "toolkit-recovery",
+        }
+        return self.submit({}, {}, recovery_job, token)
+
+    def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]:
+        del profile, plan
+        job = self._backend()["jobs"].get(recovery["job_id"])
+        require(isinstance(job, dict), "JOB_TERMINAL_MISMATCH", "recovery")
+        configured = self.scenario.get("results", {}).get("toolkit-recovery", {})
+        return {
+            "terminal": configured.get("terminal", True),
+            "state": configured.get("state", "COMPLETED"),
+            "exit_code": configured.get("exit_code", 0),
+            "gates": configured.get(
+                "gates",
+                {
+                    "job_local_cleanup": True,
+                    "marker_revalidated": True,
+                    "original_job_settled": True,
+                    "recovery_exact_node": True,
+                },
+            ),
+            "actual_gpu_minutes": configured.get("actual_gpu_minutes", 1),
+            "accounting": "available",
         }
 
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:
@@ -234,7 +270,12 @@ class FixtureAdapter:
             result["cleanup_marker_sha256"] = sha256_file(marker)
         return result
 
-    def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+    def clean(
+        self,
+        profile: dict[str, Any],
+        plan: dict[str, Any],
+        recovery: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         del profile
         self.check_masters({})
         root = self._run_root(plan)
@@ -255,6 +296,8 @@ class FixtureAdapter:
             marker_path.write_text("{}\n", encoding="utf-8")
         require(read_json(marker_path) == expected, "CLEANUP_TARGET_INVALID", "owner marker changed")
         shutil.rmtree(root)
+        if recovery is not None:
+            require(recovery.get("passed") is True, "CLEANUP_INCOMPLETE", "fixture recovery")
         default_cleanup = "verified_absent" if plan.get("job_local_cleanup") == "toolkit_recoverable" else "scheduler_purged"
         job_local = self.scenario.get("job_local_cleanup", default_cleanup)
         return {"remote_absent": not root.exists(), "job_local_cleanup": job_local}
@@ -396,6 +439,100 @@ class OpenSSHSlurmAdapter:
             require(all(isinstance(name, str) and isinstance(passed, bool) for name, passed in gates.items()), "EVIDENCE_INCOMPLETE", "invalid gates")
             value["gates"] = gates
             value["gate_receipt_sha256"] = sha256_bytes(receipt)
+            recovery_target = evidence.get("recovery_target") if isinstance(evidence, dict) else None
+            if recovery_target is not None:
+                require(isinstance(recovery_target, dict), "EVIDENCE_INCOMPLETE", "recovery target")
+                required = {"device", "job_id", "marker_sha256", "node", "target", "uid"}
+                require(required <= recovery_target.keys(), "EVIDENCE_INCOMPLETE", "recovery target fields")
+                require(
+                    recovery_target["job_id"] == job_id
+                    and recovery_target["node"] == value.get("node"),
+                    "CLEANUP_TARGET_INVALID",
+                    "gate and scheduler identity differ",
+                )
+                require(
+                    isinstance(recovery_target["uid"], int)
+                    and recovery_target["uid"] >= 0
+                    and isinstance(recovery_target["device"], int)
+                    and recovery_target["device"] >= 0,
+                    "CLEANUP_TARGET_INVALID",
+                    "recovery ownership",
+                )
+                require(
+                    re.fullmatch(r"[0-9a-f]{64}", recovery_target["marker_sha256"] or "")
+                    is not None,
+                    "CLEANUP_TARGET_INVALID",
+                    "recovery marker hash",
+                )
+                validate_shell_scalar(recovery_target["target"], "recovery target")
+                validate_shell_scalar(recovery_target["node"], "recovery node")
+                value["recovery_target"] = recovery_target
+            recovery_result = evidence.get("recovery_result") if isinstance(evidence, dict) else None
+            if recovery_result is not None:
+                require(isinstance(recovery_result, dict), "EVIDENCE_INCOMPLETE", "recovery result")
+                value["recovery_result"] = recovery_result
+        return value
+
+    def recover(self, profile: dict[str, Any], plan: dict[str, Any], attempt: dict[str, Any], token: str) -> str:
+        result = attempt.get("result")
+        require(isinstance(result, dict), "EVIDENCE_INCOMPLETE", "recovery source")
+        target = result.get("recovery_target")
+        require(isinstance(target, dict), "EVIDENCE_INCOMPLETE", "recovery target")
+        node = validate_shell_scalar(target["node"], "recovery node")
+        original_job_id = validate_shell_scalar(attempt["job_id"], "original job ID")
+        settled = self._remote_script(
+            profile,
+            "validate_recovery_settlement_v2.sh",
+            [original_job_id, node],
+        ).decode("utf-8").strip()
+        require(settled == "ORIGINAL_JOB_SETTLED", "CLEANUP_INCOMPLETE", "original job settlement")
+        recovery = plan["recovery_contingency"]
+        stdout = "slurm/toolkit-recovery.0.out"
+        stderr = "slurm/toolkit-recovery.0.err"
+        arguments = [
+            profile["remote_base"],
+            plan["remote_run_root"],
+            recovery["script"],
+            recovery["partition"],
+            recovery["gres"],
+            str(recovery["cpus"]),
+            str(recovery["memory_mb"]),
+            str(recovery["time_limit_minutes"]),
+            token,
+            plan["scheduler_authority_token"],
+            node,
+            target["target"],
+            str(target["uid"]),
+            str(target["device"]),
+            target["marker_sha256"],
+            recovery["gate_receipt"],
+            original_job_id,
+            sha256_bytes(target["target"].encode()),
+            stdout,
+            stderr,
+        ]
+        output = self._remote_script(profile, "submit_recovery_v2.sh", arguments).decode("utf-8").strip()
+        if not output.isdigit():
+            raise ToolkitError("SUBMISSION_OUTCOME_UNKNOWN", "recovery sbatch response requires reconciliation")
+        return output
+
+    def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]:
+        job = {
+            **plan["recovery_contingency"],
+            "expected_exit_code": 0,
+            "gpus": plan["recovery_contingency"]["gpus"],
+        }
+        value = self.observe(profile, plan, job, recovery["job_id"])
+        proof = value.get("recovery_result")
+        require(
+            value.get("node") == recovery.get("original_node")
+            and isinstance(proof, dict)
+            and proof.get("node") == recovery.get("original_node")
+            and proof.get("original_job_id") == recovery.get("original_job_id")
+            and proof.get("target_sha256") == recovery.get("target_sha256"),
+            "CLEANUP_TARGET_INVALID",
+            "recovery proof identity",
+        )
         return value
 
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:
@@ -423,10 +560,20 @@ class OpenSSHSlurmAdapter:
             result["sanitization_policy"] = "lemhi-evidence-projection-2"
         return result
 
-    def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+    def clean(
+        self,
+        profile: dict[str, Any],
+        plan: dict[str, Any],
+        recovery: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
         job_local_cleanup = plan["job_local_cleanup"]
         if profile.get("provider_api_version") == 2:
-            for gate_receipt in sorted({job["gate_receipt"] for job in plan["jobs"]}):
+            checked: set[str] = set()
+            for job in plan["jobs"]:
+                gate_receipt = job["gate_receipt"]
+                if gate_receipt in checked:
+                    continue
+                checked.add(gate_receipt)
                 receipt = self._remote_script(
                     profile,
                     "read_gate.sh",
@@ -437,11 +584,14 @@ class OpenSSHSlurmAdapter:
                 except json.JSONDecodeError as error:
                     raise ToolkitError("CLEANUP_INCOMPLETE", "invalid job-local cleanup receipt") from error
                 gates = evidence.get("gates") if isinstance(evidence, dict) else None
-                require(
-                    isinstance(gates, dict) and gates.get("job_local_cleanup") is True,
-                    "CLEANUP_INCOMPLETE",
-                    "job-local absence not authenticated",
-                )
+                if not (isinstance(gates, dict) and gates.get("job_local_cleanup") is True):
+                    require(
+                        isinstance(recovery, dict)
+                        and recovery.get("passed") is True
+                        and recovery.get("original_job_role") == job["role"],
+                        "CLEANUP_INCOMPLETE",
+                        "job-local absence not authenticated",
+                    )
             job_local_cleanup = "verified_absent"
         output = self._remote_script(profile, "clean.sh", [profile["remote_base"], plan["remote_run_root"], plan["run_id"], plan["package_id"], plan["source_commit"], sha256_bytes(canonical_bytes(plan))]).decode("utf-8").strip()
         require(output == "REMOTE_ABSENT", "CLEANUP_INCOMPLETE", "remote cleanup not proven")

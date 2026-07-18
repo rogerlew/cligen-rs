@@ -49,6 +49,10 @@ def _parser() -> argparse.ArgumentParser:
     observe = subcommands.add_parser("observe")
     observe.add_argument("--job-role", required=True)
     observe.add_argument("--attempt-index", required=True, type=int)
+    recover = subcommands.add_parser("recover")
+    recover.add_argument("--job-role", required=True)
+    recover.add_argument("--attempt-index", required=True, type=int)
+    subcommands.add_parser("observe-recovery")
     cancel = subcommands.add_parser("cancel")
     cancel.add_argument("--job-role", required=True)
     cancel.add_argument("--attempt-index", required=True, type=int)
@@ -130,8 +134,10 @@ def main(arguments: list[str] | None = None) -> int:
             result = toolkit.plan(read_json(options.input))
         elif command == "amend":
             result = toolkit.amend(read_json(options.input), options.reason, options.changed_field)
-        elif command in {"submit", "observe", "cancel"}:
+        elif command in {"submit", "observe", "cancel", "recover"}:
             result = getattr(toolkit, command)(options.job_role, options.attempt_index)
+        elif command == "observe-recovery":
+            result = toolkit.observe_recovery()
         else:
             result = getattr(toolkit, command)()
         if command in {"doctor", "prepare"}:

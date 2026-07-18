@@ -359,20 +359,27 @@ class V2IntegrationTests(HardeningFixture):
             self.assertEqual(sha256_file(REPOSITORY_ROOT / item["path"]), item["sha256"])
 
     def plan(self, authority: dict, script: Path) -> dict:
+        recovery_source = REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote/recover_job_local_v2.sh"
+        recovery_script = script.parent / "recover.sh"
+        recovery_script.write_bytes(recovery_source.read_bytes())
+        recovery_script.chmod(0o700)
         return {
-            "assets": [{"bytes": script.stat().st_size, "license_provenance": "repository license", "local_path": str(script), "logical_name": "job.sh", "sha256": sha256_bytes(script.read_bytes()), "source_class": "repository-owned", "target_platform": "linux-x86_64-glibc"}],
+            "assets": [
+                {"bytes": script.stat().st_size, "license_provenance": "repository license", "local_path": str(script), "logical_name": "job.sh", "sha256": sha256_bytes(script.read_bytes()), "source_class": "repository-owned", "target_platform": "linux-x86_64-glibc"},
+                {"bytes": recovery_script.stat().st_size, "executable": True, "license_provenance": "repository license", "local_path": str(recovery_script), "logical_name": "recover.sh", "sha256": sha256_bytes(recovery_script.read_bytes()), "source_class": "repository-owned", "target_platform": "linux-x86_64-glibc"},
+            ],
             "authority_id": authority["authority_id"],
             "authority_revision_sha256": authority["authority_revision_sha256"],
             "confirmation_classification": "development-only",
             "deterministic_cuda": True,
-            "evidence_allowlist": ["evidence.json", "slurm/smoke.0.out", "slurm/smoke.0.err"],
+            "evidence_allowlist": ["evidence.json", "recovery.json", "slurm/smoke.0.out", "slurm/smoke.0.err", "slurm/toolkit-recovery.0.out", "slurm/toolkit-recovery.0.err"],
             "evidence_replacements": [],
             "job_local_capacity": {"expanded_asset_bytes": 1, "product_bytes": 1, "checkpoint_bytes": 1, "margin_bytes": 1, "minimum_free_bytes": 1, "required_inodes": 4},
             "job_local_cleanup": "toolkit_recoverable",
             "jobs": [{"cpus": 2, "expected_exit_code": 0, "gate_receipt": "evidence.json", "gpus": 1, "gres": "gpu:l40:1", "max_attempts": 1, "memory_mb": 1024, "partition": "icrews", "retry_on": [], "role": "smoke", "script": "job.sh", "time_limit_minutes": 5}],
             "package_id": authority["package_id"],
             "providers": PROVIDERS_V2,
-            "recovery_contingency": {"gpu_minutes": 5, "max_attempts": 1, "time_limit_minutes": 5, "exact_node_only": True, "ambiguity": "retain-reserve"},
+            "recovery_contingency": {"ambiguity": "retain-reserve", "cpus": 2, "exact_node_only": True, "gate_receipt": "recovery.json", "gpu_minutes": 5, "gpus": 1, "gres": "gpu:l40:1", "max_attempts": 1, "memory_mb": 1024, "partition": "icrews", "script": "recover.sh", "time_limit_minutes": 5},
             "remote_run_root": "runs/v2-run",
             "required_capability_scope": "login",
             "required_job_environment": {"CUBLAS_WORKSPACE_CONFIG": ":4096:8", "PATH": "/run/runtime/bin:/run/toolchain/bin:/usr/bin:/bin", "PYTHONNOUSERSITE": "1", "TMPDIR": "/tmp/toolkit-attempt"},
@@ -408,6 +415,49 @@ class V2IntegrationTests(HardeningFixture):
         with self.assertRaisesRegex(ToolkitError, "AUTHORITY_RECONCILIATION_REQUIRED"):
             toolkit.submit("smoke", 0)
 
+    def test_v2_reserved_recovery_is_submitted_settled_and_consumed(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 7\n", encoding="utf-8")
+        scenario = {
+            "results": {
+                "smoke": {
+                    "actual_gpu_minutes": 1,
+                    "exit_code": 7,
+                    "gates": {"job_local_cleanup": False, "registered_failure": True},
+                    "node": "node03",
+                    "recovery_target": {
+                        "device": 9,
+                        "job_id": "1000",
+                        "marker_sha256": HEX_A,
+                        "node": "node03",
+                        "target": "/tmp/lemhi-toolkit-1/v2-run-smoke-0-1000",
+                        "uid": 1,
+                    },
+                }
+            }
+        }
+        adapter = FixtureAdapter(self.root / "fixture-recovery", scenario)
+        toolkit = Toolkit(
+            state,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            adapter,
+            clock=lambda: "2026-07-17T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(self.plan(authority, script)); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+        self.assertEqual(toolkit.submit("smoke", 0), "1000")
+        self.assertFalse(toolkit.observe("smoke", 0)["passed"])
+        self.assertEqual(toolkit.recover("smoke", 0), "1001")
+        self.assertTrue(toolkit.observe_recovery()["passed"])
+        toolkit.collect(); toolkit.clean(); toolkit.close()
+        ledger = read_json(toolkit.ledger_path)
+        latest = next(item for item in reversed(ledger["entries"]) if item.get("job_role") == "toolkit-recovery")
+        self.assertEqual(latest["status"], "settled")
+        self.assertEqual(latest["absence_proof"], "JOB_LOCAL_ABSENT")
+
     def test_v2_pre_submission_abort_removes_exact_staged_root(self) -> None:
         authority, state = self.authority()
         script = self.root / "assets/job.sh"
@@ -441,7 +491,7 @@ class V2IntegrationTests(HardeningFixture):
             def run(self, arguments, *, stdin=None, timeout=60):
                 del arguments, timeout
                 if stdin and b"ElapsedRaw" in stdin:
-                    output = b'{"terminal":true,"state":"FAILED","exit_code":1,"elapsed_seconds":61,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"available"}\n'
+                    output = b'{"terminal":true,"state":"FAILED","exit_code":1,"elapsed_seconds":61,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"available","node":"node03"}\n'
                 elif stdin and b"gate_receipt=$3" in stdin:
                     output = b'{"gates":{"environment_closure":false,"job_local_cleanup":true}}\n'
                 else:
