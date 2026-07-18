@@ -65,19 +65,61 @@ def main() -> None:
     recovery = REPO / "research/a10/lemhi_toolkit/remote/recover_job_local_v2.sh"
     shutil.copyfile(recovery, root / "recover-job-local-v2.sh")
     (root / "recover-job-local-v2.sh").chmod(0o700)
+    supervisor = REPO / "research/a10/lemhi_toolkit/remote/supervise_v2.sh"
+    shutil.copyfile(supervisor, root / "supervise-v2.sh")
+    (root / "supervise-v2.sh").chmod(0o700)
     wrappers = []
     for configuration in CONFIGURATIONS:
         slug = configuration.lower()
         name = f"job-{slug}.sh"
         path = root / name
-        path.write_text(
-            "#!/bin/sh\nset -eu\nexec ./screen-job.sh " + configuration + "\n",
-            encoding="utf-8",
-        )
+        path.write_text("""#!/bin/sh
+set -eu
+umask 077
+configuration='%s'
+slug=$(printf '%%s' "$configuration" | tr '[:upper:]' '[:lower:]')
+role=screen-$slug
+run_root=$PWD
+run_id=$(basename "$run_root")
+output=$run_root/results/$slug
+target=${TMPDIR:-/tmp}/a10m5-$slug-$SLURM_JOB_ID
+mkdir -p -- "$output" "$target"
+chmod 700 "$target"
+marker=$target/.lemhi-toolkit-owner.json
+printf '{"attempt_index":0,"job_id":"%%s","node":"%%s","role":"%%s","run_id":"%%s"}\n' "$SLURM_JOB_ID" "$SLURMD_NODENAME" "$role" "$run_id" >"$marker"
+marker_sha=$(sha256sum "$marker" | awk '{print $1}')
+device=$(stat -c %%d "$target")
+uid=$(id -u)
+set +e
+./supervise-v2.sh "$target" "$marker_sha" "$output/supervisor.json" ./screen-job.sh "$configuration" "$target"
+status=$?
+set -e
+cleanup=false
+[ ! -e "$target" ] && cleanup=true
+/usr/bin/python3 - "$output/evidence.json.part" "$output/evidence.json" "$status" "$cleanup" "$target" "$SLURM_JOB_ID" "$SLURMD_NODENAME" "$role" "$run_id" "$uid" "$device" "$marker_sha" <<'PY'
+import json, os, sys
+partial, final, status, cleanup, target, job, node, role, run_id, uid, device, marker_sha = sys.argv[1:]
+if os.path.exists(partial):
+    with open(partial, encoding='utf-8') as stream: value=json.load(stream)
+else:
+    value={'classification':'a10m5-development-only-fit-validation-screen','configuration_id':role[7:] if role.startswith('screen-') else role,'valid':False,'gates':{'compute_completed':False}}
+value.setdefault('gates',{})['job_local_cleanup']=cleanup=='true'
+value['gates']['offline_hash_install']=os.path.exists(partial)
+value['exit_code']=int(status)
+if cleanup!='true':
+    value['recovery_target']={'device':int(device),'job_id':job,'marker_sha256':marker_sha,'node':node,'target':target,'uid':int(uid)}
+value['verdict']='PASS' if int(status)==0 and all(value['gates'].values()) else 'FAIL'
+temporary=final+'.promote'
+with open(temporary,'w',encoding='utf-8') as stream: json.dump(value,stream,indent=2,sort_keys=True); stream.write('\n')
+os.replace(temporary,final)
+if os.path.exists(partial): os.unlink(partial)
+PY
+exit "$status"
+""" % configuration, encoding="utf-8")
         path.chmod(0o700)
         wrappers.append(name)
     assets = {name: identity(cache / name) for name in names}
-    for name in ("screen.py", "screen-job.sh", "recover-job-local-v2.sh", *wrappers):
+    for name in ("screen.py", "screen-job.sh", "recover-job-local-v2.sh", "supervise-v2.sh", *wrappers):
         assets[name] = identity(root / name)
     manifest = {
         "schema_version": 1, "source_commit": options.source_commit,

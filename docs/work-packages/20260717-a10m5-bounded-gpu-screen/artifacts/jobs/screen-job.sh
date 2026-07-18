@@ -3,49 +3,12 @@ set -eu
 umask 077
 
 configuration_id=${1:?frozen configuration ID required}
+job_local=${2:?supervised job-local root required}
 slug=$(printf '%s' "$configuration_id" | tr '[:upper:]' '[:lower:]')
 run_root=$PWD
 output=$run_root/results/$slug
-job_local=${TMPDIR:-/tmp}/a10m5-$slug-$SLURM_JOB_ID
 runtime_root=$job_local/runtime/cpython
 environment=$job_local/runtime/environment
-partial=$output/evidence.json.part
-final=$output/evidence.json
-
-finish() {
-  status=$?
-  trap - EXIT
-  if [ -d "$job_local" ] && [ ! -L "$job_local" ]; then
-    rm -rf -- "$job_local"
-  fi
-  if [ -x "$environment/bin/python" ]; then python=$environment/bin/python; else python=/usr/bin/python3; fi
-  "$python" - "$partial" "$final" "$status" <<'PY' || true
-import json, os, sys
-partial, final, status = sys.argv[1:]
-os.makedirs(os.path.dirname(final), exist_ok=True)
-if os.path.exists(partial):
-    with open(partial, encoding="utf-8") as stream:
-        value = json.load(stream)
-else:
-    value = {
-        "classification": "a10m5-development-only-fit-validation-screen",
-        "gates": {"compute_completed": False},
-        "valid": False,
-    }
-value.setdefault("gates", {})["job_local_cleanup"] = not os.path.exists(os.environ.get("A10M5_JOB_LOCAL", ""))
-value["gates"]["offline_hash_install"] = int(status) == 0
-value["exit_code"] = int(status)
-value["verdict"] = "PASS" if int(status) == 0 and all(value["gates"].values()) else "FAIL"
-temporary = final + ".promote"
-with open(temporary, "w", encoding="utf-8") as stream:
-    json.dump(value, stream, indent=2, sort_keys=True); stream.write("\n")
-os.replace(temporary, final)
-if os.path.exists(partial): os.unlink(partial)
-PY
-  exit "$status"
-}
-export A10M5_JOB_LOCAL=$job_local
-trap finish EXIT
 
 unset PYTHONPATH PYTHONHOME LD_LIBRARY_PATH
 export PYTHONNOUSERSITE=1 PIP_NO_INDEX=1
@@ -88,6 +51,4 @@ if ! "$environment/bin/python" "$run_root/screen.py" \
   exit 1
 fi
 rm -f -- "$python_stderr"
-rm -rf -- "$job_local"
-test ! -e "$job_local"
 printf '%s\n' "A10M5-SCREEN-PASS $configuration_id"
