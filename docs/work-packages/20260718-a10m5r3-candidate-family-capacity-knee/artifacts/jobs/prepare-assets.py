@@ -93,11 +93,10 @@ def main() -> None:
         seed = SEEDS[1 + slot % 2]; row_id = f"frontier-k{slot//2}-s{seed}"; name = f"job-{row_id}.sh"; (root / name).write_text(wrapper(row_id, "frontier", "AUTO", str(slot), seed), encoding="utf-8"); (root / name).chmod(0o700); wrappers.append(name)
     recovery = {"invoked": False, "reason": "all primary jobs own supervised job-local cleanup"}
     (root / "recovery.json").write_text(json.dumps(recovery, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    (root / "toolkit-recovery.0.out").write_text("recovery not invoked\n", encoding="utf-8"); (root / "toolkit-recovery.0.err").write_text("recovery not invoked\n", encoding="utf-8")
     for executable in (*jobs, "recover-job-local-v2.sh", "supervise-v2.sh", *wrappers):
         if executable.endswith((".sh", ".py")): (root / executable).chmod(0o700)
     assets = {name: identity(cache / name) for name in canonical}
-    generated = (*jobs, "m5r3_contract.py", "legacy_core.py", "recover-job-local-v2.sh", "supervise-v2.sh", "recovery.json", "toolkit-recovery.0.out", "toolkit-recovery.0.err", *wrappers)
+    generated = (*jobs, "m5r3_contract.py", "legacy_core.py", "recover-job-local-v2.sh", "supervise-v2.sh", "recovery.json", *wrappers)
     for name in generated: assets[name] = identity(root / name)
     manifest = {"schema_version": 1, "source_commit": options.source_commit, "protected_roles_opened": [], "assets": assets}
     (root / "asset-manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")

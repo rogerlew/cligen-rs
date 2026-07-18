@@ -13,6 +13,11 @@ output=$run_root/results/$row_id
 runtime_root=$job_local/runtime/cpython
 environment=$job_local/runtime/environment
 
+# Slurm creates this directory before the job starts. Revision-2 collection
+# requires explicit all-clean recovery evidence even when recovery is unused.
+printf '%s\n' 'recovery not invoked' >"$run_root/slurm/toolkit-recovery.0.out"
+printf '%s\n' 'recovery not invoked' >"$run_root/slurm/toolkit-recovery.0.err"
+
 if [ "$family" = AUTO ]; then
   set -- $(/usr/bin/python3 "$run_root/resolve.py" --phase "$phase" --slot "$capacity" --seed "$seed" --results "$run_root/results")
   family=$1

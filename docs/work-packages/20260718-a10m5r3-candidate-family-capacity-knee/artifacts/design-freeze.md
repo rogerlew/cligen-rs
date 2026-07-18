@@ -37,8 +37,9 @@ selection receipts before downstream fitting. No agent-authored code or
 threshold can change after results become visible.
 
 All jobs are sequential, one L40, one attempt, 30 minutes. One exact-node
-five-minute recovery allocation is reserved. The success path stages explicit
-`invoked=false` recovery evidence. Raw durable paths are projected through an
+five-minute recovery allocation is reserved. The success path stages an
+explicit `invoked=false` receipt, and the first primary job publishes labeled
+non-invocation streams after Slurm creates its log directory. Raw durable paths are projected through an
 exact typed replacement before collection. Family rows run calibration and
 stream gates; capacity and frontier rows additionally run the full clean-
 process 12-cell CPU benchmark. Every trainer exits before the CPU worker is
