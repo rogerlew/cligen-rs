@@ -657,9 +657,10 @@ def main() -> None:
             sys.executable,
             "-c",
             (
-                "import resource,sys,torch;"
-                "m=torch.jit.load(sys.argv[1],map_location='cpu');"
-                "m(torch.zeros((1,36525,13)),torch.tensor([int(sys.argv[2])]));"
+                "import resource,sys,torch\n"
+                "m=torch.jit.load(sys.argv[1],map_location='cpu')\n"
+                "with torch.inference_mode():\n"
+                " m(torch.zeros((1,36525,13)),torch.tensor([int(sys.argv[2])]))\n"
                 "print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024)"
             ),
             str(export),
