@@ -90,6 +90,35 @@ class HardeningFixture(unittest.TestCase):
 
 
 class ProviderAndEnvironmentTests(HardeningFixture):
+    def test_v2_live_cleanup_requires_authenticated_job_local_absence(self) -> None:
+        class Runner:
+            def run(self, arguments, *, stdin=None, timeout=60):
+                del timeout
+                if stdin and b"gate_receipt=$3" in stdin:
+                    output = b'{"gates":{"job_local_cleanup":true}}\n'
+                elif stdin and b"REMOTE_ABSENT" in stdin:
+                    output = b"REMOTE_ABSENT\n"
+                else:
+                    output = b"Master running\n"
+                return subprocess.CompletedProcess(arguments, 0, output, b"")
+
+        adapter = OpenSSHSlurmAdapter(
+            REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", Runner()
+        )
+        profile = read_json(PROFILE_V2)
+        plan = {
+            "job_local_cleanup": "toolkit_recoverable",
+            "jobs": [{"gate_receipt": "evidence.json"}],
+            "remote_run_root": "runs/v2-smoke",
+            "run_id": "v2-smoke",
+            "package_id": "v2-package",
+            "source_commit": "abcdef0",
+        }
+        self.assertEqual(
+            adapter.clean(profile, plan),
+            {"remote_absent": True, "job_local_cleanup": "verified_absent"},
+        )
+
     def test_v2_live_adapter_uses_export_none_and_authority_reconciliation(self) -> None:
         class Runner:
             def __init__(self):

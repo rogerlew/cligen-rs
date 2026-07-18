@@ -410,6 +410,25 @@ class OpenSSHSlurmAdapter:
         return result
 
     def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+        job_local_cleanup = plan["job_local_cleanup"]
+        if profile.get("provider_api_version") == 2:
+            for gate_receipt in sorted({job["gate_receipt"] for job in plan["jobs"]}):
+                receipt = self._remote_script(
+                    profile,
+                    "read_gate.sh",
+                    [profile["remote_base"], plan["remote_run_root"], gate_receipt],
+                )
+                try:
+                    evidence = json.loads(receipt)
+                except json.JSONDecodeError as error:
+                    raise ToolkitError("CLEANUP_INCOMPLETE", "invalid job-local cleanup receipt") from error
+                gates = evidence.get("gates") if isinstance(evidence, dict) else None
+                require(
+                    isinstance(gates, dict) and gates.get("job_local_cleanup") is True,
+                    "CLEANUP_INCOMPLETE",
+                    "job-local absence not authenticated",
+                )
+            job_local_cleanup = "verified_absent"
         output = self._remote_script(profile, "clean.sh", [profile["remote_base"], plan["remote_run_root"], plan["run_id"], plan["package_id"], plan["source_commit"], sha256_bytes(canonical_bytes(plan))]).decode("utf-8").strip()
         require(output == "REMOTE_ABSENT", "CLEANUP_INCOMPLETE", "remote cleanup not proven")
-        return {"remote_absent": True, "job_local_cleanup": plan["job_local_cleanup"]}
+        return {"remote_absent": True, "job_local_cleanup": job_local_cleanup}
