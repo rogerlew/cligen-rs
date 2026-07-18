@@ -571,6 +571,13 @@ Authority, package, budget, resource class/ceiling, branch, and push target do
 not change. Every live reservation/submission reconciles the authority token
 against Slurm accounting before spending.
 
+Creating another revision-0 authority for the same package is not continuation.
+It resets the ledger namespace and can violate a frozen attempt-count ceiling
+even when cumulative elapsed GPU minutes remain modest. A10M5R3 exposed this
+distinction while correcting two job-wrapper defects. Treat every settled job
+across failed and successful run lineages as package resource use, and use
+`derive-run` under the original budget for a prospective correction.
+
 A local hash chain cannot detect restoration of both itself and its saved head
 to an older valid prefix. Therefore missing or ambiguous external accounting
 holds the authority; agents must not represent the local chain as rollback
@@ -590,6 +597,13 @@ forbidden-value scan still rejects unregistered leaks. Projection failure holds
 publication but preserves exact cleanup authority and cannot alter gate
 results. Retrying collection atomically retains the failed quarantine and
 starts from a fresh authenticated download; it never overlays extracted files.
+
+Typed replacement tokens are different from producer pre-redactions: use
+reserved angle-bracket syntax such as `<REMOTE_RUN_ROOT>` in
+`evidence_replacements`, and square brackets only in raw producer output.
+A10M5R3 used the square-bracket form in a typed plan and consequently reached
+`SANITIZATION_FAILED` after raw collection. Planning and amendment now validate
+the token grammar prospectively so this defect stops before staging.
 
 External `/usr/bin/time -v` writes the full timed command on its first line,
 including durable and job-local paths. If that witness is allowlisted, register
@@ -615,6 +629,17 @@ corpus missingness contract; checkpoint every cursor needed for the next
 batch; deserialize checkpoints and CPU RNG state on CPU before explicit
 relocation; and validate output completeness with a format-aware parser or a
 byte-pinned fixture. Guessed line counts are not completeness evidence.
+
+Package wrappers also own their staged directory topology and interpreter
+order. Create nested parents before any shell redirection or Slurm log path
+uses them; declaring `slurm/name.out` does not cause a staging tool to create
+`slurm/`. On the compute node, construct and verify the canonical CPython 3.11
+environment before running package selectors or resolvers. Do not call them
+with the ambient Lemhi `python`, whose older syntax support can fail before an
+otherwise valid allocation reaches training. These were separate A10M5R3
+bootstrap defects: the first was caught before submission, while the second
+settled one short failed allocation and required a new, prospectively pushed
+run lineage.
 
 ## Submission and evidence lifecycle
 

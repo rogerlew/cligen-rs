@@ -429,6 +429,21 @@ class V2IntegrationTests(HardeningFixture):
         if v1.exists():
             self.assertEqual(read_record(v1)["schema_version"], "lemhi-toolkit-record-1")
 
+    def test_v2_plan_rejects_collection_invalid_replacement_token(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        profile = read_json(PROFILE_V2)
+        toolkit = Toolkit(state, authority, profile, "v2-run", FixtureAdapter(self.root / "fixture"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor()
+        toolkit.probe()
+        plan = self.plan(authority, script)
+        plan["evidence_replacements"] = [
+            {"kind": "path", "value": "/ceph/home/user/run", "token": "[REMOTE_RUN_ROOT]"}
+        ]
+        with self.assertRaisesRegex(ToolkitError, "invalid replacement token"):
+            toolkit.plan(plan)
+
     def test_v2_submission_holds_when_authority_reconciliation_fails(self) -> None:
         authority, state = self.authority()
         script = self.root / "assets/job.sh"; script.write_text("#!/bin/sh\n", encoding="utf-8")

@@ -1,0 +1,27 @@
+{
+  "amount_family": "lognormal_wet_v2",
+  "disposition": "A10M5R3-CAPACITY-PAIR-READY",
+  "pair": [
+    "P1",
+    "P2"
+  ],
+  "ready": true,
+  "retained_runtime_boundary_pass": true,
+  "schema_version": 1,
+  "summaries": [
+    {
+      "all_gates_pass": true,
+      "capacity_id": "P1",
+      "primary_nll_mean": 2.6632827096515235,
+      "primary_nll_population_sd": 0.0031182565104142836,
+      "stable": true
+    },
+    {
+      "all_gates_pass": true,
+      "capacity_id": "P2",
+      "primary_nll_mean": 2.5741901692889986,
+      "primary_nll_population_sd": 0.014350810916554135,
+      "stable": true
+    }
+  ]
+}

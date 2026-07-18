@@ -668,7 +668,11 @@ class Toolkit:
             require(plan_input["remote_run_root"] == f"runs/{self.run_id}", "CLEANUP_TARGET_INVALID", "run root must be runs/<run_id>")
             providers = self._load_providers(plan_input)
             if self.provider_api_version == 2:
-                from .hardening import close_job_environment, validate_v2_provider_stack
+                from .hardening import (
+                    close_job_environment,
+                    validate_evidence_replacements,
+                    validate_v2_provider_stack,
+                )
 
                 validate_v2_provider_stack(providers)
                 require(plan_input.get("authority_revision_sha256") == self.authority["authority_revision_sha256"], "AUTHORITY_INVALID", "authority revision")
@@ -699,6 +703,7 @@ class Toolkit:
                 require(isinstance(required_environment, dict), "PLAN_DRIFT", "required job environment")
                 require({"PATH", "TMPDIR"} <= required_environment.keys(), "PLAN_DRIFT", "exact PATH and TMPDIR required")
                 close_job_environment(required_environment, {}, {}, deterministic_cuda=plan_input.get("deterministic_cuda") is True)
+                validate_evidence_replacements(plan_input.get("evidence_replacements", []))
             evidence_allowlist = plan_input.get("evidence_allowlist")
             require(isinstance(evidence_allowlist, list) and evidence_allowlist, "AUTHORITY_INVALID", "evidence allowlist")
             validated_evidence = [validate_relative_path(item, "evidence allowlist") for item in evidence_allowlist]
@@ -794,6 +799,10 @@ class Toolkit:
             next_jobs = {item["role"]: item for item in replacement.get("jobs", [])}
             for role in started_roles:
                 require(prior_jobs.get(role) == next_jobs.get(role), "PLAN_DRIFT", f"started role changed: {role}")
+            if self.provider_api_version == 2:
+                from .hardening import validate_evidence_replacements
+
+                validate_evidence_replacements(replacement.get("evidence_replacements", []))
             providers = self._load_providers(replacement)
             semantic = self._semantic_plan(replacement, providers)
             actual_changes = {key for key in set(prior) | set(semantic) if prior.get(key) != semantic.get(key)}

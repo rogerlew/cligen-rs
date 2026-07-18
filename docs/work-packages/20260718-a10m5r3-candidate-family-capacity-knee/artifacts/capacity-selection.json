@@ -1,0 +1,23 @@
+{
+  "amount_family": "lognormal_wet_v2",
+  "curvature_distances": [
+    0.0,
+    0.16156223604582523,
+    0.047613159429139,
+    0.07635518889082181
+  ],
+  "frontier": [
+    "P0",
+    "P1",
+    "P2",
+    "P3",
+    "P4"
+  ],
+  "knee": "P1",
+  "larger_neighbor": "P2",
+  "pair": [
+    "P1",
+    "P2"
+  ],
+  "schema_version": 1
+}

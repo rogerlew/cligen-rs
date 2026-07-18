@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "record_type": "a10m5r3r1_marker_bound_cleanup",
+  "parent_run_id": "a10m5r3-screen-r4",
+  "parent_plan_id": "73ba0397715b5ea68e8b38678b57f220cc263102862695595d50b6fe03acb313",
+  "source_commit": "47963a9",
+  "owner_marker_sha256": "d43dedb292ea34af76867b96df27499dd9e068586ec7a43bb75ae3f5560f458b",
+  "clean_script_sha256": "3d06f34f23e46ff7ca89948216cfccf53fe1a3d5a7ef1229541f579f22edf77f",
+  "job_local_cleanup": "verified_by_all_18_gate_receipts",
+  "remote_absent": true,
+  "toolkit_close": false,
+  "parent_terminal": "SANITIZATION_FAILED",
+  "terminal": "A10M5R3R1-EXACT-DURABLE-CLEANUP-RECOVERED"
+}

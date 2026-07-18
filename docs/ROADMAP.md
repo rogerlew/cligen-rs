@@ -256,11 +256,14 @@ freeze the successor sequence:
 
 1. **Complete:** execute A10M5R2 without changing its twelve-row correction
    boundary;
-2. **Next:** execute the scaffolded
-   [A10M5R3 family and capacity/runtime-knee package](work-packages/20260718-a10m5r3-candidate-family-capacity-knee/package.md)
-   on the existing A10M1 corpus, retiring the current whole-wet-day GPD and
-   retaining the Pareto knee plus its immediately larger passing neighbor;
-3. execute A10M5R4 realized calendar-month and interannual dispersion
+2. **Complete through corrective reconciliation:**
+   [A10M5R3](work-packages/20260718-a10m5r3-candidate-family-capacity-knee/package.md)
+   produced a valid 18-row lognormal P1/P2 matrix but honestly held on fresh-
+   authority attempt-count overflow; zero-allocation
+   [A10M5R3R1](work-packages/20260718-a10m5r3r1-evidence-reconciliation/package.md)
+   authenticated and accepted only the corrected evidence, recovered typed
+   projection and exact cleanup, and issued `A10M5R3R1-CAPACITY-PAIR-READY`;
+3. **Next:** execute A10M5R4 realized calendar-month and interannual dispersion
    adjudication against observations, faithful CLIGEN, and a separately
    versioned revised stochastic-plus-PRISM comparator;
 4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and

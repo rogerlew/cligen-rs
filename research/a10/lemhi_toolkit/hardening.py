@@ -200,6 +200,27 @@ def _replace_text(text: str, replacements: list[dict[str, str]]) -> tuple[str, d
     return output, counts
 
 
+def validate_evidence_replacements(replacements: Any) -> list[dict[str, str]]:
+    """Validate projection rules while a plan can still fail prospectively."""
+
+    require(isinstance(replacements, list), "SANITIZATION_FAILED", "replacements must be a list")
+    normalized: list[dict[str, str]] = []
+    seen_tokens: set[str] = set()
+    seen_values: set[tuple[str, str]] = set()
+    for item in replacements:
+        require(isinstance(item, dict) and set(item) == {"kind", "value", "token"}, "SANITIZATION_FAILED", "replacement shape")
+        require(item["kind"] in {"identity", "path", "text"}, "SANITIZATION_FAILED", "replacement kind")
+        require(isinstance(item["value"], str) and isinstance(item["token"], str), "SANITIZATION_FAILED", "replacement strings")
+        require(RESERVED_TOKEN.fullmatch(item["token"]) is not None, "SANITIZATION_FAILED", "invalid replacement token")
+        require(item["value"] and item["token"] not in item["value"], "SANITIZATION_FAILED", "invalid replacement value")
+        require(item["token"] not in seen_tokens, "SANITIZATION_FAILED", "duplicate token")
+        require((item["kind"], item["value"]) not in seen_values, "SANITIZATION_FAILED", "duplicate replacement")
+        seen_tokens.add(item["token"])
+        seen_values.add((item["kind"], item["value"]))
+        normalized.append(dict(item))
+    return normalized
+
+
 def _loads_evidence_json(text: str) -> Any:
     """Parse scientific JSON strictly while admitting finite JSON numbers."""
 
@@ -234,17 +255,7 @@ def project_evidence(
     """Apply deterministic typed projection and return its private receipt."""
 
     require(HEX64_PATTERN.fullmatch(raw_parent_sha256) is not None, "SANITIZATION_FAILED", "raw parent hash")
-    normalized: list[dict[str, str]] = []
-    seen_tokens: set[str] = set()
-    seen_values: set[tuple[str, str]] = set()
-    for item in replacements:
-        require(isinstance(item, dict) and set(item) == {"kind", "value", "token"}, "SANITIZATION_FAILED", "replacement shape")
-        require(item["kind"] in {"identity", "path", "text"}, "SANITIZATION_FAILED", "replacement kind")
-        require(item["token"] not in seen_tokens, "SANITIZATION_FAILED", "duplicate token")
-        require((item["kind"], item["value"]) not in seen_values, "SANITIZATION_FAILED", "duplicate replacement")
-        seen_tokens.add(item["token"])
-        seen_values.add((item["kind"], item["value"]))
-        normalized.append(item)
+    normalized = validate_evidence_replacements(replacements)
     try:
         text = raw.decode("utf-8")
     except UnicodeDecodeError as error:

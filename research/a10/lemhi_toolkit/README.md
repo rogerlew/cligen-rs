@@ -24,7 +24,10 @@ unplanned allocations, or protected confirmation data.
 3. For a hardened dispatch, copy `examples/authority-v2.example.json` outside
    the repository and run the exclusive `initialize-authority` operation once.
    Later source corrections use `derive-run`; they never choose another ledger
-   root or reset the budget. Revision-1 examples remain historical fixtures.
+   root or reset the budget. A new authority or resource-budget ID is not a
+   successor run and must not be used to work around a failed lineage, even if
+   cumulative actual usage would remain below the original minute ceiling.
+   Revision-1 examples remain historical fixtures.
 4. Create a private plan from `examples/plan.example.json`. The target is
    Linux x86-64 glibc even though dependency resolution is controlled from
    macOS arm64. Every local asset path must be absolute, regular, singly linked,
@@ -108,6 +111,17 @@ accounting, and then call `observe` once.
 
 ## Authoring traps from live acceptance
 
+- Asset staging preserves each declared relative path; it does not synthesize
+  missing parent directories inside an authored wrapper. Before submission,
+  create every nested output parent used by shell redirection, including
+  `slurm/` for `%o`/`%e` paths and any receipt subdirectory. A failure here is
+  a pre-submission staging defect, not a Slurm or GPU failure.
+- Do not run staged selectors, resolvers, or finalizers with Lemhi's ambient
+  system `python`. It may be older than the authored language contract (the
+  A10M5R3 resolver used annotations unsupported by that interpreter). Create
+  and verify the canonical CPython 3.11 environment first, then invoke all
+  package Python through that exact executable. The toolkit control plane may
+  continue to use `rmm`'s supported system Python.
 - Every job gate receipt needs a nonempty boolean `gates` object even when the
   scientific result has a different disposition vocabulary. Keep operational
   gates and scientific gates in separate fields.
@@ -122,6 +136,10 @@ accounting, and then call `observe` once.
 - Prospectively register typed evidence replacements for exact durable and
   job-local paths that can appear in tracebacks. Collection quarantines raw
   evidence and fails closed on an unregistered forbidden value.
+- Projection replacement tokens use reserved angle-bracket syntax such as
+  `<REMOTE_RUN_ROOT>`. Square-bracket text such as `[REMOTE_RUN_ROOT]` is only
+  for producer-side pre-redaction and is not a typed replacement token.
+  Revision-2 planning and amendment now reject an invalid token before staging.
 - Run amendment is available while `VERIFIED` or `MATRIX_ACTIVE`, not after
   `MATRIX_SETTLED`. Inspect failure traces and amend projection rules before
   observing the final outstanding role when a correction is necessary.

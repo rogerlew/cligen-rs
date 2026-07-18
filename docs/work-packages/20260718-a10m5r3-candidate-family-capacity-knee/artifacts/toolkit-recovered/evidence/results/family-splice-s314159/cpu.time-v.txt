@@ -1,0 +1,23 @@
+	Command being timed: "/tmp/a10m5r3-family-splice-s314159-1013975/runtime/environment/bin/python <REMOTE_RUN_ROOT>/cpu_worker.py --row-id family-splice-s314159 --phase family --output <REMOTE_RUN_ROOT>/results/family-splice-s314159 --faithful-binary /tmp/a10m5r3-family-splice-s314159-1013975/source/target/release/cligen --parameters /tmp/a10m5r3-family-splice-s314159-1013975/parameters/station-parameters --trainer-exited-marker <REMOTE_RUN_ROOT>/results/family-splice-s314159/trainer-exited.marker"
+	User time (seconds): 9.32
+	System time (seconds): 0.29
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.68
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 663460
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 133763
+	Voluntary context switches: 31
+	Involuntary context switches: 23
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 24
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

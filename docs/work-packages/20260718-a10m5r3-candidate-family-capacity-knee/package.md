@@ -1,6 +1,6 @@
 # A10M5R3 — Candidate Family and Capacity/Runtime Knee
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-A10-RESOURCE-BOUND`
 Date: 2026-07-18
 Evidence mode: Mixed
 Starting branch and push target: `main` at the accepted A10M5R2 terminal,
@@ -124,6 +124,30 @@ Legitimate holds are `HOLD-A10-FAMILY-CALIBRATION`,
 `HOLD-A10-NO-CAPACITY-PAIR`, `HOLD-A10-GENERATION-RUNTIME`,
 `HOLD-A10-RESOURCE-BOUND`, or an exact toolkit/environment/cleanup terminal.
 No hold opens the expanded spatial or confirmation roles.
+
+## Terminal result
+
+`HOLD-A10-RESOURCE-BOUND`
+
+The independent corrected `r4` lineage completed the exact 18-row matrix and
+produced scientifically valid `lognormal_wet_v2` P1/P2 evidence. It cannot
+make this package complete. Two earlier post-submission correction lineages
+were initialized with fresh revision-0 authorities rather than `derive-run`:
+11 additional jobs settled, for 29 package jobs against the frozen maximum of
+18. Cumulative use was 10,418 elapsed GPU-seconds and 188 per-job rounded GPU-
+minutes, below 545 minutes but outside the job-count boundary.
+
+The `r4` toolkit also reached `SANITIZATION_FAILED` after authenticating raw
+collection because the plan's `[REMOTE_RUN_ROOT]` replacement token was not
+valid projection-v3 syntax. The parent plan was not mutated after settlement
+and the parent run is not relabeled closed. A10M5R3R1 re-projected all 239
+authenticated raw files with the valid `<REMOTE_RUN_ROOT>` token, invoked the
+committed marker-bound cleaner against the exact root, and preserved both
+failures in the record.
+
+This hold does not authorize A10M5R4. The zero-allocation
+[A10M5R3R1 evidence and authority reconciliation](../20260718-a10m5r3r1-evidence-reconciliation/package.md)
+must independently accept or reject the scientifically valid `r4` lineage.
 
 ## Artifacts
 

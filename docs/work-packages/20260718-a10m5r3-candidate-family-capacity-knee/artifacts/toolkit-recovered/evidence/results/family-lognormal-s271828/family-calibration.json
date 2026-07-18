@@ -1,0 +1,1 @@
+{"analytic_expectation":1.2716252753645503,"empirical_cdf_at_q95":0.949951171875,"empirical_expectation":1.2713996968692955,"family":"lognormal_wet_v2","gates":{"expectation_relative_error":true,"finite_analytic_values":true,"finite_gradients":true,"positive_support":true,"quantile_empirical_error":true},"predicted_q95":3.1276756952465856,"sample_count":4096,"valid":true}
