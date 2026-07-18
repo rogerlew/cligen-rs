@@ -13,6 +13,9 @@ evidence_final=$run_root/evidence.json
 write_failure_receipt() {
   status=$?
   trap - EXIT
+  if [ -n "${job_local:-}" ] && [ -d "$job_local" ] && [ ! -L "$job_local" ]; then
+    rm -rf -- "$job_local"
+  fi
   if [ "$status" -ne 0 ] && [ -x "$runtime_root/bin/python3" ]; then
     "$runtime_root/bin/python3" - "$evidence_partial" "$evidence_final" "$status" <<'PY' || true
 import json, os, sys
