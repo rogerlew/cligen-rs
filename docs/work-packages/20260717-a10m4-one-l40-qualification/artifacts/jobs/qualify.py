@@ -511,7 +511,7 @@ def run_restart(options: argparse.Namespace) -> None:
     fit = load_daymet_role(options.corpus, normalized, "candidate_fit")
     means, scales = normalizers(normalization, fit["regime"])
     device = torch.device("cuda:0")
-    checkpoint = torch.load(options.checkpoint, map_location=device, weights_only=False)
+    checkpoint = torch.load(options.checkpoint, map_location="cpu", weights_only=False)
     batch2 = window(
         fit, means, scales, int(checkpoint["corpus_cursor"]["window_offset"]) + 1
     )
