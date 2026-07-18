@@ -268,9 +268,9 @@ The private run plan additionally records:
   validated `requires`/`provides` composition;
 - target OS, architecture, libc floor, CPU baseline, interpreter ABI,
   framework/CUDA contract, and final runtime path where applicable;
-- every immutable asset's logical name, bytes, hash, source class, and license
-  provenance for externally redistributable assets; repository-owned assets
-  MAY reference repository license/provenance once;
+- every immutable asset's logical name, bytes, hash, executable intent, source
+  class, and license provenance for externally redistributable assets;
+  repository-owned assets MAY reference repository license/provenance once;
 - exact remote run root and permitted job-local root pattern;
 - job matrix, typed GRES, partition, time/memory/CPU limits, cumulative
   resource ceiling, stop ladder, and retry classes;
@@ -316,9 +316,11 @@ A job receipt records the frozen job role and attempt index, Slurm job ID,
 requested resources, node and accelerator classes, terminal state, exit code,
 elapsed allocation, available accounting, registered gate results, and log
 hashes. Missing accounting is recorded as unavailable, not zero.
-For a scheduler-success exit, registered gate results MUST be parsed from the
-job role's exact regular, nonsymlink gate-receipt file under the marked run
-root. Scheduler state or controller-generated placeholder gates MUST NOT
+For every terminal exit, including scheduler or application failure,
+registered gate results MUST be parsed from the job role's exact regular,
+nonsymlink gate-receipt file under the marked run root. A job wrapper MUST
+atomically publish that receipt on every catchable exit before returning its
+status. Scheduler state or controller-generated placeholder gates MUST NOT
 substitute for that receipt. The controller records its content hash and
 accepts only a nonempty string-to-boolean gate object.
 
@@ -516,7 +518,10 @@ The toolkit MUST exclusively create the registered remote root and atomically
 install its ownership marker before placing any other object. The marker binds
 `run_id`, `package_id`, plan hash, source commit, and exact canonical root.
 Creation and staging hold a run-specific lock. A package-authorized abort path
-MUST cover interruption before marker publication without widening the target.
+MUST cover interruption before submission, including before marker
+publication, without widening the target. An abort after staging revalidates
+the exact marker and plan identity, removes only the registered durable root,
+proves absence, and records job-local state as `not_started`.
 
 Cleanup MUST perform marker validation, canonical ancestor and symlink checks,
 and deletion inside one bounded remote script while holding the run lock. It
@@ -726,12 +731,16 @@ loader resolution, compiler invocation, and bounded build smoke. Presence
 alone is never sufficient, and providers remain declarative data.
 
 The v2 plan declares `required_job_environment`. Slurm starts with
-`--export=NONE` or a provider-proved equivalent. The wrapper reconstructs only
-registered Slurm/device variables and exact public operational values, sets
-exact path/compiler/cache/temp state, rejects ambient overrides, and publishes
-only allowed names and safe values or value hashes. Deterministic CUDA work
-requires `CUBLAS_WORKSPACE_CONFIG=:4096:8` before the first Python/framework
-import.
+`--export=NONE` or a provider-proved equivalent, but this flag is not proof
+that the site wrapper exported no Python or loader variables. The job wrapper
+records typed presence flags only, clears prohibited ambient variables,
+reconstructs registered Slurm/device variables and exact public operational
+values, then asserts the closed environment before the first interpreter
+import. A value that survives clearing or conflicts with the reconstructed
+contract is an ambient override and fails. Evidence publishes only allowed
+names and safe values or value hashes, never ambient values. Deterministic
+CUDA work requires `CUBLAS_WORKSPACE_CONFIG=:4096:8` before the first
+Python/framework import.
 
 ### 17.3 Job-local admission, supervision, and recovery
 

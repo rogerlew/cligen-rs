@@ -35,7 +35,7 @@ def _parser() -> argparse.ArgumentParser:
     derive = subcommands.add_parser("derive-run")
     derive.add_argument("--input", type=Path, required=True)
     derive.add_argument("--output", type=Path, required=True)
-    for command in ("doctor", "probe", "prepare", "stage", "verify", "collect", "clean", "close"):
+    for command in ("doctor", "probe", "prepare", "stage", "verify", "collect", "clean", "close", "abort"):
         subcommands.add_parser(command)
     plan = subcommands.add_parser("plan")
     plan.add_argument("--input", type=Path, required=True)

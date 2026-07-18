@@ -408,6 +408,54 @@ class V2IntegrationTests(HardeningFixture):
         with self.assertRaisesRegex(ToolkitError, "AUTHORITY_RECONCILIATION_REQUIRED"):
             toolkit.submit("smoke", 0)
 
+    def test_v2_pre_submission_abort_removes_exact_staged_root(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\n", encoding="utf-8")
+        plan = self.plan(authority, script)
+        adapter = FixtureAdapter(self.root / "fixture-abort")
+        toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-run", adapter, clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage()
+        receipt = toolkit.abort()
+        self.assertEqual(receipt["terminal"], "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION")
+        self.assertFalse((adapter.remote / "runs/v2-run").exists())
+        self.assertEqual(read_json(toolkit.private_path)["run_state"], "ABORTED")
+
+    def test_executable_intent_is_prepared_and_verified(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\n", encoding="utf-8")
+        plan = self.plan(authority, script)
+        plan["assets"][0]["executable"] = True
+        toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-run", FixtureAdapter(self.root / "fixture-mode"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan)
+        with self.assertRaisesRegex(ToolkitError, "not executable"):
+            toolkit.prepare()
+        script.chmod(0o700)
+        prepared = toolkit.prepare()
+        self.assertTrue(prepared[0]["executable"])
+        toolkit.stage(); toolkit.verify()
+
+    def test_live_observe_reads_failure_gate_receipt(self) -> None:
+        class Runner:
+            def run(self, arguments, *, stdin=None, timeout=60):
+                del arguments, timeout
+                if stdin and b"ElapsedRaw" in stdin:
+                    output = b'{"terminal":true,"state":"FAILED","exit_code":1,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"unavailable"}\n'
+                elif stdin and b"gate_receipt=$3" in stdin:
+                    output = b'{"gates":{"environment_closure":false,"job_local_cleanup":true}}\n'
+                else:
+                    output = b""
+                return subprocess.CompletedProcess([], 0, output, b"")
+
+        adapter = OpenSSHSlurmAdapter(REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", Runner())
+        plan = {"remote_run_root": "runs/v2-run"}
+        job = {"expected_exit_code": 0, "gate_receipt": "evidence.json"}
+        observed = adapter.observe(read_json(PROFILE_V2), plan, job, "1000")
+        self.assertFalse(observed["gates"]["environment_closure"])
+        self.assertTrue(observed["gates"]["job_local_cleanup"])
+        self.assertIn("gate_receipt_sha256", observed)
+
     def test_cli_initializes_and_derives_without_allocation(self) -> None:
         authority, _ = self.authority(initialize=False)
         authority.update({"genesis_authorized": True, "predecessor_evidence": [], "scheduler_evidence": []})

@@ -332,6 +332,7 @@ class Adapter(Protocol):
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
     def clean(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
+    def abort(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
 
 
 RUN_STATES = [
@@ -346,6 +347,7 @@ RUN_STATES = [
     "COLLECTED",
     "CLEANED",
     "CLOSED",
+    "ABORTED",
 ]
 TERMINAL_JOB_STATES = {
     "BOOT_FAIL",
@@ -701,6 +703,7 @@ class Toolkit:
                 require(asset.get("source_class") in {"repository-owned", "external-redistributable"}, "AUTHORITY_INVALID", "asset source class")
                 require(isinstance(asset.get("license_provenance"), str) and asset["license_provenance"], "AUTHORITY_INVALID", "asset license provenance")
                 require(asset.get("target_platform", target_platform) == target_platform, "PLATFORM_MISMATCH", "asset target platform")
+                require(isinstance(asset.get("executable", False), bool), "PLAN_DRIFT", "asset executable intent")
             jobs = plan_input.get("jobs")
             require(plan_input.get("job_local_cleanup") in {"scheduler_purged", "toolkit_recoverable"}, "PLAN_DRIFT", "job-local cleanup contract")
             require(plan_input.get("submission_mode") == "operator-explicit", "PLAN_DRIFT", "submission mode")
@@ -819,6 +822,8 @@ class Toolkit:
                 size = path.stat().st_size
                 digest = sha256_file(path)
                 require(asset["bytes"] == size and asset["sha256"] == digest, "ASSET_IDENTITY_MISMATCH", logical)
+                executable = asset.get("executable", False)
+                require(not executable or os.access(path, os.X_OK), "ASSET_IDENTITY_MISMATCH", f"{logical} is not executable")
                 prepared.append({
                     "logical_name": logical,
                     "local_path": str(path),
@@ -826,6 +831,7 @@ class Toolkit:
                     "sha256": digest,
                     "source_class": asset["source_class"],
                     "license_provenance": validate_record_text(asset["license_provenance"], "license provenance"),
+                    "executable": executable,
                 })
             self._event(state, "PLANNED", "PREPARED", plan_id=state["current_plan_id"])
             state["run_state"] = "PREPARED"
@@ -833,7 +839,7 @@ class Toolkit:
             self._save_state(state)
             receipt = self._common("prepare_receipt", plan_id=state["current_plan_id"])
             receipt["assets"] = [
-                {key: item[key] for key in ("logical_name", "bytes", "sha256", "source_class", "license_provenance")}
+                {key: item[key] for key in ("logical_name", "bytes", "sha256", "source_class", "license_provenance", "executable")}
                 for item in prepared
             ]
             self._write_publication("prepare.json", receipt)
@@ -1233,6 +1239,29 @@ class Toolkit:
                     return self._clean_locked()
         with directory_lock(self.run_lock):
             return self._clean_locked()
+
+    def abort(self) -> dict[str, Any]:
+        """Close a run before submission using its exact registered root."""
+        self.adapter.check_masters(self.profile)
+        with directory_lock(self.run_lock):
+            state = self._load_state()
+            self._require_state(state, {"PREPARED", "STAGED", "VERIFIED"})
+            require(not state.get("attempts"), "PLAN_DRIFT", "abort is pre-submission only")
+            prior = state["run_state"]
+            if prior == "PREPARED":
+                result = {"remote_absent": True, "job_local_cleanup": "not_started"}
+            else:
+                result = self.adapter.abort(self.profile, self._current_plan(state))
+            require(result.get("remote_absent") is True, "CLEANUP_INCOMPLETE", "remote run remains")
+            require(result.get("job_local_cleanup") == "not_started", "CLEANUP_INCOMPLETE", "pre-submission cleanup classification")
+            self._event(state, prior, "ABORTED", plan_id=state["current_plan_id"])
+            state["run_state"] = "ABORTED"
+            state["abort"] = result
+            self._save_state(state)
+            receipt = self._common("abort_receipt", plan_id=state["current_plan_id"])
+            receipt.update({"terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION", **result})
+            self._write_publication("abort.json", receipt)
+            return receipt
 
     def close(self) -> dict[str, Any]:
         with directory_lock(self.run_lock):

@@ -189,11 +189,13 @@ reserved exact-node recovery allocation proved `JOB_LOCAL_ABSENT`; both jobs
 settled and the marker-bound durable root was removed. The candidate remained
 immutable and no smoke attestation or designation was created.
 
-**Next:** scaffold a new bounded smoke package identity that records and clears
-the scheduler-provided ambient state before reconstructing the exact registered
-environment, then asserts closure before Python import. It must reuse the same
-candidate semantic SHA-256 and cannot reuse this failed package's identity or
-evidence. Its required sequence remains candidate smoke, immutable smoke
+**Active (2026-07-17):** the
+[environment-closure successor smoke](work-packages/20260717-a10-lemhi-canonical-v2-environment-closure-smoke/package.md)
+uses a new identity with the unchanged candidate. It records typed ambient
+presence flags, clears prohibited state, reconstructs the registered
+environment, and asserts closure before import. It also closes the demonstrated
+executable-mode, terminal-failure-receipt, and pre-submission-abort protocol
+gaps. The required sequence remains candidate smoke, immutable smoke
 attestation, local canonical-designation-index revision, then A10M5.
 
 After a successor canonical smoke pass, A10M5 may scaffold the

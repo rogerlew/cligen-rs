@@ -116,6 +116,8 @@ class FixtureAdapter:
             complete = partial.stat().st_size == asset["bytes"] and sha256_file(partial) == asset["sha256"]
             if complete:
                 os.replace(partial, destination)
+                if asset.get("executable", False):
+                    destination.chmod(destination.stat().st_mode | 0o100)
             receipt = {
                 "logical_name": asset["logical_name"],
                 "bytes": partial.stat().st_size if partial.exists() else destination.stat().st_size,
@@ -149,6 +151,7 @@ class FixtureAdapter:
             require(destination.is_file(), "TRANSFER_INCOMPLETE", asset["logical_name"])
             require(destination.stat().st_size == asset["bytes"], "TRANSFER_INCOMPLETE", asset["logical_name"])
             require(sha256_file(destination) == asset["sha256"], "TRANSFER_INCOMPLETE", asset["logical_name"])
+            require(not asset.get("executable", False) or os.access(destination, os.X_OK), "TRANSFER_INCOMPLETE", f"{asset['logical_name']} executable mode")
 
     def submit(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], token: str) -> str:
         del profile, plan
@@ -256,6 +259,11 @@ class FixtureAdapter:
         job_local = self.scenario.get("job_local_cleanup", default_cleanup)
         return {"remote_absent": not root.exists(), "job_local_cleanup": job_local}
 
+    def abort(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+        result = self.clean(profile, plan)
+        result["job_local_cleanup"] = "not_started"
+        return result
+
 
 class OpenSSHSlurmAdapter:
     """Live Lemhi adapter; it never opens an interactive authentication path."""
@@ -333,7 +341,8 @@ class OpenSSHSlurmAdapter:
 
     def verify(self, profile: dict[str, Any], plan: dict[str, Any], assets: list[dict[str, Any]]) -> None:
         for asset in assets:
-            self._remote_script(profile, "verify.sh", [profile["remote_base"], plan["remote_run_root"], asset["logical_name"], str(asset["bytes"]), asset["sha256"]])
+            executable = "required" if asset.get("executable", False) else "not-required"
+            self._remote_script(profile, "verify.sh", [profile["remote_base"], plan["remote_run_root"], asset["logical_name"], str(asset["bytes"]), asset["sha256"], executable])
 
     def submit(self, profile: dict[str, Any], plan: dict[str, Any], job: dict[str, Any], token: str) -> str:
         stdout = f"slurm/{job['role']}.{job['attempt_index']}.out"
@@ -367,7 +376,7 @@ class OpenSSHSlurmAdapter:
         except json.JSONDecodeError as error:
             raise ToolkitError("EVIDENCE_INCOMPLETE", "invalid accounting response") from error
         require(isinstance(value, dict), "EVIDENCE_INCOMPLETE", "invalid accounting response")
-        if value.get("terminal") is True and value.get("exit_code") == job.get("expected_exit_code", 0):
+        if value.get("terminal") is True:
             receipt = self._remote_script(
                 profile,
                 "read_gate.sh",
@@ -432,3 +441,8 @@ class OpenSSHSlurmAdapter:
         output = self._remote_script(profile, "clean.sh", [profile["remote_base"], plan["remote_run_root"], plan["run_id"], plan["package_id"], plan["source_commit"], sha256_bytes(canonical_bytes(plan))]).decode("utf-8").strip()
         require(output == "REMOTE_ABSENT", "CLEANUP_INCOMPLETE", "remote cleanup not proven")
         return {"remote_absent": True, "job_local_cleanup": job_local_cleanup}
+
+    def abort(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+        output = self._remote_script(profile, "clean.sh", [profile["remote_base"], plan["remote_run_root"], plan["run_id"], plan["package_id"], plan["source_commit"], sha256_bytes(canonical_bytes(plan))]).decode("utf-8").strip()
+        require(output == "REMOTE_ABSENT", "CLEANUP_INCOMPLETE", "remote abort cleanup not proven")
+        return {"remote_absent": True, "job_local_cleanup": "not_started"}

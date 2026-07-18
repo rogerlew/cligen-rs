@@ -28,7 +28,8 @@ unplanned allocations, or protected confirmation data.
 4. Create a private plan from `examples/plan.example.json`. The target is
    Linux x86-64 glibc even though dependency resolution is controlled from
    macOS arm64. Every local asset path must be absolute, regular, singly linked,
-   and beneath an authority allowlist root.
+   and beneath an authority allowlist root. Invoked assets declare
+   `executable: true`; preparation and remote verification both enforce it.
 5. A live revision-2 authority owns its absolute mode-restricted ledger anchor;
    the CLI rejects `--state-root`. Fixture adapters may inject a temporary
    root. Private state survives exact reconciliation and cleanup.
@@ -78,6 +79,10 @@ collect
 clean
 close
 ```
+
+Use `abort` only before submission when a prepared or staged run must stop. It
+retains private controller receipts, validates and removes the exact staged
+root when one exists, and publishes a pre-submission abort receipt.
 
 `cancel` takes the same role and attempt arguments and resolves only the exact
 registered job ID. `amend --input ... --reason ... --changed-field jobs`

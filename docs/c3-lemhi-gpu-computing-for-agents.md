@@ -443,12 +443,24 @@ file presence as execution proof.
 
 ### Start jobs from a closed environment
 
-Hardened Slurm submission uses `--export=NONE` or a provider-proved equivalent.
-The toolkit wrapper reconstructs only registered scheduler/device variables
-and the plan's exact `PATH`, compiler, cache, temporary-directory, and public
-operational values. Ambient overrides fail. Deterministic CUDA work sets
+Hardened Slurm submission uses `--export=NONE` or a provider-proved equivalent,
+but Lemhi's site launch path may still supply Python or loader variables. Do
+not make their mere presence a fatal entry guard. Record typed presence flags
+without values, clear `PYTHONPATH`, `PYTHONHOME`, `LD_LIBRARY_PATH`, and other
+prohibited ambient inputs, reconstruct only registered scheduler/device
+variables and the plan's exact `PATH`, compiler, cache, temporary-directory,
+and public operational values, then assert closure before the first Python
+import. A variable that survives clearing or conflicts with the reconstructed
+contract fails. Deterministic CUDA work sets
 `CUBLAS_WORKSPACE_CONFIG=:4096:8` before Python or a CUDA framework is
 imported. Evidence records the allowlisted contract, never `env` wholesale.
+
+Plans also declare executable intent for job and supervisor assets. Preparation
+rejects a required executable whose local mode is wrong, and remote
+verification checks the mode in addition to byte count and SHA-256. If a
+staged run must stop before submission, use the toolkit's `abort` lifecycle;
+it validates the exact owner marker, removes only the registered durable root,
+and proves absence without requiring a job-local receipt.
 
 ### Treat job-local state as toolkit-recoverable
 
