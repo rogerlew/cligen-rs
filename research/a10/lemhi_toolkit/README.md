@@ -72,6 +72,7 @@ prepare
 stage
 verify
 submit --job-role smoke --attempt-index 0
+# Monitor with squeue until the job leaves the queue and sacct is settled.
 observe --job-role smoke --attempt-index 0
 # Only when observe authenticates unresolved job-local cleanup:
 recover --job-role smoke --attempt-index 0
@@ -100,6 +101,11 @@ revalidates the UID, filesystem device, canonical target, and marker twice.
 before `collect` or `clean`; ambiguity retains both private state and the
 reserve as `CLEANUP_INCOMPLETE`.
 
+`observe` is intentionally one-shot and terminal-only. It does not wait for a
+running job; an early call returns `JOB_TERMINAL_MISMATCH` without changing the
+registered attempt. Use `squeue` as the live monitor, wait for terminal `sacct`
+accounting, and then call `observe` once.
+
 ## Authoring traps from live acceptance
 
 - Every job gate receipt needs a nonempty boolean `gates` object even when the
@@ -109,12 +115,20 @@ reserve as `CLEANUP_INCOMPLETE`.
   fail before products exist, prospectively define honest absence records or
   a failure-specific collection surface; do not invent success-shaped data
   after settlement.
+- Revision-2 recovery contingency paths are required even when recovery is
+  unnecessary. Prospectively create an explicit `invoked=false` record and
+  clearly labeled non-invocation streams on the all-clean path; absence of
+  those allowlisted files makes collection fail closed.
 - Prospectively register typed evidence replacements for exact durable and
   job-local paths that can appear in tracebacks. Collection quarantines raw
   evidence and fails closed on an unregistered forbidden value.
 - Run amendment is available while `VERIFIED` or `MATRIX_ACTIVE`, not after
   `MATRIX_SETTLED`. Inspect failure traces and amend projection rules before
   observing the final outstanding role when a correction is necessary.
+- `/usr/bin/time -v` includes the full command line in its first output line.
+  A plan that collects it must register durable/job-local path replacements,
+  or the producer must use non-reserved pre-redaction such as
+  `[REMOTE_RUN_ROOT]`, before the matrix settles.
 - A successful job-local cleanup does not make `ru_maxrss` a valid child
   deployment metric. A worker forked by a high-RSS parent can retain the
   parent's maximum across exec. Launch memory-gated workers from a small

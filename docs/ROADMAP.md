@@ -236,13 +236,16 @@ reproduced all twelve retained candidate hashes, cold load, dispersion, and
 runtime gates, then closed canonical toolkit v2 with exact cleanup. No model,
 dependency, threshold, or protected-role access changed.
 
-**Next (2026-07-18):**
+**Complete (2026-07-18):**
 [A10M5R2 corrected CPU export development screen retry](work-packages/20260718-a10m5r2-corrected-cpu-export-screen/package.md)
-is scaffolded to rerun the frozen twelve-row screen under a new package
-identity. The trainer must exit before a small supervisor launches and
-measures the CPU worker with `/proc` `VmHWM` plus external `/usr/bin/time -v`.
-A10M5R2 remains the immutable operational replay; any valid N0/N1 promotions
-become anchors rather than final scientific selections.
+reached `A10M5R2-PROMOTIONS-READY`. All twelve single-attempt rows passed the
+unchanged screen and exact A10M5 identity replay. Fresh CPU workers measured
+559--569 MB `VmHWM` and 645--677 MB external maximum RSS; all runtime ratios
+passed at 3.6725--4.2221. The frozen selector retained L64 lognormal depth-2
+and depth-3 anchors for both N0 and N1. Jobs used 6,107 elapsed GPU-seconds and
+108 rounded GPU-minutes; recovery was not invoked, protected roles remained
+sealed, and exact cleanup/close passed. These anchors are operational inputs,
+not final scientific selections.
 
 **Operator direction 2026-07-18: refine candidate family and capacity on the
 accepted corpus before spatial expansion, and require realized temporal plus
@@ -251,8 +254,9 @@ spatial evidence before promotion.**
 [SPEC-A10-REFINEMENT-TRAJECTORY](specifications/SPEC-A10-REFINEMENT-TRAJECTORY.md)
 freeze the successor sequence:
 
-1. execute A10M5R2 without changing its twelve-row correction boundary;
-2. execute the scaffolded
+1. **Complete:** execute A10M5R2 without changing its twelve-row correction
+   boundary;
+2. **Next:** execute the scaffolded
    [A10M5R3 family and capacity/runtime-knee package](work-packages/20260718-a10m5r3-candidate-family-capacity-knee/package.md)
    on the existing A10M1 corpus, retiring the current whole-wet-day GPD and
    retaining the Pareto knee plus its immediately larger passing neighbor;

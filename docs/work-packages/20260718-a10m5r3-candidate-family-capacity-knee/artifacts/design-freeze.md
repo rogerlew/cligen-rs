@@ -21,3 +21,9 @@ add and commit the exact revision-2 schemas, configuration identities,
 parameter counts, seeds, score arithmetic, asset identities, job sources,
 verification logic, and resource ledger. Those implementation details may
 instantiate this trajectory but cannot change it after fit output is accessed.
+
+The accepted R2 handoff supplies four operational anchors: L64 lognormal
+depth-2 and depth-3 for N0 and N1. All twelve R2 rows passed exact predecessor
+identity, clean-process RSS, and runtime gates. R3 may use the four anchors for
+lineage and ladder placement, but its prospectively frozen family screen and
+Pareto selector remain responsible for the successor scientific decision.

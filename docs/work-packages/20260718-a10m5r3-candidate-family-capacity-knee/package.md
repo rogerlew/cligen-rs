@@ -54,6 +54,11 @@ Excluded:
   operational anchor and is not edited by this package.
 - Canonical Lemhi v2 and the accepted agent toolkit remain mandatory.
 
+Accepted A10M5R2 operational anchors are the L64 lognormal depth-2 and depth-3
+rows in both N0 and N1. Their fresh-worker `VmHWM` was 559--569 MB and their
+external maximum RSS was 645--677 MB. R3 binds these as predecessor evidence;
+it does not treat them as a family or final-capacity decision.
+
 ## Plan
 
 1. Bind the accepted predecessor commits and publish the exact revision-2

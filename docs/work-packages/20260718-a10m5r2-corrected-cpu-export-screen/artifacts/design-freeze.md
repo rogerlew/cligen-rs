@@ -33,3 +33,12 @@ from committed A10M5 evidence into a single hash-bound staged manifest. Exact
 stream and fit identities are gates. Each configuration has one attempt,
 requests one L40, eight CPUs, 65,536 MiB, and 30 minutes, and runs sequentially
 on node03. The run reserves one five-minute exact-node recovery allocation.
+
+## Observed terminal
+
+The prospective correction held. All twelve rows passed and reproduced their
+A10M5 candidate streams and fit identities exactly. Clean-worker `VmHWM`
+ranged from 559,370,240 to 569,270,272 bytes and external maximum RSS ranged
+from 644,579,328 to 676,618,240 bytes. The frozen promotion order retained the
+L64 lognormal depth-2 and depth-3 rows in both N0 and N1. No threshold,
+scientific input, or protected-role boundary changed after allocation.

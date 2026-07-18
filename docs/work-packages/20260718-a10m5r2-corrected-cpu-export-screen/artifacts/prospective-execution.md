@@ -23,3 +23,17 @@ exits. The shell launches the fresh CPU worker under external measurement.
 The wrapper publishes the scientific receipt only after exact job-local
 cleanup. A failure stops subsequent submission unless the package's ordinary
 forward execution can close honestly without broadening the frozen question.
+
+## Execution lessons
+
+Toolkit `observe` is a terminal-settlement operation, not a blocking monitor.
+Calling it while a job is still running fails closed with
+`JOB_TERMINAL_MISMATCH`; monitor with `squeue`, wait for settled `sacct`, and
+then call `observe` once.
+
+Revision-2 recovery paths are mandatory members of the evidence allowlist even
+when recovery is not used. A successful run must prospectively materialize an
+explicit `invoked=false` recovery record and non-invocation streams. Also,
+external `/usr/bin/time -v` echoes its complete command line. Any plan that
+collects that file must freeze an exact durable-root replacement before the
+last role settles, or produce a non-reserved pre-redacted command token.

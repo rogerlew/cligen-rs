@@ -548,6 +548,14 @@ controlled failure and recovery ran on `node03` in 2 and 1 elapsed seconds;
 the marked target was absent afterward. This proves the mechanism, not future
 node availability.
 
+`observe` is not a blocking wait. Calling it while `squeue` still reports the
+job returns `JOB_TERMINAL_MISMATCH` and leaves the attempt registered. Monitor
+with `squeue`, wait for terminal `sacct` settlement, then invoke `observe`.
+When recovery is not needed, the revision-2 evidence allowlist still requires
+an honest `invoked=false` recovery receipt and clearly labeled non-invocation
+stdout/stderr placeholders. Freeze those success-path artifacts before
+execution; do not discover their absence at collection.
+
 The same acceptance run proved the accounting interpretation with a 5-second
 one-L40 job: `elapsed_seconds=5`, `actual_gpu_seconds=5`, and
 `actual_gpu_minutes=1`. GPU minutes are rounded up per settled job for ledger
@@ -582,6 +590,12 @@ forbidden-value scan still rejects unregistered leaks. Projection failure holds
 publication but preserves exact cleanup authority and cannot alter gate
 results. Retrying collection atomically retains the failed quarantine and
 starts from a fresh authenticated download; it never overlays extracted files.
+
+External `/usr/bin/time -v` writes the full timed command on its first line,
+including durable and job-local paths. If that witness is allowlisted, register
+typed path replacements in the prospective plan or have the producer emit a
+non-reserved token such as `[REMOTE_RUN_ROOT]`. A10M5R2 confirmed that omitting
+this rule holds collection even when every job gate passed.
 
 ### Transfer once only within a run lineage
 

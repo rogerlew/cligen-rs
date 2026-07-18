@@ -1,6 +1,6 @@
 # A10M5R2 — Corrected CPU Export Development Screen Retry
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-18
 Evidence mode: Development-only fit-validation screen
 Starting branch and push target: clean `main` at `387d14c`, push `main`
@@ -48,6 +48,27 @@ Emit `A10M5R2-PROMOTIONS-READY` only when every lifecycle/package gate passes
 and at least one N0 and one N1 row are valid. Otherwise emit
 `HOLD-A10-NO-VALID-NEURAL-FIT` with the exact surviving gate failures. A10M6
 is not authorized by scaffolding.
+
+## Terminal result
+
+`A10M5R2-PROMOTIONS-READY`
+
+All twelve single-attempt rows completed on `node03` and passed every frozen
+scientific, export, runtime, process-lineage, resource, and toolkit gate. The
+fresh CPU workers measured 559,370,240--569,270,272 bytes `VmHWM`; independent
+external maxima were 644,579,328--676,618,240 bytes. Those values are safely
+below 2 GiB and confirm that A10M5's 3.09--3.13 GiB readings were contaminated
+by trainer ancestry rather than deployment memory.
+
+The frozen selector retained four operational anchors:
+
+- `N0-l64-w128-d2-lognormal` and `N0-l64-w128-d3-lognormal`;
+- `N1-l64-w128-d2-lognormal` and `N1-l64-w128-d3-lognormal`.
+
+These are inputs to A10M5R3, not final scientific selections. The twelve jobs
+used 6,107 elapsed GPU-seconds, 108 per-job ceiling-rounded GPU-minutes, and no
+retry or recovery allocation. Protected roles remained unopened. Collection,
+job-local absence, remote-root absence, and toolkit close all reconciled.
 
 ## Plan
 

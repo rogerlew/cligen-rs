@@ -1,0 +1,35 @@
+{
+  "ordering": {
+    "N0_complete": [
+      "N0-l64-w128-d2-lognormal",
+      "N0-l64-w128-d3-lognormal",
+      "N0-l32-w128-d2-lognormal",
+      "N0-l64-w128-d2-gpd",
+      "N0-l64-w128-d3-gpd",
+      "N0-l32-w128-d2-gpd"
+    ],
+    "N1_partial": [
+      "N1-l64-w128-d2-lognormal",
+      "N1-l64-w128-d3-lognormal",
+      "N1-l32-w128-d2-lognormal",
+      "N1-l64-w128-d2-gpd",
+      "N1-l64-w128-d3-gpd",
+      "N1-l32-w128-d2-gpd"
+    ]
+  },
+  "promoted_count": 4,
+  "promotions": {
+    "N0_complete": [
+      "N0-l64-w128-d2-lognormal",
+      "N0-l64-w128-d3-lognormal"
+    ],
+    "N1_partial": [
+      "N1-l64-w128-d2-lognormal",
+      "N1-l64-w128-d3-lognormal"
+    ]
+  },
+  "schema_version": 1,
+  "screen_seed": 147031,
+  "selector_terminal": "A10M5-PROMOTIONS-READY",
+  "terminal": "A10M5R2-PROMOTIONS-READY"
+}
