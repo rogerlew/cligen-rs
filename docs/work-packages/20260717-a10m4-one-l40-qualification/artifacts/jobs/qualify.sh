@@ -47,6 +47,16 @@ PY
 }
 trap write_failure_receipt EXIT
 
+run_python() {
+  python_stderr=$job_local/qualify-python.stderr
+  if "$environment/bin/python" ./qualify.py "$@" 2>"$python_stderr"; then
+    rm -f -- "$python_stderr"
+    return 0
+  fi
+  sed "s|$run_root|<REMOTE_RUN_ROOT>|g" "$python_stderr" >&2 || true
+  return 1
+}
+
 unset PYTHONPATH PYTHONHOME LD_LIBRARY_PATH
 export PYTHONNOUSERSITE=1 PIP_NO_INDEX=1
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
@@ -84,18 +94,18 @@ test -x "$faithful_binary"
 
 common_args="--corpus $job_local/corpus --checkpoint $run_root/checkpoint/qualification.pt --expected $run_root/checkpoint/expected.pt --train-result $run_root/train.json"
 # shellcheck disable=SC2086
-"$environment/bin/python" ./qualify.py train $common_args
+run_python train $common_args
 
 # A distinct process restores on the same L40 and reproduces update 2 exactly.
 # shellcheck disable=SC2086
-"$environment/bin/python" ./qualify.py restart $common_args \
+run_python restart $common_args \
   --checkpoint-result "$run_root/checkpoint.json" \
   --resumed-state "$run_root/checkpoint/resumed.pt"
 
 export CUDA_VISIBLE_DEVICES=""
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
 # shellcheck disable=SC2086
-"$environment/bin/python" ./qualify.py benchmark $common_args \
+run_python benchmark $common_args \
   --checkpoint-result "$run_root/checkpoint.json" \
   --resumed-state "$run_root/checkpoint/resumed.pt" \
   --benchmark "$run_root/benchmark.json" \

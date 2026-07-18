@@ -148,11 +148,29 @@ def normalizers(normalization: dict[str, Any], regime: str) -> tuple[np.ndarray,
     return means, scales
 
 
+def first_complete_offset(value: dict[str, Any], length: int) -> int:
+    observed = value["source_observed"]
+    if len(observed) < length:
+        raise RuntimeError("Daymet record is shorter than the training window")
+    for offset in range(len(observed) - length + 1):
+        stop = offset + length
+        if not all(observed[offset:stop]):
+            continue
+        if all(
+            all(item is not None and math.isfinite(item) for item in value["fields"][field][offset:stop])
+            for field in FIELDS
+        ):
+            return offset
+    raise RuntimeError("no fully observed Daymet training window")
+
+
 def window(value: dict[str, Any], means: np.ndarray, scales: np.ndarray, offset: int) -> tuple[torch.Tensor, torch.Tensor]:
     raw = np.column_stack([value["fields"][field] for field in FIELDS]).astype(np.float32)
     normalized = (raw - means) / scales
     inputs = torch.from_numpy(normalized[offset : offset + 730]).unsqueeze(0)
     targets = torch.from_numpy(normalized[offset + 1 : offset + 731]).unsqueeze(0)
+    if not bool(torch.isfinite(inputs).all()) or not bool(torch.isfinite(targets).all()):
+        raise RuntimeError("training window includes masked or non-finite data")
     wet = torch.from_numpy((raw[offset + 1 : offset + 731, 0] >= 1.0).astype(np.float32)).reshape(1, 730, 1)
     return inputs, torch.cat((wet, targets), dim=-1)
 
@@ -212,8 +230,9 @@ def run_train(options: argparse.Namespace) -> None:
     fit = load_daymet_role(options.corpus, normalized, "candidate_fit")
     validation = load_daymet_role(options.corpus, normalized, "fit_validation")
     means, scales = normalizers(normalization, fit["regime"])
-    batch1 = window(fit, means, scales, 0)
-    batch2 = window(fit, means, scales, 1)
+    window_offset = first_complete_offset(fit, 732)
+    batch1 = window(fit, means, scales, window_offset)
+    batch2 = window(fit, means, scales, window_offset + 1)
     device = torch.device("cuda:0")
     model, optimizer, scheduler, scaler = components(device)
     parameter_count = sum(parameter.numel() for parameter in model.parameters())
@@ -258,6 +277,8 @@ def run_train(options: argparse.Namespace) -> None:
         "validation_point_id": validation["point_id"],
         "validation_role": validation["role"],
         "validation_used_for_gradient": False,
+        "window_all_observed": True,
+        "window_offset": window_offset,
         "wall_seconds": time.monotonic() - started,
     }
     atomic_json(options.train_result, result)
@@ -621,6 +642,7 @@ def run_benchmark(options: argparse.Namespace) -> None:
         "generation_prefix_exact": prefix_exact,
         "generation_support": supports,
         "model_frozen": resumed["model_record"]["configuration_id"] == "N0-l32-w128-d2-lognormal" and resumed["model_record"]["parameter_count"] <= 50_000_000,
+        "missingness_excluded": train["window_all_observed"] is True,
         "parameter_updated": train["parameter_updated"],
         "philox_known_vector": philox_known_vector(),
         "role_boundary": train["fit_role"] == "candidate_fit" and train["validation_role"] == "fit_validation" and train["validation_used_for_gradient"] is False and train["normalization_role"] == "candidate_fit",
