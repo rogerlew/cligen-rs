@@ -209,14 +209,16 @@ reached `A10-LEMHI-CANONICAL-V2-DESIGNATED`. Designation revision 1 points to
 the smoke-attested v2 candidate and records v1 as superseded without editing
 either immutable configuration or the attestation.
 
-**In progress (2026-07-17):**
+**Complete (2026-07-17):**
 [A10M4O2 Lemhi toolkit operational acceptance](work-packages/20260717-a10m4o2-lemhi-toolkit-acceptance/package.md)
-is the final bounded operational gate before A10M5. It exercises live abort,
-revised seconds/minutes accounting, authenticated failure receipts, and the
-first-class exact-node recovery lifecycle within 6 requested L40 GPU-minutes.
+reached `A10M4O2-LEMHI-TOOLKIT-ACCEPTED`. A live no-allocation abort, one
+successful L40 job, one authenticated controlled failure, and the first-class
+exact-node recovery lifecycle passed. Jobs `1013867`–`1013869` used 6
+requested GPU-minutes, 8 elapsed GPU-seconds, and 3 per-job ceiling-rounded
+GPU-minutes; scheduler identities, the ledger, evidence, job-local absence,
+both durable roots, and final cleanup reconcile.
 
-**Next after A10M4O2 acceptance:** scaffold A10M5 under the unchanged A10M3
-scientific contracts.
+**Next:** scaffold A10M5 under the unchanged A10M3 scientific contracts.
 
 After a successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions

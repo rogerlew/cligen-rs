@@ -1,0 +1,1 @@
+{"gates":{"job_local_cleanup":true,"marker_revalidated":true,"original_job_settled":true,"recovery_exact_node":true},"recovery_result":{"node":"node03","original_job_id":"1013868","target_sha256":"a249590185bf0996123380fcb2c450181e84422f2efb3391d5a4cfe1fa644784"}}

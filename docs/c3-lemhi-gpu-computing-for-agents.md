@@ -1,10 +1,11 @@
 # C3+3 Lemhi GPU computing for agents
 
 This is the operational runbook for agent-driven Lemhi GPU work from `rmm`.
-It consolidates the live evidence from A10M2, A10M2D1, and the CPython 3.11
-toolkit smoke. Live cluster state was observed on 2026-07-16 and 2026-07-17
-and must be rechecked before each new resource commitment; public C3+3
-documentation has demonstrably drifted.
+It consolidates the live evidence from A10M2, A10M2D1, the CPython 3.11
+toolkit smoke, canonical-v2 qualification, and A10M4O2 operational acceptance.
+Live cluster state was observed on 2026-07-16 and 2026-07-17 and must be
+rechecked before each new resource commitment; public C3+3 documentation has
+demonstrably drifted.
 
 ## Agent authoring authority
 
@@ -230,10 +231,16 @@ it did not validate arbitrary packages or candidate training.
 
 ## Current canonical A10 Python/L40 configuration
 
-The current canonical configuration is
-[`lemhi-a10-py311-l40-v1`](../research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v1.json),
+The current canonical configuration resolves through the immutable
+[`lemhi-canonical-designation-index-v1`](../research/a10/lemhi_toolkit/configurations/lemhi-canonical-designation-index-v1.json)
+to
+[`lemhi-a10-py311-l40-v2-candidate`](../research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v2-candidate.json),
 semantic SHA-256
-`0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179`.
+`5addee9c5db3592ee247eab2b5266ed5567fd9aaf24ed78dcb321ecbb001e22d`.
+The `candidate` suffix is its immutable issuance identity; the later
+designation index, not a mutation of that file, makes it current. The bound
+smoke attestation SHA-256 is
+`5caf106a84797b1d068be5693478f74b5368752bcfb78fa5eba186bdc21db350`.
 Its governing policy is
 [SPEC-LEMHI-CANONICAL-CONFIGURATION](specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
 
@@ -244,18 +251,20 @@ This is the default for A10M3 and later single-L40 Python work:
 - NumPy 2.2.6 and PyTorch 2.7.1+cu128 from the exact 26-wheel, 3,865,978,880
   byte offline wheelhouse;
 - `gpu-icrews` with typed `gpu:l40:1`, one GPU, and no requeue;
-- final Ceph runtime and virtual-environment prefixes, with wheel expansion in
-  scheduler-purged job-local storage;
+- final Ceph runtime and virtual-environment prefixes, with expansion and
+  attempt state in marker-bound `toolkit_recoverable` job-local storage;
 - `PYTHONPATH`, `PYTHONHOME`, and `LD_LIBRARY_PATH` cleared,
   `PYTHONNOUSERSITE=1`, and pip restricted to `--no-index --require-hashes`;
   and
 - warm-MFA toolkit control, hash-promoted transfer, authenticated structured
   evidence, sanitized collection, and exact marked-root cleanup.
 
-The accepted smoke authenticated 19 gates: exact interpreter/ABI, standard
-library, subprocess and spawned multiprocessing, compiled-extension linkage,
-NumPy arithmetic, NumPy/PyTorch interop, CUDA visibility, exactly one L40,
-tensor/autograd/checkpoint behavior, offline installation, and cleanup.
+The accepted exact-asset smoke authenticated 27 compute and operational gates:
+exact interpreter/ABI, standard library, subprocess and spawned
+multiprocessing, compiled-extension linkage, NumPy arithmetic,
+NumPy/PyTorch interop, CUDA visibility, exactly one L40,
+tensor/autograd/checkpoint behavior, offline installation, environment
+closure, toolchain/build closure, evidence, and exact cleanup.
 
 Every consuming A10 package must record both the configuration ID and semantic
 hash before submission. Do not silently resolve newer packages, use ambient
@@ -500,6 +509,27 @@ original jobs/steps/requeues absent and settled, then validates UID, marker,
 ancestors, filesystem, and target twice before one bounded exact deletion. If
 the node is unavailable or any identity differs, stop; never delete by user,
 job name, prefix, wildcard, or process scan.
+
+A10M4O2 live-accepted the controller commands for this path. After a terminal
+`observe` authenticates `job_local_cleanup=false`, use only:
+
+```text
+recover --job-role <registered-role> --attempt-index <registered-index>
+observe-recovery
+```
+
+The first command reconciles every authority-tagged scheduler ID before it
+consumes the already reserved one-attempt contingency. The second requires
+successful exact-node accounting, the original job ID, target-path hash, and
+all registered recovery gates before collection or cleanup. A10M4O2's
+controlled failure and recovery ran on `node03` in 2 and 1 elapsed seconds;
+the marked target was absent afterward. This proves the mechanism, not future
+node availability.
+
+The same acceptance run proved the accounting interpretation with a 5-second
+one-L40 job: `elapsed_seconds=5`, `actual_gpu_seconds=5`, and
+`actual_gpu_minutes=1`. GPU minutes are rounded up per settled job for ledger
+accounting, so three jobs totaling 8 GPU-seconds recorded 3 rounded minutes.
 
 ### Continue authority without resetting accounting
 

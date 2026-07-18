@@ -1,6 +1,6 @@
 # A10M4O2 — Lemhi Toolkit Operational Acceptance
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Mixed
 Scaffold start: clean `main` at `1984380`
@@ -121,3 +121,17 @@ recovery state where cleanup is not proved. Named holds are
 - `artifacts/execution.md`, `gate-results.md`, and `terminal.md` — populated
   during execution; and
 - `artifacts/verify-acceptance.py` — closed evidence verifier.
+
+## Disposition
+
+Executed from published source commit `c46a88d` on `rmm` through the warm MFA
+masters. The package reached `A10M4O2-LEMHI-TOOLKIT-ACCEPTED` with one live
+abort and three one-L40 allocations totaling 6 requested GPU-minutes, 8
+elapsed GPU-seconds, and 3 per-job ceiling-rounded actual GPU-minutes. The
+controlled failure remained a failed attempt while its evidence authorized
+one exact-node recovery. Scheduler identities, the ledger, collection,
+job-local absence, both durable roots, and final closure all reconcile.
+
+The toolkit is ready for controlled A10M5 use. Operator MFA bootstrap remains
+required; the result does not establish unattended production durability,
+cross-run caching, performance, multi-GPU operation, or scientific claims.

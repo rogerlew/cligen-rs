@@ -1,0 +1,1 @@
+{"gates":{"job_local_cleanup":false,"registered_failure":true},"recovery_target":{"device":64769,"job_id":"1013868","marker_sha256":"78cd567aa687bfee7e862b64317afde4549b02ff41e893d8c2aad7647b989d9f","node":"node03","target":"/tmp/lemhi-toolkit-10102/a10m4o2-live-failure-0-1013868","uid":10102}}
