@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import ast
 import json
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -41,6 +43,20 @@ def main() -> None:
     require("147031" in screen, "training seed absent")
     require("range(100)" in screen and ">= 20" in screen and ">= 10" in screen, "early stopping drift")
     require("range(12)" in screen and "range(64)" in screen, "epoch/batch drift")
+    with tempfile.TemporaryDirectory(prefix="a10m5-wrapper-check-") as temporary:
+        root = Path(temporary)
+        command = [
+            sys.executable,
+            str(PACKAGE / "artifacts/jobs/prepare-assets.py"),
+            "--asset-root", str(root),
+            "--canonical-cache", "/Users/roger/.cache/cligen-rs/a10-python311-smoke/assets",
+            "--source-commit", "b396b72",
+        ]
+        if Path(command[-3]).is_dir():
+            subprocess.run(command, cwd=REPO, check=True, stdout=subprocess.DEVNULL)
+            wrapper = (root / "job-n0-l32-w128-d2-lognormal.sh").read_text()
+            finalizer = wrapper.split("<<'PY'\n", 1)[1].split("\nPY\n", 1)[0]
+            ast.parse(finalizer, filename="generated-wrapper-finalizer")
 
     results_path = PACKAGE / "artifacts/screen-results.json"
     if results_path.exists():
