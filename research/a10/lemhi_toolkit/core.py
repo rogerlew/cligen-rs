@@ -1291,6 +1291,13 @@ class Toolkit:
             state = self._load_state()
             self._require_state(state, {"MATRIX_SETTLED"})
             quarantine = self.run_dir / "private" / "quarantine"
+            if quarantine.exists() and any(quarantine.iterdir()):
+                suffix = 1
+                retained = quarantine.with_name(f"quarantine.failed-{suffix}")
+                while retained.exists():
+                    suffix += 1
+                    retained = quarantine.with_name(f"quarantine.failed-{suffix}")
+                os.replace(quarantine, retained)
             quarantine.mkdir(parents=True, exist_ok=True, mode=0o700)
             result = self.adapter.collect(self.profile, self._current_plan(state), quarantine)
             require(result.get("download_promoted") is True, "TRANSFER_INCOMPLETE", "download not promoted")

@@ -337,6 +337,9 @@ class FoundationAcceptance(ToolkitFixture):
         self.verified(toolkit, self.plan("sanitize")); toolkit.submit("smoke", 0); toolkit.observe("smoke", 0)
         with self.assertRaisesRegex(ToolkitError, "SANITIZATION_FAILED"):
             toolkit.collect()
+        toolkit.adapter.scenario["evidence"] = {"classification": "synthetic", "verdict": "PASS"}
+        self.assertEqual(toolkit.collect()["record_type"], "collection_receipt")
+        self.assertTrue((toolkit.run_dir / "private/quarantine.failed-1/evidence.json").is_file())
         toolkit = self.toolkit("cleanup-race", scenario={"replace_before_cleanup": True})
         self.verified(toolkit, self.plan("cleanup-race")); toolkit.submit("smoke", 0); toolkit.observe("smoke", 0); toolkit.collect()
         with self.assertRaisesRegex(ToolkitError, "CLEANUP_TARGET_INVALID"):
