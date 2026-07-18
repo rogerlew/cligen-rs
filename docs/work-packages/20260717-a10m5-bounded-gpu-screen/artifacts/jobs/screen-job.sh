@@ -47,7 +47,7 @@ if ! "$environment/bin/python" "$run_root/screen.py" \
   --faithful-binary "$job_local/source/target/release/cligen" \
   --parameters "$job_local/parameters/station-parameters" \
   --output "$output" 2>"$python_stderr"; then
-  sed "s|$run_root|<REMOTE_RUN_ROOT>|g; s|$job_local|<JOB_LOCAL>|g" "$python_stderr" >&2 || true
+  sed "s|$run_root|[REMOTE_RUN_ROOT]|g; s|$job_local|[JOB_LOCAL]|g" "$python_stderr" >&2 || true
   exit 1
 fi
 rm -f -- "$python_stderr"
