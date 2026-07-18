@@ -1,0 +1,16 @@
+error: failed to get `arrow-array` as a dependency of package `cligen v0.1.0 (/tmp/a10m4-qualification-1013766/source/crates/cligen)`
+
+Caused by:
+  failed to load source for dependency `arrow-array`
+
+Caused by:
+  Unable to update registry `crates-io`
+
+Caused by:
+  failed to update replaced source registry `crates-io`
+
+Caused by:
+  failed to read root of directory source: /tmp/a10m4-qualification-1013766/source/../../vendor
+
+Caused by:
+  No such file or directory (os error 2)

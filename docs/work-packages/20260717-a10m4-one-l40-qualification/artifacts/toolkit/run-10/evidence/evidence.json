@@ -1,0 +1,91 @@
+{
+  "classification": "development-only-implementation-qualification",
+  "configuration_id": "lemhi-a10-py311-l40-v1",
+  "configuration_semantic_sha256": "0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179",
+  "exit_code": 1,
+  "gates": {
+    "all_98_objects_verified": true,
+    "benchmark_complete": false,
+    "benchmark_dispersion": true,
+    "canonical_configuration": true,
+    "checkpoint_complete": true,
+    "cpu_export_exact": true,
+    "cpu_export_safeguards": true,
+    "fresh_process_restart_exact": true,
+    "generation_order_independent": true,
+    "generation_prefix_exact": true,
+    "generation_support": true,
+    "missingness_excluded": true,
+    "model_frozen": true,
+    "parameter_updated": true,
+    "philox_known_vector": true,
+    "role_boundary": true,
+    "smoke_generation": true
+  },
+  "generation": [
+    {
+      "prefix_30_sha256": "1e7f0c6c60ebf6e557e5b361497a3223b3210601ec87d223ed1e052cbf20dfa6",
+      "prefix_exact": true,
+      "regime": "hot_arid",
+      "rows_100": 36524,
+      "station_id": "az026481",
+      "stream_sha256": "5e33b6809b19572714cb91b243364cac97829f026ebebafbebeba63f5cd11b4d",
+      "support": true
+    },
+    {
+      "prefix_30_sha256": "bc393f4c694f2a5083098be7c832becc36f991377c379ca6cfbe11a24549e5d0",
+      "prefix_exact": true,
+      "regime": "arid_boundary",
+      "rows_100": 36524,
+      "station_id": "nv262631",
+      "stream_sha256": "f20cf2a3df7fe2de71223f10fc9c6f81fe2cd29288b5c2039c82e67353eae2a2",
+      "support": true
+    },
+    {
+      "prefix_30_sha256": "0bbb8b102b58bc915ee63041707ebb48f9ca2bccc606441059c89bbb20989768",
+      "prefix_exact": true,
+      "regime": "monsoonal_transition",
+      "rows_100": 36524,
+      "station_id": "az028820",
+      "stream_sha256": "1386a91d3e81247b31e02bd5ee72b00d949f89888cc919f3148f79c292800043",
+      "support": true
+    },
+    {
+      "prefix_30_sha256": "8fa860d341e421d5bbf26b8ccfa0fc9a7e10389f2ad5245096b26c13dd689fee",
+      "prefix_exact": true,
+      "regime": "non_monsoonal_semi_arid",
+      "rows_100": 36524,
+      "station_id": "id101022",
+      "stream_sha256": "148f9a3d2c88f4465904d265707fe2342544dd344552ea715a7502855a526a00",
+      "support": true
+    },
+    {
+      "prefix_30_sha256": "7348afa0f31e9627c44b99f79c84e282d503f439cb4bd0dd8f1eb1dba235300d",
+      "prefix_exact": true,
+      "regime": "humid",
+      "rows_100": 36524,
+      "station_id": "la160549",
+      "stream_sha256": "30a4ff49ee9b345db79d05d05f6b6764aff8f4d16fa133699a53a6d3b65d4b77",
+      "support": true
+    },
+    {
+      "prefix_30_sha256": "efae00f0f1e3c422eff9ea367b2f81005dce9548d7e5b79aa65b4d08cf4f4781",
+      "prefix_exact": true,
+      "regime": "cold",
+      "rows_100": 36524,
+      "station_id": "me171175",
+      "stream_sha256": "7c66e92c237f101ffaad2a0d2f497598c1ac0b19f6787b6cc0deb312fc45dbec",
+      "support": true
+    }
+  ],
+  "model_record": {
+    "configuration_id": "N0-l32-w128-d2-lognormal",
+    "depth": 2,
+    "latent_dim": 32,
+    "parameter_count": 33352,
+    "tail_head": "lognormal",
+    "width": 128
+  },
+  "runtime_interpretation": "qualification-diagnostic-only-no-selector-classification",
+  "verdict": "FAIL"
+}

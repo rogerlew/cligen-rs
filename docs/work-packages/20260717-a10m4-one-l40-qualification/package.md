@@ -1,6 +1,6 @@
 # A10M4 — One-L40 Implementation Qualification
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `44ff4bb`, push `main`
@@ -110,12 +110,31 @@ provided the cumulative ledger remains at or below 40 GPU-hours.
 `HOLD-A10M4-RESOURCE`, or the exact toolkit environment/scheduler/cleanup
 hold. A hold preserves evidence and does not authorize scored output.
 
+## Result
+
+Terminal: `A10M4-QUALIFICATION-READY`
+
+The successful amended run used canonical configuration
+`lemhi-a10-py311-l40-v1`, one typed L40 on `gpu-icrews`, and source commit
+`1b791b9`. Slurm job `1013777` completed in 628 seconds. All 20 structured
+gates passed, including exact fresh-process restart, Philox/nested generation,
+all 12 benchmark rows, CPU export safeguards, offline construction, and
+job-local cleanup. The toolkit then collected a sanitized 40,960-byte evidence
+archive, proved the exact remote root absent, and closed the run.
+
+Ten allocated qualification attempts plus one five-minute recovery allocation
+used 1,205 requested GPU-minutes against the 2,400-minute ceiling. Their
+single-GPU elapsed time totals 2,917 seconds (48.62 GPU-minutes). The package
+read no development or confirmation target series, retained no fitted weights,
+and made no candidate score or runtime classification.
+
 ## Artifacts
 
 - `artifacts/design-freeze.md` — exact prospective execution contract;
 - `artifacts/environment/build-assets.py` — private asset constructor;
 - `artifacts/jobs/qualify.py`, `qualify.sh`, and `evidence.schema.json` — exact
   compute implementation and fail-closed receipt;
-- `artifacts/toolkit/`, `execution.md`, `resource-ledger.md`, `review.md`,
-  `gate-results.md`, `terminal.md`, and `a10m5-handoff.md` — populated only
-  after execution.
+- `artifacts/toolkit/` — sanitized receipts and evidence for all 11 run IDs;
+- `artifacts/execution.md`, `resource-ledger.md`, `review.md`,
+  `gate-results.md`, `terminal.md`, and `a10m5-handoff.md` — execution,
+  adjudication, closure, and successor record.

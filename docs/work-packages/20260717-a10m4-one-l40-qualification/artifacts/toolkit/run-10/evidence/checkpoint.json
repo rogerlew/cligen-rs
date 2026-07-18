@@ -1,0 +1,19 @@
+{
+  "checkpoint_bytes": 427285,
+  "checkpoint_sha256": "902e4a8763c3607b3e094be39a01f9a1d409506845ff9f488e8c8ef86037a1a9",
+  "corpus_cursor": {
+    "next_batch": 1,
+    "window_offset": 366
+  },
+  "fresh_process_restart_exact": true,
+  "required_state": [
+    "corpus_cursor",
+    "model",
+    "optimizer",
+    "rng",
+    "sampler",
+    "scaler",
+    "scheduler"
+  ],
+  "resumed_loss": 2.7546536922454834
+}

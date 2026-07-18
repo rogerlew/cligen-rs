@@ -85,3 +85,27 @@ staged via `.part`, SHA-256 verified, and promoted before submission.
   later-stage allowlisted receipts so the exhausted matrix remains collectable.
 - Any failed/ambiguous attempt is reconciled and collected before amendment;
   no invented retry or remote path is allowed.
+
+## Accepted execution amendments
+
+The prospective Cargo-only archive identity above was superseded before the
+first successful build by amendment 002. The accepted run uses the complete
+official Rust 1.92.0 x86-64 distribution: 192,171,372 bytes, SHA-256
+`d2ccef59dd9f7439f2c694948069f789a044dc1addcc0803613232af8f88ee0c`.
+Amendments 003--010 preserve the failed hypotheses and prospectively correct
+the vendor path, deterministic CuBLAS environment, failure cleanup, masked
+Daymet rows, restart cursor, RNG tensor placement, and faithful output
+completeness predicate.
+
+The final successful source boundary is `1b791b9`. Its job assets include
+`qualify.py` SHA-256
+`62af3ec0d1b691788b3601f3d3127046f5c14bbba1a90bb2778cb6601377edec`,
+`source.tar.gz` SHA-256
+`b6a3c6841f3a9fc0529f526300fb2a8fcd1e64850bd6c4cb9ed1450418eeda96`,
+and `cargo-vendor.tar.gz` SHA-256
+`13d7f41f3e0d8b45254a1e6070db5b814d54327e9201ccbe22a57269168f0d3c`.
+All other final identities are preserved in run 11's toolkit plan and prepare
+receipts. The original stable authority ID governed run IDs `r1` through
+`r11`; `r2` was a zero-allocation administrative abort, while every allocated
+successor received a prospective amendment and remained inside the package
+ceiling.

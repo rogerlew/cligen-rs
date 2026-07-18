@@ -147,14 +147,25 @@ allocation or candidate/confirmation access. The accepted stack is the current
 canonical A10 Lemhi single-L40 Python configuration; A10M2's Python 3.8 stack
 is legacy explicit-only and cannot be selected automatically.
 
-**In execution:** A10M4 is a bounded one-L40 qualification of the
-real A10M1 loader, one frozen model configuration's forward/backward step,
-atomic checkpoint/resume, stateless nested generation, portable CPU export,
-and resource telemetry. A10M4 must consume the exact
-[A10M3 package](work-packages/20260717-a10m3-model-training-generation-selector-freeze/package.md)
-and canonical configuration. It may not train or score a development
-candidate, expand the 12-configuration grid, change selector thresholds, or
-access confirmation targets.
+**Complete (2026-07-17):** A10M4 reached
+`A10M4-QUALIFICATION-READY` after a bounded one-L40 qualification of the real
+A10M1 loader, the smallest frozen N0 configuration, exact checkpoint/restart,
+stateless nested generation, portable CPU export, the full 12-row benchmark,
+and cleanup. The successful job passed all 20 structured gates in 628 seconds.
+Ten qualification allocations plus one recovery allocation used 1,205
+requested GPU-minutes and 48.62 elapsed single-GPU minutes, within the
+40-GPU-hour ceiling. All failed implementation hypotheses and prospective
+amendments remain in the
+[A10M4 package](work-packages/20260717-a10m4-one-l40-qualification/package.md).
+No development or confirmation target series was read, no fitted weights were
+retained, and the diagnostic timing ratios received no selector classification.
+
+**Next:** A10M5 may scaffold the frozen 12-configuration, one-seed development
+screen and its bounded full-development promotions under the exact A10M3
+contracts and A10M4 handoff. It remains development-only, may use at most two
+concurrent one-L40 jobs and the frozen 160 + 280 L40-GPU-hour M5 envelopes,
+and may not access confirmation targets or change the grid, roles, objectives,
+or selector thresholds.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

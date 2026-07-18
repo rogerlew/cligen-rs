@@ -1,0 +1,9 @@
+{
+  "cold_start_seconds": 1.334036773070693,
+  "cpu_peak_rss_bytes": 478527488,
+  "export_bytes": 148482,
+  "gpu_peak_bytes": 71663616,
+  "projected_twelve_config_screen_gpu_hours": 0.018630828409610938,
+  "resume_generation_benchmark_wall_seconds": 419.64253010600805,
+  "train_wall_seconds": 5.589248522883281
+}
