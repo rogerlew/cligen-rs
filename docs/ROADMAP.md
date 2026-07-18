@@ -160,12 +160,24 @@ amendments remain in the
 No development or confirmation target series was read, no fitted weights were
 retained, and the diagnostic timing ratios received no selector classification.
 
-**Next:** A10M5 may scaffold the frozen 12-configuration, one-seed development
-screen and its bounded full-development promotions under the exact A10M3
-contracts and A10M4 handoff. It remains development-only, may use at most two
-concurrent one-L40 jobs and the frozen 160 + 280 L40-GPU-hour M5 envelopes,
-and may not access confirmation targets or change the grid, roles, objectives,
-or selector thresholds.
+**Next:** execute the
+[A10M4O1 operational-hardening package](work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md)
+to incorporate A10M4's toolchain, deterministic-environment, job-local
+cleanup/recovery, sanitization, authority-continuation, and transfer lessons
+into the agent guide and Lemhi toolkit. The exact sequence is A10M4O1
+hardening, immutable successor semantic contract, separately dispatched
+bounded candidate smoke, immutable smoke attestation, canonical-index
+promotion, then A10M5. Provider/storage changes invalidate `v1` for new
+commitments while its bytes remain historical status-at-issuance evidence. A
+failed smoke holds A10M5 and cannot fall back to `v1` storage semantics. The
+frozen 5x/10x runtime criteria are not changed here and remain a separate
+prospective scientific decision.
+
+After hardening and the successor canonical smoke pass, A10M5 may scaffold the
+frozen 12-configuration, one-seed development screen and bounded promotions
+under the unchanged A10M3 scientific contracts. It remains development-only,
+may use at most two concurrent one-L40 jobs and the frozen 160 + 280
+L40-GPU-hour M5 envelopes, and may not access confirmation targets.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
