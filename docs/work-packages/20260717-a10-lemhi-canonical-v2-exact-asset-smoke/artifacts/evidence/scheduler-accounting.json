@@ -1,0 +1,1 @@
+{"job_id":"1013866","node":"node03","partition":"gpu-icrews","requested":{"cpus":4,"gpu_minutes":15,"gpus":1,"memory_mb":16384,"time_limit_minutes":15},"settled":true,"slurm":{"elapsed_seconds":236,"end":"2026-07-17T23:35:30","exit_code":"0:0","start":"2026-07-17T23:31:34","state":"COMPLETED"},"squeue_absent":true}

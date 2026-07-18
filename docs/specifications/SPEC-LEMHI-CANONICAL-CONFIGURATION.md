@@ -6,10 +6,11 @@ Status: authoritative (revision 2)
 
 This specification governs the versioned configuration record that selects
 the default Lemhi GPU execution stack for A10 agent work. The current record
-is
-[`lemhi-a10-py311-l40-v1`](../../research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v1.json).
-It is a repository-controlled operational contract, not an administrator
-claim about the cluster-wide default.
+resolves through
+[`lemhi-canonical-designation-index-v1`](../../research/a10/lemhi_toolkit/configurations/lemhi-canonical-designation-index-v1.json)
+to `lemhi-a10-py311-l40-v2-candidate`. It is a repository-controlled
+operational contract, not an administrator claim about the cluster-wide
+default. The v1 record remains immutable status-at-issuance history.
 
 ## Authority and scope
 
@@ -101,7 +102,7 @@ the attested hash current and the prior hash superseded. A failed smoke is
 retained as failed evidence, cannot mutate the candidate, cannot advance the
 index, and cannot silently restore v1's invalidated storage semantics.
 
-The candidate introduced by A10M4O1 remains noncurrent until its separately
-dispatched smoke and designation revision pass. Consumers MUST resolve the
-current configuration through the designation index once that index exists;
-historical records remain directly addressable by exact ID and hash.
+The candidate introduced by A10M4O1 passed its separately dispatched
+exact-asset smoke and designation revision on 2026-07-17. Consumers MUST
+resolve the current configuration through the designation index; historical
+records remain directly addressable by exact ID and hash.

@@ -376,6 +376,11 @@ class OpenSSHSlurmAdapter:
         except json.JSONDecodeError as error:
             raise ToolkitError("EVIDENCE_INCOMPLETE", "invalid accounting response") from error
         require(isinstance(value, dict), "EVIDENCE_INCOMPLETE", "invalid accounting response")
+        elapsed_seconds = value.get("elapsed_seconds")
+        require(isinstance(elapsed_seconds, int) and elapsed_seconds >= 0, "EVIDENCE_INCOMPLETE", "invalid elapsed accounting")
+        actual_gpu_seconds = elapsed_seconds * job["gpus"]
+        value["actual_gpu_seconds"] = actual_gpu_seconds
+        value["actual_gpu_minutes"] = (actual_gpu_seconds + 59) // 60
         if value.get("terminal") is True:
             receipt = self._remote_script(
                 profile,

@@ -441,7 +441,7 @@ class V2IntegrationTests(HardeningFixture):
             def run(self, arguments, *, stdin=None, timeout=60):
                 del arguments, timeout
                 if stdin and b"ElapsedRaw" in stdin:
-                    output = b'{"terminal":true,"state":"FAILED","exit_code":1,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"unavailable"}\n'
+                    output = b'{"terminal":true,"state":"FAILED","exit_code":1,"elapsed_seconds":61,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"available"}\n'
                 elif stdin and b"gate_receipt=$3" in stdin:
                     output = b'{"gates":{"environment_closure":false,"job_local_cleanup":true}}\n'
                 else:
@@ -450,10 +450,12 @@ class V2IntegrationTests(HardeningFixture):
 
         adapter = OpenSSHSlurmAdapter(REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", Runner())
         plan = {"remote_run_root": "runs/v2-run"}
-        job = {"expected_exit_code": 0, "gate_receipt": "evidence.json"}
+        job = {"expected_exit_code": 0, "gate_receipt": "evidence.json", "gpus": 1}
         observed = adapter.observe(read_json(PROFILE_V2), plan, job, "1000")
         self.assertFalse(observed["gates"]["environment_closure"])
         self.assertTrue(observed["gates"]["job_local_cleanup"])
+        self.assertEqual(observed["actual_gpu_seconds"], 61)
+        self.assertEqual(observed["actual_gpu_minutes"], 2)
         self.assertIn("gate_receipt_sha256", observed)
 
     def test_cli_initializes_and_derives_without_allocation(self) -> None:

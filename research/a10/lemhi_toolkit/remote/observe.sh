@@ -6,8 +6,9 @@ line=$(sacct -n -X -j "$job_id" --format=State,ExitCode,ElapsedRaw -P | awk -F '
 state=$(printf '%s\n' "$line" | awk -F '|' '{print $1}')
 exit_pair=$(printf '%s\n' "$line" | awk -F '|' '{print $2}')
 elapsed=$(printf '%s\n' "$line" | awk -F '|' '{print $3}')
+case "$elapsed" in ''|*[!0-9]*) exit 69 ;; esac
 exit_code=${exit_pair%%:*}
 case "$state" in CANCELLED*) state=CANCELLED ;; esac
 case "$state" in COMPLETED|FAILED|CANCELLED|TIMEOUT|OUT_OF_MEMORY|NODE_FAIL|PREEMPTED|BOOT_FAIL|DEADLINE|REVOKED) terminal=true ;; *) terminal=false ;; esac
-printf '{"accounting":"available","actual_gpu_minutes":null,"exit_code":%s,"gates":{"scheduler_terminal":%s},"state":"%s","terminal":%s}\n' \
-  "$exit_code" "$terminal" "$state" "$terminal"
+printf '{"accounting":"available","actual_gpu_minutes":null,"elapsed_seconds":%s,"exit_code":%s,"gates":{"scheduler_terminal":%s},"state":"%s","terminal":%s}\n' \
+  "$elapsed" "$exit_code" "$terminal" "$state" "$terminal"

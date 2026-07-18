@@ -465,7 +465,7 @@ class RecordingRunner:
         elif stdin and b"squeue -h" in stdin:
             output = b"1000\n"
         elif stdin and b"ElapsedRaw" in stdin:
-            output = b'{"terminal":true,"state":"COMPLETED","exit_code":0,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"unavailable"}\n'
+            output = b'{"terminal":true,"state":"COMPLETED","exit_code":0,"elapsed_seconds":61,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"available"}\n'
         elif stdin and b'gate_receipt=$3' in stdin:
             output = b'{"gates":{"runtime":true,"framework":true}}\n'
         elif stdin and b"tar --format" in stdin:

@@ -195,11 +195,21 @@ proved the environment remedy and passed all 27 compute/operational gates, but
 final candidate audit found a regenerated Cargo-vendor gzip timestamp and
 therefore a hash mismatch. It emitted no attestation.
 
-**Active (2026-07-17):** the
+**Complete (2026-07-17):** the
 [exact-asset successor smoke](work-packages/20260717-a10-lemhi-canonical-v2-exact-asset-smoke/package.md)
-adds a pre-allocation configuration-level identity firewall and binds the
-reconstructed exact candidate archive. The required sequence remains passing
-smoke attestation, local canonical-designation-index revision, then A10M5.
+reached `A10-LEMHI-CANONICAL-V2-SMOKE-READY`. Both candidate-level asset
+firewalls and all 27 compute/operational gates passed; job `1013866` completed
+in 236 seconds on one L40, exact cleanup passed, and immutable attestation
+`5caf106...` binds the candidate semantic hash. The candidate is attested but
+not current.
+
+**Complete (2026-07-17):** the local-only
+[canonical v2 designation](work-packages/20260717-a10-lemhi-canonical-v2-designation/package.md)
+reached `A10-LEMHI-CANONICAL-V2-DESIGNATED`. Designation revision 1 points to
+the smoke-attested v2 candidate and records v1 as superseded without editing
+either immutable configuration or the attestation.
+
+**Next:** scaffold A10M5 under the unchanged A10M3 scientific contracts.
 
 After a successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions

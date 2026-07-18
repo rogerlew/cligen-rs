@@ -40,15 +40,13 @@ GPU allocation.
 
 ## Canonical A10 configuration
 
-The current default for A10 single-L40 Python consumers is the versioned
-[`lemhi-a10-py311-l40-v1`](configurations/lemhi-a10-py311-l40-v1.json)
-record, governed by
+The current default for A10 single-L40 Python consumers resolves through
+[`lemhi-canonical-designation-index-v1`](configurations/lemhi-canonical-designation-index-v1.json)
+to the smoke-attested v2 configuration, governed by
 [`SPEC-LEMHI-CANONICAL-CONFIGURATION`](../../../docs/specifications/SPEC-LEMHI-CANONICAL-CONFIGURATION.md).
-Revision 1 is immutable status-at-issuance history. A10M4O1 publishes an
-immutable revision-2 semantic candidate, but it is not current until a
-separately dispatched smoke emits a passing attestation and a later
-designation-index revision advances the pointer. Python 3.8 remains legacy
-explicit-only.
+Revision 1 is immutable status-at-issuance history. Configuration semantics,
+smoke attestation, and current designation remain separate immutable records.
+Python 3.8 remains legacy explicit-only.
 
 ## Command sequence
 

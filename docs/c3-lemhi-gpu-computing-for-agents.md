@@ -462,6 +462,23 @@ staged run must stop before submission, use the toolkit's `abort` lifecycle;
 it validates the exact owner marker, removes only the registered durable root,
 and proves absence without requiring a job-local receipt.
 
+### Inspect allocation pressure, not presumed GPU activity
+
+From the warm `lemhi` master, `sinfo -p gpu-icrews -N` reports node allocation
+state and `squeue -p gpu-icrews` reports current jobs/users. `sacct` can review
+recent partition history when its output is filtered on the `Partition` field.
+These surfaces establish who owns Slurm allocations, CPU allocation counts,
+and queue pressure; they do not establish live GPU utilization for an
+unallocated node. During the 2026-07-10 through 2026-07-17 audit window, every
+recorded `gpu-icrews` allocation belonged to `rogerlew.ui`, and both nodes were
+idle with an empty queue immediately before the exact-asset smoke. Treat that
+as a bounded observation, not a permanent exclusivity claim.
+
+For an owned running job, `sstat -j <job>.batch` exposes CPU and memory step
+telemetry. The toolkit records exact allocated GPU-seconds from Slurm
+`ElapsedRaw` and an integer GPU-minute value rounded up for accounting. Neither
+metric is a device duty-cycle or GPU-memory-utilization measurement.
+
 ### Treat job-local state as toolkit-recoverable
 
 The A10M4 failures left marked trees on persistent node-local `/tmp`; the

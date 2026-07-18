@@ -497,9 +497,10 @@ GRES, CPU, memory, time, output, and error settings. The toolkit MUST:
   restart when allowed, and reconcile exact owned job IDs before closure.
 
 Requested GPU-minutes are allocated GPU count multiplied by requested time
-limit and are reserved at submission intent. Actual GPU-minutes are allocated
-GPU count multiplied by elapsed time for every settled allocation record.
-They do not derive from missing child-process or device telemetry. Arrays and
+limit and are reserved at submission intent. Settled accounting records exact
+allocated GPU-seconds as GPU count multiplied by Slurm `ElapsedRaw`; the
+integer actual-GPU-minute ledger rounds that value up to the next minute. It
+does not derive from missing child-process or device telemetry. Arrays and
 multi-allocation jobs require an explicit prospective accounting policy or
 are rejected.
 

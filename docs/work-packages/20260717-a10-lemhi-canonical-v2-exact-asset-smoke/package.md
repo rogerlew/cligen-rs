@@ -1,6 +1,6 @@
 # A10 Lemhi canonical v2 exact-asset smoke
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-17
 Evidence mode: Live
 Starting branch and push target: current `origin/main`, push `main`
@@ -45,3 +45,15 @@ All repository/toolkit gates from the predecessor remain required. The new
 `verify-live-inputs.py` is a pre-allocation and pre-attestation firewall.
 Success is `A10-LEMHI-CANONICAL-V2-SMOKE-READY`; any mismatch or operational
 uncertainty holds without attestation or designation.
+
+## Result
+
+Terminal: `A10-LEMHI-CANONICAL-V2-SMOKE-READY`
+
+The pre-allocation and pre-attestation firewalls both matched all frozen
+candidate assets. Job `1013866` completed all 27 gates in 236 seconds on
+`node03`; the recovery allocation was not used, and exact job-local/durable
+cleanup passed. Immutable attestation
+`lemhi-a10-py311-l40-v2-candidate-smoke-20260717` binds the candidate. The
+candidate is attested but not yet current; designation remains the next
+local-only package.
