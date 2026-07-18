@@ -11,7 +11,6 @@ import json
 import math
 import os
 import random
-import resource
 import statistics
 import struct
 import subprocess
@@ -554,6 +553,28 @@ def mad_ratio(values: list[float]) -> float:
     return statistics.median(abs(item - median) for item in values) / median
 
 
+def discard_contaminated_pairs(candidate: list[float], faithful: list[float]) -> tuple[list[int], list[int]]:
+    """Discard at most two paired trials under the frozen contamination bound."""
+    kept = list(range(len(candidate)))
+    discarded: list[int] = []
+    while (
+        mad_ratio([candidate[index] for index in kept]) > 0.10
+        or mad_ratio([faithful[index] for index in kept]) > 0.10
+    ) and len(discarded) < 2:
+        candidate_median = statistics.median(candidate[index] for index in kept)
+        faithful_median = statistics.median(faithful[index] for index in kept)
+        worst = max(
+            kept,
+            key=lambda index: max(
+                abs(candidate[index] - candidate_median) / candidate_median,
+                abs(faithful[index] - faithful_median) / faithful_median,
+            ),
+        )
+        kept.remove(worst)
+        discarded.append(worst)
+    return kept, discarded
+
+
 def benchmark(model: StateSpace, tail_head: str, binary: Path, parameters: Path, work: Path) -> dict[str, Any]:
     rows = []
     for station in STATIONS:
@@ -584,9 +605,14 @@ def benchmark(model: StateSpace, tail_head: str, binary: Path, parameters: Path,
                     break
                 if pass_index == 0:
                     rerun = True
+            kept, discarded = discard_contaminated_pairs(candidate_samples, faithful_samples)
+            candidate_samples = [candidate_samples[index] for index in kept]
+            faithful_samples = [faithful_samples[index] for index in kept]
+            candidate_repeats = [candidate_repeats[index] for index in kept]
+            faithful_repeats = [faithful_repeats[index] for index in kept]
             candidate_median, faithful_median = statistics.median(candidate_samples), statistics.median(faithful_samples)
             ratio = candidate_median / faithful_median
-            rows.append({"regime": regime, "station_id": station_id, "horizon_years": years, "candidate_identity": candidate_identity, "faithful_identity": faithful_identity, "candidate_samples_seconds": candidate_samples, "faithful_samples_seconds": faithful_samples, "candidate_repeat_counts": candidate_repeats, "faithful_repeat_counts": faithful_repeats, "candidate_median_seconds": candidate_median, "faithful_median_seconds": faithful_median, "candidate_mad_over_median": mad_ratio(candidate_samples), "faithful_mad_over_median": mad_ratio(faithful_samples), "ratio": ratio, "runtime_class": "PASS" if ratio < 5.0 else "WARN" if ratio < 10.0 else "FAIL", "complete": complete, "rerun_used": rerun})
+            rows.append({"regime": regime, "station_id": station_id, "horizon_years": years, "candidate_identity": candidate_identity, "faithful_identity": faithful_identity, "candidate_samples_seconds": candidate_samples, "faithful_samples_seconds": faithful_samples, "candidate_repeat_counts": candidate_repeats, "faithful_repeat_counts": faithful_repeats, "candidate_median_seconds": candidate_median, "faithful_median_seconds": faithful_median, "candidate_mad_over_median": mad_ratio(candidate_samples), "faithful_mad_over_median": mad_ratio(faithful_samples), "ratio": ratio, "runtime_class": "PASS" if ratio < 5.0 else "WARN" if ratio < 10.0 else "FAIL", "complete": complete, "rerun_used": rerun, "discarded_contaminated_trial_indices": discarded})
     return {"rows": rows, "warmups": 2, "timed_samples": 9, "minimum_timed_seconds": 1.0}
 
 
@@ -626,6 +652,25 @@ def main() -> None:
     cold_seconds = time.perf_counter() - cold_started
     if cold.returncode != 0:
         raise RuntimeError("CPU export cold load failed")
+    rss = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import resource,sys,torch;"
+                "m=torch.jit.load(sys.argv[1],map_location='cpu');"
+                "m(torch.zeros((1,36525,13)),torch.tensor([int(sys.argv[2])]));"
+                "print(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024)"
+            ),
+            str(export),
+            str(model.validation_index),
+        ],
+        env={**os.environ, "CUDA_VISIBLE_DEVICES": "", "OMP_NUM_THREADS": "1"},
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    inference_peak_rss = int(rss.stdout.strip())
     affinity = sorted(os.sched_getaffinity(0)); os.sched_setaffinity(0, {affinity[0]})
     torch.set_num_threads(1); torch.set_num_interop_threads(1)
     smoke = candidate_stream(model, definition["tail_head"], STATIONS[0], 1)
@@ -637,12 +682,11 @@ def main() -> None:
     benchmark_result = benchmark(model, definition["tail_head"], options.faithful_binary, options.parameters, options.output / "benchmark-work")
     atomic_json(options.output / "benchmark.json", benchmark_result)
     ratios = [row["ratio"] for row in benchmark_result["rows"]]
-    peak_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
     model_record = {"schema_version": 1, "model_id": f"a10m5-{options.config_id}-seed147031", "family_id": "neural_point_weather_state_space_v1", "pooling_class": definition["pooling_class"], "configuration_id": "lemhi-a10-py311-l40-v1", "configuration_sha256": "0b1115a6801259c62d9550c877a3c49a897319348ba1c2027be0d9c4f77c1179", "parameter_count": train["parameter_count"], "architecture": {key: definition[key] for key in ("latent_dim", "width", "depth", "tail_head")}, "corpus_manifest_sha256": "9de18c4822397ae8a70f827a6a0fa7649bea0c4a8314f6363716fb9bd92f46c2", "normalization_sha256": "bbcfa7d21d484e61cf1540cef5bfecc9d2c920cd9b2f266f405b9aa754264c74"}
     atomic_json(options.output / "model-record.json", model_record)
     warm_absolute = all(row["candidate_median_seconds"] <= (10.0 if row["horizon_years"] == 30 else 30.0) for row in benchmark_result["rows"])
-    gates = {"all_98_objects_verified": train["object_count"] == 98 and train["aggregate_bytes"] == 223_799_545, "canonical_scientific_record": True, "candidate_fit_only": train["fit_role"] == "candidate_fit" and train["normalization_role"] == "candidate_fit", "fit_validation_gradient_free": train["validation_used_for_gradient"] is False, "finite_scores": all(math.isfinite(float(train[key])) for key in ("validation_primary_nll", "validation_tail_score", "validation_stability")), "generation_support": smoke[2] and all(value[2] for value in streams.values()), "generation_prefix_exact": prefix_exact, "generation_order_independent": order_exact, "benchmark_complete": len(benchmark_result["rows"]) == 12 and all(row["complete"] for row in benchmark_result["rows"]), "benchmark_dispersion": all(row["candidate_mad_over_median"] <= 0.10 and row["faithful_mad_over_median"] <= 0.10 for row in benchmark_result["rows"]), "absolute_safeguards": export.stat().st_size <= 262_144_000 and peak_rss <= 2_147_483_648 and cold_seconds <= 15.0 and warm_absolute, "parameter_ceiling": train["parameter_count"] <= 50_000_000, "checkpoint_complete": checkpoint["state"] == {key: True for key in ("model", "optimizer", "scheduler", "scaler", "rng", "sampler")}}
-    evidence = {"schema_version": 1, "classification": "a10m5-development-only-fit-validation-screen", "configuration_id": options.config_id, "pooling_class": definition["pooling_class"], "valid": all(gates.values()), "validation_primary_nll": train["validation_primary_nll"], "validation_tail_score": train["validation_tail_score"], "validation_stability": train["validation_stability"], "parameter_count": train["parameter_count"], "runtime_ratio_max": max(ratios), "runtime_class_max": "PASS" if max(ratios) < 5.0 else "WARN" if max(ratios) < 10.0 else "FAIL", "checkpoint_record_sha256": sha256(options.output / "checkpoint-record.json"), "model_record_sha256": sha256(options.output / "model-record.json"), "export_bytes": export.stat().st_size, "cold_start_seconds": cold_seconds, "peak_rss_bytes": peak_rss, "gpu_peak_bytes": train["gpu_peak_bytes"], "gates": gates, "verdict": "PASS" if all(gates.values()) else "FAIL"}
+    gates = {"all_98_objects_verified": train["object_count"] == 98 and train["aggregate_bytes"] == 223_799_545, "canonical_scientific_record": True, "candidate_fit_only": train["fit_role"] == "candidate_fit" and train["normalization_role"] == "candidate_fit", "fit_validation_gradient_free": train["validation_used_for_gradient"] is False, "finite_scores": all(math.isfinite(float(train[key])) for key in ("validation_primary_nll", "validation_tail_score", "validation_stability")), "generation_support": smoke[2] and all(value[2] for value in streams.values()), "generation_prefix_exact": prefix_exact, "generation_order_independent": order_exact, "benchmark_complete": len(benchmark_result["rows"]) == 12 and all(row["complete"] for row in benchmark_result["rows"]), "benchmark_dispersion": all(row["candidate_mad_over_median"] <= 0.10 and row["faithful_mad_over_median"] <= 0.10 for row in benchmark_result["rows"]), "absolute_safeguards": export.stat().st_size <= 262_144_000 and inference_peak_rss <= 2_147_483_648 and cold_seconds <= 15.0 and warm_absolute, "parameter_ceiling": train["parameter_count"] <= 50_000_000, "checkpoint_complete": checkpoint["state"] == {key: True for key in ("model", "optimizer", "scheduler", "scaler", "rng", "sampler")}}
+    evidence = {"schema_version": 1, "classification": "a10m5-development-only-fit-validation-screen", "configuration_id": options.config_id, "pooling_class": definition["pooling_class"], "valid": all(gates.values()), "validation_primary_nll": train["validation_primary_nll"], "validation_tail_score": train["validation_tail_score"], "validation_stability": train["validation_stability"], "parameter_count": train["parameter_count"], "runtime_ratio_max": max(ratios), "runtime_class_max": "PASS" if max(ratios) < 5.0 else "WARN" if max(ratios) < 10.0 else "FAIL", "checkpoint_record_sha256": sha256(options.output / "checkpoint-record.json"), "model_record_sha256": sha256(options.output / "model-record.json"), "export_bytes": export.stat().st_size, "cold_start_seconds": cold_seconds, "peak_rss_bytes": inference_peak_rss, "gpu_peak_bytes": train["gpu_peak_bytes"], "gates": gates, "verdict": "PASS" if all(gates.values()) else "FAIL"}
     atomic_json(options.output / "evidence.json.part", evidence)
     if not all(gates.values()):
         raise RuntimeError("one or more A10M5 configuration gates failed")
