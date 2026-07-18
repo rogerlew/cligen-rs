@@ -218,18 +218,21 @@ requested GPU-minutes, 8 elapsed GPU-seconds, and 3 per-job ceiling-rounded
 GPU-minutes; scheduler identities, the ledger, evidence, job-local absence,
 both durable roots, and final cleanup reconcile.
 
-**In progress (2026-07-17):**
+**Hold (2026-07-17):**
 [A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
-is prospectively scaffolded under the unchanged A10M3 scientific contracts.
-It executes the exact 12-row seed-147031 fit-validation screen with at most two
-concurrent L40 jobs, benchmarks valid configurations, and may promote at most
-two per pooling class. Development and confirmation targets remain unread.
+reached `HOLD-A10-NO-VALID-NEURAL-FIT`. All twelve frozen seed-147031 rows
+completed. Eleven passed every gate except the unchanged 2 GiB CPU-export RSS
+safeguard; one also failed timing dispersion. All worst runtime ratios passed
+at 3.7073--4.2595, but isolated export RSS was 3.09--3.13 GiB. Zero N0 and zero
+N1 configurations promoted. Protected development and confirmation roles
+remain unread; A10M6 is not authorized.
 
-After a successor canonical smoke pass, A10M5 may scaffold the
-frozen 12-configuration, one-seed development screen and bounded promotions
-under the unchanged A10M3 scientific contracts. It remains development-only,
-may use at most two concurrent one-L40 jobs and the frozen 160 + 280
-L40-GPU-hour M5 envelopes, and may not access confirmation targets.
+**Next (2026-07-17):**
+[A10M5R1 canonical CPU export memory remedy](work-packages/20260717-a10m5r1-cpu-export-memory-remedy/package.md)
+is scaffolded to attribute the canonical PyTorch memory floor and test only
+output-preserving, one-core deployment remedies under the unchanged 2 GiB
+threshold. A successful remedy authorizes a newly identified development
+screen retry, not an edit or reopening of A10M5.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

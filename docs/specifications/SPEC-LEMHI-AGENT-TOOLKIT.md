@@ -469,6 +469,11 @@ and sanitized hashes; only the sanitized tree may be published. Quarantine is
 removed after verified publication unless the package explicitly authorizes
 restricted retention.
 
+If collection fails after a raw download has been promoted, a retry MUST NOT
+overlay or reuse that quarantine. The toolkit atomically retains the non-empty
+directory under a failed-attempt identity, creates a fresh mode-restricted
+quarantine, and repeats authenticated download and extraction from scratch.
+
 ## 10. Scheduler and resource rules
 
 Slurm submissions MUST use committed scripts and explicit partition, typed
@@ -796,11 +801,15 @@ and projection cannot change gate results.
 Text projection rejects reserved token syntax and invalid UTF-8, uses typed
 replacements ordered by descending byte length, and replaces paths only when
 they are exact or descendants—not sibling prefixes. JSON is parsed with
-duplicate-key rejection and transformed structurally by field type. Binary
-evidence is allowed unchanged only by exact schema/hash or excluded. The
-private transformation receipt binds sanitizer version, token counts,
-sanitized hashes, and raw-parent hashes. The forbidden-value scan runs after
-projection and rejects unknown sensitive material.
+duplicate-key rejection and transformed structurally by field type. Scientific
+JSON admits finite integer and floating-point values but rejects NaN, Infinity,
+and overflow to a non-finite value; authority, ledger, plan, and receipt
+canonicalization retains its stricter no-float rule. Binary evidence is allowed
+unchanged only by exact schema/hash or excluded. The private transformation
+receipt binds sanitizer version, token counts, sanitized hashes, and raw-parent
+hashes. The forbidden-value scan runs after projection and rejects unknown
+sensitive material. Evidence producers MUST NOT emit reserved angle-bracket
+tokens before projection; diagnostic redactions use a non-reserved notation.
 
 ### 17.5 Transfer telemetry and immutable manifests
 

@@ -1,6 +1,6 @@
 # A10M5 — Bounded GPU Architecture and Pooling Screen
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-NO-VALID-NEURAL-FIT`
 Date: 2026-07-17
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `23f2e22`, push `main`
@@ -115,3 +115,19 @@ and does not authorize development access.
 - `artifacts/toolkit/`, `execution.md`, `resource-ledger.md`,
   `screen-results.json`, `promotion-trace.json`, and `terminal.md` — live
   evidence and disposition created during execution.
+
+## Result
+
+All twelve frozen configurations ran and produced complete development-only
+fit, checkpoint, generation, and benchmark evidence. Every row failed the
+unchanged 2 GiB CPU-export RSS safeguard: observed isolated peaks were
+3,317,673,984--3,363,221,504 bytes. Eleven rows passed every other gate; one
+also exceeded the bounded timing-dispersion rule. All worst runtime ratios
+were `PASS` at 3.7073--4.2595, but hard safeguards precede promotion ordering.
+
+The frozen selector therefore emitted zero N0 and zero N1 promotions with
+terminal `HOLD-A10-NO-VALID-NEURAL-FIT`. Development and confirmation targets
+remain unread. Toolkit collection, exact durable and job-local cleanup, and
+close passed. The bounded CPU-export-memory successor is scaffolded as A10M5R1;
+A10M6 remains unauthorized until a new development package produces valid
+promotions.

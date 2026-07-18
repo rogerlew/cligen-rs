@@ -111,6 +111,12 @@ closure, a frozen recovery contingency, typed raw-evidence projection, integer
 transfer telemetry, and append-only content-addressed manifests. Useful
 operator-facing commands are:
 
+Evidence projection revision 3 accepts finite scientific JSON numbers while
+continuing to reject duplicate keys, NaN/Infinity, forbidden values, invalid
+UTF-8, and raw reserved tokens. A failed collection quarantine is retained
+under a numbered private identity; retry always downloads and extracts into a
+fresh quarantine.
+
 ```text
 initialize-authority --output /private/authority.json
 derive-run --input /private/derivation.json --output /private/revision.json

@@ -1,0 +1,14 @@
+{
+  "ordering": {
+    "N0_complete": [],
+    "N1_partial": []
+  },
+  "promoted_count": 0,
+  "promotions": {
+    "N0_complete": [],
+    "N1_partial": []
+  },
+  "schema_version": 1,
+  "screen_seed": 147031,
+  "terminal": "HOLD-A10-NO-VALID-NEURAL-FIT"
+}

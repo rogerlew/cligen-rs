@@ -557,7 +557,7 @@ class OpenSSHSlurmAdapter:
                 "hash_marker.sh",
                 [profile["remote_base"], plan["remote_run_root"]],
             ).decode("utf-8").strip()
-            result["sanitization_policy"] = "lemhi-evidence-projection-2"
+            result["sanitization_policy"] = "lemhi-evidence-projection-3"
         return result
 
     def clean(

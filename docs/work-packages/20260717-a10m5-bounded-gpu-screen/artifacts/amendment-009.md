@@ -28,3 +28,7 @@ affected file and the exact replacement count. The toolkit's new raw-collected
 record binds the normalized download, while the retained failed quarantines
 preserve the original bytes. This bounded legacy bridge does not weaken the
 projector's reserved-token rejection.
+
+After successful collection, authenticated cleanup, and close, the toolkit
+purged restricted private run state as designed. `log-normalization.md` retains
+the original and collected hashes and exact replacement count.

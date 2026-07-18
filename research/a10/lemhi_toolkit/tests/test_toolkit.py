@@ -497,7 +497,13 @@ class LiveAdapterCommandPaths(ToolkitFixture):
         self.assertTrue(adapter.observe(self.profile, plan, job, "1000")["terminal"])
         self.assertTrue(adapter.cancel(self.profile, "1000")["acknowledged"])
         quarantine = self.root / "quarantine"; quarantine.mkdir()
-        self.assertTrue(adapter.collect(self.profile, plan, quarantine)["download_promoted"])
+        collection = adapter.collect(self.profile, plan, quarantine)
+        self.assertTrue(collection["download_promoted"])
+        self.assertEqual(collection["sanitization_policy"], "lemhi-evidence-v1")
+        quarantine_v2 = self.root / "quarantine-v2"; quarantine_v2.mkdir()
+        profile_v2 = {**self.profile, "provider_api_version": 2}
+        collection_v2 = adapter.collect(profile_v2, plan, quarantine_v2)
+        self.assertEqual(collection_v2["sanitization_policy"], "lemhi-evidence-projection-3")
         self.assertTrue(adapter.clean(self.profile, plan)["remote_absent"])
         flattened = [argument for arguments, _, _ in runner.calls for argument in arguments]
         self.assertIn("-oBatchMode=yes", flattened)

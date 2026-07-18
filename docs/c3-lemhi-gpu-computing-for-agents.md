@@ -552,10 +552,14 @@ Authenticated retrieval first creates a private `RAW_COLLECTED` receipt that
 binds raw hashes, gates, and cleanup-authorizing markers. Publication then
 performs typed, boundary-aware projection. Paths match only exact roots or
 descendants, longest roots are replaced first, reserved token syntax and
-invalid UTF-8 fail, and JSON is parsed and transformed structurally. A final
-forbidden-value scan still rejects unregistered leaks. Projection failure
-holds publication but preserves exact cleanup authority and cannot alter gate
-results.
+invalid UTF-8 fail, and JSON is parsed and transformed structurally. Scientific
+JSON may contain finite float metrics; duplicate keys, NaN, Infinity, and
+non-finite overflow fail. Producers must use non-reserved notation such as
+`[REMOTE_RUN_ROOT]` for any pre-projection diagnostic redaction. A final
+forbidden-value scan still rejects unregistered leaks. Projection failure holds
+publication but preserves exact cleanup authority and cannot alter gate
+results. Retrying collection atomically retains the failed quarantine and
+starts from a fresh authenticated download; it never overlays extracted files.
 
 ### Transfer once only within a run lineage
 
