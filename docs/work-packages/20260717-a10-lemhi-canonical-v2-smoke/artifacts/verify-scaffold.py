@@ -19,7 +19,10 @@ def require(condition: bool, detail: str) -> None:
 
 def main() -> None:
     package = (PACKAGE / "package.md").read_text(encoding="utf-8")
-    require("Status: `SCAFFOLDED`" in package, "status")
+    require(
+        "Status: `SCAFFOLDED`" in package or "Status: `EXECUTED-HOLD`" in package,
+        "status",
+    )
     require("20 L40-GPU-minutes" in package, "resource ceiling")
     require("No remote" not in package, "invalid dispatch wording")
     candidate = read_json(CANDIDATE)

@@ -1,6 +1,6 @@
 # A10 Lemhi canonical v2 bounded smoke
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD`
 Date: 2026-07-17
 Evidence mode: Live, after separate operator dispatch
 Starting branch and push target: current `origin/main`, push `main`
@@ -81,3 +81,14 @@ Run:
 ```sh
 python3 docs/work-packages/20260717-a10-lemhi-canonical-v2-smoke/artifacts/verify-scaffold.py
 ```
+
+## Result
+
+Terminal: `HOLD-A10-CANONICAL-V2-SMOKE-ENVIRONMENT-CLOSURE`
+
+The bounded primary allocation failed before job-local root creation or Python
+import because at least one prohibited ambient Python/loader variable was
+present on entry despite Slurm `--export=NONE`. The exact-node recovery
+allocation proved `JOB_LOCAL_ABSENT`; both scheduler records settled and the
+marker-bound durable run root was removed. No smoke attestation or designation
+was created. A10M5 remains held.

@@ -1,0 +1,1 @@
+{"jobs":[{"alloc_tres":"billing=4,cpu=4,mem=16G,node=1","elapsed_seconds":2,"exit_code":"1:0","job_id":"1013863","node":"node03","role":"smoke","state":"FAILED"},{"alloc_tres":"billing=2,cpu=2,mem=1G,node=1","elapsed_seconds":2,"exit_code":"0:0","job_id":"1013864","node":"node03","role":"toolkit-recovery","state":"COMPLETED"}],"squeue_absent":true}

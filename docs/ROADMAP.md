@@ -179,13 +179,24 @@ It created no smoke attestation or designation. The frozen 5x/10x runtime
 criteria remain unchanged and require a separate prospective scientific
 decision.
 
-**Next:** separately dispatch the bounded
-[canonical-v2 smoke package](work-packages/20260717-a10-lemhi-canonical-v2-smoke/package.md).
-Its exact sequence is candidate smoke, immutable smoke attestation, local
-canonical-designation-index revision, then A10M5. A failed smoke holds A10M5
-and cannot mutate the candidate or fall back to v1 storage semantics.
+**Hold (2026-07-17):** the bounded
+[canonical-v2 smoke package](work-packages/20260717-a10-lemhi-canonical-v2-smoke/package.md)
+reached `HOLD-A10-CANONICAL-V2-SMOKE-ENVIRONMENT-CLOSURE`. Its one authorized
+primary allocation failed before job-local root creation or Python import:
+Slurm `--export=NONE` still presented at least one prohibited ambient
+Python/loader variable, so the entry guard failed closed. A separately
+reserved exact-node recovery allocation proved `JOB_LOCAL_ABSENT`; both jobs
+settled and the marker-bound durable root was removed. The candidate remained
+immutable and no smoke attestation or designation was created.
 
-After hardening and the successor canonical smoke pass, A10M5 may scaffold the
+**Next:** scaffold a new bounded smoke package identity that records and clears
+the scheduler-provided ambient state before reconstructing the exact registered
+environment, then asserts closure before Python import. It must reuse the same
+candidate semantic SHA-256 and cannot reuse this failed package's identity or
+evidence. Its required sequence remains candidate smoke, immutable smoke
+attestation, local canonical-designation-index revision, then A10M5.
+
+After a successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions
 under the unchanged A10M3 scientific contracts. It remains development-only,
 may use at most two concurrent one-L40 jobs and the frozen 160 + 280
