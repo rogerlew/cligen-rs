@@ -40,7 +40,7 @@ export PATH="$job_local/rust-toolchain/bin:/usr/bin:/bin"
 (cd "$job_local/source" && cargo build --release --locked --offline -p cligen --bin cligen)
 
 python_stderr=$output/python.stderr.part
-if ! "$environment/bin/python" "$run_root/screen.py" \
+if ! "$environment/bin/python" "$run_root/accept.py" \
   --config-id "$configuration_id" \
   --corpus "$job_local/corpus" \
   --faithful-binary "$job_local/source/target/release/cligen" \
