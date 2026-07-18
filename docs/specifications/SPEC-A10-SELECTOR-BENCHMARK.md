@@ -2,7 +2,7 @@
 
 Status: research-only
 
-Revision: 1 (A10M3, 2026-07-17)
+Revision: 2 (A10M5R1 process-lineage correction, 2026-07-18)
 
 ## Surface and authority
 
@@ -65,6 +65,16 @@ export absence, 30-year warm time above 10 seconds/station, 100-year warm time
 above 30 seconds/station, peak RSS above 2 GiB, or export above 250 MiB rejects
 the candidate. Cold start is separately reported and fails its own 15-second
 absolute safeguard; it never receives the 5x/10x label.
+
+Peak RSS is the high-water mark of a clean CPU-export address space. The
+training process must persist and close the export, then exit before a small
+supervisor directly launches the measured worker. Evidence records the
+worker's `/proc/self/status` `VmHWM` and an external `/usr/bin/time -v`
+maximum from that clean lineage. `getrusage(RUSAGE_SELF).ru_maxrss` from a
+child forked by the live high-RSS trainer is invalid: Lemhi retains the
+parent's historical maximum across fork/exec. If clean lineage and both
+measurements are unavailable, the RSS gate fails closed. The 2 GiB threshold
+is unchanged.
 
 ## Selection order and fail-closed behavior
 

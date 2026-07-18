@@ -12,3 +12,12 @@ allocation is reserved for this decisive candidate-fit acceptance rather than
 the optional deterministic/nondeterministic attribution contrast. R1 already
 demonstrated an exact deterministic recipe below 2 GiB on synthetic state;
 only candidate-fit acceptance can establish the package terminal.
+
+After both failed R2 roles settled, collection quarantined all allowlisted raw
+files but refused projection because the failure trace contained exact remote
+paths that the prospective plan had not registered for replacement. Toolkit
+amendment is unavailable after `MATRIX_SETTLED`. The unsanitized evidence
+remains in the restricted controller quarantine and is not published; the
+exact remote run root was authenticated, removed, and verified absent. R2 is
+therefore an honestly recorded unclosed failure lifecycle, not package
+acceptance evidence.

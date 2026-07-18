@@ -1,9 +1,9 @@
 # A10M5R1 — Canonical CPU Export Memory Remedy
 
-Status: `SCAFFOLDED`
-Date: 2026-07-17
+Status: `EXECUTED-COMPLETE`
+Date: 2026-07-18
 Evidence mode: Development-only operational diagnostic
-Starting branch and push target: `main` at `fb599ea`, push `main`
+Starting branch and push target: `main` at `d5f63e8`, push `main`
 
 ## Objective
 
@@ -66,3 +66,28 @@ A remedy does not reopen or edit A10M5. It authorizes a new, independently
 identified development screen retry package. Without a remedy, A10M6 remains
 blocked and the operator must choose whether to change the deployment contract
 or model/runtime family.
+
+## Execution result
+
+Terminal: `A10M5R1-EXPORT-REMEDY-READY`.
+
+The 3.09--3.13 GiB A10M5 value was a measurement artifact, not the resident
+set of the export runtime. Linux `ru_maxrss` in the exec'd child retained the
+large training parent's high-water mark. A direct Lemhi control reproduced
+that behavior: a child with 8,876 KiB `VmHWM` reported 530,000 KiB
+`ru_maxrss` after exec from a 512 MiB parent.
+
+Fresh shell-launched eager and TorchScript workers measured 628--635 MB by
+`/usr/bin/time -v`; steady `/proc` RSS was 521--525 MB. R4 then regenerated
+the exact retained N0-l32-w128-d2-lognormal candidate, reproduced all twelve
+stream hashes, passed benchmark dispersion and all runtime ratios with a
+3.8199 maximum, loaded cold in 1.206 seconds, and closed canonical toolkit v2
+with exact remote cleanup. Its 3,321,282,560-byte `ru_maxrss` was deliberately
+retained as the contaminated control.
+
+The canonical remedy is to launch CPU export from a small supervisor after
+the training process exits and measure that new process with `/proc/self/status`
+`VmHWM` and external `/usr/bin/time -v`. A Python `subprocess` launched while
+the high-RSS trainer remains alive is prohibited as a peak-RSS gate. No model,
+dependency, threshold, or output changed. A10M5 remains immutable; A10M5R2 is
+the independently identified development screen retry.

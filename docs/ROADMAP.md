@@ -227,12 +227,22 @@ at 3.7073--4.2595, but isolated export RSS was 3.09--3.13 GiB. Zero N0 and zero
 N1 configurations promoted. Protected development and confirmation roles
 remain unread; A10M6 is not authorized.
 
-**Next (2026-07-17):**
+**Complete (2026-07-18):**
 [A10M5R1 canonical CPU export memory remedy](work-packages/20260717-a10m5r1-cpu-export-memory-remedy/package.md)
-is scaffolded to attribute the canonical PyTorch memory floor and test only
-output-preserving, one-core deployment remedies under the unchanged 2 GiB
-threshold. A successful remedy authorizes a newly identified development
-screen retry, not an edit or reopening of A10M5.
+reached `A10M5R1-EXPORT-REMEDY-READY`. A10M5's 3.09--3.13 GiB result inherited
+the training parent's historical `ru_maxrss` across fork/exec; clean one-core
+workers measured 521--525 MB steady RSS and 628--635 MB external maximum. R4
+reproduced all twelve retained candidate hashes, cold load, dispersion, and
+runtime gates, then closed canonical toolkit v2 with exact cleanup. No model,
+dependency, threshold, or protected-role access changed.
+
+**Next (2026-07-18):**
+[A10M5R2 corrected CPU export development screen retry](work-packages/20260718-a10m5r2-corrected-cpu-export-screen/package.md)
+is scaffolded to rerun the frozen twelve-row screen under a new package
+identity. The trainer must exit before a small supervisor launches and
+measures the CPU worker with `/proc` `VmHWM` plus external `/usr/bin/time -v`.
+A10M6 remains unauthorized until the successor produces valid N0 and N1
+promotions under every unchanged gate.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-

@@ -488,6 +488,28 @@ telemetry. The toolkit records exact allocated GPU-seconds from Slurm
 `ElapsedRaw` and an integer GPU-minute value rounded up for accounting. Neither
 metric is a device duty-cycle or GPU-memory-utilization measurement.
 
+### Measure export memory from a clean process lineage
+
+Do not gate deployment memory with
+`resource.getrusage(RUSAGE_SELF).ru_maxrss` inside a child forked by a
+high-RSS trainer. Lemhi's Linux accounting retains the parent's historical
+maximum across fork/exec. A10M5 consequently reported 3.09--3.13 GiB for an
+export whose clean-process maximum is about 0.63 GiB. A direct control showed
+an exec'd child with 8,876 KiB `/proc/self/status` `VmHWM` reporting 530,000
+KiB `ru_maxrss` after launch from a 512 MiB parent.
+
+For a CPU-export memory gate, finish and exit training first. Then have a
+small shell or supervisor directly launch the export worker. Record the
+worker's own `VmHWM` and `VmRSS` from `/proc/self/status`, and corroborate the
+maximum with external `/usr/bin/time -v` whose launcher has not held the
+training corpus or model state. Keep one-core affinity and all framework/BLAS
+thread counts explicit. The A10M5R1 attribution measured 521--525 MB steady
+RSS and 628--635 MB external maximum for eager and TorchScript variants.
+
+This is an evidence correction, not permission to relax a memory threshold.
+If a workflow cannot establish clean process lineage, treat peak RSS as
+unavailable and stop the gate.
+
 ### Treat job-local state as toolkit-recoverable
 
 The A10M4 failures left marked trees on persistent node-local `/tmp`; the

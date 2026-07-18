@@ -100,6 +100,27 @@ revalidates the UID, filesystem device, canonical target, and marker twice.
 before `collect` or `clean`; ambiguity retains both private state and the
 reserve as `CLEANUP_INCOMPLETE`.
 
+## Authoring traps from live acceptance
+
+- Every job gate receipt needs a nonempty boolean `gates` object even when the
+  scientific result has a different disposition vocabulary. Keep operational
+  gates and scientific gates in separate fields.
+- Evidence allowlists must be satisfiable on success and failure. If a job can
+  fail before products exist, prospectively define honest absence records or
+  a failure-specific collection surface; do not invent success-shaped data
+  after settlement.
+- Prospectively register typed evidence replacements for exact durable and
+  job-local paths that can appear in tracebacks. Collection quarantines raw
+  evidence and fails closed on an unregistered forbidden value.
+- Run amendment is available while `VERIFIED` or `MATRIX_ACTIVE`, not after
+  `MATRIX_SETTLED`. Inspect failure traces and amend projection rules before
+  observing the final outstanding role when a correction is necessary.
+- A successful job-local cleanup does not make `ru_maxrss` a valid child
+  deployment metric. A worker forked by a high-RSS parent can retain the
+  parent's maximum across exec. Launch memory-gated workers from a small
+  supervisor after training exits and record `/proc/self/status` `VmHWM` plus
+  external `/usr/bin/time -v`.
+
 The committed profile selects an ordered SCP, Slurm, Ceph, and L40 provider
 stack. Definitions are declarative JSON and content-hashed into every plan.
 Adding a runtime or framework means adding a versioned provider record and an
