@@ -78,3 +78,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260717-a10-lemhi-canonical-v2-exact-asset-smoke](20260717-a10-lemhi-canonical-v2-exact-asset-smoke/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10-lemhi-canonical-v2-designation](20260717-a10-lemhi-canonical-v2-designation/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10m4o2-lemhi-toolkit-acceptance](20260717-a10m4o2-lemhi-toolkit-acceptance/package.md) | EXECUTED-COMPLETE |
+| [20260717-a10m5-bounded-gpu-screen](20260717-a10m5-bounded-gpu-screen/package.md) | SCAFFOLDED |

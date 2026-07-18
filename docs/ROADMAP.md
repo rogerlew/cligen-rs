@@ -218,7 +218,12 @@ requested GPU-minutes, 8 elapsed GPU-seconds, and 3 per-job ceiling-rounded
 GPU-minutes; scheduler identities, the ledger, evidence, job-local absence,
 both durable roots, and final cleanup reconcile.
 
-**Next:** scaffold A10M5 under the unchanged A10M3 scientific contracts.
+**In progress (2026-07-17):**
+[A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
+is prospectively scaffolded under the unchanged A10M3 scientific contracts.
+It executes the exact 12-row seed-147031 fit-validation screen with at most two
+concurrent L40 jobs, benchmarks valid configurations, and may promote at most
+two per pooling class. Development and confirmation targets remain unread.
 
 After a successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions
