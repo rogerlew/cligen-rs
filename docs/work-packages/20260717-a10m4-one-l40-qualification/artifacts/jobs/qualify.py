@@ -408,7 +408,10 @@ def faithful_call(binary: Path, parameters: Path, work: Path, station: str, year
     if completed.returncode != 0:
         raise RuntimeError(f"faithful generation failed: {station}/{years}: {completed.stderr[-500:]}")
     lines = cli.read_text(encoding="utf-8").splitlines()
-    complete = len(lines) == 15 + years * 365
+    complete = (
+        len(lines) == 16 + days_for_years(years)
+        and not lines[-1].strip()
+    )
     return sha256(cli), complete
 
 
