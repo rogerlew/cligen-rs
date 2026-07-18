@@ -2,7 +2,7 @@
 set -eu
 umask 077
 
-role=memory-attribution
+role=acceptance
 run_root=$PWD
 run_id=$(basename "$run_root")
 output=$run_root/results/$role
@@ -17,7 +17,7 @@ device=$(stat -c %d "$target")
 uid=$(id -u)
 set +e
 ./supervise-v2.sh "$target" "$marker_sha" "$output/supervisor.json" \
-  ./diagnose-job.sh "$target"
+  ./accept-job.sh N0-l32-w128-d2-lognormal "$target"
 status=$?
 set -e
 cleanup=false
@@ -31,12 +31,12 @@ if os.path.exists(partial):
     with open(partial, encoding="utf-8") as stream:
         value = json.load(stream)
 else:
-    value = {"classification": "a10m5r1-synthetic-development-only", "diagnostic_complete": False, "verdict": "DIAGNOSTIC-ERROR"}
-value["job_local_cleanup"] = cleanup == "true"
-value["offline_hash_install"] = os.path.exists(partial)
+    value = {"classification": "a10m5r1-development-only-candidate-acceptance", "valid": False}
+value["scientific_gates"] = value.pop("gates", {})
+value["scientific_verdict"] = value.pop("verdict", "FAIL")
 value["exit_code"] = int(status)
 value["gates"] = {
-    "diagnostic_complete": value.get("diagnostic_complete") is True,
+    "acceptance_completed": os.path.exists(partial),
     "job_local_cleanup": cleanup == "true",
     "offline_hash_install": os.path.exists(partial),
 }

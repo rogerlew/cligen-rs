@@ -1,0 +1,1463 @@
+{
+  "classification": "a10m5r1-synthetic-development-only",
+  "diagnostic_complete": true,
+  "exact_remedy_candidates": [
+    "eager",
+    "jit-default",
+    "jit-unoptimized",
+    "jit-mkldnn-off",
+    "jit-frozen"
+  ],
+  "exit_code": 0,
+  "job_local_cleanup": true,
+  "offline_hash_install": true,
+  "reference": {
+    "classification": "a10m5r1-synthetic-development-only",
+    "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+    "export_bytes": 152332,
+    "output_bytes": 2191500,
+    "phases": [
+      {
+        "live_tensor_bytes": 0,
+        "mapped_rss_bytes": {
+          "anonymous_other": 3301376,
+          "heap": 2772992,
+          "other_file": 14143488,
+          "stack": 49152
+        },
+        "monotonic_seconds": 1894044.827500511,
+        "phase": "python-start",
+        "retained_output_bytes": 0,
+        "ru_maxrss_bytes": 20062208,
+        "smaps_rollup": {
+          "Private_Clean": 9445376,
+          "Private_Dirty": 8310784,
+          "Pss": 18190336,
+          "Rss": 20267008,
+          "Shared_Clean": 2510848,
+          "Shared_Dirty": 0
+        },
+        "status": {
+          "Threads": 1,
+          "VmData": 17735680,
+          "VmExe": 12615680,
+          "VmHWM": 20062208,
+          "VmLib": 1871872,
+          "VmRSS": 20062208,
+          "VmStk": 135168
+        }
+      },
+      {
+        "live_tensor_bytes": 0,
+        "mapped_rss_bytes": {
+          "anonymous_other": 150142976,
+          "cuda_nvidia": 132694016,
+          "heap": 102248448,
+          "numpy": 5627904,
+          "other_file": 28774400,
+          "stack": 77824,
+          "torch": 81260544
+        },
+        "monotonic_seconds": 1894045.884920949,
+        "phase": "torch-imported",
+        "retained_output_bytes": 0,
+        "ru_maxrss_bytes": 500555776,
+        "smaps_rollup": {
+          "Private_Clean": 91967488,
+          "Private_Dirty": 404897792,
+          "Pss": 497664000,
+          "Rss": 500826112,
+          "Shared_Clean": 3960832,
+          "Shared_Dirty": 0
+        },
+        "status": {
+          "Threads": 1,
+          "VmData": 743657472,
+          "VmExe": 12615680,
+          "VmHWM": 500555776,
+          "VmLib": 2312757248,
+          "VmRSS": 500555776,
+          "VmStk": 135168
+        }
+      },
+      {
+        "live_tensor_bytes": 2036704,
+        "mapped_rss_bytes": {
+          "anonymous_other": 150822912,
+          "cuda_nvidia": 132694016,
+          "heap": 114049024,
+          "numpy": 5627904,
+          "other_file": 28934144,
+          "stack": 77824,
+          "torch": 99160064
+        },
+        "monotonic_seconds": 1894045.968965603,
+        "phase": "model-and-input-ready",
+        "retained_output_bytes": 0,
+        "ru_maxrss_bytes": 531144704,
+        "smaps_rollup": {
+          "Private_Clean": 92057600,
+          "Private_Dirty": 435277824,
+          "Pss": 528165888,
+          "Rss": 531365888,
+          "Shared_Clean": 4030464,
+          "Shared_Dirty": 0
+        },
+        "status": {
+          "Threads": 1,
+          "VmData": 756510720,
+          "VmExe": 12615680,
+          "VmHWM": 531144704,
+          "VmLib": 2312757248,
+          "VmRSS": 531144704,
+          "VmStk": 135168
+        }
+      },
+      {
+        "live_tensor_bytes": 1921328,
+        "mapped_rss_bytes": {
+          "anonymous_other": 150913024,
+          "cuda_nvidia": 132694016,
+          "heap": 114049024,
+          "numpy": 5627904,
+          "other_file": 28934144,
+          "stack": 77824,
+          "torch": 99225600
+        },
+        "monotonic_seconds": 1894045.982652693,
+        "phase": "first-inference",
+        "retained_output_bytes": 21900,
+        "ru_maxrss_bytes": 531415040,
+        "smaps_rollup": {
+          "Private_Clean": 92057600,
+          "Private_Dirty": 435433472,
+          "Pss": 528321536,
+          "Rss": 531521536,
+          "Shared_Clean": 4030464,
+          "Shared_Dirty": 0
+        },
+        "status": {
+          "Threads": 1,
+          "VmData": 756510720,
+          "VmExe": 12615680,
+          "VmHWM": 531415040,
+          "VmLib": 2312757248,
+          "VmRSS": 531415040,
+          "VmStk": 135168
+        }
+      },
+      {
+        "live_tensor_bytes": 2036704,
+        "mapped_rss_bytes": {
+          "anonymous_other": 150917120,
+          "cuda_nvidia": 132694016,
+          "heap": 114049024,
+          "numpy": 5627904,
+          "other_file": 28934144,
+          "stack": 77824,
+          "torch": 99225600
+        },
+        "monotonic_seconds": 1894046.439310563,
+        "phase": "steady-inference",
+        "retained_output_bytes": 2191500,
+        "ru_maxrss_bytes": 531415040,
+        "smaps_rollup": {
+          "Private_Clean": 94228480,
+          "Private_Dirty": 433266688,
+          "Pss": 528325632,
+          "Rss": 531525632,
+          "Shared_Clean": 4030464,
+          "Shared_Dirty": 0
+        },
+        "status": {
+          "Threads": 1,
+          "VmData": 756510720,
+          "VmExe": 12615680,
+          "VmHWM": 531415040,
+          "VmLib": 2312757248,
+          "VmRSS": 531415040,
+          "VmStk": 135168
+        }
+      }
+    ],
+    "state_bytes": 140901,
+    "warm_seconds": 0.46134385210461915
+  },
+  "rss_limit_bytes": 2147483648,
+  "schema_version": 1,
+  "variants": [
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "mkldnn_enabled": true,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3203072,
+            "heap": 2457600,
+            "other_file": 14245888,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894046.678833814,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19558400,
+          "smaps_rollup": {
+            "Private_Clean": 9695232,
+            "Private_Dirty": 7901184,
+            "Pss": 18021376,
+            "Rss": 19959808,
+            "Shared_Clean": 2363392,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 19558400,
+            "VmLib": 1871872,
+            "VmRSS": 19558400,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 148721664,
+            "cuda_nvidia": 132100096,
+            "heap": 102113280,
+            "numpy": 5267456,
+            "other_file": 28987392,
+            "stack": 81920,
+            "torch": 81039360
+          },
+          "monotonic_seconds": 1894047.648614832,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 497991680,
+          "smaps_rollup": {
+            "Private_Clean": 134922240,
+            "Private_Dirty": 359501824,
+            "Pss": 495241216,
+            "Rss": 498311168,
+            "Shared_Clean": 3887104,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743657472,
+            "VmExe": 12615680,
+            "VmHWM": 497991680,
+            "VmLib": 2312757248,
+            "VmRSS": 497991680,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.21",
+        "Involuntary context switches": "7",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "50725",
+        "Voluntary context switches": "5",
+        "maximum_resident_set_bytes": 611131392
+      },
+      "variant": "import-only"
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "mkldnn_enabled": true,
+      "model_tensor_bytes": 137404,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3203072,
+            "heap": 2457600,
+            "other_file": 14389248,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894047.891755328,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19963904,
+          "smaps_rollup": {
+            "Private_Clean": 9691136,
+            "Private_Dirty": 7901184,
+            "Pss": 18027520,
+            "Rss": 20103168,
+            "Shared_Clean": 2510848,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 19963904,
+            "VmLib": 1871872,
+            "VmRSS": 19963904,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150388736,
+            "cuda_nvidia": 132677632,
+            "heap": 102100992,
+            "numpy": 5578752,
+            "other_file": 28684288,
+            "stack": 81920,
+            "torch": 81260544
+          },
+          "monotonic_seconds": 1894048.863665769,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 500510720,
+          "smaps_rollup": {
+            "Private_Clean": 135680000,
+            "Private_Dirty": 361132032,
+            "Pss": 497612800,
+            "Rss": 500772864,
+            "Shared_Clean": 3960832,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743526400,
+            "VmExe": 12615680,
+            "VmHWM": 500510720,
+            "VmLib": 2312757248,
+            "VmRSS": 500510720,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 137404,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150929408,
+            "cuda_nvidia": 132677632,
+            "heap": 102789120,
+            "numpy": 5578752,
+            "other_file": 28684288,
+            "stack": 81920,
+            "torch": 86315008
+          },
+          "monotonic_seconds": 1894048.896397402,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 506785792,
+          "smaps_rollup": {
+            "Private_Clean": 135680000,
+            "Private_Dirty": 367415296,
+            "Pss": 503896064,
+            "Rss": 507056128,
+            "Shared_Clean": 3960832,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 745250816,
+            "VmExe": 12615680,
+            "VmHWM": 506785792,
+            "VmLib": 2312757248,
+            "VmRSS": 506785792,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.24",
+        "Involuntary context switches": "7",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "49868",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 619532288
+      },
+      "variant": "load-only"
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+      "exact_reference_identity": true,
+      "mkldnn_enabled": true,
+      "model_tensor_bytes": 137404,
+      "output_bytes": 2191500,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3198976,
+            "heap": 2457600,
+            "other_file": 14344192,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894049.133861458,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19980288,
+          "smaps_rollup": {
+            "Private_Clean": 9625600,
+            "Private_Dirty": 7897088,
+            "Pss": 17954816,
+            "Rss": 20054016,
+            "Shared_Clean": 2531328,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 19980288,
+            "VmLib": 1871872,
+            "VmRSS": 19980288,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155164672,
+            "cuda_nvidia": 133500928,
+            "heap": 102096896,
+            "numpy": 5550080,
+            "other_file": 28827648,
+            "stack": 81920,
+            "torch": 80429056
+          },
+          "monotonic_seconds": 1894050.105641321,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 505393152,
+          "smaps_rollup": {
+            "Private_Clean": 136450048,
+            "Private_Dirty": 365236224,
+            "Pss": 502483968,
+            "Rss": 505651200,
+            "Shared_Clean": 3964928,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743526400,
+            "VmExe": 12615680,
+            "VmHWM": 505393152,
+            "VmLib": 2312757248,
+            "VmRSS": 505393152,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 137404,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155734016,
+            "cuda_nvidia": 133500928,
+            "heap": 102494208,
+            "numpy": 5550080,
+            "other_file": 28827648,
+            "stack": 81920,
+            "torch": 83574784
+          },
+          "monotonic_seconds": 1894050.132691635,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 509231104,
+          "smaps_rollup": {
+            "Private_Clean": 136450048,
+            "Private_Dirty": 369348608,
+            "Pss": 506596352,
+            "Rss": 509763584,
+            "Shared_Clean": 3964928,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 744980480,
+            "VmExe": 12615680,
+            "VmHWM": 509231104,
+            "VmLib": 2312757248,
+            "VmRSS": 509231104,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1921328,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155877376,
+            "cuda_nvidia": 133500928,
+            "heap": 109977600,
+            "numpy": 5550080,
+            "other_file": 28827648,
+            "stack": 81920,
+            "torch": 91701248
+          },
+          "monotonic_seconds": 1894050.150693911,
+          "phase": "first-inference",
+          "retained_output_bytes": 21900,
+          "ru_maxrss_bytes": 523075584,
+          "smaps_rollup": {
+            "Private_Clean": 136450048,
+            "Private_Dirty": 385101824,
+            "Pss": 522349568,
+            "Rss": 525516800,
+            "Shared_Clean": 3964928,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 752463872,
+            "VmExe": 12615680,
+            "VmHWM": 523075584,
+            "VmLib": 2312757248,
+            "VmRSS": 523075584,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 2036704,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155885568,
+            "cuda_nvidia": 133500928,
+            "heap": 109977600,
+            "numpy": 5550080,
+            "other_file": 28827648,
+            "stack": 81920,
+            "torch": 91701248
+          },
+          "monotonic_seconds": 1894050.595282501,
+          "phase": "steady-inference",
+          "retained_output_bytes": 2191500,
+          "ru_maxrss_bytes": 523075584,
+          "smaps_rollup": {
+            "Private_Clean": 136450048,
+            "Private_Dirty": 385110016,
+            "Pss": 522357760,
+            "Rss": 525524992,
+            "Shared_Clean": 3964928,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 752463872,
+            "VmExe": 12615680,
+            "VmHWM": 523075584,
+            "VmLib": 2312757248,
+            "VmRSS": 523075584,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155901952,
+            "cuda_nvidia": 133500928,
+            "heap": 102735872,
+            "numpy": 5550080,
+            "other_file": 28958720,
+            "stack": 81920,
+            "torch": 91701248
+          },
+          "monotonic_seconds": 1894050.63319867,
+          "phase": "teardown",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 525516800,
+          "smaps_rollup": {
+            "Private_Clean": 136581120,
+            "Private_Dirty": 377884672,
+            "Pss": 515263488,
+            "Rss": 518430720,
+            "Shared_Clean": 3964928,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 746631168,
+            "VmExe": 12615680,
+            "VmHWM": 525516800,
+            "VmLib": 2312757248,
+            "VmRSS": 518426624,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.73",
+        "Involuntary context switches": "7",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "51992",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 630792192
+      },
+      "variant": "eager",
+      "warm_seconds": 0.44948400906287134
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+      "exact_reference_identity": true,
+      "mkldnn_enabled": true,
+      "model_tensor_bytes": 137404,
+      "output_bytes": 2191500,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3198976,
+            "heap": 2457600,
+            "other_file": 14024704,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894050.868911068,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19406848,
+          "smaps_rollup": {
+            "Private_Clean": 9404416,
+            "Private_Dirty": 7897088,
+            "Pss": 17732608,
+            "Rss": 19734528,
+            "Shared_Clean": 2433024,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 19406848,
+            "VmLib": 1871872,
+            "VmRSS": 19406848,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155152384,
+            "cuda_nvidia": 132685824,
+            "heap": 102092800,
+            "numpy": 5488640,
+            "other_file": 28504064,
+            "stack": 81920,
+            "torch": 80711680
+          },
+          "monotonic_seconds": 1894051.842977442,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 504455168,
+          "smaps_rollup": {
+            "Private_Clean": 136945664,
+            "Private_Dirty": 363790336,
+            "Pss": 501551104,
+            "Rss": 504717312,
+            "Shared_Clean": 3981312,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743526400,
+            "VmExe": 12615680,
+            "VmHWM": 504455168,
+            "VmLib": 2312757248,
+            "VmRSS": 504455168,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 137404,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155688960,
+            "cuda_nvidia": 132685824,
+            "heap": 102780928,
+            "numpy": 5488640,
+            "other_file": 28504064,
+            "stack": 81920,
+            "torch": 85561344
+          },
+          "monotonic_seconds": 1894051.875900813,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 510480384,
+          "smaps_rollup": {
+            "Private_Clean": 136945664,
+            "Private_Dirty": 369864704,
+            "Pss": 507625472,
+            "Rss": 510791680,
+            "Shared_Clean": 3981312,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 745250816,
+            "VmExe": 12615680,
+            "VmHWM": 510480384,
+            "VmLib": 2312757248,
+            "VmRSS": 510480384,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1921328,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155824128,
+            "cuda_nvidia": 132685824,
+            "heap": 110383104,
+            "numpy": 5488640,
+            "other_file": 28504064,
+            "stack": 81920,
+            "torch": 94081024
+          },
+          "monotonic_seconds": 1894051.922342845,
+          "phase": "first-inference",
+          "retained_output_bytes": 21900,
+          "ru_maxrss_bytes": 525074432,
+          "smaps_rollup": {
+            "Private_Clean": 136945664,
+            "Private_Dirty": 386121728,
+            "Pss": 523882496,
+            "Rss": 527048704,
+            "Shared_Clean": 3981312,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 752869376,
+            "VmExe": 12615680,
+            "VmHWM": 525074432,
+            "VmLib": 2312757248,
+            "VmRSS": 525074432,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 2036704,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155828224,
+            "cuda_nvidia": 132685824,
+            "heap": 110383104,
+            "numpy": 5488640,
+            "other_file": 28504064,
+            "stack": 81920,
+            "torch": 94081024
+          },
+          "monotonic_seconds": 1894052.364071881,
+          "phase": "steady-inference",
+          "retained_output_bytes": 2191500,
+          "ru_maxrss_bytes": 525074432,
+          "smaps_rollup": {
+            "Private_Clean": 136945664,
+            "Private_Dirty": 386121728,
+            "Pss": 523882496,
+            "Rss": 527048704,
+            "Shared_Clean": 3981312,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 752869376,
+            "VmExe": 12615680,
+            "VmHWM": 525074432,
+            "VmLib": 2312757248,
+            "VmRSS": 525074432,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 155832320,
+            "cuda_nvidia": 132685824,
+            "heap": 106323968,
+            "numpy": 5488640,
+            "other_file": 28569600,
+            "stack": 81920,
+            "torch": 94081024
+          },
+          "monotonic_seconds": 1894052.401406036,
+          "phase": "teardown",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 525225984,
+          "smaps_rollup": {
+            "Private_Clean": 137011200,
+            "Private_Dirty": 382066688,
+            "Pss": 519892992,
+            "Rss": 523059200,
+            "Shared_Clean": 3981312,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 751235072,
+            "VmExe": 12615680,
+            "VmHWM": 525225984,
+            "VmLib": 2312757248,
+            "VmRSS": 523059200,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.76",
+        "Involuntary context switches": "9",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "53124",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 634572800
+      },
+      "variant": "jit-default",
+      "warm_seconds": 0.47466610581614077
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+      "exact_reference_identity": true,
+      "mkldnn_enabled": true,
+      "model_tensor_bytes": 137404,
+      "output_bytes": 2191500,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3198976,
+            "heap": 2457600,
+            "other_file": 14241792,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894052.638761504,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19615744,
+          "smaps_rollup": {
+            "Private_Clean": 9695232,
+            "Private_Dirty": 7897088,
+            "Pss": 18017280,
+            "Rss": 19951616,
+            "Shared_Clean": 2359296,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 19615744,
+            "VmLib": 1871872,
+            "VmRSS": 19615744,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150953984,
+            "cuda_nvidia": 132456448,
+            "heap": 102092800,
+            "numpy": 5328896,
+            "other_file": 28971008,
+            "stack": 81920,
+            "torch": 81125376
+          },
+          "monotonic_seconds": 1894053.613840046,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 500682752,
+          "smaps_rollup": {
+            "Private_Clean": 141139968,
+            "Private_Dirty": 356044800,
+            "Pss": 497980416,
+            "Rss": 501010432,
+            "Shared_Clean": 3825664,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743526400,
+            "VmExe": 12615680,
+            "VmHWM": 500682752,
+            "VmLib": 2312757248,
+            "VmRSS": 500682752,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 137404,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151482368,
+            "cuda_nvidia": 132456448,
+            "heap": 102780928,
+            "numpy": 5328896,
+            "other_file": 28971008,
+            "stack": 81920,
+            "torch": 85938176
+          },
+          "monotonic_seconds": 1894053.646789966,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 506732544,
+          "smaps_rollup": {
+            "Private_Clean": 141139968,
+            "Private_Dirty": 362074112,
+            "Pss": 504009728,
+            "Rss": 507039744,
+            "Shared_Clean": 3825664,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 744202240,
+            "VmExe": 12615680,
+            "VmHWM": 506732544,
+            "VmLib": 2312757248,
+            "VmRSS": 506732544,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1921328,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151617536,
+            "cuda_nvidia": 132456448,
+            "heap": 112279552,
+            "numpy": 5328896,
+            "other_file": 28971008,
+            "stack": 81920,
+            "torch": 94588928
+          },
+          "monotonic_seconds": 1894053.66582849,
+          "phase": "first-inference",
+          "retained_output_bytes": 21900,
+          "ru_maxrss_bytes": 523280384,
+          "smaps_rollup": {
+            "Private_Clean": 141139968,
+            "Private_Dirty": 380358656,
+            "Pss": 522294272,
+            "Rss": 525324288,
+            "Shared_Clean": 3825664,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753717248,
+            "VmExe": 12615680,
+            "VmHWM": 523280384,
+            "VmLib": 2312757248,
+            "VmRSS": 523280384,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 2036704,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151621632,
+            "cuda_nvidia": 132456448,
+            "heap": 112279552,
+            "numpy": 5328896,
+            "other_file": 28971008,
+            "stack": 81920,
+            "torch": 94588928
+          },
+          "monotonic_seconds": 1894054.11922161,
+          "phase": "steady-inference",
+          "retained_output_bytes": 2191500,
+          "ru_maxrss_bytes": 523280384,
+          "smaps_rollup": {
+            "Private_Clean": 146624512,
+            "Private_Dirty": 374874112,
+            "Pss": 522294272,
+            "Rss": 525324288,
+            "Shared_Clean": 3825664,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753717248,
+            "VmExe": 12615680,
+            "VmHWM": 523280384,
+            "VmLib": 2312757248,
+            "VmRSS": 523280384,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151625728,
+            "cuda_nvidia": 132456448,
+            "heap": 103292928,
+            "numpy": 5328896,
+            "other_file": 29036544,
+            "stack": 81920,
+            "torch": 94588928
+          },
+          "monotonic_seconds": 1894054.15779487,
+          "phase": "teardown",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 525328384,
+          "smaps_rollup": {
+            "Private_Clean": 146690048,
+            "Private_Dirty": 365891584,
+            "Pss": 513377280,
+            "Rss": 516407296,
+            "Shared_Clean": 3825664,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 747888640,
+            "VmExe": 12615680,
+            "VmHWM": 525328384,
+            "VmLib": 2312757248,
+            "VmRSS": 516407296,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.74",
+        "Involuntary context switches": "5",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "53697",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 628273152
+      },
+      "variant": "jit-unoptimized",
+      "warm_seconds": 0.4586289650760591
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+      "exact_reference_identity": true,
+      "mkldnn_enabled": false,
+      "model_tensor_bytes": 137404,
+      "output_bytes": 2191500,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3203072,
+            "heap": 2457600,
+            "other_file": 14372864,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894054.38860961,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 19939328,
+          "smaps_rollup": {
+            "Private_Clean": 9814016,
+            "Private_Dirty": 7901184,
+            "Pss": 18142208,
+            "Rss": 20086784,
+            "Shared_Clean": 2371584,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17555456,
+            "VmExe": 12615680,
+            "VmHWM": 19939328,
+            "VmLib": 1871872,
+            "VmRSS": 19939328,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150740992,
+            "cuda_nvidia": 132456448,
+            "heap": 102092800,
+            "numpy": 5320704,
+            "other_file": 28884992,
+            "stack": 81920,
+            "torch": 81125376
+          },
+          "monotonic_seconds": 1894055.356626189,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 500383744,
+          "smaps_rollup": {
+            "Private_Clean": 146583552,
+            "Private_Dirty": 350281728,
+            "Pss": 497662976,
+            "Rss": 500703232,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743661568,
+            "VmExe": 12615680,
+            "VmHWM": 500383744,
+            "VmLib": 2312757248,
+            "VmRSS": 500383744,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 137404,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151281664,
+            "cuda_nvidia": 132456448,
+            "heap": 102780928,
+            "numpy": 5320704,
+            "other_file": 28884992,
+            "stack": 81920,
+            "torch": 85938176
+          },
+          "monotonic_seconds": 1894055.388975367,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 506433536,
+          "smaps_rollup": {
+            "Private_Clean": 146583552,
+            "Private_Dirty": 356323328,
+            "Pss": 503704576,
+            "Rss": 506744832,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 745385984,
+            "VmExe": 12615680,
+            "VmHWM": 506433536,
+            "VmLib": 2312757248,
+            "VmRSS": 506433536,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1921328,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151420928,
+            "cuda_nvidia": 132456448,
+            "heap": 110379008,
+            "numpy": 5320704,
+            "other_file": 28884992,
+            "stack": 81920,
+            "torch": 94523392
+          },
+          "monotonic_seconds": 1894055.435035704,
+          "phase": "first-inference",
+          "retained_output_bytes": 21900,
+          "ru_maxrss_bytes": 521158656,
+          "smaps_rollup": {
+            "Private_Clean": 146583552,
+            "Private_Dirty": 372645888,
+            "Pss": 520027136,
+            "Rss": 523067392,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753000448,
+            "VmExe": 12615680,
+            "VmHWM": 521158656,
+            "VmLib": 2312757248,
+            "VmRSS": 521158656,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 2036704,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151425024,
+            "cuda_nvidia": 132456448,
+            "heap": 110379008,
+            "numpy": 5320704,
+            "other_file": 28884992,
+            "stack": 81920,
+            "torch": 94523392
+          },
+          "monotonic_seconds": 1894055.895412568,
+          "phase": "steady-inference",
+          "retained_output_bytes": 2191500,
+          "ru_maxrss_bytes": 521158656,
+          "smaps_rollup": {
+            "Private_Clean": 146583552,
+            "Private_Dirty": 372645888,
+            "Pss": 520027136,
+            "Rss": 523067392,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753000448,
+            "VmExe": 12615680,
+            "VmHWM": 521158656,
+            "VmLib": 2312757248,
+            "VmRSS": 521158656,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 151429120,
+            "cuda_nvidia": 132456448,
+            "heap": 106332160,
+            "numpy": 5320704,
+            "other_file": 28950528,
+            "stack": 81920,
+            "torch": 94523392
+          },
+          "monotonic_seconds": 1894055.932881622,
+          "phase": "teardown",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 522993664,
+          "smaps_rollup": {
+            "Private_Clean": 146649088,
+            "Private_Dirty": 368599040,
+            "Pss": 516045824,
+            "Rss": 519086080,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 751661056,
+            "VmExe": 12615680,
+            "VmHWM": 522993664,
+            "VmLib": 2312757248,
+            "VmRSS": 519086080,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.78",
+        "Involuntary context switches": "7",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "52621",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 630800384
+      },
+      "variant": "jit-mkldnn-off",
+      "warm_seconds": 0.49391431687399745
+    },
+    {
+      "classification": "a10m5r1-synthetic-development-only",
+      "digest_sha256": "008ccb9d2b53322c8e440e27a4c20bbc0fbf28f95840b65af02af36c7e52f644",
+      "exact_reference_identity": true,
+      "mkldnn_enabled": true,
+      "model_tensor_bytes": 0,
+      "output_bytes": 2191500,
+      "phases": [
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 3198976,
+            "heap": 2457600,
+            "other_file": 14430208,
+            "stack": 53248
+          },
+          "monotonic_seconds": 1894056.171702002,
+          "phase": "python-start",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 20066304,
+          "smaps_rollup": {
+            "Private_Clean": 9871360,
+            "Private_Dirty": 7897088,
+            "Pss": 18193408,
+            "Rss": 20140032,
+            "Shared_Clean": 2371584,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 17420288,
+            "VmExe": 12615680,
+            "VmHWM": 20066304,
+            "VmLib": 1871872,
+            "VmRSS": 20066304,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150097920,
+            "cuda_nvidia": 132456448,
+            "heap": 102092800,
+            "numpy": 5328896,
+            "other_file": 28942336,
+            "stack": 81920,
+            "torch": 81125376
+          },
+          "monotonic_seconds": 1894057.139756201,
+          "phase": "torch-imported",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 499806208,
+          "smaps_rollup": {
+            "Private_Clean": 146673664,
+            "Private_Dirty": 349614080,
+            "Pss": 497083392,
+            "Rss": 500125696,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 743526400,
+            "VmExe": 12615680,
+            "VmHWM": 499806208,
+            "VmLib": 2312757248,
+            "VmRSS": 499806208,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150646784,
+            "cuda_nvidia": 132456448,
+            "heap": 102940672,
+            "numpy": 5328896,
+            "other_file": 28942336,
+            "stack": 81920,
+            "torch": 86855680
+          },
+          "monotonic_seconds": 1894057.174127753,
+          "phase": "model-loaded",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 506429440,
+          "smaps_rollup": {
+            "Private_Clean": 146673664,
+            "Private_Dirty": 356741120,
+            "Pss": 504210432,
+            "Rss": 507252736,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 744337408,
+            "VmExe": 12615680,
+            "VmHWM": 506429440,
+            "VmLib": 2312757248,
+            "VmRSS": 506429440,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1921328,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150781952,
+            "cuda_nvidia": 132456448,
+            "heap": 112435200,
+            "numpy": 5328896,
+            "other_file": 28942336,
+            "stack": 81920,
+            "torch": 94851072
+          },
+          "monotonic_seconds": 1894057.220504407,
+          "phase": "first-inference",
+          "retained_output_bytes": 21900,
+          "ru_maxrss_bytes": 524148736,
+          "smaps_rollup": {
+            "Private_Clean": 146673664,
+            "Private_Dirty": 374366208,
+            "Pss": 521835520,
+            "Rss": 524877824,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753872896,
+            "VmExe": 12615680,
+            "VmHWM": 524148736,
+            "VmLib": 2312757248,
+            "VmRSS": 524148736,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 1899300,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150781952,
+            "cuda_nvidia": 132456448,
+            "heap": 112435200,
+            "numpy": 5328896,
+            "other_file": 28942336,
+            "stack": 81920,
+            "torch": 94851072
+          },
+          "monotonic_seconds": 1894057.679878643,
+          "phase": "steady-inference",
+          "retained_output_bytes": 2191500,
+          "ru_maxrss_bytes": 524148736,
+          "smaps_rollup": {
+            "Private_Clean": 146673664,
+            "Private_Dirty": 374366208,
+            "Pss": 521835520,
+            "Rss": 524877824,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 753872896,
+            "VmExe": 12615680,
+            "VmHWM": 524148736,
+            "VmLib": 2312757248,
+            "VmRSS": 524148736,
+            "VmStk": 135168
+          }
+        },
+        {
+          "live_tensor_bytes": 0,
+          "mapped_rss_bytes": {
+            "anonymous_other": 150786048,
+            "cuda_nvidia": 132456448,
+            "heap": 106307584,
+            "numpy": 5328896,
+            "other_file": 29007872,
+            "stack": 81920,
+            "torch": 94851072
+          },
+          "monotonic_seconds": 1894057.719877435,
+          "phase": "teardown",
+          "retained_output_bytes": 0,
+          "ru_maxrss_bytes": 524886016,
+          "smaps_rollup": {
+            "Private_Clean": 146739200,
+            "Private_Dirty": 368238592,
+            "Pss": 515773440,
+            "Rss": 518815744,
+            "Shared_Clean": 3837952,
+            "Shared_Dirty": 0
+          },
+          "status": {
+            "Threads": 1,
+            "VmData": 748363776,
+            "VmExe": 12615680,
+            "VmHWM": 524886016,
+            "VmLib": 2312757248,
+            "VmRSS": 518811648,
+            "VmStk": 135168
+          }
+        }
+      ],
+      "rss_limit_pass": true,
+      "time_v": {
+        "Elapsed (wall clock) time (h:mm:ss or m:ss)": "0:01.78",
+        "Involuntary context switches": "6",
+        "Major (requiring I/O) page faults": "0",
+        "Minor (reclaiming a frame) page faults": "52450",
+        "Voluntary context switches": "6",
+        "maximum_resident_set_bytes": 630435840
+      },
+      "variant": "jit-frozen",
+      "warm_seconds": 0.4921257090754807
+    }
+  ],
+  "verdict": "REMEDY-CANDIDATE"
+}

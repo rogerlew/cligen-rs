@@ -1,0 +1,14 @@
+[
+  {"station_id":"az026481","horizon_years":30,"candidate_identity":"d974e8150ea0e498493542dff17cae26b1c6e9c4e6b3cd4ae396bcc0cdf0e098"},
+  {"station_id":"az026481","horizon_years":100,"candidate_identity":"2983c9d9358b6b670730c613d8e28ea86d5a5b2e71e269502f4cabb0ab31d88e"},
+  {"station_id":"nv262631","horizon_years":30,"candidate_identity":"acc00cba1c8ceb1bb3e559aaeff08b8a90c8dca1dd43062d3b78c13f64b3ff5e"},
+  {"station_id":"nv262631","horizon_years":100,"candidate_identity":"84c8546cf0d31201dd79795bad9490a9874c215c45e821c21271e8e7e3f0fdb8"},
+  {"station_id":"az028820","horizon_years":30,"candidate_identity":"bc04a3f8fc88ef0f10a2c4270471c540a9de4c2ec0a8b913a6293e086ce64ab6"},
+  {"station_id":"az028820","horizon_years":100,"candidate_identity":"931d05dcddf184b7ad53aa0dd6874611ef95f725914d563527ea4b6348b02128"},
+  {"station_id":"id101022","horizon_years":30,"candidate_identity":"ffe5cc7f1677a4780e81c3157b84425798777105ac6e9002d66802c09956927c"},
+  {"station_id":"id101022","horizon_years":100,"candidate_identity":"ce82f255a44eb5c21b979e7691c2bcd6d9750c941bc756e3fbd0ffd31c2b61a8"},
+  {"station_id":"la160549","horizon_years":30,"candidate_identity":"2ec7021d6dc78ca45e1655feff701a7c6bbc85e9449bbb7ae4410c38604274ad"},
+  {"station_id":"la160549","horizon_years":100,"candidate_identity":"ff34823d6b8e68b732b072e896312e5cad2560cd63678063a2e342a5ced8a6f5"},
+  {"station_id":"me171175","horizon_years":30,"candidate_identity":"2748612fe795ba08cacdd638be0bbd4747fa860f9a4b74712b68a7c8202645e5"},
+  {"station_id":"me171175","horizon_years":100,"candidate_identity":"ff07f9dcdde97bd877601c21eb40c0c6b52d9a11484772d0696f414f073a2e64"}
+]

@@ -35,15 +35,32 @@ def main() -> None:
     root = options.asset_root.resolve()
     root.mkdir(parents=True, exist_ok=True)
     cache = options.canonical_cache.resolve()
-    canonical = ("runtime.tar.gz", "wheelhouse.tar", "requirements.lock")
+    canonical = (
+        "runtime.tar.gz",
+        "wheelhouse.tar",
+        "requirements.lock",
+        "rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz",
+        "corpus.tar",
+        "source.tar.gz",
+        "cargo-vendor.tar.gz",
+        "selected-parameters-v1.tar.gz",
+    )
     for name in canonical:
         source = cache / name
         if not source.is_file():
             raise RuntimeError(f"canonical cache asset absent: {name}")
-    jobs = ("diagnose.py", "diagnose-job.sh", "job-memory-attribution.sh")
+    jobs = (
+        "diagnose.py",
+        "diagnose-job.sh",
+        "job-memory-attribution.sh",
+        "accept.py",
+        "accept-job.sh",
+        "job-acceptance.sh",
+        "expected-identities.json",
+    )
     for name in jobs:
         shutil.copyfile(PACKAGE / "artifacts/jobs" / name, root / name)
-    for name in ("diagnose-job.sh", "job-memory-attribution.sh"):
+    for name in ("diagnose-job.sh", "job-memory-attribution.sh", "accept-job.sh", "job-acceptance.sh"):
         (root / name).chmod(0o700)
     for source_name, target_name in (
         ("recover_job_local_v2.sh", "recover-job-local-v2.sh"),

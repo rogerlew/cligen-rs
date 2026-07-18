@@ -25,3 +25,14 @@ the first identifies an exact output-preserving candidate at or below 2 GiB;
 it will exercise that one recipe against a candidate-fit export and the frozen
 runtime contract. Otherwise this package stops before approximation,
 dependency expansion, threshold change, or model-family change.
+
+R1 completed its Slurm work but omitted the toolkit-v2 operational gate map,
+so its lifecycle is invalid even though the raw measurements are retained.
+R2 corrects only that receipt contract, adds a fresh-process reproduction of
+the A10M5 nondeterministic export setting, and uses the already-authorized
+second allocation for one candidate-fit acceptance. The acceptance changes
+one line in the CPU child: it reapplies
+`torch.use_deterministic_algorithms(True)`, which A10M5 applied in the training
+process but not across the `exec` boundary. Its twelve generated-stream hashes
+must exactly equal the retained A10M5 N0-l32-w128-d2-lognormal hashes before
+the recipe can pass.

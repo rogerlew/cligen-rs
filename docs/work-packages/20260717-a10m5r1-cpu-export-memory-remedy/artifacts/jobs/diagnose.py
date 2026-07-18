@@ -22,6 +22,7 @@ VARIANTS = (
     "load-only",
     "eager",
     "jit-default",
+    "jit-current-nondeterministic",
     "jit-unoptimized",
     "jit-mkldnn-off",
     "jit-frozen",
@@ -103,13 +104,13 @@ def snapshot(phase: str, tensor_bytes: int = 0, output_bytes: int = 0) -> dict[s
     }
 
 
-def configure_torch(torch: object) -> None:
+def configure_torch(torch: object, deterministic: bool = True) -> None:
     affinity = sorted(os.sched_getaffinity(0))
     os.sched_setaffinity(0, {affinity[0]})
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
     torch.manual_seed(SEED)
-    torch.use_deterministic_algorithms(True)
+    torch.use_deterministic_algorithms(deterministic)
 
 
 def model_types(torch: object) -> tuple[type, type]:
@@ -206,7 +207,7 @@ def worker(work: Path, variant: str, result: Path) -> None:
     phases = [snapshot("python-start")]
     import torch
 
-    configure_torch(torch)
+    configure_torch(torch, deterministic=variant != "jit-current-nondeterministic")
     if variant == "jit-mkldnn-off":
         torch.backends.mkldnn.enabled = False
     phases.append(snapshot("torch-imported"))
@@ -214,6 +215,7 @@ def worker(work: Path, variant: str, result: Path) -> None:
         "classification": "a10m5r1-synthetic-development-only",
         "variant": variant,
         "mkldnn_enabled": bool(torch.backends.mkldnn.enabled),
+        "deterministic_algorithms": bool(torch.are_deterministic_algorithms_enabled()),
         "phases": phases,
     }
     if variant == "import-only":
@@ -288,7 +290,7 @@ def aggregate(work: Path, output: Path) -> None:
         "exact_remedy_candidates": exact_remedies,
         "rss_limit_bytes": RSS_LIMIT,
         "diagnostic_complete": len(variants) == len(VARIANTS),
-        "verdict": "REMEDY-CANDIDATE" if exact_remedies else "NO-REMEDY",
+        "diagnostic_disposition": "REMEDY-CANDIDATE" if exact_remedies else "NO-REMEDY",
     })
 
 
