@@ -1,6 +1,6 @@
 # A10 Lemhi canonical v2 environment-closure smoke
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD`
 Date: 2026-07-17
 Evidence mode: Live
 Starting branch and push target: current `origin/main`, push `main`
@@ -100,3 +100,15 @@ attestation or designation.
 - `artifacts/execution.md` — command/evidence narrative;
 - `artifacts/gate-results.md` — final gate matrix; and
 - `artifacts/terminal.md` — terminal disposition.
+
+## Result
+
+Terminal: `HOLD-A10-CANONICAL-V2-SMOKE-ASSET-IDENTITY`
+
+Job `1013865` completed all 27 compute and operational gates on `node03`, and
+the toolkit proved both durable and job-local cleanup. Final attestation audit
+then found that the staged Cargo-vendor gzip stream had a rebuilt timestamp:
+its extracted dependency closure was correct, but its SHA-256 was `8f69ea...`
+rather than the candidate's frozen `13d7f4...`. No attestation or designation
+was issued. A new package identity must bind and verify the exact candidate
+asset hashes before allocation.

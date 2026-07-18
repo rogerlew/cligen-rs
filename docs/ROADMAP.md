@@ -189,14 +189,17 @@ reserved exact-node recovery allocation proved `JOB_LOCAL_ABSENT`; both jobs
 settled and the marker-bound durable root was removed. The candidate remained
 immutable and no smoke attestation or designation was created.
 
-**Active (2026-07-17):** the
+**Hold (2026-07-17):** the
 [environment-closure successor smoke](work-packages/20260717-a10-lemhi-canonical-v2-environment-closure-smoke/package.md)
-uses a new identity with the unchanged candidate. It records typed ambient
-presence flags, clears prohibited state, reconstructs the registered
-environment, and asserts closure before import. It also closes the demonstrated
-executable-mode, terminal-failure-receipt, and pre-submission-abort protocol
-gaps. The required sequence remains candidate smoke, immutable smoke
-attestation, local canonical-designation-index revision, then A10M5.
+proved the environment remedy and passed all 27 compute/operational gates, but
+final candidate audit found a regenerated Cargo-vendor gzip timestamp and
+therefore a hash mismatch. It emitted no attestation.
+
+**Active (2026-07-17):** the
+[exact-asset successor smoke](work-packages/20260717-a10-lemhi-canonical-v2-exact-asset-smoke/package.md)
+adds a pre-allocation configuration-level identity firewall and binds the
+reconstructed exact candidate archive. The required sequence remains passing
+smoke attestation, local canonical-designation-index revision, then A10M5.
 
 After a successor canonical smoke pass, A10M5 may scaffold the
 frozen 12-configuration, one-seed development screen and bounded promotions

@@ -74,4 +74,5 @@ Start from [templates/package.md](templates/package.md).
 | [20260717-a10m4-one-l40-qualification](20260717-a10m4-one-l40-qualification/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10m4o1-lemhi-operational-hardening](20260717-a10m4o1-lemhi-operational-hardening/package.md) | EXECUTED-COMPLETE |
 | [20260717-a10-lemhi-canonical-v2-smoke](20260717-a10-lemhi-canonical-v2-smoke/package.md) | EXECUTED-HOLD |
-| [20260717-a10-lemhi-canonical-v2-environment-closure-smoke](20260717-a10-lemhi-canonical-v2-environment-closure-smoke/package.md) | SCAFFOLDED |
+| [20260717-a10-lemhi-canonical-v2-environment-closure-smoke](20260717-a10-lemhi-canonical-v2-environment-closure-smoke/package.md) | EXECUTED-HOLD |
+| [20260717-a10-lemhi-canonical-v2-exact-asset-smoke](20260717-a10-lemhi-canonical-v2-exact-asset-smoke/package.md) | SCAFFOLDED |
