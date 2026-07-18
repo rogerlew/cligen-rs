@@ -249,6 +249,11 @@ class LedgerAndLineageTests(HardeningFixture):
         authority, _ = self.authority()
         request = {"run_id": "second-run", "source_commit": "abcdef1", "asset_manifest_sha256": HEX_A, "plan_input_sha256": HEX_B}
         revision = derive_authority_revision(authority, request)
+        self.assertEqual(revision["allowed_roots"], authority["allowed_roots"])
+        self.assertEqual(
+            revision["confirmation_classification"],
+            authority["confirmation_classification"],
+        )
         self.assertEqual(revision["resource_budget_id"], authority["resource_budget_id"])
         self.assertEqual(revision["predecessor_authority_revision_sha256"], authority["authority_revision_sha256"])
         bad = dict(request, resource_ceiling_gpu_minutes=999)

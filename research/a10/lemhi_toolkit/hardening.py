@@ -402,7 +402,9 @@ class LedgerAnchor:
 
 
 IMMUTABLE_AUTHORITY_FIELDS = (
+    "allowed_roots",
     "authority_id",
+    "confirmation_classification",
     "package_id",
     "resource_budget_id",
     "resource_ceiling_gpu_minutes",
