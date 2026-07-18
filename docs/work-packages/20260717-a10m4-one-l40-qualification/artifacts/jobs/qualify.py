@@ -248,7 +248,7 @@ def run_train(options: argparse.Namespace) -> None:
         "scaler": scaler.state_dict(),
         "rng": rng_state(),
         "sampler": {"epoch_order_sha256": hashlib.sha256(b"a10m4-fixed-two-window-order").hexdigest()},
-        "corpus_cursor": {"next_batch": 1},
+        "corpus_cursor": {"next_batch": 1, "window_offset": window_offset},
         "model_record": {
             "configuration_id": "N0-l32-w128-d2-lognormal",
             "latent_dim": 32,
@@ -510,10 +510,12 @@ def run_restart(options: argparse.Namespace) -> None:
     _, normalized, normalization = verify_corpus(options.corpus)
     fit = load_daymet_role(options.corpus, normalized, "candidate_fit")
     means, scales = normalizers(normalization, fit["regime"])
-    batch2 = window(fit, means, scales, 1)
     device = torch.device("cuda:0")
-    model, optimizer, scheduler, scaler = components(device)
     checkpoint = torch.load(options.checkpoint, map_location=device, weights_only=False)
+    batch2 = window(
+        fit, means, scales, int(checkpoint["corpus_cursor"]["window_offset"]) + 1
+    )
+    model, optimizer, scheduler, scaler = components(device)
     model.load_state_dict(checkpoint["model"])
     optimizer.load_state_dict(checkpoint["optimizer"])
     scheduler.load_state_dict(checkpoint["scheduler"])
