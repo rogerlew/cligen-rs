@@ -62,7 +62,7 @@ value['valid']=int(status)==0 and all(value['gates'].values())
 value['verdict']='PASS' if value['valid'] else 'FAIL'
 if cleanup!='true': value['recovery_target']={{'device':int(device),'job_id':job,'marker_sha256':marker_sha,'node':node,'target':target,'uid':int(uid)}}
 temporary=final+'.promote'
-with open(temporary,'w',encoding='utf-8') as stream: json.dump(value,stream,indent=2,sort_keys=True); stream.write('\n')
+with open(temporary,'w',encoding='utf-8') as stream: json.dump(value,stream,indent=2,sort_keys=True); stream.write('\\n')
 os.replace(temporary,final)
 if os.path.exists(partial): os.unlink(partial)
 PY
