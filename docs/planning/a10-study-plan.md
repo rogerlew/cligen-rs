@@ -56,6 +56,29 @@ ordinary work. A new operator decision is needed only if execution would
 materially expand the scientific question, license exposure, external cost,
 public interface, or production scope.
 
+### Operator amendment: refinement before spatial promotion (2026-07-18)
+
+After A10M5 and its clean-process memory diagnosis, the operator accepted
+[ADR-0005](../decisions/0005-a10-refinement-before-spatial-promotion.md).
+The amendment is prospective and does not rewrite A10M3/A10M5 evidence.
+A10M5R2 remains the exact corrected replay; its survivors are anchors rather
+than authority to enter M6 directly.
+
+The amended forward sequence inserts four separately audited scientific
+records before M6: M5R3 selects a precipitation family and measures the broad
+capacity/runtime knee on the accepted M1 corpus; M5R4 adjudicates realized
+calendar-month and interannual behavior; M5R5 acquires and freezes the
+spatially blocked N3/elevation corpus; and M5R6 carries the knee and its
+immediately larger Pareto neighbor through spatial generalization. M6 becomes
+eligible only after both temporal and spatial gates. The exact contract is
+[SPEC-A10-REFINEMENT-TRAJECTORY](../specifications/SPEC-A10-REFINEMENT-TRAJECTORY.md).
+
+These successor identities are justified by a material expansion of the
+scientific question, not routine package administration. The amendment also
+records a post-A10 direction—a separate cleanroom daily terrain spatializer
+driven by shared coarse neural weather state—but does not add that work to
+A10's production or confirmation scope.
+
 ## 1. Why the campaign is pivoting
 
 ### 1.1 What has been learned
@@ -1155,6 +1178,10 @@ before relevant output access. The planning hypotheses are:
 | H6 | prospective | The selector chooses at most one exact candidate identity for M7 sealing and publishes every unsupported/fallback regime. |
 | H7 | prospective | Confirmation target data remain scientifically unread unless the candidate and confirmation seals are complete. |
 | H8 | conditional prospective | If a candidate seals, the one-shot confirmation returns exactly one pass or final-failure terminal without feedback into training. |
+| H9 | prospective successor, 2026-07-18 | A family-correct lognormal, gamma, or body-plus-GPD-excess precipitation candidate produces a valid capacity pair on the accepted M1 corpus without the retired whole-wet-day GPD. |
+| H10 | prospective successor, 2026-07-18 | Realized neural calendar-month and interannual distributions improve on the registered revised stochastic-plus-PRISM comparator without violating frozen noninferiority guards. |
+| H11 | prospective successor, 2026-07-18 | A geometric capacity ladder exposes a reproducible CPU/runtime Pareto knee and one larger neighboring frontier capacity before N3/elevation expansion. |
+| H12 | prospective successor, 2026-07-18 | At least one retained capacity generalizes across geographically held N3/elevation strata, including explicit mountain contrasts, well enough to justify M6 entry. |
 
 Failure to support H4 does not automatically reject a neural candidate if the
 complete-pooling version independently satisfies H5. It does reject the claim
@@ -1440,7 +1467,10 @@ Package identity: `A10M6`.
 
 Entry:
 
-- M5 promotes bounded configurations;
+- M5R2 has an accepted terminal and M5R3 retains a valid capacity pair;
+- M5R4 passes realized temporal-dispersion adjudication;
+- M5R5 freezes the expanded N3/elevation corpus and spatial roles;
+- M5R6 selects one exact architecture after spatially blocked comparison;
 - development corpus and burns are still unchanged.
 
 Work:

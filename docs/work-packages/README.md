@@ -81,3 +81,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260717-a10m5-bounded-gpu-screen](20260717-a10m5-bounded-gpu-screen/package.md) | EXECUTED-HOLD-NO-VALID-NEURAL-FIT |
 | [20260717-a10m5r1-cpu-export-memory-remedy](20260717-a10m5r1-cpu-export-memory-remedy/package.md) | EXECUTED-COMPLETE |
 | [20260718-a10m5r2-corrected-cpu-export-screen](20260718-a10m5r2-corrected-cpu-export-screen/package.md) | SCAFFOLDED |
+| [20260718-a10m5r3-candidate-family-capacity-knee](20260718-a10m5r3-candidate-family-capacity-knee/package.md) | SCAFFOLDED |

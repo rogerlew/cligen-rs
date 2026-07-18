@@ -241,8 +241,38 @@ dependency, threshold, or protected-role access changed.
 is scaffolded to rerun the frozen twelve-row screen under a new package
 identity. The trainer must exit before a small supervisor launches and
 measures the CPU worker with `/proc` `VmHWM` plus external `/usr/bin/time -v`.
-A10M6 remains unauthorized until the successor produces valid N0 and N1
-promotions under every unchanged gate.
+A10M5R2 remains the immutable operational replay; any valid N0/N1 promotions
+become anchors rather than final scientific selections.
+
+**Operator direction 2026-07-18: refine candidate family and capacity on the
+accepted corpus before spatial expansion, and require realized temporal plus
+spatial evidence before promotion.**
+[ADR-0005](decisions/0005-a10-refinement-before-spatial-promotion.md) and
+[SPEC-A10-REFINEMENT-TRAJECTORY](specifications/SPEC-A10-REFINEMENT-TRAJECTORY.md)
+freeze the successor sequence:
+
+1. execute A10M5R2 without changing its twelve-row correction boundary;
+2. execute the scaffolded
+   [A10M5R3 family and capacity/runtime-knee package](work-packages/20260718-a10m5r3-candidate-family-capacity-knee/package.md)
+   on the existing A10M1 corpus, retiring the current whole-wet-day GPD and
+   retaining the Pareto knee plus its immediately larger passing neighbor;
+3. execute A10M5R4 realized calendar-month and interannual dispersion
+   adjudication against observations, faithful CLIGEN, and a separately
+   versioned revised stochastic-plus-PRISM comparator;
+4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
+   within-ecoregion-elevation corpus;
+5. execute A10M5R6 to compare both retained capacities on geographically held
+   mountain and nonmountain strata; and
+6. authorize A10M6 only after the final architecture/runtime decision passes
+   both temporal and spatial gates.
+
+The N3/elevation expansion is deliberately downstream of the broad capacity
+knee. It may move the final choice between the two retained capacities, but it
+does not require rerunning a full architecture matrix. The existing auxiliary
+terms named monthly precipitation and annual dispersion are training
+regularizers, not realized ensemble evidence, and cannot satisfy A10M5R4.
+Confirmation roles remain sealed. A cleanroom ClimateNA-like daily terrain
+spatializer and downstream subdaily storm disaggregation remain post-A10.
 
 A9d completed on 2026-07-15 with
 `HOLD-A9D-NO-SELECTABLE-CANDIDATE` in one successor-development/conditional-
