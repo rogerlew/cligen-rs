@@ -18,12 +18,6 @@ environment=$job_local/runtime/environment
 printf '%s\n' 'recovery not invoked' >"$run_root/slurm/toolkit-recovery.0.out"
 printf '%s\n' 'recovery not invoked' >"$run_root/slurm/toolkit-recovery.0.err"
 
-if [ "$family" = AUTO ]; then
-  set -- $(/usr/bin/python3 "$run_root/resolve.py" --phase "$phase" --slot "$capacity" --seed "$seed" --results "$run_root/results")
-  family=$1
-  capacity=$2
-fi
-
 unset PYTHONPATH PYTHONHOME LD_LIBRARY_PATH
 export PYTHONNOUSERSITE=1 PIP_NO_INDEX=1 CUBLAS_WORKSPACE_CONFIG=:4096:8
 export PATH=/usr/bin:/bin CC=/usr/bin/gcc CXX=/usr/bin/g++ CARGO_NET_OFFLINE=true
@@ -31,6 +25,11 @@ mkdir -p -- "$runtime_root" "$output" "$job_local/wheels" "$job_local/corpus" "$
 tar -xzf "$run_root/runtime.tar.gz" --strip-components=1 -C "$runtime_root"
 test "$("$runtime_root/bin/python3" --version 2>&1)" = "Python 3.11.15"
 "$runtime_root/bin/python3" -m venv --copies "$environment"
+if [ "$family" = AUTO ]; then
+  set -- $("$environment/bin/python" "$run_root/resolve.py" --phase "$phase" --slot "$capacity" --seed "$seed" --results "$run_root/results")
+  family=$1
+  capacity=$2
+fi
 tar -xf "$run_root/wheelhouse.tar" -C "$job_local/wheels"
 "$environment/bin/python" -m pip install --disable-pip-version-check --no-index --require-hashes --find-links "$job_local/wheels/wheelhouse" -r "$run_root/requirements.lock" >"$job_local/pip-install.log" 2>&1
 "$environment/bin/python" -m pip check >"$job_local/pip-check.log" 2>&1
