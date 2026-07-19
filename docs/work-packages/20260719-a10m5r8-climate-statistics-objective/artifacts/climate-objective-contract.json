@@ -1,0 +1,74 @@
+{
+  "architecture": {
+    "amount_family": "lognormal_wet_v2",
+    "capacity_id": "P1",
+    "depth": 2,
+    "latent_dim": 80,
+    "pooling": "N0_complete",
+    "training_seed": 147031,
+    "width": 160
+  },
+  "arms": [
+    "proper_nll_control",
+    "climate_statistics_treatment"
+  ],
+  "checkpoint": {
+    "early_stop_patience": 8,
+    "maximum_epochs": 40,
+    "minimum_epochs": 12,
+    "points_per_regime": 4,
+    "tie_tolerance": 1e-06
+  },
+  "decision": {
+    "maximum_block_degradation_fraction": 0.1,
+    "maximum_daily_nll_degradation_fraction": 0.1,
+    "minimum_climate_score_improvement_fraction": 0.15
+  },
+  "fields": [
+    "prcp",
+    "tmax",
+    "tmin"
+  ],
+  "objective": {
+    "blocks": [
+      "monthly_location",
+      "monthly_interannual_dispersion",
+      "within_month_daily_dispersion",
+      "annual_location",
+      "annual_interannual_dispersion",
+      "wet_occurrence_and_amount",
+      "precipitation_temperature_dependence"
+    ],
+    "climate_block_weight": 1.0,
+    "daily_proper_nll_weight": 0.05,
+    "latent_stability_weight": 0.005,
+    "paired_daily_error_weight": 0.0
+  },
+  "roles": {
+    "fit": "candidate_fit",
+    "fit_validation_gradient": false,
+    "forbidden": [
+      "development_selection",
+      "confirmation_metadata",
+      "confirmation_locked"
+    ],
+    "validation": "fit_validation"
+  },
+  "schema_version": 1,
+  "stochastic": {
+    "evaluation_members": 8,
+    "relaxed_wet_temperature": 0.5,
+    "training_members": 4,
+    "window_calendar_years": 8
+  },
+  "training": {
+    "batches_per_epoch": 6,
+    "learning_rate": 0.0003,
+    "records_per_batch": 6,
+    "weight_decay": 0.01
+  },
+  "successor": {
+    "first_extension": "solar_radiation_clearness_index",
+    "requires_core_objective_ready": true
+  }
+}

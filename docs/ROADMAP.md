@@ -364,6 +364,18 @@ explicit baseline-only versus latent-dynamics ablation, rather than raw
 autoregressive feedback. That combined architecture changes the scientific
 contract and requires separate operator direction and resource authorization.
 
+**Authorized objective-repair continuation (2026-07-19):** the operator
+directed
+[A10M5R8](work-packages/20260719-a10m5r8-climate-statistics-objective/package.md)
+to test the accepted P1 architecture before changing model structure. Its
+[living ExecPlan](exec-plans/20260719-a10-climate-statistics-training.md) and
+[research specification](specifications/SPEC-A10-CLIMATE-STATISTICS-TRAINING.md)
+freeze an exact reconstructed control against a same-architecture treatment
+trained and selected primarily on stochastic calendar-month and calendar-year
+precipitation/Tmax/Tmin locations and dispersions. Solar radiation remains the
+first gated generalization after the core objective is supported; it is not
+part of this bounded attribution experiment.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
