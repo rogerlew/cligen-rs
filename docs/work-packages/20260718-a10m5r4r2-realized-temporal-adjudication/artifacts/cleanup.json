@@ -1,0 +1,15 @@
+{
+  "durable_cleanup": {
+    "cleaner": "research/a10/lemhi_toolkit/remote/clean.sh",
+    "marker_authenticated": true,
+    "remote_absent": true,
+    "remote_relative_root": "runs/a10m5r4r2-temporal-r0"
+  },
+  "job_local_cleanup": {
+    "application_exit": 1,
+    "classification": "verified_absent_by_supervisor_contract",
+    "supervisor_cleanup_failure_exit": 75
+  },
+  "private_raw_failure_quarantine_retained": true,
+  "schema_version": 1
+}

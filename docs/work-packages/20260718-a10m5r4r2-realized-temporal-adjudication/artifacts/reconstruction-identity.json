@@ -1,0 +1,23 @@
+{
+  "accepted": {
+    "checkpoint_payload_bytes": 1074300,
+    "checkpoint_payload_sha256": "fd54c491180c58dc21e25b8f2324604239acb5a4e3e439995fbb2e92a0d92752",
+    "model_record_sha256": "0fcacf2c65db1a409a1d9a349b0880a8315bbf79b0b27942e8cbefa41fed2229",
+    "torchscript_archive_bytes": 364196,
+    "torchscript_archive_sha256": "549f71b504add381db842c05cd4c172caa559b8f292417dfab5d2d06271c56ef",
+    "validation_primary_nll": 2.666571855545044
+  },
+  "attempt_index": 0,
+  "job_id": "1013989",
+  "job_role": "capacity-p1-s147031",
+  "reconstructed": {
+    "checkpoint_payload_bytes": 1074300,
+    "checkpoint_payload_sha256": "fd54c491180c58dc21e25b8f2324604239acb5a4e3e439995fbb2e92a0d92752",
+    "model_record_sha256": "0fcacf2c65db1a409a1d9a349b0880a8315bbf79b0b27942e8cbefa41fed2229",
+    "torchscript_archive_bytes": 364196,
+    "torchscript_archive_sha256": "996ac7a5feddc9f05cca570a3b0c4f2a8165aa7175eccf6a844d07886f0955d2",
+    "validation_primary_nll": 2.666571855545044
+  },
+  "schema_version": 1,
+  "terminal": "HOLD-A10-MODEL-RECONSTRUCTION-IDENTITY"
+}

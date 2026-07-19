@@ -271,9 +271,14 @@ freeze the successor sequence:
    published and validated the independently versioned, Cargo-distributed
    stochastic-plus-PRISM comparator; resume realized calendar-month and
    interannual adjudication under fresh
-   [A10M5R4R2](work-packages/20260718-a10m5r4r2-realized-temporal-adjudication/package.md),
-   whose value-blind six-regime temporal and resource contract is now frozen
-   before generated-output access;
+   [A10M5R4R2](work-packages/20260718-a10m5r4r2-realized-temporal-adjudication/package.md)
+   reproduced the accepted checkpoint and metrics exactly but held because
+   outer TorchScript archive bytes were not a reproducible reconstruction
+   identity. Resume the unchanged value-blind six-regime temporal hypothesis
+   under corrective A10M5R4R2R1 with checkpoint-payload and semantic-record
+   identity gates; the corrective package is scaffolded as
+   [A10M5R4R2R1](work-packages/20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md)
+   and awaits authority covering its published source commit;
 4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
    within-ecoregion-elevation corpus;
 5. execute A10M5R6 to compare both retained capacities on geographically held

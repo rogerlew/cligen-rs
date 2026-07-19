@@ -1,6 +1,6 @@
 # A10M5R4R2 — Realized Temporal-Dispersion Adjudication
 
-Status: `FROZEN-ALLOCATABLE`
+Status: `EXECUTED-HOLD-MODEL-RECONSTRUCTION-IDENTITY`
 Date: 2026-07-18
 Evidence mode: Prospective temporal/resource freeze; no generated-output access
 Starting branch and push target: `main` after A10M5R4R1, push `main`
@@ -66,3 +66,28 @@ evidence.
 - `artifacts/jobs/` — deterministic model reconstruction, generated-stream
   summarization, and shared temporal-metric implementation; and
 - `artifacts/verify_freeze.py` — fail-closed pre-output verifier.
+
+## Disposition
+
+The first registered role, `capacity-p1-s147031`, reproduced the accepted
+checkpoint payload, model record, validation scores, epoch, global step, and
+corpus cursor exactly. Its newly serialized TorchScript archive had the same
+364,196-byte length but a different archive SHA-256. The frozen contract
+required the archive SHA-256 itself, so the role correctly failed before any
+generated stream was published and no further role was submitted.
+
+Slurm job 1013989 consumed three rounded GPU-minutes. The canonical supervisor
+returned the application exit code rather than its cleanup-failure code,
+proving exact job-local removal. Raw failure evidence was retained in private
+quarantine. Because the original wrapper then encountered a syntax error while
+finalizing its failure receipt, toolkit observation failed closed rather than
+settling the matrix. The repository's marker-bound cleaner subsequently
+verified the exact owner record and removed only the durable R2 run root.
+
+The terminal is `HOLD-A10-MODEL-RECONSTRUCTION-IDENTITY`. Outer TorchScript
+ZIP bytes are an unsuitable reconstruction identity; the accepted checkpoint
+payload and semantic training record are reproducible. The smallest corrective
+successor is A10M5R4R2R1, which keeps the frozen temporal estimand and sites,
+replaces only the reconstruction gate with the accepted checkpoint payload,
+model record, cursor, and metric identities, and corrects failure-receipt
+serialization before allocating.
