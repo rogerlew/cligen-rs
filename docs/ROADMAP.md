@@ -263,14 +263,15 @@ freeze the successor sequence:
    [A10M5R3R1](work-packages/20260718-a10m5r3r1-evidence-reconciliation/package.md)
    authenticated and accepted only the corrected evidence, recovered typed
    projection and exact cleanup, and issued `A10M5R3R1-CAPACITY-PAIR-READY`;
-3. **In progress through corrective prerequisite:**
+3. **Corrective prerequisite complete; fresh adjudication scaffolded:**
    [A10M5R4](work-packages/20260718-a10m5r4-realized-temporal-adjudication/package.md)
    held before generated-output access because the required independently
    versioned stochastic-plus-PRISM comparator was not yet an accepted asset;
-   execute
    [A10M5R4R1](work-packages/20260718-a10m5r4r1-stochastic-prism-comparator/package.md)
-   to build and validate that comparator, then resume realized calendar-month
-   and interannual adjudication under a fresh package identity;
+   published and validated the independently versioned, Cargo-distributed
+   stochastic-plus-PRISM comparator; resume realized calendar-month and
+   interannual adjudication under fresh
+   [A10M5R4R2](work-packages/20260718-a10m5r4r2-realized-temporal-adjudication/package.md);
 4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
    within-ecoregion-elevation corpus;
 5. execute A10M5R6 to compare both retained capacities on geographically held

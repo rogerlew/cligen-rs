@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "release": "https://github.com/rogerlew/cligen-rs/releases/tag/prism-normals-2026.07",
+  "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+  "version": "2026.07",
+  "producer_sha256": "88616e9a5b93723d3a6d9155437b8c78f49457dcfd9efe11a8c7b6c54bc7a491",
+  "runtime": {
+    "asset_id": 481957711,
+    "url": "https://github.com/rogerlew/cligen-rs/releases/download/prism-normals-2026.07/prism-normals-runtime-2026.07.tar.gz",
+    "bytes": 62509110,
+    "sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292",
+    "grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+    "normals_bytes": 125640720,
+    "normals_sha256": "9af8031291825757a2ce639079479593f53501c7a8ce147d32503fdc481694c2",
+    "validity_mask_bytes": 109064,
+    "validity_mask_sha256": "a09b8bf9b16b9d979346b22291e58d3455f7562bcc5237ca079246a7468ddcd2",
+    "valid_cells": 481631
+  },
+  "source": {
+    "asset_id": 481957709,
+    "url": "https://github.com/rogerlew/cligen-rs/releases/download/prism-normals-2026.07/prism-normals-source-2026.07.tar.gz",
+    "bytes": 108213469,
+    "sha256": "c3b832d43de54face39486673843d6c5bc511793804f5678dcb1af809ac0475c",
+    "source_manifest_sha256": "8adef2665facaea76835ece91d8c47c55a04dd3fb39a6278358cc72460fafc1f",
+    "official_archive_count": 36
+  },
+  "build_receipt_sha256": "59e8da3765a36a8f8b739fbda82a755a43eba2e680d31dc8a37ce033f5dac732",
+  "attribution_sha256": "2c3c090002bdbc9280cc3e1d6825ef44ca8d301b8f2a09946c0eff4c93e4b3cb",
+  "reproducibility": {
+    "independent_second_build_byte_identical": true,
+    "python": "3.9.6",
+    "rasterio": "1.4.3",
+    "numpy": "2.0.2"
+  }
+}

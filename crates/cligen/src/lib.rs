@@ -31,6 +31,7 @@ pub mod observed;
 pub mod output;
 pub mod par;
 pub mod parquet_output;
+pub mod prism;
 pub mod profile;
 pub mod provenance;
 pub mod qc;

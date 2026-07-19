@@ -5,11 +5,13 @@ use std::process::ExitCode;
 use clap::{Parser, Subcommand};
 
 use cligen::par::ParFile;
+use cligen::prism::run::PrismRunRequest;
+use cligen::prism::{grid as prism_grid, run as prism_run, sync as prism_sync, Distribution};
 use cligen::quality::compute_report;
 use cligen::runspec::load_runspec_file;
 use cligen::station::StationDocumentV1;
 use cligen::stations::query::{list, nearest, NearestQuery};
-use cligen::stations::sync::{sync_collection, SyncOutcome};
+use cligen::stations::sync::{sync_collection, SyncOutcome as StationSyncOutcome};
 use cligen::stations::{cache_root_from_env, Manifests};
 
 #[derive(Debug, Parser)]
@@ -43,6 +45,46 @@ enum Command {
     Stations {
         #[command(subcommand)]
         command: StationsCommand,
+    },
+    /// PRISM normals acquisition, local point query, and stochastic comparator.
+    Prism {
+        #[command(subcommand)]
+        command: PrismCommand,
+    },
+}
+
+#[derive(Debug, Subcommand)]
+enum PrismCommand {
+    /// Fetch, hash-verify, and cache the registered PRISM runtime bundle.
+    Sync {
+        /// Air-gap directory containing the exact registered runtime archive.
+        #[arg(long)]
+        from: Option<PathBuf>,
+        /// Re-acquire and validate an already-synced runtime.
+        #[arg(long)]
+        force: bool,
+    },
+    /// Query monthly normals from the local registered grid.
+    Query {
+        #[arg(long, allow_hyphen_values = true)]
+        longitude: f64,
+        #[arg(long, allow_hyphen_values = true)]
+        latitude: f64,
+        /// Emit the complete provenance receipt as JSON.
+        #[arg(long)]
+        json: bool,
+    },
+    /// Localize a station and execute the faithful stochastic generator.
+    Run {
+        #[arg(long, allow_hyphen_values = true)]
+        longitude: f64,
+        #[arg(long, allow_hyphen_values = true)]
+        latitude: f64,
+        #[arg(long)]
+        years: i32,
+        /// New destination directory for the complete artifact set.
+        #[arg(long)]
+        output_dir: PathBuf,
     },
 }
 
@@ -109,6 +151,7 @@ fn main() -> ExitCode {
             .map_err(|error| error.to_string()),
         Command::Quality { cli, par } => post_hoc_quality(&cli, &par),
         Command::Stations { command } => stations(command),
+        Command::Prism { command } => prism(command),
     };
     match result {
         Ok(()) => ExitCode::SUCCESS,
@@ -247,16 +290,123 @@ fn stations_sync(
         let outcome = sync_collection(collection, cache_root, from, force)
             .map_err(|error| error.to_string())?;
         match outcome {
-            SyncOutcome::Synced => println!(
+            StationSyncOutcome::Synced => println!(
                 "{name} {}: synced into {}",
                 collection.version,
                 collection.cache_dir(cache_root).display()
             ),
-            SyncOutcome::AlreadySynced => {
+            StationSyncOutcome::AlreadySynced => {
                 println!("{name} {}: already synced", collection.version);
             }
         }
     }
+    Ok(())
+}
+
+fn prism(command: PrismCommand) -> Result<(), String> {
+    let distribution = Distribution::embedded();
+    let cache_root = cache_root_from_env().map_err(|error| error.to_string())?;
+    match command {
+        PrismCommand::Sync { from, force } => {
+            prism_sync_command(&distribution, &cache_root, from.as_deref(), force)
+        }
+        PrismCommand::Query {
+            longitude,
+            latitude,
+            json,
+        } => prism_query_command(&distribution, &cache_root, longitude, latitude, json),
+        PrismCommand::Run {
+            longitude,
+            latitude,
+            years,
+            output_dir,
+        } => prism_run_command(
+            &distribution,
+            &cache_root,
+            longitude,
+            latitude,
+            years,
+            output_dir,
+        ),
+    }
+}
+
+fn prism_sync_command(
+    distribution: &Distribution,
+    cache_root: &Path,
+    from: Option<&Path>,
+    force: bool,
+) -> Result<(), String> {
+    let outcome = prism_sync::sync(distribution, cache_root, from, force)
+        .map_err(|error| error.to_string())?;
+    match outcome {
+        prism_sync::SyncOutcome::Synced => println!(
+            "{} {}: synced into {}",
+            distribution.bundle_id,
+            distribution.version,
+            distribution.cache_dir(cache_root).display()
+        ),
+        prism_sync::SyncOutcome::AlreadySynced => println!(
+            "{} {}: already synced",
+            distribution.bundle_id, distribution.version
+        ),
+    }
+    Ok(())
+}
+
+fn prism_query_command(
+    distribution: &Distribution,
+    cache_root: &Path,
+    longitude: f64,
+    latitude: f64,
+    json: bool,
+) -> Result<(), String> {
+    let receipt = prism_grid::query(distribution, cache_root, longitude, latitude)
+        .map_err(|error| error.to_string())?;
+    if json {
+        println!(
+            "{}",
+            serde_json::to_string_pretty(&receipt).map_err(|error| error.to_string())?
+        );
+    } else {
+        print_prism_table(&receipt);
+    }
+    Ok(())
+}
+
+fn print_prism_table(receipt: &prism_grid::NormalsReceipt) {
+    println!("month  ppt_mm  tmax_c  tmin_c");
+    for month in 0..12 {
+        println!(
+            "{:>5} {:>7.2} {:>7.2} {:>7.2}",
+            month + 1,
+            receipt.monthly_ppt_mm[month],
+            receipt.monthly_tmax_c[month],
+            receipt.monthly_tmin_c[month]
+        );
+    }
+}
+
+fn prism_run_command(
+    distribution: &Distribution,
+    cache_root: &Path,
+    longitude: f64,
+    latitude: f64,
+    years: i32,
+    output_dir: PathBuf,
+) -> Result<(), String> {
+    prism_run::execute(
+        distribution,
+        cache_root,
+        &PrismRunRequest {
+            longitude,
+            latitude,
+            years,
+            output_dir: output_dir.clone(),
+        },
+    )
+    .map_err(|error| error.to_string())?;
+    println!("{}", output_dir.display());
     Ok(())
 }
 

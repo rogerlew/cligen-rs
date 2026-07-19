@@ -77,6 +77,33 @@ cold-start days, 57.3M adjudicated formatted fields). The forward
 queue is the augmentation series (provenance/parquet first) —
 see [docs/ROADMAP.md](docs/ROADMAP.md).
 
+## Stochastic PRISM mode
+
+Cargo installs the PRISM-aware command surface but does not place the 60 MB
+normals runtime in the crate. Acquire the immutable, hash-pinned runtime once,
+then query or run entirely from the local cache:
+
+```console
+cligen prism sync
+cligen stations sync us-2015
+cligen prism query --longitude -117.0 --latitude 46.73 --json
+cligen prism run --longitude -117.0 --latitude 46.73 --years 30 \
+  --output-dir pullman-prism
+```
+
+For an air-gapped installation, download the registered
+`prism-normals-runtime-2026.07.tar.gz` release asset and use
+`cligen prism sync --from <directory>`. A separate exact-source asset retains
+all 36 official PRISM ZIPs for audit and reconstruction. Only `sync` can use
+the network; query and generation fail closed unless the registered local
+bundle and the `us-2015` station collection are present. The scientific and
+artifact contract is
+[SPEC-A10-STOCHASTIC-PRISM-COMPARATOR](docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md).
+
+PRISM data attribution: PRISM Group, Oregon State University,
+https://prism.oregonstate.edu, data accessed 2026-07-18. PRISM supplies the
+monthly normals; localized CLIGEN artifacts are not official PRISM products.
+
 ## Provenance and licensing
 
 CLIGEN is a USDA-ARS work in the public domain; the pinned copy and its

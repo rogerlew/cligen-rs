@@ -6,12 +6,14 @@ sampler. Its required request is longitude, latitude, and years. Begin year 1,
 burn 0, no interpolation, `us-2015` version 2026.07, and Norm91m 1991--2020
 CONUS 4 km are revision-1 constants.
 
-The PRISM source is a hash-pinned external bundle of the 36 official monthly
-ppt M4 and Tmax/Tmin M5 archives. Generation queries the local verified
-rasters only. The extraction receipt binds the registered bundle and
-manifest, every source archive/raster hash, PRISM release metadata, access
-date, cell coordinates, raw values, unit conversions, and required
-attribution.
+The PRISM distribution has two hash-pinned assets: a query-optimized runtime
+bundle and an exact-source bundle preserving the 36 official monthly ppt M4
+and Tmax/Tmin M5 ZIPs. The runtime grid is cell-major little-endian f32 in
+source units with layer order ppt/Tmax/Tmin, each Jan--Dec, plus a validity
+mask. Generation queries only the locally synced runtime grid. The extraction
+receipt binds both registered assets, the producer identity, every source
+archive/raster hash, PRISM release metadata, access date, cell coordinates,
+raw values, unit conversions, and required attribution.
 
 Station selection keeps the nearest ten `us-2015` candidates, then rank-sums
 distance (1), latitude difference (1), precipitation-normal error (3), Tmax-

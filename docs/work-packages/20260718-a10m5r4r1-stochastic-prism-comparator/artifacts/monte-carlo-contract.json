@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "frozen_before_execution": true,
+  "request": {
+    "longitude": -116.2,
+    "latitude": 43.6,
+    "years": 100
+  },
+  "targets": "values reparsed from localized.par",
+  "estimands": {
+    "monthly_precipitation": "mean generated monthly total over 100 years",
+    "monthly_tmax": "mean of all generated daily Tmax values by calendar month",
+    "monthly_tmin": "mean of all generated daily Tmin values by calendar month"
+  },
+  "gates": {
+    "each_month_precipitation_relative_error_max": 0.15,
+    "each_month_tmax_absolute_error_c_max": 0.75,
+    "each_month_tmin_absolute_error_c_max": 0.75
+  },
+  "decision_rule": "PASS only when all 36 monthly cells meet their family threshold",
+  "freeze_date": "2026-07-18"
+}

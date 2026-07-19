@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+  "version": "2026.07",
+  "description": "PRISM Norm91m 1991-2020 CONUS 4 km monthly ppt M4 and Tmax/Tmin M5",
+  "attribution": "PRISM Group, Oregon State University, https://prism.oregonstate.edu, data accessed 2026-07-18.",
+  "grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+  "source_manifest_sha256": "8adef2665facaea76835ece91d8c47c55a04dd3fb39a6278358cc72460fafc1f",
+  "build_receipt_sha256": "59e8da3765a36a8f8b739fbda82a755a43eba2e680d31dc8a37ce033f5dac732",
+  "attribution_sha256": "2c3c090002bdbc9280cc3e1d6825ef44ca8d301b8f2a09946c0eff4c93e4b3cb",
+  "runtime_archive": {
+    "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/481957711",
+    "file_name": "prism-normals-runtime-2026.07.tar.gz",
+    "bytes": 62509110,
+    "sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292"
+  },
+  "source_archive": {
+    "url": "https://api.github.com/repos/rogerlew/cligen-rs/releases/assets/481957709",
+    "file_name": "prism-normals-source-2026.07.tar.gz",
+    "bytes": 108213469,
+    "sha256": "c3b832d43de54face39486673843d6c5bc511793804f5678dcb1af809ac0475c"
+  }
+}

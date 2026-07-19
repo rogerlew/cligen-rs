@@ -1,8 +1,8 @@
 # SPEC-A10-STOCHASTIC-PRISM-COMPARATOR — Localized `.par` Comparator
 
-Status: research-only
+Status: active public preprocessing/orchestration surface
 
-Revision: 1 (A10M5R4R1 scaffold, 2026-07-18)
+Revision: 2 (A10M5R4R1 execution, Cargo distribution decision, 2026-07-18)
 
 ## Identity and claim boundary
 
@@ -11,7 +11,8 @@ stochastic-plus-PRISM comparator required by ADR-0005 and
 SPEC-A10-REFINEMENT-TRAJECTORY. It is a preprocessing and orchestration mode:
 it selects a legacy station, localizes six monthly `.par` rows, then runs the
 unchanged `faithful_5_32_3` generator. It is not a neural model, a new random
-number generator, or a public cligen-rs generation profile.
+number generator, or a new cligen-rs generation profile. It is a public
+Cargo-installed CLI surface under `cligen prism`.
 
 The required scientific request is exactly longitude, latitude, and number of
 years. All three are explicit and validated. Revision 1 fixes the simulation
@@ -28,15 +29,27 @@ strict manifest, source URLs, archive and embedded-raster SHA-256 values,
 PRISM dataset version/create-date metadata, the access date, and this
 attribution:
 
-> PRISM Climate Group, Oregon State University,
+> PRISM Group, Oregon State University,
 > https://prism.oregonstate.edu, data accessed 2026-07-18.
 
-The payload is distributed outside the crate as one immutable, hash-pinned
-release asset, following SPEC-STATION-DB. An explicit sync/acquisition command
-may fetch either the registered mirror or the official archives and must
-verify the same file hashes before atomic publication to a local cache.
-Generation never performs network I/O and has no network fallback. An air-gap
-source is accepted only after identical verification.
+Cargo distributes code plus a strict embedded distribution manifest, not the
+maps. Two immutable, mutually bound release assets follow SPEC-STATION-DB:
+
+- a runtime bundle containing a cell-major little-endian f32 grid, validity
+  mask, grid/source manifests, build receipt, and attribution; and
+- a source bundle preserving the exact 36 official ZIP archives and the same
+  source manifest and attribution.
+
+The runtime grid retains the source float32 values in layer order ppt Jan--Dec,
+Tmax Jan--Dec, Tmin Jan--Dec. Its grid manifest pins width, height, CRS,
+affine transform, units, byte order, layout, mask convention, and hashes. The
+producer records its script hash and Python/Rasterio/NumPy versions. The
+source manifest binds every official URL, ZIP hash, TIFF hash, PRISM release,
+and create date. `cligen prism sync` fetches only the runtime bundle by default,
+verifies its registered size/hash and internal identities, and atomically
+publishes it under the ordinary cligen data cache. `--from` accepts the exact
+runtime archive for air-gap installation. Generation never performs network
+I/O and has no network fallback.
 
 At the requested coordinate, each monthly value is the containing valid
 raster cell's value (equivalently, nearest cell center on the regular grid).
@@ -117,6 +130,17 @@ constraints, localization fails. Provenance reports both requested values and
 the values reparsed from the actual `.par` bytes.
 
 ## Execution and artifacts
+
+The Cargo CLI is:
+
+- `cligen prism sync [--from <directory>] [--force]` — the only PRISM
+  network-touching command;
+- `cligen prism query --longitude <deg> --latitude <deg> [--json]` — local
+  verified monthly normals and cell/source receipt; and
+- `cligen prism run --longitude <deg> --latitude <deg> --years <n>
+  --output-dir <path>` — local query, station selection, localization, and
+  faithful generation. The output directory is an operational destination,
+  not a fourth scientific input.
 
 After localization, the mode writes and validates a revision-1 runspec with
 `mode: continuous`, `begin_year: 1`, requested `years`, `rng.burn: 0`,
