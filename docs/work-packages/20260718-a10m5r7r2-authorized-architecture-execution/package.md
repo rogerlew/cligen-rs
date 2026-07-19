@@ -1,6 +1,6 @@
 # A10M5R7R2 — Authorized Architecture Execution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-ARCHITECTURE-HYPOTHESIS-MIXED`
 Date: 2026-07-18
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `2e00700`, push `main`
@@ -50,3 +50,11 @@ accounting, collection, and cleanup into one package record.
 
 No R2 exit opens N3/elevation, spatial, development-selection, confirmation,
 public runtime, or production work automatically.
+
+## Disposition
+
+Execution completed at `HOLD-A10-ARCHITECTURE-HYPOTHESIS-MIXED`. Generated
+feedback degraded the aggregate by 17.26%, observation conditioning improved
+it by only 9.84%, and no registered residual family dominated. The conditional
+full temporal matrix was not produced. See `artifacts/execution-disposition.md`
+for the result and recommended next prospective architecture.

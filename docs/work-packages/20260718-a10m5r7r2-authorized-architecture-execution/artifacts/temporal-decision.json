@@ -1,0 +1,7 @@
+{
+  "candidate_identity": "closed_loop_autoregressive_ssm_v1",
+  "protected_roles_opened": [],
+  "reached": false,
+  "schema_version": 1,
+  "terminal": "A10M5R7-TEMPORAL-NOT-REACHED"
+}

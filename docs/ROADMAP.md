@@ -327,6 +327,17 @@ as the new package-scoped authority required by the R1 hold. R2 preserves the
 corrected source and unchanged structural/temporal decision and is capped at
 52 primary plus five recovery GPU-minutes.
 
+R2 completed on 2026-07-18 at
+`HOLD-A10-ARCHITECTURE-HYPOTHESIS-MIXED`. Generated feedback was supported but
+worsened family-balanced error by 17.26%; observation conditioning improved it
+by only 9.84%. Temperature carried the largest accepted residual share at
+31.61%, but no registered group met a single-mechanism dominance threshold, so
+the full temporal candidate was not reached. The evidence recommends a new
+prospective climate-normal-conditioned residual state-space family, with an
+explicit baseline-only versus latent-dynamics ablation, rather than raw
+autoregressive feedback. That combined architecture changes the scientific
+contract and requires separate operator direction and resource authorization.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

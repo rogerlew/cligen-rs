@@ -91,6 +91,6 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r4r2r1r2-leap-century-remedy](20260718-a10m5r4r2r1r2-leap-century-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CAPACITY |
 | [20260718-a10m5r7-structural-architecture-identification](20260718-a10m5r7-structural-architecture-identification/package.md) | EXECUTED-HOLD-OBSERVATION-SHARD-PATH |
 | [20260718-a10m5r7r1-observation-shard-path-remedy](20260718-a10m5r7r1-observation-shard-path-remedy/package.md) | EXECUTED-HOLD-RESOURCE-AUTHORITY-EXHAUSTED |
-| [20260718-a10m5r7r2-authorized-architecture-execution](20260718-a10m5r7r2-authorized-architecture-execution/package.md) | SCAFFOLDED |
+| [20260718-a10m5r7r2-authorized-architecture-execution](20260718-a10m5r7r2-authorized-architecture-execution/package.md) | EXECUTED-HOLD-ARCHITECTURE-HYPOTHESIS-MIXED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |

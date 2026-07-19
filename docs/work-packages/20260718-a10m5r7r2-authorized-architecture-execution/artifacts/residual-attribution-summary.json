@@ -1,0 +1,45 @@
+{
+  "accepted_open_loop": {
+    "family_balanced_error": 2.6820838177832007,
+    "group_errors": {
+      "annual_dependence": 2.36149064310066,
+      "monthly_climatology": 2.342502012360656,
+      "occurrence_spells": 1.8679356215539786,
+      "precipitation_distribution": 2.599431060764966,
+      "temperature": 4.239059751135743
+    }
+  },
+  "complete_component_count": 3384,
+  "complete_evidence_sha256": "410111e62d4af6fb92f9690c18f7c66280066a6e3dc4845749d7d4b0f0cbd156",
+  "generated_feedback": {
+    "family_balanced_error": 3.144924802632249,
+    "group_errors": {
+      "annual_dependence": 2.5607512522739495,
+      "monthly_climatology": 3.9140951209129984,
+      "occurrence_spells": 1.675416924596336,
+      "precipitation_distribution": 3.5232857928531893,
+      "temperature": 4.051074922524774
+    }
+  },
+  "observation_conditioned": {
+    "family_balanced_error": 2.418196554809218,
+    "group_errors": {
+      "annual_dependence": 2.0523898226896686,
+      "monthly_climatology": 2.0446716559645193,
+      "occurrence_spells": 1.8235940381974494,
+      "precipitation_distribution": 2.268239209147124,
+      "temperature": 3.90208804804733
+    }
+  },
+  "schema_version": 1,
+  "strongest_open_loop_residuals": [
+    {"absolute_scaled_error": 14.590, "mean_signed_scaled_residual": -14.590, "metric": "monthly.07.tmax_mean"},
+    {"absolute_scaled_error": 14.072, "mean_signed_scaled_residual": -14.072, "metric": "monthly.07.tmin_mean"},
+    {"absolute_scaled_error": 13.413, "mean_signed_scaled_residual": -13.413, "metric": "monthly.08.tmin_mean"},
+    {"absolute_scaled_error": 13.232, "mean_signed_scaled_residual": -13.232, "metric": "monthly.08.tmax_mean"},
+    {"absolute_scaled_error": 12.000, "mean_signed_scaled_residual": -12.000, "metric": "monthly.06.tmax_mean"},
+    {"absolute_scaled_error": 11.887, "mean_signed_scaled_residual": 11.887, "metric": "monthly.01.tmax_mean"},
+    {"absolute_scaled_error": 11.502, "mean_signed_scaled_residual": 9.945, "metric": "monthly.12.precipitation_q10"},
+    {"absolute_scaled_error": 11.359, "mean_signed_scaled_residual": 11.359, "metric": "monthly.12.tmax_mean"}
+  ]
+}

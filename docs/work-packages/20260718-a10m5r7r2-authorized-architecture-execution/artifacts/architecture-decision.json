@@ -1,0 +1,24 @@
+{
+  "accepted_group_error_shares": {
+    "annual_dependence": 0.1760937243976575,
+    "monthly_climatology": 0.17467776337406068,
+    "occurrence_spells": 0.13928987671219514,
+    "precipitation_distribution": 0.19383667605984445,
+    "temperature": 0.3161019594562422
+  },
+  "feedback_advances": false,
+  "feedback_group_guards": {
+    "annual_dependence": true,
+    "monthly_climatology": false,
+    "occurrence_spells": true,
+    "precipitation_distribution": false,
+    "temperature": true
+  },
+  "feedback_improvement_fraction": -0.17256768106210663,
+  "feedback_support": true,
+  "observation_conditioned_improvement_fraction": 0.0983888949421764,
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "selected_architecture": "mixed_hold",
+  "terminal": "HOLD-A10-ARCHITECTURE-HYPOTHESIS-MIXED"
+}
