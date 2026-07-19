@@ -1,0 +1,28 @@
+{
+  "classification": "SINGLE-GPU-PREFERRED",
+  "fixed_global_work": {
+    "four_gpu_incremental_over_two": 0.046211796067928246,
+    "four_gpu_over_one": 0.018480248961178426,
+    "median_examples_per_second": {
+      "1": 141193.36989348984,
+      "2": 56463.692159118145,
+      "4": 2609.288627299447
+    },
+    "two_gpu_over_one": 0.3999032830062198
+  },
+  "fixed_per_gpu_work": {
+    "four_gpu_incremental_over_two": 0.07973657880790049,
+    "four_gpu_over_one": 0.04740723388323953,
+    "median_examples_per_second": {
+      "1": 94848.56762717618,
+      "2": 56392.03858776893,
+      "4": 4496.508228991803
+    },
+    "two_gpu_over_one": 0.5945481307575529
+  },
+  "four_gpu_recommendation_threshold_incremental_over_two": 1.4,
+  "interpretation": "The operational capability passes, but this communication-heavy microbenchmark is substantially slower on two and four PCIe L40s. Multi-GPU use requires workload-specific evidence that useful per-rank compute amortizes DDP/NCCL communication.",
+  "repetitions": 3,
+  "schema_version": 1,
+  "two_gpu_recommendation_threshold_over_one": 1.6
+}

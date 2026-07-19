@@ -1,0 +1,96 @@
+{
+  "canonical_configuration": {
+    "cuda_runtime": "12.8",
+    "id": "lemhi-a10-py311-l40-v2-candidate",
+    "nccl_version": "2.26.2",
+    "numpy_version": "2.2.6",
+    "python_version": "3.11.15",
+    "semantic_sha256": "5addee9c5db3592ee247eab2b5266ed5567fd9aaf24ed78dcb321ecbb001e22d",
+    "torch_version": "2.7.1+cu128"
+  },
+  "cleanup": {
+    "job_local_cleanup": "verified_absent",
+    "remote_absent": true,
+    "terminal": "LEMHI-TOOLKIT-RUN-CLOSED"
+  },
+  "jobs": [
+    {
+      "actual_gpu_minutes": 2,
+      "actual_gpu_seconds": 94,
+      "elapsed_seconds": 94,
+      "expected_exit_code": 0,
+      "gate_receipt_sha256": "4b6f07924b0f7667ef43026e661b0181f7bf411e07b6e16239bd684f4660edf5",
+      "gpus": 1,
+      "job_id": "1014018",
+      "node": "node03",
+      "operational_gates_passed": 16,
+      "requested_gpu_minutes": 8,
+      "role": "single-baseline"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 128,
+      "elapsed_seconds": 64,
+      "expected_exit_code": 0,
+      "gate_receipt_sha256": "658f1adc89d11bebcba40e244aabb7bb1bf0234ecd174d2b00c92a4edb2a6dad",
+      "gpus": 2,
+      "job_id": "1014019",
+      "node": "node03",
+      "operational_gates_passed": 16,
+      "requested_gpu_minutes": 20,
+      "role": "dual-qualification"
+    },
+    {
+      "actual_gpu_minutes": 6,
+      "actual_gpu_seconds": 304,
+      "elapsed_seconds": 76,
+      "expected_exit_code": 0,
+      "gate_receipt_sha256": "77da4586c90e2aba6e000b013833cf0d8c8fac2515c47adc41b66a0a52107db5",
+      "gpus": 4,
+      "job_id": "1014020",
+      "node": "node03",
+      "operational_gates_passed": 16,
+      "requested_gpu_minutes": 48,
+      "role": "quad-qualification"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 124,
+      "elapsed_seconds": 62,
+      "expected_exit_code": 1,
+      "gate_receipt_sha256": "036b247a8e9b767379ca0268156e0ca3d3bf13c563ee1e3e855ce8bc86059f6d",
+      "gpus": 2,
+      "job_id": "1014021",
+      "node": "node03",
+      "operational_gates_passed": 10,
+      "requested_gpu_minutes": 6,
+      "role": "dual-rank-failure"
+    }
+  ],
+  "ledger": {
+    "actual_gpu_minutes_rounded_per_job": 14,
+    "actual_gpu_seconds": 650,
+    "ceiling_gpu_minutes": 90,
+    "head_sha256": "734efa01e969dcff338a4843ae4b8d2bb8006d1eabacd6e3b154748f5e1496e6",
+    "primary_requested_gpu_minutes": 82,
+    "recovery_requested_gpu_minutes": 5,
+    "recovery_status": "released",
+    "total_authorized_reservation_gpu_minutes": 87
+  },
+  "operational_terminal": "A10M5O2-MULTI-L40-OPS-READY",
+  "performance_classification": "SINGLE-GPU-PREFERRED",
+  "plan_id": "f6b9f4f6bd4ca4f92dd314365e2467a4dc27cf094b3b35b5f6962317770f4a86",
+  "projection": {
+    "corrective_package_terminal": "A10M5O1R1-EVIDENCE-PROJECTION-READY",
+    "escaped_reserved_token_counts": {
+      "NO_OTHER_FAILURES": 1
+    },
+    "initial_fail_closed_error": "SANITIZATION_FAILED",
+    "projector_version": "lemhi-evidence-projection-4",
+    "raw_parent_sha256": "802f562bda13fd07edab549d5961e9e7fe93e6f40695f2a4df2061ac1dd66dec",
+    "sanitized_sha256": "90a57718d5911c8c744243a39c399ff635f164ad94813e478dedbde8ff2194c6"
+  },
+  "run_id": "a10m5o2-multi-l40-r0",
+  "schema_version": 1,
+  "source_commit": "0caae8e462dd82cdc382e0d425a0553872c648d1"
+}

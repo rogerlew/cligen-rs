@@ -21,6 +21,7 @@ from .core import (
     validate_relative_path,
     validate_shell_scalar,
 )
+from .hardening import SANITIZER_VERSION
 
 REMOTE_ARGUMENT = re.compile(r"^[A-Za-z0-9_./+=:@,-]+$")
 
@@ -557,7 +558,7 @@ class OpenSSHSlurmAdapter:
                 "hash_marker.sh",
                 [profile["remote_base"], plan["remote_run_root"]],
             ).decode("utf-8").strip()
-            result["sanitization_policy"] = "lemhi-evidence-projection-3"
+            result["sanitization_policy"] = SANITIZER_VERSION
         return result
 
     def clean(

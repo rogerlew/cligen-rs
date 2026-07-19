@@ -1,0 +1,7 @@
+2026-07-19T01:35:57-06:00
+NODELIST|PARTITION|STATE|GRES
+node03|gpu-icrews|idle|gpu:l40:4
+node04|gpu-icrews|idle|gpu:rtxa6000:4
+JOBID|USER|PARTITION|STATE|TRES_PER_NODE|TIME|TIME_LIMIT
+
+Admission: PASS; the four-GPU rule was met because node03 had no allocation.

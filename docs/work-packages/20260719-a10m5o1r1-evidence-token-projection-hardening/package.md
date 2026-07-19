@@ -56,5 +56,5 @@ Reached `A10M5O1R1-EVIDENCE-PROJECTION-READY`. Projection revision 4 escapes
 and counts raw reserved-looking tokens before authorized replacements. The
 exact PyTorch placeholder plus forbidden durable-path regression passes, all
 56 toolkit tests pass, and every repository gate passes. The retained A10M5O2
-raw evidence may be reprojected without changing a job, plan, gate, or raw
-file.
+raw evidence was reprojected without changing a job, plan, gate, or raw file.
+The adapter policy label is now bound to the projector version constant.

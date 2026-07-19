@@ -1,6 +1,6 @@
 # Lemhi single-node multi-L40 capability
 
-Status: proposed (revision 1; A10M5O1/A10M5O2)
+Status: authoritative (revision 1; A10M5O1/A10M5O2)
 
 ## Surface
 
@@ -33,11 +33,18 @@ the canonical baseline. Counts above four, generic GPU requests, other models,
 multiple nodes, node04, and mixed devices fail before remote mutation.
 
 One PyTorch process binds to each Slurm-visible GPU. A passing capability
-requires exact canonical software identity, unique L40 UUIDs, one hostname,
-NCCL collective correctness, synchronized DDP state, checkpoint reload,
+requires exact canonical software identity, unique Slurm-visible L40 bindings,
+one hostname, NCCL collective correctness, synchronized DDP state, checkpoint reload,
 bounded rank-failure teardown, exact GPU-second/minute accounting, authenticated
 evidence, and cleanup. Scaling results are advisory and separate from
 operational correctness.
+
+The revision-1 attestation is `A10M5O2-MULTI-L40-OPS-READY`, plan
+`f6b9f4f6bd4ca4f92dd314365e2467a4dc27cf094b3b35b5f6962317770f4a86`,
+from jobs `1014018`–`1014021`. Counts one, two, and four passed. The measured
+microbenchmark classification is `SINGLE-GPU-PREFERRED`; multi-GPU consumers
+must justify workload-specific scaling and may not infer speedup from this
+operational attestation.
 
 Before a multi-GPU submission, the executor records `squeue -a` occupancy for
 node03 and stops unless enough requested L40 capacity is idle. A four-GPU role
@@ -48,8 +55,8 @@ admission snapshot, not an atomic scheduler reservation.
 
 The attestation binds source commit, package and run IDs, canonical
 configuration ID and semantic hash, provider hashes, Slurm job IDs, requested
-GRES, parsed count, node, GPU UUIDs, runtime versions, gate receipt hashes,
-requested and actual GPU-minutes, admission snapshots, collection/cleanup
+GRES, parsed count, node, per-rank visible-device bindings, runtime versions,
+gate receipt hashes, requested and actual GPU-minutes, admission snapshots, collection/cleanup
 receipts, and terminal disposition. Raw private paths and user-identifying
 cluster data are sanitized before publication.
 

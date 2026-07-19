@@ -236,6 +236,14 @@ revision 4 escapes and counts raw placeholders before typed sanitization. No
 job retry or new allocation was needed; A10M5O2 resumes from retained raw
 evidence.
 
+**Complete operational expansion (2026-07-19):**
+[A10M5O2 canonical multi-L40 qualification](work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/package.md)
+reached `A10M5O2-MULTI-L40-OPS-READY` with jobs `1014018`–`1014021`.
+Canonical one-, two-, and four-L40 NCCL/DDP/checkpoint operation, controlled
+rank failure, accounting, evidence, and cleanup passed on node03. The separate
+performance result is `SINGLE-GPU-PREFERRED`; the additive capability is
+available for workload-specific use and does not replace the one-L40 default.
+
 **Hold (2026-07-17):**
 [A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
 reached `HOLD-A10-NO-VALID-NEURAL-FIT`. All twelve frozen seed-147031 rows

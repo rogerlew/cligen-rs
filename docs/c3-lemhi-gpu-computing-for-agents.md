@@ -276,6 +276,31 @@ This canonical designation is scoped. It is not a performance, multi-GPU,
 training-readiness, requeue, production-durability, A10M3-science, or
 administrator-support claim.
 
+## Optional single-node multi-L40 capability
+
+A10M5O2 separately qualified the same canonical stack for explicit one-node
+requests of two or four L40s. This is additive; the default remains
+`gpu:l40:1`. Use the declarative `accelerator-l40-multigpu-v1` provider, set
+`gpus` equal to the exact typed GRES count, and request only `gpu:l40:2` or
+`gpu:l40:4` on `gpu-icrews`. Immediately before submitting, inspect all node03
+allocations. Two GPUs require at least two idle L40s; four require node03 to
+have no allocation. Never use this priority partition deliberately to
+displace another job.
+
+Live jobs `1014018`–`1014021` proved CPython 3.11.15, NumPy 2.2.6, PyTorch
+2.7.1+cu128, CUDA 12.8, NCCL 2.26.2, one process per unique NVIDIA L40,
+single-node collectives, DDP synchronization, checkpoint reload, expected
+rank failure, exact accounting, and cleanup at one, two, and four GPUs. The
+matrix consumed 650 actual GPU-seconds; its unused recovery reserve was
+released.
+
+Operational readiness does not imply speedup. In the frozen communication-
+heavy microbenchmark, fixed-global throughput fell from 141,193 examples/s on
+one GPU to 56,464 on two and 2,609 on four. Classify the current evidence as
+`SINGLE-GPU-PREFERRED`. Request multiple GPUs only when a workload-specific
+pilot shows that useful per-rank compute amortizes PCIe/NCCL/DDP communication.
+This result says nothing about cross-node or heterogeneous operation.
+
 ## Legacy A10M2 offline framework and runtime contract
 
 The login-visible Python 3.11.11 environment was not available on `node03`.
@@ -724,6 +749,16 @@ Treat published documentation as a hypothesis. Timestamp live `sinfo`,
 `scontrol`, module, compiler, CPU, driver, and filesystem observations in each
 new package.
 
+### Collection rejects `<NO_OTHER_FAILURES>`
+
+PyTorch `torchrun` can emit this reserved-looking placeholder in an expected
+failure traceback. Toolkit projection revision 4 escapes raw third-party
+angle tokens to `[[RAW_RESERVED_TOKEN:NAME]]`, records their counts, and then
+applies authorized path/identity replacements. Do not delete, rewrite, or
+exclude authentic failure evidence to make collection pass. If an older
+projector fails closed after settlement, preserve raw evidence and use the
+bounded projection-hardening successor; never resubmit the compute role.
+
 ### A job is accepted but the requested research claim is still unproved
 
 A10M2/A10M2D1 proved transport, priority-partition access, typed L40
@@ -746,6 +781,9 @@ promote a lower-level smoke result into any of those claims.
 - [A10M2 completion package](work-packages/20260717-a10m2-completion/package.md)
 - [A10M2 completion terminal](work-packages/20260717-a10m2-completion/artifacts/terminal.md)
 - [A10M2 stage-2 result](work-packages/20260717-a10m2-completion/artifacts/stage2-result.md)
+- [A10M5O1 multi-L40 toolkit hardening](work-packages/20260719-a10m5o1-multi-l40-toolkit-hardening/package.md)
+- [A10M5O1R1 evidence projection hardening](work-packages/20260719-a10m5o1r1-evidence-token-projection-hardening/package.md)
+- [A10M5O2 canonical multi-L40 qualification](work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/package.md)
 - [SSH keepalive implementation](../research/a10/cluster/ssh-keepalive.sh)
 - [C3+3 GPU workshop](https://docs.c3plus3.org/docs/workshops/Cluster/GPU_Nodes.html)
 - [C3+3 current partition guide](https://docs.c3plus3.org/docs/help/Tutorials/Partitions.html)

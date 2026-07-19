@@ -10,6 +10,8 @@ retained private A10M5O2 quarantine.
   reserved-looking value.
 - Exact projection regression: PASS; placeholder escaped and counted, durable
   path replaced, and no forbidden path remained.
+- Adapter policy label is sourced from the projector version constant; it can
+  no longer drift independently from the transformation receipt.
 - Invalid UTF-8, unknown forbidden value, duplicate JSON key, NaN/Infinity,
   and sibling-prefix defenses: PASS.
 - `python3 -m unittest discover -s research/a10/lemhi_toolkit/tests -v`:

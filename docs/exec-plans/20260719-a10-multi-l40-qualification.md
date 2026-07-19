@@ -38,9 +38,12 @@ promotion.
 - [x] (2026-07-19 08:47Z) Diagnosed fail-closed collection on PyTorch's raw
   `<NO_OTHER_FAILURES>` placeholder and completed corrective local successor
   A10M5O1R1 with 56 toolkit tests and all repository gates passing.
-- [ ] Collect, sanitize, verify, clean, and reconcile toolkit and Slurm state.
-- [ ] Close both packages, update documentation/roadmap/catalog, and run all
-  repository gates.
+- [x] (2026-07-19 08:49Z) Reprojected 15 unchanged raw files, released recovery,
+  removed the exact remote root, closed the toolkit run, and reconciled all
+  four Slurm identities plus 650 actual GPU-seconds.
+- [x] (2026-07-19 08:55Z) Closed all package/specification/guide/roadmap/catalog
+  records; 56 toolkit tests, all package verifiers, shell syntax, and every
+  repository gate pass.
 
 ## Surprises & Discoveries
 
@@ -66,6 +69,10 @@ promotion.
   failure traceback. This is diagnostic syntax, but projection revision 3
   treated every raw angle token as an attempted toolkit-token injection and
   held collection after the matrix settled.
+- Observation: the adapter's collection policy label was independently
+  hard-coded to projection revision 3 while the cryptographic transformation
+  receipts correctly reported revision 4. Binding that label to the projector
+  constant prevents future receipt drift.
 
 ## Decision Log
 
@@ -103,12 +110,17 @@ promotion.
 A10M5O1 reached `A10M5O1-MULTI-L40-TOOLKIT-READY`. A previously possible
 four-device reservation charged as one now fails during plan validation. The
 default provider remains one-device-only and a new additive provider owns the
-bounded one/two/four-device contract. Live A10M5O2 execution remains in
-progress; this section will add its operational terminal, scaling
-recommendation, exact GPU-minute settlement, cleanup result, and exclusions.
+bounded one/two/four-device contract. Live A10M5O2 reached
+`A10M5O2-MULTI-L40-OPS-READY`. Jobs `1014018`–`1014021` passed
+one/two/four-L40 correctness and controlled-failure gates, used 650 actual
+GPU-seconds (14 per-job-rounded GPU-minutes), released the unused five-minute
+recovery reserve, and closed with durable/job-local absence.
 A10M5O1R1 also reached `A10M5O1R1-EVIDENCE-PROJECTION-READY` without another
 allocation. It preserves raw third-party placeholders as explicit escaped text
-and lets only registered rules introduce toolkit projection tokens.
+and lets only registered rules introduce toolkit projection tokens. The
+performance classification is `SINGLE-GPU-PREFERRED`: fixed-global two/one
+speedup was 0.3999x and incremental four/two speedup was 0.0462x, well below
+the advisory 1.6x and 1.4x thresholds.
 
 ## Context and Orientation
 
@@ -142,8 +154,8 @@ The observable result is a previously accepted mismatch failing with
 
 Milestone two freezes and publishes live assets. Add a small canonical
 PyTorch program and Slurm wrappers beneath the A10M5O2 package. The success
-program records rank/world size, hostname, unique GPU UUIDs, exact runtime
-versions, NCCL all-reduce results, one deterministic DDP update, checkpoint
+program records rank/world size, hostname, unique visible-device bindings,
+exact runtime versions, NCCL all-reduce results, one deterministic DDP update, checkpoint
 reload, CUDA-event timings, throughput, and per-rank memory. It runs warmup and
 three measurements for fixed-global-work and fixed-per-GPU-work cases. A
 separate role deliberately exits rank one and proves bounded peer teardown.
@@ -251,3 +263,9 @@ corrected the authority-input generator before any live mutation.
 
 Revision note (2026-07-19): recorded successful live matrix settlement and the
 bounded projection-repair successor triggered by a PyTorch diagnostic token.
+
+Revision note (2026-07-19): recorded authenticated collection, ledger release,
+exact cleanup, operational readiness, and single-GPU performance preference.
+
+Revision note (2026-07-19): execution complete; all milestones, artifacts,
+acceptance gates, and retrospective outcomes are closed.

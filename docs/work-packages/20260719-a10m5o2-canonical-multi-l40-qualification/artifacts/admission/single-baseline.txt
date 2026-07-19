@@ -1,0 +1,13 @@
+2026-07-19T01:32:29-06:00
+NODELIST|PARTITION|STATE|GRES
+node03|gpu-icrews|idle|gpu:l40:4
+node04|gpu-icrews|idle|gpu:rtxa6000:4
+NODELIST|PARTITION|STATE|GRES
+node01|gpu-volatile|mix|gpu:rtxa6000:8
+node02|gpu-volatile|idle|gpu:qrtx8000:7
+node03|gpu-volatile|idle|gpu:l40:4
+node04|gpu-volatile|idle|gpu:rtxa6000:4
+node05|gpu-volatile|idle|gpu:rtx4500ada:3
+JOBID|USER|PARTITION|STATE|TRES_PER_NODE|TIME|TIME_LIMIT
+
+Admission: PASS; node03 had no allocation and all four L40s were idle.

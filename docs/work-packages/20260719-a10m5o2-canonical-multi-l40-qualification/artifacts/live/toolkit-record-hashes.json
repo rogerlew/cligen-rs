@@ -1,0 +1,16 @@
+{
+  "capability": "3e52e70b988ee3bf0034f45845eab01f188de8d2cce06b4aa06fadb02a6e7c76",
+  "cleanup": "c94d59ea73cc923238a01b0e408102f88c18e718f19dbff249067c823e009f3e",
+  "collection": "5abd147d3620bec5f5b748e1ff6b300e789f1b3eee73b5426858e2a307004dc6",
+  "doctor": "c73241a2d2f03236eaf37acb550a1b3495dba6c36dfa33587c59ba9538179d59",
+  "job_dual_qualification": "bc3e1d57ecc4efd965846d5f6ba7212de113aaaa791477eb6a19e4acf92f1df7",
+  "job_dual_rank_failure": "9eafe28f06ab4f2c532f5208e1eb9116e689d3c6358b06a12c15a2d6eaadefab",
+  "job_quad_qualification": "045aa1f63786c762ebefc0082969c22f5ef86a24175e8e8e9a6dc8c9e5808f63",
+  "job_single_baseline": "87a3ba6299494f7f2fe4099d0cbdec31ac9734f018b1b492e0bcdcb88c93c6e9",
+  "plan": "996909482c01dcb502eceb5006f8204efe0cc9490acbe5412a1c06c062a399f7",
+  "prepare": "16eeb8ee53f6e296cd148bfbad85cf1a0f8675f445b54a532c19bf3cfa31df20",
+  "schema_version": 1,
+  "stage": "9586ad6865dd4a7cfb818f91a22969c8265d457d3776188db46cc24a1a66b1bf",
+  "terminal": "a3f39567624d069c60f75fb8066315382c9439f3a68a099e092ff31b698d1756",
+  "verify": "6716a8aa7b91dd7b3812218ec68473ebf7615995463013890a9d18ea704809ba"
+}

@@ -1,6 +1,6 @@
 # A10M5O2 — Canonical Multi-L40 Qualification
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-19
 Evidence mode: Ran
 ExecPlan: [`../../exec-plans/20260719-a10-multi-l40-qualification.md`](../../exec-plans/20260719-a10-multi-l40-qualification.md)
@@ -91,3 +91,14 @@ evidence, or cleanup failures produce exact holds.
 - `artifacts/scaling-summary.json` — one/two/four-GPU comparison;
 - `artifacts/gate-results.md` and `execution-disposition.md` — terminal record;
 - `artifacts/verify_freeze.py` and `verify_result.py` — deterministic gates.
+
+## Disposition
+
+Reached `A10M5O2-MULTI-L40-OPS-READY` and performance classification
+`SINGLE-GPU-PREFERRED`. Jobs `1014018`–`1014021` proved one-, two-, and
+four-rank canonical NCCL/DDP correctness plus bounded two-rank failure on
+node03. The four primary roles requested 82 GPU-minutes and used 650 actual
+GPU-seconds, recorded as 14 per-job-rounded GPU-minutes; the unused five-minute
+recovery reserve was released. Durable and job-local cleanup and toolkit close
+passed. The microbenchmark did not meet either scaling recommendation gate, so
+multi-GPU scheduling is an available explicit capability, not the default.
