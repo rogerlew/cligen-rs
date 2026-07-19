@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "algorithm": "minimum prepublished order within each fit_validation regime",
+    "source_path": "docs/work-packages/20260717-a10m1-corpus-role-freeze/artifacts/daymet-selected-v2.json",
+    "source_sha256": "76ca0f9a3ab6a6806d26ac1a12e77897ff0285bce43fd044ac947c4e15f66920",
+    "target_values_used_for_selection": false
+  },
+  "observation_window": {
+    "calendar": "daymet_official_365_v1_on_normalized_gregorian_axis",
+    "end": "2009-12-31",
+    "expected_masked_leap_december_31_rows": 8,
+    "observed_rows_per_site": 10950,
+    "start": "1980-01-01"
+  },
+  "sites": [
+    {
+      "daymet_shard": "daymet-008.tar.gz",
+      "daymet_shard_sha256": "425126384c646ae051384087ed81066e42d3795fc5f0c829066b5f2c1f3e312b",
+      "elevation_m": 1289.0,
+      "latitude": 40.5,
+      "longitude": -113.75,
+      "point_id": "p+4050_-11375",
+      "regime": "arid_boundary",
+      "role": "fit_validation"
+    },
+    {
+      "daymet_shard": "daymet-018.tar.gz",
+      "daymet_shard_sha256": "aed55dbf7d94e0a3d704b75192d046041e64eb43047c44cc5e1201ad26a23960",
+      "elevation_m": 438.0,
+      "latitude": 45.25,
+      "longitude": -88.75,
+      "point_id": "p+4525_-08875",
+      "regime": "cold",
+      "role": "fit_validation"
+    },
+    {
+      "daymet_shard": "daymet-028.tar.gz",
+      "daymet_shard_sha256": "109d56fcf4b2c637efb1510cb56c619234c964a6972dfabad1447d646685e1b3",
+      "elevation_m": 870.0,
+      "latitude": 32.5,
+      "longitude": -102.0,
+      "point_id": "p+3250_-10200",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "daymet_shard": "daymet-038.tar.gz",
+      "daymet_shard_sha256": "595a7564fe08ea34324ff0ea7f20c98a6b00816d85b1f588a35451a3d9683bd2",
+      "elevation_m": 109.0,
+      "latitude": 32.75,
+      "longitude": -83.25,
+      "point_id": "p+3275_-08325",
+      "regime": "humid",
+      "role": "fit_validation"
+    },
+    {
+      "daymet_shard": "daymet-048.tar.gz",
+      "daymet_shard_sha256": "a73e4cc31acb0bd13998115d0e12fe7fa106c57e21e7e0a4ce7e6b135d064467",
+      "elevation_m": 2071.0,
+      "latitude": 36.75,
+      "longitude": -107.5,
+      "point_id": "p+3675_-10750",
+      "regime": "monsoonal_transition",
+      "role": "fit_validation"
+    },
+    {
+      "daymet_shard": "daymet-058.tar.gz",
+      "daymet_shard_sha256": "e05304a0e3c234369eaa5537a7e72dd5a09347ae0a1cc6540e10e05fac825444",
+      "elevation_m": 662.0,
+      "latitude": 40.25,
+      "longitude": -99.0,
+      "point_id": "p+4025_-09900",
+      "regime": "non_monsoonal_semi_arid",
+      "role": "fit_validation"
+    }
+  ]
+}

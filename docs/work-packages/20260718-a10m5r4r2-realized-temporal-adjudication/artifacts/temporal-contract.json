@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "contract_id": "a10m5r4r2-realized-temporal-v1",
+  "freeze_predecessor_commit": "1dffef35955355c74d073e2099feca0e5cbb52b6",
+  "generated_output_accessed_at_freeze": false,
+  "roles": {
+    "observation": "fit_validation",
+    "candidate_fit_reopened": false,
+    "development_selection_opened": false,
+    "confirmation_opened": false
+  },
+  "authorities": {
+    "a10m1_normalized_manifest_sha256": "9de18c4822397ae8a70f827a6a0fa7649bea0c4a8314f6363716fb9bd92f46c2",
+    "a10m1_offline_transfer_manifest_sha256": "d58b107a3354d91936cc3123ce5f39d862c6459f6e01ae31fdeb73513fead066",
+    "a10m5r3r1_terminal_sha256": "a870f3b5794e3a1ddae51bba7097008bae691cbe43115f20a2bfd8d35ce83f30",
+    "prism_distribution_sha256": "bfea8bf673e250ae8d8e265b6b933aff3da30d98796516fa4e0a62642c7c5fd0"
+  },
+  "models": [
+    {"capacity_id":"P1","row_id":"capacity-p1-s147031","training_seed":147031,"parameter_count":87295,"hidden_size":80,"export_bytes":364196,"export_sha256":"549f71b504add381db842c05cd4c172caa559b8f292417dfab5d2d06271c56ef"},
+    {"capacity_id":"P1","row_id":"frontier-k0-s271828","training_seed":271828,"parameter_count":87295,"hidden_size":80,"export_bytes":364196,"export_sha256":"e06b689e50b532c5447d6e68b9723266d55b1751e049267e2452625ec146cfbf"},
+    {"capacity_id":"P1","row_id":"frontier-k0-s314159","training_seed":314159,"parameter_count":87295,"hidden_size":80,"export_bytes":364196,"export_sha256":"812c19490910f93e3791bcdbd4907ba4faa4d31f4e9324a2b505f731989e3d5c"},
+    {"capacity_id":"P2","row_id":"capacity-p2-s147031","training_seed":147031,"parameter_count":276927,"hidden_size":144,"export_bytes":1122724,"export_sha256":"fee6fcddfdd01b9cb75dfa53a5d3e455b8d0d2d4baa489ee40c966a6c210b01a"},
+    {"capacity_id":"P2","row_id":"frontier-k1-s271828","training_seed":271828,"parameter_count":276927,"hidden_size":144,"export_bytes":1122724,"export_sha256":"71248cd68bf689e42a49b2cb3c6fb3fe4cfb2a9b022d29ddcfeff90dd7581414"},
+    {"capacity_id":"P2","row_id":"frontier-k1-s314159","training_seed":314159,"parameter_count":276927,"hidden_size":144,"export_bytes":1122724,"export_sha256":"e074064d8332a1dbc6c18ed5e0db7e7465dfed152bec520b259710f96047b7d9"}
+  ],
+  "generation": {
+    "horizon_years": 100,
+    "begin_year": 2001,
+    "neural_burn_id": 101,
+    "member_ids": [0,1,2,3,4,5,6,7],
+    "stochastic_burn_counts": [101,1101,2101,3101,4101,5101,6101,7101],
+    "rng": "random123_philox4x32_10 for neural; faithful CLIGEN burn semantics for stochastic arms"
+  },
+  "metrics": {
+    "wet_threshold_mm": 1.0,
+    "dry_month_total_threshold_mm": 1.0,
+    "monthly_precipitation": ["mean","standard_deviation","coefficient_of_variation","skew","dry_frequency","q10","q50","q90","q95"],
+    "monthly_temperature": ["tmax_mean","tmax_standard_deviation","tmin_mean","tmin_standard_deviation","tmax_tmin_correlation"],
+    "annual": ["precipitation_mean","precipitation_standard_deviation","precipitation_q95","tmax_mean","tmax_standard_deviation","tmin_mean","tmin_standard_deviation","precipitation_lag1","tmax_lag1","tmin_lag1","precipitation_tmax_correlation","precipitation_tmin_correlation","tmax_tmin_correlation"],
+    "occurrence": ["p_wet_given_wet","p_wet_given_dry","wet_spell_survival_3","wet_spell_survival_7","dry_spell_survival_3","dry_spell_survival_7","seasonal_wet_frequency_range"],
+    "intensity_diagnostic": "annual q95 of generated peak rainfall rate ip*prcp/dur for faithful and PRISM only"
+  },
+  "scoring": {
+    "component_scales": {"log_precipitation":0.25,"coefficient_of_variation":0.25,"skew":0.5,"probability":0.05,"temperature_mean_c":1.0,"temperature_standard_deviation_c":0.5,"correlation":0.1},
+    "regime_composite": "unweighted mean of finite registered common-component scaled absolute errors",
+    "reference": "lower regime composite of faithful and stochastic_prism_localized_par_v1",
+    "uncertainty": "1000 deterministic paired bootstrap replicates over observation years and generated model/member streams; seed 410542",
+    "candidate_noninferiority": {"median_regime_ratio_upper_90_percent":1.25,"maximum_regime_ratio":1.5},
+    "larger_capacity_temporal_preference": {"minimum_paired_error_reduction":0.1,"minimum_bootstrap_probability":0.9}
+  },
+  "decision": {
+    "authorize_a10m5r5_when": "at least one capacity passes support, exact accepted-export reproduction, and temporal noninferiority",
+    "spatial_pair_rule": "all temporally eligible capacities continue to A10M5R6; no final architecture promotion occurs here",
+    "intensity_boundary": "accepted neural stream v1 has no storm duration, time-to-peak, peak-ratio, or half-hour-intensity field; stochastic-arm intensity diagnostics are reported but excluded from neural capacity scoring"
+  },
+  "resources": {
+    "primary_jobs": 6,
+    "gpu": "one typed L40 per job",
+    "time_limit_minutes_per_job": 30,
+    "primary_gpu_minute_ceiling": 180,
+    "recovery_gpu_minute_reserve": 5,
+    "attempts_per_role": 1
+  }
+}
