@@ -82,6 +82,9 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Closed A10M5R10R1R3 at
   `HOLD-A10M5R10R1R3-CUBLAS-ENVIRONMENT-SCOPE` after five GPU-minutes with
   authenticated matrix stop, sparse collection, cleanup, and reserve release.
+- [x] (2026-07-19) Scaffolded and independently accepted A10M5R10R1R4 with
+  exact seven-variable parent science-environment reconstruction in both
+  wrappers, hostile inherited-variable clearing, and mutation guards.
 - [ ] Publish and execute the fresh A10M5R10R1R4 science-environment remedy,
   then dispatch, authenticate, observe, and collect its ten candidate roles
   under machine-enforced wave admission.
@@ -451,3 +454,9 @@ rejected.
 control training operation exposed child-only CuBLAS environment scope. The
 bounded R1R4 successor restores deterministic science environment closure in
 both parent wrappers.
+
+2026-07-19: scaffolded A10M5R10R1R4 and accepted it after independent review.
+The package reconstructs and asserts the complete frozen seven-variable
+science environment in both parent launchers before any parent Python process;
+science, corpus, calendar, roles, waves, and the 935-minute ceiling are
+unchanged.

@@ -1,0 +1,68 @@
+{
+  "dependencies": {
+    "a10-daymet-calendar-profile-v1.json": {
+      "bytes": 1070,
+      "sha256": "6a4a2a6e6649d281033c88709eca1ab3c70dc1de180065c8658a4046b2a26d2b",
+      "source_path": "docs/specifications/a10-daymet-calendar-profile-v1.json"
+    },
+    "candidate_experiment.py": {
+      "bytes": 13276,
+      "sha256": "fcfc9b8b1066b906b0b587d973fc09766ce43ce6bc18c8a90a72e4a60cf20c02",
+      "source_path": "docs/work-packages/20260719-a10m5r10-parallel-architecture-portfolio/artifacts/jobs/candidate_experiment.py"
+    },
+    "climate_core.py": {
+      "bytes": 32239,
+      "sha256": "50f8863803305ba5012a8de370b9b3aab52d6e536bc730290d18d63f6614b6dd",
+      "source_path": "docs/work-packages/20260719-a10m5r8-climate-statistics-objective/artifacts/jobs/climate_core.py"
+    },
+    "legacy_core.py": {
+      "bytes": 42389,
+      "sha256": "3e41216221415770615dcc949e355d139afc2e0115015d9ee811702f8af29bcd",
+      "source_path": "docs/work-packages/20260717-a10m5-bounded-gpu-screen/artifacts/jobs/screen.py"
+    },
+    "materialize_controls.py": {
+      "bytes": 8003,
+      "sha256": "01bbec0632bea52ff56d619716a3c0a8747015d0800bf6137d406fb5483fb379",
+      "source_path": "docs/work-packages/20260719-a10m5r10-parallel-architecture-portfolio/artifacts/jobs/materialize_controls.py"
+    },
+    "portfolio-contract.json": {
+      "bytes": 16619,
+      "sha256": "ddcbd2e2be56d44e4b8389f738dbb3badc84daaaffbfce37cf3188a72ff2d191",
+      "source_path": "docs/work-packages/20260719-a10m5r10-parallel-architecture-portfolio/artifacts/portfolio-contract.json"
+    },
+    "portfolio_core.py": {
+      "bytes": 59576,
+      "sha256": "48827b0279f79bf0991f2b9a95db4c35de73be6e102f481a6384b87af8e171e4",
+      "source_path": "docs/work-packages/20260719-a10m5r10-parallel-architecture-portfolio/artifacts/jobs/portfolio_core.py"
+    },
+    "reconstruction-contract.json": {
+      "bytes": 5599,
+      "sha256": "13ebe740f6c885cc73a4c1d30f9357d88ea80e2ffa6b167f713138836abc432e",
+      "source_path": "docs/work-packages/20260718-a10m5r4r2r1-reconstruction-identity-remedy/artifacts/reconstruction-contract.json"
+    },
+    "residual_core.py": {
+      "bytes": 30750,
+      "sha256": "83f0e32623e23a4f31ee8cdf59818d4db468a96364857c4205f1930c4f65ced0",
+      "source_path": "docs/work-packages/20260719-a10m5r9-climate-normal-residual-architecture/artifacts/jobs/residual_core.py"
+    },
+    "screen_core_v2.py": {
+      "bytes": 21545,
+      "sha256": "1e4f5203f6b44ce0141a93e5ee97bd967aed7edd6831f9c6a2078a33f3be0731",
+      "source_path": "docs/work-packages/20260718-a10m5r3-candidate-family-capacity-knee/artifacts/jobs/screen_core_v2.py"
+    },
+    "select_portfolio.py": {
+      "bytes": 20326,
+      "sha256": "31526cdd3a9e5c29e4e33446a9b9aaeb544a514ff14caab4845596b368193f27",
+      "source_path": "docs/work-packages/20260719-a10m5r10-parallel-architecture-portfolio/artifacts/jobs/select_portfolio.py"
+    },
+    "train.py": {
+      "bytes": 3575,
+      "sha256": "631168c8acea2a7d7ecfd54774eccce9613f32a8fb7c94352bb892bad866fcb7",
+      "source_path": "docs/work-packages/20260718-a10m5r3-candidate-family-capacity-knee/artifacts/jobs/train.py"
+    }
+  },
+  "package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+  "predecessor_package_id": "20260719-a10m5r10-parallel-architecture-portfolio",
+  "predecessor_source_commit": "cbf73d781df09f466d66e31d2569ca19ffaa0faf",
+  "schema_version": 1
+}

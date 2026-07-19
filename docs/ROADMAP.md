@@ -509,7 +509,11 @@ run closed at `HOLD-A10M5R10R1R3-CUBLAS-ENVIRONMENT-SCOPE` after five
 GPU-minutes; no control row or candidate exists, all ten candidates were
 stopped, and cleanup/closure passed. The next bounded successor restores the
 frozen science environment explicitly in both parent wrappers without
-weakening deterministic execution or changing the portfolio.
+weakening deterministic execution or changing the portfolio:
+[A10M5R10R1R4](work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/package.md).
+Its exact seven-variable reconstruction, prohibited-variable clearing,
+parent-process execution proof, per-assignment mutation guards, and unchanged
+science/resource freeze passed independent review before authority creation.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
