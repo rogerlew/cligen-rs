@@ -11,7 +11,8 @@ Job `1014023` then exited before treatment training with:
 The accepted Daymet documents span 1980-01-01 through 2009-12-31: 10,958
 Gregorian dates, 10,950 `source_observed=true` rows, and 10,950 non-null rows
 for every weather field in the inspected source document. The eight excluded
-rows are the leap-day missingness represented by the A10M1 corpus contract.
+rows are the absent leap-year December 31 observations represented by the
+A10M1 `daymet_official_365_v1` corpus contract.
 Every exact eight-year interval therefore includes accepted missingness and no
 window satisfies an all-calendar-day predicate.
 
@@ -34,3 +35,8 @@ Resource/operational record:
 - job-local cleanup: verified absent
 - durable run root: verified absent
 - protected roles opened: none
+
+Terminology correction (2026-07-19): an earlier revision called the eight
+excluded rows "leap-day missingness." The count and hold are unchanged;
+official-calendar Daymet retains February 29 and omits December 31 in leap
+years.

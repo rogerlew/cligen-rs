@@ -35,8 +35,9 @@ and temperature.
 - [x] (2026-07-19) Initialize the package-scoped resource authority and execute one bounded
   single-L40 attempt through the canonical toolkit lifecycle.
 - [x] (2026-07-19) R1 job `1014023` reconstructed the control exactly and
-  passed the synthetic dispersion test, then exposed accepted leap-day
-  missingness as incompatible with the all-day-complete window predicate;
+  passed the synthetic dispersion test, then exposed accepted Daymet leap-year
+  December 31 missingness as incompatible with the all-day-complete window
+  predicate;
   collected failure evidence and closed exact cleanup after 246 GPU-seconds.
 - [x] (2026-07-19) R2 job `1014024` reached masked calendar attachment and
   exposed an inclusive target-end label slice; collected and closed exact

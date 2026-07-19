@@ -1,0 +1,42 @@
+{
+  "fit_period_example": {
+    "calendar_axis_rows": 10958,
+    "end_date_inclusive": "2009-12-31",
+    "observed_rows": 10950,
+    "start_date_inclusive": "1980-01-01",
+    "unobserved_dates": [
+      "1980-12-31",
+      "1984-12-31",
+      "1988-12-31",
+      "1992-12-31",
+      "1996-12-31",
+      "2000-12-31",
+      "2004-12-31",
+      "2008-12-31"
+    ],
+    "unobserved_rows": 8
+  },
+  "generated_calendar": "proleptic_gregorian_complete",
+  "normalized_axis": {
+    "calendar": "proleptic_gregorian",
+    "unavailable_field_representation": "null",
+    "unavailable_observation_representation": "source_observed_false"
+  },
+  "profile_id": "daymet_official_365_v1",
+  "schema_version": 1,
+  "source_calendar": {
+    "leap_year_december_31": "absent",
+    "leap_year_february_29": "observed",
+    "observations_per_year": 365
+  },
+  "window_example": {
+    "calendar_axis_rows": 2922,
+    "end_exclusive": "1988-01-01",
+    "observed_rows": 2920,
+    "start_inclusive": "1980-01-01",
+    "unobserved_dates": [
+      "1980-12-31",
+      "1984-12-31"
+    ]
+  }
+}

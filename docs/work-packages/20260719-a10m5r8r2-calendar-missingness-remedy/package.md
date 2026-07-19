@@ -70,5 +70,5 @@ job-local and durable cleanup.
 
 A10M5R8R3 makes the target-end slice exclusive and adds a synthetic
 construction test containing the preceding day, all eight target years,
-accepted leap-day missingness, and the first post-window day. Nothing else in
-the experiment changes.
+accepted leap-year December 31 missingness, and the first post-window day.
+Nothing else in the experiment changes.

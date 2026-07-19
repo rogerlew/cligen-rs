@@ -2,7 +2,8 @@
 
 Status: research-only
 
-Revision: 1 (A10M5R8, 2026-07-19)
+Revision: 2 (A10M5R8 calendar terminology and preflight hardening,
+2026-07-19)
 
 ## Surface and authority
 
@@ -31,14 +32,26 @@ MSE, rescaling, target lookup, or post-generation repair is legal.
 ## Calendar and stochastic surface
 
 Training and checkpoint windows contain eight exact Gregorian years on the
-accepted A10M1 date axis. Statistics and the core daily proper-score guard use
-only rows where `source_observed` is true and precipitation, Tmax, and Tmin are
-present; every year-month must retain at least 28 such rows. This preserves the
-accepted leap-day missingness instead of inventing observations or discarding
-calendar years. The model receives zero normalized weather inputs and the
-inherited calendar and transferable site descriptors. Four differentiable
-stochastic members are drawn for training and eight hard members for
-checkpoint/final evaluation. Random fields are deterministic and arm-paired.
+accepted A10M1 date axis, with the target end treated as exclusive. Under
+[`daymet_official_365_v1`](SPEC-A10-CORPUS.md#daymet-calendar-contract),
+February 29 is observed and leap-year December 31 is the absent source day on
+the normalized Gregorian axis. Statistics and the core daily proper-score
+guard use only rows where `source_observed` is true and precipitation, Tmax,
+and Tmin are present; every year-month must retain at least 28 such rows. This
+preserves accepted calendar-normalization missingness instead of inventing
+observations or discarding calendar years. The model receives zero normalized
+weather inputs and the inherited calendar and transferable site descriptors.
+Four differentiable stochastic members are drawn for training and eight hard
+members for checkpoint/final evaluation. Random fields are deterministic and
+arm-paired.
+
+Before training, the package must replay the A10 Daymet calendar profile and
+show, for the 1980--2009 fit surface, 10,958 Gregorian-axis rows, 10,950 jointly
+observed core rows, and the eight expected unobserved leap-year December 31
+rows. A representative eight-year window must contain 2,922 calendar labels,
+2,920 observed target rows, and no included target-end row. Calendar-axis
+completeness is not observational completeness; an all-calendar-row-observed
+eligibility predicate is prohibited.
 
 For precipitation, Tmax, and Tmin, each window computes:
 
@@ -85,3 +98,6 @@ identities, architecture, amount family, seed, arm, checkpoint, point, regime,
 window years, member field, and protected-role list. Unknown fields, incomplete
 calendar windows, identity drift, non-finite statistics, missing blocks,
 protected-role access, or incomplete arm pairing fail closed.
+
+Revision 2 is a terminology and preflight correction only. It does not change
+the executed A10M5R8 estimand, weights, thresholds, roles, or disposition.

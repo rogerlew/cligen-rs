@@ -138,6 +138,16 @@ Plus package-specific evidence gates (fixture identity, byte-parity on
 recorded build provenance (compiler, flags including `-ffp-contract=off`,
 libm, source hash).
 
+Any package that consumes calendarized observed data must complete its
+calendar and missingness preflight before reserving scarce compute or starting
+the scientific run. The package must name the source-calendar transform and
+normalized axis, pin expected axis/observed counts, exercise leap-year and
+window-boundary fixtures, and state mask-based month/year eligibility. Never
+infer observational completeness from a complete date axis or a generic
+"365-day" label. A10 Daymet consumers follow
+[SPEC-A10-CORPUS](docs/specifications/SPEC-A10-CORPUS.md) and its canonical
+calendar profile.
+
 ## Commit style
 
 Imperative subject line, ≤ 72 chars, body only when the diff doesn't speak

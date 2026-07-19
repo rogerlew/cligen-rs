@@ -24,6 +24,23 @@ Included / excluded, in enough detail that "done" is checkable.
 Numbered phases. Fixture/spec work before implementation where either
 applies.
 
+## Data calendar and missingness preflight
+
+Required when the package consumes calendarized observed data; otherwise state
+`not applicable`. Before reserving scarce compute or starting the scientific
+run, record:
+
+- source-calendar transform ID and normalized calendar axis;
+- inclusive data bounds and window-end convention;
+- expected calendar-axis, observed, and masked counts;
+- representative leap-year and window-boundary fixture results;
+- required-field mask composition and month/year eligibility; and
+- the exact preflight receipt or verifier artifact.
+
+Never infer observational completeness from a complete date axis or a generic
+"365-day" label. A10 Daymet packages must cite
+`SPEC-A10-CORPUS` and its canonical calendar profile.
+
 ## Execution & dispatch
 
 For staged multi-executor packages (the item-3/item-4 pattern): name
@@ -38,6 +55,7 @@ merge at review time (item-4 R2 precedent).
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
+- Calendar/missingness preflight, when applicable, before scarce-resource use
 - Package-specific evidence gates (fixture identity, spec lint, etc.)
 
 ## Exit criteria
