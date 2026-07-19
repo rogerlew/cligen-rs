@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "package_id": "20260718-prism-residual-attribution",
+  "freeze_head": "dcfe9b5aafbee9e0b939992f0b5d8ba06dddff66",
+  "history": {
+    "superseded_commit": "188f8ec",
+    "correcting_commit": "4af0470"
+  },
+  "canonical_method_sha256": "2c6668828292cb95c167fea4249eff89762901deba03c702bff0d26036c18924",
+  "canonical_pedigree_stages": [
+    "FSWEPP Rock:Clime",
+    "WEPPcloud wepppy",
+    "cligen-rs"
+  ],
+  "current_surface_paths": [
+    "README.md",
+    "docs/ROADMAP.md",
+    "docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md",
+    "crates/cligen/src/prism",
+    "docs/work-packages/20260718-a10m5r4r1-stochastic-prism-comparator",
+    "docs/work-packages/20260718-prism-mode-bundle-pedigree"
+  ],
+  "prohibited_token_fingerprints": [
+    {
+      "kind": "word",
+      "length": 6,
+      "sha256": "27a0f645e20497a65f997aef769b2c72324d983a92faac73e9cd467173466641"
+    },
+    {
+      "kind": "doi",
+      "length": 29,
+      "sha256": "c83f68b89a92c6701f9973e11ba6425213e14f1060b93ce143062d99e1b9d73d"
+    }
+  ],
+  "cargo_required_paths": [
+    "src/prism/distribution.json",
+    "src/prism/method.json"
+  ],
+  "cargo_prohibited_suffixes": [
+    ".bil",
+    ".f32le",
+    "validity-mask.bin",
+    "prism-normals-runtime-2026.07.tar.gz",
+    "prism-normals-source-2026.07.tar.gz"
+  ]
+}
