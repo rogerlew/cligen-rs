@@ -102,3 +102,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |
 | [20260719-a10m5o1r1-evidence-token-projection-hardening](20260719-a10m5o1r1-evidence-token-projection-hardening/package.md) | EXECUTED-COMPLETE |
 | [20260719-a10m5o2-canonical-multi-l40-qualification](20260719-a10m5o2-canonical-multi-l40-qualification/package.md) | EXECUTED-COMPLETE |
+| [20260719-a10m5o2d1-l40-interconnect-diagnostic](20260719-a10m5o2d1-l40-interconnect-diagnostic/package.md) | EXECUTED-COMPLETE |

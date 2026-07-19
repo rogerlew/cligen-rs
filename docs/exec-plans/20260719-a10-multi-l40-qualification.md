@@ -48,9 +48,15 @@ promotion.
   repository gate pass.
 - [x] (2026-07-19 15:00Z) Reopened the living plan for operator-authorized
   A10M5O2D1 and froze one four-L40, 45-minute-ceiling topology diagnostic.
-- [ ] Publish the exact A10M5O2D1 source and initialize its independent ledger.
-- [ ] Execute pairwise/four-way default and P2P-disabled NCCL measurements.
-- [ ] Collect, analyze, clean, close, update guidance, and run final gates.
+- [x] (2026-07-19 15:08Z) Published exact A10M5O2D1 source as `3ab7752`,
+  initialized its independent 45-minute ledger, staged canonical assets, and
+  passed immediate no-allocation admission on node03.
+- [x] (2026-07-19 15:12Z) Completed job `1014026`; every pair/four-way default
+  and P2P-disabled collective and all 13 machine gates passed.
+- [x] (2026-07-19 15:12Z) Collected six sanitized files, settled 656 actual
+  GPU-seconds, released recovery, and proved durable/job-local cleanup.
+- [x] (2026-07-19 15:25Z) Characterized the four-rank SHM fallback, updated
+  package/specification/guide/roadmap/catalog records, and ran final gates.
 
 ## Surprises & Discoveries
 
@@ -80,6 +86,13 @@ promotion.
   hard-coded to projection revision 3 while the cryptographic transformation
   receipts correctly reported revision 4. Binding that label to the projector
   constant prevents future receipt drift.
+- Observation: all six two-rank groups had complete CUDA peer access and NCCL
+  used `P2P/CUMEM`; 128 MiB bus bandwidth split into favored 0–1/2–3 pairs at
+  about 20.1 GB/s and four other pairs at 14.5–14.6 GB/s.
+- Observation: the four-rank default reported `intraNodeP2pSupport 0` and used
+  `SHM/direct/direct` for every channel. Its 1.148 GB/s bus bandwidth matched
+  the P2P-disabled control's 1.155 GB/s. NCCL initialized InfiniBand, but the
+  per-channel evidence proves host shared memory was the collective path.
 
 ## Decision Log
 
@@ -111,6 +124,11 @@ promotion.
   meaning while preventing token spoofing. Rationale: all scheduler/gate
   evidence is already terminal and authentic; the defect is solely in the
   publication layer. Date/Author: 2026-07-19, Codex.
+- Decision: characterize but do not tune around the four-rank NCCL P2P
+  decision. Rationale: the diagnostic proves the active transport and excludes
+  an external network hop, but does not prove whether NCCL topology policy,
+  CUMEM, ACS/IOMMU, or host affinity causes the decision. A global override
+  would exceed diagnostic authority. Date/Author: 2026-07-19, Codex.
 
 ## Outcomes & Retrospective
 
@@ -128,6 +146,15 @@ and lets only registered rules introduce toolkit projection tokens. The
 performance classification is `SINGLE-GPU-PREFERRED`: fixed-global two/one
 speedup was 0.3999x and incremental four/two speedup was 0.0462x, well below
 the advisory 1.6x and 1.4x thresholds.
+
+A10M5O2D1 reached `A10M5O2D1-L40-INTERCONNECT-CHARACTERIZED`. Job `1014026`
+completed all pairwise and four-way controls on node03, used 656 actual
+GPU-seconds, released recovery, and closed cleanly. The hardware supports peer
+access across all L40 pairs and two-rank NCCL uses it. The four-rank group
+instead falls back to host shared memory and produces the same approximately
+1.15 GB/s whether P2P is default or explicitly disabled. The current guidance
+therefore keeps one GPU canonical, permits two only after a representative
+pilot, and holds four-GPU performance use pending a supported remedy.
 
 ## Context and Orientation
 
@@ -286,3 +313,7 @@ acceptance gates, and retrospective outcomes are closed.
 
 Revision note (2026-07-19): reopened only for the bounded A10M5O2D1 physical
 interconnect diagnostic authorized after review of the scaling result.
+
+Revision note (2026-07-19): closed A10M5O2D1 after identifying four-rank NCCL
+shared-memory fallback, reconciling authority/evidence/cleanup, and updating
+the authoritative multi-GPU guidance without promoting speculative tuning.

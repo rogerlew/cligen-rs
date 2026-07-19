@@ -301,6 +301,36 @@ one GPU to 56,464 on two and 2,609 on four. Classify the current evidence as
 pilot shows that useful per-rank compute amortizes PCIe/NCCL/DDP communication.
 This result says nothing about cross-node or heterogeneous operation.
 
+A10M5O2D1 explains the four-GPU cliff more precisely. On node03, every ordered
+L40 peer-read and peer-write relation is driver-supported, and every two-GPU
+default collective used NCCL `P2P/CUMEM`. At 128 MiB, pairs 0–1 and 2–3
+reached approximately 20.1 GB/s bus bandwidth; the other four pairs reached
+14.5–14.6 GB/s. P2P-disabled controls were substantially slower.
+
+With all four GPUs participating, however, NCCL 2.26.2 reported
+`intraNodeP2pSupport 0` and selected `SHM/direct/direct` for every ring edge.
+The 128 MiB default reached 1.148 GB/s, effectively identical to the explicit
+P2P-disabled control at 1.155 GB/s. NCCL discovered and initialized the node's
+InfiniBand interfaces, but its per-channel log proves that this same-node
+collective used host shared memory rather than an external network path.
+
+This creates three operational rules:
+
+1. A successful `nvidia-smi` P2P matrix does not prove that NCCL will use P2P
+   at the intended rank count. Capture `NCCL_DEBUG=INFO` and inspect the
+   actual `via P2P/CUMEM` or `via SHM/direct/direct` channel lines.
+2. Two-L40 work may be viable after a representative scaling pilot. Pairs 0–1
+   and 2–3 were fastest in this diagnostic, but do not assume that an ordinary
+   two-GPU Slurm allocation exposes a particular physical pair unless that
+   scheduler contract is separately established.
+3. Do not use four L40s for performance work or set speculative NCCL overrides
+   as toolkit defaults until a bounded successor proves a supported remedy.
+
+The remaining root-cause possibilities include NCCL full-graph topology
+policy, CUDA CUMEM behavior, ACS/IOMMU configuration, and node03's asymmetric
+CPU-affinity/NUMA presentation. These are investigation leads, not established
+causes and not operator-side configuration authority.
+
 ## Legacy A10M2 offline framework and runtime contract
 
 The login-visible Python 3.11.11 environment was not available on `node03`.
@@ -784,6 +814,7 @@ promote a lower-level smoke result into any of those claims.
 - [A10M5O1 multi-L40 toolkit hardening](work-packages/20260719-a10m5o1-multi-l40-toolkit-hardening/package.md)
 - [A10M5O1R1 evidence projection hardening](work-packages/20260719-a10m5o1r1-evidence-token-projection-hardening/package.md)
 - [A10M5O2 canonical multi-L40 qualification](work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/package.md)
+- [A10M5O2D1 L40 interconnect diagnostic](work-packages/20260719-a10m5o2d1-l40-interconnect-diagnostic/package.md)
 - [SSH keepalive implementation](../research/a10/cluster/ssh-keepalive.sh)
 - [C3+3 GPU workshop](https://docs.c3plus3.org/docs/workshops/Cluster/GPU_Nodes.html)
 - [C3+3 current partition guide](https://docs.c3plus3.org/docs/help/Tutorials/Partitions.html)

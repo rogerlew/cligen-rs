@@ -1,0 +1,21 @@
+{
+  "actual_gpu_minutes": 11,
+  "actual_gpu_seconds": 656,
+  "all_thirteen_gates_passed": true,
+  "cleanup_receipt_sha256": "d28aae1ab31e5b9945e0796009f6713ea6a4aac3b7dbbb7e5d277f67b3498d37",
+  "collection_archive_sha256": "e8d37fe85f3c3abbbb1e84ce65098b82f07471d784799a684d8ceb644b7ff613",
+  "elapsed_seconds": 164,
+  "evidence_sha256": "19b4cf473b895441383121691ef1d455a5df5bb6fb97b25e04318e5a3e22f11b",
+  "exit_code": 0,
+  "gate_receipt_sha256": "72bfb99d7329b4fa80abe75dc84df3f879dcd05584fb1d725d1fde0d6839f309",
+  "job_id": "1014026",
+  "ledger_head_sha256": "957bb49642e6d71e59752da673aa476f8af08588f8716194226ea77f6242f9a7",
+  "node": "node03",
+  "plan_id": "fb21c78ee7e5611f16187f3c28d53e48fdcac4d56155535ac4f116467e039413",
+  "requested_gpu_minutes": 40,
+  "run_id": "a10m5o2d1-l40-topology-r0",
+  "source_commit": "3ab775253a1732b7efa5bdf7d0800316e9086bc4",
+  "state": "COMPLETED",
+  "terminal_receipt_sha256": "f001e3538100c8613c5f2da27bb73a40f217b6bb78092fa2fca4716af9ce37ed",
+  "unused_recovery_gpu_minutes_released": 5
+}

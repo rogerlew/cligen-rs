@@ -1,6 +1,6 @@
 # A10M5O2D1 — L40 Interconnect Diagnostic
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-19
 Evidence mode: Mixed
 ExecPlan: [`../../exec-plans/20260719-a10-multi-l40-qualification.md`](../../exec-plans/20260719-a10-multi-l40-qualification.md)
@@ -49,6 +49,32 @@ default, canonical designation changes, A10M6, or intentional preemption.
 The success terminal is `A10M5O2D1-L40-INTERCONNECT-CHARACTERIZED`. Missing or
 ambiguous topology, failed collectives, accounting drift, evidence failure, or
 cleanup failure produces an exact hold.
+
+## Result
+
+Job `1014026` completed on node03 with four L40s and all 13 frozen gates
+passing. Every hardware/driver peer-read and peer-write relation was `OK`, and
+PyTorch reported peer access for every pair. Default two-rank NCCL used
+`P2P/CUMEM`: the favored pairs 0–1 and 2–3 reached 20.117 and 20.067 GB/s at
+128 MiB, while the other four pairs reached 14.488–14.619 GB/s. Their
+P2P-disabled controls fell to 1.025–5.383 GB/s.
+
+The four-rank default did not use those peer paths. NCCL reported
+`intraNodeP2pSupport 0` and selected `SHM/direct/direct` for every ring edge.
+It reached 1.148 GB/s bus bandwidth, effectively indistinguishable (0.6%
+apart) from the explicit P2P-disabled control at 1.155 GB/s. NCCL
+initialized the host's InfiniBand devices, but the actual same-node collective
+channels were shared-memory paths; the collapse is not evidence of external
+network traffic.
+
+The frozen hypothesis is therefore refined: topology creates two pairwise
+bandwidth classes, but the four-GPU cliff is caused by NCCL declining
+intra-node P2P for the full four-rank group and falling back to host shared
+memory. The exact administrative cause of that NCCL decision is not proved.
+The package reaches `A10M5O2D1-L40-INTERCONNECT-CHARACTERIZED`. Continue to
+prefer one GPU by default, use two only after workload-specific scaling, and
+do not recommend four-GPU jobs until a separately authorized successor proves
+a supported transport remedy.
 
 ## Artifacts
 

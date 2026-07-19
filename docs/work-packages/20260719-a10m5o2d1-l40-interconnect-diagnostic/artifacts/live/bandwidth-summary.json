@@ -1,0 +1,31 @@
+{
+  "environment": {
+    "cuda_runtime": "12.8",
+    "gpu_count": 4,
+    "gpu_model": "NVIDIA L40",
+    "nccl": "2.26.2",
+    "python": "3.11.15",
+    "torch": "2.7.1+cu128"
+  },
+  "message_sizes_mib": [1, 16, 128],
+  "p2p_driver_matrix": {
+    "read": "all ordered off-diagonal relations OK",
+    "write": "all ordered off-diagonal relations OK"
+  },
+  "results_128_mib": [
+    {"group": "0-1", "default_bus_gbps": 20.117, "p2p_disabled_bus_gbps": 5.383, "default_transport": "P2P/CUMEM"},
+    {"group": "0-2", "default_bus_gbps": 14.488, "p2p_disabled_bus_gbps": 1.037, "default_transport": "P2P/CUMEM"},
+    {"group": "0-3", "default_bus_gbps": 14.619, "p2p_disabled_bus_gbps": 1.067, "default_transport": "P2P/CUMEM"},
+    {"group": "1-2", "default_bus_gbps": 14.597, "p2p_disabled_bus_gbps": 1.025, "default_transport": "P2P/CUMEM"},
+    {"group": "1-3", "default_bus_gbps": 14.503, "p2p_disabled_bus_gbps": 1.119, "default_transport": "P2P/CUMEM"},
+    {"group": "2-3", "default_bus_gbps": 20.067, "p2p_disabled_bus_gbps": 4.936, "default_transport": "P2P/CUMEM"},
+    {"group": "0-1-2-3", "default_bus_gbps": 1.148, "p2p_disabled_bus_gbps": 1.155, "default_transport": "SHM/direct/direct"}
+  ],
+  "topology": {
+    "gpu_0_1_class": "NODE",
+    "gpu_2_3_class": "NODE",
+    "other_gpu_pair_class": "NODE",
+    "nvlink_present": false,
+    "reported_numa": {"gpu0": 0, "gpu1": 0, "gpu2": 1, "gpu3": 1}
+  }
+}

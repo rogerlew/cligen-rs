@@ -244,6 +244,14 @@ rank failure, accounting, evidence, and cleanup passed on node03. The separate
 performance result is `SINGLE-GPU-PREFERRED`; the additive capability is
 available for workload-specific use and does not replace the one-L40 default.
 
+**Completed diagnostic successor (2026-07-19):**
+[A10M5O2D1 L40 interconnect diagnostic](work-packages/20260719-a10m5o2d1-l40-interconnect-diagnostic/package.md)
+reached `A10M5O2D1-L40-INTERCONNECT-CHARACTERIZED`. All pairs support and use
+NCCL P2P at two ranks (14.5–20.1 GB/s at 128 MiB), but NCCL disables P2P for
+the full four-rank group and selects host shared memory (~1.15 GB/s), matching
+the explicit P2P-disabled control. Four-L40 operational correctness remains
+available, while performance use is held pending a supported remedy.
+
 **Hold (2026-07-17):**
 [A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
 reached `HOLD-A10-NO-VALID-NEURAL-FIT`. All twelve frozen seed-147031 rows
