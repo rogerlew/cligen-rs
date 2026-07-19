@@ -1,6 +1,6 @@
 # A10M5R4R2R1R2 — Leap-Century Evaluation Remedy
 
-Status: `FROZEN-LOCAL-EXECUTION`
+Status: `EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CAPACITY`
 Date: 2026-07-18
 Evidence mode: Prospective zero-allocation scoring correction
 Starting branch and push target: `main`, push `main`
@@ -33,3 +33,33 @@ Two full scores must be byte-identical before disposition.
 Issue the unchanged typed temporal decision and A10M5R5 authority only if at
 least one capacity passes. Otherwise retain the exact no-eligible-capacity
 hold. Clean retained comparator scratch and pass repository gates.
+
+## Disposition
+
+The century-safe mapping passed for all 30 observation blocks. The scorer read
+the exact authenticated R2R1 neural collection and retained comparator tree;
+it regenerated neither models nor comparators and used no Slurm or GPU
+allocation. Two complete scoring runs produced byte-identical output with
+SHA-256 `d1f877f0dc298f129019dbf7d093de8033f9df10d5a694f3038c9e76b832e0a6`.
+
+Neither capacity passed the unchanged temporal noninferiority gates. P1's
+90% upper bootstrap bound on the median regime ratio was 2.594775856552054 and
+its maximum point regime ratio was 3.782817495745157. P2's corresponding
+values were 2.564622468950476 and 3.9502821535166905, against limits 1.25 and
+1.5. P2's bootstrap probability of at least a 10% reduction relative to P1
+was 0.0, against 0.9. Therefore the retained set is empty, terminal
+`HOLD-A10-NO-TEMPORALLY-ELIGIBLE-CAPACITY` is issued, and A10M5R5 is not
+authorized. Any new architecture or model-family search requires a new
+scientific decision; this package does not select one after observing the
+result.
+
+## Result artifacts
+
+- `artifacts/temporal-decision.json` — complete typed score and comparator
+  provenance;
+- `artifacts/determinism.json` — two-run byte-identity record;
+- `artifacts/execution-disposition.md` — execution, resource, cleanup, and
+  decision summary;
+- `artifacts/resource-ledger.md` — package and aggregate GPU accounting;
+- `artifacts/verify_result.py` — fail-closed result verifier; and
+- `artifacts/gate-results.md` — repository and package gate transcript.

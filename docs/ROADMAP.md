@@ -285,19 +285,24 @@ freeze the successor sequence:
    exposed year 2600 as a nonleap century before score publication; zero-
    allocation
    [A10M5R4R2R1R2](work-packages/20260718-a10m5r4r2r1r2-leap-century-remedy/package.md)
-   is frozen with a complete century-safe proof over all 30 labels;
-4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
-   within-ecoregion-elevation corpus;
-5. execute A10M5R6 to compare both retained capacities on geographically held
-   mountain and nonmountain strata; and
-6. authorize A10M6 only after the final architecture/runtime decision passes
-   both temporal and spatial gates.
+   completed the unchanged score from the exact retained matrix. Two full
+   scoring runs were byte-identical, but neither P1 nor P2 passed temporal
+   noninferiority: their 90% upper bootstrap median-ratio bounds were 2.595
+   and 2.565 and their maximum regime ratios were 3.783 and 3.950. It issued
+   `HOLD-A10-NO-TEMPORALLY-ELIGIBLE-CAPACITY` with an empty retained set;
+4. **Not authorized:** A10M5R5 spatial corpus acquisition, because its entry
+   condition requires at least one temporally eligible capacity;
+5. **Not authorized:** A10M5R6 spatial comparison, because no capacity was
+   retained; and
+6. **Not authorized:** A10M6 architecture/runtime promotion.
 
-The N3/elevation expansion is deliberately downstream of the broad capacity
-knee. It may move the final choice between the two retained capacities, but it
-does not require rerunning a full architecture matrix. The existing auxiliary
-terms named monthly precipitation and annual dispersion are training
-regularizers, not realized ensemble evidence, and cannot satisfy A10M5R4.
+The N3/elevation expansion remains deliberately downstream of the broad
+capacity knee and temporal gate. The temporal gate's empty retained set stops
+that sequence; a new model-family or architecture search would require a new
+operator scientific direction and package rather than post-result rescue. The
+existing auxiliary terms named monthly precipitation and annual dispersion are
+training regularizers, not realized ensemble evidence, and cannot satisfy
+A10M5R4.
 Confirmation roles remain sealed. A cleanroom ClimateNA-like daily terrain
 spatializer and downstream subdaily storm disaggregation remain post-A10.
 
