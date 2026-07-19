@@ -29,7 +29,10 @@ def authority(options: argparse.Namespace) -> None:
         "genesis_authorized": True,
         "ledger_anchor": str(options.state_root.resolve() / "authorities" / BUDGET_ID / "ledger.json"),
         "package_id": PACKAGE_ID,
-        "predecessor_evidence": ["A10M5O1-MULTI-L40-TOOLKIT-READY"],
+        # Ledger genesis must not claim pre-existing scheduler or predecessor
+        # evidence. The package dependency remains recorded in package.md and
+        # the governing ExecPlan; it is not part of the resource-ledger chain.
+        "predecessor_evidence": [],
         "published_source_commits": [options.source_commit],
         "push_target": "main",
         "resource_budget_id": BUDGET_ID,

@@ -26,6 +26,7 @@ for name in ("run-qualification.sh", "job-common.sh"):
 builder = (JOBS / "build_control_records.py").read_text(encoding="utf-8")
 for fragment in (
     '"resource_ceiling_gpu_minutes": 90',
+    '"predecessor_evidence": []',
     '("single-baseline", 1, 8',
     '("dual-qualification", 2, 10',
     '("quad-qualification", 4, 12',

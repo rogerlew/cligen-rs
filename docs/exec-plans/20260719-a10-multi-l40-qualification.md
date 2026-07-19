@@ -29,7 +29,9 @@ promotion.
   specification, package verifiers, and the repository ExecPlan convention.
 - [x] (2026-07-19 08:25Z) Implemented exact typed-GRES/count/accounting
   invariants; 55 toolkit tests and all repository gates pass.
-- [ ] Publish the exact source commit used by the live authority.
+- [x] (2026-07-19 08:34Z) Published the first live-source freeze as `5f2907d`;
+  authority initialization then failed closed on an invalid predecessor claim.
+- [ ] Publish the corrected exact source commit used by the live authority.
 - [ ] Freeze canonical assets, authority, plan, jobs, and admission evidence.
 - [ ] Execute and settle the one-, two-, and four-L40 qualification roles plus
   the bounded two-rank failure role.
@@ -52,6 +54,11 @@ promotion.
   tier-10 `gpu-volatile`; an idle-capacity snapshot is therefore required
   immediately before multi-GPU submission to avoid intentionally displacing
   lower-priority work.
+- Observation: resource-ledger genesis rejects any predecessor or scheduler
+  evidence because genesis is the start of that evidence chain. The generated
+  authority input incorrectly copied the package dependency terminal into
+  `predecessor_evidence`, and initialization returned `AUTHORITY_INVALID`
+  before creating a ledger or consuming capacity.
 
 ## Decision Log
 
@@ -72,6 +79,11 @@ promotion.
   sequential roles reserve 82 minutes and exact-node recovery reserves five;
   the remaining three minutes cannot be spent by the frozen plan. Date/Author:
   2026-07-19, Codex.
+- Decision: keep `A10M5O1-MULTI-L40-TOOLKIT-READY` in the package/ExecPlan
+  dependency record, but generate empty genesis evidence arrays. Rationale:
+  package provenance and an append-only resource ledger are distinct chains;
+  only the latter is constrained by ledger genesis. Date/Author: 2026-07-19,
+  Codex.
 
 ## Outcomes & Retrospective
 
@@ -217,3 +229,6 @@ toolkit, cluster-policy, and current A10 campaign reconnaissance.
 
 Revision note (2026-07-19): recorded completion of local toolkit hardening and
 the exact live role/resource freeze after all local and repository gates passed.
+
+Revision note (2026-07-19): recorded the fail-closed genesis discovery and
+corrected the authority-input generator before any live mutation.
