@@ -417,6 +417,16 @@ prospective family is climate-normal-conditioned residual state space, first
 ablating explicit baseline-only against baseline plus a small latent residual
 state; it requires its own scientific/resource dispatch.
 
+**Authorized residual-architecture continuation (2026-07-19):** the operator
+directed
+[A10M5R9](work-packages/20260719-a10m5r9-climate-normal-residual-architecture/package.md)
+to execute that bounded ablation. Its
+[living ExecPlan](exec-plans/20260719-a10-climate-normal-residual.md) and
+[research specification](specifications/SPEC-A10-CLIMATE-NORMAL-RESIDUAL.md)
+freeze exact P1 context, a candidate-fit-only regime/month baseline, and the
+same frozen baseline plus a six-dimensional monthly stochastic residual state.
+Solar radiation remains closed pending a passing core result.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

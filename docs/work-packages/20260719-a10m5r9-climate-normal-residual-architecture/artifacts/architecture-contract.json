@@ -1,0 +1,102 @@
+{
+  "architecture": {
+    "amount_family": "lognormal_wet_v2",
+    "baseline": {
+      "depth": 2,
+      "head_count": 15,
+      "monthly_cells": 12,
+      "regime_cells": 6,
+      "site_descriptor_indices": [
+        10,
+        11,
+        12
+      ],
+      "width": 96
+    },
+    "residual": {
+      "center_innovations_across_members": true,
+      "head_indices": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "latent_dim": 6,
+      "maximum_persistence": 0.995,
+      "state_step": "calendar_month"
+    },
+    "training_seed": 147031
+  },
+  "arms": [
+    "accepted_p1_context",
+    "climate_normal_baseline",
+    "climate_normal_plus_residual"
+  ],
+  "calendar": {
+    "minimum_observed_days_per_year_month": 28,
+    "missingness_mask": "source_observed_and_core_fields_present",
+    "profile_id": "daymet_official_365_v1",
+    "representative_axis_rows": 2922,
+    "representative_observed_rows": 2920,
+    "target_end": "exclusive",
+    "window_calendar_years": 8
+  },
+  "checkpoint": {
+    "baseline_maximum_epochs": 24,
+    "baseline_minimum_epochs": 8,
+    "early_stop_patience": 6,
+    "points_per_regime": 4,
+    "residual_maximum_epochs": 32,
+    "residual_minimum_epochs": 10,
+    "tie_tolerance": 1e-06
+  },
+  "decision": {
+    "maximum_block_degradation_fraction": 0.1,
+    "maximum_daily_nll_degradation_fraction": 0.1,
+    "minimum_climate_score_improvement_fraction": 0.05,
+    "minimum_dispersion_improvement_fraction": 0.15,
+    "p1_maximum_climate_score_degradation_fraction": 0.0,
+    "p1_maximum_daily_nll_degradation_fraction": 0.1
+  },
+  "fields": [
+    "prcp",
+    "tmax",
+    "tmin"
+  ],
+  "objective": {
+    "baseline_daily_proper_nll_weight": 1.0,
+    "baseline_location_weight": 0.25,
+    "baseline_wet_weight": 0.1,
+    "paired_daily_error_weight": 0.0,
+    "residual_climate_weight": 1.0,
+    "residual_daily_proper_nll_weight": 0.2,
+    "residual_size_weight": 0.01
+  },
+  "roles": {
+    "fit": "candidate_fit",
+    "fit_validation_gradient": false,
+    "forbidden": [
+      "development_selection",
+      "confirmation_metadata",
+      "confirmation_locked"
+    ],
+    "validation": "fit_validation"
+  },
+  "schema_version": 1,
+  "stochastic": {
+    "evaluation_members": 8,
+    "relaxed_wet_temperature": 0.5,
+    "training_members": 4
+  },
+  "successor": {
+    "first_extension": "solar_radiation_clearness_index",
+    "requires_core_architecture_ready": true
+  },
+  "training": {
+    "baseline_learning_rate": 0.0005,
+    "batches_per_epoch": 6,
+    "records_per_batch": 6,
+    "residual_learning_rate": 0.001,
+    "weight_decay": 0.01
+  }
+}
