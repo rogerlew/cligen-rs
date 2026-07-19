@@ -73,6 +73,9 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Observed the authenticated failed control, stopped all ten
   never-submitted roles, collected sparse evidence, released recovery, and
   closed at `HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING` after two GPU-minutes.
+- [x] (2026-07-19) Scaffolded and independently reviewed A10M5R10R1R3 with
+  only the two parent-root extraction corrections, a self-authenticated corpus
+  layout pin, and coordinated pin/archive/manifest drift rejection.
 - [ ] Publish and execute the fresh A10M5R10R1R3 extraction-root remedy, then
   dispatch, authenticate, observe, and collect its ten candidate roles
   under machine-enforced wave admission.
@@ -421,3 +424,8 @@ after an observed failed role and capped the POSIX pre-runtime setup log at
 the inherited nested corpus extraction root. The hardened matrix stop and
 sparse evidence closure passed; the bounded R1R3 successor restores only the
 two R0 extraction destinations.
+
+2026-07-19: scaffolded A10M5R10R1R3 and accepted it after independent review.
+The review required the corpus-layout pin itself to be byte/SHA authenticated
+before authority creation and proved coordinated pin/archive/manifest drift is
+rejected.

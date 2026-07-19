@@ -494,9 +494,12 @@ created `$job_local/corpus/corpus`. The run closed cleanly at
 `HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING` after two GPU-minutes; all ten
 candidates were atomically classified `NOT_EXECUTED_UPSTREAM_FAILURE`, no
 architecture result was interpreted, sparse collection passed, recovery was
-released, and the exact remote root is absent. The next bounded successor
+released, and the exact remote root is absent. Active successor
+[A10M5R10R1R3](work-packages/20260719-a10m5r10r1r3-corpus-extraction-root-remedy/package.md)
 restores only the original A10M5R10 parent-directory extraction destination in
-both wrappers while preserving the archive and all science.
+both wrappers while preserving the archive and all science. Its prospective
+archive-layout evidence is itself byte/SHA pinned, rejects coordinated drift,
+and passed independent review before authority creation.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
