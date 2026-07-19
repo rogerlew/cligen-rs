@@ -1,0 +1,38 @@
+{
+  "bootstrap": {
+    "candidate_stream_order": "training_seed ascending, then member_id ascending",
+    "candidate_stream_resample": "24 draws with replacement from the paired 3-seed by 8-member order; one index vector shared by P1 and P2",
+    "comparator_stream_order": "stochastic_burn_counts order",
+    "comparator_stream_resample": "8 draws with replacement; one index vector shared by faithful and stochastic_prism_localized_par_v1",
+    "observation_resample": "30 calendar-year blocks with replacement independently by site; inter-block transition pairs and cross-boundary spells excluded",
+    "replicates": 1000,
+    "seed": 410542
+  },
+  "component_error": {
+    "correlation": "absolute difference / 0.1",
+    "precipitation_coefficient_of_variation": "absolute difference / 0.25",
+    "precipitation_dry_frequency_and_occurrence": "absolute difference / 0.05",
+    "precipitation_mean_standard_deviation_and_quantile": "absolute difference of ln(value_mm + 0.1) / 0.25",
+    "precipitation_skew": "absolute difference / 0.5",
+    "temperature_mean": "absolute difference in C / 1.0",
+    "temperature_standard_deviation": "absolute difference in C / 0.5"
+  },
+  "epsilon_precipitation_mm": 0.1,
+  "point_estimate": {
+    "arm_metric": "arithmetic mean of each registered metric over all arm streams at one site",
+    "capacity_streams_per_site": 24,
+    "comparator_streams_per_site": 8,
+    "reference": "lower site composite error of faithful and stochastic_prism_localized_par_v1",
+    "regime_composite": "unweighted arithmetic mean of all finite registered common-component scaled errors",
+    "site_regime_mapping": "one frozen site per regime"
+  },
+  "prism_intensity": {
+    "diagnostic": "annual q95 of daily peak_rate_mm_per_hour where peak_rate = peak_intensity_ratio * precipitation_mm / duration_h and zero when duration_h is zero",
+    "neural_capacity_scoring": false
+  },
+  "schema_version": 1,
+  "temporal_decision": {
+    "capacity_noninferiority": "90th percentile of bootstrap median regime ratio <= 1.25 and point maximum regime ratio <= 1.5",
+    "p2_preference": "bootstrap probability that mean paired regime error reduction (P1-P2)/P1 >= 0.10 is at least 0.90"
+  }
+}

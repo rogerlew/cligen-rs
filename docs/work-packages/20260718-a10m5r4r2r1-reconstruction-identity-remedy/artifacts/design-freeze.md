@@ -23,4 +23,8 @@ archive digest is compared.
 The R2 temporal contract and sites are incorporated by hash and are not
 restated or changed. The original wrapper's nested Python newline is corrected
 prospectively, and both `streams.json` and `evidence.json` exist on every
-settled path. This package has not accessed any R2R1 generated output.
+settled path. `evaluation-contract.json` resolves the original contract's
+aggregation implementation prospectively: stream-level metric means, paired
+model/member resampling, calendar-year observation blocks, registered scaled
+errors, and the unchanged intensity exclusion. This package has not accessed
+any R2R1 generated output, comparator normals, or observation climate values.

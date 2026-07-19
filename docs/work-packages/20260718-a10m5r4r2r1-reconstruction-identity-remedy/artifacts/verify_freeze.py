@@ -22,10 +22,20 @@ def read(path: Path) -> dict:
 
 
 contract = read(PACKAGE / "artifacts/reconstruction-contract.json")
+evaluation = read(PACKAGE / "artifacts/evaluation-contract.json")
 assert contract["r2_temporal_contract_sha256"] == digest(R2 / "artifacts/temporal-contract.json")
 assert contract["r2_sites_sha256"] == digest(R2 / "artifacts/sites.json")
 assert "EXECUTED-HOLD-MODEL-RECONSTRUCTION-IDENTITY" in (R2 / "package.md").read_text(encoding="utf-8")
 assert len(contract["models"]) == 6
+assert evaluation["bootstrap"] == {
+    "candidate_stream_order": "training_seed ascending, then member_id ascending",
+    "candidate_stream_resample": "24 draws with replacement from the paired 3-seed by 8-member order; one index vector shared by P1 and P2",
+    "comparator_stream_order": "stochastic_burn_counts order",
+    "comparator_stream_resample": "8 draws with replacement; one index vector shared by faithful and stochastic_prism_localized_par_v1",
+    "observation_resample": "30 calendar-year blocks with replacement independently by site; inter-block transition pairs and cross-boundary spells excluded",
+    "replicates": 1000,
+    "seed": 410542,
+}
 assert len({row["row_id"] for row in contract["models"]}) == 6
 assert {row["capacity_id"] for row in contract["models"]} == {"P1", "P2"}
 for expected in contract["models"]:
@@ -46,4 +56,5 @@ for expected in contract["models"]:
 source = (PACKAGE / "artifacts/jobs/prepare_assets.py").read_text(encoding="utf-8")
 assert "stream.write('\\\\n')" in source
 assert "accepted_export_exact" not in (PACKAGE / "artifacts/jobs/generate.py").read_text(encoding="utf-8")
+compile((PACKAGE / "artifacts/jobs/evaluate.py").read_text(encoding="utf-8"), "evaluate.py", "exec")
 print("A10M5R4R2R1-FREEZE-READY")

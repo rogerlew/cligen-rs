@@ -1,6 +1,6 @@
 # A10M5R4R2R1 — Reconstruction Identity Remedy
 
-Status: `SCAFFOLDED`
+Status: `FROZEN-ALLOCATABLE`
 Date: 2026-07-18
 Evidence mode: Prospective corrective freeze; no R2R1 generated-output access
 Starting branch and push target: `main`, push `main`
@@ -33,6 +33,14 @@ Live allocation requires a revision-2 authority that names the published
 R2R1 source commit and preserves the remaining campaign budget. The existing
 R2 authority names only source commit `f704820...`; it cannot legally derive
 this corrective source commit or change its immutable package identity.
+
+The operator's 2026-07-18 instruction to execute this exact package dispatches
+a new package-scoped development authority after the present freeze reaches
+`origin/main`. It has a ceiling of 182 GPU-minutes, the original campaign's
+185-minute ceiling less R2's three charged minutes. Each primary role is
+limited to 29 minutes (174 total) and the canonical recovery reserve remains
+five minutes, so worst-case R2R1 allocation is 179 minutes with three minutes
+of unallocatable slack. Aggregate R2 plus R2R1 use can never exceed 185.
 
 ## Plan
 
@@ -69,6 +77,9 @@ must not begin until the published R2R1 commit is covered by valid authority.
 ## Artifacts
 
 - `artifacts/reconstruction-contract.json` — exact six-model semantic gate;
+- `artifacts/evaluation-contract.json` — exact aggregation, component-error,
+  bootstrap, and decision implementation;
 - `artifacts/design-freeze.md` — corrective boundary and empirical basis;
-- `artifacts/jobs/` — corrected reconstruction/generation and asset wrappers;
+- `artifacts/jobs/` — corrected reconstruction/generation, comparator/scoring,
+  and asset wrappers;
 - `artifacts/verify_freeze.py` — fail-closed prospective verifier.
