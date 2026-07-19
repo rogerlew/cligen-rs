@@ -67,13 +67,6 @@ documentation describes selecting a station, consulting a 4 km PRISM
 precipitation/elevation cell, and modifying a custom climate. Hall and Elliot
 (2001) and Elliot (2004) document the PRISM-assisted FSWEPP workflow.
 
-Brooks et al. (2016), DOI `10.1016/j.jhydrol.2015.12.004`, is a published
-later application of monthly PRISM precipitation ratios and Tmax/Tmin
-differences to spatialize station weather for WEPP hillslopes. It is evidence
-for the broader method lineage and its static-monthly limitations; it is not
-authority for this mode's station selector, wet-day equations, `.par`
-mutation, or intensity clamp.
-
 WEPPcloud/`wepppy` subsequently automated station selection and `.par`
 localization. The exact reviewed identity is commit
 `3ee74d02df445a30968ef92975e5e3e2f6084669`, file SHA-256
@@ -87,7 +80,7 @@ Every successful run emits `method.json`, exact record schema version 1 and
 method ID `stochastic_prism_localized_par_v1`. It records this layered
 pedigree and the normative limitations. The top-level artifact manifest binds
 its bytes. Pedigree does not imply behavior identity or transfer a validation
-claim from FSWEPP, Brooks et al., or WEPPcloud.
+claim from FSWEPP or WEPPcloud.
 
 ## Station selection
 

@@ -14,13 +14,14 @@ Pedigree is layered rather than collapsed:
 
 1. FSWEPP/Rock:Clime originated the PRISM-assisted custom-CLIGEN climate
    concept and the station lineage.
-2. Brooks et al. (2016) published a related WEPP application using monthly
-   PRISM precipitation and Tmax/Tmin to spatialize station weather.
-3. WEPPcloud/`wepppy` automated point localization and introduced the exact
+2. WEPPcloud/`wepppy` automated point localization and introduced the exact
    reviewed wet-day and intensity heuristics over time.
-4. cligen-rs independently implements a corrected, hash-pinned, local-only
+3. cligen-rs independently implements a corrected, hash-pinned, local-only
    revision with different selector axes and strict provenance.
 
 None of these layers is described as behavior-identical to another. The
 limitations are part of the public method record, not merely an A10 research
 note.
+
+An initially misassigned publication branch was removed by operator correction
+before any output from the changed mode was generated.

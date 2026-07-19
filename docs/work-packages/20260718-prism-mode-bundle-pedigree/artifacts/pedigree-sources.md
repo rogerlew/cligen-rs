@@ -22,17 +22,6 @@
   It documents access to PRISM precipitation through Rock:Clime and user
   modification of precipitation, wet days, and temperatures.
 
-## Published later application
-
-Brooks, E.S.; Dobre, M.; Elliot, W.J.; Wu, J.Q.; Boll, J. (2016),
-*Watershed-scale evaluation of the Water Erosion Prediction Project (WEPP)
-model in the Lake Tahoe basin*, Journal of Hydrology 533:389–402,
-<https://doi.org/10.1016/j.jhydrol.2015.12.004>. The paper applies monthly
-PRISM precipitation ratios and Tmax/Tmin differences to station weather for
-individual hillslopes. It also warns that static monthly scaling can miss
-event-specific temperature and precipitation structure. It is application
-and limitation evidence, not the source of cligen-rs's `.par` equations.
-
 ## WEPPcloud implementation lineage
 
 Static git review used `/Users/roger/src/wepppy` at commit
@@ -42,7 +31,7 @@ Static git review used `/Users/roger/src/wepppy` at commit
 History attributes the automated PRISM build/selector to 2018, the first
 `par_mod` path to 2019, the rule-of-thumb wet-day/P(W/W)/P(W/D) correction to
 2020, and optional `MX .5 P` adjustment to 2026. This establishes source
-lineage without assigning those later formulas to FSWEPP or Brooks et al.
+lineage without assigning those later formulas to FSWEPP.
 
 ## cligen-rs boundary
 

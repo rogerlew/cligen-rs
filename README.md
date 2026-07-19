@@ -105,8 +105,7 @@ https://prism.oregonstate.edu, data accessed 2026-07-18. PRISM supplies the
 monthly normals; localized CLIGEN artifacts are not official PRISM products.
 
 The mode descends from the USDA Forest Service FSWEPP/Rock:Clime concept of a
-PRISM-assisted custom CLIGEN climate, with later published PRISM
-climate-spatialization work and WEPPcloud automation. It is an independent,
+PRISM-assisted custom CLIGEN climate and later WEPPcloud automation. It is an independent,
 corrected implementation—not a behavior-identical port. Every run emits
 `method.json` with the exact pedigree and limitations. In particular, PRISM
 does not supply daily occurrence or subdaily intensity, remaining stochastic

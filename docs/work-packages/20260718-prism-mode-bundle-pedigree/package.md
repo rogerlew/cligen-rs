@@ -9,7 +9,7 @@ Starting branch and push target: `main`, push `main`
 
 Close the public Cargo PRISM mode as a self-describing operational surface:
 retain the already-published hash-pinned runtime and exact-source bundles,
-record its FSWEPP/Rock:Clime origin and later published/implementation lineage,
+record its FSWEPP/Rock:Clime origin and later implementation lineage,
 freeze its differences from WEPPcloud, and emit its limitations with every
 generated artifact set.
 
@@ -21,8 +21,8 @@ Included:
   `prism-normals-2026.07` runtime/source assets;
 - a strict, versioned method record embedded in the Cargo binary and emitted
   as `method.json` by every successful `prism run`;
-- FSWEPP/Rock:Clime, Brooks et al. (2016), source-pinned `wepppy`, and
-  cligen-rs lineage with non-authority boundaries;
+- FSWEPP/Rock:Clime, source-pinned `wepppy`, and cligen-rs lineage with
+  non-authority boundaries;
 - a frozen behavior/difference matrix and explicit scientific limitations;
 - specification revision 3 and user documentation; and
 - exact repeatability, manifest inclusion, repository gates, coverage, and
@@ -33,8 +33,8 @@ Excluded:
 - any change to station selection, localization equations, thresholds,
   fixed-width rendering, PRISM values, bundle bytes, faithful generation,
   RNG, or existing profile identity;
-- a claim that FSWEPP, Brooks et al., WEPPcloud, and cligen-rs implement the
-  same algorithm; and
+- a claim that FSWEPP, WEPPcloud, and cligen-rs implement the same algorithm;
+  and
 - a claim that the mode is observed daily/subdaily truth or has passed a
   general climate-quality standard.
 
@@ -42,9 +42,6 @@ Excluded:
 
 - FSWEPP Rock:Clime documentation establishes the original USDA Forest
   Service PRISM-assisted custom-CLIGEN climate concept and station database.
-- Brooks et al. (2016), DOI `10.1016/j.jhydrol.2015.12.004`, is published
-  evidence of monthly PRISM precipitation/Tmax/Tmin climate spatialization for
-  WEPP, but is not authority for this `.par` algorithm.
 - `wepppy` commit `3ee74d02df445a30968ef92975e5e3e2f6084669` and exact file SHA-256
   `4071cc72165d174851316349c0d96a3f4fa06fcf0b2d91e5b67de439f39a42c1`
   establish the reviewed automated implementation lineage.
@@ -66,8 +63,8 @@ Excluded:
 
 - `method.json` exactly matches the embedded registered record and is included
   by hash in `artifact-manifest.json`;
-- the record identifies FSWEPP/Rock:Clime as origin, distinguishes Brooks et
-  al. and WEPPcloud lineage, and carries every registered limitation;
+- the record identifies FSWEPP/Rock:Clime as origin, distinguishes WEPPcloud
+  lineage, and carries every registered limitation;
 - a before/after climate-behavior check proves the change is provenance-only;
 - both registered release assets remain byte/size identified and accessible;
 - `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and

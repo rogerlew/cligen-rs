@@ -10,11 +10,6 @@
       "source": "https://forest.moscowfsl.wsu.edu/fswepp/docs/rockclimdoc.html"
     },
     {
-      "stage": "Brooks et al. 2016",
-      "contribution": "Published a related WEPP application of monthly PRISM precipitation and Tmax/Tmin spatialization; not authority for this .par algorithm.",
-      "source": "https://doi.org/10.1016/j.jhydrol.2015.12.004"
-    },
-    {
       "stage": "WEPPcloud wepppy",
       "contribution": "Automated station selection and monthly .par localization; reviewed as prior art rather than port authority.",
       "source_commit": "3ee74d02df445a30968ef92975e5e3e2f6084669",

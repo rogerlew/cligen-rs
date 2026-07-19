@@ -26,7 +26,6 @@ def main() -> None:
     assert record["origin"].startswith("FSWEPP Rock:Clime")
     assert [entry["stage"] for entry in record["pedigree"]] == [
         "FSWEPP Rock:Clime",
-        "Brooks et al. 2016",
         "WEPPcloud wepppy",
         "cligen-rs",
     ]
