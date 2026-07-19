@@ -89,6 +89,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r4r2r1-reconstruction-identity-remedy](20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md) | EXECUTED-HOLD-EVALUATION-YEAR-AXIS |
 | [20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy](20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy/package.md) | EXECUTED-HOLD-LEAP-CENTURY |
 | [20260718-a10m5r4r2r1r2-leap-century-remedy](20260718-a10m5r4r2r1r2-leap-century-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CAPACITY |
-| [20260718-a10m5r7-structural-architecture-identification](20260718-a10m5r7-structural-architecture-identification/package.md) | SCAFFOLDED |
+| [20260718-a10m5r7-structural-architecture-identification](20260718-a10m5r7-structural-architecture-identification/package.md) | EXECUTED-HOLD-OBSERVATION-SHARD-PATH |
+| [20260718-a10m5r7r1-observation-shard-path-remedy](20260718-a10m5r7r1-observation-shard-path-remedy/package.md) | SCAFFOLDED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |

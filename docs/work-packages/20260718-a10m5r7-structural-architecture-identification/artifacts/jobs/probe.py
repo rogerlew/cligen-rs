@@ -111,7 +111,11 @@ def reconstruct(
 
 
 def observation_document(corpus: Path, site: dict[str, Any]) -> dict[str, Any]:
-    path = corpus / "artifacts" / site["daymet_shard"]
+    path = (
+        corpus
+        / "docs/work-packages/20260717-a10m1-corpus-role-freeze/raw/training/daymet-v2"
+        / site["daymet_shard"]
+    )
     if digest(path) != site["daymet_shard_sha256"]:
         raise RuntimeError("observation shard identity mismatch")
     with tarfile.open(path, "r:gz") as archive:

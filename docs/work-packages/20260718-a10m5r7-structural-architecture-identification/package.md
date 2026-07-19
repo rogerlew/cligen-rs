@@ -1,6 +1,6 @@
 # A10M5R7 — Structural Architecture Identification
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-OBSERVATION-SHARD-PATH`
 Date: 2026-07-18
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `7fa00e3`, push `main`
@@ -117,6 +117,25 @@ is changed.
 
 No terminal opens N3/elevation, spatial, development-selection, confirmation,
 or production work automatically.
+
+## Execution disposition
+
+Run `a10m5r7-architecture-r0` settled at Slurm job `1014016` with exit 1
+after 172 GPU-seconds (three ledger minutes). Seed 147031 reconstructed before
+the probe failed while resolving the first observation shard. The loader used
+`corpus/artifacts/daymet-008.tar.gz`; the hash-pinned corpus records the shard
+under
+`docs/work-packages/20260717-a10m1-corpus-role-freeze/raw/training/daymet-v2/`.
+No diagnostic residual or generated-feedback output was published and no
+protected role was opened.
+
+The evidence allowlist was not satisfiable on this early failure, so toolkit
+collection failed closed with `EVIDENCE_INCOMPLETE`. The authenticated gate,
+Slurm streams, and supervisor record were preserved in restricted controller
+state. The exact durable run root was then removed with the toolkit's
+owner-marker-validated cleanup script and independently verified absent. R1
+corrects only the shard path and failure-shaped evidence surface, preserves
+the scientific freeze, and continues the original authority and budget.
 
 ## Artifacts
 

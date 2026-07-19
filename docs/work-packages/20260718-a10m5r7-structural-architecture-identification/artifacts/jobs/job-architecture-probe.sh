@@ -20,6 +20,18 @@ status=$?
 set -e
 cleanup=false
 [ ! -e "$target" ] && cleanup=true
+/usr/bin/python3 - "$output" "$status" <<'PY'
+import json, os, sys
+root, status = sys.argv[1:]
+for name in ('probe-streams.json', 'residual-attribution.json', 'architecture-decision.json', 'candidate-streams.json'):
+    path=os.path.join(root,name)
+    if not os.path.exists(path):
+        temporary=path+'.promote'
+        value={'absent_reason':'probe exited before scientific publication','exit_code':int(status),'protected_roles_opened':[],'schema_version':1,'valid':False}
+        with open(temporary,'w',encoding='utf-8') as stream:
+            json.dump(value,stream,indent=2,sort_keys=True); stream.write('\n')
+        os.replace(temporary,path)
+PY
 /usr/bin/python3 - "$output/evidence.json.part" "$output/evidence.json" "$status" "$cleanup" "$target" "$SLURM_JOB_ID" "$SLURMD_NODENAME" "$role" "$run_id" "$uid" "$device" "$marker_sha" <<'PY'
 import json, os, sys
 partial, final, status, cleanup, target, job, node, role, run_id, uid, device, marker_sha = sys.argv[1:]
