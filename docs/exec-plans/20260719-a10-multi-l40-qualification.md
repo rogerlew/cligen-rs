@@ -3,7 +3,9 @@
 This ExecPlan is a living document maintained according to `.agent/PLANS.md`.
 It governs two work packages without merging their authority or evidence:
 `docs/work-packages/20260719-a10m5o1-multi-l40-toolkit-hardening/` and
-`docs/work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/`.
+`docs/work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/`. A
+bounded diagnostic successor is
+`docs/work-packages/20260719-a10m5o2d1-l40-interconnect-diagnostic/`.
 
 ## Purpose / Big Picture
 
@@ -44,6 +46,11 @@ promotion.
 - [x] (2026-07-19 08:55Z) Closed all package/specification/guide/roadmap/catalog
   records; 56 toolkit tests, all package verifiers, shell syntax, and every
   repository gate pass.
+- [x] (2026-07-19 15:00Z) Reopened the living plan for operator-authorized
+  A10M5O2D1 and froze one four-L40, 45-minute-ceiling topology diagnostic.
+- [ ] Publish the exact A10M5O2D1 source and initialize its independent ledger.
+- [ ] Execute pairwise/four-way default and P2P-disabled NCCL measurements.
+- [ ] Collect, analyze, clean, close, update guidance, and run final gates.
 
 ## Surprises & Discoveries
 
@@ -155,8 +162,8 @@ The observable result is a previously accepted mismatch failing with
 Milestone two freezes and publishes live assets. Add a small canonical
 PyTorch program and Slurm wrappers beneath the A10M5O2 package. The success
 program records rank/world size, hostname, unique visible-device bindings,
-exact runtime versions, NCCL all-reduce results, one deterministic DDP update, checkpoint
-reload, CUDA-event timings, throughput, and per-rank memory. It runs warmup and
+exact runtime versions, NCCL all-reduce results, one deterministic DDP update,
+checkpoint reload, CUDA-event timings, throughput, and per-rank memory. It runs warmup and
 three measurements for fixed-global-work and fixed-per-GPU-work cases. A
 separate role deliberately exits rank one and proves bounded peer teardown.
 All roles use `torchrun --standalone`, typed GRES, no requeue, and one node.
@@ -174,6 +181,13 @@ Milestone four collects and sanitizes evidence, proves durable and job-local
 roots absent, reconciles all authority-tagged Slurm IDs and the ledger, computes
 1/2/4 speedups, and issues separate operational and performance dispositions.
 It then updates the guide, specs, roadmap, catalog, packages, and this plan.
+
+Milestone five is the A10M5O2D1 successor. It uses one four-L40 allocation to
+capture node03 topology and peer-access matrices, benchmark every GPU pair and
+the four-GPU group at three message sizes, repeat each group with NCCL P2P
+disabled, and determine whether physical path classes explain the prior
+four-rank collapse. It has a separate 45 requested GPU-minute authority and
+does not reinterpret A10M5O2's completed operational terminal.
 
 ## Concrete Steps
 
@@ -269,3 +283,6 @@ exact cleanup, operational readiness, and single-GPU performance preference.
 
 Revision note (2026-07-19): execution complete; all milestones, artifacts,
 acceptance gates, and retrospective outcomes are closed.
+
+Revision note (2026-07-19): reopened only for the bounded A10M5O2D1 physical
+interconnect diagnostic authorized after review of the scaling result.
