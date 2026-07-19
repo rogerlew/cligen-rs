@@ -1,6 +1,6 @@
 # A10M5R9 — Climate-Normal Residual Architecture
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-RESIDUAL-ARCHITECTURE-NOT-SUPPORTED`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -85,4 +85,10 @@ retry. A scientific hold does not authorize an outcome-time architecture edit.
 - `artifacts/verify_freeze.py` — local contract/calendar verifier
 - `artifacts/verify_corpus_calendar.py` — immutable corpus preflight
 - `artifacts/jobs/` — immutable experiment and dispatch sources
-- comparison, decision, resource/toolkit records, review, and gate evidence
+- `artifacts/comparison-summary.json` — authenticated all-240 comparison
+- `artifacts/execution-disposition.md` — scientific terminal and successor
+- `artifacts/resource-ledger.md` — requested/actual resource settlement
+- `artifacts/toolkit-records.md` — receipt and evidence identities
+- `artifacts/review.md` — scientific, evidence, and operational review
+- `artifacts/gate-results.md` — package and repository gate record
+- `artifacts/verify_result.py` — committed result/decision verifier

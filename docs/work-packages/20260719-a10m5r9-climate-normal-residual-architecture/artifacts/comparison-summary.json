@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r9-climate-normal-residual-architecture",
+  "run_id": "a10m5r9-climate-normal-residual-r0",
+  "source_commit": "68b57fecd931d0cf10f9e962f8fe228e78a61287",
+  "contract_sha256": "555d5ec17ae7b748b52e0e8a57601fc1a1aede875410bc7c6fc2e11ce4fd2d04",
+  "job": {
+    "slurm_job_id": "1014027",
+    "node": "node03",
+    "state": "COMPLETED",
+    "exit_code": 0,
+    "gpu_seconds": 811,
+    "charged_gpu_minutes": 14
+  },
+  "calendar": {
+    "profile_id": "daymet_official_365_v1",
+    "candidate_fit_points": 1200,
+    "fit_validation_points": 240,
+    "calendar_axis_rows_per_point": 10958,
+    "observed_rows_per_point": 10950,
+    "window_axis_rows": 2922,
+    "window_observed_rows": 2920,
+    "valid": true
+  },
+  "arms": {
+    "accepted_p1_context": {
+      "family_balanced_climate_score": 2.5904388236148015,
+      "daily_proper_nll": 4.178742271661759,
+      "block_scores": {
+        "annual_interannual_dispersion": 1.1056881941854955,
+        "annual_location": 1.8257568292319775,
+        "monthly_interannual_dispersion": 1.5644572079181671,
+        "monthly_location": 3.59125879406929,
+        "precipitation_temperature_dependence": 3.2350292086601256,
+        "wet_occurrence_and_amount": 1.0424754858016967,
+        "within_month_daily_dispersion": 5.768406045436859
+      }
+    },
+    "climate_normal_baseline": {
+      "family_balanced_climate_score": 2.8686620618615835,
+      "daily_proper_nll": 4.611846989393234,
+      "block_scores": {
+        "annual_interannual_dispersion": 1.2975413799285889,
+        "annual_location": 2.3939811259508135,
+        "monthly_interannual_dispersion": 1.7393892735242844,
+        "monthly_location": 3.9286471903324127,
+        "precipitation_temperature_dependence": 3.4290844023227693,
+        "wet_occurrence_and_amount": 1.2159582316875457,
+        "within_month_daily_dispersion": 6.076032829284668
+      }
+    },
+    "climate_normal_plus_residual": {
+      "family_balanced_climate_score": 2.7422118692525794,
+      "daily_proper_nll": 4.639775490760803,
+      "block_scores": {
+        "annual_interannual_dispersion": 0.9243722029030323,
+        "annual_location": 2.342626601457596,
+        "monthly_interannual_dispersion": 1.6526142954826355,
+        "monthly_location": 3.9074843645095827,
+        "precipitation_temperature_dependence": 3.092128512263298,
+        "wet_occurrence_and_amount": 1.1977146133780479,
+        "within_month_daily_dispersion": 6.078542494773865
+      }
+    }
+  },
+  "training": {
+    "baseline": {
+      "parameter_count": 12231,
+      "epochs_completed": 24,
+      "best_epoch": 24,
+      "wall_seconds": 184.48145458684303,
+      "model_state_sha256": "14a780ceade7ec8d8cba035f25cff5972bcf2fa552337836e3fe60893e9a9539",
+      "checkpoint_sha256": "63e6237e39c606770e807e71b01654100688b76e4cbad3858d378e552cd3462e"
+    },
+    "residual": {
+      "parameter_count": 30,
+      "epochs_completed": 32,
+      "best_epoch": 32,
+      "wall_seconds": 293.3200092529878,
+      "checkpoint_sha256": "55c83343d256f5220cfdfdf8d2e369cc048698ca7fd295f59b8c2f1b2b26dc98",
+      "baseline_state_sha256_before": "14a780ceade7ec8d8cba035f25cff5972bcf2fa552337836e3fe60893e9a9539",
+      "baseline_state_sha256_after": "14a780ceade7ec8d8cba035f25cff5972bcf2fa552337836e3fe60893e9a9539",
+      "persistence": [
+        0.20477505028247833,
+        0.40259504318237305,
+        0.6088097095489502,
+        0.8021295070648193,
+        0.918735921382904,
+        0.9789029359817505
+      ]
+    }
+  },
+  "decision": {
+    "dispersion_improvement_fraction": 0.15145033178293577,
+    "climate_score_improvement_fraction": 0.04407984972860335,
+    "baseline_block_non_degradation": true,
+    "baseline_daily_proper_nll_guard": true,
+    "p1_climate_score_guard": false,
+    "p1_daily_proper_nll_guard": false,
+    "advances": false,
+    "selected_arm": "none",
+    "terminal": "HOLD-A10M5R9-RESIDUAL-ARCHITECTURE-NOT-SUPPORTED"
+  },
+  "evidence": {
+    "comparison_sha256": "d5d62f1eb8b27ea6f968bfa7991514cad5a1359f8b57c04598eba63a6eea65d9",
+    "decision_sha256": "1df197211c36683b1e5ba704eb9c8a07f911f70fa697b5ea5eb1cf5684fbd888",
+    "operational_evidence_sha256": "8567204e5cf352ba60aeac89304b7e2657884a8cfddd22ac92eebfd4f6213618",
+    "calendar_preflight_sha256": "5717b6d67428196654ac2b8b4062a10e42179a0b813ad8efe077d1006337cb70",
+    "control_identity_sha256": "6dc576c7352b7f535f438b380169cf076a0115ca36e62717f45aa6357032e2ed",
+    "all_publication_gates_passed": true,
+    "protected_roles_opened": []
+  }
+}

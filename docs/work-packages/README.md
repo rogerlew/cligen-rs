@@ -97,7 +97,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260719-a10m5r8r2-calendar-missingness-remedy](20260719-a10m5r8r2-calendar-missingness-remedy/package.md) | EXECUTED-HOLD-CALENDAR-END-EXCLUSION |
 | [20260719-a10m5r8r3-calendar-end-exclusion-remedy](20260719-a10m5r8r3-calendar-end-exclusion-remedy/package.md) | EXECUTED-HOLD-CORE-OBJECTIVE-NOT-SUPPORTED |
 | [20260719-a10-calendar-contract-hardening](20260719-a10-calendar-contract-hardening/package.md) | EXECUTED-COMPLETE |
-| [20260719-a10m5r9-climate-normal-residual-architecture](20260719-a10m5r9-climate-normal-residual-architecture/package.md) | SCAFFOLDED |
+| [20260719-a10m5r9-climate-normal-residual-architecture](20260719-a10m5r9-climate-normal-residual-architecture/package.md) | EXECUTED-HOLD-RESIDUAL-ARCHITECTURE-NOT-SUPPORTED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |

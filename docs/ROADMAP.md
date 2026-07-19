@@ -417,15 +417,24 @@ prospective family is climate-normal-conditioned residual state space, first
 ablating explicit baseline-only against baseline plus a small latent residual
 state; it requires its own scientific/resource dispatch.
 
-**Authorized residual-architecture continuation (2026-07-19):** the operator
-directed
+**Residual-architecture ablation complete (2026-07-19):** the operator directed
 [A10M5R9](work-packages/20260719-a10m5r9-climate-normal-residual-architecture/package.md)
-to execute that bounded ablation. Its
+to execute the bounded ablation. Its
 [living ExecPlan](exec-plans/20260719-a10-climate-normal-residual.md) and
 [research specification](specifications/SPEC-A10-CLIMATE-NORMAL-RESIDUAL.md)
-freeze exact P1 context, a candidate-fit-only regime/month baseline, and the
+froze exact P1 context, a candidate-fit-only regime/month baseline, and the
 same frozen baseline plus a six-dimensional monthly stochastic residual state.
-Solar radiation remains closed pending a passing core result.
+Job `1014027` completed at
+`HOLD-A10M5R9-RESIDUAL-ARCHITECTURE-NOT-SUPPORTED`. The residual met the frozen
+dispersion target (15.15% improvement), improved overall climate error by
+4.41%, and preserved every baseline block, but missed the 5% overall threshold
+and remained worse than accepted P1 on climate score and daily proper NLL. The
+result supports the monthly residual mechanism but not replacing P1 with the
+smaller explicit-normal baseline. The least-complex next prospective family is
+therefore exact frozen P1 plus a centered, mean-preserving monthly residual
+adapter, compared directly with frozen P1. Solar radiation and broader
+latitude/day-of-year/precipitation coupling remain closed pending a passing
+core adapter.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
