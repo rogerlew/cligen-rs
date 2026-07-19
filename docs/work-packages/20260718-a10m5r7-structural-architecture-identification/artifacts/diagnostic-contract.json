@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "package_id": "20260718-a10m5r7-structural-architecture-identification",
+  "candidate_identity": "closed_loop_autoregressive_ssm_v1",
+  "control_identity": "neural_point_weather_state_space_v2-p1-accepted-open-loop",
+  "amount_family": "lognormal_wet_v2",
+  "capacity": {
+    "id": "P1",
+    "latent_dim": 80,
+    "width": 160,
+    "depth": 2,
+    "parameter_count": 87295
+  },
+  "diagnostic": {
+    "horizon_years": 30,
+    "training_seed": 147031,
+    "member_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+    "modes": ["accepted_open_loop", "observation_conditioned", "generated_feedback"],
+    "groups": [
+      "monthly_climatology",
+      "precipitation_distribution",
+      "occurrence_spells",
+      "temperature",
+      "annual_dependence"
+    ],
+    "generated_feedback_improvement_fraction": 0.15,
+    "maximum_group_degradation_fraction": 0.25,
+    "observation_conditioned_improvement_fraction": 0.25,
+    "monthly_dominance_fraction": 0.50,
+    "occurrence_dominance_fraction": 0.30,
+    "annual_dominance_fraction": 0.30
+  },
+  "full_temporal": {
+    "horizon_years": 100,
+    "training_seeds": [147031, 271828, 314159],
+    "members_per_seed": 8,
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 410542,
+    "median_regime_ratio_upper_90_percent_limit": 1.25,
+    "maximum_regime_ratio_limit": 1.5
+  },
+  "decision_order": [
+    "generated_feedback_temporal_candidate",
+    "closed_loop_rollout_trained_ssm_v1",
+    "climate_normal_conditioned_ssm_v1",
+    "semi_markov_occurrence_ssm_v1",
+    "two_timescale_stochastic_ssm_v1",
+    "mixed_hold"
+  ],
+  "resource": {
+    "primary_jobs": 1,
+    "primary_gpu_minutes": 60,
+    "recovery_gpu_minutes": 5,
+    "total_gpu_minutes": 65
+  },
+  "protected_roles_opened": []
+}
