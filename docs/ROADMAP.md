@@ -321,6 +321,12 @@ still the frozen next scientific step; resuming it requires explicit operator
 authorization for a new package-scoped resource authority, not a budget reset
 inside the failed lineage.
 
+**Authorized continuation (2026-07-18):** the operator authorized
+[A10M5R7R2](work-packages/20260718-a10m5r7r2-authorized-architecture-execution/package.md)
+as the new package-scoped authority required by the R1 hold. R2 preserves the
+corrected source and unchanged structural/temporal decision and is capped at
+52 primary plus five recovery GPU-minutes.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
