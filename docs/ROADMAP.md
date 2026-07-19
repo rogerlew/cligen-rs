@@ -304,6 +304,23 @@ existing auxiliary terms named monthly precipitation and annual dispersion are
 training regularizers, not realized ensemble evidence, and cannot satisfy
 A10M5R4.
 
+**Operator direction 2026-07-18: identify a new model architecture through a
+prospective structural diagnostic.** A10M5R7 froze a same-weight comparison of
+accepted open-loop, observation-conditioned, and generated-feedback inference,
+component residual attribution, a least-complex deterministic architecture
+decision, and conditional unchanged temporal adjudication. Its R0 allocation
+held on an observation-shard path defect after 172 seconds; no scientific
+result was read. Corrective
+[A10M5R7R1](work-packages/20260718-a10m5r7r1-observation-shard-path-remedy/package.md)
+verified the six corrected paths and completed the derived pre-submission
+lifecycle, but the original hash-chained authority conservatively retains all
+60 requested primary minutes plus its five-minute recovery reserve. R1's
+submission was therefore refused at `RESOURCE_CEILING` before allocation and
+closed at `HOLD-A10M5R7R1-NEW-RESOURCE-AUTHORITY-REQUIRED`. The diagnostic is
+still the frozen next scientific step; resuming it requires explicit operator
+authorization for a new package-scoped resource authority, not a budget reset
+inside the failed lineage.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
