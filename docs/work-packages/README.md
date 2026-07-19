@@ -89,4 +89,4 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r4r2r1-reconstruction-identity-remedy](20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md) | EXECUTED-HOLD-EVALUATION-YEAR-AXIS |
 | [20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy](20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy/package.md) | EXECUTED-HOLD-LEAP-CENTURY |
 | [20260718-a10m5r4r2r1r2-leap-century-remedy](20260718-a10m5r4r2r1r2-leap-century-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CAPACITY |
-| [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | FROZEN-EXECUTION |
+| [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |

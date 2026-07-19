@@ -261,7 +261,9 @@ fn file_identity(path: &Path, relative_to: &Path) -> Result<ArtifactIdentity, Pr
 
 #[cfg(test)]
 mod tests {
-    use super::{runspec_yaml, EMBEDDED_METHOD};
+    use std::fs;
+
+    use super::{runspec_yaml, write_method_artifact, EMBEDDED_METHOD};
 
     #[test]
     fn generated_runspec_is_accepted_shape() {
@@ -280,5 +282,21 @@ mod tests {
         assert!(limitations
             .iter()
             .any(|value| value["id"] == "comparison_not_quality_certification"));
+    }
+
+    #[test]
+    fn method_artifact_is_the_exact_embedded_record() {
+        let root = std::env::temp_dir().join(format!(
+            "cligen-prism-method-{}-{:?}",
+            std::process::id(),
+            std::thread::current().id()
+        ));
+        fs::create_dir(&root).unwrap();
+        write_method_artifact(&root).unwrap();
+        assert_eq!(
+            fs::read_to_string(root.join("method.json")).unwrap(),
+            EMBEDDED_METHOD
+        );
+        fs::remove_dir_all(root).unwrap();
     }
 }

@@ -303,6 +303,18 @@ operator scientific direction and package rather than post-result rescue. The
 existing auxiliary terms named monthly precipitation and annual dispersion are
 training regularizers, not realized ensemble evidence, and cannot satisfy
 A10M5R4.
+
+**Public comparator follow-through complete (2026-07-18):** the independent
+[PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
+closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
+manifest-bound method record that separates FSWEPP/Rock:Clime origin,
+WEPPcloud/`wepppy` implementation lineage, and cligen-rs behavior, and states
+nine explicit limitations. The already-published runtime and exact-source
+normal bundles were reverified by size and SHA-256, an air-gap query passed,
+and before/after climate artifacts were byte-identical. This operational
+closure does not alter the empty A10 temporal retained set or authorize the
+downstream spatial and promotion stages.
+
 Confirmation roles remain sealed. A cleanroom ClimateNA-like daily terrain
 spatializer and downstream subdaily storm disaggregation remain post-A10.
 

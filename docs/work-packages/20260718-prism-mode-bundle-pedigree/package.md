@@ -1,6 +1,6 @@
 # PRISM Mode Bundle, Pedigree, and Limitations
 
-Status: `FROZEN-EXECUTION`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-18
 Evidence mode: Mixed primary-source review, source history, and ran validation
 Starting branch and push target: `main`, push `main`
@@ -87,4 +87,5 @@ change closes with a typed hold and exact evidence.
 - `artifacts/behavior-matrix.md` — frozen implementation comparison;
 - `artifacts/method-record-contract.json` — exact public record;
 - `artifacts/verify.py` — package verifier; and
-- `artifacts/gate-results.md` — executed validation record.
+- `artifacts/gate-results.md` — executed validation record; and
+- `artifacts/execution-disposition.md` — terminal claim and handoff.
