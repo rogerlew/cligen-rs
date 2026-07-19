@@ -22,10 +22,11 @@ constants creates a new comparator revision.
 ## PRISM normals and redistribution
 
 The input surface is PRISM Group Norm91m 1991--2020, CONUS 4 km, monthly
-precipitation, Tmax, and Tmin: 36 official source archives. The registered
-bundle retains those archives byte-for-byte, a strict manifest, source URLs,
-archive and embedded-raster SHA-256 values, PRISM dataset version/create-date
-metadata, the access date, and this attribution:
+precipitation release M4 and Tmax/Tmin release M5: 36 official source
+archives. The registered bundle retains those archives byte-for-byte, a
+strict manifest, source URLs, archive and embedded-raster SHA-256 values,
+PRISM dataset version/create-date metadata, the access date, and this
+attribution:
 
 > PRISM Climate Group, Oregon State University,
 > https://prism.oregonstate.edu, data accessed 2026-07-18.

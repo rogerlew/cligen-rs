@@ -7,10 +7,11 @@ burn 0, no interpolation, `us-2015` version 2026.07, and Norm91m 1991--2020
 CONUS 4 km are revision-1 constants.
 
 The PRISM source is a hash-pinned external bundle of the 36 official monthly
-ppt/Tmax/Tmin archives. Generation queries the local verified rasters only.
-The extraction receipt binds the registered bundle and manifest, every source
-archive/raster hash, PRISM release metadata, access date, cell coordinates,
-raw values, unit conversions, and required attribution.
+ppt M4 and Tmax/Tmin M5 archives. Generation queries the local verified
+rasters only. The extraction receipt binds the registered bundle and
+manifest, every source archive/raster hash, PRISM release metadata, access
+date, cell coordinates, raw values, unit conversions, and required
+attribution.
 
 Station selection keeps the nearest ten `us-2015` candidates, then rank-sums
 distance (1), latitude difference (1), precipitation-normal error (3), Tmax-

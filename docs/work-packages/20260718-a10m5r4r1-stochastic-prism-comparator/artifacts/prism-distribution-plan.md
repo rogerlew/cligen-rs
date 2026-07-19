@@ -30,6 +30,10 @@ The version-1 payload contains, byte-for-byte:
 - `ATTRIBUTION.md` carrying the PRISM Climate Group/Oregon State University
   attribution, source URL, access date, and redistribution terms URL.
 
+The source metadata currently identifies precipitation as dataset release M4
+and both temperature variables as release M5. The manifest must require those
+values; a later PRISM revision cannot reuse the version-1 comparator identity.
+
 The execution package must build the outer archive deterministically (sorted
 names, fixed owner/group/mtime, `gzip -n`), record its byte count and SHA-256,
 publish it under an immutable release tag, then put the exact asset URL and
