@@ -2,7 +2,7 @@
 
 Status: active public preprocessing/orchestration surface
 
-Revision: 2 (A10M5R4R1 execution, Cargo distribution decision, 2026-07-18)
+Revision: 3 (public bundle/mode pedigree and limitations, 2026-07-18)
 
 ## Identity and claim boundary
 
@@ -57,6 +57,37 @@ Interpolation, lapse-rate adjustment, and nearest-valid-cell searching are
 not part of revision 1. A masked, non-finite, out-of-bounds, or non-CONUS
 query fails closed. Precipitation is converted from monthly millimetres to
 inches and temperatures from Celsius to Fahrenheit only after extraction.
+
+## Pedigree and authority boundary
+
+The original concept is USDA Forest Service FSWEPP/Rock:Clime. Elliot,
+Scheele, and Hall's 1999 Rock:Clime documentation identifies the browser
+interface to CLIGEN and its expanded station database; the accompanying CD
+documentation describes selecting a station, consulting a 4 km PRISM
+precipitation/elevation cell, and modifying a custom climate. Hall and Elliot
+(2001) and Elliot (2004) document the PRISM-assisted FSWEPP workflow.
+
+Brooks et al. (2016), DOI `10.1016/j.jhydrol.2015.12.004`, is a published
+later application of monthly PRISM precipitation ratios and Tmax/Tmin
+differences to spatialize station weather for WEPP hillslopes. It is evidence
+for the broader method lineage and its static-monthly limitations; it is not
+authority for this mode's station selector, wet-day equations, `.par`
+mutation, or intensity clamp.
+
+WEPPcloud/`wepppy` subsequently automated station selection and `.par`
+localization. The exact reviewed identity is commit
+`3ee74d02df445a30968ef92975e5e3e2f6084669`, file SHA-256
+`4071cc72165d174851316349c0d96a3f4fa06fcf0b2d91e5b67de439f39a42c1`.
+Its implementation is prior art, not port authority. The cligen-rs behavior
+specified below deliberately differs in selector axes, data acquisition,
+numeric failure behavior, rendering, mandatory intensity adjustment, and
+provenance.
+
+Every successful run emits `method.json`, exact record schema version 1 and
+method ID `stochastic_prism_localized_par_v1`. It records this layered
+pedigree and the normative limitations. The top-level artifact manifest binds
+its bytes. Pedigree does not imply behavior identity or transfer a validation
+claim from FSWEPP, Brooks et al., or WEPPcloud.
 
 ## Station selection
 
@@ -152,6 +183,7 @@ companions.
 Every successful request atomically publishes:
 
 - canonical request JSON;
+- canonical method/pedigree/limitations JSON;
 - PRISM query receipt with bundle/manifest/grid hashes, source metadata,
   raster cells, raw values, converted values, and attribution;
 - station-selection receipt with all ten candidates, component errors/ranks,
@@ -185,10 +217,23 @@ The implementing package must establish:
 
 ## Limitations
 
-PRISM contributes monthly means, not daily observations, occurrence
-probabilities, or subdaily intensity. The selected station supplies all
-remaining variance, skew, persistence, storm shape, radiation, dew point, and
-wind structure. Network overlap between PRISM and station sources means the
+PRISM contributes monthly normals, not daily observations, occurrence
+probabilities, or subdaily intensity. The selected station supplies remaining
+variance, skew, persistence, storm shape, radiation, dew point, and wind
+structure. Wet-day and `MX .5 P` changes are bounded continuity heuristics,
+not PRISM observations.
+
+The point query uses one containing 4 km cell with no interpolation,
+lapse-rate adjustment, elevation input, terrain downscaling, or nearest-valid
+fallback. Fixed 1991--2020 normals do not represent event-specific gradients,
+trends, climate change, or year-to-year spatial anomalies. Independent point
+runs do not establish coherent watershed storms or a shared daily state.
+
+The registered station selector is neither FSWEPP's user selection nor the
+current WEPPcloud US heuristic. Operational history and comparator performance
+do not certify general climate accuracy or fitness for a particular WEPP
+application. Network overlap between PRISM and station sources also means the
 comparator is independently implemented and versioned, not statistically
-independent climate evidence. Later A10 reports must retain observations and
-unmodified faithful CLIGEN as separate arms.
+independent climate evidence. Localized output is not an official PRISM
+product. Observations and unmodified faithful CLIGEN remain distinct evidence
+arms wherever climate quality is evaluated.

@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 
 use serde::Serialize;
 
-use super::{grid, localize, Distribution, PrismError, PROFILE_ID};
+use super::{grid, localize, Distribution, PrismError, EMBEDDED_METHOD, PROFILE_ID};
 
 /// Required scientific request.
 #[derive(Debug, Clone, Serialize)]
@@ -153,7 +153,15 @@ fn write_receipt_artifacts(
     write_json(
         &request.output_dir.join("localization.json"),
         &localized.localization,
-    )
+    )?;
+    write_method_artifact(&request.output_dir)
+}
+
+fn write_method_artifact(output_dir: &Path) -> Result<(), PrismError> {
+    serde_json::from_str::<serde_json::Value>(EMBEDDED_METHOD)
+        .map_err(|error| PrismError::Output(format!("embedded PRISM method record: {error}")))?;
+    fs::write(output_dir.join("method.json"), EMBEDDED_METHOD)
+        .map_err(|source| super::io_error("write PRISM method artifact", source))
 }
 
 fn write_station_artifacts(
@@ -253,11 +261,24 @@ fn file_identity(path: &Path, relative_to: &Path) -> Result<ArtifactIdentity, Pr
 
 #[cfg(test)]
 mod tests {
-    use super::runspec_yaml;
+    use super::{runspec_yaml, EMBEDDED_METHOD};
 
     #[test]
     fn generated_runspec_is_accepted_shape() {
         let parsed = crate::runspec::RunspecDocument::parse(&runspec_yaml(30)).unwrap();
         parsed.validate().unwrap();
+    }
+
+    #[test]
+    fn method_record_names_origin_and_limitations() {
+        let record: serde_json::Value = serde_json::from_str(EMBEDDED_METHOD).unwrap();
+        assert_eq!(record["schema_version"], 1);
+        assert_eq!(record["method_id"], "stochastic_prism_localized_par_v1");
+        assert!(record["origin"].as_str().unwrap().starts_with("FSWEPP"));
+        let limitations = record["limitations"].as_array().unwrap();
+        assert_eq!(limitations.len(), 9);
+        assert!(limitations
+            .iter()
+            .any(|value| value["id"] == "comparison_not_quality_certification"));
     }
 }

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "method_id": "stochastic_prism_localized_par_v1",
+  "origin": "FSWEPP Rock:Clime PRISM-assisted custom CLIGEN climate",
+  "claim": "Independent, corrected descendant that localizes a selected CLIGEN station to registered monthly PRISM normals and then runs unchanged faithful CLIGEN.",
+  "pedigree": [
+    {
+      "stage": "FSWEPP Rock:Clime",
+      "contribution": "Originated the PRISM-assisted custom-CLIGEN climate concept and expanded station lineage.",
+      "source": "https://forest.moscowfsl.wsu.edu/fswepp/docs/rockclimdoc.html"
+    },
+    {
+      "stage": "Brooks et al. 2016",
+      "contribution": "Published a related WEPP application of monthly PRISM precipitation and Tmax/Tmin spatialization; not authority for this .par algorithm.",
+      "source": "https://doi.org/10.1016/j.jhydrol.2015.12.004"
+    },
+    {
+      "stage": "WEPPcloud wepppy",
+      "contribution": "Automated station selection and monthly .par localization; reviewed as prior art rather than port authority.",
+      "source_commit": "3ee74d02df445a30968ef92975e5e3e2f6084669",
+      "source_file_sha256": "4071cc72165d174851316349c0d96a3f4fa06fcf0b2d91e5b67de439f39a42c1"
+    },
+    {
+      "stage": "cligen-rs",
+      "contribution": "Independently specified hash-pinned local implementation with corrected selector, numeric, rendering, acquisition, and provenance behavior.",
+      "source": "docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md"
+    }
+  ],
+  "limitations": [
+    {
+      "id": "monthly_normals_only",
+      "statement": "PRISM supplies monthly precipitation, Tmax, and Tmin normals, not observed daily sequences, occurrence probabilities, or subdaily intensity."
+    },
+    {
+      "id": "station_inherited_structure",
+      "statement": "The selected station supplies variance, skew, persistence, storm shape, radiation, dew point, and wind structure not replaced by the mode."
+    },
+    {
+      "id": "heuristic_occurrence_and_intensity",
+      "statement": "Wet-day and MX .5 P adjustments are bounded continuity heuristics, not PRISM-derived occurrence or intensity observations."
+    },
+    {
+      "id": "point_cell_no_terrain",
+      "statement": "The mode uses one containing 4 km cell with no interpolation, lapse-rate adjustment, elevation input, or terrain downscaling."
+    },
+    {
+      "id": "station_selector_not_prior_identity",
+      "statement": "Station selection is a registered cligen-rs heuristic and is not identical to FSWEPP user selection or the current WEPPcloud US heuristic."
+    },
+    {
+      "id": "static_climatology",
+      "statement": "Fixed 1991-2020 normals do not represent event-specific gradients, trends, climate change, or year-to-year spatial anomalies."
+    },
+    {
+      "id": "no_multi_point_coherence",
+      "statement": "Independent point runs do not establish coherent storms or shared daily states across a watershed."
+    },
+    {
+      "id": "comparison_not_quality_certification",
+      "statement": "Operational history and comparator performance do not certify general climate accuracy or fitness for a particular WEPP application."
+    },
+    {
+      "id": "not_official_prism_product",
+      "statement": "Localized CLIGEN outputs are derived artifacts and are not official PRISM products."
+    }
+  ]
+}

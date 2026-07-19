@@ -20,6 +20,9 @@ use sha2::{Digest, Sha256};
 /// Embedded runtime/source distribution identity.
 pub const EMBEDDED_DISTRIBUTION: &str = include_str!("distribution.json");
 
+/// Embedded method pedigree and limitations emitted by every run.
+pub const EMBEDDED_METHOD: &str = include_str!("method.json");
+
 /// Public preprocessing identity carried in every receipt.
 pub const PROFILE_ID: &str = "stochastic_prism_localized_par_v1";
 
