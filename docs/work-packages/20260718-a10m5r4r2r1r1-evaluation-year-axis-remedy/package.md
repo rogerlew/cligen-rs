@@ -1,6 +1,6 @@
 # A10M5R4R2R1R1 — Evaluation Year-Axis Remedy
 
-Status: `FROZEN-LOCAL-EXECUTION`
+Status: `EXECUTED-HOLD-LEAP-CENTURY`
 Date: 2026-07-18
 Evidence mode: Prospective zero-allocation scoring correction
 Starting branch and push target: `main`, push `main`
@@ -64,3 +64,13 @@ no-eligible-capacity hold.
 
 - `artifacts/jobs/score.py` — identity-bound zero-regeneration scorer;
 - `artifacts/verify_freeze.py` — input and correction verifier.
+
+## Disposition
+
+The exact input identities passed, and no model or comparator was rerun. The
+first bootstrap replicate stopped before score publication because block
+position 25 assigned a leap source block to year 2600, which is divisible by
+100 but not 400 and therefore not Gregorian leap. Terminal:
+`HOLD-A10-EVALUATION-LEAP-CENTURY`. The zero-allocation R2 successor uses
+`2000 + 16*i`, whose complete 2000--2464 range contains no non-400-divisible
+century, and `+1` for nonleap blocks.

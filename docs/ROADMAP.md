@@ -282,8 +282,10 @@ freeze the successor sequence:
    but held on an out-of-range local bootstrap year label after clean toolkit
    closure. Zero-allocation
    [A10M5R4R2R1R1](work-packages/20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy/package.md)
-   is frozen to score the exact retained matrix with leap-preserving in-range
-   labels;
+   exposed year 2600 as a nonleap century before score publication; zero-
+   allocation
+   [A10M5R4R2R1R2](work-packages/20260718-a10m5r4r2r1r2-leap-century-remedy/package.md)
+   is frozen with a complete century-safe proof over all 30 labels;
 4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
    within-ecoregion-elevation corpus;
 5. execute A10M5R6 to compare both retained capacities on geographically held
