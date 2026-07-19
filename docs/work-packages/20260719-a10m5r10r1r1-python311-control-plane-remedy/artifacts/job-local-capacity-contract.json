@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r10r1r1-python311-control-plane-remedy",
+  "predecessor_package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+  "status": "SCAFFOLDED",
+  "calendar_preflight": {
+    "object_count": 1440,
+    "path": "artifacts/calendar-preflight.json",
+    "sha256": "7f58a20eae635d9453ea86a473072b9e2597195ffc1d71660184d3e70b130a68",
+    "valid": true
+  },
+  "science_dependency_manifest": {
+    "dependency_count": 12,
+    "path": "artifacts/science-dependency-identities.json",
+    "sha256": "4c5669c87aa4263fd16c76e20044ae3d865df6665f86d2c2b40868d68788d887"
+  },
+  "science_contract": {
+    "source_commit": "cbf73d781df09f466d66e31d2569ca19ffaa0faf",
+    "files": {
+      "portfolio-contract.json": "ddcbd2e2be56d44e4b8389f738dbb3badc84daaaffbfce37cf3188a72ff2d191",
+      "portfolio_core.py": "48827b0279f79bf0991f2b9a95db4c35de73be6e102f481a6384b87af8e171e4",
+      "materialize_controls.py": "01bbec0632bea52ff56d619716a3c0a8747015d0800bf6137d406fb5483fb379",
+      "candidate_experiment.py": "fcfc9b8b1066b906b0b587d973fc09766ce43ce6bc18c8a90a72e4a60cf20c02",
+      "select_portfolio.py": "31526cdd3a9e5c29e4e33446a9b9aaeb544a514ff14caab4845596b368193f27"
+    },
+    "reuse": "byte-identical",
+    "rerun_scope": "control-and-all-ten-candidates"
+  },
+  "observed_failure": {
+    "failure_class": "host-default-python36-before-runtime-extraction",
+    "failed_control_job_id": "1014042",
+    "failed_control_elapsed_seconds": 1,
+    "default_interpreter": "/usr/bin/python3",
+    "default_interpreter_version": "Python 3.6",
+    "required_interpreter": "/usr/bin/python3.11",
+    "runtime_archive_opened": false,
+    "wheelhouse_archive_opened": false,
+    "candidate_evidence_published": false,
+    "scientific_interpretation": "none"
+  },
+  "predecessor_evidence": {
+    "identity_manifest": {
+      "bytes": 2946,
+      "path": "artifacts/predecessor-evidence-identities.json",
+      "sha256": "f9f559d4ae5c12d66f7254b41339bb2ebaf8846620202e164e83191c3a0c26f5"
+    },
+    "authority_field": "predecessor_package_evidence",
+    "toolkit_genesis_predecessor_evidence": [],
+    "r1_hold_required": "HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE",
+    "r1_remote_absent_required": true,
+    "toolkit_hardening_required": "A10M5O1R2-TERMINAL-FAILURE-CLOSURE-READY"
+  },
+  "control_plane": {
+    "host_python_path": "/usr/bin/python3.11",
+    "required_major_minor": "3.11",
+    "login_admission_records_binary_identity": true,
+    "compute_setup_records_binary_identity": true,
+    "verified_before_runtime_extraction": true,
+    "science_interpreter": "$runtime_root/bin/python3"
+  },
+  "admission": {
+    "checker": "admission_checker.py",
+    "execution_location": "staged-remote-run",
+    "receipt_template": "admissions/{role_id}.json",
+    "atomic_receipt": true,
+    "job_wrapper_requires_authenticated_receipt": true,
+    "control_must_pass_before_candidates": true,
+    "maximum_live_candidate_jobs": 2,
+    "maximum_simultaneous_bootstraps": 1,
+    "second_role_requires_first_setup_ready": true,
+    "next_wave_requires_prior_terminal_observed_cleanup": true,
+    "waves": [
+      ["monthly-residual-adapter-k1", "monthly-residual-adapter-k2"],
+      ["annual-monthly-residual-adapter-k1", "annual-monthly-residual-adapter-k2"],
+      ["hierarchical-joint-factor-adapter-k1", "hierarchical-joint-factor-adapter-k2"],
+      ["climate-normal-hierarchical-state-space-k1", "climate-normal-hierarchical-state-space-k2"],
+      ["physics-conditioned-hierarchical-adapter-k1", "physics-conditioned-hierarchical-adapter-k2"]
+    ]
+  },
+  "job_local": {
+    "required_environment": {
+      "TMPDIR": "<JOB_LOCAL>/tmp",
+      "PIP_CACHE_DIR": "<JOB_LOCAL>/pip-cache",
+      "XDG_CACHE_HOME": "<JOB_LOCAL>/cache",
+      "TORCH_HOME": "<JOB_LOCAL>/torch-cache"
+    },
+    "delete_after_verified_install": [
+      "<JOB_LOCAL>/wheels",
+      "<JOB_LOCAL>/pip-cache"
+    ],
+    "deletion_before_science": true,
+    "ready_receipt": "results/{role_id}/setup.json",
+    "required_ready_fields": {
+      "exit_codes.pip_install": 0,
+      "exit_codes.pip_check": 0,
+      "cleanup.wheelhouse_deleted_before_science": true,
+      "cleanup.pip_cache_deleted_before_science": true,
+      "authentication.asset_identities_authenticated": true,
+      "authentication.execution_identity_authenticated": true,
+      "authentication.submission_admission_authenticated": true,
+      "execution_identity.run_id": "a10m5r10r1r1-python311-control-plane-remedy-r0",
+      "execution_identity.host_python_path": "/usr/bin/python3.11",
+      "exit_codes.host_python_version": 0,
+      "ready_for_science": true
+    }
+  },
+  "setup_diagnostics": {
+    "durable_files": ["setup.json", "setup.log"],
+    "atomic_json": true,
+    "log_maximum_bytes": 65536,
+    "redactions": ["[REMOTE_RUN_ROOT]", "[JOB_LOCAL]"],
+    "required_json_fields": [
+      "schema_version",
+      "stage",
+      "valid",
+      "ready_for_science",
+      "record_sha256",
+      "authentication",
+      "execution_identity",
+      "exit_codes",
+      "identities",
+      "job_local_storage",
+      "containment",
+      "cleanup"
+    ],
+    "publish_on_setup_failure": true,
+    "publish_before_supervised_cleanup": true
+  },
+  "resources": {
+    "control_minutes": 30,
+    "candidate_role_count": 10,
+    "candidate_minutes_each": 90,
+    "recovery_minutes": 5,
+    "total_gpu_minute_ceiling": 935,
+    "gpus_per_role": 1,
+    "attempts_per_role": 1,
+    "distributed_training": false,
+    "job_arrays": false,
+    "scientific_retries": false
+  }
+}

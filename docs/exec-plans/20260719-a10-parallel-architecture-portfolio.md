@@ -54,6 +54,10 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Hardened the general toolkit under A10M5O1R2 with an atomic
   upstream-failure matrix stop and authenticated sparse collection; independent
   review and all 79 toolkit tests passed.
+- [x] (2026-07-19) Scaffolded A10M5R10R1R1 with unchanged byte-pinned science,
+  explicit `/usr/bin/python3.11` login/compute control-plane execution, exact
+  R1/toolkit-hardening predecessor bindings, and a real authority-initialization
+  smoke test.
 - [ ] Publish a fresh A10M5R10R1R1 source with explicit
   `/usr/bin/python3.11` pre-runtime control-plane invocations, replay preflight,
   initialize its authority, and materialize all six controls.
@@ -232,8 +236,8 @@ observe each role exactly once. Concrete toolkit commands, run IDs, authority
 hashes, Slurm job IDs, and collection commands must be appended here when the
 implementation fixes those identifiers.
 
-For A10M5R10R1, set `RUN_ID` to
-`a10m5r10r1-candidate-job-local-capacity-remedy-r0`, set `LOCAL_RUN_STATE` to
+For A10M5R10R1R1, set `RUN_ID` to
+`a10m5r10r1r1-python311-control-plane-remedy-r0`, set `LOCAL_RUN_STATE` to
 the package-private toolkit run state, and set `REMOTE_RUN_ROOT` to the exact
 staged run root. Every submission uses this admission sequence:
 
@@ -242,7 +246,8 @@ staged run root. Every submission uses this admission sequence:
    `job-*.json` receipts needed by the target gate into
    `REMOTE_RUN_ROOT/admission-input/publication/`. Do not copy or edit toolkit
    state in the other direction.
-2. On the login host, run staged `admission_checker.py` with the staged
+2. On the login host, run staged `admission_checker.py` explicitly with
+   `/usr/bin/python3.11` and the staged
    `job-local-capacity-contract.json`, `asset-manifest.json`, copied state,
    copied publication directory, exact remote root, target role, and exact
    `admissions/{role}.json` output. For the second role in a wave, also pass
@@ -289,6 +294,13 @@ preflight must demonstrate 10,958/10,950 full-period core and physics counts,
 2,922/2,920 representative-window counts, observed February 29, absent
 leap-year December 31, exclusive target-end behavior, at least 28 observations
 per year-month, and all 1,440 role-eligible objects.
+
+The A10M5R10R1R1 source commit must contain the successor package, be pushed to
+`main`, descend from toolkit-hardening commit
+`0ddffd9ac5db2440f74f54285e0df1c2ac856c98`, and have no diff from that commit
+over the four protected toolkit implementation paths. Before authority
+creation, the executor must replay the full 1,440-object scan from the retained
+corpus and require byte equality with the frozen preflight receipt.
 
 Execution acceptance requires six exact controls; ten single-attempt
 family-capacity roles; thirty complete candidate rows; candidate-fit-only

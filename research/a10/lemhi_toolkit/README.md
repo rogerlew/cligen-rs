@@ -77,6 +77,8 @@ verify
 submit --job-role smoke --attempt-index 0
 # Monitor with squeue until the job leaves the queue and sacct is settled.
 observe --job-role smoke --attempt-index 0
+# If an exhausted failed upstream role makes every zero-attempt role moot:
+# stop-matrix --trigger-job-role smoke --reason-code upstream-role-exhausted
 # Only when observe authenticates unresolved job-local cleanup:
 recover --job-role smoke --attempt-index 0
 observe-recovery
@@ -125,14 +127,12 @@ accounting, and then call `observe` once.
 - Every job gate receipt needs a nonempty boolean `gates` object even when the
   scientific result has a different disposition vocabulary. Keep operational
   gates and scientific gates in separate fields.
-- Evidence allowlists must be satisfiable on success and failure. If a job can
-  fail before products exist, prospectively define honest absence records or
-  a failure-specific collection surface; do not invent success-shaped data
-  after settlement.
-- Revision-2 recovery contingency paths are required even when recovery is
-  unnecessary. Prospectively create an explicit `invoked=false` record and
-  clearly labeled non-invocation streams on the all-clean path; absence of
-  those allowlisted files makes collection fail closed.
+- Revision-2 evidence allowlists are maximum permitted surfaces. Collection
+  authenticates the exact sorted present/absent partition and archives only
+  present regular single-link files. Every submitted attempt still requires
+  its gate receipt and both Slurm streams; an invoked recovery likewise
+  requires its gate receipt and both fixed streams. Never invent success-shaped
+  data for a stopped role or an unused recovery reserve.
 - Prospectively register typed evidence replacements for exact durable and
   job-local paths that can appear in tracebacks. Collection quarantines raw
   evidence and fails closed on an unregistered forbidden value.

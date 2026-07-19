@@ -471,7 +471,10 @@ upstream role can atomically stop never-submitted dependents, collect the exact
 sparse evidence surface, and close without fabricated records. The next fresh
 portfolio run must explicitly pin `/usr/bin/python3.11` for every pre-runtime
 control-plane invocation while preserving the unchanged science and wave
-contract.
+contract. That fresh run is
+[A10M5R10R1R1](work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/package.md),
+which binds both predecessor dispositions and the reviewed hardened toolkit
+before opening a new 935 GPU-minute authority.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
