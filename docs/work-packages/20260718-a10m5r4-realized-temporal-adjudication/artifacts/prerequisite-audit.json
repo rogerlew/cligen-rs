@@ -1,0 +1,33 @@
+{
+  "accepted_pair": [
+    {
+      "capacity_id": "P1",
+      "family": "lognormal_wet_v2",
+      "parameter_count": 87295
+    },
+    {
+      "capacity_id": "P2",
+      "family": "lognormal_wet_v2",
+      "parameter_count": 276927
+    }
+  ],
+  "a10m1_primary_sources": [
+    "daymet_v4_daily",
+    "uscrn_daily01",
+    "uscrn_subhourly01"
+  ],
+  "audit_commit": "f1f4791",
+  "comparator_at_entry": {
+    "executable_generator": false,
+    "prism_input_object": false,
+    "registered_identity": false,
+    "station_input_record": false,
+    "validation_evidence": false
+  },
+  "generated_output_accessed": false,
+  "package_id": "A10M5R4",
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "successor": "A10M5R4R1",
+  "terminal": "HOLD-A10-REVISED-STOCHASTIC-PRISM-COMPARATOR"
+}

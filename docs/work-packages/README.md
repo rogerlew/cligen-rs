@@ -83,3 +83,5 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r2-corrected-cpu-export-screen](20260718-a10m5r2-corrected-cpu-export-screen/package.md) | EXECUTED-COMPLETE |
 | [20260718-a10m5r3-candidate-family-capacity-knee](20260718-a10m5r3-candidate-family-capacity-knee/package.md) | EXECUTED-HOLD-A10-RESOURCE-BOUND |
 | [20260718-a10m5r3r1-evidence-reconciliation](20260718-a10m5r3r1-evidence-reconciliation/package.md) | EXECUTED-COMPLETE |
+| [20260718-a10m5r4-realized-temporal-adjudication](20260718-a10m5r4-realized-temporal-adjudication/package.md) | EXECUTED-HOLD-A10-REVISED-STOCHASTIC-PRISM-COMPARATOR |
+| [20260718-a10m5r4r1-stochastic-prism-comparator](20260718-a10m5r4r1-stochastic-prism-comparator/package.md) | SCAFFOLDED |
