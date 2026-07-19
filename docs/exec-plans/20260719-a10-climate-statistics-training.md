@@ -29,6 +29,9 @@ and temperature.
   and the core-variable boundary requested by the operator.
 - [ ] Publish the package, research specification, executable contract, source,
   and local verification on `main`.
+- [x] (2026-07-19) Published scaffold source at `56a7d42`; detected and
+  preserved a pre-spend private authority genesis with a nonexistent manually
+  expanded SHA; scaffolded unchanged corrective A10M5R8R1.
 - [ ] Initialize the package-scoped resource authority and execute one bounded
   single-L40 attempt through the canonical toolkit lifecycle.
 - [ ] Authenticate and score the full fit-validation comparison, reconcile
@@ -47,6 +50,10 @@ and temperature.
 - Latitude is constant within a site. It can define a physical radiation
   baseline in a future package, but its general relationship is identifiable
   only across the multi-site corpus.
+- The first private authority genesis recorded a manually inferred full SHA
+  that did not match `git rev-parse HEAD`. Detection preceded every remote and
+  resource lifecycle step; its zero-reservation ledger is preserved rather
+  than reset.
 
 ## Decision Log
 
@@ -163,3 +170,6 @@ faithful behavior changes.
 
 Revision note (2026-07-19): initial self-contained plan created after campaign,
 objective, corpus, runtime, and cluster reconnaissance.
+
+Revision note (2026-07-19): recorded the pre-spend source-identity hold and the
+unchanged A10M5R8R1 corrective authority path.

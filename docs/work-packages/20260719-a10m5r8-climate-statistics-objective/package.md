@@ -1,6 +1,6 @@
 # A10M5R8 — Climate-Statistics Training Objective
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-AUTHORITY-SOURCE-IDENTITY`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: clean `main` at `6458b8c`, push `main`
@@ -90,3 +90,12 @@ failure does not authorize a retry or post-hoc statistic/weight change.
 - `artifacts/jobs/` — immutable training/evaluation and Lemhi sources
 - `artifacts/verify_freeze.py` — local contract/source verifier
 - terminal evidence, review, resource ledger, toolkit records, and gate log
+
+## Disposition
+
+Execution held before planning, remote mutation, reservation, or submission.
+The private authority genesis received an incorrectly expanded source SHA
+instead of Git's actual full commit identity. The initialized ledger is
+preserved with zero reservations and must not be reset or used. Corrective
+A10M5R8R1 retains the unchanged scientific contract and receives an independent
+package-scoped authority; see `artifacts/authority-initialization-hold.md`.

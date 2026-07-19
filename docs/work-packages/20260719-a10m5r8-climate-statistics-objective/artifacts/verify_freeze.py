@@ -29,7 +29,7 @@ def main() -> None:
         "build_control_records.py", "climate_core.py", "experiment.py", "job-climate-objective.sh",
         "prepare_assets.py", "run_experiment.sh",
     }
-    require(required == {path.name for path in JOBS.iterdir()}, "job source roster drift")
+    require(required == {path.name for path in JOBS.iterdir() if path.is_file()}, "job source roster drift")
     for path in JOBS.glob("*.py"):
         py_compile.compile(str(path), doraise=True)
     for path in JOBS.glob("*.sh"):

@@ -376,6 +376,15 @@ precipitation/Tmax/Tmin locations and dispersions. Solar radiation remains the
 first gated generalization after the core objective is supported; it is not
 part of this bounded attribution experiment.
 
+A10M5R8 held before remote action at
+`HOLD-A10M5R8-AUTHORITY-SOURCE-IDENTITY` because its private genesis recorded
+a nonexistent manually expanded source SHA rather than the published full Git
+object. The zero-reservation ledger is preserved and will not be reset.
+Corrective
+[A10M5R8R1](work-packages/20260719-a10m5r8r1-authority-source-identity-remedy/package.md)
+retains the exact scientific/resource contract, takes its source identity
+directly from Git, and is the active execution package.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
