@@ -55,6 +55,16 @@ status=$?
 set -e
 cleanup=false
 [ ! -e "$target" ] && cleanup=true
+/usr/bin/python3 - "$output/streams.json" "$role" "$status" <<'PY'
+import json, os, sys
+path, role, status = sys.argv[1:]
+if not os.path.exists(path):
+    temporary=path+'.promote'
+    with open(temporary,'w',encoding='utf-8') as stream:
+        json.dump({'schema_version':1,'row_id':role,'streams':[],'valid':False,'absent_reason':'model role exited before stream publication','exit_code':int(status)},stream,indent=2,sort_keys=True)
+        stream.write('\n')
+    os.replace(temporary,path)
+PY
 /usr/bin/python3 - "$output/evidence.json.part" "$output/evidence.json" "$status" "$cleanup" "$target" "$SLURM_JOB_ID" "$SLURMD_NODENAME" "$role" "$run_id" "$uid" "$device" "$marker_sha" <<'PY'
 import json, os, sys
 partial, final, status, cleanup, target, job, node, role, run_id, uid, device, marker_sha = sys.argv[1:]
