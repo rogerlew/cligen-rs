@@ -479,6 +479,10 @@ quarantine, and repeats authenticated download and extraction from scratch.
 Slurm submissions MUST use committed scripts and explicit partition, typed
 GRES, CPU, memory, time, output, and error settings. The toolkit MUST:
 
+- parse typed GRES into resource, accelerator model, and positive count before
+  remote mutation; require the provider request and model to match; require
+  that count to equal the plan's `gpus` accounting multiplier; and reject a
+  count above the provider-declared single-node maximum;
 - verify current eligibility and device inventory before first submission;
 - create output directories before `sbatch`;
 - default to `--no-requeue`; requeue requires prospective registration and
@@ -510,6 +514,13 @@ integer actual-GPU-minute ledger rounds that value up to the next minute. It
 does not derive from missing child-process or device telemetry. Arrays and
 multi-allocation jobs require an explicit prospective accounting policy or
 are rejected.
+
+The multiplier in both calculations is the same count authenticated from the
+typed GRES. A plan such as `gpus: 1` with `gres: gpu:l40:4` is invalid rather
+than a request for four devices charged as one. Recovery has the identical
+equality and provider-maximum requirements. Optional single-node multi-GPU
+providers do not change the canonical one-GPU default and must state their
+topology and maximum explicitly.
 
 The ledger is keyed by `resource_budget_id`, not `run_id` or `plan_id`, and is
 shared across every run, plan revision, attempt, retry, cancellation, and

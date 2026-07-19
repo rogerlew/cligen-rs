@@ -1,0 +1,36 @@
+{
+  "assets": [],
+  "capability_contract": {
+    "allowed_counts": [1, 2, 4],
+    "maximum_devices": 4,
+    "node": "node03",
+    "scope": "single-node-homogeneous"
+  },
+  "consumes_probe_fields": ["accelerator_class"],
+  "does_not_establish": ["multi_node", "performance", "scientific_validity"],
+  "emits_probe_fields": [],
+  "executes_provider_code": false,
+  "failure_codes": ["PLATFORM_MISMATCH", "GATE_FAILED", "PLAN_DRIFT"],
+  "implementation_version": "1.0.0",
+  "name": "accelerator-l40-multigpu-v1",
+  "network_phase": "compute-offline",
+  "operations": {
+    "request": "slurm-typed-gres-l40-multigpu-v1",
+    "validate": "compute-device-and-collective-gate-v1"
+  },
+  "provider_api_version": 2,
+  "provider_class": "accelerator",
+  "provides": {
+    "accelerator_maximum_devices": 4,
+    "accelerator_request": "gpu:l40",
+    "accelerator_topology": "single-node-homogeneous"
+  },
+  "required_commands": ["nvidia-smi"],
+  "requires": {
+    "accelerator_class": "nvidia-l40",
+    "scheduler": "slurm",
+    "target_platform": "linux-x86_64-glibc"
+  },
+  "side_effect_classes": ["bounded-slurm-allocation"],
+  "supported_platforms": ["linux-x86_64-glibc"]
+}

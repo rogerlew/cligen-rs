@@ -10,7 +10,7 @@ from pathlib import Path
 
 from research.a10.lemhi_toolkit.adapters import FixtureAdapter, OpenSSHSlurmAdapter
 from research.a10.lemhi_toolkit.cli import main
-from research.a10.lemhi_toolkit.core import Toolkit, ToolkitError, atomic_write, canonical_bytes, read_json, read_record, sha256_bytes, sha256_file
+from research.a10.lemhi_toolkit.core import Toolkit, ToolkitError, atomic_write, canonical_bytes, parse_typed_gres, read_json, read_record, sha256_bytes, sha256_file
 from research.a10.lemhi_toolkit.hardening import (
     LedgerAnchor,
     admit_job_local,
@@ -42,6 +42,7 @@ PROVIDERS_V2 = [
     "research/a10/lemhi_toolkit/providers/framework-pytorch271-cu128-numpy226-v2.json",
     "research/a10/lemhi_toolkit/providers/toolchain-rust192-linux-x86_64-v2.json",
 ]
+MULTI_GPU_PROVIDER = "research/a10/lemhi_toolkit/providers/accelerator-l40-multigpu-v1.json"
 HEX_A = "a" * 64
 HEX_B = "b" * 64
 
@@ -370,6 +371,87 @@ class StorageTransferAndSupervisorTests(HardeningFixture):
 
 
 class V2IntegrationTests(HardeningFixture):
+    def test_typed_gres_parser_and_plan_counts_fail_closed(self) -> None:
+        self.assertEqual(parse_typed_gres("gpu:l40:4", "job gres"), ("gpu", "l40", 4))
+        for value in ("gpu:4", "gpu:l40:0", "gpu:l40:-1", "gpu::2", 2):
+            with self.subTest(value=value), self.assertRaisesRegex(ToolkitError, "PLAN_DRIFT"):
+                parse_typed_gres(value, "job gres")
+
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        profile = read_json(PROFILE_V2)
+        for index, (gpus, gres, expected) in enumerate((
+            (1, "gpu:l40:2", "count mismatch"),
+            (1, "gpu:rtxa6000:1", "provider mismatch"),
+            (2, "gpu:l40:2", "provider maximum"),
+        )):
+            with self.subTest(gpus=gpus, gres=gres), self.assertRaisesRegex(ToolkitError, expected):
+                run_id = f"v2-invalid-{index}"
+                toolkit = Toolkit(state, authority, profile, run_id, FixtureAdapter(self.root / f"fixture-{index}"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+                toolkit.doctor(); toolkit.probe()
+                plan = self.plan(authority, script)
+                plan.update({"remote_run_root": f"runs/{run_id}", "run_id": run_id})
+                plan["jobs"][0].update({"gpus": gpus, "gres": gres})
+                toolkit.plan(plan)
+
+    def test_multigpu_provider_accepts_two_and_four_and_rejects_five(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        for count in (2, 4):
+            with self.subTest(count=count):
+                run_id = f"v2-run-{count}"
+                toolkit = Toolkit(state, authority, read_json(PROFILE_V2), run_id, FixtureAdapter(self.root / f"fixture-valid-{count}"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+                toolkit.doctor(); toolkit.probe()
+                plan = self.plan(authority, script)
+                plan.update({"remote_run_root": f"runs/{run_id}", "run_id": run_id})
+                plan["providers"][3] = MULTI_GPU_PROVIDER
+                plan["jobs"][0].update({"gpus": count, "gres": f"gpu:l40:{count}"})
+                toolkit.plan(plan)
+
+        toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-run-5", FixtureAdapter(self.root / "fixture-invalid-5"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor(); toolkit.probe()
+        plan = self.plan(authority, script)
+        plan.update({"remote_run_root": "runs/v2-run-5", "run_id": "v2-run-5"})
+        plan["providers"][3] = MULTI_GPU_PROVIDER
+        plan["jobs"][0].update({"gpus": 5, "gres": "gpu:l40:5"})
+        with self.assertRaisesRegex(ToolkitError, "provider maximum"):
+            toolkit.plan(plan)
+
+    def test_recovery_gres_count_must_match_ledger_multiplier(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-run", FixtureAdapter(self.root / "fixture-recovery-mismatch"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor(); toolkit.probe()
+        plan = self.plan(authority, script)
+        plan["recovery_contingency"]["gres"] = "gpu:l40:2"
+        with self.assertRaisesRegex(ToolkitError, "recovery gpus and gres count mismatch"):
+            toolkit.plan(plan)
+
+    def test_live_elapsed_accounting_uses_four_validated_gpus(self) -> None:
+        class Runner:
+            def run(self, arguments, *, stdin=None, timeout=60):
+                del arguments, timeout
+                if stdin and b"ElapsedRaw" in stdin:
+                    output = b'{"terminal":true,"state":"COMPLETED","exit_code":0,"elapsed_seconds":61,"gates":{"scheduler_terminal":true},"actual_gpu_minutes":null,"accounting":"available","node":"node03"}\n'
+                elif stdin and b"gate_receipt=$3" in stdin:
+                    output = b'{"gates":{"collective_correct":true,"job_local_cleanup":true}}\n'
+                else:
+                    output = b""
+                return subprocess.CompletedProcess([], 0, output, b"")
+
+        adapter = OpenSSHSlurmAdapter(REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", Runner())
+        observed = adapter.observe(
+            read_json(PROFILE_V2),
+            {"remote_run_root": "runs/v2-run"},
+            {"expected_exit_code": 0, "gate_receipt": "evidence.json", "gpus": 4},
+            "1000",
+        )
+        self.assertEqual(observed["actual_gpu_seconds"], 244)
+        self.assertEqual(observed["actual_gpu_minutes"], 5)
+
     def test_candidate_semantics_are_immutable_and_have_no_promotion_state(self) -> None:
         path = REPOSITORY_ROOT / "research/a10/lemhi_toolkit/configurations/lemhi-a10-py311-l40-v2-candidate.json"
         candidate = read_json(path)
@@ -400,7 +482,7 @@ class V2IntegrationTests(HardeningFixture):
             "job_local_cleanup": "toolkit_recoverable",
             "jobs": [{"cpus": 2, "expected_exit_code": 0, "gate_receipt": "evidence.json", "gpus": 1, "gres": "gpu:l40:1", "max_attempts": 1, "memory_mb": 1024, "partition": "icrews", "retry_on": [], "role": "smoke", "script": "job.sh", "time_limit_minutes": 5}],
             "package_id": authority["package_id"],
-            "providers": PROVIDERS_V2,
+            "providers": list(PROVIDERS_V2),
             "recovery_contingency": {"ambiguity": "retain-reserve", "cpus": 2, "exact_node_only": True, "gate_receipt": "recovery.json", "gpu_minutes": 5, "gpus": 1, "gres": "gpu:l40:1", "max_attempts": 1, "memory_mb": 1024, "partition": "icrews", "script": "recover.sh", "time_limit_minutes": 5},
             "remote_run_root": "runs/v2-run",
             "required_capability_scope": "login",

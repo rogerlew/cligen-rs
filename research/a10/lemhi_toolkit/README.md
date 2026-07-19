@@ -158,6 +158,14 @@ stack. Definitions are declarative JSON and content-hashed into every plan.
 Adding a runtime or framework means adding a versioned provider record and an
 explicit plan amendment or new plan; provider failure is not a fallback signal.
 
+Every job and recovery record uses one authenticated GPU count. The toolkit
+parses typed GRES such as `gpu:l40:2`, requires its resource/model to match the
+selected accelerator provider, requires its count to equal `gpus`, and rejects
+counts above that provider's maximum. The default `accelerator-l40-v2`
+provider therefore remains one GPU. Explicitly authorized single-node counts
+two and four use the additive `accelerator-l40-multigpu-v1` provider and do not
+alter the canonical single-L40 designation.
+
 Revision-2 plans use `lemhi-v2.json`, an all-v2 provider stack including the
 toolchain provider, `toolkit_recoverable` storage, `--export=NONE` environment
 closure, a frozen recovery contingency, typed raw-evidence projection, integer

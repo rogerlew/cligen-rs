@@ -50,6 +50,10 @@ read it before writing port code. Summary:
   reconciliation merge at review time.
 - Completed roadmap items move from `docs/ROADMAP.md` to the work-package
   catalog.
+- Multi-package, multi-hour, or operationally stateful changes use one living
+  ExecPlan under `docs/exec-plans/`, maintained according to
+  [`.agent/PLANS.md`](.agent/PLANS.md). The ExecPlan coordinates packages but
+  does not replace their independent authority, evidence, or terminal state.
 
 ## Autonomy and campaign continuity
 

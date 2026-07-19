@@ -22,6 +22,9 @@ SAFE_INTEGER = 9_007_199_254_740_991
 ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9._-]{0,95}$")
 SEGMENT_PATTERN = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9._+=-]{0,254}$")
 HEX64_PATTERN = re.compile(r"^[0-9a-f]{64}$")
+TYPED_GRES_PATTERN = re.compile(
+    r"^(?P<resource>[A-Za-z0-9_]+):(?P<model>[A-Za-z0-9_]+):(?P<count>[1-9][0-9]*)$"
+)
 
 
 class ToolkitError(Exception):
@@ -36,6 +39,15 @@ class ToolkitError(Exception):
 def require(condition: bool, code: str, detail: str) -> None:
     if not condition:
         raise ToolkitError(code, detail)
+
+
+def parse_typed_gres(value: Any, field: str) -> tuple[str, str, int]:
+    """Return a typed GRES resource, model, and positive count."""
+
+    require(isinstance(value, str), "PLAN_DRIFT", field)
+    match = TYPED_GRES_PATTERN.fullmatch(value)
+    require(match is not None, "PLAN_DRIFT", field)
+    return match["resource"], match["model"], int(match["count"])
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -614,7 +626,29 @@ class Toolkit:
         return semantic
 
     @staticmethod
-    def _validate_jobs(jobs: Any, logical_assets: set[str], evidence_allowlist: set[str]) -> set[str]:
+    def _accelerator_contract(providers: list[dict[str, Any]]) -> tuple[str, int]:
+        accelerator = next(
+            (provider for provider in providers if provider.get("provider_class") == "accelerator"),
+            None,
+        )
+        require(accelerator is not None, "PROVIDER_UNAVAILABLE", "accelerator provider required")
+        provides = accelerator.get("provides", {})
+        request = provides.get("accelerator_request")
+        maximum = provides.get("accelerator_maximum_devices", 1)
+        require(isinstance(request, str), "PROVIDER_UNAVAILABLE", "accelerator request")
+        resource, model = request.split(":", 1) if request.count(":") == 1 else ("", "")
+        require(resource == "gpu" and bool(model), "PROVIDER_UNAVAILABLE", "typed accelerator request")
+        require(isinstance(maximum, int) and maximum > 0, "PROVIDER_UNAVAILABLE", "accelerator maximum")
+        return request, maximum
+
+    @staticmethod
+    def _validate_jobs(
+        jobs: Any,
+        logical_assets: set[str],
+        evidence_allowlist: set[str],
+        accelerator_request: str,
+        maximum_gpus: int,
+    ) -> set[str]:
         require(isinstance(jobs, list) and jobs, "PLAN_DRIFT", "jobs")
         roles: set[str] = set()
         for job in jobs:
@@ -625,9 +659,12 @@ class Toolkit:
             validate_relative_path(job.get("script"), "job script")
             require(job["script"] in logical_assets, "PLAN_DRIFT", "job script is not a frozen asset")
             validate_id(job.get("partition"), "partition")
-            require(isinstance(job.get("gres"), str) and re.fullmatch(r"[A-Za-z0-9_]+:[A-Za-z0-9_]+:[1-9][0-9]*", job["gres"]) is not None, "PLAN_DRIFT", "job gres")
             for field in ("cpus", "memory_mb", "gpus", "time_limit_minutes"):
                 require(isinstance(job.get(field), int) and job[field] > 0, "PLAN_DRIFT", f"job {field}")
+            resource, model, count = parse_typed_gres(job.get("gres"), "job gres")
+            require(f"{resource}:{model}" == accelerator_request, "PLAN_DRIFT", "job gres provider mismatch")
+            require(count == job["gpus"], "PLAN_DRIFT", "job gpus and gres count mismatch")
+            require(count <= maximum_gpus, "PLAN_DRIFT", "job gpu count exceeds provider maximum")
             require(isinstance(job.get("max_attempts"), int) and job["max_attempts"] > 0, "PLAN_DRIFT", "job max_attempts")
             require(isinstance(job.get("expected_exit_code", 0), int) and 0 <= job.get("expected_exit_code", 0) <= 255, "PLAN_DRIFT", "expected exit code")
             retry_on = job.get("retry_on", [])
@@ -667,6 +704,7 @@ class Toolkit:
             validate_relative_path(plan_input.get("remote_run_root"), "remote_run_root")
             require(plan_input["remote_run_root"] == f"runs/{self.run_id}", "CLEANUP_TARGET_INVALID", "run root must be runs/<run_id>")
             providers = self._load_providers(plan_input)
+            accelerator_request, maximum_gpus = self._accelerator_contract(providers)
             if self.provider_api_version == 2:
                 from .hardening import (
                     close_job_environment,
@@ -688,7 +726,10 @@ class Toolkit:
                 require(recovery["gpu_minutes"] == recovery["gpus"] * recovery["time_limit_minutes"], "PLAN_DRIFT", "recovery charge")
                 require(recovery["max_attempts"] == 1, "PLAN_DRIFT", "exactly one recovery attempt")
                 validate_id(recovery.get("partition"), "recovery partition")
-                require(isinstance(recovery.get("gres"), str) and re.fullmatch(r"[A-Za-z0-9_]+:[A-Za-z0-9_]+:[1-9][0-9]*", recovery["gres"]) is not None, "PLAN_DRIFT", "recovery gres")
+                resource, model, count = parse_typed_gres(recovery.get("gres"), "recovery gres")
+                require(f"{resource}:{model}" == accelerator_request, "PLAN_DRIFT", "recovery gres provider mismatch")
+                require(count == recovery["gpus"], "PLAN_DRIFT", "recovery gpus and gres count mismatch")
+                require(count <= maximum_gpus, "PLAN_DRIFT", "recovery gpu count exceeds provider maximum")
                 recovery_script = validate_relative_path(recovery.get("script"), "recovery script")
                 require(recovery_script in {asset["logical_name"] for asset in plan_input.get("assets", []) if isinstance(asset, dict) and asset.get("executable") is True}, "PLAN_DRIFT", "recovery script must be an executable frozen asset")
                 recovery_gate = validate_relative_path(recovery.get("gate_receipt"), "recovery gate receipt")
@@ -735,7 +776,13 @@ class Toolkit:
                 "PLAN_DRIFT",
                 "stop rules",
             )
-            roles = self._validate_jobs(jobs, logical_assets, set(validated_evidence))
+            roles = self._validate_jobs(
+                jobs,
+                logical_assets,
+                set(validated_evidence),
+                accelerator_request,
+                maximum_gpus,
+            )
             semantic = self._semantic_plan(plan_input, providers)
             plan_id = sha256_bytes(canonical_bytes(semantic))
             revision = {"revision": 0, "plan_id": plan_id, "semantic": semantic}
@@ -788,10 +835,14 @@ class Toolkit:
                 "stop_rules",
             ):
                 require(replacement.get(field) == prior.get(field), "PLAN_DRIFT", f"immutable field changed: {field}")
+            providers = self._load_providers(replacement)
+            accelerator_request, maximum_gpus = self._accelerator_contract(providers)
             self._validate_jobs(
                 replacement.get("jobs"),
                 {asset["logical_name"] for asset in prior["assets"]},
                 set(prior["evidence_allowlist"]),
+                accelerator_request,
+                maximum_gpus,
             )
             attempts = state.get("attempts", {})
             started_roles = {item["job_role"] for item in attempts.values() if item.get("state") != "REGISTERED"}
@@ -803,7 +854,6 @@ class Toolkit:
                 from .hardening import validate_evidence_replacements
 
                 validate_evidence_replacements(replacement.get("evidence_replacements", []))
-            providers = self._load_providers(replacement)
             semantic = self._semantic_plan(replacement, providers)
             actual_changes = {key for key in set(prior) | set(semantic) if prior.get(key) != semantic.get(key)}
             actual_changes.discard("provider_stack")

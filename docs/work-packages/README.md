@@ -94,3 +94,5 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r7r2-authorized-architecture-execution](20260718-a10m5r7r2-authorized-architecture-execution/package.md) | EXECUTED-HOLD-ARCHITECTURE-HYPOTHESIS-MIXED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
+| [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |
+| [20260719-a10m5o2-canonical-multi-l40-qualification](20260719-a10m5o2-canonical-multi-l40-qualification/package.md) | SCAFFOLDED |

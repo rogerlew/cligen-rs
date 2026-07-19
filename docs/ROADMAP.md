@@ -218,6 +218,16 @@ requested GPU-minutes, 8 elapsed GPU-seconds, and 3 per-job ceiling-rounded
 GPU-minutes; scheduler identities, the ledger, evidence, job-local absence,
 both durable roots, and final cleanup reconcile.
 
+**Authorized operational expansion (2026-07-19):** one living
+[ExecPlan](exec-plans/20260719-a10-multi-l40-qualification.md) governs local
+[A10M5O1 multi-L40 toolkit hardening](work-packages/20260719-a10m5o1-multi-l40-toolkit-hardening/package.md)
+followed by bounded live
+[A10M5O2 canonical multi-L40 qualification](work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/package.md).
+This additive track validates exact typed-GRES accounting and single-node
+one/two/four-L40 correctness, failure handling, scaling, and cleanup. It does
+not replace the single-L40 canonical default, reopen the held scientific
+trajectory, or authorize A10M6.
+
 **Hold (2026-07-17):**
 [A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
 reached `HOLD-A10-NO-VALID-NEURAL-FIT`. All twelve frozen seed-147031 rows
