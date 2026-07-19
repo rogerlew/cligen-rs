@@ -34,6 +34,11 @@ and temperature.
   expanded SHA; scaffolded unchanged corrective A10M5R8R1.
 - [ ] Initialize the package-scoped resource authority and execute one bounded
   single-L40 attempt through the canonical toolkit lifecycle.
+- [x] (2026-07-19) R1 job `1014023` reconstructed the control exactly and
+  passed the synthetic dispersion test, then exposed accepted leap-day
+  missingness as incompatible with the all-day-complete window predicate;
+  collected failure evidence and closed exact cleanup after 246 GPU-seconds.
+- [ ] Execute the unchanged masked-calendar experiment under corrective R2.
 - [ ] Authenticate and score the full fit-validation comparison, reconcile
   resources and cleanup, and close package/campaign records.
 
@@ -54,6 +59,10 @@ and temperature.
   that did not match `git rev-parse HEAD`. Detection preceded every remote and
   resource lifecycle step; its zero-reservation ledger is preserved rather
   than reset.
+- Accepted Daymet points have 10,950 observed rows on a 10,958-day 1980–2009
+  Gregorian axis. The eight leap-day rows are explicitly unobserved, so exact
+  multi-year climate windows must carry the accepted mask rather than require
+  every calendar row or synthesize data.
 
 ## Decision Log
 
@@ -173,3 +182,6 @@ objective, corpus, runtime, and cluster reconnaissance.
 
 Revision note (2026-07-19): recorded the pre-spend source-identity hold and the
 unchanged A10M5R8R1 corrective authority path.
+
+Revision note (2026-07-19): recorded R1's authenticated calendar-missingness
+failure and the exact-mask R2 correction without changing the estimand.

@@ -382,8 +382,17 @@ a nonexistent manually expanded source SHA rather than the published full Git
 object. The zero-reservation ledger is preserved and will not be reset.
 Corrective
 [A10M5R8R1](work-packages/20260719-a10m5r8r1-authority-source-identity-remedy/package.md)
-retains the exact scientific/resource contract, takes its source identity
-directly from Git, and is the active execution package.
+retained the exact scientific/resource contract and took its source identity
+directly from Git.
+
+A10M5R8R1 job `1014023` exactly reconstructed the accepted control and passed
+the synthetic dispersion test, then held before treatment fitting because an
+all-day-complete predicate rejected A10M1's intentional leap-day missingness.
+Its five charged GPU-minutes, failure evidence, role firewall, and exact
+cleanup are closed. Corrective
+[A10M5R8R2](work-packages/20260719-a10m5r8r2-calendar-missingness-remedy/package.md)
+keeps exact Gregorian years, masks only accepted missing core rows, requires
+28 observed days per year-month, and is the active unchanged experiment.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

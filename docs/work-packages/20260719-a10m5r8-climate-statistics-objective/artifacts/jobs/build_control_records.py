@@ -150,7 +150,7 @@ def plan(options: argparse.Namespace) -> None:
         "run_id": RUN_ID,
         "scheduler_authority_token": AUTHORITY_TOKEN,
         "source_commit": options.source_commit,
-        "stop_rules": {"ambiguity": "stop", "gate_failure": "stop", "resource_ceiling": "stop"},
+        "stop_rules": {"ambiguity": "stop", "gate_failure": "authorized-retry-only", "resource_ceiling": "stop"},
         "submission_mode": "operator-explicit",
         "target_platform": "linux-x86_64-glibc",
     }

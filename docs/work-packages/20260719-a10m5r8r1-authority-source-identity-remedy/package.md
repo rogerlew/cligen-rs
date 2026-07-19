@@ -1,6 +1,6 @@
 # A10M5R8R1 — Authority Source-Identity Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-CALENDAR-MISSINGNESS`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current clean `main`, push `main`
@@ -64,3 +64,18 @@ fail-closed hold. No R1 outcome edits A10M5R8 history.
 - `artifacts/build_control_records.py` — package-specific wrapper around the
   frozen A10M5R8 builder
 - live evidence, decision, toolkit/resource records, review, and gates
+
+## Disposition
+
+Job `1014023` reconstructed the accepted control exactly and passed the
+synthetic dispersion test, then held before treatment training because the
+implementation required eight fully observed Gregorian years. A10M1 marks
+leap days `source_observed=false`, leaving 10,950 accepted rows on the
+10,958-day 1980–2009 axis and therefore zero all-day-complete windows. The job
+failed after 246 seconds, used five charged GPU-minutes, opened no protected
+roles, cleaned job-local state, and closed with the durable root absent.
+
+Corrective A10M5R8R2 preserves the date axis and excludes only accepted
+missing core rows from aggregates and the core proper-score guard. It does not
+impute leap days or change the eight-year estimand, statistic registry,
+architecture, seed, weights, thresholds, or role firewall.

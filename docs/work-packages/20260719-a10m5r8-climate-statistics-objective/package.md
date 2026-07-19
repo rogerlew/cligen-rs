@@ -60,7 +60,8 @@ state beneath `/Users/roger/.cache/cligen-rs/a10m5r8-climate-objective/`.
 
 - `python3 artifacts/verify_freeze.py`
 - exact accepted-control reconstruction identity
-- complete eight-year calendar windows and all 240 fit-validation points
+- exact eight-year calendar windows, accepted core-field missingness masks,
+  and all 240 fit-validation points
 - finite gradients/statistics and physical support
 - deterministic replay of the terminal decision
 - protected roles opened equals `[]`

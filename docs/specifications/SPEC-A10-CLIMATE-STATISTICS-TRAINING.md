@@ -30,11 +30,15 @@ MSE, rescaling, target lookup, or post-generation repair is legal.
 
 ## Calendar and stochastic surface
 
-Training and checkpoint windows contain eight exact complete Gregorian years.
-The model receives zero normalized weather inputs and the inherited calendar
-and transferable site descriptors. Four differentiable stochastic members are
-drawn for training and eight hard members for checkpoint/final evaluation.
-Random fields are deterministic and arm-paired.
+Training and checkpoint windows contain eight exact Gregorian years on the
+accepted A10M1 date axis. Statistics and the core daily proper-score guard use
+only rows where `source_observed` is true and precipitation, Tmax, and Tmin are
+present; every year-month must retain at least 28 such rows. This preserves the
+accepted leap-day missingness instead of inventing observations or discarding
+calendar years. The model receives zero normalized weather inputs and the
+inherited calendar and transferable site descriptors. Four differentiable
+stochastic members are drawn for training and eight hard members for
+checkpoint/final evaluation. Random fields are deterministic and arm-paired.
 
 For precipitation, Tmax, and Tmin, each window computes:
 

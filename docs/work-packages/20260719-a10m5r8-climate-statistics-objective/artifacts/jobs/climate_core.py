@@ -30,6 +30,7 @@ class CalendarWindow:
     first_year: int
     month_index: np.ndarray
     year_index: np.ndarray
+    valid_index: np.ndarray
 
 
 @dataclass
@@ -58,7 +59,7 @@ def _document_windows(document: dict[str, Any], years: int) -> list[CalendarWind
     dates = [dt.date.fromisoformat(text) for text in document["dates"]]
     positions = {date: index for index, date in enumerate(dates)}
     complete = np.asarray(document["source_observed"], dtype=bool)
-    for field in legacy.FIELDS:
+    for field in ("prcp", "tmax", "tmin"):
         complete &= np.asarray([value is not None for value in document["fields"][field]])
     windows = []
     for first_year in range(dates[0].year, dates[-1].year - years + 2):
@@ -72,14 +73,19 @@ def _document_windows(document: dict[str, Any], years: int) -> list[CalendarWind
         days = end - positions[target_start]
         if days <= 0 or end - input_start != days + 1:
             continue
-        if not bool(complete[input_start : end + 1].all()):
-            continue
         targets = dates[input_start + 1 : end + 1]
         month_index = np.asarray([date.month - 1 for date in targets], dtype=np.int64)
         year_index = np.asarray([date.year - first_year for date in targets], dtype=np.int64)
+        valid_index = complete[input_start + 1 : end + 1].copy()
         if len(month_index) != days or set(year_index.tolist()) != set(range(years)):
             raise RuntimeError("calendar window construction mismatch")
-        windows.append(CalendarWindow(input_start, days, first_year, month_index, year_index))
+        support = [
+            int((valid_index & (month_index == month) & (year_index == year)).sum())
+            for year in range(years) for month in range(12)
+        ]
+        if min(support) < 28:
+            continue
+        windows.append(CalendarWindow(input_start, days, first_year, month_index, year_index, valid_index))
     return windows
 
 
@@ -134,9 +140,9 @@ def climate_batch(
     selections: list[tuple[int, int]],
     device: torch.device,
     validation_index: int,
-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, list[np.ndarray], list[np.ndarray]]:
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, list[np.ndarray], list[np.ndarray], list[np.ndarray]]:
     feature_rows, precipitation_rows, target_rows, weather_rows, stations = [], [], [], [], []
-    months, years = [], []
+    months, years, valid = [], [], []
     for record_index, window_index in selections:
         item = records[record_index]
         window = item.windows[window_index]
@@ -155,6 +161,7 @@ def climate_batch(
         stations.append(record.fit_index if record.fit_index >= 0 else validation_index)
         months.append(window.month_index)
         years.append(window.year_index)
+        valid.append(window.valid_index)
     return (
         torch.from_numpy(np.stack(feature_rows)).to(device),
         torch.from_numpy(np.stack(precipitation_rows)).to(device),
@@ -163,6 +170,7 @@ def climate_batch(
         torch.tensor(stations, dtype=torch.long, device=device),
         months,
         years,
+        valid,
     )
 
 
@@ -238,6 +246,7 @@ def climate_components(
     observed: torch.Tensor,
     month_indices: list[np.ndarray],
     year_indices: list[np.ndarray],
+    valid_indices: list[np.ndarray],
     squared: bool,
 ) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
     blocks: dict[str, list[torch.Tensor]] = {
@@ -253,6 +262,7 @@ def climate_components(
     for batch_index in range(batch_count):
         months = torch.from_numpy(month_indices[batch_index]).to(generated.device)
         years = torch.from_numpy(year_indices[batch_index]).to(generated.device)
+        valid = torch.from_numpy(valid_indices[batch_index]).to(generated.device)
         year_count = int(years.max().item()) + 1
         generated_month_cells: list[list[torch.Tensor]] = [[], [], []]
         observed_month_cells: list[list[torch.Tensor]] = [[], [], []]
@@ -266,7 +276,7 @@ def climate_components(
             month_wet_generated, month_wet_observed = [], []
             month_amount_generated, month_amount_observed = [], []
             for year in range(year_count):
-                mask = (months == month) & (years == year)
+                mask = valid & (months == month) & (years == year)
                 if int(mask.sum()) < 28:
                     raise RuntimeError("incomplete calendar month")
                 generated_slice = generated[:, batch_index, mask]
@@ -325,7 +335,7 @@ def climate_components(
         generated_annual: list[list[torch.Tensor]] = [[], [], []]
         observed_annual: list[list[torch.Tensor]] = [[], [], []]
         for year in range(year_count):
-            mask = years == year
+            mask = valid & (years == year)
             for field in range(3):
                 generated_values = generated[:, batch_index, mask, field]
                 observed_values = observed[batch_index, mask, field]
@@ -364,6 +374,38 @@ def climate_components(
     return torch.stack(list(reduced.values())).mean(), reduced
 
 
+def core_daily_nll(
+    heads: torch.Tensor,
+    precipitation: torch.Tensor,
+    targets: torch.Tensor,
+    valid_indices: list[np.ndarray],
+) -> torch.Tensor:
+    valid = torch.from_numpy(np.stack(valid_indices)).to(heads.device)
+    heads = heads.float()[valid]
+    precipitation = precipitation.float()[valid]
+    targets = targets.float()[valid][:, :2]
+    wet = (precipitation >= 1.0).float()
+    occurrence = nn.functional.binary_cross_entropy_with_logits(heads[:, 0], wet)
+    positive = wet.bool()
+    scale = nn.functional.softplus(heads[:, 2]) + 1e-4
+    if positive.any():
+        values = precipitation[positive]
+        location = heads[positive, 1]
+        positive_scale = scale[positive]
+        logged = torch.log(values)
+        amount = (
+            torch.log(positive_scale)
+            + 0.5 * ((logged - location) / positive_scale).square()
+            + logged
+        ).mean()
+    else:
+        amount = occurrence * 0.0
+    locations = heads[:, [3, 5]]
+    scales = nn.functional.softplus(heads[:, [4, 6]]) + 1e-4
+    continuous = (torch.log(scales) + 0.5 * ((targets - locations) / scales).square()).mean()
+    return occurrence + amount + continuous
+
+
 def _forward(model: Any, features: torch.Tensor, station: torch.Tensor, hidden_size: int) -> tuple[torch.Tensor, torch.Tensor]:
     if isinstance(model, accepted.StateSpace):
         return model(features, station)
@@ -393,14 +435,14 @@ def score_model(
     with torch.no_grad():
         for offset in range(0, len(selections), 6):
             subset = selections[offset : offset + 6]
-            features, precipitation, targets, weather, station, months, years = climate_batch(
+            features, precipitation, targets, weather, station, months, years, valid = climate_batch(
                 records, subset, device, validation_index
             )
             heads, _ = _forward(model, features, station, hidden_size)
             uniforms = member_uniforms(members, len(subset), heads.shape[1], seed_base + offset, device)
             generated, wet, _ = sample_weather(heads, uniforms, None)
-            score, blocks = climate_components(generated, wet, weather, months, years, squared=False)
-            primary, _ = accepted.mixed_nll(heads, precipitation, targets, "lognormal_wet_v2")
+            score, blocks = climate_components(generated, wet, weather, months, years, valid, squared=False)
+            primary = core_daily_nll(heads, precipitation, targets, valid)
             weight = len(subset)
             count += weight
             daily_total += float(primary.cpu()) * weight
@@ -476,7 +518,7 @@ def train_treatment(
                 record_index = int(sampler.choice(by_regime[regime]))
                 window_index = int(sampler.integers(len(fit[record_index].windows)))
                 selections.append((record_index, window_index))
-            features, precipitation, targets, weather, station, months, years = climate_batch(
+            features, precipitation, targets, weather, station, months, years, valid = climate_batch(
                 fit, selections, device, model.validation_index
             )
             optimizer.zero_grad(set_to_none=True)
@@ -487,8 +529,8 @@ def train_treatment(
                 definition["training_seed"] + epoch * 1009 + batch_index, device,
             )
             generated, wet, _ = sample_weather(heads, uniforms, stochastic["relaxed_wet_temperature"])
-            climate_loss, block_losses = climate_components(generated, wet, weather, months, years, squared=True)
-            daily_nll, _ = accepted.mixed_nll(heads, precipitation, targets, definition["amount_family"])
+            climate_loss, block_losses = climate_components(generated, wet, weather, months, years, valid, squared=True)
+            daily_nll = core_daily_nll(heads, precipitation, targets, valid)
             stability = states.float().square().mean()
             objective = (
                 contract["objective"]["climate_block_weight"] * climate_loss
@@ -589,25 +631,33 @@ def self_test() -> None:
     dates = [dt.date(2001, 1, 1) + dt.timedelta(days=index) for index in range(days)]
     months = [np.asarray([date.month - 1 for date in dates], dtype=np.int64)]
     years = [np.asarray([date.year - 2001 for date in dates], dtype=np.int64)]
+    valid = [np.ones(days, dtype=bool)]
     phase = torch.linspace(0.0, 16.0 * math.pi, days)
     observed = torch.stack(
         (2.0 + torch.sin(phase).clamp_min(0.0), 20.0 + 8.0 * torch.sin(phase), 8.0 + 6.0 * torch.sin(phase)), dim=1
     ).unsqueeze(0)
     generated = observed.unsqueeze(0).repeat(4, 1, 1, 1)
     wet = (generated[..., 0] >= 1.0).float()
-    exact, exact_blocks = climate_components(generated, wet, observed, months, years, squared=False)
+    exact, exact_blocks = climate_components(generated, wet, observed, months, years, valid, squared=False)
     perturbed = generated.clone()
     annual_scale = torch.tensor([0.5, 0.8, 1.2, 1.5]).view(4, 1, 1, 1)
     perturbed[..., :1] *= annual_scale
-    changed, changed_blocks = climate_components(perturbed, wet, observed, months, years, squared=False)
+    changed, changed_blocks = climate_components(perturbed, wet, observed, months, years, valid, squared=False)
     if float(exact) > 1e-5:
         raise RuntimeError("identical climate self-test did not score zero")
     if float(changed_blocks["monthly_interannual_dispersion"]) <= float(exact_blocks["monthly_interannual_dispersion"]):
         raise RuntimeError("monthly dispersion self-test is insensitive")
     if float(changed_blocks["annual_interannual_dispersion"]) <= float(exact_blocks["annual_interannual_dispersion"]):
         raise RuntimeError("annual dispersion self-test is insensitive")
+    masked = [valid[0].copy()]
+    for index, date in enumerate(dates):
+        if date.month == 2 and date.day == 29:
+            masked[0][index] = False
+    masked_score, _ = climate_components(generated, wet, observed, months, years, masked, squared=False)
+    if float(masked_score) > 1e-5:
+        raise RuntimeError("accepted missingness mask changed identical climate score")
     shifted = torch.roll(generated, 17, dims=2)
-    shifted_score, _ = climate_components(shifted, torch.roll(wet, 17, dims=2), observed, months, years, squared=False)
+    shifted_score, _ = climate_components(shifted, torch.roll(wet, 17, dims=2), observed, months, years, valid, squared=False)
     if not math.isfinite(float(shifted_score)):
         raise RuntimeError("aggregate-only shifted self-test is non-finite")
     print("A10M5R8-CLIMATE-CORE-SELF-TEST-PASS")

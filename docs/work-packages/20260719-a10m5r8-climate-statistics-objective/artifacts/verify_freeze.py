@@ -24,6 +24,7 @@ def main() -> None:
     require(contract["objective"]["paired_daily_error_weight"] == 0.0, "paired-day loss is prohibited")
     require(contract["objective"]["daily_proper_nll_weight"] < contract["objective"]["climate_block_weight"], "climate objective must dominate")
     require(contract["stochastic"]["window_calendar_years"] == 8, "calendar window drift")
+    require(contract["stochastic"]["minimum_observed_days_per_year_month"] == 28, "missingness support drift")
     require(contract["decision"]["minimum_climate_score_improvement_fraction"] == 0.15, "decision threshold drift")
     required = {
         "build_control_records.py", "climate_core.py", "experiment.py", "job-climate-objective.sh",
