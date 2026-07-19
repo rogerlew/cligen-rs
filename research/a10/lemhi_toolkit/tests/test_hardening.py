@@ -210,17 +210,28 @@ class EvidenceProjectionTests(HardeningFixture):
         self.assertIn(b"/ceph/home/user/runner", projected)
         self.assertEqual(receipt["token_counts"]["<IDENTITY_1>"], 1)
 
-    def test_projection_rejects_reserved_tokens_invalid_utf8_and_unknown_leak(self) -> None:
-        for raw in (b"already <REMOTE_RUN_ROOT>", b"\xff"):
-            with self.subTest(raw=raw), self.assertRaisesRegex(ToolkitError, "SANITIZATION_FAILED"):
-                project_evidence(raw, media_type="text/plain", replacements=self.replacements(), forbidden=[], raw_parent_sha256=HEX_A)
+    def test_projection_escapes_raw_reserved_tokens_before_replacement(self) -> None:
+        projected, receipt = project_evidence(
+            b"launcher <NO_OTHER_FAILURES> /ceph/home/user/run/file",
+            media_type="text/plain",
+            replacements=self.replacements(),
+            forbidden=["/ceph/home/"],
+            raw_parent_sha256=HEX_A,
+        )
+        self.assertIn(b"[[RAW_RESERVED_TOKEN:NO_OTHER_FAILURES]]", projected)
+        self.assertIn(b"<REMOTE_RUN_ROOT>/file", projected)
+        self.assertEqual(receipt["escaped_reserved_token_counts"], {"NO_OTHER_FAILURES": 1})
+
+    def test_projection_rejects_invalid_utf8_and_unknown_leak(self) -> None:
+        with self.assertRaisesRegex(ToolkitError, "SANITIZATION_FAILED"):
+            project_evidence(b"\xff", media_type="text/plain", replacements=self.replacements(), forbidden=[], raw_parent_sha256=HEX_A)
         with self.assertRaisesRegex(ToolkitError, "unknown forbidden"):
             project_evidence(b"unregistered-secret", media_type="text/plain", replacements=[], forbidden=["unregistered-secret"], raw_parent_sha256=HEX_A)
 
     def test_json_projection_is_structural_and_rejects_duplicates(self) -> None:
         projected, receipt = project_evidence(b'{"path":"/ceph/home/user/run/file"}', media_type="application/json", replacements=self.replacements(), forbidden=["/ceph/home/"], raw_parent_sha256=HEX_A)
         self.assertEqual(json.loads(projected)["path"], "<REMOTE_RUN_ROOT>/file")
-        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-3")
+        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-4")
         with self.assertRaisesRegex(ToolkitError, "INVALID_JSON"):
             project_evidence(b'{"a":1,"a":2}', media_type="application/json", replacements=[], forbidden=[], raw_parent_sha256=HEX_A)
 

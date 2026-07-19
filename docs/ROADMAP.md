@@ -228,6 +228,14 @@ one/two/four-L40 correctness, failure handling, scaling, and cleanup. It does
 not replace the single-L40 canonical default, reopen the held scientific
 trajectory, or authorize A10M6.
 
+**Complete corrective successor (2026-07-19):**
+[A10M5O1R1 evidence-token projection hardening](work-packages/20260719-a10m5o1r1-evidence-token-projection-hardening/package.md)
+reached `A10M5O1R1-EVIDENCE-PROJECTION-READY` after PyTorch `torchrun` emitted a
+reserved-looking diagnostic placeholder during A10M5O2 collection. Projection
+revision 4 escapes and counts raw placeholders before typed sanitization. No
+job retry or new allocation was needed; A10M5O2 resumes from retained raw
+evidence.
+
 **Hold (2026-07-17):**
 [A10M5 bounded GPU screen](work-packages/20260717-a10m5-bounded-gpu-screen/package.md)
 reached `HOLD-A10-NO-VALID-NEURAL-FIT`. All twelve frozen seed-147031 rows

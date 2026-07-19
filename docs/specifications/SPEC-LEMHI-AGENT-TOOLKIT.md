@@ -809,9 +809,13 @@ projection. It binds raw hashes, exact gates, and cleanup-authorizing marker
 data. Projection failure holds publication without erasing cleanup authority,
 and projection cannot change gate results.
 
-Text projection rejects reserved token syntax and invalid UTF-8, uses typed
-replacements ordered by descending byte length, and replaces paths only when
-they are exact or descendants—not sibling prefixes. JSON is parsed with
+Text projection rejects invalid UTF-8 and deterministically escapes every raw
+reserved angle-bracket token to `[[RAW_RESERVED_TOKEN:NAME]]` before applying
+typed replacements. The private receipt counts those escapes. This prevents
+third-party placeholders from masquerading as toolkit-authored tokens while
+preserving their diagnostic meaning. Typed replacements are ordered by
+descending byte length and replace paths only when they are exact or
+descendants—not sibling prefixes. JSON is parsed with
 duplicate-key rejection and transformed structurally by field type. Scientific
 JSON admits finite integer and floating-point values but rejects NaN, Infinity,
 and overflow to a non-finite value; authority, ledger, plan, and receipt
@@ -819,8 +823,9 @@ canonicalization retains its stricter no-float rule. Binary evidence is allowed
 unchanged only by exact schema/hash or excluded. The private transformation
 receipt binds sanitizer version, token counts, sanitized hashes, and raw-parent
 hashes. The forbidden-value scan runs after projection and rejects unknown
-sensitive material. Evidence producers MUST NOT emit reserved angle-bracket
-tokens before projection; diagnostic redactions use a non-reserved notation.
+sensitive material. Evidence producers SHOULD use non-reserved notation for
+diagnostic redactions; third-party reserved-looking placeholders are escaped,
+never interpreted as authorized redactions.
 
 ### 17.5 Transfer telemetry and immutable manifests
 

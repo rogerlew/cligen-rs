@@ -33,7 +33,7 @@ from .core import (
 RECORD_SCHEMA_V2 = "lemhi-toolkit-record-2"
 PRODUCER_V2 = "lemhi-toolkit-hardening-2"
 PROVIDER_API_V2 = 2
-SANITIZER_VERSION = "lemhi-evidence-projection-3"
+SANITIZER_VERSION = "lemhi-evidence-projection-4"
 RESERVED_TOKEN = re.compile(r"<[A-Z][A-Z0-9_]*(?:_[0-9]+)?>")
 ENVIRONMENT_NAME = re.compile(r"^[A-Z][A-Z0-9_]{0,63}$")
 ALLOWED_PROVIDER_CLASSES = {
@@ -181,11 +181,23 @@ def create_raw_collected(
     return semantic
 
 
-def _replace_text(text: str, replacements: list[dict[str, str]]) -> tuple[str, dict[str, int]]:
-    require(RESERVED_TOKEN.search(text) is None, "SANITIZATION_FAILED", "reserved token in raw evidence")
+def _replace_text(
+    text: str, replacements: list[dict[str, str]]
+) -> tuple[str, dict[str, int], dict[str, int]]:
+    escaped: dict[str, int] = {}
+
+    def escape_raw_token(match: re.Match[str]) -> str:
+        name = match.group(0)[1:-1]
+        escaped[name] = escaped.get(name, 0) + 1
+        return f"[[RAW_RESERVED_TOKEN:{name}]]"
+
+    # Untrusted tools sometimes print angle-bracket placeholders which collide
+    # with toolkit-owned projection tokens. Escape those first so raw text can
+    # never masquerade as an authorized replacement; only the rules below may
+    # introduce reserved-token syntax into a projection.
+    output = RESERVED_TOKEN.sub(escape_raw_token, text)
     ordered = sorted(replacements, key=lambda item: (-len(item["value"].encode("utf-8")), item["token"]))
     counts: dict[str, int] = {}
-    output = text
     for item in ordered:
         value = item["value"]
         token = item["token"]
@@ -197,7 +209,7 @@ def _replace_text(text: str, replacements: list[dict[str, str]]) -> tuple[str, d
         else:
             output, count = output.replace(value, token), output.count(value)
         counts[token] = count
-    return output, counts
+    return output, counts, escaped
 
 
 def validate_evidence_replacements(replacements: Any) -> list[dict[str, str]]:
@@ -264,12 +276,15 @@ def project_evidence(
         value = _loads_evidence_json(text)
 
         counts: dict[str, int] = {item["token"]: 0 for item in normalized}
+        escaped: dict[str, int] = {}
 
         def visit(node: Any) -> Any:
             if isinstance(node, str):
-                projected, local_counts = _replace_text(node, normalized)
+                projected, local_counts, local_escaped = _replace_text(node, normalized)
                 for token, count in local_counts.items():
                     counts[token] += count
+                for name, count in local_escaped.items():
+                    escaped[name] = escaped.get(name, 0) + count
                 return projected
             if isinstance(node, list):
                 return [visit(item) for item in node]
@@ -291,7 +306,7 @@ def project_evidence(
         except (TypeError, ValueError) as error:
             raise ToolkitError("INVALID_JSON", str(error)) from error
     elif media_type == "text/plain":
-        projected, counts = _replace_text(text, normalized)
+        projected, counts, escaped = _replace_text(text, normalized)
         projected_bytes = projected.encode("utf-8")
     else:
         raise ToolkitError("SANITIZATION_FAILED", "binary projection requires an exact unchanged allowlist")
@@ -301,6 +316,7 @@ def project_evidence(
         "sanitizer_version": SANITIZER_VERSION,
         "raw_parent_sha256": raw_parent_sha256,
         "sanitized_sha256": sha256_bytes(projected_bytes),
+        "escaped_reserved_token_counts": dict(sorted(escaped.items())),
         "token_counts": dict(sorted(counts.items())),
     }
     return projected_bytes, receipt

@@ -137,9 +137,11 @@ accounting, and then call `observe` once.
   job-local paths that can appear in tracebacks. Collection quarantines raw
   evidence and fails closed on an unregistered forbidden value.
 - Projection replacement tokens use reserved angle-bracket syntax such as
-  `<REMOTE_RUN_ROOT>`. Square-bracket text such as `[REMOTE_RUN_ROOT]` is only
-  for producer-side pre-redaction and is not a typed replacement token.
-  Revision-2 planning and amendment now reject an invalid token before staging.
+  `<REMOTE_RUN_ROOT>`. Producer-side placeholders should use square brackets.
+  Projection revision 4 escapes third-party raw angle tokens to
+  `[[RAW_RESERVED_TOKEN:NAME]]` and counts them before typed replacements, so
+  raw logs cannot masquerade as toolkit-authored redactions. Revision-2
+  planning and amendment reject an invalid replacement token before staging.
 - Run amendment is available while `VERIFIED` or `MATRIX_ACTIVE`, not after
   `MATRIX_SETTLED`. Inspect failure traces and amend projection rules before
   observing the final outstanding role when a correction is necessary.
@@ -172,9 +174,10 @@ closure, a frozen recovery contingency, typed raw-evidence projection, integer
 transfer telemetry, and append-only content-addressed manifests. Useful
 operator-facing commands are:
 
-Evidence projection revision 3 accepts finite scientific JSON numbers while
-continuing to reject duplicate keys, NaN/Infinity, forbidden values, invalid
-UTF-8, and raw reserved tokens. A failed collection quarantine is retained
+Evidence projection revision 4 accepts finite scientific JSON numbers while
+continuing to reject duplicate keys, NaN/Infinity, forbidden values, and
+invalid UTF-8. Raw reserved-looking tokens are escaped and counted before
+authorized replacements. A failed collection quarantine is retained
 under a numbered private identity; retry always downloads and extracts into a
 fresh quarantine.
 

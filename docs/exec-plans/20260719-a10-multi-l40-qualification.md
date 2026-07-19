@@ -31,10 +31,13 @@ promotion.
   invariants; 55 toolkit tests and all repository gates pass.
 - [x] (2026-07-19 08:34Z) Published the first live-source freeze as `5f2907d`;
   authority initialization then failed closed on an invalid predecessor claim.
-- [ ] Publish the corrected exact source commit used by the live authority.
-- [ ] Freeze canonical assets, authority, plan, jobs, and admission evidence.
-- [ ] Execute and settle the one-, two-, and four-L40 qualification roles plus
-  the bounded two-rank failure role.
+- [x] (2026-07-19 08:27Z) Published corrected live source `0caae8e`, initialized
+  the 90-minute authority, and froze exact canonical assets and plan.
+- [x] (2026-07-19 08:39Z) Executed and settled jobs `1014018`–`1014021`; all
+  success gates and the bounded expected-failure gates passed.
+- [x] (2026-07-19 08:47Z) Diagnosed fail-closed collection on PyTorch's raw
+  `<NO_OTHER_FAILURES>` placeholder and completed corrective local successor
+  A10M5O1R1 with 56 toolkit tests and all repository gates passing.
 - [ ] Collect, sanitize, verify, clean, and reconcile toolkit and Slurm state.
 - [ ] Close both packages, update documentation/roadmap/catalog, and run all
   repository gates.
@@ -59,6 +62,10 @@ promotion.
   authority input incorrectly copied the package dependency terminal into
   `predecessor_evidence`, and initialization returned `AUTHORITY_INVALID`
   before creating a ledger or consuming capacity.
+- Observation: PyTorch `torchrun` prints `<NO_OTHER_FAILURES>` in its expected
+  failure traceback. This is diagnostic syntax, but projection revision 3
+  treated every raw angle token as an attempted toolkit-token injection and
+  held collection after the matrix settled.
 
 ## Decision Log
 
@@ -84,6 +91,12 @@ promotion.
   package provenance and an append-only resource ledger are distinct chains;
   only the latter is constrained by ledger genesis. Date/Author: 2026-07-19,
   Codex.
+- Decision: repair projection locally instead of mutating raw evidence,
+  widening the frozen plan, or resubmitting a job. Raw reserved-looking tokens
+  are escaped and counted before authorized replacements, retaining their
+  meaning while preventing token spoofing. Rationale: all scheduler/gate
+  evidence is already terminal and authentic; the defect is solely in the
+  publication layer. Date/Author: 2026-07-19, Codex.
 
 ## Outcomes & Retrospective
 
@@ -93,6 +106,9 @@ default provider remains one-device-only and a new additive provider owns the
 bounded one/two/four-device contract. Live A10M5O2 execution remains in
 progress; this section will add its operational terminal, scaling
 recommendation, exact GPU-minute settlement, cleanup result, and exclusions.
+A10M5O1R1 also reached `A10M5O1R1-EVIDENCE-PROJECTION-READY` without another
+allocation. It preserves raw third-party placeholders as explicit escaped text
+and lets only registered rules introduce toolkit projection tokens.
 
 ## Context and Orientation
 
@@ -232,3 +248,6 @@ the exact live role/resource freeze after all local and repository gates passed.
 
 Revision note (2026-07-19): recorded the fail-closed genesis discovery and
 corrected the authority-input generator before any live mutation.
+
+Revision note (2026-07-19): recorded successful live matrix settlement and the
+bounded projection-repair successor triggered by a PyTorch diagnostic token.
