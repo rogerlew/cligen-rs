@@ -1,0 +1,13 @@
+{
+  "cleanup_receipt_file_sha256": "95bba0d124b46172202a3a3121d9db7ec07b68938fc1e07ca68b8b202ee6847d",
+  "cleanup_receipt_record_sha256": "8932c49be040d7be79cdd20ff275efb9107d9fd6f0efabbcce0cf41054a07eda",
+  "job_local_cleanup": "verified_absent",
+  "package_id": "20260719-a10m5r10r1r3-corpus-extraction-root-remedy",
+  "recovery_invoked": false,
+  "recovery_reserve_released": true,
+  "remote_absent": true,
+  "run_id": "a10m5r10r1r3-corpus-extraction-root-remedy-r0",
+  "schema_version": 1,
+  "terminal_receipt_file_sha256": "91ebc72dfe13f225943e6ec97013f0abff8c3c75d148782ce881cf76bbabcbfb",
+  "terminal_receipt_record_sha256": "9daa61c78b2f0bbbfdb49bc0c359774e503dc4a3b35a9137cbed8135186467a0"
+}

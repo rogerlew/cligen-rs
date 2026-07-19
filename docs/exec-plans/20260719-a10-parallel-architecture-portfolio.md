@@ -76,8 +76,14 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Scaffolded and independently reviewed A10M5R10R1R3 with
   only the two parent-root extraction corrections, a self-authenticated corpus
   layout pin, and coordinated pin/archive/manifest drift rejection.
-- [ ] Publish and execute the fresh A10M5R10R1R3 extraction-root remedy, then
-  dispatch, authenticate, observe, and collect its ten candidate roles
+- [x] (2026-07-19) Published A10M5R10R1R3 at `7cc30f8…`; job `1014056`
+  proved corpus extraction and calendar preflight, then exposed a child-only
+  CuBLAS environment export at the first batch's output head before loss.
+- [x] (2026-07-19) Closed A10M5R10R1R3 at
+  `HOLD-A10M5R10R1R3-CUBLAS-ENVIRONMENT-SCOPE` after five GPU-minutes with
+  authenticated matrix stop, sparse collection, cleanup, and reserve release.
+- [ ] Publish and execute the fresh A10M5R10R1R4 science-environment remedy,
+  then dispatch, authenticate, observe, and collect its ten candidate roles
   under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
   retention, and publish the terminal.
@@ -121,6 +127,11 @@ inefficient multi-rank synchronization.
   `$job_local/corpus` created `$job_local/corpus/corpus`. R0 had correctly
   extracted into `$job_local`; the two later pre-runtime failures masked this
   separate science-entry defect.
+- After the corpus correction passed, deterministic training exposed a second
+  R1 refactor scope error: `CUBLAS_WORKSPACE_CONFIG` was exported in the child
+  bootstrap but not the `--export=NONE` parent launcher, so it could not reach
+  the output-head linear call where deterministic PyTorch rejected its
+  absence.
 - A PASS-only admission surface made the old evidence allowlist impossible to
   collect after an upstream pre-admission failure. The toolkit now separates
   maximum allowlisting from exact presence while retaining mandatory evidence
@@ -164,6 +175,9 @@ inefficient multi-rank synchronization.
 - Preserve A10M5R10R1R2 as a third operational HOLD. Restore the exact R0
   parent-directory corpus extraction in both control and candidate wrappers;
   do not repack the archive or use a new strip-components interpretation.
+- Preserve A10M5R10R1R3 as a fourth operational HOLD. Restore the frozen
+  science environment explicitly in both parent launchers; do not weaken
+  PyTorch deterministic-algorithm enforcement.
 
 ## Outcomes & Retrospective
 
@@ -183,8 +197,11 @@ bootstrap, a host-compatible minimal failure gate, and the hardened toolkit.
 R1R2 proved that bootstrap but then spent two GPU-minutes exposing a latent
 corpus-root nesting defect before any control was materialized. Its failed gate,
 whole-matrix stop, sparse collection, cleanup, reserve release, and closure all
-passed. The active successor is A10M5R10R1R3, changing only the two archive
-extraction destinations back to the already proven R0 parent root. This section
+passed. R1R3 corrected that root and reached the first P1 control training
+batch output head, where it spent five GPU-minutes exposing a child-only CuBLAS
+environment export. Its terminal closure also passed. The active successor is
+A10M5R10R1R4, restoring the frozen science environment in both parent launchers
+without weakening deterministic execution. This section
 must be updated after that execution with all ten family/capacity
 results, retained identities, resource use, operational reconciliation, and
 the realized wall-time effect of bounded concurrency.
@@ -429,3 +446,8 @@ two R0 extraction destinations.
 The review required the corpus-layout pin itself to be byte/SHA authenticated
 before authority creation and proved coordinated pin/archive/manifest drift is
 rejected.
+
+2026-07-19: closed A10M5R10R1R3 after its extraction fix passed and the first
+control training operation exposed child-only CuBLAS environment scope. The
+bounded R1R4 successor restores deterministic science environment closure in
+both parent wrappers.

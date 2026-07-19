@@ -1,6 +1,6 @@
 # A10M5R10R1R3 — Corpus Extraction Root Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-CUBLAS-ENVIRONMENT-SCOPE`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -115,6 +115,25 @@ Scientific terminals remain exactly those frozen by A10M5R10:
 evidence, resource, or cleanup hold. An operational failure records an exact
 `HOLD-A10M5R10R1R3-*` condition without interpreting candidate science.
 
+## Disposition
+
+`HOLD-A10M5R10R1R3-CUBLAS-ENVIRONMENT-SCOPE`.
+
+The corpus correction passed: job `1014056` authenticated portable setup,
+opened the corrected corpus root, completed calendar preflight, and entered the
+first P1 control training subprocess. Deterministic PyTorch then failed because
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` had been exported only inside the child
+bootstrap process. The parent science launcher was created by Slurm with
+`--export=NONE`, so the child export could not reach training.
+
+The toolkit observed the authenticated failure, stopped all ten unsubmitted
+candidates, collected the exact sparse evidence surface, proved cleanup,
+released recovery, and closed. The control job used five actual GPU-minutes.
+No control row completed, no candidate was admitted, and no selector ran; this
+package supports no architecture conclusion. A10M5R10R1R4 will restore the
+frozen science environment in both parent launchers without changing science,
+corpus, calendar, roles, or resources.
+
 ## Artifacts
 
 - `artifacts/job-local-capacity-contract.json` — unchanged resource, portable
@@ -134,6 +153,11 @@ evidence, resource, or cleanup hold. An operational failure records an exact
   execution-policy, and two-file-delta verifier;
 - `artifacts/scaffold-review.md` — independent review findings, remediation,
   and final `ACCEPT` disposition;
+- `artifacts/operational-summary.json`, `artifacts/execution-disposition.md`,
+  `artifacts/resource-ledger.md`, and `artifacts/cleanup-record.json` — exact
+  executed HOLD, accounting, and closure evidence;
+- `artifacts/gate-results.md` and `artifacts/review.md` — terminal gates and
+  independent execution review;
 - `artifacts/test_admission_checker.py` and
   `artifacts/test_operational_identity.py` — retained and corrective regression
   tests; and

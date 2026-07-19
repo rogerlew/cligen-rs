@@ -499,7 +499,17 @@ released, and the exact remote root is absent. Active successor
 restores only the original A10M5R10 parent-directory extraction destination in
 both wrappers while preserving the archive and all science. Its prospective
 archive-layout evidence is itself byte/SHA pinned, rejects coordinated drift,
-and passed independent review before authority creation.
+and passed independent review before authority creation. Job `1014056` proved
+that correction by opening the canonical manifests and completing calendar
+preflight, then deterministic PyTorch failed at the first batch's output-head
+linear operation before loss: `CUBLAS_WORKSPACE_CONFIG=:4096:8` was exported
+only in the child bootstrap and
+could not propagate to the Slurm `--export=NONE` parent science launcher. The
+run closed at `HOLD-A10M5R10R1R3-CUBLAS-ENVIRONMENT-SCOPE` after five
+GPU-minutes; no control row or candidate exists, all ten candidates were
+stopped, and cleanup/closure passed. The next bounded successor restores the
+frozen science environment explicitly in both parent wrappers without
+weakening deterministic execution or changing the portfolio.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
