@@ -1,0 +1,52 @@
+{
+  "authority_revision_sha256": "f08dd107a207a197c3c2532fe596040a1ef8b0682377b88487790f7b102a41d6",
+  "execution": {
+    "actual_gpu_minutes": 2,
+    "candidate_admissions_issued": 0,
+    "candidate_jobs_submitted": 0,
+    "candidate_science_started": false,
+    "control_admission_gates_passed": 16,
+    "control_job_id": "1014054",
+    "control_materialization_completed": false,
+    "control_payload_started": true,
+    "control_requested_gpu_minutes": 30,
+    "control_setup_ready": true,
+    "job_local_cleanup": "verified_absent",
+    "matrix_stopped_roles": 10,
+    "recovery_actual_gpu_minutes": 0,
+    "recovery_requested_gpu_minutes": 5,
+    "recovery_reservation_status": "released",
+    "remote_absent": true,
+    "selector_run": false
+  },
+  "package_id": "20260719-a10m5r10r1r2-portable-bootstrap-control-plane-remedy",
+  "plan_id": "a0fa878ef970f0717a7a21e4e6743e4507f38f5a020c8935b6397071e4d35c2d",
+  "preserved_evidence": {
+    "absent_allowlisted_files": 140,
+    "archive_bytes": 30720,
+    "archive_sha256": "de0feb7978e6b356923c053709b55db431b954e8ecc4509dc982b292b2f9a558",
+    "collection_record_file_sha256": "4bade2707c8bfd5ddc8b30cf968a2473c828ecae98e30ca1b4713010a7ab8641",
+    "present_allowlisted_files": 13
+  },
+  "root_cause": {
+    "archive_sha256": "8770e127f8413eedd47d50670c359e450988444a8c4d8d43ca5645619a1b0a17",
+    "archive_top_level": "corpus/",
+    "classification": "corpus-root-nesting",
+    "effective_corpus_root": "[JOB_LOCAL]/corpus/corpus",
+    "expected_corpus_root": "[JOB_LOCAL]/corpus",
+    "wrapper_extraction_target": "[JOB_LOCAL]/corpus"
+  },
+  "run_id": "a10m5r10r1r2-portable-bootstrap-control-plane-remedy-r0",
+  "schema_version": 1,
+  "science": {
+    "architecture_interpretation_authorized": false,
+    "candidate_rows_published": 0,
+    "control_rows_published": 0,
+    "portfolio_decision_published": false,
+    "portfolio_summary_published": false
+  },
+  "source_commit": "c63ab18c3bc883e302104a0c77aa1d33085ae2c0",
+  "successor_package_id": "20260719-a10m5r10r1r3-corpus-extraction-root-remedy",
+  "terminal": "HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING",
+  "toolkit_terminal": "LEMHI-TOOLKIT-RUN-CLOSED"
+}

@@ -67,9 +67,14 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Scaffolded and independently reviewed A10M5R10R1R2 with
   POSIX portable-runtime extraction, a 65,536-byte pre-runtime log cap,
   Python-3.6-compatible failed-gate publication, and unchanged science.
-- [ ] Publish the fresh A10M5R10R1R2 portable-bootstrap remedy, replay
-  preflight, initialize its authority, and materialize all six controls.
-- [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1R2 roles
+- [x] (2026-07-19) Published A10M5R10R1R2 at `c63ab18…`, replayed preflight,
+  initialized authority `f08dd107…`, and proved the portable setup path in job
+  `1014054` before control materialization exposed a corpus-root nesting defect.
+- [x] (2026-07-19) Observed the authenticated failed control, stopped all ten
+  never-submitted roles, collected sparse evidence, released recovery, and
+  closed at `HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING` after two GPU-minutes.
+- [ ] Publish and execute the fresh A10M5R10R1R3 extraction-root remedy, then
+  dispatch, authenticate, observe, and collect its ten candidate roles
   under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
   retention, and publish the terminal.
@@ -108,6 +113,11 @@ inefficient multi-rank synchronization.
 - Lemhi's compute image also lacks `/usr/bin/python3.11` entirely. An absolute
   interpreter path proven on the login host is not a compute capability proof;
   portable-runtime extraction must precede Python 3.11 diagnostics.
+- The portable bootstrap passed on node03, exposing a latent R1 wrapper change:
+  the archive already has a `corpus/` root, so extracting it into
+  `$job_local/corpus` created `$job_local/corpus/corpus`. R0 had correctly
+  extracted into `$job_local`; the two later pre-runtime failures masked this
+  separate science-entry defect.
 - A PASS-only admission surface made the old evidence allowlist impossible to
   collect after an upstream pre-admission failure. The toolkit now separates
   maximum allowlisting from exact presence while retaining mandatory evidence
@@ -148,6 +158,9 @@ inefficient multi-rank synchronization.
   host Python paths. Use POSIX extraction of the already verified portable
   runtime and ensure a Python-3.6-compatible minimal false gate exists for
   failures before that runtime is usable.
+- Preserve A10M5R10R1R2 as a third operational HOLD. Restore the exact R0
+  parent-directory corpus extraction in both control and candidate wrappers;
+  do not repack the archive or use a new strip-components interpretation.
 
 ## Outcomes & Retrospective
 
@@ -164,7 +177,12 @@ job-local cleanup passed, but the missing interpreter also prevented gate
 publication and therefore normal toolkit closure. The active scientific
 successor is A10M5R10R1R2 with unchanged science, POSIX portable-runtime
 bootstrap, a host-compatible minimal failure gate, and the hardened toolkit.
-This section must be updated after that execution with all ten family/capacity
+R1R2 proved that bootstrap but then spent two GPU-minutes exposing a latent
+corpus-root nesting defect before any control was materialized. Its failed gate,
+whole-matrix stop, sparse collection, cleanup, reserve release, and closure all
+passed. The active successor is A10M5R10R1R3, changing only the two archive
+extraction destinations back to the already proven R0 parent root. This section
+must be updated after that execution with all ten family/capacity
 results, retained identities, resource use, operational reconciliation, and
 the realized wall-time effect of bounded concurrency.
 
@@ -398,3 +416,8 @@ control plane with an observable pre-runtime failure path.
 accepted it after independent review. The review required admission to close
 after an observed failed role and capped the POSIX pre-runtime setup log at
 65,536 bytes before execution authority could open.
+
+2026-07-19: closed A10M5R10R1R2 after it proved portable bootstrap but exposed
+the inherited nested corpus extraction root. The hardened matrix stop and
+sparse evidence closure passed; the bounded R1R3 successor restores only the
+two R0 extraction destinations.

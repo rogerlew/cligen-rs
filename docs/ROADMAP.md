@@ -486,7 +486,17 @@ It extracts the already verified portable runtime with POSIX tools and uses it
 for Python 3.11 diagnostics, while retaining a host-compatible minimal failure
 gate so toolkit observation and matrix stop remain available. Its unchanged
 science, five two-role waves, exact predecessor bindings, bounded pre-runtime
-log, and fail-closed admission policy passed independent scaffold review.
+log, and fail-closed admission policy passed independent scaffold review. Job
+`1014054` then proved that portable setup end to end on node03, but control
+materialization exposed a separate inherited wrapper defect: `corpus.tar`
+already has a `corpus/` top level, and extraction into `$job_local/corpus`
+created `$job_local/corpus/corpus`. The run closed cleanly at
+`HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING` after two GPU-minutes; all ten
+candidates were atomically classified `NOT_EXECUTED_UPSTREAM_FAILURE`, no
+architecture result was interpreted, sparse collection passed, recovery was
+released, and the exact remote root is absent. The next bounded successor
+restores only the original A10M5R10 parent-directory extraction destination in
+both wrappers while preserving the archive and all science.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

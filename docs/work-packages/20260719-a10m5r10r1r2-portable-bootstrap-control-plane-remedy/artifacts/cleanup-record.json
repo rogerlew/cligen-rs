@@ -1,0 +1,13 @@
+{
+  "cleanup_receipt_file_sha256": "9f78e122bef8baace43b27c5a5f149d15e6c885b42acee5c8fb2e2fdf3465c5c",
+  "cleanup_receipt_record_sha256": "44434a408544e44aebcd2f6adafd0851dd574ac1b376965accb568ded7a861f0",
+  "job_local_cleanup": "verified_absent",
+  "package_id": "20260719-a10m5r10r1r2-portable-bootstrap-control-plane-remedy",
+  "recovery_invoked": false,
+  "recovery_reserve_released": true,
+  "remote_absent": true,
+  "run_id": "a10m5r10r1r2-portable-bootstrap-control-plane-remedy-r0",
+  "schema_version": 1,
+  "terminal_receipt_file_sha256": "79cc53db7add0bbeb074dd0c3431c89d2e454406c8058c5e85b10df64544b746",
+  "terminal_receipt_record_sha256": "73feea031168bb392b5e061b0862f00a6ad57f5c0615dd33a55a7147d6a5d792"
+}

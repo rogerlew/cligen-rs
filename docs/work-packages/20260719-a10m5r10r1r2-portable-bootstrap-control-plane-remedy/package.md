@@ -1,6 +1,6 @@
 # A10M5R10R1R2 — Portable Bootstrap Control-Plane Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-CORPUS-ROOT-NESTING`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -109,6 +109,28 @@ Scientific terminals remain exactly those frozen by A10M5R10:
 evidence, resource, or cleanup hold. An operational failure records an exact
 `HOLD-A10M5R10R1R2-*` condition without interpreting candidate science.
 
+## Disposition
+
+`HOLD-A10M5R10R1R2-CORPUS-ROOT-NESTING`.
+
+The package achieved its corrective objective: job `1014054` extracted and
+validated portable Python 3.11.15, completed the hash-locked environment,
+deleted setup payloads, and published an authenticated ready setup on node03.
+Control materialization then failed before producing a control because the
+unchanged archive has top-level member `corpus/`, while the successor wrapper
+extracted it into `$job_local/corpus` and passed that same directory to the
+control program. The effective data root was therefore
+`$job_local/corpus/corpus`, one level below the frozen input path.
+
+The toolkit observed the authenticated failed gate, atomically stopped all ten
+never-submitted candidates, collected the exact sparse evidence surface,
+proved job-local and remote absence, released the unused recovery reserve, and
+closed. The job used two actual GPU-minutes. No candidate was admitted or run,
+so this package supports no architecture conclusion. The bounded successor is
+A10M5R10R1R3, which restores the already successful A10M5R10 extraction root
+for both control and candidate wrappers without changing the archive or any
+science.
+
 ## Artifacts
 
 - `artifacts/job-local-capacity-contract.json` — portable-bootstrap and wave
@@ -122,6 +144,11 @@ evidence, resource, or cleanup hold. An operational failure records an exact
   bootstrap, failure finalization, and stop-matrix procedure;
 - `artifacts/scaffold-review.md` — independent pre-authority review and
   correction record;
+- `artifacts/operational-summary.json`, `artifacts/execution-disposition.md`,
+  `artifacts/resource-ledger.md`, and `artifacts/cleanup-record.json` — exact
+  executed HOLD, accounting, and closure evidence;
+- `artifacts/gate-results.md` and `artifacts/review.md` — terminal gates and
+  independent execution review;
 - `artifacts/verify_freeze.py` — science, predecessor, interpreter-order, and
   execution-policy verifier; and
 - `artifacts/jobs/` — immutable asset preparation, control records, staged
