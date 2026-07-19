@@ -86,4 +86,5 @@ Start from [templates/package.md](templates/package.md).
 | [20260718-a10m5r4-realized-temporal-adjudication](20260718-a10m5r4-realized-temporal-adjudication/package.md) | EXECUTED-HOLD-A10-REVISED-STOCHASTIC-PRISM-COMPARATOR |
 | [20260718-a10m5r4r1-stochastic-prism-comparator](20260718-a10m5r4r1-stochastic-prism-comparator/package.md) | EXECUTED-COMPLETE |
 | [20260718-a10m5r4r2-realized-temporal-adjudication](20260718-a10m5r4r2-realized-temporal-adjudication/package.md) | EXECUTED-HOLD-MODEL-RECONSTRUCTION-IDENTITY |
-| [20260718-a10m5r4r2r1-reconstruction-identity-remedy](20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md) | FROZEN-ALLOCATABLE |
+| [20260718-a10m5r4r2r1-reconstruction-identity-remedy](20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md) | EXECUTED-HOLD-EVALUATION-YEAR-AXIS |
+| [20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy](20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy/package.md) | FROZEN-LOCAL-EXECUTION |

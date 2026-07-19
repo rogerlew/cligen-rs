@@ -278,8 +278,12 @@ freeze the successor sequence:
    under corrective A10M5R4R2R1 with checkpoint-payload and semantic-record
    identity gates; the corrective package is scaffolded as
    [A10M5R4R2R1](work-packages/20260718-a10m5r4r2r1-reconstruction-identity-remedy/package.md)
-   and is frozen for execution under a package-scoped authority capped at the
-   campaign's 182 remaining GPU-minutes;
+   and reconstructed all six models exactly under a package-scoped authority,
+   but held on an out-of-range local bootstrap year label after clean toolkit
+   closure. Zero-allocation
+   [A10M5R4R2R1R1](work-packages/20260718-a10m5r4r2r1r1-evaluation-year-axis-remedy/package.md)
+   is frozen to score the exact retained matrix with leap-preserving in-range
+   labels;
 4. execute A10M5R5 to acquire and freeze a spatially blocked N3/ecoregion and
    within-ecoregion-elevation corpus;
 5. execute A10M5R6 to compare both retained capacities on geographically held

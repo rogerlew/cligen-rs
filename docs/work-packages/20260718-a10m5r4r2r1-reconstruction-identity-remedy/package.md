@@ -1,6 +1,6 @@
 # A10M5R4R2R1 — Reconstruction Identity Remedy
 
-Status: `FROZEN-ALLOCATABLE`
+Status: `EXECUTED-HOLD-EVALUATION-YEAR-AXIS`
 Date: 2026-07-18
 Evidence mode: Prospective corrective freeze; no R2R1 generated-output access
 Starting branch and push target: `main`, push `main`
@@ -83,3 +83,23 @@ must not begin until the published R2R1 commit is covered by valid authority.
 - `artifacts/jobs/` — corrected reconstruction/generation, comparator/scoring,
   and asset wrappers;
 - `artifacts/verify_freeze.py` — fail-closed prospective verifier.
+
+## Disposition
+
+All six registered roles passed every reconstruction, support, firewall, and
+cleanup gate. The toolkit collected 288 100-year neural streams, verified
+job-local absence, removed the exact durable root, and closed normally. The
+six jobs used 24 rounded GPU-minutes; no retry or recovery was invoked.
+
+The local faithful and stochastic-PRISM arms completed for all six sites and
+eight burns. Before any score was published, bootstrap replicate construction
+failed because the frozen implementation mapped repeated observation blocks
+to years beyond Python's supported year 9999. The scientific contract remains
+answerable and no generated evidence is missing, but this package cannot
+retroactively change its published evaluation implementation after accessing
+the comparator matrix. Its terminal is `HOLD-A10-EVALUATION-YEAR-AXIS`.
+
+The zero-allocation successor A10M5R4R2R1R1 binds the exact neural collection
+and 354-file comparator tree, replaces only the invalid synthetic labels with
+leap-preserving years 2400--2633, and resumes the unchanged bootstrap without
+rerunning a model or comparator.
