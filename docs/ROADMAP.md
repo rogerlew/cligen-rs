@@ -436,6 +436,20 @@ adapter, compared directly with frozen P1. Solar radiation and broader
 latitude/day-of-year/precipitation coupling remain closed pending a passing
 core adapter.
 
+**Parallel architecture portfolio authorized (2026-07-19):** the operator
+replaced the serial one-candidate cadence with
+[A10M5R10](work-packages/20260719-a10m5r10-parallel-architecture-portfolio/package.md),
+a prospectively frozen comparison of five stochastic architecture families at
+matched P1/P2 capacities and three seeds. Its
+[research specification](specifications/SPEC-A10-ARCHITECTURE-PORTFOLIO.md)
+and [living ExecPlan](exec-plans/20260719-a10-parallel-architecture-portfolio.md)
+put monthly and annual dispersion directly in the common objective, include a
+physics-conditioned solar/latitude/day-of-year/precipitation arm without
+observed-weather input, dispatch independent one-L40 jobs concurrently, and
+retain up to three eligible Pareto configurations. Confirmation remains
+sealed; this development package optimizes scientific wall time rather than
+GPU-minute economy.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
