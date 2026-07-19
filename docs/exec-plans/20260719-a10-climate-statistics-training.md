@@ -27,7 +27,7 @@ and temperature.
   architecture hold, clean `main`, canonical Lemhi assets, and live SSH path.
 - [x] (2026-07-19) Froze the bounded same-architecture control/treatment design
   and the core-variable boundary requested by the operator.
-- [ ] Publish the package, research specification, executable contract, source,
+- [x] (2026-07-19) Publish the package, research specification, executable contract, source,
   and local verification on `main`.
 - [x] (2026-07-19) Published scaffold source at `56a7d42`; detected and
   preserved a pre-spend private authority genesis with a nonexistent manually
@@ -38,7 +38,10 @@ and temperature.
   passed the synthetic dispersion test, then exposed accepted leap-day
   missingness as incompatible with the all-day-complete window predicate;
   collected failure evidence and closed exact cleanup after 246 GPU-seconds.
-- [ ] Execute the unchanged masked-calendar experiment under corrective R2.
+- [x] (2026-07-19) R2 job `1014024` reached masked calendar attachment and
+  exposed an inclusive target-end label slice; collected and closed exact
+  failure evidence after 223 GPU-seconds.
+- [ ] Execute the exclusive-end masked-calendar experiment under R3.
 - [ ] Authenticate and score the full fit-validation comparison, reconcile
   resources and cleanup, and close package/campaign records.
 
@@ -63,6 +66,8 @@ and temperature.
   Gregorian axis. The eight leap-day rows are explicitly unobserved, so exact
   multi-year climate windows must carry the accepted mask rather than require
   every calendar row or synthesize data.
+- Calendar target-end is exclusive. Including its first post-window day yields
+  2,923 labels against the correct 2,922-day eight-year target and must fail.
 
 ## Decision Log
 
@@ -185,3 +190,6 @@ unchanged A10M5R8R1 corrective authority path.
 
 Revision note (2026-07-19): recorded R1's authenticated calendar-missingness
 failure and the exact-mask R2 correction without changing the estimand.
+
+Revision note (2026-07-19): recorded R2's end-boundary failure and the tested
+exclusive-end R3 correction.

@@ -73,10 +73,10 @@ def _document_windows(document: dict[str, Any], years: int) -> list[CalendarWind
         days = end - positions[target_start]
         if days <= 0 or end - input_start != days + 1:
             continue
-        targets = dates[input_start + 1 : end + 1]
+        targets = dates[input_start + 1 : end]
         month_index = np.asarray([date.month - 1 for date in targets], dtype=np.int64)
         year_index = np.asarray([date.year - first_year for date in targets], dtype=np.int64)
-        valid_index = complete[input_start + 1 : end + 1].copy()
+        valid_index = complete[input_start + 1 : end].copy()
         if len(month_index) != days or set(year_index.tolist()) != set(range(years)):
             raise RuntimeError("calendar window construction mismatch")
         support = [
@@ -660,6 +660,19 @@ def self_test() -> None:
     shifted_score, _ = climate_components(shifted, torch.roll(wet, 17, dims=2), observed, months, years, valid, squared=False)
     if not math.isfinite(float(shifted_score)):
         raise RuntimeError("aggregate-only shifted self-test is non-finite")
+    document_dates = [dt.date(2000, 12, 31) + dt.timedelta(days=index) for index in range(days + 2)]
+    document_valid = [not (date.month == 2 and date.day == 29) for date in document_dates]
+    document = {
+        "dates": [date.isoformat() for date in document_dates],
+        "source_observed": document_valid,
+        "fields": {
+            field: [1.0 if keep else None for keep in document_valid]
+            for field in ("prcp", "tmax", "tmin")
+        },
+    }
+    windows = _document_windows(document, 8)
+    if not windows or windows[0].days != 2922 or len(windows[0].month_index) != 2922:
+        raise RuntimeError("calendar window end-exclusion self-test failed")
     print("A10M5R8-CLIMATE-CORE-SELF-TEST-PASS")
 
 

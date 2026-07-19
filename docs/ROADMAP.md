@@ -392,7 +392,12 @@ Its five charged GPU-minutes, failure evidence, role firewall, and exact
 cleanup are closed. Corrective
 [A10M5R8R2](work-packages/20260719-a10m5r8r2-calendar-missingness-remedy/package.md)
 keeps exact Gregorian years, masks only accepted missing core rows, requires
-28 observed days per year-month, and is the active unchanged experiment.
+28 observed days per year-month, and preserves the unchanged experiment. Its
+job `1014024` then exposed an inclusive target-end label slice before treatment
+training. Corrective
+[A10M5R8R3](work-packages/20260719-a10m5r8r3-calendar-end-exclusion-remedy/package.md)
+makes that boundary exclusive and adds a 2,922-day construction test; it is the
+active execution package.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

@@ -1,6 +1,6 @@
 # A10M5R8R2 — Calendar-Missingness Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-CALENDAR-END-EXCLUSION`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current clean `main`, push `main`
@@ -58,3 +58,17 @@ source, resource, firewall, or cleanup drift fails closed without retry.
 
 - `artifacts/build_control_records.py` — R2 authority wrapper
 - live comparison, decision, toolkit/resource records, review, and gates
+
+## Disposition
+
+Job `1014024` passed immutable staging, the masked synthetic score, and exact
+control reconstruction, then failed during calendar attachment because the
+target-end index was included in label arrays. The resulting 2,923 labels did
+not match the correct 2,922-day eight-year window. The job used 223 GPU-seconds
+(four charged minutes), opened no protected roles, and closed with exact
+job-local and durable cleanup.
+
+A10M5R8R3 makes the target-end slice exclusive and adds a synthetic
+construction test containing the preceding day, all eight target years,
+accepted leap-day missingness, and the first post-window day. Nothing else in
+the experiment changes.
