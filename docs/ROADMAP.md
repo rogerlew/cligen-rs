@@ -397,7 +397,17 @@ job `1014024` then exposed an inclusive target-end label slice before treatment
 training. Corrective
 [A10M5R8R3](work-packages/20260719-a10m5r8r3-calendar-end-exclusion-remedy/package.md)
 makes that boundary exclusive and adds a 2,922-day construction test; it is the
-active execution package.
+completed in job `1014025` at
+`HOLD-A10M5R8-CORE-OBJECTIVE-NOT-SUPPORTED`. The treatment improved the
+all-240 fit-validation climate score by 14.35%, below the frozen 15% gate, and
+failed annual-location, monthly-location, monthly-dispersion, and daily proper-
+NLL guards. It substantially improved within-month dispersion, demonstrating
+that the objective carries the intended stochastic signal, but the unchanged
+absolute-weather P1 architecture cannot preserve location/proper fit while
+using it. Solar radiation is therefore not opened. The recommended next
+prospective family is climate-normal-conditioned residual state space, first
+ablating explicit baseline-only against baseline plus a small latent residual
+state; it requires its own scientific/resource dispatch.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

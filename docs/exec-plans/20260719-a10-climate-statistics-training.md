@@ -32,7 +32,7 @@ and temperature.
 - [x] (2026-07-19) Published scaffold source at `56a7d42`; detected and
   preserved a pre-spend private authority genesis with a nonexistent manually
   expanded SHA; scaffolded unchanged corrective A10M5R8R1.
-- [ ] Initialize the package-scoped resource authority and execute one bounded
+- [x] (2026-07-19) Initialize the package-scoped resource authority and execute one bounded
   single-L40 attempt through the canonical toolkit lifecycle.
 - [x] (2026-07-19) R1 job `1014023` reconstructed the control exactly and
   passed the synthetic dispersion test, then exposed accepted leap-day
@@ -41,8 +41,10 @@ and temperature.
 - [x] (2026-07-19) R2 job `1014024` reached masked calendar attachment and
   exposed an inclusive target-end label slice; collected and closed exact
   failure evidence after 223 GPU-seconds.
-- [ ] Execute the exclusive-end masked-calendar experiment under R3.
-- [ ] Authenticate and score the full fit-validation comparison, reconcile
+- [x] (2026-07-19) R3 job `1014025` completed in 664 GPU-seconds with exact
+  control identity and all operational gates; the treatment improved the
+  climate score 14.35% but failed the 15% and four nondegradation guards.
+- [x] (2026-07-19) Authenticate and score the full fit-validation comparison, reconcile
   resources and cleanup, and close package/campaign records.
 
 ## Surprises & Discoveries
@@ -91,7 +93,19 @@ and temperature.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+The campaign reached an honest scientific result after two fail-closed
+calendar corrections. A10M5R8R3 completed the full experiment with every
+corpus, role, support, identity, and operational gate passing. The treatment
+improved family-balanced stochastic climate behavior by 14.35%, led by a
+64.88% improvement in within-month dispersion and 18.57% in annual dispersion.
+It nevertheless degraded annual/monthly location and more than doubled core
+daily proper NLL, so it did not advance under the frozen 15%/10% gates.
+
+This separates the next model question cleanly: the aggregate stochastic loss
+is informative, but the absolute-weather P1 representation cannot allocate
+location and residual variability independently. A climate-normal-conditioned
+residual family is therefore warranted. Solar radiation remains downstream of
+a passing core architecture.
 
 ## Context and Orientation
 
@@ -193,3 +207,6 @@ failure and the exact-mask R2 correction without changing the estimand.
 
 Revision note (2026-07-19): recorded R2's end-boundary failure and the tested
 exclusive-end R3 correction.
+
+Revision note (2026-07-19): recorded R3 completion, the objective hold, exact
+cleanup, and the residual-architecture successor interpretation.

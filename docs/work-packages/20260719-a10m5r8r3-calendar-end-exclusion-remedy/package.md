@@ -1,6 +1,6 @@
 # A10M5R8R3 — Calendar End-Exclusion Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-CORE-OBJECTIVE-NOT-SUPPORTED`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current clean `main`, push `main`
@@ -53,3 +53,12 @@ resource, or cleanup drift holds without retry.
 
 - `artifacts/build_control_records.py` — R3 authority wrapper
 - live comparison, decision, toolkit/resource records, review, and gates
+
+## Disposition
+
+Job `1014025` completed the exact control reconstruction, 40-epoch treatment,
+and paired all-240 fit-validation evaluation. The treatment improved the
+family-balanced climate score by 14.35%, below the frozen 15% threshold. It
+also degraded annual location by 44.74%, monthly interannual dispersion by
+11.70%, monthly location by 10.13%, and core daily proper NLL by 110.59%.
+Accordingly it did not advance. See `artifacts/execution-disposition.md`.

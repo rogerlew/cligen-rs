@@ -1,0 +1,53 @@
+{
+  "arms": {
+    "climate_statistics_treatment": {
+      "block_scores": {
+        "annual_interannual_dispersion": 0.8865967988967896,
+        "annual_location": 2.6415909051895143,
+        "monthly_interannual_dispersion": 1.7539676129817963,
+        "monthly_location": 3.9544810950756073,
+        "precipitation_temperature_dependence": 3.08940552175045,
+        "wet_occurrence_and_amount": 1.1314669743180275,
+        "within_month_daily_dispersion": 2.0269522190093996
+      },
+      "daily_proper_nll": 8.7998441696167,
+      "family_balanced_climate_score": 2.212065875317369,
+      "support": true
+    },
+    "proper_nll_control": {
+      "block_scores": {
+        "annual_interannual_dispersion": 1.088756261765957,
+        "annual_location": 1.8249978415668011,
+        "monthly_interannual_dispersion": 1.5703091323375702,
+        "monthly_location": 3.5905600607395174,
+        "precipitation_temperature_dependence": 3.1889966398477556,
+        "wet_occurrence_and_amount": 1.0436556443572045,
+        "within_month_daily_dispersion": 5.771806287765503
+      },
+      "daily_proper_nll": 4.178742271661759,
+      "family_balanced_climate_score": 2.5827259811971865,
+      "support": true
+    }
+  },
+  "decision": {
+    "advances": false,
+    "block_non_degradation": {
+      "annual_interannual_dispersion": true,
+      "annual_location": false,
+      "monthly_interannual_dispersion": false,
+      "monthly_location": false,
+      "precipitation_temperature_dependence": true,
+      "wet_occurrence_and_amount": true,
+      "within_month_daily_dispersion": true
+    },
+    "climate_score_improvement_fraction": 0.14351507228343408,
+    "daily_proper_nll_guard": false,
+    "selected_arm": "none",
+    "terminal": "HOLD-A10M5R8-CORE-OBJECTIVE-NOT-SUPPORTED"
+  },
+  "fit_validation_points": 240,
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "stochastic_members": 8,
+  "window_calendar_years": 8
+}
