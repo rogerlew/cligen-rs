@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import io
 import json
 import os
 import re
 import shutil
 import subprocess
+import tarfile
 import time
 from pathlib import Path
 from typing import Any, Protocol
@@ -186,25 +188,43 @@ class FixtureAdapter:
         return sorted(self._backend()["jobs"].keys())
 
     def observe(self, profile: dict[str, Any], plan: dict[str, Any], planned_job: dict[str, Any], job_id: str) -> dict[str, Any]:
-        del profile, plan, planned_job
+        del profile
         self.check_masters({})
         job = self._backend()["jobs"].get(job_id)
         require(isinstance(job, dict), "JOB_TERMINAL_MISMATCH", job_id)
         configured = self.scenario.get("results", {}).get(job["role"], {})
         if job["cancelled"]:
-            return {"terminal": True, "state": "CANCELLED", "exit_code": 1, "gates": {"cancelled": False}, "actual_gpu_minutes": 0}
-        result = {
-            "terminal": configured.get("terminal", True),
-            "state": configured.get("state", "COMPLETED"),
-            "exit_code": configured.get("exit_code", job["job"].get("expected_exit_code", 0)),
-            "gates": configured.get("gates", {"registered": True}),
-            "actual_gpu_minutes": configured.get("actual_gpu_minutes"),
-            "accounting": "unavailable" if configured.get("actual_gpu_minutes") is None else "available",
-        }
+            result = {
+                "terminal": True,
+                "state": "CANCELLED",
+                "exit_code": 1,
+                "gates": {"cancelled": False},
+                "actual_gpu_minutes": 0,
+                "accounting": "available",
+            }
+        else:
+            result = {
+                "terminal": configured.get("terminal", True),
+                "state": configured.get("state", "COMPLETED"),
+                "exit_code": configured.get("exit_code", job["job"].get("expected_exit_code", 0)),
+                "gates": configured.get("gates", {"registered": True}),
+                "actual_gpu_minutes": configured.get("actual_gpu_minutes"),
+                "accounting": "unavailable" if configured.get("actual_gpu_minutes") is None else "available",
+            }
         if "node" in configured:
             result["node"] = configured["node"]
         if "recovery_target" in configured:
             result["recovery_target"] = configured["recovery_target"]
+        root = self._run_root(plan)
+        gate = root / planned_job["gate_receipt"]
+        gate.parent.mkdir(parents=True, exist_ok=True)
+        gate.write_bytes(canonical_bytes({"gates": result["gates"]}) + b"\n")
+        attempt = job["job"]["attempt_index"]
+        slurm = root / "slurm"
+        slurm.mkdir(parents=True, exist_ok=True)
+        for suffix in ("out", "err"):
+            (slurm / f"{job['role']}.{attempt}.{suffix}").write_bytes(b"")
+        result["gate_receipt_sha256"] = sha256_file(gate)
         return result
 
     def recover(self, profile: dict[str, Any], plan: dict[str, Any], attempt: dict[str, Any], token: str) -> str:
@@ -217,11 +237,11 @@ class FixtureAdapter:
         return self.submit({}, {}, recovery_job, token)
 
     def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]:
-        del profile, plan
+        del profile
         job = self._backend()["jobs"].get(recovery["job_id"])
         require(isinstance(job, dict), "JOB_TERMINAL_MISMATCH", "recovery")
         configured = self.scenario.get("results", {}).get("toolkit-recovery", {})
-        return {
+        result = {
             "terminal": configured.get("terminal", True),
             "state": configured.get("state", "COMPLETED"),
             "exit_code": configured.get("exit_code", 0),
@@ -237,6 +257,16 @@ class FixtureAdapter:
             "actual_gpu_minutes": configured.get("actual_gpu_minutes", 1),
             "accounting": "available",
         }
+        root = self._run_root(plan)
+        gate = root / plan["recovery_contingency"]["gate_receipt"]
+        gate.parent.mkdir(parents=True, exist_ok=True)
+        gate.write_bytes(canonical_bytes({"gates": result["gates"]}) + b"\n")
+        slurm = root / "slurm"
+        slurm.mkdir(parents=True, exist_ok=True)
+        for suffix in ("out", "err"):
+            (slurm / f"toolkit-recovery.0.{suffix}").write_bytes(b"")
+        result["gate_receipt_sha256"] = sha256_file(gate)
+        return result
 
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]:
         del profile
@@ -248,8 +278,44 @@ class FixtureAdapter:
         return {"job_id": job_id, "acknowledged": True}
 
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]:
-        del profile
         self.check_masters({})
+        if profile.get("provider_api_version") == 2:
+            root = self._run_root(plan)
+            present = []
+            for logical in plan["evidence_allowlist"]:
+                source = root / validate_relative_path(logical, "evidence member")
+                if source.exists():
+                    require(
+                        source.is_file()
+                        and not source.is_symlink()
+                        and source.stat().st_nlink == 1,
+                        "EVIDENCE_INCOMPLETE",
+                        "unsafe fixture evidence member",
+                    )
+                    present.append(logical)
+            present = sorted(set(present))
+            require(present, "EVIDENCE_INCOMPLETE", "no fixture evidence")
+            final = quarantine / "evidence.tar"
+            with tarfile.open(final, "w") as archive:
+                for logical in present:
+                    payload = (root / logical).read_bytes()
+                    item = tarfile.TarInfo(logical)
+                    item.size = len(payload)
+                    item.uid = 0
+                    item.gid = 0
+                    item.mode = 0o600
+                    archive.addfile(item, io.BytesIO(payload))
+            marker = root / ".lemhi-toolkit-owner.json"
+            return {
+                "absent": sorted(set(plan["evidence_allowlist"]) - set(present)),
+                "bytes": final.stat().st_size,
+                "cleanup_marker_sha256": sha256_file(marker),
+                "download_promoted": True,
+                "logical_name": "evidence.tar",
+                "present": present,
+                "sanitization_policy": SANITIZER_VERSION,
+                "sha256": sha256_file(final),
+            }
         partial = quarantine / "evidence.json.part"
         final = quarantine / "evidence.json"
         content = self.scenario.get("evidence", {"classification": "synthetic", "verdict": "PASS"})
@@ -276,8 +342,9 @@ class FixtureAdapter:
         profile: dict[str, Any],
         plan: dict[str, Any],
         recovery: dict[str, Any] | None = None,
+        stopped_roles: set[str] | None = None,
     ) -> dict[str, Any]:
-        del profile
+        del profile, stopped_roles
         self.check_masters({})
         root = self._run_root(plan)
         require(root.is_dir() and not root.is_symlink(), "CLEANUP_TARGET_INVALID", "registered root absent or escaped")
@@ -566,11 +633,15 @@ class OpenSSHSlurmAdapter:
         profile: dict[str, Any],
         plan: dict[str, Any],
         recovery: dict[str, Any] | None = None,
+        stopped_roles: set[str] | None = None,
     ) -> dict[str, Any]:
         job_local_cleanup = plan["job_local_cleanup"]
         if profile.get("provider_api_version") == 2:
+            stopped_roles = stopped_roles or set()
             checked: set[str] = set()
             for job in plan["jobs"]:
+                if job.get("role") in stopped_roles:
+                    continue
                 gate_receipt = job["gate_receipt"]
                 if gate_receipt in checked:
                     continue

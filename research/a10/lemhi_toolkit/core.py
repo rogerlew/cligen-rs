@@ -297,7 +297,7 @@ def extract_validated_archive(
     max_files: int,
     max_bytes: int,
     allowed_members: set[str] | None = None,
-) -> None:
+) -> list[str]:
     """Extract only members already accepted by :func:`validate_archive`."""
 
     members = validate_archive(path, max_files=max_files, max_bytes=max_bytes, allowed_members=allowed_members)
@@ -314,6 +314,7 @@ def extract_validated_archive(
             with source, target.open("xb") as stream:
                 os.chmod(target, 0o600)
                 shutil.copyfileobj(source, stream)
+    return [member.name for member in members]
 
 
 @contextlib.contextmanager
@@ -345,7 +346,13 @@ class Adapter(Protocol):
     def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]: ...
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
-    def clean(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any] | None = None) -> dict[str, Any]: ...
+    def clean(
+        self,
+        profile: dict[str, Any],
+        plan: dict[str, Any],
+        recovery: dict[str, Any] | None = None,
+        stopped_roles: set[str] | None = None,
+    ) -> dict[str, Any]: ...
     def abort(self, profile: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]: ...
 
 
@@ -513,6 +520,8 @@ class Toolkit:
         })
         if scope in {"attempt", "recovery"}:
             event.update({"job_role": job_role, "attempt_index": attempt_index})
+        elif scope == "role":
+            event["job_role"] = job_role
         events.append(self._finalize(event))
 
     def _require_state(self, state: dict[str, Any], expected: set[str]) -> None:
@@ -648,9 +657,13 @@ class Toolkit:
         evidence_allowlist: set[str],
         accelerator_request: str,
         maximum_gpus: int,
+        additional_slurm_streams: tuple[str, ...] = (),
+        additional_gate_receipts: set[str] | None = None,
     ) -> set[str]:
         require(isinstance(jobs, list) and jobs, "PLAN_DRIFT", "jobs")
         roles: set[str] = set()
+        slurm_streams = list(additional_slurm_streams)
+        gate_receipts = set(additional_gate_receipts or set())
         for job in jobs:
             require(isinstance(job, dict), "PLAN_DRIFT", "job")
             role = validate_id(job.get("role"), "job role")
@@ -674,6 +687,22 @@ class Toolkit:
             require(job["max_attempts"] == 1 or retry_on, "PLAN_DRIFT", "retries require classes")
             gate_receipt = validate_relative_path(job.get("gate_receipt"), "gate receipt")
             require(gate_receipt in evidence_allowlist, "PLAN_DRIFT", "gate receipt is not evidence-allowlisted")
+            gate_receipts.add(gate_receipt)
+            slurm_streams.extend(
+                f"slurm/{role}.{attempt_index}.{suffix}"
+                for attempt_index in range(job["max_attempts"])
+                for suffix in ("out", "err")
+            )
+        require(
+            len(slurm_streams) == len(set(slurm_streams)),
+            "PLAN_DRIFT",
+            "Slurm stream has multiple owners",
+        )
+        require(
+            not gate_receipts & set(slurm_streams),
+            "PLAN_DRIFT",
+            "gate receipt collides with Slurm stream",
+        )
         return roles
 
     def plan(self, plan_input: dict[str, Any]) -> str:
@@ -705,6 +734,8 @@ class Toolkit:
             require(plan_input["remote_run_root"] == f"runs/{self.run_id}", "CLEANUP_TARGET_INVALID", "run root must be runs/<run_id>")
             providers = self._load_providers(plan_input)
             accelerator_request, maximum_gpus = self._accelerator_contract(providers)
+            additional_slurm_streams: list[str] = []
+            additional_gate_receipts: set[str] = set()
             if self.provider_api_version == 2:
                 from .hardening import (
                     close_job_environment,
@@ -734,8 +765,10 @@ class Toolkit:
                 require(recovery_script in {asset["logical_name"] for asset in plan_input.get("assets", []) if isinstance(asset, dict) and asset.get("executable") is True}, "PLAN_DRIFT", "recovery script must be an executable frozen asset")
                 recovery_gate = validate_relative_path(recovery.get("gate_receipt"), "recovery gate receipt")
                 require(recovery_gate in plan_input.get("evidence_allowlist", []), "PLAN_DRIFT", "recovery gate receipt is not evidence-allowlisted")
+                additional_gate_receipts.add(recovery_gate)
                 for stream in ("slurm/toolkit-recovery.0.out", "slurm/toolkit-recovery.0.err"):
                     require(stream in plan_input.get("evidence_allowlist", []), "PLAN_DRIFT", "recovery logs are not evidence-allowlisted")
+                    additional_slurm_streams.append(stream)
                 capacity = plan_input.get("job_local_capacity")
                 require(isinstance(capacity, dict), "PLAN_DRIFT", "job-local capacity")
                 for field in ("expanded_asset_bytes", "product_bytes", "checkpoint_bytes", "margin_bytes", "minimum_free_bytes", "required_inodes"):
@@ -782,6 +815,8 @@ class Toolkit:
                 set(validated_evidence),
                 accelerator_request,
                 maximum_gpus,
+                tuple(additional_slurm_streams),
+                additional_gate_receipts,
             )
             semantic = self._semantic_plan(plan_input, providers)
             plan_id = sha256_bytes(canonical_bytes(semantic))
@@ -831,18 +866,35 @@ class Toolkit:
                 "required_capability_scope",
                 "evidence_allowlist",
                 "job_local_cleanup",
+                "recovery_contingency",
                 "submission_mode",
                 "stop_rules",
             ):
                 require(replacement.get(field) == prior.get(field), "PLAN_DRIFT", f"immutable field changed: {field}")
             providers = self._load_providers(replacement)
             accelerator_request, maximum_gpus = self._accelerator_contract(providers)
+            additional_slurm_streams: tuple[str, ...] = ()
+            additional_gate_receipts: set[str] = set()
+            if self.provider_api_version == 2:
+                recovery = prior.get("recovery_contingency")
+                require(isinstance(recovery, dict), "PLAN_DRIFT", "recovery contingency")
+                additional_slurm_streams = (
+                    "slurm/toolkit-recovery.0.out",
+                    "slurm/toolkit-recovery.0.err",
+                )
+                additional_gate_receipts.add(
+                    validate_relative_path(
+                        recovery.get("gate_receipt"), "recovery gate receipt"
+                    )
+                )
             self._validate_jobs(
                 replacement.get("jobs"),
                 {asset["logical_name"] for asset in prior["assets"]},
                 set(prior["evidence_allowlist"]),
                 accelerator_request,
                 maximum_gpus,
+                additional_slurm_streams,
+                additional_gate_receipts,
             )
             attempts = state.get("attempts", {})
             started_roles = {item["job_role"] for item in attempts.values() if item.get("state") != "REGISTERED"}
@@ -1118,6 +1170,47 @@ class Toolkit:
                 self._save_state(state)
                 return job_id
 
+    @staticmethod
+    def _role_outcomes(
+        state: dict[str, Any], plan: dict[str, Any]
+    ) -> tuple[set[str], set[str]]:
+        attempts = state.get("attempts", {}).values()
+        passed_roles = {
+            item["job_role"]
+            for item in attempts
+            if item.get("state") == "RESULT_VALIDATED" and item.get("passed")
+        }
+        exhausted_roles = {
+            planned["role"]
+            for planned in plan["jobs"]
+            if len(
+                [
+                    item
+                    for item in state.get("attempts", {}).values()
+                    if item.get("job_role") == planned["role"]
+                    and item.get("state") == "RESULT_VALIDATED"
+                ]
+            )
+            >= planned["max_attempts"]
+        }
+        return passed_roles, exhausted_roles
+
+    def _settle_matrix_if_complete(
+        self, state: dict[str, Any], plan: dict[str, Any]
+    ) -> None:
+        required_roles = {item["role"] for item in plan["jobs"]}
+        passed_roles, exhausted_roles = self._role_outcomes(state, plan)
+        matrix_stop = state.get("matrix_stop", {})
+        stopped_roles = set(matrix_stop.get("stopped_roles", []))
+        if required_roles <= passed_roles | exhausted_roles | stopped_roles:
+            self._event(
+                state,
+                "MATRIX_ACTIVE",
+                "MATRIX_SETTLED",
+                plan_id=state["current_plan_id"],
+            )
+            state["run_state"] = "MATRIX_SETTLED"
+
     def observe(self, job_role: str, attempt_index: int) -> dict[str, Any]:
         key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
         self.adapter.check_masters(self.profile)
@@ -1146,26 +1239,184 @@ class Toolkit:
                     "settled",
                     actual_gpu_minutes=result.get("actual_gpu_minutes"),
                 )
-                required_roles = {item["role"] for item in plan["jobs"]}
-                passed_roles = {item["job_role"] for item in state["attempts"].values() if item.get("state") == "RESULT_VALIDATED" and item.get("passed")}
-                exhausted_roles = {
-                    planned["role"]
-                    for planned in plan["jobs"]
-                    if len([
-                        item
-                        for item in state["attempts"].values()
-                        if item.get("job_role") == planned["role"] and item.get("state") == "RESULT_VALIDATED"
-                    ]) >= planned["max_attempts"]
-                }
-                if required_roles <= passed_roles | exhausted_roles:
-                    self._event(state, "MATRIX_ACTIVE", "MATRIX_SETTLED", plan_id=state["current_plan_id"])
-                    state["run_state"] = "MATRIX_SETTLED"
+                self._settle_matrix_if_complete(state, plan)
                 self._save_ledger(ledger)
                 self._save_state(state)
                 receipt = self._common("job_receipt", plan_id=attempt["plan_id"])
                 receipt.update({"job_role": job_role, "attempt_index": attempt_index, "job_id": attempt["job_id"], "passed": passed, "result": result})
                 self._write_publication(f"job-{key}.json", receipt)
                 return receipt
+
+    def stop_matrix(self, trigger_job_role: str, reason_code: str) -> dict[str, Any]:
+        """Settle all never-submitted roles after an exhausted upstream failure."""
+
+        trigger_job_role = validate_id(trigger_job_role, "trigger job role")
+        require(
+            reason_code == "upstream-role-exhausted",
+            "PLAN_DRIFT",
+            "unsupported matrix stop reason",
+        )
+        require(
+            self.provider_api_version == 2,
+            "PLAN_DRIFT",
+            "matrix stop requires provider revision 2",
+        )
+        with directory_lock(self.budget_lock):
+            with directory_lock(self.run_lock):
+                state = self._load_state()
+                existing_stop = state.get("matrix_stop")
+                if existing_stop is not None:
+                    require(
+                        existing_stop.get("trigger_job_role") == trigger_job_role
+                        and existing_stop.get("reason_code") == reason_code,
+                        "PLAN_DRIFT",
+                        "matrix already stopped differently",
+                    )
+                    receipt_path = self.publication_dir / "matrix-stop.json"
+                    expected_receipt = self._finalize(existing_stop["receipt"])
+                    if not receipt_path.exists():
+                        self._write_publication(
+                            "matrix-stop.json", existing_stop["receipt"]
+                        )
+                    published_receipt = read_record(receipt_path)
+                    require(
+                        published_receipt == expected_receipt,
+                        "EVIDENCE_INCOMPLETE",
+                        "persisted matrix stop receipt differs",
+                    )
+                    return published_receipt
+
+                self._require_state(state, {"MATRIX_ACTIVE"})
+                self.adapter.check_masters(self.profile)
+                ledger = self._load_ledger()
+                observed_job_ids = self.adapter.reconcile_authority(
+                    self.profile, self.authority["scheduler_authority_token"]
+                )
+                registered_job_ids = {
+                    item["job_id"]
+                    for item in ledger["entries"]
+                    if isinstance(item.get("job_id"), str)
+                }
+                require(
+                    set(observed_job_ids) == registered_job_ids,
+                    "AUTHORITY_RECONCILIATION_REQUIRED",
+                    "scheduler and ledger job identities differ",
+                )
+                plan = self._current_plan(state)
+                jobs = {item["role"]: item for item in plan["jobs"]}
+                require(
+                    trigger_job_role in jobs,
+                    "PLAN_DRIFT",
+                    "unknown matrix stop trigger",
+                )
+                attempts = state.get("attempts", {})
+                require(
+                    attempts
+                    and all(
+                        item.get("state") == "RESULT_VALIDATED"
+                        for item in attempts.values()
+                    ),
+                    "PLAN_DRIFT",
+                    "matrix stop requires every attempt settled",
+                )
+                trigger_attempts = [
+                    (key, item)
+                    for key, item in attempts.items()
+                    if item.get("job_role") == trigger_job_role
+                ]
+                require(
+                    len(trigger_attempts) >= jobs[trigger_job_role]["max_attempts"]
+                    and all(item.get("passed") is False for _, item in trigger_attempts),
+                    "PLAN_DRIFT",
+                    "matrix stop trigger is not exhausted and failed",
+                )
+                passed_roles, exhausted_roles = self._role_outcomes(state, plan)
+                attempted_roles = {
+                    item["job_role"] for item in attempts.values()
+                }
+                require(
+                    attempted_roles <= passed_roles | exhausted_roles,
+                    "PLAN_DRIFT",
+                    "matrix stop cannot abandon retry-eligible attempts",
+                )
+                stopped_roles = sorted(set(jobs) - attempted_roles)
+                require(stopped_roles, "PLAN_DRIFT", "matrix has no unstarted roles")
+
+                trigger_receipts = []
+                for key, item in sorted(trigger_attempts):
+                    receipt_path = self.publication_dir / f"job-{key}.json"
+                    require(
+                        receipt_path.is_file(),
+                        "EVIDENCE_INCOMPLETE",
+                        "trigger job receipt missing",
+                    )
+                    trigger_receipt = read_record(receipt_path)
+                    require(
+                        trigger_receipt.get("authority_id") == self.authority_id
+                        and trigger_receipt.get("run_id") == self.run_id
+                        and trigger_receipt.get("package_id") == self.package_id
+                        and trigger_receipt.get("source_commit") == self.source_commit
+                        and trigger_receipt.get("plan_id") == item["plan_id"]
+                        and trigger_receipt.get("job_role") == trigger_job_role
+                        and trigger_receipt.get("attempt_index")
+                        == item["attempt_index"]
+                        and trigger_receipt.get("job_id") == item["job_id"]
+                        and trigger_receipt.get("passed") is False
+                        and trigger_receipt.get("result") == item.get("result"),
+                        "EVIDENCE_INCOMPLETE",
+                        "trigger job receipt identity mismatch",
+                    )
+                    trigger_receipts.append(
+                        {
+                            "attempt_index": item["attempt_index"],
+                            "job_id": item["job_id"],
+                            "sha256": sha256_file(receipt_path),
+                        }
+                    )
+                receipt = self._common(
+                    "matrix_stop_receipt", plan_id=state["current_plan_id"]
+                )
+                receipt.update(
+                    {
+                        "classification": "NOT_EXECUTED_UPSTREAM_FAILURE",
+                        "ledger_head_sha256": ledger.get("head_sha256"),
+                        "reason_code": reason_code,
+                        "stopped_roles": stopped_roles,
+                        "trigger_job_receipts": trigger_receipts,
+                        "trigger_job_role": trigger_job_role,
+                    }
+                )
+                require(
+                    isinstance(receipt["ledger_head_sha256"], str)
+                    and HEX64_PATTERN.fullmatch(receipt["ledger_head_sha256"])
+                    is not None,
+                    "AUTHORITY_INVALID",
+                    "matrix stop ledger head",
+                )
+                for role in stopped_roles:
+                    self._event(
+                        state,
+                        "UNREGISTERED",
+                        "NOT_EXECUTED_UPSTREAM_FAILURE",
+                        scope="role",
+                        plan_id=state["current_plan_id"],
+                        job_role=role,
+                    )
+                state["matrix_stop"] = {
+                    "reason_code": reason_code,
+                    "receipt": receipt,
+                    "stopped_roles": stopped_roles,
+                    "trigger_job_role": trigger_job_role,
+                }
+                self._settle_matrix_if_complete(state, plan)
+                require(
+                    state["run_state"] == "MATRIX_SETTLED",
+                    "PLAN_DRIFT",
+                    "matrix stop did not settle complete matrix",
+                )
+                self._save_state(state)
+                self._write_publication("matrix-stop.json", receipt)
+                return read_record(self.publication_dir / "matrix-stop.json")
 
     def cancel(self, job_role: str, attempt_index: int) -> dict[str, Any]:
         key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
@@ -1349,6 +1600,45 @@ class Toolkit:
         with directory_lock(self.run_lock):
             state = self._load_state()
             self._require_state(state, {"MATRIX_SETTLED"})
+            plan = self._current_plan(state)
+            recovery = state.get("recovery")
+            recovery_result: dict[str, Any] | None = None
+            recovery_evidence: tuple[str, str] | None = None
+            if self.provider_api_version == 2 and recovery is not None:
+                require(
+                    isinstance(recovery, dict)
+                    and recovery.get("state") == "RESULT_VALIDATED",
+                    "EVIDENCE_INCOMPLETE",
+                    "collection requires settled recovery",
+                )
+                recovery_result = recovery.get("result")
+                require(
+                    isinstance(recovery_result, dict),
+                    "EVIDENCE_INCOMPLETE",
+                    "observed recovery result missing",
+                )
+                recovery_gate_sha256 = recovery_result.get(
+                    "gate_receipt_sha256"
+                )
+                require(
+                    isinstance(recovery_gate_sha256, str)
+                    and HEX64_PATTERN.fullmatch(recovery_gate_sha256) is not None,
+                    "EVIDENCE_INCOMPLETE",
+                    "observed recovery gate receipt identity missing",
+                )
+                recovery_plan = plan.get("recovery_contingency")
+                require(
+                    isinstance(recovery_plan, dict),
+                    "EVIDENCE_INCOMPLETE",
+                    "configured recovery contingency missing",
+                )
+                recovery_evidence = (
+                    validate_relative_path(
+                        recovery_plan.get("gate_receipt"),
+                        "recovery gate receipt",
+                    ),
+                    recovery_gate_sha256,
+                )
             quarantine = self.run_dir / "private" / "quarantine"
             if quarantine.exists() and any(quarantine.iterdir()):
                 suffix = 1
@@ -1358,21 +1648,141 @@ class Toolkit:
                     retained = quarantine.with_name(f"quarantine.failed-{suffix}")
                 os.replace(quarantine, retained)
             quarantine.mkdir(parents=True, exist_ok=True, mode=0o700)
-            result = self.adapter.collect(self.profile, self._current_plan(state), quarantine)
+            result = self.adapter.collect(self.profile, plan, quarantine)
             require(result.get("download_promoted") is True, "TRANSFER_INCOMPLETE", "download not promoted")
-            plan = self._current_plan(state)
             allowed_evidence = set(plan["evidence_allowlist"])
             logical_name = result.get("logical_name")
+            if self.provider_api_version == 2:
+                require(
+                    isinstance(logical_name, str)
+                    and logical_name.endswith(".tar"),
+                    "EVIDENCE_INCOMPLETE",
+                    "v2 collection requires sparse archive metadata",
+                )
             if isinstance(logical_name, str) and logical_name.endswith(".tar"):
                 archive_path = quarantine / validate_relative_path(logical_name, "evidence archive")
-                extract_validated_archive(
+                present = result.get("present")
+                absent = result.get("absent")
+                require(
+                    isinstance(present, list)
+                    and isinstance(absent, list)
+                    and all(isinstance(item, str) for item in present + absent),
+                    "EVIDENCE_INCOMPLETE",
+                    "evidence present/absent partition",
+                )
+                require(
+                    present == sorted(set(present))
+                    and absent == sorted(set(absent))
+                    and not set(present) & set(absent)
+                    and set(present) | set(absent) == allowed_evidence,
+                    "EVIDENCE_INCOMPLETE",
+                    "evidence partition differs from allowlist",
+                )
+                extracted_members = extract_validated_archive(
                     archive_path,
                     quarantine / "extracted",
                     max_files=self.profile.get("max_evidence_files", 1000),
                     max_bytes=self.profile.get("max_evidence_expanded_bytes", 50_000_000),
                     allowed_members=allowed_evidence,
                 )
+                require(
+                    set(extracted_members) == set(present)
+                    and len(extracted_members) == len(present),
+                    "EVIDENCE_INCOMPLETE",
+                    "archive members differ from reported present evidence",
+                )
+                extracted_regular_files = {
+                    str(path.relative_to(quarantine / "extracted"))
+                    for path in (quarantine / "extracted").rglob("*")
+                    if path.is_file()
+                }
+                require(
+                    extracted_regular_files == set(present),
+                    "EVIDENCE_INCOMPLETE",
+                    "reported present evidence includes a nonregular member",
+                )
                 archive_path.unlink()
+                required_attempt_paths: set[str] = set()
+                gate_identities: dict[str, str] = {}
+                for attempt in state.get("attempts", {}).values():
+                    require(
+                        attempt.get("state") == "RESULT_VALIDATED",
+                        "EVIDENCE_INCOMPLETE",
+                        "collection requires settled attempts",
+                    )
+                    job = next(
+                        item
+                        for item in plan["jobs"]
+                        if item["role"] == attempt["job_role"]
+                    )
+                    attempt_id = f"{attempt['job_role']}.{attempt['attempt_index']}"
+                    gate_sha256 = attempt.get("result", {}).get(
+                        "gate_receipt_sha256"
+                    )
+                    require(
+                        isinstance(gate_sha256, str)
+                        and HEX64_PATTERN.fullmatch(gate_sha256) is not None,
+                        "EVIDENCE_INCOMPLETE",
+                        "observed gate receipt identity missing",
+                    )
+                    existing_gate_sha256 = gate_identities.get(job["gate_receipt"])
+                    require(
+                        existing_gate_sha256 in {None, gate_sha256},
+                        "EVIDENCE_INCOMPLETE",
+                        "attempts sharing a gate path have conflicting identities",
+                    )
+                    gate_identities[job["gate_receipt"]] = gate_sha256
+                    required_attempt_paths.update(
+                        {
+                            job["gate_receipt"],
+                            f"slurm/{attempt_id}.out",
+                            f"slurm/{attempt_id}.err",
+                        }
+                    )
+                if recovery_evidence is not None:
+                    recovery_gate_path, recovery_gate_sha256 = recovery_evidence
+                    recovery_paths = {
+                        recovery_gate_path,
+                        "slurm/toolkit-recovery.0.out",
+                        "slurm/toolkit-recovery.0.err",
+                    }
+                    require(
+                        recovery_paths <= set(present),
+                        "EVIDENCE_INCOMPLETE",
+                        "recovery evidence missing",
+                    )
+                    existing_gate_sha256 = gate_identities.get(
+                        recovery_gate_path
+                    )
+                    require(
+                        existing_gate_sha256 in {None, recovery_gate_sha256},
+                        "EVIDENCE_INCOMPLETE",
+                        "recovery gate path has a conflicting identity",
+                    )
+                    gate_identities[recovery_gate_path] = recovery_gate_sha256
+                    required_attempt_paths.update(recovery_paths)
+                require(
+                    required_attempt_paths <= set(present),
+                    "EVIDENCE_INCOMPLETE",
+                    "submitted attempt evidence missing",
+                )
+                if recovery_evidence is not None:
+                    recovery_gate_path, recovery_gate_sha256 = recovery_evidence
+                    require(
+                        sha256_file(
+                            quarantine / "extracted" / recovery_gate_path
+                        )
+                        == recovery_gate_sha256,
+                        "EVIDENCE_INCOMPLETE",
+                        "collected recovery gate receipt changed after observation",
+                    )
+                for required_path, expected_sha256 in gate_identities.items():
+                    require(
+                        sha256_file(quarantine / "extracted" / required_path)
+                        == expected_sha256,
+                        "EVIDENCE_INCOMPLETE",
+                        "collected gate receipt changed after observation",
+                    )
             forbidden = tuple(self.profile.get("forbidden_publication_substrings", []))
             evidence_paths = [path for path in quarantine.rglob("*") if path.is_file()]
             logical_paths: list[tuple[Path, str]] = []
@@ -1396,6 +1806,15 @@ class Toolkit:
                     if isinstance(attempt.get("result", {}).get("gates"), dict)
                     for name, passed in attempt["result"]["gates"].items()
                 }
+                if isinstance(recovery_result, dict) and isinstance(
+                    recovery_result.get("gates"), dict
+                ):
+                    gates.update(
+                        {
+                            f"toolkit-recovery.{name}": passed
+                            for name, passed in recovery_result["gates"].items()
+                        }
+                    )
                 raw = create_raw_collected(
                     self.authority_id,
                     self.run_id,
@@ -1460,7 +1879,13 @@ class Toolkit:
                 "CLEANUP_INCOMPLETE",
                 "recovery is not settled",
             )
-        result = self.adapter.clean(self.profile, self._current_plan(state), recovery)
+        stopped_roles = set(state.get("matrix_stop", {}).get("stopped_roles", []))
+        result = self.adapter.clean(
+            self.profile,
+            self._current_plan(state),
+            recovery,
+            stopped_roles,
+        )
         require(result.get("remote_absent") is True, "CLEANUP_INCOMPLETE", "remote run remains")
         allowed_cleanup = {"verified_absent"} if self.provider_api_version == 2 else {"scheduler_purged", "verified_absent"}
         require(result.get("job_local_cleanup") in allowed_cleanup, "CLEANUP_INCOMPLETE", "job-local cleanup")
@@ -1517,7 +1942,7 @@ class Toolkit:
             state = self._load_state()
             self._require_state(state, {"CLEANED"})
             receipt = self._common("terminal_receipt", plan_id=state["current_plan_id"])
-            receipt.update({"terminal": "LEMHI-TOOLKIT-RUN-CLOSED", "attempt_count": len(state.get("attempts", {})), "cleanup": state["cleanup"]})
+            receipt.update({"terminal": "LEMHI-TOOLKIT-RUN-CLOSED", "attempt_count": len(state.get("attempts", {})), "stopped_role_count": len(state.get("matrix_stop", {}).get("stopped_roles", [])), "cleanup": state["cleanup"]})
             self._write_publication("terminal.json", receipt)
             private_dir = self.private_path.parent
             for child in list(private_dir.iterdir()):

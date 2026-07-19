@@ -49,6 +49,13 @@ def _parser() -> argparse.ArgumentParser:
     observe = subcommands.add_parser("observe")
     observe.add_argument("--job-role", required=True)
     observe.add_argument("--attempt-index", required=True, type=int)
+    stop_matrix = subcommands.add_parser("stop-matrix")
+    stop_matrix.add_argument("--trigger-job-role", required=True)
+    stop_matrix.add_argument(
+        "--reason-code",
+        choices=("upstream-role-exhausted",),
+        required=True,
+    )
     recover = subcommands.add_parser("recover")
     recover.add_argument("--job-role", required=True)
     recover.add_argument("--attempt-index", required=True, type=int)
@@ -136,6 +143,10 @@ def main(arguments: list[str] | None = None) -> int:
             result = toolkit.amend(read_json(options.input), options.reason, options.changed_field)
         elif command in {"submit", "observe", "cancel", "recover"}:
             result = getattr(toolkit, command)(options.job_role, options.attempt_index)
+        elif command == "stop-matrix":
+            result = toolkit.stop_matrix(
+                options.trigger_job_role, options.reason_code
+            )
         elif command == "observe-recovery":
             result = toolkit.observe_recovery()
         else:

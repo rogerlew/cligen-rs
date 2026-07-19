@@ -1,0 +1,50 @@
+{
+  "authority_revision_sha256": "227d28212a6823ba6b7ae3ecb5cccc9fa706e5d281ed78fdf7adf80db4dbffa9",
+  "execution": {
+    "actual_gpu_minutes": 11,
+    "attempt_count": 11,
+    "candidate_admissions_issued": 0,
+    "candidate_science_started": false,
+    "control_admission_gates_passed": 15,
+    "control_science_started": false,
+    "job_local_cleanup_passed": 11,
+    "remote_absent": true,
+    "selector_run": false,
+    "toolkit_collection_complete": false,
+    "toolkit_run_state_at_manual_cleanup": "MATRIX_SETTLED"
+  },
+  "jobs": {
+    "control": "1014042",
+    "candidates": [
+      "1014043",
+      "1014044",
+      "1014045",
+      "1014046",
+      "1014047",
+      "1014048",
+      "1014049",
+      "1014050",
+      "1014051",
+      "1014052"
+    ]
+  },
+  "package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+  "plan_id": "58a51d5e89c26305b1dac1b6caeaba9a720bb4f72b1011ddc26fd0e6a1399356",
+  "root_cause": {
+    "classification": "host-default-python36-control-plane-incompatibility",
+    "failing_source": "setup_diagnostics.py",
+    "host_default_interpreter": "/usr/bin/python3",
+    "required_interpreter": "/usr/bin/python3.11",
+    "runtime_archive_opened": false
+  },
+  "run_id": "a10m5r10r1-candidate-job-local-capacity-remedy-r0",
+  "schema_version": 1,
+  "science": {
+    "architecture_interpretation_authorized": false,
+    "portfolio_decision_published": false,
+    "portfolio_summary_published": false
+  },
+  "source_commit": "6bde267235c9a3cddababe981cba5986e4fd8ca2",
+  "successor_package_id": "20260719-a10m5r10r1r1-python311-control-plane-remedy",
+  "terminal": "HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE"
+}

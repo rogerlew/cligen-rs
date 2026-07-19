@@ -1,0 +1,11 @@
+{
+  "cleanup_method": "unmodified-toolkit-owner-marker-validated-clean.sh",
+  "evidence_manifest_sha256": "35abd39ca42e12a6569185b9d0b57c3b192befbcb4e0b2d31876a8afb90dd19e",
+  "job_local_cleanup_passed": 11,
+  "package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+  "plan_id": "58a51d5e89c26305b1dac1b6caeaba9a720bb4f72b1011ddc26fd0e6a1399356",
+  "remote_absent": true,
+  "run_id": "a10m5r10r1-candidate-job-local-capacity-remedy-r0",
+  "schema_version": 1,
+  "source_commit": "6bde267235c9a3cddababe981cba5986e4fd8ca2"
+}

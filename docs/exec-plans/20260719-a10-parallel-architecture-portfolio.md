@@ -44,8 +44,19 @@ inefficient multi-rank synchronization.
   cleanup.
 - [x] (2026-07-19) Scaffolded A10M5R10R1 with unchanged science, complete byte
   pinning, authenticated setup/admission evidence, and five bounded waves.
-- [ ] Publish A10M5R10R1 source, replay preflight, initialize its fresh
-  authority, and materialize all six controls.
+- [x] (2026-07-19) Published A10M5R10R1 source at
+  `6bde267235c9a3cddababe981cba5986e4fd8ca2`, replayed the exact preflight,
+  and initialized its fresh authority.
+- [x] (2026-07-19) Closed A10M5R10R1 at
+  `HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE`: control job `1014042` failed
+  before setup under the host Python 3.6, no science opened, all eleven
+  job-local cleanups passed, and the exact remote root was removed.
+- [x] (2026-07-19) Hardened the general toolkit under A10M5O1R2 with an atomic
+  upstream-failure matrix stop and authenticated sparse collection; independent
+  review and all 79 toolkit tests passed.
+- [ ] Publish a fresh A10M5R10R1R1 source with explicit
+  `/usr/bin/python3.11` pre-runtime control-plane invocations, replay preflight,
+  initialize its authority, and materialize all six controls.
 - [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1 roles
   under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
@@ -78,6 +89,14 @@ inefficient multi-rank synchronization.
   so successful cleanup erased the failure detail and left empty Slurm
   streams. Durable redacted setup and admission receipts are required before
   the corrective authority opens.
+- Lemhi's compute-node `/usr/bin/python3` is Python 3.6 even though
+  `/usr/bin/python3.11` is installed and used successfully by the login-side
+  admission checker. Pre-runtime diagnostics cannot rely on the default
+  interpreter before the portable science runtime is extracted.
+- A PASS-only admission surface made the old evidence allowlist impossible to
+  collect after an upstream pre-admission failure. The toolkit now separates
+  maximum allowlisting from exact presence while retaining mandatory evidence
+  for every submitted attempt and invoked recovery.
 
 ## Decision Log
 
@@ -107,16 +126,24 @@ inefficient multi-rank synchronization.
   second member only after the first proves setup complete and payload cleanup;
   admit the next wave only after both prior roles are terminal, observed, and
   job-local-clean.
+- Preserve A10M5R10R1 as an operational HOLD. Use a fresh run identity for the
+  Python 3.11 remedy, and use the toolkit's atomic whole-matrix stop if a future
+  exhausted upstream role makes unsubmitted dependents scientifically moot.
 
 ## Outcomes & Retrospective
 
 The first package run consumed 103 charged GPU-minutes and closed cleanly at an
 operational HOLD. Its exact controls and two physics results demonstrate that
 the corrected science code runs, but eight missing candidate roles prohibit
-selection or architecture interpretation. A10M5R10R1 is the active corrective
-run. This section must be updated after its execution with all ten
-family/capacity results, retained identities, resource use, operational
-reconciliation, and the realized wall-time effect of bounded concurrency.
+selection or architecture interpretation. A10M5R10R1 then consumed 11 charged
+GPU-minutes and failed before any science because its control-plane interpreter
+was not qualified. Its admission firewall and cleanup worked, but its evidence
+surface also exposed the general terminal-closure gap now closed by A10M5O1R2.
+The active scientific successor is a fresh A10M5R10R1R1 run with unchanged
+science, explicit Python 3.11 control-plane execution, and the hardened toolkit.
+This section must be updated after that execution with all ten family/capacity
+results, retained identities, resource use, operational reconciliation, and
+the realized wall-time effect of bounded concurrency.
 
 ## Context and Orientation
 
@@ -327,3 +354,7 @@ frozen multi-candidate Pareto decision.
 2026-07-19: recorded the first run's aggregate job-local capacity HOLD and
 continued under A10M5R10R1 with complete science byte pinning, durable setup
 diagnostics, authenticated submission admission, and five two-role waves.
+
+2026-07-19: recorded A10M5R10R1's pre-runtime Python 3.6 HOLD and exact manual
+cleanup, completed A10M5O1R2 terminal-failure closure hardening, and continued
+the unchanged science toward a fresh Python 3.11 control-plane remedy.

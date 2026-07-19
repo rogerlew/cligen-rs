@@ -1,10 +1,13 @@
 # SPEC-LEMHI-AGENT-TOOLKIT — Lemhi Agent Workflow Toolkit
 
-Status: authoritative revision 2; hardening implemented 2026-07-17
+Status: authoritative revision 2; hardening extended 2026-07-19
 Owning packages:
 [foundation](../work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
 and
-[A10M4O1 hardening](../work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md)
+[A10M4O1 hardening](../work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md),
+[A10M5O1R1 evidence projection](../work-packages/20260719-a10m5o1r1-evidence-token-projection-hardening/package.md),
+and
+[A10M5O1R2 terminal failure closure](../work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/package.md)
 
 ## 1. Surface
 
@@ -156,6 +159,7 @@ commands differently:
 | `verify` | verify staged identities and compute-side preconditions |
 | `submit` | reserve resources and perform an at-most-once frozen submission |
 | `observe` | obtain scheduler terminal state and registered gate results |
+| `stop-matrix` | atomically settle every never-submitted role after an exact upstream role is exhausted and failed |
 | `cancel` | cancel one exact registered job under an authorized stop/abort rule |
 | `recover` | consume the one reserved recovery attempt on the authenticated original node |
 | `observe-recovery` | settle recovery accounting and authenticate exact target absence |
@@ -802,6 +806,12 @@ than creating a new charge. `observe-recovery` requires successful scheduler
 accounting, exact-node agreement, the original job identity, the target-path
 hash, and all registered recovery gates before cleanup can continue.
 
+The recovery contingency is immutable across plan amendments. Planned attempt
+streams and the fixed recovery streams have one global ownership namespace:
+duplicate stream writers are invalid, and no planned or recovery gate receipt
+may alias any stream in that namespace. Initial planning and every amendment
+MUST enforce the same complete collision check.
+
 ### 17.4 Evidence projection
 
 Collection authenticates a private `RAW_COLLECTED` record before publication
@@ -858,3 +868,45 @@ The required forward sequence is A10M4O1 hardening, immutable successor
 semantics, bounded smoke, immutable attestation, designation-index revision,
 then A10M5. The 5x/10x scientific runtime thresholds are outside this revision
 and remain unchanged.
+
+### 17.7 Terminal failure closure
+
+For provider API v2, `stop-matrix` MAY settle all planned zero-attempt roles
+only when an exact trigger role is exhausted after one or more authenticated
+failed `RESULT_VALIDATED` attempts, every existing attempt is settled, and all
+attempted roles are passed or exhausted. Before writing the stop, the toolkit
+MUST reconcile the full scheduler authority against the append-only ledger,
+hold the authority-budget lock before the run lock, and require the fixed
+reason `upstream-role-exhausted`. The receipt binds the trigger's job-receipt
+hashes, the current plan, ledger head, and complete stopped-role set. Selective
+waiver is prohibited until the plan schema prospectively defines dependency
+edges.
+
+A stopped role is classified `NOT_EXECUTED_UPSTREAM_FAILURE`. It is not an
+attempt, job receipt, cancellation, successful gate, retry, resource charge,
+or scientific result. The stop is immutable and idempotently republishable
+within the run. `MATRIX_SETTLED` MAY include passed roles, exhausted attempted
+roles, and the exact stopped-role set. Cleanup MUST require registered
+job-local cleanup evidence for every submitted role and MUST skip only stopped
+roles that have no attempt. A stop can never suppress cleanup ambiguity from a
+started role.
+
+The plan's `evidence_allowlist` is a maximum permitted member set, not a claim
+that every member exists on all terminal paths. Remote collection MUST report
+a sorted, disjoint present/absent partition of that exact set, archive exactly
+the present regular nonsymlink single-link members, fail if none are present,
+and retain the existing local archive safety, size, ownership, projection, and
+unexpected-member checks. The controller MUST compare archive members to the
+reported present set. For every submitted attempt, its exact registered gate
+receipt and Slurm stdout/stderr remain mandatory, and the collected gate hash
+MUST equal the hash authenticated by `observe`. Missing evidence remains
+visible in job and matrix-stop receipts; collection MUST NOT create placeholder
+admissions, gate receipts, or science results.
+
+If the reserved recovery was invoked, sparse collection additionally requires
+the recovery to be `RESULT_VALIDATED`, its configured gate receipt, both fixed
+recovery Slurm streams, and a valid gate hash authenticated by
+`observe-recovery`. The collected recovery gate hash MUST match that observed
+identity, and every recovery gate result MUST be included in the private
+`RAW_COLLECTED` record. An unused released reserve creates no recovery evidence
+obligation.

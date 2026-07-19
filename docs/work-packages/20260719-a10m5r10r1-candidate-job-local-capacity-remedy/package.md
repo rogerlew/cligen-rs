@@ -1,6 +1,6 @@
 # A10M5R10R1 — Candidate Job-Local Capacity Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-PYTHON311-CONTROL-PLANE`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -146,3 +146,34 @@ exact `HOLD-A10M5R10R1-*` condition without interpreting candidate science.
 - `artifacts/jobs/` — immutable asset preparation, authority/plan generation,
   remote admission enforcement, durable setup diagnostics, and complete
   control/candidate job sources.
+- `artifacts/execution-disposition.md`, `artifacts/operational-summary.json`,
+  and `artifacts/resource-ledger.md` — the executed run, exact pre-science
+  failure, accounting, toolkit closure limitation, and successor boundary;
+- `artifacts/cleanup-record.json` — owner-marker-bound manual cleanup proof
+  after the toolkit's mandatory-admission collection contract could not close
+  the failed matrix; and
+- `artifacts/gate-results.md` and `artifacts/review.md` — validation and review.
+
+## Executed disposition
+
+Run `a10m5r10r1-candidate-job-local-capacity-remedy-r0` closed at
+`HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE`. Control job `1014042` authenticated
+its submission admission and then failed in one second because the wrapper
+invoked the host default `/usr/bin/python3` (Python 3.6) for
+`setup_diagnostics.py`, whose frozen source requires Python 3.11. No runtime
+archive, wheelhouse, corpus, or scientific process was opened.
+
+The remaining ten registered roles were exhausted only to make the toolkit
+matrix terminal. Each intentionally lacked an admission receipt and therefore
+failed in one second before runtime extraction; every job-local cleanup gate
+passed. The toolkit then could not collect because its evidence allowlist
+requires a PASS admission receipt for every role, while the admission protocol
+correctly writes PASS-only receipts. Real durable evidence was preserved under
+the package-private controller root, and the exact staged remote root was
+removed with the toolkit's owner-marker-validated `clean.sh`. No candidate
+science or selector interpretation is authorized.
+
+A10M5R10R1R1 is the bounded corrective successor. It preserves the complete
+scientific and capacity contract, changes only the pre-runtime control-plane
+interpreter to explicit `/usr/bin/python3.11`, and reruns control plus all ten
+candidate roles under a fresh authority.

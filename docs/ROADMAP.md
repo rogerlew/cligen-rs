@@ -457,7 +457,21 @@ supports no architecture conclusion. Corrective
 [A10M5R10R1](work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/package.md)
 preserves the complete scientific contract and reruns all roles under five
 two-job waves, one authenticated bootstrap at a time, durable setup receipts,
-and verified wheel/cache deletion before science.
+and verified wheel/cache deletion before science. Its control job `1014042`
+then failed before setup because the pre-runtime wrapper used the host default
+Python 3.6 for Python 3.11 diagnostics. No runtime, corpus, or science opened;
+the ten dependents also failed closed before admission, all eleven job-local
+cleanups passed, and the exact remote root was manually removed under the
+toolkit owner-marker contract. The run closed at
+`HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE` with no architecture conclusion.
+Operational follow-up
+[A10M5O1R2](work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/package.md)
+is complete at `A10M5O1R2-TERMINAL-FAILURE-CLOSURE-READY`: a future failed
+upstream role can atomically stop never-submitted dependents, collect the exact
+sparse evidence surface, and close without fabricated records. The next fresh
+portfolio run must explicitly pin `/usr/bin/python3.11` for every pre-runtime
+control-plane invocation while preserving the unchanged science and wave
+contract.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
