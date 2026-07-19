@@ -98,7 +98,8 @@ Start from [templates/package.md](templates/package.md).
 | [20260719-a10m5r8r3-calendar-end-exclusion-remedy](20260719-a10m5r8r3-calendar-end-exclusion-remedy/package.md) | EXECUTED-HOLD-CORE-OBJECTIVE-NOT-SUPPORTED |
 | [20260719-a10-calendar-contract-hardening](20260719-a10-calendar-contract-hardening/package.md) | EXECUTED-COMPLETE |
 | [20260719-a10m5r9-climate-normal-residual-architecture](20260719-a10m5r9-climate-normal-residual-architecture/package.md) | EXECUTED-HOLD-RESIDUAL-ARCHITECTURE-NOT-SUPPORTED |
-| [20260719-a10m5r10-parallel-architecture-portfolio](20260719-a10m5r10-parallel-architecture-portfolio/package.md) | SCAFFOLDED |
+| [20260719-a10m5r10-parallel-architecture-portfolio](20260719-a10m5r10-parallel-architecture-portfolio/package.md) | EXECUTED-HOLD-JOB-LOCAL-CAPACITY |
+| [20260719-a10m5r10r1-candidate-job-local-capacity-remedy](20260719-a10m5r10r1-candidate-job-local-capacity-remedy/package.md) | SCAFFOLDED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |

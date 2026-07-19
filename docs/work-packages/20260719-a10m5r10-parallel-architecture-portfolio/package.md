@@ -1,6 +1,6 @@
 # A10M5R10 — Parallel Architecture Portfolio
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-JOB-LOCAL-CAPACITY`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -248,3 +248,20 @@ profile work.
   closure;
 - `artifacts/review.md`, `gate-results.md`, and `verify_result.py` — final
   review and committed verification.
+
+## Execution result
+
+Run `a10m5r10-parallel-architecture-portfolio-r0` closed at
+`HOLD-A10M5R10-JOB-LOCAL-CAPACITY`. Control materialization and both physics
+roles passed, but the other eight candidate roles failed during environment
+bootstrap in two four-job batches. Four concurrent bootstraps exceeded the
+shared node-local temporary-storage capacity before the science entrypoint
+could publish candidate evidence. The selector was therefore not run, and no
+architecture conclusion is drawn from this incomplete matrix.
+
+The toolkit settled 103 charged GPU-minutes, collected sanitized evidence,
+verified every supervised job-local target absent, removed the exact durable
+remote root, released the unused cleanup reserve, and closed the authority.
+Corrective A10M5R10R1 reruns the unchanged full portfolio with two live jobs,
+one authenticated bootstrap at a time, and verified wheel/cache deletion
+before science.

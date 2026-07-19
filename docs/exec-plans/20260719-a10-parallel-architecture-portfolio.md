@@ -14,11 +14,13 @@ retains up to three configurations. The campaign is ready to continue only if
 at least two eligible configurations survive; otherwise it closes with an
 honest scientific HOLD and complete comparison evidence.
 
-The execution optimizes wall time rather than GPU-minute minimization. After a
-single control-materialization predecessor, ten independent one-L40 jobs can
-run concurrently. Each job owns one family/capacity pair and executes all
-three registered seeds, which keeps matched-seed evidence and failure state
-together without using inefficient multi-rank synchronization.
+The execution optimizes wall time rather than GPU-minute minimization. The
+first run demonstrated that ten independent one-L40 roles are scientifically
+appropriate but four simultaneous environment bootstraps are not operationally
+admissible on the shared node-local filesystem. A10M5R10R1 therefore runs the
+same ten roles in five two-job waves, admits only one authenticated bootstrap
+at a time, and preserves three-seed evidence within each role without using
+inefficient multi-rank synchronization.
 
 ## Progress
 
@@ -28,11 +30,24 @@ together without using inefficient multi-rank synchronization.
   common objective, physics boundary, eligibility, Pareto, and retention rule.
 - [x] (2026-07-19) Scaffolded the package, research specification, machine
   contract, and this living ExecPlan.
-- [ ] Publish the immutable implementation source and prospective verifier.
-- [ ] Run complete core-plus-`srad` Daymet preflight before authority creation.
-- [ ] Initialize the 935 GPU-minute authority and materialize all six controls.
-- [ ] Dispatch, authenticate, and collect the ten concurrent family-capacity
-  roles.
+- [x] (2026-07-19) Published immutable A10M5R10 implementation source and
+  prospective verifier at `cbf73d781df09f466d66e31d2569ca19ffaa0faf`.
+- [x] (2026-07-19) Passed complete core-plus-`srad` Daymet preflight before
+  authority creation.
+- [x] (2026-07-19) Initialized the first 935 GPU-minute authority and
+  materialized all six controls exactly in job `1014028`.
+- [x] (2026-07-19) Submitted and observed all ten first-run roles. Eight
+  bootstraps failed from aggregate node-local capacity; physics jobs `1014039`
+  and `1014040` passed, so the matrix remained incomplete.
+- [x] (2026-07-19) Collected and closed the first run at
+  `HOLD-A10M5R10-JOB-LOCAL-CAPACITY` with 103 charged GPU-minutes and exact
+  cleanup.
+- [x] (2026-07-19) Scaffolded A10M5R10R1 with unchanged science, complete byte
+  pinning, authenticated setup/admission evidence, and five bounded waves.
+- [ ] Publish A10M5R10R1 source, replay preflight, initialize its fresh
+  authority, and materialize all six controls.
+- [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1 roles
+  under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
   retention, and publish the terminal.
 - [ ] Reconcile accounting, exact cleanup, reserve, authority close, package
@@ -55,6 +70,14 @@ together without using inefficient multi-rank synchronization.
 - Four-rank NCCL on node03 uses host shared memory and is markedly slower than
   one GPU. Ten independent one-GPU jobs provide useful concurrency without
   that communication path.
+- Four simultaneous A10M5R10 environment bootstraps each needed at least
+  10.53 GB before science. Two successive four-job batches exhausted the
+  shared temporary filesystem; two concurrent jobs then completed normally.
+  Per-job capacity checks did not account for aggregate same-node expansion.
+- Setup diagnostics originally lived only under supervised job-local roots,
+  so successful cleanup erased the failure detail and left empty Slurm
+  streams. Durable redacted setup and admission receipts are required before
+  the corrective authority opens.
 
 ## Decision Log
 
@@ -77,13 +100,23 @@ together without using inefficient multi-rank synchronization.
   silently completed by another job or retried after outcome inspection.
 - Retain multiple eligible Pareto configurations rather than forcing a single
   winner. Two retained configurations are required for a READY terminal.
+- Do not splice the two successful first-run physics roles into a later
+  portfolio. A coherent selector lineage requires a fresh control and all ten
+  candidate roles under one corrective run identity.
+- Preserve useful concurrency with five waves of two live jobs. Submit the
+  second member only after the first proves setup complete and payload cleanup;
+  admit the next wave only after both prior roles are terminal, observed, and
+  job-local-clean.
 
 ## Outcomes & Retrospective
 
-The package is scaffolded and has not consumed compute or opened an authority.
-This section must be updated after execution with per-family/capacity results,
-retained identities, resource use, operational reconciliation, and a direct
-comparison with the intended reduction in scientific wall time.
+The first package run consumed 103 charged GPU-minutes and closed cleanly at an
+operational HOLD. Its exact controls and two physics results demonstrate that
+the corrected science code runs, but eight missing candidate roles prohibit
+selection or architecture interpretation. A10M5R10R1 is the active corrective
+run. This section must be updated after its execution with all ten
+family/capacity results, retained identities, resource use, operational
+reconciliation, and the realized wall-time effect of bounded concurrency.
 
 ## Context and Orientation
 
@@ -130,12 +163,16 @@ predecessor reconstructs P1 and P2 for all three seeds and publishes immutable
 control/checkpoint/random-field records. Acceptance is six exact checkpoint
 identities and no protected-role access.
 
-Submit the ten family-capacity roles together after the predecessor succeeds.
-Each role requests one typed L40 for 90 minutes, verifies its assets and
-calendar locally, executes its three seeds, scores all 240 validation points,
-publishes complete learning curves and metrics, and removes job-local state.
-Acceptance is ten authenticated terminal receipts and thirty complete candidate
-rows; partial rows remain failures rather than being imputed.
+The first run submitted the ten family-capacity roles after the predecessor
+succeeded and exposed an aggregate bootstrap-capacity defect. The corrective
+run submits five deterministic waves of two. The second role in a wave waits
+for an authenticated setup-ready receipt from the first; the next wave waits
+for both roles to be terminal, toolkit-observed, and job-local-clean. Each role
+still requests one typed L40 for 90 minutes, verifies its assets and calendar
+locally, executes its three seeds, scores all 240 validation points, publishes
+complete learning curves and metrics, and removes job-local state. Acceptance
+is ten authenticated terminal receipts and thirty complete candidate rows;
+partial rows remain failures rather than being imputed.
 
 ### Milestone 3: decision and closure
 
@@ -167,6 +204,43 @@ release all ten one-L40 role submissions. Submit them without DDP/NCCL and
 observe each role exactly once. Concrete toolkit commands, run IDs, authority
 hashes, Slurm job IDs, and collection commands must be appended here when the
 implementation fixes those identifiers.
+
+For A10M5R10R1, set `RUN_ID` to
+`a10m5r10r1-candidate-job-local-capacity-remedy-r0`, set `LOCAL_RUN_STATE` to
+the package-private toolkit run state, and set `REMOTE_RUN_ROOT` to the exact
+staged run root. Every submission uses this admission sequence:
+
+1. Copy the current toolkit `private/state.json` to
+   `REMOTE_RUN_ROOT/admission-input/state.json`. Copy all currently published
+   `job-*.json` receipts needed by the target gate into
+   `REMOTE_RUN_ROOT/admission-input/publication/`. Do not copy or edit toolkit
+   state in the other direction.
+2. On the login host, run staged `admission_checker.py` with the staged
+   `job-local-capacity-contract.json`, `asset-manifest.json`, copied state,
+   copied publication directory, exact remote root, target role, and exact
+   `admissions/{role}.json` output. For the second role in a wave, also pass
+   `--setup first-role=REMOTE_RUN_ROOT/results/first-role/setup.json`.
+3. Require exit zero and authenticate the receipt's `PASS`, role, run, plan,
+   source, asset-manifest, input hashes, and all-true gates. Immediately invoke
+   the toolkit's serial `submit --job-role ROLE --attempt-index 0`. The remote
+   job wrapper independently rejects a missing, stale, wrong-role, or failed
+   receipt before runtime extraction.
+4. After the first role is submitted, poll only its durable `setup.json` until
+   the self-hash, scheduler identity, admission identity, exact staged assets,
+   pip install/check, payload deletion, and `ready_for_science` all pass. Then
+   refresh the state snapshot, admit, and submit the second role.
+5. Wait for both roles to become scheduler-terminal. Inspect their final
+   evidence and accounting, then invoke toolkit `observe` exactly once per
+   role, serially. Refresh the state and publication snapshots only after both
+   observations. The next wave's first-role admission must prove both prior
+   job receipts terminal and `job_local_cleanup: true`.
+
+The five exact waves are monthly K1/K2, annual-monthly K1/K2, joint-factor
+K1/K2, climate-normal K1/K2, and physics-conditioned K1/K2. At no point may a
+third candidate be live or a second environment be bootstrapping. A failed
+admission receipt is evidence, not permission to bypass the checker. Any
+ambiguous job-local cleanup follows the toolkit's one exact-node recovery path;
+the five-minute reserve never runs science.
 
 After collection, run the package result verifier and repository gates:
 
@@ -247,5 +321,9 @@ production work requires separate authority.
 ## Revision note
 
 2026-07-19: created the prospective parallel portfolio plan with five families,
-two matched capacities, three seeds, ten concurrent one-L40 roles, and a frozen
-multi-candidate Pareto decision.
+two matched capacities, three seeds, ten independent one-L40 roles, and a
+frozen multi-candidate Pareto decision.
+
+2026-07-19: recorded the first run's aggregate job-local capacity HOLD and
+continued under A10M5R10R1 with complete science byte pinning, durable setup
+diagnostics, authenticated submission admission, and five two-role waves.

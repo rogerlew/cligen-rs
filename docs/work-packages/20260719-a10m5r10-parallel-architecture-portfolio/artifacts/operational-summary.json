@@ -1,0 +1,140 @@
+{
+  "authority": {
+    "authority_id": "a10m5r10-parallel-architecture-portfolio-authority",
+    "ceiling_gpu_minutes": 935,
+    "ledger_head_sha256": "e3284290dac2763406e299ea70fea28b8a8aee762fd96f6af7c073c4bc4fbeee",
+    "plan_id": "2a4145b3ca25341377d6e8dd825909b4f925e2988cde064386458600c3dd1f3d"
+  },
+  "collection": {
+    "archive_bytes": 1290240,
+    "archive_sha256": "ddc24fcf6e71b8cbca4b79f9d2d7ea8f8f44e45f90d45cfb2d456f9cf77fc6ff",
+    "receipt_sha256": "a295e04b04f3fb867e3728fe401d5dc39b94ffaf4498567c1aebc70985597943",
+    "sanitization_policy": "lemhi-evidence-projection-4"
+  },
+  "execution": {
+    "actual_gpu_minutes": 103,
+    "attempt_count": 11,
+    "cleanup_receipt_sha256": "73d9d25810209f381b63e316ad9ea7fc446d00c68e575571ae240fe4111c2bda",
+    "failed_candidate_roles": 8,
+    "job_local_cleanup": "verified_absent",
+    "recovery_invoked": false,
+    "remote_absent": true,
+    "successful_candidate_roles": 2,
+    "terminal_receipt_sha256": "a68ec688df7755aa07547dcd929edccdd5aaae795bfef5cc4cc098a2518b3d21"
+  },
+  "jobs": [
+    {
+      "actual_gpu_minutes": 15,
+      "actual_gpu_seconds": 885,
+      "job_id": "1014028",
+      "passed": true,
+      "receipt_sha256": "2bb35989199500afaa3d9b43e413fcb4cc68a8c973615b6d96d6edbfc28282b2",
+      "role": "control-materialization"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 136,
+      "job_id": "1014031",
+      "passed": false,
+      "receipt_sha256": "5ae58c2ed82f4b5f143dd5a28442d9fa56cb6234c6291c13bee520ddc5b88435",
+      "role": "monthly-residual-adapter-k1"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 133,
+      "job_id": "1014032",
+      "passed": false,
+      "receipt_sha256": "5e13984603c8760afd791b979ce44612ca24f85cbe37eff5aa1ef7319ed910a2",
+      "role": "monthly-residual-adapter-k2"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 133,
+      "job_id": "1014033",
+      "passed": false,
+      "receipt_sha256": "6cf3570fbe28752cd7de059b05e8c3965d62b0c6ced1d610133f8945fb3278c2",
+      "role": "annual-monthly-residual-adapter-k1"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 130,
+      "job_id": "1014034",
+      "passed": false,
+      "receipt_sha256": "5e350c4f00a63d93424bfc8129f1550a3cbf8301ebf1eea8ab17d635276ed6e7",
+      "role": "annual-monthly-residual-adapter-k2"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 140,
+      "job_id": "1014035",
+      "passed": false,
+      "receipt_sha256": "7021c3f1b11e10be8a094eb64063af5147921d81ed90bd6e96630a590595318a",
+      "role": "hierarchical-joint-factor-adapter-k1"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 140,
+      "job_id": "1014036",
+      "passed": false,
+      "receipt_sha256": "7583d63ef4b56a39b7c05b5c0461a70147b9b1b52c74c98ba349e5acd5cf9a5b",
+      "role": "hierarchical-joint-factor-adapter-k2"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 140,
+      "job_id": "1014037",
+      "passed": false,
+      "receipt_sha256": "82f434591cd05b3f1e4dd47d0b58286ecc1e67707e9591f881839030903c7a05",
+      "role": "climate-normal-hierarchical-state-space-k1"
+    },
+    {
+      "actual_gpu_minutes": 3,
+      "actual_gpu_seconds": 140,
+      "job_id": "1014038",
+      "passed": false,
+      "receipt_sha256": "654b7139feaa4ae178518c2ec5ec36016dcef5d39370943a021217c1db562a0d",
+      "role": "climate-normal-hierarchical-state-space-k2"
+    },
+    {
+      "actual_gpu_minutes": 31,
+      "actual_gpu_seconds": 1836,
+      "job_id": "1014039",
+      "passed": true,
+      "receipt_sha256": "7b717b6fc7704560329fe460e32b41b1087d4214685164d52d73f657e5bffd66",
+      "role": "physics-conditioned-hierarchical-adapter-k1"
+    },
+    {
+      "actual_gpu_minutes": 33,
+      "actual_gpu_seconds": 1970,
+      "job_id": "1014040",
+      "passed": true,
+      "receipt_sha256": "6af2378df829100aa6cd1f7bef7e6aac3f5dfd659c6e017bf818657e1cd6bf62",
+      "role": "physics-conditioned-hierarchical-adapter-k2"
+    }
+  ],
+  "package_id": "20260719-a10m5r10-parallel-architecture-portfolio",
+  "root_cause": {
+    "candidate_science_publication_absent_for_failed_roles": true,
+    "classification": "aggregate-node-local-bootstrap-capacity",
+    "concurrent_bootstraps_in_failed_batches": 4,
+    "environment_tree_bytes_lower_bound": 6665030821,
+    "failed_batches": 2,
+    "per_bootstrap_bytes_lower_bound": 10531009701,
+    "slurm_streams_empty_after_supervised_cleanup": true,
+    "wheelhouse_archive_bytes": 3865978880,
+    "wheelhouse_sha256": "30344178212946f5a37df03a6ccdc82025d198c07467adf55d87b9d5918e730e"
+  },
+  "run_id": "a10m5r10-parallel-architecture-portfolio-r0",
+  "schema_version": 1,
+  "science": {
+    "control_matrix_passed": true,
+    "portfolio_decision_published": false,
+    "portfolio_summary_published": false,
+    "protected_roles_opened": [],
+    "selector_run": false,
+    "scientific_interpretation_authorized": false
+  },
+  "source_commit": "cbf73d781df09f466d66e31d2569ca19ffaa0faf",
+  "successor_package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+  "terminal": "HOLD-A10M5R10-JOB-LOCAL-CAPACITY"
+}

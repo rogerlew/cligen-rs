@@ -436,8 +436,8 @@ adapter, compared directly with frozen P1. Solar radiation and broader
 latitude/day-of-year/precipitation coupling remain closed pending a passing
 core adapter.
 
-**Parallel architecture portfolio authorized (2026-07-19):** the operator
-replaced the serial one-candidate cadence with
+**Parallel architecture portfolio operational remedy in execution
+(2026-07-19):** the operator replaced the serial one-candidate cadence with
 [A10M5R10](work-packages/20260719-a10m5r10-parallel-architecture-portfolio/package.md),
 a prospectively frozen comparison of five stochastic architecture families at
 matched P1/P2 capacities and three seeds. Its
@@ -448,7 +448,16 @@ physics-conditioned solar/latitude/day-of-year/precipitation arm without
 observed-weather input, dispatch independent one-L40 jobs concurrently, and
 retain up to three eligible Pareto configurations. Confirmation remains
 sealed; this development package optimizes scientific wall time rather than
-GPU-minute economy.
+GPU-minute economy. The first run closed at
+`HOLD-A10M5R10-JOB-LOCAL-CAPACITY`: exact control materialization and both
+physics roles passed, but two batches of four simultaneous environment
+bootstraps exhausted shared node-local temporary storage before the other
+eight roles published science. The incomplete matrix was not selected and
+supports no architecture conclusion. Corrective
+[A10M5R10R1](work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/package.md)
+preserves the complete scientific contract and reruns all roles under five
+two-job waves, one authenticated bootstrap at a time, durable setup receipts,
+and verified wheel/cache deletion before science.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
