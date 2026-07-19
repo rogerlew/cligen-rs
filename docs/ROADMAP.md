@@ -480,9 +480,13 @@ before runtime extraction and could not author its registered gate. No
 candidate was submitted, the supervisor removed job-local state, and the exact
 durable root was manually removed. The package closes at
 `HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT` without a science conclusion. The
-next bounded remedy extracts the already verified portable runtime with POSIX
-tools and uses it for Python 3.11 diagnostics, while retaining a host-compatible
-minimal failure gate so toolkit observation and matrix stop remain available.
+active bounded remedy is
+[A10M5R10R1R2](work-packages/20260719-a10m5r10r1r2-portable-bootstrap-control-plane-remedy/package.md).
+It extracts the already verified portable runtime with POSIX tools and uses it
+for Python 3.11 diagnostics, while retaining a host-compatible minimal failure
+gate so toolkit observation and matrix stop remain available. Its unchanged
+science, five two-role waves, exact predecessor bindings, bounded pre-runtime
+log, and fail-closed admission policy passed independent scaffold review.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

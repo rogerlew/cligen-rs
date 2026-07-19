@@ -64,9 +64,12 @@ inefficient multi-rank synchronization.
   `HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT`: node03 lacked the login-only
   interpreter, no science opened, no candidate was submitted, and exact
   job-local/durable cleanup passed.
+- [x] (2026-07-19) Scaffolded and independently reviewed A10M5R10R1R2 with
+  POSIX portable-runtime extraction, a 65,536-byte pre-runtime log cap,
+  Python-3.6-compatible failed-gate publication, and unchanged science.
 - [ ] Publish the fresh A10M5R10R1R2 portable-bootstrap remedy, replay
   preflight, initialize its authority, and materialize all six controls.
-- [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1 roles
+- [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1R2 roles
   under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
   retention, and publish the terminal.
@@ -252,8 +255,8 @@ observe each role exactly once. Concrete toolkit commands, run IDs, authority
 hashes, Slurm job IDs, and collection commands must be appended here when the
 implementation fixes those identifiers.
 
-For A10M5R10R1R1, set `RUN_ID` to
-`a10m5r10r1r1-python311-control-plane-remedy-r0`, set `LOCAL_RUN_STATE` to
+For A10M5R10R1R2, set `RUN_ID` to
+`a10m5r10r1r2-portable-bootstrap-control-plane-remedy-r0`, set `LOCAL_RUN_STATE` to
 the package-private toolkit run state, and set `REMOTE_RUN_ROOT` to the exact
 staged run root. Every submission uses this admission sequence:
 
@@ -311,7 +314,7 @@ preflight must demonstrate 10,958/10,950 full-period core and physics counts,
 leap-year December 31, exclusive target-end behavior, at least 28 observations
 per year-month, and all 1,440 role-eligible objects.
 
-The A10M5R10R1R1 source commit must contain the successor package, be pushed to
+The A10M5R10R1R2 source commit must contain the successor package, be pushed to
 `main`, descend from toolkit-hardening commit
 `0ddffd9ac5db2440f74f54285e0df1c2ac856c98`, and have no diff from that commit
 over the four protected toolkit implementation paths. Before authority
@@ -390,3 +393,8 @@ the unchanged science toward a fresh Python 3.11 control-plane remedy.
 2026-07-19: recorded A10M5R10R1R1's compute-node Python 3.11 absence and exact
 cleanup, then continued the unchanged science toward a portable-runtime-first
 control plane with an observable pre-runtime failure path.
+
+2026-07-19: scaffolded the A10M5R10R1R2 portable-bootstrap successor and
+accepted it after independent review. The review required admission to close
+after an observed failed role and capped the POSIX pre-runtime setup log at
+65,536 bytes before execution authority could open.

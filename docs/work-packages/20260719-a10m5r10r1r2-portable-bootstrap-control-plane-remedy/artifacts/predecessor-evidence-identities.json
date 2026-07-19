@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r10r1r2-portable-bootstrap-control-plane-remedy",
+  "predecessors": {
+    "a10m5r10r1r1_compute_python_hold": {
+      "package_id": "20260719-a10m5r10r1r1-python311-control-plane-remedy",
+      "run_id": "a10m5r10r1r1-python311-control-plane-remedy-r0",
+      "source_commit": "9bdee723deeb2185045b3fcb1e1455ac10abdedc",
+      "record_commit": "6abdac4177e638817b5d1a99f9415f2336a2c4af",
+      "terminal": "HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT",
+      "files": {
+        "cleanup-record.json": {
+          "bytes": 453,
+          "sha256": "1d0e9c258c6b9012484b818d05fab9b7cbccff63fe5557b1e0779f5420e2d48c",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/artifacts/cleanup-record.json"
+        },
+        "execution-disposition.md": {
+          "bytes": 1632,
+          "sha256": "cf4a26521301b1f75117c505c9a7e6ed5bbf8992cbe618a52fe3546a95cd3e1b",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/artifacts/execution-disposition.md"
+        },
+        "operational-summary.json": {
+          "bytes": 1833,
+          "sha256": "50c6d672507ab9dc2fa623433e4ae092b78c5fb8fcb0709ad31463ce6bb876ea",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/artifacts/operational-summary.json"
+        },
+        "resource-ledger.md": {
+          "bytes": 1080,
+          "sha256": "5864404c12f3ec2b372976d010275e4d72433f95e9f4c6ce3189304c9dfe19cd",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/artifacts/resource-ledger.md"
+        }
+      }
+    },
+    "a10m5r10r1_operational_hold": {
+      "package_id": "20260719-a10m5r10r1-candidate-job-local-capacity-remedy",
+      "run_id": "a10m5r10r1-candidate-job-local-capacity-remedy-r0",
+      "terminal": "HOLD-A10M5R10R1-PYTHON311-CONTROL-PLANE",
+      "files": {
+        "cleanup-record.json": {
+          "bytes": 541,
+          "sha256": "b0d72d8e8b31ef6733702a0a1ead2e0543d3a956d2140cbdf6e6c83a8e4a62bb",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/artifacts/cleanup-record.json"
+        },
+        "execution-disposition.md": {
+          "bytes": 2349,
+          "sha256": "e395019714db70428f61cc078277a41926264b0c956c530a1c12c49cfea743a8",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/artifacts/execution-disposition.md"
+        },
+        "operational-summary.json": {
+          "bytes": 1655,
+          "sha256": "65e7cbb900a497f4fca5fd506355a23433d8a8cf313ef620b22864b1acf03f36",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/artifacts/operational-summary.json"
+        },
+        "resource-ledger.md": {
+          "bytes": 837,
+          "sha256": "2aa9d9b6d58428aee592bf5de6d393e04dc4a2e2969a0659c21e8688e4185190",
+          "source_path": "docs/work-packages/20260719-a10m5r10r1-candidate-job-local-capacity-remedy/artifacts/resource-ledger.md"
+        }
+      }
+    },
+    "a10m5o1r2_toolkit_hardening": {
+      "package_id": "20260719-a10m5o1r2-terminal-failure-closure-hardening",
+      "source_commit": "0ddffd9ac5db2440f74f54285e0df1c2ac856c98",
+      "terminal": "A10M5O1R2-TERMINAL-FAILURE-CLOSURE-READY",
+      "files": {
+        "execution-disposition.md": {
+          "bytes": 864,
+          "sha256": "f947b86c22141ba4647bfadc4689bde56c3cb998d3c40fac79bf13c627228969",
+          "source_path": "docs/work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/artifacts/execution-disposition.md"
+        },
+        "gate-results.md": {
+          "bytes": 1125,
+          "sha256": "a75265a0c937b5629f9efb36c4cb8b53b0394daed105f57114bfb2818d6eabd0",
+          "source_path": "docs/work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/artifacts/gate-results.md"
+        },
+        "package.md": {
+          "bytes": 4365,
+          "sha256": "e7889128a4e02ad0eb25fb9dc674048886e126c46c84cdfcbcbd915b5a96ef4f",
+          "source_path": "docs/work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/package.md"
+        },
+        "review.md": {
+          "bytes": 1733,
+          "sha256": "1cd1d81ca7429c25aa99c90ed68d48f810d164dd5b989bd03f223a5859956c24",
+          "source_path": "docs/work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/artifacts/review.md"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "fields": [
+    "prcp",
+    "tmax",
+    "tmin",
+    "srad"
+  ],
+  "full_period": {
+    "calendar_axis_rows": 10958,
+    "core_observed_rows": 10950,
+    "physics_observed_rows": 10950
+  },
+  "profile_id": "daymet_official_365_v1",
+  "representative_window": {
+    "calendar_axis_rows": 2922,
+    "core_observed_rows": 2920,
+    "end_exclusive": "1988-01-01",
+    "physics_observed_rows": 2920
+  },
+  "roles": {
+    "candidate_fit": 1200,
+    "fit_validation": 240
+  },
+  "solar_missing_values": {
+    "candidate_fit": 9600,
+    "fit_validation": 1920
+  },
+  "valid": true
+}
