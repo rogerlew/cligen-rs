@@ -1,6 +1,6 @@
 # A10M5R10R1R1 — Python 3.11 Control-Plane Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-COMPUTE-PYTHON311-ABSENT`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -125,3 +125,26 @@ evidence, resource, or cleanup hold. An operational failure records an exact
 - `artifacts/jobs/` — immutable asset preparation, authority/plan generation,
   remote admission enforcement, durable setup diagnostics, and complete
   control/candidate job sources.
+
+## Executed disposition
+
+Run `a10m5r10r1r1-python311-control-plane-remedy-r0` closed operationally at
+`HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT`. The login host authenticated
+`/usr/bin/python3.11` as Python 3.11.13 and the control admission passed all 16
+gates. Control job `1014053` then failed in one second on node03 because that
+compute image has no `/usr/bin/python3.11`. No runtime archive, wheelhouse,
+corpus, controls, candidate science, or selector opened, and no candidate was
+submitted.
+
+The supervised job-local root was removed successfully, but the same missing
+interpreter prevented the outer wrapper from writing its registered gate
+receipt. Toolkit `observe` therefore held at `EVIDENCE_INCOMPLETE`, so the
+atomic matrix-stop precondition could not be met. The authentic admission,
+Slurm streams, supervisor status, private state, and ledger were retained; the
+exact durable remote root was then removed with the unmodified owner-marker and
+plan-hash validating cleanup script and independently proved absent.
+
+The bounded successor must make compute bootstrap independent of a host Python
+3.11 binary: extract the already hash-verified portable runtime with POSIX
+tools, use that runtime for Python 3.11 diagnostics, and retain a host-compatible
+minimal failure-gate path so every submitted role remains observable.

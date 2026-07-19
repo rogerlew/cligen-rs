@@ -1,0 +1,46 @@
+{
+  "authority_revision_sha256": "b3176058b91b583abf905b4b939299c0218bf1d6fcb12cad737fb8b48a6a9f7a",
+  "execution": {
+    "actual_gpu_minutes": 1,
+    "controller_requested_gpu_minutes": 35,
+    "candidate_admissions_issued": 0,
+    "candidate_jobs_submitted": 0,
+    "candidate_science_started": false,
+    "control_admission_gates_passed": 16,
+    "control_job_id": "1014053",
+    "control_science_started": false,
+    "control_requested_gpu_minutes": 30,
+    "control_reservation_status": "submitted-unsettled",
+    "job_local_cleanup_passed": true,
+    "recovery_actual_gpu_minutes": 0,
+    "recovery_requested_gpu_minutes": 5,
+    "recovery_reservation_status": "reserved-unsettled",
+    "remote_absent": true,
+    "selector_run": false,
+    "toolkit_observation_complete": false,
+    "toolkit_run_state_at_manual_cleanup": "MATRIX_ACTIVE"
+  },
+  "package_id": "20260719-a10m5r10r1r1-python311-control-plane-remedy",
+  "plan_id": "07f702afb665d4bfab92012161bf95172dc6fd84dce674dd7db4d561b74d10c1",
+  "preserved_evidence": {
+    "file_count": 10,
+    "logical_manifest_sha256": "dd9aa0a22bcd87f7175601419f2cc35a8adacf900bc09297724ef6a00d20fce4"
+  },
+  "root_cause": {
+    "classification": "compute-python311-binary-absent",
+    "compute_node": "node03",
+    "compute_path": "/usr/bin/python3.11",
+    "login_path_verified": true,
+    "runtime_archive_opened": false
+  },
+  "run_id": "a10m5r10r1r1-python311-control-plane-remedy-r0",
+  "schema_version": 1,
+  "science": {
+    "architecture_interpretation_authorized": false,
+    "portfolio_decision_published": false,
+    "portfolio_summary_published": false
+  },
+  "source_commit": "9bdee723deeb2185045b3fcb1e1455ac10abdedc",
+  "successor_package_id": "20260719-a10m5r10r1r2-portable-bootstrap-control-plane-remedy",
+  "terminal": "HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT"
+}

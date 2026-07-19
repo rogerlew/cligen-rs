@@ -58,9 +58,14 @@ inefficient multi-rank synchronization.
   explicit `/usr/bin/python3.11` login/compute control-plane execution, exact
   R1/toolkit-hardening predecessor bindings, and a real authority-initialization
   smoke test.
-- [ ] Publish a fresh A10M5R10R1R1 source with explicit
-  `/usr/bin/python3.11` pre-runtime control-plane invocations, replay preflight,
-  initialize its authority, and materialize all six controls.
+- [x] (2026-07-19) Published A10M5R10R1R1 at `9bdee723…`, replayed the full
+  calendar, staged and verified assets, and admitted control job `1014053`.
+- [x] (2026-07-19) Closed A10M5R10R1R1 at
+  `HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT`: node03 lacked the login-only
+  interpreter, no science opened, no candidate was submitted, and exact
+  job-local/durable cleanup passed.
+- [ ] Publish the fresh A10M5R10R1R2 portable-bootstrap remedy, replay
+  preflight, initialize its authority, and materialize all six controls.
 - [ ] Dispatch, authenticate, observe, and collect the ten A10M5R10R1 roles
   under machine-enforced wave admission.
 - [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
@@ -97,6 +102,9 @@ inefficient multi-rank synchronization.
   `/usr/bin/python3.11` is installed and used successfully by the login-side
   admission checker. Pre-runtime diagnostics cannot rely on the default
   interpreter before the portable science runtime is extracted.
+- Lemhi's compute image also lacks `/usr/bin/python3.11` entirely. An absolute
+  interpreter path proven on the login host is not a compute capability proof;
+  portable-runtime extraction must precede Python 3.11 diagnostics.
 - A PASS-only admission surface made the old evidence allowlist impossible to
   collect after an upstream pre-admission failure. The toolkit now separates
   maximum allowlisting from exact presence while retaining mandatory evidence
@@ -133,6 +141,10 @@ inefficient multi-rank synchronization.
 - Preserve A10M5R10R1 as an operational HOLD. Use a fresh run identity for the
   Python 3.11 remedy, and use the toolkit's atomic whole-matrix stop if a future
   exhausted upstream role makes unsubmitted dependents scientifically moot.
+- Preserve A10M5R10R1R1 as a second operational HOLD. Do not probe additional
+  host Python paths. Use POSIX extraction of the already verified portable
+  runtime and ensure a Python-3.6-compatible minimal false gate exists for
+  failures before that runtime is usable.
 
 ## Outcomes & Retrospective
 
@@ -143,8 +155,12 @@ selection or architecture interpretation. A10M5R10R1 then consumed 11 charged
 GPU-minutes and failed before any science because its control-plane interpreter
 was not qualified. Its admission firewall and cleanup worked, but its evidence
 surface also exposed the general terminal-closure gap now closed by A10M5O1R2.
-The active scientific successor is a fresh A10M5R10R1R1 run with unchanged
-science, explicit Python 3.11 control-plane execution, and the hardened toolkit.
+The A10M5R10R1R1 run then spent one GPU-minute proving that compute node03 has
+no `/usr/bin/python3.11`; no science opened and no candidate was submitted. Its
+job-local cleanup passed, but the missing interpreter also prevented gate
+publication and therefore normal toolkit closure. The active scientific
+successor is A10M5R10R1R2 with unchanged science, POSIX portable-runtime
+bootstrap, a host-compatible minimal failure gate, and the hardened toolkit.
 This section must be updated after that execution with all ten family/capacity
 results, retained identities, resource use, operational reconciliation, and
 the realized wall-time effect of bounded concurrency.
@@ -370,3 +386,7 @@ diagnostics, authenticated submission admission, and five two-role waves.
 2026-07-19: recorded A10M5R10R1's pre-runtime Python 3.6 HOLD and exact manual
 cleanup, completed A10M5O1R2 terminal-failure closure hardening, and continued
 the unchanged science toward a fresh Python 3.11 control-plane remedy.
+
+2026-07-19: recorded A10M5R10R1R1's compute-node Python 3.11 absence and exact
+cleanup, then continued the unchanged science toward a portable-runtime-first
+control plane with an observable pre-runtime failure path.

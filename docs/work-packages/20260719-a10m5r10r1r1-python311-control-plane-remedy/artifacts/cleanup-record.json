@@ -1,0 +1,10 @@
+{
+  "cleanup_method": "unmodified-toolkit-owner-marker-and-plan-hash-validated-clean.sh",
+  "job_local_cleanup_passed": true,
+  "package_id": "20260719-a10m5r10r1r1-python311-control-plane-remedy",
+  "plan_id": "07f702afb665d4bfab92012161bf95172dc6fd84dce674dd7db4d561b74d10c1",
+  "remote_absent": true,
+  "run_id": "a10m5r10r1r1-python311-control-plane-remedy-r0",
+  "schema_version": 1,
+  "source_commit": "9bdee723deeb2185045b3fcb1e1455ac10abdedc"
+}

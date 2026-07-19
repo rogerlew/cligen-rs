@@ -474,7 +474,15 @@ control-plane invocation while preserving the unchanged science and wave
 contract. That fresh run is
 [A10M5R10R1R1](work-packages/20260719-a10m5r10r1r1-python311-control-plane-remedy/package.md),
 which binds both predecessor dispositions and the reviewed hardened toolkit
-before opening a new 935 GPU-minute authority.
+before opening a new 935 GPU-minute authority. Its login check passed, but
+control job `1014053` proved node03 has no `/usr/bin/python3.11`; the job failed
+before runtime extraction and could not author its registered gate. No
+candidate was submitted, the supervisor removed job-local state, and the exact
+durable root was manually removed. The package closes at
+`HOLD-A10M5R10R1R1-COMPUTE-PYTHON311-ABSENT` without a science conclusion. The
+next bounded remedy extracts the already verified portable runtime with POSIX
+tools and uses it for Python 3.11 diagnostics, while retaining a host-compatible
+minimal failure gate so toolkit observation and matrix stop remain available.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
