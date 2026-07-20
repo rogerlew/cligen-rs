@@ -9,14 +9,17 @@ monthly and yearly climate across the ratified six-regime temporal protocol.
 
 - [x] Audited the retained portfolio and ratified temporal protocol.
 - [x] Froze the three-candidate scope and downstream solar boundary.
-- [ ] Publish the scaffold and immutable execution assets.
-- [ ] Execute the control and three candidate roles on typed L40s.
+- [x] Published the scaffold and immutable execution assets.
+- [x] Closed A10M5R11 before submission when admission exposed an inherited
+  11-role assertion; zero GPU-minutes consumed.
+- [ ] Execute bounded A10M5R11R1 with the corrected four-role admission guard.
 - [ ] Collect, replay, disposition, review, and reconcile the package.
 
 ## Surprises
 
-None at scaffold. The protocol already contains the required monthly and
-annual dispersions and an explicit leap-century-safe bootstrap year axis.
+The inherited admission checker encoded the predecessor's 11-role total as a
+literal. It failed closed before submission against the intended four-role
+plan. The protocol itself remains unchanged.
 
 ## Decision Log
 

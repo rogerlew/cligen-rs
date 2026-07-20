@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r11-retained-adapter-temporal-generalization",
+  "run_id": "a10m5r11-retained-adapter-temporal-generalization-r0",
+  "terminal": "HOLD-A10M5R11-ADMISSION-ROLE-MATRIX",
+  "source_commit": "504dd67e244f0549d0c269a55b4da5bce542af97",
+  "execution": {
+    "remote_stage_verified": true,
+    "control_admission_passed": false,
+    "jobs_submitted": 0,
+    "gpu_minutes_reserved": 0,
+    "gpu_minutes_consumed": 0
+  },
+  "failure": {
+    "gate": "exact_role_matrix",
+    "planned_total_roles": 4,
+    "checker_required_total_roles": 11,
+    "scientific_interpretation": "none"
+  },
+  "cleanup": {
+    "remote_absent": true,
+    "job_local_cleanup": "not_started",
+    "toolkit_terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+  },
+  "protected_roles_opened": []
+}

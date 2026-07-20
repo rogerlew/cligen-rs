@@ -1,6 +1,6 @@
 # A10M5R11 — Retained Adapter Temporal Generalization
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-ADMISSION-ROLE-MATRIX`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -56,6 +56,20 @@ configuration to pass both inherited temporal gates. Otherwise the scientific
 terminal is `HOLD-A10M5R11-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. Identity,
 calendar, evidence, resource, or cleanup failures receive exact operational
 holds and no scientific interpretation.
+
+## Result
+
+Source, assets, authority, login capability, remote staging, and remote
+identity verification passed. The pre-submit control admission then failed
+closed because the inherited checker asserted 11 total roles instead of the
+four-role A10M5R11 plan. No receipt was published, no Slurm job was submitted,
+and zero GPU-minutes were reserved or consumed. The toolkit authenticated and
+removed the exact staged root and issued
+`LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION`.
+
+The science contract is untouched and no temporal result exists. Bounded
+A10M5R11R1 corrects only the role-count assertion and the admission contract's
+explicit failure-closure flag before opening fresh execution authority.
 
 ## Artifacts
 
