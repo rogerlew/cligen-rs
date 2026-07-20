@@ -18,3 +18,18 @@
 
 Coverage/CRAP is not triggered because no production function under `crates/`
 changes.
+
+## Prepublication result
+
+All scaffold gates that can be exercised before publication pass. The exact
+R14R2 parent and all child assets were authenticated; the changed-file roster
+was exactly the frozen 11-file operational allowlist; frozen science surfaces
+were byte-identical; and the real derived inherited checker passed its complete
+control-role `check()` path. Tamper, reorder, stale identity, symlink, hardlink,
+wrong authority, and receipt-projection failures were exercised and failed
+closed.
+
+The source-exact preparation, fresh authority and plan, submit-lock
+materialization, live role execution, collection, cleanup, and replay-twice
+items are intentionally re-exercised after publication and recorded as run
+evidence rather than claimed from this prepublication scaffold.

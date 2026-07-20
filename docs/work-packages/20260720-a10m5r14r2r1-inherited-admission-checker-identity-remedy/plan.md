@@ -2,12 +2,17 @@
 
 A10M5O1R3 ratified composed admission-checker identities at toolkit commit
 `06df84c882fbe297e93b13fb8c845d5eb500b405`. The steps below describe the
-authorized science successor but are not an executable scaffold today.
+authorized executable science successor. Scaffolding creates no authority,
+reserves no compute, and submits no HPC; execution begins only from exact
+published `main` after review and all gates.
 
 1. Authenticate the exact R14R2 abort receipt, zero-attempt state, published
    source commit, and prepared asset manifest.
-2. Prepare a fresh asset tree from the exact R14R2 tree. Remove inherited
-   admissions and rewrite only fresh operational identities.
+2. Authenticate the locally retained R14R2 prepared tree against its exact
+   manifest `574af0…`; if it is unavailable, deterministically reconstruct it
+   with the exact published R14R2 preparer and canonical R14R1 parent assets.
+   Remove inherited admissions and rewrite only the closed operational
+   allowlist under fresh identities.
 3. Declare the outer and inherited admission checker as an ordered composed
    identity under the ratified A10M5O1R3 `checker_assets` contract. Do not
    patch hard-coded logical names as a package-local compatibility mechanism.

@@ -629,9 +629,10 @@ outer wrapper's logical plan name. The one-off R14R2R1 compatibility package
 was deferred while
 [A10M5O1R3](work-packages/20260720-a10m5o1r3-composed-admission-identity-hardening/package.md),
 added and ratified an ordered composed-checker identity contract in the
-toolkit. The R14R2R1 science successor is now unblocked, but must consume its
-assigned outer and inherited chain slots under fresh identities before the
-unchanged R14R2 portfolio is attempted again.
+toolkit. The R14R2R1 science successor now has an independently accepted
+executable scaffold that consumes its assigned outer and inherited chain slots
+under fresh identities. Its exact-real composition evidence passed; publish
+the scaffold and execute the unchanged R14R2 portfolio under fresh authority.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

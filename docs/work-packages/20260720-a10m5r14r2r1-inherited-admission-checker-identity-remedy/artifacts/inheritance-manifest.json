@@ -3,9 +3,30 @@
     "path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
     "sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629"
   },
-  "executable_scaffold_published": false,
-  "future_scaffold_requirement": "publish and test a closed operational asset-change allowlist before authority creation",
+  "checker_chain": {
+    "logical_names": [
+      "admission_checker.py",
+      "inherited_admission_checker.py"
+    ],
+    "protocol": "ordered-plan-assets-v1"
+  },
+  "executable_scaffold_declared": true,
+  "executable_scaffold_published": true,
+  "publication_required_before_execution": true,
   "operational_change": "consume the ratified ordered outer-and-inherited checker identity contract without aliasing or removing either self-identity gate",
+  "operational_asset_change_allowlist": [
+    "admission_checker.py",
+    "build_control_records.py",
+    "inherited_admission_checker.py",
+    "job-control-materialization.sh",
+    "job-continuous-distribution-head-factorial-portfolio.sh",
+    "job-local-capacity-contract.json",
+    "materialize_admission.py",
+    "portfolio_launcher.py",
+    "run_temporal_replay.py",
+    "setup_diagnostics.py",
+    "temporal_select.py"
+  ],
   "package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
   "parent_abort_sha256": "7f3c7c6a9e73cb3114310cf7ecf1bcaf5ba82bc9f8cef61710f7598693d33e24",
   "parent_asset_manifest_sha256": "574af046f382ea992925cb68b162af553e0b712530b8f4a5894bb47a85bef21a",
@@ -23,6 +44,10 @@
   "toolkit_prerequisite": {
     "commit": "06df84c882fbe297e93b13fb8c845d5eb500b405",
     "package_id": "20260720-a10m5o1r3-composed-admission-identity-hardening",
+    "path_scoped_exact_tree": [
+      "research/a10/lemhi_toolkit",
+      "docs/specifications/SPEC-LEMHI-AGENT-TOOLKIT.md"
+    ],
     "terminal": "A10M5O1R3-COMPOSED-ADMISSION-IDENTITY-READY"
   }
 }

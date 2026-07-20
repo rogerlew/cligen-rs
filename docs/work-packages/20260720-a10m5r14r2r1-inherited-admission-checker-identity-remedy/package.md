@@ -1,6 +1,6 @@
 # A10M5R14R2R1 — Inherited Admission-Checker Identity Remedy
 
-Status: `AUTHORIZED-PENDING-EXECUTABLE-SCAFFOLD`
+Status: `SCAFFOLDED-AUTHORIZED`
 Date: 2026-07-20
 Evidence mode: Operational successor; unchanged R14R2 science and resources
 Starting branch and push target: current `main`, push `main`
@@ -20,11 +20,11 @@ a fresh inherited checker by changing two hard-coded self-identity lookups,
 but would leave the toolkit unable to express or authenticate composed checker
 identities generally. A10M5O1R3 ratified the additive toolkit contract at
 commit `06df84c882fbe297e93b13fb8c845d5eb500b405`. This package retains the
-R14R2 closeout evidence and intended successor scope; its executable
-prepare/build/materialize implementation is the next campaign step and has not
-yet been published.
+R14R2 closeout evidence and intended successor scope. Its executable
+prepare/build/materialize implementation now consumes that ratified contract
+under fresh R14R2R1 authority, budget, run, plan, and admission identities.
 
-The later implementation must consume the chain, not merely declare it. The
+The implementation consumes the chain, not merely declares it. The
 outer wrapper must authenticate itself as chain slot 0 and its delegate as
 slot 1 against both current plan and staged manifest. The inherited checker
 must derive its staged logical name from `Path(__file__)` relative to the exact
@@ -56,6 +56,7 @@ terminal `LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION`, exact remote absence,
 and `job_local_cleanup: not_started`. The private state contained no attempts;
 the resource ledger remained at genesis, so actual GPU usage was zero.
 
-This deferred package creates no authority, reserves no compute, and submits
-no HPC. Its implementation must inherit the ratified A10M5O1R3 contract rather
-than revive the package-local substitution.
+This scaffold creates no authority, reserves no compute, and submits no HPC.
+Execution uses a fresh dispatch only after the scaffold is reviewed, committed,
+and exact on published `main`; it consumes the ratified A10M5O1R3 contract and
+does not revive the package-local substitution.
