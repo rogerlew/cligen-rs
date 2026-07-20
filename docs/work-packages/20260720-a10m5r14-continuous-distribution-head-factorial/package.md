@@ -1,6 +1,6 @@
 # A10M5R14 — Continuous Distribution-Head Factorial
 
-Status: `SCAFFOLDED-AUTHORIZED`
+Status: `EXECUTED-ABORTED-BEFORE-SUBMISSION`
 Date: 2026-07-20
 Evidence mode: Prospective development comparison
 Starting branch and push target: current `main`, push `main`
@@ -86,3 +86,18 @@ and 1.5 maximum-ratio gates decide eligibility. At least one eligible arm
 emits `A10M5R14-TEMPORAL-READY`; none emits
 `HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. Passing arms still require
 the ratified random-origin sensitivity successor before promotion.
+
+## Execution disposition
+
+Published source `7b44bfae967d0f030c2f521ad5777547bb13b3b0`
+passed local review, remote staging, and toolkit verification. The first
+control admission then failed closed before toolkit submission, scheduler
+reservation, or GPU allocation. The staged inherited checker requires its
+capacity contract to name the exact candidate wave and
+`candidate_role_count`; the R14 contract used a slimmer, incompatible field
+surface, so it saw an empty role matrix. The run was aborted exactly with the
+remote root absent. Science, selector, and confirmation data were untouched.
+
+The bounded operational successor is A10M5R14R1. It preserves this package's
+science and changes only the admission-contract/materialization surface under
+fresh package, run, authority, and budget identities.

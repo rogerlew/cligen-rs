@@ -604,6 +604,13 @@ OU core. Months and years remain selector aggregation domains, not model
 features, parameter cells, or state-reset boundaries. Its common prospective
 objective covers all 188 selector components, including monthly and annual
 dispersion, while the smooth correction is harmonic across calendar seams.
+R14 passed remote verification but aborted before its first submission: its
+slim job-local capacity contract omitted the inherited admission checker's
+exact candidate-wave and role-count fields. The active operational successor
+is
+[A10M5R14R1](work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/package.md),
+which preserves the four science arms and repairs only that
+contract/materialization boundary under fresh identities.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

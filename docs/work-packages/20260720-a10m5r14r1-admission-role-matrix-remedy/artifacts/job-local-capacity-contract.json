@@ -1,0 +1,33 @@
+{
+  "admission": {
+    "admission_closes_after_any_observed_candidate_failure": true,
+    "control_must_pass_before_candidates": true,
+    "maximum_live_candidate_jobs": 4,
+    "maximum_simultaneous_bootstraps": 1,
+    "waves": [[
+      "continuous-location-ou-k2",
+      "continuous-location-ou-smooth-climatology-k2",
+      "continuous-location-scale-ou-k2",
+      "continuous-location-scale-ou-smooth-climatology-k2"
+    ]]
+  },
+  "calendar_preflight_before_reservation": true,
+  "package_id": "20260720-a10m5r14r1-admission-role-matrix-remedy",
+  "predecessor_package_id": "20260720-a10m5r14-continuous-distribution-head-factorial",
+  "predecessor_terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+  "protected_roles_opened": [],
+  "resources": {
+    "attempts_per_role": 1,
+    "candidate_minutes_each": 240,
+    "candidate_role_count": 4,
+    "control_minutes": 30,
+    "distributed_training": false,
+    "gpus_per_role": 1,
+    "job_arrays": false,
+    "recovery_minutes": 5,
+    "scientific_retries": false,
+    "total_gpu_minute_ceiling": 995
+  },
+  "schema_version": 1,
+  "status": "SCAFFOLDED"
+}

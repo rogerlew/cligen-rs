@@ -33,6 +33,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [ ] 2026-07-20: execute a matched 2x2 continuous distribution-head portfolio
   separating smooth climatological mean correction, OU scale-head modulation,
   and their interaction while retaining the flexible daily OU core.
+- [x] 2026-07-20: preserve A10M5R14's authenticated pre-submission abort after
+  its capacity contract omitted fields required by the inherited role-matrix
+  checker; consume zero GPU minutes and remove the exact remote root.
+- [ ] 2026-07-20: execute A10M5R14R1 with identical science and corrected
+  admission wave/role-count semantics under fresh authority identities.
 
 ## Surprises & Discoveries
 
@@ -107,6 +112,13 @@ adapter reuses the same OU states to reach scale heads. A common 188-component
 objective makes the factorial attributable to those two mechanisms rather
 than to a change in which selector summaries receive training signal.
 
+R14 reached remote `VERIFIED`, but its first control admission failed before
+submission because the job-local capacity contract did not provide the
+inherited checker's `admission.waves` and `candidate_role_count` fields. The
+toolkit recorded no attempt, reserved no GPU, and removed the exact remote root
+through its authenticated pre-submission abort. R14R1 repairs only this
+operational interface.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -165,6 +177,8 @@ than to a change in which selector summaries receive training signal.
   20-by-4 harmonic/geography correction for the climatology factor and reuse
   the existing 8+4 OU states for scale-head access; add no monthly cells,
   calendar resets, stochastic states, or solar inputs.
+- 2026-07-20: preserve R14's pre-submission abort and carry its science into a
+  fresh R14R1 identity; do not amend or reuse the initialized R14 authority.
 
 ## Outcomes & Retrospective
 
@@ -184,7 +198,7 @@ Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
 The active successor package is
-`docs/work-packages/20260720-a10m5r14-continuous-distribution-head-factorial/`.
+`docs/work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/`.
 
 ## Plan of Work
 

@@ -1,0 +1,28 @@
+{
+  "operational_change": "capacity-contract schema and arbitrary-sized same-wave admission only",
+  "package_id": "20260720-a10m5r14r1-admission-role-matrix-remedy",
+  "evidence_profile": {
+    "path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
+    "sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629"
+  },
+  "parent_abort_sha256": "590b69e6f2ec986d8af0f7890d43f0ce4d24d8c5e23a4a85e88bd0f3df675f23",
+  "parent_asset_manifest_sha256": "ec6a3338bd544c33593a26f76cbd39eb9a90bf6d1accb9d8e0a5f26ee7cce0b5",
+  "parent_package_id": "20260720-a10m5r14-continuous-distribution-head-factorial",
+  "parent_plan_id": "2e58cd16bba1175b67a122771e46c83faa55f39ff2c0de184fe43f86351c03b6",
+  "parent_source_commit": "7b44bfae967d0f030c2f521ad5777547bb13b3b0",
+  "protected_roles_opened": [],
+  "science_asset_sha256": {
+    "aligned_objective.py": "8f5185919f3d0189a7cd9d9552349747e99db9dde8047c964c6050e9ac77fff1",
+    "climate_core.py": "f9e9eb96b5909034f410f475ae9f1ad89bcb2f4cc0cc26453338bb939ccf31f9",
+    "continuous_core.py": "f4a3f256e95dc76cffcd709fcd1d6559adbfcdc0cce231d8e0f23efdab10b798",
+    "objective-selector-coverage.json": "8b77b1b50e0e961ef54ff1a71a5206c561a6fa86163473ffd3fbcd9a5b1b3f04",
+    "portfolio-contract.json": "d39fe5e1b8e5a82ddd758aedd1e2aacb6acc72509de6b986cdae574c82937a8e",
+    "science-contract.json": "8be33760b73ee3ff3219a686ed0a5c2ae5c77bac5c106c8c84b3f8575698f754",
+    "temporal-contract.json": "a3e0456ae991e3e965e64696104d76c6b01c7248e80822d0f13982e622262b35"
+  },
+  "science_terminals": [
+    "A10M5R14-TEMPORAL-READY",
+    "HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  ],
+  "schema_version": 1
+}
