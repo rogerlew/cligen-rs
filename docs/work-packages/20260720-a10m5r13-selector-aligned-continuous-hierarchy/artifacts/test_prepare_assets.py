@@ -62,4 +62,15 @@ if (
     or 'source_paths["temporal_select.py"]' in source
 ):
     raise RuntimeError("transformed selector source authentication is unsound")
+if '"admission_checker.py", "setup_diagnostics.py"' not in source:
+    raise RuntimeError("admission materializer remains an operational rewrite")
+materializer = package / "artifacts/jobs/materialize_admission.py"
+materializer_source = materializer.read_text(encoding="utf-8")
+if (
+    "inherited.verify_published_source = verify_published_source"
+    not in materializer_source
+    or '"selector-aligned-continuous-hierarchy-k2"' not in materializer_source
+    or '"selector-aligned-shared-slow-climate-state-k2"' not in materializer_source
+):
+    raise RuntimeError("R13 admission wrapper is not self-authenticating and complete")
 print("A10M5R13-PREPARE-ASSETS-TEST-PASS")

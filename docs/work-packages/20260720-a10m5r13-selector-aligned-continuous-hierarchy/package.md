@@ -1,6 +1,6 @@
 # A10M5R13 — Selector-Aligned Continuous Hierarchy
 
-Status: `SCAFFOLDED`
+Status: `ABORTED-BEFORE-SUBMISSION`
 Date: 2026-07-20
 Evidence mode: Prospective development comparison
 Starting branch and push target: current `main`, push `main`
@@ -90,3 +90,16 @@ eligible arm yields `A10M5R13-TEMPORAL-READY`; no eligible arm yields
 `HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. Passing candidates require
 the already-ratified random-origin rolling-window sensitivity successor before
 promotion.
+
+## Pre-submission disposition
+
+The first execution lineage reached remote verification but no submission or
+GPU allocation. Control-admission materialization then exposed that the
+cache-local transformed controller could not authenticate itself as a Git
+worktree path. Because the corrective controller source was not prospectively
+listed by the initialized authority, the run was closed through the toolkit's
+pre-submission abort path. The authenticated abort receipt records remote
+absence and terminal
+`LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION`. The scientific freeze and
+protected-role firewalls were not opened; execution continues under a bounded
+controller-materialization remedy package.

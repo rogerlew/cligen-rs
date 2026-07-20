@@ -141,7 +141,8 @@ with tempfile.TemporaryDirectory() as scratch:
             raise RuntimeError(f"materialized contract is stale: {name}")
 
 for script in (
-    "test_builder.py", "test_prepare_assets.py", "test_replay_contract.py",
+    "test_builder.py", "test_prepare_assets.py", "test_admission_wrapper.py",
+    "test_replay_contract.py",
 ):
     subprocess.run(["python3", str(PACKAGE / "artifacts" / script)], check=True)
 if options.science_python is None:

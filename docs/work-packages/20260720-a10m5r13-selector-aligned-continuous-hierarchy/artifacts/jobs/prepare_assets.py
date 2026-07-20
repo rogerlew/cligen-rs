@@ -112,7 +112,13 @@ def main() -> None:
     jobs = args.package / "artifacts" / "jobs"
     shutil.copy2(args.parent_assets / "continuous_core.py", args.output / "inherited_continuous_core.py")
     source_paths: dict[str, str] = {}
-    for name in ("continuous_core.py", "climate_core.py", "selector_loss.py", "build_control_records.py"):
+    for name in (
+        "continuous_core.py",
+        "climate_core.py",
+        "selector_loss.py",
+        "build_control_records.py",
+        "materialize_admission.py",
+    ):
         relative = (jobs / name).relative_to(repo).as_posix()
         committed_write(repo, args.source_commit, relative, args.output / name)
         source_paths[name] = relative
@@ -172,7 +178,7 @@ def main() -> None:
         "HOLD-A10M5R12-NO-TEMPORALLY-ELIGIBLE-CANDIDATE": "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE",
     }
     operational = (
-        "admission_checker.py", "materialize_admission.py", "setup_diagnostics.py",
+        "admission_checker.py", "setup_diagnostics.py",
         "job-control-materialization.sh", "job-common-candidate.sh",
         "run_temporal_candidate.sh", "run_control.sh", "temporal_select.py",
         "continuous_candidate_experiment.py",

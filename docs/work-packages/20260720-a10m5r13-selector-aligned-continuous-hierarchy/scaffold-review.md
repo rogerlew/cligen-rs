@@ -32,3 +32,18 @@ R12R1 selector input under its already-frozen SHA-256 before applying the
 declared R13 identifier rewrite. The transformed output is deliberately not
 labeled as byte-identical to that source. Regression tests preserve both the
 actual predecessor roster distinction and this source/output distinction.
+
+The first control-admission attempt also failed closed before submission when
+the cache-local transformed materializer tried to prove itself as a repository
+path. R13 now publishes a package-local admission wrapper that self-authenticates
+against `main`, delegates to the reviewed R12R1 implementation, and supplies
+only the frozen R13 package, run, role, and remote-root constants. Asset
+preparation stages that wrapper byte-identically instead of text-rewriting the
+parent executable.
+
+That controller correction necessarily changes published source, while the
+initialized authority admitted only commit `6ded2b6b43d6c87efc43776e9b1f730217736574`.
+No job had been submitted. The verified remote root was therefore removed and
+the zero-allocation run closed with authenticated terminal
+`LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION`; execution moves to a bounded
+remedy package rather than mutating this frozen authority.
