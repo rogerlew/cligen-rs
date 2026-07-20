@@ -1,0 +1,43 @@
+{
+  "collection": {
+    "absent_count": 0,
+    "archive_bytes": 96727040,
+    "archive_sha256": "2ad8ea3400870ff0a226d2f4137b6fe43e38b2ac79538d42d99df3f23c9ccb73",
+    "file_sha256": "7b9b811fac5286c6c6748bc0f06b9e90e451e878815810bbbbd52675537bce46",
+    "present_count": 51,
+    "record_sha256": "55024661dc1bd13366f8dd76e41b16a71ea81ea38c44eb33455b7b87ab958f47",
+    "sanitized_count": 51
+  },
+  "job_receipts": [
+    {
+      "file_sha256": "0ae0d377db16b681f03eca3a49cb1e19418a35cedb4e48363af29525a79781f4",
+      "job_id": "1016150",
+      "job_role": "control-materialization",
+      "record_sha256": "79028a8b7d45b9c6a024634d836019103aa1dbb529ac2d41f260d45fe36ef988"
+    },
+    {
+      "file_sha256": "1cc86d2af8aa795a46a84d67861f2b1ffcc9f56572721b71db9e97b934fe4387",
+      "job_id": "1016152",
+      "job_role": "selector-aligned-continuous-hierarchy-k2",
+      "record_sha256": "a83156da83d2e025f3a1479498cccef1d4eccb6a63c874f8dbc8071afeb607c0"
+    },
+    {
+      "file_sha256": "2d1eb4e0a55f35a826bcad071582e0d6836d85867ebffa3d1b475dab3660bdb7",
+      "job_id": "1016153",
+      "job_role": "selector-aligned-shared-slow-climate-state-k2",
+      "record_sha256": "7d58d37b80ba4d2874a40f5dbcdee09cb157ea76d82e446b7545a26dfe1c69fb"
+    }
+  ],
+  "plan_id": "2dfc598e9767f4492afb99449fd3de1c2d320624de4213d3fcf993881f0ee91b",
+  "records": {
+    "capability": "924a36a4e1e68f026ca51b0a62ba08aa7ff1c386d4f004ca36584ec61c54f34f",
+    "cleanup": "d4de26d813327793ba834037d0317ca4db7359e6aae12049bfa3b8d00094949d",
+    "doctor": "43efa19a147b017cae2478497900cf6463bb1cd7eafcb7ef1cba34aef6e8d79a",
+    "plan": "798e1e5603b3b85593366484a6aefc90315604a2b11283015c9b4b61796388b8",
+    "terminal": "886657cb32a8185d7d97fa86d3e411e17fd2f0f1ab40b98398e8d68f89abda0b",
+    "verify": "0de99e012bc522064f9aaedb62f49f87909b2af07ca349ac17d6c6af5aa1e198"
+  },
+  "run_id": "a10m5r13r1-admission-controller-materialization-remedy-r0",
+  "schema_version": 1,
+  "source_commit": "927c6147f879ed3a9a56ff1218ffaa3953bef93c"
+}

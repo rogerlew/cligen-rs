@@ -1,0 +1,42 @@
+{
+  "authority_id": "a10m5r13r1-admission-controller-materialization-remedy-r0-authority",
+  "ceiling_gpu_minutes": 515,
+  "charged_gpu_minutes": 185,
+  "final_ledger_head_sha256": "2ee9cf67116ad2b67429141703ff9190607660d094e8b9e2501dddf1325e07cf",
+  "final_ledger_sha256": "7eb3fb832e87756b96b9be678fd63b6235bc2fb413c6fab25c657d91aceab805",
+  "jobs": [
+    {
+      "actual_gpu_minutes": 20,
+      "job_id": "1016150",
+      "job_role": "control-materialization",
+      "requested_gpu_minutes": 30,
+      "status": "settled"
+    },
+    {
+      "actual_gpu_minutes": 84,
+      "job_id": "1016152",
+      "job_role": "selector-aligned-continuous-hierarchy-k2",
+      "requested_gpu_minutes": 240,
+      "status": "settled"
+    },
+    {
+      "actual_gpu_minutes": 81,
+      "job_id": "1016153",
+      "job_role": "selector-aligned-shared-slow-climate-state-k2",
+      "requested_gpu_minutes": 240,
+      "status": "settled"
+    },
+    {
+      "actual_gpu_minutes": 0,
+      "job_id": null,
+      "job_role": "toolkit-recovery",
+      "requested_gpu_minutes": 5,
+      "status": "released"
+    }
+  ],
+  "preclose_ledger_sha256": "7129f5b554864239d60da77e2c596f876091546f2ada5b1539315b32e294e941",
+  "preclose_private_state_sha256": "fdfc95d0b815171bcdf37f229ce5728a531b407cd20793337f8789b3ba3db906",
+  "resource_budget_id": "a10m5r13r1-admission-controller-materialization-remedy-r0-budget",
+  "schema_version": 1,
+  "unused_gpu_minutes": 330
+}

@@ -1,6 +1,6 @@
 # A10M5R13R1 — Admission Controller Materialization Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`
 Date: 2026-07-20
 Evidence mode: Operational successor; identical R13 science
 Starting branch and push target: current `main`, push `main`
@@ -59,3 +59,25 @@ applies to the frozen sequence without another scientific decision.
 
 Authenticated two-pass replay uses the unchanged R13 selector and scientific
 terminals. Cleanup and toolkit close occur only after the replay receipt.
+
+## Execution result
+
+The controller remedy succeeded and the complete three-role matrix ran once
+under the published R13R1 authority. Control job `1016150` and concurrent
+candidate jobs `1016152` and `1016153` passed every registered gate and
+charged 20, 84, and 81 GPU-minutes respectively. Collection promoted all 51
+allowlisted members under evidence projection v5.
+
+R13R1's first replay command exposed a semantic-plan authentication defect
+before selector execution. The bounded zero-GPU R13R2 successor authenticated
+the same collected evidence, reconstructed the semantic plan, and produced
+byte-identical selector passes. Neither candidate met the unchanged temporal
+limits, so the scientific terminal is
+`HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`.
+
+After the R13R2 replay receipt, marker-bound cleanup proved both durable and
+job-local state absent. The unused five-minute recovery reservation was
+released and the toolkit run closed as `LEMHI-TOOLKIT-RUN-CLOSED`.
+
+See `artifacts/execution-disposition.md`, `artifacts/execution-gates.md`, and
+`artifacts/operational-summary.md` for the closeout evidence.

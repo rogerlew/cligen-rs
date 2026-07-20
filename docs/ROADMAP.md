@@ -588,8 +588,17 @@ audit then found that its frozen replay surface could not authenticate the
 semantic evidence allowlist from the separate toolkit plan receipt. The
 zero-allocation
 [A10M5R13R2](work-packages/20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy/package.md)
-now binds those two records exactly and must complete the unchanged replay
-before R13R1 remote cleanup or scientific disposition.
+bound those two records exactly, reproduced the unchanged selector twice
+byte-identically, and permitted exact cleanup and toolkit closure. Neither arm
+was eligible: flexible hierarchy scored 2.482 / 3.610 and rank-one shared state
+2.489 / 3.636 against 1.25 / 1.5 gates. Annual cross-field error improved
+71.2% from R12, but 74.4% of the remaining composite error is monthly
+temperature mean plus precipitation location/quantiles. The continuous time
+scales remained stable; the structural bottlenecks are instead the
+member-centered decoder's inability to correct climatological means and its
+inability to reach scale heads. The next bounded stage is a matched 2x2 that
+crosses a smooth day-of-year/geography climatology head with continuous OU
+scale-head modulation while retaining the flexible daily OU core.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

@@ -1,6 +1,6 @@
 # A10M5R13R2 — Semantic Plan Replay Authentication Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`
 Date: 2026-07-20
 Evidence mode: Zero-GPU operational successor; R13R1 evidence replay only
 Starting branch and push target: current `main`, push `main`
@@ -77,3 +77,49 @@ failed before selector execution because the integer-only record parser was
 also applied to legitimate float-valued science JSON. No cleanup occurred.
 The failure and bounded parser correction are recorded in
 [`execution-note.md`](execution-note.md).
+
+Published attempt 2 at `009d87b2438768c46509eeb901bf96e73f4d4005`
+completed the authenticated replay twice with byte-identical results. Neither
+candidate met the inherited temporal gate, so the scientific terminal is
+`HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. Protected roles remained
+sealed. The replay identity was emitted before toolkit cleanup; subsequent
+cleanup proved both remote and job-local state absent, and the toolkit run
+closed at `LEMHI-TOOLKIT-RUN-CLOSED`.
+
+## Result
+
+| Candidate | Upper 90% bootstrap median-regime ratio | Maximum regime ratio | Eligible |
+|---|---:|---:|---|
+| Continuous hierarchy K2 | 2.4819 | 3.6096 | No |
+| Shared slow climate state K2 | 2.4886 | 3.6363 | No |
+
+The flexible hierarchy had a 0.865 non-gating probability of lower error than
+the shared-state candidate, but its median relative reduction was only 0.00175.
+That does not rescue either candidate or support choosing between them. The
+learned continuous time scales were stable across seeds and covered roughly
+36--157 day medium states and 372--1272 day slow states, confirming that the
+models did not collapse to monthly resets. Their remaining error was scientific
+but primarily monthly rather than annual: monthly temperature means and
+precipitation location/quantiles account for 74.4% of the flexible arm's
+composite error. The existing member-centered OU decoder cannot move the
+ensemble climatological mean and cannot reach scale heads, so the next bounded
+test must separate smooth mean correction from continuous stochastic scale
+modulation.
+
+All three HPC roles passed their operational gates. Charged compute was 185 of
+515 authorized GPU-minutes (20 control, 84 flexible hierarchy, 81 shared
+state). No recovery or scientific retry was used.
+
+## Retained evidence
+
+- [`artifacts/execution/temporal-result.json`](artifacts/execution/temporal-result.json)
+  — exact two-pass selector result.
+- [`artifacts/execution/replay-identity.json`](artifacts/execution/replay-identity.json)
+  — authenticated pre-cleanup replay record.
+- [`artifacts/execution/execution-summary.json`](artifacts/execution/execution-summary.json)
+  — compact science, accounting, and receipt index.
+- [`artifacts/execution/toolkit-cleanup-receipt.json`](artifacts/execution/toolkit-cleanup-receipt.json)
+  and [`artifacts/execution/toolkit-terminal-receipt.json`](artifacts/execution/toolkit-terminal-receipt.json)
+  — exact sanitized toolkit close receipts.
+- [`execution-gates.md`](execution-gates.md) and
+  [`closeout-review.md`](closeout-review.md) — validation and disposition.

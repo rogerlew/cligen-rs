@@ -27,9 +27,12 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: execute the A10M5R13R1 control and both concurrent candidates
   with identical R13 science under fresh authority identities; collect all 51
   allowlisted paths in 185 charged GPU-minutes.
-- [ ] 2026-07-20: execute zero-GPU A10M5R13R2 to authenticate the split toolkit
+- [x] 2026-07-20: execute zero-GPU A10M5R13R2 to authenticate the split toolkit
   plan receipt and semantic allowlist before the unchanged selector replay and
   R13R1 cleanup.
+- [ ] 2026-07-20: execute a matched 2x2 continuous distribution-head portfolio
+  separating smooth climatological mean correction, OU scale-head modulation,
+  and their interaction while retaining the flexible daily OU core.
 
 ## Surprises & Discoveries
 
@@ -86,6 +89,16 @@ only that proof boundary: it reconstructs the toolkit semantic plan and
 requires its canonical hash to equal the authenticated receipt plan ID before
 the allowlist can be used.
 
+R13R2 reproduced the selector twice byte-identically and closed the parent run.
+Flexible and rank-one shared candidates remained ineligible at 2.482 / 3.610
+and 2.489 / 3.636. Exact annual alignment reduced annual cross-field error by
+71.2%, proving the objective can move its intended statistic, but overall
+eligibility improved only about 0.6% from R12. Of 188 selector metrics, 168 are
+monthly; monthly temperature means and precipitation location/quantiles now
+contribute 74.4% of composite error. The residual decoder member-centers every
+latent offset and reaches only location heads 0/1/3/5, leaving ensemble mean
+calibration and scale heads 2/4/6 structurally unreachable.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -134,10 +147,22 @@ the allowlist can be used.
 - 2026-07-20: require the semantic-plan reconstruction and allowlist
   authentication to live in a published zero-allocation R13R2 replay program;
   do not rely on an ad hoc derived-plan preflight and do not clean R13R1 first.
+- 2026-07-20: retire the rank-one shared arm. Next run a 2x2 with a smooth,
+  uncentered day-of-year/geography correction on/off and centered OU scale-head
+  access on/off; retain the flexible P2/K2 daily OU core and keep solar sealed.
+- 2026-07-20: require a prospective objective-versus-selector coverage report
+  that records metric counts, scales, exact training counterparts, and decoder
+  head reachability before the next submission.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+Continuous daily state evolution is retained: learned medium and slow scales
+were stable at roughly 36--158 and 372--1272 days, and adding calendar-aligned
+training did not induce monthly resets. The annual objective substantially
+fixed annual cross-field dependence, but the rank-one decoder removed useful
+context flexibility and did not generalize. The campaign now moves from state
+clock and slow-factor questions to the distribution-head bottleneck exposed by
+the full selector, without opening solar or confirmation.
 
 ## Context and Orientation
 

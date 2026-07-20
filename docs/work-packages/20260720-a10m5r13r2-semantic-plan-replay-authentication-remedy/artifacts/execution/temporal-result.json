@@ -1,0 +1,439 @@
+{
+  "annual_actual_series_member_bootstrap": {
+    "diagnostics": {
+      "annual_cross_field_dependence": {
+        "configurations": {
+          "selector_aligned_continuous_hierarchy-k2": {
+            "median_error": 1.3912097517690796,
+            "upper_90_percent_error": 1.4522762813928323
+          },
+          "selector_aligned_shared_slow_climate_state-k2": {
+            "median_error": 1.4460550806389945,
+            "upper_90_percent_error": 1.5047423651080147
+          }
+        },
+        "probability_medium_lower_error": 0.86,
+        "selection_gating": false
+      },
+      "annual_dispersion": {
+        "configurations": {
+          "selector_aligned_continuous_hierarchy-k2": {
+            "median_error": 0.4838401396809113,
+            "upper_90_percent_error": 0.49951483707598376
+          },
+          "selector_aligned_shared_slow_climate_state-k2": {
+            "median_error": 0.522595726245171,
+            "upper_90_percent_error": 0.5398600720723801
+          }
+        },
+        "probability_medium_lower_error": 1.0,
+        "selection_gating": false
+      },
+      "annual_lag": {
+        "configurations": {
+          "selector_aligned_continuous_hierarchy-k2": {
+            "median_error": 1.537847636692026,
+            "upper_90_percent_error": 1.6131715809534315
+          },
+          "selector_aligned_shared_slow_climate_state-k2": {
+            "median_error": 1.6792093516667377,
+            "upper_90_percent_error": 1.7525697905423379
+          }
+        },
+        "probability_medium_lower_error": 0.999,
+        "selection_gating": false
+      },
+      "annual_location": {
+        "configurations": {
+          "selector_aligned_continuous_hierarchy-k2": {
+            "median_error": 2.645389519295195,
+            "upper_90_percent_error": 2.6631219474466103
+          },
+          "selector_aligned_shared_slow_climate_state-k2": {
+            "median_error": 2.6501789362702404,
+            "upper_90_percent_error": 2.6660529466885885
+          }
+        },
+        "probability_medium_lower_error": 0.709,
+        "selection_gating": false
+      }
+    },
+    "observation_basis": "fixed actual 1980-2009 series; annual lag order preserved",
+    "replicates": 1000,
+    "seed": 410543,
+    "selection_gating": false
+  },
+  "bootstrap": {
+    "replicates": 1000,
+    "seed": 410542
+  },
+  "candidate_decisions": {
+    "selector_aligned_continuous_hierarchy-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.4819108573300412,
+      "maximum_regime_ratio": 3.6095934156375393,
+      "temporally_eligible": false
+    },
+    "selector_aligned_shared_slow_climate_state-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.488582245042053,
+      "maximum_regime_ratio": 3.6363081225098077,
+      "temporally_eligible": false
+    }
+  },
+  "eligible_configurations": [],
+  "learned_time_scales_days": {
+    "selector_aligned_continuous_hierarchy-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          35.829750061035156,
+          54.537662506103516,
+          69.58029174804688,
+          89.66810607910156,
+          109.64856719970703,
+          123.72721862792969,
+          140.9114532470703,
+          157.6283721923828
+        ],
+        "slow_time_scale_days": [
+          382.8160705566406,
+          662.5214233398438,
+          946.1318359375,
+          1261.1981201171875
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          36.65766143798828,
+          53.8041877746582,
+          69.85723876953125,
+          86.53335571289062,
+          109.35543823242188,
+          125.76544952392578,
+          141.455078125,
+          157.327880859375
+        ],
+        "slow_time_scale_days": [
+          373.350830078125,
+          664.2313842773438,
+          933.0347900390625,
+          1267.890869140625
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          38.27903747558594,
+          55.19084548950195,
+          72.50141906738281,
+          89.33344268798828,
+          106.90313720703125,
+          123.14305877685547,
+          139.44119262695312,
+          155.16680908203125
+        ],
+        "slow_time_scale_days": [
+          378.7602233886719,
+          664.3634033203125,
+          961.2099609375,
+          1269.9981689453125
+        ]
+      }
+    },
+    "selector_aligned_shared_slow_climate_state-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          36.54460144042969,
+          55.575050354003906,
+          71.28340148925781,
+          88.89754486083984,
+          108.74076080322266,
+          123.4049072265625,
+          140.837158203125,
+          157.13555908203125
+        ],
+        "slow_time_scale_days": [
+          373.3492126464844,
+          659.6154174804688,
+          954.6585693359375,
+          1258.059326171875
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          38.01538848876953,
+          54.694549560546875,
+          69.85040283203125,
+          87.1331787109375,
+          107.6471176147461,
+          123.2155532836914,
+          139.7498779296875,
+          156.32479858398438
+        ],
+        "slow_time_scale_days": [
+          371.986328125,
+          669.7130126953125,
+          950.9259643554688,
+          1267.07421875
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          37.54498291015625,
+          53.87721252441406,
+          71.87033081054688,
+          92.95648956298828,
+          109.67992401123047,
+          123.46981811523438,
+          142.36288452148438,
+          157.31114196777344
+        ],
+        "slow_time_scale_days": [
+          374.2505798339844,
+          640.6148681640625,
+          951.5548706054688,
+          1272.11083984375
+        ]
+      }
+    }
+  },
+  "non_gating_pairwise_contrasts": {
+    "selector_aligned_continuous_hierarchy-k2__vs__selector_aligned_shared_slow_climate_state-k2": {
+      "median_relative_error_reduction_left_vs_right": 0.0017540435223260672,
+      "probability_left_lower_error": 0.865,
+      "selection_gating": false
+    }
+  },
+  "point_results": {
+    "p+3250_-10200": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 3.3309618411996014,
+        "selector_aligned_shared_slow_climate_state-k2": 3.329158723521386
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 1.5247463868725297,
+          "annual_dispersion": 0.3235416683878268,
+          "annual_lag": 1.6393450243649388,
+          "annual_location": 3.534406311293663
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 1.4244922961541937,
+          "annual_dispersion": 0.3213085920462717,
+          "annual_lag": 1.9716490945995595,
+          "annual_location": 3.5335642761073567
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 2.339757196119589,
+        "selector_aligned_shared_slow_climate_state-k2": 2.3384906377607173
+      },
+      "comparator_errors": {
+        "faithful": 1.5639304083380314,
+        "stochastic_prism_localized_par_v1": 1.4236356860976398
+      },
+      "reference_error": 1.4236356860976398,
+      "regime": "hot_arid"
+    },
+    "p+3275_-08325": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 2.9568957440434045,
+        "selector_aligned_shared_slow_climate_state-k2": 2.978779816280395
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 2.1214132131137537,
+          "annual_dispersion": 0.3595121987610754,
+          "annual_lag": 1.3564134034378996,
+          "annual_location": 5.313516085786288
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 2.4013823043955473,
+          "annual_dispersion": 0.38076270982704435,
+          "annual_lag": 1.506656073434275,
+          "annual_location": 5.345784883297385
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 3.6095934156375393,
+        "selector_aligned_shared_slow_climate_state-k2": 3.6363081225098077
+      },
+      "comparator_errors": {
+        "faithful": 0.8191769552862914,
+        "stochastic_prism_localized_par_v1": 0.8432625654432572
+      },
+      "reference_error": 0.8191769552862914,
+      "regime": "humid"
+    },
+    "p+3675_-10750": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 2.1584617269676727,
+        "selector_aligned_shared_slow_climate_state-k2": 2.1296057060409144
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 0.9581135167442462,
+          "annual_dispersion": 0.3472209121708048,
+          "annual_lag": 1.8533809923688802,
+          "annual_location": 0.7782477755955559
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 0.8648284486634067,
+          "annual_dispersion": 0.44834083036734285,
+          "annual_lag": 1.5680069439055684,
+          "annual_location": 0.7481024241369216
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 1.5197901698565337,
+        "selector_aligned_shared_slow_climate_state-k2": 1.499472414671098
+      },
+      "comparator_errors": {
+        "faithful": 1.682396032623209,
+        "stochastic_prism_localized_par_v1": 1.4202366680470297
+      },
+      "reference_error": 1.4202366680470297,
+      "regime": "monsoonal_transition"
+    },
+    "p+4025_-09900": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 2.4433714911076247,
+        "selector_aligned_shared_slow_climate_state-k2": 2.445546136821063
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 1.217299117366646,
+          "annual_dispersion": 0.28524238943924285,
+          "annual_lag": 1.3654021825963376,
+          "annual_location": 0.6700791184388069
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 0.8716925206358489,
+          "annual_dispersion": 0.3288042471578713,
+          "annual_lag": 1.5257897061758616,
+          "annual_location": 0.6507171134389098
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 2.5200726377395553,
+        "selector_aligned_shared_slow_climate_state-k2": 2.5223155488888254
+      },
+      "comparator_errors": {
+        "faithful": 1.005385006173677,
+        "stochastic_prism_localized_par_v1": 0.9695639143557665
+      },
+      "reference_error": 0.9695639143557665,
+      "regime": "non_monsoonal_semi_arid"
+    },
+    "p+4050_-11375": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 3.7398937455616594,
+        "selector_aligned_shared_slow_climate_state-k2": 3.757669345296824
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 2.086592075248628,
+          "annual_dispersion": 1.0825855240319697,
+          "annual_lag": 2.3482839765625734,
+          "annual_location": 2.2438588415019383
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 2.238076772672057,
+          "annual_dispersion": 1.1954849747776142,
+          "annual_lag": 2.6157593661645215,
+          "annual_location": 2.262390910997934
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 2.4562631097839556,
+        "selector_aligned_shared_slow_climate_state-k2": 2.467937652659829
+      },
+      "comparator_errors": {
+        "faithful": 1.7621019469068957,
+        "stochastic_prism_localized_par_v1": 1.5225949250569526
+      },
+      "reference_error": 1.5225949250569526,
+      "regime": "arid_boundary"
+    },
+    "p+4525_-08875": {
+      "candidate_errors": {
+        "selector_aligned_continuous_hierarchy-k2": 2.5484919932670658,
+        "selector_aligned_shared_slow_climate_state-k2": 2.553842540996698
+      },
+      "candidate_family_errors": {
+        "selector_aligned_continuous_hierarchy-k2": {
+          "annual_cross_field_dependence": 0.41277726712507884,
+          "annual_dispersion": 0.5002600350615459,
+          "annual_lag": 0.6131079318188163,
+          "annual_location": 3.3291324351033866
+        },
+        "selector_aligned_shared_slow_climate_state-k2": {
+          "annual_cross_field_dependence": 0.8128843774147887,
+          "annual_dispersion": 0.457605073436623,
+          "annual_lag": 0.8256178405530276,
+          "annual_location": 3.346511271851992
+        }
+      },
+      "candidate_ratios": {
+        "selector_aligned_continuous_hierarchy-k2": 3.338660731282138,
+        "selector_aligned_shared_slow_climate_state-k2": 3.345670234801462
+      },
+      "comparator_errors": {
+        "faithful": 0.8295862628890749,
+        "stochastic_prism_localized_par_v1": 0.7633276329602902
+      },
+      "reference_error": 0.7633276329602902,
+      "regime": "cold"
+    }
+  },
+  "prism_provenance": {
+    "p+3250_-10200": {
+      "artifact_manifest_sha256": "996a65a10137d0aafa8194ede261dbc1680818fc588e4c2a05e2af52667acf97",
+      "localization_sha256": "1966ee4d45a30b0f4faedb1e91d27970b1f3dadc251745f53f0b6b0adcc679c4",
+      "localized_station_sha256": "393a5b1f27faeb0f13d02a8d7ea536694e370ed29fc844d9e416846cc2139b9d",
+      "normals_sha256": "a2e56b3e7f719cee06f36b3b407a74e4bc9cb76e4d19f1c02696acf0ef0090ef",
+      "source_station_sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f",
+      "station_selection_sha256": "f1f509887f42f07f310dfaa7833f401dff40aeb7ebb24f6497cf94ffb2e8ff8f"
+    },
+    "p+3275_-08325": {
+      "artifact_manifest_sha256": "bc824d174521c56b2ca060225a753ddf59cd3cc88ab1076b82619a7c48349b59",
+      "localization_sha256": "f6035649ddab16731b9b145e28979af85bde4a2002b9b7164ef9ded4d184f9cd",
+      "localized_station_sha256": "b43f7a2ad68688d1a42b8f8fc7e9ab6fb1805983813de9fd1241cf430b07451c",
+      "normals_sha256": "329f94f51f5cd6da03200a0ca0a50e645b677f93e3b723ab4223b2af4d1b7e85",
+      "source_station_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+      "station_selection_sha256": "8aaeb58c61b251fbbd325ae99b6eb16f2f494fa9484d8b717ce21b68f85bb184"
+    },
+    "p+3675_-10750": {
+      "artifact_manifest_sha256": "e354bb08abdbd903157042b01d7fbf8645c1b9f90896845947073dfdc33becfa",
+      "localization_sha256": "001e5a94c2a373c9e202dd22e3a6f5cdeb75430d4baaea5061806646c2dda5a7",
+      "localized_station_sha256": "29cda0592f5336543844584ecf7418b20d6d88f602f4185d7d785f74446bdef5",
+      "normals_sha256": "2d7cf6d1136363dde24b27669f32d80c815f3a67643d0d93c686e178beefceaf",
+      "source_station_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+      "station_selection_sha256": "4e994808c81518f250e5255c3b51089578327e55e19efdce6ba500dafa519d9d"
+    },
+    "p+4025_-09900": {
+      "artifact_manifest_sha256": "e648490634a872a94e2ad52653585ce7e0fb5c46ad1e3b0c4bd140525ad7990b",
+      "localization_sha256": "e0954da8c6ebed73d41d874fc556d2fca05e818f65f8d5deb3b7ebc5789a7f16",
+      "localized_station_sha256": "109790a453f521a98151378020d8fb47a2c493983a36b9cda8e08dc21a4e1249",
+      "normals_sha256": "cd332020b96764bf1e83bc5c66e92a05ebffcc3387af4fa9fb3d85b0a54e1370",
+      "source_station_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+      "station_selection_sha256": "9d023e30d270b85c398060f5642c85ac561201a9f178b043fa24c2ff7edd38b3"
+    },
+    "p+4050_-11375": {
+      "artifact_manifest_sha256": "8020904c436d8851c0b823d14bd817a0883523fa5de73b0e73b2cee8eab5b26a",
+      "localization_sha256": "f1e8db5d46b9c1c5079240c1a6b7c1574ec1ab105d64253927fefc07ae482f1a",
+      "localized_station_sha256": "581a1ff29eb9820e61af6cecd811eedff268fbee7a2130d000e8851ba95b9807",
+      "normals_sha256": "c972ecdfd731b1e6bb64fa8c56a94f567f558469bd7842519d50184d5dad3dde",
+      "source_station_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+      "station_selection_sha256": "d2be0b58d4c5c5ab562fc79c20e20810a2ff7375f556d3d767b25a8e12e351cb"
+    },
+    "p+4525_-08875": {
+      "artifact_manifest_sha256": "ad6514a7a798bd34fce5ea4f671a25be6fc7099e1b413e18dcdcb8eb454aaf4d",
+      "localization_sha256": "257254ab8f13e0956711ca8168d31b21e75f772313612e2e305142c97809b17b",
+      "localized_station_sha256": "908155978f2c93a1323e34ac57d4fdd57e96759fd98569378d34b5ba7024c1a9",
+      "normals_sha256": "7e0d3394071dc35c5bf81cd304dd7b57034d533974fd86ba783f348eb8178f51",
+      "source_station_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+      "station_selection_sha256": "e132da80d211a0323ef4731b8996ccb49f53c3e5b676a27e6365405d6e107f95"
+    }
+  },
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "terminal": "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+}

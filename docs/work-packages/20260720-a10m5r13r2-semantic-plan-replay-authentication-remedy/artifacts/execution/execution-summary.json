@@ -1,0 +1,69 @@
+{
+  "cleanup": {
+    "job_local_cleanup": "verified_absent",
+    "receipt_file_sha256": "c6d11733708de340cec9e48d53b62b502656347c96f387209d8d42f77e135a64",
+    "receipt_record_sha256": "d4de26d813327793ba834037d0317ca4db7359e6aae12049bfa3b8d00094949d",
+    "remote_absent": true
+  },
+  "input_package_id": "20260720-a10m5r13r1-admission-controller-materialization-remedy",
+  "input_run_id": "a10m5r13r1-admission-controller-materialization-remedy-r0",
+  "jobs": {
+    "control-materialization": {
+      "actual_gpu_minutes": 20,
+      "passed": true,
+      "record_sha256": "79028a8b7d45b9c6a024634d836019103aa1dbb529ac2d41f260d45fe36ef988"
+    },
+    "selector-aligned-continuous-hierarchy-k2": {
+      "actual_gpu_minutes": 84,
+      "passed": true,
+      "record_sha256": "a83156da83d2e025f3a1479498cccef1d4eccb6a63c874f8dbc8071afeb607c0"
+    },
+    "selector-aligned-shared-slow-climate-state-k2": {
+      "actual_gpu_minutes": 81,
+      "passed": true,
+      "record_sha256": "7d58d37b80ba4d2874a40f5dbcdee09cb157ea76d82e446b7545a26dfe1c69fb"
+    }
+  },
+  "package_id": "20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy",
+  "plan_id": "2dfc598e9767f4492afb99449fd3de1c2d320624de4213d3fcf993881f0ee91b",
+  "protected_roles_opened": [],
+  "replay": {
+    "byte_identical_passes": true,
+    "identity_file_sha256": "6edcaad3196369f984589ff1c06a50e114f7b50390d3ac30d49382da6e029965",
+    "identity_record_sha256": "1f08ab7df52ba51709e16878cf23135e85f7dbdce7a5be75558562e7b326f810",
+    "source_commit": "009d87b2438768c46509eeb901bf96e73f4d4005",
+    "temporal_result_sha256": "2213ce79ef3cf9bf2a91562983824307c7fbd7cc26f85159b24cbbf176079cbb"
+  },
+  "resource_accounting": {
+    "authorized_gpu_minutes": 515,
+    "charged_gpu_minutes": 185,
+    "remaining_gpu_minutes": 330
+  },
+  "schema_version": "a10m5r13r2-execution-summary-1",
+  "science": {
+    "candidates": {
+      "selector_aligned_continuous_hierarchy-k2": {
+        "bootstrap_median_regime_ratio_upper_90_percent": 2.4819108573300412,
+        "maximum_regime_ratio": 3.6095934156375393,
+        "temporally_eligible": false
+      },
+      "selector_aligned_shared_slow_climate_state-k2": {
+        "bootstrap_median_regime_ratio_upper_90_percent": 2.488582245042053,
+        "maximum_regime_ratio": 3.6363081225098077,
+        "temporally_eligible": false
+      }
+    },
+    "eligible_configurations": [],
+    "non_gating_continuous_vs_shared": {
+      "median_relative_error_reduction": 0.0017540435223260672,
+      "probability_continuous_lower_error": 0.865
+    },
+    "terminal": "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  },
+  "terminal_receipt": {
+    "attempt_count": 3,
+    "file_sha256": "a208a8b8813a43c57df1f92ac2ffa34e2fa843e725eab6bdf6bffcc7eb47d944",
+    "record_sha256": "886657cb32a8185d7d97fa86d3e411e17fd2f0f1ab40b98398e8d68f89abda0b",
+    "terminal": "LEMHI-TOOLKIT-RUN-CLOSED"
+  }
+}
