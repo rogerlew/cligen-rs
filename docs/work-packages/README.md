@@ -105,7 +105,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260719-a10m5r10r1r3-corpus-extraction-root-remedy](20260719-a10m5r10r1r3-corpus-extraction-root-remedy/package.md) | EXECUTED-HOLD-CUBLAS-ENVIRONMENT-SCOPE |
 | [20260719-a10m5r10r1r4-science-environment-closure-remedy](20260719-a10m5r10r1r4-science-environment-closure-remedy/package.md) | EXECUTED-COMPLETE |
 | [20260719-a10m5r11-retained-adapter-temporal-generalization](20260719-a10m5r11-retained-adapter-temporal-generalization/package.md) | EXECUTED-HOLD-ADMISSION-ROLE-MATRIX |
-| [20260719-a10m5r11r1-admission-role-matrix-remedy](20260719-a10m5r11r1-admission-role-matrix-remedy/package.md) | SCAFFOLDED |
+| [20260719-a10m5r11r1-admission-role-matrix-remedy](20260719-a10m5r11r1-admission-role-matrix-remedy/package.md) | EXECUTED-HOLD-SCORER-COMPARATOR-BURNS |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |

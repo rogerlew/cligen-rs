@@ -12,7 +12,10 @@ monthly and yearly climate across the ratified six-regime temporal protocol.
 - [x] Published the scaffold and immutable execution assets.
 - [x] Closed A10M5R11 before submission when admission exposed an inherited
   11-role assertion; zero GPU-minutes consumed.
-- [ ] Execute bounded A10M5R11R1 with the corrected four-role admission guard.
+- [x] Executed A10M5R11R1: all four jobs and 432 candidate streams passed;
+  133 actual GPU-minutes, exact collection and cleanup complete.
+- [ ] Complete bounded A10M5R11R2 local scoring after adding the omitted
+  ratified comparator burn list; no GPU rerun.
 - [ ] Collect, replay, disposition, review, and reconcile the package.
 
 ## Surprises
@@ -20,6 +23,11 @@ monthly and yearly climate across the ratified six-regime temporal protocol.
 The inherited admission checker encoded the predecessor's 11-role total as a
 literal. It failed closed before submission against the intended four-role
 plan. The protocol itself remains unchanged.
+
+The R1 scorer contract omitted `stochastic_burn_counts`, although the copied
+ratified scorer requires it to generate the two eight-member comparator arms.
+This surfaced only after complete authenticated collection. Comparator and
+selection work did not open.
 
 ## Decision Log
 

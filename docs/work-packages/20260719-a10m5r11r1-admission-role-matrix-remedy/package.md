@@ -1,6 +1,6 @@
 # A10M5R11R1 — Admission Role-Matrix Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-SCORER-COMPARATOR-BURNS`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -46,3 +46,21 @@ The scientific terminals remain `A10M5R11-TEMPORAL-READY` and
 `HOLD-A10M5R11-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. An identity, admission,
 execution, evidence, resource, or cleanup failure receives an exact
 `HOLD-A10M5R11R1-*` terminal and no scientific interpretation.
+
+## Result
+
+The corrected admission passed. Control `1015199` and candidates `1015308`,
+`1015320`, and `1015624` all passed every registered science and operational
+gate. Each candidate published three seed results and 144 support-valid
+100-year temporal streams. Actual use was 133 GPU-minutes (15 + 35 + 39 +
+44), all four job-local trees were absent, 59/59 allowlisted files were
+authenticated, the unused recovery reserve was released, and the exact remote
+root was removed. Toolkit terminal: `LEMHI-TOOLKIT-RUN-CLOSED`.
+
+The local scorer then failed before comparator generation because
+`temporal-contract.json` omitted the ratified eight-value
+`stochastic_burn_counts` field it consumes. No comparator, bootstrap, or
+selection result was produced. The complete GPU evidence is retained and
+supports no architecture disposition by itself. A10M5R11R2 adds only that
+inherited field and adjudicates the immutable collected streams; no GPU rerun
+is authorized or needed.

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r11r1-admission-role-matrix-remedy",
+  "run_id": "a10m5r11r1-admission-role-matrix-remedy-r0",
+  "terminal": "HOLD-A10M5R11R1-SCORER-COMPARATOR-BURNS",
+  "source_commit": "f9727ea872ff68d048d42cff4acaf945a3b5e1f9",
+  "jobs": [
+    {"role": "control-materialization", "job_id": "1015199", "actual_gpu_minutes": 15, "passed": true},
+    {"role": "annual-monthly-residual-adapter-k1", "job_id": "1015308", "actual_gpu_minutes": 35, "passed": true, "streams": 144},
+    {"role": "monthly-residual-adapter-k2", "job_id": "1015320", "actual_gpu_minutes": 39, "passed": true, "streams": 144},
+    {"role": "annual-monthly-residual-adapter-k2", "job_id": "1015624", "actual_gpu_minutes": 44, "passed": true, "streams": 144}
+  ],
+  "actual_gpu_minutes": 133,
+  "collection": {"present": 59, "absent": 0, "bytes": 7321600, "sha256": "5f80585a24ddef9db0dde98b09ac77bcb641092feafca543caec1d771cb881be"},
+  "cleanup": {"remote_absent": true, "job_local_cleanup": "verified_absent", "recovery_invoked": false},
+  "scoring": {"started": false, "failure": "temporal contract lacks generation.stochastic_burn_counts"},
+  "protected_roles_opened": []
+}
