@@ -21,9 +21,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: recovered all evidence, replayed the selector twice
   byte-identically, cleaned the remote root, and closed R2 with neither
   continuous candidate temporally eligible.
-- [ ] 2026-07-20: execute A10M5R13, the 16-year selector-aligned comparison of
-  the flexible continuous hierarchy and its explicit rank-one shared-state
-  inductive-bias arm.
+- [x] 2026-07-20: publish A10M5R13 and close its authenticated zero-allocation
+  pre-submission abort after the cache-local admission controller failed its
+  repository-path self-authentication.
+- [ ] 2026-07-20: execute A10M5R13R1 with identical R13 science and a committed,
+  source-authenticated controller under fresh R13R1 authority identities.
 
 ## Surprises & Discoveries
 
@@ -63,6 +65,12 @@ window therefore has 5,844 Gregorian-axis rows and 5,840 source-observed rows:
 exactly 365 observations in each of 16 years, with four masked leap-year
 December 31 rows. Thirteen rolling origins per point survive the predecessor
 day requirement and corpus boundary.
+
+A10M5R13 itself consumed no GPU minute and submitted no job. Its controller
+correction changed published source after authority initialization, so the
+toolkit correctly aborted rather than mutating authority. R13R1 stages the
+committed wrapper byte-exactly and authenticates the full R13 controller before
+import.
 
 ## Decision Log
 
@@ -106,6 +114,9 @@ day requirement and corpus boundary.
   including precipitation q95, dispersion, lag one, and complete annual
   cross-field dependence—rather than counting the inherited annual moments
   twice.
+- 2026-07-20: preserve every R13 scientific role, contract, selector field,
+  terminal, firewall, and resource bound in R13R1; change only package/run/
+  authority/budget/admission identities and committed controller provenance.
 
 ## Outcomes & Retrospective
 
@@ -119,7 +130,7 @@ Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
 The active successor package is
-`docs/work-packages/20260720-a10m5r13-selector-aligned-continuous-hierarchy/`.
+`docs/work-packages/20260720-a10m5r13r1-admission-controller-materialization-remedy/`.
 
 ## Plan of Work
 
@@ -139,15 +150,12 @@ replay, annual-family diagnostics, and source/receipt-bound two-pass execution.
    `materialize_admission.py` with the exact private `state.json`, publication
    directory, source commit, role, and the plan-fixed
    `controller-admissions/<role>.json` output; then immediately call toolkit
-   `submit` for that role. Submit and observe the passing control first.
-   Materialize and submit the medium candidate next. Wait for its authenticated
-   `ready-for-science` setup receipt, pass that exact remote receipt through
-   `--setup continuous-medium-latent-process-k2=<remote setup.json>` while
-   materializing the hierarchical admission, and submit the hierarchical
-   candidate. Toolkit `submit` authenticates the current-state receipt under
-   the run lock before reserving resources, so a missing or stale receipt
-   fails closed. This admits the two science jobs concurrently while retaining
-   one serialized environment bootstrap.
+   `submit` for that role. Submit and observe the passing control first, then
+   materialize both selector-aligned candidate admissions and submit their
+   exact R13 roles concurrently. Toolkit `submit` authenticates each
+   current-state receipt under the run lock before reserving resources, so a
+   missing or stale receipt fails closed. Setup remains serialized even while
+   science execution overlaps.
 5. Observe terminal receipts, collect allowlisted evidence, and settle usage.
 6. Replay retained raw streams, then run two isolated source/receipt-bound
    comparator/bootstrap passes and require byte identity.

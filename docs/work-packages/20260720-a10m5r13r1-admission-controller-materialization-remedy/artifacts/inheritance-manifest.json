@@ -1,0 +1,29 @@
+{
+  "fresh_gpu_minute_ceiling": 515,
+  "parent_abort_record_sha256": "5dd6ede82046863c3995306f5ee522d40f98eb5e459ca6b8b471516b0a28221b",
+  "parent_abort_terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+  "parent_commit": "c849cdd3e0fcf8abf496b6ff987776a08d8b30cf",
+  "parent_package": "20260720-a10m5r13-selector-aligned-continuous-hierarchy",
+  "parent_run": "a10m5r13-selector-aligned-continuous-hierarchy-r0",
+  "protected_roles_opened": [],
+  "schema_version": "a10m5r13r1-inheritance-1",
+  "science_assets": {
+    "artifacts/evidence-profile.json": "d1d0074303b8de6a2dbf08b97e5365386d96982b74f40027c4f8e8990198b307",
+    "artifacts/portfolio-contract.json": "c3ab065b1ba94d68ade314863e390909fe9d73286396f3b4f0192675eb11259b",
+    "artifacts/replay-predecessor-pin.json": "b6a2119eed0d042052d2d606628c4698d9937cce029896f0a5785c54a11c9670",
+    "artifacts/science-contract.json": "5acfcd7822bb6e223c795726aff8c9d28aa4879c3f5b3838b911897053a94e34",
+    "artifacts/temporal-contract.json": "e207c89332c0a712325d592dfeef543b7a12d59100ddf9bda3ab32fd67bc4277",
+    "artifacts/jobs/climate_core.py": "f9e9eb96b5909034f410f475ae9f1ad89bcb2f4cc0cc26453338bb939ccf31f9",
+    "artifacts/jobs/continuous_core.py": "166c75702fb853c3019cbfed8d4fcf96300e4bbd2cb1241e3ad90454df2d33be",
+    "artifacts/jobs/selector_loss.py": "5de3c1a770f16dc0f8b66c2c8cf0d59e459a9e6f550e14b21e3aed819a90ddc8"
+  },
+  "science_role_ids": [
+    "selector-aligned-continuous-hierarchy-k2",
+    "selector-aligned-shared-slow-climate-state-k2"
+  ],
+  "science_terminals": [
+    "A10M5R13-TEMPORAL-READY",
+    "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  ],
+  "solar_opened": false
+}

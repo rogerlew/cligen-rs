@@ -1,0 +1,29 @@
+{
+  "admission": {
+    "admission_closes_after_any_observed_candidate_failure": true,
+    "control_must_pass_before_candidates": true,
+    "maximum_live_candidate_jobs": 2,
+    "maximum_simultaneous_bootstraps": 1,
+    "waves": [[
+      "selector-aligned-continuous-hierarchy-k2",
+      "selector-aligned-shared-slow-climate-state-k2"
+    ]]
+  },
+  "package_id": "20260720-a10m5r13r1-admission-controller-materialization-remedy",
+  "predecessor_package_id": "20260720-a10m5r13-selector-aligned-continuous-hierarchy",
+  "predecessor_terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+  "resources": {
+    "attempts_per_role": 1,
+    "candidate_minutes_each": 240,
+    "candidate_role_count": 2,
+    "control_minutes": 30,
+    "distributed_training": false,
+    "gpus_per_role": 1,
+    "job_arrays": false,
+    "recovery_minutes": 5,
+    "scientific_retries": false,
+    "total_gpu_minute_ceiling": 515
+  },
+  "schema_version": 1,
+  "status": "SCAFFOLDED"
+}

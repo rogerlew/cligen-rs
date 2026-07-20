@@ -567,13 +567,21 @@ The slow hierarchy improved annual dispersion and lag but not enough overall;
 annual cross-field dependence remains the dominant error. Both candidates
 evolve daily through month/year boundaries, so calendar periods remain
 aggregation bins rather than process resets. Solar remains deferred until that
-core passes. The active bounded successor is
+core passes. The next scientific stage was
 [A10M5R13](work-packages/20260720-a10m5r13-selector-aligned-continuous-hierarchy/package.md):
 it compares the same four-factor continuous hierarchy under 16-year,
 selector-aligned training with a matched arm that dedicates one existing slow
 factor to an explicit rank-one joint climate decoder. Both arms retain daily
 continuous evolution, use 5,844-row Gregorian windows with the exact 5,840-row
 Daymet observed mask, and change neither the temporal selector nor its gates.
+R13 reached remote verification but aborted before submission and allocation:
+the transformed cache-local admission controller could not authenticate itself
+as a repository path, and its initialized authority could not admit the later
+controller correction. The active bounded operational successor is
+[A10M5R13R1](work-packages/20260720-a10m5r13r1-admission-controller-materialization-remedy/package.md).
+It preserves the R13 roles, science, 515-minute ceiling, selector, evidence
+profile, and scientific terminals exactly while publishing and authenticating
+a committed R13R1 admission controller before import.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
