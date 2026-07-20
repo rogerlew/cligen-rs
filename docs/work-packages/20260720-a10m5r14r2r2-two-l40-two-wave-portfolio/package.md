@@ -1,6 +1,6 @@
 # A10M5R14R2R2 — Two-L40 Two-Wave Portfolio
 
-Status: `CORRECTIVE-R2-AUTHORIZED`
+Status: `CORRECTIVE-R3-AUTHORIZED`
 Date: 2026-07-20
 Evidence mode: Development architecture comparison; unchanged R14 science
 Starting branch and push target: current `main`, push `main`
@@ -83,3 +83,20 @@ inapplicable because no candidate evidence existed.
 Fresh run `r2` changes that single assertion to two, strengthens the focused
 test against recurrence, and changes only operational run identities. Frozen
 science remains unchanged.
+
+## Run r2 operational failure
+
+Run `r2` completed control job `1018164` in 1,244 seconds with every gate true.
+After several correct occupancy holds, its fresh portfolio admission passed and
+job `1018406` received exactly two L40s. The corrected launcher authenticated
+the two devices and launched both wave-0 children in isolated processes. Both
+then failed during import before training because the R14R2 `continuous_core`
+export loop copied the public name `inherited` into its own globals, overwriting
+the wrapper's module binding before the loop reached
+`smooth_climatology_basis`. Wave 1 remained unopened. The run charged 24
+GPU-minutes, collected the partial evidence, and cleaned the remote root.
+Replay was inapplicable because no training record existed.
+
+Fresh run `r3` makes the wrapper module and accounting bindings private before
+exporting the byte-identical R14 public surface. It changes no candidate,
+objective, temporal metric, calendar, seed, training, or selector behavior.

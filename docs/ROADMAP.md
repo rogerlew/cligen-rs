@@ -639,9 +639,11 @@ two deterministic concurrent pairs when at least two L40s are idle.
 R14R2R2 `r0` held before portfolio submission on duplicate identical scheduler
 rows. Run `r1` deduplicated those rows, passed control and portfolio admission,
 and received exactly two L40s, but an untransformed four-unique-token launcher
-predicate stopped before any candidate began. The active `r2` correction
-changes that predicate to two under fresh run identities; science remains
-unchanged.
+predicate stopped before any candidate began. Run `r2` corrected that gate,
+launched both wave-0 children on separate L40s, and exposed a pre-training
+R14R2 wrapper collision: exporting the public name `inherited` overwrote the
+wrapper's own module reference. The active `r3` correction makes those wrapper
+bindings private; science remains unchanged.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

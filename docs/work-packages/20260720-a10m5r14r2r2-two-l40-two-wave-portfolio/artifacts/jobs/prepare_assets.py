@@ -15,7 +15,7 @@ PARENT_COMMIT = "6463ab2bebcf016c371afc56e31ffc7156a2fb95"
 PARENT_PACKAGE_ID = "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy"
 PARENT_RUN_ID = "a10m5r14r2r1-inherited-admission-checker-identity-remedy-r0"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r2"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r3"
 PARENT_RECORD = "a10m5r14r2r1-submission-admission"
 RECORD = "a10m5r14r2r2-submission-admission"
 TOOLKIT_COMMIT = "06df84c882fbe297e93b13fb8c845d5eb500b405"
@@ -35,6 +35,7 @@ OVERLAYS = {
     "materialize_admission.py": "artifacts/jobs/materialize_admission.py",
     "portfolio-role-map.json": "artifacts/portfolio-role-map.json",
 }
+OPERATIONAL_TRANSFORMS = {"continuous_core.py"}
 
 
 def digest(path: Path) -> str:
@@ -257,6 +258,29 @@ def transform_launcher(path: Path) -> None:
     path.write_text(text)
 
 
+def transform_continuous_core(path: Path) -> None:
+    text = path.read_text()
+    text = replace_once(
+        text,
+        'inherited = load("inherited_r14_continuous_core", SOURCE)\naccounting = load("r14r2_parameter_accounting", ACCOUNTING)\nfor exported_name in dir(inherited):\n    if not exported_name.startswith("_"):\n        globals()[exported_name] = getattr(inherited, exported_name)\n',
+        '_inherited = load("inherited_r14_continuous_core", SOURCE)\n_accounting = load("r14r2_parameter_accounting", ACCOUNTING)\nfor exported_name in dir(_inherited):\n    if not exported_name.startswith("_"):\n        globals()[exported_name] = getattr(_inherited, exported_name)\n',
+        "continuous wrapper export binding",
+    )
+    text = replace_once(
+        text,
+        "    model, result = inherited.train_candidate(contract, candidate, *args, **kwargs)\n",
+        "    model, result = _inherited.train_candidate(contract, candidate, *args, **kwargs)\n",
+        "continuous wrapper training binding",
+    )
+    text = replace_once(
+        text,
+        "    return model, accounting.repair(result, candidate, adapter_count)\n",
+        "    return model, _accounting.repair(result, candidate, adapter_count)\n",
+        "continuous wrapper accounting binding",
+    )
+    path.write_text(text)
+
+
 def prepare(r14r2_assets: Path, package: Path, source_commit: str, output: Path, *, require_published: bool) -> dict:
     repo = package.parents[2]
     parent = load_parent(repo)
@@ -285,6 +309,8 @@ def prepare(r14r2_assets: Path, package: Path, source_commit: str, output: Path,
         source_paths.pop(name, None)
     transform_admission(output / "admission_checker.py")
     transform_launcher(output / "portfolio_launcher.py")
+    transform_continuous_core(output / "continuous_core.py")
+    source_paths.pop("continuous_core.py", None)
     for name, relative in OVERLAYS.items():
         source = package / relative
         repo_relative = source.relative_to(repo).as_posix()
@@ -304,7 +330,7 @@ def prepare(r14r2_assets: Path, package: Path, source_commit: str, output: Path,
         if identity(output / name)
         != {key: expected[key] for key in ("bytes", "sha256")}
     }
-    expected_changed = IDENTITY_REWRITES | set(OVERLAYS)
+    expected_changed = IDENTITY_REWRITES | set(OVERLAYS) | OPERATIONAL_TRANSFORMS
     if changed != expected_changed:
         raise RuntimeError(f"R14R2R2 operational changed-file roster drift: {sorted(changed)}")
     for name in IDENTITY_REWRITES:

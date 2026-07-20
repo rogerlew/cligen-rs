@@ -105,6 +105,40 @@ class TwoWaveTransformTests(unittest.TestCase):
             self.assertFalse(crowded_receipt["valid"])
             self.assertEqual(crowded_receipt["active_gpu_count"], 3)
 
+    def test_continuous_wrapper_keeps_private_module_bindings(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            target = Path(raw) / "continuous_core.py"
+            shutil.copyfile(
+                PARENT.parent
+                / "20260720-a10m5r14r2-shared-environment-four-l40-portfolio/artifacts/jobs/continuous_core.py",
+                target,
+            )
+            prepare.transform_continuous_core(target)
+            transformed = target.read_text()
+            py_compile.compile(str(target), doraise=True)
+            self.assertIn("for exported_name in dir(_inherited):", transformed)
+            self.assertIn("_inherited.train_candidate", transformed)
+            self.assertIn("_accounting.repair", transformed)
+            self.assertNotIn("for exported_name in dir(inherited):", transformed)
+            (target.parent / "inherited_r14_continuous_core.py").write_text(
+                "inherited = 'public-name'\n"
+                "def smooth_climatology_basis(value):\n    return value + 1\n"
+                "def train_candidate(*args, **kwargs):\n    raise AssertionError('not called')\n"
+            )
+            (target.parent / "parameter_accounting.py").write_text(
+                "def repair(*args):\n    return args\n"
+            )
+            wrapper_spec = importlib.util.spec_from_file_location(
+                "transformed_continuous_core", target
+            )
+            self.assertIsNotNone(wrapper_spec)
+            self.assertIsNotNone(wrapper_spec.loader)
+            wrapper = importlib.util.module_from_spec(wrapper_spec)
+            wrapper_spec.loader.exec_module(wrapper)
+            self.assertEqual(wrapper.inherited, "public-name")
+            self.assertEqual(wrapper.smooth_climatology_basis(2), 3)
+            self.assertTrue(hasattr(wrapper._inherited, "train_candidate"))
+
     def test_contract_reduces_ceiling_without_changing_four_arm_count(self) -> None:
         value = json.loads((PACKAGE / "artifacts/job-local-capacity-contract.json").read_text())
         resources = value["resources"]

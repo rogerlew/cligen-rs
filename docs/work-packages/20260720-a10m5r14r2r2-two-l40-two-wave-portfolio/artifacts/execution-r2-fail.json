@@ -1,0 +1,39 @@
+{
+  "actual_gpu_minutes": 24,
+  "collection": {
+    "archive_sha256": "9fb858c36700259f80138012d062bf28e7c0d6409a9bab45cae42c79d94289ca",
+    "record_sha256": "ba7c6272b5653a565e8175c47bd0b6342558f328684469a527f66be1363d729e"
+  },
+  "control": {
+    "elapsed_seconds": 1244,
+    "exit_code": 0,
+    "gate_receipt_sha256": "8f20b43e804c5f70d859aeed379fa3c7683327b1ba40234821dff56c9e96e525",
+    "job_id": "1018164",
+    "passed": true
+  },
+  "failure": {
+    "candidate_children_started": 2,
+    "failed_roles": [
+      "continuous-location-ou-k2",
+      "continuous-location-ou-smooth-climatology-k2"
+    ],
+    "root_cause": "continuous_core export loop overwrote its inherited module binding before reaching smooth_climatology_basis",
+    "wave": 0
+  },
+  "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "plan_id": "2150ab0a45e37574612a054b32feb8ccfc395375b16f8e1c357e7606d439cccb",
+  "portfolio": {
+    "elapsed_seconds": 84,
+    "exit_code": 1,
+    "gate_receipt_sha256": "0e71025dc00683914a0d0437a646f6b42533095d477cd08742fea946365f4b24",
+    "job_id": "1018406",
+    "passed": false
+  },
+  "remote_cleanup_verified_absent": true,
+  "replay_performed": false,
+  "run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r2",
+  "schema_version": 1,
+  "source_commit": "74301230c2cb81709c2cbf6ab7a07243ad685a93",
+  "successor_run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r3",
+  "terminal": "R14R2R2-R2-FAIL-WRAPPER-BINDING-COLLISION"
+}

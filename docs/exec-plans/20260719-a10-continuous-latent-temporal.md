@@ -51,8 +51,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: preserve R14R2R2 runs r0/r1: r0 held on duplicate identical
   scheduler rows; r1 passed exact two-L40 admission but exposed one stale
   four-unique-token launcher assertion before starting a candidate.
-- [ ] 2026-07-20: execute corrective R14R2R2 r2 as the same four-candidate
-  comparison in two deterministic concurrent pairs on two idle L40s.
+- [x] 2026-07-20: execute corrective R14R2R2 r2 through both wave-0 process
+  launches; preserve its pre-training failure when a public export overwrote
+  the compatibility wrapper's inherited-module binding.
+- [ ] 2026-07-20: execute corrective R14R2R2 r3 with private wrapper bindings
+  and otherwise identical four-candidate science.
 
 ## Surprises & Discoveries
 

@@ -14,10 +14,10 @@ REPO = PACKAGE.parents[2]
 PARENT_COMMIT = "6463ab2bebcf016c371afc56e31ffc7156a2fb95"
 PARENT_PACKAGE = "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy"
 SOURCE = PACKAGE.parent / PARENT_PACKAGE / "artifacts/jobs/build_control_records.py"
-HOLD = PACKAGE / "artifacts/execution-r1-fail.json"
-HOLD_SHA256 = "2f70ae235f374cb252c20beefcc99ef22c1af96ce4fe01b3b11240a735ab109e"
+HOLD = PACKAGE / "artifacts/execution-r2-fail.json"
+HOLD_SHA256 = "a551fa51293fab8b5eb89dd602399bbf40d847912e3d56e0f78323577644f184"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r2"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r3"
 RECORD_TYPE = "a10m5r14r2r2-submission-admission"
 PORTFOLIO_ROLE = "continuous-distribution-head-factorial-portfolio"
 
@@ -39,21 +39,21 @@ def verify_parent() -> None:
 
 def predecessor_bundle(record_commit: str | None = None) -> dict:
     if digest(HOLD) != HOLD_SHA256:
-        raise RuntimeError("R14R2R2 r1 failure identity drift")
+        raise RuntimeError("R14R2R2 r2 failure identity drift")
     value = json.loads(HOLD.read_text())
     if not (
         value.get("source_commit")
-        == "d838933ec825322409a4f0e22a644ebacd4fc207"
-        and value.get("actual_gpu_minutes") == 25
+        == "74301230c2cb81709c2cbf6ab7a07243ad685a93"
+        and value.get("actual_gpu_minutes") == 24
         and value.get("control", {}).get("passed") is True
         and value.get("portfolio", {}).get("passed") is False
-        and value.get("failure", {}).get("candidate_children_started") == 0
+        and value.get("failure", {}).get("candidate_children_started") == 2
         and value.get("remote_cleanup_verified_absent") is True
-        and value.get("terminal") == "R14R2R2-R1-FAIL-TWO-TOKEN-ASSERTION"
+        and value.get("terminal") == "R14R2R2-R2-FAIL-WRAPPER-BINDING-COLLISION"
     ):
-        raise RuntimeError("R14R2R2 r1 failure semantic drift")
+        raise RuntimeError("R14R2R2 r2 failure semantic drift")
     bundle = {
-        "actual_gpu_minutes": 25,
+        "actual_gpu_minutes": 24,
         "artifact": {"bytes": HOLD.stat().st_size, "sha256": digest(HOLD)},
         "artifact_source_path": HOLD.relative_to(REPO).as_posix(),
         "control_job_id": value["control"]["job_id"],
@@ -67,7 +67,7 @@ def predecessor_bundle(record_commit: str | None = None) -> dict:
     }
     if record_commit is not None:
         if git_bytes(record_commit, HOLD.relative_to(REPO).as_posix()) != HOLD.read_bytes():
-            raise RuntimeError("R14R2R2 r1 failure differs from published r2 bytes")
+            raise RuntimeError("R14R2R2 r2 failure differs from published r3 bytes")
         bundle["artifact_record_commit"] = record_commit
     return bundle
 

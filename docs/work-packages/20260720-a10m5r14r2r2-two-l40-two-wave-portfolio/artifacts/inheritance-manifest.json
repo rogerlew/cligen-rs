@@ -7,10 +7,11 @@
     ],
     "protocol": "ordered-plan-assets-v1"
   },
-  "operational_change": "schedule four isolated single-GPU candidates as two deterministic concurrent pairs",
+  "operational_change": "schedule four isolated single-GPU candidates as two deterministic concurrent pairs and preserve private compatibility-wrapper bindings",
   "operational_asset_change_allowlist": [
     "admission_checker.py",
     "build_control_records.py",
+    "continuous_core.py",
     "inherited_admission_checker.py",
     "job-continuous-distribution-head-factorial-portfolio.sh",
     "job-control-materialization.sh",

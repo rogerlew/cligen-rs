@@ -23,8 +23,8 @@ changes.
 
 ## Prepublication result
 
-All scaffold gates pass. The observed changed-file roster is the exact frozen
-twelve-asset operational set, and the selected frozen science set is
+All scaffold gates pass. The initial observed changed-file roster was the
+exact frozen twelve-asset operational set, and the selected frozen science set is
 byte-identical. Live authority, admission, execution, collection, replay, and
 cleanup remain postpublication gates.
 
@@ -42,3 +42,14 @@ strengthened regression test fails
 against the `r1` transform. Four focused package tests, 86 toolkit tests,
 generated Python compilation and shell syntax, `cargo fmt --check`, clippy with
 warnings denied, the full Rust suite, and `git diff --check` pass.
+
+## Corrective r3 result
+
+The authenticated `r2` execution proved allocation and process isolation, then
+failed before training because the compatibility wrapper overwrote its own
+publicly named module binding during export. The `r3` generated wrapper uses
+private `_inherited` and `_accounting` bindings while exporting the unchanged
+R14 public surface. A focused regression test rejects the colliding form. The
+immediate predecessor binding is the exact `r2` failure artifact.
+Fresh generation enforces the current thirteen-asset operational allowlist
+(the prior twelve plus `continuous_core.py`), and all five focused tests pass.

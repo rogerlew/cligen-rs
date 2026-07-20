@@ -13,7 +13,7 @@ PARENT_COMMIT = "6463ab2bebcf016c371afc56e31ffc7156a2fb95"
 PARENT_PACKAGE = "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy"
 SOURCE = PACKAGE.parent / PARENT_PACKAGE / "artifacts/jobs/materialize_admission.py"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r2"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r3"
 RECORD_TYPE = "a10m5r14r2r2-submission-admission"
 
 

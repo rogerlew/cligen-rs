@@ -1,11 +1,12 @@
 # Scaffold review
 
-Disposition: `ACCEPT — A10M5R14R2R2-R2-CORRECTION-READY-FOR-PUBLICATION`
+Disposition: `ACCEPT — A10M5R14R2R2-R3-CORRECTION-READY-FOR-PUBLICATION`
 
-The exact reconstructed child tree differs from R14R2R1 in twelve operational
+The exact reconstructed child tree differs from R14R2R1 in thirteen operational
 assets: the composed admission wrapper, inherited operational identities, two
 job wrappers, builder, materializer, capacity contract, role map, launcher,
-replay identities, setup diagnostics, and selector identities. Candidate code,
+replay identities, setup diagnostics, selector identities, and the private
+compatibility-wrapper binding. Candidate code,
 objectives, temporal metrics, calendar controls, parameter accounting, corpus,
 runtime, and all other frozen science assets are byte-identical.
 
@@ -15,7 +16,7 @@ snapshot passes the at-least-two-idle gate; a three-active-GPU snapshot fails.
 The generated 51-asset tree compiles and all shell assets parse.
 
 Repository formatting, clippy with warnings denied, the complete Rust suite,
-all 86 toolkit tests, four focused package tests, Python compilation, JSON
+all 86 toolkit tests, five focused package tests, Python compilation, JSON
 parsing, shell syntax, and `git diff --check` pass. No production function under
 `crates/` changes, so coverage/CRAP is not triggered.
 
@@ -42,3 +43,18 @@ sealed protected roles, and no
 the `r1` transform and passes against `r2`. Four focused tests, 86 toolkit
 tests, generated Python and shell validation, repository formatting, clippy,
 the full Rust suite, and `git diff --check` pass.
+
+## Corrective review after run r2
+
+Run `r2` proved the two-token correction: the launcher authenticated exactly
+two L40s and started both wave-0 children with distinct device bindings. Both
+failed before training at the same deterministic import boundary. The R14R2
+compatibility wrapper exported every public inherited-module name into its own
+globals; exporting the name `inherited` replaced the wrapper's module reference
+before later names such as `smooth_climatology_basis` were copied.
+
+The `r3` transform changes only those wrapper-local bindings to private names.
+The inherited R14 science module remains byte-identical. A focused transform
+test requires the private export, training, and accounting bindings and rejects
+the colliding loop form. The fresh authority binds the authenticated `r2`
+failure as its immediate operational predecessor.
