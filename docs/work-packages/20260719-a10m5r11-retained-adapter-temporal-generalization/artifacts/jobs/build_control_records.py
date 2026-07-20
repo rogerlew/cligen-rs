@@ -39,7 +39,7 @@ PREDECESSOR_FILES = (
     "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/portfolio-decision.json",
     "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/operational-summary.json",
     "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/execution-disposition.md",
-    "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/cleanup-record.json",
+    "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/toolkit-recovered/cleanup.json",
     "docs/work-packages/20260719-a10m5r10r1r4-science-environment-closure-remedy/artifacts/review.md",
 )
 
