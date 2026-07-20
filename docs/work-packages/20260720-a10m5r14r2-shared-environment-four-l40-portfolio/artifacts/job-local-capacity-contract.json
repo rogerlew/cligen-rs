@@ -1,0 +1,52 @@
+{
+  "admission": {
+    "admission_closes_after_any_observed_candidate_failure": true,
+    "control_must_pass_before_candidates": true,
+    "maximum_live_candidate_jobs": 1,
+    "maximum_simultaneous_bootstraps": 1,
+    "waves": [["continuous-distribution-head-factorial-portfolio"]]
+  },
+  "calendar_preflight_before_reservation": true,
+  "package_id": "20260720-a10m5r14r2-shared-environment-four-l40-portfolio",
+  "predecessor_package_id": "20260720-a10m5r14r1-admission-role-matrix-remedy",
+  "protected_roles_opened": [],
+  "resources": {
+    "allocation_job_count": 1,
+    "attempts_per_role": 1,
+    "candidate_process_count": 4,
+    "candidate_role_count": 1,
+    "control_minutes": 30,
+    "distributed_training": false,
+    "gpus_per_portfolio": 4,
+    "independent_process_count": 4,
+    "job_arrays": false,
+    "portfolio_minutes": 240,
+    "recovery_minutes": 5,
+    "scientific_retries": false,
+    "science_arm_count": 4,
+    "total_gpu_minute_ceiling": 995
+  },
+  "schema_version": 1,
+  "shared_environment": {
+    "bootstrap_count": 1,
+    "corpus_extraction_count": 1,
+    "immutable_before_science": true,
+    "process_model": "four-independent-single-gpu-processes",
+    "uses_ddp": false,
+    "uses_nccl": false,
+    "uses_torchrun": false
+  },
+  "storage_formula": {
+    "components": [
+      "one expanded portable runtime and environment",
+      "one extracted corpus",
+      "four isolated transient cache roots",
+      "four candidate transient work roots",
+      "fixed safety margin"
+    ],
+    "minimum_free_bytes_before_mutation": 17179869184,
+    "minimum_free_inodes_before_mutation": 16000,
+    "shared_tree_identity_before_and_after_science": true
+  },
+  "status": "SCAFFOLDED"
+}

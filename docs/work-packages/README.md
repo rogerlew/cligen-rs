@@ -114,7 +114,8 @@ Start from [templates/package.md](templates/package.md).
 | [20260720-a10m5r13r1-admission-controller-materialization-remedy](20260720-a10m5r13r1-admission-controller-materialization-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE |
 | [20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy](20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE |
 | [20260720-a10m5r14-continuous-distribution-head-factorial](20260720-a10m5r14-continuous-distribution-head-factorial/package.md) | EXECUTED-ABORTED-BEFORE-SUBMISSION |
-| [20260720-a10m5r14r1-admission-role-matrix-remedy](20260720-a10m5r14r1-admission-role-matrix-remedy/package.md) | SCAFFOLDED-AUTHORIZED |
+| [20260720-a10m5r14r1-admission-role-matrix-remedy](20260720-a10m5r14r1-admission-role-matrix-remedy/package.md) | EXECUTED-HOLD-OPERATIONAL-PREREQUISITES |
+| [20260720-a10m5r14r2-shared-environment-four-l40-portfolio](20260720-a10m5r14r2-shared-environment-four-l40-portfolio/package.md) | SCAFFOLDED-AUTHORIZED |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |

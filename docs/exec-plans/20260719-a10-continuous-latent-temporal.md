@@ -36,8 +36,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: preserve A10M5R14's authenticated pre-submission abort after
   its capacity contract omitted fields required by the inherited role-matrix
   checker; consume zero GPU minutes and remove the exact remote root.
-- [ ] 2026-07-20: execute A10M5R14R1 with identical science and corrected
-  admission wave/role-count semantics under fresh authority identities.
+- [x] 2026-07-20: execute A10M5R14R1 with identical science and corrected
+  admission wave/role-count semantics; preserve its two authenticated
+  operational failures and close cleanly after 88 charged GPU-minutes.
+- [ ] 2026-07-20: execute A10M5R14R2 as one shared-environment four-L40
+  portfolio with corrected adapter-only/total parameter accounting.
 
 ## Surprises & Discoveries
 
@@ -119,6 +122,17 @@ toolkit recorded no attempt, reserved no GPU, and removed the exact remote root
 through its authenticated pre-submission abort. R14R1 repairs only this
 operational interface.
 
+R14R1's control passed and the candidate wave then exposed two independent
+prerequisites. A and B trained their first seed but the R14 wrapper replaced
+the inherited adapter-only `parameter_count` with a control-plus-adapter total;
+the unchanged experiment driver added the control again and failed closed at
+555,594/555,674 rather than the intended 278,667/278,747. C exhausted node03's
+job-local filesystem while installing the third duplicated environment, and D
+was never opened. The collected evidence is operational rather than a matched
+scientific result. R14R2 therefore fixes the parameter-count interface and
+bootstraps one immutable environment/corpus for four independent GPU-bound
+children inside one typed four-L40 job.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -179,6 +193,10 @@ operational interface.
   calendar resets, stochastic states, or solar inputs.
 - 2026-07-20: preserve R14's pre-submission abort and carry its science into a
   fresh R14R1 identity; do not amend or reuse the initialized R14 authority.
+- 2026-07-20: preserve R14R1's 88-minute operational HOLD. Do not score or mix
+  its partial arms. Repair the adapter-only parameter-count interface and rerun
+  all four arms together using one immutable shared environment and corpus in
+  one four-L40 allocation; each arm remains an independent process and result.
 
 ## Outcomes & Retrospective
 
@@ -198,7 +216,7 @@ Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
 The active successor package is
-`docs/work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/`.
+`docs/work-packages/20260720-a10m5r14r2-shared-environment-four-l40-portfolio/`.
 
 ## Plan of Work
 

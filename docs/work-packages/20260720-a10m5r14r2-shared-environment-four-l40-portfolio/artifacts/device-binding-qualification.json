@@ -1,0 +1,22 @@
+{
+  "binding_contract": {
+    "child_gate": "one visible CUDA device, NVIDIA L40 name, assigned allocation token retained",
+    "portfolio_gate": "four distinct Slurm CUDA_VISIBLE_DEVICES tokens",
+    "uuid_dependency": false
+  },
+  "evidence": {
+    "bytes": 3281,
+    "path": "docs/work-packages/20260719-a10m5o2-canonical-multi-l40-qualification/artifacts/live/operational-summary.json",
+    "sha256": "42b74d476d8e3c1777867821e2a63ce2fa7fbe60fc522fea7f99894d87e2cdf8"
+  },
+  "gates": {
+    "canonical_torch_2_7_1_cu128": true,
+    "four_l40": true,
+    "node03": true,
+    "one_process_per_gpu": true,
+    "unique_device_bindings": true
+  },
+  "package_id": "20260719-a10m5o2-canonical-multi-l40-qualification",
+  "schema_version": 1,
+  "source_commit": "0caae8e462dd82cdc382e0d425a0553872c648d1"
+}

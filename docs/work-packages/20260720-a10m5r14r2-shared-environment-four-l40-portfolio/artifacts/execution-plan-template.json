@@ -1,0 +1,31 @@
+{
+  "admission_materialization": {
+    "record_type": "a10m5r14r2-submission-admission",
+    "required_before_each_submit": true,
+    "required_roles": [
+      "control-materialization",
+      "continuous-distribution-head-factorial-portfolio"
+    ]
+  },
+  "attempts_per_role": 1,
+  "candidate_processes": 4,
+  "control_minutes": 30,
+  "evidence_profile_path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
+  "evidence_profile_sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629",
+  "gpu_minute_ceiling": 995,
+  "gpu_type": "NVIDIA L40",
+  "package_id": "20260720-a10m5r14r2-shared-environment-four-l40-portfolio",
+  "portfolio_gpus": 4,
+  "portfolio_minutes": 240,
+  "recovery_minutes": 5,
+  "resource_budget_id": "a10m5r14r2-shared-environment-four-l40-portfolio-r0-budget",
+  "run_id": "a10m5r14r2-shared-environment-four-l40-portfolio-r0",
+  "science_terminals": [
+    "A10M5R14-TEMPORAL-READY",
+    "HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  ],
+  "submission_waves": [
+    ["control-materialization"],
+    ["continuous-distribution-head-factorial-portfolio"]
+  ]
+}

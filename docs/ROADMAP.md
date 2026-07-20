@@ -609,8 +609,20 @@ slim job-local capacity contract omitted the inherited admission checker's
 exact candidate-wave and role-count fields. The active operational successor
 is
 [A10M5R14R1](work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/package.md),
-which preserves the four science arms and repairs only that
-contract/materialization boundary under fresh identities.
+which preserved the four science arms and repaired that
+contract/materialization boundary under fresh identities. Its control passed,
+but the candidate wave exposed two further operational prerequisites. A and B
+failed after first-seed training because R14's wrapper reported a total model
+count where its inherited caller expected an adapter-only count and therefore
+double-counted the frozen control. C exhausted job-local storage while
+installing a third duplicate environment; D remained unopened. R14R1 closed
+cleanly after collecting the partial evidence and charging 88 GPU-minutes. The
+active bounded successor is
+[A10M5R14R2](work-packages/20260720-a10m5r14r2-shared-environment-four-l40-portfolio/package.md):
+one source-authenticated shared read-only environment and corpus, four
+independent one-GPU children in one four-L40 allocation, and corrected
+adapter-only versus total parameter accounting. It reruns all four arms as one
+matched portfolio and changes no scientific hypothesis.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

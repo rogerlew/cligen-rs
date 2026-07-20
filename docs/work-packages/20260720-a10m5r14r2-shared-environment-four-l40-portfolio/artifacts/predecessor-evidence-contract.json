@@ -1,0 +1,60 @@
+{
+  "actual_gpu_minutes": 88,
+  "collection": {
+    "archive_sha256": "03000568368acf75bf24e1c9232635b7a138ae0fbddaec32c0da3a0ec4c997e5",
+    "file_sha256": "3f1cf6d4caa0079e83a716cd726320504ea6384746795aacfcb0dc8dc44ebed2",
+    "record_sha256": "2f5987da4829d174d0c71504b371825348eb9b15f7b2ae0b280b8a3eff35459d"
+  },
+  "execution_bindings": {
+    "path": "docs/work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/artifacts/execution-bindings.json",
+    "sha256": "b9cef51e3e00f7112ac28ad54863412445a8306dc6f8ec55be39d2c582824276"
+  },
+  "failures": {
+    "continuous-location-ou-k2": {
+      "actual_gpu_minutes": 31,
+      "job_id": "1016163",
+      "job_receipt_file_sha256": "159472544b1d926fddc585c6f5d97e64faf77f97f415bcb204591652b453cf82",
+      "job_receipt_record_sha256": "c38a4d04be907c9016a02e3048d852ce052eb2168f1f7477e8172e2e2aa8232b",
+      "stderr_file_sha256": "6e52c1d4662da10851767d5004686e7b02a0b5faabe0d6932b9e1758fc6d89c8",
+      "terminal": "candidate parameter ceiling exceeded: 555594>330000"
+    },
+    "continuous-location-ou-smooth-climatology-k2": {
+      "actual_gpu_minutes": 36,
+      "job_id": "1016164",
+      "job_receipt_file_sha256": "46a3b0efff9c24b7f155ab061ff73b57916a3ea855a547fb3e8ea068b0f5bc7e",
+      "job_receipt_record_sha256": "ab8ef42dcb035a87c472ef7d320a7b789397f9271d888165ff179c8b51c55256",
+      "stderr_file_sha256": "86fb1b6515f597be2dbdb76bf5e5ac2406e2c009d3dbf4b09388cfd77f92ff54",
+      "terminal": "candidate parameter ceiling exceeded: 555674>330000"
+    },
+    "continuous-location-scale-ou-k2": {
+      "actual_gpu_minutes": 2,
+      "job_id": "1016165",
+      "job_receipt_file_sha256": "d280adb9057425e03be456108deb98689c1c3a486b7407b859c7351f9ae8db87",
+      "job_receipt_record_sha256": "ed45d288a0f59f82b71a9dfcbf081505c76a4f33936c1f63bf0fa07484cc91c6",
+      "setup_log_file_sha256": "243bb114483059d6cecaba1857f4e8f90a7ed2308dc7fd710870ad640c7e3bd7",
+      "terminal": "OSError: [Errno 28] No space left on device"
+    }
+  },
+  "ledger": {
+    "file_sha256": "d7c7d8c27f90814f266de14ab0fba018eeef70264b156d9000f7161d780478e7",
+    "head_sha256": "a2e529b36005a585ca52a637a816c9521132c6155f2bc93c2b57641e5067eeaa"
+  },
+  "matrix_stop": {
+    "file_sha256": "5e2818eb090d3796996481ac8f2077543f025f5ea46a683dc17c473481a6da5d",
+    "record_sha256": "44737476b606bbc072d42a4b0a349cdf0be95d1f3e37c22423710653dea6633a",
+    "stopped_role": "continuous-location-scale-ou-smooth-climatology-k2"
+  },
+  "plan_id": "dc11173b0d4bbad54e3361a5ecbee0b092f7996e0862c0839f82fdfa5f30992d",
+  "run_id": "a10m5r14r1-admission-role-matrix-remedy-r0",
+  "schema_version": 1,
+  "source_commit": "bbb3075109ce06dabda13d43862cd94d375225bd",
+  "terminal": {
+    "cleanup_file_sha256": "b9076a06d58d5f9bb2d762be341648d645ef298f95d48966c0d5cbf4b5d17a58",
+    "cleanup_record_sha256": "dc5c43a1ba240ea8b3fecacf0667f6a5abfecb939cdf9c5603234191276b4b41",
+    "job_local_cleanup": "verified_absent",
+    "remote_absent": true,
+    "terminal": "LEMHI-TOOLKIT-RUN-CLOSED",
+    "terminal_file_sha256": "8bc737ec2e6262c902a98ddc6d3dbca6ef78f26029bfa067fe6afcf4716bccb9",
+    "terminal_record_sha256": "feea65aa3a6ba828f80f46dc22fe4a7e483ce6a945a474d698c0e278f1944e31"
+  }
+}
