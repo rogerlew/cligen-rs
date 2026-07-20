@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r11r1-admission-role-matrix-remedy",
+  "predecessor_package_id": "20260719-a10m5r11-retained-adapter-temporal-generalization",
+  "status": "SCAFFOLDED",
+  "science_parent_environment": {
+    "reconstructed_after_bootstrap": true,
+    "asserted_before_first_parent_python": true,
+    "required_job_environment": {
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "PATH": "/registered/run/runtime/bin:/usr/bin:/bin",
+      "PIP_CACHE_DIR": "/registered/job-local/attempt/pip-cache",
+      "PYTHONNOUSERSITE": "1",
+      "TMPDIR": "/registered/job-local/attempt/tmp",
+      "TORCH_HOME": "/registered/job-local/attempt/torch-cache",
+      "XDG_CACHE_HOME": "/registered/job-local/attempt/cache"
+    },
+    "prohibited_parent_variables": ["LD_LIBRARY_PATH", "PYTHONHOME", "PYTHONPATH"]
+  },
+  "admission": {
+    "control_must_pass_before_candidates": true,
+    "admission_closes_after_any_observed_candidate_failure": true,
+    "maximum_live_candidate_jobs": 2,
+    "maximum_simultaneous_bootstraps": 1,
+    "waves": [
+      ["annual-monthly-residual-adapter-k1", "monthly-residual-adapter-k2"],
+      ["annual-monthly-residual-adapter-k2"]
+    ]
+  },
+  "resources": {
+    "control_minutes": 30,
+    "candidate_role_count": 3,
+    "candidate_minutes_each": 90,
+    "recovery_minutes": 5,
+    "total_gpu_minute_ceiling": 305,
+    "gpus_per_role": 1,
+    "attempts_per_role": 1,
+    "distributed_training": false,
+    "job_arrays": false,
+    "scientific_retries": false
+  }
+}

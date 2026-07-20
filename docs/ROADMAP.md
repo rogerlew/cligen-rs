@@ -533,7 +533,13 @@ leap-century correction exactly, carries every passing configuration forward,
 and introduces no new parsimony selector. Solar remains closed during this
 stage; its downstream constraint is a procedural latitude/day-of-year
 astronomical envelope plus a stochastic clearness/cloud residual coupled to
-generated precipitation and temperature.
+generated precipitation and temperature. Its first authority failed closed
+before submission because the inherited admission checker retained the old
+11-role literal; zero GPU-minutes were consumed and the exact root was
+removed. Active bounded
+[A10M5R11R1](work-packages/20260719-a10m5r11r1-admission-role-matrix-remedy/package.md)
+derives the four-role total from the frozen contract and reruns the unchanged
+science.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
