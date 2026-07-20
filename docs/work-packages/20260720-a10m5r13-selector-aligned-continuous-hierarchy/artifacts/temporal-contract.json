@@ -1,0 +1,153 @@
+{
+  "contract_id": "a10m5r13-selector-aligned-continuous-hierarchy-v1",
+  "generation": {
+    "begin_year": 2001,
+    "common_random_numbers": true,
+    "expected_streams_per_configuration": 144,
+    "horizon_years": 100,
+    "member_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "stochastic_burn_counts": [
+      101,
+      1101,
+      2101,
+      3101,
+      4101,
+      5101,
+      6101,
+      7101
+    ],
+    "training_seed_count": 3
+  },
+  "metrics": {
+    "annual": [
+      "precipitation_mean",
+      "precipitation_standard_deviation",
+      "precipitation_q95",
+      "tmax_mean",
+      "tmax_standard_deviation",
+      "tmin_mean",
+      "tmin_standard_deviation",
+      "precipitation_lag1",
+      "tmax_lag1",
+      "tmin_lag1",
+      "precipitation_tmax_correlation",
+      "precipitation_tmin_correlation",
+      "tmax_tmin_correlation"
+    ],
+    "dry_month_total_threshold_mm": 1.0,
+    "monthly_precipitation": [
+      "mean",
+      "standard_deviation",
+      "coefficient_of_variation",
+      "skew",
+      "dry_frequency",
+      "q10",
+      "q50",
+      "q90",
+      "q95"
+    ],
+    "monthly_temperature": [
+      "tmax_mean",
+      "tmax_standard_deviation",
+      "tmin_mean",
+      "tmin_standard_deviation",
+      "tmax_tmin_correlation"
+    ],
+    "occurrence": [
+      "p_wet_given_wet",
+      "p_wet_given_dry",
+      "wet_spell_survival_3",
+      "wet_spell_survival_7",
+      "dry_spell_survival_3",
+      "dry_spell_survival_7",
+      "seasonal_wet_frequency_range"
+    ],
+    "paired_daily_pattern_weight": 0.0,
+    "wet_threshold_mm": 1.0
+  },
+  "observation": {
+    "bootstrap_year_relabel": "2000 + 16 * position + (0 if source block contains February 29 else 1)",
+    "expected_observed_rows_per_site": 10950,
+    "missing_value_policy": "exclude source-unobserved rows; no filling",
+    "role": "fit_validation",
+    "site_count": 6,
+    "years": [
+      1980,
+      2009
+    ]
+  },
+  "predecessor_terminal": "HOLD-A10M5R12-NO-TEMPORALLY-ELIGIBLE-CANDIDATE",
+  "protected_roles_opened": [],
+  "resources": {
+    "candidate_minutes_each": 240,
+    "candidate_role_count": 2,
+    "control_minutes": 30,
+    "gpu_jobs": 3,
+    "gpu_minute_ceiling": 515,
+    "maximum_concurrent_candidates": 2,
+    "recovery_minutes": 5
+  },
+  "roles": [
+    {
+      "architecture": "selector_aligned_continuous_hierarchy",
+      "backbone_capacity": "P2",
+      "capacity": "K2",
+      "configuration_id": "selector_aligned_continuous_hierarchy-k2",
+      "role_id": "selector-aligned-continuous-hierarchy-k2",
+      "seeds": [
+        147031,
+        271828,
+        314159
+      ]
+    },
+    {
+      "architecture": "selector_aligned_shared_slow_climate_state",
+      "backbone_capacity": "P2",
+      "capacity": "K2",
+      "configuration_id": "selector_aligned_shared_slow_climate_state-k2",
+      "role_id": "selector-aligned-shared-slow-climate-state-k2",
+      "seeds": [
+        147031,
+        271828,
+        314159
+      ]
+    }
+  ],
+  "schema_version": 1,
+  "scoring": {
+    "bootstrap": {
+      "replicates": 1000,
+      "resampling": "paired observation-year blocks and generated member streams",
+      "seed": 410542
+    },
+    "candidate_noninferiority": {
+      "maximum_regime_ratio": 1.5,
+      "median_regime_ratio_upper_90_percent": 1.25
+    },
+    "component_scales": {
+      "coefficient_of_variation": 0.25,
+      "correlation": 0.1,
+      "log_precipitation": 0.25,
+      "probability": 0.05,
+      "skew": 0.5,
+      "temperature_mean_c": 1.0,
+      "temperature_standard_deviation_c": 0.5
+    },
+    "decision": "all temporally eligible configurations continue; no final architecture promotion",
+    "reference": "lower regime composite of faithful and stochastic_prism_localized_par_v1",
+    "regime_composite": "unweighted mean of finite registered common-component scaled absolute errors"
+  },
+  "solar": {
+    "downstream_constraint": "procedural latitude/day-of-year envelope plus stochastic clearness/cloud residual coupled to generated precipitation and temperature",
+    "opened": false
+  }
+}

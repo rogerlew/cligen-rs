@@ -1,0 +1,45 @@
+{
+  "attempts_per_role": 1,
+  "admission_materialization": {
+    "record_type": "a10m5r13-submission-admission",
+    "required_before_each_submit": true,
+    "required_roles": [
+      "control-materialization",
+      "selector-aligned-continuous-hierarchy-k2",
+      "selector-aligned-shared-slow-climate-state-k2"
+    ]
+  },
+  "candidate_concurrency": 2,
+  "candidate_minutes_each": 240,
+  "control_minutes": 30,
+  "evidence_profile_path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-large-evidence.json",
+  "evidence_profile_sha256": "fba24ee726285f2a0cba55d69ed9c4949145ac072514bc8e31ee4941d55d0b45",
+  "evidence_volume": {
+    "maximum_expanded_bytes": 128000000,
+    "maximum_file_bytes": 64000000,
+    "maximum_files": 100
+  },
+  "gpu_minute_ceiling": 515,
+  "gpu_type": "NVIDIA L40",
+  "package_id": "20260720-a10m5r13-selector-aligned-continuous-hierarchy",
+  "recovery_minutes": 5,
+  "roles": [
+    "control-materialization",
+    "selector-aligned-continuous-hierarchy-k2",
+    "selector-aligned-shared-slow-climate-state-k2"
+  ],
+  "schema_version": "a10m5r13-execution-plan-template-1",
+  "sequence": [
+    "publish_source",
+    "prepare_authenticated_assets",
+    "calendar_preflight",
+    "create_authority",
+    "materialize_control_admission",
+    "submit_and_observe_control",
+    "materialize_candidate_admissions",
+    "submit_candidates_concurrently",
+    "observe_pack_collect",
+    "replay_selector_twice",
+    "cleanup_and_close"
+  ]
+}

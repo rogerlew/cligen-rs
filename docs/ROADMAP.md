@@ -567,7 +567,14 @@ The slow hierarchy improved annual dispersion and lag but not enough overall;
 annual cross-field dependence remains the dominant error. Both candidates
 evolve daily through month/year boundaries, so calendar periods remain
 aggregation bins rather than process resets. Solar remains deferred until that
-core passes, after which its design remains a
+core passes. The active bounded successor is
+[A10M5R13](work-packages/20260720-a10m5r13-selector-aligned-continuous-hierarchy/package.md):
+it compares the same four-factor continuous hierarchy under 16-year,
+selector-aligned training with a matched arm that dedicates one existing slow
+factor to an explicit rank-one joint climate decoder. Both arms retain daily
+continuous evolution, use 5,844-row Gregorian windows with the exact 5,840-row
+Daymet observed mask, and change neither the temporal selector nor its gates.
+Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.

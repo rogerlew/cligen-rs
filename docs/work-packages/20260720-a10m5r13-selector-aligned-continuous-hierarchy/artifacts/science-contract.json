@@ -1,0 +1,68 @@
+{
+  "annual_loss": {
+    "families_equal_weight": true,
+    "cross_field_pairs": ["precipitation_tmax", "precipitation_tmin", "tmax_tmin"],
+    "fields": {
+      "precipitation": "annual_total",
+      "tmax": "annual_mean",
+      "tmin": "annual_mean"
+    },
+    "lag_order": 1,
+    "location_components": ["precipitation_mean", "precipitation_q95", "tmax_mean", "tmin_mean"],
+    "metrics": ["location", "dispersion", "lag", "complete_cross_field_dependence"],
+    "minimum_mask_eligible_years": 16,
+    "replaces_inherited_annual_location_and_dispersion": true,
+    "selector_scales": {
+      "annual_precipitation": "abs(log(generated+0.1)-log(observed+0.1))/0.25",
+      "annual_temperature_location": "abs(generated-observed)",
+      "annual_temperature_standard_deviation": "abs(generated-observed)/0.5",
+      "correlation_and_lag": "abs(generated-observed)/0.1"
+    }
+  },
+  "backbone_capacity": "P2",
+  "capacity": "K2",
+  "candidate_parameter_ceiling": 340000,
+  "candidates": [
+    {
+      "architecture": "selector_aligned_continuous_hierarchy",
+      "explicit_shared_slow_climate_state": false,
+      "role_id": "selector-aligned-continuous-hierarchy-k2"
+    },
+    {
+      "architecture": "selector_aligned_shared_slow_climate_state",
+      "explicit_shared_slow_climate_state": true,
+      "role_id": "selector-aligned-shared-slow-climate-state-k2",
+      "shared_injection_heads": ["precipitation_occurrence", "positive_amount_location", "temperature_mean_location", "log_dtr_location"],
+      "shared_state_dimension": 1,
+      "shared_state_source": "dedicated_existing_slow_factor_0",
+      "remaining_flexible_slow_state_dimension": 3,
+      "additional_ou_state_dimension": 0
+    }
+  ],
+  "continuous_process": {
+    "calendar_boundary_resets": false,
+    "daily_transition": "exact_stationary_continuous_time_ou_discretization",
+    "medium_state_dimension": 8,
+    "medium_time_scale_days": [14.0, 180.0],
+    "slow_state_dimension": 4,
+    "slow_time_scale_days": [180.0, 1460.0]
+  },
+  "daily_proper_nll_weight": 0.0,
+  "matched_random_field": true,
+  "paired_daily_pattern_weight": 0.0,
+  "schema_version": "a10m5r13-science-contract-1",
+  "seeds": [147031, 271828, 314159],
+  "solar_opened": false,
+  "training_window": {
+    "axis_rows": 5844,
+    "calendar_years": 16,
+    "mask_eligible_adjacent_annual_pairs": 15,
+    "eligible_origins_per_point": 13,
+    "observed_rows": 5840,
+    "observed_rows_per_year": 365,
+    "leap_year_observed_date": "February 29",
+    "leap_year_structural_null_date": "December 31",
+    "source_calendar_transform": "daymet_official_365_v1_to_proleptic_gregorian_daily",
+    "year_month_eligibility": "source_observed_and_prcp_tmax_tmin_present_mask"
+  }
+}

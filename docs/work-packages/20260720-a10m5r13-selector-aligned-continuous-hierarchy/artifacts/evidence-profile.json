@@ -1,0 +1,8 @@
+{
+  "estimated_stream_evidence_bytes": 96000000,
+  "max_evidence_expanded_bytes": 128000000,
+  "max_evidence_file_bytes": 64000000,
+  "profile_path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-large-evidence.json",
+  "profile_sha256": "fba24ee726285f2a0cba55d69ed9c4949145ac072514bc8e31ee4941d55d0b45",
+  "schema_version": "a10m5r13-evidence-profile-binding-1"
+}

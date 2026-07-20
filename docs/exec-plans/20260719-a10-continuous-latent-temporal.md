@@ -21,6 +21,9 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: recovered all evidence, replayed the selector twice
   byte-identically, cleaned the remote root, and closed R2 with neither
   continuous candidate temporally eligible.
+- [ ] 2026-07-20: execute A10M5R13, the 16-year selector-aligned comparison of
+  the flexible continuous hierarchy and its explicit rank-one shared-state
+  inductive-bias arm.
 
 ## Surprises & Discoveries
 
@@ -54,6 +57,13 @@ far outside the inherited noninferiority gates. This points to training-horizon
 and selector-objective alignment plus explicit shared cross-field structure,
 not to monthly process resets.
 
+The inherited Daymet profile is not a generic February-29-dropping no-leap
+calendar. Leap years retain February 29 and omit December 31. Every A10M5R13
+window therefore has 5,844 Gregorian-axis rows and 5,840 source-observed rows:
+exactly 365 observations in each of 16 years, with four masked leap-year
+December 31 rows. Thirteen rolling origins per point survive the predecessor
+day requirement and corpus boundary.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -83,6 +93,19 @@ not to monthly process resets.
 - 2026-07-20: retain the continuous slow hierarchy as a diagnostic basis, not
   a candidate; next compare selector-aligned long-horizon training with and
   without an explicit shared slow climate state before opening solar.
+- 2026-07-20: use 16 mask-eligible years as the smallest useful horizon
+  increase: 15 ordered annual pairs and at least four cycles of the maximum
+  1,460-day time scale, across 13 rolling origins per point.
+- 2026-07-20: keep four slow OU factors in both A10M5R13 arms. The structured
+  arm dedicates one existing factor to a rank-one joint decoder and leaves
+  three flexible; it adds no fifth state. This tests an optimization and
+  generalization bias because the flexible arm can already represent shared
+  effects.
+- 2026-07-20: replace the inherited annual location and dispersion objective
+  blocks with four equally weighted selector-scaled families—location
+  including precipitation q95, dispersion, lag one, and complete annual
+  cross-field dependence—rather than counting the inherited annual moments
+  twice.
 
 ## Outcomes & Retrospective
 
@@ -95,6 +118,8 @@ The package lives at
 Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
+The active successor package is
+`docs/work-packages/20260720-a10m5r13-selector-aligned-continuous-hierarchy/`.
 
 ## Plan of Work
 
