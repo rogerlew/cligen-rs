@@ -24,8 +24,12 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: publish A10M5R13 and close its authenticated zero-allocation
   pre-submission abort after the cache-local admission controller failed its
   repository-path self-authentication.
-- [ ] 2026-07-20: execute A10M5R13R1 with identical R13 science and a committed,
-  source-authenticated controller under fresh R13R1 authority identities.
+- [x] 2026-07-20: execute the A10M5R13R1 control and both concurrent candidates
+  with identical R13 science under fresh authority identities; collect all 51
+  allowlisted paths in 185 charged GPU-minutes.
+- [ ] 2026-07-20: execute zero-GPU A10M5R13R2 to authenticate the split toolkit
+  plan receipt and semantic allowlist before the unchanged selector replay and
+  R13R1 cleanup.
 
 ## Surprises & Discoveries
 
@@ -72,6 +76,16 @@ toolkit correctly aborted rather than mutating authority. R13R1 stages the
 committed wrapper byte-exactly and authenticates the full R13 controller before
 import.
 
+A10M5R13R1 then completed the control plus both concurrent candidates with
+every job, calendar, stream, support, firewall, and job-local-cleanup gate
+passing. Collection preserved 51/51 allowlisted paths and 96,727,040 archive
+bytes before remote cleanup. An independent pre-cleanup audit found that the
+frozen replay accepted a single plan argument even though the authenticated
+toolkit receipt and raw semantic allowlist are separate records. R13R2 repairs
+only that proof boundary: it reconstructs the toolkit semantic plan and
+requires its canonical hash to equal the authenticated receipt plan ID before
+the allowlist can be used.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -117,6 +131,9 @@ import.
 - 2026-07-20: preserve every R13 scientific role, contract, selector field,
   terminal, firewall, and resource bound in R13R1; change only package/run/
   authority/budget/admission identities and committed controller provenance.
+- 2026-07-20: require the semantic-plan reconstruction and allowlist
+  authentication to live in a published zero-allocation R13R2 replay program;
+  do not rely on an ad hoc derived-plan preflight and do not clean R13R1 first.
 
 ## Outcomes & Retrospective
 
@@ -130,7 +147,7 @@ Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
 The active successor package is
-`docs/work-packages/20260720-a10m5r13r1-admission-controller-materialization-remedy/`.
+`docs/work-packages/20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy/`.
 
 ## Plan of Work
 

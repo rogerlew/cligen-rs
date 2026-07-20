@@ -1,0 +1,25 @@
+{
+  "asset_manifest": {
+    "bytes": 8867,
+    "sha256": "eddd17045a8347ac2b9c919ecba0ce30ca49dbe47e236664e45969fea76f09c9"
+  },
+  "collection": {
+    "bytes": 12830,
+    "record_sha256": "55024661dc1bd13366f8dd76e41b16a71ea81ea38c44eb33455b7b87ab958f47",
+    "sha256": "7b9b811fac5286c6c6748bc0f06b9e90e451e878815810bbbbd52675537bce46"
+  },
+  "package_id": "20260720-a10m5r13r1-admission-controller-materialization-remedy",
+  "plan_id": "2dfc598e9767f4492afb99449fd3de1c2d320624de4213d3fcf993881f0ee91b",
+  "plan_receipt": {
+    "bytes": 2813,
+    "record_sha256": "798e1e5603b3b85593366484a6aefc90315604a2b11283015c9b4b61796388b8",
+    "sha256": "8a3f99854777f3971eec329b28072f82a23b02c3c3eaa7faeaae49fd5ec1d376"
+  },
+  "raw_semantic_plan": {
+    "bytes": 36748,
+    "sha256": "5405f2e60dc7fa920857f9d69f66e11c52582c01ac58a02e587e62839f7c6f90"
+  },
+  "run_id": "a10m5r13r1-admission-controller-materialization-remedy-r0",
+  "schema_version": "a10m5r13r2-r13r1-input-pin-1",
+  "source_commit": "927c6147f879ed3a9a56ff1218ffaa3953bef93c"
+}

@@ -581,7 +581,15 @@ controller correction. The active bounded operational successor is
 [A10M5R13R1](work-packages/20260720-a10m5r13r1-admission-controller-materialization-remedy/package.md).
 It preserves the R13 roles, science, 515-minute ceiling, selector, evidence
 profile, and scientific terminals exactly while publishing and authenticating
-a committed R13R1 admission controller before import.
+a committed R13R1 admission controller before import. R13R1 completed its
+control and two concurrent candidate jobs in 185 charged GPU-minutes and
+collected all 51 allowlisted evidence paths before cleanup. A pre-cleanup
+audit then found that its frozen replay surface could not authenticate the
+semantic evidence allowlist from the separate toolkit plan receipt. The
+zero-allocation
+[A10M5R13R2](work-packages/20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy/package.md)
+now binds those two records exactly and must complete the unchanged replay
+before R13R1 remote cleanup or scientific disposition.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
