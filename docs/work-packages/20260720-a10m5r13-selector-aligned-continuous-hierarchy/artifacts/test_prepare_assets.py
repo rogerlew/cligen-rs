@@ -58,8 +58,8 @@ if "committed_write(repo, args.source_commit" not in source:
 if "temporal_select.py" in prepare.EXPECTED:
     raise RuntimeError("selector was incorrectly required from the R12R1 asset tree")
 if (
-    'source_paths["temporal_select.py"] = parent_selector_relative' not in source
-    or 'raise RuntimeError("inherited temporal selector drift")' not in source
+    'raise RuntimeError("inherited temporal selector drift")' not in source
+    or 'source_paths["temporal_select.py"]' in source
 ):
-    raise RuntimeError("published predecessor selector is not authenticated and staged")
+    raise RuntimeError("transformed selector source authentication is unsound")
 print("A10M5R13-PREPARE-ASSETS-TEST-PASS")

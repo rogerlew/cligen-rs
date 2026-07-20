@@ -131,7 +131,9 @@ def main() -> None:
     if hashlib.sha256(selector_payload).hexdigest() != "49f25fdd453143a1a94eefed2cdf7aaede88f54e75894469eb9395e280f059e7":
         raise RuntimeError("inherited temporal selector drift")
     (args.output / "temporal_select.py").write_bytes(selector_payload)
-    source_paths["temporal_select.py"] = parent_selector_relative
+    # Do not record source_path for this output: the operational rewrite below
+    # changes package, role, and terminal identifiers. The frozen input hash
+    # above authenticates its source without making a false byte-identity claim.
     parent_builder = args.package.parent / "20260719-a10m5r12r1-admission-materialization-remedy" / "artifacts" / "jobs" / "build_control_records.py"
     parent_builder_relative = parent_builder.relative_to(repo).as_posix()
     committed_write(repo, args.source_commit, parent_builder_relative, args.output / "inherited_build_control_records.py")

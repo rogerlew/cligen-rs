@@ -28,5 +28,7 @@ The first local materialization attempt then failed closed before copying or
 allocating because R12R1 had executed `temporal_select.py` from its published
 package instead of staging it in the remote asset tree. The bounded correction
 removes that false parent-asset assumption and stages the exact published
-R12R1 selector bytes under their already-frozen SHA-256. A regression test
-preserves the actual predecessor roster distinction.
+R12R1 selector input under its already-frozen SHA-256 before applying the
+declared R13 identifier rewrite. The transformed output is deliberately not
+labeled as byte-identical to that source. Regression tests preserve both the
+actual predecessor roster distinction and this source/output distinction.
