@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "predecessor_source_commit": "5af569d0d17a03c974a6c10b10c9427aa7389f89",
+  "binary_sha256": "615aba134dcb8878046640d9672d42f470982afd26df7e1b5f0ee4c2a1835e79",
+  "inputs": {
+    "scorer_sha256": "36477fdfe1c22d84b907c8965f1473ed766f2346ac91c1daa4bce4a0c0b4cdce",
+    "temporal_metrics_sha256": "948d917b910049cb484cd527eace8a079598189f78611cdb4dc64deb82d0663c",
+    "sites_sha256": "f8415f74143f37e07b9936b4c3ecdc0a08908fc32b285e523c63ccfe12ad71dd",
+    "collection_sha256": "3fbbc6ab4c7b913d1efb6f7f847ab57bc41e0bbc7f9447b44dd7443be4dbe4a4",
+    "cleanup_sha256": "052d2edf6beceab3c6572da3a654424e84226f4877a5897e9c715d66d15bafc3",
+    "terminal_sha256": "28ea8441e3f7169e3e5570c9247402e644e6da60b82f383aa3f54d08caecef5b",
+    "annual_monthly_residual_adapter_k1_streams_sha256": "4522c4a6cd4f78cefec91ab07743709bf4943d4eef5183f07377f95c4a5c0b9b",
+    "monthly_residual_adapter_k2_streams_sha256": "5b59be4755c624a6601bdbd1bcbe913d6e40f1bbb1fe7da3372e04d49ccf68c6",
+    "annual_monthly_residual_adapter_k2_streams_sha256": "34340fbaeb70ded038a60695c411a4c81ef5364967932d254df49771eca34dc3"
+  },
+  "gpu_rerun_authorized": false,
+  "protected_roles_opened": []
+}

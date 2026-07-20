@@ -536,10 +536,13 @@ astronomical envelope plus a stochastic clearness/cloud residual coupled to
 generated precipitation and temperature. Its first authority failed closed
 before submission because the inherited admission checker retained the old
 11-role literal; zero GPU-minutes were consumed and the exact root was
-removed. Active bounded
-[A10M5R11R1](work-packages/20260719-a10m5r11r1-admission-role-matrix-remedy/package.md)
-derives the four-role total from the frozen contract and reruns the unchanged
-science.
+removed. A10M5R11R1 then derived the four-role total from the frozen contract
+and completed all distributed work, producing 432 authenticated streams in
+133 GPU-minutes with exact collection and cleanup. Local scoring failed before
+comparator generation because its contract omitted the already-ratified
+eight-member burn list. Active zero-allocation
+[A10M5R11R2](work-packages/20260719-a10m5r11r2-comparator-burn-contract-remedy/package.md)
+restores only that field and adjudicates the immutable collected evidence.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

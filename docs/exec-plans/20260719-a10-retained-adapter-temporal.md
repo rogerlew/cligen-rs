@@ -16,6 +16,8 @@ monthly and yearly climate across the ratified six-regime temporal protocol.
   133 actual GPU-minutes, exact collection and cleanup complete.
 - [ ] Complete bounded A10M5R11R2 local scoring after adding the omitted
   ratified comparator burn list; no GPU rerun.
+- [x] Scaffolded A10M5R11R2 with exact R1 evidence identities, zero GPU
+  authority, and the restored ratified burn list.
 - [ ] Collect, replay, disposition, review, and reconcile the package.
 
 ## Surprises
@@ -37,6 +39,8 @@ selection work did not open.
   parsimony selector.
 - 2026-07-19: reserve solar for a later partially procedural latitude/day-of-
   year envelope plus stochastic weather-coupled residual.
+- 2026-07-19: preserve the complete R1 stream matrix and correct only local
+  evaluation intake; a distributed rerun would add cost without new evidence.
 
 ## Outcomes
 
