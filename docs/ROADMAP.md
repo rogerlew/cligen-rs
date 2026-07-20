@@ -622,7 +622,16 @@ active bounded successor is
 one source-authenticated shared read-only environment and corpus, four
 independent one-GPU children in one four-L40 allocation, and corrected
 adapter-only versus total parameter accounting. It reruns all four arms as one
-matched portfolio and changes no scientific hypothesis.
+matched portfolio and changes no scientific hypothesis. R14R2 reached
+`VERIFIED` but aborted before submission with zero attempts and zero charged
+GPU minutes because its inherited checker resolved its own bytes through the
+outer wrapper's logical plan name. The one-off R14R2R1 compatibility package
+was deferred while
+[A10M5O1R3](work-packages/20260720-a10m5o1r3-composed-admission-identity-hardening/package.md),
+added and ratified an ordered composed-checker identity contract in the
+toolkit. The R14R2R1 science successor is now unblocked, but must consume its
+assigned outer and inherited chain slots under fresh identities before the
+unchanged R14R2 portfolio is attempted again.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

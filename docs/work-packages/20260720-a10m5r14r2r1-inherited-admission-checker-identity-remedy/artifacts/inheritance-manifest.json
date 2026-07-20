@@ -1,0 +1,21 @@
+{
+  "evidence_profile": {
+    "path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
+    "sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629"
+  },
+  "operational_change": "exactly two inherited-checker self-identity logical-key substitutions",
+  "package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
+  "parent_abort_sha256": "7f3c7c6a9e73cb3114310cf7ecf1bcaf5ba82bc9f8cef61710f7598693d33e24",
+  "parent_asset_manifest_sha256": "574af046f382ea992925cb68b162af553e0b712530b8f4a5894bb47a85bef21a",
+  "parent_package_id": "20260720-a10m5r14r2-shared-environment-four-l40-portfolio",
+  "parent_plan_id": "7e5bf34d54a05f2055ce3ba47470488dbade732e1fe3da0d7a63ba0d670dc7e1",
+  "parent_source_commit": "3a9f2aedab1f7be5202a141c7d32350d7fe6f5e3",
+  "protected_roles_opened": [],
+  "r14r1_checker_source": {
+    "commit": "bbb3075109ce06dabda13d43862cd94d375225bd",
+    "path": "docs/work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/artifacts/jobs/admission_checker.py",
+    "substitution_count": 2
+  },
+  "resource_ceiling_gpu_minutes": 995,
+  "schema_version": 1
+}

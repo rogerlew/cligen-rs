@@ -682,17 +682,19 @@ class Toolkit:
             "submission admission requires provider revision 2",
         )
 
+        legacy_fields = {
+            "asset",
+            "receipt_directory",
+            "record_type",
+            "required_before_each_submit",
+            "required_roles",
+            "snapshot",
+            "toolkit_submit_invokes_package_checker",
+        }
+        composed_fields = legacy_fields | {"checker_assets"}
         require(
-            set(contract)
-            == {
-                "asset",
-                "receipt_directory",
-                "record_type",
-                "required_before_each_submit",
-                "required_roles",
-                "snapshot",
-                "toolkit_submit_invokes_package_checker",
-            },
+            frozenset(contract)
+            in {frozenset(legacy_fields), frozenset(composed_fields)},
             "PLAN_DRIFT",
             "submission admission contract shape",
         )
@@ -719,6 +721,8 @@ class Toolkit:
             "PLAN_DRIFT",
             "submission admission materializer is not a frozen executable asset",
         )
+        if "checker_assets" in contract:
+            self._admission_checker_identities(plan_input, contract)
         validate_id(contract.get("record_type"), "submission admission record type")
         required_roles = contract.get("required_roles")
         require(
@@ -753,6 +757,57 @@ class Toolkit:
             "ALLOWLIST_VIOLATION",
             "submission admission receipt directory",
         )
+
+    @staticmethod
+    def _admission_checker_identities(
+        plan: dict[str, Any], contract: dict[str, Any]
+    ) -> list[dict[str, Any]]:
+        checker_contract = contract.get("checker_assets")
+        require(
+            isinstance(checker_contract, dict)
+            and set(checker_contract) == {"logical_names", "protocol"}
+            and checker_contract.get("protocol") == "ordered-plan-assets-v1",
+            "PLAN_DRIFT",
+            "submission admission checker identity protocol",
+        )
+        checker_assets = checker_contract.get("logical_names")
+        require(
+            isinstance(checker_assets, list)
+            and bool(checker_assets)
+            and all(isinstance(item, str) for item in checker_assets)
+            and len(checker_assets) == len(set(checker_assets)),
+            "PLAN_DRIFT",
+            "submission admission checker asset chain",
+        )
+        require(
+            contract.get("asset") not in checker_assets,
+            "PLAN_DRIFT",
+            "submission admission materializer/checker separation",
+        )
+        assets = {
+            item.get("logical_name"): item
+            for item in plan.get("assets", [])
+            if isinstance(item, dict)
+        }
+        identities: list[dict[str, Any]] = []
+        for logical_name in checker_assets:
+            validate_relative_path(logical_name, "submission admission checker asset")
+            asset = assets.get(logical_name)
+            require(
+                isinstance(asset, dict)
+                and asset.get("executable") is True
+                and asset.get("source_class") == "repository-owned",
+                "PLAN_DRIFT",
+                "submission admission checker is not a frozen repository executable asset",
+            )
+            identities.append(
+                {
+                    "bytes": asset.get("bytes"),
+                    "logical_name": logical_name,
+                    "sha256": asset.get("sha256"),
+                }
+            )
+        return identities
 
     def _validate_evidence_volume(
         self, plan_input: dict[str, Any], allowlist: set[str]
@@ -815,6 +870,53 @@ class Toolkit:
         validated_path = validate_allowed_file(receipt_path, self.allowed_roots)
         receipt = read_record(validated_path)
         gates = receipt.get("gates")
+        input_identities = receipt.get("input_identities", {})
+        require(
+            isinstance(input_identities, dict),
+            "PLAN_DRIFT",
+            "submission admission input identities",
+        )
+        checker_identities_match = True
+        if "checker_assets" in contract:
+            checker_identities = self._admission_checker_identities(plan, contract)
+            checker_names = [item["logical_name"] for item in checker_identities]
+            prepared_identities = self._project_checker_identities(
+                state.get("prepared_assets"), checker_names
+            )
+            transfer_identities = self._project_checker_identities(
+                state.get("transfer_receipts"),
+                checker_names,
+                require_promoted_transfer=True,
+            )
+            local_identities = []
+            plan_assets = {
+                item.get("logical_name"): item
+                for item in plan.get("assets", [])
+                if isinstance(item, dict)
+            }
+            for logical_name in checker_names:
+                local_path = validate_allowed_file(
+                    Path(plan_assets[logical_name].get("local_path", "")),
+                    self.allowed_roots,
+                )
+                local_identities.append(
+                    {
+                        "bytes": local_path.stat().st_size,
+                        "logical_name": logical_name,
+                        "sha256": sha256_file(local_path),
+                    }
+                )
+            checker_identities_match = (
+                checker_identities
+                == prepared_identities
+                == transfer_identities
+                == local_identities
+                and input_identities.get("checker_assets")
+                == {
+                    "assets": checker_identities,
+                    "protocol": "ordered-plan-assets-v1",
+                }
+            )
         require(
             receipt.get("record_type") == contract.get("record_type")
             and receipt.get("authority_id") == self.authority_id
@@ -829,14 +931,59 @@ class Toolkit:
             and isinstance(gates, dict)
             and bool(gates)
             and all(value is True for value in gates.values())
-            and receipt.get("input_identities", {}).get(
-                "toolkit_state_sha256"
-            )
-            == sha256_file(self.private_path),
+            and input_identities.get("toolkit_state_sha256")
+            == sha256_file(self.private_path)
+            and checker_identities_match,
             "PLAN_DRIFT",
             "submission admission receipt is stale or invalid",
         )
         return receipt["record_sha256"]
+
+    @staticmethod
+    def _project_checker_identities(
+        records: Any,
+        logical_names: list[str],
+        *,
+        require_promoted_transfer: bool = False,
+    ) -> list[dict[str, Any]]:
+        require(
+            isinstance(records, list)
+            and all(isinstance(item, dict) for item in records),
+            "PLAN_DRIFT",
+            "submission admission staged checker identities",
+        )
+        by_name = {item.get("logical_name"): item for item in records}
+        require(
+            len(by_name) == len(records),
+            "PLAN_DRIFT",
+            "submission admission staged checker identity uniqueness",
+        )
+        projected = []
+        for logical_name in logical_names:
+            item = by_name.get(logical_name)
+            require(
+                isinstance(item, dict),
+                "PLAN_DRIFT",
+                "submission admission staged checker identity missing",
+            )
+            if require_promoted_transfer:
+                require(
+                    item.get("promoted") is True
+                    and item.get("identity_sha256") == item.get("sha256")
+                    and item.get("remote_revalidated") is True
+                    and item.get("state")
+                    in {"uploaded", "resumed", "already_verified"},
+                    "PLAN_DRIFT",
+                    "submission admission checker transfer is not promoted and revalidated",
+                )
+            projected.append(
+                {
+                    "bytes": item.get("bytes"),
+                    "logical_name": logical_name,
+                    "sha256": item.get("sha256"),
+                }
+            )
+        return projected
 
     @staticmethod
     def _accelerator_contract(providers: list[dict[str, Any]]) -> tuple[str, int]:
@@ -1047,10 +1194,20 @@ class Toolkit:
 
     def _current_plan(self, state: dict[str, Any]) -> dict[str, Any]:
         current = state.get("current_plan_id")
-        for revision in state.get("plan_revisions", []):
-            if revision.get("plan_id") == current:
-                return revision["semantic"]
-        raise ToolkitError("PLAN_DRIFT", "current plan missing")
+        matches = [
+            revision
+            for revision in state.get("plan_revisions", [])
+            if isinstance(revision, dict) and revision.get("plan_id") == current
+        ]
+        require(len(matches) == 1, "PLAN_DRIFT", "current plan missing or ambiguous")
+        semantic = matches[0].get("semantic")
+        require(
+            isinstance(semantic, dict)
+            and sha256_bytes(canonical_bytes(semantic)) == current,
+            "PLAN_DRIFT",
+            "current plan identity mismatch",
+        )
+        return semantic
 
     def amend(self, replacement: dict[str, Any], reason: str, changed_fields: list[str]) -> str:
         require(isinstance(reason, str) and 0 < len(reason) <= 500 and not any(ord(char) < 32 for char in reason), "AUTHORITY_INVALID", "amendment reason")
@@ -1073,6 +1230,7 @@ class Toolkit:
                 "evidence_allowlist",
                 "job_local_cleanup",
                 "recovery_contingency",
+                "admission_materialization",
                 "submission_mode",
                 "stop_rules",
             ):

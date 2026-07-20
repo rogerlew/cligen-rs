@@ -1,0 +1,38 @@
+{
+  "admission_materialization": {
+    "asset": "materialize_admission.py",
+    "checker_assets": {
+      "logical_names": [
+        "admission_checker.py",
+        "inherited_admission_checker.py"
+      ],
+      "protocol": "ordered-plan-assets-v1"
+    },
+    "receipt_directory": "/absolute/controller-admissions",
+    "record_type": "example-submission-admission",
+    "required_before_each_submit": true,
+    "required_roles": [
+      "control"
+    ],
+    "snapshot": "exact private toolkit state plus authenticated job receipts",
+    "toolkit_submit_invokes_package_checker": false
+  },
+  "receipt_input_projection": {
+    "checker_assets": {
+      "assets": [
+        {
+          "bytes": 100,
+          "logical_name": "admission_checker.py",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "bytes": 200,
+          "logical_name": "inherited_admission_checker.py",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        }
+      ],
+      "protocol": "ordered-plan-assets-v1"
+    }
+  },
+  "schema_version": 1
+}

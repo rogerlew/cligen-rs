@@ -1,0 +1,28 @@
+{
+  "adverse": [
+    "unknown protocol",
+    "empty checker roster",
+    "duplicate checker logical name",
+    "unsafe checker logical name",
+    "checker absent from plan assets",
+    "checker asset not executable",
+    "checker order changed after receipt",
+    "checker bytes or sha changed after receipt",
+    "prepared checker identity mismatch",
+    "transfer checker identity mismatch",
+    "receipt checker identity omitted or mismatched",
+    "admission contract changed by plan amendment"
+  ],
+  "invariants": [
+    "failure precedes ledger reservation",
+    "failure precedes adapter submit",
+    "historical records are not rewritten"
+  ],
+  "positive": [
+    "historical admission contract without checker_assets",
+    "one declared checker",
+    "ordered outer plus inherited checker composition"
+  ],
+  "protocol": "ordered-plan-assets-v1",
+  "schema_version": 1
+}

@@ -91,6 +91,22 @@ Use `abort` only before submission when a prepared or staged run must stop. It
 retains private controller receipts, validates and removes the exact staged
 root when one exists, and publishes a pre-submission abort receipt.
 
+Provider-v2 plans with a composed admission controller declare a
+`checker_assets` object inside `admission_materialization`, with protocol
+`ordered-plan-assets-v1` and an ordered `logical_names` list. List the outer
+entrypoint first and each imported or executed delegate afterward. Every name
+must identify a distinct repository-owned executable frozen plan asset; do not
+infer identity from a basename, a matching digest, or import position. The
+materializer binds the protocol and resulting ordered
+`{logical_name, bytes, sha256}` projection at
+`input_identities.checker_assets`. Toolkit `submit` reauthenticates
+that projection against current plan, prepared, and promoted identities while
+holding the run lock and before reservation. It also recomputes the current
+semantic plan ID and rechecks promotion, identity, remote-revalidation, and
+transfer-state fields for every projected checker. Historical single-controller
+plans may omit the additive fields; every newly authored composition must
+declare them.
+
 `cancel` takes the same role and attempt arguments and resolves only the exact
 registered job ID. `amend --input ... --reason ... --changed-field jobs`
 creates a prospective revision; it cannot mutate a started role, immutable

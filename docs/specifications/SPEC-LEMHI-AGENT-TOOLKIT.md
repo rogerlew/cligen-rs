@@ -1,13 +1,15 @@
 # SPEC-LEMHI-AGENT-TOOLKIT — Lemhi Agent Workflow Toolkit
 
-Status: authoritative revision 2; hardening extended 2026-07-19
+Status: authoritative revision 3; composed admission identity specified 2026-07-20
 Owning packages:
 [foundation](../work-packages/20260717-a10-lemhi-toolkit-foundation/package.md)
 and
 [A10M4O1 hardening](../work-packages/20260717-a10m4o1-lemhi-operational-hardening/package.md),
 [A10M5O1R1 evidence projection](../work-packages/20260719-a10m5o1r1-evidence-token-projection-hardening/package.md),
 and
-[A10M5O1R2 terminal failure closure](../work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/package.md)
+[A10M5O1R2 terminal failure closure](../work-packages/20260719-a10m5o1r2-terminal-failure-closure-hardening/package.md),
+and
+[A10M5O1R3 composed admission identity](../work-packages/20260720-a10m5o1r3-composed-admission-identity-hardening/package.md)
 
 ## 1. Surface
 
@@ -778,6 +780,28 @@ then-current state. A missing or stale receipt fails before ledger reservation
 or scheduler submission. A package materializer may execute outside the lock,
 but it cannot authorize a later state because `submit` performs this
 current-state check atomically with the transition.
+
+The contract MAY add a `checker_assets` object whose `protocol` is
+`ordered-plan-assets-v1` and whose `logical_names` value is a non-empty,
+ordered, duplicate-free list of repository-owned executable frozen plan-asset
+logical names: the entrypoint or outer wrapper first, followed by delegates in
+invocation order. The order and each member's logical name, byte count, and
+SHA-256 are semantic plan data. Every covered admission receipt then MUST
+publish the protocol plus the same ordered projection at
+`input_identities.checker_assets`. While holding the submit lock, the toolkit
+reconstructs that projection from the current plan and requires exact equality
+with the receipt, private prepared assets, and promoted transfer receipts
+before ledger reservation. The toolkit MUST also reauthenticate exactly one
+current semantic revision against `current_plan_id`, and every projected
+transfer receipt MUST remain promoted, identity-matched, remotely revalidated,
+and in a valid completed transfer state. Missing, reordered, renamed,
+non-executable, stale, or changed members fail closed. The materializer asset
+MUST NOT also appear in the checker chain. The entire admission materialization
+contract is immutable across plan amendments. Omission of the additive object retains the historical
+contract and does not reinterpret historical plans or receipts. A newly
+authored controller that executes or imports more than one checker component
+MUST declare the composed chain; legacy omission is not permission to leave a
+new composition implicit.
 
 New v2 storage providers use `toolkit_recoverable`; `scheduler_purged` is
 historical-only and cannot authorize a hardened plan. Primary admission

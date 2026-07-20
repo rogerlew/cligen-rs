@@ -1,6 +1,6 @@
 # A10M5R14R2 — Shared-Environment Four-L40 Portfolio
 
-Status: `SCAFFOLDED-AUTHORIZED`
+Status: `EXECUTED-ABORTED-BEFORE-SUBMISSION`
 Date: 2026-07-20
 Evidence mode: Operational/interface successor; unchanged R14 model and objective
 Starting branch and push target: current `main`, push `main`
@@ -83,8 +83,9 @@ observational completeness.
 The fresh ceiling remains 995 GPU-minute equivalents: one 30-minute one-L40
 control, one 240-minute four-L40 portfolio charged as 960 GPU-minutes, and one
 five-minute one-L40 exact-node recovery reserve. Both primary roles have one
-attempt and no retry. The xlarge-evidence profile remains unchanged. This
-scaffold creates no authority, reserves no compute, and submits no HPC.
+attempt and no retry. The xlarge-evidence profile remains unchanged. Execution
+created fresh authority and staged the plan, but the admission failure occurred
+before resource reservation or HPC submission.
 
 ## Predecessor gate
 
@@ -94,3 +95,21 @@ cleanup disposition. The published scaffold deliberately does not manufacture
 that record from mutable live state. `prepare_assets.py` and the authority
 builder refuse execution until the exact published predecessor artifact and
 its hash are materialized in this package.
+
+## Execution outcome
+
+R14R2 reached remote `VERIFIED` at source commit
+`3a9f2aedab1f7be5202a141c7d32350d7fe6f5e3`, then aborted before the first
+control submission. Its composed admission controller staged a distinct outer
+`admission_checker.py` and delegated `inherited_admission_checker.py`, but the
+inherited R14R1 self-check still resolved its identity through the outer
+logical plan name. The exact differing SHA-256 identities were
+`a152fbbc3b2865ff0f39195a8cd64adb13780c67923662bc9fba9839db95651d`
+and `3c90ff10b2c3b4fe8c2c3e7ea3f90e018175455251dc6228c7abd1736f5565a5`.
+
+The toolkit recorded zero attempts, the resource ledger remained at genesis,
+no scheduler job or GPU minute was consumed, and the exact remote root was
+removed. The authenticated terminal was
+`LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION`. The initially proposed R14R2R1
+package-local compatibility edit is deferred; A10M5O1R3 first adds a general
+ordered composed-checker identity contract to the toolkit.

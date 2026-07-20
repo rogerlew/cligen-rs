@@ -39,8 +39,12 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: execute A10M5R14R1 with identical science and corrected
   admission wave/role-count semantics; preserve its two authenticated
   operational failures and close cleanly after 88 charged GPU-minutes.
-- [ ] 2026-07-20: execute A10M5R14R2 as one shared-environment four-L40
-  portfolio with corrected adapter-only/total parameter accounting.
+- [x] 2026-07-20: preserve A10M5R14R2's authenticated zero-attempt,
+  zero-allocation abort after its inherited checker confused its own logical
+  identity with the distinct outer occupancy wrapper.
+- [x] 2026-07-20: harden the toolkit with the additive
+  `checker_assets/ordered-plan-assets-v1` contract before implementing the
+  deferred R14R2R1 science successor.
 
 ## Surprises & Discoveries
 
@@ -133,6 +137,14 @@ scientific result. R14R2 therefore fixes the parameter-count interface and
 bootstraps one immutable environment/corpus for four independent GPU-bound
 children inside one typed four-L40 job.
 
+R14R2 reached `VERIFIED` with that portfolio but submitted no job. The plan
+correctly contained distinct outer and inherited checker assets; the inherited
+R14R1 checker nevertheless hard-coded the outer logical name for its self-byte
+check. The toolkit authenticated both assets independently but had no contract
+for their ordered composition. A10M5O1R3 therefore adds that general proof
+surface before R14R2R1 is implemented; a package-local string substitution is
+not retained as the campaign remedy.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -197,6 +209,9 @@ children inside one typed four-L40 job.
   its partial arms. Repair the adapter-only parameter-count interface and rerun
   all four arms together using one immutable shared environment and corpus in
   one four-L40 allocation; each arm remains an independent process and result.
+- 2026-07-20: preserve R14R2's zero-attempt abort and defer R14R2R1 until the
+  toolkit can authenticate an ordered outer-plus-inherited admission checker
+  chain from semantic plan through the current-state submission receipt.
 
 ## Outcomes & Retrospective
 
@@ -215,8 +230,10 @@ The package lives at
 Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
-The active successor package is
-`docs/work-packages/20260720-a10m5r14r2-shared-environment-four-l40-portfolio/`.
+The operational prerequisite completed at
+`docs/work-packages/20260720-a10m5o1r3-composed-admission-identity-hardening/`;
+the now-unblocked science successor is
+`docs/work-packages/20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy/`.
 
 ## Plan of Work
 

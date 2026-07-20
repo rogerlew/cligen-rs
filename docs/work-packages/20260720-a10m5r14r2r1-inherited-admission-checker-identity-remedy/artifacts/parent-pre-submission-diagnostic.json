@@ -1,0 +1,35 @@
+{
+  "actual_gpu_minutes": 0,
+  "attempt_count": 0,
+  "cause_classification": "independent deterministic replay of authenticated staged identities",
+  "failed_gate": "staged_admission_checker_plan_identity",
+  "package_id": "20260720-a10m5r14r2-shared-environment-four-l40-portfolio",
+  "plan": {
+    "bytes": 43986,
+    "file_sha256": "31e6e8e2edf290e712576f920e43c2eacfdd26864372d03c0a8223711a0757bd",
+    "plan_id": "7e5bf34d54a05f2055ce3ba47470488dbade732e1fe3da0d7a63ba0d670dc7e1"
+  },
+  "private_state": {
+    "bytes": 88268,
+    "sha256": "f5e83ea07eb850fbe137721cb058403cb598f88485302b956a7e3c8a230a78d0"
+  },
+  "record_sha256": "a1deee540e445c20e8f919259017eb0bb2b81a139563777f252c101dcecd4536",
+  "record_type": "a10m5r14r2-pre-submission-diagnostic",
+  "schema_version": 1,
+  "source_commit": "3a9f2aedab1f7be5202a141c7d32350d7fe6f5e3",
+  "staged_identities": {
+    "admission_checker.py": {
+      "bytes": 5964,
+      "sha256": "a152fbbc3b2865ff0f39195a8cd64adb13780c67923662bc9fba9839db95651d"
+    },
+    "asset-manifest.json": {
+      "bytes": 10368,
+      "sha256": "574af046f382ea992925cb68b162af553e0b712530b8f4a5894bb47a85bef21a"
+    },
+    "inherited_admission_checker.py": {
+      "bytes": 22693,
+      "sha256": "3c90ff10b2c3b4fe8c2c3e7ea3f90e018175455251dc6228c7abd1736f5565a5"
+    }
+  },
+  "terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+}

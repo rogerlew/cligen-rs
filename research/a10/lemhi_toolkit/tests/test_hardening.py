@@ -502,21 +502,48 @@ class V2IntegrationTests(HardeningFixture):
         script = self.root / "assets/job.sh"
         script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
         script.chmod(0o700)
+        checker_paths = [
+            self.root / "assets/admission_checker.py",
+            self.root / "assets/inherited_admission_checker.py",
+        ]
+        for index, checker_path in enumerate(checker_paths):
+            checker_path.write_text(
+                f"#!/usr/bin/env python3\n# checker {index}\n", encoding="utf-8"
+            )
+            checker_path.chmod(0o700)
         receipt_root = self.root / "assets/admissions"
         receipt_root.mkdir()
+        adapter = FixtureAdapter(self.root / "fixture-admission")
         toolkit = Toolkit(
             state_root,
             authority,
             read_json(PROFILE_V2),
             "v2-run",
-            FixtureAdapter(self.root / "fixture-admission"),
+            adapter,
             clock=lambda: "2026-07-19T20:00:00Z",
             provider_root=REPOSITORY_ROOT,
         )
         plan = self.plan(authority, script)
         plan["assets"][0]["executable"] = True
+        for checker_path in checker_paths:
+            plan["assets"].append(
+                {
+                    "bytes": checker_path.stat().st_size,
+                    "executable": True,
+                    "license_provenance": "repository license",
+                    "local_path": str(checker_path),
+                    "logical_name": checker_path.name,
+                    "sha256": sha256_file(checker_path),
+                    "source_class": "repository-owned",
+                    "target_platform": "linux-x86_64-glibc",
+                }
+            )
         plan["admission_materialization"] = {
             "asset": "job.sh",
+            "checker_assets": {
+                "logical_names": [path.name for path in checker_paths],
+                "protocol": "ordered-plan-assets-v1",
+            },
             "receipt_directory": str(receipt_root),
             "record_type": "test-submission-admission",
             "required_before_each_submit": True,
@@ -526,16 +553,31 @@ class V2IntegrationTests(HardeningFixture):
         }
         toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
 
-        def publish_receipt() -> None:
+        checker_identities = [
+            {
+                "bytes": path.stat().st_size,
+                "logical_name": path.name,
+                "sha256": sha256_file(path),
+            }
+            for path in checker_paths
+        ]
+
+        def publish_receipt(*, include_checker_identities: bool = True) -> None:
             state = read_json(toolkit.private_path)
+            input_identities = {
+                "toolkit_state_sha256": sha256_file(toolkit.private_path)
+            }
+            if include_checker_identities:
+                input_identities["checker_assets"] = {
+                    "assets": checker_identities,
+                    "protocol": "ordered-plan-assets-v1",
+                }
             semantic = {
                 "attempt_index": 0,
                 "authority_id": authority["authority_id"],
                 "decision": "PASS",
                 "gates": {"fixture_admission": True},
-                "input_identities": {
-                    "toolkit_state_sha256": sha256_file(toolkit.private_path)
-                },
+                "input_identities": input_identities,
                 "package_id": authority["package_id"],
                 "plan_id": state["current_plan_id"],
                 "record_type": "test-submission-admission",
@@ -548,12 +590,140 @@ class V2IntegrationTests(HardeningFixture):
             semantic["record_sha256"] = sha256_bytes(canonical_bytes(semantic))
             atomic_write(receipt_root / "smoke.json", semantic, private=True)
 
+        def assert_pre_reservation_failure(pattern: str = "stale or invalid") -> None:
+            with self.assertRaisesRegex(ToolkitError, pattern):
+                toolkit.submit("smoke", 0)
+            self.assertEqual(read_json(toolkit.private_path).get("attempts", {}), {})
+            self.assertEqual(len(read_json(toolkit.ledger_path)["entries"]), 1)
+            self.assertEqual(read_json(adapter.backend_path)["submit_calls"], 0)
+
+        publish_receipt(include_checker_identities=False)
+        assert_pre_reservation_failure()
+
+        publish_receipt()
+        malformed = read_json(receipt_root / "smoke.json")
+        malformed["input_identities"] = []
+        malformed.pop("record_sha256")
+        malformed["record_sha256"] = sha256_bytes(canonical_bytes(malformed))
+        atomic_write(receipt_root / "smoke.json", malformed, private=True)
+        assert_pre_reservation_failure("input identities")
+
+        publish_receipt()
+        reordered = read_json(receipt_root / "smoke.json")
+        reordered["input_identities"]["checker_assets"]["assets"].reverse()
+        reordered.pop("record_sha256")
+        reordered["record_sha256"] = sha256_bytes(canonical_bytes(reordered))
+        atomic_write(receipt_root / "smoke.json", reordered, private=True)
+        assert_pre_reservation_failure()
+
+        for mutation in ("wrong-hash", "extra-member"):
+            with self.subTest(mutation=mutation):
+                publish_receipt()
+                changed_receipt = read_json(receipt_root / "smoke.json")
+                assets = changed_receipt["input_identities"]["checker_assets"][
+                    "assets"
+                ]
+                if mutation == "wrong-hash":
+                    assets[0]["sha256"] = HEX_A
+                else:
+                    assets.append(
+                        {
+                            "bytes": 1,
+                            "logical_name": "undeclared-checker.py",
+                            "sha256": HEX_B,
+                        }
+                    )
+                changed_receipt.pop("record_sha256")
+                changed_receipt["record_sha256"] = sha256_bytes(
+                    canonical_bytes(changed_receipt)
+                )
+                atomic_write(
+                    receipt_root / "smoke.json", changed_receipt, private=True
+                )
+                assert_pre_reservation_failure()
+
+        original_state = read_json(toolkit.private_path)
+        changed_prepared = read_json(toolkit.private_path)
+        next(
+            item
+            for item in changed_prepared["prepared_assets"]
+            if item["logical_name"] == checker_paths[0].name
+        )["sha256"] = HEX_A
+        atomic_write(toolkit.private_path, changed_prepared, private=True)
+        publish_receipt()
+        assert_pre_reservation_failure()
+        atomic_write(toolkit.private_path, original_state, private=True)
+
+        changed_transfer = read_json(toolkit.private_path)
+        next(
+            item
+            for item in changed_transfer["transfer_receipts"]
+            if item["logical_name"] == checker_paths[1].name
+        )["sha256"] = HEX_B
+        atomic_write(toolkit.private_path, changed_transfer, private=True)
+        publish_receipt()
+        assert_pre_reservation_failure("not promoted and revalidated")
+        atomic_write(toolkit.private_path, original_state, private=True)
+
+        for field, value in (
+            ("promoted", False),
+            ("identity_sha256", HEX_A),
+            ("remote_revalidated", False),
+            ("state", "unverified"),
+        ):
+            with self.subTest(transfer_field=field):
+                changed_transfer = read_json(toolkit.private_path)
+                transfer = next(
+                    item
+                    for item in changed_transfer["transfer_receipts"]
+                    if item["logical_name"] == checker_paths[0].name
+                )
+                transfer[field] = value
+                atomic_write(toolkit.private_path, changed_transfer, private=True)
+                publish_receipt()
+                assert_pre_reservation_failure("not promoted and revalidated")
+                atomic_write(toolkit.private_path, original_state, private=True)
+
+        changed_plan = read_json(toolkit.private_path)
+        changed_plan["plan_revisions"][0]["semantic"]["admission_materialization"][
+            "checker_assets"
+        ]["logical_names"].reverse()
+        atomic_write(toolkit.private_path, changed_plan, private=True)
+        publish_receipt()
+        matching_stale_plan_receipt = read_json(receipt_root / "smoke.json")
+        matching_stale_plan_receipt["input_identities"]["checker_assets"][
+            "assets"
+        ].reverse()
+        matching_stale_plan_receipt.pop("record_sha256")
+        matching_stale_plan_receipt["record_sha256"] = sha256_bytes(
+            canonical_bytes(matching_stale_plan_receipt)
+        )
+        atomic_write(
+            receipt_root / "smoke.json", matching_stale_plan_receipt, private=True
+        )
+        assert_pre_reservation_failure("current plan identity mismatch")
+        atomic_write(toolkit.private_path, original_state, private=True)
+
+        ambiguous_plan = read_json(toolkit.private_path)
+        ambiguous_plan["plan_revisions"].append(
+            json.loads(json.dumps(ambiguous_plan["plan_revisions"][0]))
+        )
+        atomic_write(toolkit.private_path, ambiguous_plan, private=True)
+        publish_receipt()
+        assert_pre_reservation_failure("current plan")
+        atomic_write(toolkit.private_path, original_state, private=True)
+
+        original_checker = checker_paths[0].read_bytes()
+        checker_paths[0].write_bytes(original_checker + b"# local drift\n")
+        publish_receipt()
+        assert_pre_reservation_failure()
+        checker_paths[0].write_bytes(original_checker)
+
         publish_receipt()
         changed = read_json(toolkit.private_path)
         changed["injected_state_transition"] = True
         atomic_write(toolkit.private_path, changed, private=True)
-        with self.assertRaisesRegex(ToolkitError, "stale or invalid"):
-            toolkit.submit("smoke", 0)
+        assert_pre_reservation_failure()
         publish_receipt()
         self.assertEqual(toolkit.submit("smoke", 0), "1000")
         recorded = read_json(toolkit.private_path)["attempts"]["smoke.0"]
@@ -561,6 +731,118 @@ class V2IntegrationTests(HardeningFixture):
             recorded["submission_admission_record_sha256"],
             read_json(receipt_root / "smoke.json")["record_sha256"],
         )
+
+    def test_composed_admission_checker_chain_fails_closed_at_plan_time(self) -> None:
+        authority, state_root = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        script.chmod(0o700)
+        receipt_root = self.root / "assets/admissions"
+        receipt_root.mkdir()
+        toolkit = Toolkit(
+            state_root,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-composed-admission"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        plan = self.plan(authority, script)
+        plan["assets"][0]["executable"] = True
+        legacy = {
+            "asset": "job.sh",
+            "receipt_directory": str(receipt_root),
+            "record_type": "test-submission-admission",
+            "required_before_each_submit": True,
+            "required_roles": ["smoke"],
+            "snapshot": "exact private toolkit state plus authenticated job receipts",
+            "toolkit_submit_invokes_package_checker": False,
+        }
+        plan["admission_materialization"] = legacy
+        toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        invalid_directory = dict(legacy)
+        invalid_directory["receipt_directory"] = str(
+            self.root / "assets/missing-admissions"
+        )
+        plan["admission_materialization"] = invalid_directory
+        with self.assertRaisesRegex(ToolkitError, "receipt directory"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        outside_directory = self.root / "outside-admissions"
+        outside_directory.mkdir()
+        invalid_directory["receipt_directory"] = str(outside_directory)
+        with self.assertRaisesRegex(ToolkitError, "receipt directory"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        linked_directory = self.root / "assets/linked-admissions"
+        linked_directory.symlink_to(receipt_root, target_is_directory=True)
+        invalid_directory["receipt_directory"] = str(linked_directory)
+        with self.assertRaisesRegex(ToolkitError, "receipt directory"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        composed = dict(legacy)
+        composed.update(
+            {
+                "checker_assets": {
+                    "logical_names": ["missing-checker.py"],
+                    "protocol": "ordered-plan-assets-v1",
+                },
+            }
+        )
+        plan["admission_materialization"] = composed
+        with self.assertRaisesRegex(ToolkitError, "not a frozen repository executable"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        composed["checker_assets"]["logical_names"] = []
+        with self.assertRaisesRegex(ToolkitError, "checker asset chain"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        composed["checker_assets"]["logical_names"] = ["../unsafe-checker.py"]
+        with self.assertRaisesRegex(ToolkitError, "unsafe submission admission checker"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        checker_asset = dict(plan["assets"][0])
+        checker_asset.update(
+            {"executable": False, "logical_name": "declared-checker.py"}
+        )
+        plan["assets"].append(checker_asset)
+        composed["checker_assets"]["logical_names"] = ["declared-checker.py"]
+        with self.assertRaisesRegex(ToolkitError, "not a frozen repository executable"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        checker_asset["executable"] = True
+        checker_asset["source_class"] = "external-redistributable"
+        with self.assertRaisesRegex(ToolkitError, "not a frozen repository executable"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        checker_asset["source_class"] = "repository-owned"
+        checker_asset["executable"] = True
+        composed["checker_assets"]["logical_names"] = ["declared-checker.py"]
+        self.assertEqual(
+            toolkit._admission_checker_identities(plan, composed),
+            [
+                {
+                    "bytes": checker_asset["bytes"],
+                    "logical_name": "declared-checker.py",
+                    "sha256": checker_asset["sha256"],
+                }
+            ],
+        )
+
+        composed["checker_assets"]["logical_names"] = ["job.sh", "job.sh"]
+        with self.assertRaisesRegex(ToolkitError, "checker asset chain"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        composed["checker_assets"]["logical_names"] = ["job.sh"]
+        with self.assertRaisesRegex(ToolkitError, "materializer/checker separation"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
+
+        composed["checker_assets"]["logical_names"] = ["missing-checker.py"]
+        composed["checker_assets"]["protocol"] = "unversioned"
+        with self.assertRaisesRegex(ToolkitError, "identity protocol"):
+            toolkit._validate_admission_materialization(plan, {"smoke"})
 
     def test_typed_gres_parser_and_plan_counts_fail_closed(self) -> None:
         self.assertEqual(parse_typed_gres("gpu:l40:4", "job gres"), ("gpu", "l40", 4))
@@ -1314,6 +1596,48 @@ class V2IntegrationTests(HardeningFixture):
         replacement["jobs"][0]["gate_receipt"] = "slurm/toolkit-recovery.0.out"
         with self.assertRaisesRegex(ToolkitError, "collides with Slurm stream"):
             toolkit.amend(replacement, "exercise global collision check", ["jobs"])
+
+    def test_v2_amend_cannot_change_admission_materialization(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        script.chmod(0o700)
+        receipt_root = self.root / "assets/admissions"
+        receipt_root.mkdir()
+        toolkit = Toolkit(
+            state,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-amend-admission"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        toolkit.doctor(); toolkit.probe()
+        plan = self.plan(authority, script)
+        plan["assets"][0]["executable"] = True
+        plan["admission_materialization"] = {
+            "asset": "job.sh",
+            "receipt_directory": str(receipt_root),
+            "record_type": "test-submission-admission",
+            "required_before_each_submit": True,
+            "required_roles": ["smoke"],
+            "snapshot": "exact private toolkit state plus authenticated job receipts",
+            "toolkit_submit_invokes_package_checker": False,
+        }
+        toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+        replacement = json.loads(json.dumps(plan))
+        replacement["admission_materialization"]["record_type"] = (
+            "changed-submission-admission"
+        )
+        with self.assertRaisesRegex(
+            ToolkitError, "immutable field changed: admission_materialization"
+        ):
+            toolkit.amend(
+                replacement,
+                "attempt to replace admission controller",
+                ["admission_materialization"],
+            )
 
     def test_v2_submission_holds_when_authority_reconciliation_fails(self) -> None:
         authority, state = self.authority()

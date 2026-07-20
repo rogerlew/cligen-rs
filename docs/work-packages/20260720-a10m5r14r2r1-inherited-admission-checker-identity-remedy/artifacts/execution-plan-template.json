@@ -1,0 +1,16 @@
+{
+  "admission_record_type": "a10m5r14r2r1-submission-admission",
+  "attempts_per_role": 1,
+  "control_minutes": 30,
+  "evidence_profile_path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
+  "gpu_minute_ceiling": 995,
+  "package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
+  "portfolio_gpu_count": 4,
+  "portfolio_minutes": 240,
+  "recovery_minutes": 5,
+  "run_id": "a10m5r14r2r1-inherited-admission-checker-identity-remedy-r0",
+  "submission_waves": [
+    ["control-materialization"],
+    ["continuous-distribution-head-factorial-portfolio"]
+  ]
+}
