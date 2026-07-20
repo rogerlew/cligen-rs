@@ -23,3 +23,10 @@ asset authentication, collection/plan and data-root replay binding, and exact
 six-site predecessor PRISM provenance. The frozen predecessor replay pin has
 SHA-256
 `b6a2119eed0d042052d2d606628c4698d9937cce029896f0a5785c54a11c9670`.
+
+The first local materialization attempt then failed closed before copying or
+allocating because R12R1 had executed `temporal_select.py` from its published
+package instead of staging it in the remote asset tree. The bounded correction
+removes that false parent-asset assumption and stages the exact published
+R12R1 selector bytes under their already-frozen SHA-256. A regression test
+preserves the actual predecessor roster distinction.

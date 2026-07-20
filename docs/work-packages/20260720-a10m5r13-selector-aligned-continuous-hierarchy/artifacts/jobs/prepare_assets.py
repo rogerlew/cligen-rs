@@ -15,7 +15,6 @@ EXPECTED = {
     "continuous_core.py": "e1a65062ba0619a1a013fc1e2ea25dd66dcf083f0b71dfbe48ce2e758faa9ed2",
     "continuous_candidate_experiment.py": "b74d0067b2cf9fa792d219c4c36e1cada0b1cda227acaa8a67ac0ffd9f2fc314",
     "temporal_metrics.py": "948d917b910049cb484cd527eace8a079598189f78611cdb4dc64deb82d0663c",
-    "temporal_select.py": "49f25fdd453143a1a94eefed2cdf7aaede88f54e75894469eb9395e280f059e7",
 }
 
 
@@ -117,6 +116,22 @@ def main() -> None:
         relative = (jobs / name).relative_to(repo).as_posix()
         committed_write(repo, args.source_commit, relative, args.output / name)
         source_paths[name] = relative
+    # R12R1 executed the temporal selector from its published package rather
+    # than staging it in the remote asset tree. R13 replay requires it in the
+    # local authenticated asset root, so source those exact published bytes.
+    parent_selector = (
+        args.package.parent
+        / "20260719-a10m5r12r1-admission-materialization-remedy"
+        / "artifacts"
+        / "jobs"
+        / "temporal_select.py"
+    )
+    parent_selector_relative = parent_selector.relative_to(repo).as_posix()
+    selector_payload = git_bytes(repo, args.source_commit, parent_selector_relative)
+    if hashlib.sha256(selector_payload).hexdigest() != "49f25fdd453143a1a94eefed2cdf7aaede88f54e75894469eb9395e280f059e7":
+        raise RuntimeError("inherited temporal selector drift")
+    (args.output / "temporal_select.py").write_bytes(selector_payload)
+    source_paths["temporal_select.py"] = parent_selector_relative
     parent_builder = args.package.parent / "20260719-a10m5r12r1-admission-materialization-remedy" / "artifacts" / "jobs" / "build_control_records.py"
     parent_builder_relative = parent_builder.relative_to(repo).as_posix()
     committed_write(repo, args.source_commit, parent_builder_relative, args.output / "inherited_build_control_records.py")
