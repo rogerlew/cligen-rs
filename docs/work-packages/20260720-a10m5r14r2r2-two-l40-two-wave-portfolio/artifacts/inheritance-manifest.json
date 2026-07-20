@@ -1,0 +1,37 @@
+{
+  "candidate_science_change": false,
+  "checker_chain": {
+    "logical_names": [
+      "admission_checker.py",
+      "inherited_admission_checker.py"
+    ],
+    "protocol": "ordered-plan-assets-v1"
+  },
+  "operational_change": "schedule four isolated single-GPU candidates as two deterministic concurrent pairs",
+  "operational_asset_change_allowlist": [
+    "admission_checker.py",
+    "build_control_records.py",
+    "inherited_admission_checker.py",
+    "job-continuous-distribution-head-factorial-portfolio.sh",
+    "job-control-materialization.sh",
+    "job-local-capacity-contract.json",
+    "materialize_admission.py",
+    "portfolio-role-map.json",
+    "portfolio_launcher.py",
+    "run_temporal_replay.py",
+    "setup_diagnostics.py",
+    "temporal_select.py"
+  ],
+  "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "parent_execution_hold_sha256": "b62a7e1ec7908653f8dd038ca34e9bd43520165fbc7b383d7fc18b7a730e174d",
+  "parent_package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
+  "parent_source_commit": "6463ab2bebcf016c371afc56e31ffc7156a2fb95",
+  "protected_roles_opened": [],
+  "resource_ceiling_gpu_minutes": 515,
+  "schema_version": 1,
+  "toolkit_prerequisite_commit": "06df84c882fbe297e93b13fb8c845d5eb500b405",
+  "waves": [
+    [0, 1],
+    [2, 3]
+  ]
+}

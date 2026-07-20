@@ -45,8 +45,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: harden the toolkit with the additive
   `checker_assets/ordered-plan-assets-v1` contract before implementing the
   deferred R14R2R1 science successor.
-- [ ] 2026-07-20: publish and execute A10M5R14R2R1 with explicit outer slot 0
-  and inherited slot 1 consumption under fresh authority and plan identities.
+- [x] 2026-07-20: publish A10M5R14R2R1 and execute its control with explicit
+  outer slot 0 and inherited slot 1 consumption; hold its unsubmitted portfolio
+  when the frozen four-idle-L40 admission cannot pass.
+- [ ] 2026-07-20: execute R14R2R2 as the same four-candidate comparison in two
+  deterministic concurrent pairs on two idle L40s.
 
 ## Surprises & Discoveries
 

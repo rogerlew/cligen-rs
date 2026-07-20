@@ -1,6 +1,6 @@
 # A10M5R14R2R1 — Inherited Admission-Checker Identity Remedy
 
-Status: `SCAFFOLDED-AUTHORIZED`
+Status: `EXECUTED-HOLD-FOUR-IDLE-L40-UNAVAILABLE`
 Date: 2026-07-20
 Evidence mode: Operational successor; unchanged R14R2 science and resources
 Starting branch and push target: current `main`, push `main`
@@ -60,3 +60,17 @@ This scaffold creates no authority, reserves no compute, and submits no HPC.
 Execution uses a fresh dispatch only after the scaffold is reviewed, committed,
 and exact on published `main`; it consumes the ratified A10M5O1R3 contract and
 does not revive the package-local substitution.
+
+## Execution disposition
+
+Published source `6463ab2bebcf016c371afc56e31ffc7156a2fb95` passed doctor,
+probe, plan, prepare, stage, verify, and the exact composed control admission.
+Control job `1017801` completed on `node03` in 1,118 seconds with exit zero,
+all fourteen gates true, job-local cleanup true, and 19 charged GPU-minutes.
+
+The portfolio was never submitted. Its immediate admission correctly rejected
+the node while another user's one-GPU interactive allocation occupied one of
+the four L40s. No local or remote portfolio admission was retained and no
+portfolio reservation entered the ledger. The operator subsequently chose a
+two-idle-L40 workflow. R14R2R2 carries the unchanged science as two concurrent
+pairs; this hold is operational evidence, not a candidate result.

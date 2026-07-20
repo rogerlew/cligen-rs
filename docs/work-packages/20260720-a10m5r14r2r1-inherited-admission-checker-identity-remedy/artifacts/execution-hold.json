@@ -1,0 +1,23 @@
+{
+  "actual_gpu_minutes": 19,
+  "control": {
+    "elapsed_seconds": 1118,
+    "exit_code": 0,
+    "gate_receipt_sha256": "5e80070ad56ab5b91c4da1e5b2f5a9edc931be314863f0d883a83491bf1b6f69",
+    "job_id": "1017801",
+    "job_local_cleanup": true,
+    "node": "node03",
+    "passed": true
+  },
+  "current_plan_id": "225cd43f86b7422252ea82de4f11cb4b1570c1c79b433507a0837dbd2c26fe36",
+  "package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
+  "portfolio_admission_retained": false,
+  "portfolio_submitted": false,
+  "reason": "four idle L40s unavailable on the only qualified node",
+  "run_id": "a10m5r14r2r1-inherited-admission-checker-identity-remedy-r0",
+  "run_state": "MATRIX_ACTIVE",
+  "schema_version": 1,
+  "source_commit": "6463ab2bebcf016c371afc56e31ffc7156a2fb95",
+  "successor": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "terminal": "R14R2R1-HOLD-FOUR-IDLE-L40-UNAVAILABLE"
+}

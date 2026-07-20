@@ -631,8 +631,11 @@ was deferred while
 added and ratified an ordered composed-checker identity contract in the
 toolkit. The R14R2R1 science successor now has an independently accepted
 executable scaffold that consumes its assigned outer and inherited chain slots
-under fresh identities. Its exact-real composition evidence passed; publish
-the scaffold and execute the unchanged R14R2 portfolio under fresh authority.
+under fresh identities. Its exact-real composition and control execution
+passed, but the four-L40 portfolio admission held because another allocation
+occupied one device on the only qualified node. The operator chose R14R2R2:
+retain the four frozen candidates and single-GPU isolation, but execute them as
+two deterministic concurrent pairs when at least two L40s are idle.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

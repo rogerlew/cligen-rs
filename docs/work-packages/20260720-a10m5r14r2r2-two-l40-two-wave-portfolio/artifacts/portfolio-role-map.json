@@ -1,0 +1,40 @@
+{
+  "expected_accelerator": "NVIDIA L40",
+  "expected_allocated_devices": 2,
+  "processes": [
+    {
+      "allocation_token_index": 0,
+      "candidate": "centered_location_ou",
+      "capacity": "K2",
+      "role": "continuous-location-ou-k2",
+      "slot": 0,
+      "wave": 0
+    },
+    {
+      "allocation_token_index": 1,
+      "candidate": "centered_location_ou_smooth_climatology",
+      "capacity": "K2",
+      "role": "continuous-location-ou-smooth-climatology-k2",
+      "slot": 1,
+      "wave": 0
+    },
+    {
+      "allocation_token_index": 0,
+      "candidate": "centered_location_and_scale_ou",
+      "capacity": "K2",
+      "role": "continuous-location-scale-ou-k2",
+      "slot": 2,
+      "wave": 1
+    },
+    {
+      "allocation_token_index": 1,
+      "candidate": "centered_location_and_scale_ou_smooth_climatology",
+      "capacity": "K2",
+      "role": "continuous-location-scale-ou-smooth-climatology-k2",
+      "slot": 3,
+      "wave": 1
+    }
+  ],
+  "schema_version": 2,
+  "waves": [[0, 1], [2, 3]]
+}
