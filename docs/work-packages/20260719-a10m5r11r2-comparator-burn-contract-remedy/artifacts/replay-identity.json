@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "pass_a_comparator_streams": 96,
+  "pass_b_comparator_streams": 96,
+  "pass_a_result_sha256": "656f23ce7b8ec64a96aa7eff98a162f12c57c8d51497fd4285d5eb7594d68a41",
+  "pass_b_result_sha256": "656f23ce7b8ec64a96aa7eff98a162f12c57c8d51497fd4285d5eb7594d68a41",
+  "result_bytes": 9619,
+  "byte_identical": true,
+  "bootstrap_replicates": 1000,
+  "bootstrap_seed": 410542,
+  "gpu_jobs": 0,
+  "gpu_minutes": 0,
+  "protected_roles_opened": [],
+  "terminal": "HOLD-A10M5R11-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+}

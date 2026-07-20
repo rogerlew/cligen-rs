@@ -14,11 +14,11 @@ monthly and yearly climate across the ratified six-regime temporal protocol.
   11-role assertion; zero GPU-minutes consumed.
 - [x] Executed A10M5R11R1: all four jobs and 432 candidate streams passed;
   133 actual GPU-minutes, exact collection and cleanup complete.
-- [ ] Complete bounded A10M5R11R2 local scoring after adding the omitted
+- [x] Complete bounded A10M5R11R2 local scoring after adding the omitted
   ratified comparator burn list; no GPU rerun.
 - [x] Scaffolded A10M5R11R2 with exact R1 evidence identities, zero GPU
   authority, and the restored ratified burn list.
-- [ ] Collect, replay, disposition, review, and reconcile the package.
+- [x] Collected, replayed, dispositioned, reviewed, and reconciled the package.
 
 ## Surprises
 
@@ -44,7 +44,21 @@ selection work did not open.
 
 ## Outcomes
 
-Pending execution.
+A10M5R11R1 completed all four jobs and 432 candidate streams in 133
+GPU-minutes. A10M5R11R2 then restored the missing local comparator burn list
+without rerunning a model. Two independent 96-stream comparator passes and
+1,000-replicate selections were byte-identical. None of the three retained
+adapters met the inherited temporal gates: bootstrap upper ratios were
+2.507--2.572 against 1.25 and maximum point ratios were 3.591--3.739 against
+1.50. The result closes at
+`HOLD-A10M5R11-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`; confirmation and solar remain
+sealed.
+
+The matched variants differed by less than 0.6% in non-gating paired median
+error, so another capacity or adapter selection is not supported. A successor
+should test explicit stochastic annual/monthly latent-state dynamics for
+precipitation, Tmax, and Tmin before adding the frozen procedural-plus-
+stochastic solar extension.
 
 ## Context
 
@@ -99,3 +113,11 @@ outside Git.
 
 `SPEC-A10-RETAINED-ADAPTER-TEMPORAL` defines the stream matrix, calendar
 hardening, inherited selection rule, and solar boundary.
+
+## Revision Notes
+
+- 2026-07-19: created for the retained-adapter temporal campaign.
+- 2026-07-19: recorded the pre-submit role-matrix hold and bounded R1 remedy.
+- 2026-07-19: closed R1's distributed execution, added the local-only R2
+  comparator-burn correction, and recorded the final empty temporal set and
+  recommended latent-state successor.

@@ -1,0 +1,204 @@
+{
+  "bootstrap": {
+    "replicates": 1000,
+    "seed": 410542
+  },
+  "candidate_decisions": {
+    "annual_monthly_residual_adapter-k1": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.5719705189182,
+      "maximum_regime_ratio": 3.590675280282438,
+      "temporally_eligible": false
+    },
+    "annual_monthly_residual_adapter-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.5243309898256805,
+      "maximum_regime_ratio": 3.728999459601091,
+      "temporally_eligible": false
+    },
+    "monthly_residual_adapter-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.5066579833499607,
+      "maximum_regime_ratio": 3.739038526345742,
+      "temporally_eligible": false
+    }
+  },
+  "eligible_configurations": [],
+  "non_gating_pairwise_contrasts": {
+    "annual_monthly_residual_adapter-k1__vs__annual_monthly_residual_adapter-k2": {
+      "median_relative_error_reduction_left_vs_right": 0.0008139450808156193,
+      "probability_left_lower_error": 0.569,
+      "selection_gating": false
+    },
+    "annual_monthly_residual_adapter-k1__vs__monthly_residual_adapter-k2": {
+      "median_relative_error_reduction_left_vs_right": -0.004950575049491392,
+      "probability_left_lower_error": 0.102,
+      "selection_gating": false
+    },
+    "monthly_residual_adapter-k2__vs__annual_monthly_residual_adapter-k2": {
+      "median_relative_error_reduction_left_vs_right": 0.005580286439137697,
+      "probability_left_lower_error": 0.999,
+      "selection_gating": false
+    }
+  },
+  "point_results": {
+    "p+3250_-10200": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 3.593611626158463,
+        "annual_monthly_residual_adapter-k2": 3.4277245242940757,
+        "monthly_residual_adapter-k2": 3.4285652300408187
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 2.524249470037516,
+        "annual_monthly_residual_adapter-k2": 2.4077259075247612,
+        "monthly_residual_adapter-k2": 2.4083164418552454
+      },
+      "comparator_errors": {
+        "faithful": 1.5639304083380314,
+        "stochastic_prism_localized_par_v1": 1.4236356860976398
+      },
+      "reference_error": 1.4236356860976398,
+      "regime": "hot_arid"
+    },
+    "p+3275_-08325": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 2.9413984435235188,
+        "annual_monthly_residual_adapter-k2": 3.054710423580248,
+        "monthly_residual_adapter-k2": 3.0629341957100467
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 3.590675280282438,
+        "annual_monthly_residual_adapter-k2": 3.728999459601091,
+        "monthly_residual_adapter-k2": 3.739038526345742
+      },
+      "comparator_errors": {
+        "faithful": 0.8191769552862914,
+        "stochastic_prism_localized_par_v1": 0.8432625654432572
+      },
+      "reference_error": 0.8191769552862914,
+      "regime": "humid"
+    },
+    "p+3675_-10750": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 2.246053453999248,
+        "annual_monthly_residual_adapter-k2": 2.2387819764910324,
+        "monthly_residual_adapter-k2": 2.222468811904306
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 1.581464205601592,
+        "annual_monthly_residual_adapter-k2": 1.5763443001155475,
+        "monthly_residual_adapter-k2": 1.5648580704231692
+      },
+      "comparator_errors": {
+        "faithful": 1.682396032623209,
+        "stochastic_prism_localized_par_v1": 1.4202366680470297
+      },
+      "reference_error": 1.4202366680470297,
+      "regime": "monsoonal_transition"
+    },
+    "p+4025_-09900": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 2.50746390638086,
+        "annual_monthly_residual_adapter-k2": 2.6073741168150817,
+        "monthly_residual_adapter-k2": 2.5940040703681957
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 2.5861770113906952,
+        "annual_monthly_residual_adapter-k2": 2.6892235552594483,
+        "monthly_residual_adapter-k2": 2.675433802723361
+      },
+      "comparator_errors": {
+        "faithful": 1.005385006173677,
+        "stochastic_prism_localized_par_v1": 0.9695639143557665
+      },
+      "reference_error": 0.9695639143557665,
+      "regime": "non_monsoonal_semi_arid"
+    },
+    "p+4050_-11375": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 4.003947489134996,
+        "annual_monthly_residual_adapter-k2": 3.731958458303875,
+        "monthly_residual_adapter-k2": 3.710283601289319
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 2.629686611483503,
+        "annual_monthly_residual_adapter-k2": 2.451051423387794,
+        "monthly_residual_adapter-k2": 2.436815951656043
+      },
+      "comparator_errors": {
+        "faithful": 1.7621019469068957,
+        "stochastic_prism_localized_par_v1": 1.5225949250569526
+      },
+      "reference_error": 1.5225949250569526,
+      "regime": "arid_boundary"
+    },
+    "p+4525_-08875": {
+      "candidate_errors": {
+        "annual_monthly_residual_adapter-k1": 2.461528141612916,
+        "annual_monthly_residual_adapter-k2": 2.6314450206944118,
+        "monthly_residual_adapter-k2": 2.6323173923397545
+      },
+      "candidate_ratios": {
+        "annual_monthly_residual_adapter-k1": 3.224733437287956,
+        "annual_monthly_residual_adapter-k2": 3.4473336311556073,
+        "monthly_residual_adapter-k2": 3.448476484640368
+      },
+      "comparator_errors": {
+        "faithful": 0.8295862628890749,
+        "stochastic_prism_localized_par_v1": 0.7633276329602902
+      },
+      "reference_error": 0.7633276329602902,
+      "regime": "cold"
+    }
+  },
+  "prism_provenance": {
+    "p+3250_-10200": {
+      "artifact_manifest_sha256": "996a65a10137d0aafa8194ede261dbc1680818fc588e4c2a05e2af52667acf97",
+      "localization_sha256": "1966ee4d45a30b0f4faedb1e91d27970b1f3dadc251745f53f0b6b0adcc679c4",
+      "localized_station_sha256": "393a5b1f27faeb0f13d02a8d7ea536694e370ed29fc844d9e416846cc2139b9d",
+      "normals_sha256": "a2e56b3e7f719cee06f36b3b407a74e4bc9cb76e4d19f1c02696acf0ef0090ef",
+      "source_station_sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f",
+      "station_selection_sha256": "f1f509887f42f07f310dfaa7833f401dff40aeb7ebb24f6497cf94ffb2e8ff8f"
+    },
+    "p+3275_-08325": {
+      "artifact_manifest_sha256": "bc824d174521c56b2ca060225a753ddf59cd3cc88ab1076b82619a7c48349b59",
+      "localization_sha256": "f6035649ddab16731b9b145e28979af85bde4a2002b9b7164ef9ded4d184f9cd",
+      "localized_station_sha256": "b43f7a2ad68688d1a42b8f8fc7e9ab6fb1805983813de9fd1241cf430b07451c",
+      "normals_sha256": "329f94f51f5cd6da03200a0ca0a50e645b677f93e3b723ab4223b2af4d1b7e85",
+      "source_station_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+      "station_selection_sha256": "8aaeb58c61b251fbbd325ae99b6eb16f2f494fa9484d8b717ce21b68f85bb184"
+    },
+    "p+3675_-10750": {
+      "artifact_manifest_sha256": "e354bb08abdbd903157042b01d7fbf8645c1b9f90896845947073dfdc33becfa",
+      "localization_sha256": "001e5a94c2a373c9e202dd22e3a6f5cdeb75430d4baaea5061806646c2dda5a7",
+      "localized_station_sha256": "29cda0592f5336543844584ecf7418b20d6d88f602f4185d7d785f74446bdef5",
+      "normals_sha256": "2d7cf6d1136363dde24b27669f32d80c815f3a67643d0d93c686e178beefceaf",
+      "source_station_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+      "station_selection_sha256": "4e994808c81518f250e5255c3b51089578327e55e19efdce6ba500dafa519d9d"
+    },
+    "p+4025_-09900": {
+      "artifact_manifest_sha256": "e648490634a872a94e2ad52653585ce7e0fb5c46ad1e3b0c4bd140525ad7990b",
+      "localization_sha256": "e0954da8c6ebed73d41d874fc556d2fca05e818f65f8d5deb3b7ebc5789a7f16",
+      "localized_station_sha256": "109790a453f521a98151378020d8fb47a2c493983a36b9cda8e08dc21a4e1249",
+      "normals_sha256": "cd332020b96764bf1e83bc5c66e92a05ebffcc3387af4fa9fb3d85b0a54e1370",
+      "source_station_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+      "station_selection_sha256": "9d023e30d270b85c398060f5642c85ac561201a9f178b043fa24c2ff7edd38b3"
+    },
+    "p+4050_-11375": {
+      "artifact_manifest_sha256": "8020904c436d8851c0b823d14bd817a0883523fa5de73b0e73b2cee8eab5b26a",
+      "localization_sha256": "f1e8db5d46b9c1c5079240c1a6b7c1574ec1ab105d64253927fefc07ae482f1a",
+      "localized_station_sha256": "581a1ff29eb9820e61af6cecd811eedff268fbee7a2130d000e8851ba95b9807",
+      "normals_sha256": "c972ecdfd731b1e6bb64fa8c56a94f567f558469bd7842519d50184d5dad3dde",
+      "source_station_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+      "station_selection_sha256": "d2be0b58d4c5c5ab562fc79c20e20810a2ff7375f556d3d767b25a8e12e351cb"
+    },
+    "p+4525_-08875": {
+      "artifact_manifest_sha256": "ad6514a7a798bd34fce5ea4f671a25be6fc7099e1b413e18dcdcb8eb454aaf4d",
+      "localization_sha256": "257254ab8f13e0956711ca8168d31b21e75f772313612e2e305142c97809b17b",
+      "localized_station_sha256": "908155978f2c93a1323e34ac57d4fdd57e96759fd98569378d34b5ba7024c1a9",
+      "normals_sha256": "7e0d3394071dc35c5bf81cd304dd7b57034d533974fd86ba783f348eb8178f51",
+      "source_station_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+      "station_selection_sha256": "e132da80d211a0323ef4731b8996ccb49f53c3e5b676a27e6365405d6e107f95"
+    }
+  },
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "terminal": "HOLD-A10M5R11-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+}

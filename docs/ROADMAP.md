@@ -540,9 +540,20 @@ removed. A10M5R11R1 then derived the four-role total from the frozen contract
 and completed all distributed work, producing 432 authenticated streams in
 133 GPU-minutes with exact collection and cleanup. Local scoring failed before
 comparator generation because its contract omitted the already-ratified
-eight-member burn list. Active zero-allocation
+eight-member burn list. The zero-allocation
 [A10M5R11R2](work-packages/20260719-a10m5r11r2-comparator-burn-contract-remedy/package.md)
-restores only that field and adjudicates the immutable collected evidence.
+restored only that field and adjudicated the immutable collected evidence in
+two byte-identical local passes. None of the three candidates qualified: the
+best bootstrap upper-90 median ratio was 2.507 against 1.25, and the best
+maximum point ratio was 3.591 against 1.50. All candidate-site ratios exceeded
+1.50, while non-gating pairwise differences among adapters stayed below 0.6%.
+This closes the residual-adapter portfolio without a temporal candidate and
+keeps confirmation sealed. The next defensible development stage is a small
+matched comparison of explicit annual/monthly stochastic latent-state
+dynamics for precipitation and temperature, with solar deferred until that
+core passes. The later solar design remains a procedural latitude/day-of-year
+astronomical envelope plus a learned stochastic residual coupled to generated
+weather.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
