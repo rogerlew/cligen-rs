@@ -596,9 +596,14 @@ was eligible: flexible hierarchy scored 2.482 / 3.610 and rank-one shared state
 temperature mean plus precipitation location/quantiles. The continuous time
 scales remained stable; the structural bottlenecks are instead the
 member-centered decoder's inability to correct climatological means and its
-inability to reach scale heads. The next bounded stage is a matched 2x2 that
-crosses a smooth day-of-year/geography climatology head with continuous OU
-scale-head modulation while retaining the flexible daily OU core.
+inability to reach scale heads. The active bounded stage is
+[A10M5R14](work-packages/20260720-a10m5r14-continuous-distribution-head-factorial/package.md),
+a matched 2x2 that crosses a smooth day-of-year/geography climatology head
+with continuous OU scale-head modulation while retaining the flexible daily
+OU core. Months and years remain selector aggregation domains, not model
+features, parameter cells, or state-reset boundaries. Its common prospective
+objective covers all 188 selector components, including monthly and annual
+dispersion, while the smooth correction is harmonic across calendar seams.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

@@ -1,0 +1,20 @@
+{
+  "campaign_predecessor_commit": "4720ea5764fe02c55a3707f94bb6805f5886b812",
+  "campaign_predecessor_package": "20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy",
+  "campaign_predecessor_terminal": "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE",
+  "executed_parent_assets": {
+    "asset_manifest_sha256": "eddd17045a8347ac2b9c919ecba0ce30ca49dbe47e236664e45969fea76f09c9",
+    "package_id": "20260720-a10m5r13r1-admission-controller-materialization-remedy",
+    "source_commit": "927c6147f879ed3a9a56ff1218ffaa3953bef93c"
+  },
+  "inherited_contracts": {
+    "portfolio_contract_sha256": "c3ab065b1ba94d68ade314863e390909fe9d73286396f3b4f0192675eb11259b",
+    "temporal_contract_sha256": "e207c89332c0a712325d592dfeef543b7a12d59100ddf9bda3ab32fd67bc4277"
+  },
+  "predecessor_evidence": {
+    "replay_identity_sha256": "6edcaad3196369f984589ff1c06a50e114f7b50390d3ac30d49382da6e029965",
+    "temporal_result_sha256": "2213ce79ef3cf9bf2a91562983824307c7fbd7cc26f85159b24cbbf176079cbb"
+  },
+  "protected_roles_opened": [],
+  "schema_version": "a10m5r14-inheritance-manifest-1"
+}

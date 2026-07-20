@@ -177,6 +177,10 @@ operator-facing commands are:
 Packages that intentionally retain large binary streams use the separately
 versioned `lemhi-v2-large-evidence.json` profile. It changes only evidence
 collection ceilings and does not alter the designated canonical profile.
+Four-arm packages whose authenticated allowlist contains four retained stream
+archives use `lemhi-v2-xlarge-evidence.json`. It changes only the aggregate
+expanded-evidence ceiling to 256 MB; the 64 MB per-file ceiling and all other
+v2 provider, projection, transport, and execution semantics remain unchanged.
 
 Evidence projection revision 4 accepts finite scientific JSON numbers while
 continuing to reject duplicate keys, NaN/Infinity, forbidden values, and

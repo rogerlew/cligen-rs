@@ -1,0 +1,37 @@
+{
+  "admission_materialization": {
+    "record_type": "a10m5r14-submission-admission",
+    "required_before_each_submit": true,
+    "required_roles": [
+      "control-materialization",
+      "continuous-location-ou-k2",
+      "continuous-location-ou-smooth-climatology-k2",
+      "continuous-location-scale-ou-k2",
+      "continuous-location-scale-ou-smooth-climatology-k2"
+    ]
+  },
+  "attempts_per_role": 1,
+  "candidate_concurrency": 4,
+  "candidate_minutes_each": 240,
+  "control_minutes": 30,
+  "evidence_profile_path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
+  "evidence_profile_sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629",
+  "gpu_minute_ceiling": 995,
+  "gpu_type": "NVIDIA L40",
+  "package_id": "20260720-a10m5r14-continuous-distribution-head-factorial",
+  "recovery_minutes": 5,
+  "run_id": "a10m5r14-continuous-distribution-head-factorial-r0",
+  "science_terminals": [
+    "A10M5R14-TEMPORAL-READY",
+    "HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  ],
+  "submission_waves": [
+    ["control-materialization"],
+    [
+      "continuous-location-ou-k2",
+      "continuous-location-ou-smooth-climatology-k2",
+      "continuous-location-scale-ou-k2",
+      "continuous-location-scale-ou-smooth-climatology-k2"
+    ]
+  ]
+}

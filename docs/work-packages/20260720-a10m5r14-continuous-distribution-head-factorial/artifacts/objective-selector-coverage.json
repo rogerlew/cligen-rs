@@ -1,0 +1,8350 @@
+{
+  "candidate_head_access": {
+    "A": {
+      "centered_scale_ou": false,
+      "smooth_uncentered_climatology": false,
+      "trainable_head_indices": [
+        0,
+        1,
+        3,
+        5
+      ]
+    },
+    "B": {
+      "centered_scale_ou": false,
+      "smooth_uncentered_climatology": true,
+      "trainable_head_indices": [
+        0,
+        1,
+        3,
+        5
+      ]
+    },
+    "C": {
+      "centered_scale_ou": true,
+      "smooth_uncentered_climatology": false,
+      "trainable_head_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "D": {
+      "centered_scale_ou": true,
+      "smooth_uncentered_climatology": true,
+      "trainable_head_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  },
+  "counts": {
+    "annual": 13,
+    "monthly_precipitation": 108,
+    "monthly_temperature": 60,
+    "occurrence": 7,
+    "total": 188
+  },
+  "daily_proper_nll_weight": 0.0,
+  "metric_reduction": "unweighted_mean_of_188_absolute_scaled_metric_residuals",
+  "metrics": [
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_coefficient_of_variation",
+      "selector_scale": "coefficient_of_variation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_skew",
+      "selector_scale": "skew",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_dry_frequency",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "smooth_sigmoid_monthly_total_below_1mm",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_q10",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_q50",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_q90",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.01.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.02.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.03.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.04.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.05.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.06.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.07.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.08.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.09.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.10.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.11.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "monthly.12.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_mean",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_standard_deviation",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_q95",
+      "selector_scale": "log_precipitation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmax_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmax_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmin_mean",
+      "selector_scale": "temperature_mean_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmin_standard_deviation",
+      "selector_scale": "temperature_standard_deviation_c",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_lag1",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmax_lag1",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmin_lag1",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_tmax_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.precipitation_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "annual.tmax_tmin_correlation",
+      "selector_scale": "correlation",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            3,
+            5
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "torch_differentiable_selector_formula",
+      "weather_distribution_head_indices": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.p_wet_given_wet",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.p_wet_given_dry",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.wet_spell_survival_3",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_run_start_survival_ratio",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.wet_spell_survival_7",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_run_start_survival_ratio",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.dry_spell_survival_3",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_run_start_survival_ratio",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.dry_spell_survival_7",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_run_start_survival_ratio",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "differentiable": true,
+      "metric_key": "occurrence.seasonal_wet_frequency_range",
+      "selector_scale": "probability",
+      "trainable_head_reachability": {
+        "A": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "B": {
+          "direct_indices": [
+            0,
+            1
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "C": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        },
+        "D": {
+          "direct_indices": [
+            0,
+            1,
+            2
+          ],
+          "frozen_p2_completes_distribution": true
+        }
+      },
+      "training_counterpart": "continuous_wet_indicator_selector_formula",
+      "weather_distribution_head_indices": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "paired_daily_pattern_weight": 0.0,
+  "schema_version": "a10m5r14-objective-selector-coverage-1",
+  "selector_contract": "inherited_A10M5R13_temporal_protocol",
+  "wet_semantics": "realized_precipitation_ge_1mm_hard_forward_soft_backward"
+}

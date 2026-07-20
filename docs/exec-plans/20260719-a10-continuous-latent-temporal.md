@@ -99,6 +99,14 @@ contribute 74.4% of composite error. The residual decoder member-centers every
 latent offset and reaches only location heads 0/1/3/5, leaving ensemble mean
 calibration and scale heads 2/4/6 structurally unreachable.
 
+A10M5R14 therefore treats monthly and annual statistics as error measurements,
+not as model clocks. Its state remains a daily exact OU transition with no
+calendar reset. The optional deterministic correction uses continuous
+day-of-year harmonics crossed with geography, and the optional stochastic
+adapter reuses the same OU states to reach scale heads. A common 188-component
+objective makes the factorial attributable to those two mechanisms rather
+than to a change in which selector summaries receive training signal.
+
 ## Decision Log
 
 - 2026-07-19: use the exact daily transition of continuous-time OU processes;
@@ -153,6 +161,10 @@ calibration and scale heads 2/4/6 structurally unreachable.
 - 2026-07-20: require a prospective objective-versus-selector coverage report
   that records metric counts, scales, exact training counterparts, and decoder
   head reachability before the next submission.
+- 2026-07-20: execute A10M5R14 as a four-arm matched factorial. Use a bias-free
+  20-by-4 harmonic/geography correction for the climatology factor and reuse
+  the existing 8+4 OU states for scale-head access; add no monthly cells,
+  calendar resets, stochastic states, or solar inputs.
 
 ## Outcomes & Retrospective
 
@@ -172,7 +184,7 @@ Its science contract, temporal contract, candidate source, operational
 wrappers, and evidence are under `artifacts/`. The predecessor is A10M5R11R2,
 whose three residual adapters all failed broadly and nearly equivalently.
 The active successor package is
-`docs/work-packages/20260720-a10m5r13r2-semantic-plan-replay-authentication-remedy/`.
+`docs/work-packages/20260720-a10m5r14-continuous-distribution-head-factorial/`.
 
 ## Plan of Work
 

@@ -1,0 +1,28 @@
+{
+  "capability_max_age_seconds": 300,
+  "connect_timeout_seconds": 10,
+  "forbidden_publication_substrings": ["rogerlew.ui", "/Users/roger", "/ceph/home/"],
+  "gateway": "login-ui",
+  "max_evidence_expanded_bytes": 256000000,
+  "max_evidence_file_bytes": 64000000,
+  "max_evidence_files": 1000,
+  "operation_timeout_seconds": 120,
+  "platform": "linux-x86_64-glibc",
+  "profile_api_version": 2,
+  "provider_api_version": 2,
+  "record_schema_version": "lemhi-toolkit-record-2",
+  "provides": {
+    "accelerator_class": "nvidia-l40",
+    "durable_storage": "ceph-home",
+    "scheduler": "slurm",
+    "target_arch": "x86_64",
+    "target_libc": "glibc",
+    "target_os": "linux",
+    "target_platform": "linux-x86_64-glibc",
+    "transport": "scp"
+  },
+  "remote_base": "/ceph/home/rogerlew.ui/.cligen-rs-a10",
+  "target": "lemhi",
+  "transfer_timeout_fixed_handshake_seconds": 60,
+  "transfer_timeout_minimum_bytes_per_second": 1048576
+}

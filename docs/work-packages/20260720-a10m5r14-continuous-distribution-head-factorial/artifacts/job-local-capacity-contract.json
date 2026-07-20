@@ -1,0 +1,22 @@
+{
+  "admission": {
+    "control_precedes_candidates": true,
+    "maximum_live_candidate_jobs": 4,
+    "one_attempt_per_role": true,
+    "required_before_each_submit": true,
+    "serialized_bootstrap": true
+  },
+  "calendar_preflight_before_reservation": true,
+  "package_id": "20260720-a10m5r14-continuous-distribution-head-factorial",
+  "predecessor_terminal": "HOLD-A10M5R13-NO-TEMPORALLY-ELIGIBLE-CANDIDATE",
+  "protected_roles_opened": [],
+  "resources": {
+    "candidate_count": 4,
+    "candidate_minutes_each": 240,
+    "control_minutes": 30,
+    "gpu_type": "NVIDIA L40",
+    "recovery_minutes": 5,
+    "total_gpu_minute_ceiling": 995
+  },
+  "schema_version": "a10m5r14-job-local-capacity-contract-1"
+}
