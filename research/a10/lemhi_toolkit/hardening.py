@@ -33,7 +33,7 @@ from .core import (
 RECORD_SCHEMA_V2 = "lemhi-toolkit-record-2"
 PRODUCER_V2 = "lemhi-toolkit-hardening-2"
 PROVIDER_API_V2 = 2
-SANITIZER_VERSION = "lemhi-evidence-projection-4"
+SANITIZER_VERSION = "lemhi-evidence-projection-5"
 RESERVED_TOKEN = re.compile(r"<[A-Z][A-Z0-9_]*(?:_[0-9]+)?>")
 ENVIRONMENT_NAME = re.compile(r"^[A-Z][A-Z0-9_]{0,63}$")
 ALLOWED_PROVIDER_CLASSES = {
@@ -268,11 +268,14 @@ def project_evidence(
 
     require(HEX64_PATTERN.fullmatch(raw_parent_sha256) is not None, "SANITIZATION_FAILED", "raw parent hash")
     normalized = validate_evidence_replacements(replacements)
-    try:
-        text = raw.decode("utf-8")
-    except UnicodeDecodeError as error:
-        raise ToolkitError("SANITIZATION_FAILED", "invalid UTF-8 evidence") from error
+    text = None
+    if media_type in {"application/json", "text/plain"}:
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError as error:
+            raise ToolkitError("SANITIZATION_FAILED", "invalid UTF-8 evidence") from error
     if media_type == "application/json":
+        assert text is not None
         value = _loads_evidence_json(text)
 
         counts: dict[str, int] = {item["token"]: 0 for item in normalized}
@@ -306,10 +309,15 @@ def project_evidence(
         except (TypeError, ValueError) as error:
             raise ToolkitError("INVALID_JSON", str(error)) from error
     elif media_type == "text/plain":
+        assert text is not None
         projected, counts, escaped = _replace_text(text, normalized)
         projected_bytes = projected.encode("utf-8")
+    elif media_type == "application/octet-stream":
+        projected_bytes = raw
+        counts = {item["token"]: 0 for item in normalized}
+        escaped = {}
     else:
-        raise ToolkitError("SANITIZATION_FAILED", "binary projection requires an exact unchanged allowlist")
+        raise ToolkitError("SANITIZATION_FAILED", "unknown evidence media type")
     for secret in forbidden:
         require(not secret or secret.encode("utf-8") not in projected_bytes, "SANITIZATION_FAILED", "unknown forbidden value")
     receipt = {

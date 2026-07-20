@@ -1832,7 +1832,12 @@ class Toolkit:
                 if self.provider_api_version == 2:
                     from .hardening import project_evidence
 
-                    media_type = "application/json" if path.suffix == ".json" else "text/plain"
+                    if path.suffix == ".json":
+                        media_type = "application/json"
+                    elif path.suffix in {".npz", ".pt"}:
+                        media_type = "application/octet-stream"
+                    else:
+                        media_type = "text/plain"
                     projected, projection = project_evidence(
                         path.read_bytes(),
                         media_type=media_type,

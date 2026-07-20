@@ -548,10 +548,12 @@ best bootstrap upper-90 median ratio was 2.507 against 1.25, and the best
 maximum point ratio was 3.591 against 1.50. All candidate-site ratios exceeded
 1.50, while non-gating pairwise differences among adapters stayed below 0.6%.
 This closes the residual-adapter portfolio without a temporal candidate and
-keeps confirmation sealed. The next defensible development stage is a small
-matched comparison of explicit annual/monthly stochastic latent-state
-dynamics for precipitation and temperature, with solar deferred until that
-core passes. The later solar design remains a procedural latitude/day-of-year
+keeps confirmation sealed. Active
+[A10M5R12](work-packages/20260719-a10m5r12-continuous-latent-temporal-process/package.md)
+compares a continuous medium-timescale latent process against the same process
+plus a slow component. Both evolve daily through month/year boundaries;
+calendar periods are aggregation bins only. Solar remains deferred until that
+core passes, after which its design remains a procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.
 

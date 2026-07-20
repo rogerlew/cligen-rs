@@ -830,7 +830,11 @@ duplicate-key rejection and transformed structurally by field type. Scientific
 JSON admits finite integer and floating-point values but rejects NaN, Infinity,
 and overflow to a non-finite value; authority, ledger, plan, and receipt
 canonicalization retains its stricter no-float rule. Binary evidence is allowed
-unchanged only by exact schema/hash or excluded. The private transformation
+unchanged only by exact schema/hash or excluded. Provider-v2 collection treats
+plan-allowlisted `.npz` and `.pt` evidence as exact-byte binary projections
+under sanitizer version `lemhi-evidence-projection-5`:
+typed text replacements are not applied, raw and projected hashes must be
+identical, and the forbidden-value byte scan still runs. The private transformation
 receipt binds sanitizer version, token counts, sanitized hashes, and raw-parent
 hashes. The forbidden-value scan runs after projection and rejects unknown
 sensitive material. Evidence producers SHOULD use non-reserved notation for

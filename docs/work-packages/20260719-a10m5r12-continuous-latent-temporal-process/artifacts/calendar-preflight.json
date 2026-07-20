@@ -1,0 +1,148 @@
+{
+  "corpus": {
+    "bytes": 224040960,
+    "sha256": "8770e127f8413eedd47d50670c359e450988444a8c4d8d43ca5645619a1b0a17"
+  },
+  "counts": {
+    "calendar_axis_rows_per_point": 10958,
+    "core_observed_rows_per_point": 10950,
+    "physics_observed_rows_per_point": 10950,
+    "roles": {
+      "candidate_fit": 1200,
+      "fit_validation": 240
+    }
+  },
+  "fixture": {
+    "point_id": "p+4375_-11375",
+    "rows": [
+      {
+        "date": "1984-02-28",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1984-02-29",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1984-03-01",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1984-12-30",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1984-12-31",
+        "required_fields_present": {
+          "prcp": false,
+          "srad": false,
+          "tmax": false,
+          "tmin": false
+        },
+        "source_observed": false
+      },
+      {
+        "date": "1985-01-01",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1987-12-31",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      },
+      {
+        "date": "1988-01-01",
+        "required_fields_present": {
+          "prcp": true,
+          "srad": true,
+          "tmax": true,
+          "tmin": true
+        },
+        "source_observed": true
+      }
+    ],
+    "spans_absent_leap_december_31": true,
+    "spans_observed_february_29": true,
+    "spans_window_end_exclusive": [
+      "1987-12-31",
+      "1988-01-01"
+    ]
+  },
+  "mask_composition": {
+    "core": "source_observed and prcp present and tmax present and tmin present",
+    "physics": "core and srad present"
+  },
+  "month_year_eligibility": {
+    "core_minimum_observed_rows": 28,
+    "eligible": true,
+    "physics_minimum_observed_rows": 28,
+    "required_minimum_observed_rows": 28,
+    "year_month_cells_per_point": 360
+  },
+  "normalized_calendar_axis": {
+    "calendar": "proleptic_gregorian",
+    "unavailable_field_representation": "null",
+    "unavailable_observation_representation": "source_observed_false"
+  },
+  "profile_id": "daymet_official_365_v1",
+  "schema_version": 2,
+  "source_bounds": {
+    "end_inclusive": "2009-12-31",
+    "start_inclusive": "1980-01-01"
+  },
+  "source_transform_id": "daymet_official_365_v1",
+  "unobserved_dates": [
+    "1980-12-31",
+    "1984-12-31",
+    "1988-12-31",
+    "1992-12-31",
+    "1996-12-31",
+    "2000-12-31",
+    "2004-12-31",
+    "2008-12-31"
+  ],
+  "valid": true,
+  "window": {
+    "calendar_axis_rows": 2922,
+    "core_observed_rows": 2920,
+    "end_exclusive": "1988-01-01",
+    "end_semantics": "exclusive",
+    "physics_observed_rows": 2920,
+    "start_inclusive": "1980-01-01"
+  }
+}

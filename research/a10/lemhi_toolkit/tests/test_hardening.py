@@ -255,10 +255,31 @@ class EvidenceProjectionTests(HardeningFixture):
         with self.assertRaisesRegex(ToolkitError, "unknown forbidden"):
             project_evidence(b"unregistered-secret", media_type="text/plain", replacements=[], forbidden=["unregistered-secret"], raw_parent_sha256=HEX_A)
 
+    def test_binary_projection_is_exact_and_still_scans_forbidden_bytes(self) -> None:
+        raw = b"\x93NUMPY\x00\xff\x01\x02"
+        projected, receipt = project_evidence(
+            raw,
+            media_type="application/octet-stream",
+            replacements=self.replacements(),
+            forbidden=[],
+            raw_parent_sha256=HEX_A,
+        )
+        self.assertEqual(projected, raw)
+        self.assertEqual(receipt["sanitized_sha256"], sha256_bytes(raw))
+        self.assertTrue(all(value == 0 for value in receipt["token_counts"].values()))
+        with self.assertRaisesRegex(ToolkitError, "unknown forbidden"):
+            project_evidence(
+                b"binary-private-user-payload",
+                media_type="application/octet-stream",
+                replacements=self.replacements(),
+                forbidden=["private-user"],
+                raw_parent_sha256=HEX_A,
+            )
+
     def test_json_projection_is_structural_and_rejects_duplicates(self) -> None:
         projected, receipt = project_evidence(b'{"path":"/ceph/home/user/run/file"}', media_type="application/json", replacements=self.replacements(), forbidden=["/ceph/home/"], raw_parent_sha256=HEX_A)
         self.assertEqual(json.loads(projected)["path"], "<REMOTE_RUN_ROOT>/file")
-        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-4")
+        self.assertEqual(receipt["sanitizer_version"], "lemhi-evidence-projection-5")
         with self.assertRaisesRegex(ToolkitError, "INVALID_JSON"):
             project_evidence(b'{"a":1,"a":2}', media_type="application/json", replacements=[], forbidden=[], raw_parent_sha256=HEX_A)
 
@@ -820,6 +841,7 @@ class V2IntegrationTests(HardeningFixture):
                 content = {
                     "evidence.json": gate,
                     "slurm/smoke.0.out": b"PASS\n",
+                    "streams.npz": b"\x93NUMPY\x00\xff\x01\x02",
                 }
                 if not self.omit_stderr:
                     content["slurm/smoke.0.err"] = b""
@@ -875,12 +897,18 @@ class V2IntegrationTests(HardeningFixture):
                 clock=lambda: "2026-07-19T20:00:00Z",
                 provider_root=REPOSITORY_ROOT,
             )
-            toolkit.doctor(); toolkit.probe(); toolkit.plan(self.plan(authority, script)); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+            plan = self.plan(authority, script)
+            plan["evidence_allowlist"].append("streams.npz")
+            toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
             toolkit.submit("smoke", 0); toolkit.observe("smoke", 0)
             return toolkit
 
         toolkit = settled_toolkit(SparseAdapter(self.root / "sparse-pass"))
         self.assertTrue(toolkit.collect()["download_promoted"])
+        self.assertEqual(
+            (toolkit.publication_dir / "evidence/streams.npz").read_bytes(),
+            b"\x93NUMPY\x00\xff\x01\x02",
+        )
 
         self.temporary.cleanup()
         self.setUp()
