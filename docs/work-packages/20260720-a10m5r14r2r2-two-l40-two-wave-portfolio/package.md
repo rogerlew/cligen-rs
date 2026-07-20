@@ -1,6 +1,6 @@
 # A10M5R14R2R2 — Two-L40 Two-Wave Portfolio
 
-Status: `SCAFFOLDED-AUTHORIZED`
+Status: `CORRECTIVE-R2-AUTHORIZED`
 Date: 2026-07-20
 Evidence mode: Development architecture comparison; unchanged R14 science
 Starting branch and push target: current `main`, push `main`
@@ -67,3 +67,19 @@ inventory, one active GPU, and at least two idle GPUs. Fresh run `r1`
 deduplicates identical `sinfo` rows before enforcing exact-node identity;
 conflicting rows still fail closed. No r0 portfolio admission or reservation
 was retained.
+
+## Run r1 operational failure
+
+Run `r1` completed control job `1017918` in 1,300 seconds with all gates
+true. Its fresh portfolio admission passed the composed checker and the
+two-idle-L40 occupancy gate, and job `1018091` received exactly two L40s.
+The launcher saw allocation tokens `0,1` and two devices named `NVIDIA L40`,
+but failed before starting any candidate because the scheduling transform
+changed the token-count assertion to two while leaving the unique-token
+assertion at four. The failed portfolio charged three GPU-minutes; the complete
+run charged 25. Collection and remote cleanup succeeded, and replay was
+inapplicable because no candidate evidence existed.
+
+Fresh run `r2` changes that single assertion to two, strengthens the focused
+test against recurrence, and changes only operational run identities. Frozen
+science remains unchanged.

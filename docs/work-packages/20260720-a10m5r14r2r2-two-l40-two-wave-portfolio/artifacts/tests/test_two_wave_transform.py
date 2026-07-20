@@ -50,12 +50,15 @@ class TwoWaveTransformTests(unittest.TestCase):
             transformed = target.read_text()
             py_compile.compile(str(target), doraise=True)
             self.assertIn('allocated_count == 2', transformed)
+            self.assertIn('len(tokens) == 2', transformed)
+            self.assertIn('len(set(tokens)) == 2', transformed)
             self.assertIn('for wave in (0, 1):', transformed)
             self.assertIn('"all_children_launched": len(processes) == 4', transformed)
             self.assertIn('"two_complete_nonoverlapping_waves"', transformed)
             self.assertIn('"two_unique_wave_binding_tokens": len(tokens) == 2 and len(set(tokens)) == 2', transformed)
             self.assertNotIn('"exact_four_l40_allocation"', transformed)
             self.assertNotIn('"unique_child_binding_tokens"', transformed)
+            self.assertNotIn('len(set(tokens)) == 4', transformed)
 
     def test_admission_transform_requires_two_available_not_whole_idle_node(self) -> None:
         with tempfile.TemporaryDirectory() as raw:

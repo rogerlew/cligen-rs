@@ -636,6 +636,12 @@ passed, but the four-L40 portfolio admission held because another allocation
 occupied one device on the only qualified node. The operator chose R14R2R2:
 retain the four frozen candidates and single-GPU isolation, but execute them as
 two deterministic concurrent pairs when at least two L40s are idle.
+R14R2R2 `r0` held before portfolio submission on duplicate identical scheduler
+rows. Run `r1` deduplicated those rows, passed control and portfolio admission,
+and received exactly two L40s, but an untransformed four-unique-token launcher
+predicate stopped before any candidate began. The active `r2` correction
+changes that predicate to two under fresh run identities; science remains
+unchanged.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

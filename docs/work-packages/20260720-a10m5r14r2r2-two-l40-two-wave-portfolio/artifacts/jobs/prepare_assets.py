@@ -15,7 +15,7 @@ PARENT_COMMIT = "6463ab2bebcf016c371afc56e31ffc7156a2fb95"
 PARENT_PACKAGE_ID = "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy"
 PARENT_RUN_ID = "a10m5r14r2r1-inherited-admission-checker-identity-remedy-r0"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r1"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r2"
 PARENT_RECORD = "a10m5r14r2r1-submission-admission"
 RECORD = "a10m5r14r2r2-submission-admission"
 TOOLKIT_COMMIT = "06df84c882fbe297e93b13fb8c845d5eb500b405"
@@ -252,6 +252,7 @@ def transform_launcher(path: Path) -> None:
     text = text.replace('tokens[row["slot"]]', 'tokens[row["allocation_token_index"]]')
     text = text.replace('"exact_four_l40_allocation": allocation_ok', '"exact_two_l40_allocation": allocation_ok')
     text = text.replace('"unique_child_binding_tokens": len(tokens) == 2 and len(set(tokens)) == 4', '"two_unique_wave_binding_tokens": len(tokens) == 2 and len(set(tokens)) == 2')
+    text = text.replace("len(set(tokens)) == 4", "len(set(tokens)) == 2")
     text = text.replace('"all_children_reaped": len(children) == 4,', '"all_children_reaped": len(children) == 4,\n        "two_complete_nonoverlapping_waves": [item.get("wave") for item in children] == [0, 0, 1, 1],')
     path.write_text(text)
 

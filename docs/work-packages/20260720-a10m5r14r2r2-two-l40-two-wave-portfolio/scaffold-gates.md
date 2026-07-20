@@ -27,3 +27,16 @@ All scaffold gates pass. The observed changed-file roster is the exact frozen
 twelve-asset operational set, and the selected frozen science set is
 byte-identical. Live authority, admission, execution, collection, replay, and
 cleanup remain postpublication gates.
+
+## Corrective r2 result
+
+The authenticated `r1` execution exposed one stale four-token uniqueness
+predicate before any candidate launched. The `r2` transform now generates
+exactly two distinct-token checks both in `allocation_ok` and in the named
+wave-binding gate while retaining four children in waves `[0,0,1,1]`.
+
+Fresh 51-asset generation contains only `r2` run-bound executable identities
+and keeps protected roles sealed. The strengthened regression test fails
+against the `r1` transform. Four focused package tests, 86 toolkit tests,
+generated Python compilation and shell syntax, `cargo fmt --check`, clippy with
+warnings denied, the full Rust suite, and `git diff --check` pass.

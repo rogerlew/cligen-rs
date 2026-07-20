@@ -48,8 +48,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: publish A10M5R14R2R1 and execute its control with explicit
   outer slot 0 and inherited slot 1 consumption; hold its unsubmitted portfolio
   when the frozen four-idle-L40 admission cannot pass.
-- [ ] 2026-07-20: execute R14R2R2 as the same four-candidate comparison in two
-  deterministic concurrent pairs on two idle L40s.
+- [x] 2026-07-20: preserve R14R2R2 runs r0/r1: r0 held on duplicate identical
+  scheduler rows; r1 passed exact two-L40 admission but exposed one stale
+  four-unique-token launcher assertion before starting a candidate.
+- [ ] 2026-07-20: execute corrective R14R2R2 r2 as the same four-candidate
+  comparison in two deterministic concurrent pairs on two idle L40s.
 
 ## Surprises & Discoveries
 

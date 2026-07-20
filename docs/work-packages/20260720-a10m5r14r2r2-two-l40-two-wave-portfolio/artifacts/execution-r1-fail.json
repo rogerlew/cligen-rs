@@ -1,0 +1,36 @@
+{
+  "actual_gpu_minutes": 25,
+  "collection": {
+    "archive_sha256": "d28276969f93d094d0749faf5c9a82be270ab5e273e0383ecbba9218cdff33be",
+    "record_sha256": "fafd4c36360f0e0ab8817b1d023aaadfa03aba2cc2b07d7d2ab3cd08dff24fd"
+  },
+  "control": {
+    "elapsed_seconds": 1300,
+    "exit_code": 0,
+    "gate_receipt_sha256": "1bacef33539eae6b6661ae5cfd76ccdf09406dc82bd0b2fd2565ed896508b35a",
+    "job_id": "1017918",
+    "passed": true
+  },
+  "failure": {
+    "candidate_children_started": 0,
+    "launcher_gate": "exact_two_l40_allocation",
+    "observed_allocation_tokens": ["0", "1"],
+    "observed_devices": ["NVIDIA L40", "NVIDIA L40"],
+    "root_cause": "launcher transform retained len(set(tokens)) == 4 while the two-L40 contract requires 2"
+  },
+  "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "portfolio": {
+    "elapsed_seconds": 80,
+    "exit_code": 1,
+    "gate_receipt_sha256": "1c9d7e0be2986b8fb28673fc3ad15ff5538ad2b46d653683304c5f0386c82360",
+    "job_id": "1018091",
+    "passed": false
+  },
+  "remote_cleanup_verified_absent": true,
+  "replay_performed": false,
+  "run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r1",
+  "schema_version": 1,
+  "source_commit": "d838933ec825322409a4f0e22a644ebacd4fc207",
+  "successor_run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r2",
+  "terminal": "R14R2R2-R1-FAIL-TWO-TOKEN-ASSERTION"
+}
