@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "package_id": "20260719-a10m5r11-retained-adapter-temporal-generalization",
+  "archive": {
+    "bytes": 224040960,
+    "sha256": "8770e127f8413eedd47d50670c359e450988444a8c4d8d43ca5645619a1b0a17"
+  },
+  "layout": {
+    "member_count": 101,
+    "accepted_object_count": 98,
+    "all_members_regular": true,
+    "sole_top_level_prefix": "corpus",
+    "absolute_paths_allowed": false,
+    "parent_components_allowed": false,
+    "required_members": [
+      "corpus/artifacts/normalization-statistics-v1.json",
+      "corpus/artifacts/normalized-manifest-v1.json",
+      "corpus/artifacts/offline-transfer-manifest-v1.json"
+    ]
+  },
+  "extraction_contract": {
+    "archive_prefix": "corpus/",
+    "destination": "[JOB_LOCAL]",
+    "science_corpus_root": "[JOB_LOCAL]/corpus",
+    "nested_corpus_forbidden": "[JOB_LOCAL]/corpus/corpus"
+  }
+}

@@ -526,9 +526,14 @@ and core combined-dispersion gate despite improved solar dependence
 aggregates. The run settled at 396 GPU-minutes, authenticated all 153
 allowlisted evidence files, released recovery, removed the exact remote root,
 and closed normally. Confirmation remained sealed. The next defensible science
-stage is a separately authorized prospective temporal-generalization
-comparison of the three retained configurations; this package does not
-authorize that new claim or its resources.
+stage is the separately authorized prospective
+[A10M5R11 retained-adapter temporal comparison](work-packages/20260719-a10m5r11-retained-adapter-temporal-generalization/package.md).
+It inherits the ratified six-regime, 100-year A10 temporal estimand and
+leap-century correction exactly, carries every passing configuration forward,
+and introduces no new parsimony selector. Solar remains closed during this
+stage; its downstream constraint is a procedural latitude/day-of-year
+astronomical envelope plus a stochastic clearness/cloud residual coupled to
+generated precipitation and temperature.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
