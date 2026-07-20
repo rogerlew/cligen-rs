@@ -559,11 +559,15 @@ but controller collection failed closed because the two intentional ~45.7 MB
 stream archives exceeded both the frozen 10 MB per-file and 50 MB aggregate
 generic profile ceilings. The active zero-allocation
 [A10M5R12R2](work-packages/20260720-a10m5r12r2-collection-ceiling-reconciliation/package.md)
-binds and recovers the exact safe 96.4 MB archive, replays the unchanged
-selector, and performs marker-bound cleanup without rerunning science. The
-matched comparison remains unchanged: both evolve daily through month/year
-boundaries, and calendar periods are aggregation bins only. Solar remains
-deferred until that core passes, after which its design remains a
+recovered the exact safe 96.4 MB archive, reproduced the unchanged selector
+twice byte-identically, and completed marker-bound cleanup with zero additional
+GPU use. Neither candidate was eligible: the hierarchy scored 2.498 / 3.632
+and medium-only 2.517 / 3.677 against the 1.25 / 1.5 bootstrap/max-ratio gates.
+The slow hierarchy improved annual dispersion and lag but not enough overall;
+annual cross-field dependence remains the dominant error. Both candidates
+evolve daily through month/year boundaries, so calendar periods remain
+aggregation bins rather than process resets. Solar remains deferred until that
+core passes, after which its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.

@@ -18,7 +18,9 @@ calendar boundaries, and isolate the value of an additional slow process.
   on typed L40 GPUs; all passed in 99 rounded GPU-minutes.
 - [x] 2026-07-20: preserved the collection-capacity hold and scaffolded the
   zero-allocation A10M5R12R2 evidence reconciliation.
-- [ ] Recover, score, replay, clean, review, and reconcile the package.
+- [x] 2026-07-20: recovered all evidence, replayed the selector twice
+  byte-identically, cleaned the remote root, and closed R2 with neither
+  continuous candidate temporally eligible.
 
 ## Surprises & Discoveries
 
@@ -42,6 +44,15 @@ root-owned members, 96,443,290 expanded bytes, no unsafe path/type/set-id, and
 all observed gate hashes exact. A10M5R12R2 applies an established
 zero-allocation reconciliation rather than drifting the parent profile or
 rerunning GPU work.
+
+The recovered selector showed that the added slow hierarchy helps the intended
+physics but does not close the full gap. Relative to medium-only it reduced the
+bootstrap annual-dispersion error from 0.536 to 0.450 and annual-lag error from
+1.699 to 1.454, while annual cross-field dependence worsened from 4.663 to
+4.831. Overall error changed by only about 0.31%, and both candidates remained
+far outside the inherited noninferiority gates. This points to training-horizon
+and selector-objective alignment plus explicit shared cross-field structure,
+not to monthly process resets.
 
 ## Decision Log
 
@@ -69,6 +80,9 @@ rerunning GPU work.
 - 2026-07-20: preserve A10M5R12R1 as toolkit-unclosed at
   `ARCHIVE_UNSAFE`; recover under a separately reviewed, exact-archive-bound
   zero-allocation successor and change no science or selector field.
+- 2026-07-20: retain the continuous slow hierarchy as a diagnostic basis, not
+  a candidate; next compare selector-aligned long-horizon training with and
+  without an explicit shared slow climate state before opening solar.
 
 ## Outcomes & Retrospective
 

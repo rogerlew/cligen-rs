@@ -109,7 +109,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260719-a10m5r11r2-comparator-burn-contract-remedy](20260719-a10m5r11r2-comparator-burn-contract-remedy/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE |
 | [20260719-a10m5r12-continuous-latent-temporal-process](20260719-a10m5r12-continuous-latent-temporal-process/package.md) | EXECUTED-HOLD-ADMISSION-MATERIALIZATION |
 | [20260719-a10m5r12r1-admission-materialization-remedy](20260719-a10m5r12r1-admission-materialization-remedy/package.md) | EXECUTED-HOLD-COLLECTION-CAPACITY |
-| [20260720-a10m5r12r2-collection-ceiling-reconciliation](20260720-a10m5r12r2-collection-ceiling-reconciliation/package.md) | SCAFFOLDED |
+| [20260720-a10m5r12r2-collection-ceiling-reconciliation](20260720-a10m5r12r2-collection-ceiling-reconciliation/package.md) | EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |
