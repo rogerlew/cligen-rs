@@ -1,0 +1,126 @@
+{
+  "authority_revision_sha256": "0b9bc39625cb164c6ca7720e2ea634179195cdda7a9d6051eb7ae0436377634e",
+  "confirmation": {
+    "classification": "development-only",
+    "protected_roles_opened": []
+  },
+  "execution": {
+    "actual_gpu_minutes": 396,
+    "candidate_jobs_completed": 10,
+    "candidate_seed_rows": 30,
+    "control_job_completed": true,
+    "jobs": [
+      {
+        "actual_gpu_minutes": 15,
+        "elapsed_seconds": 893,
+        "job_id": "1014057",
+        "role": "control-materialization"
+      },
+      {
+        "actual_gpu_minutes": 38,
+        "elapsed_seconds": 2224,
+        "job_id": "1014058",
+        "role": "monthly-residual-adapter-k1"
+      },
+      {
+        "actual_gpu_minutes": 38,
+        "elapsed_seconds": 2259,
+        "job_id": "1014059",
+        "role": "monthly-residual-adapter-k2"
+      },
+      {
+        "actual_gpu_minutes": 35,
+        "elapsed_seconds": 2042,
+        "job_id": "1014060",
+        "role": "annual-monthly-residual-adapter-k1"
+      },
+      {
+        "actual_gpu_minutes": 43,
+        "elapsed_seconds": 2575,
+        "job_id": "1014061",
+        "role": "annual-monthly-residual-adapter-k2"
+      },
+      {
+        "actual_gpu_minutes": 38,
+        "elapsed_seconds": 2253,
+        "job_id": "1014062",
+        "role": "hierarchical-joint-factor-adapter-k1"
+      },
+      {
+        "actual_gpu_minutes": 31,
+        "elapsed_seconds": 1848,
+        "job_id": "1014063",
+        "role": "hierarchical-joint-factor-adapter-k2"
+      },
+      {
+        "actual_gpu_minutes": 42,
+        "elapsed_seconds": 2477,
+        "job_id": "1014064",
+        "role": "climate-normal-hierarchical-state-space-k1"
+      },
+      {
+        "actual_gpu_minutes": 51,
+        "elapsed_seconds": 3014,
+        "job_id": "1014065",
+        "role": "climate-normal-hierarchical-state-space-k2"
+      },
+      {
+        "actual_gpu_minutes": 31,
+        "elapsed_seconds": 1848,
+        "job_id": "1014073",
+        "role": "physics-conditioned-hierarchical-adapter-k1"
+      },
+      {
+        "actual_gpu_minutes": 34,
+        "elapsed_seconds": 2003,
+        "job_id": "1014074",
+        "role": "physics-conditioned-hierarchical-adapter-k2"
+      }
+    ],
+    "recovery_actual_gpu_minutes": 0,
+    "recovery_reservation_status": "released",
+    "remote_absent": true,
+    "wave_policy": "five-ordered-two-role-waves"
+  },
+  "package_id": "20260719-a10m5r10r1r4-science-environment-closure-remedy",
+  "plan_id": "cdce8b81b4bf355278dc77c0b011dfac1849b25090d077fc3b13aab0e6c56d16",
+  "preserved_evidence": {
+    "absent_allowlisted_files": 0,
+    "archive_bytes": 6952960,
+    "archive_sha256": "aa83f2d047a30ae2ac8412fdeb5fe33fcdb6e43407405aa235180d3d6d6b8483",
+    "collection_record_file_sha256": "f451beedca28374897395415b71910f3369b7a62209c9530a592d2d4474102b4",
+    "present_allowlisted_files": 153
+  },
+  "run_id": "a10m5r10r1r4-science-environment-closure-remedy-r0",
+  "schema_version": 1,
+  "science": {
+    "eligible_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "annual_monthly_residual_adapter-k2",
+      "hierarchical_joint_factor_adapter-k2",
+      "monthly_residual_adapter-k2"
+    ],
+    "nondominated_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "annual_monthly_residual_adapter-k2",
+      "hierarchical_joint_factor_adapter-k2",
+      "monthly_residual_adapter-k2"
+    ],
+    "physics_generalization_supported": false,
+    "retained_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "monthly_residual_adapter-k2",
+      "annual_monthly_residual_adapter-k2"
+    ],
+    "selector_output_sha256": {
+      "portfolio-decision.json": "12b216cb1174aab9bce2976fc1a942c6ea66fde50f601786df32c576edca0c8a",
+      "portfolio-pareto.json": "ae50cc2daec0873c108aab0c72a7b11a353cb6586b28b02ae751dd8db0dcee14",
+      "portfolio-selection-evidence.json": "08d3dfab40fa7eb339b455b38bb06b56e51afb0c8dd325e35183453106d6ea8b",
+      "portfolio-summary.json": "09451e656f6872743652e742927d315e5eb9cd3ee88157fcf6affbb28e5878b8"
+    },
+    "selector_replay_byte_identical": true
+  },
+  "source_commit": "decbe1ababddaf54a3c0cbd88b6f5b1cdb847937",
+  "terminal": "A10M5R10-PORTFOLIO-READY",
+  "toolkit_terminal": "LEMHI-TOOLKIT-RUN-CLOSED"
+}

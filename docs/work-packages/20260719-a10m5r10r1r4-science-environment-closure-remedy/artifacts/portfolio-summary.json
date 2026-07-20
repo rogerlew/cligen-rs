@@ -1,0 +1,1234 @@
+{
+  "collected_control_files": {
+    "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+    "control_evidence_sha256": "484753f7cdd9f8758dff7092e754bb96dd836111c12da38e164b103562ed6acf",
+    "control_identity_sha256": "20643d92d1864857c1e3916982af395a05c120b3478da01f044ef49e9fa2776c",
+    "control_summary_sha256": "729d6a7d9c2395458f2bb2c27551749b3f0307c4db3e5b97df1a43d54df9b291"
+  },
+  "configuration_count": 10,
+  "configurations": [
+    {
+      "architecture": "annual_monthly_residual_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.898937396053447,
+        "combined_monthly_annual_location": 0.9973651571555409,
+        "combined_wet_dependence": 0.9192648755777109,
+        "daily_proper_nll": 1.0041539343963855,
+        "family_balanced_climate": 0.9653447101730489,
+        "within_month_daily_dispersion": 1.0000565023677688
+      },
+      "capacity": "K1",
+      "configuration_id": "annual_monthly_residual_adapter-k1",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": true,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": true,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.7986062257927118,
+        "annual_location": 0.994164972351307,
+        "monthly_interannual_dispersion": 0.9730295583121704,
+        "monthly_location": 0.9989910778780906,
+        "precipitation_temperature_dependence": 0.8968729260922256,
+        "wet_occurrence_and_amount": 0.9912828252341529,
+        "within_month_daily_dispersion": 1.0000565023677688
+      },
+      "parameter_count": 87370,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8975683541936755,
+            "combined_monthly_annual_location": 0.9973651571555409,
+            "combined_wet_dependence": 0.9131521080342683,
+            "daily_proper_nll": 1.00559827075328,
+            "family_balanced_climate": 0.9638682342513584,
+            "within_month_daily_dispersion": 1.0001453663847535
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7896148933408176,
+            "annual_location": 0.994164972351307,
+            "monthly_interannual_dispersion": 0.9730295583121704,
+            "monthly_location": 0.9989910778780906,
+            "precipitation_temperature_dependence": 0.8879353256140581,
+            "wet_occurrence_and_amount": 0.9914528157595557,
+            "within_month_daily_dispersion": 1.0001453663847535
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.898937396053447,
+            "combined_monthly_annual_location": 0.99703563288111,
+            "combined_wet_dependence": 0.9192648755777109,
+            "daily_proper_nll": 1.0040123967288164,
+            "family_balanced_climate": 0.9653447101730489,
+            "within_month_daily_dispersion": 1.000053513323452
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7986062257927118,
+            "annual_location": 0.9934201485648926,
+            "monthly_interannual_dispersion": 0.969415786973722,
+            "monthly_location": 0.9988793474731962,
+            "precipitation_temperature_dependence": 0.8968729260922256,
+            "wet_occurrence_and_amount": 0.9887626863411768,
+            "within_month_daily_dispersion": 1.000053513323452
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.904764223485053,
+            "combined_monthly_annual_location": 0.9974860997929662,
+            "combined_wet_dependence": 0.9365563619913582,
+            "daily_proper_nll": 1.0041539343963855,
+            "family_balanced_climate": 0.9705546063266809,
+            "within_month_daily_dispersion": 1.0000565023677688
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8037749078930538,
+            "annual_location": 0.9943479830742386,
+            "monthly_interannual_dispersion": 0.9756589185555294,
+            "monthly_location": 0.9990828995822199,
+            "precipitation_temperature_dependence": 0.918895801453653,
+            "wet_occurrence_and_amount": 0.9912828252341529,
+            "within_month_daily_dispersion": 1.0000565023677688
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 1743.9126859889366
+    },
+    {
+      "architecture": "annual_monthly_residual_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.878997432111631,
+        "combined_monthly_annual_location": 0.9862852674499233,
+        "combined_wet_dependence": 0.8646649482138624,
+        "daily_proper_nll": 1.008818298638608,
+        "family_balanced_climate": 0.9501248408729245,
+        "within_month_daily_dispersion": 0.999559746854379
+      },
+      "capacity": "K2",
+      "configuration_id": "annual_monthly_residual_adapter-k2",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": true,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": true,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.7641393768615895,
+        "annual_location": 0.9703825729898815,
+        "monthly_interannual_dispersion": 0.960065535954842,
+        "monthly_location": 0.9946719113812179,
+        "precipitation_temperature_dependence": 0.8303689573438391,
+        "wet_occurrence_and_amount": 0.9730241072790315,
+        "within_month_daily_dispersion": 0.999559746854379
+      },
+      "parameter_count": 277113,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8609573396272471,
+            "combined_monthly_annual_location": 0.988610003052836,
+            "combined_wet_dependence": 0.8642894882306962,
+            "daily_proper_nll": 1.009393177490925,
+            "family_balanced_climate": 0.9456603388160006,
+            "within_month_daily_dispersion": 0.999559746854379
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7315696629436391,
+            "annual_location": 0.975272050343637,
+            "monthly_interannual_dispersion": 0.9541314131289449,
+            "monthly_location": 0.9956299439307162,
+            "precipitation_temperature_dependence": 0.8282575013763471,
+            "wet_occurrence_and_amount": 0.9794220631758163,
+            "within_month_daily_dispersion": 0.999559746854379
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8938244639294963,
+            "combined_monthly_annual_location": 0.9862852674499233,
+            "combined_wet_dependence": 0.8646649482138624,
+            "daily_proper_nll": 1.008818298638608,
+            "family_balanced_climate": 0.950298953779765,
+            "within_month_daily_dispersion": 0.9998586753597252
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.78705865245703,
+            "annual_location": 0.9703825729898815,
+            "monthly_interannual_dispersion": 0.9677804070737027,
+            "monthly_location": 0.9946719113812179,
+            "precipitation_temperature_dependence": 0.8303689573438391,
+            "wet_occurrence_and_amount": 0.9730241072790315,
+            "within_month_daily_dispersion": 0.9998586753597252
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.878997432111631,
+            "combined_monthly_annual_location": 0.9849687492184217,
+            "combined_wet_dependence": 0.8747419727907055,
+            "daily_proper_nll": 1.0085892371206577,
+            "family_balanced_climate": 0.9501248408729245,
+            "within_month_daily_dispersion": 0.9994821077126037
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7641393768615895,
+            "annual_location": 0.9681706969370683,
+            "monthly_interannual_dispersion": 0.960065535954842,
+            "monthly_location": 0.9939025274366622,
+            "precipitation_temperature_dependence": 0.8436971288544944,
+            "wet_occurrence_and_amount": 0.9716783317361566,
+            "within_month_daily_dispersion": 0.9994821077126037
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 2275.4703083708882
+    },
+    {
+      "architecture": "climate_normal_hierarchical_state_space",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.9994275476227803,
+        "combined_monthly_annual_location": 0.9485194337506142,
+        "combined_wet_dependence": 0.8007581954690273,
+        "daily_proper_nll": 1.3093175509326505,
+        "family_balanced_climate": 0.733590996100549,
+        "within_month_daily_dispersion": 0.34940653650085124
+      },
+      "capacity": "K1",
+      "configuration_id": "climate_normal_hierarchical_state_space-k1",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": false,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": false,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.877952999576353,
+        "annual_location": 0.9076266859264798,
+        "monthly_interannual_dispersion": 1.0999873586602675,
+        "monthly_location": 0.9693726720113024,
+        "precipitation_temperature_dependence": 0.761107315919949,
+        "wet_occurrence_and_amount": 0.923822483609417,
+        "within_month_daily_dispersion": 0.34940653650085124
+      },
+      "parameter_count": 89874,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9578141371901269,
+            "combined_monthly_annual_location": 1.0367895598237988,
+            "combined_wet_dependence": 0.9933911582401084,
+            "daily_proper_nll": 1.3321731445454106,
+            "family_balanced_climate": 0.8005894607532624,
+            "within_month_daily_dispersion": 0.3648322220257917
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7544236469694728,
+            "annual_location": 1.0523341880902075,
+            "monthly_interannual_dispersion": 1.0999873586602675,
+            "monthly_location": 1.0288917867985508,
+            "precipitation_temperature_dependence": 0.9623691443860257,
+            "wet_occurrence_and_amount": 1.0897177077324642,
+            "within_month_daily_dispersion": 0.3648322220257917
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 1.0227634752700112,
+            "combined_monthly_annual_location": 0.9485194337506142,
+            "combined_wet_dependence": 0.8007581954690273,
+            "daily_proper_nll": 1.2704099175559862,
+            "family_balanced_climate": 0.733590996100549,
+            "within_month_daily_dispersion": 0.34940653650085124
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.9088994784080238,
+            "annual_location": 0.9076266859264798,
+            "monthly_interannual_dispersion": 1.102748102796325,
+            "monthly_location": 0.9693726720113024,
+            "precipitation_temperature_dependence": 0.761107315919949,
+            "wet_occurrence_and_amount": 0.923822483609417,
+            "within_month_daily_dispersion": 0.34940653650085124
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9994275476227803,
+            "combined_monthly_annual_location": 0.9374338679596201,
+            "combined_wet_dependence": 0.7900706408226572,
+            "daily_proper_nll": 1.3093175509326505,
+            "family_balanced_climate": 0.7161633705569127,
+            "within_month_daily_dispersion": 0.32798366310898514
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.877952999576353,
+            "annual_location": 0.9047757049077598,
+            "monthly_interannual_dispersion": 1.0847029155376182,
+            "monthly_location": 0.9540516526224428,
+            "precipitation_temperature_dependence": 0.7587012419280625,
+            "wet_occurrence_and_amount": 0.8872779889070168,
+            "within_month_daily_dispersion": 0.32798366310898514
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 2176.0809536417946
+    },
+    {
+      "architecture": "climate_normal_hierarchical_state_space",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.9603704002909635,
+        "combined_monthly_annual_location": 0.8488328639572544,
+        "combined_wet_dependence": 0.7539681460696109,
+        "daily_proper_nll": 1.2223102859440707,
+        "family_balanced_climate": 0.6458114613662592,
+        "within_month_daily_dispersion": 0.29523689842720463
+      },
+      "capacity": "K2",
+      "configuration_id": "climate_normal_hierarchical_state_space-k2",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": false,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": false,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.8820748044579118,
+        "annual_location": 0.7415345595031112,
+        "monthly_interannual_dispersion": 1.0156323101295217,
+        "monthly_location": 0.9054190403533129,
+        "precipitation_temperature_dependence": 0.7222934616299244,
+        "wet_occurrence_and_amount": 0.8086491119708756,
+        "within_month_daily_dispersion": 0.29523689842720463
+      },
+      "parameter_count": 273665,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9950244366002529,
+            "combined_monthly_annual_location": 0.8553151832855345,
+            "combined_wet_dependence": 0.7548407401768609,
+            "daily_proper_nll": 1.2223102859440707,
+            "family_balanced_climate": 0.6651058632444967,
+            "within_month_daily_dispersion": 0.31155587681181146
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.9234528906482885,
+            "annual_location": 0.7462461041180818,
+            "monthly_interannual_dispersion": 1.0465642173126406,
+            "monthly_location": 0.9127196818659136,
+            "precipitation_temperature_dependence": 0.7209481911898583,
+            "wet_occurrence_and_amount": 0.8631371949935411,
+            "within_month_daily_dispersion": 0.31155587681181146
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9318964352684659,
+            "combined_monthly_annual_location": 0.8488328639572544,
+            "combined_wet_dependence": 0.7340720104329223,
+            "daily_proper_nll": 1.2046710162072658,
+            "family_balanced_climate": 0.6360384790305003,
+            "within_month_daily_dispersion": 0.2877531463989564
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8358880562279555,
+            "annual_location": 0.7415345595031112,
+            "monthly_interannual_dispersion": 0.9984007789695251,
+            "monthly_location": 0.9054190403533129,
+            "precipitation_temperature_dependence": 0.7222934616299244,
+            "wet_occurrence_and_amount": 0.7712866705410948,
+            "within_month_daily_dispersion": 0.2877531463989564
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9603704002909635,
+            "combined_monthly_annual_location": 0.8345466264053015,
+            "combined_wet_dependence": 0.7539681460696109,
+            "daily_proper_nll": 1.2235016226657127,
+            "family_balanced_climate": 0.6458114613662592,
+            "within_month_daily_dispersion": 0.29523689842720463
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8820748044579118,
+            "annual_location": 0.7088464139799888,
+            "monthly_interannual_dispersion": 1.0156323101295217,
+            "monthly_location": 0.9013982947406854,
+            "precipitation_temperature_dependence": 0.736456016759686,
+            "wet_occurrence_and_amount": 0.8086491119708756,
+            "within_month_daily_dispersion": 0.29523689842720463
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 2713.8182510938495
+    },
+    {
+      "architecture": "hierarchical_joint_factor_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.9016674745838046,
+        "combined_monthly_annual_location": 0.9973272332096579,
+        "combined_wet_dependence": 0.9171880038673623,
+        "daily_proper_nll": 1.0041135227459983,
+        "family_balanced_climate": 0.9658714932700194,
+        "within_month_daily_dispersion": 1.0002209001212425
+      },
+      "capacity": "K1",
+      "configuration_id": "hierarchical_joint_factor_adapter-k1",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.8021707385783071,
+        "annual_location": 0.9941400102245191,
+        "monthly_interannual_dispersion": 0.9715597108376373,
+        "monthly_location": 0.9989766524705794,
+        "precipitation_temperature_dependence": 0.8942356319119386,
+        "wet_occurrence_and_amount": 0.9886547171414405,
+        "within_month_daily_dispersion": 1.0002209001212425
+      },
+      "parameter_count": 87846,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8941955438172603,
+            "combined_monthly_annual_location": 0.9975945086492203,
+            "combined_wet_dependence": 0.9070919471736543,
+            "daily_proper_nll": 1.003671892232771,
+            "family_balanced_climate": 0.9620416557376654,
+            "within_month_daily_dispersion": 1.0002209001212425
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7811274445386818,
+            "annual_location": 0.9944213076198603,
+            "monthly_interannual_dispersion": 0.9732319623956387,
+            "monthly_location": 0.9992067197014156,
+            "precipitation_temperature_dependence": 0.880824615962763,
+            "wet_occurrence_and_amount": 0.9886547171414405,
+            "within_month_daily_dispersion": 1.0002209001212425
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9016674745838046,
+            "combined_monthly_annual_location": 0.9973272332096579,
+            "combined_wet_dependence": 0.9194319332006712,
+            "daily_proper_nll": 1.0041135227459983,
+            "family_balanced_climate": 0.9658714932700194,
+            "within_month_daily_dispersion": 1.0000532268032114
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8021707385783071,
+            "annual_location": 0.9941400102245191,
+            "monthly_interannual_dispersion": 0.9715597108376373,
+            "monthly_location": 0.9989525561296256,
+            "precipitation_temperature_dependence": 0.8963607644810577,
+            "wet_occurrence_and_amount": 0.9910378341878554,
+            "within_month_daily_dispersion": 1.0000532268032114
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9051660112416335,
+            "combined_monthly_annual_location": 0.9966625522767234,
+            "combined_wet_dependence": 0.9171880038673623,
+            "daily_proper_nll": 1.0051166416551804,
+            "family_balanced_climate": 0.9659044998347641,
+            "within_month_daily_dispersion": 1.0002730667952682
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8142453006077919,
+            "annual_location": 0.9921147582727269,
+            "monthly_interannual_dispersion": 0.9689925261377095,
+            "monthly_location": 0.9989766524705794,
+            "precipitation_temperature_dependence": 0.8942356319119386,
+            "wet_occurrence_and_amount": 0.9883127078353752,
+            "within_month_daily_dispersion": 1.0002730667952682
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 1950.0284351790324
+    },
+    {
+      "architecture": "hierarchical_joint_factor_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.8943567244677795,
+        "combined_monthly_annual_location": 0.986655758877941,
+        "combined_wet_dependence": 0.8731781061515645,
+        "daily_proper_nll": 1.0078556818970008,
+        "family_balanced_climate": 0.9514729707969177,
+        "within_month_daily_dispersion": 0.9996109903168812
+      },
+      "capacity": "K2",
+      "configuration_id": "hierarchical_joint_factor_adapter-k2",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": true,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": true,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.8096846336218098,
+        "annual_location": 0.9709499211920212,
+        "monthly_interannual_dispersion": 0.954274745806554,
+        "monthly_location": 0.9949385859576843,
+        "precipitation_temperature_dependence": 0.8391347545964202,
+        "wet_occurrence_and_amount": 0.972072351267326,
+        "within_month_daily_dispersion": 0.9996109903168812
+      },
+      "parameter_count": 278777,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8679526985700159,
+            "combined_monthly_annual_location": 0.9898461105075378,
+            "combined_wet_dependence": 0.8731781061515645,
+            "daily_proper_nll": 1.0077591964297383,
+            "family_balanced_climate": 0.949067835400621,
+            "within_month_daily_dispersion": 0.9996109903168812
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7480801984339684,
+            "annual_location": 0.977811482924455,
+            "monthly_interannual_dispersion": 0.954274745806554,
+            "monthly_location": 0.9961800941377454,
+            "precipitation_temperature_dependence": 0.8391347545964202,
+            "wet_occurrence_and_amount": 0.9819564186034808,
+            "within_month_daily_dispersion": 0.9996109903168812
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9042269392863597,
+            "combined_monthly_annual_location": 0.986655758877941,
+            "combined_wet_dependence": 0.8632117157634208,
+            "daily_proper_nll": 1.0078556818970008,
+            "family_balanced_climate": 0.9514729707969177,
+            "within_month_daily_dispersion": 0.9998559537807831
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8096846336218098,
+            "annual_location": 0.9709499211920212,
+            "monthly_interannual_dispersion": 0.9697157440452947,
+            "monthly_location": 0.9949385859576843,
+            "precipitation_temperature_dependence": 0.8287570061333703,
+            "wet_occurrence_and_amount": 0.972072351267326,
+            "within_month_daily_dispersion": 0.9998559537807831
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8943567244677795,
+            "combined_monthly_annual_location": 0.9817335671471128,
+            "combined_wet_dependence": 0.8789743155102904,
+            "daily_proper_nll": 1.0097167226795845,
+            "family_balanced_climate": 0.9523114698742362,
+            "within_month_daily_dispersion": 0.99951094148806
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.812199986994419,
+            "annual_location": 0.9606717789623107,
+            "monthly_interannual_dispersion": 0.9523438713893481,
+            "monthly_location": 0.9929349458171537,
+            "precipitation_temperature_dependence": 0.8510084061918652,
+            "wet_occurrence_and_amount": 0.9662968167764264,
+            "within_month_daily_dispersion": 0.99951094148806
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 1549.0782263928559
+    },
+    {
+      "architecture": "monthly_residual_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.9109932171433588,
+        "combined_monthly_annual_location": 0.9975509010544933,
+        "combined_wet_dependence": 0.936415190047284,
+        "daily_proper_nll": 1.0050549959459396,
+        "family_balanced_climate": 0.9705453469120561,
+        "within_month_daily_dispersion": 1.0000930028645876
+      },
+      "capacity": "K1",
+      "configuration_id": "monthly_residual_adapter-k1",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.8191180753563103,
+        "annual_location": 0.9945600721425738,
+        "monthly_interannual_dispersion": 0.9752154178309117,
+        "monthly_location": 0.9990727548936911,
+        "precipitation_temperature_dependence": 0.9190718357212853,
+        "wet_occurrence_and_amount": 0.9934571520951322,
+        "within_month_daily_dispersion": 1.0000930028645876
+      },
+      "parameter_count": 87325,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9109932171433588,
+            "combined_monthly_annual_location": 0.9977083147134865,
+            "combined_wet_dependence": 0.9327140105591444,
+            "daily_proper_nll": 1.0050549959459396,
+            "family_balanced_climate": 0.9705453469120561,
+            "within_month_daily_dispersion": 1.000173322174023
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8191180753563103,
+            "annual_location": 0.994855974336086,
+            "monthly_interannual_dispersion": 0.9752154178309117,
+            "monthly_location": 0.9991575058105898,
+            "precipitation_temperature_dependence": 0.9131516511867737,
+            "wet_occurrence_and_amount": 0.9934571520951322,
+            "within_month_daily_dispersion": 1.000173322174023
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9050022946619478,
+            "combined_monthly_annual_location": 0.9967359794835376,
+            "combined_wet_dependence": 0.936415190047284,
+            "daily_proper_nll": 1.0058237851532512,
+            "family_balanced_climate": 0.9701577719338332,
+            "within_month_daily_dispersion": 1.0000052521839742
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8158574873147365,
+            "annual_location": 0.9928285965974004,
+            "monthly_interannual_dispersion": 0.9676227401765569,
+            "monthly_location": 0.9987285476193544,
+            "precipitation_temperature_dependence": 0.9190718357212853,
+            "wet_occurrence_and_amount": 0.9902436946950504,
+            "within_month_daily_dispersion": 1.0000052521839742
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9158373285935021,
+            "combined_monthly_annual_location": 0.9975509010544933,
+            "combined_wet_dependence": 0.9497845014721276,
+            "daily_proper_nll": 1.004568512945937,
+            "family_balanced_climate": 0.9752931826073753,
+            "within_month_daily_dispersion": 1.0000930028645876
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8293351177687553,
+            "annual_location": 0.9945600721425738,
+            "monthly_interannual_dispersion": 0.9765620480689584,
+            "monthly_location": 0.9990727548936911,
+            "precipitation_temperature_dependence": 0.935626833812805,
+            "wet_occurrence_and_amount": 0.9936562164784223,
+            "within_month_daily_dispersion": 1.0000930028645876
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 1923.5100100981072
+    },
+    {
+      "architecture": "monthly_residual_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.8805704822368274,
+        "combined_monthly_annual_location": 0.9878762185174996,
+        "combined_wet_dependence": 0.8793835383007179,
+        "daily_proper_nll": 1.0094988544830612,
+        "family_balanced_climate": 0.9514962458868164,
+        "within_month_daily_dispersion": 0.9996309304808798
+      },
+      "capacity": "K2",
+      "configuration_id": "monthly_residual_adapter-k2",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": true,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": true,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.7683645485597579,
+        "annual_location": 0.9740544155485636,
+        "monthly_interannual_dispersion": 0.9597666889230261,
+        "monthly_location": 0.9952271256484272,
+        "precipitation_temperature_dependence": 0.8474901845098786,
+        "wet_occurrence_and_amount": 0.9812919887122398,
+        "within_month_daily_dispersion": 0.9996309304808798
+      },
+      "parameter_count": 276987,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.868255940650842,
+            "combined_monthly_annual_location": 0.9883221553559929,
+            "combined_wet_dependence": 0.8793835383007179,
+            "daily_proper_nll": 1.0096964023594954,
+            "family_balanced_climate": 0.9500675003458712,
+            "within_month_daily_dispersion": 0.9994949021272271
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7547893336852497,
+            "annual_location": 0.9745146848370244,
+            "monthly_interannual_dispersion": 0.9499650048243369,
+            "monthly_location": 0.9955892096655639,
+            "precipitation_temperature_dependence": 0.8474901845098786,
+            "wet_occurrence_and_amount": 0.9812919887122398,
+            "within_month_daily_dispersion": 0.9994949021272271
+          },
+          "seed": 147031
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8963291783874171,
+            "combined_monthly_annual_location": 0.9861498178046513,
+            "combined_wet_dependence": 0.8686434895958987,
+            "daily_proper_nll": 1.008136793975474,
+            "family_balanced_climate": 0.9514962458868164,
+            "within_month_daily_dispersion": 0.9997798577467262
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7970521174694373,
+            "annual_location": 0.9706155141152776,
+            "monthly_interannual_dispersion": 0.9650977155391014,
+            "monthly_location": 0.9943421825696745,
+            "precipitation_temperature_dependence": 0.8358475756813681,
+            "wet_occurrence_and_amount": 0.9722631128346718,
+            "within_month_daily_dispersion": 0.9997798577467262
+          },
+          "seed": 271828
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.8805704822368274,
+            "combined_monthly_annual_location": 0.9878762185174996,
+            "combined_wet_dependence": 0.8943255191004084,
+            "daily_proper_nll": 1.0094988544830612,
+            "family_balanced_climate": 0.9557000979214658,
+            "within_month_daily_dispersion": 0.9996309304808798
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.7683645485597579,
+            "annual_location": 0.9740544155485636,
+            "monthly_interannual_dispersion": 0.9597666889230261,
+            "monthly_location": 0.9952271256484272,
+            "precipitation_temperature_dependence": 0.8652904282593915,
+            "wet_occurrence_and_amount": 0.9849864995054561,
+            "within_month_daily_dispersion": 0.9996309304808798
+          },
+          "seed": 314159
+        }
+      ],
+      "solar": null,
+      "training_wall_seconds": 1959.3529430448543
+    },
+    {
+      "architecture": "physics_conditioned_hierarchical_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 1.0255895343126327,
+        "combined_monthly_annual_location": 0.9955415479948563,
+        "combined_wet_dependence": 0.9319511860047428,
+        "daily_proper_nll": 1.004583295391068,
+        "family_balanced_climate": 0.9893121125160234,
+        "within_month_daily_dispersion": 1.0002070374845646
+      },
+      "capacity": "K1",
+      "configuration_id": "physics_conditioned_hierarchical_adapter-k1",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": true,
+        "median_each_block": false,
+        "solar_dependence_improvement": true,
+        "solar_each_block_non_degradation": false,
+        "solar_family_improvement": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 1.1143038153253082,
+        "annual_location": 0.9887086127608107,
+        "monthly_interannual_dispersion": 0.9684523880661158,
+        "monthly_location": 0.9988831152565724,
+        "precipitation_temperature_dependence": 0.9156958966274981,
+        "wet_occurrence_and_amount": 0.9844004816937943,
+        "within_month_daily_dispersion": 1.0002070374845646
+      },
+      "parameter_count": 88203,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 1.0518321358238956,
+            "combined_monthly_annual_location": 0.9955415479948563,
+            "combined_wet_dependence": 0.9278380075563307,
+            "daily_proper_nll": 1.004583295391068,
+            "family_balanced_climate": 0.9893121125160234,
+            "within_month_daily_dispersion": 1.0003062676666707
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 1.171113724828974,
+            "annual_location": 0.9887086127608107,
+            "monthly_interannual_dispersion": 0.9684523880661158,
+            "monthly_location": 0.9990131634397449,
+            "precipitation_temperature_dependence": 0.9066273728750128,
+            "wet_occurrence_and_amount": 0.9936992137631403,
+            "within_month_daily_dispersion": 1.0003062676666707
+          },
+          "seed": 147031,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 3.2486732862075973,
+              "annual_location": 2.5700295226481877,
+              "monthly_interannual_dispersion": 1.4466715771786467,
+              "monthly_location": 4.857842844825936,
+              "precipitation_temperature_association": 0.9466917050819957,
+              "wet_dry_contrast": 0.5624067006303511,
+              "within_month_daily_dispersion": 0.8755828079779078
+            },
+            "dependence_ratio": 0.6340782792202223,
+            "family_ratio": 0.8256430866567925
+          }
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 1.0255895343126327,
+            "combined_monthly_annual_location": 0.9950644536411088,
+            "combined_wet_dependence": 0.9319511860047428,
+            "daily_proper_nll": 1.0056471331840737,
+            "family_balanced_climate": 0.9863490700044901,
+            "within_month_daily_dispersion": 1.000191154348843
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 1.1143038153253082,
+            "annual_location": 0.9885380301935557,
+            "monthly_interannual_dispersion": 0.9632715152845085,
+            "monthly_location": 0.9983926003268553,
+            "precipitation_temperature_dependence": 0.9156958966274981,
+            "wet_occurrence_and_amount": 0.9824026674971168,
+            "within_month_daily_dispersion": 1.000191154348843
+          },
+          "seed": 271828,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 3.2266302873487227,
+              "annual_location": 2.474213768836216,
+              "monthly_interannual_dispersion": 1.4721164566409999,
+              "monthly_location": 4.932787932989517,
+              "precipitation_temperature_association": 0.9234801166721437,
+              "wet_dry_contrast": 0.6029923230335759,
+              "within_month_daily_dispersion": 0.9052650317444073
+            },
+            "dependence_ratio": 0.6633937804608855,
+            "family_ratio": 0.8518771472999604
+          }
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 1.0205626892464246,
+            "combined_monthly_annual_location": 0.9957830485759541,
+            "combined_wet_dependence": 0.9497743573391914,
+            "daily_proper_nll": 1.004552391050622,
+            "family_balanced_climate": 0.9900473088686843,
+            "within_month_daily_dispersion": 1.0002070374845646
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 1.0924748300562983,
+            "annual_location": 0.9896906310135957,
+            "monthly_interannual_dispersion": 0.9700802271691686,
+            "monthly_location": 0.9988831152565724,
+            "precipitation_temperature_dependence": 0.9386002976774594,
+            "wet_occurrence_and_amount": 0.9844004816937943,
+            "within_month_daily_dispersion": 1.0002070374845646
+          },
+          "seed": 314159,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 2.9516670325817955,
+              "annual_location": 2.6242731874229253,
+              "monthly_interannual_dispersion": 1.4396946841253702,
+              "monthly_location": 5.167779183939947,
+              "precipitation_temperature_association": 0.8690184878541114,
+              "wet_dry_contrast": 0.6109158777851827,
+              "within_month_daily_dispersion": 0.899346102676681
+            },
+            "dependence_ratio": 0.6600525484449286,
+            "family_ratio": 0.8370310779879744
+          }
+        }
+      ],
+      "solar": {
+        "median_block_ratios": {
+          "annual_interannual_dispersion": 3.2266302873487227,
+          "annual_location": 2.5700295226481877,
+          "monthly_interannual_dispersion": 1.4466715771786467,
+          "monthly_location": 4.932787932989517,
+          "precipitation_temperature_association": 0.9234801166721437,
+          "wet_dry_contrast": 0.6029923230335759,
+          "within_month_daily_dispersion": 0.899346102676681
+        },
+        "median_dependence_ratio": 0.6600525484449286,
+        "median_family_ratio": 0.8370310779879744
+      },
+      "training_wall_seconds": 1425.4365311691072
+    },
+    {
+      "architecture": "physics_conditioned_hierarchical_adapter",
+      "axes": {
+        "combined_monthly_annual_dispersion": 0.9289722580861194,
+        "combined_monthly_annual_location": 0.99259275719987,
+        "combined_wet_dependence": 0.918478867617584,
+        "daily_proper_nll": 1.025973797921264,
+        "family_balanced_climate": 0.9698748679374571,
+        "within_month_daily_dispersion": 1.0014238751558406
+      },
+      "capacity": "K2",
+      "configuration_id": "physics_conditioned_hierarchical_adapter-k2",
+      "eligibility_gates": {
+        "complete_finite_support": true,
+        "median_climate": true,
+        "median_combined_dispersion": false,
+        "median_daily_nll": true,
+        "median_each_block": true,
+        "solar_dependence_improvement": true,
+        "solar_each_block_non_degradation": false,
+        "solar_family_improvement": true,
+        "worst_seed_climate": true,
+        "worst_seed_daily_nll": true,
+        "worst_seed_each_block": true
+      },
+      "eligible": false,
+      "median_block_ratios": {
+        "annual_interannual_dispersion": 0.8713703509057604,
+        "annual_location": 0.9828051900710985,
+        "monthly_interannual_dispersion": 0.9688727029352374,
+        "monthly_location": 0.9977544510668372,
+        "precipitation_temperature_dependence": 0.8814975865933594,
+        "wet_occurrence_and_amount": 1.0353222773363642,
+        "within_month_daily_dispersion": 1.0014238751558406
+      },
+      "parameter_count": 279486,
+      "seed_ratios": [
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9931010788982213,
+            "combined_monthly_annual_location": 0.9840631812306809,
+            "combined_wet_dependence": 0.8935649479884317,
+            "daily_proper_nll": 1.008134243650207,
+            "family_balanced_climate": 0.9697955903606429,
+            "within_month_daily_dispersion": 0.9995230844312453
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 1.0660519169866527,
+            "annual_location": 0.965507534276581,
+            "monthly_interannual_dispersion": 0.9405680485178783,
+            "monthly_location": 0.9938292635829423,
+            "precipitation_temperature_dependence": 0.8691532743766257,
+            "wet_occurrence_and_amount": 0.971567275559436,
+            "within_month_daily_dispersion": 0.9995230844312453
+          },
+          "seed": 147031,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 2.9374346133311033,
+              "annual_location": 2.3720985242457457,
+              "monthly_interannual_dispersion": 1.3703140366145221,
+              "monthly_location": 4.822710293677171,
+              "precipitation_temperature_association": 0.8909516156688865,
+              "wet_dry_contrast": 0.6132476209122995,
+              "within_month_daily_dispersion": 0.9124429847138206
+            },
+            "dependence_ratio": 0.6639707507035609,
+            "family_ratio": 0.835805377374117
+          }
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.9289722580861194,
+            "combined_monthly_annual_location": 0.99259275719987,
+            "combined_wet_dependence": 0.918478867617584,
+            "daily_proper_nll": 1.025973797921264,
+            "family_balanced_climate": 0.9698748679374571,
+            "within_month_daily_dispersion": 1.0014238751558406
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8713703509057604,
+            "annual_location": 0.9828051900710985,
+            "monthly_interannual_dispersion": 0.9688727029352374,
+            "monthly_location": 0.9977544510668372,
+            "precipitation_temperature_dependence": 0.8814975865933594,
+            "wet_occurrence_and_amount": 1.0353222773363642,
+            "within_month_daily_dispersion": 1.0014238751558406
+          },
+          "seed": 271828,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 4.454641457964448,
+              "annual_location": 2.4240838459218192,
+              "monthly_interannual_dispersion": 2.158985474988634,
+              "monthly_location": 4.885969104829618,
+              "precipitation_temperature_association": 1.0253336302587353,
+              "wet_dry_contrast": 0.3623505548375893,
+              "within_month_daily_dispersion": 0.8297113130738963
+            },
+            "dependence_ratio": 0.48424639538256076,
+            "family_ratio": 0.7768118853758237
+          }
+        },
+        {
+          "axes": {
+            "combined_monthly_annual_dispersion": 0.904017718895901,
+            "combined_monthly_annual_location": 0.9966045084312843,
+            "combined_wet_dependence": 0.9520285044669761,
+            "daily_proper_nll": 1.0378270189453016,
+            "family_balanced_climate": 0.9753541413740449,
+            "within_month_daily_dispersion": 1.0017137826409737
+          },
+          "blocks": {
+            "annual_interannual_dispersion": 0.8073096040200868,
+            "annual_location": 0.9912421567879901,
+            "monthly_interannual_dispersion": 0.972275391221681,
+            "monthly_location": 0.9994563902749065,
+            "precipitation_temperature_dependence": 0.9058035122677925,
+            "wet_occurrence_and_amount": 1.096364306098891,
+            "within_month_daily_dispersion": 1.0017137826409737
+          },
+          "seed": 314159,
+          "solar": {
+            "blocks": {
+              "annual_interannual_dispersion": 4.321496349827653,
+              "annual_location": 2.9036831098089197,
+              "monthly_interannual_dispersion": 2.010168924869266,
+              "monthly_location": 5.1845813660932825,
+              "precipitation_temperature_association": 0.9829135884944071,
+              "wet_dry_contrast": 0.36756502284004655,
+              "within_month_daily_dispersion": 0.8383692702539275
+            },
+            "dependence_ratio": 0.4812784752554973,
+            "family_ratio": 0.7662668790064742
+          }
+        }
+      ],
+      "solar": {
+        "median_block_ratios": {
+          "annual_interannual_dispersion": 4.321496349827653,
+          "annual_location": 2.4240838459218192,
+          "monthly_interannual_dispersion": 2.010168924869266,
+          "monthly_location": 4.885969104829618,
+          "precipitation_temperature_association": 0.9829135884944071,
+          "wet_dry_contrast": 0.36756502284004655,
+          "within_month_daily_dispersion": 0.8383692702539275
+        },
+        "median_dependence_ratio": 0.48424639538256076,
+        "median_family_ratio": 0.7768118853758237
+      },
+      "training_wall_seconds": 1576.7944440648425
+    }
+  ],
+  "contract_sha256": "ddcbd2e2be56d44e4b8389f738dbb3badc84daaaffbfce37cf3188a72ff2d191",
+  "protected_roles_opened": [],
+  "role_inputs": [
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "33ddc3e3ee109832c7bbbb9ca52abd295dcd211e252f2c2cd8720f3fd2a44765",
+      "control_identity_sha256": "b6686908cc8fbbca7d193b1e2a68416ed6a9c3c32906389525164e0a102e2d58",
+      "evidence_sha256": "526df8da6fb299ec231ce57bf815e695fba981d80bb6d64adf39d041843cbe3a",
+      "role_id": "monthly-residual-adapter-k1",
+      "seed_sha256": {
+        "147031": "5c1ee91d64c0ff2acd741ff36965540cadab082eefdb047d19baad249f027a86",
+        "271828": "6ea886953812fed36c729e1af1e13201899a8165edf09c035eeffa1ff50d5ca1",
+        "314159": "911a931ffc40de125b4160a5610328b229518bffd0ca3df3f1da82991cba5eb8"
+      },
+      "training_sha256": "575c7f78dc0a8cacb40601b11c98b8debddcea69d1913776c38aa0255c84979f"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "b6ec0fd3d51a0383065e8a7ebe04b1601140096d17819b2a51051926c080bd2f",
+      "control_identity_sha256": "9f4793ccc3a6099016f6788533533ef2f1e55e07e0142632c6db558c8cfb848d",
+      "evidence_sha256": "d949c0b83d370f7acf6f01a956b4156ca1a84af4b48c92ad3d0b41590e1fe918",
+      "role_id": "monthly-residual-adapter-k2",
+      "seed_sha256": {
+        "147031": "f21c43332f8bf4ca5234307c14817bf7b08dac6bb5c733de457502735678bdde",
+        "271828": "50709c4800e5bb4111a7c52202dc4091b04fc33db716bd3a457d914edad2aaa4",
+        "314159": "7febde8ae2ccfb98777f2d86e9646a35fa541294d692bed8469cc3c26137b17c"
+      },
+      "training_sha256": "36ac0b99ac26dd07c9fd6796edb0ce558ce2a7f75c1fc11c06c3ae1b56c192b5"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "ce9226e9671886766f519a1273e5bfc0a05fa8e8405a4a27a82b5da86cc3e61a",
+      "control_identity_sha256": "b6686908cc8fbbca7d193b1e2a68416ed6a9c3c32906389525164e0a102e2d58",
+      "evidence_sha256": "8780c3994b11f16786fd5a17867352531f02a0145a7b0f0dbbeb2e1e81c48263",
+      "role_id": "annual-monthly-residual-adapter-k1",
+      "seed_sha256": {
+        "147031": "d018ff9ee06373f5871645dc01b67da6ec257319b059bb8f40730373fbd24ffa",
+        "271828": "1b73c1caeeac75eee5b08998c56e7a281a4d2cad172e86b64ffab8cbb082815c",
+        "314159": "88a38e918be0666651f1fcd9c824dcb686c9ce03a573ebe340cae7d6e363545f"
+      },
+      "training_sha256": "981a3844de9c8f6ac73e51d8a13ff23898c2697b0254692c1d75246b97d155fd"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "db58650cf4e7b212147907056f7f6341e1648d9b6ea09ea4ddd13155d1f196a8",
+      "control_identity_sha256": "9f4793ccc3a6099016f6788533533ef2f1e55e07e0142632c6db558c8cfb848d",
+      "evidence_sha256": "255494eec3b2a90375422ef4205d5226b32cf9250327cec962e792e210137af5",
+      "role_id": "annual-monthly-residual-adapter-k2",
+      "seed_sha256": {
+        "147031": "27aaeadf19f5b4d9ed38bbf246ca86e7ab96f584e61eb6aa238798cdc9ce1a04",
+        "271828": "7e29bcac3450f58169aba7dc2a3635fea5735bc79555dcd881a3ed2035f41879",
+        "314159": "503e552d53ddacfdccdad5a6a97b79d6d48ba2def49a554e71093412e5701007"
+      },
+      "training_sha256": "5c26981902b413b017ded0b9d67145e4e357917077b9bb69db5d5d123b51e1c8"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "7f9762b70c3f25153fec7375ba2cd3f0cfeb12129d71511a57948587ef18279d",
+      "control_identity_sha256": "b6686908cc8fbbca7d193b1e2a68416ed6a9c3c32906389525164e0a102e2d58",
+      "evidence_sha256": "ff65b4e6c2ec8a468f1ac346f503fa2a03e41e75186def98043eb554b448857c",
+      "role_id": "hierarchical-joint-factor-adapter-k1",
+      "seed_sha256": {
+        "147031": "707e3ea38a979d7e78c7c771865f79485a7e99ee582aed3fc7d42ff7f4e6d696",
+        "271828": "42436b0645479ed9513b716017600b0ee6e13b0d742f8bc9cde1c4a87c9f567a",
+        "314159": "a2466dda2df99eaa6d2d2510a1d4c0e7230e9440543b1b42fa4596d6498a8526"
+      },
+      "training_sha256": "380198048ade4619b14513398ff5cb58ac7926e669aa14ab87573681fae0f274"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "3e74fee2998e0c093815ad9cb873ebf063515358fe355ce604a2e0c0923117af",
+      "control_identity_sha256": "9f4793ccc3a6099016f6788533533ef2f1e55e07e0142632c6db558c8cfb848d",
+      "evidence_sha256": "a0e363cbde21d00e45d1cd52cf03c646c5210ef75fef8f417748ca56873d93a3",
+      "role_id": "hierarchical-joint-factor-adapter-k2",
+      "seed_sha256": {
+        "147031": "1afce9fa1dc918f0748fb45a16f29e5b4d2c0d421dd518d2d764889ded129fb6",
+        "271828": "2d81337ab787955dbdcc37027f2ba03a9ba6749d406ae4e338de8e6cce0c3ff4",
+        "314159": "522d22ee9560762f2e2062e1acad1e0480bb691046bfaaa48e0957955abf94f4"
+      },
+      "training_sha256": "f9cbd402ade3fc353b2122dfed8ccd19b4f4e4df059761c78f334d4e98aa3598"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "baaeaaffe29ecfa8c1c5654b89cc8a229b6288e57dca3fb7871c9e3c2a78b0b3",
+      "control_identity_sha256": "b6686908cc8fbbca7d193b1e2a68416ed6a9c3c32906389525164e0a102e2d58",
+      "evidence_sha256": "4faea9d3c366af9b875bd64d520e910132d014f8a6427652f4ebc758852804ce",
+      "role_id": "climate-normal-hierarchical-state-space-k1",
+      "seed_sha256": {
+        "147031": "da098c6102debe7aab55371720505717ded80386e585acc2f9ef095d11a03249",
+        "271828": "beb6ca1a9c2cc8cf50c302f62357f351c2cc7360f380bc07ce21ae711e6dabf7",
+        "314159": "d116356595ae5a81e3f8a0d192f85d59a1fea57ba1b28b04000adbe88f9ad60a"
+      },
+      "training_sha256": "637e4e2e17b50221bb40cf268469385802bf501dbfccdf626b75e3c6440d892a"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "b67be11dbe9d6ea94ceac76185656c5807f3294ffa7f4016cd46e3b55ab714a0",
+      "control_identity_sha256": "9f4793ccc3a6099016f6788533533ef2f1e55e07e0142632c6db558c8cfb848d",
+      "evidence_sha256": "346ecf6f0c21eb161b24550b84502b3a4e55490799e3927616a78dc1c47fb2ee",
+      "role_id": "climate-normal-hierarchical-state-space-k2",
+      "seed_sha256": {
+        "147031": "5c59555c43a4e4c09cdd58f554f0410b0bd8f2cf03e376e5cb55d20aa3a6322f",
+        "271828": "34b3cd13691047f9c6e8b59b60d190d81dbc08e1b99a1dd37755172346545092",
+        "314159": "1bc791be34e3bbd7073a4b13c09d8348bc788adbdaac896bc780a11935b6bc7c"
+      },
+      "training_sha256": "9e42942fee59032011b7480c43b43590d0a2051798a1b54cc710a9a572352dbd"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "8e7e4ea1ef6232841b3d10bd637240418ac3d034dca01214f3b35ae8ee013d3c",
+      "control_identity_sha256": "b6686908cc8fbbca7d193b1e2a68416ed6a9c3c32906389525164e0a102e2d58",
+      "evidence_sha256": "054ccba5bf208cf7e592cba0ff1f68c522be81f7162911e3a7fd3fe1133097f4",
+      "role_id": "physics-conditioned-hierarchical-adapter-k1",
+      "seed_sha256": {
+        "147031": "ae8413f3a124747bd25dbd60f6b92d73427fc2e873b4ad8e2a801d6ad20fc900",
+        "271828": "bfa2c32bd67e2aa31789be7810364e8500f7c4f54803c372e628d58c6e94590c",
+        "314159": "4daf37a9df071b9abcff13e2c016336d5b39e00e1937e6f6e2782ec62ea88c89"
+      },
+      "training_sha256": "1842820dd8bcf1dfc5ea76fbc5371968243a9dd37710298e2882e895e8d5a094"
+    },
+    {
+      "calendar_preflight_sha256": "72d7d1481c7ea1fddd12e56e3fb4e812debed283674f076c4ccd7b58a142b5aa",
+      "candidate_summary_sha256": "4c1d956288c5db4726030149965eae56559a2f4501d7fcaea97ab37ae9d481b9",
+      "control_identity_sha256": "9f4793ccc3a6099016f6788533533ef2f1e55e07e0142632c6db558c8cfb848d",
+      "evidence_sha256": "62fdc5678ad13f78a67c8d774150a3bf69bef438e8431482c4c7b2dba25bf260",
+      "role_id": "physics-conditioned-hierarchical-adapter-k2",
+      "seed_sha256": {
+        "147031": "a32f97d5bf9cb8563d075e58cea53b08f3ba96d5484b97e56030bc92f66071e4",
+        "271828": "f60312c65f1ed7de54513bcc1939d91b22f8fb91bd973201419459671ddce0fc",
+        "314159": "f5aab56733e52f1ec420fd7f723078e45c190906cb6fb95d34d7b70bb6be2c5a"
+      },
+      "training_sha256": "08839cce568db2fd9e252a829c4f1a5053de938c945124fc233b70243cdba6bf"
+    }
+  ],
+  "schema_version": 1
+}

@@ -436,8 +436,8 @@ adapter, compared directly with frozen P1. Solar radiation and broader
 latitude/day-of-year/precipitation coupling remain closed pending a passing
 core adapter.
 
-**Parallel architecture portfolio operational remedy in execution
-(2026-07-19):** the operator replaced the serial one-candidate cadence with
+**Parallel architecture portfolio complete (2026-07-19):** the operator
+replaced the serial one-candidate cadence with
 [A10M5R10](work-packages/20260719-a10m5r10-parallel-architecture-portfolio/package.md),
 a prospectively frozen comparison of five stochastic architecture families at
 matched P1/P2 capacities and three seeds. Its
@@ -514,6 +514,21 @@ weakening deterministic execution or changing the portfolio:
 Its exact seven-variable reconstruction, prohibited-variable clearing,
 parent-process execution proof, per-assignment mutation guards, and unchanged
 science/resource freeze passed independent review before authority creation.
+The fresh run then completed all six controls and all ten candidate roles in
+five ordered two-role waves. All 30 seed rows passed their execution gates and
+the frozen selector issued `A10M5R10-PORTFOLIO-READY`. Four configurations were
+eligible and nondominated; the retained set is annual/monthly residual K1,
+monthly residual K2, and annual/monthly residual K2. Hierarchical joint-factor
+K2 was eligible but lost the frozen equivalence/parsimony tie-break. Both
+climate-normal state-space capacities failed combined-dispersion and daily-NLL
+guards. Both physics-conditioned capacities failed the per-block solar guard
+and core combined-dispersion gate despite improved solar dependence
+aggregates. The run settled at 396 GPU-minutes, authenticated all 153
+allowlisted evidence files, released recovery, removed the exact remote root,
+and closed normally. Confirmation remained sealed. The next defensible science
+stage is a separately authorized prospective temporal-generalization
+comparison of the three retained configurations; this package does not
+authorize that new claim or its resources.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

@@ -1,6 +1,6 @@
 # A10M5R10R1R4 — Science Environment Closure Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -126,6 +126,31 @@ substitutions, or prior-result splicing.
 Coverage/CRAP is not triggered because this package changes no production
 function under `crates/`.
 
+## Result
+
+The full matrix completed and the frozen selector issued
+`A10M5R10-PORTFOLIO-READY`. All six controls were reconstructed exactly; all
+ten family/capacity roles and 30 seed rows passed their execution and evidence
+gates. Four configurations were eligible and nondominated. The selector
+retained `annual_monthly_residual_adapter-k1`,
+`monthly_residual_adapter-k2`, and
+`annual_monthly_residual_adapter-k2` in its predeclared three-axis order.
+
+The result supports the centered residual-adapter mechanism, with explicit
+annual/monthly structure useful at both capacities. Hierarchical joint-factor
+K2 was also eligible and nondominated but lost an equivalence-band parsimony
+tie-break; it was not scientifically rejected. Climate-normal state space
+failed combined-dispersion and daily-NLL guards. The physics-conditioned arm
+improved solar dependence aggregates but failed core dispersion and per-block
+solar non-degradation, so broader physics coupling is not retained in this
+form.
+
+The selector replay was byte-identical. The toolkit authenticated all 153
+allowlisted evidence files, settled 396 actual GPU-minutes, released the unused
+recovery reserve, verified job-local absence, removed the exact durable root,
+and closed normally. Confirmation remained sealed. Independent execution
+review accepted the final record with no findings.
+
 ## Exit criteria
 
 Scientific terminals remain exactly those frozen by A10M5R10:
@@ -152,6 +177,16 @@ evidence, resource, or cleanup hold. An operational failure records an exact
   interpreter, execution-policy, and normalized-delta verifier;
 - `artifacts/scaffold-review.md` — independent review scope and final `ACCEPT`
   disposition;
+- `artifacts/portfolio-summary.json`, `portfolio-pareto.json`,
+  `portfolio-decision.json`, and `portfolio-selection-evidence.json` — complete
+  frozen selector inputs and outputs;
+- `artifacts/operational-summary.json`, `execution-disposition.md`,
+  `resource-ledger.md`, and `toolkit-records.md` — reconciled execution,
+  science, accounting, and closure records;
+- `artifacts/toolkit-recovered/` — sanitized collection, cleanup, and terminal
+  receipts;
+- `artifacts/verify_result.py`, `gate-results.md`, and `review.md` — result
+  verification and independent final disposition;
 - `artifacts/test_admission_checker.py` and
   `artifacts/test_operational_identity.py` — retained and corrective regression
   tests; and

@@ -85,13 +85,13 @@ inefficient multi-rank synchronization.
 - [x] (2026-07-19) Scaffolded and independently accepted A10M5R10R1R4 with
   exact seven-variable parent science-environment reconstruction in both
   wrappers, hostile inherited-variable clearing, and mutation guards.
-- [ ] Publish and execute the fresh A10M5R10R1R4 science-environment remedy,
-  then dispatch, authenticate, observe, and collect its ten candidate roles
-  under machine-enforced wave admission.
-- [ ] Aggregate all thirty candidate seed rows, replay eligibility/Pareto
-  retention, and publish the terminal.
-- [ ] Reconcile accounting, exact cleanup, reserve, authority close, package
-  records, review, and repository gates.
+- [x] (2026-07-19) Published and executed the fresh A10M5R10R1R4
+  science-environment remedy, then dispatched, authenticated, observed, and
+  collected its ten candidate roles under machine-enforced wave admission.
+- [x] (2026-07-19) Aggregated all thirty candidate seed rows, replayed
+  eligibility/Pareto retention, and published the terminal.
+- [x] (2026-07-19) Reconciled accounting, exact cleanup, reserve, authority
+  close, package records, review, and repository gates.
 
 ## Surprises & Discoveries
 
@@ -202,12 +202,21 @@ corpus-root nesting defect before any control was materialized. Its failed gate,
 whole-matrix stop, sparse collection, cleanup, reserve release, and closure all
 passed. R1R3 corrected that root and reached the first P1 control training
 batch output head, where it spent five GPU-minutes exposing a child-only CuBLAS
-environment export. Its terminal closure also passed. The active successor is
-A10M5R10R1R4, restoring the frozen science environment in both parent launchers
-without weakening deterministic execution. This section
-must be updated after that execution with all ten family/capacity
-results, retained identities, resource use, operational reconciliation, and
-the realized wall-time effect of bounded concurrency.
+environment export. Its terminal closure also passed. R1R4 restored the frozen
+science environment in both parent launchers without weakening deterministic
+execution and completed all six controls and 30 candidate seed rows. Four
+configurations were eligible and nondominated; the frozen selector retained
+annual/monthly residual K1, monthly residual K2, and annual/monthly residual K2
+and issued `A10M5R10-PORTFOLIO-READY`. Hierarchical joint-factor K2 remained
+eligible but lost a predeclared equivalence/parsimony tie-break. State-space
+failed combined dispersion and daily proper NLL; the physics-conditioned
+family failed core dispersion and per-block solar non-degradation. The five
+two-job waves settled at 396 actual GPU-minutes, below the 935-minute ceiling
+while preserving useful concurrency. Collection, reserve release, exact
+cleanup, closure, and independent review all passed. The campaign's downstream
+interface is now the three retained development configurations; temporal,
+spatial, confirmation, public-profile, and production work each require a new
+authority.
 
 ## Context and Orientation
 
@@ -460,3 +469,8 @@ The package reconstructs and asserts the complete frozen seven-variable
 science environment in both parent launchers before any parent Python process;
 science, corpus, calendar, roles, waves, and the 935-minute ceiling are
 unchanged.
+
+2026-07-19: executed A10M5R10R1R4 to `A10M5R10-PORTFOLIO-READY`. The complete
+matrix retained annual/monthly residual K1, monthly residual K2, and
+annual/monthly residual K2; authenticated collection, 396-minute accounting,
+recovery release, exact cleanup, closure, and independent review passed.

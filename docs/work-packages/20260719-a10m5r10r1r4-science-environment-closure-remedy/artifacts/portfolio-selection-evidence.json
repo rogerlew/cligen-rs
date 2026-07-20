@@ -1,0 +1,32 @@
+{
+  "classification": "a10m5r10-development-only-portfolio-selection",
+  "gates": {
+    "candidate_matrix_complete": true,
+    "controls_bound": true,
+    "deterministic_selection_replayed": true,
+    "protected_roles_sealed": true,
+    "scientific_decision_published": true
+  },
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "scientific_decision": {
+    "eligible_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "annual_monthly_residual_adapter-k2",
+      "hierarchical_joint_factor_adapter-k2",
+      "monthly_residual_adapter-k2"
+    ],
+    "nondominated_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "annual_monthly_residual_adapter-k2",
+      "hierarchical_joint_factor_adapter-k2",
+      "monthly_residual_adapter-k2"
+    ],
+    "retained_configuration_ids": [
+      "annual_monthly_residual_adapter-k1",
+      "monthly_residual_adapter-k2",
+      "annual_monthly_residual_adapter-k2"
+    ],
+    "terminal": "A10M5R10-PORTFOLIO-READY"
+  }
+}
