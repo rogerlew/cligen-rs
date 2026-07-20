@@ -25,3 +25,11 @@ replay vendors the toolkit's exact integer-only RFC-8785 and strict I-JSON
 helpers so no mutable repository module executes before publication binding;
 test-only parity checks compare those local canonical bytes with the toolkit
 implementation, including Unicode key ordering and fail-closed JSON cases.
+
+The first published attempt exposed one overextension: the integer-only
+toolkit-record parser was used for authenticated science JSON containing
+legitimate floats. The correction separates record/semantic parsing from
+float-valued science parsing without relaxing byte authentication. A focused
+`1289.0` regression proves science JSON is admitted while toolkit records
+continue to reject floats. Attempt 1 stopped before selector and cleanup, as
+recorded in `execution-note.md`.

@@ -111,6 +111,43 @@ def test_toolkit_canonical_exactness() -> None:
         require_rejection(lambda value=text: REPLAY.loads_strict(value), label)
 
 
+def test_science_float_parser_is_separate_from_records() -> None:
+    science = REPLAY.loads_science_object(
+        '{"sites":[{"elevation_m":1289.0,"latitude":45.25}]}'
+    )
+    if science["sites"][0]["elevation_m"] != 1289.0:
+        raise RuntimeError("legitimate float-valued science JSON did not round-trip")
+    require_rejection(
+        lambda: REPLAY.loads_strict('{"record_sha256":"' + "a" * 64 + '","value":1289.0}'),
+        "float in authenticated integer-only record",
+    )
+    for text, label in (
+        ('{"a":1,"a":2}', "duplicate science JSON key"),
+        ('{"value":NaN}', "non-finite science JSON constant"),
+        ('[1289.0]', "non-object science JSON"),
+    ):
+        require_rejection(lambda value=text: REPLAY.loads_science_object(value), label)
+    with tempfile.TemporaryDirectory() as scratch:
+        root = Path(scratch)
+        science_path = root / "sites.json"
+        record_path = root / "receipt.json"
+        science_path.write_text(
+            '{"sites":[{"elevation_m":1289.0}]}\n', encoding="utf-8"
+        )
+        record_path.write_text(
+            '{"record_sha256":"' + "a" * 64 + '","value":1289.0}\n',
+            encoding="utf-8",
+        )
+        if REPLAY.read_science_object(science_path)["sites"][0][
+            "elevation_m"
+        ] != 1289.0:
+            raise RuntimeError("science file reader rejected legitimate float")
+        require_rejection(
+            lambda: REPLAY.read_strict_record(record_path),
+            "float in authenticated record file reader",
+        )
+
+
 def test_receipt_tamper() -> None:
     raw, receipt = fixture()
     tampered_unsigned = dict(receipt)
@@ -294,7 +331,7 @@ def test_actual_r13r1_input_pin() -> None:
     )
     if not root.exists():
         return
-    pin = REPLAY.read(Path(__file__).parent / "r13r1-input-pin.json")
+    pin = REPLAY.read_strict_object(Path(__file__).parent / "r13r1-input-pin.json")
     REPLAY.validate_input_pin(pin)
     paths = {
         "raw_semantic_plan": root / "records/plan.json",
@@ -308,12 +345,22 @@ def test_actual_r13r1_input_pin() -> None:
     }
     for key, path in paths.items():
         REPLAY.authenticate_pinned_file(path, pin[key], key)
-    plan_receipt = REPLAY.read(paths["plan_receipt"])
-    collection = REPLAY.read(paths["collection"])
-    raw_plan = REPLAY.read(paths["raw_semantic_plan"])
+    plan_receipt = REPLAY.read_strict_record(paths["plan_receipt"])
+    collection = REPLAY.read_strict_record(paths["collection"])
+    raw_plan = REPLAY.read_strict_object(paths["raw_semantic_plan"])
     semantic = REPLAY.authenticate_plan(raw_plan, plan_receipt)
     REPLAY.authenticate_collection(collection, plan_receipt)
+    manifest = REPLAY.read_strict_object(paths["asset_manifest"])
+    if manifest.get("source_commit") != REPLAY.INPUT_SOURCE_COMMIT:
+        raise RuntimeError("actual asset manifest source drift")
     REPLAY.authenticate_manifest_from_semantic(semantic, paths["asset_manifest"])
+    sites = REPLAY.read_science_object(root / "assets/sites.json")
+    if not any(
+        isinstance(value, float)
+        for site in sites.get("sites", [])
+        for value in site.values()
+    ):
+        raise RuntimeError("actual sites fixture did not exercise science floats")
     REPLAY.validate_collection_roster(
         collection, set(REPLAY.validate_allowlist(semantic["evidence_allowlist"]))
     )
@@ -339,6 +386,10 @@ def test_command_surface() -> None:
         'authenticate_manifest_from_semantic(',
         'rows = validate_collection_roster(collection, allowlist)',
         'PREDECESSOR_PIN, INPUT_PIN',
+        'collection = read_strict_record(options.collection)',
+        'plan_receipt = read_strict_record(options.plan_receipt)',
+        'sites = read_science_object(options.asset_root / "sites.json")',
+        'result = read_science_object(results[0])',
         '"remedy_source_commit": head',
     )
     if any(item not in source for item in required):
@@ -350,6 +401,7 @@ def test_command_surface() -> None:
 if __name__ == "__main__":
     test_semantic_identity_and_allowlist_tamper()
     test_toolkit_canonical_exactness()
+    test_science_float_parser_is_separate_from_records()
     test_receipt_tamper()
     test_published_binding_tamper()
     test_pinned_files_and_manifest_binding()

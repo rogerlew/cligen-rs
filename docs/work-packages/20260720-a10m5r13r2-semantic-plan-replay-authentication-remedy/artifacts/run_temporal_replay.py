@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import shutil
 import subprocess
 import tarfile
@@ -96,6 +97,45 @@ def loads_strict(text: str) -> object:
     return result
 
 
+def validate_science_json_value(value: object, path: str = "$") -> None:
+    if isinstance(value, float):
+        if not math.isfinite(value):
+            raise RuntimeError(f"non-finite science JSON number at {path}")
+        return
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            validate_science_json_value(item, f"{path}[{index}]")
+        return
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise RuntimeError(f"non-string science JSON key at {path}")
+            validate_json_value(key, f"{path}.<key>")
+            validate_science_json_value(item, f"{path}.{key}")
+        return
+    validate_json_value(value, path)
+
+
+def loads_science_object(text: str) -> dict:
+    def reject_constant(value: str) -> None:
+        raise RuntimeError(f"science JSON constant prohibited: {value}")
+
+    try:
+        value = json.loads(
+            text,
+            object_pairs_hook=_unique_object,
+            parse_constant=reject_constant,
+        )
+    except RuntimeError:
+        raise
+    except (UnicodeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"invalid science JSON: {error}") from error
+    if not isinstance(value, dict):
+        raise RuntimeError("science JSON object required")
+    validate_science_json_value(value)
+    return value
+
+
 def _utf16_key(value: str) -> bytes:
     return value.encode("utf-16-be", "surrogatepass")
 
@@ -138,11 +178,22 @@ def digest(path: Path) -> str:
     return value.hexdigest()
 
 
-def read(path: Path) -> dict:
+def read_strict_object(path: Path) -> dict:
     value = loads_strict(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise RuntimeError(f"JSON object required: {path}")
     return value
+
+
+def read_strict_record(path: Path) -> dict:
+    value = read_strict_object(path)
+    if not isinstance(value.get("record_sha256"), str):
+        raise RuntimeError(f"authenticated JSON record required: {path}")
+    return value
+
+
+def read_science_object(path: Path) -> dict:
+    return loads_science_object(path.read_text(encoding="utf-8"))
 
 
 def file_identity(path: Path) -> dict:
@@ -431,12 +482,12 @@ def main() -> None:
     if options.output_root.exists():
         raise RuntimeError("fresh replay output required")
 
-    collection = read(options.collection)
-    plan_receipt = read(options.plan_receipt)
-    raw_plan = read(options.semantic_plan)
-    predecessor = read(PREDECESSOR_PIN)
-    input_pin = read(INPUT_PIN)
-    manifest = read(options.asset_root / "asset-manifest.json")
+    collection = read_strict_record(options.collection)
+    plan_receipt = read_strict_record(options.plan_receipt)
+    raw_plan = read_strict_object(options.semantic_plan)
+    predecessor = read_strict_object(PREDECESSOR_PIN)
+    input_pin = read_strict_object(INPUT_PIN)
+    manifest = read_strict_object(options.asset_root / "asset-manifest.json")
     repo = REPO_ROOT
     head = subprocess.run(
         ("git", "rev-parse", "HEAD"),
@@ -542,7 +593,7 @@ def main() -> None:
 
     options.output_root.mkdir(mode=0o700)
     observations = options.output_root / "observations"
-    sites = read(options.asset_root / "sites.json")["sites"]
+    sites = read_science_object(options.asset_root / "sites.json")["sites"]
     extract_observations(options.corpus, observations, sites)
     results = []
     try:
@@ -580,7 +631,7 @@ def main() -> None:
             results.append(result)
         if results[0].read_bytes() != results[1].read_bytes():
             raise RuntimeError("isolated selector passes differ")
-        result = read(results[0])
+        result = read_science_object(results[0])
         if (
             result.get("terminal") not in TERMINALS
             or result.get("protected_roles_opened") != []

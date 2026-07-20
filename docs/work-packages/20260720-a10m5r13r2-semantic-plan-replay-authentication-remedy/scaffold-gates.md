@@ -18,5 +18,7 @@ integer/surrogate rejection, exact semantic reconstruction, optional
 both unsigned and resigned receipt tampering, all four committed input-file
 pins, semantic asset-manifest binding, input-commit ancestry, working-byte
 publication drift, local/upstream head drift, and the complete collection
-present/absent/identity partition. They create no authority, remote state,
-scheduler query, or allocation.
+present/absent/identity partition. A focused file-reader regression admits the
+authenticated `1289.0` science value while proving the record reader still
+rejects the same float. The tests create no authority, remote state, scheduler
+query, or allocation.

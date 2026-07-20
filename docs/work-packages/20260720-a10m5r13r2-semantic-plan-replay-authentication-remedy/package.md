@@ -69,3 +69,11 @@ Run the authenticated two-pass replay against the uncleaned R13R1 collection.
 If both selector outputs are byte-identical and all inherited scientific and
 firewall checks pass, preserve its unchanged R13 terminal and emit a signed
 R13R2 replay identity. Cleanup remains downstream of that receipt.
+
+## Execution status
+
+Published attempt 1 at `72b6513f46f1f06292c7672b90593679d5f8cbae`
+failed before selector execution because the integer-only record parser was
+also applied to legitimate float-valued science JSON. No cleanup occurred.
+The failure and bounded parser correction are recorded in
+[`execution-note.md`](execution-note.md).
