@@ -1,17 +1,23 @@
-# A10M5R12 — Continuous Latent Temporal Process Comparison
+# A10M5R12R1 — Admission Materialization Remedy
 
-Status: `EXECUTED-HOLD-ADMISSION-MATERIALIZATION`
+Status: `SCAFFOLDED`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
 
 ## Objective
 
-Determine whether explicit continuously evolving stochastic state can close
-the broad A10M5R11 realized temporal gap, and whether a distinct slow
-multi-year process is necessary beyond a medium-timescale process.
+Execute the unchanged A10M5R12 continuous-process comparison after repairing
+the missing controller-side pre-submission admission materialization step.
 
 ## Scope
+
+The architecture, objective, data, candidate matrix, seeds, calendar,
+temporal protocol, resource ceiling, and firewalls are identical to A10M5R12.
+The only substantive change is a source-authenticated controller materializer
+that snapshots the exact private toolkit state and authenticated job receipts,
+runs the staged admission checker, fetches and validates its PASS receipt, and
+must complete before every toolkit `submit` call.
 
 The matched candidates are `continuous_medium_latent_process-k2` and
 `continuous_hierarchical_latent_process-k2`. Both use the frozen P2 daily
@@ -35,23 +41,31 @@ before promotion.
 
 ## Authority
 
-This is a research extension governed by
+This is an operational remedy under
 `SPEC-A10-CONTINUOUS-LATENT-TEMPORAL`. The operator's 2026-07-19 instruction
-authorizes the development package. The source scaffold is published before
-fresh package-scoped authority is created. The 395 GPU-minute ceiling covers
-one 30-minute control job, two 180-minute candidates, and five minutes of
-exact-node cleanup recovery.
+authorizes the ongoing development campaign. The failed A10M5R12 evidence is
+bound before fresh package-scoped authority is created from the published
+remedy scaffold. The 395 GPU-minute ceiling is fresh and covers one 30-minute
+control job, two 180-minute candidates, and five minutes of exact-node cleanup
+recovery; the predecessor's charged minute is not reused or hidden.
 
 ## Plan
 
-1. Freeze architecture, state-clock, data, objective, temporal, resource, and
-   firewall contracts.
-2. Publish and review the scaffold; create fresh authority from that commit.
-3. Materialize exact controls, then train both candidates concurrently with
+1. Freeze the exact A10M5R12 science and bind its operational hold.
+2. Publish and review the remedy; create fresh authority from that commit.
+3. Before each submit, materialize and authenticate an admission receipt from
+   the current toolkit state/publication snapshot. Invoke the published
+   materializer for control and submit control immediately; after its passing
+   observation, repeat for the medium candidate. Wait for the medium role's
+   authenticated `ready-for-science` setup, bind that exact remote receipt via
+   `--setup` while materializing the hierarchical role, then submit it. The
+   toolkit re-authenticates each receipt against current state under its run
+   lock before resource reservation.
+4. Materialize exact controls, then train both candidates concurrently with
    one serialized environment bootstrap at admission.
-4. Collect 288 candidate streams, generate comparators locally, and replay
+5. Collect 288 candidate streams, generate comparators locally, and replay
    the source/receipt-bound leap-safe selector twice in isolated roots.
-5. Close resources, review science, and reconcile roadmap/catalog/ExecPlan.
+6. Close resources, review science, and reconcile roadmap/catalog/ExecPlan.
 
 The inherited conditional-member daily NLL is diagnostic only (weight zero)
 for both candidates. It is not a marginal mixture likelihood and would
@@ -80,6 +94,8 @@ materializer expectation.
 
 - exact predecessor, corpus, control, source, staged asset, comparator binary,
   and per-site comparator provenance identities;
+- a fresh authenticated admission receipt before every toolkit submission,
+  including same-wave setup readiness before the second candidate;
 - continuous-core recurrence self-test and no calendar-boundary state reset;
 - two candidates by three seeds by six sites by eight 100-year members;
 - retained raw float32 daily streams and fitted adapter checkpoints with exact
@@ -101,12 +117,3 @@ candidates continue. An empty set yields
 `HOLD-A10M5R12-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`. Any identity, execution,
 evidence, replay, resource, or cleanup failure receives an exact
 `HOLD-A10M5R12-*` terminal without scientific interpretation.
-
-## Result
-
-Execution closed as `HOLD-A10M5R12-ADMISSION-NOT-MATERIALIZED`. The control
-job failed before environment bootstrap because its required pre-submission
-admission receipt was absent. No candidate was submitted and no scientific
-inference was made. The toolkit charged one GPU-minute, collected the failure
-evidence, verified job-local and remote cleanup, stopped both downstream roles,
-and closed the run. A10M5R12R1 is the bounded operational remedy.

@@ -767,6 +767,18 @@ Python/framework import.
 
 ### 17.3 Job-local admission, supervision, and recovery
 
+A provider-v2 plan MAY declare an `admission_materialization` contract for
+package-specific pre-submission checks. The contract binds a frozen executable
+asset, an allowlisted controller receipt directory, the authenticated record
+type, and the exact required role matrix. For every covered role, `submit`
+MUST, while holding the existing run lock and before reserving resources,
+authenticate the role receipt and require its package, authority, run, source,
+plan, role, attempt, PASS gates, and private toolkit-state SHA-256 to match the
+then-current state. A missing or stale receipt fails before ledger reservation
+or scheduler submission. A package materializer may execute outside the lock,
+but it cannot authorize a later state because `submit` performs this
+current-state check atomically with the transition.
+
 New v2 storage providers use `toolkit_recoverable`; `scheduler_purged` is
 historical-only and cannot authorize a hardened plan. Primary admission
 reserves both primary charge and a frozen recovery contingency. Recovery

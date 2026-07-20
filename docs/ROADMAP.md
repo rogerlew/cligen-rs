@@ -548,12 +548,16 @@ best bootstrap upper-90 median ratio was 2.507 against 1.25, and the best
 maximum point ratio was 3.591 against 1.50. All candidate-site ratios exceeded
 1.50, while non-gating pairwise differences among adapters stayed below 0.6%.
 This closes the residual-adapter portfolio without a temporal candidate and
-keeps confirmation sealed. Active
+keeps confirmation sealed.
 [A10M5R12](work-packages/20260719-a10m5r12-continuous-latent-temporal-process/package.md)
-compares a continuous medium-timescale latent process against the same process
-plus a slow component. Both evolve daily through month/year boundaries;
-calendar periods are aggregation bins only. Solar remains deferred until that
-core passes, after which its design remains a procedural latitude/day-of-year
+closed before science because the controller did not materialize its required
+admission receipt before submitting the control. Active
+[A10M5R12R1](work-packages/20260719-a10m5r12r1-admission-materialization-remedy/package.md)
+repairs that operational sequence and leaves the matched continuous medium
+versus medium-plus-slow comparison unchanged. Both evolve daily through
+month/year boundaries; calendar periods are aggregation bins only. Solar
+remains deferred until that core passes, after which its design remains a
+procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.
 

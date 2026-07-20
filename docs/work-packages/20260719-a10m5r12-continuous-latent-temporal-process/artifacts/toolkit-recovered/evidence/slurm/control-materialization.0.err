@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<REMOTE_RUN_ROOT>/setup_diagnostics.py", line 323, in <module>
+    main()
+  File "<REMOTE_RUN_ROOT>/setup_diagnostics.py", line 319, in main
+    (append_log if options.command == "log" else record)(options)
+  File "<REMOTE_RUN_ROOT>/setup_diagnostics.py", line 134, in record
+    admission = json.loads(options.admission_receipt.read_text(encoding="utf-8"))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/a10m5r12-control-materialization-1016048/runtime/cpython/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/a10m5r12-control-materialization-1016048/runtime/cpython/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<REMOTE_RUN_ROOT>/admissions/control-materialization.json'

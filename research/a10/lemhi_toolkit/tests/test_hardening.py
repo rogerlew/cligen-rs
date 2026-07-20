@@ -430,6 +430,71 @@ class StorageTransferAndSupervisorTests(HardeningFixture):
 
 
 class V2IntegrationTests(HardeningFixture):
+    def test_submit_authenticates_current_state_admission_under_run_lock(self) -> None:
+        authority, state_root = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        script.chmod(0o700)
+        receipt_root = self.root / "assets/admissions"
+        receipt_root.mkdir()
+        toolkit = Toolkit(
+            state_root,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-admission"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        plan = self.plan(authority, script)
+        plan["assets"][0]["executable"] = True
+        plan["admission_materialization"] = {
+            "asset": "job.sh",
+            "receipt_directory": str(receipt_root),
+            "record_type": "test-submission-admission",
+            "required_before_each_submit": True,
+            "required_roles": ["smoke"],
+            "snapshot": "exact private toolkit state plus authenticated job receipts",
+            "toolkit_submit_invokes_package_checker": False,
+        }
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+
+        def publish_receipt() -> None:
+            state = read_json(toolkit.private_path)
+            semantic = {
+                "attempt_index": 0,
+                "authority_id": authority["authority_id"],
+                "decision": "PASS",
+                "gates": {"fixture_admission": True},
+                "input_identities": {
+                    "toolkit_state_sha256": sha256_file(toolkit.private_path)
+                },
+                "package_id": authority["package_id"],
+                "plan_id": state["current_plan_id"],
+                "record_type": "test-submission-admission",
+                "role": "smoke",
+                "run_id": "v2-run",
+                "schema_version": "lemhi-toolkit-record-2",
+                "source_commit": authority["source_commit"],
+                "valid": True,
+            }
+            semantic["record_sha256"] = sha256_bytes(canonical_bytes(semantic))
+            atomic_write(receipt_root / "smoke.json", semantic, private=True)
+
+        publish_receipt()
+        changed = read_json(toolkit.private_path)
+        changed["injected_state_transition"] = True
+        atomic_write(toolkit.private_path, changed, private=True)
+        with self.assertRaisesRegex(ToolkitError, "stale or invalid"):
+            toolkit.submit("smoke", 0)
+        publish_receipt()
+        self.assertEqual(toolkit.submit("smoke", 0), "1000")
+        recorded = read_json(toolkit.private_path)["attempts"]["smoke.0"]
+        self.assertEqual(
+            recorded["submission_admission_record_sha256"],
+            read_json(receipt_root / "smoke.json")["record_sha256"],
+        )
+
     def test_typed_gres_parser_and_plan_counts_fail_closed(self) -> None:
         self.assertEqual(parse_typed_gres("gpu:l40:4", "job gres"), ("gpu", "l40", 4))
         for value in ("gpu:4", "gpu:l40:0", "gpu:l40:-1", "gpu::2", 2):

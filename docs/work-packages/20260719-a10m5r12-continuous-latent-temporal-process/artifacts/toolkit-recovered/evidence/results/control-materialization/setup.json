@@ -1,0 +1,1 @@
+{"authentication":{},"cleanup":{"pip_cache_deleted_before_science":false,"wheelhouse_deleted_before_science":false},"containment":{},"execution_identity":{},"exit_codes":{"host_python_version":125,"pip_check":125,"pip_install":125,"runtime_version":125},"identities":{},"job_local_storage":{},"ready_for_science":false,"schema_version":1,"stage":"setup-not-started","valid":false}

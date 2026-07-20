@@ -634,6 +634,132 @@ class Toolkit:
         ]
         return semantic
 
+    def _validate_admission_materialization(
+        self, plan_input: dict[str, Any], roles: set[str]
+    ) -> None:
+        contract = plan_input.get("admission_materialization")
+        if contract is None:
+            return
+        require(
+            self.provider_api_version == 2 and isinstance(contract, dict),
+            "PLAN_DRIFT",
+            "submission admission requires provider revision 2",
+        )
+        require(
+            set(contract)
+            == {
+                "asset",
+                "receipt_directory",
+                "record_type",
+                "required_before_each_submit",
+                "required_roles",
+                "snapshot",
+                "toolkit_submit_invokes_package_checker",
+            },
+            "PLAN_DRIFT",
+            "submission admission contract shape",
+        )
+        require(
+            contract.get("required_before_each_submit") is True
+            and contract.get("toolkit_submit_invokes_package_checker") is False,
+            "PLAN_DRIFT",
+            "submission admission invocation semantics",
+        )
+        require(
+            contract.get("snapshot")
+            == "exact private toolkit state plus authenticated job receipts",
+            "PLAN_DRIFT",
+            "submission admission snapshot",
+        )
+        validate_relative_path(contract.get("asset"), "submission admission asset")
+        require(
+            contract["asset"]
+            in {
+                item.get("logical_name")
+                for item in plan_input.get("assets", [])
+                if isinstance(item, dict) and item.get("executable") is True
+            },
+            "PLAN_DRIFT",
+            "submission admission materializer is not a frozen executable asset",
+        )
+        validate_id(contract.get("record_type"), "submission admission record type")
+        required_roles = contract.get("required_roles")
+        require(
+            isinstance(required_roles, list)
+            and len(required_roles) == len(set(required_roles))
+            and set(required_roles) == roles,
+            "PLAN_DRIFT",
+            "submission admission role matrix",
+        )
+        receipt_directory = contract.get("receipt_directory")
+        require(
+            isinstance(receipt_directory, str)
+            and Path(receipt_directory).is_absolute(),
+            "ALLOWLIST_VIOLATION",
+            "submission admission receipt directory",
+        )
+        receipt_root = Path(receipt_directory)
+        try:
+            resolved = receipt_root.resolve(strict=True)
+        except OSError as error:
+            raise ToolkitError(
+                "ALLOWLIST_VIOLATION",
+                f"submission admission receipt directory: {error}",
+            ) from error
+        require(
+            resolved.is_dir()
+            and not receipt_root.is_symlink()
+            and any(
+                _is_relative_to(resolved, root.resolve())
+                for root in self.allowed_roots
+            ),
+            "ALLOWLIST_VIOLATION",
+            "submission admission receipt directory",
+        )
+
+    def _submission_admission_hash(
+        self,
+        plan: dict[str, Any],
+        state: dict[str, Any],
+        job_role: str,
+        attempt_index: int,
+    ) -> str | None:
+        contract = plan.get("admission_materialization")
+        if contract is None:
+            return None
+        require(
+            isinstance(contract, dict)
+            and job_role in contract.get("required_roles", []),
+            "PLAN_DRIFT",
+            "submission admission role",
+        )
+        receipt_path = Path(contract["receipt_directory"]) / f"{job_role}.json"
+        validated_path = validate_allowed_file(receipt_path, self.allowed_roots)
+        receipt = read_record(validated_path)
+        gates = receipt.get("gates")
+        require(
+            receipt.get("record_type") == contract.get("record_type")
+            and receipt.get("authority_id") == self.authority_id
+            and receipt.get("package_id") == self.package_id
+            and receipt.get("run_id") == self.run_id
+            and receipt.get("source_commit") == self.source_commit
+            and receipt.get("plan_id") == state.get("current_plan_id")
+            and receipt.get("role") == job_role
+            and receipt.get("attempt_index") == attempt_index
+            and receipt.get("decision") == "PASS"
+            and receipt.get("valid") is True
+            and isinstance(gates, dict)
+            and bool(gates)
+            and all(value is True for value in gates.values())
+            and receipt.get("input_identities", {}).get(
+                "toolkit_state_sha256"
+            )
+            == sha256_file(self.private_path),
+            "PLAN_DRIFT",
+            "submission admission receipt is stale or invalid",
+        )
+        return receipt["record_sha256"]
+
     @staticmethod
     def _accelerator_contract(providers: list[dict[str, Any]]) -> tuple[str, int]:
         accelerator = next(
@@ -818,6 +944,7 @@ class Toolkit:
                 tuple(additional_slurm_streams),
                 additional_gate_receipts,
             )
+            self._validate_admission_materialization(plan_input, roles)
             semantic = self._semantic_plan(plan_input, providers)
             plan_id = sha256_bytes(canonical_bytes(semantic))
             revision = {"revision": 0, "plan_id": plan_id, "semantic": semantic}
@@ -1091,6 +1218,9 @@ class Toolkit:
                     else:
                         retry_class = "gate-failed"
                     require(retry_class in job.get("retry_on", []), "PLAN_DRIFT", f"retry class not authorized: {retry_class}")
+                admission_sha256 = self._submission_admission_hash(
+                    plan, state, job_role, attempt_index
+                )
                 requested = job["gpus"] * job["time_limit_minutes"]
                 ledger = self._load_ledger()
                 recovery_requested = 0
@@ -1136,6 +1266,8 @@ class Toolkit:
                 self._save_ledger(ledger)
                 prior = state["run_state"]
                 attempts[key] = {"job_role": job_role, "attempt_index": attempt_index, "state": "REGISTERED", "token": token, "plan_id": state["current_plan_id"]}
+                if admission_sha256 is not None:
+                    attempts[key]["submission_admission_record_sha256"] = admission_sha256
                 self._event(state, "UNREGISTERED", "REGISTERED", scope="attempt", plan_id=state["current_plan_id"], job_role=job_role, attempt_index=attempt_index)
                 attempts[key]["state"] = "RESERVED"
                 self._event(state, "REGISTERED", "RESERVED", scope="attempt", plan_id=state["current_plan_id"], job_role=job_role, attempt_index=attempt_index)

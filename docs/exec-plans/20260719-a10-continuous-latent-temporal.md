@@ -11,7 +11,9 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-19: audited the empty retained-adapter temporal result and prior
   month/year-stepped state-space implementations.
 - [x] 2026-07-19: froze medium-only and medium-plus-slow daily OU candidates.
-- [ ] Publish and independently validate the execution scaffold.
+- [x] 2026-07-19: published and independently validated A10M5R12.
+- [x] 2026-07-19: closed its pre-science admission-materialization hold and
+  scaffolded the bounded A10M5R12R1 remedy.
 - [ ] Execute control and two candidate roles on typed L40 GPUs.
 - [ ] Collect, score, replay, clean, review, and reconcile the package.
 
@@ -21,6 +23,13 @@ The earlier A10 state-space and residual families advanced latent state on
 calendar-month and calendar-year cells. Monthly/yearly losses therefore did
 not distinguish a useful aggregation scale from a potentially artificial
 state clock. A10M5R12 removes that confounding mechanism.
+
+A10M5R12 staged and required a pre-submission admission checker, but the
+controller sequence omitted the step that materialized its receipt before
+toolkit `submit`. The control failed closed before bootstrap, charged one GPU
+minute, cleaned successfully, and produced no science. A10M5R12R1 adds a
+source-authenticated state/publication snapshot and receipt materializer while
+holding the science matrix exact.
 
 ## Decision Log
 
@@ -42,6 +51,9 @@ state clock. A10M5R12 removes that confounding mechanism.
 - 2026-07-19: preserve inherited eligibility but add non-gating actual-series
   annual-family member bootstraps and learned-time-scale reporting because the
   inherited iid observation-year bootstrap destroys annual lag ordering.
+- 2026-07-19: require an authenticated package admission receipt before each
+  toolkit submit; the toolkit submit command does not implicitly invoke staged
+  package-specific admission code.
 
 ## Outcomes & Retrospective
 
@@ -69,7 +81,19 @@ replay, annual-family diagnostics, and source/receipt-bound two-pass execution.
 1. Run freeze, syntax, contract, calendar, and repository gates.
 2. Commit and push the scaffold to `main`.
 3. Prepare immutable runtime/corpus/source assets and create authority/plan.
-4. Stage and verify; submit control, then the two candidates concurrently.
+4. Stage and verify. For each role, invoke the published
+   `materialize_admission.py` with the exact private `state.json`, publication
+   directory, source commit, role, and the plan-fixed
+   `controller-admissions/<role>.json` output; then immediately call toolkit
+   `submit` for that role. Submit and observe the passing control first.
+   Materialize and submit the medium candidate next. Wait for its authenticated
+   `ready-for-science` setup receipt, pass that exact remote receipt through
+   `--setup continuous-medium-latent-process-k2=<remote setup.json>` while
+   materializing the hierarchical admission, and submit the hierarchical
+   candidate. Toolkit `submit` authenticates the current-state receipt under
+   the run lock before reserving resources, so a missing or stale receipt
+   fails closed. This admits the two science jobs concurrently while retaining
+   one serialized environment bootstrap.
 5. Observe terminal receipts, collect allowlisted evidence, and settle usage.
 6. Replay retained raw streams, then run two isolated source/receipt-bound
    comparator/bootstrap passes and require byte identity.
