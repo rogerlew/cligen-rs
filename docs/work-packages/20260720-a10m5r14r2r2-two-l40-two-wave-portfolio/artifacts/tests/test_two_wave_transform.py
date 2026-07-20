@@ -80,7 +80,7 @@ class TwoWaveTransformTests(unittest.TestCase):
 
             def result(arguments, **_options):
                 if arguments[0] == "sinfo":
-                    return SimpleNamespace(stdout="node03|mixed|gpu:l40:4\n")
+                    return SimpleNamespace(stdout="node03|mixed|gpu:l40:4\nnode03|mixed|gpu:l40:4\n")
                 return SimpleNamespace(stdout="101|RUNNING|other|gres/gpu:1|node03\n")
 
             output = Path(raw) / "occupancy.json"
@@ -88,6 +88,7 @@ class TwoWaveTransformTests(unittest.TestCase):
                 receipt = checker.capture_occupancy(output)
             self.assertTrue(receipt["valid"])
             self.assertEqual(receipt["active_gpu_count"], 1)
+            self.assertEqual(receipt["sinfo"], ["node03|mixed|gpu:l40:4"])
             self.assertTrue(checker.authenticated(receipt))
 
             def crowded(arguments, **_options):

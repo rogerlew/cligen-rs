@@ -56,3 +56,14 @@ The package may select a candidate only if control, both waves, all four child
 records, collection, cleanup, and two independent replay passes authenticate
 and agree. Otherwise it closes with an honest HOLD or FAIL disposition while
 preserving all retained evidence.
+
+## Run r0 operational hold
+
+Run `r0` completed control job `1017887` in 1,303 seconds with exit zero,
+all gates true, cleanup true, and 22 charged GPU-minutes. Portfolio admission
+then failed before submission because `sinfo --Node` returned the same node row
+once per partition. The availability facts themselves passed: four-L40
+inventory, one active GPU, and at least two idle GPUs. Fresh run `r1`
+deduplicates identical `sinfo` rows before enforcing exact-node identity;
+conflicting rows still fail closed. No r0 portfolio admission or reservation
+was retained.

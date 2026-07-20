@@ -17,7 +17,7 @@ SOURCE = PACKAGE.parent / PARENT_PACKAGE / "artifacts/jobs/build_control_records
 HOLD = PACKAGE.parent / PARENT_PACKAGE / "artifacts/execution-hold.json"
 HOLD_SHA256 = "b62a7e1ec7908653f8dd038ca34e9bd43520165fbc7b383d7fc18b7a730e174d"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r0"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r1"
 RECORD_TYPE = "a10m5r14r2r2-submission-admission"
 PORTFOLIO_ROLE = "continuous-distribution-head-factorial-portfolio"
 

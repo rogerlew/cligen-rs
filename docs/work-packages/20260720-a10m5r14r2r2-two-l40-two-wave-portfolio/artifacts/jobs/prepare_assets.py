@@ -15,7 +15,7 @@ PARENT_COMMIT = "6463ab2bebcf016c371afc56e31ffc7156a2fb95"
 PARENT_PACKAGE_ID = "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy"
 PARENT_RUN_ID = "a10m5r14r2r1-inherited-admission-checker-identity-remedy-r0"
 PACKAGE_ID = "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio"
-RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r0"
+RUN_ID = "a10m5r14r2r2-two-l40-two-wave-portfolio-r1"
 PARENT_RECORD = "a10m5r14r2r1-submission-admission"
 RECORD = "a10m5r14r2r2-submission-admission"
 TOOLKIT_COMMIT = "06df84c882fbe297e93b13fb8c845d5eb500b405"
@@ -72,6 +72,12 @@ def load_parent(repo: Path):
 def transform_admission(path: Path) -> None:
     text = path.read_text()
     text = replace_once(text, "import os\n", "import os\nimport re\n", "admission import")
+    text = replace_once(
+        text,
+        '    sinfo = subprocess.run(("sinfo", "--Node", "--noheader", "--nodes=node03", "--format=%N|%T|%G"), check=True, capture_output=True, text=True, timeout=10).stdout.strip().splitlines()\n',
+        '    sinfo = sorted(set(subprocess.run(("sinfo", "--Node", "--noheader", "--nodes=node03", "--format=%N|%T|%G"), check=True, capture_output=True, text=True, timeout=10).stdout.strip().splitlines()))\n',
+        "deduplicate identical sinfo rows",
+    )
     old = '''    gates = {
         "all_partition_active_allocation_absent": active == [],
         "capture_bounded_seconds": (finished - started).total_seconds() <= 15,
