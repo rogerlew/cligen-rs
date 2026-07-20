@@ -19,6 +19,7 @@
     "root_cause": "launcher transform retained len(set(tokens)) == 4 while the two-L40 contract requires 2"
   },
   "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "plan_id": "543b72d83cc0134c0f385ad662afc90d447a1495e159a90088beeb13e4ad3a5e",
   "portfolio": {
     "elapsed_seconds": 80,
     "exit_code": 1,

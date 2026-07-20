@@ -35,7 +35,9 @@ Independent review recomputed the retained record hashes, confirmed control
 job `1017918` passed in 1,300 seconds and portfolio job `1018091` failed in 80
 seconds with zero children, and confirmed the 25 GPU-minute total. The `r2`
 correction changes only the remaining stale uniqueness predicate and fresh run
-identities. Fresh generation retains 51 assets, sealed protected roles, and no
+identities. The fresh authority binds the authenticated `r1` failure artifact
+as its immediate operational predecessor. Fresh generation retains 51 assets,
+sealed protected roles, and no
 `r0` or `r1` executable identity. The strengthened focused test fails against
 the `r1` transform and passes against `r2`. Four focused tests, 86 toolkit
 tests, generated Python and shell validation, repository formatting, clippy,

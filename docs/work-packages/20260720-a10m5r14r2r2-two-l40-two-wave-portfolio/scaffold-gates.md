@@ -36,7 +36,9 @@ exactly two distinct-token checks both in `allocation_ok` and in the named
 wave-binding gate while retaining four children in waves `[0,0,1,1]`.
 
 Fresh 51-asset generation contains only `r2` run-bound executable identities
-and keeps protected roles sealed. The strengthened regression test fails
+and keeps protected roles sealed. Its authority and plan bind the exact `r1`
+failure artifact as immediate operational predecessor evidence. The
+strengthened regression test fails
 against the `r1` transform. Four focused package tests, 86 toolkit tests,
 generated Python compilation and shell syntax, `cargo fmt --check`, clippy with
 warnings denied, the full Rust suite, and `git diff --check` pass.
