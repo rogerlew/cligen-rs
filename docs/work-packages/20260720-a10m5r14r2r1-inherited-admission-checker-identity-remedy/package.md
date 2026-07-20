@@ -1,6 +1,6 @@
 # A10M5R14R2R1 — Inherited Admission-Checker Identity Remedy
 
-Status: `DEFERRED-PENDING-TOOLKIT-HARDENING`
+Status: `AUTHORIZED-PENDING-EXECUTABLE-SCAFFOLD`
 Date: 2026-07-20
 Evidence mode: Operational successor; unchanged R14R2 science and resources
 Starting branch and push target: current `main`, push `main`
@@ -18,10 +18,11 @@ the inherited self-check failed closed before the control submission.
 The initial one-off compatibility approach has been deferred. It would derive
 a fresh inherited checker by changing two hard-coded self-identity lookups,
 but would leave the toolkit unable to express or authenticate composed checker
-identities generally. A10M5O1R3 now owns the additive toolkit contract. This
-package retains only the R14R2 closeout evidence and intended successor scope;
-it has no executable prepare/build/materialize implementation until the
-toolkit hardening is ratified.
+identities generally. A10M5O1R3 ratified the additive toolkit contract at
+commit `06df84c882fbe297e93b13fb8c845d5eb500b405`. This package retains the
+R14R2 closeout evidence and intended successor scope; its executable
+prepare/build/materialize implementation is the next campaign step and has not
+yet been published.
 
 The later implementation must consume the chain, not merely declare it. The
 outer wrapper must authenticate itself as chain slot 0 and its delegate as

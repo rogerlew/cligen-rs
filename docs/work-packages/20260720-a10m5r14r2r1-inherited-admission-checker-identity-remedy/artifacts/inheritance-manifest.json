@@ -3,7 +3,9 @@
     "path": "research/a10/lemhi_toolkit/profiles/lemhi-v2-xlarge-evidence.json",
     "sha256": "ebf36a6cda19491a00bf6f56ec64cec30ca28f60eaa2b07fa5bd92dd8c668629"
   },
-  "operational_change": "exactly two inherited-checker self-identity logical-key substitutions",
+  "executable_scaffold_published": false,
+  "future_scaffold_requirement": "publish and test a closed operational asset-change allowlist before authority creation",
+  "operational_change": "consume the ratified ordered outer-and-inherited checker identity contract without aliasing or removing either self-identity gate",
   "package_id": "20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy",
   "parent_abort_sha256": "7f3c7c6a9e73cb3114310cf7ecf1bcaf5ba82bc9f8cef61710f7598693d33e24",
   "parent_asset_manifest_sha256": "574af046f382ea992925cb68b162af553e0b712530b8f4a5894bb47a85bef21a",
@@ -14,8 +16,13 @@
   "r14r1_checker_source": {
     "commit": "bbb3075109ce06dabda13d43862cd94d375225bd",
     "path": "docs/work-packages/20260720-a10m5r14r1-admission-role-matrix-remedy/artifacts/jobs/admission_checker.py",
-    "substitution_count": 2
+    "required_logical_identity": "remote-root-relative Path(__file__) must equal checker_assets slot 1"
   },
   "resource_ceiling_gpu_minutes": 995,
-  "schema_version": 1
+  "schema_version": 2,
+  "toolkit_prerequisite": {
+    "commit": "06df84c882fbe297e93b13fb8c845d5eb500b405",
+    "package_id": "20260720-a10m5o1r3-composed-admission-identity-hardening",
+    "terminal": "A10M5O1R3-COMPOSED-ADMISSION-IDENTITY-READY"
+  }
 }

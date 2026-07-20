@@ -1,8 +1,8 @@
-# Deferred execution plan
+# Authorized execution plan
 
-Execution is paused until A10M5O1R3 ratifies composed admission-checker
-identities. The steps below describe the later science successor and are not
-an executable scaffold today.
+A10M5O1R3 ratified composed admission-checker identities at toolkit commit
+`06df84c882fbe297e93b13fb8c845d5eb500b405`. The steps below describe the
+authorized science successor but are not an executable scaffold today.
 
 1. Authenticate the exact R14R2 abort receipt, zero-attempt state, published
    source commit, and prepared asset manifest.
