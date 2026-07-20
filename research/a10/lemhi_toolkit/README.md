@@ -174,6 +174,10 @@ closure, a frozen recovery contingency, typed raw-evidence projection, integer
 transfer telemetry, and append-only content-addressed manifests. Useful
 operator-facing commands are:
 
+Packages that intentionally retain large binary streams use the separately
+versioned `lemhi-v2-large-evidence.json` profile. It changes only evidence
+collection ceilings and does not alter the designated canonical profile.
+
 Evidence projection revision 4 accepts finite scientific JSON numbers while
 continuing to reject duplicate keys, NaN/Infinity, forbidden values, and
 invalid UTF-8. Raw reserved-looking tokens are escaped and counted before

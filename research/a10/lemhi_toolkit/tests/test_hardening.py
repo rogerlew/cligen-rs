@@ -35,6 +35,7 @@ from research.a10.lemhi_toolkit.hardening import (
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
 PROFILE_V2 = REPOSITORY_ROOT / "research/a10/lemhi_toolkit/profiles/lemhi-v2.json"
+PROFILE_LARGE_EVIDENCE = REPOSITORY_ROOT / "research/a10/lemhi_toolkit/profiles/lemhi-v2-large-evidence.json"
 PROVIDERS_V2 = [
     "research/a10/lemhi_toolkit/providers/transport-scp-v2.json",
     "research/a10/lemhi_toolkit/providers/scheduler-slurm-v2.json",
@@ -430,6 +431,72 @@ class StorageTransferAndSupervisorTests(HardeningFixture):
 
 
 class V2IntegrationTests(HardeningFixture):
+    def test_runtime_profile_must_match_frozen_state_and_plan(self) -> None:
+        authority, state_root = self.authority()
+        profile = read_json(PROFILE_V2)
+        toolkit = Toolkit(
+            state_root,
+            authority,
+            profile,
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-profile"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        toolkit.doctor()
+        changed = dict(profile)
+        changed["max_evidence_expanded_bytes"] += 1
+        drifted = Toolkit(
+            state_root,
+            authority,
+            changed,
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-profile-drift"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        with self.assertRaisesRegex(ToolkitError, "runtime authority/profile"):
+            drifted.probe()
+
+    def test_plan_evidence_volume_is_explicit_and_profile_bounded(self) -> None:
+        authority, state_root = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        script.chmod(0o700)
+        toolkit = Toolkit(
+            state_root,
+            authority,
+            read_json(PROFILE_LARGE_EVIDENCE),
+            "v2-run",
+            FixtureAdapter(self.root / "fixture-volume"),
+            clock=lambda: "2026-07-19T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        plan = self.plan(authority, script)
+        plan["evidence_volume"] = {
+            "maximum_expanded_bytes": 100_000_000,
+            "maximum_file_bytes": 50_000_000,
+            "maximum_files": len(plan["evidence_allowlist"]),
+        }
+        toolkit.doctor()
+        toolkit.probe()
+        self.assertRegex(toolkit.plan(plan), r"[0-9a-f]{64}")
+
+        bad = dict(plan)
+        bad["evidence_volume"] = dict(plan["evidence_volume"])
+        bad["evidence_volume"]["maximum_file_bytes"] = 64_000_001
+        with self.assertRaisesRegex(ToolkitError, "exceeds cluster profile"):
+            toolkit._validate_evidence_volume(
+                bad, set(bad["evidence_allowlist"])
+            )
+        boolean = dict(plan)
+        boolean["evidence_volume"] = dict(plan["evidence_volume"])
+        boolean["evidence_volume"]["maximum_files"] = True
+        with self.assertRaisesRegex(ToolkitError, "exceeds cluster profile"):
+            toolkit._validate_evidence_volume(
+                boolean, set(boolean["evidence_allowlist"])
+            )
+
     def test_submit_authenticates_current_state_admission_under_run_lock(self) -> None:
         authority, state_root = self.authority()
         script = self.root / "assets/job.sh"

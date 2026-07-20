@@ -1,6 +1,6 @@
 # A10M5R12R1 — Admission Materialization Remedy
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-COLLECTION-CAPACITY`
 Date: 2026-07-19
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`

@@ -14,8 +14,11 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-19: published and independently validated A10M5R12.
 - [x] 2026-07-19: closed its pre-science admission-materialization hold and
   scaffolded the bounded A10M5R12R1 remedy.
-- [ ] Execute control and two candidate roles on typed L40 GPUs.
-- [ ] Collect, score, replay, clean, review, and reconcile the package.
+- [x] 2026-07-20: executed the control and both candidate roles concurrently
+  on typed L40 GPUs; all passed in 99 rounded GPU-minutes.
+- [x] 2026-07-20: preserved the collection-capacity hold and scaffolded the
+  zero-allocation A10M5R12R2 evidence reconciliation.
+- [ ] Recover, score, replay, clean, review, and reconcile the package.
 
 ## Surprises & Discoveries
 
@@ -30,6 +33,15 @@ toolkit `submit`. The control failed closed before bootstrap, charged one GPU
 minute, cleaned successfully, and produced no science. A10M5R12R1 adds a
 source-authenticated state/publication snapshot and receipt materializer while
 holding the science matrix exact.
+
+A10M5R12R1 completed all science and retained exact daily stream archives, but
+the two ~45.7 MB `.npz` members independently exceeded the generic 10 MB
+per-file ceiling and together exceeded the 50 MB expanded-archive ceiling.
+The downloaded archive is otherwise exactly safe: 51/51 allowlisted regular
+root-owned members, 96,443,290 expanded bytes, no unsafe path/type/set-id, and
+all observed gate hashes exact. A10M5R12R2 applies an established
+zero-allocation reconciliation rather than drifting the parent profile or
+rerunning GPU work.
 
 ## Decision Log
 
@@ -54,6 +66,9 @@ holding the science matrix exact.
 - 2026-07-19: require an authenticated package admission receipt before each
   toolkit submit; the toolkit submit command does not implicitly invoke staged
   package-specific admission code.
+- 2026-07-20: preserve A10M5R12R1 as toolkit-unclosed at
+  `ARCHIVE_UNSAFE`; recover under a separately reviewed, exact-archive-bound
+  zero-allocation successor and change no science or selector field.
 
 ## Outcomes & Retrospective
 

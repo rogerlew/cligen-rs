@@ -446,6 +446,30 @@ class SerializationAndFirewall(ToolkitFixture):
         with self.assertRaisesRegex(ToolkitError, "ARCHIVE_UNSAFE"):
             validate_archive(safe, max_files=10, max_bytes=100, allowed_members={"evidence.json"})
 
+    def test_archive_firewall_applies_aggregate_and_member_byte_ceilings_pre_extract(self) -> None:
+        archive = self.root / "volume.tar"
+        with tarfile.open(archive, "w") as stream:
+            for name in ("one.bin", "two.bin"):
+                item = tarfile.TarInfo(name)
+                item.size = 6
+                item.uid = item.gid = 0
+                item.mode = 0o600
+                stream.addfile(item, io.BytesIO(b"123456"))
+        with self.assertRaisesRegex(ToolkitError, "member byte ceiling"):
+            validate_archive(
+                archive,
+                max_files=2,
+                max_bytes=12,
+                max_file_bytes=5,
+            )
+        with self.assertRaisesRegex(ToolkitError, "expansion ceiling"):
+            validate_archive(
+                archive,
+                max_files=2,
+                max_bytes=11,
+                max_file_bytes=6,
+            )
+
 
 class RecordingRunner:
     def __init__(self, root: Path):

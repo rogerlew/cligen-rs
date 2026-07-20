@@ -1,0 +1,136 @@
+{
+  "caps": {
+    "archive_bytes": 96491520,
+    "archive_members": 51,
+    "expanded_bytes": 96443290,
+    "max_archive_bytes": 100000000,
+    "max_expanded_bytes": 100000000,
+    "max_member_bytes": 50000000
+  },
+  "cleanup": {
+    "script_path": "/Users/roger/src/cligen-rs/research/a10/lemhi_toolkit/remote/clean.sh",
+    "script_repository_path": "research/a10/lemhi_toolkit/remote/clean.sh",
+    "script_sha256": "3d06f34f23e46ff7ca89948216cfccf53fe1a3d5a7ef1229541f579f22edf77f"
+  },
+  "expected_attempts": {
+    "continuous-hierarchical-latent-process-k2.0": {
+      "actual_gpu_minutes": 49,
+      "gate_receipt": "results/continuous-hierarchical-latent-process-k2/evidence.json",
+      "job_id": "1016104"
+    },
+    "continuous-medium-latent-process-k2.0": {
+      "actual_gpu_minutes": 34,
+      "gate_receipt": "results/continuous-medium-latent-process-k2/evidence.json",
+      "job_id": "1016103"
+    },
+    "control-materialization.0": {
+      "actual_gpu_minutes": 16,
+      "gate_receipt": "results/control-materialization/evidence.json",
+      "job_id": "1016088"
+    }
+  },
+  "job_receipts": {
+    "continuous-hierarchical-latent-process-k2.0": {
+      "bytes": 1648,
+      "sha256": "57a29a132524070a6d292b56c22fef65175399cf4fa1f3c5f8941c8222214490"
+    },
+    "continuous-medium-latent-process-k2.0": {
+      "bytes": 1642,
+      "sha256": "ab79212ed41f9c4731b349a9c00f16fb953dd2c20ad9ee35530300a13c068446"
+    },
+    "control-materialization.0": {
+      "bytes": 1424,
+      "sha256": "5f0f506a467c622bf23f1f744a0ccec8a9bd1ff349666e4bf0f966df7e9605ff"
+    }
+  },
+  "parent": {
+    "archive_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/toolkit-state/runs/a10m5r12r1-admission-materialization-remedy-r0/private/quarantine/evidence.tar",
+    "archive_sha256": "4c5d2ebcdbf96fa8fe75ab971a163d2a3155c4fbb7ca6fb7e852278eafbf4abf",
+    "authority_bytes": 4656,
+    "authority_id": "a10m5r12r1-admission-materialization-remedy-authority",
+    "authority_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/records/authority.json",
+    "authority_sha256": "17ccd2e0917cae5f34b201c85c4fd0dc6686f1a95e7f66b2016cadf9e5b35ded",
+    "authority_canonical_sha256": "d200dcd1dabbb06e1bfd4360d57a9d3dc6d2edf96c70b7e757a57e4977639d50",
+    "cluster_profile_sha256": "d124cebc18e1035ec81991d5fc8f5b59736729ad32c57c1900ec770149656ba6",
+    "ledger_bytes": 6256,
+    "ledger_head_sha256": "deecb7ba9e15f6a6ba8f6094c58ca7adbd9cedd5f2a9fce1e4682b1411b73845",
+    "ledger_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/toolkit-state/authorities/a10m5r12r1-admission-materialization-remedy-budget/ledger.json",
+    "ledger_sha256": "179f43a56a75d5eb49aad055a2498b9a4e4e424bacaa168891a891e64db621a8",
+    "reserved_recovery_gpu_minutes": 5,
+    "reserved_recovery_token": "71bf3c16881fbad1770d01ea3edc5a35",
+    "package_id": "20260719-a10m5r12r1-admission-materialization-remedy",
+    "plan_id": "39a7f91c1da86964210027a10487aae150de82c9f377a634b7917d9485d1d8a7",
+    "plan_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/records/plan.json",
+    "plan_sha256": "00de794d920cbb543bd7f9bd1b607c389daf8443ad62dbb247976e686b62923f",
+    "publication_dir": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/toolkit-state/runs/a10m5r12r1-admission-materialization-remedy-r0/publication",
+    "remote_archive_path": "/ceph/home/rogerlew.ui/.cligen-rs-a10/runs/a10m5r12r1-admission-materialization-remedy-r0/evidence.tar",
+    "remote_base": "/ceph/home/rogerlew.ui/.cligen-rs-a10",
+    "remote_marker_path": "/ceph/home/rogerlew.ui/.cligen-rs-a10/runs/a10m5r12r1-admission-materialization-remedy-r0/.lemhi-toolkit-owner.json",
+    "remote_marker_sha256": "28b9254445a3f9350b6f87b922bb0ab4e9c8018801d3025e74826392aa55d017",
+    "remote_run_root": "runs/a10m5r12r1-admission-materialization-remedy-r0",
+    "resource_ceiling_gpu_minutes": 395,
+    "run_lock_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/toolkit-state/runs/a10m5r12r1-admission-materialization-remedy-r0/.run.lock",
+    "run_id": "a10m5r12r1-admission-materialization-remedy-r0",
+    "source_commit": "87d38996e1f46ddb47b80c16c9625c16beaede9b",
+    "state_path": "/Users/roger/.cache/cligen-rs/a10m5r12r1-admission-materialization-remedy/toolkit-state/runs/a10m5r12r1-admission-materialization-remedy-r0/private/state.json",
+    "state_sha256": "be4a20d39dc7280e091311698b6e014612753816dc661325ebe0787379d09af6"
+  },
+  "published_source": {
+    "branch": "refs/heads/main",
+    "remote": "origin",
+    "repository_root": "/Users/roger/src/cligen-rs"
+  },
+  "projection": {
+    "forbidden_publication_substrings": [
+      "rogerlew.ui",
+      "/Users/roger",
+      "/ceph/home/"
+    ]
+  },
+  "recovery": {
+    "output_root": "/Users/roger/.cache/cligen-rs/a10m5r12r2-collection-ceiling-reconciliation/private",
+    "package_id": "20260720-a10m5r12r2-collection-ceiling-reconciliation",
+    "replay_receipt": "/Users/roger/.cache/cligen-rs/a10m5r12r2-collection-ceiling-reconciliation/private/replay/replay-identity.json",
+    "sanitizer_version": "lemhi-evidence-projection-5"
+  },
+  "replay_contract": {
+    "binary": {
+      "bytes": 57004072,
+      "sha256": "615aba134dcb8878046640d9672d42f470982afd26df7e1b5f0ee4c2a1835e79"
+    },
+    "corpus": {
+      "bytes": 224040960,
+      "sha256": "8770e127f8413eedd47d50670c359e450988444a8c4d8d43ca5645619a1b0a17"
+    },
+    "observations": [
+      {"bytes": 3584145, "name": "daymet-008.tar.gz", "sha256": "425126384c646ae051384087ed81066e42d3795fc5f0c829066b5f2c1f3e312b"},
+      {"bytes": 3716537, "name": "daymet-018.tar.gz", "sha256": "aed55dbf7d94e0a3d704b75192d046041e64eb43047c44cc5e1201ad26a23960"},
+      {"bytes": 3463864, "name": "daymet-028.tar.gz", "sha256": "109d56fcf4b2c637efb1510cb56c619234c964a6972dfabad1447d646685e1b3"},
+      {"bytes": 3632742, "name": "daymet-038.tar.gz", "sha256": "595a7564fe08ea34324ff0ea7f20c98a6b00816d85b1f588a35451a3d9683bd2"},
+      {"bytes": 3517885, "name": "daymet-048.tar.gz", "sha256": "a73e4cc31acb0bd13998115d0e12fe7fa106c57e21e7e0a4ce7e6b135d064467"},
+      {"bytes": 3615813, "name": "daymet-058.tar.gz", "sha256": "e05304a0e3c234369eaa5537a7e72dd5a09347ae0a1cc6540e10e05fac825444"}
+    ],
+    "predecessor": {
+      "commit": "b3d4e81e5305d584dfe6609f418bc976e64165e0",
+      "sha256": "656f23ce7b8ec64a96aa7eff98a162f12c57c8d51497fd4285d5eb7594d68a41"
+    },
+    "record_type": "a10m5r12r2_replay_identity",
+    "runner": {
+      "bytes": 13964,
+      "path": "/Users/roger/src/cligen-rs/docs/work-packages/20260720-a10m5r12r2-collection-ceiling-reconciliation/artifacts/run_recovered_replay.py",
+      "repository_path": "docs/work-packages/20260720-a10m5r12r2-collection-ceiling-reconciliation/artifacts/run_recovered_replay.py",
+      "sha256": "cb0028fee139d3ed158645828d118b8f186eef419f696da7b3f7e5337f09c11e"
+    },
+    "schema_version": "a10m5r12r2-replay-identity-1",
+    "terminals": [
+      "A10M5R12-TEMPORAL-READY",
+      "HOLD-A10M5R12-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+    ]
+  },
+  "schema_version": "a10m5r12r2-frozen-parent-identities-1",
+  "ssh": {
+    "executable": "/usr/bin/ssh",
+    "target": "lemhi"
+  },
+  "total_actual_gpu_minutes": 99
+}

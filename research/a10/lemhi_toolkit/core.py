@@ -260,6 +260,7 @@ def validate_archive(
     *,
     max_files: int,
     max_bytes: int,
+    max_file_bytes: int | None = None,
     allowed_members: set[str] | None = None,
 ) -> list[tarfile.TarInfo]:
     """Inspect an archive without extracting or observing member content."""
@@ -285,6 +286,12 @@ def validate_archive(
             require(member.uid == 0 and member.gid == 0, "ARCHIVE_UNSAFE", "unexpected ownership")
             require(member.mode & 0o6000 == 0, "ARCHIVE_UNSAFE", "setid member")
             if member.isfile():
+                if max_file_bytes is not None:
+                    require(
+                        member.size <= max_file_bytes,
+                        "ARCHIVE_UNSAFE",
+                        "archive member byte ceiling",
+                    )
                 total += member.size
                 require(total <= max_bytes, "ARCHIVE_UNSAFE", "archive expansion ceiling")
         return members
@@ -296,11 +303,18 @@ def extract_validated_archive(
     *,
     max_files: int,
     max_bytes: int,
+    max_file_bytes: int | None = None,
     allowed_members: set[str] | None = None,
 ) -> list[str]:
     """Extract only members already accepted by :func:`validate_archive`."""
 
-    members = validate_archive(path, max_files=max_files, max_bytes=max_bytes, allowed_members=allowed_members)
+    members = validate_archive(
+        path,
+        max_files=max_files,
+        max_bytes=max_bytes,
+        max_file_bytes=max_file_bytes,
+        allowed_members=allowed_members,
+    )
     destination.mkdir(parents=True, exist_ok=False, mode=0o700)
     with tarfile.open(path, mode="r:*") as archive:
         for member in members:
@@ -487,7 +501,29 @@ class Toolkit:
 
     def _load_state(self) -> dict[str, Any]:
         require(self.private_path.exists(), "AUTHORITY_INVALID", "run is not initialized")
-        return read_json(self.private_path)
+        state = read_json(self.private_path)
+        require(
+            state.get("authority_sha256") == self.authority_sha256
+            and state.get("cluster_profile_sha256") == self.profile_sha256,
+            "PLAN_DRIFT",
+            "runtime authority/profile differs from frozen run identity",
+        )
+        current = state.get("current_plan_id")
+        if current is not None:
+            matches = [
+                revision.get("semantic")
+                for revision in state.get("plan_revisions", [])
+                if isinstance(revision, dict) and revision.get("plan_id") == current
+            ]
+            require(
+                len(matches) == 1
+                and isinstance(matches[0], dict)
+                and matches[0].get("cluster_profile_sha256")
+                == self.profile_sha256,
+                "PLAN_DRIFT",
+                "current plan/profile identity differs from runtime profile",
+            )
+        return state
 
     def _save_state(self, state: dict[str, Any]) -> None:
         atomic_write(self.private_path, state, private=True)
@@ -645,6 +681,7 @@ class Toolkit:
             "PLAN_DRIFT",
             "submission admission requires provider revision 2",
         )
+
         require(
             set(contract)
             == {
@@ -715,6 +752,47 @@ class Toolkit:
             ),
             "ALLOWLIST_VIOLATION",
             "submission admission receipt directory",
+        )
+
+    def _validate_evidence_volume(
+        self, plan_input: dict[str, Any], allowlist: set[str]
+    ) -> None:
+        contract = plan_input.get("evidence_volume")
+        if contract is None:
+            return
+        require(
+            isinstance(contract, dict)
+            and set(contract)
+            == {
+                "maximum_expanded_bytes",
+                "maximum_file_bytes",
+                "maximum_files",
+            },
+            "PLAN_DRIFT",
+            "evidence volume contract shape",
+        )
+        limits = {
+            "maximum_expanded_bytes": self.profile.get(
+                "max_evidence_expanded_bytes", 50_000_000
+            ),
+            "maximum_file_bytes": self.profile.get(
+                "max_evidence_file_bytes", 10_000_000
+            ),
+            "maximum_files": self.profile.get("max_evidence_files", 1000),
+        }
+        require(
+            all(
+                type(contract.get(name)) is int
+                and 0 < contract[name] <= limit
+                for name, limit in limits.items()
+            ),
+            "PLAN_DRIFT",
+            "evidence volume exceeds cluster profile",
+        )
+        require(
+            len(allowlist) <= contract["maximum_files"],
+            "PLAN_DRIFT",
+            "evidence allowlist exceeds declared file ceiling",
         )
 
     def _submission_admission_hash(
@@ -945,6 +1023,7 @@ class Toolkit:
                 additional_gate_receipts,
             )
             self._validate_admission_materialization(plan_input, roles)
+            self._validate_evidence_volume(plan_input, set(validated_evidence))
             semantic = self._semantic_plan(plan_input, providers)
             plan_id = sha256_bytes(canonical_bytes(semantic))
             revision = {"revision": 0, "plan_id": plan_id, "semantic": semantic}
@@ -1022,6 +1101,9 @@ class Toolkit:
                 maximum_gpus,
                 additional_slurm_streams,
                 additional_gate_receipts,
+            )
+            self._validate_evidence_volume(
+                replacement, set(prior["evidence_allowlist"])
             )
             attempts = state.get("attempts", {})
             started_roles = {item["job_role"] for item in attempts.values() if item.get("state") != "REGISTERED"}
@@ -1793,6 +1875,7 @@ class Toolkit:
                 )
             if isinstance(logical_name, str) and logical_name.endswith(".tar"):
                 archive_path = quarantine / validate_relative_path(logical_name, "evidence archive")
+                evidence_volume = plan.get("evidence_volume", {})
                 present = result.get("present")
                 absent = result.get("absent")
                 require(
@@ -1813,8 +1896,20 @@ class Toolkit:
                 extracted_members = extract_validated_archive(
                     archive_path,
                     quarantine / "extracted",
-                    max_files=self.profile.get("max_evidence_files", 1000),
-                    max_bytes=self.profile.get("max_evidence_expanded_bytes", 50_000_000),
+                    max_files=evidence_volume.get(
+                        "maximum_files",
+                        self.profile.get("max_evidence_files", 1000),
+                    ),
+                    max_bytes=evidence_volume.get(
+                        "maximum_expanded_bytes",
+                        self.profile.get(
+                            "max_evidence_expanded_bytes", 50_000_000
+                        ),
+                    ),
+                    max_file_bytes=evidence_volume.get(
+                        "maximum_file_bytes",
+                        self.profile.get("max_evidence_file_bytes", 10_000_000),
+                    ),
                     allowed_members=allowed_evidence,
                 )
                 require(
@@ -1926,7 +2021,16 @@ class Toolkit:
                 else:
                     logical = str(path.relative_to(quarantine))
                 require(logical in allowed_evidence, "ALLOWLIST_VIOLATION", f"unregistered evidence: {logical}")
-                require(path.stat().st_size <= self.profile.get("max_evidence_file_bytes", 10_000_000), "EVIDENCE_INCOMPLETE", str(path))
+                evidence_volume = plan.get("evidence_volume", {})
+                require(
+                    path.stat().st_size
+                    <= evidence_volume.get(
+                        "maximum_file_bytes",
+                        self.profile.get("max_evidence_file_bytes", 10_000_000),
+                    ),
+                    "EVIDENCE_INCOMPLETE",
+                    str(path),
+                )
                 logical_paths.append((path, logical))
             if self.provider_api_version == 2:
                 from .hardening import create_raw_collected

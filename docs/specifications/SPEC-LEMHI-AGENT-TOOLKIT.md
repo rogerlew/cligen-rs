@@ -853,6 +853,20 @@ sensitive material. Evidence producers SHOULD use non-reserved notation for
 diagnostic redactions; third-party reserved-looking placeholders are escaped,
 never interpreted as authorized redactions.
 
+The cluster profile supplies absolute evidence file-count, per-file byte, and
+expanded-archive byte ceilings. A plan MAY declare a tighter
+`evidence_volume` contract with exactly `maximum_files`,
+`maximum_file_bytes`, and `maximum_expanded_bytes`; planning and amendment
+MUST reject non-positive values, values above the frozen profile, or an
+allowlist larger than the declared file ceiling. Collection MUST apply the
+plan-specific contract when present. The Lemhi v2 profile admits at most 1,000
+files, 10,000,000 bytes per file, and 50,000,000 expanded bytes. The separately
+versioned `lemhi-v2-large-evidence.json` profile admits at most 1,000 files,
+64,000,000 bytes per file, and 128,000,000 expanded bytes without changing the
+designated canonical profile. Packages retaining binary streams or checkpoints
+MUST select the appropriate profile prospectively and estimate and declare both
+byte dimensions; an aggregate-only estimate is insufficient.
+
 ### 17.5 Transfer telemetry and immutable manifests
 
 V2 transfer receipts record integer `elapsed_ns`, bytes, method, final
@@ -869,6 +883,13 @@ parallel claims serialize or fail deterministically; referenced identities
 cannot be overwritten. Cross-run and cross-authority caching remains excluded
 until quota, ownership, concurrency, garbage collection, and licensing are
 separately designed.
+
+Every command after `doctor` MUST require the runtime authority and cluster
+profile hashes to equal both the identities frozen in private run state and,
+once planned, the current semantic plan. Passing a widened or otherwise
+different profile to retry a failed operation is `PLAN_DRIFT`; recovery needs
+an explicit reviewed mechanism and cannot exploit runtime profile
+substitution.
 
 ### 17.6 Canonical transition
 

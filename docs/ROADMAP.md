@@ -551,12 +551,19 @@ This closes the residual-adapter portfolio without a temporal candidate and
 keeps confirmation sealed.
 [A10M5R12](work-packages/20260719-a10m5r12-continuous-latent-temporal-process/package.md)
 closed before science because the controller did not materialize its required
-admission receipt before submitting the control. Active
+admission receipt before submitting the control.
 [A10M5R12R1](work-packages/20260719-a10m5r12r1-admission-materialization-remedy/package.md)
-repairs that operational sequence and leaves the matched continuous medium
-versus medium-plus-slow comparison unchanged. Both evolve daily through
-month/year boundaries; calendar periods are aggregation bins only. Solar
-remains deferred until that core passes, after which its design remains a
+repaired that operational sequence and completed the control plus both matched
+continuous candidates in 99 GPU-minutes. All jobs and retained streams passed,
+but controller collection failed closed because the two intentional ~45.7 MB
+stream archives exceeded both the frozen 10 MB per-file and 50 MB aggregate
+generic profile ceilings. The active zero-allocation
+[A10M5R12R2](work-packages/20260720-a10m5r12r2-collection-ceiling-reconciliation/package.md)
+binds and recovers the exact safe 96.4 MB archive, replays the unchanged
+selector, and performs marker-bound cleanup without rerunning science. The
+matched comparison remains unchanged: both evolve daily through month/year
+boundaries, and calendar periods are aggregation bins only. Solar remains
+deferred until that core passes, after which its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.
