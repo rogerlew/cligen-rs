@@ -1,0 +1,27 @@
+{
+  "collection_bytes": 241684480,
+  "control": {
+    "actual_gpu_minutes": 21,
+    "elapsed_seconds": 1246,
+    "job_id": "1018626",
+    "passed": true
+  },
+  "disposition": "EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE",
+  "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "portfolio": {
+    "actual_gpu_minutes": 409,
+    "elapsed_seconds": 12243,
+    "gate_receipt_sha256": "16b8ce4c062f33e066d43efdbbdcb029604d1c7f7839e628564d29171897ff8c",
+    "job_id": "1018733",
+    "passed": true
+  },
+  "replay": {
+    "byte_identical_passes": true,
+    "recovery_attestation_sha256": "07e00f5eb40fba65452fb760caf962d600fe17c9288fa3c8fb9ea4955427fb20",
+    "replay_record_sha256": "f4e404326e81fcbf6670552d221da10eca4605ce296a3898cdc08573d83c289a",
+    "terminal": "HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+  },
+  "run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r3",
+  "source_commit": "719d83451ddff698b280219708f7648ff73c8f9d",
+  "terminal_receipt": "LEMHI-TOOLKIT-RUN-CLOSED"
+}

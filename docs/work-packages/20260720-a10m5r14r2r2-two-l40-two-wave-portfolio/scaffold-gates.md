@@ -53,3 +53,16 @@ R14 public surface. A focused regression test rejects the colliding form. The
 immediate predecessor binding is the exact `r2` failure artifact.
 Fresh generation enforces the current thirteen-asset operational allowlist
 (the prior twelve plus `continuous_core.py`), and all five focused tests pass.
+
+## Run r3 execution result
+
+Control and portfolio receipts both passed. The two-L40 launcher completed
+four children in two nonoverlapping waves; collection promoted 241,684,480
+bytes and cleanup verified remote and job-local absence. The original replay
+was correctly rejected before selection because its generated source lineage
+and two-device/four-candidate operational assumptions were incomplete. The
+recovery replayer authenticates the deterministic source rebind, keeps the
+collected asset manifest available for evidence authentication, and changes
+only recovery-local operational checks plus a non-gating annual diagnostic.
+Two selector passes were byte-identical at
+`HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`; no candidate was selected.

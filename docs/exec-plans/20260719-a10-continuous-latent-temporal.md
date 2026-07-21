@@ -54,8 +54,10 @@ calendar boundaries, and isolate the value of an additional slow process.
 - [x] 2026-07-20: execute corrective R14R2R2 r2 through both wave-0 process
   launches; preserve its pre-training failure when a public export overwrote
   the compatibility wrapper's inherited-module binding.
-- [ ] 2026-07-20: execute corrective R14R2R2 r3 with private wrapper bindings
-  and otherwise identical four-candidate science.
+- [x] 2026-07-20: execute corrective R14R2R2 r3 with private wrapper bindings
+  and otherwise identical four-candidate science; control and two-L40
+  portfolio passed, while authenticated byte-identical replay closed at
+  `HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`.
 
 ## Surprises & Discoveries
 

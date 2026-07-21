@@ -1,6 +1,6 @@
 # A10M5R14R2R2 — Two-L40 Two-Wave Portfolio
 
-Status: `CORRECTIVE-R3-AUTHORIZED`
+Status: `EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`
 Date: 2026-07-20
 Evidence mode: Development architecture comparison; unchanged R14 science
 Starting branch and push target: current `main`, push `main`
@@ -100,3 +100,30 @@ Replay was inapplicable because no training record existed.
 Fresh run `r3` makes the wrapper module and accounting bindings private before
 exporting the byte-identical R14 public surface. It changes no candidate,
 objective, temporal metric, calendar, seed, training, or selector behavior.
+
+## Run r3 disposition
+
+Run `r3` completed control job `1018626` in 1,246 seconds (21 GPU-minutes)
+and two-L40 portfolio job `1018733` in 12,243 seconds (409 GPU-minutes). All
+control and portfolio operational gates passed; the portfolio receipt is
+`16b8ce4c062f33e066d43efdbbdcb029604d1c7f7839e628564d29171897ff8c`.
+Collection promoted 241,684,480 authenticated bytes, then cleanup verified
+both the remote root and job-local state absent.
+
+The inherited replay asset was an operationally rebound artifact with no
+published source path and retained two-L40 assumptions in its evidence and
+non-gating annual-diagnostic checks. `artifacts/recover_r3_replay.py`
+authenticated the exact deterministic rebind from published R14R2R1 source,
+made the two-device token/device checks explicit, and recorded all six
+non-gating annual pairwise probabilities rather than unpacking two candidates.
+It did not alter collected evidence, candidate decisions, objectives, or
+selection gates. Two independent passes were byte-identical and both returned
+`HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`; the replay record is
+`f4e404326e81fcbf6670552d221da10eca4605ce296a3898cdc08573d83c289a` and
+the recovery attestation is
+`07e00f5eb40fba65452fb760caf962d600fe17c9288fa3c8fb9ea4955427fb20`.
+
+No candidate is selectable under the frozen temporal protocol. This is a
+scientific HOLD, not an operational failure: the completed four-candidate
+portfolio and its evidence remain the basis for the next architecture
+decision, while confirmation and solar roles remain sealed.
