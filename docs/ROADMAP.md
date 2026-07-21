@@ -642,8 +642,13 @@ and received exactly two L40s, but an untransformed four-unique-token launcher
 predicate stopped before any candidate began. Run `r2` corrected that gate,
 launched both wave-0 children on separate L40s, and exposed a pre-training
 R14R2 wrapper collision: exporting the public name `inherited` overwrote the
-wrapper's own module reference. The active `r3` correction makes those wrapper
-bindings private; science remains unchanged.
+wrapper's own module reference. Run `r3` made those bindings private and
+completed both control and the two-L40 portfolio. Its authenticated,
+byte-identical two-pass replay returned
+`HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`: all four frozen candidates
+failed temporal eligibility, so none is selected. This closes R14R2R2 as a
+scientific HOLD; it does not authorize solar work or open the confirmation
+firewall.
 Solar remains deferred; after a core candidate passes, its design remains a
 procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated

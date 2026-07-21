@@ -1,0 +1,20 @@
+{
+  "base_replay_source": "docs/work-packages/20260720-a10m5r14-continuous-distribution-head-factorial/artifacts/run_temporal_replay.py",
+  "cache_replay": {
+    "bytes": 14413,
+    "sha256": "9d077328f228750877791e28aaa4f69373dfda42f9b01d384226fbb1633c1519"
+  },
+  "deterministic_parent_source": {
+    "commit": "6463ab2bebcf016c371afc56e31ffc7156a2fb95",
+    "path": "docs/work-packages/20260720-a10m5r14r2r1-inherited-admission-checker-identity-remedy/artifacts/run_temporal_replay.py"
+  },
+  "package_id": "20260720-a10m5r14r2r2-two-l40-two-wave-portfolio",
+  "record_sha256": "07e00f5eb40fba65452fb760caf962d600fe17c9288fa3c8fb9ea4955427fb20",
+  "recovery_selector": {
+    "bytes": 33810,
+    "sha256": "b9bbac6df2c3580705f7df2372f4099cbe9224e86511aa793d0ccbe50e41fefc"
+  },
+  "replay_record_sha256": "f4e404326e81fcbf6670552d221da10eca4605ce296a3898cdc08573d83c289a",
+  "run_id": "a10m5r14r2r2-two-l40-two-wave-portfolio-r3",
+  "source_commit": "719d83451ddff698b280219708f7648ff73c8f9d"
+}
