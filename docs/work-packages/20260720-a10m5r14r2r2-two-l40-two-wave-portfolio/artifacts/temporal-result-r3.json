@@ -1,0 +1,742 @@
+{
+  "annual_actual_series_member_bootstrap": {
+    "diagnostics": {
+      "annual_cross_field_dependence": {
+        "configurations": {
+          "centered_location_and_scale_ou-k2": {
+            "median_error": 1.3253005935217637,
+            "upper_90_percent_error": 1.3908964436457327
+          },
+          "centered_location_and_scale_ou_smooth_climatology-k2": {
+            "median_error": 1.3014760691737384,
+            "upper_90_percent_error": 1.3695809141342277
+          },
+          "centered_location_ou-k2": {
+            "median_error": 1.5871047298711378,
+            "upper_90_percent_error": 1.6430552053988605
+          },
+          "centered_location_ou_smooth_climatology-k2": {
+            "median_error": 1.2602042374426383,
+            "upper_90_percent_error": 1.3312803995338398
+          }
+        },
+        "pairwise_probability_lower_error": {
+          "centered_location_and_scale_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.31,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou-k2": 0.877,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.807
+        },
+        "selection_gating": false
+      },
+      "annual_dispersion": {
+        "configurations": {
+          "centered_location_and_scale_ou-k2": {
+            "median_error": 0.7120404766638364,
+            "upper_90_percent_error": 0.7512178144209444
+          },
+          "centered_location_and_scale_ou_smooth_climatology-k2": {
+            "median_error": 0.6104213559576547,
+            "upper_90_percent_error": 0.6292965265707668
+          },
+          "centered_location_ou-k2": {
+            "median_error": 0.6431072397959003,
+            "upper_90_percent_error": 0.6637138587196502
+          },
+          "centered_location_ou_smooth_climatology-k2": {
+            "median_error": 0.6016518799822965,
+            "upper_90_percent_error": 0.6194372748565581
+          }
+        },
+        "pairwise_probability_lower_error": {
+          "centered_location_and_scale_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou-k2": 0.998,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.028,
+          "centered_location_ou-k2__vs__centered_location_ou_smooth_climatology-k2": 0.011,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou-k2": 1.0,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.784
+        },
+        "selection_gating": false
+      },
+      "annual_lag": {
+        "configurations": {
+          "centered_location_and_scale_ou-k2": {
+            "median_error": 1.6751978950220692,
+            "upper_90_percent_error": 1.7448158065633248
+          },
+          "centered_location_and_scale_ou_smooth_climatology-k2": {
+            "median_error": 1.7230946339956488,
+            "upper_90_percent_error": 1.79839226647823
+          },
+          "centered_location_ou-k2": {
+            "median_error": 1.7118621986624702,
+            "upper_90_percent_error": 1.7871446744023143
+          },
+          "centered_location_ou_smooth_climatology-k2": {
+            "median_error": 1.7267747390655637,
+            "upper_90_percent_error": 1.7936616750532974
+          }
+        },
+        "pairwise_probability_lower_error": {
+          "centered_location_and_scale_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.937,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou-k2": 0.149,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.595,
+          "centered_location_ou-k2__vs__centered_location_ou_smooth_climatology-k2": 0.615,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou-k2": 0.107,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.469
+        },
+        "selection_gating": false
+      },
+      "annual_location": {
+        "configurations": {
+          "centered_location_and_scale_ou-k2": {
+            "median_error": 2.5546945305426254,
+            "upper_90_percent_error": 2.5773200054487475
+          },
+          "centered_location_and_scale_ou_smooth_climatology-k2": {
+            "median_error": 2.528069951547835,
+            "upper_90_percent_error": 2.5441892036446134
+          },
+          "centered_location_ou-k2": {
+            "median_error": 2.5989235936957664,
+            "upper_90_percent_error": 2.6223452379126755
+          },
+          "centered_location_ou_smooth_climatology-k2": {
+            "median_error": 2.5474161865043214,
+            "upper_90_percent_error": 2.5637405386604244
+          }
+        },
+        "pairwise_probability_lower_error": {
+          "centered_location_and_scale_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou-k2__vs__centered_location_ou_smooth_climatology-k2": 0.0,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou-k2": 0.752,
+          "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": 0.011
+        },
+        "selection_gating": false
+      }
+    },
+    "observation_basis": "fixed actual 1980-2009 series; annual lag order preserved",
+    "replicates": 1000,
+    "seed": 410543,
+    "selection_gating": false
+  },
+  "bootstrap": {
+    "replicates": 1000,
+    "seed": 410542
+  },
+  "candidate_decisions": {
+    "centered_location_and_scale_ou-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.3636846190702756,
+      "maximum_regime_ratio": 3.780532063280972,
+      "temporally_eligible": false
+    },
+    "centered_location_and_scale_ou_smooth_climatology-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.1615628087289007,
+      "maximum_regime_ratio": 3.517339755268833,
+      "temporally_eligible": false
+    },
+    "centered_location_ou-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.3616272513847045,
+      "maximum_regime_ratio": 3.691198968109291,
+      "temporally_eligible": false
+    },
+    "centered_location_ou_smooth_climatology-k2": {
+      "bootstrap_median_regime_ratio_upper_90_percent": 2.1726199897460226,
+      "maximum_regime_ratio": 3.517346915010429,
+      "temporally_eligible": false
+    }
+  },
+  "eligible_configurations": [],
+  "learned_time_scales_days": {
+    "centered_location_and_scale_ou-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          36.31180191040039,
+          56.103973388671875,
+          69.41131591796875,
+          89.2144775390625,
+          105.37445831298828,
+          121.53085327148438,
+          138.46514892578125,
+          155.607177734375
+        ],
+        "slow_time_scale_days": [
+          380.86053466796875,
+          670.7850341796875,
+          973.91845703125,
+          1274.6292724609375
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          36.316917419433594,
+          51.791934967041016,
+          70.44280242919922,
+          87.30125427246094,
+          104.88710021972656,
+          122.6255111694336,
+          138.2124786376953,
+          155.78456115722656
+        ],
+        "slow_time_scale_days": [
+          370.760498046875,
+          656.349609375,
+          991.886474609375,
+          1263.929443359375
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          34.37062072753906,
+          55.39107894897461,
+          69.11080932617188,
+          87.65259552001953,
+          105.16886138916016,
+          124.7458267211914,
+          139.4800567626953,
+          154.47955322265625
+        ],
+        "slow_time_scale_days": [
+          380.0770568847656,
+          674.080810546875,
+          967.6671142578125,
+          1303.32958984375
+        ]
+      }
+    },
+    "centered_location_and_scale_ou_smooth_climatology-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          36.29720687866211,
+          56.346858978271484,
+          71.18055725097656,
+          88.12813568115234,
+          104.86146545410156,
+          121.18069458007812,
+          139.03262329101562,
+          154.6094207763672
+        ],
+        "slow_time_scale_days": [
+          367.394287109375,
+          668.7085571289062,
+          961.0318603515625,
+          1270.544189453125
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          36.360496520996094,
+          52.315223693847656,
+          70.51756286621094,
+          86.74679565429688,
+          102.50247955322266,
+          122.91423034667969,
+          140.11611938476562,
+          156.1230010986328
+        ],
+        "slow_time_scale_days": [
+          377.655029296875,
+          646.2811279296875,
+          960.7506713867188,
+          1266.5419921875
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          37.127464294433594,
+          56.26189041137695,
+          70.5052490234375,
+          87.75511169433594,
+          104.2833023071289,
+          126.32696533203125,
+          139.52114868164062,
+          154.060302734375
+        ],
+        "slow_time_scale_days": [
+          382.62420654296875,
+          669.257568359375,
+          967.4442138671875,
+          1287.295654296875
+        ]
+      }
+    },
+    "centered_location_ou-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          35.80144500732422,
+          56.840232849121094,
+          70.14913940429688,
+          89.25151824951172,
+          107.21453094482422,
+          119.9458999633789,
+          137.24688720703125,
+          155.43304443359375
+        ],
+        "slow_time_scale_days": [
+          374.479736328125,
+          670.3224487304688,
+          977.2809448242188,
+          1276.0675048828125
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          34.64783477783203,
+          51.04253005981445,
+          67.1641845703125,
+          87.20428466796875,
+          101.06977081298828,
+          122.946044921875,
+          139.4707489013672,
+          155.92962646484375
+        ],
+        "slow_time_scale_days": [
+          373.9236755371094,
+          661.219970703125,
+          978.97998046875,
+          1269.486328125
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          38.20063400268555,
+          55.43649673461914,
+          69.84014892578125,
+          88.03659057617188,
+          105.401123046875,
+          121.52617645263672,
+          139.2292022705078,
+          154.7546844482422
+        ],
+        "slow_time_scale_days": [
+          383.40643310546875,
+          670.823974609375,
+          970.6116943359375,
+          1276.00439453125
+        ]
+      }
+    },
+    "centered_location_ou_smooth_climatology-k2": {
+      "147031": {
+        "medium_time_scale_days": [
+          35.80824279785156,
+          54.9927978515625,
+          69.6560287475586,
+          88.28803253173828,
+          106.4454116821289,
+          121.0840072631836,
+          137.734375,
+          154.55860900878906
+        ],
+        "slow_time_scale_days": [
+          364.38232421875,
+          659.5113525390625,
+          956.758544921875,
+          1278.28955078125
+        ]
+      },
+      "271828": {
+        "medium_time_scale_days": [
+          35.85816955566406,
+          51.74537658691406,
+          69.05772399902344,
+          87.1360855102539,
+          103.5974349975586,
+          120.36935424804688,
+          140.02374267578125,
+          155.63644409179688
+        ],
+        "slow_time_scale_days": [
+          378.1758117675781,
+          651.6287231445312,
+          955.9771728515625,
+          1274.4222412109375
+        ]
+      },
+      "314159": {
+        "medium_time_scale_days": [
+          37.21123504638672,
+          55.942813873291016,
+          68.09623718261719,
+          86.85948944091797,
+          104.88410186767578,
+          121.94522094726562,
+          141.25457763671875,
+          154.80557250976562
+        ],
+        "slow_time_scale_days": [
+          388.34735107421875,
+          672.632568359375,
+          978.5955200195312,
+          1287.2996826171875
+        ]
+      }
+    }
+  },
+  "non_gating_pairwise_contrasts": {
+    "centered_location_and_scale_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": {
+      "median_relative_error_reduction_left_vs_right": -0.06948240226334121,
+      "probability_left_lower_error": 0.0,
+      "selection_gating": false
+    },
+    "centered_location_ou-k2__vs__centered_location_and_scale_ou-k2": {
+      "median_relative_error_reduction_left_vs_right": 0.005338401182571626,
+      "probability_left_lower_error": 0.791,
+      "selection_gating": false
+    },
+    "centered_location_ou-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": {
+      "median_relative_error_reduction_left_vs_right": -0.06391311369489297,
+      "probability_left_lower_error": 0.0,
+      "selection_gating": false
+    },
+    "centered_location_ou-k2__vs__centered_location_ou_smooth_climatology-k2": {
+      "median_relative_error_reduction_left_vs_right": -0.061689349314363956,
+      "probability_left_lower_error": 0.0,
+      "selection_gating": false
+    },
+    "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou-k2": {
+      "median_relative_error_reduction_left_vs_right": 0.06293256015248908,
+      "probability_left_lower_error": 1.0,
+      "selection_gating": false
+    },
+    "centered_location_ou_smooth_climatology-k2__vs__centered_location_and_scale_ou_smooth_climatology-k2": {
+      "median_relative_error_reduction_left_vs_right": -0.0022055046780563156,
+      "probability_left_lower_error": 0.212,
+      "selection_gating": false
+    }
+  },
+  "point_results": {
+    "p+3250_-10200": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 2.8948042945805623,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.9033575744074214,
+        "centered_location_ou-k2": 3.006719403225052,
+        "centered_location_ou_smooth_climatology-k2": 2.8902548302849445
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 0.9266000390732061,
+          "annual_dispersion": 0.32955239957757615,
+          "annual_lag": 1.4787213965036017,
+          "annual_location": 3.531409830704725
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 1.063960132347128,
+          "annual_dispersion": 0.34142398527351375,
+          "annual_lag": 1.5341974809875882,
+          "annual_location": 3.46508433010136
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 1.3575190721121997,
+          "annual_dispersion": 0.36442033249307904,
+          "annual_lag": 1.594982429702732,
+          "annual_location": 3.5687501686771173
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.9227844043639694,
+          "annual_dispersion": 0.37516545883922975,
+          "annual_lag": 1.6168750459850045,
+          "annual_location": 3.463184344933422
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 2.0333884032617755,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.0393964570850853,
+        "centered_location_ou-k2": 2.112000585955273,
+        "centered_location_ou_smooth_climatology-k2": 2.0301927371654247
+      },
+      "comparator_errors": {
+        "faithful": 1.5639304083380314,
+        "stochastic_prism_localized_par_v1": 1.4236356860976398
+      },
+      "reference_error": 1.4236356860976398,
+      "regime": "hot_arid"
+    },
+    "p+3275_-08325": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 3.096924744960708,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.881323671428552,
+        "centered_location_ou-k2": 3.0237451320516695,
+        "centered_location_ou_smooth_climatology-k2": 2.8813295365238734
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 1.7756980575325414,
+          "annual_dispersion": 0.7289875255349184,
+          "annual_lag": 1.5703117571181477,
+          "annual_location": 5.027814243216184
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 1.8539689527657408,
+          "annual_dispersion": 0.4767331177144751,
+          "annual_lag": 1.6546853742486733,
+          "annual_location": 4.961476150518942
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 2.2851540217452895,
+          "annual_dispersion": 0.35545515612668455,
+          "annual_lag": 1.5660402656499128,
+          "annual_location": 5.166655375624168
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 1.8384921038834419,
+          "annual_dispersion": 0.4190111221998072,
+          "annual_lag": 1.7726974414389012,
+          "annual_location": 5.0176736108122055
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 3.780532063280972,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 3.517339755268833,
+        "centered_location_ou-k2": 3.691198968109291,
+        "centered_location_ou_smooth_climatology-k2": 3.517346915010429
+      },
+      "comparator_errors": {
+        "faithful": 0.8191769552862914,
+        "stochastic_prism_localized_par_v1": 0.8432625654432572
+      },
+      "reference_error": 0.8191769552862914,
+      "regime": "humid"
+    },
+    "p+3675_-10750": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 2.275339997085808,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.2127222531353516,
+        "centered_location_ou-k2": 2.2101539023720727,
+        "centered_location_ou_smooth_climatology-k2": 2.234388756405932
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 1.3796321448124285,
+          "annual_dispersion": 0.4985292716001471,
+          "annual_lag": 1.7624657681182452,
+          "annual_location": 0.7730295682046369
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 1.2304809089170707,
+          "annual_dispersion": 0.55562016530749,
+          "annual_lag": 1.9840732833162018,
+          "annual_location": 0.8751591673641408
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 0.866320889631146,
+          "annual_dispersion": 0.4616806828632762,
+          "annual_lag": 1.8203119212476162,
+          "annual_location": 0.7753865006903455
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.800781355014658,
+          "annual_dispersion": 0.5625426566974919,
+          "annual_lag": 1.7723857240381662,
+          "annual_location": 0.8813750088165593
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 1.6020850948839622,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 1.5579954404205536,
+        "centered_location_ou-k2": 1.556187044101079,
+        "centered_location_ou_smooth_climatology-k2": 1.573250998707451
+      },
+      "comparator_errors": {
+        "faithful": 1.682396032623209,
+        "stochastic_prism_localized_par_v1": 1.4202366680470297
+      },
+      "reference_error": 1.4202366680470297,
+      "regime": "monsoonal_transition"
+    },
+    "p+4025_-09900": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 2.307103052445364,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 1.8924661806194105,
+        "centered_location_ou-k2": 2.3039682855559547,
+        "centered_location_ou_smooth_climatology-k2": 1.9117384914821394
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 0.4122726074115872,
+          "annual_dispersion": 0.5795687205710064,
+          "annual_lag": 1.702874670879145,
+          "annual_location": 0.5266495565336267
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.8076550209774997,
+          "annual_dispersion": 0.36785071918197193,
+          "annual_lag": 1.5765181759085998,
+          "annual_location": 0.46193677541116995
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 0.8740006898546476,
+          "annual_dispersion": 0.5945883674228188,
+          "annual_lag": 1.8279182799763098,
+          "annual_location": 0.5527999002719932
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.8097746126742876,
+          "annual_dispersion": 0.35426428058557585,
+          "annual_lag": 1.6826241549488736,
+          "annual_location": 0.467615972400625
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 2.379526525570349,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 1.9518735718179785,
+        "centered_location_ou-k2": 2.3762933535813806,
+        "centered_location_ou_smooth_climatology-k2": 1.971750869825232
+      },
+      "comparator_errors": {
+        "faithful": 1.005385006173677,
+        "stochastic_prism_localized_par_v1": 0.9695639143557665
+      },
+      "reference_error": 0.9695639143557665,
+      "regime": "non_monsoonal_semi_arid"
+    },
+    "p+4050_-11375": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 3.469262517600664,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 3.3778096122689507,
+        "centered_location_ou-k2": 3.5051550431402854,
+        "centered_location_ou_smooth_climatology-k2": 3.3913348934919645
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 2.1229928412445838,
+          "annual_dispersion": 1.2987415888842617,
+          "annual_lag": 2.336924597044335,
+          "annual_location": 2.2635649041689727
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 2.340046737849488,
+          "annual_dispersion": 1.1890329257288277,
+          "annual_lag": 2.32204553463369,
+          "annual_location": 2.174736769792907
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 2.5683978488829977,
+          "annual_dispersion": 1.3482726236449718,
+          "annual_lag": 2.2688731527048893,
+          "annual_location": 2.2842033362766836
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 2.4630574281711546,
+          "annual_dispersion": 1.1972946914446305,
+          "annual_lag": 2.2575793144691887,
+          "annual_location": 2.1862164938974393
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 2.278519690633342,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.2184558457940504,
+        "centered_location_ou-k2": 2.3020929503027046,
+        "centered_location_ou_smooth_climatology-k2": 2.227338892099034
+      },
+      "comparator_errors": {
+        "faithful": 1.7621019469068957,
+        "stochastic_prism_localized_par_v1": 1.5225949250569526
+      },
+      "reference_error": 1.5225949250569526,
+      "regime": "arid_boundary"
+    },
+    "p+4525_-08875": {
+      "candidate_errors": {
+        "centered_location_and_scale_ou-k2": 2.6607364989878253,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 2.350770574540811,
+        "centered_location_ou-k2": 2.6405583796558476,
+        "centered_location_ou_smooth_climatology-k2": 2.351846608645064
+      },
+      "candidate_family_errors": {
+        "centered_location_and_scale_ou-k2": {
+          "annual_cross_field_dependence": 1.2247837542864852,
+          "annual_dispersion": 0.8487141620678221,
+          "annual_lag": 1.1883262501170266,
+          "annual_location": 3.1961862975972055
+        },
+        "centered_location_and_scale_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.4368898258538794,
+          "annual_dispersion": 0.7265586566822129,
+          "annual_lag": 1.2571626117395382,
+          "annual_location": 3.2230907609650092
+        },
+        "centered_location_ou-k2": {
+          "annual_cross_field_dependence": 1.530044603010215,
+          "annual_dispersion": 0.7333182204554465,
+          "annual_lag": 1.1305664162183018,
+          "annual_location": 3.232856836245329
+        },
+        "centered_location_ou_smooth_climatology-k2": {
+          "annual_cross_field_dependence": 0.6817906913381746,
+          "annual_dispersion": 0.7011620575035117,
+          "annual_lag": 1.2276820446697123,
+          "annual_location": 3.2562058993035485
+        }
+      },
+      "candidate_ratios": {
+        "centered_location_and_scale_ou-k2": 3.485707033386334,
+        "centered_location_and_scale_ou_smooth_climatology-k2": 3.079635104292239,
+        "centered_location_ou-k2": 3.4592726185155867,
+        "centered_location_ou_smooth_climatology-k2": 3.0810447664841862
+      },
+      "comparator_errors": {
+        "faithful": 0.8295862628890749,
+        "stochastic_prism_localized_par_v1": 0.7633276329602902
+      },
+      "reference_error": 0.7633276329602902,
+      "regime": "cold"
+    }
+  },
+  "prism_provenance": {
+    "p+3250_-10200": {
+      "artifact_manifest_sha256": "996a65a10137d0aafa8194ede261dbc1680818fc588e4c2a05e2af52667acf97",
+      "localization_sha256": "1966ee4d45a30b0f4faedb1e91d27970b1f3dadc251745f53f0b6b0adcc679c4",
+      "localized_station_sha256": "393a5b1f27faeb0f13d02a8d7ea536694e370ed29fc844d9e416846cc2139b9d",
+      "normals_sha256": "a2e56b3e7f719cee06f36b3b407a74e4bc9cb76e4d19f1c02696acf0ef0090ef",
+      "source_station_sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f",
+      "station_selection_sha256": "f1f509887f42f07f310dfaa7833f401dff40aeb7ebb24f6497cf94ffb2e8ff8f"
+    },
+    "p+3275_-08325": {
+      "artifact_manifest_sha256": "bc824d174521c56b2ca060225a753ddf59cd3cc88ab1076b82619a7c48349b59",
+      "localization_sha256": "f6035649ddab16731b9b145e28979af85bde4a2002b9b7164ef9ded4d184f9cd",
+      "localized_station_sha256": "b43f7a2ad68688d1a42b8f8fc7e9ab6fb1805983813de9fd1241cf430b07451c",
+      "normals_sha256": "329f94f51f5cd6da03200a0ca0a50e645b677f93e3b723ab4223b2af4d1b7e85",
+      "source_station_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+      "station_selection_sha256": "8aaeb58c61b251fbbd325ae99b6eb16f2f494fa9484d8b717ce21b68f85bb184"
+    },
+    "p+3675_-10750": {
+      "artifact_manifest_sha256": "e354bb08abdbd903157042b01d7fbf8645c1b9f90896845947073dfdc33becfa",
+      "localization_sha256": "001e5a94c2a373c9e202dd22e3a6f5cdeb75430d4baaea5061806646c2dda5a7",
+      "localized_station_sha256": "29cda0592f5336543844584ecf7418b20d6d88f602f4185d7d785f74446bdef5",
+      "normals_sha256": "2d7cf6d1136363dde24b27669f32d80c815f3a67643d0d93c686e178beefceaf",
+      "source_station_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+      "station_selection_sha256": "4e994808c81518f250e5255c3b51089578327e55e19efdce6ba500dafa519d9d"
+    },
+    "p+4025_-09900": {
+      "artifact_manifest_sha256": "e648490634a872a94e2ad52653585ce7e0fb5c46ad1e3b0c4bd140525ad7990b",
+      "localization_sha256": "e0954da8c6ebed73d41d874fc556d2fca05e818f65f8d5deb3b7ebc5789a7f16",
+      "localized_station_sha256": "109790a453f521a98151378020d8fb47a2c493983a36b9cda8e08dc21a4e1249",
+      "normals_sha256": "cd332020b96764bf1e83bc5c66e92a05ebffcc3387af4fa9fb3d85b0a54e1370",
+      "source_station_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+      "station_selection_sha256": "9d023e30d270b85c398060f5642c85ac561201a9f178b043fa24c2ff7edd38b3"
+    },
+    "p+4050_-11375": {
+      "artifact_manifest_sha256": "8020904c436d8851c0b823d14bd817a0883523fa5de73b0e73b2cee8eab5b26a",
+      "localization_sha256": "f1e8db5d46b9c1c5079240c1a6b7c1574ec1ab105d64253927fefc07ae482f1a",
+      "localized_station_sha256": "581a1ff29eb9820e61af6cecd811eedff268fbee7a2130d000e8851ba95b9807",
+      "normals_sha256": "c972ecdfd731b1e6bb64fa8c56a94f567f558469bd7842519d50184d5dad3dde",
+      "source_station_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+      "station_selection_sha256": "d2be0b58d4c5c5ab562fc79c20e20810a2ff7375f556d3d767b25a8e12e351cb"
+    },
+    "p+4525_-08875": {
+      "artifact_manifest_sha256": "ad6514a7a798bd34fce5ea4f671a25be6fc7099e1b413e18dcdcb8eb454aaf4d",
+      "localization_sha256": "257254ab8f13e0956711ca8168d31b21e75f772313612e2e305142c97809b17b",
+      "localized_station_sha256": "908155978f2c93a1323e34ac57d4fdd57e96759fd98569378d34b5ba7024c1a9",
+      "normals_sha256": "7e0d3394071dc35c5bf81cd304dd7b57034d533974fd86ba783f348eb8178f51",
+      "source_station_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+      "station_selection_sha256": "e132da80d211a0323ef4731b8996ccb49f53c3e5b676a27e6365405d6e107f95"
+    }
+  },
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "terminal": "HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE"
+}

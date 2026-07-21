@@ -58,3 +58,19 @@ The inherited R14 science module remains byte-identical. A focused transform
 test requires the private export, training, and accounting bindings and rejects
 the colliding loop form. The fresh authority binds the authenticated `r2`
 failure as its immediate operational predecessor.
+
+## Final r3 closeout review
+
+Disposition: `ACCEPT — EXECUTED-HOLD-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`
+
+Independent closeout review authenticated the completed control and two-L40
+portfolio receipts, collected evidence, cleanup and terminal receipts, and
+the retained replay records. The recovery verifies the cached replay asset as
+the exact deterministic R14R2R1 identity rebind, changes only stale two-device
+operational checks, and converts the post-eligibility annual diagnostic from
+a two-item unpack to explicit all-pair reporting. Candidate eligibility and
+all selection gates are unchanged. Both selector passes are byte-identical;
+all four candidates fail the frozen temporal thresholds, `eligible=[]`,
+`selected=null`, and protected roles remain sealed. The scientific HOLD is
+therefore accepted; it is not an operational failure and does not authorize
+confirmation or solar work.
