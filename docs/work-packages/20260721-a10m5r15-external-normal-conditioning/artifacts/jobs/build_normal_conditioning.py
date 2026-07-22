@@ -9,6 +9,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import struct
 import tarfile
 from pathlib import Path
@@ -89,6 +90,7 @@ def corpus_points(corpus: Path) -> list[dict]:
                         "latitude": float(record["latitude"]),
                         "longitude": float(record["longitude"]),
                         "point_id": str(record["point_id"]),
+                        "regime": str(record["regime"]),
                         "role": str(record["role"]),
                     }
                 )
@@ -175,8 +177,11 @@ def main() -> None:
     parser.add_argument("--corpus", type=Path, required=True)
     parser.add_argument("--prism-root", type=Path, required=True)
     parser.add_argument("--sites", type=Path, required=True)
+    parser.add_argument("--source-commit", required=True)
     parser.add_argument("--output", type=Path, required=True)
     options = parser.parse_args()
+    if re.fullmatch(r"[0-9a-f]{40}", options.source_commit) is None:
+        raise RuntimeError("full published source commit is required")
     options.output.mkdir(parents=True, exist_ok=True)
     manifest = validate_grid(options.prism_root)
     points = corpus_points(options.corpus)
@@ -233,6 +238,14 @@ def main() -> None:
             role: sum(row["role"] == role for row in failures)
             for role in ("candidate_fit", "fit_validation", "temporal_site")
         }
+        by_regime_role = {
+            f"{regime}/{role}": sum(
+                row.get("regime") == regime and row["role"] == role
+                for row in failures
+            )
+            for regime in sorted({row.get("regime") for row in failures if row.get("regime")})
+            for role in ("candidate_fit", "fit_validation")
+        }
         failure = {
             "bundle_id": BUNDLE_ID,
             "calendar_points_validated": len(points),
@@ -240,6 +253,7 @@ def main() -> None:
             "failure_count": len(failures),
             "failures": failures,
             "failed_by_role": by_role,
+            "failed_by_regime_role": by_regime_role,
             "gates": {
                 "all_calendar_surfaces_valid": len(points) == 1440,
                 "all_corpus_queries_valid": False,
@@ -255,6 +269,7 @@ def main() -> None:
             "runtime_archive_sha256": RUNTIME_ARCHIVE_SHA256,
             "schema_version": "a10m5r15-normal-conditioning-preflight-failure-1",
             "source_archive_sha256": SOURCE_ARCHIVE_SHA256,
+            "source_commit": options.source_commit,
             "terminal": "HOLD-A10M5R15-ENGINEERING-INCOMPLETE",
             "valid": False,
         }
@@ -313,6 +328,7 @@ def main() -> None:
         "runtime_archive_sha256": RUNTIME_ARCHIVE_SHA256,
         "schema_version": "a10m5r15-normal-conditioning-1",
         "source_archive_sha256": SOURCE_ARCHIVE_SHA256,
+        "source_commit": options.source_commit,
         "temporal_site_count": 6,
         "valid": bool(gates) and all(gates.values()),
     }
