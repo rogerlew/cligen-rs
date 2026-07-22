@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "package_id": "20260722-a10m5r15r2r2-successor-control-execution",
+  "archive": {
+    "bytes": 224040960,
+    "sha256": "7b41e497d215c85ae734dea438424f23ae01cff59a3b3ba55ec32442578553f2"
+  },
+  "layout": {
+    "member_count": 101,
+    "accepted_object_count": 98,
+    "all_members_regular": true,
+    "sole_top_level_prefix": "corpus",
+    "absolute_paths_allowed": false,
+    "parent_components_allowed": false,
+    "required_members": [
+      "corpus/artifacts/normalization-statistics-v1.json",
+      "corpus/artifacts/normalized-manifest-v1.json",
+      "corpus/artifacts/offline-transfer-manifest-v1.json"
+    ]
+  },
+  "extraction_contract": {
+    "archive_prefix": "corpus/",
+    "destination": "[JOB_LOCAL]",
+    "science_corpus_root": "[JOB_LOCAL]/corpus",
+    "nested_corpus_forbidden": "[JOB_LOCAL]/corpus/corpus"
+  }
+}

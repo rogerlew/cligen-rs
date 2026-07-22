@@ -139,3 +139,5 @@ package is candidate evidence.
   `artifacts/successor-control-summary.json` — six authenticated identities;
 - `artifacts/execution-r3-*.json` — job, collection, cleanup, terminal, and
   recovery-release accounting.
+- `artifacts/execution-r2-job.json` — authenticated 9-minute canceled-job
+  settlement retained for campaign accounting.

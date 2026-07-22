@@ -50,8 +50,12 @@ production change.
   authority.
 - [x] Closed the candidate-blind successor-control calibration with all six
   exact dynamic identities, 20 billed L40-minutes, and authenticated cleanup.
-- [ ] Publish a fresh execution successor that prospectively pins those six
-  identities and retains the unchanged 515-minute study ceiling.
+- [x] Scaffolded A10M5R15R2R2 as a fresh execution successor that
+  prospectively pins all six calibrated identities and retains the unchanged
+  515-minute study ceiling.
+- [x] Completed independent R2R2 execution-readiness review at `PASS` after
+  dispositioning all P0/P1/P2 findings.
+- [ ] Publish R2R2 and run the authorized study end to end.
 
 ## Surprises & Discoveries
 

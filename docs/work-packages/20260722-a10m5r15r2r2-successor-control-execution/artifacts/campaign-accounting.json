@@ -1,0 +1,52 @@
+{
+  "authorized_outer_ceiling_l40_minutes": 597,
+  "bounded_maximum_l40_minutes": 553,
+  "components": [
+    {
+      "actual_l40_minutes": 8,
+      "evidence_sha256": "ae0fb7da03e615b12f30a711e82082e7dec13b1c73646024ac287fa0aca2553d",
+      "evidence_path": "docs/work-packages/20260721-a10m5r15r2-external-normal-conditioning-execution/artifacts/execution-r0-failure.json",
+      "kind": "failed-r2-control",
+      "record_sha256": "a7fdc4b67d927d1f70cde72a81efc0fdce3d46cc60d74cde279c253976224b7d"
+    },
+    {
+      "actual_l40_minutes": 9,
+      "evidence_sha256": "9b329d5fdc89e23a2ae25197e2e642ceb8e794b0b831e1a085ad4d7c78c78a6c",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r2-job.json",
+      "kind": "canceled-control-calibration",
+      "record_sha256": "535e15b570256b10f3d4439ca2cb96b6bc5707486b8e0cfd2af71c4e1a56063c"
+    },
+    {
+      "actual_l40_minutes": 1,
+      "evidence_sha256": "c88fa943bebfea22225b065432f731248100b36901786f07e7811ba895ae21a4",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/cancelled-cleanup-execution.json",
+      "kind": "out-of-band-corrective-cleanup",
+      "record_sha256": "b349d889345da14ac623af5eb17007dbcd94a4da6df47bedeaced5f4c9ac7a6f"
+    },
+    {
+      "actual_l40_minutes": 20,
+      "evidence_sha256": "251e1cc998347a147979e1c8272815ad6fdb7bda8672760021b0f3ae4c05c646",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r3-job.json",
+      "kind": "successful-successor-control-calibration",
+      "record_sha256": "c916883dfcd423423a72b7f76c7fdaf0331667613f23561976ea402c46556fcb"
+    }
+  ],
+  "operator_authorization": "authorization granted; authorize 597",
+  "outstanding_study_ceiling_l40_minutes": 515,
+  "package_id": "20260722-a10m5r15r2r2-successor-control-execution",
+  "realized_l40_minutes": 38,
+  "released_recovery_reserves": [
+    {
+      "event_sha256": "da58af4ca36ffbb1b30bc9a81293570a7cc1565f84955b39f2f4eb757c898bfd",
+      "evidence_sha256": "c518945ab7079742214c4934623fe4a134d6d92df2650f30e5c1f56987e536e0",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r2-recovery-release.json"
+    },
+    {
+      "event_sha256": "3b48574d94cfbaf3b929a6e721d43d6d3971b2bd1601518dce0f440a8824068f",
+      "evidence_sha256": "649e7d66a4626d790fa7f386b5010f7d6923abc4f7c153c92a7d4b0026a704fa",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r3-recovery-release.json"
+    }
+  ],
+  "schema_version": 1,
+  "valid": true
+}
