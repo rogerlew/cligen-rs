@@ -2185,6 +2185,19 @@ class Toolkit:
                 "CLEANUP_TARGET_INVALID",
                 "external cleanup scheduler identity",
             )
+            remote_root = (
+                f"{self.profile['remote_base']}/{self._current_plan(state)['remote_run_root']}"
+            )
+            require(
+                evidence.get("remote_command")
+                == f"{remote_root}/cleanup-cancelled-{attempt['job_id']}.sh"
+                and evidence.get("remote_stdout")
+                == f"{remote_root}/slurm/cancelled-cleanup.0.out"
+                and evidence.get("remote_stderr")
+                == f"{remote_root}/slurm/cancelled-cleanup.0.err",
+                "CLEANUP_TARGET_INVALID",
+                "external cleanup remote paths",
+            )
             observed_cleanup = self.adapter.inspect_external_cleanup(
                 self.profile, evidence
             )

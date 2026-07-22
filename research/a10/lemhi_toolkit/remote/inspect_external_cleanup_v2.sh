@@ -8,8 +8,8 @@ expected_stdout=$4
 expected_stderr=$5
 
 case "$job_id" in ''|*[!0-9]*) exit 64 ;; esac
-row=$(sacct -n -X -P -j "$job_id" --format=JobIDRaw,State,NodeList,ElapsedRaw,ExitCode | sed -n '1p')
-IFS='|' read -r observed_job state node elapsed exit_code <<EOF
+row=$(sacct -n -X -P -j "$job_id" --format=JobIDRaw,State,NodeList,ElapsedRaw,ExitCode,SubmitLine%1000 | sed -n '1p')
+IFS='|' read -r observed_job state node elapsed exit_code submit_line <<EOF
 $row
 EOF
 [ "$observed_job" = "$job_id" ] || exit 65
@@ -18,13 +18,8 @@ EOF
 [ "$exit_code" = 0:0 ] || exit 65
 case "$elapsed" in ''|*[!0-9]*) exit 65 ;; esac
 
-control=$(scontrol show job -o "$job_id")
-case " $control " in *' Partition=gpu-icrews '*) ;; *) exit 65 ;; esac
-case " $control " in *' TimeLimit=00:05:00 '*) ;; *) exit 65 ;; esac
-case " $control " in *' TresPerNode=gres/gpu:l40:1 '*) ;; *) exit 65 ;; esac
-case " $control " in *" Command=$expected_command "*) ;; *) exit 65 ;; esac
-case " $control " in *" StdOut=$expected_stdout "*) ;; *) exit 65 ;; esac
-case " $control " in *" StdErr=$expected_stderr "*) ;; *) exit 65 ;; esac
+expected_submit="sbatch --parsable --job-name=a10-r2-cancel-clean --partition=gpu-icrews --nodelist=$expected_node --gres=gpu:l40:1 --cpus-per-task=1 --mem=512M --time=00:05:00 --output=$expected_stdout --error=$expected_stderr $expected_command"
+[ "$submit_line" = "$expected_submit" ] || exit 65
 [ -f "$expected_command" ] && [ ! -L "$expected_command" ] || exit 65
 [ -f "$expected_stdout" ] && [ ! -L "$expected_stdout" ] || exit 65
 [ -f "$expected_stderr" ] && [ ! -L "$expected_stderr" ] || exit 65
