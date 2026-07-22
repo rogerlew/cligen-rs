@@ -9,9 +9,13 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 PACKAGE = Path(__file__).resolve().parents[2]
 REPO = PACKAGE.parents[2]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+from research.a10.lemhi_toolkit.core import read_record
+
+
 PARENT_COMMIT = "b38f695697a8636e67f041ccae373107cb5cb5bc"
 SOURCE = (
     PACKAGE.parent
@@ -19,12 +23,16 @@ SOURCE = (
     / "artifacts/jobs/build_control_records.py"
 )
 PACKAGE_ID = "20260722-a10m5r15r2r1-successor-control-identity-calibration"
-RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r1"
+RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r2"
 RECORD_TYPE = "a10m5r15r2r1-submission-admission"
 PARENT_PACKAGE = SOURCE.parents[2]
 FAILURE = PARENT_PACKAGE / "artifacts/execution-r0-failure.json"
 CONTRACT = PACKAGE / "artifacts/control-calibration-contract.json"
-CALIBRATION_ABORT = PACKAGE / "artifacts/execution-r0-abort.json"
+CALIBRATION_ABORTS = (
+    PACKAGE / "artifacts/execution-r0-abort.json",
+    PACKAGE / "artifacts/execution-r1-abort.json",
+)
+DIAGNOSTICS = PACKAGE / "artifacts/pre-submission-diagnostics.json"
 CONTROL_ROLE = "control-materialization"
 CONTROL_EVIDENCE = [
     "admissions/control-materialization.json",
@@ -72,6 +80,38 @@ EXPECTED_IDENTITY_CONTRACT = {
     ],
     "required_row_count": 6,
 }
+EXPECTED_ABORTS = (
+    {
+        "authority_id": "a10m5r15r2r1-successor-control-identity-calibration-r0-authority",
+        "created_at": "2026-07-22T07:45:23.366743Z",
+        "job_local_cleanup": "not_started",
+        "package_id": PACKAGE_ID,
+        "plan_id": "037a11f6efb64e7f38601448984861b0f239b2505940bba8c54987d9646dbe17",
+        "producer_version": "lemhi-toolkit-hardening-2",
+        "record_sha256": "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057",
+        "record_type": "abort_receipt",
+        "remote_absent": True,
+        "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r0",
+        "schema_version": "lemhi-toolkit-record-2",
+        "source_commit": "c07a7b6cf50114a8709dedc103105994ae67b6eb",
+        "terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+    },
+    {
+        "authority_id": "a10m5r15r2r1-successor-control-identity-calibration-r1-authority",
+        "created_at": "2026-07-22T07:52:50.363523Z",
+        "job_local_cleanup": "not_started",
+        "package_id": PACKAGE_ID,
+        "plan_id": "d25d20a0ff2322bc1d4f4a9a4f82feec02db12f595cad20e0b82f5435d55c47a",
+        "producer_version": "lemhi-toolkit-hardening-2",
+        "record_sha256": "a42098bd65f69fc4c0a596e17301e679c8498c24f742ef0b532f75dd617c6bf4",
+        "record_type": "abort_receipt",
+        "remote_absent": True,
+        "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r1",
+        "schema_version": "lemhi-toolkit-record-2",
+        "source_commit": "e93489e2845c65e8ad2946a8efe76da9296b80cc",
+        "terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+    },
+)
 
 
 def git_bytes(commit: str, path: Path) -> bytes:
@@ -216,31 +256,47 @@ def failure_bundle(record_commit: str | None = None) -> dict:
 
 
 def abort_bundle(record_commit: str | None = None) -> dict:
-    value = json.loads(CALIBRATION_ABORT.read_text(encoding="utf-8"))
+    records = []
+    for path, expected in zip(CALIBRATION_ABORTS, EXPECTED_ABORTS):
+        value = read_record(path)
+        if value != expected:
+            raise RuntimeError(f"calibration abort evidence drift: {path.name}")
+        if record_commit is not None and git_bytes(record_commit, path) != path.read_bytes():
+            raise RuntimeError(f"calibration abort differs from published source: {path.name}")
+        records.append(
+            {
+                "authority_id": value["authority_id"],
+                "bytes": path.stat().st_size,
+                "job_local_cleanup": value["job_local_cleanup"],
+                "package_id": value["package_id"],
+                "plan_id": value["plan_id"],
+                "producer_version": value["producer_version"],
+                "record_sha256": value["record_sha256"],
+                "remote_absent": value["remote_absent"],
+                "run_id": value["run_id"],
+                "schema_version": value["schema_version"],
+                "sha256": inherited.digest(path),
+                "source_commit": value["source_commit"],
+                "terminal": value["terminal"],
+            }
+        )
+    diagnostics = json.loads(DIAGNOSTICS.read_text(encoding="utf-8"))
     if not (
-        value.get("record_type") == "abort_receipt"
-        and value.get("record_sha256")
-        == "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057"
-        and value.get("run_id")
-        == "a10m5r15r2r1-successor-control-identity-calibration-r0"
-        and value.get("source_commit")
-        == "c07a7b6cf50114a8709dedc103105994ae67b6eb"
-        and value.get("remote_absent") is True
-        and value.get("job_local_cleanup") == "not_started"
-        and value.get("terminal")
-        == "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+        diagnostics.get("actual_gpu_minutes") == 0
+        and diagnostics.get("attempt_count") == 0
+        and diagnostics.get("candidate_output_produced") is False
+        and [item.get("abort_record_sha256") for item in diagnostics.get("runs", [])]
+        == [item["record_sha256"] for item in EXPECTED_ABORTS]
     ):
-        raise RuntimeError("calibration r0 abort evidence drift")
-    if (
-        record_commit is not None
-        and git_bytes(record_commit, CALIBRATION_ABORT) != CALIBRATION_ABORT.read_bytes()
-    ):
-        raise RuntimeError("calibration r0 abort differs from published source")
+        raise RuntimeError("pre-submission diagnostic drift")
+    if record_commit is not None and git_bytes(record_commit, DIAGNOSTICS) != DIAGNOSTICS.read_bytes():
+        raise RuntimeError("pre-submission diagnostic differs from published source")
     return {
-        "bytes": CALIBRATION_ABORT.stat().st_size,
+        "actual_gpu_minutes": 0,
+        "attempt_count": 0,
+        "diagnostic_sha256": inherited.digest(DIAGNOSTICS),
         "record_commit": record_commit,
-        "record_sha256": value["record_sha256"],
-        "sha256": inherited.digest(CALIBRATION_ABORT),
+        "records": records,
     }
 
 

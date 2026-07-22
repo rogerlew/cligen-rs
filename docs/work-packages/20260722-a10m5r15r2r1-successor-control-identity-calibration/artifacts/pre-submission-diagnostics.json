@@ -1,0 +1,21 @@
+{
+  "actual_gpu_minutes": 0,
+  "attempt_count": 0,
+  "candidate_output_produced": false,
+  "package_id": "20260722-a10m5r15r2r1-successor-control-identity-calibration",
+  "runs": [
+    {
+      "abort_record_sha256": "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057",
+      "classification": "LOCAL_ASSET_LINK_ALIAS_REJECTED",
+      "remote_state": "not_staged",
+      "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r0"
+    },
+    {
+      "abort_record_sha256": "a42098bd65f69fc4c0a596e17301e679c8498c24f742ef0b532f75dd617c6bf4",
+      "classification": "SOURCE_AUDIT_HARDENING_BEFORE_SUBMISSION",
+      "remote_state": "staged_then_verified_absent",
+      "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r1"
+    }
+  ],
+  "schema_version": 1
+}

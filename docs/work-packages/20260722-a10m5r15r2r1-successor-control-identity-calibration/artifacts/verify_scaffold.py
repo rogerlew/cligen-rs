@@ -6,18 +6,28 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 
 PACKAGE = Path(__file__).resolve().parent.parent
 REPO = PACKAGE.parents[2]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+from research.a10.lemhi_toolkit.core import read_record
+
+
 R2 = PACKAGE.parent / "20260721-a10m5r15r2-external-normal-conditioning-execution"
 CONTRACT = PACKAGE / "artifacts/control-calibration-contract.json"
 ROLE_MAP = PACKAGE / "artifacts/control-role-map.json"
 CORPUS_PIN = PACKAGE / "artifacts/corpus-layout-pin.json"
 CORPUS_VERIFIER = PACKAGE / "artifacts/verify_corpus_layout.py"
 FAILURE = R2 / "artifacts/execution-r0-failure.json"
-ABORT = PACKAGE / "artifacts/execution-r0-abort.json"
+ABORTS = (
+    PACKAGE / "artifacts/execution-r0-abort.json",
+    PACKAGE / "artifacts/execution-r1-abort.json",
+)
+DIAGNOSTICS = PACKAGE / "artifacts/pre-submission-diagnostics.json"
 JOBS = PACKAGE / "artifacts/jobs"
 EXPECTED_CHAIN = {
     "cleanup_record_sha256": "4365bbdef1910a0600c4347947aff92f4f71ba9fe174854b82ea80393ca60d3b",
@@ -69,17 +79,65 @@ def failure_projection(value: dict) -> dict:
 contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
 failure = json.loads(FAILURE.read_text(encoding="utf-8"))
 role_map = json.loads(ROLE_MAP.read_text(encoding="utf-8"))
-abort = json.loads(ABORT.read_text(encoding="utf-8"))
+aborts = [read_record(path) for path in ABORTS]
+abort_lineage = [
+    {
+        key: value[key]
+        for key in (
+            "authority_id",
+            "job_local_cleanup",
+            "package_id",
+            "plan_id",
+            "producer_version",
+            "record_sha256",
+            "record_type",
+            "remote_absent",
+            "run_id",
+            "schema_version",
+            "source_commit",
+            "terminal",
+        )
+    }
+    for value in aborts
+]
+if abort_lineage != [
+    {
+        "authority_id": "a10m5r15r2r1-successor-control-identity-calibration-r0-authority",
+        "job_local_cleanup": "not_started",
+        "package_id": "20260722-a10m5r15r2r1-successor-control-identity-calibration",
+        "plan_id": "037a11f6efb64e7f38601448984861b0f239b2505940bba8c54987d9646dbe17",
+        "producer_version": "lemhi-toolkit-hardening-2",
+        "record_sha256": "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057",
+        "record_type": "abort_receipt",
+        "remote_absent": True,
+        "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r0",
+        "schema_version": "lemhi-toolkit-record-2",
+        "source_commit": "c07a7b6cf50114a8709dedc103105994ae67b6eb",
+        "terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+    },
+    {
+        "authority_id": "a10m5r15r2r1-successor-control-identity-calibration-r1-authority",
+        "job_local_cleanup": "not_started",
+        "package_id": "20260722-a10m5r15r2r1-successor-control-identity-calibration",
+        "plan_id": "d25d20a0ff2322bc1d4f4a9a4f82feec02db12f595cad20e0b82f5435d55c47a",
+        "producer_version": "lemhi-toolkit-hardening-2",
+        "record_sha256": "a42098bd65f69fc4c0a596e17301e679c8498c24f742ef0b532f75dd617c6bf4",
+        "record_type": "abort_receipt",
+        "remote_absent": True,
+        "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r1",
+        "schema_version": "lemhi-toolkit-record-2",
+        "source_commit": "e93489e2845c65e8ad2946a8efe76da9296b80cc",
+        "terminal": "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION",
+    },
+]:
+    raise RuntimeError("calibration abort lineage drift")
+diagnostics = json.loads(DIAGNOSTICS.read_text(encoding="utf-8"))
 if not (
-    abort.get("record_sha256")
-    == "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057"
-    and abort.get("run_id")
-    == "a10m5r15r2r1-successor-control-identity-calibration-r0"
-    and abort.get("remote_absent") is True
-    and abort.get("job_local_cleanup") == "not_started"
-    and abort.get("terminal") == "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+    diagnostics.get("actual_gpu_minutes") == 0
+    and diagnostics.get("attempt_count") == 0
+    and diagnostics.get("candidate_output_produced") is False
 ):
-    raise RuntimeError("calibration r0 abort evidence drift")
+    raise RuntimeError("pre-submission diagnostics drift")
 if not (
     digest(CORPUS_PIN)
     == "93045d7727a5c0718579ed2222397fb514633f54bec20afd919b61bd6944bc44"
@@ -185,6 +243,12 @@ if not (
     and '("cp", "-c", "-p", str(source), str(target))' in preparer
     and "target.stat().st_nlink != 1" in preparer
     and "abort_bundle(options.source_commit)" in builder
+    and 'RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r2"'
+    in preparer
+    and 'RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r2"'
+    in builder
+    and 'RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r2"'
+    in admission
 ):
     raise RuntimeError("control-only authority/admission projection incomplete")
 package_text = (PACKAGE / "package.md").read_text(encoding="utf-8")

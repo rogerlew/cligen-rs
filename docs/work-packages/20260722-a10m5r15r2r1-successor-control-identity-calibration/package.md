@@ -36,6 +36,10 @@ Run `r0` was aborted before staging or allocation after the toolkit rejected
 hardlinked local cache assets. Its authenticated abort receipt is retained at
 `artifacts/execution-r0-abort.json`. Run `r1` replaces those aliases with
 link-isolated copy-on-write clones while preserving every asset byte identity.
+It was staged and then aborted with zero allocation so the review-requested
+full abort authentication could be incorporated prospectively. Run `r2` binds
+both authenticated aborts and is the execution run. The compact zero-attempt,
+zero-GPU diagnostic is `artifacts/pre-submission-diagnostics.json`.
 
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.
