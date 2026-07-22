@@ -32,6 +32,11 @@ reproduce checkpoint-payload and semantic identity before candidate release.
 
 ## Plan
 
+Run `r0` was aborted before staging or allocation after the toolkit rejected
+hardlinked local cache assets. Its authenticated abort receipt is retained at
+`artifacts/execution-r0-abort.json`. Run `r1` replaces those aliases with
+link-isolated copy-on-write clones while preserving every asset byte identity.
+
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.
 2. Overlay a control-calibration producer that retains the frozen trainer and

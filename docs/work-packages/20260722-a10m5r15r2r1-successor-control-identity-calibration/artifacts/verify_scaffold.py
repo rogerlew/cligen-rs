@@ -17,6 +17,7 @@ ROLE_MAP = PACKAGE / "artifacts/control-role-map.json"
 CORPUS_PIN = PACKAGE / "artifacts/corpus-layout-pin.json"
 CORPUS_VERIFIER = PACKAGE / "artifacts/verify_corpus_layout.py"
 FAILURE = R2 / "artifacts/execution-r0-failure.json"
+ABORT = PACKAGE / "artifacts/execution-r0-abort.json"
 JOBS = PACKAGE / "artifacts/jobs"
 EXPECTED_CHAIN = {
     "cleanup_record_sha256": "4365bbdef1910a0600c4347947aff92f4f71ba9fe174854b82ea80393ca60d3b",
@@ -68,6 +69,17 @@ def failure_projection(value: dict) -> dict:
 contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
 failure = json.loads(FAILURE.read_text(encoding="utf-8"))
 role_map = json.loads(ROLE_MAP.read_text(encoding="utf-8"))
+abort = json.loads(ABORT.read_text(encoding="utf-8"))
+if not (
+    abort.get("record_sha256")
+    == "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057"
+    and abort.get("run_id")
+    == "a10m5r15r2r1-successor-control-identity-calibration-r0"
+    and abort.get("remote_absent") is True
+    and abort.get("job_local_cleanup") == "not_started"
+    and abort.get("terminal") == "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+):
+    raise RuntimeError("calibration r0 abort evidence drift")
 if not (
     digest(CORPUS_PIN)
     == "93045d7727a5c0718579ed2222397fb514633f54bec20afd919b61bd6944bc44"
@@ -170,6 +182,9 @@ if not (
     and 'value["status"] = "EXECUTION-READY"' in preparer
     and "verify_parent_layout(options.parent_assets, parent)" in preparer
     and "verify_copied_parent(parent, options.output)" in preparer
+    and '("cp", "-c", "-p", str(source), str(target))' in preparer
+    and "target.stat().st_nlink != 1" in preparer
+    and "abort_bundle(options.source_commit)" in builder
 ):
     raise RuntimeError("control-only authority/admission projection incomplete")
 package_text = (PACKAGE / "package.md").read_text(encoding="utf-8")

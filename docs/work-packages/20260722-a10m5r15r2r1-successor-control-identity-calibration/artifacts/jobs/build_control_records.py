@@ -19,11 +19,12 @@ SOURCE = (
     / "artifacts/jobs/build_control_records.py"
 )
 PACKAGE_ID = "20260722-a10m5r15r2r1-successor-control-identity-calibration"
-RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r0"
+RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r1"
 RECORD_TYPE = "a10m5r15r2r1-submission-admission"
 PARENT_PACKAGE = SOURCE.parents[2]
 FAILURE = PARENT_PACKAGE / "artifacts/execution-r0-failure.json"
 CONTRACT = PACKAGE / "artifacts/control-calibration-contract.json"
+CALIBRATION_ABORT = PACKAGE / "artifacts/execution-r0-abort.json"
 CONTROL_ROLE = "control-materialization"
 CONTROL_EVIDENCE = [
     "admissions/control-materialization.json",
@@ -214,14 +215,47 @@ def failure_bundle(record_commit: str | None = None) -> dict:
     }
 
 
+def abort_bundle(record_commit: str | None = None) -> dict:
+    value = json.loads(CALIBRATION_ABORT.read_text(encoding="utf-8"))
+    if not (
+        value.get("record_type") == "abort_receipt"
+        and value.get("record_sha256")
+        == "6ac0b6ad0c921febb3aeb94bcd33e0faaab44b4e30a413d7816df5528c6eb057"
+        and value.get("run_id")
+        == "a10m5r15r2r1-successor-control-identity-calibration-r0"
+        and value.get("source_commit")
+        == "c07a7b6cf50114a8709dedc103105994ae67b6eb"
+        and value.get("remote_absent") is True
+        and value.get("job_local_cleanup") == "not_started"
+        and value.get("terminal")
+        == "LEMHI-TOOLKIT-RUN-ABORTED-BEFORE-SUBMISSION"
+    ):
+        raise RuntimeError("calibration r0 abort evidence drift")
+    if (
+        record_commit is not None
+        and git_bytes(record_commit, CALIBRATION_ABORT) != CALIBRATION_ABORT.read_bytes()
+    ):
+        raise RuntimeError("calibration r0 abort differs from published source")
+    return {
+        "bytes": CALIBRATION_ABORT.stat().st_size,
+        "record_commit": record_commit,
+        "record_sha256": value["record_sha256"],
+        "sha256": inherited.digest(CALIBRATION_ABORT),
+    }
+
+
 def authority(options) -> None:
     failure_bundle(options.source_commit)
+    abort_bundle(options.source_commit)
     validate_execution_contract(options.asset_root, options.source_commit)
     base_authority(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
     value.update(
         {
             "package_id": PACKAGE_ID,
+            "calibration_predecessor_run_evidence": abort_bundle(
+                options.source_commit
+            ),
             "operational_predecessor_package_evidence": failure_bundle(
                 options.source_commit
             ),
@@ -241,11 +275,15 @@ def authority(options) -> None:
 
 def plan(options) -> None:
     failure_bundle(options.source_commit)
+    abort_bundle(options.source_commit)
     validate_execution_contract(options.asset_root, options.source_commit)
     base_plan(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
     value["package_id"] = PACKAGE_ID
     value["run_id"] = RUN_ID
+    value["calibration_predecessor_run_evidence"] = abort_bundle(
+        options.source_commit
+    )
     value["operational_predecessor_package_evidence"] = failure_bundle(
         options.source_commit
     )

@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
@@ -16,7 +15,7 @@ from pathlib import Path
 PACKAGE = Path(__file__).resolve().parents[2]
 REPO = PACKAGE.parents[2]
 PACKAGE_ID = "20260722-a10m5r15r2r1-successor-control-identity-calibration"
-RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r0"
+RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r1"
 RECORD_TYPE = "a10m5r15r2r1-submission-admission"
 PARENT_PACKAGE_ID = "20260721-a10m5r15r2-external-normal-conditioning-execution"
 PARENT_RUN_ID = "a10m5r15r2-external-normal-conditioning-execution-r0"
@@ -69,7 +68,15 @@ def copy_parent(parent: Path, output: Path) -> None:
         if source.is_dir():
             shutil.copytree(source, target)
         elif source.name in LARGE_IMMUTABLE:
-            os.link(source, target)
+            cloned = subprocess.run(
+                ("cp", "-c", "-p", str(source), str(target)),
+                check=False,
+                capture_output=True,
+            )
+            if cloned.returncode != 0:
+                shutil.copy2(source, target)
+            if target.stat().st_nlink != 1:
+                raise RuntimeError(f"copied asset is not link-isolated: {source.name}")
         else:
             shutil.copy2(source, target)
     (output / "controller-admissions").mkdir(mode=0o700)
