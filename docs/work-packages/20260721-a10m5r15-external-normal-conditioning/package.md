@@ -1,6 +1,6 @@
 # A10M5R15 — External-Normal Conditioning
 
-Status: `SCAFFOLDED`
+Status: `HOLD-A10M5R15-ENGINEERING-INCOMPLETE`
 Date: 2026-07-21
 Evidence mode: Prospective development comparison
 Starting branch and push target: current `main`, push `main`
@@ -96,6 +96,15 @@ not itself authorize GPU reservation. Live execution requires publication on
 successful calendar/normals preflight, and an independently accepted
 execution-readiness review.
 
+The published-source preflight at commit
+`679755627cc19e579dc0d704e11c910df9904a83` stopped before resource
+reservation. Although all calendars and all six temporal-site cells passed,
+74 corpus coordinates resolved to masked or out-of-coverage PRISM cells (60
+candidate-fit and 14 fit-validation). The exact containing-cell/no-fallback
+contract therefore failed. No normalizer, candidate output, toolkit authority,
+or GPU reservation was created. See `preflight-disposition.md` and the bounded
+machine-readable failure record.
+
 ## Resources
 
 - control/materialization: one L40, at most 30 minutes;
@@ -178,4 +187,12 @@ No confirmation target may be consumed from any A10M5R15 terminal.
 - `artifacts/resource-contract.json` — bounded two-L40/two-wave authority.
 - `artifacts/predecessor-pin.json` — accepted R14 and PRISM identities.
 - `artifacts/verify_scaffold.py` — fail-closed scaffold verifier.
+- `artifacts/jobs/build_normal_conditioning.py` — published-source calendar
+  and exact containing-cell preflight.
+- `artifacts/preflight/normal-conditioning-preflight-failure.json` — complete
+  74-coordinate failure record; proves no resource reservation.
+- `artifacts/verify_preflight_failure.py` — binds the failure record to its
+  published preflight source and reconciled terminal.
 - `execution-readiness-review.md` — independent review and dispositions.
+- `preflight-disposition.md` — terminal interpretation and smallest decision
+  required to continue under a new prospective cohort/source contract.

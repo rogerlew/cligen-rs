@@ -18,11 +18,14 @@ production change.
   ceilings, E2 model identity, and matched-ablation design.
 - [x] 2026-07-21: scaffolded A10M5R15 contracts, preflight, resources, and
   fail-closed verification.
-- [ ] Implement and publish immutable execution/job sources on `main`.
-- [ ] Authenticate PRISM coverage for 1,440 corpus objects and six temporal
-  sites before any scarce-resource reservation.
-- [ ] Execute control, four-arm portfolio, replay, runtime benchmark, cleanup,
-  review, and terminal reconciliation.
+- [x] 2026-07-21: published the exact calendar/PRISM coverage preflight on
+  `main` at `679755627cc19e579dc0d704e11c910df9904a83`.
+- [x] 2026-07-21: authenticated all calendars and six temporal sites, then
+  failed closed on 74 masked/out-of-coverage corpus cells before authority or
+  resource reservation.
+- [x] 2026-07-21: closed A10M5R15 at
+  `HOLD-A10M5R15-ENGINEERING-INCOMPLETE`; candidate implementation and live
+  execution are not reachable under the frozen input contract.
 
 ## Surprises & Discoveries
 
@@ -35,6 +38,9 @@ production change.
 - ADR-0006 amended Sections 4.5/10.5 but left other 10× prose apparently
   normative. The plan now makes the 30× boundary explicit in objectives,
   hypotheses, milestone gates, risks, and terminal semantics.
+- The accepted A10M1 corpus is not wholly inside the valid PRISM runtime mask.
+  Exact containing-cell queries fail for 74 points: cold 19/3 and hot-arid
+  41/11 in candidate-fit/fit-validation. All six temporal sites are valid.
 
 ## Decision Log
 
@@ -49,11 +55,20 @@ production change.
   existing absolute temporal gates. Date/Author: 2026-07-21, Codex.
 - Decision: reuse the proven two-L40/two-wave topology at a 515
   L40-minute-equivalent ceiling. Date/Author: 2026-07-21, Codex.
+- Decision: preserve the frozen no-fallback coverage gate and stop before
+  authority or GPU reservation. Silent deletion of the 74 points would
+  unbalance two regimes and change the study claim. Date/Author: 2026-07-21,
+  Codex.
 
 ## Outcomes & Retrospective
 
-Scaffolding is complete. No model output, GPU reservation, confirmation target,
-or public runtime change exists yet. Complete this section after the terminal.
+A10M5R15 closed at `HOLD-A10M5R15-ENGINEERING-INCOMPLETE`. The immutable
+preflight authenticated 1,440 calendar surfaces and six temporal sites but
+found 74 corpus coordinates outside the valid PRISM mask. No normalizer,
+candidate output, toolkit authority, GPU reservation, confirmation target, or
+public runtime change exists. A successor needs an explicit prospective
+cohort/fallback/source decision; implementation cannot repair this input
+identity mechanically.
 
 ## Context and Orientation
 

@@ -303,10 +303,11 @@ for token in (
 ):
     if token not in spec:
         raise RuntimeError(f"ratified specification text drift: {token}")
+exit_text = package_text.split("## Exit criteria", 1)[1]
 for terminal in expected_terminals:
-    if terminal not in package_text:
+    if terminal not in exit_text:
         raise RuntimeError(f"terminal precedence drift: {terminal}")
-positions = [package_text.index(terminal) for terminal in expected_terminals]
+positions = [exit_text.index(terminal) for terminal in expected_terminals]
 if positions != sorted(positions):
     raise RuntimeError("terminal precedence order drift")
 for token in (

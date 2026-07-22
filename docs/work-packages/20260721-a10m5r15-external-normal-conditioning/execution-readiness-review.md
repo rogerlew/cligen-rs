@@ -33,3 +33,12 @@ The independent reviewer reran the scaffold verifier, Python compilation, and
 `git diff --check`; all passed. The primary agent additionally ran the full
 repository formatting, clippy, and Rust test gates. No P1/P2/P3 remains after
 the final prose correction.
+
+## Post-review preflight disposition
+
+The accepted review established that the scaffold would fail closed; it did
+not assert that every external cell existed. The later published-source
+preflight exercised that gate and found 74 masked/out-of-coverage corpus
+coordinates. This is a new observed input fact, not an unresolved review
+finding. The package correctly stopped before authority, GPU reservation, or
+candidate output and closed at `HOLD-A10M5R15-ENGINEERING-INCOMPLETE`.

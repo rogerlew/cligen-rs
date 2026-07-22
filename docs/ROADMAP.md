@@ -682,6 +682,17 @@ eligibility, ADR-0007 supports adjudicating closure of the neural line rather
 than another family. Confirmation, solar, spatial, and promotion roles remain
 sealed.
 
+A10M5R15 stopped at its published-source pre-reservation gate with
+`HOLD-A10M5R15-ENGINEERING-INCOMPLETE`. All 1,440 Daymet calendar surfaces and
+all six temporal-site PRISM cells passed, but 74 corpus coordinates resolve to
+masked or out-of-coverage PRISM cells: 60 candidate-fit and 14 fit-validation,
+confined to the cold and hot-arid regimes. The frozen containing-cell contract
+prohibited fallback or interpolation, so no normalizer, toolkit authority,
+candidate output, or GPU reservation was created. Continuing now requires a
+new prospective cohort, valid-cell fallback, or complete-normals-source
+decision; silently dropping the 74 points would change regime balance and is
+not authorized by this package.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

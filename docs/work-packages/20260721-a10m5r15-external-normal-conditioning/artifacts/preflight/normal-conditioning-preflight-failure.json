@@ -1,0 +1,629 @@
+{
+  "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+  "calendar_points_validated": 1440,
+  "corpus_query_count": 1440,
+  "failed_by_regime_role": {
+    "cold/candidate_fit": 19,
+    "cold/fit_validation": 3,
+    "hot_arid/candidate_fit": 41,
+    "hot_arid/fit_validation": 11
+  },
+  "failed_by_role": {
+    "candidate_fit": 60,
+    "fit_validation": 14,
+    "temporal_site": 0
+  },
+  "failure_count": 74,
+  "failures": [
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-102.0 (502,552)",
+      "latitude": 29.0,
+      "longitude": -102.0,
+      "point_id": "p+2900_-10200",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-106.75 (502,438)",
+      "latitude": 29.0,
+      "longitude": -106.75,
+      "point_id": "p+2900_-10675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-107.0 (502,432)",
+      "latitude": 29.0,
+      "longitude": -107.0,
+      "point_id": "p+2900_-10700",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-107.5 (502,420)",
+      "latitude": 29.0,
+      "longitude": -107.5,
+      "point_id": "p+2900_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.25,-106.25 (496,450)",
+      "latitude": 29.25,
+      "longitude": -106.25,
+      "point_id": "p+2925_-10625",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.25,-107.25 (496,426)",
+      "latitude": 29.25,
+      "longitude": -107.25,
+      "point_id": "p+2925_-10725",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.5,-106.75 (490,438)",
+      "latitude": 29.5,
+      "longitude": -106.75,
+      "point_id": "p+2950_-10675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.5,-107.25 (490,426)",
+      "latitude": 29.5,
+      "longitude": -107.25,
+      "point_id": "p+2950_-10725",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-106.25 (484,450)",
+      "latitude": 29.75,
+      "longitude": -106.25,
+      "point_id": "p+2975_-10625",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-106.5 (484,444)",
+      "latitude": 29.75,
+      "longitude": -106.5,
+      "point_id": "p+2975_-10650",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-106.75 (484,438)",
+      "latitude": 29.75,
+      "longitude": -106.75,
+      "point_id": "p+2975_-10675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-107.0 (484,432)",
+      "latitude": 29.75,
+      "longitude": -107.0,
+      "point_id": "p+2975_-10700",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-107.5 (484,420)",
+      "latitude": 29.75,
+      "longitude": -107.5,
+      "point_id": "p+2975_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.0,-105.5 (478,468)",
+      "latitude": 30.0,
+      "longitude": -105.5,
+      "point_id": "p+3000_-10550",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.0,-107.25 (478,426)",
+      "latitude": 30.0,
+      "longitude": -107.25,
+      "point_id": "p+3000_-10725",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.0,-107.5 (478,420)",
+      "latitude": 30.0,
+      "longitude": -107.5,
+      "point_id": "p+3000_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.25,-105.75 (472,462)",
+      "latitude": 30.25,
+      "longitude": -105.75,
+      "point_id": "p+3025_-10575",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.25,-106.5 (472,444)",
+      "latitude": 30.25,
+      "longitude": -106.5,
+      "point_id": "p+3025_-10650",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.25,-107.0 (472,432)",
+      "latitude": 30.25,
+      "longitude": -107.0,
+      "point_id": "p+3025_-10700",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.25,-107.25 (472,426)",
+      "latitude": 30.25,
+      "longitude": -107.25,
+      "point_id": "p+3025_-10725",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.5,-105.25 (466,474)",
+      "latitude": 30.5,
+      "longitude": -105.25,
+      "point_id": "p+3050_-10525",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.5,-105.75 (466,462)",
+      "latitude": 30.5,
+      "longitude": -105.75,
+      "point_id": "p+3050_-10575",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.5,-107.5 (466,420)",
+      "latitude": 30.5,
+      "longitude": -107.5,
+      "point_id": "p+3050_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.75,-105.5 (460,468)",
+      "latitude": 30.75,
+      "longitude": -105.5,
+      "point_id": "p+3075_-10550",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-106.0 (454,456)",
+      "latitude": 31.0,
+      "longitude": -106.0,
+      "point_id": "p+3100_-10600",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-106.25 (454,450)",
+      "latitude": 31.0,
+      "longitude": -106.25,
+      "point_id": "p+3100_-10625",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-106.75 (454,438)",
+      "latitude": 31.0,
+      "longitude": -106.75,
+      "point_id": "p+3100_-10675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-107.0 (454,432)",
+      "latitude": 31.0,
+      "longitude": -107.0,
+      "point_id": "p+3100_-10700",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-107.25 (454,426)",
+      "latitude": 31.0,
+      "longitude": -107.25,
+      "point_id": "p+3100_-10725",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.0,-107.5 (454,420)",
+      "latitude": 31.0,
+      "longitude": -107.5,
+      "point_id": "p+3100_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.25,-106.0 (448,456)",
+      "latitude": 31.25,
+      "longitude": -106.0,
+      "point_id": "p+3125_-10600",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.25,-106.25 (448,450)",
+      "latitude": 31.25,
+      "longitude": -106.25,
+      "point_id": "p+3125_-10625",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.25,-106.5 (448,444)",
+      "latitude": 31.25,
+      "longitude": -106.5,
+      "point_id": "p+3125_-10650",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.25,-106.75 (448,438)",
+      "latitude": 31.25,
+      "longitude": -106.75,
+      "point_id": "p+3125_-10675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.5,-106.5 (442,444)",
+      "latitude": 31.5,
+      "longitude": -106.5,
+      "point_id": "p+3150_-10650",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 31.5,-107.5 (442,420)",
+      "latitude": 31.5,
+      "longitude": -107.5,
+      "point_id": "p+3150_-10750",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 32.0,-113.75 (430,270)",
+      "latitude": 32.0,
+      "longitude": -113.75,
+      "point_id": "p+3200_-11375",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 32.0,-114.5 (430,252)",
+      "latitude": 32.0,
+      "longitude": -114.5,
+      "point_id": "p+3200_-11450",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 32.0,-114.75 (430,246)",
+      "latitude": 32.0,
+      "longitude": -114.75,
+      "point_id": "p+3200_-11475",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 32.0,-116.25 (430,210)",
+      "latitude": 32.0,
+      "longitude": -116.25,
+      "point_id": "p+3200_-11625",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 32.25,-116.75 (424,198)",
+      "latitude": 32.25,
+      "longitude": -116.75,
+      "point_id": "p+3225_-11675",
+      "regime": "hot_arid",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.0,-89.5 (70,852)",
+      "latitude": 47.0,
+      "longitude": -89.5,
+      "point_id": "p+4700_-08950",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.0,-89.75 (70,846)",
+      "latitude": 47.0,
+      "longitude": -89.75,
+      "point_id": "p+4700_-08975",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.0,-90.25 (70,834)",
+      "latitude": 47.0,
+      "longitude": -90.25,
+      "point_id": "p+4700_-09025",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.25,-89.25 (64,858)",
+      "latitude": 47.25,
+      "longitude": -89.25,
+      "point_id": "p+4725_-08925",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.25,-90.0 (64,840)",
+      "latitude": 47.25,
+      "longitude": -90.0,
+      "point_id": "p+4725_-09000",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-88.25 (58,882)",
+      "latitude": 47.5,
+      "longitude": -88.25,
+      "point_id": "p+4750_-08825",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-89.0 (58,864)",
+      "latitude": 47.5,
+      "longitude": -89.0,
+      "point_id": "p+4750_-08900",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-89.5 (58,852)",
+      "latitude": 47.5,
+      "longitude": -89.5,
+      "point_id": "p+4750_-08950",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-90.0 (58,840)",
+      "latitude": 47.5,
+      "longitude": -90.0,
+      "point_id": "p+4750_-09000",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-90.25 (58,834)",
+      "latitude": 47.5,
+      "longitude": -90.25,
+      "point_id": "p+4750_-09025",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 47.5,-90.5 (58,828)",
+      "latitude": 47.5,
+      "longitude": -90.5,
+      "point_id": "p+4750_-09050",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.25,-89.25 (40,858)",
+      "latitude": 48.25,
+      "longitude": -89.25,
+      "point_id": "p+4825_-08925",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.25,-91.25 (40,810)",
+      "latitude": 48.25,
+      "longitude": -91.25,
+      "point_id": "p+4825_-09125",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.5,-88.0 (34,888)",
+      "latitude": 48.5,
+      "longitude": -88.0,
+      "point_id": "p+4850_-08800",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.5,-89.5 (34,852)",
+      "latitude": 48.5,
+      "longitude": -89.5,
+      "point_id": "p+4850_-08950",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.5,-89.75 (34,846)",
+      "latitude": 48.5,
+      "longitude": -89.75,
+      "point_id": "p+4850_-08975",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.75,-91.75 (28,798)",
+      "latitude": 48.75,
+      "longitude": -91.75,
+      "point_id": "p+4875_-09175",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.75,-92.0 (28,792)",
+      "latitude": 48.75,
+      "longitude": -92.0,
+      "point_id": "p+4875_-09200",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.75,-92.75 (28,774)",
+      "latitude": 48.75,
+      "longitude": -92.75,
+      "point_id": "p+4875_-09275",
+      "regime": "cold",
+      "role": "candidate_fit"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-102.25 (502,546)",
+      "latitude": 29.0,
+      "longitude": -102.25,
+      "point_id": "p+2900_-10225",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-105.25 (502,474)",
+      "latitude": 29.0,
+      "longitude": -105.25,
+      "point_id": "p+2900_-10525",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-105.5 (502,468)",
+      "latitude": 29.0,
+      "longitude": -105.5,
+      "point_id": "p+2900_-10550",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-105.75 (502,462)",
+      "latitude": 29.0,
+      "longitude": -105.75,
+      "point_id": "p+2900_-10575",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.0,-106.0 (502,456)",
+      "latitude": 29.0,
+      "longitude": -106.0,
+      "point_id": "p+2900_-10600",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.25,-105.5 (496,468)",
+      "latitude": 29.25,
+      "longitude": -105.5,
+      "point_id": "p+2925_-10550",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.5,-105.5 (490,468)",
+      "latitude": 29.5,
+      "longitude": -105.5,
+      "point_id": "p+2950_-10550",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-102.25 (484,546)",
+      "latitude": 29.75,
+      "longitude": -102.25,
+      "point_id": "p+2975_-10225",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-105.75 (484,462)",
+      "latitude": 29.75,
+      "longitude": -105.75,
+      "point_id": "p+2975_-10575",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 29.75,-106.0 (484,456)",
+      "latitude": 29.75,
+      "longitude": -106.0,
+      "point_id": "p+2975_-10600",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 30.5,-105.0 (466,480)",
+      "latitude": 30.5,
+      "longitude": -105.0,
+      "point_id": "p+3050_-10500",
+      "regime": "hot_arid",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.5,-90.75 (34,822)",
+      "latitude": 48.5,
+      "longitude": -90.75,
+      "point_id": "p+4850_-09075",
+      "regime": "cold",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.75,-90.25 (28,834)",
+      "latitude": 48.75,
+      "longitude": -90.25,
+      "point_id": "p+4875_-09025",
+      "regime": "cold",
+      "role": "fit_validation"
+    },
+    {
+      "error": "coordinate resolves to a masked PRISM cell: 48.75,-90.75 (28,822)",
+      "latitude": 48.75,
+      "longitude": -90.75,
+      "point_id": "p+4875_-09075",
+      "regime": "cold",
+      "role": "fit_validation"
+    }
+  ],
+  "gates": {
+    "all_calendar_surfaces_valid": true,
+    "all_corpus_queries_valid": false,
+    "all_temporal_queries_valid": true,
+    "containing_cell_only": true,
+    "fallback_or_interpolation_used": false,
+    "pre_reservation": true
+  },
+  "grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+  "normals_grid_sha256": "9af8031291825757a2ce639079479593f53501c7a8ce147d32503fdc481694c2",
+  "package_id": "20260721-a10m5r15-external-normal-conditioning",
+  "resource_reserved": false,
+  "runtime_archive_sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292",
+  "schema_version": "a10m5r15-normal-conditioning-preflight-failure-1",
+  "source_archive_sha256": "c3b832d43de54face39486673843d6c5bc511793804f5678dcb1af809ac0475c",
+  "source_commit": "679755627cc19e579dc0d704e11c910df9904a83",
+  "terminal": "HOLD-A10M5R15-ENGINEERING-INCOMPLETE",
+  "valid": false
+}
