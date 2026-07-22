@@ -4,13 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import importlib.util
 import json
+import math
 import os
 import subprocess
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 PACKAGE = Path(__file__).resolve().parents[2]
@@ -22,6 +24,12 @@ PLAN = PACKAGE / "artifacts/cohort-plan.json"
 LEDGER = PACKAGE / "artifacts/daymet-access.ndjson"
 ACQUISITION = PACKAGE / "artifacts/acquisition-result.json"
 SELECTION = PACKAGE / "artifacts/cohort-selection.json"
+SHARD_MANIFEST = PACKAGE / "artifacts/daymet-shard-manifest-v1.json"
+NORMALIZED_MANIFEST = PACKAGE / "artifacts/normalized-manifest-v1.json"
+NORMALIZATION = PACKAGE / "artifacts/normalization-statistics-v1.json"
+TRANSFER_MANIFEST = PACKAGE / "artifacts/offline-transfer-manifest-v1.json"
+SOURCE_MANIFEST = PACKAGE / "artifacts/source-manifest-v1.json"
+BUILD_RECEIPT = PACKAGE / "artifacts/cohort-build-receipt.json"
 RAW = PACKAGE / "raw"
 PARENT_SOURCE = A10M1 / "artifacts/jobs/a10m1_corpus.py"
 PREFLIGHT_SOURCE = R15 / "artifacts/jobs/build_normal_conditioning.py"
@@ -315,9 +323,191 @@ def finalize() -> None:
     print("A10M5R15R1-COHORT-SELECTION-FINALIZED")
 
 
+def build() -> None:
+    contract, parent, _ = authenticate()
+    selection = read(SELECTION)
+    selected = selection["locations"]
+    if len(selected) != 1440 or digest(SELECTION) == "":
+        raise RuntimeError("final cohort selection is unavailable")
+    freeze_contract = read(A10M1 / "artifacts/a10m1-freeze-v1.json")
+    shards = []
+    availability = Counter()
+    statistics: dict[tuple[str, str, str], dict] = {}
+    for shard_index in range(0, len(selected), 24):
+        points = selected[shard_index : shard_index + 24]
+        objects = []
+        for point in points:
+            path = source_path(point["point_id"])
+            if path is None:
+                raise RuntimeError(f"selected Daymet source missing: {point['point_id']}")
+            with gzip.open(path, "rb") as stream:
+                payload, coverage = parent.parse_daymet(stream.read(), point, freeze_contract)
+            objects.append((f"{point['point_id']}.json", parent.canonical_bytes(payload)))
+            for field, rows in coverage["availability"].items():
+                for row in rows:
+                    availability[(point["regime"], point["role"], field, row["year"], row["month"], row["state"])] += row["count"]
+            for field, summary in coverage["statistics"].items():
+                key = (point["regime"], point["role"], field)
+                target = statistics.setdefault(
+                    key,
+                    {
+                        "count": 0,
+                        "maximum": None,
+                        "minimum": None,
+                        "sum": 0.0,
+                        "sum_squares": 0.0,
+                    },
+                )
+                target["count"] += summary["count"]
+                target["sum"] += summary["sum"]
+                target["sum_squares"] += summary["sum_squares"]
+                target["minimum"] = summary["minimum"] if target["minimum"] is None else min(target["minimum"], summary["minimum"])
+                target["maximum"] = summary["maximum"] if target["maximum"] is None else max(target["maximum"], summary["maximum"])
+        path = RAW / "training/daymet-v1" / f"daymet-{shard_index // 24:03d}.tar.gz"
+        identity = parent.deterministic_tar_gz(path, objects)
+        identity.update(
+            {
+                "object_count": len(points),
+                "point_ids": [row["point_id"] for row in points],
+                "schema_version": 1,
+                "source_id": "daymet_v4r1_single_pixel",
+            }
+        )
+        shards.append(identity)
+
+    coverage = {
+        "availability": [
+            {
+                "count": count,
+                "field": field,
+                "month": month,
+                "regime": regime,
+                "role": role,
+                "state": state,
+                "year": year,
+            }
+            for (regime, role, field, year, month, state), count in sorted(availability.items())
+        ],
+        "schema_version": 1,
+        "statistics": [
+            {**summary, "field": field, "regime": regime, "role": role}
+            for (regime, role, field), summary in sorted(statistics.items())
+        ],
+    }
+    write(RAW / "daymet/coverage-v1.json", coverage)
+    write(SHARD_MANIFEST, {"schema_version": 1, "shards": shards})
+
+    parent_normalized = read(A10M1 / "artifacts/normalized-manifest-v1.json")
+    parent_normalization = read(A10M1 / "artifacts/normalization-statistics-v1.json")
+    daymet_counts = Counter((row["regime"], row["role"]) for row in selected)
+    daymet_tiles = defaultdict(set)
+    tile_roles = defaultdict(set)
+    for row in selected:
+        daymet_tiles[(row["regime"], row["role"])].add(row["tile_id"])
+        tile_roles[row["tile_id"]].add(row["role"])
+    leakage = dict(parent_normalized["leakage_audit"])
+    leakage["tile_role_splits"] = sorted(tile for tile, roles in tile_roles.items() if len(roles) != 1)
+    if any(leakage.values()):
+        raise RuntimeError(f"successor leakage audit failed: {leakage}")
+    coverage_summary = dict(parent_normalized["coverage_summary"])
+    coverage_summary["daymet"] = [
+        {
+            "locations": daymet_counts[(regime, role)],
+            "regime": regime,
+            "role": role,
+            "tiles": len(daymet_tiles[(regime, role)]),
+        }
+        for regime in freeze_contract["regime_frames"]
+        for role in ("candidate_fit", "fit_validation")
+    ]
+    normalization_rows = []
+    for (regime, role, field), row in sorted(statistics.items()):
+        if role != "candidate_fit" or row["count"] == 0:
+            continue
+        mean = row["sum"] / row["count"]
+        variance = max(0.0, row["sum_squares"] / row["count"] - mean**2)
+        normalization_rows.append(
+            {
+                "count": row["count"],
+                "field": field,
+                "maximum": row["maximum"],
+                "mean": mean,
+                "minimum": row["minimum"],
+                "regime": regime,
+                "source_id": "daymet_v4r1_single_pixel",
+                "standard_deviation": math.sqrt(variance),
+            }
+        )
+    normalization_rows.extend(
+        row for row in parent_normalization["rows"] if row["source_id"] != "daymet_v4r1_single_pixel"
+    )
+    normalized = {
+        "cohort_contract_sha256": digest(CONTRACT),
+        "cohort_selection_sha256": digest(SELECTION),
+        "coverage_summary": coverage_summary,
+        "daymet_shards": shards,
+        "freeze_sha256": digest(A10M1 / "artifacts/a10m1-freeze-v1.json"),
+        "inherited_development_objects": parent_normalized["inherited_development_objects"],
+        "leakage_audit": leakage,
+        "manifest_id": "a10m5r15r1-normalized-manifest-v1",
+        "schema_version": 1,
+        "uscrn_objects": parent_normalized["uscrn_objects"],
+    }
+    source_manifest = {
+        "confirmation_target_series_accessed": False,
+        "cohort_contract_sha256": digest(CONTRACT),
+        "cohort_selection_sha256": digest(SELECTION),
+        "original_daymet_access_ledger_sha256": contract["predecessors"]["a10m1_original_access_ledger_sha256"],
+        "package_id": contract["package_id"],
+        "schema_version": "a10m5r15r1-source-manifest-1",
+        "successor_daymet_access_ledger_sha256": digest(LEDGER),
+    }
+    parent_transfer = read(A10M1 / "artifacts/offline-transfer-manifest-v1.json")
+    inherited_objects = [row for row in parent_transfer["objects"] if "/daymet-v2/" not in row["path"]]
+    transfer_objects = [
+        {
+            "bytes": row["bytes"],
+            "destination_class": "job_local_stage",
+            "path": row["path"],
+            "sha256": row["sha256"],
+        }
+        for row in shards
+    ] + inherited_objects
+    transfer = {
+        "aggregate_bytes": sum(row["bytes"] for row in transfer_objects),
+        "hash_required_before_use": True,
+        "manifest_id": "a10m5r15r1-offline-transfer-v1",
+        "objects": transfer_objects,
+        "schema_version": 1,
+        "source_manifest_sha256": hashlib.sha256(canonical(source_manifest)).hexdigest(),
+        "small_file_policy": parent_transfer["small_file_policy"],
+    }
+    write(SOURCE_MANIFEST, source_manifest)
+    write(NORMALIZED_MANIFEST, normalized)
+    write(NORMALIZATION, {"fit_role_only": "candidate_fit", "rows": normalization_rows, "schema_version": 1})
+    write(TRANSFER_MANIFEST, transfer)
+    write(
+        BUILD_RECEIPT,
+        {
+            "aggregate_bytes": transfer["aggregate_bytes"],
+            "cohort_selection_sha256": digest(SELECTION),
+            "daymet_location_count": len(selected),
+            "daymet_shard_count": len(shards),
+            "normalized_manifest_sha256": digest(NORMALIZED_MANIFEST),
+            "normalization_statistics_sha256": digest(NORMALIZATION),
+            "package_id": contract["package_id"],
+            "schema_version": "a10m5r15r1-cohort-build-1",
+            "transfer_manifest_sha256": digest(TRANSFER_MANIFEST),
+            "transfer_object_count": len(transfer_objects),
+            "valid": True,
+        },
+    )
+    print("A10M5R15R1-CORPUS-BUILT")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=("freeze", "acquire", "finalize"))
+    parser.add_argument("mode", choices=("freeze", "acquire", "finalize", "build"))
     parser.add_argument("--source-commit")
     options = parser.parse_args()
     if options.mode == "freeze":
@@ -326,8 +516,10 @@ def main() -> None:
         if options.source_commit is None:
             raise RuntimeError("--source-commit is required for acquisition")
         acquire(options.source_commit)
-    else:
+    elif options.mode == "finalize":
         finalize()
+    else:
+        build()
 
 
 if __name__ == "__main__":
