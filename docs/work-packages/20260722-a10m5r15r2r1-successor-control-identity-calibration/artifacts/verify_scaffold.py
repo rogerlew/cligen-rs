@@ -14,6 +14,8 @@ REPO = PACKAGE.parents[2]
 R2 = PACKAGE.parent / "20260721-a10m5r15r2-external-normal-conditioning-execution"
 CONTRACT = PACKAGE / "artifacts/control-calibration-contract.json"
 ROLE_MAP = PACKAGE / "artifacts/control-role-map.json"
+CORPUS_PIN = PACKAGE / "artifacts/corpus-layout-pin.json"
+CORPUS_VERIFIER = PACKAGE / "artifacts/verify_corpus_layout.py"
 FAILURE = R2 / "artifacts/execution-r0-failure.json"
 JOBS = PACKAGE / "artifacts/jobs"
 EXPECTED_CHAIN = {
@@ -66,6 +68,13 @@ def failure_projection(value: dict) -> dict:
 contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
 failure = json.loads(FAILURE.read_text(encoding="utf-8"))
 role_map = json.loads(ROLE_MAP.read_text(encoding="utf-8"))
+if not (
+    digest(CORPUS_PIN)
+    == "93045d7727a5c0718579ed2222397fb514633f54bec20afd919b61bd6944bc44"
+    and digest(CORPUS_VERIFIER)
+    == "8ebb71ca9b623cf3626bd5694e580f7d72bd8e565af45dd9b8e150ed769fa11e"
+):
+    raise RuntimeError("successor corpus verifier publication drift")
 parent_failure = contract["parent_failure"]
 if parent_failure != failure_projection(failure):
     raise RuntimeError("calibration contract does not bind the complete R2 failure")
