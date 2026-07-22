@@ -122,7 +122,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260721-a10m5r15r1-prism-eligible-cohort](20260721-a10m5r15r1-prism-eligible-cohort/package.md) | A10M5R15R1-COHORT-READY |
 | [20260721-a10m5r15r2-external-normal-conditioning-execution](20260721-a10m5r15r2-external-normal-conditioning-execution/package.md) | EXECUTED-HOLD-SUCCESSOR-CONTROL-IDENTITY |
 | [20260722-a10m5r15r2r1-successor-control-identity-calibration](20260722-a10m5r15r2r1-successor-control-identity-calibration/package.md) | A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY |
-| [20260722-a10m5r15r2r2-successor-control-execution](20260722-a10m5r15r2r2-successor-control-execution/package.md) | EXECUTION-READY |
+| [20260722-a10m5r15r2r2-successor-control-execution](20260722-a10m5r15r2r2-successor-control-execution/package.md) | EXECUTED-HOLD-PORTFOLIO-LAUNCHER-FAILURE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |
 | [20260719-a10m5o1-multi-l40-toolkit-hardening](20260719-a10m5o1-multi-l40-toolkit-hardening/package.md) | EXECUTED-COMPLETE |

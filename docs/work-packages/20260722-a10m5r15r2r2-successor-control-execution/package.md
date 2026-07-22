@@ -1,6 +1,6 @@
 # A10M5R15R2R2 — Successor-Control External-Normal Execution
 
-Status: `EXECUTION-READY`
+Status: `EXECUTED-HOLD-PORTFOLIO-LAUNCHER-FAILURE`
 Date: 2026-07-22
 Starting branch and push target: current `main`, push `main`
 
@@ -78,3 +78,20 @@ The operator authorized the 515-minute study within a 597-minute outer
 campaign ceiling. Prior realized use is 38 L40-minutes, so the bounded maximum
 after this study is 553. Authority, assets, admission, run root, and recovery
 reserve are fresh; no failed-run execution identity is reused.
+
+## Execution result
+
+Fresh control job 1060866 reconstructed all six calibrated identities exactly
+in 1,126 seconds and was billed 19 L40-minutes. Immediate two-L40 occupancy
+and portfolio admission then passed. Portfolio job 1060868 failed closed after
+87 wall-seconds, billed as 3 L40-minutes: both wave-0 children exited 1 before
+publishing authenticated role records. No wave-1 child or runtime benchmark
+ran, and no candidate result is interpretable.
+
+The package's inherited evidence allowlist named predecessor role paths and
+retained only new-role portable exports, so the child `candidate.stderr`
+diagnostics were not collected. This is an operational evidence-surface defect
+and requires a fresh successor identity with complete new-role failure
+evidence. Collection, remote/job-local cleanup, terminal closure, and release
+of the unused recovery reserve all authenticated. Realized campaign use is now
+60 L40-minutes; a fresh 515-minute successor remains bounded at 575 under 597.

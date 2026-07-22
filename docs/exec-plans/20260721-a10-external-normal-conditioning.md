@@ -55,7 +55,11 @@ production change.
   515-minute study ceiling.
 - [x] Completed independent R2R2 execution-readiness review at `PASS` after
   dispositioning all P0/P1/P2 findings.
-- [ ] Publish R2R2 and run the authorized study end to end.
+- [x] Published and executed R2R2: exact control passed in 19 L40-minutes;
+  portfolio admission passed, then both wave-0 children failed before role
+  records in 3 L40-minutes. Cleanup and reserve release authenticated.
+- [ ] Publish a fresh evidence-surface successor with complete new-role
+  diagnostics; realized 60 + successor ceiling 515 = 575 under outer 597.
 
 ## Surprises & Discoveries
 

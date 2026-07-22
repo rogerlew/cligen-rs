@@ -1,0 +1,14 @@
+{
+  "attempt_index": 0,
+  "authority_id": "a10m5r15r2r2-successor-control-execution-r0-authority",
+  "event_sha256": "83b82730778b46f2f3b0743f20e8b8042f4d11e9ce581215c17b3f18698bbdfd",
+  "job_role": "toolkit-recovery",
+  "plan_id": "0995a2ba57c4d21f03eae47bcd8c17eadb02e9489130bfa41d4bb8e2881ce3b6",
+  "predecessor_sha256": "2a33433d0c139805ac516633a7ba3e8c0bb20e48710b4a1342c1320d75357bcf",
+  "release_reason": "verified-cleanup",
+  "requested_gpu_minutes": 5,
+  "run_id": "a10m5r15r2r2-successor-control-execution-r0",
+  "sequence": 8,
+  "status": "released",
+  "token": "2a0d0a3fad195f4211378177acdc2933"
+}
