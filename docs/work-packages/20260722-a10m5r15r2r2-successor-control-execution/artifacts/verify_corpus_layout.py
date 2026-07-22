@@ -13,8 +13,8 @@ from typing import Any
 
 
 PIN_PATH = Path(__file__).resolve().with_name("corpus-layout-pin.json")
-PIN_BYTES = 866
-PIN_SHA256 = "93045d7727a5c0718579ed2222397fb514633f54bec20afd919b61bd6944bc44"
+PIN_BYTES = 857
+PIN_SHA256 = "27e0599cf45e08eed2e53c284dab35b5dfb9cf2889847e324dd4ef22007eda23"
 
 
 def digest(path: Path) -> str:

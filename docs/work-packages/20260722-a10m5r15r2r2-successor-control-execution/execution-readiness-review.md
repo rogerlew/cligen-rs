@@ -17,6 +17,7 @@ authorize R2R2. This review evaluates the fresh successor package.
 | P0 | Terminal replay required the new package ID for the intentionally predecessor-owned attribution receipt. | Accepted. Replay now requires the exact predecessor package ID and exact frozen receipt SHA; the verifier asserts both semantics. |
 | P2 | Accounting allowed duplicate component or recovery rows and did not recompute release-event hashes. | Accepted. The validator requires the exact four ordered unique charges, distinct records and paths, distinct R2/R3 releases, exact run IDs, and canonical event-hash recomputation. |
 | P1 | The shared accounting validator did not authenticate its own published bytes. | Accepted. The helper self-authenticates against the source commit, is included in preparation's published-source gate, and is verified locally. |
+| P1 | Prospective authority construction found the relocated corpus verifier still pinned the predecessor pin-file bytes. | Accepted. The verifier now embeds the exact 857-byte R2R2 pin identity, and scaffold verification executes `load_pin()` against the relocated package pin. Focused independent re-review passed. |
 
 Independent re-review confirmed all dispositions, compiled every package
 Python source, exercised the real contract transformation, validated campaign

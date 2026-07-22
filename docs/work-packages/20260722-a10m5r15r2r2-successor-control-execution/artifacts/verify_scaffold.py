@@ -90,6 +90,16 @@ if (
     or pin["layout"]["sole_top_level_prefix"] != "corpus"
 ):
     raise RuntimeError("successor corpus layout pin drift")
+corpus_verifier_spec = importlib.util.spec_from_file_location(
+    "r2r2_verify_corpus_layout",
+    PACKAGE / "artifacts/verify_corpus_layout.py",
+)
+if corpus_verifier_spec is None or corpus_verifier_spec.loader is None:
+    raise RuntimeError("cannot load successor corpus verifier")
+corpus_verifier = importlib.util.module_from_spec(corpus_verifier_spec)
+corpus_verifier_spec.loader.exec_module(corpus_verifier)
+if corpus_verifier.load_pin() != pin:
+    raise RuntimeError("successor corpus verifier pin self-identity drift")
 if contract["replay"] != {
     "attribution_bootstrap_seed": 410542,
     "calibration_receipt_sha256": "d54013c376f19a3d969f312a9e660dd5879e142bf64c3a16b622d21b30c2d9a2",
