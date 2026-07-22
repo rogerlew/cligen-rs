@@ -12,8 +12,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 
-PACKAGE = Path(__file__).resolve().parents[1]
-PIN_PATH = PACKAGE / "artifacts/corpus-layout-pin.json"
+PIN_PATH = Path(__file__).resolve().with_name("corpus-layout-pin.json")
 PIN_BYTES = 866
 PIN_SHA256 = "93045d7727a5c0718579ed2222397fb514633f54bec20afd919b61bd6944bc44"
 

@@ -250,6 +250,57 @@ def evidence(role: str) -> list[str]:
     return values
 
 
+def prospective_calendar_preflight(root: Path) -> dict:
+    manifest = json.loads((root / "asset-manifest.json").read_text(encoding="utf-8"))
+    path = root / "calendar-preflight.json"
+    value = json.loads(path.read_text(encoding="utf-8"))
+    calendar_identity = {"bytes": path.stat().st_size, "sha256": digest(path)}
+    corpus_identity = {
+        key: manifest["assets"]["corpus.tar"][key] for key in ("bytes", "sha256")
+    }
+    if not (
+        calendar_identity
+        == {
+            key: manifest["assets"]["calendar-preflight.json"][key]
+            for key in ("bytes", "sha256")
+        }
+        and value.get("corpus") == corpus_identity
+        and value.get("valid") is True
+        and value.get("profile_id") == "daymet_official_365_v1"
+        and value.get("source_transform_id") == "daymet_official_365_v1"
+        and value.get("counts")
+        == {
+            "calendar_axis_rows_per_point": 10958,
+            "core_observed_rows_per_point": 10950,
+            "physics_observed_rows_per_point": 10950,
+            "roles": {"candidate_fit": 1200, "fit_validation": 240},
+        }
+        and value.get("month_year_eligibility")
+        == {
+            "core_minimum_observed_rows": 28,
+            "eligible": True,
+            "physics_minimum_observed_rows": 28,
+            "required_minimum_observed_rows": 28,
+            "year_month_cells_per_point": 360,
+        }
+        and value.get("fixture", {}).get("spans_observed_february_29") is True
+        and value.get("fixture", {}).get("spans_absent_leap_december_31") is True
+        and value.get("fixture", {}).get("spans_window_end_exclusive")
+        == ["1987-12-31", "1988-01-01"]
+        and value.get("window")
+        == {
+            "calendar_axis_rows": 5844,
+            "core_observed_rows": 5840,
+            "end_exclusive": "1996-01-01",
+            "end_semantics": "exclusive",
+            "physics_observed_rows": 5840,
+            "start_inclusive": "1980-01-01",
+        }
+    ):
+        raise RuntimeError("successor calendar preflight identity or semantics drift")
+    return value
+
+
 parent.PACKAGE_ID = PACKAGE_ID
 parent.RUN_ID = RUN_ID
 parent.RECORD_TYPE = RECORD_TYPE
@@ -266,6 +317,7 @@ inherited.PREDECESSOR_COMMIT = PARENT_COMMIT
 inherited.predecessor_bundle = predecessor_bundle
 inherited.operational_predecessor_bundle = predecessor_bundle
 inherited.evidence = evidence
+inherited.prospective_calendar_preflight = prospective_calendar_preflight
 inherited.authority = authority
 inherited.plan = plan
 parent.authority = authority

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import hashlib
+import io
 import json
 import os
 import re
@@ -50,6 +52,17 @@ BENCHMARK_PARAMETERS = {
     "p+3675_-10750": {"bytes": 7022, "sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5"},
     "p+4025_-09900": {"bytes": 7022, "sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78"},
 }
+CALENDAR_FIELDS = ("prcp", "tmax", "tmin", "srad")
+CALENDAR_FIXTURE_DATES = (
+    "1984-02-28",
+    "1984-02-29",
+    "1984-03-01",
+    "1984-12-30",
+    "1984-12-31",
+    "1985-01-01",
+    "1987-12-31",
+    "1988-01-01",
+)
 
 
 def digest(path: Path) -> str:
@@ -124,6 +137,157 @@ def rewrite_json(path: Path, transform) -> None:
     value = json.loads(path.read_text(encoding="utf-8"))
     transform(value)
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def calendar_fixture(document: dict) -> dict:
+    indices = {value: index for index, value in enumerate(document["dates"])}
+    rows = []
+    for date in CALENDAR_FIXTURE_DATES:
+        index = indices[date]
+        observed = bool(document["source_observed"][index])
+        present = {
+            field: document["fields"][field][index] is not None
+            for field in CALENDAR_FIELDS
+        }
+        if any(value != observed for value in present.values()):
+            raise RuntimeError("calendar fixture field mask drift")
+        rows.append(
+            {
+                "date": date,
+                "required_fields_present": present,
+                "source_observed": observed,
+            }
+        )
+    if not (
+        rows[1]["source_observed"]
+        and not rows[4]["source_observed"]
+        and rows[-2]["source_observed"]
+        and rows[-1]["source_observed"]
+    ):
+        raise RuntimeError("calendar fixture boundary semantics failed")
+    return {
+        "point_id": document["point_id"],
+        "rows": rows,
+        "spans_absent_leap_december_31": True,
+        "spans_observed_february_29": True,
+        "spans_window_end_exclusive": ["1987-12-31", "1988-01-01"],
+    }
+
+
+def rebuild_calendar_preflight(corpus_archive: Path, output: Path) -> None:
+    profile = json.loads(
+        (REPO / "docs/specifications/a10-daymet-calendar-profile-v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    expected = profile["fit_period_example"]
+    window = profile["window_example"]
+    roles = {"candidate_fit": 0, "fit_validation": 0}
+    minimum_counts = {"core": 10**9, "physics": 10**9}
+    fixture = None
+    with tarfile.open(corpus_archive, "r:") as outer:
+        for member in outer.getmembers():
+            if not member.name.endswith(".tar.gz") or "/daymet-v1/" not in member.name:
+                continue
+            stream = outer.extractfile(member)
+            if stream is None:
+                raise RuntimeError("Daymet outer corpus member cannot be read")
+            with tarfile.open(fileobj=io.BytesIO(stream.read()), mode="r:gz") as inner:
+                for item in inner.getmembers():
+                    document_stream = inner.extractfile(item)
+                    if document_stream is None:
+                        continue
+                    document = json.load(document_stream)
+                    role = document.get("role")
+                    if role not in roles:
+                        continue
+                    dates = document["dates"]
+                    observed = [bool(value) for value in document["source_observed"]]
+                    if len(dates) != len(observed):
+                        raise RuntimeError("Daymet date/mask length drift")
+                    missing = [
+                        date for date, keep in zip(dates, observed) if not keep
+                    ]
+                    if not (
+                        len(dates) == expected["calendar_axis_rows"]
+                        and dates[0] == expected["start_date_inclusive"]
+                        and dates[-1] == expected["end_date_inclusive"]
+                        and sum(observed) == expected["observed_rows"]
+                        and missing == expected["unobserved_dates"]
+                    ):
+                        raise RuntimeError("Daymet calendar profile drift")
+                    for field in CALENDAR_FIELDS:
+                        present = [value is not None for value in document["fields"][field]]
+                        if present != observed:
+                            raise RuntimeError(f"Daymet {field} mask drift")
+                    roles[role] += 1
+                    parsed_dates = [dt.date.fromisoformat(value) for value in dates]
+                    for name, fields in (
+                        ("core", CALENDAR_FIELDS[:3]),
+                        ("physics", CALENDAR_FIELDS),
+                    ):
+                        counts = {}
+                        for index, date in enumerate(parsed_dates):
+                            keep = observed[index] and all(
+                                document["fields"][field][index] is not None
+                                for field in fields
+                            )
+                            if keep:
+                                key = (date.year, date.month)
+                                counts[key] = counts.get(key, 0) + 1
+                        if len(counts) != 360:
+                            raise RuntimeError("calendar year-month eligibility drift")
+                        minimum_counts[name] = min(
+                            minimum_counts[name], min(counts.values())
+                        )
+                    if fixture is None and role == "candidate_fit":
+                        fixture = calendar_fixture(document)
+    if roles != {"candidate_fit": 1200, "fit_validation": 240}:
+        raise RuntimeError(f"Daymet role roster drift: {roles}")
+    if fixture is None or min(minimum_counts.values()) < 28:
+        raise RuntimeError("calendar consumer preflight incomplete")
+    value = {
+        "corpus": identity(corpus_archive),
+        "counts": {
+            "calendar_axis_rows_per_point": expected["calendar_axis_rows"],
+            "core_observed_rows_per_point": expected["observed_rows"],
+            "physics_observed_rows_per_point": expected["observed_rows"],
+            "roles": roles,
+        },
+        "fixture": fixture,
+        "mask_composition": {
+            "core": "source_observed and prcp present and tmax present and tmin present",
+            "physics": "core and srad present",
+        },
+        "month_year_eligibility": {
+            "core_minimum_observed_rows": minimum_counts["core"],
+            "eligible": True,
+            "physics_minimum_observed_rows": minimum_counts["physics"],
+            "required_minimum_observed_rows": 28,
+            "year_month_cells_per_point": 360,
+        },
+        "normalized_calendar_axis": profile["normalized_axis"],
+        "profile_id": profile["profile_id"],
+        "schema_version": 2,
+        "source_bounds": {
+            "end_inclusive": expected["end_date_inclusive"],
+            "start_inclusive": expected["start_date_inclusive"],
+        },
+        "source_transform_id": profile["profile_id"],
+        "unobserved_dates": expected["unobserved_dates"],
+        "valid": True,
+        "window": {
+            "calendar_axis_rows": window["calendar_axis_rows"],
+            "core_observed_rows": window["observed_rows"],
+            "end_exclusive": window["end_exclusive"],
+            "end_semantics": "exclusive",
+            "physics_observed_rows": window["observed_rows"],
+            "start_inclusive": window["start_inclusive"],
+        },
+    }
+    (output / "calendar-preflight.json").write_text(
+        json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
 
 
 def transform_contracts(output: Path, contract: dict) -> None:
@@ -213,6 +377,11 @@ def transform_contracts(output: Path, contract: dict) -> None:
             row["candidate"]: 340000 if row["uses_p2"] else 330000 for row in arms
         }
         value["status"] = "ratified"
+        value["terminals"] = {
+            "none": "HOLD-A10M5R15-NORMAL-CONDITIONING-NOT-SUFFICIENT",
+            "ready": "A10M5R15-TEMPORAL-READY",
+            "single": "A10M5R15-TEMPORAL-READY",
+        }
 
     def temporal(value):
         value["contract_id"] = "a10m5r15r2-external-normal-conditioning-v1"
@@ -241,6 +410,7 @@ def transform_contracts(output: Path, contract: dict) -> None:
     def capacity(value):
         value["package_id"] = PACKAGE_ID
         value["predecessor_package_id"] = PARENT_PACKAGE
+        value["admission"]["waves"] = [[PORTFOLIO_ROLE]]
         value["storage_formula"] = {
             "components": [
                 "one expanded portable runtime and environment",
@@ -577,6 +747,7 @@ def main() -> None:
         git_bytes(options.source_commit, CALIBRATION)
     )
     shutil.copy2(options.corpus_archive, options.output / "corpus.tar")
+    rebuild_calendar_preflight(options.corpus_archive, options.output)
     for name in (
         "normal-conditioning-index.json",
         "normal-conditioning-receipt.json",

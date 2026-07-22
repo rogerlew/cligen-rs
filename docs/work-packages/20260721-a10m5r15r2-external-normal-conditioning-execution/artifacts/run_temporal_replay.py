@@ -174,6 +174,22 @@ def verify_replay_asset_bundle(options, plan: dict, manifest: dict, head: str) -
             key: expected.get(key) for key in ("bytes", "sha256")
         }:
             raise InvalidEvidenceError(f"replay-consumed asset identity drift: {name}")
+    calendar = json.loads(
+        (options.asset_root / "calendar-preflight.json").read_text(encoding="utf-8")
+    )
+    if not (
+        calendar.get("corpus")
+        == {
+            key: manifest["assets"]["corpus.tar"][key]
+            for key in ("bytes", "sha256")
+        }
+        and calendar.get("valid") is True
+        and calendar.get("profile_id") == "daymet_official_365_v1"
+        and calendar.get("source_transform_id") == "daymet_official_365_v1"
+        and calendar.get("counts", {}).get("roles")
+        == {"candidate_fit": 1200, "fit_validation": 240}
+    ):
+        raise InvalidEvidenceError("successor calendar preflight/corpus binding drift")
     entry = json.loads(
         (options.asset_root / "post-collection-replay-entry.json").read_text(encoding="utf-8")
     )

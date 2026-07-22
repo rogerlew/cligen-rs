@@ -166,6 +166,10 @@ for path in (
     PACKAGE / "artifacts/verify_corpus_layout.py",
 ):
     subprocess.run(("python3", "-m", "py_compile", str(path)), check=True)
+if 'with_name("corpus-layout-pin.json")' not in (
+    PACKAGE / "artifacts/verify_corpus_layout.py"
+).read_text(encoding="utf-8"):
+    raise RuntimeError("corpus verifier is not relocatable with staged pin")
 texts = {
     name: (PACKAGE / "artifacts" / name).read_text(encoding="utf-8")
     for name in (
@@ -191,6 +195,7 @@ for token in (
     "runtime safeguard gate recomputation drift",
     '"engineering_eligible"',
     '"faithful_output_deterministic"',
+    "successor calendar preflight/corpus binding drift",
 ):
     if token not in texts["run_temporal_replay.py"]:
         raise RuntimeError(f"replay invariant absent: {token}")
@@ -303,9 +308,14 @@ for token in (
     '.replace("16000", "262144")',
     'rm -rf -- "$benchmark_root/rust-1.92.0-x86_64-unknown-linux-gnu"',
     'rm -rf -- "$benchmark_root/source/target"',
+    "rebuild_calendar_preflight(options.corpus_archive, options.output)",
+    'value["admission"]["waves"] = [[PORTFOLIO_ROLE]]',
+    '"none": "HOLD-A10M5R15-NORMAL-CONDITIONING-NOT-SUFFICIENT"',
 ):
     if token not in prepare:
         raise RuntimeError(f"calibration/replay preparation gate absent: {token}")
+if "inherited.prospective_calendar_preflight = prospective_calendar_preflight" not in builder:
+    raise RuntimeError("successor calendar preflight authority override absent")
 if not (PACKAGE / "plan.md").is_file():
     raise RuntimeError("bounded execution plan absent")
 if "Status: `EXECUTION-READY`" not in (PACKAGE / "package.md").read_text(encoding="utf-8"):
