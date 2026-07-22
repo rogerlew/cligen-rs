@@ -28,7 +28,7 @@ The ratified revision-2 `SPEC-A10-EXTERNAL-NORMAL-CONDITIONING` contract and
 the A10M5R15R1 corpus are unchanged. This package is a candidate-blind
 development calibration. It does not weaken exact reconstruction: its output
 becomes a prospective pin that a separately published execution package must
-reconstruct byte-for-byte before candidate release.
+reproduce checkpoint-payload and semantic identity before candidate release.
 
 ## Plan
 

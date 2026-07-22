@@ -86,6 +86,34 @@ required_materializer = (
 )
 if any(token not in materializer for token in required_materializer):
     raise RuntimeError("six-row candidate-blind materializer gates incomplete")
+identity_contract = contract.get("identity_contract")
+if identity_contract != {
+    "gating_fields": [
+        "capacity_id",
+        "checkpoint_epoch",
+        "checkpoint_global_step",
+        "checkpoint_payload_bytes",
+        "checkpoint_payload_sha256",
+        "corpus_cursor_epoch_order_sha256",
+        "corpus_cursor_next_batch",
+        "family",
+        "hidden_size",
+        "model_record_sha256",
+        "parameter_count",
+        "row_id",
+        "training_seed",
+        "validation_primary_nll",
+        "validation_stability",
+        "validation_tail_score",
+    ],
+    "non_gating_provenance_fields": [
+        "checkpoint_record_sha256",
+        "export_metadata_sha256",
+        "export_sha256",
+    ],
+    "required_row_count": 6,
+}:
+    raise RuntimeError("control identity gating contract drift")
 if not (
     'value["jobs"] = [' in builder
     and 'value["candidate_output_allowed"] = False' in builder
@@ -95,6 +123,8 @@ if not (
     and 'delegated.ROLES = {"control-materialization"}' in admission
     and 'value["admission"]["waves"] = []' in preparer
     and 'value["status"] = "EXECUTION-READY"' in preparer
+    and "verify_parent_layout(options.parent_assets, parent)" in preparer
+    and "verify_copied_parent(parent, options.output)" in preparer
 ):
     raise RuntimeError("control-only authority/admission projection incomplete")
 package_text = (PACKAGE / "package.md").read_text(encoding="utf-8")

@@ -75,6 +75,53 @@ def copy_parent(parent: Path, output: Path) -> None:
     (output / "controller-admissions").mkdir(mode=0o700)
 
 
+def verify_parent_layout(parent_root: Path, manifest: dict) -> None:
+    assets = manifest.get("assets")
+    if not isinstance(assets, dict) or not assets:
+        raise RuntimeError("parent manifest asset map missing")
+    entries = {path.name for path in parent_root.iterdir()}
+    allowed = set(assets) | {"asset-manifest.json", "controller-admissions"}
+    if entries - allowed:
+        raise RuntimeError("unexpected parent asset entry")
+    directories = {path.name for path in parent_root.iterdir() if path.is_dir()}
+    if directories - {"controller-admissions"}:
+        raise RuntimeError("unexpected parent asset directory")
+    admissions = parent_root / "controller-admissions"
+    if admissions.is_symlink() or not admissions.is_dir():
+        raise RuntimeError("parent controller-admissions is not a regular directory")
+    manifest_path = parent_root / "asset-manifest.json"
+    if manifest_path.is_symlink() or not manifest_path.is_file():
+        raise RuntimeError("parent asset manifest is not a regular file")
+    files = {
+        path.name
+        for path in parent_root.iterdir()
+        if path.is_file() and path.name != "asset-manifest.json"
+    }
+    if files != set(assets):
+        raise RuntimeError("parent asset file set differs from manifest")
+    for name, expected in assets.items():
+        path = parent_root / name
+        if (
+            path.is_symlink()
+            or not path.is_file()
+            or identity(path)
+            != {key: expected.get(key) for key in ("bytes", "sha256")}
+        ):
+            raise RuntimeError(f"parent asset identity drift: {name}")
+
+
+def verify_copied_parent(parent_manifest: dict, output: Path) -> None:
+    for name, expected in parent_manifest["assets"].items():
+        path = output / name
+        if (
+            path.is_symlink()
+            or not path.is_file()
+            or identity(path)
+            != {key: expected.get(key) for key in ("bytes", "sha256")}
+        ):
+            raise RuntimeError(f"copied parent asset identity drift: {name}")
+
+
 def transform_text_assets(output: Path) -> None:
     replacements = {
         PARENT_PACKAGE_ID: PACKAGE_ID,
@@ -161,9 +208,11 @@ def main() -> None:
         == "7b41e497d215c85ae734dea438424f23ae01cff59a3b3ba55ec32442578553f2"
     ):
         raise RuntimeError("parent execution assets differ from closed R2 run")
+    verify_parent_layout(options.parent_assets, parent)
     if options.output.exists():
         raise RuntimeError("fresh calibration asset output required")
     copy_parent(options.parent_assets, options.output)
+    verify_copied_parent(parent, options.output)
     transform_text_assets(options.output)
     rewrite_capacity(options.output)
     overlays = {
