@@ -147,12 +147,12 @@ def authority(options) -> None:
         {
             "package_id": PACKAGE_ID,
             "attribution_calibration": calibration_bundle(options.source_commit),
-            "predecessor_package_evidence": predecessor_bundle(options.source_commit),
+            "predecessor_package_evidence": predecessor_bundle(),
             "resource_ceiling_gpu_minutes": 515,
             "resource_class": "one-control-plus-one-two-l40-two-wave-external-normal-conditioning",
         }
     )
-    parent.parent.rewrite(options.output, value)
+    inherited.write(options.output, value)
 
 
 def plan(options) -> None:
@@ -160,9 +160,14 @@ def plan(options) -> None:
     calibration_bundle(options.source_commit)
     base_plan(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
+    value = json.loads(
+        json.dumps(value).replace(
+            "continuous-distribution-head-factorial-portfolio", PORTFOLIO_ROLE
+        )
+    )
     value["package_id"] = PACKAGE_ID
     value["run_id"] = RUN_ID
-    value["predecessor_package_evidence"] = predecessor_bundle(options.source_commit)
+    value["predecessor_package_evidence"] = predecessor_bundle()
     value["attribution_calibration"] = calibration_bundle(options.source_commit)
     value["admission_materialization"]["record_type"] = RECORD_TYPE
     portfolio = next(job for job in value["jobs"] if job["role"] == PORTFOLIO_ROLE)
@@ -231,7 +236,7 @@ def plan(options) -> None:
         (PORTFOLIO_ROLE, 2, 240),
     ]:
         raise RuntimeError("A10M5R15R2 resource plan drift")
-    parent.parent.rewrite(options.output, value)
+    inherited.write(options.output, value)
 
 
 def evidence(role: str) -> list[str]:
@@ -304,7 +309,6 @@ def prospective_calendar_preflight(root: Path) -> dict:
 parent.PACKAGE_ID = PACKAGE_ID
 parent.RUN_ID = RUN_ID
 parent.RECORD_TYPE = RECORD_TYPE
-parent.PORTFOLIO_ROLE = PORTFOLIO_ROLE
 parent.predecessor_bundle = predecessor_bundle
 inherited.PACKAGE_ID = PACKAGE_ID
 inherited.PACKAGE = PACKAGE

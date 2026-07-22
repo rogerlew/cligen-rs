@@ -316,6 +316,14 @@ for token in (
         raise RuntimeError(f"calibration/replay preparation gate absent: {token}")
 if "inherited.prospective_calendar_preflight = prospective_calendar_preflight" not in builder:
     raise RuntimeError("successor calendar preflight authority override absent")
+if builder.count("inherited.write(options.output, value)") != 2:
+    raise RuntimeError("successor authority/plan record writer override absent")
+if (
+    'json.dumps(value).replace(\n            "continuous-distribution-head-factorial-portfolio", PORTFOLIO_ROLE'
+    not in builder
+    or "parent.PORTFOLIO_ROLE = PORTFOLIO_ROLE" in builder
+):
+    raise RuntimeError("successor semantic-plan portfolio role rebinding drift")
 if not (PACKAGE / "plan.md").is_file():
     raise RuntimeError("bounded execution plan absent")
 if "Status: `EXECUTION-READY`" not in (PACKAGE / "package.md").read_text(encoding="utf-8"):
