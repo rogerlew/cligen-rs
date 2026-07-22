@@ -736,6 +736,9 @@ advanced-indexing temporary rather than the module weight. It closed at
 `EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION` after 22 billed L40-minutes
 with cleanup and reserve release authenticated. Realized use is 82; one exact
 515-minute R2R4 implementation remedy remains bounded at the authorized 597.
+R2R4 is scaffolded with exactly one scientific-code delta: an indexed
+assignment that makes the already-ratified E2 descriptor initialization write
+effective while preserving the startup equality and zero-normal-column gates.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

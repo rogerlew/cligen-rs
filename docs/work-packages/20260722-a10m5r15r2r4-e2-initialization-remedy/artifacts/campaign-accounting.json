@@ -1,0 +1,90 @@
+{
+  "authorized_outer_ceiling_l40_minutes": 597,
+  "bounded_maximum_l40_minutes": 597,
+  "components": [
+    {
+      "actual_l40_minutes": 8,
+      "evidence_sha256": "ae0fb7da03e615b12f30a711e82082e7dec13b1c73646024ac287fa0aca2553d",
+      "evidence_path": "docs/work-packages/20260721-a10m5r15r2-external-normal-conditioning-execution/artifacts/execution-r0-failure.json",
+      "kind": "failed-r2-control",
+      "record_sha256": "a7fdc4b67d927d1f70cde72a81efc0fdce3d46cc60d74cde279c253976224b7d"
+    },
+    {
+      "actual_l40_minutes": 9,
+      "evidence_sha256": "9b329d5fdc89e23a2ae25197e2e642ceb8e794b0b831e1a085ad4d7c78c78a6c",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r2-job.json",
+      "kind": "canceled-control-calibration",
+      "record_sha256": "535e15b570256b10f3d4439ca2cb96b6bc5707486b8e0cfd2af71c4e1a56063c"
+    },
+    {
+      "actual_l40_minutes": 1,
+      "evidence_sha256": "c88fa943bebfea22225b065432f731248100b36901786f07e7811ba895ae21a4",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/cancelled-cleanup-execution.json",
+      "kind": "out-of-band-corrective-cleanup",
+      "record_sha256": "b349d889345da14ac623af5eb17007dbcd94a4da6df47bedeaced5f4c9ac7a6f"
+    },
+    {
+      "actual_l40_minutes": 20,
+      "evidence_sha256": "251e1cc998347a147979e1c8272815ad6fdb7bda8672760021b0f3ae4c05c646",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r3-job.json",
+      "kind": "successful-successor-control-calibration",
+      "record_sha256": "c916883dfcd423423a72b7f76c7fdaf0331667613f23561976ea402c46556fcb"
+    },
+    {
+      "actual_l40_minutes": 19,
+      "evidence_sha256": "bfd1784008701ad5a3b6e7902ad0f6456c58660e7513dc0d2abcc295d8557a64",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r2-successor-control-execution/artifacts/execution-r0-control-job.json",
+      "kind": "successful-r2r2-control",
+      "record_sha256": "f210cdfb522529304cdcc693d2dfd285785f415f05492fbffa6f85bd673b7c9e"
+    },
+    {
+      "actual_l40_minutes": 3,
+      "evidence_sha256": "239f151d4be17abbd2728767272990a110081c7c07f27d16b9eff86c4020a393",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r2-successor-control-execution/artifacts/execution-r0-portfolio-job.json",
+      "kind": "failed-r2r2-portfolio-launcher",
+      "record_sha256": "6be264b356ef15778d6b630fde1f3c9b22f1c4094ed4da31c88525f72dbf1ce3"
+    },
+    {
+      "actual_l40_minutes": 19,
+      "evidence_sha256": "a610e852507cbeab19db0028a4bcec702f8d43a44ea391b7ae8b9870f9c7ac68",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r3-portfolio-evidence-remedy/artifacts/execution-r0-control-job.json",
+      "kind": "successful-r2r3-control",
+      "record_sha256": "2992b9c439d1cf21f3e8df64eb5a5c5184ac2d20b239a94d6ac0154641b34565"
+    },
+    {
+      "actual_l40_minutes": 3,
+      "evidence_sha256": "c2ccc20bf65bb01048d1b05c399e21564119ba7aec37c119f590cbb8286495d9",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r3-portfolio-evidence-remedy/artifacts/execution-r0-portfolio-job.json",
+      "kind": "failed-r2r3-e2-initialization",
+      "record_sha256": "4564bc6ce23630d1af0f2784d12ccce19b537afddd07c19cd664395a72616fbe"
+    }
+  ],
+  "operator_authorization": "authorization granted; authorize 597",
+  "outstanding_study_ceiling_l40_minutes": 515,
+  "package_id": "20260722-a10m5r15r2r4-e2-initialization-remedy",
+  "realized_l40_minutes": 82,
+  "released_recovery_reserves": [
+    {
+      "event_sha256": "da58af4ca36ffbb1b30bc9a81293570a7cc1565f84955b39f2f4eb757c898bfd",
+      "evidence_sha256": "c518945ab7079742214c4934623fe4a134d6d92df2650f30e5c1f56987e536e0",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r2-recovery-release.json"
+    },
+    {
+      "event_sha256": "3b48574d94cfbaf3b929a6e721d43d6d3971b2bd1601518dce0f440a8824068f",
+      "evidence_sha256": "649e7d66a4626d790fa7f386b5010f7d6923abc4f7c153c92a7d4b0026a704fa",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/artifacts/execution-r3-recovery-release.json"
+    },
+    {
+      "event_sha256": "83b82730778b46f2f3b0743f20e8b8042f4d11e9ce581215c17b3f18698bbdfd",
+      "evidence_sha256": "97d935efc43a0d6b24c0cc86f59572fb958fd734add056d369aa3191ed5fae6b",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r2-successor-control-execution/artifacts/execution-r0-recovery-release.json"
+    },
+    {
+      "event_sha256": "3bf1a18d0073402a250d9fbf574cb99d8b18a40c4326f7d58f7b8e017a76cc24",
+      "evidence_sha256": "0fdb55bbba8a89ad1c700c171c6e9e192bce074b9b359a02da73b5d81c021313",
+      "evidence_path": "docs/work-packages/20260722-a10m5r15r2r3-portfolio-evidence-remedy/artifacts/execution-r0-recovery-release.json"
+    }
+  ],
+  "schema_version": 1,
+  "valid": true
+}

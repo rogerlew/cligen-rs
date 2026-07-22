@@ -64,6 +64,8 @@ production change.
       deterministic rewrite of every inherited role-scoped evidence path.
 - [ ] Correct the PyTorch advanced-index assignment under a fresh R2R4
       identity; realized 82 + successor ceiling 515 = authorized maximum 597.
+- [x] Scaffolded R2R4 with exactly one scientific-code delta: effective
+      indexed assignment for the already-ratified matched E2 initialization.
 
 ## Surprises & Discoveries
 
