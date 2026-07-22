@@ -33,6 +33,12 @@ CALIBRATION_ABORTS = (
     PACKAGE / "artifacts/execution-r1-abort.json",
 )
 DIAGNOSTICS = PACKAGE / "artifacts/pre-submission-diagnostics.json"
+R2_CLOSURE = (
+    PACKAGE / "artifacts/execution-r2-external-cleanup-registration.json",
+    PACKAGE / "artifacts/execution-r2-cleanup.json",
+    PACKAGE / "artifacts/execution-r2-terminal.json",
+)
+R2_RELEASE = PACKAGE / "artifacts/execution-r2-recovery-release.json"
 CONTROL_ROLE = "control-materialization"
 CONTROL_EVIDENCE = [
     "admissions/control-materialization.json",
@@ -300,9 +306,47 @@ def abort_bundle(record_commit: str | None = None) -> dict:
     }
 
 
+def canceled_attempt_bundle(record_commit: str | None = None) -> dict:
+    registration, cleanup, terminal = (read_record(path) for path in R2_CLOSURE)
+    release = json.loads(R2_RELEASE.read_text(encoding="utf-8"))
+    if not (
+        registration["record_sha256"]
+        == "31bec9a326c1cfe7b177f9c5fcd76c557c23b551202e94f2a051651c3a3ba439"
+        and cleanup["record_sha256"]
+        == "465575ced925b3ef47796f7552fd0227b6cc70787a5d8655bd8a9470a889b147"
+        and cleanup["remote_absent"] is True
+        and cleanup["job_local_cleanup"] == "verified_absent"
+        and terminal["record_sha256"]
+        == "d8eacd70925416ac6b628c6b023eb9f062ea2f56f7c8af70ef7298338b6d037c"
+        and terminal["terminal"] == "LEMHI-TOOLKIT-RUN-CLOSED"
+        and release["event_sha256"]
+        == "da58af4ca36ffbb1b30bc9a81293570a7cc1565f84955b39f2f4eb757c898bfd"
+        and release["status"] == "released"
+        and release["requested_gpu_minutes"] == 5
+    ):
+        raise RuntimeError("r2 canceled-attempt closure drift")
+    paths = (*R2_CLOSURE, R2_RELEASE)
+    if record_commit is not None:
+        for path in paths:
+            if git_bytes(record_commit, path) != path.read_bytes():
+                raise RuntimeError("r2 canceled-attempt evidence is unpublished")
+    return {
+        "actual_l40_minutes": 10,
+        "records": [
+            {"path": path.relative_to(REPO).as_posix(), "sha256": inherited.digest(path)}
+            for path in paths
+        ],
+        "recovery_reserve": "released",
+        "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r2",
+        "scientific_result": "none-canceled",
+        "terminal": "LEMHI-TOOLKIT-RUN-CLOSED",
+    }
+
+
 def authority(options) -> None:
     failure_bundle(options.source_commit)
     abort_bundle(options.source_commit)
+    canceled_attempt_bundle(options.source_commit)
     validate_execution_contract(options.asset_root, options.source_commit)
     base_authority(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
@@ -310,6 +354,9 @@ def authority(options) -> None:
         {
             "package_id": PACKAGE_ID,
             "calibration_predecessor_run_evidence": abort_bundle(
+                options.source_commit
+            ),
+            "canceled_attempt_evidence": canceled_attempt_bundle(
                 options.source_commit
             ),
             "operational_predecessor_package_evidence": failure_bundle(
