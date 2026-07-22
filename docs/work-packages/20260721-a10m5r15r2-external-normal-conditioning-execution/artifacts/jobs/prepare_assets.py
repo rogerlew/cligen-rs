@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+import tarfile
 from pathlib import Path
 
 
@@ -25,6 +26,30 @@ PACKAGE_ID = "20260721-a10m5r15r2-external-normal-conditioning-execution"
 RUN_ID = "a10m5r15r2-external-normal-conditioning-execution-r0"
 PORTFOLIO_ROLE = "external-normal-conditioning-portfolio"
 RECORD_TYPE = "a10m5r15r2-submission-admission"
+CALIBRATION_GATES = {
+    "candidate_blind": True,
+    "replicate_count": True,
+    "sequence_seeds_exact": True,
+    "strictly_positive_margin": True,
+}
+BENCHMARK_TOOLCHAIN = {
+    "cargo-vendor.tar.gz": {
+        "bytes": 35822885,
+        "sha256": "13d7f41f3e0d8b45254a1e6070db5b814d54327e9201ccbe22a57269168f0d3c",
+    },
+    "rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz": {
+        "bytes": 192171372,
+        "sha256": "d2ccef59dd9f7439f2c694948069f789a044dc1addcc0803613232af8f88ee0c",
+    },
+}
+BENCHMARK_PARAMETERS = {
+    "p+4050_-11375": {"bytes": 7022, "sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704"},
+    "p+4525_-08875": {"bytes": 7022, "sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f"},
+    "p+3250_-10200": {"bytes": 7022, "sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f"},
+    "p+3275_-08325": {"bytes": 7022, "sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7"},
+    "p+3675_-10750": {"bytes": 7022, "sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5"},
+    "p+4025_-09900": {"bytes": 7022, "sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78"},
+}
 
 
 def digest(path: Path) -> str:
@@ -37,6 +62,13 @@ def digest(path: Path) -> str:
 
 def identity(path: Path) -> dict[str, object]:
     return {"bytes": path.stat().st_size, "sha256": digest(path)}
+
+
+def authenticated(value: dict) -> bool:
+    semantic = dict(value)
+    recorded = semantic.pop("record_sha256", None)
+    encoded = json.dumps(semantic, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return recorded == hashlib.sha256(encoded).hexdigest()
 
 
 def git_bytes(commit: str, path: Path) -> bytes:
@@ -206,8 +238,39 @@ def transform_contracts(output: Path, contract: dict) -> None:
             "recovery_minutes": 5,
         }
 
+    def capacity(value):
+        value["package_id"] = PACKAGE_ID
+        value["predecessor_package_id"] = PARENT_PACKAGE
+        value["storage_formula"] = {
+            "components": [
+                "one expanded portable runtime and environment",
+                "one extracted corpus",
+                "four isolated transient cache roots",
+                "four candidate transient work roots",
+                "one exact Rust toolchain and vendored release build root",
+                "one six-station runtime-parameter root",
+                "one runtime benchmark work root",
+                "fixed safety margin",
+            ],
+            "evidence": {
+                "inherited_expanded_asset_bytes": 11811160064,
+                "measured_new_prebuild_tree_bytes": 3613761536,
+                "measured_new_prebuild_tree_entries": 113595,
+                "release_build_and_runtime_byte_allowance": 3902431232,
+                "release_build_and_runtime_inode_allowance": 50000,
+                "free_byte_margin": 2147483648,
+                "free_inode_margin_after_inherited_and_new_allowances": 82549,
+            },
+            "maximum_expanded_bytes": 19327352832,
+            "minimum_free_bytes_before_mutation": 21474836480,
+            "minimum_free_inodes_before_mutation": 262144,
+            "shared_tree_identity_before_and_after_science": True,
+        }
+        value["status"] = "EXECUTION-READY"
+
     rewrite_json(output / "portfolio-contract.json", portfolio)
     rewrite_json(output / "temporal-contract.json", temporal)
+    rewrite_json(output / "job-local-capacity-contract.json", capacity)
     (output / "portfolio-role-map.json").write_bytes(
         (PACKAGE / "artifacts/portfolio-role-map.json").read_bytes()
     )
@@ -258,10 +321,163 @@ def transform_operational(output: Path, arms: list[dict]) -> None:
         path.write_text(text, encoding="utf-8")
 
 
+def install_runtime_execution(output: Path) -> None:
+    run_path = output / "run_portfolio.sh"
+    run_text = run_path.read_text(encoding="utf-8")
+    if (
+        run_text.count("16777216") != 1
+        or run_text.count("17179869184") != 1
+        or run_text.count("16000") != 2
+    ):
+        raise RuntimeError("parent storage preflight threshold drift")
+    run_text = (
+        run_text.replace("16777216", "20971520")
+        .replace("17179869184", "21474836480")
+        .replace("16000", "262144")
+    )
+    old_tail = """launcher_status=$?
+set -e
+restore_cleanup_permissions
+trap - EXIT
+"""
+    new_tail = """launcher_status=$?
+set -e
+if [ "$launcher_status" -eq 0 ]; then
+  benchmark_started=$(date +%s)
+  benchmark_deadline=${SLURM_JOB_END_TIME:?SLURM end time required for runtime admission}
+  benchmark_remaining=$((benchmark_deadline - benchmark_started))
+  benchmark_preflight_valid=false
+  [ "$benchmark_remaining" -ge 1800 ] && benchmark_preflight_valid=true
+  printf '{"minimum_remaining_seconds":1800,"observed_remaining_seconds":%s,"schema_version":1,"valid":%s}\n' \\
+    "$benchmark_remaining" "$benchmark_preflight_valid" \\
+    >"$output/runtime-walltime-preflight.json"
+  test "$benchmark_preflight_valid" = true
+  benchmark_root=$job_local/runtime-benchmark
+  mkdir -p -- "$benchmark_root/source" "$benchmark_root/parameters"
+  tar -xzf "$run_root/source.tar.gz" -C "$benchmark_root/source"
+  tar -xzf "$run_root/cargo-vendor.tar.gz" -C "$benchmark_root"
+  tar -xf "$run_root/runtime-parameters.tar" -C "$benchmark_root/parameters"
+  tar -xJf "$run_root/rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz" -C "$benchmark_root"
+  "$benchmark_root/rust-1.92.0-x86_64-unknown-linux-gnu/install.sh" \\
+    --prefix="$benchmark_root/rust-toolchain" --disable-ldconfig >/dev/null
+  rm -rf -- "$benchmark_root/rust-1.92.0-x86_64-unknown-linux-gnu"
+  mkdir -p -- "$benchmark_root/source/.cargo"
+  printf '%s\n' '[source.crates-io]' 'replace-with = "vendored-sources"' '' \\
+    '[source.vendored-sources]' 'directory = "../vendor"' \\
+    >"$benchmark_root/source/.cargo/config.toml"
+  PATH="$benchmark_root/rust-toolchain/bin:/usr/bin:/bin" \\
+    CARGO_NET_OFFLINE=true CC=/usr/bin/gcc CXX=/usr/bin/g++ \\
+    "$benchmark_root/rust-toolchain/bin/cargo" build \\
+      --manifest-path "$benchmark_root/source/Cargo.toml" \\
+      --release --locked --offline -p cligen --bin cligen
+  cp "$benchmark_root/source/target/release/cligen" \\
+    "$output/faithful-cligen-linux-x86_64"
+  chmod 500 "$output/faithful-cligen-linux-x86_64"
+  rm -rf -- "$benchmark_root/source/target"
+  set +e
+  env CUDA_VISIBLE_DEVICES= NVIDIA_VISIBLE_DEVICES=void \\
+    OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \\
+    NUMEXPR_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 \\
+    PATH="$environment/bin:$benchmark_root/rust-toolchain/bin:/usr/bin:/bin" \\
+    "$environment/bin/python" "$run_root/run_runtime_benchmarks.py" \\
+      --asset-root "$run_root" --evidence-root "$run_root" \\
+      --binary "$output/faithful-cligen-linux-x86_64" \\
+      --parameter-root "$benchmark_root/parameters" \\
+      --rustc "$benchmark_root/rust-toolchain/bin/rustc" \\
+      --cargo "$benchmark_root/rust-toolchain/bin/cargo" \\
+      --work-root "$benchmark_root/work" \\
+      --output "$output/runtime-benchmark.json"
+  benchmark_status=$?
+  set -e
+  if [ "$benchmark_status" -ne 0 ]; then launcher_status=$benchmark_status; fi
+fi
+restore_cleanup_permissions
+trap - EXIT
+"""
+    if old_tail not in run_text:
+        raise RuntimeError("parent portfolio runner tail drift")
+    run_path.write_text(run_text.replace(old_tail, new_tail), encoding="utf-8")
+
+    job_path = output / f"job-{PORTFOLIO_ROLE}.sh"
+    job_text = job_path.read_text(encoding="utf-8")
+    replacements = {
+        "cleanup_permissions = load('cleanup-permissions.json')": (
+            "cleanup_permissions = load('cleanup-permissions.json')\n"
+            "runtime = load('runtime-benchmark.json')\n"
+            "runtime_preflight = load('runtime-walltime-preflight.json')"
+        ),
+        "child_records_ok = True": (
+            "runtime_ok = (\n"
+            "    authenticated(runtime) and runtime.get('valid') is True\n"
+            "    and runtime.get('package_id') == '20260721-a10m5r15r2-external-normal-conditioning-execution'\n"
+            "    and runtime.get('source_commit') == manifest.get('source_commit')\n"
+            "    and runtime.get('asset_manifest_sha256') == manifest_sha\n"
+            "    and bool(runtime.get('gates')) and all(runtime['gates'].values())\n"
+            "    and len(runtime.get('rows', [])) == 48\n"
+            "    and runtime_preflight.get('valid') is True\n"
+            "    and runtime_preflight.get('minimum_remaining_seconds') == 1800\n"
+            "    and runtime_preflight.get('observed_remaining_seconds', 0) >= 1800\n"
+            ")\n"
+            "child_records_ok = True"
+        ),
+        "'portfolio_admission_authenticated': admission_ok,": (
+            "'portfolio_admission_authenticated': admission_ok,\n"
+            "    'runtime_benchmark_authenticated': runtime_ok,"
+        ),
+        "'submission_admission_record_sha256': admission.get('record_sha256'),": (
+            "'submission_admission_record_sha256': admission.get('record_sha256'),\n"
+            "    'runtime_benchmark_record_sha256': runtime.get('record_sha256'),"
+        ),
+    }
+    for old, new in replacements.items():
+        if old not in job_text:
+            raise RuntimeError(f"parent portfolio finalizer drift: {old}")
+        job_text = job_text.replace(old, new)
+    job_path.write_text(job_text, encoding="utf-8")
+
+
+def add_runtime_build_assets(
+    output: Path, benchmark_assets: Path, benchmark_parameters: Path, source_commit: str
+) -> None:
+    for name, expected in BENCHMARK_TOOLCHAIN.items():
+        source = benchmark_assets / name
+        if not source.is_file() or identity(source) != expected:
+            raise RuntimeError(f"benchmark toolchain asset identity drift: {name}")
+        shutil.copy2(source, output / name)
+    subprocess.run(
+        (
+            "git",
+            "archive",
+            "--format=tar.gz",
+            f"--output={output / 'source.tar.gz'}",
+            source_commit,
+            "Cargo.toml",
+            "Cargo.lock",
+            "crates",
+        ),
+        cwd=REPO,
+        check=True,
+    )
+    parameter_archive = output / "runtime-parameters.tar"
+    with tarfile.open(parameter_archive, "w") as archive:
+        for point_id, expected in sorted(BENCHMARK_PARAMETERS.items()):
+            source = benchmark_parameters / point_id / "source-station.par"
+            if not source.is_file() or identity(source) != expected:
+                raise RuntimeError(f"benchmark parameter identity drift: {point_id}")
+            information = tarfile.TarInfo(f"{point_id}.par")
+            information.size = source.stat().st_size
+            information.mode = 0o400
+            information.mtime = 0
+            with source.open("rb") as stream:
+                archive.addfile(information, stream)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--parent-assets", type=Path, required=True)
     parser.add_argument("--corpus-archive", type=Path, required=True)
+    parser.add_argument("--benchmark-assets", type=Path, required=True)
+    parser.add_argument("--benchmark-parameters", type=Path, required=True)
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--output", type=Path, required=True)
     options = parser.parse_args()
@@ -277,12 +493,35 @@ def main() -> None:
         raise RuntimeError("successor corpus archive identity drift")
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
     calibration = json.loads(CALIBRATION.read_text(encoding="utf-8"))
+    calibration_ancestor = subprocess.run(
+        (
+            "git",
+            "merge-base",
+            "--is-ancestor",
+            calibration.get("source_commit", ""),
+            options.source_commit,
+        ),
+        cwd=REPO,
+        check=False,
+    ).returncode == 0
     if not (
-        calibration.get("valid") is True
+        authenticated(calibration)
+        and calibration_ancestor
+        and calibration.get("valid") is True
         and calibration.get("candidate_output_accessed") is False
         and calibration.get("protected_roles_opened") == []
         and calibration.get("package_id") == PACKAGE_ID
-        and all(calibration.get("gates", {}).values())
+        and calibration.get("calibration_configuration")
+        == "centered_location_ou_smooth_climatology-k2"
+        and calibration.get("asset_manifest_sha256") == PARENT_MANIFEST_SHA256
+        and calibration.get("calibration_source_commit") == contract["parent_asset_source_commit"]
+        and calibration.get("calibration_stream_sha256")
+        == "2bb8379f639712dc864308510bd2a8c10ac9c39ea3cae609abdc2a2bf51384ff"
+        and calibration.get("sequence_seeds") == [410542, 410543]
+        and calibration.get("replicates") == 1000
+        and calibration.get("nearest_rank_zero_based_index") == 899
+        and calibration.get("margin", 0) > 0
+        and calibration.get("gates") == CALIBRATION_GATES
         and digest(CALIBRATION) == contract["replay"].get("calibration_receipt_sha256")
     ):
         raise RuntimeError("candidate-blind attribution calibration is not frozen")
@@ -348,6 +587,13 @@ def main() -> None:
         (options.output / name).write_bytes(source.read_bytes())
     transform_contracts(options.output, contract)
     transform_operational(options.output, contract["arms"])
+    install_runtime_execution(options.output)
+    add_runtime_build_assets(
+        options.output,
+        options.benchmark_assets,
+        options.benchmark_parameters,
+        options.source_commit,
+    )
     for path in options.output.iterdir():
         if path.is_file() and path.suffix in (".py", ".sh"):
             path.chmod(0o700)

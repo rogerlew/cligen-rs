@@ -1,6 +1,6 @@
 # A10M5R15R2 — External-Normal Conditioning Execution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTION-READY`
 Date: 2026-07-21
 Starting branch and push target: current `main`, push `main`
 
@@ -20,6 +20,9 @@ and ADR-0006 runtime classification.
 - maximum 515 L40-minute-equivalent, including five recovery minutes;
 - exact A10M5R15R1 98-object corpus and conditioning identities;
 - exact R14R2R2 r3 launcher/control/replay lineage where unchanged;
+- two fixed-horizon portable CPU exports per fitted seed, with the normative
+  GPU-hidden one-core benchmark executed in the portfolio allocation after all
+  trainer processes exit;
 - no confirmation, solar, spatial, or production roles.
 
 ## Model identities
@@ -52,3 +55,7 @@ remain mandatory despite the operator's GPU authorization.
 Candidate science runs once. Operational retry is limited to the recorded
 five-minute recovery allowance. Two authenticated selector replays and the
 normative CPU benchmarks precede one terminal disposition.
+Candidate safeguard failures reject only the affected arm and its matched
+treatment pair. Faithful-comparator nondeterminism or incompleteness remains a
+global benchmark-integrity failure. Independent execution-readiness review
+closed `PASS` with no unresolved P1/P2 findings.

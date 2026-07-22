@@ -312,6 +312,67 @@ class ReplacementPair(inherited.ContinuousLatentProcess):
         return heads, diagnostics
 
 
+class PortableCandidateExport(nn.Module):
+    """Portable CPU inference surface for one fitted rev-2 candidate."""
+
+    def __init__(self, model: nn.Module) -> None:
+        super().__init__()
+        self.model = model
+
+    def forward(
+        self,
+        base_heads: torch.Tensor,
+        features: torch.Tensor,
+        medium_daily: torch.Tensor,
+        slow_daily: torch.Tensor,
+    ) -> torch.Tensor:
+        indices = torch.zeros(
+            (features.shape[0], features.shape[1]),
+            dtype=torch.long,
+            device=features.device,
+        )
+        heads, _ = self.model.member_heads(
+            base_heads,
+            features,
+            indices[:, 0],
+            indices,
+            indices,
+            {"medium_daily": medium_daily, "slow_daily": slow_daily},
+        )
+        return heads
+
+
+def portable_stationary_ou_states(
+    innovations: torch.Tensor,
+    raw_time_scales: torch.Tensor,
+    lower_days: float,
+    upper_days: float,
+    steps: int,
+    fft_size: int,
+) -> torch.Tensor:
+    """Trace-safe prefix-stable OU transform for one frozen horizon."""
+    del fft_size
+    time_scales = inherited.bounded_time_scales(
+        raw_time_scales, lower_days, upper_days
+    )
+    rho = torch.exp(-1.0 / time_scales)
+    innovation_scale = torch.sqrt((1.0 - rho.square()).clamp_min(1e-7))
+    states = torch.cat(
+        (innovations[:, :, :1], innovations[:, :, 1:] * innovation_scale), dim=2
+    )
+    offset = 1
+    while offset < steps:
+        states = torch.cat(
+            (
+                states[:, :, :offset],
+                states[:, :, offset:] + states[:, :, :-offset] * rho.pow(offset),
+            ),
+            dim=2,
+        )
+        offset *= 2
+    return states
+
+
 def build_candidate(
     contract: dict[str, Any],
     candidate: str,

@@ -19,12 +19,43 @@
    control job and retain its exact receipt.
 8. Capture immediate two-idle-L40 occupancy, materialize the portfolio
    admission, and run one two-L40/two-wave portfolio: E0/E1, then E2C/E2. Use
-   the five-minute allowance only for a recorded operational recovery.
+   the five-minute allowance only for a recorded operational recovery. After
+   all four trainers exit successfully and before the allocation exits, hide
+   both GPUs and run the four-arm benchmark from the fitted fixed-horizon
+   TorchScript exports against the release faithful Rust binary on one pinned
+   CPU/thread.
+   The accepted parent used 12,243 seconds, leaving 2,157 seconds in the same
+   allocation. Admit the build/benchmark tail only with at least 1,800 seconds
+   remaining: 864 seconds are the immutable timed-sample floor and 936 seconds
+   bound toolchain setup, fixed-horizon export/probe overhead, warmups, receipt
+   publication, and finalization. A failing walltime preflight preserves the
+   completed role evidence and closes engineering-incomplete; it must not begin
+   a partial timing pass.
+   Before mutation, require 20 GiB free and 262,144 free inodes. The 18 GiB
+   maximum-expanded estimate consists of the inherited 11,811,160,064-byte
+   estimate, 3,613,761,536 bytes measured for the exact extracted Rust,
+   installed-toolchain, vendor, and source trees, and a 3,902,431,232-byte
+   release-build/runtime allowance; the free-space floor retains a further
+   2 GiB margin. Phase storage by deleting the unpacked Rust distribution
+   immediately after installation, deleting Cargo's target tree after copying
+   the faithful binary, and deleting each faithful row's timed work before the
+   next row. The exact new prebuild trees contain 113,595 entries. Adding
+   the inherited 16,000-entry allowance and 50,000 build/runtime entries leaves
+   an 82,549-inode margin at the frozen floor.
+   Local preflight measurements on 2026-07-21 support the overhead bound: a
+   cold one-job Cargo 1.92 release build completed in 300.31 seconds and made a
+   492,085,248-byte/2,004-entry target tree; the complete four-architecture,
+   two-horizon eager/export tolerance and exact-prefix check completed in 3.23
+   seconds at 642,023,424-byte peak RSS; serializing all eight representative
+   exports took 2.14 seconds and produced 44,899-to-54,538-byte files. One
+   eight-member faithful call took 0.94 seconds at 30 years and 1.30 seconds at
+   100 years, implying about 108 seconds for all frozen warmups. These are
+   feasibility measurements, not substitutes for the normative node03 receipt.
 9. Observe terminal accounting, collect only allowlisted evidence without
-   cleanup, and authenticate every process, stream, checkpoint, portable P2
-   export, conditioning identity, and mapping hash.
-10. On the normative single-core host, run
-    `artifacts/run_runtime_benchmarks.py` for all four arms. Then run
+   cleanup, and authenticate every process, stream, checkpoint, portable
+   candidate/P2 export, benchmark receipt, conditioning identity, and mapping
+   hash.
+10. From the authenticated collected evidence, run
     `artifacts/run_temporal_replay.py` twice, apply the shared attribution
     margin and per-treatment selection, and publish exactly one science
     terminal.

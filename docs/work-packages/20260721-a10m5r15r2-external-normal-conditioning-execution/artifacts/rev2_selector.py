@@ -34,12 +34,50 @@ FOUR_ARM_DIAGNOSTIC = '''        pairwise = {}
 '''
 
 
+class InvalidEvidenceError(RuntimeError):
+    """An authenticated identity, firewall, provenance, or role rule failed."""
+
+
+class EngineeringIncompleteError(RuntimeError):
+    """Required execution, support, numerical, or benchmark evidence is incomplete."""
+
+
+def failure_terminal(error: BaseException) -> str:
+    if isinstance(error, InvalidEvidenceError):
+        return "FAIL-A10M5R15-INVALID-EVIDENCE"
+    return "HOLD-A10M5R15-ENGINEERING-INCOMPLETE"
+
+
 def four_arm_source(source: str) -> str:
     if source.count(TWO_ARM_DIAGNOSTIC) != 1:
         raise RuntimeError("frozen two-arm diagnostic source identity drift")
     transformed = source.replace(TWO_ARM_DIAGNOSTIC, FOUR_ARM_DIAGNOSTIC)
     compile(transformed, "temporal_select_rev2.py", "exec")
     return transformed
+
+
+def dispersion_metric_keys(metric_keys: tuple[str, ...]) -> tuple[str, ...]:
+    """Select the frozen monthly/annual interannual-dispersion metrics."""
+    expected = tuple(
+        [
+            f"monthly.{month:02d}.{variable}_standard_deviation"
+            for month in range(1, 13)
+            for variable in ("precipitation", "tmax", "tmin")
+        ]
+        + [
+            f"annual.{variable}_standard_deviation"
+            for variable in ("precipitation", "tmax", "tmin")
+        ]
+    )
+    observed = tuple(name for name in metric_keys if name.endswith("_standard_deviation"))
+    if (
+        len(metric_keys) != 188
+        or len(set(metric_keys)) != 188
+        or len(expected) != 39
+        or set(observed) != set(expected)
+    ):
+        raise RuntimeError("frozen interannual-dispersion metric registry drift")
+    return expected
 
 
 def digest(path: Path) -> str:

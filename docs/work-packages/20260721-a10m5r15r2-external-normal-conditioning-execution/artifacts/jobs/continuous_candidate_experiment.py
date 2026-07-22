@@ -116,6 +116,83 @@ def mapping_hash(checkpoint: Path) -> str | None:
     return value.hexdigest()
 
 
+def export_candidate(checkpoint: Path, target_root: Path) -> dict[str, str]:
+    """Freeze and cross-shape check the CPU inference path used by ADR-0006."""
+    contract = json.loads((run_root / "portfolio-contract.json").read_text(encoding="utf-8"))
+    width = 42 if uses_normals else 6
+    state = torch.load(checkpoint, map_location="cpu", weights_only=False)["model"]
+    output = {}
+    loaded_exports = {}
+    eager_models = {}
+    original_stationary = continuous.inherited.stationary_ou_states
+    for years in (30, 100):
+        days = len(parent.date_axis(years))
+        model = continuous.build_candidate(
+            contract, candidate, days=days, generation=True
+        ).cpu().eval()
+        model.load_state_dict(state)
+        eager_models[str(years)] = model
+        wrapper = continuous.PortableCandidateExport(model).eval()
+        inputs = (
+            torch.zeros((1, days, 15), dtype=torch.float32),
+            torch.zeros((1, days, width), dtype=torch.float32),
+            torch.zeros((8, 1, days, 8), dtype=torch.float32),
+            torch.zeros((8, 1, days, 4), dtype=torch.float32),
+        )
+        fft_size = 1 << (2 * days - 2).bit_length()
+        continuous.inherited.stationary_ou_states = (
+            lambda innovations, raw, lower, upper, frozen_days=days, frozen_fft=fft_size:
+            continuous.portable_stationary_ou_states(
+                innovations, raw, lower, upper, frozen_days, frozen_fft
+            )
+        )
+        try:
+            with torch.inference_mode():
+                expected = wrapper(*inputs)
+                traced = torch.jit.trace(
+                    wrapper, inputs, strict=True, check_trace=False
+                )
+                observed = traced(*inputs)
+        finally:
+            continuous.inherited.stationary_ou_states = original_stationary
+        if expected.shape != (8, 1, days, 15) or not torch.equal(expected, observed):
+            raise RuntimeError("portable candidate export fixed-horizon parity failed")
+        target = target_root / f"candidate-export-{years}.pt"
+        traced.save(str(target))
+        loaded = torch.jit.load(str(target), map_location="cpu").eval()
+        loaded_exports[str(years)] = loaded
+        with torch.inference_mode():
+            reloaded = loaded(*inputs)
+        if not torch.equal(expected, reloaded):
+            raise RuntimeError("serialized portable candidate export parity failed")
+        output[str(years)] = digest(target)
+    generator = torch.Generator(device="cpu")
+    generator.manual_seed(510_271)
+    long_days = len(parent.date_axis(100))
+    long_inputs = (
+        torch.randn((1, long_days, 15), generator=generator),
+        torch.randn((1, long_days, width), generator=generator),
+        torch.randn((8, 1, long_days, 8), generator=generator),
+        torch.randn((8, 1, long_days, 4), generator=generator),
+    )
+    portable_outputs = {}
+    for years in (30, 100):
+        days = len(parent.date_axis(years))
+        inputs = tuple(value[..., :days, :] for value in long_inputs)
+        with torch.inference_mode():
+            eager = continuous.PortableCandidateExport(eager_models[str(years)])(*inputs)
+            portable = loaded_exports[str(years)](*inputs)
+        if not torch.allclose(eager, portable, rtol=0.0, atol=2.0e-5):
+            raise RuntimeError("portable candidate export numeric tolerance failed")
+        portable_outputs[str(years)] = portable
+    short_days = len(parent.date_axis(30))
+    if not torch.equal(
+        portable_outputs["30"], portable_outputs["100"][:, :, :short_days]
+    ):
+        raise RuntimeError("portable candidate export prefix identity failed")
+    return output
+
+
 def provenance(seed: int | None, fitted_mapping_sha256: str | None) -> dict:
     contract = json.loads((run_root / "execution-contract.json").read_text(encoding="utf-8"))
     arm = next(row for row in contract["arms"] if row["candidate"] == candidate)
@@ -172,15 +249,24 @@ def publish_provenance() -> None:
             shutil.copy2(source, target)
             if digest(target) != row["export_sha256"]:
                 raise RuntimeError("portable P2 control export identity drift")
+    candidate_export_by_seed = {
+        seed: export_candidate(
+            output_root / "seed-work" / str(seed) / "checkpoint.pt",
+            output_root / "seed-work" / str(seed),
+        )
+        for seed in (147031, 271828, 314159)
+    }
     for seed, fitted_mapping_sha256 in mapping_by_seed.items():
         path = output_root / "seeds" / f"{seed}.json"
         value = json.loads(path.read_text(encoding="utf-8"))
+        value["configuration_id"] = arm["configuration_id"]
         value["provenance"] = provenance(seed, fitted_mapping_sha256)
         portfolio.atomic_json(path, value)
     training_path = output_root / "training.json"
     training = json.loads(training_path.read_text(encoding="utf-8"))
     for row in training["seeds"]:
         row["provenance"] = provenance(row["seed"], mapping_by_seed[row["seed"]])
+        row["portable_candidate_exports"] = candidate_export_by_seed[row["seed"]]
         row["portable_control_export_sha256"] = (
             digest(output_root / "seed-work" / str(row["seed"]) / "control-export.pt")
             if arm["uses_p2"]
@@ -205,6 +291,7 @@ def publish_provenance() -> None:
     part_path = output_root / "evidence.json.part"
     evidence = json.loads(part_path.read_text(encoding="utf-8"))
     evidence["gates"]["rev2_provenance_complete"] = True
+    evidence["gates"]["portable_export_prefix_exact"] = True
     evidence["provenance"] = provenance(None, None)
     evidence["runtime_classification_pending"] = True
     portfolio.atomic_json(part_path, evidence)

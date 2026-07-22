@@ -75,6 +75,7 @@ if (
     raise RuntimeError("successor corpus layout pin drift")
 if contract["replay"] != {
     "attribution_bootstrap_seed": 410542,
+    "calibration_receipt_sha256": "d54013c376f19a3d969f312a9e660dd5879e142bf64c3a16b622d21b30c2d9a2",
     "calibration_replicates": 1000,
     "calibration_sequence_seeds": [410542, 410543],
     "materiality_floor": 0.000001,
@@ -83,6 +84,49 @@ if contract["replay"] != {
     "selection": "per-treatment",
 }:
     raise RuntimeError("rev-2 replay contract drift")
+
+calibration_path = PACKAGE / "artifacts/attribution-calibration.json"
+calibration = json.loads(calibration_path.read_text(encoding="utf-8"))
+semantic_calibration = dict(calibration)
+record_sha256 = semantic_calibration.pop("record_sha256", None)
+semantic_bytes = json.dumps(
+    semantic_calibration, separators=(",", ":"), sort_keys=True
+).encode("utf-8")
+calibration_commit = calibration.get("source_commit", "")
+ancestor = subprocess.run(
+    ("git", "merge-base", "--is-ancestor", calibration_commit, "HEAD"),
+    cwd=REPO,
+    check=False,
+).returncode == 0
+if not (
+    digest(calibration_path) == contract["replay"]["calibration_receipt_sha256"]
+    and record_sha256 == hashlib.sha256(semantic_bytes).hexdigest()
+    and ancestor
+    and calibration.get("package_id") == PACKAGE.name
+    and calibration.get("calibration_configuration")
+    == "centered_location_ou_smooth_climatology-k2"
+    and calibration.get("asset_manifest_sha256")
+    == contract["parent_asset_manifest_sha256"]
+    and calibration.get("calibration_source_commit")
+    == contract["parent_asset_source_commit"]
+    and calibration.get("calibration_stream_sha256")
+    == "2bb8379f639712dc864308510bd2a8c10ac9c39ea3cae609abdc2a2bf51384ff"
+    and calibration.get("candidate_output_accessed") is False
+    and calibration.get("protected_roles_opened") == []
+    and calibration.get("sequence_seeds") == [410542, 410543]
+    and calibration.get("replicates") == 1000
+    and calibration.get("nearest_rank_zero_based_index") == 899
+    and calibration.get("margin", 0) > 0
+    and calibration.get("valid") is True
+    and calibration.get("gates")
+    == {
+        "candidate_blind": True,
+        "replicate_count": True,
+        "sequence_seeds_exact": True,
+        "strictly_positive_margin": True,
+    }
+):
+    raise RuntimeError("candidate-blind attribution calibration drift")
 
 role_map = json.loads((PACKAGE / "artifacts/portfolio-role-map.json").read_text())
 if (
@@ -106,6 +150,8 @@ for token in (
     "torch.count_nonzero(e2.location_baseline.weight[:, normal_columns])",
     "portfolio.forward_control = lambda control, features, station, hidden_size: None",
     "descriptor-only control accepted conditioned tensors",
+    "PortableCandidateExport",
+    "portable_stationary_ou_states",
     "if uses_normals:",
 ):
     if token not in core:
@@ -129,10 +175,43 @@ texts = {
 for token in ("410542", "410543", "899", "candidate_output_accessed"):
     if token not in texts["calibrate_attribution.py"]:
         raise RuntimeError(f"calibration invariant absent: {token}")
-for token in ("PAIRINGS", "selector_replays_byte_identical", "runtime_receipt"):
+for token in (
+    "PAIRINGS",
+    "selector_replays_byte_identical",
+    "runtime_receipt",
+    "verify_replay_asset_bundle",
+    "staged asset manifest differs from authenticated plan",
+    "replay-consumed asset identity drift",
+    "verify_runtime_semantics",
+    "runtime Cartesian roster drift",
+    "timed candidate artifact identity drift",
+    "runtime environment provenance drift",
+    "expected_retained, expected_discarded = runtime_discard_contaminated_pairs",
+    'runtime.get("gates") != computed_gates',
+    "runtime safeguard gate recomputation drift",
+    '"engineering_eligible"',
+    '"faithful_output_deterministic"',
+):
     if token not in texts["run_temporal_replay.py"]:
         raise RuntimeError(f"replay invariant absent: {token}")
-for token in ("timed_sample_count", "single_core", "warn_below\": 30.0"):
+for token in (
+    "discard_contaminated_pairs",
+    "raw_timed_sample_count",
+    "timed_sample_count",
+    "candidate_exports",
+    "artifact_identities",
+    "torch.set_num_interop_threads(1)",
+    "CUDA_VISIBLE_DEVICES",
+    "host_environment",
+    "warn_below\": 30.0",
+    '"daily_field_count": 8',
+    '"clean_export_prefix_exact"',
+    '"clean_export_cold_start"',
+    '"clean_export_peak_rss"',
+    '"candidate_complete"',
+    '"faithful_complete"',
+    '"deterministic_output"',
+):
     if token not in texts["run_runtime_benchmarks.py"]:
         raise RuntimeError(f"runtime invariant absent: {token}")
 builder = (PACKAGE / "artifacts/jobs/build_control_records.py").read_text(encoding="utf-8")
@@ -140,11 +219,15 @@ if (
     "inherited.PACKAGE = PACKAGE" not in builder
     or "inherited.ROLES = ROLES" not in builder
     or "control-export.pt" not in builder
+    or "candidate-export-{years}.pt" not in builder
+    or "runtime-benchmark.json" not in builder
 ):
     raise RuntimeError("successor authority/portable export override absent")
 wrapper = (PACKAGE / "artifacts/jobs/continuous_candidate_experiment.py").read_text(encoding="utf-8")
 if "if uses_normals:\n    continuous.load_conditioning" not in wrapper:
     raise RuntimeError("descriptor-only process still loads conditioning")
+if 'value["configuration_id"] = arm["configuration_id"]' not in wrapper:
+    raise RuntimeError("per-seed replacement configuration identity override absent")
 if "180 normals-only input columns (720 weights)" not in (PACKAGE / "package.md").read_text(encoding="utf-8"):
     raise RuntimeError("normal-only parameter explanation drift")
 materializer_path = PACKAGE / "artifacts/jobs/materialize_admission.py"
@@ -186,19 +269,48 @@ transformed = selector_module.four_arm_source(
 )
 if "left, right = configurations" in transformed or "pairwise_probabilities" not in transformed:
     raise RuntimeError("four-arm selector diagnostic transform drift")
+coverage = json.loads((parent_assets / "objective-selector-coverage.json").read_text())
+metric_keys = tuple(row["metric_key"] for row in coverage["metrics"])
+dispersion_keys = selector_module.dispersion_metric_keys(metric_keys)
+if len(dispersion_keys) != 39 or not all(
+    name.endswith("_standard_deviation") for name in dispersion_keys
+):
+    raise RuntimeError("interannual-dispersion diagnostic registry drift")
+if (
+    selector_module.failure_terminal(selector_module.InvalidEvidenceError("fixture"))
+    != "FAIL-A10M5R15-INVALID-EVIDENCE"
+    or selector_module.failure_terminal(
+        selector_module.EngineeringIncompleteError("fixture")
+    )
+    != "HOLD-A10M5R15-ENGINEERING-INCOMPLETE"
+    or selector_module.failure_terminal(FileNotFoundError("fixture"))
+    != "HOLD-A10M5R15-ENGINEERING-INCOMPLETE"
+):
+    raise RuntimeError("failure-terminal precedence fixture drift")
 prepare = (PACKAGE / "artifacts/jobs/prepare_assets.py").read_text(encoding="utf-8")
 for token in (
     "candidate-blind attribution calibration is not frozen",
     'post-collection-replay-entry.json',
     '(options.output / "run_temporal_replay.py").unlink()',
+    "install_runtime_execution",
+    "runtime-parameters.tar",
+    "cargo-vendor.tar.gz",
+    "runtime-walltime-preflight.json",
+    '"$benchmark_remaining" -ge 1800',
+    '"maximum_expanded_bytes": 19327352832',
+    '"minimum_free_bytes_before_mutation": 21474836480',
+    '"minimum_free_inodes_before_mutation": 262144',
+    '.replace("16000", "262144")',
+    'rm -rf -- "$benchmark_root/rust-1.92.0-x86_64-unknown-linux-gnu"',
+    'rm -rf -- "$benchmark_root/source/target"',
 ):
     if token not in prepare:
         raise RuntimeError(f"calibration/replay preparation gate absent: {token}")
 if not (PACKAGE / "plan.md").is_file():
     raise RuntimeError("bounded execution plan absent")
-if "Status: `SCAFFOLDED`" not in (PACKAGE / "package.md").read_text(encoding="utf-8"):
+if "Status: `EXECUTION-READY`" not in (PACKAGE / "package.md").read_text(encoding="utf-8"):
     raise RuntimeError("execution package state drift")
 if PACKAGE.name not in (REPO / "docs/work-packages/README.md").read_text(encoding="utf-8"):
     raise RuntimeError("execution package missing from catalog")
 
-print("A10M5R15R2-SCAFFOLD-VERIFIED")
+print("A10M5R15R2-EXECUTION-READY-VERIFIED")

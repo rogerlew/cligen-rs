@@ -36,8 +36,11 @@ production change.
   run the authorized two-L40/two-wave portfolio if every data gate passes.
 - [x] Scaffolded A10M5R15R2 with four exact model roles, successor corpus and
   conditioning pins, inherited two-wave controls, and a 515-minute ceiling.
-- [ ] Disposition independent execution-readiness findings, publish R2 source,
-  prepare immutable assets, and materialize fresh authority.
+- [x] Dispositioned all independent execution-readiness findings at `PASS`,
+  including per-arm safeguards, deterministic portable exports, exact replay,
+  phase-bounded storage, and measured 240-minute feasibility.
+- [ ] Publish R2 source, prepare immutable assets, and materialize fresh
+  authority.
 
 ## Surprises & Discoveries
 
@@ -53,6 +56,10 @@ production change.
 - The accepted A10M1 corpus is not wholly inside the valid PRISM runtime mask.
   Exact containing-cell queries fail for 74 points: cold 19/3 and hot-arid
   41/11 in candidate-fit/fit-validation. All six temporal sites are valid.
+- Horizon-dependent FFT rounding made independent 30/100 exports unsuitable
+  for exact prefix identity. A fixed affine prefix scan is exact across the two
+  horizons and remains within 1.43e-6 of the inherited eager FFT, below the
+  frozen 2e-5 export tolerance.
 
 ## Decision Log
 
@@ -67,6 +74,10 @@ production change.
   existing absolute temporal gates. Date/Author: 2026-07-21, Codex.
 - Decision: reuse the proven two-L40/two-wave topology at a 515
   L40-minute-equivalent ceiling. Date/Author: 2026-07-21, Codex.
+- Decision: apply runtime safeguards per arm and matched pair while reserving
+  global engineering-incomplete disposition for faithful-comparator or
+  measurement-method failures. Date/Author: 2026-07-21, Codex/independent
+  reviewer.
 - Decision: preserve the frozen no-fallback coverage gate and stop before
   authority or GPU reservation. Silent deletion of the 74 points would
   unbalance two regimes and change the study claim. Date/Author: 2026-07-21,

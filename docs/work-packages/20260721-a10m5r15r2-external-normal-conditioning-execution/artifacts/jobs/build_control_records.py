@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +23,7 @@ RECORD_TYPE = "a10m5r15r2-submission-admission"
 PORTFOLIO_ROLE = "external-normal-conditioning-portfolio"
 R1 = PACKAGE.parent / "20260721-a10m5r15r1-prism-eligible-cohort"
 CALIBRATION = PACKAGE / "artifacts/attribution-calibration.json"
+CONTRACT = PACKAGE / "artifacts/execution-contract.json"
 ROLES = (
     ("e0-centered-location-ou-smooth-climatology-k2", "centered_location_ou_smooth_climatology", "K2"),
     ("e1-normal-conditioned-smooth-climatology-k2", "normal_conditioned_smooth_climatology", "K2"),
@@ -29,6 +31,12 @@ ROLES = (
     ("e2-normal-anchored-residual-v1", "normal_anchored_residual", "K2"),
 )
 P2_ROLES = {ROLES[0][0], ROLES[1][0]}
+CALIBRATION_GATES = {
+    "candidate_blind": True,
+    "replicate_count": True,
+    "sequence_seeds_exact": True,
+    "strictly_positive_margin": True,
+}
 
 
 def digest(path: Path) -> str:
@@ -42,6 +50,13 @@ def git_bytes(commit: str, path: Path) -> bytes:
         check=True,
         capture_output=True,
     ).stdout
+
+
+def authenticated(value: dict) -> bool:
+    semantic = dict(value)
+    recorded = semantic.pop("record_sha256", None)
+    encoded = json.dumps(semantic, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return recorded == hashlib.sha256(encoded).hexdigest()
 
 
 if SOURCE.read_bytes() != git_bytes(PARENT_COMMIT, SOURCE):
@@ -87,17 +102,35 @@ def predecessor_bundle(record_commit: str | None = None) -> dict:
 
 def calibration_bundle(record_commit: str | None = None) -> dict:
     value = json.loads(CALIBRATION.read_text(encoding="utf-8"))
+    contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
     if not (
-        value.get("package_id") == PACKAGE_ID
+        authenticated(value)
+        and digest(CALIBRATION) == contract["replay"].get("calibration_receipt_sha256")
+        and value.get("package_id") == PACKAGE_ID
         and value.get("valid") is True
         and value.get("candidate_output_accessed") is False
         and value.get("protected_roles_opened") == []
+        and value.get("calibration_configuration")
+        == "centered_location_ou_smooth_climatology-k2"
+        and value.get("asset_manifest_sha256") == contract["parent_asset_manifest_sha256"]
+        and value.get("calibration_source_commit") == contract["parent_asset_source_commit"]
+        and value.get("calibration_stream_sha256") == "2bb8379f639712dc864308510bd2a8c10ac9c39ea3cae609abdc2a2bf51384ff"
         and value.get("sequence_seeds") == [410542, 410543]
-        and all(value.get("gates", {}).values())
+        and value.get("replicates") == 1000
+        and value.get("nearest_rank_zero_based_index") == 899
+        and math.isfinite(value.get("margin", math.nan))
+        and value["margin"] > 0
+        and value.get("gates") == CALIBRATION_GATES
     ):
         raise RuntimeError("attribution calibration receipt invalid")
-    if record_commit is not None and git_bytes(record_commit, CALIBRATION) != CALIBRATION.read_bytes():
-        raise RuntimeError("attribution calibration differs from published source")
+    if record_commit is not None:
+        ancestor = subprocess.run(
+            ("git", "merge-base", "--is-ancestor", value["source_commit"], record_commit),
+            cwd=REPO,
+            check=False,
+        ).returncode == 0
+        if not ancestor or git_bytes(record_commit, CALIBRATION) != CALIBRATION.read_bytes():
+            raise RuntimeError("attribution calibration differs from published source")
     return {
         "artifact": {"bytes": CALIBRATION.stat().st_size, "sha256": digest(CALIBRATION)},
         "candidate_output_accessed": False,
@@ -134,6 +167,65 @@ def plan(options) -> None:
     value["admission_materialization"]["record_type"] = RECORD_TYPE
     portfolio = next(job for job in value["jobs"] if job["role"] == PORTFOLIO_ROLE)
     portfolio.update({"gpus": 2, "gres": "gpu:l40:2", "time_limit_minutes": 240})
+    extra_evidence = [
+        f"results/{PORTFOLIO_ROLE}/runtime-benchmark.json",
+        f"results/{PORTFOLIO_ROLE}/runtime-walltime-preflight.json",
+        f"results/{PORTFOLIO_ROLE}/faithful-cligen-linux-x86_64",
+        *(
+            f"results/{role}/seed-work/{seed}/candidate-export-{years}.pt"
+            for role, _, _ in ROLES
+            for seed in (147031, 271828, 314159)
+            for years in (30, 100)
+        ),
+        *(
+            f"results/{role}/seed-work/{seed}/control-export.pt"
+            for role in sorted(P2_ROLES)
+            for seed in (147031, 271828, 314159)
+        ),
+    ]
+    value["evidence_allowlist"] = list(
+        dict.fromkeys([*value["evidence_allowlist"], *extra_evidence])
+    )
+    value["evidence_volume"]["maximum_files"] = len(value["evidence_allowlist"])
+    value["job_local_capacity"].update(
+        {
+            "expanded_asset_bytes": 19327352832,
+            "minimum_free_bytes": 21474836480,
+            "required_inodes": 262144,
+        }
+    )
+    capacity = json.loads(
+        (options.asset_root / "job-local-capacity-contract.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    if (
+        capacity.get("package_id") != PACKAGE_ID
+        or capacity.get("status") != "EXECUTION-READY"
+        or capacity.get("storage_formula", {}).get(
+            "minimum_free_bytes_before_mutation"
+        )
+        != value["job_local_capacity"]["minimum_free_bytes"]
+        or capacity.get("storage_formula", {}).get(
+            "minimum_free_inodes_before_mutation"
+        )
+        != value["job_local_capacity"]["required_inodes"]
+    ):
+        raise RuntimeError("runtime storage contract/semantic plan drift")
+    external_assets = {
+        "cargo-vendor.tar.gz",
+        "corpus.tar",
+        "requirements.lock",
+        "runtime-parameters.tar",
+        "runtime.tar.gz",
+        "rust-1.92.0-x86_64-unknown-linux-gnu.tar.xz",
+        "wheelhouse.tar",
+    }
+    for row in value["assets"]:
+        if row["logical_name"] in external_assets:
+            row["source_class"] = "external-redistributable"
+        elif row["logical_name"] == "source.tar.gz":
+            row["source_class"] = "repository-owned"
     if [(job["role"], job["gpus"], job["time_limit_minutes"]) for job in value["jobs"]] != [
         ("control-materialization", 1, 30),
         (PORTFOLIO_ROLE, 2, 240),
@@ -144,6 +236,12 @@ def plan(options) -> None:
 
 def evidence(role: str) -> list[str]:
     values = base_evidence(role)
+    if role != "control-materialization":
+        values.extend(
+            f"results/{role}/seed-work/{seed}/candidate-export-{years}.pt"
+            for seed in (147031, 271828, 314159)
+            for years in (30, 100)
+        )
     if role in P2_ROLES:
         values.extend(
             f"results/{role}/seed-work/{seed}/control-export.pt"

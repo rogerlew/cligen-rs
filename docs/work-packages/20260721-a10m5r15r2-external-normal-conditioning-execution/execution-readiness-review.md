@@ -4,7 +4,7 @@ Date: 2026-07-21
 Reviewer: independent subagent `a10m5r15_readiness_review`
 Initial disposition: `NOT READY`
 First re-review disposition: `REJECT`
-Final re-review disposition: pending post-publication calibration
+Final re-review disposition: `PASS` — no unresolved P1/P2 findings
 
 ## Initial findings and disposition
 
@@ -44,6 +44,31 @@ review R2 was revised to:
   compute the two registered non-gating diagnostics, restrict portable P2
   exports to E0/E1, and compare serialized replay bytes.
 
-The only intentional remaining gate at this checkpoint is stage 2 of
-`plan.md`: publish these producer bytes, compute candidate-blind calibration
-from accepted R14 E0, commit its receipt/hash, and request final re-review.
+## Final re-review
+
+Candidate-blind calibration was reproduced byte-for-byte under NumPy 2.2.6
+with margin `0.084085278215276102` and frozen receipt SHA-256
+`d54013c376f19a3d969f312a9e660dd5879e142bf64c3a16b622d21b30c2d9a2`.
+The final review accepted all subsequent execution and disposition remedies:
+
+- the fixed-horizon CPU path uses a prefix-stable affine scan; all four exact
+  architectures passed eager tolerance and exact 30/100 prefix checks;
+- runtime replay recomputes the exact roster, samples, rerun/contamination
+  relation, repeats, MADs, aggregates, artifact identities, environment, and
+  every global and per-arm gate;
+- candidate completeness, support, determinism, warm time, memory, artifact
+  size, parameter count, and stability reject only that arm and its matched
+  pair, while faithful-comparator failures remain global integrity failures;
+- runtime construction materializes eight equivalent daily fields, keeps
+  normals outside the warm timer, and authenticates exact six-site parameter,
+  compiler, corpus, and dependency identities;
+- job-local admission requires 20 GiB and 262,144 inodes, phases the Rust
+  distribution, Cargo target, and faithful row work, and retains stated byte
+  and inode margins on the recent node03 observation; and
+- the 240-minute allocation is supported by measured export, serialization,
+  cold build, warmup, RSS, target-tree, and artifact-size evidence and fails
+  closed before beginning a partial benchmark tail.
+
+Focused verification, Python compilation, `git diff --check`, and
+`cargo fmt --check` passed. Execution remains contingent on publication and
+fresh toolkit authority, control, occupancy, and admission records.

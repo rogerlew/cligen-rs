@@ -36,6 +36,7 @@
   "protected_roles_opened":[],
   "replay": {
     "attribution_bootstrap_seed":410542,
+    "calibration_receipt_sha256":"d54013c376f19a3d969f312a9e660dd5879e142bf64c3a16b622d21b30c2d9a2",
     "calibration_replicates":1000,
     "calibration_sequence_seeds":[410542,410543],
     "materiality_floor":0.000001,
