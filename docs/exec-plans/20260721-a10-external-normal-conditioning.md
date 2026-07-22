@@ -14,11 +14,11 @@ production change.
 ## Progress
 
 - [x] Campaign execution ceiling is 597 L40-minutes, an outer cap rather than
-      an unnamed reserve. Realized use through successful calibration is 38 =
-      8 prior R2 + 9 canceled calibration + 1 out-of-band cleanup + 20 fresh
-      calibration. Both calibration recovery reserves were released after
-      authenticated cleanup. Adding the outstanding 515-minute study yields a
-      bounded campaign maximum of 553.
+      an unnamed reserve. Realized use through R2R2 is 60 = 8 prior R2 + 9
+      canceled calibration + 1 out-of-band cleanup + 20 fresh calibration +
+      19 R2R2 control + 3 failed R2R2 portfolio. All three recovery reserves
+      were released after authenticated cleanup. Adding the outstanding
+      515-minute study yields a bounded campaign maximum of 575.
 
 - [x] 2026-07-21: accepted ADR-0006/0007 and drafted the successor contract.
 - [x] 2026-07-21: corrected the runtime boundary, control labeling, capacity
@@ -39,15 +39,15 @@ production change.
   accepted; the balanced corpus and candidate-fit-only normalizer passed.
 - [x] Closed A10M5R15R1 at `A10M5R15R1-COHORT-READY` with all 1,440 corpus and
   six temporal PRISM cells valid.
-- [ ] Publish the A10M5R15R2 execution source and fresh toolkit authority, then
-  run the authorized two-L40/two-wave portfolio if every data gate passes.
+- [x] Published the initial A10M5R15R2 execution source and fresh toolkit
+      authority; its control failed closed on the stale reconstruction pin.
 - [x] Scaffolded A10M5R15R2 with four exact model roles, successor corpus and
   conditioning pins, inherited two-wave controls, and a 515-minute ceiling.
 - [x] Dispositioned all independent execution-readiness findings at `PASS`,
   including per-arm safeguards, deterministic portable exports, exact replay,
   phase-bounded storage, and measured 240-minute feasibility.
-- [ ] Publish R2 source, prepare immutable assets, and materialize fresh
-  authority.
+- [x] Published R2 source, prepared immutable assets, and materialized its
+      fresh authority before the successor-control hold.
 - [x] Closed the candidate-blind successor-control calibration with all six
   exact dynamic identities, 20 billed L40-minutes, and authenticated cleanup.
 - [x] Scaffolded A10M5R15R2R2 as a fresh execution successor that
@@ -60,6 +60,8 @@ production change.
   records in 3 L40-minutes. Cleanup and reserve release authenticated.
 - [ ] Publish a fresh evidence-surface successor with complete new-role
   diagnostics; realized 60 + successor ceiling 515 = 575 under outer 597.
+- [x] Scaffolded A10M5R15R2R3 with an unchanged science contract and a
+      deterministic rewrite of every inherited role-scoped evidence path.
 
 ## Surprises & Discoveries
 

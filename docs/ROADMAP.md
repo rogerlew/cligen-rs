@@ -722,8 +722,14 @@ output. A later execution identity must pin and independently reconstruct
 those bytes before releasing the unchanged R15 science portfolio.
 The calibration completed all six rows in 20 billed L40-minutes, released its
 recovery reserve after authenticated cleanup, and closed at
-`A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY`. The campaign's bounded
-maximum is now 553 L40-minutes including the still-unrun 515-minute study.
+`A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY`. The R2R2 successor then
+reconstructed all six rows exactly in 19 billed L40-minutes, but its portfolio
+launcher failed both wave-0 children in three billed L40-minutes. The inherited
+evidence allowlist omitted the new-role stderr paths, so no scientific
+interpretation is permitted. The fresh
+[A10M5R15R2R3 evidence remedy](work-packages/20260722-a10m5r15r2r3-portfolio-evidence-remedy/package.md)
+changes only that collection-path mapping. Realized use is 60 and the bounded
+maximum is now 575 L40-minutes including its still-unrun 515-minute study.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
