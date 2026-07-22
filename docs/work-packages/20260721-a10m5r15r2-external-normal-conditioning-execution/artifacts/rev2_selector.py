@@ -90,7 +90,21 @@ def run_selector(
     module_name = f"rev2_temporal_select_{bootstrap_seed}_{output_root.name}"
     module = __import__("types").ModuleType(module_name)
     module.__file__ = str(source)
-    exec(compile(four_arm_source(source.read_text(encoding="utf-8")), str(source), "exec"), module.__dict__)
+    inserted = str(asset_root) not in sys.path
+    if inserted:
+        sys.path.insert(0, str(asset_root))
+    try:
+        exec(
+            compile(
+                four_arm_source(source.read_text(encoding="utf-8")),
+                str(source),
+                "exec",
+            ),
+            module.__dict__,
+        )
+    finally:
+        if inserted:
+            sys.path.remove(str(asset_root))
     contract = json.loads((asset_root / "temporal-contract.json").read_text(encoding="utf-8"))
     configurations = [row["configuration_id"] for row in contract["roles"]]
     replicates = int(contract["scoring"]["bootstrap"]["replicates"])
