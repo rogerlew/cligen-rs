@@ -26,6 +26,12 @@ production change.
 - [x] 2026-07-21: closed A10M5R15 at
   `HOLD-A10M5R15-ENGINEERING-INCOMPLETE`; candidate implementation and live
   execution are not reachable under the frozen input contract.
+- [x] 2026-07-21: operator authorized A10M5R15R1, a prospective exact-cell,
+  regime-balanced cohort repair preserving all 1,366 valid predecessor points.
+- [ ] Publish and execute the frozen 72-request A10M5R15R1 queue, finalize the
+  replacement corpus, and recompute candidate-fit-only normal conditioning.
+- [ ] Publish the A10M5R15R2 execution source and fresh toolkit authority, then
+  run the authorized two-L40/two-wave portfolio if every data gate passes.
 
 ## Surprises & Discoveries
 
@@ -59,6 +65,10 @@ production change.
   authority or GPU reservation. Silent deletion of the 74 points would
   unbalance two regimes and change the study claim. Date/Author: 2026-07-21,
   Codex.
+- Decision: use A10M5R15R1 to retain all valid predecessor points, prefer
+  already accepted local series in original candidate-blind order, and bound
+  new requests to a published 72-point queue for the remaining 8 cold and 28
+  hot-arid candidate-fit slots. Date/Author: 2026-07-21, operator/Codex.
 
 ## Outcomes & Retrospective
 
@@ -69,6 +79,11 @@ candidate output, toolkit authority, GPU reservation, confirmation target, or
 public runtime change exists. A successor needs an explicit prospective
 cohort/fallback/source decision; implementation cannot repair this input
 identity mechanically.
+
+The operator selected the prospective-cohort path. A10M5R15R1 is now the
+active data remedy; it does not alter the predecessor HOLD. GPU execution
+remains contingent on the successor corpus, normalizer, source, authority, and
+pre-reservation checks all passing.
 
 ## Context and Orientation
 

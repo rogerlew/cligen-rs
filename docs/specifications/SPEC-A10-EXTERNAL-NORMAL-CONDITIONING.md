@@ -1,6 +1,6 @@
 # SPEC-A10-EXTERNAL-NORMAL-CONDITIONING
 
-Status: research-only **RATIFIED** (rev 1; A10M5R15 prospective execution
+Status: research-only **RATIFIED** (rev 2; A10M5R15 prospective execution
 contract; no public runtime identifier)
 Authority: [ADR-0006](../decisions/0006-a10-runtime-boundary-expansion.md),
 [ADR-0007](../decisions/0007-a10-external-normal-conditioning.md),
@@ -34,7 +34,7 @@ identifies as the dominant temporal-gate failure mechanism?
 |---|---|
 | Adapter pair capacity | E0/E1 use the frozen P2 backbone and the A10M5R14 K2 ceiling of 340,000 total parameters |
 | Replacement pair capacity | E2C/E2 replace the P2 backbone; each remains below the architecture-portfolio K2 ceiling of 330,000 total parameters |
-| Corpus | accepted A10M1 corpus, 1,200 `candidate_fit` + 240 `fit_validation`, `daymet_official_365_v1` calendar, 16-year windows |
+| Corpus | A10M5R15R1 PRISM-eligible prospective successor to the accepted A10M1 corpus, 1,200 `candidate_fit` + 240 `fit_validation`, `daymet_official_365_v1` calendar, 16-year windows |
 | Normals asset | PRISM Norm91m monthly ppt/Tmax/Tmin bundle, exact SHA-256s inherited from the accepted SPEC-A10-STOCHASTIC-PRISM-COMPARATOR pins, frozen before output |
 | Seeds | 147031, 271828, 314159 |
 | Temporal protocol | ratified A10M5R4R2 lineage: 6 temporal sites, 8 members × 100 Gregorian years, 1,000 bootstrap replicates, reference = per-regime minimum of faithful and `stochastic_prism_localized_par_v1` |
@@ -44,6 +44,23 @@ identifies as the dominant temporal-gate failure mechanism?
 Normals enter the model only after normalization by candidate-fit-only
 statistics. The normals values at development/confirmation coordinates
 are conditioning covariates under ADR-0007 §3, not target access.
+
+### PRISM-eligible balanced-cohort remedy
+
+A10M5R15R1 preserves the 1,366 A10M1 v2 points whose exact containing PRISM
+cell is valid and replaces only the 74 masked or out-of-coverage points. For
+each frozen regime/role deficit it follows the original candidate-blind
+`(regime, role, order)` lattice, first consuming authenticated accepted local
+Daymet series and then a published bounded request queue. The resulting
+prospective identity must restore exactly 200 `candidate_fit` and 40
+`fit_validation` points in each regime with no cross-role point or tile.
+
+Eligibility is only the Boolean result of the frozen containing-cell query;
+no PRISM value, Daymet climate value, model output, or protected-role evidence
+may affect ordering or role assignment. The containing-cell/no-fallback/no-
+interpolation rule, calendar transform, observed mask, years, variables, and
+all downstream model science remain unchanged. Candidate-fit-only
+normalization is recomputed against the successor identity before output.
 
 ## Arms
 

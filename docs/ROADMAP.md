@@ -693,6 +693,17 @@ new prospective cohort, valid-cell fallback, or complete-normals-source
 decision; silently dropping the 74 points would change regime balance and is
 not authorized by this package.
 
+**Authorized successor 2026-07-21:**
+[A10M5R15R1](work-packages/20260721-a10m5r15r1-prism-eligible-cohort/package.md)
+prospectively preserves the 1,366 valid A10M1 v2 points and replaces exactly
+the 74 invalid cells while restoring 200 candidate-fit and 40 fit-validation
+points per regime. The frozen candidate-blind lattice supplies 38 already
+accepted local replacements; the remaining deficit is eight cold and 28
+hot-arid candidate-fit points. A published queue permits at most 72 new
+Daymet requests. Exact PRISM containing-cell eligibility is the only new
+inclusion predicate; no climate value or protected-role evidence enters the
+ordering, and all model science remains at specification revision 2.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

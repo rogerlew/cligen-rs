@@ -1,0 +1,36 @@
+{
+  "candidate_fit_per_regime": 200,
+  "fit_validation_per_regime": 40,
+  "frozen_new_request_deficit": {
+    "cold/candidate_fit": 8,
+    "hot_arid/candidate_fit": 28
+  },
+  "maximum_new_daymet_requests": 72,
+  "package_id": "20260721-a10m5r15r1-prism-eligible-cohort",
+  "predecessors": {
+    "a10m1_freeze_sha256": "654f3ad2a8c64ea08541cb85f44397fc629cae55d348a1866f5e642f2e34cc30",
+    "a10m1_job_source_sha256": "e59c9c645cf85fef8a0eef65e67487ccd16134c771c29fee686c379d046060f6",
+    "a10m1_original_access_ledger_sha256": "0c364257cfb0b142df470e4021ababcd74fa4c297ce77d93edef29a80de81865",
+    "a10m1_partition_sha256": "7a0e52fbd6ba74aa2ab378516846d4161425fd319b5ba390978b1ede0900f166",
+    "a10m1_selected_v2_sha256": "76ca0f9a3ab6a6806d26ac1a12e77897ff0285bce43fd044ac947c4e15f66920",
+    "a10m1_tile_repair_sha256": "91040bac9ab8a6beffe6b60c4a82dd62c1f9ef0c808a2019ca8233c0ec6db629",
+    "a10m5r15_failure_sha256": "32c914ad36337a1c689babbc45c9ea308dbbbacfa1a44d4d033e59c83ffd4186",
+    "a10m5r15_preflight_source_sha256": "11232a44a5c158d8a46ed984337e01c1d993b799f1784589229846b3beaf83de"
+  },
+  "prism": {
+    "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+    "grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+    "query": "one_valid_containing_cell_no_fallback_no_interpolation"
+  },
+  "regimes": [
+    "hot_arid",
+    "arid_boundary",
+    "monsoonal_transition",
+    "non_monsoonal_semi_arid",
+    "humid",
+    "cold"
+  ],
+  "schema_version": "a10m5r15r1-cohort-contract-1",
+  "selection": "retain_valid_v2_then_original_candidate_blind_order_existing_accepted_first_then_published_request_queue",
+  "target_total": 1440
+}
