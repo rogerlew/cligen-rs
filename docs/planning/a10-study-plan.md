@@ -79,6 +79,34 @@ records a post-A10 direction—a separate cleanroom daily terrain spatializer
 driven by shared coarse neural weather state—but does not add that work to
 A10's production or confirmation scope.
 
+### Operator amendment: runtime boundary and external-normal conditioning (2026-07-21)
+
+After the R14R2R2 terminal
+(`HOLD-A10M5R14-NO-TEMPORALLY-ELIGIBLE-CANDIDATE`) closed the seventh
+candidate family against the frozen temporal gate, the operator accepted
+[ADR-0006](../decisions/0006-a10-runtime-boundary-expansion.md) and
+[ADR-0007](../decisions/0007-a10-external-normal-conditioning.md). Both are
+prospective and rewrite no closed terminal.
+
+- **ADR-0006** supersedes the Section 4.5 and Section 10.5 warm-generation
+  classification values: `PASS` below 5.0×, `WARN` at 5.0× to below 30.0×,
+  `FAIL` at 30.0× or greater. The benchmark procedure, `WARN` semantics,
+  cold-start safeguards, and unrounded-ratio arithmetic are unchanged.
+  P3/P4 capacities become re-admissible for prospectively identified
+  successor packages.
+- **ADR-0007** admits externally measured monthly climate normals
+  (initially the hash-pinned PRISM Norm91m ppt/Tmax/Tmin bundle) as
+  transferable site conditioning under the Section 4.2 envelope, with a
+  frozen asset identity, unchanged confirmation firewall, a mandatory
+  no-normals control, and new family identities for normal-conditioned
+  candidates. This deliberately redefines the candidate class: A10
+  candidates are conditionable at any site the frozen normals product
+  covers, and out-of-coverage stations route to the declared fallback.
+
+Sections 4.5, 6.2, and 10.5 are read through these amendments; their
+original values remain in place as the historical record of the pre-R15
+contract.
+
 ## 1. Why the campaign is pivoting
 
 ### 1.1 What has been learned

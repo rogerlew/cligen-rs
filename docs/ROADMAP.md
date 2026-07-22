@@ -654,6 +654,27 @@ procedural latitude/day-of-year
 astronomical envelope plus a learned stochastic residual coupled to generated
 weather.
 
+**Operator direction 2026-07-21: ADR-0006 and ADR-0007 accepted.** With
+seven candidate families closed against the frozen temporal gate, the
+operator (1) expanded the warm-generation runtime failure boundary from 10×
+to 30× ([ADR-0006](decisions/0006-a10-runtime-boundary-expansion.md)),
+prospectively re-admitting the P3/P4 capacities the A10M5R3 knee excluded,
+and (2) admitted externally measured monthly climate normals — initially
+the hash-pinned PRISM Norm91m ppt/Tmax/Tmin bundle already versioned under
+SPEC-A10-STOCHASTIC-PRISM-COMPARATOR — as transferable site conditioning
+([ADR-0007](decisions/0007-a10-external-normal-conditioning.md)). The
+rationale is recorded in both ADRs: the diagnosed dominant failure is site
+climatological location, and the temporal reference itself consumes PRISM
+normals that candidates were denied. The proposed successor is A10M5R15
+under the draft
+[SPEC-A10-EXTERNAL-NORMAL-CONDITIONING](specifications/SPEC-A10-EXTERNAL-NORMAL-CONDITIONING.md):
+the R14 arm-B control, a normals-augmented smooth-climatology arm, and a
+normal-anchored residual arm, all under the unchanged temporal protocol and
+K2 capacity. The draft binds only when the dispatched package ratifies it
+before candidate output. If no arm reaches temporal eligibility, ADR-0007
+supports adjudicating closure of the neural line rather than an eighth
+family. Confirmation, solar, spatial, and promotion roles remain sealed.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
