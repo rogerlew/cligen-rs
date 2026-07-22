@@ -54,7 +54,7 @@ def digest(path: Path) -> str:
 
 def extract_observations(corpus: Path, output: Path, sites: list[dict]) -> None:
     wanted = {site["daymet_shard"]: site["daymet_shard_sha256"] for site in sites}
-    output.mkdir(mode=0o700)
+    output.mkdir(parents=True, mode=0o700)
     with tarfile.open(corpus, "r:") as archive:
         for member in archive:
             name = Path(member.name).name
