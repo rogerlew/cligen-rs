@@ -28,8 +28,10 @@ production change.
   execution are not reachable under the frozen input contract.
 - [x] 2026-07-21: operator authorized A10M5R15R1, a prospective exact-cell,
   regime-balanced cohort repair preserving all 1,366 valid predecessor points.
-- [ ] Publish and execute the frozen 72-request A10M5R15R1 queue, finalize the
-  replacement corpus, and recompute candidate-fit-only normal conditioning.
+- [x] Published and executed the frozen A10M5R15R1 queue: 36/36 requests were
+  accepted; the balanced corpus and candidate-fit-only normalizer passed.
+- [x] Closed A10M5R15R1 at `A10M5R15R1-COHORT-READY` with all 1,440 corpus and
+  six temporal PRISM cells valid.
 - [ ] Publish the A10M5R15R2 execution source and fresh toolkit authority, then
   run the authorized two-L40/two-wave portfolio if every data gate passes.
 
@@ -81,9 +83,10 @@ cohort/fallback/source decision; implementation cannot repair this input
 identity mechanically.
 
 The operator selected the prospective-cohort path. A10M5R15R1 is now the
-active data remedy; it does not alter the predecessor HOLD. GPU execution
-remains contingent on the successor corpus, normalizer, source, authority, and
-pre-reservation checks all passing.
+completed data remedy; it does not alter the predecessor HOLD. The successor
+corpus, normalizer, and preflight passed. GPU execution remains contingent on
+the separately published A10M5R15R2 source, fresh authority, and
+pre-reservation checks.
 
 ## Context and Orientation
 

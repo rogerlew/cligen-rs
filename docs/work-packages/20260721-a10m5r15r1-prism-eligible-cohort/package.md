@@ -1,6 +1,6 @@
 # A10M5R15R1 — PRISM-Eligible Balanced Cohort
 
-Status: `SCAFFOLDED`
+Status: `A10M5R15R1-COHORT-READY`
 Date: 2026-07-21
 Starting branch and push target: current `main`, push `main`
 
@@ -65,3 +65,17 @@ to fill any cell within the queue is
 On success, execution continues under a separately published A10M5R15R2 job
 source/authority identity. Confirmation, solar, spatial, and production roles
 remain sealed.
+
+## Result
+
+The frozen 72-point queue filled the 36-point deficit with 36 requests: eight
+cold and 28 hot-arid `candidate_fit` series, all accepted. The finalized
+selection has 1,440 unique points and exact 200/40 regime-role balance. Its 60
+Daymet shards and 38 hash-inherited USCRN objects form a 98-object,
+223,729,862-byte transfer manifest.
+
+The complete calendar/PRISM preflight passed all 1,440 corpus points and all
+six temporal sites. Candidate-fit-only conditioning produced a finite
+36-field normalizer and a 1,446-point archive. No fallback, interpolation,
+confirmation access, resource reservation, or GPU use occurred in this
+remedy. The terminal is `A10M5R15R1-COHORT-READY`.

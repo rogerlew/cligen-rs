@@ -1,0 +1,31 @@
+{
+  "archive_bytes": 208224,
+  "archive_sha256": "869ca739247a43ccf905a11f216df4fe18e812b5d5c6ade2905e5749fe0c970c",
+  "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+  "candidate_fit_count": 1200,
+  "field_count": 36,
+  "fit_validation_count": 240,
+  "gates": {
+    "all_calendar_surfaces_valid": true,
+    "all_corpus_queries_valid": true,
+    "all_temporal_queries_valid": true,
+    "candidate_fit_only_normalizer": true,
+    "canonical_layer_order_and_units": true,
+    "finite_nonzero_population_scales": true,
+    "source_f32_single_round_normalization": true,
+    "temporal_sites_match_fit_validation_cells": true
+  },
+  "grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+  "index_sha256": "1a25423b5807a79cae2d9dd9d16c2ed5a58d67a3878a55a0d97cdd65e5404ac9",
+  "normalizer_payload_bytes": 576,
+  "normalizer_payload_sha256": "fca0ae70d45de16e99053b2be1cc7af1a7c910ea0049753fbfd4e20997b86883",
+  "normals_grid_sha256": "9af8031291825757a2ce639079479593f53501c7a8ce147d32503fdc481694c2",
+  "package_id": "20260721-a10m5r15-external-normal-conditioning",
+  "point_order_sha256": "9c70e554bb035b8fbf44cd784ea09de09f14807fbd45d31c4c443ab1100836b8",
+  "runtime_archive_sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292",
+  "schema_version": "a10m5r15-normal-conditioning-1",
+  "source_archive_sha256": "c3b832d43de54face39486673843d6c5bc511793804f5678dcb1af809ac0475c",
+  "source_commit": "f6a1e816438745d582fd803bb320bd8a949a3aec",
+  "temporal_site_count": 6,
+  "valid": true
+}

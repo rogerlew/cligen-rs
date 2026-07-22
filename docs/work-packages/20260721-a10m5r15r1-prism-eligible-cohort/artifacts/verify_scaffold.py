@@ -114,7 +114,7 @@ if point_sets["retained"] != selected_ids - invalid:
     raise RuntimeError("retained cohort differs from valid predecessor subset")
 
 package_text = (PACKAGE / "package.md").read_text(encoding="utf-8")
-if "Status: `SCAFFOLDED`" not in package_text or "72 new requests" not in package_text:
+if "Status: `A10M5R15R1-COHORT-READY`" not in package_text or "72 new requests" not in package_text:
     raise RuntimeError("package state or resource bound drift")
 if PACKAGE_ID not in (REPO / "docs/work-packages/README.md").read_text(encoding="utf-8"):
     raise RuntimeError("work-package catalog missing cohort remedy")

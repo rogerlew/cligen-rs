@@ -703,6 +703,11 @@ hot-arid candidate-fit points. A published queue permits at most 72 new
 Daymet requests. Exact PRISM containing-cell eligibility is the only new
 inclusion predicate; no climate value or protected-role evidence enters the
 ordering, and all model science remains at specification revision 2.
+The queue filled with 36 accepted requests, and the complete successor passed
+all 1,440 calendar/PRISM cells, all six temporal cells, transfer identity, and
+candidate-fit-only normalization gates. A10M5R15R1 therefore closed at
+`A10M5R15R1-COHORT-READY`; model execution continues under a separately
+published A10M5R15R2 authority identity.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

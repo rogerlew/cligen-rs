@@ -38,6 +38,8 @@ normalization = job.read(job.NORMALIZATION)
 transfer = job.read(job.TRANSFER_MANIFEST)
 source = job.read(job.SOURCE_MANIFEST)
 receipt = job.read(job.BUILD_RECEIPT)
+conditioning_root = PACKAGE / "artifacts/normal-conditioning"
+conditioning = job.read(conditioning_root / "normal-conditioning-receipt.json")
 
 if acquisition.get("valid") is not True or acquisition["request_count"] != 36:
     raise RuntimeError("bounded acquisition result drift")
@@ -134,5 +136,19 @@ if receipt != {
     "valid": True,
 }:
     raise RuntimeError("cohort build receipt drift")
+if (
+    conditioning.get("valid") is not True
+    or not all(conditioning["gates"].values())
+    or conditioning["candidate_fit_count"] != 1200
+    or conditioning["fit_validation_count"] != 240
+    or conditioning["temporal_site_count"] != 6
+    or conditioning["archive_sha256"] != job.digest(conditioning_root / "normal-conditioning.f32le")
+    or conditioning["normalizer_payload_sha256"] != job.digest(conditioning_root / "normalizer.f64le")
+    or conditioning["index_sha256"] != job.digest(conditioning_root / "normal-conditioning-index.json")
+):
+    raise RuntimeError("normal-conditioning receipt drift")
+index = job.read(conditioning_root / "normal-conditioning-index.json")
+if len(index["point_ids"]) != 1446 or len(set(index["point_ids"])) != 1446:
+    raise RuntimeError("normal-conditioning roster drift")
 
 print("A10M5R15R1-COHORT-VERIFIED")
