@@ -1,0 +1,49 @@
+{
+  "arms": [
+    {"arm":"E0","candidate":"centered_location_ou_smooth_climatology","capacity":"K2","configuration_id":"centered_location_ou_smooth_climatology-k2","parameter_count":278747,"role":"e0-centered-location-ou-smooth-climatology-k2","uses_normals":false,"uses_p2":true,"wave":0},
+    {"arm":"E1","candidate":"normal_conditioned_smooth_climatology","capacity":"K2","configuration_id":"normal_conditioned_smooth_climatology-k2","parameter_count":279467,"role":"e1-normal-conditioned-smooth-climatology-k2","uses_normals":true,"uses_p2":true,"wave":0},
+    {"arm":"E2C","candidate":"descriptor_anchored_residual","capacity":"K2","configuration_id":"descriptor_anchored_residual-v1","parameter_count":2040,"role":"e2c-descriptor-anchored-residual-v1","uses_normals":false,"uses_p2":false,"wave":1},
+    {"arm":"E2","candidate":"normal_anchored_residual","capacity":"K2","configuration_id":"normal_anchored_residual-v1","parameter_count":2760,"role":"e2-normal-anchored-residual-v1","uses_normals":true,"uses_p2":false,"wave":1}
+  ],
+  "conditioning": {
+    "archive_sha256":"869ca739247a43ccf905a11f216df4fe18e812b5d5c6ade2905e5749fe0c970c",
+    "index_sha256":"1a25423b5807a79cae2d9dd9d16c2ed5a58d67a3878a55a0d97cdd65e5404ac9",
+    "normalizer_sha256":"fca0ae70d45de16e99053b2be1cc7af1a7c910ea0049753fbfd4e20997b86883",
+    "point_count":1446,
+    "receipt_sha256":"fb038040e68527bf7e655e93c33be0ebad370258edd7f9de5ad4e27b2aac929d"
+  },
+  "calendar": {
+    "profile_id":"daymet_official_365_v1",
+    "normalized_axis":"Gregorian daily 1980-01-01 through 2009-12-31 inclusive",
+    "calendar_axis_rows_per_point":10958,
+    "core_observed_rows_per_point":10950,
+    "representative_window_axis_rows":5844,
+    "month_year_eligibility":"mask-based"
+  },
+  "corpus": {
+    "aggregate_bytes":223729862,
+    "build_receipt_sha256":"9cc995aa211def1566c18e06fe16ec8d3b6ac7e6823e61639134711647abd1e5",
+    "normalized_manifest_sha256":"32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "normalization_statistics_sha256":"d36be584abdd4fd085bfacec89514e47809cc78bcd602025e7445503d572721d",
+    "object_count":98,
+    "selection_sha256":"af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "terminal":"A10M5R15R1-COHORT-READY",
+    "transfer_manifest_sha256":"e835e15282ebb17355c322b8bc7f41016e93479be1aa82bd76f0f65ef1fcb269"
+  },
+  "package_id":"20260721-a10m5r15r2-external-normal-conditioning-execution",
+  "parent_asset_manifest_sha256":"7988efbb342045f0df5ce05ddb810cc36c8be46f145f4c0bc531d02c56291c05",
+  "parent_asset_source_commit":"719d83451ddff698b280219708f7648ff73c8f9d",
+  "protected_roles_opened":[],
+  "replay": {
+    "attribution_bootstrap_seed":410542,
+    "calibration_replicates":1000,
+    "calibration_sequence_seeds":[410542,410543],
+    "materiality_floor":0.000001,
+    "nearest_rank_q90_zero_based_index":899,
+    "replay_count":2,
+    "selection":"per-treatment"
+  },
+  "resource":{"control_l40_minutes":30,"portfolio_l40_count":2,"portfolio_minutes":240,"recovery_l40_minutes":5,"total_l40_minute_equivalent":515},
+  "run_id":"a10m5r15r2-external-normal-conditioning-execution-r0",
+  "schema_version":"a10m5r15r2-execution-contract-1"
+}

@@ -34,6 +34,10 @@ production change.
   six temporal PRISM cells valid.
 - [ ] Publish the A10M5R15R2 execution source and fresh toolkit authority, then
   run the authorized two-L40/two-wave portfolio if every data gate passes.
+- [x] Scaffolded A10M5R15R2 with four exact model roles, successor corpus and
+  conditioning pins, inherited two-wave controls, and a 515-minute ceiling.
+- [ ] Disposition independent execution-readiness findings, publish R2 source,
+  prepare immutable assets, and materialize fresh authority.
 
 ## Surprises & Discoveries
 

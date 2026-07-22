@@ -708,6 +708,10 @@ all 1,440 calendar/PRISM cells, all six temporal cells, transfer identity, and
 candidate-fit-only normalization gates. A10M5R15R1 therefore closed at
 `A10M5R15R1-COHORT-READY`; model execution continues under a separately
 published A10M5R15R2 authority identity.
+The scaffolded [A10M5R15R2 execution package](work-packages/20260721-a10m5r15r2-external-normal-conditioning-execution/package.md)
+uses the authorized 515 L40-minute-equivalent two-wave topology and keeps
+fresh toolkit authority, control, occupancy, admission, replay, benchmark, and
+cleanup gates mandatory.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
