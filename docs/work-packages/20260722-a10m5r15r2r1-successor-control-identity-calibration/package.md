@@ -1,6 +1,6 @@
 # A10M5R15R2R1 — Successor Control-Identity Calibration
 
-Status: `SCAFFOLDED`
+Status: `A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY`
 Date: 2026-07-22
 Evidence mode: Mixed
 Starting branch and push target: current `main`, push `main`
@@ -77,6 +77,11 @@ calibration + 515 later study execution. After authenticated cleanup releases
 the 5-minute r2 reserve, the bounded maximum is 568. Fresh r3 calibration remains
 30 science minutes plus one 5-minute recovery contingency.
 
+Run r3 completed in 20 billed L40-minutes. Its cleanup authenticated remote
+and job-local absence and released the unused five-minute recovery reserve.
+The realized campaign total is now 38 minutes, so the remaining 515-minute
+study yields a bounded campaign maximum of 553 under the 597-minute outer cap.
+
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.
 2. Overlay a control-calibration producer that retains the frozen trainer and
@@ -130,4 +135,7 @@ package is candidate evidence.
 
 - `artifacts/control-calibration-contract.json` — frozen calibration boundary;
 - `artifacts/jobs/` — asset, authority, admission, and control producers;
-- collected control identity, receipts, and terminal accounting after run.
+- `artifacts/successor-control-identity.json` and
+  `artifacts/successor-control-summary.json` — six authenticated identities;
+- `artifacts/execution-r3-*.json` — job, collection, cleanup, terminal, and
+  recovery-release accounting.

@@ -252,7 +252,13 @@ if not (
 ):
     raise RuntimeError("control-only authority/admission projection incomplete")
 package_text = (PACKAGE / "package.md").read_text(encoding="utf-8")
-if "Status: `SCAFFOLDED`" not in package_text:
+if not any(
+    status in package_text
+    for status in (
+        "Status: `SCAFFOLDED`",
+        "Status: `A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY`",
+    )
+):
     raise RuntimeError("calibration package status drift")
 print(
     "A10M5R15R2R1-SCAFFOLD-VERIFIED",

@@ -720,6 +720,10 @@ eight L40-minutes; the portfolio was never submitted. The bounded
 now captures all six successor-corpus control identities without candidate
 output. A later execution identity must pin and independently reconstruct
 those bytes before releasing the unchanged R15 science portfolio.
+The calibration completed all six rows in 20 billed L40-minutes, released its
+recovery reserve after authenticated cleanup, and closed at
+`A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY`. The campaign's bounded
+maximum is now 553 L40-minutes including the still-unrun 515-minute study.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

@@ -13,11 +13,12 @@ production change.
 
 ## Progress
 
-- [ ] Campaign execution ceiling is 597 L40-minutes, an outer cap rather than
-      an unnamed reserve. Current pre-release maximum is 573 = 8 prior R2 + 9
-      canceled calibration + 1 out-of-band cleanup + 5 outstanding r2
-      recovery + 35 fresh calibration (30 science + 5 recovery) + 515 study.
-      Authenticated release of the r2 reserve reduces this maximum to 568.
+- [x] Campaign execution ceiling is 597 L40-minutes, an outer cap rather than
+      an unnamed reserve. Realized use through successful calibration is 38 =
+      8 prior R2 + 9 canceled calibration + 1 out-of-band cleanup + 20 fresh
+      calibration. Both calibration recovery reserves were released after
+      authenticated cleanup. Adding the outstanding 515-minute study yields a
+      bounded campaign maximum of 553.
 
 - [x] 2026-07-21: accepted ADR-0006/0007 and drafted the successor contract.
 - [x] 2026-07-21: corrected the runtime boundary, control labeling, capacity
@@ -47,6 +48,10 @@ production change.
   phase-bounded storage, and measured 240-minute feasibility.
 - [ ] Publish R2 source, prepare immutable assets, and materialize fresh
   authority.
+- [x] Closed the candidate-blind successor-control calibration with all six
+  exact dynamic identities, 20 billed L40-minutes, and authenticated cleanup.
+- [ ] Publish a fresh execution successor that prospectively pins those six
+  identities and retains the unchanged 515-minute study ceiling.
 
 ## Surprises & Discoveries
 

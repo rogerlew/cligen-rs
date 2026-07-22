@@ -1,0 +1,14 @@
+{
+  "attempt_index": 0,
+  "authority_id": "a10m5r15r2r1-successor-control-identity-calibration-r3-authority",
+  "event_sha256": "3b48574d94cfbaf3b929a6e721d43d6d3971b2bd1601518dce0f440a8824068f",
+  "job_role": "toolkit-recovery",
+  "plan_id": "2efb6e5e3dcdbe4d01f86273c5462f08764dd0d4cad41ce2c737b6ba1eabf48e",
+  "predecessor_sha256": "e76f79b37b5f6c4600486ad977579013344a3c236cf3dbbd6ea6bc5beb8b6e94",
+  "release_reason": "verified-cleanup",
+  "requested_gpu_minutes": 5,
+  "run_id": "a10m5r15r2r1-successor-control-identity-calibration-r3",
+  "sequence": 5,
+  "status": "released",
+  "token": "d49ae286dbb69f9678bf15b7c01325b8"
+}
