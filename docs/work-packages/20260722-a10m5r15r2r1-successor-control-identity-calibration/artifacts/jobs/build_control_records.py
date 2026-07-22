@@ -23,6 +23,7 @@ RUN_ID = "a10m5r15r2r1-successor-control-identity-calibration-r0"
 RECORD_TYPE = "a10m5r15r2r1-submission-admission"
 PARENT_PACKAGE = SOURCE.parents[2]
 FAILURE = PARENT_PACKAGE / "artifacts/execution-r0-failure.json"
+CONTRACT = PACKAGE / "artifacts/control-calibration-contract.json"
 CONTROL_ROLE = "control-materialization"
 CONTROL_EVIDENCE = [
     "admissions/control-materialization.json",
@@ -39,6 +40,37 @@ CONTROL_EVIDENCE = [
     "slurm/toolkit-recovery.0.err",
     "slurm/toolkit-recovery.0.out",
 ]
+EXPECTED_CONTRACT = {
+    "package_id": PACKAGE_ID,
+    "parent_asset_manifest_sha256": "64a5595fab4b493c5985db3e0a271ec6eeaa7d2dcdbe77c10e7f97d5474f988b",
+    "successor_corpus_sha256": "7b41e497d215c85ae734dea438424f23ae01cff59a3b3ba55ec32442578553f2",
+}
+EXPECTED_IDENTITY_CONTRACT = {
+    "gating_fields": [
+        "capacity_id",
+        "checkpoint_epoch",
+        "checkpoint_global_step",
+        "checkpoint_payload_bytes",
+        "checkpoint_payload_sha256",
+        "corpus_cursor_epoch_order_sha256",
+        "corpus_cursor_next_batch",
+        "family",
+        "hidden_size",
+        "model_record_sha256",
+        "parameter_count",
+        "row_id",
+        "training_seed",
+        "validation_primary_nll",
+        "validation_stability",
+        "validation_tail_score",
+    ],
+    "non_gating_provenance_fields": [
+        "checkpoint_record_sha256",
+        "export_metadata_sha256",
+        "export_sha256",
+    ],
+    "required_row_count": 6,
+}
 
 
 def git_bytes(commit: str, path: Path) -> bytes:
@@ -74,6 +106,60 @@ def calibration_bundle(record_commit: str | None = None) -> dict:
         parent.PACKAGE_ID = active_package
 
 
+def failure_projection(value: dict) -> dict:
+    control = value["control"]
+    evidence = value["evidence_chain"]
+    return {
+        "actual_checkpoint_payload_sha256": control[
+            "actual_checkpoint_payload_sha256"
+        ],
+        "cleanup_record_sha256": evidence["cleanup_record_sha256"],
+        "collection_record_sha256": evidence["collection_record_sha256"],
+        "expected_checkpoint_payload_sha256": control[
+            "expected_checkpoint_payload_sha256"
+        ],
+        "gate_receipt_sha256": control["gate_receipt_sha256"],
+        "job_id": str(control["job_id"]),
+        "job_receipt_record_sha256": control["job_receipt_record_sha256"],
+        "matrix_stop_record_sha256": value["matrix_stop"]["record_sha256"],
+        "plan_id": value["plan_id"],
+        "row_id": control["row_id"],
+        "run_id": value["run_id"],
+        "sanitized_control_stderr_sha256": evidence[
+            "sanitized_control_stderr_sha256"
+        ],
+        "source_commit": value["source_commit"],
+        "terminal_record_sha256": value["terminal_record_sha256"],
+    }
+
+
+def validate_contract(path: Path, failure: dict) -> None:
+    contract = json.loads(path.read_text(encoding="utf-8"))
+    if not (
+        all(contract.get(key) == value for key, value in EXPECTED_CONTRACT.items())
+        and contract.get("schema_version") == 1
+        and contract.get("candidate_output_allowed") is False
+        and contract.get("protected_roles_opened") == []
+        and contract.get("maximum_l40_minutes") == 35
+        and contract.get("control_capacities") == ["P1", "P2"]
+        and contract.get("control_seeds") == [147031, 271828, 314159]
+        and contract.get("identity_contract") == EXPECTED_IDENTITY_CONTRACT
+        and contract.get("parent_failure") == failure_projection(failure)
+    ):
+        raise RuntimeError("control calibration contract identity drift")
+
+
+def validate_execution_contract(asset_root: Path, source_commit: str) -> None:
+    staged = asset_root / "control-calibration-contract.json"
+    repository_bytes = CONTRACT.read_bytes()
+    if not (
+        staged.read_bytes() == repository_bytes
+        and git_bytes(source_commit, CONTRACT) == repository_bytes
+    ):
+        raise RuntimeError("staged, repository, and published contract differ")
+    validate_contract(staged, json.loads(FAILURE.read_text(encoding="utf-8")))
+
+
 def failure_bundle(record_commit: str | None = None) -> dict:
     package_path = PARENT_PACKAGE / "package.md"
     disposition_path = PARENT_PACKAGE / "disposition.md"
@@ -83,6 +169,7 @@ def failure_bundle(record_commit: str | None = None) -> dict:
     ):
         raise RuntimeError("R2 failure terminal drift")
     failure = json.loads(FAILURE.read_text(encoding="utf-8"))
+    validate_contract(CONTRACT, failure)
     if not (
         failure.get("record_authenticated") is True
         and failure.get("record_valid") is True
@@ -129,6 +216,7 @@ def failure_bundle(record_commit: str | None = None) -> dict:
 
 def authority(options) -> None:
     failure_bundle(options.source_commit)
+    validate_execution_contract(options.asset_root, options.source_commit)
     base_authority(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
     value.update(
@@ -153,6 +241,7 @@ def authority(options) -> None:
 
 def plan(options) -> None:
     failure_bundle(options.source_commit)
+    validate_execution_contract(options.asset_root, options.source_commit)
     base_plan(options)
     value = json.loads(options.output.read_text(encoding="utf-8"))
     value["package_id"] = PACKAGE_ID

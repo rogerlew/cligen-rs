@@ -14,9 +14,9 @@ checkpoint to an identity generated on the predecessor corpus.
 
 ## Scope
 
-One 30-minute, one-L40 control-only toolkit run plus the existing five-minute
-marker-bound recovery reserve. The job trains the unchanged P1/P2 control
-matrix for seeds 147031, 271828, and 314159; validates all static model,
+One 30-minute, one-L40 control-only toolkit run plus a fresh canonical
+five-minute marker-bound recovery reserve. The job trains the unchanged P1/P2
+control matrix for seeds 147031, 271828, and 314159; validates all static model,
 calendar, corpus, optimizer, and role identities; records every dynamic
 checkpoint/export/metric identity; and emits no R15 candidate stream. The
 portfolio, runtime benchmark, selector, confirmation, solar, spatial, and
