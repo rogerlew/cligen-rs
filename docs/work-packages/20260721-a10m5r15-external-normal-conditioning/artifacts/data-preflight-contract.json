@@ -1,0 +1,48 @@
+{
+  "calendar": {
+    "adjacent_annual_pairs_per_window": 15,
+    "axis_rows_per_window": 5844,
+    "eligible_origins_per_window": 13,
+    "leap_day_policy": "february_29_observed_december_31_structural_null",
+    "minimum_eligible_days_per_month": 28,
+    "normalized_axis": "proleptic_gregorian_daily",
+    "observed_core_rows_per_window": 5840,
+    "source_calendar": "daymet_official_365_v1",
+    "transform": "daymet_official_365_v1_to_proleptic_gregorian_daily",
+    "window_end": "exclusive",
+    "window_years": 16
+  },
+  "corpus": {
+    "candidate_fit": 1200,
+    "fit_validation": 240,
+    "required_mask": ["source_observed", "finite_precipitation", "finite_tmax", "finite_tmin"],
+    "total_objects": 1440
+  },
+  "failure_policy": "fail_before_resource_reservation",
+  "normals": {
+    "bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+    "candidate_fit_normalizer_count": 1200,
+    "canonical_point_order": "ascending_utf8_point_id_bytes",
+    "canonical_receipt": {
+      "binary_payload": "72_little_endian_ieee754_f64_values_means_then_population_scales",
+      "manifest_fields": ["schema_version", "bundle_id", "candidate_fit_count", "point_order_sha256", "payload_bytes", "payload_sha256"],
+      "schema_version": "a10m5r15-normalizer-receipt-1"
+    },
+    "coverage": "CONUS containing valid raster cell only",
+    "field_count": 36,
+    "fit_validation_may_update_normalizer": false,
+    "input_dtype": "source_ieee754_f32_promoted_exactly_to_f64",
+    "input_units": ["ppt_monthly_mm", "tmax_degrees_c", "tmin_degrees_c"],
+    "layer_order": ["ppt_jan_to_dec", "tmax_jan_to_dec", "tmin_jan_to_dec"],
+    "model_conversion": "(f64_input-f64_mean)/f64_population_scale_then_single_round_to_ieee754_f32_nearest_ties_even",
+    "normalizer_role": "candidate_fit_only",
+    "normalizer_statistics": "per_field_welford_f64_population_mean_and_population_standard_deviation_ddof_0",
+    "required_corpus_query_count": 1440,
+    "required_temporal_query_count": 6,
+    "runtime_archive_sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292",
+    "source_archive_sha256": "c3b832d43de54face39486673843d6c5bc511793804f5678dcb1af809ac0475c",
+    "zero_or_nonfinite_scale": "fail_before_resource_reservation"
+  },
+  "package_id": "20260721-a10m5r15-external-normal-conditioning",
+  "schema_version": "a10m5r15-data-preflight-1"
+}

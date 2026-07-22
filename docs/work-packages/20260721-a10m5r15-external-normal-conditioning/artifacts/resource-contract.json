@@ -1,0 +1,22 @@
+{
+  "candidate_portfolio": {
+    "allocated_l40_count": 2,
+    "maximum_minutes": 240,
+    "one_scientific_attempt_per_arm": true,
+    "waves": [
+      ["E0", "E1"],
+      ["E2C", "E2"]
+    ]
+  },
+  "control": {
+    "allocated_l40_count": 1,
+    "maximum_minutes": 30
+  },
+  "maximum_l40_minute_equivalents": 515,
+  "package_id": "20260721-a10m5r15-external-normal-conditioning",
+  "recovery": {
+    "maximum_l40_minutes": 5,
+    "scope": "cleanup-only"
+  },
+  "schema_version": "a10m5r15-resource-contract-1"
+}

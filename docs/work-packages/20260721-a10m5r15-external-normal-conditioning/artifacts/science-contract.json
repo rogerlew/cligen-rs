@@ -1,0 +1,152 @@
+{
+  "arms": [
+    {
+      "arm": "E0",
+      "configuration_id": "centered_location_ou_smooth_climatology-k2",
+      "matched_pair": "adapter",
+      "normals_conditioned": false,
+      "parameter_ceiling": 340000,
+      "parameter_count": 278747,
+      "uses_p2_backbone": true
+    },
+    {
+      "arm": "E1",
+      "configuration_id": "normal_conditioned_smooth_climatology-k2",
+      "matched_pair": "adapter",
+      "normals_conditioned": true,
+      "parameter_ceiling": 340000,
+      "parameter_count": 279467,
+      "uses_p2_backbone": true
+    },
+    {
+      "arm": "E2C",
+      "configuration_id": "descriptor_anchored_residual-v1",
+      "matched_pair": "replacement",
+      "normals_conditioned": false,
+      "parameter_ceiling": 330000,
+      "parameter_count": 2040,
+      "uses_p2_backbone": false
+    },
+    {
+      "arm": "E2",
+      "configuration_id": "normal_anchored_residual-v1",
+      "matched_pair": "replacement",
+      "normals_conditioned": true,
+      "parameter_ceiling": 330000,
+      "parameter_count": 2760,
+      "uses_p2_backbone": false
+    }
+  ],
+  "attribution": {
+    "calibration": {
+      "bootstrap_operator": "byte_inherited_r14_temporal_bootstrap",
+      "bootstrap_replicates_per_sequence": 1000,
+      "calibration_source": "accepted_r14_e0_streams_only",
+      "floor": 1e-06,
+      "margin_equation": "max(floor, nearest_rank_q90(abs(A_i-B_i)/max(A_i,B_i)))",
+      "nearest_rank_index_zero_based": 899,
+      "receipt_required_before_candidate_output": true,
+      "sequence_seeds": [410542, 410543]
+    },
+    "comparisons": [
+      ["E1", "E0"],
+      ["E2", "E2C"]
+    ],
+    "gate_boundary": "relative_improvement_greater_than_or_equal_to_margin",
+    "gate_equation": "1-treatment_u90/control_u90",
+    "metric": "bootstrap_median_regime_ratio_upper_90_percent",
+    "paired_bootstrap_seed": 410542,
+    "shared_strictly_positive_margin": true
+  },
+  "calendar_boundary_resets": false,
+  "candidate_member_count": 8,
+  "candidate_seeds": [147031, 271828, 314159],
+  "diagnostics": {
+    "replacement_dispersion": "report E2/E2C combined monthly_and_annual_interannual_dispersion ratio; non-gating",
+    "replacement_runtime": "report E2/E1 warm runtime ratio; non-gating beyond ADR-0006"
+  },
+  "location_head_indices": [0, 1, 3, 5],
+  "normal_field_count": 36,
+  "normal_layer_order": ["ppt_jan_to_dec", "tmax_jan_to_dec", "tmin_jan_to_dec"],
+  "objective_component_count": 188,
+  "package_id": "20260721-a10m5r15-external-normal-conditioning",
+  "protected_roles_opened": [],
+  "replacement_architecture": {
+    "common_initialization": "same_seed_default_pytorch_linear_initialization; copy shared descriptor columns; zero initialize E2 normal-only columns",
+    "descriptor_basis": "outer_product(5_term_day_of_year_harmonic,[1,lat,lon,elev])",
+    "descriptor_basis_width": 20,
+    "e2_location_basis": "outer_product(5_term_day_of_year_harmonic,[1,lat,lon,elev,36_normalized_normals])",
+    "e2_location_basis_width": 200,
+    "e2c_baseline": "bias_free_linear_20_to_15",
+    "e2c_baseline_parameter_count": 300,
+    "e2_baseline": "bias_free_linear_20_to_11_nonlocation_plus_bias_free_linear_200_to_4_location",
+    "e2_baseline_parameter_count": 1020,
+    "medium_state_dimension": 8,
+    "medium_time_scale_days": [14.0, 180.0],
+    "ou_adapter_parameter_count": 1740,
+    "ou_discretization": "byte_inherited_r14_exact_stationary_continuous_time",
+    "residual_centering": "subtract exact eight_member mean at every site_day_head cell",
+    "residual_head_indices": [0, 1, 3, 5],
+    "slow_state_dimension": 4,
+    "slow_time_scale_days": [180.0, 1460.0]
+  },
+  "runtime": {
+    "fail_at_or_above": 30.0,
+    "pass_below": 5.0,
+    "warn_at_or_above": 5.0
+  },
+  "selection": {
+    "matched_controls": {
+      "E1": "E0",
+      "E2": "E2C"
+    },
+    "full_treatment_predicate_after_engineering": "runtime_valid(T)&&temporal(T)&&attribution(T,C)",
+    "portfolio_evidence_may_not_mix_treatments": true,
+    "runtime_valid_predicate": "runtime(T)!=FAIL&&runtime(C)!=FAIL",
+    "terminal_conditions_after_evidence_and_engineering": {
+      "A10M5R15-TEMPORAL-READY": "any_T(full(T))",
+      "HOLD-A10M5R15-ATTRIBUTION-NOT-SUPPORTED": "any_T(runtime_valid(T)&&temporal(T))&&!any_T(full(T))",
+      "HOLD-A10M5R15-NORMAL-CONDITIONING-NOT-SUFFICIENT": "any_T(runtime_valid(T))&&!any_T(runtime_valid(T)&&temporal(T))",
+      "HOLD-A10M5R15-RUNTIME-INELIGIBLE": "!any_T(runtime_valid(T))"
+    },
+    "terminal_precedence": [
+      "FAIL-A10M5R15-INVALID-EVIDENCE",
+      "HOLD-A10M5R15-ENGINEERING-INCOMPLETE",
+      "HOLD-A10M5R15-RUNTIME-INELIGIBLE",
+      "HOLD-A10M5R15-ATTRIBUTION-NOT-SUPPORTED",
+      "HOLD-A10M5R15-NORMAL-CONDITIONING-NOT-SUFFICIENT",
+      "A10M5R15-TEMPORAL-READY"
+    ]
+  },
+  "schema_version": "a10m5r15-science-contract-2",
+  "temporal": {
+    "bootstrap_replicates": 1000,
+    "horizons_years": [30, 100],
+    "maximum_regime_ratio": 1.5,
+    "median_regime_ratio_upper_90_percent": 1.25,
+    "nested_prefix": true,
+    "site_count": 6
+  },
+  "training": {
+    "batches_per_epoch": 6,
+    "checkpoint_points_per_regime": 4,
+    "checkpoint_scalar": "unweighted_mean_of_same_188_absolute_scaled_components",
+    "daily_proper_nll_weight": 0.0,
+    "early_stop_patience": 16,
+    "fit_validation_gradient": false,
+    "gradient_clip_norm": 1.0,
+    "learning_rate": 0.001,
+    "maximum_epochs": 96,
+    "minimum_epochs": 24,
+    "optimizer": "AdamW",
+    "records_per_batch": 6,
+    "regularization": {
+      "latent_stability_weight": 0.005,
+      "residual_size_and_centering_weight": 0.01
+    },
+    "tie_tolerance": 1e-06,
+    "training_members": 8,
+    "weight_decay": 0.01,
+    "wet_semantics": "exact_hard_forward_relaxed_soft_backward_temperature_0.5"
+  }
+}

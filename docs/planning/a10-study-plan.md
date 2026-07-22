@@ -36,11 +36,11 @@ A10 will combine three ideas in one coherent study:
    use in supported regimes while explicitly assigning `faithful_5_32_3` as
    the research fallback outside that envelope.
 
-Operational feasibility is co-equal with climate quality. Candidate generation
-must remain below 10× the faithful stochastic-generation runtime on the frozen
-CPU benchmark. A ratio of 5× or greater is a warning that survives selection
-and confirmation; a ratio of 10× or greater is a hard failure regardless of
-climate score.
+Operational feasibility is co-equal with climate quality. Under ADR-0006,
+candidate generation must remain below 30× the faithful stochastic-generation
+runtime on the frozen CPU benchmark. A ratio of 5× or greater is a warning that
+survives selection and confirmation; a ratio of 30× or greater is a hard failure
+regardless of climate score.
 
 This is not a post-hoc relaxation of A9d. A10 receives a new model identity,
 new hypotheses, a new candidate-blind selector, and a new development record.
@@ -103,9 +103,13 @@ prospective and rewrite no closed terminal.
   candidates are conditionable at any site the frozen normals product
   covers, and out-of-coverage stations route to the declared fallback.
 
-Sections 4.5, 6.2, and 10.5 are read through these amendments; their
-original values remain in place as the historical record of the pre-R15
-contract.
+Sections 4.5, 6.2, and 10.5 are read through these amendments; their original
+values remain in place as the historical record of the pre-R15 contract. Every
+other prospective runtime reference in this plan, including O9, H3, milestone
+gates, risk controls, and Section 16 terminal semantics, uses the ADR-0006
+boundary: `PASS` below 5.0×, `WARN` from 5.0× to below 30.0×, and `FAIL` at
+30.0× or greater. No surviving 10× phrase outside the explicitly historical
+Section 4.5/10.5 text is normative.
 
 ## 1. Why the campaign is pivoting
 
@@ -200,7 +204,7 @@ runtime?
 | O6 | Define and execute a prospective regime-level applicability rule with an explicit faithful fallback for unsupported fits. |
 | O7 | Seal at most one complete model, weight set, preprocessing contract, and applicability policy before any locked confirmation target is read. |
 | O8 | If and only if a candidate seals, execute one independent confirmation and return one final study terminal without feedback into training. |
-| O9 | Demonstrate that candidate generation on a deployable CPU path remains below the prospective 10× faithful-runtime failure boundary, with 5× or greater treated as an explicit performance warning. |
+| O9 | Demonstrate that candidate generation on a deployable CPU path remains below the prospective 30× faithful-runtime failure boundary, with 5× or greater treated as an explicit performance warning. |
 
 ### 2.3 Non-objectives
 
@@ -311,7 +315,7 @@ and for deterministic 100-year research generation without distributed
 inference. The planning target is at most 50 million trainable parameters;
 A10M3 must justify a larger model before training it. This
 parameter cap is subordinate to the generation-runtime gate: a smaller model
-that still reaches the 10× failure boundary is not operationally feasible.
+that still reaches the 30× failure boundary is not operationally feasible.
 
 ### 4.3 Output distributions and support
 
@@ -1200,7 +1204,7 @@ before relevant output access. The planning hypotheses are:
 |---|---|---|
 | H1 | prospective | The expanded corpus satisfies role, leakage, variable, regime, calendar, and source-identity gates without accessing locked confirmation targets. |
 | H2 | prospective | The pinned GPU environment can train, checkpoint, interrupt, resume, and reproduce registered generation streams within the resource bound. |
-| H3 | prospective | At least one neural configuration passes all hard engineering gates, remains below the 10× faithful generation-runtime failure boundary, and generates stable nested 30/100-year climates. |
+| H3 | prospective | At least one neural configuration passes all hard engineering gates, remains below the 30× faithful generation-runtime failure boundary, and generates stable nested 30/100-year climates. |
 | H4 | prospective | Hierarchical partial pooling improves held-out spatial generalization over the otherwise identical complete-pooling, transferable-descriptor-only ablation under the frozen comparison rule. |
 | H5 | prospective | At least one candidate earns the frozen minimum applicability breadth and outperforms both faithful CLIGEN and the A9 renewal comparator under the registered regime-level climate rule. |
 | H6 | prospective | The selector chooses at most one exact candidate identity for M7 sealing and publishes every unsupported/fallback regime. |
@@ -1397,7 +1401,7 @@ Gate:
   missing-comparator behavior pass synthetic tests;
 - exact configuration and resource bounds are finite;
 - the runtime ratio arithmetic classifies exactly 5× as `WARN` and exactly
-  10× as `FAIL`;
+  30× as `FAIL`;
 - confirmation rule is conditional and inaccessible.
 
 Failure terminal: `HOLD-A10-DESIGN-INCOMPLETE`.
@@ -1442,7 +1446,7 @@ Gate:
 - no clipping/repair path exists;
 - authoritative A10 interruption/resume equivalence and generation identities
   pass;
-- the CPU export exists and the preliminary normative ratio is below 10×;
+- the CPU export exists and the preliminary normative ratio is below 30×;
 - a 100-year stream completes within measured resource bounds.
 
 Failure terminal: `HOLD-A10-IMPLEMENTATION` or
@@ -1480,7 +1484,7 @@ Artifacts:
 Gate:
 
 - at least one valid configuration remains;
-- at least one promotable configuration is below the 10× runtime failure
+- at least one promotable configuration is below the 30× runtime failure
   boundary, with any 5× warning retained;
 - no role/firewall violation;
 - training and generation remain within resource limits;
@@ -1525,7 +1529,7 @@ Artifacts:
 Gate:
 
 - zero or more candidates may meet hard gates, minimum applicability breadth,
-  the paired-both-baselines climate rule, stability rule, and the below-10×
+  the paired-both-baselines climate rule, stability rule, and the below-30×
   generation-runtime rule;
 - if multiple candidates qualify, the frozen deterministic ordering selects
   exactly one and all survivor results remain published;
@@ -1733,7 +1737,7 @@ Research-specific gates additionally include:
 - deterministic generation replay;
 - exact nested 30/100-year prefix;
 - normative single-core CPU generation benchmark with exact 5× warning and
-  10× failure boundary tests;
+  30× failure boundary tests;
 - physical support and calendar checks;
 - complete attempt and resource inventory;
 - candidate/confirmation firewall verifier;
@@ -1762,7 +1766,7 @@ should not be triggered during feasibility work.
 | GPU-node interruption | lost progress or corrupted state | 15-minute atomic checkpoints, forced-restart gate, durable project/Ceph state |
 | No compute-node internet | failed job/environment drift | offline environment and wheel/image cache, preflight completeness test |
 | Storage growth | unmanageable evidence/cost | 2-TB retention cap, shard manifests, rolling checkpoints, cleanup receipt |
-| Model too large or slow for deployment | research success cannot transfer | <=50M planning target, portable CPU export, single-core faithful-relative benchmark, 5× warning, 10× hard failure |
+| Model too large or slow for deployment | research success cannot transfer | <=50M planning target, portable CPU export, single-core faithful-relative benchmark, 5× warning, 30× hard failure |
 | GPU benchmark masks deployment cost | candidate appears fast only on scarce hardware | GPU throughput is diagnostic only; normative generation gate uses one pinned CPU core |
 | Confirmation leakage | invalid final evidence | metadata-only roster, custodian seal, hash-chained one-shot transition |
 | Premature Rust integration | hardens an unvalidated family | external Python research only until confirmation passes |
@@ -1776,14 +1780,14 @@ A10 is successful only if the evidence supports the claimed level:
 - **Fit success** means a neural model trains and generates valid streams; it
   says nothing about superiority.
 - **Development success** means one candidate earns the frozen applicability
-  breadth, climate rule, and below-10× runtime rule; it authorizes sealing,
+  breadth, climate rule, and below-30× runtime rule; it authorizes sealing,
   not production. A 5× or greater warning remains attached.
 - **Confirmation success** means the frozen candidate passes independent
   confirmation; it authorizes a separately planned production-runtime
   implementation study, not immediate public-default change.
 
 No climate-quality result overrides a runtime `FAIL`. A confirmation terminal
-cannot be reached by a candidate at or above 10× faithful generation time.
+cannot be reached by a candidate at or above 30× faithful generation time.
 
 A hold preserves the evidence and closes the study at the reached boundary.
 It is not automatically followed by selector relaxation, new architectures,
@@ -1810,11 +1814,11 @@ below are true:
 - model, distributions, training recipe, configuration grid, resource bound,
   and selector are frozen;
 - the representative performance workload, CPU host controls, ratio
-  arithmetic, 5× warning, 10× failure, and absolute resource limits are
+  arithmetic, 5× warning, 30× failure, and absolute resource limits are
   frozen;
 - local/small-data tests pass;
 - the portable CPU inference/export path and benchmark harness pass the M4
-  preliminary below-10× gate;
+  preliminary below-30× gate;
 - offline environment reconstructs on the live node;
 - one-GPU and two-GPU smoke tests pass;
 - node-local/Ceph/project staging is measured and verified;

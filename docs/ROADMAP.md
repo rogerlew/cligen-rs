@@ -665,15 +665,22 @@ SPEC-A10-STOCHASTIC-PRISM-COMPARATOR — as transferable site conditioning
 ([ADR-0007](decisions/0007-a10-external-normal-conditioning.md)). The
 rationale is recorded in both ADRs: the diagnosed dominant failure is site
 climatological location, and the temporal reference itself consumes PRISM
-normals that candidates were denied. The proposed successor is A10M5R15
-under the draft
+normals that candidates were denied. The scaffolded successor is
+[A10M5R15](work-packages/20260721-a10m5r15-external-normal-conditioning/package.md)
+under the ratified revision 1
 [SPEC-A10-EXTERNAL-NORMAL-CONDITIONING](specifications/SPEC-A10-EXTERNAL-NORMAL-CONDITIONING.md):
-the R14 arm-B control, a normals-augmented smooth-climatology arm, and a
-normal-anchored residual arm, all under the unchanged temporal protocol and
-K2 capacity. The draft binds only when the dispatched package ratifies it
-before candidate output. If no arm reaches temporal eligibility, ADR-0007
-supports adjudicating closure of the neural line rather than an eighth
-family. Confirmation, solar, spatial, and promotion roles remain sealed.
+the matched R14 arm-B E0/E1 adapter pair and the matched E2C/E2
+backbone-free replacement pair, all under the unchanged temporal protocol.
+E0/E1 use the corrected R14 340,000-parameter ceiling; E2C/E2 remain below
+the 330,000 replacement-family ceiling. Each normals treatment must improve
+its own no-normals control by the shared strictly positive margin calibrated
+from candidate-blind null/control evidence, and every arm uses ADR-0006's 30×
+runtime failure boundary. Replacement counts are frozen at 2,040/2,760; the
+package must freeze the exact calibrated margin, source, asset hashes, and
+preflight receipts before candidate output. If no normals-conditioned arm reaches temporal
+eligibility, ADR-0007 supports adjudicating closure of the neural line rather
+than another family. Confirmation, solar, spatial, and promotion roles remain
+sealed.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
