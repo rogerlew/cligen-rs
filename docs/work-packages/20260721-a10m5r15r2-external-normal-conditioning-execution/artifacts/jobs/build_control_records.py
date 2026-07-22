@@ -289,11 +289,11 @@ def prospective_calendar_preflight(root: Path) -> dict:
         == ["1987-12-31", "1988-01-01"]
         and value.get("window")
         == {
-            "calendar_axis_rows": 5844,
-            "core_observed_rows": 5840,
-            "end_exclusive": "1996-01-01",
+            "calendar_axis_rows": 2922,
+            "core_observed_rows": 2920,
+            "end_exclusive": "1988-01-01",
             "end_semantics": "exclusive",
-            "physics_observed_rows": 5840,
+            "physics_observed_rows": 2920,
             "start_inclusive": "1980-01-01",
         }
     ):
