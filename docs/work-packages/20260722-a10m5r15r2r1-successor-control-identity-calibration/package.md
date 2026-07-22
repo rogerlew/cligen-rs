@@ -37,8 +37,8 @@ hardlinked local cache assets. Its authenticated abort receipt is retained at
 `artifacts/execution-r0-abort.json`. Run `r1` replaces those aliases with
 link-isolated copy-on-write clones while preserving every asset byte identity.
 It was staged and then aborted with zero allocation so the review-requested
-full abort authentication could be incorporated prospectively. Run `r2` binds
-both authenticated aborts and is the execution run. The compact zero-attempt,
+full abort authentication could be incorporated prospectively. Run `r2` bound
+both authenticated aborts and was the first execution attempt. The compact zero-attempt,
 zero-GPU diagnostic is `artifacts/pre-submission-diagnostics.json`.
 
 Run `r2` was manually canceled during a live progress audit after 519 seconds.
@@ -59,12 +59,22 @@ already-absent target as authenticated success while retaining full marker,
 UID, device, canonical-path, and immediate-revalidation checks before any
 deletion of a present target.
 
+Run `r2` is closed as canceled/no-science. Its externally authenticated
+cleanup registration is `31bec9a326c1cfe7b177f9c5fcd76c557c23b551202e94f2a051651c3a3ba439`,
+its cleanup receipt is
+`465575ced925b3ef47796f7552fd0227b6cc70787a5d8655bd8a9470a889b147`,
+and its terminal receipt is
+`d8eacd70925416ac6b628c6b023eb9f062ea2f56f7c8af70ef7298338b6d037c`.
+The unused recovery reserve was released. Fresh execution is run
+`a10m5r15r2r1-successor-control-identity-calibration-r3` under a new
+35-minute authority; no r2 root, authority, or staged asset is reused.
+
 The operator-authorized outer campaign ceiling is 597 L40-minutes; it is not
 an additional reserve. Before release of r2's unused recovery reserve, the
 bounded maximum is 573 = 8 prior R2 execution + 9 canceled calibration + 1
 out-of-band corrective cleanup + 5 outstanding r2 recovery + 35 fresh
 calibration + 515 later study execution. After authenticated cleanup releases
-the 5-minute r2 reserve, the bounded maximum is 568. Fresh calibration remains
+the 5-minute r2 reserve, the bounded maximum is 568. Fresh r3 calibration remains
 30 science minutes plus one 5-minute recovery contingency.
 
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
