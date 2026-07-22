@@ -1,0 +1,14 @@
+{
+  "attempt_index": 0,
+  "authority_id": "a10m5r15r2r3-portfolio-evidence-remedy-r0-authority",
+  "event_sha256": "3bf1a18d0073402a250d9fbf574cb99d8b18a40c4326f7d58f7b8e017a76cc24",
+  "job_role": "toolkit-recovery",
+  "plan_id": "56b3d9a0ed02e9d200311e4ed44b3493ffae14b877c3335883b5ec09a8f5df01",
+  "predecessor_sha256": "751f5d75198be91563180e690254e24618aa77ee9573a2fc9a234f6435faa670",
+  "release_reason": "verified-cleanup",
+  "requested_gpu_minutes": 5,
+  "run_id": "a10m5r15r2r3-portfolio-evidence-remedy-r0",
+  "sequence": 8,
+  "status": "released",
+  "token": "0e89ccd1645a26044d205332e62bba4d"
+}

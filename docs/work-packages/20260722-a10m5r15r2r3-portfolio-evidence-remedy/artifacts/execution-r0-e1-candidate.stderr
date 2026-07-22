@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "[REMOTE_RUN_ROOT]/continuous_candidate_experiment.py", line 301, in <module>
+    parent.main()
+  File "[REMOTE_RUN_ROOT]/inherited_r15_candidate_experiment.py", line 177, in main
+    continuous.self_test(device)
+  File "[REMOTE_RUN_ROOT]/continuous_core.py", line 554, in self_test
+    raise RuntimeError("E2C/E2 location initialization drift")
+RuntimeError: E2C/E2 location initialization drift

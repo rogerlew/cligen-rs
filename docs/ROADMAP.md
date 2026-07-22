@@ -730,6 +730,12 @@ interpretation is permitted. The fresh
 [A10M5R15R2R3 evidence remedy](work-packages/20260722-a10m5r15r2r3-portfolio-evidence-remedy/package.md)
 changes only that collection-path mapping. Realized use is 60 and the bounded
 maximum is now 575 L40-minutes including its still-unrun 515-minute study.
+R2R3 subsequently passed the six-row control, then collected identical wave-0
+startup exceptions proving E2's descriptor initialization wrote through an
+advanced-indexing temporary rather than the module weight. It closed at
+`EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION` after 22 billed L40-minutes
+with cleanup and reserve release authenticated. Realized use is 82; one exact
+515-minute R2R4 implementation remedy remains bounded at the authorized 597.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

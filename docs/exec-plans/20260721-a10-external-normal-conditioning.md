@@ -58,10 +58,12 @@ production change.
 - [x] Published and executed R2R2: exact control passed in 19 L40-minutes;
   portfolio admission passed, then both wave-0 children failed before role
   records in 3 L40-minutes. Cleanup and reserve release authenticated.
-- [ ] Publish a fresh evidence-surface successor with complete new-role
-  diagnostics; realized 60 + successor ceiling 515 = 575 under outer 597.
+- [x] Published and executed a fresh evidence-surface successor with complete
+      new-role diagnostics; it collected the shared E2 initialization exception.
 - [x] Scaffolded A10M5R15R2R3 with an unchanged science contract and a
       deterministic rewrite of every inherited role-scoped evidence path.
+- [ ] Correct the PyTorch advanced-index assignment under a fresh R2R4
+      identity; realized 82 + successor ceiling 515 = authorized maximum 597.
 
 ## Surprises & Discoveries
 

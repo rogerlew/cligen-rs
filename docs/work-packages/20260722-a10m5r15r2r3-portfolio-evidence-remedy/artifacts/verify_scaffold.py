@@ -476,7 +476,11 @@ if not (PACKAGE / "plan.md").is_file():
     raise RuntimeError("bounded execution plan absent")
 if not any(
     status in (PACKAGE / "package.md").read_text(encoding="utf-8")
-    for status in ("Status: `SCAFFOLDED`", "Status: `EXECUTION-READY`")
+    for status in (
+        "Status: `SCAFFOLDED`",
+        "Status: `EXECUTION-READY`",
+        "Status: `EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION`",
+    )
 ):
     raise RuntimeError("execution package state drift")
 if PACKAGE.name not in (REPO / "docs/work-packages/README.md").read_text(encoding="utf-8"):

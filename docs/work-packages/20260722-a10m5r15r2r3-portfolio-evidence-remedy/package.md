@@ -1,6 +1,6 @@
 # A10M5R15R2R3 — Portfolio Evidence Remedy
 
-Status: `EXECUTION-READY`
+Status: `EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION`
 Date: 2026-07-22
 Starting branch and push target: current `main`, push `main`
 
@@ -82,5 +82,26 @@ reserve are fresh; no failed-run execution identity is reused.
 
 Independent readiness review closed `PASS` after two P2 findings were
 dispositioned with an executable 64-path rebinding fixture and reconciliation
-of the living ExecPlan. Publication and execution remain pending. Candidate
-output and protected confirmation roles remain unopened.
+of the living ExecPlan. The package was then published at source commit
+`31dbae02c23c0562dcee31fb964e9011807a27d6` and executed under plan
+`56b3d9a0ed02e9d200311e4ed44b3493ffae14b877c3335883b5ec09a8f5df01`.
+
+Control job 1060872 passed all six reconstruction rows in 1,122 seconds and
+was billed 19 L40-minutes. Portfolio admission passed, but job 1060874 failed
+after 86 seconds and was billed three L40-minutes. Both wave-0 children
+reported the same authenticated exception before training:
+`RuntimeError: E2C/E2 location initialization drift`.
+
+The evidence remedy succeeded: both 439-byte `candidate.stderr` files were
+collected with SHA-256
+`bb161e03319e25c15a7b82094f4a721a1bfcbf500a950b261de513541238dfd1`.
+Inspection established that `.copy_()` targeted an advanced-indexing result,
+which is a temporary tensor in PyTorch, so E2's descriptor columns remained
+zero instead of receiving the matched E2C values. This is an implementation
+defect in the already-ratified initialization, not a scientific change.
+
+No wave-1 trainer, runtime benchmark, replay, candidate interpretation, or
+protected role ran. Collection, remote and job-local cleanup, terminal closure,
+and release of the five-minute recovery reserve authenticated. Realized
+campaign use is 82 L40-minutes; one fresh 515-minute corrective successor is
+bounded at exactly the authorized 597 ceiling.
