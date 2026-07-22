@@ -41,6 +41,13 @@ full abort authentication could be incorporated prospectively. Run `r2` binds
 both authenticated aborts and is the execution run. The compact zero-attempt,
 zero-GPU diagnostic is `artifacts/pre-submission-diagnostics.json`.
 
+Run `r2` was canceled after live progress proved that the sequential six-model
+matrix could not complete inside its 30-minute job limit. The cancellation
+also exposed that the live adapter incorrectly required a scientific gate from
+a scheduler-canceled job. This package corrects that closure path: canceled
+jobs settle from terminal scheduler accounting without a nonexistent gate and
+remain scientifically failed.
+
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.
 2. Overlay a control-calibration producer that retains the frozen trainer and

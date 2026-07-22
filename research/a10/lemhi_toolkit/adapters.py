@@ -492,7 +492,7 @@ class OpenSSHSlurmAdapter:
         actual_gpu_seconds = elapsed_seconds * job["gpus"]
         value["actual_gpu_seconds"] = actual_gpu_seconds
         value["actual_gpu_minutes"] = (actual_gpu_seconds + 59) // 60
-        if value.get("terminal") is True:
+        if value.get("terminal") is True and value.get("state") != "CANCELLED":
             receipt = self._remote_script(
                 profile,
                 "read_gate.sh",

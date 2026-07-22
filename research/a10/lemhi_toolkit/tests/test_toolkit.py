@@ -534,6 +534,29 @@ class LiveAdapterCommandPaths(ToolkitFixture):
         self.assertNotIn("-oBatchMode=no", flattened)
         self.assertTrue(all(arguments[0] in {"ssh", "scp"} for arguments, _, _ in runner.calls))
 
+    def test_cancelled_live_job_settles_without_gate_receipt(self) -> None:
+        class CancelledRunner(RecordingRunner):
+            def run(self, arguments, *, stdin=None, timeout=60):
+                if stdin and b"ElapsedRaw" in stdin:
+                    output = b'{"terminal":true,"state":"CANCELLED","exit_code":0,"elapsed_seconds":519,"node":"node03","accounting":"available"}\n'
+                    self.calls.append((list(arguments), stdin, timeout))
+                    return subprocess.CompletedProcess(arguments, 0, output, b"")
+                return super().run(arguments, stdin=stdin, timeout=timeout)
+
+        runner = CancelledRunner(self.root)
+        adapter = OpenSSHSlurmAdapter(
+            REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", runner
+        )
+        plan = self.plan("cancelled-live")
+        job = {**plan["jobs"][0], "attempt_index": 0}
+        observed = adapter.observe(self.profile, plan, job, "1058096")
+        self.assertEqual(observed["state"], "CANCELLED")
+        self.assertEqual(observed["actual_gpu_minutes"], 9)
+        self.assertNotIn("gates", observed)
+        self.assertFalse(
+            any(stdin and b"gate_receipt=$3" in stdin for _, stdin, _ in runner.calls)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
