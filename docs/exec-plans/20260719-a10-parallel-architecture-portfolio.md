@@ -474,3 +474,15 @@ unchanged.
 matrix retained annual/monthly residual K1, monthly residual K2, and
 annual/monthly residual K2; authenticated collection, 396-minute accounting,
 recovery release, exact cleanup, closure, and independent review passed.
+
+2026-07-22: A10M5R15R2 published and staged the exact PRISM-eligible R1
+successor corpus, but its live control failed closed after eight L40-minutes
+because the package inherited six R14 checkpoint identities generated on the
+predecessor corpus. Setup, admission, environment, scheduler, collection, and
+cleanup all passed; the candidate portfolio was never submitted and the run
+closed at `EXECUTED-HOLD-SUCCESSOR-CONTROL-IDENTITY`. A10M5R15R2R1 is the
+candidate-blind control-only corrective stage. It may spend at most 30
+L40-minutes plus the five-minute cleanup reserve to capture all six successor
+identities. A separately published R2R2 execution must then reconstruct every
+captured identity exactly before the unchanged R15 portfolio can run. The
+closed R2 authority and its 515-minute budget are never reused or expanded.

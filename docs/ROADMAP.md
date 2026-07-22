@@ -711,7 +711,15 @@ published A10M5R15R2 authority identity.
 The execution-ready [A10M5R15R2 execution package](work-packages/20260721-a10m5r15r2-external-normal-conditioning-execution/package.md)
 uses the authorized 515 L40-minute-equivalent two-wave topology and keeps
 fresh toolkit authority, control, occupancy, admission, replay, benchmark, and
-cleanup gates mandatory.
+cleanup gates mandatory. Its first live control reached an authenticated
+ready-for-science environment but rejected the inherited R14 checkpoint hash
+after the A10M5R15R1 corpus replacement changed the deterministic fitted
+control. The run closed at `EXECUTED-HOLD-SUCCESSOR-CONTROL-IDENTITY` after
+eight L40-minutes; the portfolio was never submitted. The bounded
+[A10M5R15R2R1 control calibration](work-packages/20260722-a10m5r15r2r1-successor-control-identity-calibration/package.md)
+now captures all six successor-corpus control identities without candidate
+output. A later execution identity must pin and independently reconstruct
+those bytes before releasing the unchanged R15 science portfolio.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

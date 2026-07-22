@@ -1,6 +1,6 @@
 # A10M5R15R2 — External-Normal Conditioning Execution
 
-Status: `EXECUTION-READY`
+Status: `EXECUTED-HOLD-SUCCESSOR-CONTROL-IDENTITY`
 Date: 2026-07-21
 Starting branch and push target: current `main`, push `main`
 
@@ -59,3 +59,23 @@ Candidate safeguard failures reject only the affected arm and its matched
 treatment pair. Faithful-comparator nondeterminism or incompleteness remains a
 global benchmark-integrity failure. Independent execution-readiness review
 closed `PASS` with no unresolved P1/P2 findings.
+
+## Execution result
+
+Published source `b38f695697a8636e67f041ccae373107cb5cb5bc` passed
+doctor, probe, plan, prepare, stage, remote verification, and the composed
+control admission. Control job `1057354` reached `ready_for_science` on
+`node03`, then failed closed after 453 seconds when the first successor-corpus
+checkpoint differed from the inherited old-corpus identity:
+`fd54c491180c58dc21e25b8f2324604239acb5a4e3e439995fbb2e92a0d92752`
+expected versus
+`5780bd035603794311cb8b7fc26b03133686fb9c3edf2211771b11328a33506b`
+observed for `capacity-p1-s147031`.
+
+The toolkit charged eight L40-minutes, recorded the portfolio as
+`NOT_EXECUTED_UPSTREAM_FAILURE`, collected the failure evidence, verified
+job-local and remote cleanup, released the recovery reserve, and closed the
+run. No portfolio, candidate, protected, or confirmation role ran. The result
+is an engineering/control-contract hold, not candidate evidence. A candidate-blind control-only
+successor must capture the exact six-model identity on the R1 corpus before a
+new execution identity can require byte-exact reconstruction.

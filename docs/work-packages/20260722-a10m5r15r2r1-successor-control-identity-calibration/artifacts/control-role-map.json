@@ -1,0 +1,12 @@
+{
+  "candidate_roles": [],
+  "control_role": "control-materialization",
+  "package_id": "20260722-a10m5r15r2r1-successor-control-identity-calibration",
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "submission_waves": [
+    [
+      "control-materialization"
+    ]
+  ]
+}

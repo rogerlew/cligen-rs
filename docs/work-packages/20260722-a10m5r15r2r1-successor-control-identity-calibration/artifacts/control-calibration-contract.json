@@ -1,0 +1,34 @@
+{
+  "candidate_output_allowed": false,
+  "control_capacities": [
+    "P1",
+    "P2"
+  ],
+  "control_seeds": [
+    147031,
+    271828,
+    314159
+  ],
+  "maximum_l40_minutes": 35,
+  "package_id": "20260722-a10m5r15r2r1-successor-control-identity-calibration",
+  "parent_asset_manifest_sha256": "64a5595fab4b493c5985db3e0a271ec6eeaa7d2dcdbe77c10e7f97d5474f988b",
+  "parent_failure": {
+    "actual_checkpoint_payload_sha256": "5780bd035603794311cb8b7fc26b03133686fb9c3edf2211771b11328a33506b",
+    "expected_checkpoint_payload_sha256": "fd54c491180c58dc21e25b8f2324604239acb5a4e3e439995fbb2e92a0d92752",
+    "cleanup_record_sha256": "4365bbdef1910a0600c4347947aff92f4f71ba9fe174854b82ea80393ca60d3b",
+    "collection_record_sha256": "55d333eb9300f8342d76c6757f5e710aec0547993e7276e68010e7627383ed41",
+    "gate_receipt_sha256": "fb4a0b14759276d505133e5f8493b43efb44903fb698df01425647785107bb4a",
+    "job_id": "1057354",
+    "job_receipt_record_sha256": "a7fdc4b67d927d1f70cde72a81efc0fdce3d46cc60d74cde279c253976224b7d",
+    "matrix_stop_record_sha256": "39eb154dc1533ff6a8381d7fdedbb3f179f88e67e779a651d7e068aaa78687ee",
+    "plan_id": "c9bf8f093c49c874eba24d33794f32db3ae3fea4a2ce4ce2d54e82cc52d2aedd",
+    "row_id": "capacity-p1-s147031",
+    "run_id": "a10m5r15r2-external-normal-conditioning-execution-r0",
+    "sanitized_control_stderr_sha256": "5e6c794a24ccd095ff7293c10b15112a98f03b86b795af6f9e4d985badb82ade",
+    "source_commit": "b38f695697a8636e67f041ccae373107cb5cb5bc",
+    "terminal_record_sha256": "459fb9c8def8424c20ed14ed7c2682c4a99a2cebc1cb590df8dcaff24ce02c00"
+  },
+  "protected_roles_opened": [],
+  "schema_version": 1,
+  "successor_corpus_sha256": "7b41e497d215c85ae734dea438424f23ae01cff59a3b3ba55ec32442578553f2"
+}
