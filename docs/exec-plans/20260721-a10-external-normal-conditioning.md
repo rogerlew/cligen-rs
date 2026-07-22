@@ -13,6 +13,12 @@ production change.
 
 ## Progress
 
+- [ ] Campaign execution ceiling is 597 L40-minutes, an outer cap rather than
+      an unnamed reserve. Current pre-release maximum is 573 = 8 prior R2 + 9
+      canceled calibration + 1 out-of-band cleanup + 5 outstanding r2
+      recovery + 35 fresh calibration (30 science + 5 recovery) + 515 study.
+      Authenticated release of the r2 reserve reduces this maximum to 568.
+
 - [x] 2026-07-21: accepted ADR-0006/0007 and drafted the successor contract.
 - [x] 2026-07-21: corrected the runtime boundary, control labeling, capacity
   ceilings, E2 model identity, and matched-ablation design.

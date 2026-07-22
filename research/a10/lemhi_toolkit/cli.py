@@ -67,6 +67,10 @@ def _parser() -> argparse.ArgumentParser:
     register_cancelled.add_argument("--job-role", required=True)
     register_cancelled.add_argument("--attempt-index", required=True, type=int)
     register_cancelled.add_argument("--input", type=Path, required=True)
+    register_external = subcommands.add_parser("register-external-cleanup")
+    register_external.add_argument("--job-role", required=True)
+    register_external.add_argument("--attempt-index", required=True, type=int)
+    register_external.add_argument("--input", type=Path, required=True)
     return parser
 
 
@@ -149,6 +153,10 @@ def main(arguments: list[str] | None = None) -> int:
             result = getattr(toolkit, command)(options.job_role, options.attempt_index)
         elif command == "register-cancelled-recovery":
             result = toolkit.register_cancelled_recovery(
+                options.job_role, options.attempt_index, read_json(options.input)
+            )
+        elif command == "register-external-cleanup":
+            result = toolkit.register_external_cleanup(
                 options.job_role, options.attempt_index, read_json(options.input)
             )
         elif command == "stop-matrix":

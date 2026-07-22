@@ -59,6 +59,14 @@ already-absent target as authenticated success while retaining full marker,
 UID, device, canonical-path, and immediate-revalidation checks before any
 deletion of a present target.
 
+The operator-authorized outer campaign ceiling is 597 L40-minutes; it is not
+an additional reserve. Before release of r2's unused recovery reserve, the
+bounded maximum is 573 = 8 prior R2 execution + 9 canceled calibration + 1
+out-of-band corrective cleanup + 5 outstanding r2 recovery + 35 fresh
+calibration + 515 later study execution. After authenticated cleanup releases
+the 5-minute r2 reserve, the bounded maximum is 568. Fresh calibration remains
+30 science minutes plus one 5-minute recovery contingency.
+
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.
 2. Overlay a control-calibration producer that retains the frozen trainer and

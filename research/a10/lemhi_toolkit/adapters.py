@@ -277,6 +277,22 @@ class FixtureAdapter:
         self._save_backend(backend)
         return {"job_id": job_id, "acknowledged": True}
 
+    def inspect_external_cleanup(
+        self, profile: dict[str, Any], evidence: dict[str, Any]
+    ) -> dict[str, Any]:
+        del profile
+        observed = self.scenario.get("external_cleanup_observation")
+        if observed is not None:
+            return dict(observed)
+        return {
+            "actual_gpu_minutes": evidence["cleanup_actual_l40_minutes"],
+            "elapsed_seconds": evidence["cleanup_elapsed_seconds"],
+            "exit_code": evidence["cleanup_exit_code"],
+            "job_id": evidence["cleanup_job_id"],
+            "node": evidence["cleanup_job_node"],
+            "state": evidence["cleanup_job_state"],
+        }
+
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]:
         self.check_masters({})
         if profile.get("provider_api_version") == 2:
@@ -607,6 +623,27 @@ class OpenSSHSlurmAdapter:
         self._remote_script(profile, "cancel.sh", [validate_shell_scalar(job_id, "job_id")])
         return {"job_id": job_id, "acknowledged": True}
 
+    def inspect_external_cleanup(
+        self, profile: dict[str, Any], evidence: dict[str, Any]
+    ) -> dict[str, Any]:
+        output = self._remote_script(
+            profile,
+            "inspect_external_cleanup_v2.sh",
+            [
+                validate_shell_scalar(evidence["cleanup_job_id"], "cleanup job ID"),
+                validate_shell_scalar(evidence["cleanup_job_node"], "cleanup node"),
+                validate_shell_scalar(evidence["remote_command"], "cleanup command"),
+                validate_shell_scalar(evidence["remote_stdout"], "cleanup stdout"),
+                validate_shell_scalar(evidence["remote_stderr"], "cleanup stderr"),
+            ],
+        )
+        try:
+            result = json.loads(output)
+        except json.JSONDecodeError as error:
+            raise ToolkitError("EVIDENCE_INCOMPLETE", "invalid cleanup accounting") from error
+        require(isinstance(result, dict), "EVIDENCE_INCOMPLETE", "cleanup accounting")
+        return result
+
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]:
         metadata = json.loads(self._remote_script(profile, "pack_evidence.sh", [profile["remote_base"], plan["remote_run_root"], *plan["evidence_allowlist"]]))
         logical = validate_relative_path(metadata["logical_name"], "evidence archive")
@@ -642,6 +679,12 @@ class OpenSSHSlurmAdapter:
             for job in plan["jobs"]:
                 if job.get("role") in stopped_roles:
                     continue
+                if (
+                    isinstance(recovery, dict)
+                    and recovery.get("passed") is True
+                    and recovery.get("original_job_role") == job.get("role")
+                ):
+                    continue
                 gate_receipt = job["gate_receipt"]
                 if gate_receipt in checked:
                     continue
@@ -657,10 +700,7 @@ class OpenSSHSlurmAdapter:
                     raise ToolkitError("CLEANUP_INCOMPLETE", "invalid job-local cleanup receipt") from error
                 gates = evidence.get("gates") if isinstance(evidence, dict) else None
                 if not (isinstance(gates, dict) and gates.get("job_local_cleanup") is True):
-                    require(
-                        isinstance(recovery, dict)
-                        and recovery.get("passed") is True
-                        and recovery.get("original_job_role") == job["role"],
+                    raise ToolkitError(
                         "CLEANUP_INCOMPLETE",
                         "job-local absence not authenticated",
                     )

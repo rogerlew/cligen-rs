@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import stat
+import subprocess
 import tarfile
 from pathlib import Path
 from typing import Any, Callable, Iterator, Protocol
@@ -359,6 +360,9 @@ class Adapter(Protocol):
     def recover(self, profile: dict[str, Any], plan: dict[str, Any], attempt: dict[str, Any], token: str) -> str: ...
     def observe_recovery(self, profile: dict[str, Any], plan: dict[str, Any], recovery: dict[str, Any]) -> dict[str, Any]: ...
     def cancel(self, profile: dict[str, Any], job_id: str) -> dict[str, Any]: ...
+    def inspect_external_cleanup(
+        self, profile: dict[str, Any], evidence: dict[str, Any]
+    ) -> dict[str, Any]: ...
     def collect(self, profile: dict[str, Any], plan: dict[str, Any], quarantine: Path) -> dict[str, Any]: ...
     def clean(
         self,
@@ -527,6 +531,21 @@ class Toolkit:
 
     def _save_state(self, state: dict[str, Any]) -> None:
         atomic_write(self.private_path, state, private=True)
+
+    def _published_blob(self, commit: str, relative_path: str) -> bytes:
+        published = subprocess.run(
+            ["git", "-C", str(self.provider_root), "merge-base", "--is-ancestor", commit, "origin/main"],
+            check=False,
+            capture_output=True,
+        )
+        require(published.returncode == 0, "EVIDENCE_INCOMPLETE", "cleanup source commit is not published")
+        blob = subprocess.run(
+            ["git", "-C", str(self.provider_root), "show", f"{commit}:{relative_path}"],
+            check=False,
+            capture_output=True,
+        )
+        require(blob.returncode == 0, "EVIDENCE_INCOMPLETE", "cleanup source blob is unavailable")
+        return blob.stdout
 
     def _event(
         self,
@@ -2075,6 +2094,256 @@ class Toolkit:
             self._save_state(state)
             return read_record(self.publication_dir / publication_name)
 
+    def register_external_cleanup(
+        self, job_role: str, attempt_index: int, evidence: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Bind an out-of-band corrective cleanup to a canceled run."""
+        key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
+        self.adapter.check_masters(self.profile)
+        require(self.provider_api_version == 2, "PLAN_DRIFT", "external cleanup requires v2")
+        with directory_lock(self.run_lock):
+            state = self._load_state()
+            self._require_state(state, {"COLLECTED"})
+            require("recovery" not in state, "PLAN_DRIFT", "cleanup already registered")
+            attempt = state.get("attempts", {}).get(key)
+            result = attempt.get("result") if isinstance(attempt, dict) else None
+            require(
+                isinstance(attempt, dict)
+                and attempt.get("state") == "RESULT_VALIDATED"
+                and attempt.get("passed") is False
+                and isinstance(result, dict)
+                and result.get("state") == "CANCELLED",
+                "PLAN_DRIFT",
+                "external cleanup source is not a failed cancellation",
+            )
+            prior_job = read_record(self.publication_dir / f"job-{key}.json")
+            if prior_job.get("passed") is True:
+                correction = read_record(
+                    self.publication_dir / f"cancellation-correction-{key}.json"
+                )
+                require(
+                    correction.get("corrected_passed") is False
+                    and correction.get("prior_job_receipt_sha256")
+                    == prior_job["record_sha256"],
+                    "EVIDENCE_INCOMPLETE",
+                    "external cleanup cancellation correction lineage",
+                )
+            require(
+                attempt.get("cancel_acknowledgement", {}).get("job_id")
+                == attempt.get("job_id"),
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup cancellation acknowledgement",
+            )
+            recorded = evidence.get("record_sha256")
+            semantic = dict(evidence)
+            semantic.pop("record_sha256", None)
+            gates = evidence.get("gates")
+            cleanup_result = evidence.get("result")
+            expected_gates = (
+                {
+                    "exact_node": True,
+                    "job_local_cleanup": True,
+                    "marker_revalidated": True,
+                    "original_job_settled": True,
+                }
+                if cleanup_result == "validated-delete"
+                else {
+                    "exact_node": True,
+                    "job_local_cleanup": True,
+                    "original_job_settled": True,
+                }
+            )
+            require(
+                evidence.get("record_type") == "cancelled_job_cleanup_execution"
+                and evidence.get("package_id") == self.package_id
+                and evidence.get("accounting_classification")
+                == "out-of-band-corrective-cleanup"
+                and evidence.get("scheduler_authority") == "none-manual-sbatch"
+                and evidence.get("execution_publication_state")
+                == "local-commit-not-pushed-at-execution"
+                and isinstance(recorded, str)
+                and HEX64_PATTERN.fullmatch(recorded) is not None
+                and sha256_bytes(canonical_bytes(semantic)) == recorded
+                and cleanup_result in {"validated-delete", "already-absent"}
+                and gates == expected_gates,
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup record authentication",
+            )
+            cleanup_job_id = evidence.get("cleanup_job_id")
+            cleanup_minutes = evidence.get("cleanup_actual_l40_minutes")
+            require(
+                isinstance(cleanup_job_id, str)
+                and cleanup_job_id.isdigit()
+                and cleanup_job_id != attempt.get("job_id")
+                and evidence.get("cleanup_job_state") == "COMPLETED"
+                and evidence.get("cleanup_exit_code") == "0:0"
+                and evidence.get("original_job_id") == attempt.get("job_id")
+                and evidence.get("original_job_node") == result.get("node")
+                and evidence.get("cleanup_job_node") == result.get("node")
+                and isinstance(cleanup_minutes, int)
+                and 0 <= cleanup_minutes <= 5,
+                "CLEANUP_TARGET_INVALID",
+                "external cleanup scheduler identity",
+            )
+            observed_cleanup = self.adapter.inspect_external_cleanup(
+                self.profile, evidence
+            )
+            require(
+                observed_cleanup
+                == {
+                    "actual_gpu_minutes": cleanup_minutes,
+                    "elapsed_seconds": evidence.get("cleanup_elapsed_seconds"),
+                    "exit_code": "0:0",
+                    "job_id": cleanup_job_id,
+                    "node": result.get("node"),
+                    "script_sha256": evidence.get("cleanup_script_sha256"),
+                    "state": "COMPLETED",
+                    "stderr_sha256": evidence.get("stderr_sha256"),
+                    "stdout_sha256": evidence.get("stdout_sha256"),
+                },
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup accounting revalidation",
+            )
+            scheduler_row = (
+                f"{cleanup_job_id}|COMPLETED|{result.get('node')}|"
+                f"{evidence.get('cleanup_elapsed_seconds')}|0:0\n"
+            ).encode()
+            require(
+                evidence.get("scheduler_row_sha256")
+                == sha256_bytes(scheduler_row),
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup scheduler row identity",
+            )
+            target = evidence.get("target")
+            target_sha256 = evidence.get("target_sha256")
+            cleanup_script = (
+                self.provider_root
+                / "docs"
+                / "work-packages"
+                / self.package_id
+                / "artifacts"
+                / "jobs"
+                / f"cleanup-cancelled-{attempt['job_id']}.sh"
+            )
+            cleanup_script_sha256 = evidence.get("cleanup_script_sha256")
+            cleanup_source_commit = evidence.get("source_commit")
+            cleanup_relative_path = cleanup_script.relative_to(self.provider_root).as_posix()
+            require(
+                isinstance(target, str)
+                and isinstance(target_sha256, str)
+                and HEX64_PATTERN.fullmatch(target_sha256) is not None
+                and sha256_bytes(target.encode()) == target_sha256
+                and cleanup_script.is_file()
+                and not cleanup_script.is_symlink()
+                and cleanup_script.resolve() == Path(evidence.get("cleanup_script_path", "")).resolve()
+                and isinstance(cleanup_script_sha256, str)
+                and sha256_file(cleanup_script) == cleanup_script_sha256
+                and isinstance(cleanup_source_commit, str)
+                and re.fullmatch(r"[0-9a-f]{40}", cleanup_source_commit) is not None
+                and self._published_blob(cleanup_source_commit, cleanup_relative_path)
+                == cleanup_script.read_bytes(),
+                "CLEANUP_TARGET_INVALID",
+                "external cleanup target identity",
+            )
+            frozen_targets = re.findall(
+                r"^target=(/tmp/[A-Za-z0-9._-]+)$",
+                cleanup_script.read_text(encoding="utf-8"),
+                flags=re.MULTILINE,
+            )
+            require(
+                frozen_targets == [target],
+                "CLEANUP_TARGET_INVALID",
+                "external cleanup script target differs",
+            )
+            setup_path = f"results/{job_role}/setup.json"
+            collection = read_record(self.publication_dir / "collection.json")
+            setup_identity = next(
+                (
+                    item
+                    for item in collection.get("sanitized_files", [])
+                    if item.get("logical_name") == setup_path
+                ),
+                None,
+            )
+            setup_file = self.publication_dir / "evidence" / setup_path
+            require(
+                isinstance(setup_identity, dict)
+                and setup_file.is_file()
+                and sha256_file(setup_file) == setup_identity.get("sha256"),
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup setup collection identity",
+            )
+            setup = read_json(setup_file)
+            setup_recorded = setup.get("record_sha256")
+            setup_semantic = dict(setup)
+            setup_semantic.pop("record_sha256", None)
+            execution = setup.get("execution_identity")
+            authentication = setup.get("authentication")
+            require(
+                setup.get("valid") is True
+                and isinstance(authentication, dict)
+                and authentication.get("execution_identity_authenticated") is True
+                and authentication.get("asset_identities_authenticated") is True
+                and isinstance(setup_recorded, str)
+                and sha256_bytes(canonical_bytes(setup_semantic)) == setup_recorded
+                and isinstance(execution, dict)
+                and execution.get("job_id") == attempt.get("job_id")
+                and execution.get("node") == result.get("node")
+                and execution.get("role") == job_role
+                and execution.get("run_id") == self.run_id
+                and execution.get("source_commit") == self.source_commit
+                and execution.get("owner_marker_sha256")
+                == evidence.get("marker_sha256"),
+                "CLEANUP_TARGET_INVALID",
+                "external cleanup marker/setup lineage",
+            )
+            expected_stdout = {
+                "gates": gates,
+                "job_id": attempt["job_id"],
+                "node": result["node"],
+                "result": evidence.get("result"),
+                "target_sha256": target_sha256,
+            }
+            require(
+                evidence.get("result") in {"validated-delete", "already-absent"}
+                and evidence.get("stdout_sha256")
+                == sha256_bytes(canonical_bytes(expected_stdout) + b"\n")
+                and evidence.get("stderr_sha256") == sha256_bytes(b""),
+                "EVIDENCE_INCOMPLETE",
+                "external cleanup output identity",
+            )
+            registration = self._common(
+                "external_cleanup_registration_receipt",
+                plan_id=state["current_plan_id"],
+            )
+            registration.update(
+                {
+                    "cleanup_actual_l40_minutes": cleanup_minutes,
+                    "cleanup_job_id": cleanup_job_id,
+                    "external_evidence_record_sha256": recorded,
+                    "job_id": attempt["job_id"],
+                    "job_role": job_role,
+                    "target_sha256": target_sha256,
+                }
+            )
+            state["recovery"] = {
+                "kind": "external-cancelled-cleanup",
+                "original_job_id": attempt["job_id"],
+                "original_job_role": job_role,
+                "original_node": result["node"],
+                "passed": True,
+                "result": {
+                    "actual_gpu_minutes": cleanup_minutes,
+                    "gates": gates,
+                    "state": "COMPLETED",
+                },
+                "state": "RESULT_VALIDATED",
+            }
+            name = f"external-cleanup-registration-{key}.json"
+            self._write_publication(name, registration)
+            self._save_state(state)
+            return read_record(self.publication_dir / name)
+
     def recover(self, job_role: str, attempt_index: int) -> str:
         """Submit the one reserved marker-bound recovery on the original node."""
         key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
@@ -2580,7 +2849,7 @@ class Toolkit:
             recovery_token = state.get("recovery_token")
             require(isinstance(recovery_token, str), "CLEANUP_INCOMPLETE", "recovery reserve missing")
             ledger = self._load_ledger()
-            if recovery is None:
+            if recovery is None or recovery.get("kind") == "external-cancelled-cleanup":
                 self._append_ledger_transition(ledger, recovery_token, "released", release_reason="verified-cleanup")
             self._save_ledger(ledger)
         self._event(state, "COLLECTED", "CLEANED", plan_id=state["current_plan_id"])

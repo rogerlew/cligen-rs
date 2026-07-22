@@ -147,6 +147,17 @@ class ProviderAndEnvironmentTests(HardeningFixture):
                 for item in runner.gate_calls[0][0]
             )
         )
+        runner.gate_calls.clear()
+        self.assertEqual(
+            adapter.clean(
+                profile,
+                plan,
+                recovery={"original_job_role": "smoke", "passed": True},
+                stopped_roles={"dependent"},
+            ),
+            {"remote_absent": True, "job_local_cleanup": "verified_absent"},
+        )
+        self.assertEqual(runner.gate_calls, [])
 
     def test_v2_live_adapter_uses_export_none_and_authority_reconciliation(self) -> None:
         class Runner:
@@ -1786,6 +1797,153 @@ class V2IntegrationTests(HardeningFixture):
             read_record(toolkit.publication_dir / "terminal.json")["terminal"],
             "LEMHI-TOOLKIT-RUN-CLOSED",
         )
+
+    def test_v2_external_cleanup_revalidates_hashes_and_releases_reserve(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        provider = self.root / "provider"
+        cleanup_script = (
+            provider
+            / "docs/work-packages/a10m4o1-hardening/artifacts/jobs"
+            / "cleanup-cancelled-1000.sh"
+        )
+        cleanup_script.parent.mkdir(parents=True)
+        cleanup_script.write_text(
+            "#!/bin/sh\ntarget=/tmp/toolkit-smoke-1000\n", encoding="utf-8"
+        )
+        cleanup_script.chmod(0o700)
+        stdout = {
+            "gates": {
+                "exact_node": True,
+                "job_local_cleanup": True,
+                "marker_revalidated": True,
+                "original_job_settled": True,
+            },
+            "job_id": "1000",
+            "node": "node03",
+            "result": "validated-delete",
+            "target_sha256": sha256_bytes(b"/tmp/toolkit-smoke-1000"),
+        }
+        observation = {
+            "actual_gpu_minutes": 1,
+            "elapsed_seconds": 1,
+            "exit_code": "0:0",
+            "job_id": "1001",
+            "node": "node03",
+            "script_sha256": sha256_file(cleanup_script),
+            "state": "COMPLETED",
+            "stderr_sha256": sha256_bytes(b""),
+            "stdout_sha256": sha256_bytes(canonical_bytes(stdout) + b"\n"),
+        }
+        fixture_root = self.root / "fixture-external-cleanup"
+        adapter = FixtureAdapter(
+            fixture_root,
+            {
+                "external_cleanup_observation": {
+                    **observation,
+                    "stdout_sha256": HEX_B,
+                },
+                "results": {"smoke": {"node": "node03"}},
+            },
+        )
+        toolkit = Toolkit(
+            state,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            adapter,
+            clock=lambda: "2026-07-22T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        plan = self.plan(authority, script)
+        setup_logical = "results/smoke/setup.json"
+        plan["evidence_allowlist"].append(setup_logical)
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+        toolkit.submit("smoke", 0); toolkit.cancel("smoke", 0); toolkit.observe("smoke", 0)
+        setup = fixture_root / "remote/runs/v2-run" / setup_logical
+        setup.parent.mkdir(parents=True, exist_ok=True)
+        setup_record = {
+            "authentication": {
+                "asset_identities_authenticated": True,
+                "execution_identity_authenticated": True,
+            },
+            "execution_identity": {
+                "job_id": "1000",
+                "node": "node03",
+                "owner_marker_sha256": HEX_A,
+                "role": "smoke",
+                "run_id": "v2-run",
+                "source_commit": "abcdef0",
+            },
+            "valid": True,
+        }
+        setup_record["record_sha256"] = sha256_bytes(canonical_bytes(setup_record))
+        setup.write_bytes(canonical_bytes(setup_record) + b"\n")
+        toolkit.collect()
+        toolkit.provider_root = provider.resolve()
+        evidence = {
+            "accounting_classification": "out-of-band-corrective-cleanup",
+            "cleanup_actual_l40_minutes": 1,
+            "cleanup_elapsed_seconds": 1,
+            "cleanup_exit_code": "0:0",
+            "cleanup_job_id": "1001",
+            "cleanup_job_node": "node03",
+            "cleanup_job_state": "COMPLETED",
+            "cleanup_script_sha256": sha256_file(cleanup_script),
+            "cleanup_script_path": str(cleanup_script),
+            "gates": stdout["gates"],
+            "marker_sha256": HEX_A,
+            "original_job_id": "1000",
+            "original_job_node": "node03",
+            "package_id": "a10m4o1-hardening",
+            "record_type": "cancelled_job_cleanup_execution",
+            "remote_command": "/tmp/cleanup.sh",
+            "remote_stderr": "/tmp/cleanup.err",
+            "remote_stdout": "/tmp/cleanup.out",
+            "result": "validated-delete",
+            "scheduler_authority": "none-manual-sbatch",
+            "execution_publication_state": "local-commit-not-pushed-at-execution",
+            "scheduler_row_sha256": sha256_bytes(
+                b"1001|COMPLETED|node03|1|0:0\n"
+            ),
+            "source_commit": "a" * 40,
+            "stderr_sha256": sha256_bytes(b""),
+            "stdout_sha256": observation["stdout_sha256"],
+            "target": "/tmp/toolkit-smoke-1000",
+            "target_sha256": stdout["target_sha256"],
+        }
+        evidence["record_sha256"] = sha256_bytes(canonical_bytes(evidence))
+        original_published_blob = toolkit._published_blob
+        toolkit._published_blob = lambda commit, path: cleanup_script.read_bytes()
+        try:
+            incomplete = dict(evidence)
+            incomplete["gates"] = {
+                "exact_node": True,
+                "job_local_cleanup": True,
+            }
+            incomplete.pop("record_sha256")
+            incomplete["record_sha256"] = sha256_bytes(canonical_bytes(incomplete))
+            with self.assertRaisesRegex(ToolkitError, "record authentication"):
+                toolkit.register_external_cleanup("smoke", 0, incomplete)
+            with self.assertRaisesRegex(ToolkitError, "accounting revalidation"):
+                toolkit.register_external_cleanup("smoke", 0, evidence)
+            adapter.scenario["external_cleanup_observation"] = observation
+            toolkit._published_blob = lambda commit, path: b"wrong blob"
+            with self.assertRaisesRegex(ToolkitError, "target identity"):
+                toolkit.register_external_cleanup("smoke", 0, evidence)
+            toolkit._published_blob = lambda commit, path: cleanup_script.read_bytes()
+            toolkit.register_external_cleanup("smoke", 0, evidence)
+        finally:
+            toolkit._published_blob = original_published_blob
+        toolkit.clean(); toolkit.close()
+        ledger = read_json(toolkit.ledger_path)
+        reserve = next(
+            item
+            for item in reversed(ledger["entries"])
+            if item.get("job_role") == "toolkit-recovery"
+        )
+        self.assertEqual(reserve["status"], "released")
 
     def test_v2_recovery_collection_requires_all_recovery_evidence(self) -> None:
         toolkit, adapter, plan = self._settled_recovery_fixture(

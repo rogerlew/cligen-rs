@@ -132,6 +132,13 @@ and marker identity from the already collected setup receipt, restricts the
 target to the canceled role/job's bounded `/tmp` name, preserves the original
 collection receipt, and reopens only the recovery/collection tail. It neither
 changes the canceled scientific result nor creates another recovery reserve.
+When an immutable staged recovery asset cannot establish already-absent
+success, `register-external-cleanup` may instead bind a record-hashed
+out-of-band corrective cleanup. It revalidates scheduler accounting and the
+exact script, target, marker, setup, stdout, and stderr lineage before cleanup
+consumes that absence proof and formally releases the original unused reserve.
+This records the exception honestly; it does not retroactively grant the
+corrective job toolkit authority.
 
 `observe` is intentionally one-shot and terminal-only. It does not wait for a
 running job; an early call returns `JOB_TERMINAL_MISMATCH` without changing the
