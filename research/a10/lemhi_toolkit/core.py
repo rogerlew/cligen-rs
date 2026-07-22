@@ -1854,6 +1854,227 @@ class Toolkit:
             self._write_publication(f"cancel-{key}.json", receipt)
             return result
 
+    def register_cancelled_recovery(
+        self, job_role: str, attempt_index: int, declaration: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Bind a canceled attempt's recovery target from collected evidence."""
+        key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
+        self.adapter.check_masters(self.profile)
+        require(
+            self.provider_api_version == 2,
+            "PLAN_DRIFT",
+            "cancellation recovery requires provider revision 2",
+        )
+        with directory_lock(self.run_lock):
+            state = self._load_state()
+            self._require_state(state, {"COLLECTED"})
+            attempt = state.get("attempts", {}).get(key)
+            require(
+                isinstance(attempt, dict)
+                and attempt.get("state") == "RESULT_VALIDATED"
+                and attempt.get("passed") is False,
+                "PLAN_DRIFT",
+                "cancellation recovery source is not a failed settled attempt",
+            )
+            result = attempt.get("result")
+            require(
+                isinstance(result, dict) and result.get("state") == "CANCELLED",
+                "PLAN_DRIFT",
+                "cancellation recovery requires scheduler cancellation",
+            )
+            prior_job = read_record(self.publication_dir / f"job-{key}.json")
+            if prior_job.get("passed") is True:
+                correction = read_record(
+                    self.publication_dir / f"cancellation-correction-{key}.json"
+                )
+                require(
+                    correction.get("corrected_passed") is False
+                    and correction.get("prior_job_receipt_sha256")
+                    == prior_job["record_sha256"],
+                    "EVIDENCE_INCOMPLETE",
+                    "cancellation correction lineage",
+                )
+            require(
+                attempt.get("cancel_acknowledgement", {}).get("job_id")
+                == attempt.get("job_id"),
+                "EVIDENCE_INCOMPLETE",
+                "cancellation acknowledgement",
+            )
+            require(
+                "cancelled_recovery" not in attempt and "recovery" not in state,
+                "PLAN_DRIFT",
+                "cancellation recovery already registered",
+            )
+
+            evidence_path = validate_relative_path(
+                declaration.get("binding_evidence_path"), "binding evidence"
+            )
+            require(
+                evidence_path.startswith("results/") and evidence_path.endswith("/setup.json"),
+                "EVIDENCE_INCOMPLETE",
+                "cancellation recovery requires collected setup evidence",
+            )
+            evidence_file = self.publication_dir / "evidence" / evidence_path
+            require(
+                evidence_file.is_file() and not evidence_file.is_symlink(),
+                "EVIDENCE_INCOMPLETE",
+                "binding evidence is unavailable",
+            )
+            evidence_sha256 = declaration.get("binding_evidence_sha256")
+            collection = read_record(self.publication_dir / "collection.json")
+            collected_identity = next(
+                (
+                    item
+                    for item in collection.get("sanitized_files", [])
+                    if item.get("logical_name") == evidence_path
+                ),
+                None,
+            )
+            require(
+                isinstance(evidence_sha256, str)
+                and HEX64_PATTERN.fullmatch(evidence_sha256) is not None
+                and isinstance(collected_identity, dict)
+                and collected_identity.get("sha256") == evidence_sha256
+                and sha256_file(evidence_file) == evidence_sha256,
+                "EVIDENCE_INCOMPLETE",
+                "binding evidence is not authenticated by prior collection",
+            )
+            evidence = read_json(evidence_file)
+            evidence_record_sha256 = evidence.get("record_sha256")
+            evidence_semantic = dict(evidence)
+            evidence_semantic.pop("record_sha256", None)
+            authentication = evidence.get("authentication")
+            require(
+                evidence.get("valid") is True
+                and isinstance(authentication, dict)
+                and authentication.get("execution_identity_authenticated") is True
+                and authentication.get("asset_identities_authenticated") is True
+                and isinstance(evidence_record_sha256, str)
+                and HEX64_PATTERN.fullmatch(evidence_record_sha256) is not None
+                and sha256_bytes(canonical_bytes(evidence_semantic))
+                == evidence_record_sha256,
+                "EVIDENCE_INCOMPLETE",
+                "collected setup record authentication",
+            )
+            execution = evidence.get("execution_identity")
+            require(
+                isinstance(execution, dict)
+                and execution.get("job_id") == attempt.get("job_id")
+                and execution.get("node") == result.get("node")
+                and execution.get("role") == job_role
+                and execution.get("run_id") == self.run_id
+                and execution.get("source_commit") == self.source_commit,
+                "CLEANUP_TARGET_INVALID",
+                "collected setup and scheduler identity differ",
+            )
+
+            target = declaration.get("target")
+            require(isinstance(target, str), "CLEANUP_TARGET_INVALID", "recovery target")
+            validate_shell_scalar(target, "recovery target")
+            target_path = Path(target)
+            derivation_asset = declaration.get("target_derivation_asset")
+            plan = self._current_plan(state)
+            asset = next(
+                (
+                    item
+                    for item in plan.get("assets", [])
+                    if item.get("logical_name") == derivation_asset
+                ),
+                None,
+            )
+            require(
+                isinstance(asset, dict) and asset.get("executable") is True,
+                "CLEANUP_TARGET_INVALID",
+                "target derivation asset",
+            )
+            asset_path = Path(asset["local_path"])
+            require(
+                asset_path.is_file()
+                and not asset_path.is_symlink()
+                and sha256_file(asset_path) == asset.get("sha256"),
+                "ASSET_IDENTITY_MISMATCH",
+                "target derivation asset identity",
+            )
+            derivations = re.findall(
+                r"^target=\$\{TMPDIR:-/tmp\}/([A-Za-z0-9._-]+)-\$role-\$SLURM_JOB_ID$",
+                asset_path.read_text(encoding="utf-8"),
+                flags=re.MULTILINE,
+            )
+            require(
+                len(derivations) == 1,
+                "CLEANUP_TARGET_INVALID",
+                "target derivation is not uniquely frozen",
+            )
+            expected_target = f"/tmp/{derivations[0]}-{job_role}-{attempt['job_id']}"
+            require(
+                target_path == Path(expected_target),
+                "CLEANUP_TARGET_INVALID",
+                "recovery target differs from the frozen job derivation",
+            )
+            marker_sha256 = declaration.get("marker_sha256")
+            require(
+                isinstance(marker_sha256, str)
+                and HEX64_PATTERN.fullmatch(marker_sha256) is not None
+                and execution.get("owner_marker_sha256") == marker_sha256,
+                "CLEANUP_TARGET_INVALID",
+                "collected setup marker identity",
+            )
+            uid = declaration.get("uid")
+            device = declaration.get("device")
+            require(
+                isinstance(uid, int)
+                and uid >= 0
+                and isinstance(device, int)
+                and device >= 0,
+                "CLEANUP_TARGET_INVALID",
+                "recovery ownership",
+            )
+            recovery_target = {
+                "device": device,
+                "job_id": attempt["job_id"],
+                "marker_sha256": marker_sha256,
+                "node": result["node"],
+                "target": target,
+                "uid": uid,
+            }
+            receipt = self._common(
+                "cancelled_recovery_registration_receipt",
+                plan_id=state["current_plan_id"],
+            )
+            receipt.update(
+                {
+                    "attempt_index": attempt_index,
+                    "binding_evidence_path": evidence_path,
+                    "binding_evidence_sha256": evidence_sha256,
+                    "job_id": attempt["job_id"],
+                    "job_role": job_role,
+                    "recovery_target": recovery_target,
+                    "target_derivation_asset": derivation_asset,
+                }
+            )
+            publication_name = f"cancelled-recovery-registration-{key}.json"
+            record_sha256 = self._write_publication(publication_name, receipt)
+            attempt["cancelled_recovery"] = {
+                **receipt,
+                "record_sha256": record_sha256,
+            }
+            prior_collection = self.publication_dir / "collection.json"
+            require(prior_collection.is_file(), "EVIDENCE_INCOMPLETE", "prior collection receipt")
+            atomic_write(
+                self.publication_dir / "collection-pre-recovery.json",
+                read_json(prior_collection),
+            )
+            state["pre_recovery_collection"] = state["collection"]
+            self._event(
+                state,
+                "COLLECTED",
+                "MATRIX_SETTLED",
+                plan_id=state["current_plan_id"],
+            )
+            state["run_state"] = "MATRIX_SETTLED"
+            self._save_state(state)
+            return read_record(self.publication_dir / publication_name)
+
     def recover(self, job_role: str, attempt_index: int) -> str:
         """Submit the one reserved marker-bound recovery on the original node."""
         key = f"{validate_id(job_role, 'job role')}.{attempt_index}"
@@ -1888,12 +2109,23 @@ class Toolkit:
                 result = attempt.get("result")
                 require(isinstance(result, dict), "EVIDENCE_INCOMPLETE", "recovery source result")
                 gates = result.get("gates")
-                require(
-                    isinstance(gates, dict) and gates.get("job_local_cleanup") is False,
-                    "PLAN_DRIFT",
-                    "recovery requires unresolved job-local cleanup",
-                )
-                recovery_target = result.get("recovery_target")
+                cancelled_recovery = attempt.get("cancelled_recovery")
+                if isinstance(cancelled_recovery, dict):
+                    require(
+                        result.get("state") == "CANCELLED"
+                        and attempt.get("passed") is False,
+                        "PLAN_DRIFT",
+                        "registered cancellation recovery source",
+                    )
+                    recovery_target = cancelled_recovery.get("recovery_target")
+                else:
+                    require(
+                        isinstance(gates, dict)
+                        and gates.get("job_local_cleanup") is False,
+                        "PLAN_DRIFT",
+                        "recovery requires unresolved job-local cleanup",
+                    )
+                    recovery_target = result.get("recovery_target")
                 require(isinstance(recovery_target, dict), "EVIDENCE_INCOMPLETE", "recovery target")
                 require(
                     recovery_target.get("job_id") == attempt.get("job_id")
@@ -1913,8 +2145,13 @@ class Toolkit:
                     "recovery reserve is not available",
                 )
                 try:
+                    recovery_attempt = dict(attempt)
+                    recovery_attempt["result"] = {**result, "recovery_target": recovery_target}
                     job_id = self.adapter.recover(
-                        self.profile, self._current_plan(state), attempt, recovery_token
+                        self.profile,
+                        self._current_plan(state),
+                        recovery_attempt,
+                        recovery_token,
                     )
                 except ToolkitError as error:
                     if error.code != "SUBMISSION_OUTCOME_UNKNOWN":

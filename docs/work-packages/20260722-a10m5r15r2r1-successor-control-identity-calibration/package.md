@@ -41,12 +41,23 @@ full abort authentication could be incorporated prospectively. Run `r2` binds
 both authenticated aborts and is the execution run. The compact zero-attempt,
 zero-GPU diagnostic is `artifacts/pre-submission-diagnostics.json`.
 
-Run `r2` was canceled after live progress proved that the sequential six-model
-matrix could not complete inside its 30-minute job limit. The cancellation
-also exposed that the live adapter incorrectly required a scientific gate from
-a scheduler-canceled job. This package corrects that closure path: canceled
-jobs settle from terminal scheduler accounting without a nonexistent gate and
-remain scientifically failed.
+Run `r2` was manually canceled during a live progress audit after 519 seconds.
+That cancellation was premature: its first model completed by 445 seconds,
+its second family began by 475 seconds, and the same six-model loop previously
+completed on node03 in 893 seconds. The original 30-minute limit therefore
+remains empirically sufficient. The canceled run has no scientific result.
+It also exposed that the live adapter incorrectly required a scientific gate
+from a scheduler-canceled job. This package corrects that closure path:
+canceled jobs settle from terminal scheduler accounting without a nonexistent
+gate and remain scientifically failed.
+
+Because cancellation can prevent the gate finalizer from publishing its
+recovery target, the retained setup and collection receipts bind a narrow
+post-collection recovery registration. The recovery target must be derived
+exactly from the frozen job script, and exact-node recovery now treats an
+already-absent target as authenticated success while retaining full marker,
+UID, device, canonical-path, and immediate-revalidation checks before any
+deletion of a present target.
 
 1. Authenticate the closed A10M5R15R2 failure, R1 corpus/calendar identities,
    R2 assets, source commit, and sealed-role state.

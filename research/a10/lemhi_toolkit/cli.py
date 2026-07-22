@@ -63,6 +63,10 @@ def _parser() -> argparse.ArgumentParser:
     cancel = subcommands.add_parser("cancel")
     cancel.add_argument("--job-role", required=True)
     cancel.add_argument("--attempt-index", required=True, type=int)
+    register_cancelled = subcommands.add_parser("register-cancelled-recovery")
+    register_cancelled.add_argument("--job-role", required=True)
+    register_cancelled.add_argument("--attempt-index", required=True, type=int)
+    register_cancelled.add_argument("--input", type=Path, required=True)
     return parser
 
 
@@ -143,6 +147,10 @@ def main(arguments: list[str] | None = None) -> int:
             result = toolkit.amend(read_json(options.input), options.reason, options.changed_field)
         elif command in {"submit", "observe", "cancel", "recover"}:
             result = getattr(toolkit, command)(options.job_role, options.attempt_index)
+        elif command == "register-cancelled-recovery":
+            result = toolkit.register_cancelled_recovery(
+                options.job_role, options.attempt_index, read_json(options.input)
+            )
         elif command == "stop-matrix":
             result = toolkit.stop_matrix(
                 options.trigger_job_role, options.reason_code

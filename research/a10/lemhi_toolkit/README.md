@@ -79,6 +79,9 @@ submit --job-role smoke --attempt-index 0
 observe --job-role smoke --attempt-index 0
 # If an exhausted failed upstream role makes every zero-attempt role moot:
 # stop-matrix --trigger-job-role smoke --reason-code upstream-role-exhausted
+# If a cancellation prevented the gate finalizer but collected setup evidence
+# binds the exact marker target, register that declaration before recovery:
+# register-cancelled-recovery --job-role smoke --attempt-index 0 --input /private/cancelled-recovery.json
 # Only when observe authenticates unresolved job-local cleanup:
 recover --job-role smoke --attempt-index 0
 observe-recovery
@@ -121,6 +124,14 @@ revalidates the UID, filesystem device, canonical target, and marker twice.
 `observe-recovery` must authenticate the recovery gate receipt and accounting
 before `collect` or `clean`; ambiguity retains both private state and the
 reserve as `CLEANUP_INCOMPLETE`.
+
+`register-cancelled-recovery` is the narrow post-collection exception for a
+scheduler-canceled job whose final gate receipt was never published. It
+requires a failed corrected cancellation, authenticates job, node, role, run,
+and marker identity from the already collected setup receipt, restricts the
+target to the canceled role/job's bounded `/tmp` name, preserves the original
+collection receipt, and reopens only the recovery/collection tail. It neither
+changes the canceled scientific result nor creates another recovery reserve.
 
 `observe` is intentionally one-shot and terminal-only. It does not wait for a
 running job; an early call returns `JOB_TERMINAL_MISMATCH` without changing the

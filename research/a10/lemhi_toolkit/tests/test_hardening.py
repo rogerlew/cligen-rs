@@ -551,7 +551,12 @@ class V2IntegrationTests(HardeningFixture):
             "snapshot": "exact private toolkit state plus authenticated job receipts",
             "toolkit_submit_invokes_package_checker": False,
         }
-        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+        toolkit.doctor()
+        toolkit.probe()
+        toolkit.plan(plan)
+        toolkit.prepare()
+        toolkit.stage()
+        toolkit.verify()
 
         checker_identities = [
             {
@@ -1700,6 +1705,87 @@ class V2IntegrationTests(HardeningFixture):
         latest = next(item for item in reversed(ledger["entries"]) if item.get("job_role") == "toolkit-recovery")
         self.assertEqual(latest["status"], "settled")
         self.assertEqual(latest["absence_proof"], "JOB_LOCAL_ABSENT")
+
+    def test_v2_cancelled_attempt_registers_recovery_after_collection(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text(
+            "#!/bin/sh\n"
+            "role=smoke\n"
+            "target=${TMPDIR:-/tmp}/toolkit-$role-$SLURM_JOB_ID\n"
+            "exit 0\n",
+            encoding="utf-8",
+        )
+        script.chmod(0o700)
+        fixture_root = self.root / "fixture-cancelled-recovery"
+        adapter = FixtureAdapter(
+            fixture_root,
+            {"results": {"smoke": {"node": "node03"}}},
+        )
+        toolkit = Toolkit(
+            state,
+            authority,
+            read_json(PROFILE_V2),
+            "v2-run",
+            adapter,
+            clock=lambda: "2026-07-22T20:00:00Z",
+            provider_root=REPOSITORY_ROOT,
+        )
+        plan = self.plan(authority, script)
+        plan["assets"][0]["executable"] = True
+        setup_logical = "results/smoke/setup.json"
+        plan["evidence_allowlist"].append(setup_logical)
+        toolkit.doctor(); toolkit.probe(); toolkit.plan(plan); toolkit.prepare(); toolkit.stage(); toolkit.verify()
+        self.assertEqual(toolkit.submit("smoke", 0), "1000")
+        toolkit.cancel("smoke", 0)
+        self.assertFalse(toolkit.observe("smoke", 0)["passed"])
+        setup = fixture_root / "remote/runs/v2-run" / setup_logical
+        setup.parent.mkdir(parents=True, exist_ok=True)
+        setup_record = {
+            "authentication": {
+                "asset_identities_authenticated": True,
+                "execution_identity_authenticated": True,
+            },
+            "execution_identity": {
+                "job_id": "1000",
+                "node": "node03",
+                "owner_marker_sha256": HEX_A,
+                "role": "smoke",
+                "run_id": "v2-run",
+                "source_commit": "abcdef0",
+            },
+            "valid": True,
+        }
+        setup_record["record_sha256"] = sha256_bytes(canonical_bytes(setup_record))
+        setup.write_bytes(canonical_bytes(setup_record) + b"\n")
+        toolkit.collect()
+        published_setup = toolkit.publication_dir / "evidence" / setup_logical
+        registration = toolkit.register_cancelled_recovery(
+            "smoke",
+            0,
+            {
+                "binding_evidence_path": setup_logical,
+                "binding_evidence_sha256": sha256_file(published_setup),
+                "device": 9,
+                "marker_sha256": HEX_A,
+                "target": "/tmp/toolkit-smoke-1000",
+                "target_derivation_asset": "job.sh",
+                "uid": 1,
+            },
+        )
+        self.assertEqual(registration["recovery_target"]["job_id"], "1000")
+        self.assertTrue(
+            (toolkit.publication_dir / "collection-pre-recovery.json").is_file()
+        )
+        self.assertEqual(toolkit.recover("smoke", 0), "1001")
+        self.assertTrue(toolkit.observe_recovery()["passed"])
+        toolkit.collect()
+        toolkit.clean()
+        toolkit.close()
+        self.assertEqual(
+            read_record(toolkit.publication_dir / "terminal.json")["terminal"],
+            "LEMHI-TOOLKIT-RUN-CLOSED",
+        )
 
     def test_v2_recovery_collection_requires_all_recovery_evidence(self) -> None:
         toolkit, adapter, plan = self._settled_recovery_fixture(
