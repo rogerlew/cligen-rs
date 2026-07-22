@@ -190,6 +190,36 @@ class FoundationAcceptance(ToolkitFixture):
         self.assertFalse(receipt["passed"])
         self.assertEqual(receipt["result"]["state"], "CANCELLED")
 
+    def test_legacy_cancelled_success_is_corrected_without_rewriting(self) -> None:
+        toolkit = self.toolkit("cancel-correction")
+        jobs = self.plan("cancel-correction")["jobs"]
+        jobs[0]["max_attempts"] = 1
+        jobs[0]["retry_on"] = []
+        self.verified(toolkit, self.plan("cancel-correction", jobs=jobs))
+        toolkit.submit("smoke", 0)
+        toolkit.cancel("smoke", 0)
+        receipt = toolkit.observe("smoke", 0)
+        self.assertFalse(receipt["passed"])
+
+        state = read_json(toolkit.private_path)
+        state["attempts"]["smoke.0"]["passed"] = True
+        toolkit._save_state(state)
+        receipt_path = toolkit.publication_dir / "job-smoke.0.json"
+        legacy = read_record(receipt_path)
+        legacy["passed"] = True
+        legacy.pop("record_sha256")
+        legacy["record_sha256"] = sha256_bytes(canonical_bytes(legacy))
+        receipt_path.write_bytes(canonical_bytes(legacy) + b"\n")
+
+        correction = toolkit.observe("smoke", 0)
+        self.assertFalse(correction["corrected_passed"])
+        self.assertEqual(
+            correction["prior_job_receipt_sha256"], legacy["record_sha256"]
+        )
+        corrected_state = read_json(toolkit.private_path)
+        self.assertFalse(corrected_state["attempts"]["smoke.0"]["passed"])
+        self.assertTrue(toolkit.collect()["download_promoted"])
+
     def test_missing_accounting_remains_unavailable(self) -> None:
         toolkit = self.toolkit("accounting")
         self.verified(toolkit, self.plan("accounting"))

@@ -1590,7 +1590,49 @@ class Toolkit:
             with directory_lock(self.run_lock):
                 state = self._load_state()
                 attempt = state.get("attempts", {}).get(key)
-                require(isinstance(attempt, dict) and attempt.get("state") == "SUBMITTED", "PLAN_DRIFT", key)
+                require(isinstance(attempt, dict), "PLAN_DRIFT", key)
+                if attempt.get("state") == "RESULT_VALIDATED":
+                    result = attempt.get("result", {})
+                    correction_path = self.publication_dir / f"cancellation-correction-{key}.json"
+                    if attempt.get("passed") is False and correction_path.exists():
+                        return read_record(correction_path)
+                    require(
+                        attempt.get("passed") is True
+                        and result.get("state") == "CANCELLED"
+                        and attempt.get("cancel_acknowledgement", {}).get("job_id")
+                        == attempt.get("job_id"),
+                        "PLAN_DRIFT",
+                        "only a misclassified exact cancellation can be corrected",
+                    )
+                    prior = read_record(self.publication_dir / f"job-{key}.json")
+                    require(
+                        prior.get("passed") is True
+                        and prior.get("result", {}).get("state") == "CANCELLED",
+                        "EVIDENCE_INCOMPLETE",
+                        "published cancellation misclassification missing",
+                    )
+                    attempt["passed"] = False
+                    correction = self._common(
+                        "cancellation_correction_receipt",
+                        plan_id=attempt["plan_id"],
+                    )
+                    correction.update(
+                        {
+                            "attempt_index": attempt_index,
+                            "corrected_passed": False,
+                            "job_id": attempt["job_id"],
+                            "job_role": job_role,
+                            "prior_job_receipt_sha256": prior["record_sha256"],
+                            "reason": "scheduler cancellation cannot pass science",
+                        }
+                    )
+                    attempt["cancellation_correction"] = correction
+                    self._save_state(state)
+                    self._write_publication(
+                        f"cancellation-correction-{key}.json", correction
+                    )
+                    return read_record(correction_path)
+                require(attempt.get("state") == "SUBMITTED", "PLAN_DRIFT", key)
                 plan = self._current_plan(state)
                 job = next(item for item in plan["jobs"] if item["role"] == job_role)
                 result = self.adapter.observe(self.profile, plan, job, attempt["job_id"])
@@ -1601,7 +1643,13 @@ class Toolkit:
                 attempt["state"] = "TERMINAL_OBSERVED"
                 self._event(state, "SUBMITTED", "TERMINAL_OBSERVED", scope="attempt", plan_id=attempt["plan_id"], job_role=job_role, attempt_index=attempt_index)
                 gates = result.get("gates")
-                passed = result.get("exit_code") == job.get("expected_exit_code", 0) and isinstance(gates, dict) and bool(gates) and all(value is True for value in gates.values())
+                passed = (
+                    result.get("state") == "COMPLETED"
+                    and result.get("exit_code") == job.get("expected_exit_code", 0)
+                    and isinstance(gates, dict)
+                    and bool(gates)
+                    and all(value is True for value in gates.values())
+                )
                 attempt.update({"state": "RESULT_VALIDATED", "result": result, "passed": passed})
                 self._event(state, "TERMINAL_OBSERVED", "RESULT_VALIDATED", scope="attempt", plan_id=attempt["plan_id"], job_role=job_role, attempt_index=attempt_index)
                 ledger = self._load_ledger()
@@ -2101,29 +2149,32 @@ class Toolkit:
                         if item["role"] == attempt["job_role"]
                     )
                     attempt_id = f"{attempt['job_role']}.{attempt['attempt_index']}"
-                    gate_sha256 = attempt.get("result", {}).get(
-                        "gate_receipt_sha256"
-                    )
-                    require(
-                        isinstance(gate_sha256, str)
-                        and HEX64_PATTERN.fullmatch(gate_sha256) is not None,
-                        "EVIDENCE_INCOMPLETE",
-                        "observed gate receipt identity missing",
-                    )
-                    existing_gate_sha256 = gate_identities.get(job["gate_receipt"])
-                    require(
-                        existing_gate_sha256 in {None, gate_sha256},
-                        "EVIDENCE_INCOMPLETE",
-                        "attempts sharing a gate path have conflicting identities",
-                    )
-                    gate_identities[job["gate_receipt"]] = gate_sha256
                     required_attempt_paths.update(
                         {
-                            job["gate_receipt"],
                             f"slurm/{attempt_id}.out",
                             f"slurm/{attempt_id}.err",
                         }
                     )
+                    if attempt.get("result", {}).get("state") != "CANCELLED":
+                        gate_sha256 = attempt.get("result", {}).get(
+                            "gate_receipt_sha256"
+                        )
+                        require(
+                            isinstance(gate_sha256, str)
+                            and HEX64_PATTERN.fullmatch(gate_sha256) is not None,
+                            "EVIDENCE_INCOMPLETE",
+                            "observed gate receipt identity missing",
+                        )
+                        existing_gate_sha256 = gate_identities.get(
+                            job["gate_receipt"]
+                        )
+                        require(
+                            existing_gate_sha256 in {None, gate_sha256},
+                            "EVIDENCE_INCOMPLETE",
+                            "attempts sharing a gate path have conflicting identities",
+                        )
+                        gate_identities[job["gate_receipt"]] = gate_sha256
+                        required_attempt_paths.add(job["gate_receipt"])
                 if recovery_evidence is not None:
                     recovery_gate_path, recovery_gate_sha256 = recovery_evidence
                     recovery_paths = {
