@@ -884,11 +884,13 @@ class V2IntegrationTests(HardeningFixture):
                 plan["jobs"][0].update({"gpus": gpus, "gres": gres})
                 toolkit.plan(plan)
 
-    def test_multigpu_provider_accepts_two_and_four_and_rejects_five(self) -> None:
+    def test_multigpu_provider_requires_evidence_for_exceptional_counts(self) -> None:
         authority, state = self.authority()
         script = self.root / "assets/job.sh"
         script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
-        for count in (2, 4):
+        evidence = self.root / "assets/scaling.json"
+        evidence.write_text('{"measured_on":"one-l40"}\n', encoding="utf-8")
+        for count in (2, 3, 4):
             with self.subTest(count=count):
                 run_id = f"v2-run-{count}"
                 toolkit = Toolkit(state, authority, read_json(PROFILE_V2), run_id, FixtureAdapter(self.root / f"fixture-valid-{count}"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
@@ -897,6 +899,11 @@ class V2IntegrationTests(HardeningFixture):
                 plan.update({"remote_run_root": f"runs/{run_id}", "run_id": run_id})
                 plan["providers"][3] = MULTI_GPU_PROVIDER
                 plan["jobs"][0].update({"gpus": count, "gres": f"gpu:l40:{count}"})
+                if count > 2:
+                    with self.assertRaisesRegex(ToolkitError, "requires concurrency justification"):
+                        toolkit.plan(plan)
+                    plan["assets"].append({"bytes": evidence.stat().st_size, "license_provenance": "repository license", "local_path": str(evidence), "logical_name": "scaling.json", "sha256": sha256_bytes(evidence.read_bytes()), "source_class": "repository-owned", "target_platform": "linux-x86_64-glibc"})
+                    plan["jobs"][0]["concurrency_justification"] = {"schema_version": "lemhi-concurrency-justification-1", "baseline_gpus": 2, "measured_baseline_elapsed_seconds": 120, "projected_elapsed_seconds": 80, "evidence_asset": "scaling.json"}
                 toolkit.plan(plan)
 
         toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-run-5", FixtureAdapter(self.root / "fixture-invalid-5"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)

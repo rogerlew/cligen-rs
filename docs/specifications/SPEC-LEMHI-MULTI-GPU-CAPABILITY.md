@@ -1,20 +1,22 @@
 # Lemhi single-node multi-L40 capability
 
-Status: authoritative (revision 2; A10M5O1/A10M5O2/A10M5O2D1)
+Status: authoritative (revision 3; A10M5O1/A10M5O2/A10M5O2D1; ADR-0008)
 
 ## Surface
 
 This specification defines an optional single-node, homogeneous multi-L40
 capability for the Lemhi agent toolkit. It reuses the exact current canonical
-runtime and framework assets without replacing the single-L40 default. This
-additive capability does not change the default.
+runtime and framework assets. One and two L40s are the normal execution
+capacities; this capability does not imply that every workload should scale
+past one L40.
 
 ## Producers and consumers
 
 A10M5O1 produces fail-closed toolkit semantics for typed GRES and accounting.
 A10M5O2 produces the live capability attestation. Later explicitly authorized
 work packages may consume the attested counts. Ordinary canonical consumers
-continue to request one typed L40.
+request one typed L40, or two typed L40s when independent roles or a measured
+workload justify concurrent execution.
 
 ## Authority basis
 
@@ -27,10 +29,13 @@ scientific promotion.
 ## Semantics
 
 A multi-L40 job is one Slurm allocation on node03, requested through
-`gpu-icrews` with typed GRES `gpu:l40:N`, where `N` is two or four. The plan's
-positive integer `gpus` must equal the parsed GRES count. One is retained as
-the canonical baseline. Counts above four, generic GPU requests, other models,
-multiple nodes, node04, and mixed devices fail before remote mutation.
+`gpu-icrews` with typed GRES `gpu:l40:N`, where `N` is one through four. The
+plan's positive integer `gpus` must equal the parsed GRES count. One is the
+canonical baseline and two is the canonical concurrent capacity. Three- and
+four-L40 requests are exceptional: the frozen job record must name a one/two
+L40 baseline, a strictly lower projected elapsed time, and a distinct frozen
+measurement evidence asset. Counts above four, generic GPU requests, other
+models, multiple nodes, node04, and mixed devices fail before remote mutation.
 
 One PyTorch process binds to each Slurm-visible GPU. A passing capability
 requires exact canonical software identity, unique Slurm-visible L40 bindings,
@@ -59,10 +64,11 @@ explicit P2P-disabled control at 1.155 GB/s.
 Consequently, a hardware P2P matrix is necessary but insufficient evidence
 for a multi-rank performance claim. The consumer must verify NCCL's actual
 channel transport at the intended rank count. Two-GPU execution remains
-optional and workload-qualified. Four-GPU operational correctness remains
-attested, but four-GPU performance use is held until a later bounded package
-proves a supported direct-transport remedy. No undocumented NCCL override may
-become a provider or toolkit default on the strength of diagnostic evidence.
+workload-qualified. Four-GPU operational correctness remains attested, but
+four-GPU performance use is held until a later bounded package proves a
+supported direct-transport remedy and supplies the exceptional-use evidence.
+No undocumented NCCL override may become a provider or toolkit default on the
+strength of diagnostic evidence.
 
 Before a multi-GPU submission, the executor records `squeue -a` occupancy for
 node03 and stops unless enough requested L40 capacity is idle. A four-GPU role
@@ -82,5 +88,6 @@ cluster data are sanitized before publication.
 
 Passing does not establish multi-node communication, heterogeneous execution,
 universal speedup, the administrative cause of NCCL's four-rank P2P decision,
-scientific model validity, production durability, requeue, administrator
-support, or a new canonical default.
+scientific model validity, production durability, requeue, or administrator
+support. It does not justify a three- or four-L40 request without the frozen
+prospective evidence required above.

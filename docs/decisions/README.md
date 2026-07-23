@@ -11,3 +11,4 @@ Numbered, immutable once accepted; supersede rather than edit.
 | [0005](0005-a10-refinement-before-spatial-promotion.md) | Refine A10 before spatial expansion and promotion | Accepted |
 | [0006](0006-a10-runtime-boundary-expansion.md) | Expand the A10 warm-generation runtime failure boundary to 30× | Accepted |
 | [0007](0007-a10-external-normal-conditioning.md) | Admit external measured climate normals as transferable site conditioning | Accepted |
+| [0008](0008-lemhi-gpu-capacity-policy.md) | Prefer one- and two-L40 Lemhi execution topologies | Accepted |

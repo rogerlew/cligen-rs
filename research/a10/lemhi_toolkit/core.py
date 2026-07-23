@@ -1005,7 +1005,9 @@ class Toolkit:
         return projected
 
     @staticmethod
-    def _accelerator_contract(providers: list[dict[str, Any]]) -> tuple[str, int]:
+    def _accelerator_contract(
+        providers: list[dict[str, Any]],
+    ) -> tuple[str, int, set[int], set[int]]:
         accelerator = next(
             (provider for provider in providers if provider.get("provider_class") == "accelerator"),
             None,
@@ -1018,7 +1020,36 @@ class Toolkit:
         resource, model = request.split(":", 1) if request.count(":") == 1 else ("", "")
         require(resource == "gpu" and bool(model), "PROVIDER_UNAVAILABLE", "typed accelerator request")
         require(isinstance(maximum, int) and maximum > 0, "PROVIDER_UNAVAILABLE", "accelerator maximum")
-        return request, maximum
+        contract = accelerator.get("capability_contract", {})
+        require(isinstance(contract, dict), "PROVIDER_UNAVAILABLE", "accelerator capability contract")
+        allowed = contract.get("allowed_counts", list(range(1, maximum + 1)))
+        canonical = contract.get("canonical_counts", [1])
+        exceptional = contract.get("exceptional_counts", [])
+        require(
+            isinstance(allowed, list)
+            and allowed
+            and all(isinstance(count, int) and 0 < count <= maximum for count in allowed),
+            "PROVIDER_UNAVAILABLE",
+            "accelerator allowed counts",
+        )
+        require(len(set(allowed)) == len(allowed), "PROVIDER_UNAVAILABLE", "duplicate accelerator allowed count")
+        require(
+            isinstance(canonical, list)
+            and canonical
+            and set(canonical) <= set(allowed)
+            and all(isinstance(count, int) for count in canonical),
+            "PROVIDER_UNAVAILABLE",
+            "accelerator canonical counts",
+        )
+        require(
+            isinstance(exceptional, list)
+            and set(exceptional) <= set(allowed)
+            and set(exceptional).isdisjoint(canonical)
+            and all(isinstance(count, int) for count in exceptional),
+            "PROVIDER_UNAVAILABLE",
+            "accelerator exceptional counts",
+        )
+        return request, maximum, set(allowed), set(exceptional)
 
     @staticmethod
     def _validate_jobs(
@@ -1027,6 +1058,8 @@ class Toolkit:
         evidence_allowlist: set[str],
         accelerator_request: str,
         maximum_gpus: int,
+        allowed_gpus: set[int],
+        exceptional_gpus: set[int],
         additional_slurm_streams: tuple[str, ...] = (),
         additional_gate_receipts: set[str] | None = None,
     ) -> set[str]:
@@ -1048,6 +1081,25 @@ class Toolkit:
             require(f"{resource}:{model}" == accelerator_request, "PLAN_DRIFT", "job gres provider mismatch")
             require(count == job["gpus"], "PLAN_DRIFT", "job gpus and gres count mismatch")
             require(count <= maximum_gpus, "PLAN_DRIFT", "job gpu count exceeds provider maximum")
+            require(count in allowed_gpus, "PLAN_DRIFT", "job gpu count is not provider-allowed")
+            justification = job.get("concurrency_justification")
+            if count in exceptional_gpus:
+                require(isinstance(justification, dict), "PLAN_DRIFT", "exceptional gpu count requires concurrency justification")
+                require(
+                    justification.get("schema_version") == "lemhi-concurrency-justification-1",
+                    "PLAN_DRIFT",
+                    "concurrency justification schema",
+                )
+                baseline = justification.get("baseline_gpus")
+                measured = justification.get("measured_baseline_elapsed_seconds")
+                projected = justification.get("projected_elapsed_seconds")
+                require(isinstance(baseline, int) and baseline in allowed_gpus and baseline < count, "PLAN_DRIFT", "concurrency justification baseline")
+                require(isinstance(measured, int) and measured > 0, "PLAN_DRIFT", "concurrency justification measurement")
+                require(isinstance(projected, int) and 0 < projected < measured, "PLAN_DRIFT", "concurrency justification benefit")
+                evidence_asset = validate_relative_path(justification.get("evidence_asset"), "concurrency justification evidence")
+                require(evidence_asset in logical_assets and evidence_asset != job["script"], "PLAN_DRIFT", "concurrency justification evidence asset")
+            else:
+                require(justification is None, "PLAN_DRIFT", "canonical gpu count must not carry exceptional justification")
             require(isinstance(job.get("max_attempts"), int) and job["max_attempts"] > 0, "PLAN_DRIFT", "job max_attempts")
             require(isinstance(job.get("expected_exit_code", 0), int) and 0 <= job.get("expected_exit_code", 0) <= 255, "PLAN_DRIFT", "expected exit code")
             retry_on = job.get("retry_on", [])
@@ -1103,7 +1155,7 @@ class Toolkit:
             validate_relative_path(plan_input.get("remote_run_root"), "remote_run_root")
             require(plan_input["remote_run_root"] == f"runs/{self.run_id}", "CLEANUP_TARGET_INVALID", "run root must be runs/<run_id>")
             providers = self._load_providers(plan_input)
-            accelerator_request, maximum_gpus = self._accelerator_contract(providers)
+            accelerator_request, maximum_gpus, allowed_gpus, exceptional_gpus = self._accelerator_contract(providers)
             additional_slurm_streams: list[str] = []
             additional_gate_receipts: set[str] = set()
             if self.provider_api_version == 2:
@@ -1131,6 +1183,7 @@ class Toolkit:
                 require(f"{resource}:{model}" == accelerator_request, "PLAN_DRIFT", "recovery gres provider mismatch")
                 require(count == recovery["gpus"], "PLAN_DRIFT", "recovery gpus and gres count mismatch")
                 require(count <= maximum_gpus, "PLAN_DRIFT", "recovery gpu count exceeds provider maximum")
+                require(count in allowed_gpus and count not in exceptional_gpus, "PLAN_DRIFT", "recovery gpu count must be canonical")
                 recovery_script = validate_relative_path(recovery.get("script"), "recovery script")
                 require(recovery_script in {asset["logical_name"] for asset in plan_input.get("assets", []) if isinstance(asset, dict) and asset.get("executable") is True}, "PLAN_DRIFT", "recovery script must be an executable frozen asset")
                 recovery_gate = validate_relative_path(recovery.get("gate_receipt"), "recovery gate receipt")
@@ -1185,6 +1238,8 @@ class Toolkit:
                 set(validated_evidence),
                 accelerator_request,
                 maximum_gpus,
+                allowed_gpus,
+                exceptional_gpus,
                 tuple(additional_slurm_streams),
                 additional_gate_receipts,
             )
@@ -1255,7 +1310,7 @@ class Toolkit:
             ):
                 require(replacement.get(field) == prior.get(field), "PLAN_DRIFT", f"immutable field changed: {field}")
             providers = self._load_providers(replacement)
-            accelerator_request, maximum_gpus = self._accelerator_contract(providers)
+            accelerator_request, maximum_gpus, allowed_gpus, exceptional_gpus = self._accelerator_contract(providers)
             additional_slurm_streams: tuple[str, ...] = ()
             additional_gate_receipts: set[str] = set()
             if self.provider_api_version == 2:
@@ -1276,6 +1331,8 @@ class Toolkit:
                 set(prior["evidence_allowlist"]),
                 accelerator_request,
                 maximum_gpus,
+                allowed_gpus,
+                exceptional_gpus,
                 additional_slurm_streams,
                 additional_gate_receipts,
             )

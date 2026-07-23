@@ -1,7 +1,9 @@
 {
   "assets": [],
   "capability_contract": {
-    "allowed_counts": [1, 2, 4],
+    "allowed_counts": [1, 2, 3, 4],
+    "canonical_counts": [1, 2],
+    "exceptional_counts": [3, 4],
     "maximum_devices": 4,
     "node": "node03",
     "scope": "single-node-homogeneous"
@@ -11,7 +13,7 @@
   "emits_probe_fields": [],
   "executes_provider_code": false,
   "failure_codes": ["PLATFORM_MISMATCH", "GATE_FAILED", "PLAN_DRIFT"],
-  "implementation_version": "1.0.0",
+  "implementation_version": "1.1.0",
   "name": "accelerator-l40-multigpu-v1",
   "network_phase": "compute-offline",
   "operations": {

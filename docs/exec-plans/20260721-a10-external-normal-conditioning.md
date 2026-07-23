@@ -99,6 +99,10 @@ production change.
   existing absolute temporal gates. Date/Author: 2026-07-21, Codex.
 - Decision: reuse the proven two-L40/two-wave topology at a 515
   L40-minute-equivalent ceiling. Date/Author: 2026-07-21, Codex.
+- Decision: retain R2R4's frozen two-L40 topology. ADR-0008 makes one/two L40s
+  the canonical Lemhi capacities; three/four-L40 work requires a frozen,
+  measured concurrency justification. R2R4 still requires two fresh idle L40s
+  for admission. Date/Author: 2026-07-22, operator/Codex.
 - Decision: apply runtime safeguards per arm and matched pair while reserving
   global engineering-incomplete disposition for faithful-comparator or
   measurement-method failures. Date/Author: 2026-07-21, Codex/independent

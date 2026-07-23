@@ -241,8 +241,9 @@ evidence.
 reached `A10M5O2-MULTI-L40-OPS-READY` with jobs `1014018`–`1014021`.
 Canonical one-, two-, and four-L40 NCCL/DDP/checkpoint operation, controlled
 rank failure, accounting, evidence, and cleanup passed on node03. The separate
-performance result is `SINGLE-GPU-PREFERRED`; the additive capability is
-available for workload-specific use and does not replace the one-L40 default.
+performance result is `SINGLE-GPU-PREFERRED`. Under ADR-0008, one and two L40s
+are the normal Lemhi capacities; three/four-L40 work requires a frozen,
+measured concurrency justification before authority or reservation.
 
 **Completed diagnostic successor (2026-07-19):**
 [A10M5O2D1 L40 interconnect diagnostic](work-packages/20260719-a10m5o2d1-l40-interconnect-diagnostic/package.md)
