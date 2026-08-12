@@ -124,7 +124,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260722-a10m5r15r2r1-successor-control-identity-calibration](20260722-a10m5r15r2r1-successor-control-identity-calibration/package.md) | A10M5R15R2R1-SUCCESSOR-CONTROL-IDENTITY-READY |
 | [20260722-a10m5r15r2r2-successor-control-execution](20260722-a10m5r15r2r2-successor-control-execution/package.md) | EXECUTED-HOLD-PORTFOLIO-LAUNCHER-FAILURE |
 | [20260722-a10m5r15r2r3-portfolio-evidence-remedy](20260722-a10m5r15r2r3-portfolio-evidence-remedy/package.md) | EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION |
-| [20260722-a10m5r15r2r4-e2-initialization-remedy](20260722-a10m5r15r2r4-e2-initialization-remedy/package.md) | EXECUTION-READY |
+| [20260722-a10m5r15r2r4-e2-initialization-remedy](20260722-a10m5r15r2r4-e2-initialization-remedy/package.md) | EXECUTED-HOLD-OCCUPANCY-PARSER |
 | [20260812-a10m5r15r2r5-pending-admission-remedy](20260812-a10m5r15r2r5-pending-admission-remedy/package.md) | SCAFFOLDED |
 | [20260722-lemhi-gpu-capacity-policy](20260722-lemhi-gpu-capacity-policy/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |

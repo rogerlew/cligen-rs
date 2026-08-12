@@ -72,9 +72,10 @@ E2C/E2 descriptor equality and zero normals-only columns. All other model,
 checkpoint, cursor, validation, temporal, attribution, evidence, resource, and
 selection contracts remain unchanged.
 
-The operator authorized the 515-minute study within a 597-minute outer
-campaign ceiling. Prior realized use is 82 L40-minutes, so the bounded maximum
-after this study is exactly 597. Authority, assets, admission, run root, and recovery
+The operator originally authorized the 515-minute study within a 597-minute outer
+campaign ceiling. The completed 19-minute control is now reconciled in the
+fresh R2R5 ledger, where the operator granted a 19-minute extension to 616.
+Authority, assets, admission, run root, and recovery
 reserve are fresh; no failed-run execution identity is reused.
 
 ## Execution state

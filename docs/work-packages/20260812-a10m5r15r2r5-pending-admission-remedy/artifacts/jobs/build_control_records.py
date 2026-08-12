@@ -205,9 +205,9 @@ def campaign_accounting_bundle(record_commit: str | None = None) -> dict:
     campaign.validate(record_commit)
     return {
         "artifact_sha256": digest(CAMPAIGN_ACCOUNTING),
-        "authorized_outer_ceiling_l40_minutes": 597,
-        "bounded_maximum_l40_minutes": 597,
-        "realized_l40_minutes": 82,
+        "authorized_outer_ceiling_l40_minutes": 616,
+        "bounded_maximum_l40_minutes": 616,
+        "realized_l40_minutes": 101,
         "valid": True,
     }
 

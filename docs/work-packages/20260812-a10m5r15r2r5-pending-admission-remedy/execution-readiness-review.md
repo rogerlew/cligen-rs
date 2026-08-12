@@ -21,8 +21,9 @@ No unresolved P0, P1, or P2 findings remain.
   counts, and conditioning invariants.
 - The complete 64-path evidence-role behavioral fixture remains intact.
 - Campaign accounting authenticates R2R3 jobs 1060872 and 1060874 and the
-  fourth recovery release. Realized 82 plus 515 equals the authorized ceiling
-  of 597 exactly.
+  fourth recovery release. The later R2R4 control receipt adds 19 realized
+  L40-minutes; the operator's 19-minute extension yields 101 plus 515 equals
+  the authorized ceiling of 616 exactly.
 - Fresh package, run, authority, plan, admission, corpus-pin, and protected-role
   identities are coherent; confirmation remains sealed.
 - Scaffold verification, campaign validation, Python compilation, toolkit

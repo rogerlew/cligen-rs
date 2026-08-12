@@ -13,12 +13,12 @@ production change.
 
 ## Progress
 
-- [x] Campaign execution ceiling is 597 L40-minutes, an outer cap rather than
+- [x] Campaign execution ceiling is 616 L40-minutes, an outer cap rather than
       an unnamed reserve. Realized use through R2R2 is 60 = 8 prior R2 + 9
       canceled calibration + 1 out-of-band cleanup + 20 fresh calibration +
       19 R2R2 control + 3 failed R2R2 portfolio. All three recovery reserves
       were released after authenticated cleanup. Adding the outstanding
-      515-minute study yields a bounded campaign maximum of 575.
+      515-minute study yields a bounded campaign maximum of 616.
 
 - [x] 2026-07-21: accepted ADR-0006/0007 and drafted the successor contract.
 - [x] 2026-07-21: corrected the runtime boundary, control labeling, capacity
@@ -63,7 +63,7 @@ production change.
 - [x] Scaffolded A10M5R15R2R3 with an unchanged science contract and a
       deterministic rewrite of every inherited role-scoped evidence path.
 - [ ] Correct the PyTorch advanced-index assignment under a fresh R2R4
-      identity; realized 82 + successor ceiling 515 = authorized maximum 597.
+      identity; realized 101 + successor ceiling 515 = authorized maximum 616.
 - [x] Scaffolded R2R4 with exactly one scientific-code delta: effective
       indexed assignment for the already-ratified matched E2 initialization.
 - [x] R2R4 control job `1060885` reconstructed all required rows in 19

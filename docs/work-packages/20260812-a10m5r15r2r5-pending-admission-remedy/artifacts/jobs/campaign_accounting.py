@@ -50,20 +50,21 @@ def validate(source_commit: str | None = None) -> dict:
         "failed-r2r2-portfolio-launcher",
         "successful-r2r3-control",
         "failed-r2r3-e2-initialization",
+        "successful-r2r4-control",
     ]
     if not (
         value.get("valid") is True
         and value.get("package_id") == PACKAGE.name
-        and actual == value.get("realized_l40_minutes") == 82
+        and actual == value.get("realized_l40_minutes") == 101
         and value.get("outstanding_study_ceiling_l40_minutes") == 515
-        and value.get("bounded_maximum_l40_minutes") == actual + 515 == 597
-        and value.get("authorized_outer_ceiling_l40_minutes") == 597
+        and value.get("bounded_maximum_l40_minutes") == actual + 515 == 616
+        and value.get("authorized_outer_ceiling_l40_minutes") == 616
         and value["bounded_maximum_l40_minutes"]
         <= value["authorized_outer_ceiling_l40_minutes"]
         and len(value.get("released_recovery_reserves", [])) == 4
         and [row.get("kind") for row in components] == expected_kinds
-        and len({row.get("evidence_path") for row in components}) == 8
-        and len({row.get("record_sha256") for row in components}) == 8
+        and len({row.get("evidence_path") for row in components}) == 9
+        and len({row.get("record_sha256") for row in components}) == 9
     ):
         raise RuntimeError("campaign accounting identity or arithmetic drift")
     for row in components:
@@ -163,6 +164,18 @@ def validate(source_commit: str | None = None) -> dict:
                 and evidence.get("result", {}).get("actual_gpu_minutes")
                 == row["actual_l40_minutes"]
                 == 3
+            )
+        elif kind == "successful-r2r4-control":
+            valid = (
+                authenticated(evidence)
+                and evidence.get("record_sha256") == row["record_sha256"]
+                and evidence.get("job_id") == "1060885"
+                and evidence.get("run_id")
+                == "a10m5r15r2r4-e2-initialization-remedy-r0"
+                and evidence.get("result", {}).get("state") == "COMPLETED"
+                and evidence.get("result", {}).get("actual_gpu_minutes")
+                == row["actual_l40_minutes"]
+                == 19
             )
         else:
             valid = False

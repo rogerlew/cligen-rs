@@ -56,10 +56,10 @@ def verify_published_source(source_commit: str) -> None:
         source_commit == head == upstream
         and branch == "main"
         and Path(__file__).read_bytes() == git_bytes(source_commit, Path(__file__).resolve())
-        and actual == accounting.get("realized_l40_minutes") == 82
+        and actual == accounting.get("realized_l40_minutes") == 101
         and accounting.get("outstanding_study_ceiling_l40_minutes") == 515
-        and accounting.get("bounded_maximum_l40_minutes") == actual + 515 == 597
-        and accounting.get("authorized_outer_ceiling_l40_minutes") == 597
+        and accounting.get("bounded_maximum_l40_minutes") == actual + 515 == 616
+        and accounting.get("authorized_outer_ceiling_l40_minutes") == 616
     ):
         raise RuntimeError("A10M5R15R2 materializer is not exact published main")
 

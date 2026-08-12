@@ -735,8 +735,11 @@ R2R3 subsequently passed the six-row control, then collected identical wave-0
 startup exceptions proving E2's descriptor initialization wrote through an
 advanced-indexing temporary rather than the module weight. It closed at
 `EXECUTED-HOLD-E2-INITIALIZATION-IMPLEMENTATION` after 22 billed L40-minutes
-with cleanup and reserve release authenticated. Realized use is 82; one exact
-515-minute R2R4 implementation remedy remains bounded at the authorized 597.
+with cleanup and reserve release authenticated. R2R4 then completed its
+control in 19 L40-minutes but held before portfolio admission on a valid
+`%b=N/A` occupancy sentinel. Realized use is 101; the fresh R2R5 queued
+admission successor retains the exact 515-minute study under the operator's
+new 616-minute outer ceiling.
 R2R4 is scaffolded with exactly one scientific-code delta: an indexed
 assignment that makes the already-ratified E2 descriptor initialization write
 effective while preserving the startup equality and zero-normal-column gates.

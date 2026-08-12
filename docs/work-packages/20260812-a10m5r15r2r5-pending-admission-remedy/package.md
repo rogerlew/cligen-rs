@@ -74,13 +74,12 @@ E2C/E2 descriptor equality and zero normals-only columns. All other model,
 checkpoint, cursor, validation, temporal, attribution, evidence, resource, and
 selection contracts remain unchanged.
 
-The operator authorized a 597-minute outer campaign ceiling. Published prior
-use was 82 L40-minutes; the successful R2R4 control adds 19, leaving 496.
-Repeating a 30-minute control plus a 485-minute portfolio/recovery reserve
-would require a 19-minute ceiling increase. R2R5 remains scaffolded until it
-either binds R2R4's authenticated control under a fresh reuse contract or
-receives that additional authorization. Authority, assets, admission, run root,
-and recovery reserve are fresh; no failed-run execution identity is reused.
+The operator authorized a 597-minute outer campaign ceiling, then granted a
+19 L40-minute increase after the successful R2R4 control. Published use is
+therefore 101 L40-minutes and the authorized outer ceiling is 616, preserving
+the frozen 515-minute R2R5 study ceiling. Authority, assets, admission, run
+root, and recovery reserve are fresh; no failed-run execution identity is
+reused.
 
 ## Execution state
 
