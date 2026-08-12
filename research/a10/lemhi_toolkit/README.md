@@ -145,6 +145,13 @@ running job; an early call returns `JOB_TERMINAL_MISMATCH` without changing the
 registered attempt. Use `squeue` as the live monitor, wait for terminal `sacct`
 accounting, and then call `observe` once.
 
+For a multi-GPU plan that may wait in Slurm, set the job's
+`scheduler_pending_start_recheck` to `true`. The toolkit submits the typed
+GRES request normally; immediately after allocation, before the job script,
+the remote wrapper verifies that `CUDA_VISIBLE_DEVICES` contains exactly the
+requested count. This replaces polling for an instantaneous idle snapshot, not
+the package's authority or admission evidence.
+
 ## Authoring traps from live acceptance
 
 - Asset staging preserves each declared relative path; it does not synthesize

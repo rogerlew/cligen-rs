@@ -1082,6 +1082,11 @@ class Toolkit:
             require(count == job["gpus"], "PLAN_DRIFT", "job gpus and gres count mismatch")
             require(count <= maximum_gpus, "PLAN_DRIFT", "job gpu count exceeds provider maximum")
             require(count in allowed_gpus, "PLAN_DRIFT", "job gpu count is not provider-allowed")
+            require(
+                isinstance(job.get("scheduler_pending_start_recheck", False), bool),
+                "PLAN_DRIFT",
+                "scheduler-pending start recheck",
+            )
             justification = job.get("concurrency_justification")
             if count in exceptional_gpus:
                 require(isinstance(justification, dict), "PLAN_DRIFT", "exceptional gpu count requires concurrency justification")

@@ -75,6 +75,19 @@ node03 and stops unless enough requested L40 capacity is idle. A four-GPU role
 requires no existing node03 allocation. This is a best-effort non-preemption
 admission snapshot, not an atomic scheduler reservation.
 
+### Scheduler-pending admission
+
+A revision-2 job MAY declare `scheduler_pending_start_recheck: true`. The
+toolkit submits its typed-GRES request to Slurm even when the allocation is not
+immediately available. Before the scientific job script starts, the submitted
+wrapper counts `CUDA_VISIBLE_DEVICES` and exits before science unless its count
+exactly matches the typed L40 request. This makes Slurm's allocation the
+capacity authority at start time; a pre-submit occupancy receipt remains
+evidence only and is not treated as a reservation.
+
+The job-start recheck is required for scheduler-pending multi-GPU work. It
+does not weaken identity, authority, evidence, walltime, or cleanup gates.
+
 ## Provenance obligations
 
 The attestation binds source commit, package and run IDs, canonical

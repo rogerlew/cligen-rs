@@ -37,6 +37,9 @@ in elapsed time.
 - The multi-L40 provider declares one/two as canonical and three/four as
   exceptional, and the toolkit validates that distinction before remote
   mutation.
+- Canonical multi-GPU work may use Slurm pending admission with an
+  allocation-start visible-device recheck; it does not busy-wait for an
+  instantaneous idle-capacity snapshot.
 - A fresh occupancy snapshot remains necessary for every multi-GPU admission.
 - Existing two-L40 R2R4 admission still needs two fresh idle L40s; it cannot be
   silently converted to one GPU.

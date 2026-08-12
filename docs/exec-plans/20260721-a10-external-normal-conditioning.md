@@ -66,6 +66,12 @@ production change.
       identity; realized 82 + successor ceiling 515 = authorized maximum 597.
 - [x] Scaffolded R2R4 with exactly one scientific-code delta: effective
       indexed assignment for the already-ratified matched E2 initialization.
+- [x] R2R4 control job `1060885` reconstructed all required rows in 19
+      L40-minutes; its portfolio remained unsubmitted after the frozen
+      occupancy parser rejected Slurm's valid `%b=N/A` CPU-only sentinel.
+- [x] Scaffolded R2R5 as the fresh parser/admission successor: it records
+      occupancy without treating it as a reservation and rechecks exactly two
+      visible devices at Slurm allocation start.
 
 ## Surprises & Discoveries
 

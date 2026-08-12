@@ -1,0 +1,32 @@
+{
+  "asset_manifest_sha256": "7988efbb342045f0df5ce05ddb810cc36c8be46f145f4c0bc531d02c56291c05",
+  "calibration_configuration": "centered_location_ou_smooth_climatology-k2",
+  "calibration_source_commit": "719d83451ddff698b280219708f7648ff73c8f9d",
+  "calibration_stream_sha256": "2bb8379f639712dc864308510bd2a8c10ac9c39ea3cae609abdc2a2bf51384ff",
+  "candidate_output_accessed": false,
+  "difference_sequence_sha256": "aaf050e9f7531a845d71c7ad4661f22f3b6919f47dd8aa724c20187c7bb0bbda",
+  "gates": {
+    "candidate_blind": true,
+    "replicate_count": true,
+    "sequence_seeds_exact": true,
+    "strictly_positive_margin": true
+  },
+  "margin": 0.0840852782152761,
+  "nearest_rank_q90": 0.0840852782152761,
+  "nearest_rank_zero_based_index": 899,
+  "package_id": "20260721-a10m5r15r2-external-normal-conditioning-execution",
+  "protected_roles_opened": [],
+  "record_sha256": "244da34e52f6abcd6f48a51eb1c53c76df7999e0a46dac11a1f01bf8e357e998",
+  "replicates": 1000,
+  "schema_version": 1,
+  "sequence_seeds": [
+    410542,
+    410543
+  ],
+  "sequence_sha256": [
+    "bf93b25211307ac025cf7d119d3cddcc0e1e93a3602429ea6de315ecf67b1c4b",
+    "a4812e8f017bd5ecce7698d29ace47c3e3669f0b011f031473533faba13311f6"
+  ],
+  "source_commit": "a54fbf662285e0d21a806f2f602714de7dedf526",
+  "valid": true
+}

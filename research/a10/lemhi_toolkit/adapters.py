@@ -478,7 +478,13 @@ class OpenSSHSlurmAdapter:
         arguments = [profile["remote_base"], plan["remote_run_root"], job["script"], job["partition"], job["gres"], str(job["cpus"]), str(job["memory_mb"]), str(job["time_limit_minutes"]), token]
         if profile.get("provider_api_version") == 2:
             arguments.append(plan["scheduler_authority_token"])
-        arguments.extend([stdout, stderr])
+        arguments.extend([
+            stdout,
+            stderr,
+            "scheduler-pending-start-recheck-v1"
+            if job.get("scheduler_pending_start_recheck") is True
+            else "none",
+        ])
         submit_script = "submit_v2.sh" if profile.get("provider_api_version") == 2 else "submit.sh"
         output = self._remote_script(profile, submit_script, arguments).decode("utf-8").strip()
         if not output.isdigit():

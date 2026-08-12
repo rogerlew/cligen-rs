@@ -915,6 +915,18 @@ class V2IntegrationTests(HardeningFixture):
         with self.assertRaisesRegex(ToolkitError, "provider maximum"):
             toolkit.plan(plan)
 
+    def test_scheduler_pending_start_recheck_requires_boolean(self) -> None:
+        authority, state = self.authority()
+        script = self.root / "assets/job.sh"
+        script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+        toolkit = Toolkit(state, authority, read_json(PROFILE_V2), "v2-pending", FixtureAdapter(self.root / "fixture-pending"), clock=lambda: "2026-07-17T20:00:00Z", provider_root=REPOSITORY_ROOT)
+        toolkit.doctor(); toolkit.probe()
+        plan = self.plan(authority, script)
+        plan.update({"remote_run_root": "runs/v2-pending", "run_id": "v2-pending"})
+        plan["jobs"][0]["scheduler_pending_start_recheck"] = "yes"
+        with self.assertRaisesRegex(ToolkitError, "scheduler-pending start recheck"):
+            toolkit.plan(plan)
+
     def test_recovery_gres_count_must_match_ledger_multiplier(self) -> None:
         authority, state = self.authority()
         script = self.root / "assets/job.sh"

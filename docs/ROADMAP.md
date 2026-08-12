@@ -740,6 +740,11 @@ with cleanup and reserve release authenticated. Realized use is 82; one exact
 R2R4 is scaffolded with exactly one scientific-code delta: an indexed
 assignment that makes the already-ratified E2 descriptor initialization write
 effective while preserving the startup equality and zero-normal-column gates.
+R2R4's control job `1060885` subsequently passed, but its portfolio receipt
+failed closed when Slurm emitted `%b=N/A` for an active CPU-only row. The fresh
+R2R5 successor corrects that sentinel handling and introduces scheduler-pending
+two-L40 submission with allocation-start GPU revalidation. Its resource ledger
+must reconcile the 19-minute R2R4 control before a new reservation.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
