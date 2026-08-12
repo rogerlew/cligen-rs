@@ -24,5 +24,5 @@
   "remote_base": "/ceph/home/rogerlew.ui/.cligen-rs-a10",
   "target": "lemhi",
   "transfer_timeout_fixed_handshake_seconds": 60,
-  "transfer_timeout_minimum_bytes_per_second": 1048576
+  "transfer_timeout_minimum_bytes_per_second": 131072
 }

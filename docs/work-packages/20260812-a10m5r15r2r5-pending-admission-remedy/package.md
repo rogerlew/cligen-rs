@@ -13,7 +13,7 @@ with an allocation-start visible-device recheck.
 
 ## Frozen execution
 
-- run id: `a10m5r15r2r5-pending-admission-remedy-r1`;
+- run id: `a10m5r15r2r5-pending-admission-remedy-r2`;
 - one 30-minute control followed by one two-L40, two-wave portfolio;
 - wave 0: E0/E1; wave 1: E2C/E2;
 - three seeds per arm: 147031, 271828, 314159;
@@ -89,3 +89,10 @@ Torch 2.7.1 and authenticated R2R3 dependencies; exact matched E2C/E2
 initialization, zero normals-only columns, parameter counts, and conditioning
 invariants all passed. Publication and execution remain pending. Candidate
 output and protected confirmation roles remain unopened.
+
+R2R5-r0 used the standard evidence profile instead of the frozen xlarge
+profile; R2R5-r1 then reached a legacy fixed transfer deadline while staging
+the 3.6-GB wheelhouse. Neither run submitted a Slurm job or reserved GPU
+minutes. R2R5-r2 is a fresh authority, ledger, run root, asset set, plan, and
+admission lineage using the xlarge profile and its declared throughput-derived
+transfer deadline.

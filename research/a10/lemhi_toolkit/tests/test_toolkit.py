@@ -535,6 +535,18 @@ class RecordingRunner:
 
 
 class LiveAdapterCommandPaths(ToolkitFixture):
+    def test_v2_transfer_timeout_scales_with_declared_throughput(self) -> None:
+        profile = {
+            "transfer_timeout_fixed_handshake_seconds": 60,
+            "transfer_timeout_minimum_bytes_per_second": 128,
+        }
+        self.assertEqual(OpenSSHSlurmAdapter._transfer_timeout(profile, 0), 60)
+        self.assertEqual(OpenSSHSlurmAdapter._transfer_timeout(profile, 129), 62)
+        self.assertEqual(
+            OpenSSHSlurmAdapter._transfer_timeout({"transfer_timeout_seconds": 600}, 10**12),
+            600,
+        )
+
     def test_all_live_operations_use_fixed_batch_commands(self) -> None:
         runner = RecordingRunner(self.root)
         adapter = OpenSSHSlurmAdapter(REPOSITORY_ROOT / "research/a10/lemhi_toolkit/remote", runner)

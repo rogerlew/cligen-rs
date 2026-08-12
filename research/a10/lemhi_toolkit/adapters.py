@@ -417,6 +417,21 @@ class OpenSSHSlurmAdapter:
         command = ["ssh", *self._ssh_options(profile), target, "sh", "-s", "--", *arguments]
         return self._run(command, stdin=script, timeout=timeout or profile.get("operation_timeout_seconds", 120))
 
+    @staticmethod
+    def _transfer_timeout(profile: dict[str, Any], byte_count: int) -> int:
+        """Derive a v2 transfer deadline from its declared throughput floor."""
+
+        legacy_timeout = profile.get("transfer_timeout_seconds")
+        if legacy_timeout is not None:
+            require(isinstance(legacy_timeout, int) and legacy_timeout > 0, "PLAN_DRIFT", "transfer timeout")
+            return legacy_timeout
+        fixed = profile.get("transfer_timeout_fixed_handshake_seconds")
+        rate = profile.get("transfer_timeout_minimum_bytes_per_second")
+        require(isinstance(fixed, int) and fixed >= 0, "PLAN_DRIFT", "transfer handshake timeout")
+        require(isinstance(rate, int) and rate > 0, "PLAN_DRIFT", "transfer throughput floor")
+        require(isinstance(byte_count, int) and byte_count >= 0, "PLAN_DRIFT", "transfer byte count")
+        return fixed + (byte_count + rate - 1) // rate
+
     def check_masters(self, profile: dict[str, Any]) -> None:
         for endpoint in (profile["gateway"], profile["target"]):
             endpoint = validate_shell_scalar(endpoint, "endpoint")
@@ -448,7 +463,7 @@ class OpenSSHSlurmAdapter:
             started_ns = time.monotonic_ns()
             logical = validate_relative_path(asset["logical_name"], "logical_name")
             remote_part = f"{remote_base}/{run_root}/{logical}.part"
-            self._run(["scp", *self._ssh_options(profile), "--", asset["local_path"], f"{target}:{remote_part}"], timeout=profile.get("transfer_timeout_seconds", 600), code="TRANSFER_INCOMPLETE")
+            self._run(["scp", *self._ssh_options(profile), "--", asset["local_path"], f"{target}:{remote_part}"], timeout=self._transfer_timeout(profile, asset["bytes"]), code="TRANSFER_INCOMPLETE")
             self._remote_script(profile, "promote.sh", [remote_base, run_root, logical, str(asset["bytes"]), asset["sha256"]])
             receipt = {"logical_name": logical, "bytes": asset["bytes"], "sha256": asset["sha256"], "method": "scp", "partial_name": logical + ".part", "promoted": True}
             if profile.get("provider_api_version") == 2:
