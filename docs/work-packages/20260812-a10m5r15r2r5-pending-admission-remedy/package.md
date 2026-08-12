@@ -13,7 +13,7 @@ with an allocation-start visible-device recheck.
 
 ## Frozen execution
 
-- run id: `a10m5r15r2r5-pending-admission-remedy-r0`;
+- run id: `a10m5r15r2r5-pending-admission-remedy-r1`;
 - one 30-minute control followed by one two-L40, two-wave portfolio;
 - wave 0: E0/E1; wave 1: E2C/E2;
 - three seeds per arm: 147031, 271828, 314159;
