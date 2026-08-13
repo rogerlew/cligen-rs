@@ -13,7 +13,7 @@ with an allocation-start visible-device recheck.
 
 ## Frozen execution
 
-- run id: `a10m5r15r2r5-pending-admission-remedy-r2`;
+- run id: `a10m5r15r2r5-pending-admission-remedy-r3`;
 - one 30-minute control followed by one two-L40, two-wave portfolio;
 - wave 0: E0/E1; wave 1: E2C/E2;
 - three seeds per arm: 147031, 271828, 314159;
@@ -96,3 +96,9 @@ the 3.6-GB wheelhouse. Neither run submitted a Slurm job or reserved GPU
 minutes. R2R5-r2 is a fresh authority, ledger, run root, asset set, plan, and
 admission lineage using the xlarge profile and its declared throughput-derived
 transfer deadline.
+
+R2R5-r2 completed authenticated staging and verification but failed closed
+before Slurm submission because the generated checker retained R2R4's
+submission-admission record type. R2R5-r3 corrects that successor binding
+under another fresh authority and execution identity. R2R5-r2 consumed no GPU
+minutes and opened no candidate or confirmation evidence.
