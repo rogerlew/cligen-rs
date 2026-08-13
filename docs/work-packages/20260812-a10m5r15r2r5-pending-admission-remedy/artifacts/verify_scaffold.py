@@ -54,9 +54,9 @@ actual = sum(row.get("actual_l40_minutes", -1) for row in accounting.get("compon
 if not (
     accounting.get("valid") is True
     and accounting.get("package_id") == PACKAGE.name
-    and actual == accounting.get("realized_l40_minutes") == 101
-    and accounting.get("outstanding_study_ceiling_l40_minutes") == 515
-    and accounting.get("bounded_maximum_l40_minutes") == actual + 515 == 616
+    and actual == accounting.get("realized_l40_minutes") == 321
+    and accounting.get("outstanding_study_ceiling_l40_minutes") == 295
+    and accounting.get("bounded_maximum_l40_minutes") == actual + 295 == 616
     and accounting.get("authorized_outer_ceiling_l40_minutes") == 616
     and len(accounting.get("released_recovery_reserves", [])) == 4
 ):

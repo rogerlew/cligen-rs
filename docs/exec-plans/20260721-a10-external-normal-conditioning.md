@@ -72,6 +72,11 @@ production change.
 - [x] Scaffolded R2R5 as the fresh parser/admission successor: it records
       occupancy without treating it as a reservation and rechecks exactly two
       visible devices at Slurm allocation start.
+- [x] R2R5-r3 control job `1242185` passed; portfolio job `1242218` failed
+      closed after E0 completed and E1 reached a non-finite training state.
+      Collection and exact cleanup passed; campaign use is 321/616.
+- [ ] Reproduce and bound the E1 numerical failure in a fresh corrective
+      package before seeking authority for another candidate execution.
 
 ## Surprises & Discoveries
 

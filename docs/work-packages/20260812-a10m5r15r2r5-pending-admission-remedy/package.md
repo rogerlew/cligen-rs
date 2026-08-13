@@ -1,6 +1,6 @@
 # A10M5R15R2R5 — Pending Admission and Occupancy Remedy
 
-Status: `EXECUTION-READY`
+Status: `HOLD-A10M5R15R2R5-E1-NONFINITE-TRAINING`
 Date: 2026-08-12
 Starting branch and push target: current `main`, push `main`
 
@@ -102,3 +102,10 @@ before Slurm submission because the generated checker retained R2R4's
 submission-admission record type. R2R5-r3 corrects that successor binding
 under another fresh authority and execution identity. R2R5-r2 consumed no GPU
 minutes and opened no candidate or confirmation evidence.
+
+R2R5-r3 control job `1242185` passed in 21 L40-minutes. Portfolio job
+`1242218` used 199 L40-minutes and failed closed when E1 produced a non-finite
+training state after E0 completed; E2C/E2 and the runtime benchmark were not
+started. Toolkit collection, exact cleanup, and closure passed. Campaign use
+is 321 of 616 L40-minutes, leaving 295, which does not admit another unchanged
+515-minute full-study bound.

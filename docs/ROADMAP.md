@@ -748,6 +748,12 @@ failed closed when Slurm emitted `%b=N/A` for an active CPU-only row. The fresh
 R2R5 successor corrects that sentinel handling and introduces scheduler-pending
 two-L40 submission with allocation-start GPU revalidation. Its resource ledger
 must reconcile the 19-minute R2R4 control before a new reservation.
+R2R5-r3 subsequently passed control job `1242185`, then portfolio job
+`1242218` completed E0 but failed closed on E1's non-finite training state
+before E2C/E2 or the runtime benchmark. Authenticated collection and exact
+cleanup passed. Campaign use is 321/616 L40-minutes; the package holds pending
+a bounded E1 numerical corrective successor, and the remaining 295 minutes do
+not authorize a repeat of the unchanged 515-minute full-study bound.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

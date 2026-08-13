@@ -1,0 +1,14 @@
+{
+  "actual_l40_minutes": 220,
+  "collection_record_sha256": "c5c9bf890bfa84a589b344e48d3cc8621017d451af5033e19f33523db95828fc",
+  "cleanup_record_sha256": "0af422f94d90eb2e205751d775c38dafc4af3616e3df36283481228a77aefef3",
+  "control": {"actual_l40_minutes": 21, "job_id": "1242185", "job_receipt_record_sha256": "bf0fa4f5e45bf0c7d226739be339fd5d76092c8372676368913afcd5fb37c80e", "passed": true, "state": "COMPLETED"},
+  "package_id": "20260812-a10m5r15r2r5-pending-admission-remedy",
+  "portfolio": {"actual_l40_minutes": 199, "failure": "E1 non-finite continuous candidate training state", "job_id": "1242218", "job_receipt_record_sha256": "3da504abc3ac1e26d6a95509bac5c0f375a28801bb20af9614719c91b58e468d", "passed": false, "state": "FAILED"},
+  "protected_roles_opened": [],
+  "run_id": "a10m5r15r2r5-pending-admission-remedy-r3",
+  "schema_version": 1,
+  "source_commit": "a7468ab17847df10be6935fec20fb2957dac041c",
+  "terminal_record_sha256": "4c5d43cbb7b5f82f2ae3d37600fcff848e9b07769f274e6bc3eb695511fceba5",
+  "valid": true
+}

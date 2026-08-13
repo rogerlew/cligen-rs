@@ -51,20 +51,21 @@ def validate(source_commit: str | None = None) -> dict:
         "successful-r2r3-control",
         "failed-r2r3-e2-initialization",
         "successful-r2r4-control",
+        "r2r5-control-and-failed-portfolio",
     ]
     if not (
         value.get("valid") is True
         and value.get("package_id") == PACKAGE.name
-        and actual == value.get("realized_l40_minutes") == 101
-        and value.get("outstanding_study_ceiling_l40_minutes") == 515
-        and value.get("bounded_maximum_l40_minutes") == actual + 515 == 616
+        and actual == value.get("realized_l40_minutes") == 321
+        and value.get("outstanding_study_ceiling_l40_minutes") == 295
+        and value.get("bounded_maximum_l40_minutes") == actual + 295 == 616
         and value.get("authorized_outer_ceiling_l40_minutes") == 616
         and value["bounded_maximum_l40_minutes"]
         <= value["authorized_outer_ceiling_l40_minutes"]
         and len(value.get("released_recovery_reserves", [])) == 4
         and [row.get("kind") for row in components] == expected_kinds
-        and len({row.get("evidence_path") for row in components}) == 9
-        and len({row.get("record_sha256") for row in components}) == 9
+        and len({row.get("evidence_path") for row in components}) == 10
+        and len({row.get("record_sha256") for row in components}) == 10
     ):
         raise RuntimeError("campaign accounting identity or arithmetic drift")
     for row in components:
@@ -176,6 +177,18 @@ def validate(source_commit: str | None = None) -> dict:
                 and evidence.get("result", {}).get("actual_gpu_minutes")
                 == row["actual_l40_minutes"]
                 == 19
+            )
+        elif kind == "r2r5-control-and-failed-portfolio":
+            valid = (
+                evidence.get("valid") is True
+                and evidence.get("terminal_record_sha256") == row["record_sha256"]
+                and evidence.get("run_id")
+                == "a10m5r15r2r5-pending-admission-remedy-r3"
+                and evidence.get("control", {}).get("job_id") == "1242185"
+                and evidence.get("portfolio", {}).get("job_id") == "1242218"
+                and evidence.get("actual_l40_minutes")
+                == row["actual_l40_minutes"]
+                == 220
             )
         else:
             valid = False

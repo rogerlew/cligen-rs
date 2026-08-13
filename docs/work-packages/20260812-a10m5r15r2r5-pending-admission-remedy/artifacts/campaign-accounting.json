@@ -64,12 +64,19 @@
       "evidence_path": "docs/work-packages/20260722-a10m5r15r2r4-e2-initialization-remedy/artifacts/execution-r0-control-job.json",
       "kind": "successful-r2r4-control",
       "record_sha256": "dfeb644bea4f991a6d8c5fe204caebf5a9e81d4fe88eb22045ab0258fb21a34b"
+    },
+    {
+      "actual_l40_minutes": 220,
+      "evidence_sha256": "6e7e794347d2dae1321b7b6befb9c6f50fcf271f28d615c5ba63ce433c236720",
+      "evidence_path": "docs/work-packages/20260812-a10m5r15r2r5-pending-admission-remedy/artifacts/execution-r3-summary.json",
+      "kind": "r2r5-control-and-failed-portfolio",
+      "record_sha256": "4c5d43cbb7b5f82f2ae3d37600fcff848e9b07769f274e6bc3eb695511fceba5"
     }
   ],
   "operator_authorization": "authorization granted; authorize 597; 19 L40-minute ceiling increase granted",
-  "outstanding_study_ceiling_l40_minutes": 515,
+  "outstanding_study_ceiling_l40_minutes": 295,
   "package_id": "20260812-a10m5r15r2r5-pending-admission-remedy",
-  "realized_l40_minutes": 101,
+  "realized_l40_minutes": 321,
   "released_recovery_reserves": [
     {
       "event_sha256": "da58af4ca36ffbb1b30bc9a81293570a7cc1565f84955b39f2f4eb757c898bfd",
