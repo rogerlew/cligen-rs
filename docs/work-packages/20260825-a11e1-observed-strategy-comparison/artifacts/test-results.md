@@ -23,3 +23,24 @@ day had `Tmax == Tmin`. The executor had imposed an undeclared strictly positive
 daily range constraint. The corrected and tested implementation accepts a zero
 daily range when the monthly mean is positive and uses 0.01 °C only inside the
 daily log-texture estimator. No authoritative output preceded this correction.
+
+## Observed execution and closure gates
+
+- Published execution source: `105c29b0efa3feccd27db37914bcaa60693cd828`.
+- Calendar/role preflight: PASS, 1,440 fit-corpus objects and 20 development
+  objects; exact eight/four leap-year December 31 masks.
+- Fit/CV: PASS, six regimes and both registered integrated strategies.
+- Development generation: PASS, 40/40 unique streams and zero invariant
+  failures.
+- Confirmation target access: false.
+- Receipt/output hash and size recomputation: PASS.
+- Evidence self-hash, decision medians, and bootstrap recomputation in
+  independent review: PASS.
+- Deterministic replay: PASS; the five scientific output SHA-256 hashes were
+  byte-identical. The execution receipt's elapsed time is operational and was
+  regenerated.
+- Final synthetic suite: PASS, 13 tests.
+- Repository Rust gates: PASS (`cargo fmt --check`,
+  `cargo clippy --all-targets -- -D warnings`, and `cargo test`).
+- `git diff --check`: PASS.
+- Independent evidence review: no P0; closure-record P1 reconciled.

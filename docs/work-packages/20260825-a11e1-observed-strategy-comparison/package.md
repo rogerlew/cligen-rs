@@ -1,6 +1,6 @@
 # A11E1 — Observed Exploratory Strategy Comparison
 
-Status: `ACTIVE`
+Status: `EXECUTED-COMPLETE`
 
 Date: 2026-08-25
 
@@ -67,6 +67,28 @@ Complete with a descriptive disposition for each arm and no authority beyond
 development. Hold on source, calendar, role, numerical, support, evidence, or
 review failure, naming the smallest corrective successor. A lower composite
 score is not a promotion decision.
+
+## Outcome
+
+All 1,440 authenticated fit-corpus objects and 20 development objects passed
+the frozen calendar, missingness, role, and identity preflight. Candidate-only
+fitting and conditional CV completed for six regimes. Both strategies produced
+all 20 requested member-0 development streams with zero daily invariant
+failures; confirmation access remained false.
+
+Both arms are `RETAINED_FOR_EXPLORATION`, meaning numerically valid only. The
+circular-block arm was descriptively better: the Gaussian-minus-block composite
+contrast was +7.20, with paired-site bootstrap 5/50/95 percentiles
++4.68/+7.10/+10.43 and 18 of 20 site differences positive. The block arm also
+had lower median conditional-CV covariance error (0.0324 versus 0.0453). The
+single member, pooled regional forcing, 16-year horizon, and uncalibrated score
+do not support selection or promotion.
+
+The independently recommended bounded successor holds the circular-block law,
+daily core, roles, calendar, and evaluator fixed and changes only forcing
+location to a prospectively selected nearest candidate-fit climatology using
+non-target metadata. Its falsifiable development-only hypothesis is lower
+precipitation and temperature level error with zero invariant failures.
 
 ## Artifacts
 

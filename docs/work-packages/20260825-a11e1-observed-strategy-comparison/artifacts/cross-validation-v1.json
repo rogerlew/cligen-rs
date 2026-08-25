@@ -1,0 +1,509 @@
+{
+  "folds": 5,
+  "regions": {
+    "arid_boundary": [
+      {
+        "covariance_frobenius_per_field": 0.045768755004437535,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.007674001777972339,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.028333499071149095,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.012150258423770682,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04760952220248906,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.022331840147609146,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.0372150257206726,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.008621093295054005,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.042956500737933855,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.021310442266474806,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03437840735340205,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.003267776688193301,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04763299618803831,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0012731620886912431,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03618447840500964,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.022554900179683965,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04405854678237503,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0172540179729369,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.028822527758939287,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.002823381990292771,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ],
+    "cold": [
+      {
+        "covariance_frobenius_per_field": 0.041203254515812436,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.016614424444579612,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.029098510221532356,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004412363148005541,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.043749575624825586,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.007642863820413251,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.039616979598888276,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.024327913655401573,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04079680041080959,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.002075167140889775,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.02553004561453399,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.002453798337616664,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04322557917589996,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0036261301697858295,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.030114352213410134,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0011646557550444789,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04528978557779205,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.006919897167206729,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03453785148802008,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.011417849931455039,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ],
+    "hot_arid": [
+      {
+        "covariance_frobenius_per_field": 0.042706927607204535,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.01115023574537619,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03128356936430993,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.009163463811586853,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.039460266532879366,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.01313281661541,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.029287216803008973,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.017758947344506445,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.048809195641274464,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0020525710810419644,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.033529455917325285,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004664111266258434,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.0411925870613747,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.01975790020098774,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.026742617580864585,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0004253640322290121,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04760183634155579,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0006411378654033184,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.02648584840359945,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.02032036026667138,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ],
+    "humid": [
+      {
+        "covariance_frobenius_per_field": 0.045326972850918745,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.005639366505083846,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03372586292252156,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004165141914984773,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04271552394313129,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0011908740510710725,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03551525389788899,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0021642608919436868,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03998496101001134,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.009628410188484943,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03170907191492346,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004030957575051421,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04221471068663327,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0013933227143143358,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03412478264433032,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.009141213557635666,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04078754986297375,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.00785432962440816,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03411314456126141,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0005215997876000522,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ],
+    "monsoonal_transition": [
+      {
+        "covariance_frobenius_per_field": 0.043314248304359454,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.009626423087595318,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.032039501011448084,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.015980135142460786,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04635583727592805,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0027322751026467073,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03273073031640947,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.025422798769984253,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04826426310885487,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.01219095139828808,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03385111533666883,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.016153532635327546,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.0561675172460761,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004744075820594732,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.030653428820099502,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.015562481988360983,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04766539624570821,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.022579906591900557,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03405279564071229,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.0014353724441176878,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ],
+    "non_monsoonal_semi_arid": [
+      {
+        "covariance_frobenius_per_field": 0.04711145976221934,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.02201094414950052,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.03866266943314514,
+        "fold": 0,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.007719958310310887,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.047888994908349185,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.015792008689413637,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.036194665128872476,
+        "fold": 1,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.011870273386276602,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04842983866792446,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.008170143771710117,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.02887779754548272,
+        "fold": 2,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.008405013902371063,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.04701810337699485,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.008554003366374293,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.027608050425831268,
+        "fold": 3,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.004143283885703553,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.05217912159781459,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.005133329718301487,
+        "strategy_id": "gaussian_latent_ar1_physical_core_v1",
+        "training_sites": 160
+      },
+      {
+        "covariance_frobenius_per_field": 0.02917141567723508,
+        "fold": 4,
+        "held_sites": 40,
+        "persistence_absolute_error": 0.02158238268417386,
+        "strategy_id": "circular_fixed_block_physical_core_v1",
+        "training_sites": 160
+      }
+    ]
+  },
+  "schema_version": "a11e1-cross-validation-1",
+  "scope": "annual-strategy-only conditional on full-candidate adapter",
+  "summary": {
+    "circular_fixed_block_physical_core_v1": {
+      "median_covariance_frobenius_per_field": 0.03238511566392878,
+      "median_persistence_absolute_error": 0.008513053598712534
+    },
+    "gaussian_latent_ar1_physical_core_v1": {
+      "median_covariance_frobenius_per_field": 0.0453083792143554,
+      "median_persistence_absolute_error": 0.008012236698059139
+    }
+  }
+}

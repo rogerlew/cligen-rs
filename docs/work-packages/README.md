@@ -128,7 +128,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260812-a10m5r15r2r5-pending-admission-remedy](20260812-a10m5r15r2r5-pending-admission-remedy/package.md) | HOLD — E1 NONFINITE TRAINING |
 | [20260825-a11-forced-monthly-annual-stochastic-generator](20260825-a11-forced-monthly-annual-stochastic-generator/package.md) | EXECUTED-HOLD-CONTRACT-NONCONFORMANCE |
 | [20260825-a11e-exploratory-strategy-lab](20260825-a11e-exploratory-strategy-lab/package.md) | EXECUTED-COMPLETE |
-| [20260825-a11e1-observed-strategy-comparison](20260825-a11e1-observed-strategy-comparison/package.md) | ACTIVE |
+| [20260825-a11e1-observed-strategy-comparison](20260825-a11e1-observed-strategy-comparison/package.md) | EXECUTED-COMPLETE |
 | [20260722-lemhi-gpu-capacity-policy](20260722-lemhi-gpu-capacity-policy/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |

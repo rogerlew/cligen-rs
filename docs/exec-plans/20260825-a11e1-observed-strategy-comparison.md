@@ -12,9 +12,9 @@ production winner.
 - [x] 2026-08-25: independent review held the initial fit-validation/PRISM draft.
 - [x] 2026-08-25: corrected role, strategy identity, dry support, calendar estimand, schema, and authentication design.
 - [x] 2026-08-25: published initial corrected source and passed synthetic gates.
-- [ ] Publish the pre-output daily-range correction and rerun.
-- [ ] Preflight, fit, cross-validate, and execute development generation.
-- [ ] Review, gate, publish evidence, and close.
+- [x] 2026-08-25: published the pre-output daily-range correction and reran.
+- [x] 2026-08-25: preflighted, fit, cross-validated, and generated 40 development streams.
+- [x] 2026-08-25: replayed deterministically, independently reviewed, gated, and closed.
 
 ## Decisions and discoveries
 
@@ -60,4 +60,11 @@ atomic compact JSON writes. Raw observed and generated streams remain local.
 
 ## Outcomes & retrospective
 
-Pending execution.
+Execution completed from published source `105c29b`. All objects and streams
+passed, every invariant count was zero, and confirmation stayed sealed. Both
+arms remain numerically valid for exploration, while the block arm was
+descriptively better at 18/20 sites and had the lower covariance diagnostic.
+The main remaining error is site-level climate forcing, especially hot-arid
+precipitation. The next bounded hypothesis changes only the block arm's forcing
+location from region median to a non-target-metadata nearest candidate-fit
+climatology. No confirmation or promotion follows from this package.

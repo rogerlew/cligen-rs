@@ -777,15 +777,24 @@ so the terminal is `HOLD-A11-CONTRACT-NONCONFORMANCE` with science status
 `NOT_EVALUATED`; no confirmation target access was observed, the claimed seal
 was unauthenticated, and no profile was promoted.
 
-**A11 current stage:**
+**A11 observed stage complete (2026-08-25):**
 [A11E1 observed exploratory strategy comparison](work-packages/20260825-a11e1-observed-strategy-comparison/package.md)
-is active from published base source `b842430`. Its corrected prospective
+executed from published source `105c29b`. Its corrected prospective
 contract uses the canonical A10 calendar/missingness preflight, candidate-fit
 parameters only, 20 role-correct development objects, two newly registered
 integrated strategy IDs, a two-part dry/positive precipitation law, and a
-mask-normalized Daymet estimator. The initial scaffold review HOLD is preserved
-and dispositioned before source publication. Results remain exploratory and
-cannot authorize confirmation or promotion.
+mask-normalized Daymet estimator. All 40 streams completed with zero invariant
+failures and no confirmation access. Both arms remain numerically valid; the
+circular block arm was descriptively better at 18/20 sites and in conditional-CV
+covariance, but one member and the uncalibrated score prohibit selection.
+
+**A11 recommended next stage:** a bounded development-only forcing-location
+test that freezes the circular-block law, daily core, calendar, roles, and
+evaluator and replaces only region-median location with a prospectively frozen
+nearest candidate-fit climatology selected from non-target coordinate/elevation
+metadata. The hypothesis is lower monthly precipitation relative error and
+temperature MAE with zero invariants. It has no confirmation or promotion
+authority and is not yet dispatched.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

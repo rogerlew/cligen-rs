@@ -65,3 +65,22 @@ accepts finite nonnegative daily ranges, preserves the uncensored monthly mean,
 and applies 0.01 °C only to the daily log-texture input. A new synthetic fixture
 passes. Scoped independent disposition: **GO to republish**, with no unresolved
 P0/P1 and no reviewer access to observed values.
+
+## Completed-evidence review
+
+Independent disposition: **evidence accepted; GO to close after record
+reconciliation**. The reviewer reproduced the evidence self-hash, decision
+medians, and paired bootstrap; verified source `105c29b` against `origin/main`,
+committed source blobs, input manifests, and all output hashes/sizes; and found
+40 unique finite stream rows, zero invariant failures, and confirmation access
+false throughout. There were no P0 evidence defects.
+
+The sole closure P1 was that package, plan, catalog, roadmap, review, and gate
+records still said active after the generated terminal said complete. Those
+records are reconciled in the closure commit.
+
+Retaining both arms is accepted only under the contract's numerical-validity
+meaning, not equivalence or promotion. The block arm is descriptively better at
+18/20 sites (Gaussian-minus-block mean +7.20; bootstrap 5/50/95
++4.68/+7.10/+10.43). The reviewer recommends the bounded nearest-candidate-fit
+forcing-location successor recorded in the package and roadmap.

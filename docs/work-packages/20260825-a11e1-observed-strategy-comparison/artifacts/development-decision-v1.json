@@ -1,0 +1,60 @@
+{
+  "confirmation_authorized": false,
+  "execution_id": "a11e1-observed-development-v1",
+  "next_action": "interpret diagnostics and register only a falsifiable bounded successor",
+  "paired_bootstrap": {
+    "bootstrap_quantiles_05_50_95": [
+      4.684270623007961,
+      7.104791520883889,
+      10.434609105473768
+    ],
+    "contrast": "gaussian_latent_ar1_physical_core_v1 minus circular_fixed_block_physical_core_v1; lower score is better",
+    "interpretation": "descriptive site resampling of one stochastic member; no Monte Carlo interval, confirmation, or promotion threshold",
+    "mean_difference": 7.202079466078578,
+    "replicates": 1000,
+    "rng": "numpy_philox/a11e1_site_bootstrap_domain_v1",
+    "seed": 410542,
+    "site_differences": {
+      "az026481": 8.522878828722463,
+      "az028820": 5.524292335835784,
+      "ca040442": 34.80944738673108,
+      "ca042713": 14.062620976967434,
+      "co050130": 3.7172972439200764,
+      "id101022": 3.680151151424841,
+      "la160549": -1.1452856457792966,
+      "me171175": 2.1138507449307804,
+      "mn212248": 1.4313637377932968,
+      "mt243996": 7.7609226004801615,
+      "ne257665": 2.9931561617130313,
+      "nm290234": 13.476141927470758,
+      "nv262631": 10.62605727256064,
+      "nv264436": 13.15084288715431,
+      "nv269171": 2.8827594521511166,
+      "or350412": 2.298437065865005,
+      "sc381544": -0.8983906485769806,
+      "tx413280": 7.821633984480651,
+      "tx417262": 9.418508676032502,
+      "wy487845": 1.7949031816939236
+    }
+  },
+  "production_authorized": false,
+  "schema_version": "a11e1-development-decision-1",
+  "science_status": "EXPLORATORY_EVALUATED",
+  "strategies": {
+    "circular_fixed_block_physical_core_v1": {
+      "disposition": "RETAINED_FOR_EXPLORATION",
+      "maximum_daily_invariant_failures": 0,
+      "median_descriptive_composite_score": 4.345066521514569,
+      "scope": "observed development only; no confirmation or promotion authority",
+      "site_count": 20
+    },
+    "gaussian_latent_ar1_physical_core_v1": {
+      "disposition": "RETAINED_FOR_EXPLORATION",
+      "maximum_daily_invariant_failures": 0,
+      "median_descriptive_composite_score": 9.631201083626536,
+      "scope": "observed development only; no confirmation or promotion authority",
+      "site_count": 20
+    }
+  },
+  "terminal": "EXECUTED-COMPLETE"
+}

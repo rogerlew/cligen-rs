@@ -1,0 +1,277 @@
+{
+  "candidate_fit_only": true,
+  "fit_sha256": "847dfcd6150c64d53275d20647121b816809e4cb9e1bfde96360e74bfc6b94ed",
+  "regions": {
+    "arid_boundary": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.034666666666666665,
+        0.036333333333333336,
+        0.029166666666666667,
+        0.030333333333333334,
+        0.030666666666666665,
+        0.09766666666666667,
+        0.1845,
+        0.18633333333333332,
+        0.0965,
+        0.07233333333333333,
+        0.0455,
+        0.05583333333333333
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "983eae909608aeb9fb93eb5e7864bbcd77aba8c457d018a1b497a9dc4180f8aa",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "0354e7de12cac629057710370581f6818e23b187b13988af4544828988dac677",
+          "scalar_persistence": 0.06148218176564793
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    },
+    "cold": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.06566666666666666,
+        0.0585,
+        0.024333333333333332,
+        0.023666666666666666,
+        0.0015,
+        0.0005,
+        0.0023333333333333335,
+        0.010166666666666666,
+        0.005833333333333334,
+        0.018666666666666668,
+        0.08983333333333333,
+        0.06316666666666666
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "7f68be6a50bebf4a278d566fbdd421460786d300261bffb33bfe8c6f0a2afb46",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "e0b422383f90f5c04e817dd2edf26e9c434fb324a2b9a32763e6cdb072a70585",
+          "scalar_persistence": 0.045263803814263474
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    },
+    "hot_arid": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.231,
+        0.18283333333333332,
+        0.27066666666666667,
+        0.4261666666666667,
+        0.4206666666666667,
+        0.4665,
+        0.21366666666666667,
+        0.17116666666666666,
+        0.2345,
+        0.31283333333333335,
+        0.2881666666666667,
+        0.281
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "0f6e764b92ae9fc6b52a616b34839673815968886554fb01f5f5d65334332f3a",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "0c756ca46035b0881ae1b97f2996265914b7d9caed8b76f3160b4db788805cab",
+          "scalar_persistence": 0.03573058695975653
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    },
+    "humid": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.0008333333333333334,
+        0.0,
+        0.0006666666666666666,
+        0.0013333333333333333,
+        0.0026666666666666666,
+        0.0013333333333333333,
+        0.0016666666666666668,
+        0.005166666666666667,
+        0.0055,
+        0.017,
+        0.00016666666666666666,
+        0.00016666666666666666
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "4545e8fd7cfca04ae93806469de63693c57f79617bb4df495d06335fbbf403fe",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "10dc94a7d316149bc4bb8fd4d48dfb11cb9b0ade858493def93e9f32bc09b2de",
+          "scalar_persistence": -0.026975906505256393
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    },
+    "monsoonal_transition": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.11983333333333333,
+        0.139,
+        0.11833333333333333,
+        0.20433333333333334,
+        0.2645,
+        0.2866666666666667,
+        0.0385,
+        0.019666666666666666,
+        0.05433333333333333,
+        0.12566666666666668,
+        0.13616666666666666,
+        0.1395
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "7034861417b5f3de9a0e99c872bbf6fb8295a321a93718c9f0db6b542cefc638",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "d24b3090cc35c34f405d20c067915b0d9205bf76f78464dcd5414a49adf172b5",
+          "scalar_persistence": 0.007985572747720372
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    },
+    "non_monsoonal_semi_arid": {
+      "candidate_site_years": 6000,
+      "candidate_sites": 200,
+      "dry_month_probability": [
+        0.12983333333333333,
+        0.12183333333333334,
+        0.0405,
+        0.011666666666666667,
+        0.006,
+        0.006,
+        0.008833333333333334,
+        0.012833333333333334,
+        0.034833333333333334,
+        0.06616666666666667,
+        0.10083333333333333,
+        0.14216666666666666
+      ],
+      "forcing_location": "median candidate-fit site mean; development targets excluded",
+      "strategies": {
+        "circular_fixed_block_physical_core_v1": {
+          "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+          "model_sha256": "c09ae6d1e1156b583afcb285c466bcd9b1e9e0656386898fab136ba80ca76739",
+          "scalar_persistence": null
+        },
+        "gaussian_latent_ar1_physical_core_v1": {
+          "annual_strategy_id": "gaussian_latent_scalar_ar1_v1",
+          "model_sha256": "308496b2418e1e9a6a235d3bdda00667c7d5921742f074c0875995862da71007",
+          "scalar_persistence": -0.03498075914776743
+        }
+      },
+      "support_floor_equivalent_mm": [
+        0.9818548387096774,
+        1.0870535714285714,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774,
+        1.0145833333333334,
+        0.9818548387096774
+      ]
+    }
+  },
+  "schema_version": "a11e1-fit-summary-1"
+}
