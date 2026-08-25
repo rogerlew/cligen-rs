@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.invalid/schemas/a11e-strategy-manifest-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "manifest_id", "exploratory", "promotion_authority", "rng", "strategies"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "manifest_id": {"const": "a11e-strategy-manifest-v1"},
+    "exploratory": {"const": true},
+    "promotion_authority": {"const": false},
+    "rng": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "numpy_version", "domains"],
+      "properties": {
+        "algorithm": {"const": "numpy_philox"},
+        "numpy_version": {"const": "2.3.5"},
+        "domains": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {"enum": ["annual_target", "wet_count", "occurrence", "amount", "temperature", "range"]}
+        }
+      }
+    },
+    "strategies": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "allOf": [
+        {"contains": {"type": "object", "required": ["strategy_id"], "properties": {"strategy_id": {"const": "gaussian_latent_scalar_ar1_v1"}}}, "minContains": 1, "maxContains": 1},
+        {"contains": {"type": "object", "required": ["strategy_id"], "properties": {"strategy_id": {"const": "circular_fixed_block_bootstrap_v1"}}}, "minContains": 1, "maxContains": 1}
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["strategy_id", "fit_transform", "annual_law", "capabilities", "evaluation_stages", "evaluator_id", "metric_set_id", "uncertainty_id"],
+        "allOf": [
+          {
+            "if": {"properties": {"strategy_id": {"const": "circular_fixed_block_bootstrap_v1"}}, "required": ["strategy_id"]},
+            "then": {"required": ["block_length_years"]},
+            "else": {"not": {"required": ["block_length_years"]}}
+          }
+        ],
+        "properties": {
+          "strategy_id": {"enum": ["gaussian_latent_scalar_ar1_v1", "circular_fixed_block_bootstrap_v1"]},
+          "fit_transform": {"const": "within_site_sample_standardization"},
+          "annual_law": {"type": "string", "minLength": 16},
+          "block_length_years": {"type": "integer", "minimum": 2, "maximum": 30},
+          "capabilities": {
+            "type": "array",
+            "const": ["annual_monthly_targets", "core_daily"]
+          },
+          "evaluation_stages": {
+            "type": "array",
+            "const": ["synthetic", "candidate_fit_cross_validation", "held_out_development"]
+          },
+          "evaluator_id": {"const": "a11e_core_diagnostics_v1"},
+          "metric_set_id": {"const": "a11e_core_metrics_v1"},
+          "uncertainty_id": {"const": "a11e_descriptive_bootstrap_v1"}
+        }
+      }
+    }
+  }
+}

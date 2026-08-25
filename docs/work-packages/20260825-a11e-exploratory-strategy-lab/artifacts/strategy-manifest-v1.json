@@ -1,0 +1,34 @@
+{
+  "exploratory": true,
+  "manifest_id": "a11e-strategy-manifest-v1",
+  "promotion_authority": false,
+  "rng": {
+    "algorithm": "numpy_philox",
+    "domains": ["annual_target", "wet_count", "occurrence", "amount", "temperature", "range"],
+    "numpy_version": "2.3.5"
+  },
+  "schema_version": 1,
+  "strategies": [
+    {
+      "annual_law": "stationary scalar vector AR(1) with joint Gaussian innovations fit on average-rank latent scores",
+      "capabilities": ["annual_monthly_targets", "core_daily"],
+      "evaluator_id": "a11e_core_diagnostics_v1",
+      "evaluation_stages": ["synthetic", "candidate_fit_cross_validation", "held_out_development"],
+      "fit_transform": "within_site_sample_standardization",
+      "metric_set_id": "a11e_core_metrics_v1",
+      "uncertainty_id": "a11e_descriptive_bootstrap_v1",
+      "strategy_id": "gaussian_latent_scalar_ar1_v1"
+    },
+    {
+      "annual_law": "fixed-length circular block bootstrap of complete within-site standardized annual vectors",
+      "block_length_years": 5,
+      "capabilities": ["annual_monthly_targets", "core_daily"],
+      "evaluator_id": "a11e_core_diagnostics_v1",
+      "evaluation_stages": ["synthetic", "candidate_fit_cross_validation", "held_out_development"],
+      "fit_transform": "within_site_sample_standardization",
+      "metric_set_id": "a11e_core_metrics_v1",
+      "strategy_id": "circular_fixed_block_bootstrap_v1",
+      "uncertainty_id": "a11e_descriptive_bootstrap_v1"
+    }
+  ]
+}

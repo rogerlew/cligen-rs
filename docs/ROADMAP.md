@@ -777,6 +777,18 @@ so the terminal is `HOLD-A11-CONTRACT-NONCONFORMANCE` with science status
 `NOT_EVALUATED`; no confirmation target access was observed, the claimed seal
 was unauthenticated, and no profile was promoted.
 
+**Operator direction 2026-08-25: continue A11 as an exploratory strategy
+laboratory.** The active
+[A11E work package](work-packages/20260825-a11e-exploratory-strategy-lab/package.md)
+and [exploratory strategy specification](specifications/SPEC-A11-EXPLORATORY-STRATEGY-LAB.md)
+allow results from one strategy to motivate newly versioned strategies. Each
+strategy is immutable only after its own output, and all results remain
+non-promotional. The initial implementation registers a stationary
+latent Gaussian scalar-AR(1) and a fixed-length circular block bootstrap, both using
+within-site standardized variation, plus shared covariance reconciliation and
+support-valid conditional daily primitives. This implementation package emits
+synthetic fixtures only and will be published before observed-data execution.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
