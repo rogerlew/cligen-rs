@@ -18,8 +18,17 @@ Evidence class: Ran locally from `/Users/roger/src/cligen-rs` on `main`.
 | `cargo test` | PASS | Workspace suite passed; ignored evidence-only/environment-bound tests remained ignored |
 | `git diff --check` | PASS | No output |
 | Changed-document relative-link check | PASS | All local relative Markdown targets resolved |
+| Exact source publication | PASS | `b842430cb665a1219e01061312357688e04e6c62` equaled `origin/main` at publication check |
+
+Published source artifact identities:
+
+| Artifact | SHA-256 |
+|---|---|
+| `strategy-manifest-v1.json` | `fb9dd3771e130ed58b1146af6ac5d360bf2afe3d2b3b30293c547f4a80339a53` |
+| `strategy-manifest-v1.schema.json` | `71bd330e2510843c36b08e0af4b87e6d7fb792274cf2893cd5b245ade7d145ba` |
+| `strategy_lab.py` | `af5691361bf278ef6adbb4c4e56fa35d017bc33677284836ee008396190b2de4` |
+| `test_strategy_lab.py` | `265d116c579949df164e3c6b8d7e71af506725fb321d6c7ea90dcde1ca2c0059` |
 
 No observed data, confirmation data, public profile, Rust production function,
 or reference Fortran source was consumed or changed. Coverage/CRAP was not
 triggered because no production function under `crates/` changed.
-

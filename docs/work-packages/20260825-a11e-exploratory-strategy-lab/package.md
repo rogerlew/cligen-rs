@@ -1,6 +1,6 @@
 # A11E — Exploratory Stochastic-Generator Strategy Lab
 
-Status: `ACTIVE`
+Status: `EXECUTED-COMPLETE`
 
 Date: 2026-08-25
 
@@ -74,6 +74,11 @@ Work runs locally from current `origin/main` and pushes only to `main`. This
 package deliberately produces no observed-data strategy output, eliminating
 the prior uncommitted-source identity failure. A later execution names this
 package's published commit as its source.
+
+Published implementation source:
+`b842430cb665a1219e01061312357688e04e6c62` on `origin/main`.
+This package produced synthetic evidence only. Any observed-data execution
+must use that commit or register a new source/strategy revision before output.
 
 ## Gates
 

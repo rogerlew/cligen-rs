@@ -16,8 +16,10 @@ reproducible and every result explicitly exploratory.
   manifest/schema, two initial strategies, and shared daily primitives.
 - [x] 2026-08-25: passed 18 synthetic tests, including 48-field/30-year
   execution for both registered annual strategies.
-- [ ] Disposition independent review and run repository gates.
-- [ ] Commit and push the exact implementation source to `main`.
+- [x] 2026-08-25: independent review closed with no P0/P1 findings; repository
+  and package gates passed.
+- [x] 2026-08-25: committed and pushed exact implementation source
+  `b842430cb665a1219e01061312357688e04e6c62` to `origin/main`.
 - [ ] Open a separately identified observed-data execution from that published
   source only when dispatched.
 
@@ -43,8 +45,14 @@ addition but makes output-bearing strategy entries immutable.
 
 ## Outcomes & Retrospective
 
-Pending terminal review and source publication. No observed data, confirmation
-targets, candidate outputs, or production code are consumed or changed here.
+The laboratory closed `EXECUTED-COMPLETE`. Revision 1 registers a latent
+Gaussian scalar-AR(1) and a fixed-length circular block bootstrap, a strict
+domain-separated RNG surface, population-law covariance reconciliation, and a
+composed support-valid daily core. Independent review found no unresolved P0
+or P1 issue; 18 synthetic tests and all repository gates passed. Exact source
+`b842430cb665a1219e01061312357688e04e6c62` was published before any observed
+execution. No observed data, confirmation targets, candidate outputs, public
+profiles, or production code were consumed or changed.
 
 ## Context and Orientation
 

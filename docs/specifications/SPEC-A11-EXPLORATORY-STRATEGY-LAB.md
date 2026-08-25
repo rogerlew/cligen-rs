@@ -1,6 +1,6 @@
 # SPEC-A11-EXPLORATORY-STRATEGY-LAB — Versioned exploratory generator strategies
 
-Status: research-only revision 1; no public runtime identifier
+Status: research-only implemented revision 1; source `b842430`; no public runtime identifier
 
 ## Purpose
 
