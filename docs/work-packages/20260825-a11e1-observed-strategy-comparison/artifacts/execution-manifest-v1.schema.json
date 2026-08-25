@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.invalid/schemas/a11e1-observed-execution-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["adapter_id", "bootstrap", "confirmation_target_access", "cross_validation_folds", "development", "evaluator_id", "execution_id", "field_order", "fit", "integrated_strategies", "metric_set_id", "month_equivalent_days", "rng", "schema_version", "strategy_source", "uncertainty_id", "wet_threshold_mm"],
+  "properties": {
+    "adapter_id": {"const": "a11e_two_part_physical_core_36_v1"},
+    "bootstrap": {"type": "object", "additionalProperties": false, "required": ["replicates", "seed"], "properties": {"replicates": {"const": 1000}, "seed": {"const": 410542}}},
+    "confirmation_target_access": {"const": false},
+    "cross_validation_folds": {"const": 5},
+    "development": {
+      "type": "object", "additionalProperties": false,
+      "required": ["calendar_profile", "horizon_years", "member_ids", "object_count", "period_end_inclusive", "period_start", "role", "source_manifest", "source_manifest_sha256"],
+      "properties": {
+        "calendar_profile": {"const": "daymet_official_365_v1"}, "horizon_years": {"const": 16}, "member_ids": {"const": [0]}, "object_count": {"const": 20},
+        "period_end_inclusive": {"const": "2025-12-31"}, "period_start": {"const": "2010-01-01"}, "role": {"const": "development"},
+        "source_manifest": {"type": "string", "minLength": 1}, "source_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "evaluator_id": {"const": "a11e_mask_normalized_observed_diagnostics_v1"},
+    "execution_id": {"const": "a11e1-observed-development-v1"},
+    "field_order": {"const": ["equivalent_precipitation_months_01_12", "mean_temperature_months_01_12", "diurnal_range_months_01_12"]},
+    "fit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["calendar_profile", "daymet_manifest", "daymet_manifest_sha256", "period_end_inclusive", "period_start", "role"],
+      "properties": {
+        "calendar_profile": {"const": "daymet_official_365_v1"}, "daymet_manifest": {"type": "string", "minLength": 1}, "daymet_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "period_end_inclusive": {"const": "2009-12-31"}, "period_start": {"const": "1980-01-01"}, "role": {"const": "candidate_fit"}
+      }
+    },
+    "integrated_strategies": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "prefixItems": [
+        {"type": "object", "additionalProperties": false, "required": ["annual_strategy_id", "strategy_id"], "properties": {"annual_strategy_id": {"const": "gaussian_latent_scalar_ar1_v1"}, "strategy_id": {"const": "gaussian_latent_ar1_physical_core_v1"}}},
+        {"type": "object", "additionalProperties": false, "required": ["annual_strategy_id", "block_length_years", "strategy_id"], "properties": {"annual_strategy_id": {"const": "circular_fixed_block_bootstrap_v1"}, "block_length_years": {"const": 5}, "strategy_id": {"const": "circular_fixed_block_physical_core_v1"}}}
+      ], "items": false
+    },
+    "metric_set_id": {"const": "a11e_mask_normalized_observed_metrics_v1"},
+    "month_equivalent_days": {"const": 30.4375},
+    "rng": {
+      "type": "object", "additionalProperties": false,
+      "required": ["algorithm", "hurdle_domain", "hurdle_key_template", "seed_hash"],
+      "properties": {
+        "algorithm": {"const": "numpy_philox"}, "hurdle_domain": {"const": "month_hurdle"},
+        "hurdle_key_template": {"const": "a11e1-integrated-v1\\0{point_id}\\0{integrated_strategy_id}\\0{member_id}\\0month_hurdle"},
+        "seed_hash": {"const": "blake2b_64_little_endian"}
+      }
+    },
+    "schema_version": {"const": 1},
+    "strategy_source": {
+      "type": "object", "additionalProperties": false, "required": ["commit", "implementation_sha256", "manifest_sha256"],
+      "properties": {"commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"}, "implementation_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+    },
+    "uncertainty_id": {"const": "a11e_paired_development_site_bootstrap_v1"},
+    "wet_threshold_mm": {"const": 1.0}
+  }
+}

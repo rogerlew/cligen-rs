@@ -777,13 +777,15 @@ so the terminal is `HOLD-A11-CONTRACT-NONCONFORMANCE` with science status
 `NOT_EVALUATED`; no confirmation target access was observed, the claimed seal
 was unauthenticated, and no profile was promoted.
 
-**A11 next stage:** dispatch a separately identified exploratory observed-data
-execution from published source `b842430`, completing the canonical A10
-calendar/missingness and role preflight before fitting. The implemented
-[strategy laboratory](work-packages/20260825-a11e-exploratory-strategy-lab/package.md)
-contains latent Gaussian scalar-AR(1) and fixed-length circular block arms plus
-the shared core. Results may motivate new registered strategies but have no
-confirmation or promotion authority.
+**A11 current stage:**
+[A11E1 observed exploratory strategy comparison](work-packages/20260825-a11e1-observed-strategy-comparison/package.md)
+is active from published base source `b842430`. Its corrected prospective
+contract uses the canonical A10 calendar/missingness preflight, candidate-fit
+parameters only, 20 role-correct development objects, two newly registered
+integrated strategy IDs, a two-part dry/positive precipitation law, and a
+mask-normalized Daymet estimator. The initial scaffold review HOLD is preserved
+and dispositioned before source publication. Results remain exploratory and
+cannot authorize confirmation or promotion.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

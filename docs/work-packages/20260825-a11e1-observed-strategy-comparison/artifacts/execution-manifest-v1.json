@@ -1,0 +1,48 @@
+{
+  "adapter_id": "a11e_two_part_physical_core_36_v1",
+  "bootstrap": {"replicates": 1000, "seed": 410542},
+  "confirmation_target_access": false,
+  "cross_validation_folds": 5,
+  "development": {
+    "calendar_profile": "daymet_official_365_v1",
+    "horizon_years": 16,
+    "member_ids": [0],
+    "object_count": 20,
+    "period_end_inclusive": "2025-12-31",
+    "period_start": "2010-01-01",
+    "role": "development",
+    "source_manifest": "../../20260715-a9c-observed-development/artifacts/observed-source-manifest-v1.json",
+    "source_manifest_sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b"
+  },
+  "evaluator_id": "a11e_mask_normalized_observed_diagnostics_v1",
+  "execution_id": "a11e1-observed-development-v1",
+  "field_order": ["equivalent_precipitation_months_01_12", "mean_temperature_months_01_12", "diurnal_range_months_01_12"],
+  "fit": {
+    "calendar_profile": "daymet_official_365_v1",
+    "daymet_manifest": "../../20260721-a10m5r15r1-prism-eligible-cohort/artifacts/daymet-shard-manifest-v1.json",
+    "daymet_manifest_sha256": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+    "period_end_inclusive": "2009-12-31",
+    "period_start": "1980-01-01",
+    "role": "candidate_fit"
+  },
+  "integrated_strategies": [
+    {"annual_strategy_id": "gaussian_latent_scalar_ar1_v1", "strategy_id": "gaussian_latent_ar1_physical_core_v1"},
+    {"annual_strategy_id": "circular_fixed_block_bootstrap_v1", "block_length_years": 5, "strategy_id": "circular_fixed_block_physical_core_v1"}
+  ],
+  "metric_set_id": "a11e_mask_normalized_observed_metrics_v1",
+  "month_equivalent_days": 30.4375,
+  "rng": {
+    "algorithm": "numpy_philox",
+    "hurdle_domain": "month_hurdle",
+    "hurdle_key_template": "a11e1-integrated-v1\\0{point_id}\\0{integrated_strategy_id}\\0{member_id}\\0month_hurdle",
+    "seed_hash": "blake2b_64_little_endian"
+  },
+  "schema_version": 1,
+  "strategy_source": {
+    "commit": "b842430cb665a1219e01061312357688e04e6c62",
+    "implementation_sha256": "af5691361bf278ef6adbb4c4e56fa35d017bc33677284836ee008396190b2de4",
+    "manifest_sha256": "fb9dd3771e130ed58b1146af6ac5d360bf2afe3d2b3b30293c547f4a80339a53"
+  },
+  "uncertainty_id": "a11e_paired_development_site_bootstrap_v1",
+  "wet_threshold_mm": 1.0
+}
