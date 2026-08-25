@@ -89,7 +89,8 @@ This domain is independent of all base daily streams and is part of the
 immutable integrated strategy identity.
 
 Wet counts and daily texture are candidate-fit region-month laws. Prospective
-texture semantics floor temperature SD at 0.01 °C, clip AR coefficients to
+texture semantics floor temperature SD at 0.01 °C, censor zero daily ranges to
+0.01 °C only for the log-range autocorrelation estimator, clip AR coefficients to
 [-0.8, 0.8], and clip transition probabilities to [1e-6, 1-1e-6]. Generated
 month count support is conditioned to `0 <= fitted_count <= generated_days`, so
 a candidate leap-February count of 29 cannot enter a 28-day February law.

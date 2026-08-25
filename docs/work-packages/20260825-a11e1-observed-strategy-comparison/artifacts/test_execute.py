@@ -71,6 +71,17 @@ class ExecutionContractTests(unittest.TestCase):
         np.testing.assert_allclose(summary["precipitation"][:, 0], [60.875, 60.875])
         np.testing.assert_allclose(summary["wet_fraction"][:, 0], [1.0, 1.0])
 
+    def test_zero_daily_range_is_valid_when_monthly_mean_is_positive(self) -> None:
+        records = []
+        for month in range(1, 13):
+            records.extend([
+                (dt.date(2011, month, 1), 0.0, 5.0, 5.0),
+                (dt.date(2011, month, 2), 0.0, 7.0, 5.0),
+            ])
+        summary = execute.aggregate_months("synthetic", "cold", "candidate_fit", records, (2011,))
+        np.testing.assert_allclose(summary["dtr"], 1.0)
+        self.assertTrue(np.isfinite(summary["texture"]["range_phi"]).all())
+
     def test_two_part_adapter_preserves_dry_support(self) -> None:
         shape = (2, 12)
         summary = {

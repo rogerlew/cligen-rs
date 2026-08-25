@@ -55,3 +55,13 @@ dry-month generation, February support, both annual laws, replay, and bootstrap.
 Final scoped re-review disposition: **GO for source publication**. No unresolved
 P0/P1 remains in the prospective source. The reviewer did not access observed
 values or confirmation evidence.
+
+## Pre-output DTR correction review
+
+The first published-source preflight failed before artifact publication because
+the executor rejected a candidate day with `Tmax == Tmin`. That exceeded the
+contract, which requires only a positive monthly mean range. The correction
+accepts finite nonnegative daily ranges, preserves the uncensored monthly mean,
+and applies 0.01 °C only to the daily log-texture input. A new synthetic fixture
+passes. Scoped independent disposition: **GO to republish**, with no unresolved
+P0/P1 and no reviewer access to observed values.

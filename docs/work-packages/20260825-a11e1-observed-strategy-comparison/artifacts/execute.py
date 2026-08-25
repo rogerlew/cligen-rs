@@ -245,8 +245,8 @@ def aggregate_months(point: str, regime: str, role: str, records: list[tuple[dt.
             values = np.asarray(grouped[(year, month)], dtype=np.float64)
             p, tx, tn = values[:, 0], values[:, 1], values[:, 2]
             temp, daily_range = (tx + tn) / 2.0, tx - tn
-            if np.any(daily_range <= 0.0):
-                raise ExecutionError(f"nonpositive daily range: {point}/{year}/{month}")
+            if np.any(daily_range < 0.0) or float(np.mean(daily_range)) <= 0.0:
+                raise ExecutionError(f"invalid daily/monthly range: {point}/{year}/{month}")
             wet = p >= 1.0
             observed_days[year_index, slot] = len(values)
             precipitation[year_index, slot] = float(np.mean(p) * EQUIVALENT_DAYS)
@@ -256,7 +256,8 @@ def aggregate_months(point: str, regime: str, role: str, records: list[tuple[dt.
             dtr[year_index, slot] = float(np.mean(daily_range))
             texture["temp_sd"][year_index, slot] = float(np.std(temp, ddof=1))
             texture["temp_phi"][year_index, slot] = safe_corr(temp[:-1], temp[1:])
-            texture["range_phi"][year_index, slot] = safe_corr(np.log(daily_range[:-1]), np.log(daily_range[1:]))
+            texture_range = np.log(np.maximum(daily_range, 0.01))
+            texture["range_phi"][year_index, slot] = safe_corr(texture_range[:-1], texture_range[1:])
             wet_amounts = p[wet]
             texture["amount_phi"][year_index, slot] = safe_corr(np.log(wet_amounts[:-1]), np.log(wet_amounts[1:])) if len(wet_amounts) >= 3 else 0.0
             previous, current = wet[:-1], wet[1:]

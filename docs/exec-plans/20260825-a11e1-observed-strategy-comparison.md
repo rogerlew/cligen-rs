@@ -11,7 +11,8 @@ production winner.
 - [x] 2026-08-25: identified the published base source and authenticated local inputs.
 - [x] 2026-08-25: independent review held the initial fit-validation/PRISM draft.
 - [x] 2026-08-25: corrected role, strategy identity, dry support, calendar estimand, schema, and authentication design.
-- [ ] Publish corrected source and pass synthetic gates.
+- [x] 2026-08-25: published initial corrected source and passed synthetic gates.
+- [ ] Publish the pre-output daily-range correction and rerun.
 - [ ] Preflight, fit, cross-validate, and execute development generation.
 - [ ] Review, gate, publish evidence, and close.
 
@@ -27,6 +28,11 @@ production winner.
   forcing test.
 - Use one member per site and label the paired bootstrap as spatially
   descriptive, not Monte Carlo uncertainty.
+- The first published-source invocation failed before artifact publication on
+  a candidate day with zero diurnal range. The specification requires a
+  positive monthly mean, not a strictly positive daily range. The corrected
+  source preserves that monthly value and censors only the daily log-texture
+  input at 0.01 °C.
 
 ## Plan of work
 
