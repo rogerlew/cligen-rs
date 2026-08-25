@@ -751,9 +751,31 @@ must reconcile the 19-minute R2R4 control before a new reservation.
 R2R5-r3 subsequently passed control job `1242185`, then portfolio job
 `1242218` completed E0 but failed closed on E1's non-finite training state
 before E2C/E2 or the runtime benchmark. Authenticated collection and exact
-cleanup passed. Campaign use is 321/616 L40-minutes; the package holds pending
-a bounded E1 numerical corrective successor, and the remaining 295 minutes do
-not authorize a repeat of the unchanged 515-minute full-study bound.
+cleanup passed. At that terminal, campaign use was 321/616 L40-minutes and the
+proposed next step was a bounded E1 numerical corrective; the remaining 295
+minutes did not authorize a repeat of the unchanged 515-minute full-study
+bound. That proposed corrective was superseded by the direction below.
+
+**Operator direction 2026-08-25: close the A10/R15 neural-candidate line at
+the recorded R2R5 HOLD and begin a fresh A11 forcing-driven lineage.** No E1
+numerical corrective successor or unchanged R15 rerun is authorized. Prior A10
+packages, terminals, confirmation firewalls, and evidence remain unchanged;
+unused campaign capacity is not transferred to A11.
+
+The A11 package executed on 2026-08-25:
+[A11 — Forced Monthly/Annual Stochastic Generator with Conditional Daily Oracle](work-packages/20260825-a11-forced-monthly-annual-stochastic-generator/package.md),
+governed by the attempted revision-1 research
+[SPEC-A11-FORCED-STOCHASTIC-GENERATOR](specifications/SPEC-A11-FORCED-STOCHASTIC-GENERATOR.md)
+and its [living ExecPlan](exec-plans/20260825-a11-forced-stochastic-generator.md).
+Independent review rejected the execution before scientific adjudication: the
+attempt was not bound to a source commit containing its implementation, omitted
+the annual transition and mandatory oracle/evaluation surfaces, did not
+reconcile covariance after PRISM scaling, changed wet-count targets outside the
+registered law, and did not compute the frozen bootstrap estimator. The 48
+stream records are non-authoritative diagnostics. Both attempt slots are spent,
+so the terminal is `HOLD-A11-CONTRACT-NONCONFORMANCE` with science status
+`NOT_EVALUATED`; no confirmation target access was observed, the claimed seal
+was unauthenticated, and no profile was promoted.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

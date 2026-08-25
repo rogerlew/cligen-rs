@@ -1,0 +1,32 @@
+{
+  "attempt_id": "a11-attempt-0002",
+  "confirmation_state": "SEALED",
+  "development_evidence_authoritative": false,
+  "development_evidence_sha256": "31def4315d8aec347330e9315326e90d10b51d80636da2ba48a8084f2e4dd74a",
+  "findings": [
+    "the named source commit does not contain the package-local implementation or freeze",
+    "the target generator has no frozen annual transition and does not reproduce interyear persistence",
+    "the reported regional covariance and annual variance are not reconciled after site-specific PRISM scaling",
+    "storm, context, required climate families, matched bootstrap, runtime, and WEPP surfaces are absent",
+    "wet totals and counts are changed after copula sampling by a rule absent from the prospective freeze",
+    "the raw median was substituted for the frozen upper-90-percent bootstrap estimator",
+    "variation fitting pooled uncentered site-year levels, so between-site climatology masqueraded as interannual variation",
+    "tied wet fractions received artificial stable ordinal ranks and no requested/effective integer-count receipt",
+    "the evidence schema left scientific nested objects unconstrained and required freeze/fixture/verifier artifacts were absent",
+    "the calendar receipt was aggregate and did not prove ordered axes, boundaries, per-object support, or exact PRISM role/cell mapping",
+    "the scored f64 arrays differ from the f32 payload whose bytes were hashed, and source/evaluator hashes were absent",
+    "the claimed confirmation seal had no roster, custodian, metadata manifest, or firewall artifact",
+    "resource bytes were internally inconsistent and aggregate resource reconciliation was absent"
+  ],
+  "raw_diagnostic_only": {
+    "maximum_site_ratio": 1.3541987148009367,
+    "median_site_ratio": 1.2579097731782252,
+    "must_not_be_used_for_scientific_decision": true,
+    "stream_count": 48
+  },
+  "schema_version": "a11-evidence-audit-1",
+  "science_status": "NOT_EVALUATED",
+  "seal_authentication": "NOT_ESTABLISHED",
+  "target_series_accessed": false,
+  "terminal": "HOLD-A11-CONTRACT-NONCONFORMANCE"
+}

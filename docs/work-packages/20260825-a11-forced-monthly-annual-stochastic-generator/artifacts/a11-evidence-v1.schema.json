@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cligen-rs.invalid/schemas/a11-evidence-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "science_contract_id", "attempt_id", "candidate_id", "calendar_preflight", "forcing_receipts", "streams", "development", "confirmation", "resource_use"],
+  "properties": {
+    "schema_version": {"const": "a11-evidence-1"},
+    "science_contract_id": {"const": "a11-forced-monthly-annual-oracle-science-v1"},
+    "attempt_id": {"type": "string", "pattern": "^a11-attempt-[0-9]{4}$"},
+    "candidate_id": {"const": "a11_forced_monthly_annual_oracle_v1"},
+    "calendar_preflight": {"type": "object"},
+    "forcing_receipts": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"type": "object"}},
+    "streams": {"type": "array", "minItems": 48, "maxItems": 48, "items": {"type": "object"}},
+    "development": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["climate", "comparators", "wepp", "integrated_pass", "science_status", "terminal"],
+      "properties": {
+        "climate": {"type": "object"},
+        "comparators": {"type": "object"},
+        "wepp": {"type": "object"},
+        "integrated_pass": {"type": "boolean"},
+        "science_status": {"enum": ["PASS", "FAIL", "NOT_EVALUATED"]},
+        "terminal": {"type": "string", "minLength": 1}
+      }
+    },
+    "confirmation": {"type": "object"},
+    "resource_use": {"type": "object"}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "attempt_id": "a11-attempt-0002",
+  "candidate_id": "a11_forced_monthly_annual_oracle_v1",
+  "confirmation": {
+    "consume_receipt": null,
+    "state": "NO_ACCESS_OBSERVED_SEAL_UNAUTHENTICATED",
+    "target_series_accessed": false
+  },
+  "decision_sha256": "5e04b4d5bfe03bcf1b85fd09efdc5a053bba66dbe2221fa9e9b9dff8dbc22b89",
+  "development_evidence_sha256": "31def4315d8aec347330e9315326e90d10b51d80636da2ba48a8084f2e4dd74a",
+  "evidence_audit_sha256": "ec9ba2be2c9f85c95261ecc7de25414f444b9fbb2cfa1787348bcbc2345fe90e",
+  "promotion_authorized": false,
+  "schema_version": "a11-terminal-1",
+  "science_contract_id": "a11-forced-monthly-annual-oracle-science-v1",
+  "science_status": "NOT_EVALUATED",
+  "terminal": "HOLD-A11-CONTRACT-NONCONFORMANCE"
+}

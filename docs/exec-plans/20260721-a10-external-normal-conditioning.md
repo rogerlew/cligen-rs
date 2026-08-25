@@ -62,7 +62,7 @@ production change.
       new-role diagnostics; it collected the shared E2 initialization exception.
 - [x] Scaffolded A10M5R15R2R3 with an unchanged science contract and a
       deterministic rewrite of every inherited role-scoped evidence path.
-- [ ] Correct the PyTorch advanced-index assignment under a fresh R2R4
+- [x] Corrected the PyTorch advanced-index assignment under the fresh R2R4
       identity; realized 101 + successor ceiling 515 = authorized maximum 616.
 - [x] Scaffolded R2R4 with exactly one scientific-code delta: effective
       indexed assignment for the already-ratified matched E2 initialization.
@@ -75,8 +75,9 @@ production change.
 - [x] R2R5-r3 control job `1242185` passed; portfolio job `1242218` failed
       closed after E0 completed and E1 reached a non-finite training state.
       Collection and exact cleanup passed; campaign use is 321/616.
-- [ ] Reproduce and bound the E1 numerical failure in a fresh corrective
-      package before seeking authority for another candidate execution.
+- [x] 2026-08-25: closed the planned E1 numerical-corrective path without
+      changing the R2R5 HOLD. The operator selected fresh non-neural A11
+      forcing-driven work; no further R15 candidate execution is authorized.
 
 ## Surprises & Discoveries
 
@@ -126,6 +127,10 @@ production change.
   already accepted local series in original candidate-blind order, and bound
   new requests to a published 72-point queue for the remaining 8 cold and 28
   hot-arid candidate-fit slots. Date/Author: 2026-07-21, operator/Codex.
+- Decision: preserve R2R5 at its nonfinite-training HOLD and close the R15
+  corrective queue. Begin A11 as a fresh non-neural, forcing-driven lineage;
+  do not transfer unused L40 authority or reinterpret A10 evidence.
+  Date/Author: 2026-08-25, operator/Codex.
 
 ## Outcomes & Retrospective
 
@@ -139,9 +144,14 @@ identity mechanically.
 
 The operator selected the prospective-cohort path. A10M5R15R1 is now the
 completed data remedy; it does not alter the predecessor HOLD. The successor
-corpus, normalizer, and preflight passed. GPU execution remains contingent on
-the separately published A10M5R15R2 source, fresh authority, and
-pre-reservation checks.
+corpus, normalizer, and preflight passed. Execution then continued through the
+separately published R2--R2R5 authority identities and their recorded gates.
+
+The later R2R5 execution closed at
+`HOLD-A10M5R15R2R5-E1-NONFINITE-TRAINING`. On 2026-08-25 the operator closed
+the neural corrective path and selected the separately governed A11
+forcing-driven lineage. No further R15 execution or confirmation access is
+authorized, and the remaining campaign capacity is not reassigned.
 
 ## Context and Orientation
 
@@ -210,3 +220,6 @@ verified immutable local bundle.
 
 Revision note (2026-07-21): created after review of the proposed A10M5R15
 candidate plan and incorporated all five review recommendations.
+
+Revision note (2026-08-25): closed the pending R15 numerical-corrective path
+at the existing R2R5 HOLD and recorded the fresh A11 transition.

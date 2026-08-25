@@ -1,0 +1,29 @@
+{
+  "calendar": {
+    "axis_rows_per_object": 10958,
+    "calendar_objects": 1440,
+    "candidate_fit_objects": 1200,
+    "february_29_observed": true,
+    "fit_validation_objects": 240,
+    "mask_based_eligibility": true,
+    "masked_leap_december_31_per_object": 8,
+    "observed_rows_per_object": 10950,
+    "schema_version": "a11-calendar-preflight-1",
+    "shard_count": 60,
+    "shard_manifest_sha256": "1387f034da29a0fe1d6586f33a1496fa2efe76dea63accd66bb6f686328d6f86",
+    "valid": true,
+    "window_end_inclusive": "2009-12-31",
+    "window_start_inclusive": "1980-01-01"
+  },
+  "candidate_output_produced": false,
+  "confirmation_sealed": true,
+  "design_freeze_sha256": "e5637d02e15d1cbf2018a518c7d3a293d1dcc98019606f5989fc3f17855d7c50",
+  "fit_sha256": "420552a1137b27dc22effc45a30f15230de40ec382b0d2eef461102bebf1ac12",
+  "normal_conditioning": {
+    "archive_sha256": "869ca739247a43ccf905a11f216df4fe18e812b5d5c6ade2905e5749fe0c970c",
+    "index_sha256": "1a25423b5807a79cae2d9dd9d16c2ed5a58d67a3878a55a0d97cdd65e5404ac9",
+    "normalizer_sha256": "fca0ae70d45de16e99053b2be1cc7af1a7c910ea0049753fbfd4e20997b86883"
+  },
+  "schema_version": "a11-preflight-1",
+  "valid": true
+}

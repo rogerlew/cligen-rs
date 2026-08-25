@@ -1,0 +1,25 @@
+{
+  "candidate_id": "a11_forced_monthly_annual_oracle_v1",
+  "climate_gate": {
+    "candidate_pass": false,
+    "maximum_site_ratio": 1.3541987148009367,
+    "maximum_site_ratio_limit": 1.5,
+    "median_site_ratio": 1.2579097731782252,
+    "median_site_ratio_limit": 1.25,
+    "stream_count": 48,
+    "support_pass": true
+  },
+  "confirmation_authorized": false,
+  "confirmation_state": "NO_ACCESS_OBSERVED_SEAL_UNAUTHENTICATED",
+  "development_evidence_sha256": "31def4315d8aec347330e9315326e90d10b51d80636da2ba48a8084f2e4dd74a",
+  "evidence_authoritative": false,
+  "integrated_pass": false,
+  "schema_version": "a11-development-decision-1",
+  "science_contract_id": "a11-forced-monthly-annual-oracle-science-v1",
+  "science_status": "NOT_EVALUATED",
+  "terminal": "HOLD-A11-CONTRACT-NONCONFORMANCE",
+  "wepp_execution": {
+    "executed": false,
+    "reason": "attempt output failed the architecture/evidence contract before downstream execution"
+  }
+}

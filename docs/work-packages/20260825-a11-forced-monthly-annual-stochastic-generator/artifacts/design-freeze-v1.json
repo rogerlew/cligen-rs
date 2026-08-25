@@ -1,0 +1,128 @@
+{
+  "architecture": {
+    "candidate_id": "a11_forced_monthly_annual_oracle_v1",
+    "daily_oracle": {
+      "amount_law": "monthly-region lognormal AR(1) positive weights with one exact-total normalization",
+      "dtr_law": "monthly-region lognormal AR(1), scaled once to the positive monthly mean target",
+      "occurrence_law": "monthly-region first-order Markov bridge conditional on start state and exact wet count; pooled transition probabilities bounded to [1e-6,1-1e-6] before any candidate output",
+      "secondary_variables": "not emitted by the climate-only research stream",
+      "storm_law": "not emitted by the climate-only research stream",
+      "temperature_law": "monthly-region Gaussian AR(1), centered and scaled once to exact zero mean and daily residual SD"
+    },
+    "joint_target_law": "region-pooled 48-variable empirical Gaussian copula over log1p precipitation total, wet fraction, mean temperature, and log diurnal range; one vector per donor year",
+    "model_count": 1,
+    "neural": false
+  },
+  "calendar": {
+    "eligibility": "conjunction of source_observed and finite prcp/tmax/tmin masks",
+    "fit_end_inclusive": "2009-12-31",
+    "fit_start": "1980-01-01",
+    "normalized_axis": "proleptic_gregorian",
+    "source_transform": "daymet_official_365_v1"
+  },
+  "comparators": [
+    "faithful_5_32_3/qc_filter=faithful",
+    "faithful_5_32_3/qc_filter=off",
+    "stochastic_prism_localized_par_v1",
+    "a11_forced_monthly_annual_oracle_v1"
+  ],
+  "confirmation": {
+    "consume_when": "integrated_development_pass_only",
+    "state_at_freeze": "SEALED",
+    "target_series_accessed": false
+  },
+  "evaluation": {
+    "bootstrap_replicates": 1000,
+    "bootstrap_seed": 410542,
+    "component_scales": {
+      "coefficient_of_variation": 0.25,
+      "correlation": 0.1,
+      "log_precipitation": 0.25,
+      "probability": 0.05,
+      "skew": 0.5,
+      "temperature_mean_c": 1.0,
+      "temperature_standard_deviation_c": 0.5
+    },
+    "development_pass": {
+      "all_four_arms_complete": true,
+      "maximum_site_ratio": 1.5,
+      "median_site_ratio_upper_90_percent": 1.25,
+      "wepp_matrix_complete": true
+    },
+    "metric_contract": "a10m5r4r2-realized-temporal-v1",
+    "wet_threshold_mm": 1.0
+  },
+  "forcing": {
+    "climatology": {
+      "asset_id": "prism_norm91m_9120_4km_m4_m5_v1",
+      "fields": ["monthly_ppt_mm", "monthly_tmax_c", "monthly_tmin_c"],
+      "lookup": "containing_cell_only",
+      "period": "PRISM Norm91m registered bundle period"
+    },
+    "reconciliation": {
+      "annual_constraint": "implied from the same complete candidate-fit annual rows used for monthly covariance",
+      "arithmetic": "IEEE-754 binary64",
+      "day_count_weights": "normalized Gregorian month lengths for annual mean temperature",
+      "joint_feasibility": "sample covariance of a single joint latent matrix; symmetrize; eigh; clip eigenvalues below 1e-10; renormalize diagonal to one",
+      "norm": "Frobenius",
+      "serialization": "RFC 8785-style sorted compact JSON numbers emitted by Python json",
+      "tolerance": 1e-10
+    },
+    "variation": {
+      "construction_role": "candidate_fit_only",
+      "fields": [
+        "monthly_precipitation_covariance",
+        "monthly_temperature_covariance",
+        "monthly_dtr_covariance",
+        "wet_count_distribution",
+        "annual_dispersion",
+        "cross_variable_dependence",
+        "daily_texture"
+      ],
+      "lookup_scope": "region_pooled",
+      "regions": [
+        "arid_boundary",
+        "cold",
+        "hot_arid",
+        "humid",
+        "monsoonal_transition",
+        "non_monsoonal_semi_arid"
+      ]
+    }
+  },
+  "generation": {
+    "begin_year": 2001,
+    "horizons_years": [30, 100],
+    "member_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+    "nested_prefix": true,
+    "rng": "NumPy 2.3.5 Philox with BLAKE2b-64 domain-separated seeds",
+    "rng_domains": ["target", "occurrence", "amount", "temperature", "dtr"]
+  },
+  "implementation": {
+    "kind": "package-local research Python",
+    "numpy_version": "2.3.5",
+    "production_crate_changed": false,
+    "python_version": "3.12.13"
+  },
+  "resources": {
+    "aggregate_cpu_seconds": 28800,
+    "aggregate_output_bytes": 2147483648,
+    "gpu_count": 0,
+    "operational_attempts": 2
+  },
+  "roster": {
+    "observation_role": "fit_validation",
+    "site_manifest": "../../20260718-a10m5r4r2-realized-temporal-adjudication/artifacts/sites.json",
+    "site_manifest_sha256": "f8415f74143f37e07b9936b4c3ecdc0a08908fc32b285e523c63ccfe12ad71dd"
+  },
+  "schema_version": "a11-design-freeze-1",
+  "science_contract_id": "a11-forced-monthly-annual-oracle-science-v1",
+  "source_commit": "2f65bf863e572d4d0143595f019be1867f49808a",
+  "status": "RATIFIED",
+  "wepp": {
+    "mandatory": true,
+    "protocol_id": "cligen-a5-wepp-response-protocol-v1",
+    "response_schema_id": "cligen-a5-wepp-response-v1",
+    "reuse_rule": "exact executable, scenario, climate-installation, and extraction identities required; absence fails integrated development"
+  }
+}
