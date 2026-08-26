@@ -24,6 +24,11 @@
     "winner_rule": "current_if_supported_and_reference_unsupported_or_current_arm_median_le_reference_else_reference_if_supported_else_closest"
   },
   "evaluation_id": "a12r3-localizable-selector-quality-v1",
+  "estimand_eligibility": {
+    "diagnostic_file_sha256": "f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8",
+    "minimum_eligible_months_per_family": 11,
+    "sparse_wet_month_rule": "exclude_from_wet_day_sd_and_skew_monthly_medians_only"
+  },
   "input_hashes": {
     "a10_corpus_spec": "703a67dffdcc15f99ebd60ec1e6cc4402aff8ad24e8971a4521e7b6c664c19d4",
     "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",

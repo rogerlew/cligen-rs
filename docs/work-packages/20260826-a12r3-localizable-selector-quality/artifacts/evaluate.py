@@ -73,6 +73,7 @@ PACKAGE_PATH = PACKAGE.parent / "package.md"
 PLAN_PATH = ROOT / "docs/exec-plans/20260826-a12r3-localizable-selector-quality.md"
 REVIEW_PATH = PACKAGE / "review.md"
 TEST_RESULTS_PATH = PACKAGE / "test-results.md"
+ESTIMAND_DIAGNOSTIC_PATH = PACKAGE / "estimand-eligibility-diagnostic-v1.json"
 POLICIES = (
     "closest_localizable_v1",
     "cligen_prism_rank_sum_localizable_v1",
@@ -84,7 +85,7 @@ METRICS = BASE.METRICS
 
 
 def validate_manifest(value: Any) -> dict[str, Any]:
-    fields = {"bootstrap", "corpus", "decision", "evaluation_id", "input_hashes",
+    fields = {"bootstrap", "corpus", "decision", "estimand_eligibility", "evaluation_id", "input_hashes",
               "metrics", "policies", "predecessor", "runtime", "schema_version"}
     if not isinstance(value, dict) or set(value) != fields:
         raise EvaluationError("manifest fields differ")
@@ -109,6 +110,12 @@ def validate_manifest(value: Any) -> dict[str, Any]:
         "winner_rule": "current_if_supported_and_reference_unsupported_or_current_arm_median_le_reference_else_reference_if_supported_else_closest",
     }:
         raise EvaluationError("decision contract differs")
+    if value["estimand_eligibility"] != {
+        "diagnostic_file_sha256": "f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8",
+        "minimum_eligible_months_per_family": 11,
+        "sparse_wet_month_rule": "exclude_from_wet_day_sd_and_skew_monthly_medians_only",
+    } or BASE.digest(ESTIMAND_DIAGNOSTIC_PATH) != value["estimand_eligibility"]["diagnostic_file_sha256"]:
+        raise EvaluationError("estimand eligibility contract differs")
     expected_corpus = {
         "calendar_axis_rows": 10958,
         "masked_dates": [f"{year}-12-31" for year in range(1980, 2010) if year % 4 == 0],
@@ -125,6 +132,7 @@ def validate_manifest(value: Any) -> dict[str, Any]:
 def source_paths() -> list[Path]:
     return [
         Path(__file__), MANIFEST_PATH, SCHEMA_PATH, PACKAGE / "test_evaluate.py",
+        ESTIMAND_DIAGNOSTIC_PATH,
         SPEC_PATH, PACKAGE_PATH, PLAN_PATH, REVIEW_PATH, TEST_RESULTS_PATH,
         R2_PATH, R2.BASE_PATH, R2.LOCALIZE_PATH, R2.RUN_PATH,
         ROOT / "crates/cligen/src/prism/grid.rs", ROOT / "crates/cligen/src/prism/mod.rs",
@@ -193,6 +201,83 @@ def arm_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
 def paired_comparison(candidate: list[dict[str, Any]], baseline: list[dict[str, Any]],
                       manifest: dict[str, Any]) -> dict[str, Any]:
     return R2.paired_comparison(candidate, baseline, manifest)
+
+
+def observed_descriptors_masked(value: dict[str, Any]) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
+    dates = [BASE.dt.date.fromisoformat(text) for text in value["dates"]]
+    observed = np.array(value["source_observed"], dtype=bool)
+    fields = {name: np.array(value["fields"][name], dtype=float)
+              for name in ("prcp", "tmax", "tmin")}
+    result = {name: np.zeros(12) for name in ("sd", "skew", "pww", "pwd", "tmax_sd", "tmin_sd")}
+    sparse = []
+    for month in range(1, 13):
+        indexes = [index for index, date in enumerate(dates) if date.month == month and observed[index]]
+        positive = fields["prcp"][indexes]
+        positive = positive[positive > 0.0]
+        if len(positive) < 3:
+            result["sd"][month - 1] = np.nan
+            result["skew"][month - 1] = np.nan
+            sparse.append({"month": month, "wet_day_count": len(positive)})
+        else:
+            result["sd"][month - 1] = float(np.std(positive / 25.4, ddof=1))
+            result["skew"][month - 1] = BASE.adjusted_skew(positive)
+        result["tmax_sd"][month - 1] = float(np.std(fields["tmax"][indexes], ddof=1) * 1.8)
+        result["tmin_sd"][month - 1] = float(np.std(fields["tmin"][indexes], ddof=1) * 1.8)
+        ww, wd, wet_prev, dry_prev = BASE.wet_transition_counts(
+            dates, observed, fields["prcp"], indexes
+        )
+        if wet_prev == 0 or dry_prev == 0:
+            raise EvaluationError(f"{value['point_id']} month {month} has incomplete transitions")
+        result["pww"][month - 1] = ww / wet_prev
+        result["pwd"][month - 1] = wd / dry_prev
+        if sparse and sparse[-1]["month"] == month:
+            sparse[-1].update({"wet_predecessor_count": wet_prev,
+                               "dry_predecessor_count": dry_prev})
+    eligible = {name: int(np.sum(np.isfinite(result[name]))) for name in result}
+    if (eligible["sd"] < 11 or eligible["skew"] < 11
+            or any(eligible[name] != 12 for name in ("pww", "pwd", "tmax_sd", "tmin_sd"))):
+        raise EvaluationError(f"{value['point_id']} descriptor month eligibility differs")
+    return result, {"eligible_month_counts": eligible, "sparse_wet_months": sparse}
+
+
+def verify_estimand_diagnostic(descriptor_sites: list[tuple[Any, ...]]) -> None:
+    diagnostic = json.loads(ESTIMAND_DIAGNOSTIC_PATH.read_text())
+    actual = []
+    for value, _normals, _arms, _matrix, _displacements, _prior, _observed, eligibility in descriptor_sites:
+        for sparse in eligibility["sparse_wet_months"]:
+            actual.append({
+                "dry_predecessor_count": sparse["dry_predecessor_count"],
+                "month": sparse["month"], "point_id": value["point_id"],
+                "reason": "wet_days_lt_3", "regime": value["regime"],
+                "wet_day_count": sparse["wet_day_count"],
+                "wet_predecessor_count": sparse["wet_predecessor_count"],
+            })
+    if (actual != diagnostic["ineligible_month_cells"]
+            or len(actual) != diagnostic["ineligible_month_cell_count"]
+            or len({row["point_id"] for row in actual}) != diagnostic["ineligible_site_count"]):
+        raise EvaluationError("estimand eligibility diagnostic reproduction differs")
+
+
+def errors_masked(par: dict[str, Any], observed: dict[str, np.ndarray],
+                  localized: dict[str, Any]) -> dict[str, float]:
+    families = {
+        METRICS[0]: np.abs(par["sd"].astype(np.float64) - observed["sd"]) / np.maximum(observed["sd"], 1e-6),
+        METRICS[1]: np.abs(par["skew"].astype(np.float64) - observed["skew"]) / np.maximum(1.0, np.abs(observed["skew"])),
+        METRICS[2]: np.abs(localized["pww"] - observed["pww"]),
+        METRICS[3]: np.abs(localized["pwd"] - observed["pwd"]),
+        METRICS[4]: np.abs(par["tmax_sd"].astype(np.float64) - observed["tmax_sd"]) / np.maximum(observed["tmax_sd"], 1e-6),
+        METRICS[5]: np.abs(par["tmin_sd"].astype(np.float64) - observed["tmin_sd"]) / np.maximum(observed["tmin_sd"], 1e-6),
+    }
+    if any(not np.all(np.isfinite(families[name])) for name in METRICS[2:]):
+        raise EvaluationError("non-finite twelve-month metric family")
+    output = {
+        name: float(np.nanmedian(values) if name in METRICS[:2] else np.median(values))
+        for name, values in families.items()
+    }
+    if not all(np.isfinite(value) for value in output.values()):
+        raise EvaluationError("non-finite metric")
+    output["composite"] = float(np.mean(list(output.values())))
+    return output
 
 
 def summarize(site_rows: list[dict[str, Any]], manifest: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -282,9 +367,14 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
             raise EvaluationError("isolated runtime input identity changed during feasibility")
         # Only after the complete 240-site/2,400-cell feasibility reproduction
         # has passed may observed descriptors be read or any quality metric computed.
-        site_rows = []
+        descriptor_sites = []
         for value, normals, all_arms, matrix, displacements, prior in prepared_sites:
-            observed = BASE.observed_descriptors(value)
+            observed, eligibility = observed_descriptors_masked(value)
+            descriptor_sites.append((value, normals, all_arms, matrix, displacements,
+                                     prior, observed, eligibility))
+        verify_estimand_diagnostic(descriptor_sites)
+        site_rows = []
+        for value, normals, all_arms, matrix, displacements, prior, observed, eligibility in descriptor_sites:
             policy_rows = {}
             for selector in SELECTORS:
                 station = all_arms[ARM[selector]]
@@ -294,13 +384,14 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
                     "selected_station_id": station["id"],
                     "selected_source_par_sha256": par["sha256"],
                     "distance_km": station["distance_km"],
-                    "metrics": BASE.errors(par, observed, normals, localized),
+                    "metrics": errors_masked(par, observed, localized),
                 }
             site_rows.append({
                 "point_id": value["point_id"], "regime": value["regime"],
                 "eligible_candidate_count": prior["eligible_candidate_count"],
                 "candidate_pool_sha256": BASE.canonical_digest(matrix),
-                "policy_displacements": displacements, "policies": policy_rows,
+                "policy_displacements": displacements, "estimand_eligibility": eligibility,
+                "policies": policy_rows,
             })
     summaries, decision = summarize(site_rows, manifest)
     evidence = {
@@ -314,6 +405,7 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
                                "object_set_sha256": preflight["object_set_sha256"],
                                "shard_set_sha256": preflight["shard_set_sha256"]},
         "authenticated_predecessor": AUTHENTICATED_PREDECESSOR,
+        "estimand_eligibility_diagnostic_sha256": BASE.digest(ESTIMAND_DIAGNOSTIC_PATH),
         "predecessor_feasibility_evidence_sha256": BASE.digest(R2_FEASIBILITY),
         "feasibility_reproduction": {"site_count": 240, "candidate_count": 2400,
                                      "exact_match": True},
@@ -331,6 +423,7 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
         "station_archive_sha256": BASE.digest(station_archive),
         "prism_cache_file_set_sha256": prism_identity["file_set_sha256"],
         "authenticated_predecessor": AUTHENTICATED_PREDECESSOR,
+        "estimand_eligibility_diagnostic_sha256": BASE.digest(ESTIMAND_DIAGNOSTIC_PATH),
         "selected_source_par_identities": {
             row["point_id"]: {
                 policy: {

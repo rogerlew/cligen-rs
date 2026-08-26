@@ -53,6 +53,21 @@ SD relative absolute error, wet-day skew scaled absolute error, PWW absolute
 error, PWD absolute error, Tmax SD relative absolute error, and Tmin SD
 relative absolute error. Their unweighted mean is the site composite.
 
+### Prospective estimand-eligibility amendment
+
+The first source-bound run completed feasibility but failed before publishing
+at the first observed descriptor with fewer than three wet days. A complete
+fit-validation diagnostic found exactly two such month cells: June at
+`p+3350_-11625` (one wet day) and `p+3375_-11625` (two wet days). Both have
+eligible wet/dry transition denominators. For wet-day precipitation SD and skew
+only, exclude a site-month with fewer than three wet days from that family's
+monthly median; require at least 11 eligible months per site/family. PWW, PWD,
+Tmax SD, and Tmin SD continue to use all 12 months. This mask is common to all
+three arms and is not an imputation. Any other descriptor ineligibility or
+fewer than 11 eligible months fails closed. The authenticated diagnostic is
+part of the evaluation manifest. The first staged attempt published no quality
+artifact, so the amended source remains prospective to the resulting scores.
+
 Compare current and reference independently with closest using paired site
 deltas. A selector is supported only when the paired composite median is less
 than zero, the upper endpoint of the domain-separated 10,000-replicate Philox

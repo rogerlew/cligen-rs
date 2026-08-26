@@ -2,6 +2,7 @@
 
 Status: prospective scaffold tests passed; terminal gates pending
 
-- evaluator tests: 10/10 passed
-- manifest digest: `1a60c211d243d3e1d1986e34d78f721f85adc35185be35f2139605016feb6386`
+- evaluator tests: 13/13 passed after estimand-eligibility amendment
+- manifest digest: `24558715b5f560bb357a48aa09f2a195a9a3830903f8cd68021baa1dcf06065e`
+- eligibility diagnostic SHA-256: `f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8`
 - `git diff --check`: passed

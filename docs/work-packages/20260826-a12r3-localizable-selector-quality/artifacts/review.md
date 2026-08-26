@@ -17,3 +17,9 @@ binary before scoring; and records every selected station/source `.par` SHA-256
 identity directly in the execution receipt. Targeted disposition, safeguard,
 and source-surface tests were added. Re-review confirmed the PRISM distribution
 authority is also source-bound and returned GO with no unresolved P0/P1 finding.
+
+The first staged science attempt then exposed two sparse wet-month descriptor
+cells before publishing evidence. Independent amendment review required and
+confirmed an exact full-corpus descriptor-eligibility replay before scoring,
+the exact two-cell diagnostic roster, and 12 finite months for all non-wet-day
+families. Final prospective amendment disposition: GO, no unresolved P0/P1.

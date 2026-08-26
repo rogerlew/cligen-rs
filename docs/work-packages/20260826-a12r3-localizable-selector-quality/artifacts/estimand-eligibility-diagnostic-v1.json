@@ -1,0 +1,25 @@
+{
+  "calendar_transform_id": "daymet_official_365_v1",
+  "confirmation_target_series_accessed": false,
+  "diagnostic_id": "a12r3-estimand-eligibility-diagnostic-v1",
+  "failed_source_commit": "f748ba28ca3f80fe0a987847ec4825593ffca7fb",
+  "ineligible_month_cells": [
+    {"dry_predecessor_count": 899, "month": 6, "point_id": "p+3350_-11625", "reason": "wet_days_lt_3", "regime": "hot_arid", "wet_day_count": 1, "wet_predecessor_count": 1},
+    {"dry_predecessor_count": 899, "month": 6, "point_id": "p+3375_-11625", "reason": "wet_days_lt_3", "regime": "hot_arid", "wet_day_count": 2, "wet_predecessor_count": 1}
+  ],
+  "ineligible_month_cell_count": 2,
+  "ineligible_site_count": 2,
+  "input_hashes": {
+    "a10_corpus_spec": "703a67dffdcc15f99ebd60ec1e6cc4402aff8ad24e8971a4521e7b6c664c19d4",
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "daymet_shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40"
+  },
+  "metric_effect": "wet_day_precipitation_sd_and_skew_only",
+  "minimum_eligible_months_per_family": 11,
+  "observed_rows_per_site": 10950,
+  "quality_artifacts_published": false,
+  "runtime": {"numpy": "2.3.5", "python": "3.12.13"},
+  "site_count": 240,
+  "transition_metrics_remain_eligible": true
+}

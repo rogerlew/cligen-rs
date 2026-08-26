@@ -105,6 +105,34 @@ class A12R3Tests(unittest.TestCase):
     def test_execution_paths_are_disjoint(self):
         self.assertTrue(set(MODULE.paths(False).values()).isdisjoint(MODULE.paths(True).values()))
 
+    def test_masked_errors_ignore_only_nan_month(self):
+        import numpy as np
+        observed = {name: np.ones(12) for name in ("sd", "skew", "pww", "pwd", "tmax_sd", "tmin_sd")}
+        observed["sd"][5] = np.nan
+        observed["skew"][5] = np.nan
+        par = {name: np.ones(12, dtype=np.float32) for name in ("sd", "skew", "tmax_sd", "tmin_sd")}
+        localized = {"pww": np.ones(12), "pwd": np.ones(12)}
+        result = MODULE.errors_masked(par, observed, localized)
+        self.assertTrue(all(value == 0.0 for value in result.values()))
+
+    def test_masked_errors_reject_non_wet_family_nan(self):
+        import numpy as np
+        observed = {name: np.ones(12) for name in ("sd", "skew", "pww", "pwd", "tmax_sd", "tmin_sd")}
+        observed["pww"][5] = np.nan
+        par = {name: np.ones(12, dtype=np.float32) for name in ("sd", "skew", "tmax_sd", "tmin_sd")}
+        localized = {"pww": np.ones(12), "pwd": np.ones(12)}
+        with self.assertRaisesRegex(MODULE.EvaluationError, "twelve-month"):
+            MODULE.errors_masked(par, observed, localized)
+
+    def test_estimand_diagnostic_rejects_unexpected_sparse_cell(self):
+        eligibility = {"sparse_wet_months": [{"month": 1, "wet_day_count": 2,
+                                                "wet_predecessor_count": 1,
+                                                "dry_predecessor_count": 10}]}
+        site = ({"point_id": "unexpected", "regime": "hot_arid"}, None, None, None,
+                None, None, None, eligibility)
+        with self.assertRaisesRegex(MODULE.EvaluationError, "diagnostic reproduction"):
+            MODULE.verify_estimand_diagnostic([site])
+
 
 if __name__ == "__main__":
     unittest.main()
