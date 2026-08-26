@@ -135,6 +135,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260826-a12-station-selection-heuristic-evaluation](20260826-a12-station-selection-heuristic-evaluation/package.md) | EXECUTED-HOLD-UNLOCALIZABLE-DONOR |
 | [20260826-a12r1-localizability-aware-selection](20260826-a12r1-localizability-aware-selection/package.md) | EXECUTED-COMPLETE |
 | [20260826-a12r2-localizability-repair-comparison](20260826-a12r2-localizability-repair-comparison/package.md) | EXECUTED-HOLD-REPAIR-INELIGIBLE |
+| [20260826-a12r3-localizable-selector-quality](20260826-a12r3-localizable-selector-quality/package.md) | READY-TO-EXECUTE |
 | [20260722-lemhi-gpu-capacity-policy](20260722-lemhi-gpu-capacity-policy/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |

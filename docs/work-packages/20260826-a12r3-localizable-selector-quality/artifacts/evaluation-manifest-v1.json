@@ -1,0 +1,44 @@
+{
+  "bootstrap": {
+    "algorithm": "numpy_philox",
+    "common_resamples": true,
+    "domain": "a12r3_localizable_selector_site_median_v1",
+    "quantile_method": "linear",
+    "replicates": 10000,
+    "seed": 1201203,
+    "seed_derivation": "numpy_seedsequence_u32le_sha256_domain_plus_integer_seed"
+  },
+  "corpus": {
+    "calendar_axis_rows": 10958,
+    "masked_dates": ["1980-12-31", "1984-12-31", "1988-12-31", "1992-12-31", "1996-12-31", "2000-12-31", "2004-12-31", "2008-12-31"],
+    "observed_rows": 10950,
+    "period_end_inclusive": "2009-12-31",
+    "period_start": "1980-01-01",
+    "role": "fit_validation",
+    "site_count": 240,
+    "source_transform": "daymet_official_365_v1"
+  },
+  "decision": {
+    "family_worsening_limit_fraction": 0.05,
+    "support_rule": "paired_composite_median_lt_0_and_bootstrap_upper_lt_0_and_site_win_fraction_gt_0.5_and_no_family_median_more_than_5pct_above_baseline",
+    "winner_rule": "current_if_supported_and_reference_unsupported_or_current_arm_median_le_reference_else_reference_if_supported_else_closest"
+  },
+  "evaluation_id": "a12r3-localizable-selector-quality-v1",
+  "input_hashes": {
+    "a10_corpus_spec": "703a67dffdcc15f99ebd60ec1e6cc4402aff8ad24e8971a4521e7b6c664c19d4",
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "daymet_shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "station_manifests": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef"
+  },
+  "metrics": ["wet_day_precipitation_sd_relative_absolute_error", "wet_day_precipitation_skew_scaled_absolute_error", "wet_after_wet_probability_absolute_error", "wet_after_dry_probability_absolute_error", "tmax_sd_relative_absolute_error", "tmin_sd_relative_absolute_error"],
+  "policies": ["closest_localizable_v1", "cligen_prism_rank_sum_localizable_v1", "elevation_prism_reference_localizable_v1"],
+  "predecessor": {
+    "a12r2_closure_commit": "9b7fd39bf1cec21a2307c8851bc393cf538deb8c",
+    "a12r2_evaluator_sha256": "cc1ec0b5474e506a98514fc8f23fcf0791ae06cc75bb2ffd932e9dd2bdebfe5d",
+    "a12r2_feasibility_file_sha256": "9523b1a27d09affd755fde1c701ae6b26f7d31be883e054c78b99aee5a84d508",
+    "a12r2_source_commit": "866d0401ab757708d80a58ad9dda5683f6e000bc"
+  },
+  "runtime": {"numpy": "2.3.5", "python": "3.12.13"},
+  "schema_version": 1
+}
