@@ -1,0 +1,42 @@
+{
+  "binary_path": "target/release/cligen",
+  "build_command": [
+    "cargo",
+    "build",
+    "--release",
+    "--locked",
+    "--bin",
+    "cligen"
+  ],
+  "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+  "cargo_version": "cargo 1.97.1 (c980f4866 2026-06-30)",
+  "cligen_binary_sha256": "5dcf78ef99dd8908c3580e070fabf662235666100004292ec139941d1900b698",
+  "features": "default",
+  "rust_toolchain_sha256": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df",
+  "rustc_verbose": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.6",
+  "schema_version": "a12-build-receipt-1",
+  "source_commit": "d94f6eab53c9103c797b332ae51aea3a87341bcb",
+  "source_hashes": {
+    "Cargo.lock": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "README.md": "d866a35c2589b26a5586342ea535545acc0df8dbaa9c539c42ebe9f3759a4aaf",
+    "crates/cligen/src/prism/distribution.json": "bfea8bf673e250ae8d8e265b6b933aff3da30d98796516fa4e0a62642c7c5fd0",
+    "crates/cligen/src/prism/localize.rs": "20544932a809ab11dae96e1932c01985652deefb904be7851f4789919ca9f00e",
+    "crates/cligen/src/prism/run.rs": "366a005abb0bb86b39cdaf03078a7d5e7f0f86eeaf77c0954efdbdfaef569749",
+    "crates/cligen/src/stations/manifests.json": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef",
+    "docs/ROADMAP.md": "2a83ca7247d4f9bb26fec3458e205e7a9b515ed343393e85c4564d9334f79874",
+    "docs/cli-guide.md": "19a5d070ed90449094f5031112a55934bc2ae2d1f53b27c1df76cb77828985dc",
+    "docs/exec-plans/20260826-a12-station-selection-heuristic-evaluation.md": "d6535fa281e215a776b30b1159249ab4c597055682c274fbe30ddf6afc821dcb",
+    "docs/specifications/README.md": "3de6bc5de8528ba81c6cbaffbc47a7a5359e3859c481e5b9e7b3cdff8c546130",
+    "docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md": "32029fa1b2adbbf33d191819191543d426b36d11a793a972ceb44219f46181a1",
+    "docs/specifications/SPEC-A12-STATION-SELECTION-EVALUATION.md": "fed407f2a6e24c79befc7fdfdc7b525cfa76af3407a086188630bf3bb5997e48",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/evaluate.py": "a8bcc227e4ce5d894a6c789093f93523b1f55e6cb10366d1471926b8aaa8921c",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/evaluation-manifest-v1.json": "3c5256ee190ac7eece3441f1ca78985969213a46cceee929a748471ed1bc6683",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/evaluation-manifest-v1.schema.json": "f42c776a71870bf667372271d1cb1392ec2900f8d2134202fe85f661691e1a18",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/review.md": "00839de70eed05b956f2cb4dc949c4cc802e58ad67d9b68a22b8c3a260a2d3d9",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/test-results.md": "b65d4926908d5dd9a9fde85fa06d5aa38db59f2418989b615cad1c07826b4585",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/test_evaluate.py": "19355a79c034fd918016f0963d6e5aa332d703c8fed447ffc6835d574acab334",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/package.md": "49539c75baff77010c2303928f12d133b5620026e02534257f5c0f72ad0da713",
+    "docs/work-packages/README.md": "71af5cea62487f032a645a491ac14d8930618bb8b7352fcb2405ce58815c993f",
+    "rust-toolchain.toml": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+  }
+}

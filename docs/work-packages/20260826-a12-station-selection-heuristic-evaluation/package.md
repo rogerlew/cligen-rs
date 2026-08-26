@@ -1,6 +1,6 @@
 # A12 — Station Selection Heuristic Evaluation
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-HOLD-UNLOCALIZABLE-DONOR`
 
 Date: 2026-08-26
 
@@ -93,8 +93,29 @@ Confirmation roles and target series remain unopened.
 complete cryptographic provenance, replay, review, and gates. Identity,
 calendar, role, numerical, or evidence failure closes on an explicit HOLD.
 
+## Disposition
+
+`EXECUTED-HOLD-UNLOCALIZABLE-DONOR`. The source-bound run authenticated the
+complete calendar and runtime inputs, then stopped at zero-based site index 49,
+`p+3325_-11650`. All three policies selected `ca040983.par`, source SHA-256
+`13bd7d13a59a2180da11798bdb926888f6835acb4167c664907f4446433b567f`.
+Its June occurrence parameters are `P(W/W)=0` and `P(W/D)=0`. This defines an
+all-dry stationary state, but source expected precipitation is zero for a
+positive PRISM target and the preserved persistence ratio would be `0/0`, so
+production localization rejects the donor. No site-quality score, policy
+disposition, runtime-default authority, or confirmation access was emitted.
+The exact failure identities are in
+[`execution-failure-receipt-v1.json`](artifacts/execution-failure-receipt-v1.json).
+
+The bounded corrective successor is
+[A12R1 localizability-aware selection](../20260826-a12r1-localizability-aware-selection/package.md),
+which keeps this failure immutable and prospectively evaluates candidate
+eligibility before policy quality.
+
 ## Artifacts
 
 - prospective manifest, schema, evaluator, and synthetic tests;
-- calendar/input preflight, selector evidence, decision, and execution receipt;
-- independent review and gate record.
+- source-bound build receipt and complete calendar/input preflight;
+- cryptographic failure receipt; no selector-quality evidence or decision was
+  emitted after the frozen fail-closed gate;
+- independent prospective and completed-failure review plus gate record.

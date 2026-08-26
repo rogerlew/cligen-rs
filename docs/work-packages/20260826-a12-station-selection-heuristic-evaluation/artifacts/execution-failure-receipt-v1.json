@@ -1,0 +1,52 @@
+{
+  "schema_version": "a12-execution-failure-receipt-1",
+  "evaluation_id": "a12-station-selection-heuristic-evaluation-v1",
+  "terminal": "EXECUTED-HOLD-UNLOCALIZABLE-DONOR",
+  "source_commit": "d94f6eab53c9103c797b332ae51aea3a87341bcb",
+  "build_receipt_sha256": "79da3f2419b932b3c265f8e0da7e6f335b39c884a48c42b9959a28df074c2af4",
+  "cligen_binary_sha256": "5dcf78ef99dd8908c3580e070fabf662235666100004292ec139941d1900b698",
+  "station_archive_sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9",
+  "station_extracted_tree_sha256": "59785114dda09c666583605092b06b85c7a495de049bf886211adbcbb5474abb",
+  "station_catalog_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211",
+  "prism_runtime_file_set_sha256": "478623402434722813a8083674ed50555b0d9efb5ef416c22bfdabf36866e1d9",
+  "calendar_preflight_sha256": "cb489ef3ad4a6fcf1463364db427d2fc47a3dc2e0642c39a8e2967488552677d",
+  "attempted_site_count": 50,
+  "failed_site_zero_based_index": 49,
+  "failed_site": {
+    "point_id": "p+3325_-11650",
+    "role": "fit_validation",
+    "regime": "hot_arid",
+    "calendar_transform_id": "daymet_official_365_v1",
+    "latitude": 33.25,
+    "longitude": -116.5,
+    "elevation_m": 1618.0
+  },
+  "selected_station": {
+    "station_id": "ca040983.par",
+    "source_par_sha256": "13bd7d13a59a2180da11798bdb926888f6835acb4167c664907f4446433b567f",
+    "distance_km": 7.763751866717407,
+    "current_score": 27.0,
+    "reference_score": 12.0,
+    "selected_by": [
+      "closest_v1",
+      "cligen_prism_rank_sum_v1",
+      "wepppy_elevation_prism_reference_v1"
+    ]
+  },
+  "failed_month": 6,
+  "source_month": {
+    "mean_wet_day_in": 0.15000000596046448,
+    "pww": 0.0,
+    "pwd": 0.0,
+    "intensity_in_per_hour": 0.3199999928474426
+  },
+  "prism_target_month": {
+    "ppt_in": 0.06319291009677677,
+    "tmax_f": 80.41946029663086,
+    "tmin_f": 51.88909912109375
+  },
+  "error": "cligen: PRISM station: month 6 cannot be localized",
+  "scientific_decision_emitted": false,
+  "confirmation_target_series_accessed": false,
+  "failure_evidence_sha256": "0f5e786af89b0281eea429503cd6ecefe56a674136c6494cab13bbb7b0879da6"
+}

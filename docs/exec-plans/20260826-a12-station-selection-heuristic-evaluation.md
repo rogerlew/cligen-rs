@@ -14,8 +14,13 @@ authenticated validation corpus that was not used to fit either policy.
   kept development and confirmation roles out of selector evaluation.
 - [x] 2026-08-26: froze and independently reviewed prospective source; closure
   review returned GO with no unresolved P0/P1 or blocking P2.
-- [ ] Publish, execute, and replay A12.
-- [ ] Review evidence, run gates, and reconcile the terminal package.
+- [x] 2026-08-26: published source commit `d94f6eab53c9103c797b332ae51aea3a87341bcb`,
+  built the locked release, and executed until the frozen fail-closed gate.
+- [x] 2026-08-26: closed A12 at
+  `EXECUTED-HOLD-UNLOCALIZABLE-DONOR`; no scientific result existed to replay.
+- [x] 2026-08-26: independently reviewed failure evidence, ran terminal gates,
+  reconciled the package, and scaffolded the corrective successor. Scientific
+  replay was not applicable because no evidence/decision artifact was emitted.
 
 ## Surprises & Discoveries
 
@@ -37,7 +42,14 @@ authenticated validation corpus that was not used to fit either policy.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+A12 authenticated its 240-site calendar preflight but could not enter quality
+scoring. At site index 49 all three policies selected a donor whose June
+transition probabilities are both zero. Their stationary wet fraction is the
+well-defined all-dry value zero, but source expected precipitation is zero for
+a positive PRISM target and the preserved persistence ratio is `0/0`; the
+production localizer correctly rejects the donor. The failure demonstrates that
+donor feasibility is a prerequisite to selector-quality inference. A12R1 is
+scaffolded to test the least-complex explicit filter without rewriting A12.
 
 ## Context and Orientation
 
