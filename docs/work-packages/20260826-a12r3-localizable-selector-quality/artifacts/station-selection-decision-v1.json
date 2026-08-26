@@ -1,0 +1,8 @@
+{
+  "confirmation_authorized": false,
+  "disposition": "CLOSEST_PREFERRED",
+  "evaluation_id": "a12r3-localizable-selector-quality-v1",
+  "runtime_default_change_authorized": false,
+  "schema_version": "a12r3-station-selection-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}

@@ -35,3 +35,16 @@ site-policy distances had been overwritten through shared mutable station
 dictionaries. The flawed execution and replay are preserved under `attempt1-`
 artifact names. The corrected evaluator snapshots each selected arm at the
 site boundary and has a regression test for later mutation.
+
+## Final closure review
+
+Status: GO; no unresolved P0/P1
+
+Independent review reproduced all 240 sites, 2,400 candidate cells, 720
+selected station/source identities and metrics, the exact sparse roster,
+bootstrap comparisons, and `CLOSEST_PREFERRED`. Every final published distance
+exactly matches its authenticated candidate row; all 582 formerly corrupted
+rows are corrected. Evidence SHA-256 is
+`5711af00c28fa4d55a9af913024fe1ddf2b9460496a053a929be4c1d77c91e3d`.
+Preflight, evidence, and decision replay byte-identically. Binary, archive,
+PRISM, build, source, receipt, confirmation, and default-change chains pass.

@@ -1,0 +1,24 @@
+{
+  "comparisons": {
+    "decision": {
+      "first_sha256": "243ef5d529dddb518fb4f01ce9337362189fdcde6214ca9369cd159b5e027b16",
+      "identical": true,
+      "replay_sha256": "243ef5d529dddb518fb4f01ce9337362189fdcde6214ca9369cd159b5e027b16"
+    },
+    "evidence": {
+      "first_sha256": "5711af00c28fa4d55a9af913024fe1ddf2b9460496a053a929be4c1d77c91e3d",
+      "identical": true,
+      "replay_sha256": "5711af00c28fa4d55a9af913024fe1ddf2b9460496a053a929be4c1d77c91e3d"
+    },
+    "preflight": {
+      "first_sha256": "16e6e2e016547e322653186fe3710a887befc63bc69dd739bf6ecb053df98600",
+      "identical": true,
+      "replay_sha256": "16e6e2e016547e322653186fe3710a887befc63bc69dd739bf6ecb053df98600"
+    }
+  },
+  "first_execution_receipt_sha256": "2a2c555288ce5d0aea14552d5057279c5662b6b4af5dbe581c60ada5451ee050",
+  "replay_execution_receipt_sha256": "ad3b6d47e5489b0fb47d74328f5269185ff60778ce5bf46dfc94c734382e4079",
+  "schema_version": "a12r3-replay-receipt-1",
+  "scientific_replay_identical": true,
+  "source_commit": "5644a89185b087f7be2eb4b415db4a06a92203d4"
+}

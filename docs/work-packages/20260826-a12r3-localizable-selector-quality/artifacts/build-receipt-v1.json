@@ -1,0 +1,43 @@
+{
+  "binary_path": "target/release/cligen",
+  "build_command": [
+    "cargo",
+    "build",
+    "--release",
+    "--locked",
+    "--bin",
+    "cligen"
+  ],
+  "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+  "cargo_version": "cargo 1.97.1 (c980f4866 2026-06-30)",
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483",
+  "features": "default",
+  "rust_toolchain_sha256": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df",
+  "rustc_verbose": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: aarch64-apple-darwin\nrelease: 1.97.1\nLLVM version: 22.1.6",
+  "schema_version": "a12r3-build-receipt-1",
+  "source_commit": "5644a89185b087f7be2eb4b415db4a06a92203d4",
+  "source_hashes": {
+    "Cargo.lock": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "crates/cligen/src/prism/distribution.json": "bfea8bf673e250ae8d8e265b6b933aff3da30d98796516fa4e0a62642c7c5fd0",
+    "crates/cligen/src/prism/grid.rs": "53e81a2e2597fd44d14caf72689b3a0c2e8b8fbddb35eefcdc369b6e2f8f931d",
+    "crates/cligen/src/prism/localize.rs": "2391ab452b52aeceec0f39720c5fd74c6c8494c95963905bad4afab77e33d60a",
+    "crates/cligen/src/prism/method.json": "2c6668828292cb95c167fea4249eff89762901deba03c702bff0d26036c18924",
+    "crates/cligen/src/prism/mod.rs": "b219dd11a9ebf2be0077b590122bfc44b3b666aab1f284926c7e6f20c3acca7f",
+    "crates/cligen/src/prism/run.rs": "78f3a58375d7aae88063c7935b3befe6e81a06721739c57f1aebf4a9ea2c31c1",
+    "crates/cligen/src/prism/sync.rs": "fba911f0072f6a077d916bf53667888891590c8877b97ee87e2a1dcb26fdacad",
+    "crates/cligen/src/stations/manifests.json": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef",
+    "docs/exec-plans/20260826-a12r3-localizable-selector-quality.md": "a1ef469240bef4f9610d7c27303327d6d6a6a9c0a6b23c60b34e113565202b6e",
+    "docs/specifications/SPEC-A12R3-LOCALIZABLE-SELECTOR-QUALITY.md": "dfe6b8d01007a050a582bd9df0cde2d423c9e42054f90a486ab8dd71aa2331fb",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/evaluate.py": "a8bcc227e4ce5d894a6c789093f93523b1f55e6cb10366d1471926b8aaa8921c",
+    "docs/work-packages/20260826-a12r2-localizability-repair-comparison/artifacts/evaluate.py": "cc1ec0b5474e506a98514fc8f23fcf0791ae06cc75bb2ffd932e9dd2bdebfe5d",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/estimand-eligibility-diagnostic-v1.json": "f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluate.py": "9dd52e3ddd383f6d6d1d4957d9440739b35759d1df2b8ac16abcdbcffd213264",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluation-manifest-v1.json": "203f171e9aa4a2b0b756052e3dde67f54db6fad4cfc9d3830962e1c4c9b2c0a9",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluation-manifest-v1.schema.json": "cb7cee1f5bfb264cb6763c91275411fab9d9dd7fde0c4190ef4f35d32d6a1f3c",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/review.md": "a4b51d459518544963ec93fa246d4f8528c6f54851e97f35d9fe86dd1a41777d",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/test-results.md": "d08c4314e2e7e1e8d5e4c6f3c4d1c8f904bce93ad704d270e32f4a6e081bd8a9",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/test_evaluate.py": "15b875dae500a317387891f61bd61e7dd388f4cae84e1d70359223838ccdfa44",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/package.md": "e7015ecdf1a2d67541e4552d65b5b5dd963d30db87a7b9f11b18766be9e2c4ca",
+    "rust-toolchain.toml": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+  }
+}

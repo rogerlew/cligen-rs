@@ -1,6 +1,6 @@
 # A12R3 Localizable Selector Quality — ExecPlan
 
-Status: active
+Status: complete
 
 ## Purpose
 
@@ -17,11 +17,11 @@ living operational guidance; the specification and package retain authority.
 - [x] Amend wet-day descriptor eligibility after the first staged science run
       found two sparse June cells; preserve the failed build receipt and bind
       the complete diagnostic before re-execution.
-- [ ] Build the exact locked release binary and record its SHA-256.
-- [ ] Execute the first 240-site evaluation.
-- [ ] Execute a separately staged byte-identical replay.
-- [ ] Obtain independent closure review and run all gates.
-- [ ] Reconcile package, roadmap, catalog, and specification registry; commit and push.
+- [x] Build the exact locked release binary and record its SHA-256.
+- [x] Execute the corrected 240-site evaluation.
+- [x] Execute a separately staged byte-identical replay.
+- [x] Obtain independent closure review and run all gates.
+- [x] Reconcile package, roadmap, catalog, and specification registry; commit and push.
 
 The first complete/replay pair at source `6b42aa6` was preserved as attempt 1
 after closure review found shared mutable station dictionaries had overwritten

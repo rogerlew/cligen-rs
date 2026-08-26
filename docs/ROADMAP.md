@@ -16,20 +16,6 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-**A12 terminal / A12R1 complete / A12R2 feasibility HOLD / A12R3 active (2026-08-26):** A12 stopped at
-`EXECUTED-HOLD-UNLOCALIZABLE-DONOR` before scoring when all three policies
-selected a station with zero June source precipitation and an undefined
-`P(W/D)/P(W/W)` persistence ratio for positive PRISM precipitation at
-`p+3325_-11650`. A12R1 added and exact-vector-tested the explicit independent
-all-dry repair profile while preserving ordinary fail-closed behavior. Its
-remaining comparison executed as A12R2. All 240 sites had ordinary-localizable
-donors (2,362/2,400 cells), but 11 raw-policy instances across four desert sites
-were outside the repair contract, so A12R2 closed before scoring. The next
-bounded stage is the scaffolded A12R3 localizability-only selector-quality
-comparison over all 240 sites; any
-zero-target or one-sided repair expansion requires separate authority. No
-package opens confirmation or authorizes a runtime-default change.
-
 **Operator direction 2026-07-15: continue stochastic climate-generator
 development, retire the stopped A8c runtime first, and replace incremental
 candidate rescue with a calibration-first successor family.** File/I/O,

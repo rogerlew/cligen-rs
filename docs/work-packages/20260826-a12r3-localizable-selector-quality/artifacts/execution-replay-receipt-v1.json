@@ -1,0 +1,3425 @@
+{
+  "authenticated_predecessor": {
+    "a12r2_closure_commit": "9b7fd39bf1cec21a2307c8851bc393cf538deb8c",
+    "a12r2_evaluator_sha256": "cc1ec0b5474e506a98514fc8f23fcf0791ae06cc75bb2ffd932e9dd2bdebfe5d",
+    "a12r2_feasibility_file_sha256": "9523b1a27d09affd755fde1c701ae6b26f7d31be883e054c78b99aee5a84d508",
+    "a12r2_source_commit": "866d0401ab757708d80a58ad9dda5683f6e000bc"
+  },
+  "build_receipt_sha256": "ab80e463b73dd8cfa1fc7a176ce0b2273bf40c5f490467de536b9c481745b884",
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483",
+  "confirmation_target_series_accessed": false,
+  "elapsed_seconds": 16.4431350419909,
+  "estimand_eligibility_diagnostic_sha256": "f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8",
+  "evaluation_id": "a12r3-localizable-selector-quality-v1",
+  "input_hashes": {
+    "a10_corpus_spec": "703a67dffdcc15f99ebd60ec1e6cc4402aff8ad24e8971a4521e7b6c664c19d4",
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "daymet_shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "station_manifests": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef"
+  },
+  "outputs": {
+    "calendar-preflight-replay-v1.json": {
+      "bytes": 27796,
+      "sha256": "16e6e2e016547e322653186fe3710a887befc63bc69dd739bf6ecb053df98600"
+    },
+    "station-selection-decision-replay-v1.json": {
+      "bytes": 276,
+      "sha256": "243ef5d529dddb518fb4f01ce9337362189fdcde6214ca9369cd159b5e027b16"
+    },
+    "station-selection-evidence-replay-v1.json": {
+      "bytes": 857359,
+      "sha256": "5711af00c28fa4d55a9af913024fe1ddf2b9460496a053a929be4c1d77c91e3d"
+    }
+  },
+  "prism_cache_file_set_sha256": "478623402434722813a8083674ed50555b0d9efb5ef416c22bfdabf36866e1d9",
+  "schema_version": "a12r3-execution-receipt-1",
+  "selected_source_par_identities": {
+    "p+3050_-08475": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "b83fbc886f56c9f80e7d3fc6a9539aa9f1db6fa4734b52c3c8b918a430f8d000",
+        "station_id": "fl088758.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b83fbc886f56c9f80e7d3fc6a9539aa9f1db6fa4734b52c3c8b918a430f8d000",
+        "station_id": "fl088758.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "46729cffc70d21451f56a4005a6b68f035cec0febf6a80a67576826a2e98cc72",
+        "station_id": "fl081544.par"
+      }
+    },
+    "p+3050_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "160fc9dccbc292379967a585a73848e83cdb16eff8294982092c10c978499e4e",
+        "station_id": "tx410174.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "160fc9dccbc292379967a585a73848e83cdb16eff8294982092c10c978499e4e",
+        "station_id": "tx410174.par"
+      }
+    },
+    "p+3050_-10450": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "725bcad329d76025ae92ce883a71d2f7c87788dc756a614280741ba070c6cda9",
+        "station_id": "tx415579.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "160fc9dccbc292379967a585a73848e83cdb16eff8294982092c10c978499e4e",
+        "station_id": "tx410174.par"
+      }
+    },
+    "p+3050_-10475": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "0f8486cc9c1e194aa24800183b77c19fc2869caadbddbfb183dc84bfe488c2e5",
+        "station_id": "tx413280.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "725bcad329d76025ae92ce883a71d2f7c87788dc756a614280741ba070c6cda9",
+        "station_id": "tx415579.par"
+      }
+    },
+    "p+3075_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "160fc9dccbc292379967a585a73848e83cdb16eff8294982092c10c978499e4e",
+        "station_id": "tx410174.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "160fc9dccbc292379967a585a73848e83cdb16eff8294982092c10c978499e4e",
+        "station_id": "tx410174.par"
+      }
+    },
+    "p+3075_-10450": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "725bcad329d76025ae92ce883a71d2f7c87788dc756a614280741ba070c6cda9",
+        "station_id": "tx415579.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "725bcad329d76025ae92ce883a71d2f7c87788dc756a614280741ba070c6cda9",
+        "station_id": "tx415579.par"
+      }
+    },
+    "p+3075_-10475": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "51a1d8bf0cb4438454ed20ef29f8332ae586b0fa8e1e7bd1c7390c5021902176",
+        "station_id": "tx410498.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "725bcad329d76025ae92ce883a71d2f7c87788dc756a614280741ba070c6cda9",
+        "station_id": "tx415579.par"
+      }
+    },
+    "p+3075_-10500": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1017f58cbc19ef615e805529ffe2173afa253b228fb3d6c8c3572d25029cadce",
+        "station_id": "tx412797.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c0d7e3e972282fc9830b461d93cc0e84c6e9df558535c4adad1874f294aca5fb",
+        "station_id": "tx416104.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1017f58cbc19ef615e805529ffe2173afa253b228fb3d6c8c3572d25029cadce",
+        "station_id": "tx412797.par"
+      }
+    },
+    "p+3100_-08925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      }
+    },
+    "p+3100_-08950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5dc5816df649bb1936f90bf3a141dea4932ff42be6bc0c91ffeb14f256fffce9",
+        "station_id": "ms227128.par"
+      }
+    },
+    "p+3100_-09000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5038fe44184f791df2b28b76ebfcce89daedfe3cdd10d7aad0749ac8768630c0",
+        "station_id": "ms221865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5038fe44184f791df2b28b76ebfcce89daedfe3cdd10d7aad0749ac8768630c0",
+        "station_id": "ms221865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5038fe44184f791df2b28b76ebfcce89daedfe3cdd10d7aad0749ac8768630c0",
+        "station_id": "ms221865.par"
+      }
+    },
+    "p+3125_-08950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5038fe44184f791df2b28b76ebfcce89daedfe3cdd10d7aad0749ac8768630c0",
+        "station_id": "ms221865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "70e606e73ba94bedb981a59b9153693cd5581e1c42288a92a40382122f637ce2",
+        "station_id": "ms223887.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5038fe44184f791df2b28b76ebfcce89daedfe3cdd10d7aad0749ac8768630c0",
+        "station_id": "ms221865.par"
+      }
+    },
+    "p+3200_-08325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      }
+    },
+    "p+3200_-08375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "85a030fc80e14dfddff25c5daab33e8fdfa3003bfdc840949ef927bbbbae7b0c",
+        "station_id": "ga092266.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85a030fc80e14dfddff25c5daab33e8fdfa3003bfdc840949ef927bbbbae7b0c",
+        "station_id": "ga092266.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "85a030fc80e14dfddff25c5daab33e8fdfa3003bfdc840949ef927bbbbae7b0c",
+        "station_id": "ga092266.par"
+      }
+    },
+    "p+3200_-08400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e0a7180cd7057668cff08048a2187836cd4637a5702f948940e263007355689c",
+        "station_id": "ga092450.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85a030fc80e14dfddff25c5daab33e8fdfa3003bfdc840949ef927bbbbae7b0c",
+        "station_id": "ga092266.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "85a030fc80e14dfddff25c5daab33e8fdfa3003bfdc840949ef927bbbbae7b0c",
+        "station_id": "ga092266.par"
+      }
+    },
+    "p+3200_-10925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c8622d2ea61a79d55ec1118d507fe6f2fb4f1c3167c143caf08059d905474b2d",
+        "station_id": "nm299691.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "caf3f68b87ac9a8db077d87a606d6234d6ae17aec8e18d5ef56280a6c66f8adb",
+        "station_id": "nm290417.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "aa7934170a1b863872acb115d3df03ba44afb4e930a755ff9a01d97898413a93",
+        "station_id": "az028619.par"
+      }
+    },
+    "p+3200_-10975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c5b2ab45cc5dede6e8f956adf01a5bf1661486dbeec698274737658ae9908bed",
+        "station_id": "az022664.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b5e11bdd938117679865ce2fc0057b57d1ee245936b9ba052dcc7abe67040155",
+        "station_id": "az029334.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c5b2ab45cc5dede6e8f956adf01a5bf1661486dbeec698274737658ae9908bed",
+        "station_id": "az022664.par"
+      }
+    },
+    "p+3225_-08225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5db0e199c8691b15dff3149a837d7c9e0db70a5e6c8fbbc43feea91bd9ed1260",
+        "station_id": "ga091266.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a6440f8ff627f78d18c38d842289b5452a5ef696815158a122885f39adfcb40d",
+        "station_id": "ga093754.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "17790257013897f7278adda7ffe0769b8c4193783503fffcb926f0208e79db01",
+        "station_id": "ga090211.par"
+      }
+    },
+    "p+3225_-08325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      }
+    },
+    "p+3225_-10200": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "bf727823a85681646c381a6ad6fd96989411a2ef87b2655e209401d3afd4bb24",
+        "station_id": "tx415890.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "19a5de1cefb6ecfa8c3027673ef640b2b33f0a16a1eb0e094d91ac4155476e9c",
+        "station_id": "tx415891.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "19a5de1cefb6ecfa8c3027673ef640b2b33f0a16a1eb0e094d91ac4155476e9c",
+        "station_id": "tx415891.par"
+      }
+    },
+    "p+3225_-10950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "b5e11bdd938117679865ce2fc0057b57d1ee245936b9ba052dcc7abe67040155",
+        "station_id": "az029334.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b5e11bdd938117679865ce2fc0057b57d1ee245936b9ba052dcc7abe67040155",
+        "station_id": "az029334.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "b5e11bdd938117679865ce2fc0057b57d1ee245936b9ba052dcc7abe67040155",
+        "station_id": "az029334.par"
+      }
+    },
+    "p+3250_-08175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5db0e199c8691b15dff3149a837d7c9e0db70a5e6c8fbbc43feea91bd9ed1260",
+        "station_id": "ga091266.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5db0e199c8691b15dff3149a837d7c9e0db70a5e6c8fbbc43feea91bd9ed1260",
+        "station_id": "ga091266.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5db0e199c8691b15dff3149a837d7c9e0db70a5e6c8fbbc43feea91bd9ed1260",
+        "station_id": "ga091266.par"
+      }
+    },
+    "p+3250_-08250": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d6348f956e01439c57ea443cca182140e1be138841d441b2a4131ab04791c3af",
+        "station_id": "ga092966.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b2f1fce663e9142f87356402379c91c37b4ab83cd71e7aa2b5575dc1d4a22605",
+        "station_id": "ga097777.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "b2f1fce663e9142f87356402379c91c37b4ab83cd71e7aa2b5575dc1d4a22605",
+        "station_id": "ga097777.par"
+      }
+    },
+    "p+3250_-08375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+        "station_id": "ga095443.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+        "station_id": "ga095443.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+        "station_id": "ga095443.par"
+      }
+    },
+    "p+3250_-10200": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f",
+        "station_id": "tx410786.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5e2e5819220f9729181f2169874d64a6eb3e0e6c2213a78d34a3731f1d86c383",
+        "station_id": "tx415013.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2ef4231cb4fe9843e70b7f7c962fab7df8f6b169e488c270ec77199faf13803f",
+        "station_id": "tx410786.par"
+      }
+    },
+    "p+3250_-10225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "bf727823a85681646c381a6ad6fd96989411a2ef87b2655e209401d3afd4bb24",
+        "station_id": "tx415890.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5e2e5819220f9729181f2169874d64a6eb3e0e6c2213a78d34a3731f1d86c383",
+        "station_id": "tx415013.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      }
+    },
+    "p+3250_-10250": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2710e64efea4a852e94b09786b5699a55a9c8c8d503b05db0e298d7a0151ab0e",
+        "station_id": "nm294026.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2710e64efea4a852e94b09786b5699a55a9c8c8d503b05db0e298d7a0151ab0e",
+        "station_id": "nm294026.par"
+      }
+    },
+    "p+3250_-10975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2ca64129c525cd0fe9db24131fcfacc52625eb185c0e1a5d37e5d9bb0eea3be5",
+        "station_id": "az021330.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b5e11bdd938117679865ce2fc0057b57d1ee245936b9ba052dcc7abe67040155",
+        "station_id": "az029334.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "aa7934170a1b863872acb115d3df03ba44afb4e930a755ff9a01d97898413a93",
+        "station_id": "az028619.par"
+      }
+    },
+    "p+3275_-08300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "854e4abb5e5809e8d0da75b2dcfcb977f42cc236dbb6effd76660923d18e114c",
+        "station_id": "ga095314.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b2f1fce663e9142f87356402379c91c37b4ab83cd71e7aa2b5575dc1d4a22605",
+        "station_id": "ga097777.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "b2f1fce663e9142f87356402379c91c37b4ab83cd71e7aa2b5575dc1d4a22605",
+        "station_id": "ga097777.par"
+      }
+    },
+    "p+3275_-08325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+        "station_id": "ga095443.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "47c432dde92f122fb42699dbd9297893d54a5ea08800f9ec69952f2fbfb98740",
+        "station_id": "ga095874.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "68350d92b5ba93524a4c735e058d6dae5a941f1f87ca1cf8c44d592c45e366a7",
+        "station_id": "ga095443.par"
+      }
+    },
+    "p+3275_-10200": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5e2e5819220f9729181f2169874d64a6eb3e0e6c2213a78d34a3731f1d86c383",
+        "station_id": "tx415013.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5504e4af451441b8d9400e02e52702de1c0f15d52eed584117a6cb43e5d5d55b",
+        "station_id": "tx418433.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5e2e5819220f9729181f2169874d64a6eb3e0e6c2213a78d34a3731f1d86c383",
+        "station_id": "tx415013.par"
+      }
+    },
+    "p+3275_-10225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5e2e5819220f9729181f2169874d64a6eb3e0e6c2213a78d34a3731f1d86c383",
+        "station_id": "tx415013.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      }
+    },
+    "p+3275_-10250": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      }
+    },
+    "p+3275_-10275": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "264be89cf112db0029a9db0e0356a7b4cc793b88550824cd5c734b890dc55e78",
+        "station_id": "tx418201.par"
+      }
+    },
+    "p+3275_-10300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2710e64efea4a852e94b09786b5699a55a9c8c8d503b05db0e298d7a0151ab0e",
+        "station_id": "nm294026.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2710e64efea4a852e94b09786b5699a55a9c8c8d503b05db0e298d7a0151ab0e",
+        "station_id": "nm294026.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2710e64efea4a852e94b09786b5699a55a9c8c8d503b05db0e298d7a0151ab0e",
+        "station_id": "nm294026.par"
+      }
+    },
+    "p+3275_-10925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9377a940e8dae8280fbd73c7a5acb1ee66dad9ec7bd062d8065faf0831c55f4f",
+        "station_id": "az022754.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9377a940e8dae8280fbd73c7a5acb1ee66dad9ec7bd062d8065faf0831c55f4f",
+        "station_id": "az022754.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9377a940e8dae8280fbd73c7a5acb1ee66dad9ec7bd062d8065faf0831c55f4f",
+        "station_id": "az022754.par"
+      }
+    },
+    "p+3275_-10950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "656b167445b6814857d6222e4cdabf4030df546198911d36e7bd71904dec2217",
+        "station_id": "az027390.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "656b167445b6814857d6222e4cdabf4030df546198911d36e7bd71904dec2217",
+        "station_id": "az027390.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "656b167445b6814857d6222e4cdabf4030df546198911d36e7bd71904dec2217",
+        "station_id": "az027390.par"
+      }
+    },
+    "p+3300_-08250": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "854e4abb5e5809e8d0da75b2dcfcb977f42cc236dbb6effd76660923d18e114c",
+        "station_id": "ga095314.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "854e4abb5e5809e8d0da75b2dcfcb977f42cc236dbb6effd76660923d18e114c",
+        "station_id": "ga095314.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "b2f1fce663e9142f87356402379c91c37b4ab83cd71e7aa2b5575dc1d4a22605",
+        "station_id": "ga097777.par"
+      }
+    },
+    "p+3300_-09075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "db59c0869d8a148efe6f26ae3c19fe56142ea17cc852c59dba7cd497dd7cb893",
+        "station_id": "la165090.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "b761ff1265d1f2ab8977db8fef56204d31156ff1860fa21c9b5811ccd9587f4c",
+        "station_id": "ms227560.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "db59c0869d8a148efe6f26ae3c19fe56142ea17cc852c59dba7cd497dd7cb893",
+        "station_id": "la165090.par"
+      }
+    },
+    "p+3300_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      }
+    },
+    "p+3300_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      }
+    },
+    "p+3300_-10575": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      }
+    },
+    "p+3300_-10600": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "8c3de1399d7cd8d90d90ec7cc92ca3ba16fe064d404d758fff73974b6dc69c13",
+        "station_id": "nm292848.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8c3de1399d7cd8d90d90ec7cc92ca3ba16fe064d404d758fff73974b6dc69c13",
+        "station_id": "nm292848.par"
+      }
+    },
+    "p+3325_-08425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      }
+    },
+    "p+3325_-08900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "851eff73168248320be81522287e395efb70bd1569abccda094b62e352029858",
+        "station_id": "ms228374.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "36a93a01adfce2d92c76de12c8008c8bc3dfef39311c7fa0603113fe65c38614",
+        "station_id": "ms225247.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "851eff73168248320be81522287e395efb70bd1569abccda094b62e352029858",
+        "station_id": "ms228374.par"
+      }
+    },
+    "p+3325_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      }
+    },
+    "p+3325_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      }
+    },
+    "p+3325_-10575": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      }
+    },
+    "p+3325_-10600": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "3c27e3cd2c3f6d6ddc268c977f9c7ff0798585d90e3c2055e630a1a452e6c485",
+        "station_id": "nm291286.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8c3de1399d7cd8d90d90ec7cc92ca3ba16fe064d404d758fff73974b6dc69c13",
+        "station_id": "nm292848.par"
+      }
+    },
+    "p+3325_-11650": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "37ea77683fc0df3d0171127722047e63a480cb68054abd71ed045b96e0746bac",
+        "station_id": "ca041424.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2736ac25a39b4ab9c498bfddde527f717a77444ff87316892bf684d7d574b327",
+        "station_id": "ca043914.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1888c83150c3c5382df4f7c03b51dd0331f34183e73e8b3e563759b3e6886cc9",
+        "station_id": "ca040136.par"
+      }
+    },
+    "p+3325_-11675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2736ac25a39b4ab9c498bfddde527f717a77444ff87316892bf684d7d574b327",
+        "station_id": "ca043914.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2736ac25a39b4ab9c498bfddde527f717a77444ff87316892bf684d7d574b327",
+        "station_id": "ca043914.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2736ac25a39b4ab9c498bfddde527f717a77444ff87316892bf684d7d574b327",
+        "station_id": "ca043914.par"
+      }
+    },
+    "p+3350_-08425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "908e2b5aa9df50e4087200cf782dd089dc1cc6508960ac42fe109acb9539e553",
+        "station_id": "ga090451.par"
+      }
+    },
+    "p+3350_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      }
+    },
+    "p+3350_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "890ba113e6171c9f88e4e881965ccd4335e2cf40bf36f8c483462a518cfbb4b6",
+        "station_id": "nm292865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      }
+    },
+    "p+3350_-10575": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      }
+    },
+    "p+3350_-10600": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1c7205934d4b3bb8d780803b36351b797661e76f230489ade3dfe016d0d061c5",
+        "station_id": "nm295960.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a21b1bc28cc363824edf72752c51bbcf6b1bb2624f38c2df882f02912c4ce93e",
+        "station_id": "nm295965.par"
+      }
+    },
+    "p+3350_-11625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2736ac25a39b4ab9c498bfddde527f717a77444ff87316892bf684d7d574b327",
+        "station_id": "ca043914.par"
+      }
+    },
+    "p+3350_-11675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d5719f2836829f4bd2df778d339d70138796392cb50abb7e51aec1626e016dcc",
+        "station_id": "ca046657.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      }
+    },
+    "p+3375_-09050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c54ce5e9b96568779e192f3843dba5fdeee75f60e7bc04781813fc27b565f682",
+        "station_id": "ms226009.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c54ce5e9b96568779e192f3843dba5fdeee75f60e7bc04781813fc27b565f682",
+        "station_id": "ms226009.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c54ce5e9b96568779e192f3843dba5fdeee75f60e7bc04781813fc27b565f682",
+        "station_id": "ms226009.par"
+      }
+    },
+    "p+3375_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "56b13ea8e15221fa6acd5c93737575419279285abf78dccd8e956eba20e8e749",
+        "station_id": "nm290992.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4fa39e2ad2e311140eee8c9045a0eb4b13696ee935109e97fed287873c7e4c37",
+        "station_id": "nm296687.par"
+      }
+    },
+    "p+3375_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      }
+    },
+    "p+3375_-10575": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      }
+    },
+    "p+3375_-10600": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "eea53566fec76017ab87f2d40d177773d826e8902862596e5531a6c094148c3e",
+        "station_id": "nm293649.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a21b1bc28cc363824edf72752c51bbcf6b1bb2624f38c2df882f02912c4ce93e",
+        "station_id": "nm295965.par"
+      }
+    },
+    "p+3375_-11625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      }
+    },
+    "p+3375_-11650": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5eb7d463f0d4ca1cc902ca7f5c57415e5f586e41967bd79a3df321eaa1da5e18",
+        "station_id": "ca047306.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      }
+    },
+    "p+3375_-11675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c00e162bb731d83a1999f427013eabf065d6bbf0f3ee47069166d9cea835a77b",
+        "station_id": "ca044211.par"
+      }
+    },
+    "p+3400_-08850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "851eff73168248320be81522287e395efb70bd1569abccda094b62e352029858",
+        "station_id": "ms228374.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "011a9d8f1b148f17bbade2518466b934ae47175b5a9acac1acb4198d3699a525",
+        "station_id": "ms220021.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "08d52c3a6cb21510b943fb4f14de1930720fedf59023d0600a506fc2f96a8f20",
+        "station_id": "ms227111.par"
+      }
+    },
+    "p+3400_-08950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c4677fd7a53555c5c40e0c59647da3d81943ab3968e61a61f1e2c2217034b029",
+        "station_id": "ms223645.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "987bce5f55bb05ae65fbfe5d50e06f070edbcf1e85f1179068bab2b5b9c199e9",
+        "station_id": "ms221314.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "08d52c3a6cb21510b943fb4f14de1930720fedf59023d0600a506fc2f96a8f20",
+        "station_id": "ms227111.par"
+      }
+    },
+    "p+3400_-10325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "4dcac713f9165483ffae3edacbf6aae189990f7427008470bd35f62faef42774",
+        "station_id": "nm297008.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3400_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3400_-10375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      }
+    },
+    "p+3400_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      }
+    },
+    "p+3400_-10475": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "822c09e6cff38408440fd18ff7ce63266bb1a9b2ed17f473eff9b79981a04c21",
+        "station_id": "nm292854.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9151ee11e95d38291f45b6a93ac32e842f0f7e6a5dd786357a131fad955ca181",
+        "station_id": "nm299851.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "56b13ea8e15221fa6acd5c93737575419279285abf78dccd8e956eba20e8e749",
+        "station_id": "nm290992.par"
+      }
+    },
+    "p+3400_-10500": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "56b13ea8e15221fa6acd5c93737575419279285abf78dccd8e956eba20e8e749",
+        "station_id": "nm290992.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9151ee11e95d38291f45b6a93ac32e842f0f7e6a5dd786357a131fad955ca181",
+        "station_id": "nm299851.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "56b13ea8e15221fa6acd5c93737575419279285abf78dccd8e956eba20e8e749",
+        "station_id": "nm290992.par"
+      }
+    },
+    "p+3425_-08475": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "95380ab11d05da15ab934b8b0397d3055951b15828acacaab70af3a9bed629ec",
+        "station_id": "ga097600.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "6dba2e72e0c8db3f86324746b11d526d360ba31385f3d5031f1af13c5e998e52",
+        "station_id": "ga091665.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "0e1c8220956aff188326fd63e72544a73a11dbf3003e679ef3372556fae9df06",
+        "station_id": "ga092485.par"
+      }
+    },
+    "p+3425_-08650": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2dde7b18e969c16d7a8419db9391f932ee5ad041e3f9646afe43639daa3b64fb",
+        "station_id": "al015635.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "4a1284beb7de67e68a51e286555fa4aa7de699c5b77b996336be1b3ffe791e12",
+        "station_id": "al017157.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4a1284beb7de67e68a51e286555fa4aa7de699c5b77b996336be1b3ffe791e12",
+        "station_id": "al017157.par"
+      }
+    },
+    "p+3425_-08925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "08d52c3a6cb21510b943fb4f14de1930720fedf59023d0600a506fc2f96a8f20",
+        "station_id": "ms227111.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "08d52c3a6cb21510b943fb4f14de1930720fedf59023d0600a506fc2f96a8f20",
+        "station_id": "ms227111.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "08d52c3a6cb21510b943fb4f14de1930720fedf59023d0600a506fc2f96a8f20",
+        "station_id": "ms227111.par"
+      }
+    },
+    "p+3425_-09000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c4677fd7a53555c5c40e0c59647da3d81943ab3968e61a61f1e2c2217034b029",
+        "station_id": "ms223645.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "820f5f7e13e4ee860f5e1a686d32fa92dcc9718e1048496f874284fe73c376f1",
+        "station_id": "ms220488.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a48fff601c471bf28bc55a4524b0fb31760f13ac4f5ef81ee8ec0f1ccb269d9c",
+        "station_id": "ms229400.par"
+      }
+    },
+    "p+3425_-10375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3425_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3450_-08625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      }
+    },
+    "p+3450_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3450_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3475_-08450": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2c45591b2e4b8c09132a79b8c2fe65144f105602d89e20f4b372bf97acaa4020",
+        "station_id": "ga094648.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2c45591b2e4b8c09132a79b8c2fe65144f105602d89e20f4b372bf97acaa4020",
+        "station_id": "ga094648.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2c45591b2e4b8c09132a79b8c2fe65144f105602d89e20f4b372bf97acaa4020",
+        "station_id": "ga094648.par"
+      }
+    },
+    "p+3475_-08625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "6b0870479ed660afc5d6a5f308d1b54bb730beeb914a1b555338e9ef973732df",
+        "station_id": "al017304.par"
+      }
+    },
+    "p+3475_-08850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      }
+    },
+    "p+3475_-08875": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c082d63f3ac1ae25b4ebe541574a892e7f7917972715e477f28c71bc0510d26d",
+        "station_id": "ms220955.par"
+      }
+    },
+    "p+3475_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "ab80655f495d1adc35d437def3a2924c76089045db2bd45901279c45cfd2a965",
+        "station_id": "nm291963.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a638d9873194db354f889ccced819533545b7493a30db1cbbd0c42d100c5f9a4",
+        "station_id": "nm297226.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "ab80655f495d1adc35d437def3a2924c76089045db2bd45901279c45cfd2a965",
+        "station_id": "nm291963.par"
+      }
+    },
+    "p+3475_-10375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a638d9873194db354f889ccced819533545b7493a30db1cbbd0c42d100c5f9a4",
+        "station_id": "nm297226.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a638d9873194db354f889ccced819533545b7493a30db1cbbd0c42d100c5f9a4",
+        "station_id": "nm297226.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      }
+    },
+    "p+3475_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f13a867b7f25a17bf80a7e8c7bc778eabdb753269e17873862525fe241a9c7d3",
+        "station_id": "nm295617.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a638d9873194db354f889ccced819533545b7493a30db1cbbd0c42d100c5f9a4",
+        "station_id": "nm297226.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a638d9873194db354f889ccced819533545b7493a30db1cbbd0c42d100c5f9a4",
+        "station_id": "nm297226.par"
+      }
+    },
+    "p+3475_-10450": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "3b38cd81f8c09f178780062d687338aac4cd3269d7df7a36df976240b5c5a199",
+        "station_id": "nm299156.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9151ee11e95d38291f45b6a93ac32e842f0f7e6a5dd786357a131fad955ca181",
+        "station_id": "nm299851.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      }
+    },
+    "p+3475_-10500": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      }
+    },
+    "p+3500_-08150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "58393e5ea8611038afc73b6521302a6ba4f887669e1db1abc99a4a28d287fa52",
+        "station_id": "sc386293.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "58393e5ea8611038afc73b6521302a6ba4f887669e1db1abc99a4a28d287fa52",
+        "station_id": "sc386293.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "58393e5ea8611038afc73b6521302a6ba4f887669e1db1abc99a4a28d287fa52",
+        "station_id": "sc386293.par"
+      }
+    },
+    "p+3500_-08175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2d392073e829d29e88715cf63364216913b4a92a7a90bf3f8a1fc081b4f509d6",
+        "station_id": "nc317845.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "58393e5ea8611038afc73b6521302a6ba4f887669e1db1abc99a4a28d287fa52",
+        "station_id": "sc386293.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "58393e5ea8611038afc73b6521302a6ba4f887669e1db1abc99a4a28d287fa52",
+        "station_id": "sc386293.par"
+      }
+    },
+    "p+3500_-08275": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "cece88ee0bc03a38b880cd164d18557efdced955377a0b3e0bf47bc643764e23",
+        "station_id": "sc388887.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "969f6927db9407f03460ded733b0b0c05a6d640bc29467cf3abb9d72296d8aec",
+        "station_id": "sc386831.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fc83f342d2d4a5a8c3fc0881c5e0f992872ce3f5ed8e82173c63108b3e687043",
+        "station_id": "nc316805.par"
+      }
+    },
+    "p+3500_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "403ad92daab21a680959ecd580c341aac73bc5b8656e9fcc78183f0aa194ba8d",
+        "station_id": "nm292510.par"
+      }
+    },
+    "p+3500_-11300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "0ef67fd5c978199ac9b4f242ef72c72aa59c43618a7bd2940667c3a58e2ca972",
+        "station_id": "az029158.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "0ef67fd5c978199ac9b4f242ef72c72aa59c43618a7bd2940667c3a58e2ca972",
+        "station_id": "az029158.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e659aa371bf224510d66cf0e4f6635e050198a7c1ab3cf494748675427336665",
+        "station_id": "az024453.par"
+      }
+    },
+    "p+3525_-08225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "ffb696fd3b3648ba65fe8ab9f7a3f35ee9f55628cd485d9e32b495e354ba1878",
+        "station_id": "nc318744.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "ffb696fd3b3648ba65fe8ab9f7a3f35ee9f55628cd485d9e32b495e354ba1878",
+        "station_id": "nc318744.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "ffb696fd3b3648ba65fe8ab9f7a3f35ee9f55628cd485d9e32b495e354ba1878",
+        "station_id": "nc318744.par"
+      }
+    },
+    "p+3525_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      }
+    },
+    "p+3525_-11125": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "083d7b1ed1731814a60bf9d5a4a374dc0673d9245f9dc958f9494b1db58e360d",
+        "station_id": "az029439.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "94c4c6e7c0f763e9c1231d6a88379b75f4331033ccfdb2d6c259115ab5d58f0c",
+        "station_id": "az029542.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "94c4c6e7c0f763e9c1231d6a88379b75f4331033ccfdb2d6c259115ab5d58f0c",
+        "station_id": "az029542.par"
+      }
+    },
+    "p+3550_-08175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1eab902cd266d0c2523f7d45c61ef29e0691eff8279876ecfca3a7b9031259c6",
+        "station_id": "nc315838.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1eab902cd266d0c2523f7d45c61ef29e0691eff8279876ecfca3a7b9031259c6",
+        "station_id": "nc315838.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1cc6c4617cfb2b2944cf50d61016c9c20f927f6156bf4166d483138b60176103",
+        "station_id": "nc315340.par"
+      }
+    },
+    "p+3550_-10525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f29849f161e40180bb5c4b082c9675d9089d48e0ccf54c7cd202fc7ab3fdb319",
+        "station_id": "nm294856.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      }
+    },
+    "p+3550_-10550": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f84e2fe6d052aeb8a88a800c53226daf3fa5d76cfdf9935f5bedefc083ba2217",
+        "station_id": "nm296676.par"
+      }
+    },
+    "p+3550_-11125": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "94c4c6e7c0f763e9c1231d6a88379b75f4331033ccfdb2d6c259115ab5d58f0c",
+        "station_id": "az029542.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "94c4c6e7c0f763e9c1231d6a88379b75f4331033ccfdb2d6c259115ab5d58f0c",
+        "station_id": "az029542.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "94c4c6e7c0f763e9c1231d6a88379b75f4331033ccfdb2d6c259115ab5d58f0c",
+        "station_id": "az029542.par"
+      }
+    },
+    "p+3600_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "02c5dcfec5795938893e3dd8649535689ffdbe8c3c957ebea58807884668525a",
+        "station_id": "nm295937.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "29c164932b2ea86edcbf75b74d3ec8260ada9694bf260edaffdd0586d01ac628",
+        "station_id": "nm290377.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "02c5dcfec5795938893e3dd8649535689ffdbe8c3c957ebea58807884668525a",
+        "station_id": "nm295937.par"
+      }
+    },
+    "p+3600_-10850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d4e6955de74ee21bad5fb5585d015aa95044fc03f22443118ff03ee3e1ed3194",
+        "station_id": "nm291647.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d4e6955de74ee21bad5fb5585d015aa95044fc03f22443118ff03ee3e1ed3194",
+        "station_id": "nm291647.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d4e6955de74ee21bad5fb5585d015aa95044fc03f22443118ff03ee3e1ed3194",
+        "station_id": "nm291647.par"
+      }
+    },
+    "p+3625_-10300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "3ae9843c03a2367876039e45c76da53b112995fef1e431a54fd011c9a0c1e73d",
+        "station_id": "tx412240.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c9b590a9c2731092e959b669bddcd2be497563f6b295aab319a25ac609210c18",
+        "station_id": "nm291887.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "3ae9843c03a2367876039e45c76da53b112995fef1e431a54fd011c9a0c1e73d",
+        "station_id": "tx412240.par"
+      }
+    },
+    "p+3625_-10325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c9b590a9c2731092e959b669bddcd2be497563f6b295aab319a25ac609210c18",
+        "station_id": "nm291887.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c9b590a9c2731092e959b669bddcd2be497563f6b295aab319a25ac609210c18",
+        "station_id": "nm291887.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fc51897f5b73f96f459c03125de7d53f707d3f40b7bdd9cbc8bf24c4156a331c",
+        "station_id": "nm296619.par"
+      }
+    },
+    "p+3625_-10850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9c040ddf1bd8784db27892c684beb5c69ca2bc5dae69c74c4995d62c6f8cdb97",
+        "station_id": "nm291063.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d4e6955de74ee21bad5fb5585d015aa95044fc03f22443118ff03ee3e1ed3194",
+        "station_id": "nm291647.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9c040ddf1bd8784db27892c684beb5c69ca2bc5dae69c74c4995d62c6f8cdb97",
+        "station_id": "nm291063.par"
+      }
+    },
+    "p+3625_-10900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "26a475bc1d0510b1ca6c3d6566bb51c0c6e0272f3d6da267cf8612dca1a3a1e0",
+        "station_id": "nm295560.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "80f78ef0f964449b655055afbe60eafc39efed58ec4b975ad2732219bfc9bf7b",
+        "station_id": "az023303.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "26a475bc1d0510b1ca6c3d6566bb51c0c6e0272f3d6da267cf8612dca1a3a1e0",
+        "station_id": "nm295560.par"
+      }
+    },
+    "p+3650_-10300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c9b590a9c2731092e959b669bddcd2be497563f6b295aab319a25ac609210c18",
+        "station_id": "nm291887.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c9b590a9c2731092e959b669bddcd2be497563f6b295aab319a25ac609210c18",
+        "station_id": "nm291887.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4f648c8e5ed6f45241c66bf2ab3eb271a78eddeb3ea4caafbea2601b5ec4847a",
+        "station_id": "nm293706.par"
+      }
+    },
+    "p+3650_-10375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "4f648c8e5ed6f45241c66bf2ab3eb271a78eddeb3ea4caafbea2601b5ec4847a",
+        "station_id": "nm293706.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "4f648c8e5ed6f45241c66bf2ab3eb271a78eddeb3ea4caafbea2601b5ec4847a",
+        "station_id": "nm293706.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4f648c8e5ed6f45241c66bf2ab3eb271a78eddeb3ea4caafbea2601b5ec4847a",
+        "station_id": "nm293706.par"
+      }
+    },
+    "p+3675_-10675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9ee321a9e2df1b4eae0fbe3ded6ae7656e57d92245df6590e9d8385d0ce33c9c",
+        "station_id": "nm291664.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+        "station_id": "nm292837.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9ee321a9e2df1b4eae0fbe3ded6ae7656e57d92245df6590e9d8385d0ce33c9c",
+        "station_id": "nm291664.par"
+      }
+    },
+    "p+3675_-10725": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "da939ed198892777da9b230f6c43e13e8a62288c20cbad04fda5911823072f23",
+        "station_id": "nm292608.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "da939ed198892777da9b230f6c43e13e8a62288c20cbad04fda5911823072f23",
+        "station_id": "nm292608.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "da939ed198892777da9b230f6c43e13e8a62288c20cbad04fda5911823072f23",
+        "station_id": "nm292608.par"
+      }
+    },
+    "p+3675_-10750": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+        "station_id": "nm292837.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9c040ddf1bd8784db27892c684beb5c69ca2bc5dae69c74c4995d62c6f8cdb97",
+        "station_id": "nm291063.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2a02b7449fe92460dde0b399328b9a2b28aad9134fa416e95e840d057b4083d5",
+        "station_id": "nm292837.par"
+      }
+    },
+    "p+3700_-08525": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7198280ff690a90d6d494541a12a5eefbc5cba42a7338ca1c359f612c9014588",
+        "station_id": "ky155524.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fb325b49f29bb60d679fc920332a165ff127f925fe4aa05c7e0037a0fe223867",
+        "station_id": "ky153430.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fb325b49f29bb60d679fc920332a165ff127f925fe4aa05c7e0037a0fe223867",
+        "station_id": "ky153430.par"
+      }
+    },
+    "p+3700_-11000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "76daf7ea4f8cbb0f4453e3c819644a11ab9132443b8e2c55710c57daa8229247",
+        "station_id": "ut425582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "76daf7ea4f8cbb0f4453e3c819644a11ab9132443b8e2c55710c57daa8229247",
+        "station_id": "ut425582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "76daf7ea4f8cbb0f4453e3c819644a11ab9132443b8e2c55710c57daa8229247",
+        "station_id": "ut425582.par"
+      }
+    },
+    "p+3725_-07800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "1f1d5aca2421017e3a5b6d7ab1eb2ad51da9d73616e24dbedbfd7f2838cebde3",
+        "station_id": "va442941.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1f1d5aca2421017e3a5b6d7ab1eb2ad51da9d73616e24dbedbfd7f2838cebde3",
+        "station_id": "va442941.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "1f1d5aca2421017e3a5b6d7ab1eb2ad51da9d73616e24dbedbfd7f2838cebde3",
+        "station_id": "va442941.par"
+      }
+    },
+    "p+3725_-10975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "260973ed5b303865a9f642aba6db1342ae2fdfe7112a3b361beba6916afd7fbb",
+        "station_id": "ut420788.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "76daf7ea4f8cbb0f4453e3c819644a11ab9132443b8e2c55710c57daa8229247",
+        "station_id": "ut425582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "260973ed5b303865a9f642aba6db1342ae2fdfe7112a3b361beba6916afd7fbb",
+        "station_id": "ut420788.par"
+      }
+    },
+    "p+3775_-08575": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "6e912ac51eb3737142ec5b42b7485545c947b2e1c55795fbd6e2c19d3b740cbd",
+        "station_id": "ky152040.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "550bfd0cc5312506d8ab5b3f49ad86aaa644bf99befd03dfcfbdb3cdb0cffe2e",
+        "station_id": "ky153929.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "6e912ac51eb3737142ec5b42b7485545c947b2e1c55795fbd6e2c19d3b740cbd",
+        "station_id": "ky152040.par"
+      }
+    },
+    "p+3800_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "20f51923e22adb8725ce34aac74a5b69829e376baf711b00de2858a5e2bbecdf",
+        "station_id": "ks142164.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "20f51923e22adb8725ce34aac74a5b69829e376baf711b00de2858a5e2bbecdf",
+        "station_id": "ks142164.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      }
+    },
+    "p+3825_-09950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      }
+    },
+    "p+3825_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      }
+    },
+    "p+3825_-10800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "8cf146dc97f9c4df6b6cf688655325e1d7d1857d3514d721cd5b08b63b85e42c",
+        "station_id": "co051609.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "63051083e68d9d7005f03b669caf55233c4f6fe405ffdef0f1fa450593d61621",
+        "station_id": "co055722.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8cf146dc97f9c4df6b6cf688655325e1d7d1857d3514d721cd5b08b63b85e42c",
+        "station_id": "co051609.par"
+      }
+    },
+    "p+3850_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "83dc9e60de2a206e1685dcd4293814e1ff7f0438b0cb0d601c106f837dcf5b32",
+        "station_id": "ks140865.par"
+      }
+    },
+    "p+3850_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      }
+    },
+    "p+3850_-10800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "63051083e68d9d7005f03b669caf55233c4f6fe405ffdef0f1fa450593d61621",
+        "station_id": "co055722.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "63051083e68d9d7005f03b669caf55233c4f6fe405ffdef0f1fa450593d61621",
+        "station_id": "co055722.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "63051083e68d9d7005f03b669caf55233c4f6fe405ffdef0f1fa450593d61621",
+        "station_id": "co055722.par"
+      }
+    },
+    "p+3875_-10000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "90b5b9a79419a5a8726ef75ac75734bc96545856ebcfd172ce34bc4ffb879c3f",
+        "station_id": "ks141383.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "90b5b9a79419a5a8726ef75ac75734bc96545856ebcfd172ce34bc4ffb879c3f",
+        "station_id": "ks141383.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "945fe5cd9ea832e7aa0ccd7526b176db621ba43eee89494cb214ff40c06f00e9",
+        "station_id": "ks148495.par"
+      }
+    },
+    "p+3875_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "6cefa0fa7f71183b580526420cbaa027feea96f7f11695cf78d8212f53f4cf22",
+        "station_id": "co055017.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7da4c84edb60d0c425152a597a9aec243abea45968942d6acf3d57da58c833f7",
+        "station_id": "co058157.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "6cefa0fa7f71183b580526420cbaa027feea96f7f11695cf78d8212f53f4cf22",
+        "station_id": "co055017.par"
+      }
+    },
+    "p+3900_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d9cbe48aecc9635a21f6acbada19bae65d560029370a74582f1d5d459dc4f11f",
+        "station_id": "co051778.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d9cbe48aecc9635a21f6acbada19bae65d560029370a74582f1d5d459dc4f11f",
+        "station_id": "co051778.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d9cbe48aecc9635a21f6acbada19bae65d560029370a74582f1d5d459dc4f11f",
+        "station_id": "co051778.par"
+      }
+    },
+    "p+3900_-11050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5f7d84885bc9ebfb46a156bb39cd0da5d70f0ba9fc6d99b1f1328d167c5e149f",
+        "station_id": "ut422798.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      }
+    },
+    "p+3900_-11650": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d2cd81f9b301bd6ac2ca655820ad29c4db9e263b2a9310483ebe705d12a47ddc",
+        "station_id": "nv267620.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      }
+    },
+    "p+3925_-10050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "51e05e3701d291652bbca08ba0be97bfb7f85d56783a94a9595d4235ef69a3e5",
+        "station_id": "ks143837.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "51e05e3701d291652bbca08ba0be97bfb7f85d56783a94a9595d4235ef69a3e5",
+        "station_id": "ks143837.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "51e05e3701d291652bbca08ba0be97bfb7f85d56783a94a9595d4235ef69a3e5",
+        "station_id": "ks143837.par"
+      }
+    },
+    "p+3925_-10325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      }
+    },
+    "p+3925_-10375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "6cefa0fa7f71183b580526420cbaa027feea96f7f11695cf78d8212f53f4cf22",
+        "station_id": "co055017.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "6cefa0fa7f71183b580526420cbaa027feea96f7f11695cf78d8212f53f4cf22",
+        "station_id": "co055017.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      }
+    },
+    "p+3925_-11050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5f7d84885bc9ebfb46a156bb39cd0da5d70f0ba9fc6d99b1f1328d167c5e149f",
+        "station_id": "ut422798.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      }
+    },
+    "p+3925_-11075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      }
+    },
+    "p+3925_-11100": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      }
+    },
+    "p+3925_-11650": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      }
+    },
+    "p+3950_-10025": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "4c502ca84e56db7d2c42d87c56f5d49ade5620fd343d2139d2f863924609726f",
+        "station_id": "ks146637.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "51e05e3701d291652bbca08ba0be97bfb7f85d56783a94a9595d4235ef69a3e5",
+        "station_id": "ks143837.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4c502ca84e56db7d2c42d87c56f5d49ade5620fd343d2139d2f863924609726f",
+        "station_id": "ks146637.par"
+      }
+    },
+    "p+3950_-10050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "51e05e3701d291652bbca08ba0be97bfb7f85d56783a94a9595d4235ef69a3e5",
+        "station_id": "ks143837.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      }
+    },
+    "p+3950_-10075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7236cfda60993391fa7775354107a746a1d2e076d4e9883480d99a739aa0672f",
+        "station_id": "ks141699.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7236cfda60993391fa7775354107a746a1d2e076d4e9883480d99a739aa0672f",
+        "station_id": "ks141699.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7236cfda60993391fa7775354107a746a1d2e076d4e9883480d99a739aa0672f",
+        "station_id": "ks141699.par"
+      }
+    },
+    "p+3950_-11025": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      }
+    },
+    "p+3950_-11050": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5f7d84885bc9ebfb46a156bb39cd0da5d70f0ba9fc6d99b1f1328d167c5e149f",
+        "station_id": "ut422798.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      }
+    },
+    "p+3950_-11075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5f7d84885bc9ebfb46a156bb39cd0da5d70f0ba9fc6d99b1f1328d167c5e149f",
+        "station_id": "ut422798.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "0d4256f12ba322a815cbfd44c64ae4bff887cc2b1e96621ddb8c79010509b32a",
+        "station_id": "ut425837.par"
+      }
+    },
+    "p+3950_-11100": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "14ee09da002c8603424cae40c95b7d3bb9c8727cce341aaade5c63c5e8a18919",
+        "station_id": "ut421214.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9f191f04345e641890c148f9eaa499eb448985571e03d17bb0f38eebeadbd7b4",
+        "station_id": "ut422578.par"
+      }
+    },
+    "p+3950_-11625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5b992725fb351820f8309336977be7fd89943ce2e321f10249a6048388436b34",
+        "station_id": "nv262631.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5b992725fb351820f8309336977be7fd89943ce2e321f10249a6048388436b34",
+        "station_id": "nv262631.par"
+      }
+    },
+    "p+3950_-11700": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d2cd81f9b301bd6ac2ca655820ad29c4db9e263b2a9310483ebe705d12a47ddc",
+        "station_id": "nv267620.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      }
+    },
+    "p+3975_-10025": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      }
+    },
+    "p+3975_-10100": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f4c868eb308a03089e3a65f12ed04ab7a13b19e100a7c9f64904ac6bc385fd66",
+        "station_id": "ks145906.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "206e0b52d1adeb6ce4c7a19b483031c56a27307d7e65c96d784e6bf372ee24bb",
+        "station_id": "ks140439.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "206e0b52d1adeb6ce4c7a19b483031c56a27307d7e65c96d784e6bf372ee24bb",
+        "station_id": "ks140439.par"
+      }
+    },
+    "p+3975_-10325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "98a35244c932489bc66161711d4e545a46ecbabf3933e04463c9cb51d2d634a2",
+        "station_id": "co050114.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      }
+    },
+    "p+3975_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "98a35244c932489bc66161711d4e545a46ecbabf3933e04463c9cb51d2d634a2",
+        "station_id": "co050114.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "63e65c4ede5b8250e2623166bca5330392d56068986c6e9d608b47d027bc0f32",
+        "station_id": "co052932.par"
+      }
+    },
+    "p+3975_-10425": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f2f7caafd231c4b5cbfed3025ebc95e650e65900ad30e0214124d223e115c86a",
+        "station_id": "co051179.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f2f7caafd231c4b5cbfed3025ebc95e650e65900ad30e0214124d223e115c86a",
+        "station_id": "co051179.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f2f7caafd231c4b5cbfed3025ebc95e650e65900ad30e0214124d223e115c86a",
+        "station_id": "co051179.par"
+      }
+    },
+    "p+3975_-11025": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d27c1cfdfedd98d2a9cd3820f48aac9cda288314100b938f488ea274bb35d891",
+        "station_id": "ut426123.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1f5793a1ac10eb273268392737738141d54ecb1ea06598acb14835e0eea88cf1",
+        "station_id": "ut425969.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "01e858b43355bc5bffc05f2bb40315a0256e8842f6def7e2f39e616a43654d2c",
+        "station_id": "ut420074.par"
+      }
+    },
+    "p+3975_-11675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "770cbe91fd83d2aa4a495637508b98afa0bb88c1bb0c867d438e61e451973e79",
+        "station_id": "nv260795.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "8b984412039938751c105182466ba6b60f4b3e632777d97f47d4c421631b1369",
+        "station_id": "nv262708.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "f3a281c4759d267131f82f89708068f1fd92b7b46d249a330dc70369a5f41b74",
+        "station_id": "nv260691.par"
+      }
+    },
+    "p+4000_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "4636a4a204a05c161aa98676cefe6d7d5306f2045e5360eb030a76e1657eec7f",
+        "station_id": "ne253595.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "4636a4a204a05c161aa98676cefe6d7d5306f2045e5360eb030a76e1657eec7f",
+        "station_id": "ne253595.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "4636a4a204a05c161aa98676cefe6d7d5306f2045e5360eb030a76e1657eec7f",
+        "station_id": "ne253595.par"
+      }
+    },
+    "p+4000_-11325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2698ca16f3a765d82c8c04e96e1926d857d208617ede2247c6752e2f4ca1f198",
+        "station_id": "ut422852.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2698ca16f3a765d82c8c04e96e1926d857d208617ede2247c6752e2f4ca1f198",
+        "station_id": "ut422852.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2698ca16f3a765d82c8c04e96e1926d857d208617ede2247c6752e2f4ca1f198",
+        "station_id": "ut422852.par"
+      }
+    },
+    "p+4025_-09900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "4636a4a204a05c161aa98676cefe6d7d5306f2045e5360eb030a76e1657eec7f",
+        "station_id": "ne253595.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      }
+    },
+    "p+4025_-11350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "1d35eef63c180a440544955259c0035faa2a0499ef46b47bc13536e6b84cd628",
+        "station_id": "ut421144.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4025_-11400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "bbf15f8aa94b0fcd750b93e0015b59989a3fb0a5af5f2d58e15929b1e2d41068",
+        "station_id": "ut424174.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "bbf15f8aa94b0fcd750b93e0015b59989a3fb0a5af5f2d58e15929b1e2d41068",
+        "station_id": "ut424174.par"
+      }
+    },
+    "p+4050_-09900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d87d11280568bc11664f40a778ce410e03585f19f070c55cd4f22f81ee549492",
+        "station_id": "ne255565.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d87d11280568bc11664f40a778ce410e03585f19f070c55cd4f22f81ee549492",
+        "station_id": "ne255565.par"
+      }
+    },
+    "p+4050_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      }
+    },
+    "p+4050_-09950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      }
+    },
+    "p+4050_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "600d160ef3b27d30bff5b50de53b28e84ccd72db313bd37c2177f67da0837b78",
+        "station_id": "ne253910.par"
+      }
+    },
+    "p+4050_-11350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+        "station_id": "ut429382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4050_-11375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+        "station_id": "ut429382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4075_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a30b890ffc64b508a0e8c4cc882b8398aec2afe238e768bc56cd40d8e6e0ce0a",
+        "station_id": "ne256167.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      }
+    },
+    "p+4075_-10000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      }
+    },
+    "p+4075_-11325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+        "station_id": "ut429382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4075_-11350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+        "station_id": "ut429382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4075_-11375": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f5b0585048b16863fc6a57fb3e54e0dfbdec4aa122ee99df902c16a53029553f",
+        "station_id": "ut429382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "e6d1a9f1aa93b3c8389b83cc9e09ab02688924ac3ffaf9d5f046fb71a5be7704",
+        "station_id": "ut422257.par"
+      }
+    },
+    "p+4100_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c18ab327d97a77ce9b3cb278e855ac7e2803b292dcb84859e1249eef3a30ffd8",
+        "station_id": "ne254335.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fb47f0891ba0cc1323a35b1965bd38ec027f7b6ffa1669471721567da6ec444f",
+        "station_id": "ne257040.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c18ab327d97a77ce9b3cb278e855ac7e2803b292dcb84859e1249eef3a30ffd8",
+        "station_id": "ne254335.par"
+      }
+    },
+    "p+4100_-10000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "acd79ee9ee0a15a66a7e4186afb6080c63c0106ef26bdff68422346a7cbfb05d",
+        "station_id": "ne253365.par"
+      }
+    },
+    "p+4100_-11125": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      }
+    },
+    "p+4100_-11150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fec0d779fcbd552201b16aa2f23a628e7e3325156d4b91cc840a25a1c2cfdc56",
+        "station_id": "ut422385.par"
+      }
+    },
+    "p+4100_-11175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "58c3b541bc4b1f27858571ad266e3f03af78280f25d6aa78cb128b105e2b6fe9",
+        "station_id": "ut422726.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      }
+    },
+    "p+4125_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "984be22c0d43ed9b604f5f796e2c00af78cac0b7f626c27eb010ad27cdf5f02b",
+        "station_id": "ne251200.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "984be22c0d43ed9b604f5f796e2c00af78cac0b7f626c27eb010ad27cdf5f02b",
+        "station_id": "ne251200.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "984be22c0d43ed9b604f5f796e2c00af78cac0b7f626c27eb010ad27cdf5f02b",
+        "station_id": "ne251200.par"
+      }
+    },
+    "p+4125_-11125": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9742e64e2989db608139c205be9c1d674684599849df96c7e76c5a50b55c812b",
+        "station_id": "wy483100.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      }
+    },
+    "p+4125_-11150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      }
+    },
+    "p+4125_-11175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "58c3b541bc4b1f27858571ad266e3f03af78280f25d6aa78cb128b105e2b6fe9",
+        "station_id": "ut422726.par"
+      }
+    },
+    "p+4150_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d6588d06a164d164db82928c84d7e98f36f881b45ef6e18dd0d48616fd868a85",
+        "station_id": "ne253425.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "984be22c0d43ed9b604f5f796e2c00af78cac0b7f626c27eb010ad27cdf5f02b",
+        "station_id": "ne251200.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d6588d06a164d164db82928c84d7e98f36f881b45ef6e18dd0d48616fd868a85",
+        "station_id": "ne253425.par"
+      }
+    },
+    "p+4150_-11150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d04d65bf0b7c3c3315032f49c1ce37d619d8d1ff33496fd07a5fa5ddab9b54f6",
+        "station_id": "ut429595.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      }
+    },
+    "p+4150_-11175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "365e24d2d92e667f77b8cee9b1edee78ef3fde45f63c1183e234b21211fdf601",
+        "station_id": "ut426869.par"
+      }
+    },
+    "p+4150_-11200": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      }
+    },
+    "p+4175_-11125": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a762991912c488347354047cb831e46220ee9508d170eb1afc1e9d66fbbb0f1a",
+        "station_id": "ut424856.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a762991912c488347354047cb831e46220ee9508d170eb1afc1e9d66fbbb0f1a",
+        "station_id": "ut424856.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a4a516a8f82031e2278b16f24f0721648ccc3480388cfdc1ed830b6b551ee3ad",
+        "station_id": "ut425186.par"
+      }
+    },
+    "p+4200_-09925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d6588d06a164d164db82928c84d7e98f36f881b45ef6e18dd0d48616fd868a85",
+        "station_id": "ne253425.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "caabbf06a7426f7ac865d6c0beec69405505b845d6107cedf106850db0da070f",
+        "station_id": "ne250420.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "df9fb150328f2d5e262737be6245a02f41cb78e3300d2dc67abaa1c62a87dcc3",
+        "station_id": "ne250245.par"
+      }
+    },
+    "p+4225_-09900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "caabbf06a7426f7ac865d6c0beec69405505b845d6107cedf106850db0da070f",
+        "station_id": "ne250420.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "b8063968764c60c958d649195c337b17f5ee9c61175efe7520466ec5a53b547e",
+        "station_id": "ne256290.par"
+      }
+    },
+    "p+4225_-11000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "e4978918a6ef4bcb476b7676dd9c7dfa1c62abe5d3447328ac1d1227bbd001ac",
+        "station_id": "wy485105.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4250_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fbab6115f52c75169cbe4aa64c31dd775ba6375d54be027b1844d8c8fd1c9e71",
+        "station_id": "ne250050.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      }
+    },
+    "p+4250_-10950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4250_-10975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4275_-09950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      }
+    },
+    "p+4275_-10275": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "f01a8ded301cb6fbeea68b9eaf0e6b50228d69bfb50c1cc03723a24bb0bed904",
+        "station_id": "ne251575.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "f01a8ded301cb6fbeea68b9eaf0e6b50228d69bfb50c1cc03723a24bb0bed904",
+        "station_id": "ne251575.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506cc9e4343cd81fae545298aa71de3de2cfdf133025a7c87763a08877c18117",
+        "station_id": "sd394007.par"
+      }
+    },
+    "p+4275_-10925": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5a77644dcd84461a8d4c1f2cd7c0fca8088901625292572b28690d0d2613858d",
+        "station_id": "wy485390.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4275_-10975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4275_-11000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "506e10c9c959e50cce428f3fb854692a145d0b2d95b937f97b22604e22e2e16f",
+        "station_id": "wy487260.par"
+      }
+    },
+    "p+4300_-10000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9c6f1262d7c46db14b24fdf33997596e4a63e7cf73b8731dc606a896dfed2713",
+        "station_id": "ne255925.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a582b8fe04b2d4e114e4990e4f3ce17d016d078cb67c843173f1482ff0022a29",
+        "station_id": "sd399367.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c5e75b9cb772d724b0768905bed7e28c8b2849a376960929469f731400539582",
+        "station_id": "sd393452.par"
+      }
+    },
+    "p+4350_-09950": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c5e75b9cb772d724b0768905bed7e28c8b2849a376960929469f731400539582",
+        "station_id": "sd393452.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c5e75b9cb772d724b0768905bed7e28c8b2849a376960929469f731400539582",
+        "station_id": "sd393452.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c5e75b9cb772d724b0768905bed7e28c8b2849a376960929469f731400539582",
+        "station_id": "sd393452.par"
+      }
+    },
+    "p+4350_-10000": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c5e75b9cb772d724b0768905bed7e28c8b2849a376960929469f731400539582",
+        "station_id": "sd393452.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "a582b8fe04b2d4e114e4990e4f3ce17d016d078cb67c843173f1482ff0022a29",
+        "station_id": "sd399367.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a582b8fe04b2d4e114e4990e4f3ce17d016d078cb67c843173f1482ff0022a29",
+        "station_id": "sd399367.par"
+      }
+    },
+    "p+4375_-09975": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "9506dacb26a2ff4cbaedd6677247474703e2f9374c0510295f40ba5682dffeae",
+        "station_id": "sd390043.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2d75cf9931d5e0766066754703e4834379a0db4c4d8479d0e1f67307b2980399",
+        "station_id": "sd394516.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "9506dacb26a2ff4cbaedd6677247474703e2f9374c0510295f40ba5682dffeae",
+        "station_id": "sd390043.par"
+      }
+    },
+    "p+4400_-08800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "360a8dfbf0e5abc66a6a540dde5d3a05272e40616af12acd622b2e2c47be467a",
+        "station_id": "wi471568.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "360a8dfbf0e5abc66a6a540dde5d3a05272e40616af12acd622b2e2c47be467a",
+        "station_id": "wi471568.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "360a8dfbf0e5abc66a6a540dde5d3a05272e40616af12acd622b2e2c47be467a",
+        "station_id": "wi471568.par"
+      }
+    },
+    "p+4400_-09725": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "95906de5ebf5b7558d36cd772e57302810164870d786d44767a67226d317219e",
+        "station_id": "sd392984.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "bc7453b541c545098059fb41e6abeba75651b30dc847cc87214ef47626bcf193",
+        "station_id": "sd395090.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "95906de5ebf5b7558d36cd772e57302810164870d786d44767a67226d317219e",
+        "station_id": "sd392984.par"
+      }
+    },
+    "p+4400_-09800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5429bbbc6858520f0678a277dc3ad30db6dccd207f8aff15a0c5c62696923fd5",
+        "station_id": "sd394037.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "77466808100e6d6389d1decc7e387b5ad5a4064d32211d011090adf33a774c1a",
+        "station_id": "sd393029.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5429bbbc6858520f0678a277dc3ad30db6dccd207f8aff15a0c5c62696923fd5",
+        "station_id": "sd394037.par"
+      }
+    },
+    "p+4425_-09800": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5429bbbc6858520f0678a277dc3ad30db6dccd207f8aff15a0c5c62696923fd5",
+        "station_id": "sd394037.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "c6ade3295fbdb0e4ee790b044301e24b46f11c5152be2535d77a372463dee464",
+        "station_id": "sd394127.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5429bbbc6858520f0678a277dc3ad30db6dccd207f8aff15a0c5c62696923fd5",
+        "station_id": "sd394037.par"
+      }
+    },
+    "p+4425_-10150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "3e56626643e9b7d977bc0072a4f0c22563d0f2e6c236dee0182d3bfd8075669f",
+        "station_id": "sd394184.par"
+      }
+    },
+    "p+4425_-10325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "61298cba8790d4ab4693f5fed9c66122f689eba772cf5bc8ec1f03596510227d",
+        "station_id": "sd396947.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "cfd08eafe5e8060403484b38c6f38b5224c52d2ae5e37f3a01675cafc6433e1d",
+        "station_id": "sd396937.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "61298cba8790d4ab4693f5fed9c66122f689eba772cf5bc8ec1f03596510227d",
+        "station_id": "sd396947.par"
+      }
+    },
+    "p+4425_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "aef67abfdfb54c5d38b8c98d374209fe0883b0f2a80b0455dc8813590376ce84",
+        "station_id": "sd394834.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "186016fdedc8c43eb39f3fd501286c895ee588bfb4787cb3484f7527ea52264f",
+        "station_id": "sd393069.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "186016fdedc8c43eb39f3fd501286c895ee588bfb4787cb3484f7527ea52264f",
+        "station_id": "sd393069.par"
+      }
+    },
+    "p+4450_-10175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      }
+    },
+    "p+4450_-10350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "186016fdedc8c43eb39f3fd501286c895ee588bfb4787cb3484f7527ea52264f",
+        "station_id": "sd393069.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "186016fdedc8c43eb39f3fd501286c895ee588bfb4787cb3484f7527ea52264f",
+        "station_id": "sd393069.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "186016fdedc8c43eb39f3fd501286c895ee588bfb4787cb3484f7527ea52264f",
+        "station_id": "sd393069.par"
+      }
+    },
+    "p+4475_-09725": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7bd164db53822ee5a1b08b099e534b07a3805410e902e1b24454af98b9104e83",
+        "station_id": "sd391076.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "db5fcad003e2f230ea3ebab67d7f6be7f58f2cae911a1aab033cb6465dfe007f",
+        "station_id": "sd398932.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a3dde171de5521667377826daebc1123177fc279fbc6aab17bdfd91bee4d1c0a",
+        "station_id": "sd392302.par"
+      }
+    },
+    "p+4475_-09750": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "72bcf7379a23e024b2f8de7f715397eb2c9f62ef363a67479f1334d83a3aafd1",
+        "station_id": "sd391777.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "db5fcad003e2f230ea3ebab67d7f6be7f58f2cae911a1aab033cb6465dfe007f",
+        "station_id": "sd398932.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a3dde171de5521667377826daebc1123177fc279fbc6aab17bdfd91bee4d1c0a",
+        "station_id": "sd392302.par"
+      }
+    },
+    "p+4475_-10150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "fe84bd03588c0a79ff296e60f1426bb06e2f4d5f9681a449cf46de213b718172",
+        "station_id": "sd395544.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2514d1a977dd54c70ff9b74231dc656c8a363a80b2ee0f7a7d109e4b67e764c2",
+        "station_id": "sd392429.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "c666f90149feeb34aee762a45d61d5a9dbfc8301fecffd7051b59efb5a123468",
+        "station_id": "sd398307.par"
+      }
+    },
+    "p+4475_-10400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "c27537245d5a96ea6677a38f7f8338360097ceeacf22ed5b9043ff33ff779b43",
+        "station_id": "sd396054.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2473a0ff19b21c35b2c4d572fbbfadf77c83119232df54fa953846a6ac30ade6",
+        "station_id": "sd390559.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2473a0ff19b21c35b2c4d572fbbfadf77c83119232df54fa953846a6ac30ade6",
+        "station_id": "sd390559.par"
+      }
+    },
+    "p+4500_-09175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "24acb9a5f0b8051c98317fc4d5fef7aaf0609a760f884017d03b6f11b7c399b0",
+        "station_id": "wi475335.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "24acb9a5f0b8051c98317fc4d5fef7aaf0609a760f884017d03b6f11b7c399b0",
+        "station_id": "wi475335.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "24acb9a5f0b8051c98317fc4d5fef7aaf0609a760f884017d03b6f11b7c399b0",
+        "station_id": "wi475335.par"
+      }
+    },
+    "p+4500_-10225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "2514d1a977dd54c70ff9b74231dc656c8a363a80b2ee0f7a7d109e4b67e764c2",
+        "station_id": "sd392429.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "2514d1a977dd54c70ff9b74231dc656c8a363a80b2ee0f7a7d109e4b67e764c2",
+        "station_id": "sd392429.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2514d1a977dd54c70ff9b74231dc656c8a363a80b2ee0f7a7d109e4b67e764c2",
+        "station_id": "sd392429.par"
+      }
+    },
+    "p+4525_-08825": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "668daa50e3b5c26e5cbfbe4bd108b91c5d155659de016445b8a840abbdbd36e3",
+        "station_id": "wi471897.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4525_-08875": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4525_-08900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4525_-10225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "42c54ab99cef13b7454fbc9cff7adf1be9dd35d0d226051e7ee392b7999f006d",
+        "station_id": "sd390701.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "2514d1a977dd54c70ff9b74231dc656c8a363a80b2ee0f7a7d109e4b67e764c2",
+        "station_id": "sd392429.par"
+      }
+    },
+    "p+4550_-08850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4550_-08875": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4575_-08850": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "7586415909ec4eadfadfc9d9378500cec3d47a64dcbe861bb146ef8d9d48fc0f",
+        "station_id": "wi474582.par"
+      }
+    },
+    "p+4575_-09625": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a71bda3a96479f12bec8a55748d09ecdb253ed5c6d85dbfcabae31715cc4b19a",
+        "station_id": "mn215638.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "e36ee4f6a2fd51c0eb0757ddba1c01632e6da8de6921399b8ac041d93b735fea",
+        "station_id": "mn218907.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a71bda3a96479f12bec8a55748d09ecdb253ed5c6d85dbfcabae31715cc4b19a",
+        "station_id": "mn215638.par"
+      }
+    },
+    "p+4575_-09675": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "185f388ed62dfd1674d7dfd5111ebd1adabbcde718ee6b978eff04bc358c3044",
+        "station_id": "mn210287.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "e36ee4f6a2fd51c0eb0757ddba1c01632e6da8de6921399b8ac041d93b735fea",
+        "station_id": "mn218907.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "a71bda3a96479f12bec8a55748d09ecdb253ed5c6d85dbfcabae31715cc4b19a",
+        "station_id": "mn215638.par"
+      }
+    },
+    "p+4575_-10275": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "afa1dcd42e383923c7e0182949c6da9f1e44dba40cfa65e5c367c86a08fd17be",
+        "station_id": "sd395048.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "42c54ab99cef13b7454fbc9cff7adf1be9dd35d0d226051e7ee392b7999f006d",
+        "station_id": "sd390701.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "afa1dcd42e383923c7e0182949c6da9f1e44dba40cfa65e5c367c86a08fd17be",
+        "station_id": "sd395048.par"
+      }
+    },
+    "p+4600_-10175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "e327c862838d7330a70239253b7aaa62a712e6d5d92922af528194a6ed673696",
+        "station_id": "nd327311.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "e327c862838d7330a70239253b7aaa62a712e6d5d92922af528194a6ed673696",
+        "station_id": "nd327311.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      }
+    },
+    "p+4600_-10225": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      }
+    },
+    "p+4625_-09825": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d94b63bfcf653faca8004d2764369f386b5857d519d6af768fc751270f6a0db8",
+        "station_id": "nd323287.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "d94b63bfcf653faca8004d2764369f386b5857d519d6af768fc751270f6a0db8",
+        "station_id": "nd323287.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "390ac423291329a98dbfea665b406390aed5e3016207894e2e05d798de9631f5",
+        "station_id": "sd391049.par"
+      }
+    },
+    "p+4625_-09900": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "d94b63bfcf653faca8004d2764369f386b5857d519d6af768fc751270f6a0db8",
+        "station_id": "nd323287.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "762d77b0ba607eb45a27a4f876f16e0caf558b1fd375bd088075bbdf2096cfb0",
+        "station_id": "nd320382.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "d94b63bfcf653faca8004d2764369f386b5857d519d6af768fc751270f6a0db8",
+        "station_id": "nd323287.par"
+      }
+    },
+    "p+4625_-10150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "e327c862838d7330a70239253b7aaa62a712e6d5d92922af528194a6ed673696",
+        "station_id": "nd327311.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "ca9d687b7f6b26a6d05a519fc8c1cb298d7657cd991e88a927502e3d28e2d77f",
+        "station_id": "sd394864.par"
+      }
+    },
+    "p+4650_-10300": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "620b1c1d1aa011e81f9be2843d77981d24b7ae64b31c15725e30c0f5edbdd681",
+        "station_id": "nd322183.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "6441bfb2cd1dc4f8138ec477c79f16c547ee12cc9d2726e8eccec670af3c4fe7",
+        "station_id": "nd326315.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "620b1c1d1aa011e81f9be2843d77981d24b7ae64b31c15725e30c0f5edbdd681",
+        "station_id": "nd322183.par"
+      }
+    },
+    "p+4675_-10150": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5d957c44c3d0ce6f1c116ef3748a3755137fa751aa4222654fcde613669c100b",
+        "station_id": "nd326365.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5d957c44c3d0ce6f1c116ef3748a3755137fa751aa4222654fcde613669c100b",
+        "station_id": "nd326365.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      }
+    },
+    "p+4675_-10175": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "5d957c44c3d0ce6f1c116ef3748a3755137fa751aa4222654fcde613669c100b",
+        "station_id": "nd326365.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "5d957c44c3d0ce6f1c116ef3748a3755137fa751aa4222654fcde613669c100b",
+        "station_id": "nd326365.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "5d957c44c3d0ce6f1c116ef3748a3755137fa751aa4222654fcde613669c100b",
+        "station_id": "nd326365.par"
+      }
+    },
+    "p+4700_-10075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      }
+    },
+    "p+4725_-10075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "01d449c4fd99b3332f3385f765efd7b03bd6366a31ebedae426f209dd82e5e79",
+        "station_id": "nd325479.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "60f0808100be0efaf0a0c5e3bec6b4c2b1d6add1f3a3f8eaa85c6ce296ec8ca1",
+        "station_id": "nd328840.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "af985f23531870d4fdb9356627d792f17e3eb9a59220d5bcf34443c2296656b9",
+        "station_id": "nd325710.par"
+      }
+    },
+    "p+4750_-10075": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "4fb4e2ddfa0f9d0d85e799b4501ba75181acbae94a626bb37210dec3456fe7b6",
+        "station_id": "nd325638.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "60f0808100be0efaf0a0c5e3bec6b4c2b1d6add1f3a3f8eaa85c6ce296ec8ca1",
+        "station_id": "nd328840.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "af985f23531870d4fdb9356627d792f17e3eb9a59220d5bcf34443c2296656b9",
+        "station_id": "nd325710.par"
+      }
+    },
+    "p+4800_-09325": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "a8dff80b8e7333742945b265855f0bb97bb65f2e5f4927d6bf44909ab980f029",
+        "station_id": "mn213730.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85eae8edaf08acb6ff5bfe1eabbea9c012072b7f6e5336e6e381f9da28120a4d",
+        "station_id": "mn210746.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "6df4f31407375b2c5f2eb58e0113cf851646434ae3a4303ff131c67867201115",
+        "station_id": "mn216612.par"
+      }
+    },
+    "p+4825_-09350": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+        "station_id": "mn214026.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85eae8edaf08acb6ff5bfe1eabbea9c012072b7f6e5336e6e381f9da28120a4d",
+        "station_id": "mn210746.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+        "station_id": "mn214026.par"
+      }
+    },
+    "p+4825_-09400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "3fc8c3dab6b98be1770f5e2bd69c16828883c0f37ee8020002d19b583f5bfca4",
+        "station_id": "mn211374.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85eae8edaf08acb6ff5bfe1eabbea9c012072b7f6e5336e6e381f9da28120a4d",
+        "station_id": "mn210746.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+        "station_id": "mn214026.par"
+      }
+    },
+    "p+4850_-09400": {
+      "cligen_prism_rank_sum_localizable_v1": {
+        "source_par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+        "station_id": "mn214026.par"
+      },
+      "closest_localizable_v1": {
+        "source_par_sha256": "85eae8edaf08acb6ff5bfe1eabbea9c012072b7f6e5336e6e381f9da28120a4d",
+        "station_id": "mn210746.par"
+      },
+      "elevation_prism_reference_localizable_v1": {
+        "source_par_sha256": "af2d895735444b947ecee0e7cdaf2dd249f526886f83250f8a0ed2631c96e5c2",
+        "station_id": "mn214026.par"
+      }
+    }
+  },
+  "source_commit": "5644a89185b087f7be2eb4b415db4a06a92203d4",
+  "source_hashes": {
+    "Cargo.lock": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "crates/cligen/src/prism/distribution.json": "bfea8bf673e250ae8d8e265b6b933aff3da30d98796516fa4e0a62642c7c5fd0",
+    "crates/cligen/src/prism/grid.rs": "53e81a2e2597fd44d14caf72689b3a0c2e8b8fbddb35eefcdc369b6e2f8f931d",
+    "crates/cligen/src/prism/localize.rs": "2391ab452b52aeceec0f39720c5fd74c6c8494c95963905bad4afab77e33d60a",
+    "crates/cligen/src/prism/method.json": "2c6668828292cb95c167fea4249eff89762901deba03c702bff0d26036c18924",
+    "crates/cligen/src/prism/mod.rs": "b219dd11a9ebf2be0077b590122bfc44b3b666aab1f284926c7e6f20c3acca7f",
+    "crates/cligen/src/prism/run.rs": "78f3a58375d7aae88063c7935b3befe6e81a06721739c57f1aebf4a9ea2c31c1",
+    "crates/cligen/src/prism/sync.rs": "fba911f0072f6a077d916bf53667888891590c8877b97ee87e2a1dcb26fdacad",
+    "crates/cligen/src/stations/manifests.json": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef",
+    "docs/exec-plans/20260826-a12r3-localizable-selector-quality.md": "a1ef469240bef4f9610d7c27303327d6d6a6a9c0a6b23c60b34e113565202b6e",
+    "docs/specifications/SPEC-A12R3-LOCALIZABLE-SELECTOR-QUALITY.md": "dfe6b8d01007a050a582bd9df0cde2d423c9e42054f90a486ab8dd71aa2331fb",
+    "docs/work-packages/20260826-a12-station-selection-heuristic-evaluation/artifacts/evaluate.py": "a8bcc227e4ce5d894a6c789093f93523b1f55e6cb10366d1471926b8aaa8921c",
+    "docs/work-packages/20260826-a12r2-localizability-repair-comparison/artifacts/evaluate.py": "cc1ec0b5474e506a98514fc8f23fcf0791ae06cc75bb2ffd932e9dd2bdebfe5d",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/estimand-eligibility-diagnostic-v1.json": "f6a45430e4f1035458af99868050dc93091dcb7997659b3d308369973331b6e8",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluate.py": "9dd52e3ddd383f6d6d1d4957d9440739b35759d1df2b8ac16abcdbcffd213264",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluation-manifest-v1.json": "203f171e9aa4a2b0b756052e3dde67f54db6fad4cfc9d3830962e1c4c9b2c0a9",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/evaluation-manifest-v1.schema.json": "cb7cee1f5bfb264cb6763c91275411fab9d9dd7fde0c4190ef4f35d32d6a1f3c",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/review.md": "a4b51d459518544963ec93fa246d4f8528c6f54851e97f35d9fe86dd1a41777d",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/test-results.md": "d08c4314e2e7e1e8d5e4c6f3c4d1c8f904bce93ad704d270e32f4a6e081bd8a9",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/artifacts/test_evaluate.py": "15b875dae500a317387891f61bd61e7dd388f4cae84e1d70359223838ccdfa44",
+    "docs/work-packages/20260826-a12r3-localizable-selector-quality/package.md": "e7015ecdf1a2d67541e4552d65b5b5dd963d30db87a7b9f11b18766be9e2c4ca",
+    "rust-toolchain.toml": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df"
+  },
+  "station_archive_sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9"
+}
