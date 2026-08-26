@@ -21,9 +21,11 @@ runtime default or open confirmation.
   identity, executable predecessor gates, strict schema, f64 probability snap,
   named HOLD receipts, two-pass ordering, provenance checks, and disposition
   table.
-- [ ] Obtain independent GO on the corrected prospective source.
-- [ ] Publish source commit to `origin/main` and build its locked release.
-- [ ] Execute, replay, independently closure-review, run gates, and reconcile.
+- [x] 2026-08-26: obtained independent GO on original and amended prospective source.
+- [x] 2026-08-26: published amended source commit `866d0401ab757708d80a58ad9dda5683f6e000bc` and built its locked release.
+- [x] 2026-08-26: executed all 2,400 feasibility cells and closed quality scoring on the frozen repair gate.
+- [x] 2026-08-26: independently replayed byte-identical preflight and feasibility evidence.
+- [x] 2026-08-26: closure review returned GO; terminal gates and reconciliation passed.
 
 ## Surprises & Discoveries
 
@@ -57,9 +59,13 @@ runtime default or open confirmation.
 
 ## Outcomes & Retrospective
 
-Pending execution. On closure, record feasibility counts, selector winner
-changes, six arm medians, paired intervals, selector-stratum dispositions,
-strategy disposition, replay hashes, and successor boundary here.
+A12R2 closed before quality scoring at `HOLD-REPAIR-INELIGIBLE`. Ordinary
+localization succeeded for 2,362/2,400 cells and every site retained at least
+three eligible donors. Eleven raw-policy instances failed across four sites.
+The first/replay preflight and feasibility files are byte-identical. No six-arm
+quality estimand exists. A localizability-only selector evaluation is the
+least-complex successor; zero-target and one-sided repair semantics require a
+separate scientific contract.
 
 ## Context and Orientation
 
@@ -107,19 +113,23 @@ $PY docs/work-packages/20260826-a12r2-localizability-repair-comparison/artifacts
 $PY docs/work-packages/20260826-a12r2-localizability-repair-comparison/artifacts/evaluate.py --execute --source-commit SOURCE --cligen-binary target/release/cligen --build-receipt docs/work-packages/20260826-a12r2-localizability-repair-comparison/artifacts/build-receipt-v1.json --station-archive /tmp/cligen-a12r2-input/us-2015-2026.07.tar.gz
 ```
 
-Hash the evidence and decision, repeat the execute command, and require the two
-hashes to be identical. Elapsed time in the execution receipt may differ.
+The command exited on the named HOLD after publishing preflight, complete
+feasibility evidence, and failure receipt. Closure replay called the same
+source-bound `execute_science` into an isolated output root, required the same
+named HOLD, and required byte-identical preflight and feasibility hashes. It
+published `hold-replay-receipt-v1.json`; no quality evidence or decision exists.
 
 ## Validation and Acceptance
 
-Acceptance requires: exact manifest/schema agreement; 240 sites and exactly
-2,400 candidate cells; at least one ordinary-localizable donor per site; every
-raw winner repairable; Python/Rust selector and localized-parameter parity at
-all sites; authenticated source `.par`, binary, station archive/tree, PRISM,
-Daymet, predecessor, and output identities; byte-identical evidence/decision
-replay; confirmation access false; independent GO with no unresolved P0/P1;
-and fmt, clippy, and test passing. No production functions change, so the
-coverage/CRAP production-function gate is not triggered.
+HOLD acceptance requires: exact manifest/schema agreement; 240 sites and
+exactly 2,400 candidate cells; a complete per-candidate matrix; authenticated
+source `.par`, binary, station archive/tree, PRISM, Daymet, predecessor, and
+output identities; production success/failure parity for the current selector;
+an authenticated named failure receipt; byte-identical preflight/feasibility
+replay; no quality evidence or decision; confirmation access false;
+independent GO with no unresolved P0/P1; and fmt, clippy, and test passing. The
+realized artifacts satisfy the scientific HOLD branch. No production functions
+change, so the coverage/CRAP gate is not triggered.
 
 ## Idempotence and Recovery
 
@@ -138,9 +148,9 @@ terminal set.
 ## Artifacts and Notes
 
 Prospective sources are the manifest, schema, evaluator, tests, spec, and
-package. Realized artifacts are build receipt, calendar preflight, feasibility
-evidence, station selection evidence, decision, first/replay execution and
-replay receipts, review, and test results in
+package. Realized artifacts are the first-attempt and amended build receipts,
+selector-parity diagnostic, calendar preflight, complete feasibility evidence,
+execution failure receipt, HOLD replay receipt, review, and test results in
 the package `artifacts/` directory. Large runtime inputs and temporary CLIGEN
 outputs remain outside git.
 

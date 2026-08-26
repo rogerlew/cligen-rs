@@ -1,6 +1,6 @@
 # A12R2 — Localizability and Repair Corpus Comparison
 
-Status: `SCAFFOLDED-PROSPECTIVE`
+Status: `EXECUTED-HOLD-REPAIR-INELIGIBLE`
 
 Date: 2026-08-26
 
@@ -81,3 +81,44 @@ quality scoring. Execution remains necessary to publish the complete 2,400-cell
 ordinary-localizability census, all raw-policy repair failures, production
 failure parity, and the formal named receipt. The package will not weaken its
 prospective gate after observing this result.
+
+## Disposition
+
+`EXECUTED-HOLD-REPAIR-INELIGIBLE` at exact source commit
+`866d0401ab757708d80a58ad9dda5683f6e000bc`. The evaluator authenticated all
+240 fit-validation sites and all 2,400 nearest-ten candidate cells before
+scoring. Of those cells, 2,362 complete ordinary localization; every site has
+between 3 and 10 eligible donors. Filtering changes 4 closest winners and 5
+winners in each heuristic selector.
+
+The raw repair arms have 11 policy-site failures across four desert sites,
+all in June: 3 closest, 4 current, and 4 elevation-reference. Three sites have
+zero PRISM June precipitation with all-dry raw donors, outside the positive-
+target repair contract. The fourth has positive PRISM precipitation but a
+one-sided absorbing source state (`PWW=0.25`, `PWD=0`), also outside the
+both-zero repair contract. No quality metric or policy disposition was emitted.
+Confirmation access remained false.
+
+First and independent replay calendar preflights are byte-identical at
+`e7a042c7e5aed05b15a17a431bc19e7e117cc5f31bae7f56a2cbb16f49b10a36`;
+feasibility evidence is byte-identical at
+`9523b1a27d09affd755fde1c701ae6b26f7d31be883e054c78b99aee5a84d508`.
+
+Artifacts:
+
+- [calendar preflight](artifacts/calendar-preflight-v1.json)
+- [complete feasibility evidence](artifacts/feasibility-evidence-v1.json)
+- [failure receipt](artifacts/execution-failure-receipt-v1.json)
+- [HOLD replay receipt](artifacts/hold-replay-receipt-v1.json)
+- [build receipt](artifacts/build-receipt-v1.json)
+- [independent review](artifacts/review.md)
+- [test results](artifacts/test-results.md)
+
+## Successor boundary
+
+Do not broaden repair inside this closed package. The least-complex successor
+is a new prospective localizability-only quality evaluation of closest,
+current rank-sum, and elevation-reference arms on all 240 sites. It can answer
+the original selector question without inventing zero-target rainfall or a new
+one-sided absorbing-chain repair. A separately frozen repair-generalization
+study remains optional.

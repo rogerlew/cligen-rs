@@ -1,0 +1,24 @@
+{
+  "schema_version": "a12r2-hold-replay-receipt-1",
+  "source_commit": "866d0401ab757708d80a58ad9dda5683f6e000bc",
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483",
+  "build_receipt_sha256": "4e0a75cc84108adf7430869fdba39a8184db50918ce66766f32d14cde1817077",
+  "terminal": "HOLD-REPAIR-INELIGIBLE",
+  "point_id": "p+3350_-11625",
+  "comparisons": {
+    "calendar_preflight": {
+      "first_sha256": "e7a042c7e5aed05b15a17a431bc19e7e117cc5f31bae7f56a2cbb16f49b10a36",
+      "replay_sha256": "e7a042c7e5aed05b15a17a431bc19e7e117cc5f31bae7f56a2cbb16f49b10a36",
+      "identical": true
+    },
+    "feasibility_evidence": {
+      "first_sha256": "9523b1a27d09affd755fde1c701ae6b26f7d31be883e054c78b99aee5a84d508",
+      "replay_sha256": "9523b1a27d09affd755fde1c701ae6b26f7d31be883e054c78b99aee5a84d508",
+      "identical": true
+    }
+  },
+  "scientific_replay_identical": true,
+  "quality_scoring_started": false,
+  "confirmation_target_series_accessed": false,
+  "receipt_sha256": "9d151acd1aaacd46a70a7f2d8eb9df8d22e8de11fe3f43da01cf30e61836e77d"
+}

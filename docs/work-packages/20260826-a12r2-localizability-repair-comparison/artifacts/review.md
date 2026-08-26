@@ -19,8 +19,8 @@ The first published-source execution then exposed an over-strict inherited
 floating component tolerance before publishing any evidence. A corpus
 diagnostic measured maximum Rust/Python component drift of `6.68e-13 km` with
 exact pools/ranks/scores/winners. The prospective amendment freezes `1e-12`
-absolute and `1e-13` relative component tolerance; amendment re-review is
-pending.
+absolute and `1e-13` relative component tolerance; amendment re-review returned
+GO with no unresolved P0/P1.
 The exact diagnostic is preserved as `selector-parity-diagnostic-v1.json`
 with canonical self-hash
 `2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230`;
@@ -34,4 +34,11 @@ publication and execution of the formal expected-HOLD run.
 
 ## Closure review
 
-Pending realized evidence and replay.
+Independent closure audit recomputed the complete artifact chain and census.
+It verified source commit `866d0401ab757708d80a58ad9dda5683f6e000bc`,
+240 sites, 2,400 cells, 2,362 ordinary-localizable cells, 3--10 eligible donors
+per site, 11 repair failures at four sites with selector counts 3/4/4, winner
+change counts 4/5/5, byte-identical preflight and feasibility replay, valid
+self-hashes and receipt links, all 2,400 candidate source hashes, absent quality
+evidence/decision, and false confirmation access. Final documentation
+reconciliation completed. Closure review returned GO with no unresolved P0/P1.
