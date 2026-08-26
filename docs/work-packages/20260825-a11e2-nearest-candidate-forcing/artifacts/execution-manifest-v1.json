@@ -1,0 +1,43 @@
+{
+  "bootstrap": {"replicates": 1000, "seed": 410543},
+  "confirmation_target_access": false,
+  "execution_id": "a11e2-nearest-candidate-forcing-v1",
+  "forcing_selector": {
+    "candidate_role": "candidate_fit",
+    "distance": "haversine_mean_earth_radius_6371.0088_km",
+    "panel_sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "selection_id": "a11e2-nearest-candidate-coordinate-v1",
+    "tie_break": "distance_then_point_id_utf8",
+    "uses_candidate_regime": false
+  },
+  "hypothesis": {
+    "comparator_strategy_id": "circular_fixed_block_physical_core_v1",
+    "primary_metrics": [
+      "monthly_equivalent_precipitation_mean_relative_absolute_error",
+      "monthly_temperature_mean_absolute_error_c"
+    ],
+    "rule": "both_across_site_medians_strictly_lower_and_zero_invariants"
+  },
+  "inputs": {
+    "a11e1_decision_sha256": "b72ea78d5b4f2b446915aa64f263608091da76202d6dcc24f65dfcb1bfaf3398",
+    "a11e1_evidence_sha256": "961e0bd524566535159a85a30fdaa17bb6b7fccaab763915ddcaa9197e2ea746",
+    "a11e1_execution_manifest_sha256": "609ea61f40219f16c409f668763b77c8ed139cf2b78b9bf5f272396207b38fc3",
+    "a11e1_executor_sha256": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e1_source_commit": "105c29b0efa3feccd27db37914bcaa60693cd828",
+    "cohort_selection_sha256": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "development_manifest_sha256": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+    "normalized_manifest_sha256": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "shard_manifest_sha256": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9"
+  },
+  "inherited_contract": {
+    "adapter_id": "a11e_two_part_physical_core_36_v1",
+    "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+    "block_length_years": 5,
+    "calendar_estimator": "daymet_mask_normalized_month_v1",
+    "evaluator_id": "a11e_mask_normalized_observed_diagnostics_v1",
+    "metric_set_id": "a11e_mask_normalized_observed_metrics_v1",
+    "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1"
+  },
+  "schema_version": 1,
+  "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1"
+}

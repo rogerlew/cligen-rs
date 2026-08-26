@@ -788,13 +788,15 @@ failures and no confirmation access. Both arms remain numerically valid; the
 circular block arm was descriptively better at 18/20 sites and in conditional-CV
 covariance, but one member and the uncalibrated score prohibit selection.
 
-**A11 recommended next stage:** a bounded development-only forcing-location
-test that freezes the circular-block law, daily core, calendar, roles, and
-evaluator and replaces only region-median location with a prospectively frozen
-nearest candidate-fit climatology selected from non-target coordinate/elevation
-metadata. The hypothesis is lower monthly precipitation relative error and
+**A11 current stage:**
+[A11E2 nearest candidate-fit forcing](work-packages/20260825-a11e2-nearest-candidate-forcing/package.md)
+is active as the bounded development-only successor. It freezes the
+circular-block law, daily core, calendar, roles, evaluator, and A11E1 common
+random numbers and changes only region-median location to a prospectively
+selected nearest candidate-fit climatology based on non-target coordinates.
+The hypothesis is lower median monthly precipitation relative error and
 temperature MAE with zero invariants. It has no confirmation or promotion
-authority and is not yet dispatched.
+authority.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
