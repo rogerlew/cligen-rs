@@ -816,6 +816,15 @@ not nomination or promotion. Confirmation remains sealed. Any nomination,
 confirmation, selector refinement, or new model surface requires a separately
 authorized prospective scientific decision.
 
+**A11E4 attribution separately authorized (2026-08-25):**
+[A11E4 forcing heterogeneity attribution](work-packages/20260825-a11e4-heterogeneity-attribution/package.md)
+uses only closed A11E3 metric evidence and A11E2 selector metadata. Its frozen
+station-level joint model tests ranked candidate distance and regime mismatch
+conditional on station regime and each other using all 1,327,104 within-regime
+permutations, max-|t| familywise control, and leave-one-member/station sign
+stability. It cannot change the selector, read raw observations or confirmation,
+or launch a successor automatically.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

@@ -1,0 +1,68 @@
+{
+  "analysis_id": "a11e4-heterogeneity-attribution-v1",
+  "confirmation_target_access": false,
+  "decision": {
+    "alpha_familywise": 0.05,
+    "dispositions": [
+      "SUPPORTED_BOTH_METADATA_ASSOCIATIONS",
+      "SUPPORTED_DISTANCE_ASSOCIATION",
+      "SUPPORTED_REGIME_MISMATCH_ASSOCIATION",
+      "NO_STABLE_METADATA_ASSOCIATION"
+    ],
+    "support_rule": "max_t_adjusted_p_at_most_alpha_and_full_sign_preserved_in_all_lomo_and_loso_fits"
+  },
+  "inputs": {
+    "a11e2_closure_commit": "65ed7ac7c54a67014e33358c64147bc686cd9327",
+    "a11e2_decision_sha256": "8ba4757b817453c4be5d7a706aa321a9786a66425a9285584d94f49c0d205dc5",
+    "a11e2_execution_receipt_sha256": "24c8aa6391fedb900f3376842c37c56442c91473bee54d823f1e4afc84267235",
+    "a11e2_selection_receipt_sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6",
+    "a11e2_source_commit": "e15369ad26f4e0b646f5f4665912dd6a37e35e3a",
+    "a11e3_calendar_preflight_sha256": "49d86f2da3a00ad05a115c17b91a5c820a740f5b8acbbf0127a0b192bb5eb6a4",
+    "a11e3_closure_commit": "cc85b4dc56040116cfcef1e1f721a971b0cb6b54",
+    "a11e3_decision_sha256": "06537916809199ed0857ce8d8af2dab77f86975bb67bb536f41651ce5d424d37",
+    "a11e3_evidence_self_sha256": "c8e302b31690efaeb58af710fb9ab4a7301bea661dc4017a0568f6c5ddd93d2f",
+    "a11e3_evidence_sha256": "834d9af57679a0a252622d7c29fb223985833b85022a8bc55656f7a24daaa930",
+    "a11e3_execution_manifest_sha256": "e3e925dae4b9df6ab2e2fed958873a7fb51a26374cb27fd29b0d77f2fab71044",
+    "a11e3_execution_receipt_sha256": "00464e2e2b4b96f2ff71e35c6aed8f543f2215b43c207b3bcaea55ff0937f314",
+    "a11e3_executor_sha256": "4572b45c21eb9d4b3d7ec0f1c264817228aaa92ca632af23bd75533529a2d543",
+    "a11e3_fit_authentication_sha256": "5cdcddec1e411e1b0a726439ea0944db2141462de451dcebe7d04e28e232d523",
+    "a11e3_review_sha256": "9857a23d2daf586cf2d94afa43a20c75ef56bbbd3d3a3cc57735f9ed4ceae18d",
+    "a11e3_source_commit": "ac254ee4fc2bc0073a4f4c351e555cc517c49f3d",
+    "a11e3_test_results_sha256": "2cf7e8f6a67b1cab86d0b611206ec6876f2249c9e8da9c40dcfba072e6b5795f"
+  },
+  "model": {
+    "distance_transform": "ascending_average_rank_centered_scaled_population_sd",
+    "exact_assignment_count": 1327104,
+    "familywise_statistic": "max_abs_t_distance_mismatch",
+    "max_t_comparison_relative_tolerance": 1e-12,
+    "mismatch": "station_regime_not_equal_candidate_regime",
+    "outcome": "station_fraction_of_eight_members_with_both_primary_metrics_strictly_improved",
+    "permutation": "exhaustive_outcome_label_permutation_within_station_regime_including_identity",
+    "permutation_degenerate_fit_rule": "sse_at_or_below_ols_tolerance_maps_nonzero_selected_beta_to_signed_infinity_and_counts_as_extreme",
+    "predictors": ["station_regime_fixed_effects", "ranked_distance", "regime_mismatch"],
+    "reference_regime": "arid_boundary",
+    "station_regime_levels": [
+      "arid_boundary",
+      "cold",
+      "hot_arid",
+      "humid",
+      "monsoonal_transition",
+      "non_monsoonal_semi_arid"
+    ],
+    "station_regime_sizes": [2, 4, 4, 2, 4, 4]
+  },
+  "outcome": {
+    "member_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+    "station_count": 20
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": 1,
+  "stability": {
+    "leave_one_member_out_fits": 8,
+    "leave_one_station_out_fits": 20,
+    "rule": "coefficient_retains_full_fit_strict_sign_in_every_fit"
+  }
+}
