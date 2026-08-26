@@ -1,0 +1,16 @@
+{
+  "schema_version": "a12r1-build-receipt-1",
+  "source_commit": "de1502ad4d80a7205ac128c24e1851a42380f5b7",
+  "source_tree": "bc055141e3b07c0658c57811824170823280f466",
+  "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+  "build_command": "cargo build --release --locked --bin cligen",
+  "profile": "release",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "rustc_commit": "8bab26f4f68e0e26f0bb7960be334d5b520ea452",
+  "llvm": "22.1.6",
+  "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+  "host": "aarch64-apple-darwin",
+  "os": "macOS 26.5.2 build 25F84",
+  "cligen_binary_bytes": 16297792,
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483"
+}

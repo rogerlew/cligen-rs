@@ -1,0 +1,81 @@
+{
+  "schema_version": "a12r1-execution-receipt-1",
+  "execution_id": "a12r1-exact-vector-independent-repair-v1",
+  "terminal": "EXECUTED-COMPLETE",
+  "source_commit": "de1502ad4d80a7205ac128c24e1851a42380f5b7",
+  "build_receipt_sha256": "1b61ae19fcd909aebf163d28d448ac8e93391eb68d066fab4cba90767846a73f",
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483",
+  "station_collection": "us-2015@2026.07",
+  "station_archive_sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9",
+  "prism_runtime_archive_sha256": "49fe87c83511678094e1033ecc2143d5d833811135934858aab854af78c28292",
+  "prism_grid_manifest_sha256": "f0eb4b9d4fbe422477c70aebf6eb11e43d329947d6731010edaf315d87de4c9d",
+  "prism_source_manifest_sha256": "8adef2665facaea76835ece91d8c47c55a04dd3fb39a6278358cc72460fafc1f",
+  "prism_build_receipt_sha256": "59e8da3765a36a8f8b739fbda82a755a43eba2e680d31dc8a37ce033f5dac732",
+  "request": {
+    "longitude": -116.5,
+    "latitude": 33.25,
+    "years": 1
+  },
+  "default_profile_check": {
+    "command": "target/release/cligen prism run --longitude -116.5 --latitude 33.25 --years 1 --output-dir /tmp/cligen-a12r1-de1502a-default",
+    "exit_code": 1,
+    "error": "cligen: PRISM station: month 6 cannot be localized",
+    "final_output_published": false,
+    "staging_path_retained": false
+  },
+  "repair_profile_check": {
+    "command": "target/release/cligen prism run --longitude -116.5 --latitude 33.25 --years 1 --degenerate-occurrence-repair independent-prism-v1 --output-dir /tmp/cligen-a12r1-de1502a-repair",
+    "exit_code": 0,
+    "warning": "warning: applied degenerate_occurrence_independent_prism_v1 to month 6: source PWW=0 PWD=0, PRISM ppt=0.06319291 in, encoded PWW=PWD=0.01",
+    "profile_id": "stochastic_prism_localized_par_degenerate_occurrence_independent_v1",
+    "repair_method_id": "degenerate_occurrence_independent_prism_v1",
+    "selected_station_id": "ca040983.par",
+    "source_par_sha256": "13bd7d13a59a2180da11798bdb926888f6835acb4167c664907f4446433b567f",
+    "localized_par_sha256": "1cc1e411e587f4ff22d19a13c8fb4f0a89032bddd1e73dca0aa465b2d3ff27d7",
+    "month": 6,
+    "prism_target_ppt_in": 0.06319291009677677,
+    "source_mean_wet_day_in": 0.15,
+    "continuous_limit_wet_day_count": 0.21064302528572076,
+    "continuous_limit_wet_fraction": 0.007021434176190692,
+    "encoded_wet_day_count": 0.3,
+    "encoded_pww": 0.01,
+    "encoded_pwd": 0.01,
+    "encoded_mean_wet_day_in": 0.21,
+    "encoded_expected_ppt_in": 0.063,
+    "absolute_target_error_in": 0.00019291009677677284,
+    "encoded_intensity_in_per_hour": 0.64,
+    "precipitation_ratio": null,
+    "precipitation_ratio_undefined_reason": "source_expected_monthly_precipitation_is_zero",
+    "persistence_assumption": "independent_days_pww_equals_pwd_equals_q"
+  },
+  "artifact_identities": {
+    "artifact_manifest_sha256": "da991d299c506cfe85b55607855a6f086b8008a9f5796e8f0bb80c5b5a413e02",
+    "station_selection_sha256": "8aa310ebf62afc8016de387ae82041c67e157c5c0310c66ffaff7c8c3f46e965",
+    "localization_sha256": "8d0862958df48ade920188984c14c273aa62251966d987198c52edc5557b30cb",
+    "method_sha256": "2010abe2d0d15adf65ecacd809d42188bb6b8d7c3fdf90fd65d2314a3965baea",
+    "request_sha256": "42e5b6ad76cc5df9af8863bd5009a794dcfa1fb75b663c7dcf52b6fd47d27965",
+    "runspec_sha256": "119f7e60fd1e12b3940c36f94f775489d22f9140bb72e51742413a8e2bb9ad6f",
+    "climate_sha256": "06885cf41295aeade14c92f2f0d2d3c702ca247cd53b242f60772fffa2d0efae",
+    "climate_provenance_sha256": "0154dd129bc5c160591c0dbf2114a534d882d4e18d1c97dba7e5a5109490b865",
+    "climate_quality_sha256": "1149ffd5e5ae76e14807431b51e076600f347f385954b8529812f5588361ce6b",
+    "prism_normals_sha256": "26b4bc88e01b348022d57b56f50ec9075381bd0e98780e29d4634598504e3f3a"
+  },
+  "provenance_cross_checks": {
+    "selection_source_hash_matches_copied_source": true,
+    "selection_binary_hash_matches_manifest_executable": true,
+    "selection_binary_hash_matches_built_executable": true,
+    "profile_matches_selection_localization_method_manifest": true,
+    "repair_method_matches_request_localization_method_climate_provenance": true
+  },
+  "gates": {
+    "cargo_fmt_check": "PASS",
+    "cargo_clippy_all_targets_deny_warnings": "PASS",
+    "cargo_test": "PASS",
+    "cargo_llvm_cov_workspace_lcov": "PASS",
+    "lcov_sha256": "c07ca57b1e09c74d9471b5272922e3b8cb8484f13133b9d904df00c40f74b0b1",
+    "cargo_crap_fail_above_30": "PASS: 846 functions analyzed; 0 above threshold",
+    "independent_review": "GO; no P0/P1 findings"
+  },
+  "confirmation_target_series_accessed": false,
+  "receipt_payload_sha256": "7c42d2d4c8ee12637711f1c6505e1c73eec70e4f27f81991b9ea9f0e563123d2"
+}

@@ -1,6 +1,6 @@
 # SPEC-A12R1-LOCALIZABILITY-AWARE-SELECTION — Feasible Donor Evaluation
 
-Status: revision 2; explicit repair implementation authorized; no default change or confirmation authority
+Status: revision 2; explicit repair implementation executed; corpus comparison pending; no default change or confirmation authority
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 # A12R1 — Localizability-Aware Station Selection
 
-Status: `ACTIVE`
+Status: `EXECUTED-COMPLETE`
 
 Date: 2026-08-26
 
@@ -52,7 +52,28 @@ warnings, cryptographic receipts, all repository gates, and independent GO.
 Corpus-wide comparative claims remain unauthorized until their own prospective
 evaluator is published and executed.
 
-## Current boundary
+## Disposition
 
-The package is active. It does not retroactively change A12, the ordinary
-runtime profile, station selection, or confirmation access.
+`EXECUTED-COMPLETE`. Source commit
+`de1502ad4d80a7205ac128c24e1851a42380f5b7` implements the explicit profile.
+The exact A12 vector proves that the ordinary profile still fails atomically
+and the explicit profile succeeds with a structured warning and complete
+cryptographic provenance. June encodes `PWW=PWD=0.01`, mean wet-day
+precipitation `0.21 in`, and expected monthly precipitation `0.063 in` against
+the `0.06319291009677677 in` PRISM target. Independent review returned GO with
+no P0/P1 findings and all repository gates passed.
+
+Evidence:
+
+- [build receipt](artifacts/build-receipt-v1.json)
+- [execution receipt](artifacts/execution-receipt-v1.json)
+- [independent review](artifacts/review.md)
+- [test results](artifacts/test-results.md)
+
+## Current boundary and successor
+
+This package does not retroactively change A12, the ordinary runtime profile,
+station selection, or confirmation access. The next scientific stage is a new
+prospective corpus-wide comparison of raw selected-donor repair against the
+full-localizability selector arms already specified here; no selector default
+is inferred from this one exact-vector repair proof.

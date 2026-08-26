@@ -16,14 +16,16 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-**A12 terminal / A12R1 active (2026-08-26):** A12 stopped at
+**A12 terminal / A12R1 implementation complete (2026-08-26):** A12 stopped at
 `EXECUTED-HOLD-UNLOCALIZABLE-DONOR` before scoring when all three policies
 selected a station with zero June source precipitation and an undefined
 `P(W/D)/P(W/W)` persistence ratio for positive PRISM precipitation at
-`p+3325_-11650`. The scaffolded A12R1 successor prospectively evaluates full
-localization eligibility across each nearest-ten pool before reconsidering
-closest, current PRISM rank-sum, and elevation/PRISM policy quality. Neither
-package opens confirmation or authorizes a runtime-default change.
+`p+3325_-11650`. A12R1 added and exact-vector-tested the explicit independent
+all-dry repair profile while preserving ordinary fail-closed behavior. Its
+remaining full-localizability and repaired-donor corpus comparison moves to a
+new prospective successor before reconsidering closest, current PRISM
+rank-sum, and elevation/PRISM policy quality. Neither package opens
+confirmation or authorizes a runtime-default change.
 
 **Operator direction 2026-07-15: continue stochastic climate-generator
 development, retire the stopped A8c runtime first, and replace incremental
