@@ -16,6 +16,11 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
+**Active (2026-08-26):** A12 prospectively compares closest-station selection,
+the current PRISM rank-sum selector, and a separately named WEPPpy-style
+elevation/PRISM reference on the 240-point A10 fit-validation corpus. It does
+not open confirmation or authorize a runtime-default change.
+
 **Operator direction 2026-07-15: continue stochastic climate-generator
 development, retire the stopped A8c runtime first, and replace incremental
 candidate rescue with a calibration-first successor family.** File/I/O,

@@ -49,8 +49,14 @@ pub struct CandidateReceipt {
 pub struct SelectionReceipt {
     pub schema_version: u32,
     pub profile_id: String,
-    pub collection: String,
+    pub selection_method_id: String,
+    pub collection_name: String,
+    pub collection_version: String,
+    pub collection_archive_sha256: String,
     pub selected_station_id: String,
+    pub selected_source_par_path: PathBuf,
+    pub selected_source_par_sha256: String,
+    pub cligen_binary_sha256: String,
     pub candidates: Vec<CandidateReceipt>,
 }
 
@@ -96,7 +102,27 @@ struct Candidate {
 
 /// Select a station and localize its monthly precipitation/temperature rows.
 pub fn localize(cache_root: &Path, normals: &NormalsReceipt) -> Result<LocalizedPar, PrismError> {
-    let (selected, selection) = select_station(cache_root, normals)?;
+    let executable_path = std::env::current_exe()
+        .map_err(|source| super::io_error("resolve current executable", source))?;
+    let cligen_binary_sha256 = super::sha256_file(&executable_path)?;
+    localize_with_binary_identity(cache_root, normals, &cligen_binary_sha256)
+}
+
+fn localize_with_binary_identity(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
+    cligen_binary_sha256: &str,
+) -> Result<LocalizedPar, PrismError> {
+    if cligen_binary_sha256.len() != 64
+        || !cligen_binary_sha256
+            .bytes()
+            .all(|byte| byte.is_ascii_hexdigit() && !byte.is_ascii_uppercase())
+    {
+        return Err(PrismError::InvalidRequest(
+            "cligen binary SHA-256 must be 64 lowercase hex characters".to_owned(),
+        ));
+    }
+    let (selected, selection) = select_station(cache_root, normals, cligen_binary_sha256)?;
     localize_selected(selected, selection, normals)
 }
 
@@ -107,6 +133,11 @@ fn localize_selected(
 ) -> Result<LocalizedPar, PrismError> {
     let source_bytes = fs::read(&selected.path)
         .map_err(|source| super::io_error("read selected station .par", source))?;
+    if crate::quality::sha256_hex(&source_bytes) != selection.selected_source_par_sha256 {
+        return Err(PrismError::InvalidStation(
+            "selected source .par changed after selection".to_owned(),
+        ));
+    }
     let source = ParFile::parse(&source_bytes)
         .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
     let (localized_bytes, ratios) = rewrite(&source_bytes, &source, normals)?;
@@ -164,9 +195,28 @@ fn build_localized_result(
 fn select_station(
     cache_root: &Path,
     normals: &NormalsReceipt,
+    cligen_binary_sha256: &str,
 ) -> Result<(NearestRow, SelectionReceipt), PrismError> {
+    let (collection, rows) = load_pool(cache_root, normals)?;
+    let mut candidates = load_candidates(rows, normals)?;
+    assign_ranks(&mut candidates);
+    let receipts: Vec<CandidateReceipt> = candidates.iter().map(candidate_receipt).collect();
+    let winner = winning_candidate(&candidates);
+    let receipt = build_selection_receipt(&collection, &winner, receipts, cligen_binary_sha256)?;
+    Ok((winner, receipt))
+}
+
+fn load_pool(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
+) -> Result<(crate::stations::Collection, Vec<NearestRow>), PrismError> {
+    let manifests = Manifests::embedded();
+    let collection = manifests
+        .get("us-2015")
+        .map_err(|error| PrismError::InvalidStation(error.to_string()))?
+        .clone();
     let rows = nearest(
-        &Manifests::embedded(),
+        &manifests,
         cache_root,
         &NearestQuery {
             latitude: normals.requested_latitude,
@@ -177,24 +227,41 @@ fn select_station(
         },
     )
     .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
-    if rows.len() != POOL_SIZE {
-        return Err(PrismError::InvalidStation(format!(
-            "selector requires {POOL_SIZE} candidates, found {}",
-            rows.len()
-        )));
+    require_complete_pool(&rows)?;
+    Ok((collection, rows))
+}
+
+fn require_complete_pool(rows: &[NearestRow]) -> Result<(), PrismError> {
+    if rows.len() == POOL_SIZE {
+        return Ok(());
     }
-    let mut candidates = load_candidates(rows, normals)?;
-    assign_ranks(&mut candidates);
-    let receipts: Vec<CandidateReceipt> = candidates.iter().map(candidate_receipt).collect();
-    let winner = winning_candidate(&candidates);
-    let receipt = SelectionReceipt {
-        schema_version: 1,
+    Err(PrismError::InvalidStation(format!(
+        "selector requires {POOL_SIZE} candidates, found {}",
+        rows.len()
+    )))
+}
+
+fn build_selection_receipt(
+    collection: &crate::stations::Collection,
+    winner: &NearestRow,
+    candidates: Vec<CandidateReceipt>,
+    cligen_binary_sha256: &str,
+) -> Result<SelectionReceipt, PrismError> {
+    let source_bytes = fs::read(&winner.path)
+        .map_err(|source| super::io_error("hash selected station .par", source))?;
+    Ok(SelectionReceipt {
+        schema_version: 2,
         profile_id: PROFILE_ID.to_owned(),
-        collection: "us-2015@2026.07".to_owned(),
+        selection_method_id: "cligen_prism_rank_sum_v1".to_owned(),
+        collection_name: collection.name.clone(),
+        collection_version: collection.version.clone(),
+        collection_archive_sha256: collection.archive.sha256.clone(),
         selected_station_id: winner.id.clone(),
-        candidates: receipts,
-    };
-    Ok((winner, receipt))
+        selected_source_par_path: winner.path.clone(),
+        selected_source_par_sha256: crate::quality::sha256_hex(&source_bytes),
+        cligen_binary_sha256: cligen_binary_sha256.to_owned(),
+        candidates,
+    })
 }
 
 fn load_candidates(
@@ -465,8 +532,8 @@ fn validate_encoded(par: &ParFile, normals: &NormalsReceipt) -> Result<(), Prism
 #[cfg(test)]
 mod tests {
     use super::{
-        localize_month, localize_selected, render_monthly, rewrite, station_ppt, validate_encoded,
-        SelectionReceipt,
+        localize_month, localize_selected, localize_with_binary_identity, render_monthly, rewrite,
+        station_ppt, validate_encoded, SelectionReceipt,
     };
     use crate::par::ParFile;
     use crate::prism::grid::NormalsReceipt;
@@ -549,18 +616,39 @@ mod tests {
                 longitude: -116.0,
                 years: 40.0,
                 distance_km: 0.0,
-                path,
+                path: path.clone(),
             },
             SelectionReceipt {
-                schema_version: 1,
+                schema_version: 2,
                 profile_id: "stochastic_prism_localized_par_v1".to_owned(),
-                collection: "us-2015@2026.07".to_owned(),
+                selection_method_id: "cligen_prism_rank_sum_v1".to_owned(),
+                collection_name: "us-2015".to_owned(),
+                collection_version: "2026.07".to_owned(),
+                collection_archive_sha256: "0".repeat(64),
                 selected_station_id: "id106388.par".to_owned(),
+                selected_source_par_path: path,
+                selected_source_par_sha256: crate::quality::sha256_hex(PAR),
+                cligen_binary_sha256: "1".repeat(64),
                 candidates: Vec::new(),
             },
             &normals(&par),
         )
         .unwrap();
         assert_eq!(result.localization.source_station_id, "id106388.par");
+        assert_eq!(result.selection.schema_version, 2);
+        assert_eq!(result.selection.selected_source_par_sha256.len(), 64);
+        assert_eq!(result.selection.cligen_binary_sha256, "1".repeat(64));
+    }
+
+    #[test]
+    fn selection_rejects_malformed_binary_identity_before_cache_access() {
+        let par = ParFile::parse(PAR).unwrap();
+        let error = localize_with_binary_identity(
+            std::path::Path::new("missing"),
+            &normals(&par),
+            "not-a-hash",
+        )
+        .unwrap_err();
+        assert!(error.to_string().contains("binary SHA-256"));
     }
 }

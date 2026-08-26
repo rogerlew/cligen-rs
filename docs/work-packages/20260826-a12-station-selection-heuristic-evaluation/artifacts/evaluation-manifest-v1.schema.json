@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "sha256": {"pattern": "^[0-9a-f]{64}$", "type": "string"}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "bootstrap": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {"const": "numpy_philox"},
+        "common_resamples": {"const": true},
+        "domain": {"const": "a12_station_selection_site_median_v1"},
+        "quantile_method": {"const": "linear"},
+        "replicates": {"const": 10000},
+        "seed": {"const": 12012},
+        "seed_derivation": {"const": "numpy_seedsequence_u32le_sha256_domain_plus_integer_seed"}
+      },
+      "required": ["algorithm", "common_resamples", "domain", "quantile_method", "replicates", "seed", "seed_derivation"],
+      "type": "object"
+    },
+    "corpus": {
+      "additionalProperties": false,
+      "properties": {
+        "calendar_axis_rows": {"const": 10958},
+        "masked_dates": {
+          "prefixItems": [
+            {"const": "1980-12-31"}, {"const": "1984-12-31"},
+            {"const": "1988-12-31"}, {"const": "1992-12-31"},
+            {"const": "1996-12-31"}, {"const": "2000-12-31"},
+            {"const": "2004-12-31"}, {"const": "2008-12-31"}
+          ],
+          "items": false,
+          "maxItems": 8,
+          "minItems": 8,
+          "type": "array"
+        },
+        "observed_rows": {"const": 10950},
+        "period_end_inclusive": {"const": "2009-12-31"},
+        "period_start": {"const": "1980-01-01"},
+        "role": {"const": "fit_validation"},
+        "site_count": {"const": 240},
+        "source_transform": {"const": "daymet_official_365_v1"}
+      },
+      "required": ["calendar_axis_rows", "masked_dates", "observed_rows", "period_end_inclusive", "period_start", "role", "site_count", "source_transform"],
+      "type": "object"
+    },
+    "decision": {
+      "additionalProperties": false,
+      "properties": {
+        "family_worsening_limit_fraction": {"const": 0.05},
+        "heuristic_support_rule": {"const": "paired_composite_median_lt_0_and_bootstrap_upper_lt_0_and_site_win_fraction_gt_0.5_and_no_family_median_more_than_5pct_above_closest"},
+        "policies": {
+          "prefixItems": [
+            {"const": "closest_v1"},
+            {"const": "cligen_prism_rank_sum_v1"},
+            {"const": "wepppy_elevation_prism_reference_v1"}
+          ],
+          "items": false,
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array"
+        }
+      },
+      "required": ["family_worsening_limit_fraction", "heuristic_support_rule", "policies"],
+      "type": "object"
+    },
+    "evaluation_id": {"const": "a12-station-selection-heuristic-evaluation-v1"},
+    "input_hashes": {
+      "additionalProperties": false,
+      "properties": {
+        "a10_corpus_spec": {"$ref": "#/$defs/sha256"},
+        "cohort_selection": {"$ref": "#/$defs/sha256"},
+        "daymet_shard_manifest": {"$ref": "#/$defs/sha256"},
+        "normalized_manifest": {"$ref": "#/$defs/sha256"},
+        "station_manifests": {"$ref": "#/$defs/sha256"}
+      },
+      "required": ["a10_corpus_spec", "cohort_selection", "daymet_shard_manifest", "normalized_manifest", "station_manifests"],
+      "type": "object"
+    },
+    "metrics": {
+      "prefixItems": [
+        {"const": "wet_day_precipitation_sd_relative_absolute_error"},
+        {"const": "wet_day_precipitation_skew_scaled_absolute_error"},
+        {"const": "wet_after_wet_probability_absolute_error"},
+        {"const": "wet_after_dry_probability_absolute_error"},
+        {"const": "tmax_sd_relative_absolute_error"},
+        {"const": "tmin_sd_relative_absolute_error"}
+      ],
+      "items": false,
+      "maxItems": 6,
+      "minItems": 6,
+      "type": "array"
+    },
+    "runtime": {
+      "additionalProperties": false,
+      "properties": {
+        "numpy": {"const": "2.3.5"},
+        "python": {"const": "3.12.13"}
+      },
+      "required": ["numpy", "python"],
+      "type": "object"
+    },
+    "schema_version": {"const": 1}
+  },
+  "required": ["bootstrap", "corpus", "decision", "evaluation_id", "input_hashes", "metrics", "runtime", "schema_version"],
+  "type": "object"
+}

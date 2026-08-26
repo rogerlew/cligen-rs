@@ -2,7 +2,7 @@
 
 Status: active public preprocessing/orchestration surface
 
-Revision: 3 (public bundle/mode pedigree and limitations, 2026-07-18)
+Revision: 4 (station-selection receipt cryptographic closure, 2026-08-26)
 
 ## Identity and claim boundary
 
@@ -179,8 +179,10 @@ Every successful request atomically publishes:
 - canonical method/pedigree/limitations JSON;
 - PRISM query receipt with bundle/manifest/grid hashes, source metadata,
   raster cells, raw values, converted values, and attribution;
-- station-selection receipt with all ten candidates, component errors/ranks,
-  scores, collection identity, source `.par` path, and source hash;
+- station-selection receipt schema version 2 with the method ID, all ten
+  candidates, component errors/ranks, scores, collection name/version/archive
+  SHA-256, selected source `.par` path and SHA-256, and exact executing cligen
+  binary SHA-256;
 - source and localized `.par` files plus a field-level mutation receipt;
 - runspec, `.cli`, ordinary cligen-rs provenance, and quality report; and
 - a top-level manifest hashing every artifact and the cligen executable.

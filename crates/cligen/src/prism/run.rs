@@ -129,7 +129,11 @@ fn emit_run(
     write_receipt_artifacts(request, normals, localized)?;
     write_station_artifacts(request, localized)?;
     execute_faithful(request)?;
-    write_artifact_manifest(distribution, &request.output_dir)
+    write_artifact_manifest(
+        distribution,
+        &request.output_dir,
+        &localized.selection.cligen_binary_sha256,
+    )
 }
 
 fn write_receipt_artifacts(
@@ -207,6 +211,7 @@ fn write_json(path: &Path, value: &impl Serialize) -> Result<(), PrismError> {
 fn write_artifact_manifest(
     distribution: &Distribution,
     output_dir: &Path,
+    expected_executable_sha256: &str,
 ) -> Result<(), PrismError> {
     let artifacts = artifact_identities(output_dir)?;
     let executable_path = std::env::current_exe()
@@ -215,6 +220,11 @@ fn write_artifact_manifest(
         &executable_path,
         executable_path.parent().unwrap_or(Path::new(".")),
     )?;
+    if executable.sha256 != expected_executable_sha256 {
+        return Err(PrismError::Output(
+            "executing cligen binary changed while producing the run".to_owned(),
+        ));
+    }
     write_json(
         &output_dir.join("artifact-manifest.json"),
         &ArtifactManifest {

@@ -79,6 +79,9 @@ see [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Stochastic PRISM mode
 
+For installation, runspec, station-cache, PRISM, output, and provenance
+walkthroughs, see the [command-line guide](docs/cli-guide.md).
+
 Cargo installs the PRISM-aware command surface but does not place the 60 MB
 normals runtime in the crate. Acquire the immutable, hash-pinned runtime once,
 then query or run entirely from the local cache:
