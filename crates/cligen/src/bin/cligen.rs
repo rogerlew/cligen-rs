@@ -2,10 +2,11 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, ValueEnum};
 
 use cligen::par::ParFile;
-use cligen::prism::run::PrismRunRequest;
+use cligen::prism::localize::DegenerateOccurrenceRepair;
+use cligen::prism::run::{PrismRunOptions, PrismRunRequest};
 use cligen::prism::{grid as prism_grid, run as prism_run, sync as prism_sync, Distribution};
 use cligen::quality::compute_report;
 use cligen::runspec::load_runspec_file;
@@ -85,7 +86,23 @@ enum PrismCommand {
         /// New destination directory for the complete artifact set.
         #[arg(long)]
         output_dir: PathBuf,
+        /// Explicitly repair source months with PWW=PWD=0 and positive PRISM precipitation.
+        #[arg(long, value_enum)]
+        degenerate_occurrence_repair: Option<DegenerateOccurrenceRepairArg>,
     },
+}
+
+#[derive(Debug, Clone, Copy, ValueEnum)]
+enum DegenerateOccurrenceRepairArg {
+    IndependentPrismV1,
+}
+
+impl From<DegenerateOccurrenceRepairArg> for DegenerateOccurrenceRepair {
+    fn from(value: DegenerateOccurrenceRepairArg) -> Self {
+        match value {
+            DegenerateOccurrenceRepairArg::IndependentPrismV1 => Self::IndependentPrismV1,
+        }
+    }
 }
 
 #[derive(Debug, Subcommand)]
@@ -320,6 +337,7 @@ fn prism(command: PrismCommand) -> Result<(), String> {
             latitude,
             years,
             output_dir,
+            degenerate_occurrence_repair,
         } => prism_run_command(
             &distribution,
             &cache_root,
@@ -327,6 +345,7 @@ fn prism(command: PrismCommand) -> Result<(), String> {
             latitude,
             years,
             output_dir,
+            degenerate_occurrence_repair,
         ),
     }
 }
@@ -394,8 +413,9 @@ fn prism_run_command(
     latitude: f64,
     years: i32,
     output_dir: PathBuf,
+    degenerate_occurrence_repair: Option<DegenerateOccurrenceRepairArg>,
 ) -> Result<(), String> {
-    prism_run::execute(
+    let repairs = prism_run::execute_with_options(
         distribution,
         cache_root,
         &PrismRunRequest {
@@ -404,8 +424,16 @@ fn prism_run_command(
             years,
             output_dir: output_dir.clone(),
         },
+        PrismRunOptions {
+            degenerate_occurrence_repair: degenerate_occurrence_repair
+                .map(Into::into)
+                .unwrap_or_default(),
+        },
     )
     .map_err(|error| error.to_string())?;
+    for repair in repairs {
+        eprintln!("warning: {}", repair.warning());
+    }
     println!("{}", output_dir.display());
     Ok(())
 }
@@ -450,4 +478,44 @@ fn post_hoc_quality(cli: &PathBuf, par: &PathBuf) -> Result<(), String> {
     std::io::stdout()
         .write_all(&bytes)
         .map_err(|error| format!("cannot write report to stdout: {error}"))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{Cli, Command, DegenerateOccurrenceRepairArg, PrismCommand};
+    use clap::Parser;
+
+    #[test]
+    fn prism_repair_flag_parses_only_as_explicit_run_option() {
+        let cli = Cli::try_parse_from([
+            "cligen",
+            "prism",
+            "run",
+            "--longitude",
+            "-116.5",
+            "--latitude",
+            "33.25",
+            "--years",
+            "1",
+            "--output-dir",
+            "out",
+            "--degenerate-occurrence-repair",
+            "independent-prism-v1",
+        ])
+        .unwrap();
+        let Command::Prism {
+            command:
+                PrismCommand::Run {
+                    degenerate_occurrence_repair,
+                    ..
+                },
+        } = cli.command
+        else {
+            panic!("expected prism run")
+        };
+        assert!(matches!(
+            degenerate_occurrence_repair,
+            Some(DegenerateOccurrenceRepairArg::IndependentPrismV1)
+        ));
+    }
 }

@@ -26,6 +26,10 @@ pub const EMBEDDED_METHOD: &str = include_str!("method.json");
 /// Public preprocessing identity carried in every receipt.
 pub const PROFILE_ID: &str = "stochastic_prism_localized_par_v1";
 
+/// Explicit extension profile for independently repaired all-dry months.
+pub const DEGENERATE_OCCURRENCE_REPAIR_PROFILE_ID: &str =
+    "stochastic_prism_localized_par_degenerate_occurrence_independent_v1";
+
 /// PRISM distribution manifest schema understood by this build.
 pub const DISTRIBUTION_SCHEMA_VERSION: u32 = 1;
 

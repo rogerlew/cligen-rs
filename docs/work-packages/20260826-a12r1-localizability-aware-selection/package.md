@@ -1,6 +1,6 @@
 # A12R1 — Localizability-Aware Station Selection
 
-Status: `SCAFFOLDED`
+Status: `ACTIVE`
 
 Date: 2026-08-26
 
@@ -10,9 +10,10 @@ Starting branch and push target: current `origin/main`, push `main`
 
 ## Objective
 
-Determine whether a prospectively frozen full-localization eligibility filter
-restores complete automatic donor coverage and, only then, whether current or
-elevation/PRISM scoring improves on closest eligible selection.
+Implement the operator-authorized explicit independent-occurrence repair,
+prove it resolves the exact A12 donor failure without changing default
+behavior, and retain the full-localizability filter as the comparison arm for
+later corpus-wide policy evaluation.
 
 ## Trigger
 
@@ -34,24 +35,24 @@ Immutable predecessor: A12 source commit
 
 ## Scope and plan
 
-1. Freeze a new source-bound manifest, exact feasibility predicate, all-ten
-   rank semantics, seed/domain, evaluator, schemas, and tests.
-2. Independently review and publish the prospective source.
-3. Authenticate inputs, execute the complete 2,400 candidate feasibility
-   census, and stop if any site has no eligible donor.
-4. If coverage is complete, execute and replay the three-policy quality
-   comparison under the unchanged A12 structural estimand.
-5. Review evidence and reconcile the package without changing runtime defaults
-   or opening confirmation.
+1. Freeze the opt-in CLI value, profile identity, zero-count limiting algebra,
+   independence assumption, warnings, receipts, and default-behavior boundary.
+2. Implement without breaking the existing public localization/run APIs.
+3. Prove the ordinary profile still fails on the exact A12 point and the repair
+   profile succeeds with complete cryptographic provenance.
+4. Independently review and run all repository gates.
+5. Retain the 2,400-candidate feasibility and policy-quality comparison as a
+   separately published experimental stage; do not infer it from one repair.
 
 ## Exit
 
-`EXECUTED-COMPLETE` requires a complete eligibility matrix, either an explicit
-zero-eligible HOLD or a frozen quality disposition, byte-identical replay,
-cryptographic provenance, all repository gates, and independent GO.
+The implementation stage reaches `EXECUTED-COMPLETE` only with default-failure
+and explicit-repair-success evidence on the A12 vector, structured and human
+warnings, cryptographic receipts, all repository gates, and independent GO.
+Corpus-wide comparative claims remain unauthorized until their own prospective
+evaluator is published and executed.
 
 ## Current boundary
 
-This package is scaffolded but not executed. It records the recommended
-corrective successor without retroactively changing A12 after observed
-failure evidence.
+The package is active. It does not retroactively change A12, the ordinary
+runtime profile, station selection, or confirmation access.

@@ -2,9 +2,17 @@
 
 Status: active public preprocessing/orchestration surface
 
-Revision: 4 (station-selection receipt cryptographic closure, 2026-08-26)
+Revision: 5 (explicit degenerate-occurrence repair profile, 2026-08-26)
 
 ## Identity and claim boundary
+
+The ordinary profile remains `stochastic_prism_localized_par_v1`. An opt-in
+`--degenerate-occurrence-repair independent-prism-v1` activates
+`stochastic_prism_localized_par_degenerate_occurrence_independent_v1` under
+[SPEC-A12R1-LOCALIZABILITY-AWARE-SELECTION](SPEC-A12R1-LOCALIZABILITY-AWARE-SELECTION.md).
+The extension repairs only exact all-dry occurrence months with positive PRISM
+precipitation, emits human and structured warnings, and never presents its
+independence assumption as observed PRISM persistence.
 
 `stochastic_prism_localized_par_v1` is the independently versioned
 stochastic-plus-PRISM comparator required by ADR-0005 and
@@ -14,8 +22,9 @@ unchanged `faithful_5_32_3` generator. It is not a neural model, a new random
 number generator, or a new cligen-rs generation profile. It is a public
 Cargo-installed CLI surface under `cligen prism`.
 
-The required scientific request is exactly longitude, latitude, and number of
-years. All three are explicit and validated. Revision 1 fixes the simulation
+The ordinary scientific request is exactly longitude, latitude, and number of
+years. The revision-5 extension adds only the explicit repair-policy choice;
+the three ordinary inputs remain explicit and validated. Revision 1 fixes the simulation
 begin year to 1, the faithful burn to 0, monthly interpolation to `none`, and
 the station collection to `us-2015` version `2026.07`. Changing one of those
 constants creates a new comparator revision.
@@ -76,10 +85,12 @@ specified below deliberately differs in selector axes, data acquisition,
 numeric failure behavior, rendering, mandatory intensity adjustment, and
 provenance.
 
-Every successful run emits `method.json`, exact record schema version 1 and
-method ID `stochastic_prism_localized_par_v1`. It records this layered
-pedigree and the normative limitations. The top-level artifact manifest binds
-its bytes. Pedigree does not imply behavior identity or transfer a validation
+Every successful run emits `method.json`. An ordinary-profile run emits the
+exact record schema version 1 and method ID
+`stochastic_prism_localized_par_v1`; the explicit extension uses the
+schema-version-2 binding specified below. Both record this layered pedigree
+and the normative limitations, and the top-level artifact manifest binds the
+bytes. Pedigree does not imply behavior identity or transfer a validation
 claim from FSWEPP or WEPPcloud.
 
 ## Station selection
@@ -148,10 +159,12 @@ The localized `.par` changes only records 4 (`MEAN P`), 7 (`P(W/W)`), 8
 (`P(W/D)`), 9 (`TMAX AV`), 10 (`TMIN AV`), and 15 (`MX .5 P`). All other
 records and the unread tail remain byte-identical. Mutated monthly fields use
 SPEC-PAR's canonical six-column, two-decimal rendering and are reparsed by
-`ParFile`. No silent 0.01 floor is permitted: if fixed-width quantization
-would make a positive target unrepresentable or violate probability/ordering
-constraints, localization fails. Provenance reports both requested values and
-the values reparsed from the actual `.par` bytes.
+`ParFile`. Under the ordinary profile, no silent 0.01 floor is permitted: if
+fixed-width quantization would make a positive target unrepresentable or
+violate probability/ordering constraints, localization fails. The explicit
+revision-5 repair profile follows SPEC-A12R1's declared positive F6.2 snap.
+Provenance reports both requested values and the values reparsed from the
+actual `.par` bytes.
 
 ## Execution and artifacts
 
@@ -162,9 +175,10 @@ The Cargo CLI is:
 - `cligen prism query --longitude <deg> --latitude <deg> [--json]` — local
   verified monthly normals and cell/source receipt; and
 - `cligen prism run --longitude <deg> --latitude <deg> --years <n>
-  --output-dir <path>` — local query, station selection, localization, and
-  faithful generation. The output directory is an operational destination,
-  not a fourth scientific input.
+  --output-dir <path> [--degenerate-occurrence-repair independent-prism-v1]`
+  — local query, station selection, localization, and faithful generation.
+  The output directory is an operational destination, not a fourth scientific
+  input; the optional repair value is a declared preprocessing policy.
 
 After localization, the mode writes and validates a revision-1 runspec with
 `mode: continuous`, `begin_year: 1`, requested `years`, `rng.burn: 0`,
@@ -176,7 +190,9 @@ companions.
 Every successful request atomically publishes:
 
 - canonical request JSON;
-- canonical method/pedigree/limitations JSON;
+- canonical method/pedigree/limitations JSON; extension runs advance that
+  artifact to schema 2 and bind the base method, active profile, repair method,
+  governing contract, and independence assumption;
 - PRISM query receipt with bundle/manifest/grid hashes, source metadata,
   raster cells, raw values, converted values, and attribution;
 - station-selection receipt schema version 2 with the method ID, all ten

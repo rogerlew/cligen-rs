@@ -87,6 +87,28 @@ The selection receipt binds the selected source `.par` and executing cligen
 binary by SHA-256, while the top-level manifest independently hashes the
 complete artifact set.
 
+If the selected donor has an exactly all-dry occurrence month but PRISM has
+positive precipitation, the ordinary command fails closed. An explicit
+research extension can repair that month with an independent-day assumption:
+
+```console
+cligen prism run --longitude -116.5 --latitude 33.25 --years 30 \
+  --degenerate-occurrence-repair independent-prism-v1 \
+  --output-dir repaired-prism
+```
+
+The command prints a warning for every repaired month. The localization
+receipt records the original parameters, PRISM target, continuous limiting
+frequency, F6.2-snapped wet frequency, encoded values, source `.par` SHA-256,
+and distinct profile ID. The companion station-selection receipt records the
+source `.par` and executable SHA-256 values. `method.json` also identifies the
+ordinary base method, active repair method, governing contract, and declared
+independence assumption. The mean is recomputed after the
+probability snap so the serialized station remains anchored to the PRISM
+monthly expectation. PRISM does not observe daily persistence; the repair's
+`PWW=PWD=q` choice is an explicit independence assumption. Omitting the flag
+preserves ordinary fail-closed behavior.
+
 ## Choose an exact station
 
 Today, an exact station is selected by supplying its `.par` path in a runspec.
