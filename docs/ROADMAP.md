@@ -788,15 +788,23 @@ failures and no confirmation access. Both arms remain numerically valid; the
 circular block arm was descriptively better at 18/20 sites and in conditional-CV
 covariance, but one member and the uncalibrated score prohibit selection.
 
-**A11 current stage:**
+**A11 nearest-forcing stage complete (2026-08-25):**
 [A11E2 nearest candidate-fit forcing](work-packages/20260825-a11e2-nearest-candidate-forcing/package.md)
-is active as the bounded development-only successor. It freezes the
+executed as the bounded development-only successor. It froze the
 circular-block law, daily core, calendar, roles, evaluator, and A11E1 common
 random numbers and changes only region-median location to a prospectively
 selected nearest candidate-fit climatology based on non-target coordinates.
-The hypothesis is lower median monthly precipitation relative error and
-temperature MAE with zero invariants. It has no confirmation or promotion
-authority.
+Both predeclared median level metrics improved with zero invariants, so the
+result is `SUPPORTED_FOR_EXPLORATION`. Only 8/20 stations improved on both
+primary metrics and the descriptive composite bootstrap crossed zero; this is
+not selection or promotion. Confirmation remained sealed.
+
+**A11 recommended next stage:** a small prospectively fixed, development-only
+common-RNG multi-member stability test. Freeze the region-median and nearest
+adapters, circular-block law, selector, evaluator, calendars, and roles; test
+whether both primary median improvements persist across members. Do not tune
+distance, elevation, cutoffs, or model surfaces from A11E2 outcomes. This stage
+has no confirmation or promotion authority and is not yet dispatched.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

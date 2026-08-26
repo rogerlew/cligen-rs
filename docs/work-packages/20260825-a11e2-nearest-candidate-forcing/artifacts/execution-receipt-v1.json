@@ -1,0 +1,61 @@
+{
+  "candidate_fit_objects": 1200,
+  "confirmation_target_series_accessed": false,
+  "development_objects": 20,
+  "development_streams": 20,
+  "elapsed_seconds": 122.56218912500117,
+  "execution_id": "a11e2-nearest-candidate-forcing-v1",
+  "execution_source_commit": "e15369ad26f4e0b646f5f4665912dd6a37e35e3a",
+  "fit_calendar_objects": 1440,
+  "inherited_strategy_dependencies": {
+    "strategy-manifest-v1.json": "fb9dd3771e130ed58b1146af6ac5d360bf2afe3d2b3b30293c547f4a80339a53",
+    "strategy_lab.py": "af5691361bf278ef6adbb4c4e56fa35d017bc33677284836ee008396190b2de4",
+    "strategy_source_commit": "b842430cb665a1219e01061312357688e04e6c62"
+  },
+  "input_hashes": {
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+    "inherited": {
+      "candidate_shard_set": "f9a016ec7c637c9bbbb79bc1f1cf1c06e879d95e8b03f79a84f3c768fb257812",
+      "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+      "daymet_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+      "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+      "development_object_set": "531566ccb96d6d1b1fb6c0201e673112d4ae32d468c1f879949cf3c724cf76b8",
+      "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40"
+    },
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9"
+  },
+  "outputs": {
+    "calendar-preflight-v1.json": {
+      "bytes": 1108,
+      "sha256": "1d8be7281eb712857779d4eb91c9d67e8117e3f2aeedd38d9396ef843f984d23"
+    },
+    "development-decision-v1.json": {
+      "bytes": 2300,
+      "sha256": "8ba4757b817453c4be5d7a706aa321a9786a66425a9285584d94f49c0d205dc5"
+    },
+    "development-evidence-v1.json": {
+      "bytes": 91159,
+      "sha256": "fa3ad7a9df5be6c1350567182be5802646de26aabec68b32bf2411e813c729b4"
+    },
+    "fit-summary-v1.json": {
+      "bytes": 3588,
+      "sha256": "94a4742869d98e31a5478706e533c4d6ae38c22113d38a1d5378dd3829985b0a"
+    },
+    "selection-receipt-v1.json": {
+      "bytes": 7841,
+      "sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6"
+    }
+  },
+  "published_ref": "origin/main",
+  "schema_version": "a11e2-execution-receipt-1",
+  "source_hashes": {
+    "SPEC-A11-NEAREST-CANDIDATE-FORCING.md": "dfe4071fec6c1178bffb90b2895a875dba5db637216a1efe4253992f3242d0aa",
+    "execute.py": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "execution-manifest-v1.json": "1dc78ed31f695ccb64e8072cc7c52893b4ba44271704f9b2eca4118d54f1aa6e",
+    "execution-manifest-v1.schema.json": "9c060127494661e71f5446a83007dee57dc5063910e22555f91d6b3e1a7f4eaf",
+    "test_execute.py": "dc96f5bf62d590d9cecd70353c351f4fbe20b49866c1299173aa2f9292145a8e"
+  }
+}

@@ -129,7 +129,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260825-a11-forced-monthly-annual-stochastic-generator](20260825-a11-forced-monthly-annual-stochastic-generator/package.md) | EXECUTED-HOLD-CONTRACT-NONCONFORMANCE |
 | [20260825-a11e-exploratory-strategy-lab](20260825-a11e-exploratory-strategy-lab/package.md) | EXECUTED-COMPLETE |
 | [20260825-a11e1-observed-strategy-comparison](20260825-a11e1-observed-strategy-comparison/package.md) | EXECUTED-COMPLETE |
-| [20260825-a11e2-nearest-candidate-forcing](20260825-a11e2-nearest-candidate-forcing/package.md) | ACTIVE |
+| [20260825-a11e2-nearest-candidate-forcing](20260825-a11e2-nearest-candidate-forcing/package.md) | EXECUTED-COMPLETE — SUPPORTED_FOR_EXPLORATION |
 | [20260722-lemhi-gpu-capacity-policy](20260722-lemhi-gpu-capacity-policy/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-mode-bundle-pedigree](20260718-prism-mode-bundle-pedigree/package.md) | EXECUTED-COMPLETE |
 | [20260718-prism-residual-attribution](20260718-prism-residual-attribution/package.md) | SCAFFOLDED |

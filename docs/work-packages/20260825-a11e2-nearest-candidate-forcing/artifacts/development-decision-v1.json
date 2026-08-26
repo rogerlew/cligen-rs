@@ -1,0 +1,62 @@
+{
+  "confirmation_authorized": false,
+  "disposition": "SUPPORTED_FOR_EXPLORATION",
+  "execution_id": "a11e2-nearest-candidate-forcing-v1",
+  "hypothesis_supported": true,
+  "maximum_daily_invariant_failures": 0,
+  "paired_bootstrap": {
+    "bootstrap_quantiles_05_50_95": [
+      -6.649105162696352,
+      -2.463616365183383,
+      0.32538884954074393
+    ],
+    "contrast": "nearest-candidate minus A11E1 region-median composite; lower is better",
+    "interpretation": "descriptive only",
+    "mean_difference": -2.6327661107029954,
+    "replicates": 1000,
+    "rng": "numpy_philox/a11e2_paired_site_bootstrap_v1",
+    "seed": 410543,
+    "site_differences": {
+      "az026481": 3.5944949571360336,
+      "az028820": -0.10064097471265931,
+      "ca040442": -39.95870350088033,
+      "ca042713": -18.34805143010745,
+      "co050130": 3.2121823337389914,
+      "id101022": -0.9020764655975761,
+      "la160549": -0.8988916084906506,
+      "me171175": 2.9844200617961905,
+      "mn212248": -0.5804131014090228,
+      "mt243996": -2.243734758762938,
+      "ne257665": 0.049485927028992016,
+      "nm290234": 1.6966159868316089,
+      "nv262631": -0.21960461956445432,
+      "nv264436": -2.7178098676818054,
+      "nv269171": 1.0636650377823793,
+      "or350412": 1.8879772754735615,
+      "sc381544": -0.08561537932295682,
+      "tx413280": -0.931182406078007,
+      "tx417262": 0.9546336121102925,
+      "wy487845": -1.1120732933501025
+    }
+  },
+  "primary_metrics": {
+    "monthly_equivalent_precipitation_mean_relative_absolute_error": {
+      "baseline_median": 0.9092846293847812,
+      "candidate_median": 0.748092236089446,
+      "improvement_baseline_minus_candidate": 0.1611923932953352,
+      "strictly_lower": true
+    },
+    "monthly_temperature_mean_absolute_error_c": {
+      "baseline_median": 3.064100617973266,
+      "candidate_median": 1.9992334587886895,
+      "improvement_baseline_minus_candidate": 1.0648671591845766,
+      "strictly_lower": true
+    }
+  },
+  "production_authorized": false,
+  "schema_version": "a11e2-development-decision-1",
+  "science_status": "EXPLORATORY_EVALUATED",
+  "scope": "development only; no confirmation, selection, or promotion authority",
+  "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+  "terminal": "EXECUTED-COMPLETE"
+}

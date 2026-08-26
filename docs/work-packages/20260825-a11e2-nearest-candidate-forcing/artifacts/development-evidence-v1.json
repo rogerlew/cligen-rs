@@ -1,0 +1,1932 @@
+{
+  "comparator_strategy_id": "circular_fixed_block_physical_core_v1",
+  "confirmation_target_series_accessed": false,
+  "evidence_sha256": "9de21a23b2f3304cb66031387babae124814cc4db836f291ce2069f48d6c2560",
+  "execution_id": "a11e2-nearest-candidate-forcing-v1",
+  "hypothesis": {
+    "disposition": "SUPPORTED_FOR_EXPLORATION",
+    "hypothesis_supported": true,
+    "maximum_daily_invariant_failures": 0,
+    "primary_metrics": {
+      "monthly_equivalent_precipitation_mean_relative_absolute_error": {
+        "baseline_median": 0.9092846293847812,
+        "candidate_median": 0.748092236089446,
+        "improvement_baseline_minus_candidate": 0.1611923932953352,
+        "strictly_lower": true
+      },
+      "monthly_temperature_mean_absolute_error_c": {
+        "baseline_median": 3.064100617973266,
+        "candidate_median": 1.9992334587886895,
+        "improvement_baseline_minus_candidate": 1.0648671591845766,
+        "strictly_lower": true
+      }
+    }
+  },
+  "limitations": [
+    "one common-random-number member per station",
+    "coordinate-only selector",
+    "candidate geography is sparse for Maine, Montana, and Oregon",
+    "development-only uncalibrated metrics"
+  ],
+  "paired_bootstrap": {
+    "bootstrap_quantiles_05_50_95": [
+      -6.649105162696352,
+      -2.463616365183383,
+      0.32538884954074393
+    ],
+    "contrast": "nearest-candidate minus A11E1 region-median composite; lower is better",
+    "interpretation": "descriptive only",
+    "mean_difference": -2.6327661107029954,
+    "replicates": 1000,
+    "rng": "numpy_philox/a11e2_paired_site_bootstrap_v1",
+    "seed": 410543,
+    "site_differences": {
+      "az026481": 3.5944949571360336,
+      "az028820": -0.10064097471265931,
+      "ca040442": -39.95870350088033,
+      "ca042713": -18.34805143010745,
+      "co050130": 3.2121823337389914,
+      "id101022": -0.9020764655975761,
+      "la160549": -0.8988916084906506,
+      "me171175": 2.9844200617961905,
+      "mn212248": -0.5804131014090228,
+      "mt243996": -2.243734758762938,
+      "ne257665": 0.049485927028992016,
+      "nm290234": 1.6966159868316089,
+      "nv262631": -0.21960461956445432,
+      "nv264436": -2.7178098676818054,
+      "nv269171": 1.0636650377823793,
+      "or350412": 1.8879772754735615,
+      "sc381544": -0.08561537932295682,
+      "tx413280": -0.931182406078007,
+      "tx417262": 0.9546336121102925,
+      "wy487845": -1.1120732933501025
+    }
+  },
+  "rows": [
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.3158012228191799,
+        "annual_precipitation_variance_absolute_log_ratio": 2.6760990661261754,
+        "annual_temperature_variance_absolute_log_ratio": 0.18911526558720623,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 5.895537778524279,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.1848240480077152,
+        "monthly_range_mean_relative_absolute_error": 0.10849536200097226,
+        "monthly_temperature_mean_absolute_error_c": 6.704859223591189,
+        "monthly_wet_fraction_mean_absolute_error": 0.026743656421597192
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.4094189171576349,
+        "annual_precipitation_variance_absolute_log_ratio": 4.8325204536350395,
+        "annual_temperature_variance_absolute_log_ratio": 0.1891152655872064,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 9.490032735660312,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 2.6249656108294013,
+        "monthly_range_mean_relative_absolute_error": 0.0550440018805872,
+        "monthly_temperature_mean_absolute_error_c": 6.570880871726094,
+        "monthly_wet_fraction_mean_absolute_error": 0.021597437408407933
+      },
+      "candidate_point_id": "p+3425_-11250",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-az026481",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-az026481",
+          "member_id_formula": "0*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000az026481\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 100.98510600736147,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.09361769433845502,
+        "annual_precipitation_variance_absolute_log_ratio": 2.156421387508864,
+        "annual_temperature_variance_absolute_log_ratio": 1.6653345369377348e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.5944949571360336,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.440141562821686,
+        "monthly_range_mean_relative_absolute_error": -0.05345136012038506,
+        "monthly_temperature_mean_absolute_error_c": -0.1339783518650952,
+        "monthly_wet_fraction_mean_absolute_error": -0.005146219013189259
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "az026481",
+      "station_regime": "hot_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "5f464ec5af51c10dd5d992dd3599a0b6004e87836d035a954bc39fd168a3f5bd",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 7.077137155886538,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9403252700161419,
+          "effective_annual_variance": 0.304800161819601,
+          "feasible_alpha_interval": [
+            -0.304926520482055,
+            1.1377345934621126
+          ],
+          "minimum_eigenvalue": 0.0013450722651229402,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9403252700161419,
+          "requested_annual_variance": 0.30480016181960107,
+          "tolerance": 1e-10
+        },
+        "region_id": "hot_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1887149799371988,
+        "annual_precipitation_variance_absolute_log_ratio": 1.8295915508547145,
+        "annual_temperature_variance_absolute_log_ratio": 0.19975100286226027,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.946236863697348,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6302954210073387,
+        "monthly_range_mean_relative_absolute_error": 0.05516325660465593,
+        "monthly_temperature_mean_absolute_error_c": 9.752475405145463,
+        "monthly_wet_fraction_mean_absolute_error": 0.030741857134028994
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.10643693252259717,
+        "annual_precipitation_variance_absolute_log_ratio": 2.56837404944959,
+        "annual_temperature_variance_absolute_log_ratio": 0.19975100286226055,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.845595888984689,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6794197681592359,
+        "monthly_range_mean_relative_absolute_error": 0.1112264770681912,
+        "monthly_temperature_mean_absolute_error_c": 5.430687789754173,
+        "monthly_wet_fraction_mean_absolute_error": 0.03141670032399315
+      },
+      "candidate_point_id": "p+3300_-11025",
+      "candidate_regime": "monsoonal_transition",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-az028820",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-az028820",
+          "member_id_formula": "1*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000az028820\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 108.61554648504034,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.08227804741460162,
+        "annual_precipitation_variance_absolute_log_ratio": 0.7387824985948757,
+        "annual_temperature_variance_absolute_log_ratio": 2.7755575615628914e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.10064097471265931,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.049124347151897174,
+        "monthly_range_mean_relative_absolute_error": 0.05606322046353528,
+        "monthly_temperature_mean_absolute_error_c": -4.3217876153912895,
+        "monthly_wet_fraction_mean_absolute_error": 0.0006748431899641569
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "az028820",
+      "station_regime": "monsoonal_transition",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "6b7767e76f313494c40d7191c2582a5cf3514f464d3af98f29ba5ac60af31ce1",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 8.497298817092691,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.7803760555059318,
+          "effective_annual_variance": 0.30759122338875816,
+          "feasible_alpha_interval": [
+            -0.29230825529547205,
+            1.1198567181406722
+          ],
+          "minimum_eigenvalue": 0.002280557009246394,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.7803760555059318,
+          "requested_annual_variance": 0.3075912233887581,
+          "tolerance": 1e-10
+        },
+        "region_id": "monsoonal_transition",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.4798235159221058,
+        "annual_precipitation_variance_absolute_log_ratio": 4.091654125029599,
+        "annual_temperature_variance_absolute_log_ratio": 0.7456424644133517,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 43.40760584435982,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 37.24351388586374,
+        "monthly_range_mean_relative_absolute_error": 0.15631263298465473,
+        "monthly_temperature_mean_absolute_error_c": 2.3051373082242557,
+        "monthly_wet_fraction_mean_absolute_error": 0.07654391950050322
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.19657379357217242,
+        "annual_precipitation_variance_absolute_log_ratio": 1.0573005214532247,
+        "annual_temperature_variance_absolute_log_ratio": 0.7456424644133521,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.4489023434794914,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.8268766407824383,
+        "monthly_range_mean_relative_absolute_error": 0.023965882684902167,
+        "monthly_temperature_mean_absolute_error_c": 2.053561786703549,
+        "monthly_wet_fraction_mean_absolute_error": 0.0626102277442308
+      },
+      "candidate_point_id": "p+3550_-11675",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-ca040442",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-ca040442",
+          "member_id_formula": "2*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000ca040442\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 208.49770709379948,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.2832497223499334,
+        "annual_precipitation_variance_absolute_log_ratio": -3.0343536035763745,
+        "annual_temperature_variance_absolute_log_ratio": 4.440892098500626e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -39.95870350088033,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -36.416637245081304,
+        "monthly_range_mean_relative_absolute_error": -0.13234675029975257,
+        "monthly_temperature_mean_absolute_error_c": -0.2515755215207065,
+        "monthly_wet_fraction_mean_absolute_error": -0.013933691756272418
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "ca040442",
+      "station_regime": "hot_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "00309c867efdf89261a14fdca8868f1b13fdb3236297ccb032d4536e8c291376",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 5.025185186700359,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9403252700161419,
+          "effective_annual_variance": 0.304800161819601,
+          "feasible_alpha_interval": [
+            -0.304926520482055,
+            1.1377345934621126
+          ],
+          "minimum_eigenvalue": 0.0013450722651229402,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9403252700161419,
+          "requested_annual_variance": 0.30480016181960107,
+          "tolerance": 1e-10
+        },
+        "region_id": "hot_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.6056053081350481,
+        "annual_precipitation_variance_absolute_log_ratio": 5.666936256821052,
+        "annual_temperature_variance_absolute_log_ratio": 0.7256628523038584,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 20.6078539289874,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 12.060675089837071,
+        "monthly_range_mean_relative_absolute_error": 0.03325700660077571,
+        "monthly_temperature_mean_absolute_error_c": 7.010200699719859,
+        "monthly_wet_fraction_mean_absolute_error": 0.03789242511520737
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.0009041813074916194,
+        "annual_precipitation_variance_absolute_log_ratio": 0.4059026430257856,
+        "annual_temperature_variance_absolute_log_ratio": 0.7256628523038596,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 2.2598024988799503,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.816764704019656,
+        "monthly_range_mean_relative_absolute_error": 0.03149729683290891,
+        "monthly_temperature_mean_absolute_error_c": 1.148432303955852,
+        "monthly_wet_fraction_mean_absolute_error": 0.016461453533026114
+      },
+      "candidate_point_id": "p+3250_-11450",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-ca042713",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-ca042713",
+          "member_id_formula": "3*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000ca042713\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 104.91472752395183,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.6047011268275565,
+        "annual_precipitation_variance_absolute_log_ratio": -5.2610336137952665,
+        "annual_temperature_variance_absolute_log_ratio": 1.2212453270876722e-15,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -18.34805143010745,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -11.243910385817415,
+        "monthly_range_mean_relative_absolute_error": -0.001759709767866803,
+        "monthly_temperature_mean_absolute_error_c": -5.861768395764007,
+        "monthly_wet_fraction_mean_absolute_error": -0.021430971582181258
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "ca042713",
+      "station_regime": "hot_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "6177d3f5dbddc638429998412efae4f7b821af55906c48806bc811b0e7afe8e8",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 13.35065927952586,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9403252700161419,
+          "effective_annual_variance": 0.304800161819601,
+          "feasible_alpha_interval": [
+            -0.304926520482055,
+            1.1377345934621126
+          ],
+          "minimum_eigenvalue": 0.0013450722651229402,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9403252700161419,
+          "requested_annual_variance": 0.30480016181960107,
+          "tolerance": 1e-10
+        },
+        "region_id": "hot_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.23196458901154113,
+        "annual_precipitation_variance_absolute_log_ratio": 1.3577004257665692,
+        "annual_temperature_variance_absolute_log_ratio": 0.18391812682469993,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 5.074575723799863,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 2.2452728708288334,
+        "monthly_range_mean_relative_absolute_error": 0.37369397437123214,
+        "monthly_temperature_mean_absolute_error_c": 2.3908004134927983,
+        "monthly_wet_fraction_mean_absolute_error": 0.06795521809947562
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.2687945775496687,
+        "annual_precipitation_variance_absolute_log_ratio": 3.1280903122778265,
+        "annual_temperature_variance_absolute_log_ratio": 0.18391812682470068,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 8.286758057538854,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 4.290949937880478,
+        "monthly_range_mean_relative_absolute_error": 0.07056723759330524,
+        "monthly_temperature_mean_absolute_error_c": 0.947647342584271,
+        "monthly_wet_fraction_mean_absolute_error": 0.05163613229867401
+      },
+      "candidate_point_id": "p+3725_-10700",
+      "candidate_regime": "monsoonal_transition",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-co050130",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-co050130",
+          "member_id_formula": "4*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000co050130\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 103.61725765447963,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.03682998853812755,
+        "annual_precipitation_variance_absolute_log_ratio": 1.7703898865112573,
+        "annual_temperature_variance_absolute_log_ratio": 7.494005416219807e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.2121823337389914,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 2.045677067051644,
+        "monthly_range_mean_relative_absolute_error": -0.3031267367779269,
+        "monthly_temperature_mean_absolute_error_c": -1.4431530709085272,
+        "monthly_wet_fraction_mean_absolute_error": -0.01631908580080161
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "co050130",
+      "station_regime": "cold",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "4aaa8e1f107f4facac363487a1386c505d1f2c834796f98eec6dbc807795f285",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 8.872233596239228,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 1.0405251088713812,
+          "effective_annual_variance": 1.0964012719764198,
+          "feasible_alpha_interval": [
+            -0.29005709532136353,
+            1.118768873141418
+          ],
+          "minimum_eigenvalue": 0.0012177242389148787,
+          "projected_to_boundary": false,
+          "requested_alpha": 1.0405251088713812,
+          "requested_annual_variance": 1.0964012719764198,
+          "tolerance": 1e-10
+        },
+        "region_id": "cold",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.6770063458501836,
+        "annual_precipitation_variance_absolute_log_ratio": 1.0978128398365372,
+        "annual_temperature_variance_absolute_log_ratio": 0.011913444786312911,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.4087960041861365,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.71765281047432,
+        "monthly_range_mean_relative_absolute_error": 0.25199437833133376,
+        "monthly_temperature_mean_absolute_error_c": 1.3121117127145874,
+        "monthly_wet_fraction_mean_absolute_error": 0.129997947454844
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.4859026660448431,
+        "annual_precipitation_variance_absolute_log_ratio": 1.7540918697473822,
+        "annual_temperature_variance_absolute_log_ratio": 0.011913444786312472,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.5067195385885603,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6034910631770246,
+        "monthly_range_mean_relative_absolute_error": 0.21563562924271606,
+        "monthly_temperature_mean_absolute_error_c": 0.5384529559905008,
+        "monthly_wet_fraction_mean_absolute_error": 0.10933142479739394
+      },
+      "candidate_point_id": "p+4300_-11525",
+      "candidate_regime": "arid_boundary",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-id101022",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-id101022",
+          "member_id_formula": "5*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000id101022\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 100.90461374745375,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.1911036798053405,
+        "annual_precipitation_variance_absolute_log_ratio": 0.656279029910845,
+        "annual_temperature_variance_absolute_log_ratio": -4.388850394221322e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.9020764655975761,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -1.1141617472972953,
+        "monthly_range_mean_relative_absolute_error": -0.03635874908861769,
+        "monthly_temperature_mean_absolute_error_c": -0.7736587567240866,
+        "monthly_wet_fraction_mean_absolute_error": -0.02066652265745006
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "id101022",
+      "station_regime": "non_monsoonal_semi_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "04bb93dd04c4cfed93dab28c452879ed9854f9d025828b23be636226e7fb9d8c",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 3.084616545684613,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.8878262567188288,
+          "effective_annual_variance": 0.4848924237174752,
+          "feasible_alpha_interval": [
+            -0.3075841326302476,
+            1.0952313427453995
+          ],
+          "minimum_eigenvalue": 0.0019691978625908753,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.8878262567188288,
+          "requested_annual_variance": 0.4848924237174752,
+          "tolerance": 1e-10
+        },
+        "region_id": "non_monsoonal_semi_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.47805268781799715,
+        "annual_precipitation_variance_absolute_log_ratio": 0.6475864757192888,
+        "annual_temperature_variance_absolute_log_ratio": 0.8095044280007297,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.512857079871748,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.19685960727310917,
+        "monthly_range_mean_relative_absolute_error": 0.1332928791747834,
+        "monthly_temperature_mean_absolute_error_c": 5.383553716656807,
+        "monthly_wet_fraction_mean_absolute_error": 0.05695008618482617
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.41835172763091516,
+        "annual_precipitation_variance_absolute_log_ratio": 0.5609371245988164,
+        "annual_temperature_variance_absolute_log_ratio": 0.8095044280007258,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 2.613965471381097,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.22377042015675494,
+        "monthly_range_mean_relative_absolute_error": 0.09254354928413727,
+        "monthly_temperature_mean_absolute_error_c": 1.6848314824430137,
+        "monthly_wet_fraction_mean_absolute_error": 0.05729730840704839
+      },
+      "candidate_point_id": "p+3150_-09125",
+      "candidate_regime": "humid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-la160549",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-la160549",
+          "member_id_formula": "6*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000la160549\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 108.27938487221375,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.059700960187081986,
+        "annual_precipitation_variance_absolute_log_ratio": -0.08664935112047245,
+        "annual_temperature_variance_absolute_log_ratio": -3.9968028886505635e-15,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.8988916084906506,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.026910812883645774,
+        "monthly_range_mean_relative_absolute_error": -0.04074932989064614,
+        "monthly_temperature_mean_absolute_error_c": -3.6987222342137933,
+        "monthly_wet_fraction_mean_absolute_error": 0.000347222222222221
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "la160549",
+      "station_regime": "humid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "205a83a7c29a61522397fba47a8675ca81e7cacecc26b5664dfa9de059629ec2",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 2.0237004507710163,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9683382185157777,
+          "effective_annual_variance": 0.2988335249184806,
+          "feasible_alpha_interval": [
+            -0.2940316352918429,
+            1.1499860244981726
+          ],
+          "minimum_eigenvalue": 0.0018956561559919675,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9683382185157777,
+          "requested_annual_variance": 0.2988335249184806,
+          "tolerance": 1e-10
+        },
+        "region_id": "humid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.14295721309562276,
+        "annual_precipitation_variance_absolute_log_ratio": 0.0853149081514379,
+        "annual_temperature_variance_absolute_log_ratio": 0.6849927320887348,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 2.395360215853243,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.4863725937901906,
+        "monthly_range_mean_relative_absolute_error": 0.09601422092871953,
+        "monthly_temperature_mean_absolute_error_c": 1.8292766645846135,
+        "monthly_wet_fraction_mean_absolute_error": 0.1779510716272048
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.02990765639561236,
+        "annual_precipitation_variance_absolute_log_ratio": 1.9787909969669697,
+        "annual_temperature_variance_absolute_log_ratio": 0.6849927320887351,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 5.3797802776494335,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.4275029849440837,
+        "monthly_range_mean_relative_absolute_error": 0.15407515481862963,
+        "monthly_temperature_mean_absolute_error_c": 7.92220789176545,
+        "monthly_wet_fraction_mean_absolute_error": 0.1733563913607712
+      },
+      "candidate_point_id": "p+3800_-07825",
+      "candidate_regime": "humid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-me171175",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-me171175",
+          "member_id_formula": "7*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000me171175\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 1292.9899228438117,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.1130495567000104,
+        "annual_precipitation_variance_absolute_log_ratio": 1.8934760888155318,
+        "annual_temperature_variance_absolute_log_ratio": 3.3306690738754696e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 2.9844200617961905,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.058869608846106924,
+        "monthly_range_mean_relative_absolute_error": 0.0580609338899101,
+        "monthly_temperature_mean_absolute_error_c": 6.092931227180837,
+        "monthly_wet_fraction_mean_absolute_error": -0.004594680266433615
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "me171175",
+      "station_regime": "cold",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "7d61b6534a1303810dce19a22d687b3b6904c02ea7a34a8cf3b86ae8b8d43e4f",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 7.499162232056458,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 1.0405251088713812,
+          "effective_annual_variance": 1.0964012719764198,
+          "feasible_alpha_interval": [
+            -0.29005709532136353,
+            1.118768873141418
+          ],
+          "minimum_eigenvalue": 0.0012177242389148787,
+          "projected_to_boundary": false,
+          "requested_alpha": 1.0405251088713812,
+          "requested_annual_variance": 1.0964012719764198,
+          "tolerance": 1e-10
+        },
+        "region_id": "cold",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.05983573320097345,
+        "annual_precipitation_variance_absolute_log_ratio": 0.6736346328547089,
+        "annual_temperature_variance_absolute_log_ratio": 0.029816327368205692,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.8230308904182633,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.3904098772643501,
+        "monthly_range_mean_relative_absolute_error": 0.09803067155659591,
+        "monthly_temperature_mean_absolute_error_c": 1.2725616952344323,
+        "monthly_wet_fraction_mean_absolute_error": 0.10559710304218091
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1333197825529151,
+        "annual_precipitation_variance_absolute_log_ratio": 0.23608745063793204,
+        "annual_temperature_variance_absolute_log_ratio": 0.029816327368205907,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.2426177890092405,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.2736243102296992,
+        "monthly_range_mean_relative_absolute_error": 0.0785250483734443,
+        "monthly_temperature_mean_absolute_error_c": 0.9653273456200914,
+        "monthly_wet_fraction_mean_absolute_error": 0.09939313357434186
+      },
+      "candidate_point_id": "p+4675_-09350",
+      "candidate_regime": "cold",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-mn212248",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-mn212248",
+          "member_id_formula": "8*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000mn212248\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 100.88652069810644,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.07348404935194165,
+        "annual_precipitation_variance_absolute_log_ratio": -0.4375471822167769,
+        "annual_temperature_variance_absolute_log_ratio": 2.1510571102112408e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.5804131014090228,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.11678556703465093,
+        "monthly_range_mean_relative_absolute_error": -0.019505623183151605,
+        "monthly_temperature_mean_absolute_error_c": -0.30723434961434093,
+        "monthly_wet_fraction_mean_absolute_error": -0.006203969467839049
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "mn212248",
+      "station_regime": "cold",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "4a0921d0a5d734b86f55c30566c61b4efaa99752d68a0c623763ea4f0f4b10e3",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 6.285601037778548,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 1.0405251088713812,
+          "effective_annual_variance": 1.0964012719764198,
+          "feasible_alpha_interval": [
+            -0.29005709532136353,
+            1.118768873141418
+          ],
+          "minimum_eigenvalue": 0.0012177242389148787,
+          "projected_to_boundary": false,
+          "requested_alpha": 1.0405251088713812,
+          "requested_annual_variance": 1.0964012719764198,
+          "tolerance": 1e-10
+        },
+        "region_id": "cold",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1853060372657375,
+        "annual_precipitation_variance_absolute_log_ratio": 2.1800478870246827,
+        "annual_temperature_variance_absolute_log_ratio": 0.5715776651377836,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.830648008917826,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.8909519068782515,
+        "monthly_range_mean_relative_absolute_error": 0.14549045408859132,
+        "monthly_temperature_mean_absolute_error_c": 3.639366884395771,
+        "monthly_wet_fraction_mean_absolute_error": 0.04313356054787506
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1838355283593597,
+        "annual_precipitation_variance_absolute_log_ratio": 1.062535264761045,
+        "annual_temperature_variance_absolute_log_ratio": 0.5715776651377841,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 2.5869132501548875,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.36219265047652005,
+        "monthly_range_mean_relative_absolute_error": 0.037287008586514986,
+        "monthly_temperature_mean_absolute_error_c": 1.1758270956530377,
+        "monthly_wet_fraction_mean_absolute_error": 0.04477323790101876
+      },
+      "candidate_point_id": "p+4725_-10450",
+      "candidate_regime": "cold",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-mt243996",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-mt243996",
+          "member_id_formula": "9*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000mt243996\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 418.5100913689203,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.0014705089063777876,
+        "annual_precipitation_variance_absolute_log_ratio": -1.1175126222636376,
+        "annual_temperature_variance_absolute_log_ratio": 4.440892098500626e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -2.243734758762938,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.5287592564017315,
+        "monthly_range_mean_relative_absolute_error": -0.10820344550207633,
+        "monthly_temperature_mean_absolute_error_c": -2.4635397887427333,
+        "monthly_wet_fraction_mean_absolute_error": 0.0016396773531437009
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "mt243996",
+      "station_regime": "non_monsoonal_semi_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "4482c24c260136e1a9c0de5dc05194d31a8df4ee6f0a637f3ded666737a69ddf",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 5.7402728038611945,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.8878262567188288,
+          "effective_annual_variance": 0.4848924237174752,
+          "feasible_alpha_interval": [
+            -0.3075841326302476,
+            1.0952313427453995
+          ],
+          "minimum_eigenvalue": 0.0019691978625908753,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.8878262567188288,
+          "requested_annual_variance": 0.4848924237174752,
+          "tolerance": 1e-10
+        },
+        "region_id": "non_monsoonal_semi_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.17429301803797076,
+        "annual_precipitation_variance_absolute_log_ratio": 0.7423289256804297,
+        "annual_temperature_variance_absolute_log_ratio": 0.07738936726677173,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.6758138472347932,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.36908434101253423,
+        "monthly_range_mean_relative_absolute_error": 0.04633699585627108,
+        "monthly_temperature_mean_absolute_error_c": 0.7364357488771697,
+        "monthly_wet_fraction_mean_absolute_error": 0.0396980165351272
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.229402309011692,
+        "annual_precipitation_variance_absolute_log_ratio": 0.5510918924958206,
+        "annual_temperature_variance_absolute_log_ratio": 0.07738936726677209,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.7252997742637852,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.3973064503575259,
+        "monthly_range_mean_relative_absolute_error": 0.03525206097165675,
+        "monthly_temperature_mean_absolute_error_c": 1.560919284139162,
+        "monthly_wet_fraction_mean_absolute_error": 0.040891279110828606
+      },
+      "candidate_point_id": "p+4100_-10325",
+      "candidate_regime": "non_monsoonal_semi_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-ne257665",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-ne257665",
+          "member_id_formula": "10*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000ne257665\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 101.04371675475403,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.05510929097372125,
+        "annual_precipitation_variance_absolute_log_ratio": -0.19123703318460916,
+        "annual_temperature_variance_absolute_log_ratio": 3.608224830031759e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 0.049485927028992016,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.02822210934499164,
+        "monthly_range_mean_relative_absolute_error": -0.01108493488461433,
+        "monthly_temperature_mean_absolute_error_c": 0.8244835352619923,
+        "monthly_wet_fraction_mean_absolute_error": 0.0011932625757014037
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "ne257665",
+      "station_regime": "non_monsoonal_semi_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "a9dec2eaa1421733894f490f50c5c1331436dbf83d9a906fbcba485cf6fad15a",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 3.1500973111350588,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.8878262567188288,
+          "effective_annual_variance": 0.4848924237174752,
+          "feasible_alpha_interval": [
+            -0.3075841326302476,
+            1.0952313427453995
+          ],
+          "minimum_eigenvalue": 0.0019691978625908753,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.8878262567188288,
+          "requested_annual_variance": 0.4848924237174752,
+          "tolerance": 1e-10
+        },
+        "region_id": "non_monsoonal_semi_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1371694550521372,
+        "annual_precipitation_variance_absolute_log_ratio": 1.965031178545272,
+        "annual_temperature_variance_absolute_log_ratio": 0.052642332731066534,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.6236551953039875,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.7935254221986131,
+        "monthly_range_mean_relative_absolute_error": 0.019941418858832934,
+        "monthly_temperature_mean_absolute_error_c": 2.885358512700664,
+        "monthly_wet_fraction_mean_absolute_error": 0.026091228459311055
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.10019453541102652,
+        "annual_precipitation_variance_absolute_log_ratio": 3.127498539333703,
+        "annual_temperature_variance_absolute_log_ratio": 0.052642332731066534,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 5.320271182135596,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.3370754826097162,
+        "monthly_range_mean_relative_absolute_error": 0.02338224547542758,
+        "monthly_temperature_mean_absolute_error_c": 3.044244252220176,
+        "monthly_wet_fraction_mean_absolute_error": 0.02354306537687378
+      },
+      "candidate_point_id": "p+3450_-10575",
+      "candidate_regime": "monsoonal_transition",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-nm290234",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-nm290234",
+          "member_id_formula": "11*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000nm290234\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 100.27082575039611,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.03697491964111069,
+        "annual_precipitation_variance_absolute_log_ratio": 1.162467360788431,
+        "annual_temperature_variance_absolute_log_ratio": 0.0,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.6966159868316089,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.5435500604111031,
+        "monthly_range_mean_relative_absolute_error": 0.0034408266165946444,
+        "monthly_temperature_mean_absolute_error_c": 0.15888573951951201,
+        "monthly_wet_fraction_mean_absolute_error": -0.002548163082437275
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "nm290234",
+      "station_regime": "monsoonal_transition",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "680dcdf89de1b18ce10da8919f3b2c2b02311de58d2dde54ca57846a6d1049a6",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 9.813857749467262,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.7803760555059318,
+          "effective_annual_variance": 0.30759122338875816,
+          "feasible_alpha_interval": [
+            -0.29230825529547205,
+            1.1198567181406722
+          ],
+          "minimum_eigenvalue": 0.002280557009246394,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.7803760555059318,
+          "requested_annual_variance": 0.3075912233887581,
+          "tolerance": 1e-10
+        },
+        "region_id": "monsoonal_transition",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.658123848006491,
+        "annual_precipitation_variance_absolute_log_ratio": 1.1962276141027526,
+        "annual_temperature_variance_absolute_log_ratio": 0.6414114417009474,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.442538275120563,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6167592680588193,
+        "monthly_range_mean_relative_absolute_error": 0.11285007105735573,
+        "monthly_temperature_mean_absolute_error_c": 0.7315548666624944,
+        "monthly_wet_fraction_mean_absolute_error": 0.023618352953899396
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.549401899034707,
+        "annual_precipitation_variance_absolute_log_ratio": 1.1519939278691527,
+        "annual_temperature_variance_absolute_log_ratio": 0.6414114417009474,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.222933655556109,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6168800666879429,
+        "monthly_range_mean_relative_absolute_error": 0.09401811714398141,
+        "monthly_temperature_mean_absolute_error_c": 0.4748068364163131,
+        "monthly_wet_fraction_mean_absolute_error": 0.024755611945371406
+      },
+      "candidate_point_id": "p+3850_-11425",
+      "candidate_regime": "arid_boundary",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-nv262631",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-nv262631",
+          "member_id_formula": "12*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000nv262631\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 101.08905800331456,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.108721948971784,
+        "annual_precipitation_variance_absolute_log_ratio": -0.04423368623359991,
+        "annual_temperature_variance_absolute_log_ratio": 0.0,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.21960461956445432,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.0001207986291236196,
+        "monthly_range_mean_relative_absolute_error": -0.01883195391337432,
+        "monthly_temperature_mean_absolute_error_c": -0.25674803024618126,
+        "monthly_wet_fraction_mean_absolute_error": 0.0011372589914720108
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "nv262631",
+      "station_regime": "arid_boundary",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "8d9af4012d62add890f7d4809fd84861df6724754af25d7347d1059ae26f9787",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 7.387712743710629,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9880969304324885,
+          "effective_annual_variance": 0.7215139710490083,
+          "feasible_alpha_interval": [
+            -0.26245693869144304,
+            1.1136969578945826
+          ],
+          "minimum_eigenvalue": 0.0012736467389714737,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9880969304324885,
+          "requested_annual_variance": 0.7215139710490084,
+          "tolerance": 1e-10
+        },
+        "region_id": "arid_boundary",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.7495317769235645,
+        "annual_precipitation_variance_absolute_log_ratio": 3.6559379205476814,
+        "annual_temperature_variance_absolute_log_ratio": 0.15808564558351712,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 7.5493214888697135,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.8712284204097063,
+        "monthly_range_mean_relative_absolute_error": 0.2624241768266171,
+        "monthly_temperature_mean_absolute_error_c": 3.86943829681548,
+        "monthly_wet_fraction_mean_absolute_error": 0.02607529640517683
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.1174777956138319,
+        "annual_precipitation_variance_absolute_log_ratio": 2.366632573569241,
+        "annual_temperature_variance_absolute_log_ratio": 0.15808564558351806,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.831511621187908,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.2306878542079385,
+        "monthly_range_mean_relative_absolute_error": 0.062430207962018175,
+        "monthly_temperature_mean_absolute_error_c": 4.235337585855033,
+        "monthly_wet_fraction_mean_absolute_error": 0.016376675693451283
+      },
+      "candidate_point_id": "p+3525_-11575",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-nv264436",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-nv264436",
+          "member_id_formula": "13*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000nv264436\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 106.12771802511811,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.6320539813097327,
+        "annual_precipitation_variance_absolute_log_ratio": -1.2893053469784403,
+        "annual_temperature_variance_absolute_log_ratio": 9.43689570931383e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -2.7178098676818054,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.6405405662017678,
+        "monthly_range_mean_relative_absolute_error": -0.19999396886459894,
+        "monthly_temperature_mean_absolute_error_c": 0.3658992890395534,
+        "monthly_wet_fraction_mean_absolute_error": -0.009698620711725548
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "nv264436",
+      "station_regime": "hot_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "247cc2cffcb8ec9da22bb8deef24011e813a55fd58f2dbd045c01e7fe9859f83",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 10.060813364422597,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9403252700161419,
+          "effective_annual_variance": 0.304800161819601,
+          "feasible_alpha_interval": [
+            -0.304926520482055,
+            1.1377345934621126
+          ],
+          "minimum_eigenvalue": 0.0013450722651229402,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9403252700161419,
+          "requested_annual_variance": 0.30480016181960107,
+          "tolerance": 1e-10
+        },
+        "region_id": "hot_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.706002692922096,
+        "annual_precipitation_variance_absolute_log_ratio": 0.7837782699923553,
+        "annual_temperature_variance_absolute_log_ratio": 0.5396911182104646,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.69037600478046,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.8201406179641914,
+        "monthly_range_mean_relative_absolute_error": 0.1046006998498491,
+        "monthly_temperature_mean_absolute_error_c": 3.242842723245868,
+        "monthly_wet_fraction_mean_absolute_error": 0.02919802039744337
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.6356425648311341,
+        "annual_precipitation_variance_absolute_log_ratio": 1.7373429301940544,
+        "annual_temperature_variance_absolute_log_ratio": 0.5396911182104636,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.754041042562839,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.0684244531811642,
+        "monthly_range_mean_relative_absolute_error": 0.10350657093382072,
+        "monthly_temperature_mean_absolute_error_c": 2.9816453568121166,
+        "monthly_wet_fraction_mean_absolute_error": 0.024368111283260066
+      },
+      "candidate_point_id": "p+4175_-11700",
+      "candidate_regime": "arid_boundary",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-nv269171",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-nv269171",
+          "member_id_formula": "14*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000nv269171\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 105.99153994759381,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.07036012809096193,
+        "annual_precipitation_variance_absolute_log_ratio": 0.953564660201699,
+        "annual_temperature_variance_absolute_log_ratio": -9.992007221626409e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.0636650377823793,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.24828383521697284,
+        "monthly_range_mean_relative_absolute_error": -0.001094128916028378,
+        "monthly_temperature_mean_absolute_error_c": -0.26119736643375147,
+        "monthly_wet_fraction_mean_absolute_error": -0.0048299091141833055
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "nv269171",
+      "station_regime": "arid_boundary",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "38077bfa08483b4bf7977e59164dc989bd4b74f23bd81d90b389d2edc51d885f",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 5.444125442053604,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9880969304324885,
+          "effective_annual_variance": 0.7215139710490083,
+          "feasible_alpha_interval": [
+            -0.26245693869144304,
+            1.1136969578945826
+          ],
+          "minimum_eigenvalue": 0.0012736467389714737,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9880969304324885,
+          "requested_annual_variance": 0.7215139710490084,
+          "tolerance": 1e-10
+        },
+        "region_id": "arid_boundary",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.3301009509464717,
+        "annual_precipitation_variance_absolute_log_ratio": 2.663677269323519,
+        "annual_temperature_variance_absolute_log_ratio": 0.2534292031866636,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 5.926874087226378,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.7565265250115878,
+        "monthly_range_mean_relative_absolute_error": 0.3143775375927575,
+        "monthly_temperature_mean_absolute_error_c": 1.4521792791994244,
+        "monthly_wet_fraction_mean_absolute_error": 0.10610891510849796
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.4981104407729285,
+        "annual_precipitation_variance_absolute_log_ratio": 4.978535392072777,
+        "annual_temperature_variance_absolute_log_ratio": 0.2534292031866628,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 7.814851362699939,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.4021686075582667,
+        "monthly_range_mean_relative_absolute_error": 0.11728249252717093,
+        "monthly_temperature_mean_absolute_error_c": 1.4788300118899542,
+        "monthly_wet_fraction_mean_absolute_error": 0.08985307473471404
+      },
+      "candidate_point_id": "p+4275_-11700",
+      "candidate_regime": "arid_boundary",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-or350412",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-or350412",
+          "member_id_formula": "15*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000or350412\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 240.4655864668182,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.1680094898264568,
+        "annual_precipitation_variance_absolute_log_ratio": 2.314858122749258,
+        "annual_temperature_variance_absolute_log_ratio": -8.326672684688674e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 1.8879772754735615,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.3543579174533211,
+        "monthly_range_mean_relative_absolute_error": -0.19709504506558656,
+        "monthly_temperature_mean_absolute_error_c": 0.026650732690529866,
+        "monthly_wet_fraction_mean_absolute_error": -0.016255840373783914
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "or350412",
+      "station_regime": "non_monsoonal_semi_arid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "c1059fe2d63846ceaa6d34c97f6b3d8ecee51dc79d43ee30340c2d21cd1bc3aa",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 3.983795004069718,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.8878262567188288,
+          "effective_annual_variance": 0.4848924237174752,
+          "feasible_alpha_interval": [
+            -0.3075841326302476,
+            1.0952313427453995
+          ],
+          "minimum_eigenvalue": 0.0019691978625908753,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.8878262567188288,
+          "requested_annual_variance": 0.4848924237174752,
+          "tolerance": 1e-10
+        },
+        "region_id": "non_monsoonal_semi_arid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.5205652458224604,
+        "annual_precipitation_variance_absolute_log_ratio": 0.4849040437517771,
+        "annual_temperature_variance_absolute_log_ratio": 0.8263769081954303,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.5956697738820336,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.36897827505851927,
+        "monthly_range_mean_relative_absolute_error": 0.2105088276809345,
+        "monthly_temperature_mean_absolute_error_c": 4.847207462539647,
+        "monthly_wet_fraction_mean_absolute_error": 0.0716316602883274
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.5139386493776571,
+        "annual_precipitation_variance_absolute_log_ratio": 0.6973266459003002,
+        "annual_temperature_variance_absolute_log_ratio": 0.8263769081954319,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.5100543945590768,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.3003486876724659,
+        "monthly_range_mean_relative_absolute_error": 0.29282539658956225,
+        "monthly_temperature_mean_absolute_error_c": 3.3217156297933865,
+        "monthly_wet_fraction_mean_absolute_error": 0.0716316602883274
+      },
+      "candidate_point_id": "p+3425_-08175",
+      "candidate_regime": "humid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-sc381544",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-sc381544",
+          "member_id_formula": "16*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000sc381544\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 218.91131801522806,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.006626596444803345,
+        "annual_precipitation_variance_absolute_log_ratio": 0.21242260214852315,
+        "annual_temperature_variance_absolute_log_ratio": 1.5543122344752192e-15,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.08561537932295682,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.06862958738605335,
+        "monthly_range_mean_relative_absolute_error": 0.08231656890862774,
+        "monthly_temperature_mean_absolute_error_c": -1.52549183274626,
+        "monthly_wet_fraction_mean_absolute_error": 0.0
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "sc381544",
+      "station_regime": "humid",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "a46e5a67d8693f4d8482b1cd8df3d616dde3d60a83d0f241991edc31b563f5c3",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 1.417280093569492,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.9683382185157777,
+          "effective_annual_variance": 0.2988335249184806,
+          "feasible_alpha_interval": [
+            -0.2940316352918429,
+            1.1499860244981726
+          ],
+          "minimum_eigenvalue": 0.0018956561559919675,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.9683382185157777,
+          "requested_annual_variance": 0.2988335249184806,
+          "tolerance": 1e-10
+        },
+        "region_id": "humid",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.19032153975177685,
+        "annual_precipitation_variance_absolute_log_ratio": 1.0598354821450873,
+        "annual_temperature_variance_absolute_log_ratio": 0.25337195869925944,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.281337038843003,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.9276173518913108,
+        "monthly_range_mean_relative_absolute_error": 0.10699191785767138,
+        "monthly_temperature_mean_absolute_error_c": 7.867146098986126,
+        "monthly_wet_fraction_mean_absolute_error": 0.056589856233557556
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.027184236170313986,
+        "annual_precipitation_variance_absolute_log_ratio": 1.1320252047034853,
+        "annual_temperature_variance_absolute_log_ratio": 0.253371958699259,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.3501546327649963,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.8555847195041159,
+        "monthly_range_mean_relative_absolute_error": 0.037714979889443084,
+        "monthly_temperature_mean_absolute_error_c": 4.547447779498277,
+        "monthly_wet_fraction_mean_absolute_error": 0.04492799263290781
+      },
+      "candidate_point_id": "p+3075_-10400",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-tx413280",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-tx413280",
+          "member_id_formula": "17*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000tx413280\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 109.18161837223028,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.16313730358146286,
+        "annual_precipitation_variance_absolute_log_ratio": 0.07218972255839806,
+        "annual_temperature_variance_absolute_log_ratio": -4.440892098500626e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -0.931182406078007,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.07203263238719493,
+        "monthly_range_mean_relative_absolute_error": -0.0692769379682283,
+        "monthly_temperature_mean_absolute_error_c": -3.3196983194878493,
+        "monthly_wet_fraction_mean_absolute_error": -0.011661863600649747
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "tx413280",
+      "station_regime": "monsoonal_transition",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "b769daa780d5f880bef2aa03f57fdc456cb601a36f4b0c0b94a2725b5c2ddefb",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 9.765888165395957,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.7803760555059318,
+          "effective_annual_variance": 0.30759122338875816,
+          "feasible_alpha_interval": [
+            -0.29230825529547205,
+            1.1198567181406722
+          ],
+          "minimum_eigenvalue": 0.002280557009246394,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.7803760555059318,
+          "requested_annual_variance": 0.3075912233887581,
+          "tolerance": 1e-10
+        },
+        "region_id": "monsoonal_transition",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.011126964834062447,
+        "annual_precipitation_variance_absolute_log_ratio": 0.3512571363603505,
+        "annual_temperature_variance_absolute_log_ratio": 0.2538773948074477,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.034891851933195,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.0766314506069083,
+        "monthly_range_mean_relative_absolute_error": 0.12065813728933071,
+        "monthly_temperature_mean_absolute_error_c": 10.211167422396464,
+        "monthly_wet_fraction_mean_absolute_error": 0.05970242785193425
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.15706946248487172,
+        "annual_precipitation_variance_absolute_log_ratio": 2.0056598193593627,
+        "annual_temperature_variance_absolute_log_ratio": 0.2538773948074506,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.989525464043488,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.1868572140984261,
+        "monthly_range_mean_relative_absolute_error": 0.10196195324899361,
+        "monthly_temperature_mean_absolute_error_c": 5.772062669319852,
+        "monthly_wet_fraction_mean_absolute_error": 0.043229028726804036
+      },
+      "candidate_point_id": "p+3050_-10400",
+      "candidate_regime": "hot_arid",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-tx417262",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-tx417262",
+          "member_id_formula": "18*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000tx417262\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 111.47929078349013,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": 0.14594249765080927,
+        "annual_precipitation_variance_absolute_log_ratio": 1.6544026829990122,
+        "annual_temperature_variance_absolute_log_ratio": 2.886579864025407e-15,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 0.9546336121102925,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.1102257634915178,
+        "monthly_range_mean_relative_absolute_error": -0.0186961840403371,
+        "monthly_temperature_mean_absolute_error_c": -4.439104753076612,
+        "monthly_wet_fraction_mean_absolute_error": -0.01647339912513021
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "tx417262",
+      "station_regime": "monsoonal_transition",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "1c2c5f526a16d0739b371890557e3fa6ceb5ce97882c691c5d6958364fd99b1a",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 6.186266408557399,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 0.7803760555059318,
+          "effective_annual_variance": 0.30759122338875816,
+          "feasible_alpha_interval": [
+            -0.29230825529547205,
+            1.1198567181406722
+          ],
+          "minimum_eigenvalue": 0.002280557009246394,
+          "projected_to_boundary": false,
+          "requested_alpha": 0.7803760555059318,
+          "requested_annual_variance": 0.3075912233887581,
+          "tolerance": 1e-10
+        },
+        "region_id": "monsoonal_transition",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    },
+    {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "baseline_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.27718283701970386,
+        "annual_precipitation_variance_absolute_log_ratio": 1.6648295207811148,
+        "annual_temperature_variance_absolute_log_ratio": 0.40757310266431435,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 4.531335751447325,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 1.4324615165104984,
+        "monthly_range_mean_relative_absolute_error": 0.17854314111021033,
+        "monthly_temperature_mean_absolute_error_c": 2.052760904902656,
+        "monthly_wet_fraction_mean_absolute_error": 0.05339781746031746
+      },
+      "candidate_metrics": {
+        "annual_precipitation_lag1_absolute_error": 0.15013386011243693,
+        "annual_precipitation_variance_absolute_log_ratio": 1.6014297522136334,
+        "annual_temperature_variance_absolute_log_ratio": 0.4075731026643145,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": 3.4192624580972226,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": 0.6720532320639628,
+        "monthly_range_mean_relative_absolute_error": 0.08401251981434528,
+        "monthly_temperature_mean_absolute_error_c": 1.94490513087383,
+        "monthly_wet_fraction_mean_absolute_error": 0.038359655017921136
+      },
+      "candidate_point_id": "p+4100_-11000",
+      "candidate_regime": "arid_boundary",
+      "common_rng_contract": {
+        "annual": {
+          "domain": "annual_target",
+          "experiment_id": "a11e1-development-wy487845",
+          "member_id": 0,
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "daily": {
+          "domains": [
+            "wet_count",
+            "occurrence",
+            "amount",
+            "temperature",
+            "range"
+          ],
+          "experiment_id": "a11e1-core-wy487845",
+          "member_id_formula": "19*192 + year_index*12 + month_index",
+          "strategy_id": "circular_fixed_block_bootstrap_v1"
+        },
+        "hurdle": {
+          "blake2b_key": "a11e1-integrated-v1\u0000wy487845\u0000circular_fixed_block_physical_core_v1\u00000\u0000month_hurdle",
+          "domain": "month_hurdle",
+          "key_strategy_id": "circular_fixed_block_physical_core_v1",
+          "member_id": 0
+        }
+      },
+      "great_circle_distance_km": 102.40385916074518,
+      "member_id": 0,
+      "metric_differences_candidate_minus_baseline": {
+        "annual_precipitation_lag1_absolute_error": -0.12704897690726694,
+        "annual_precipitation_variance_absolute_log_ratio": -0.06339976856748142,
+        "annual_temperature_variance_absolute_log_ratio": 1.6653345369377348e-16,
+        "daily_invariant_failures": 0,
+        "descriptive_composite_score": -1.1120732933501025,
+        "monthly_equivalent_precipitation_mean_relative_absolute_error": -0.7604082844465355,
+        "monthly_range_mean_relative_absolute_error": -0.09453062129586505,
+        "monthly_temperature_mean_absolute_error_c": -0.10785577402882596,
+        "monthly_wet_fraction_mean_absolute_error": -0.015038162442396322
+      },
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1",
+      "station_id": "wy487845",
+      "station_regime": "cold",
+      "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+      "stream_summary_sha256": "b9a05af4ab9291226b998e043cabe3857ef45e1bab43fa96079d1d4cd76dfa3d",
+      "target_receipt": {
+        "fit_data_role": "candidate_fit",
+        "maximum_realized_covariance_error": 4.503750434702516,
+        "moment_semantics": "stationary_population_law; realized sample is diagnostic",
+        "reconciliation": {
+          "annual_target_satisfied": true,
+          "effective_alpha": 1.0405251088713812,
+          "effective_annual_variance": 1.0964012719764198,
+          "feasible_alpha_interval": [
+            -0.29005709532136353,
+            1.118768873141418
+          ],
+          "minimum_eigenvalue": 0.0012177242389148787,
+          "projected_to_boundary": false,
+          "requested_alpha": 1.0405251088713812,
+          "requested_annual_variance": 1.0964012719764198,
+          "tolerance": 1e-10
+        },
+        "region_id": "cold",
+        "strategy_id": "circular_fixed_block_bootstrap_v1"
+      },
+      "years": 16
+    }
+  ],
+  "schema_version": "a11e2-development-evidence-1",
+  "source_commit": "e15369ad26f4e0b646f5f4665912dd6a37e35e3a",
+  "strategy_id": "circular_fixed_block_nearest_candidate_forcing_v1",
+  "stream_count": 20
+}

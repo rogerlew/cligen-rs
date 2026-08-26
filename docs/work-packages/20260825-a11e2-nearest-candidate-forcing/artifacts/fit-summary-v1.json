@@ -1,0 +1,89 @@
+{
+  "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+  "candidate_fit_only": true,
+  "inherited_fit_sha256": "847dfcd6150c64d53275d20647121b816809e4cb9e1bfde96360e74bfc6b94ed",
+  "schema_version": "a11e2-fit-summary-1",
+  "station_location_sha256": "b5ee091b36a9b6b98c45167b1d0ce3ea9a8c022c6bec37faac26831287d6a14d",
+  "stations": {
+    "az026481": {
+      "candidate_point_id": "p+3425_-11250",
+      "location_sha256": "629cf1ab7b09aaa6ef8f91ea9a5aa47d6f04cebae7eba9ee0290a8abc691bbb5"
+    },
+    "az028820": {
+      "candidate_point_id": "p+3300_-11025",
+      "location_sha256": "7f68a06f345ec53849758d23ffb3d3f2f773980ff299cff1eb49f68182b4f6ed"
+    },
+    "ca040442": {
+      "candidate_point_id": "p+3550_-11675",
+      "location_sha256": "f88b96ddf54d98a2d5708957052c8b0325a2beb57c084ce104b58eec2f273173"
+    },
+    "ca042713": {
+      "candidate_point_id": "p+3250_-11450",
+      "location_sha256": "3aab0372811f9bc5338090de6c2bd523899e214507154d069f6c7827afaad264"
+    },
+    "co050130": {
+      "candidate_point_id": "p+3725_-10700",
+      "location_sha256": "2827feeeb117a6d4be7ab637ac41ad070d70c791010e551be61b377324051e2a"
+    },
+    "id101022": {
+      "candidate_point_id": "p+4300_-11525",
+      "location_sha256": "bad2c6a0ef4a0fbaa5e2391cbc8131e01fc68067bdb4a2f010f7490b130b667f"
+    },
+    "la160549": {
+      "candidate_point_id": "p+3150_-09125",
+      "location_sha256": "38b0c0ac2b54d20093272d863f01918cd2610d8fd7cdb81c195a4fae7b05a8db"
+    },
+    "me171175": {
+      "candidate_point_id": "p+3800_-07825",
+      "location_sha256": "0924e4214219cfe8b825f8f7316573da6d653b9d8a3da46345fa7c5317044498"
+    },
+    "mn212248": {
+      "candidate_point_id": "p+4675_-09350",
+      "location_sha256": "fed1a18b47fd116ab0152510d5567215458bc5cbddc6eb42e1cb682272a46aff"
+    },
+    "mt243996": {
+      "candidate_point_id": "p+4725_-10450",
+      "location_sha256": "c3b319f1670f88c2b4ee489e7384d288598a2c5d2559da51b1dacad918e99191"
+    },
+    "ne257665": {
+      "candidate_point_id": "p+4100_-10325",
+      "location_sha256": "65473f35843b7817b05d58475f6cccce9903b2aaa11765c19a14fafe65183fff"
+    },
+    "nm290234": {
+      "candidate_point_id": "p+3450_-10575",
+      "location_sha256": "20303704ed4de824e91f9d66490d13cda2142a538047ac8f695383465298c325"
+    },
+    "nv262631": {
+      "candidate_point_id": "p+3850_-11425",
+      "location_sha256": "7ab7f7fe402b77adeb958bc8f883dd0a1a81b4925c5e7fd6b7153afc715f7cce"
+    },
+    "nv264436": {
+      "candidate_point_id": "p+3525_-11575",
+      "location_sha256": "adeb293273f503956bb5f838c6e61d3f52850bd118cf82f681dcfd2573c78fb1"
+    },
+    "nv269171": {
+      "candidate_point_id": "p+4175_-11700",
+      "location_sha256": "752e189d796cacd16a7a38b61f5ce9cb617cbd0a8d4cdb8334f4fb1533ccec9a"
+    },
+    "or350412": {
+      "candidate_point_id": "p+4275_-11700",
+      "location_sha256": "d4b8472904a531d3bee4bdbd30fef80058aa7d31ecd3f139eb3c7756e9373785"
+    },
+    "sc381544": {
+      "candidate_point_id": "p+3425_-08175",
+      "location_sha256": "1db91b460983300f3078a17c3341e145ac6308a1d802534600be5956ee226228"
+    },
+    "tx413280": {
+      "candidate_point_id": "p+3075_-10400",
+      "location_sha256": "645efa8a25860806cd7b808dccf24425e809ea0c2ef845a974892799c439f012"
+    },
+    "tx417262": {
+      "candidate_point_id": "p+3050_-10400",
+      "location_sha256": "242e7f6765462573e005795d4feb25ce0c64bc85294159b0165b98ca0335b067"
+    },
+    "wy487845": {
+      "candidate_point_id": "p+4100_-11000",
+      "location_sha256": "84cab939b64998e1f4752d835da192ebaeca7959773765a5f68e92b974101b58"
+    }
+  }
+}

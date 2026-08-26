@@ -1,0 +1,236 @@
+{
+  "candidate_role": "candidate_fit",
+  "confirmation_target_series_accessed": false,
+  "development_role": "development",
+  "distance": "WGS84-coordinate haversine with mean Earth radius 6371.0088 km",
+  "maximum_distance_km": 1292.9899228438117,
+  "rows": [
+    {
+      "candidate_latitude": 34.25,
+      "candidate_longitude": -112.5,
+      "candidate_point_id": "p+3425_-11250",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 100.98510600736147,
+      "station_id": "az026481",
+      "station_latitude": 33.43,
+      "station_longitude": -112.03,
+      "station_regime": "hot_arid"
+    },
+    {
+      "candidate_latitude": 33.0,
+      "candidate_longitude": -110.25,
+      "candidate_point_id": "p+3300_-11025",
+      "candidate_regime": "monsoonal_transition",
+      "great_circle_distance_km": 108.61554648504034,
+      "station_id": "az028820",
+      "station_latitude": 32.18,
+      "station_longitude": -110.88,
+      "station_regime": "monsoonal_transition"
+    },
+    {
+      "candidate_latitude": 35.5,
+      "candidate_longitude": -116.75,
+      "candidate_point_id": "p+3550_-11675",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 208.49770709379948,
+      "station_id": "ca040442",
+      "station_latitude": 35.42,
+      "station_longitude": -119.05,
+      "station_regime": "hot_arid"
+    },
+    {
+      "candidate_latitude": 32.5,
+      "candidate_longitude": -114.5,
+      "candidate_point_id": "p+3250_-11450",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 104.91472752395183,
+      "station_id": "ca042713",
+      "station_latitude": 32.78,
+      "station_longitude": -115.57,
+      "station_regime": "hot_arid"
+    },
+    {
+      "candidate_latitude": 37.25,
+      "candidate_longitude": -107.0,
+      "candidate_point_id": "p+3725_-10700",
+      "candidate_regime": "monsoonal_transition",
+      "great_circle_distance_km": 103.61725765447963,
+      "station_id": "co050130",
+      "station_latitude": 37.43,
+      "station_longitude": -105.85,
+      "station_regime": "cold"
+    },
+    {
+      "candidate_latitude": 43.0,
+      "candidate_longitude": -115.25,
+      "candidate_point_id": "p+4300_-11525",
+      "candidate_regime": "arid_boundary",
+      "great_circle_distance_km": 100.90461374745375,
+      "station_id": "id101022",
+      "station_latitude": 43.57,
+      "station_longitude": -116.22,
+      "station_regime": "non_monsoonal_semi_arid"
+    },
+    {
+      "candidate_latitude": 31.5,
+      "candidate_longitude": -91.25,
+      "candidate_point_id": "p+3150_-09125",
+      "candidate_regime": "humid",
+      "great_circle_distance_km": 108.27938487221375,
+      "station_id": "la160549",
+      "station_latitude": 30.53,
+      "station_longitude": -91.15,
+      "station_regime": "humid"
+    },
+    {
+      "candidate_latitude": 38.0,
+      "candidate_longitude": -78.25,
+      "candidate_point_id": "p+3800_-07825",
+      "candidate_regime": "humid",
+      "great_circle_distance_km": 1292.9899228438117,
+      "station_id": "me171175",
+      "station_latitude": 46.87,
+      "station_longitude": -68.02,
+      "station_regime": "cold"
+    },
+    {
+      "candidate_latitude": 46.75,
+      "candidate_longitude": -93.5,
+      "candidate_point_id": "p+4675_-09350",
+      "candidate_regime": "cold",
+      "great_circle_distance_km": 100.88652069810644,
+      "station_id": "mn212248",
+      "station_latitude": 46.83,
+      "station_longitude": -92.18,
+      "station_regime": "cold"
+    },
+    {
+      "candidate_latitude": 47.25,
+      "candidate_longitude": -104.5,
+      "candidate_point_id": "p+4725_-10450",
+      "candidate_regime": "cold",
+      "great_circle_distance_km": 418.5100913689203,
+      "station_id": "mt243996",
+      "station_latitude": 48.55,
+      "station_longitude": -109.77,
+      "station_regime": "non_monsoonal_semi_arid"
+    },
+    {
+      "candidate_latitude": 41.0,
+      "candidate_longitude": -103.25,
+      "candidate_point_id": "p+4100_-10325",
+      "candidate_regime": "non_monsoonal_semi_arid",
+      "great_circle_distance_km": 101.04371675475403,
+      "station_id": "ne257665",
+      "station_latitude": 41.87,
+      "station_longitude": -103.6,
+      "station_regime": "non_monsoonal_semi_arid"
+    },
+    {
+      "candidate_latitude": 34.5,
+      "candidate_longitude": -105.75,
+      "candidate_point_id": "p+3450_-10575",
+      "candidate_regime": "monsoonal_transition",
+      "great_circle_distance_km": 100.27082575039611,
+      "station_id": "nm290234",
+      "station_latitude": 35.05,
+      "station_longitude": -106.62,
+      "station_regime": "monsoonal_transition"
+    },
+    {
+      "candidate_latitude": 38.5,
+      "candidate_longitude": -114.25,
+      "candidate_point_id": "p+3850_-11425",
+      "candidate_regime": "arid_boundary",
+      "great_circle_distance_km": 101.08905800331456,
+      "station_id": "nv262631",
+      "station_latitude": 39.28,
+      "station_longitude": -114.85,
+      "station_regime": "arid_boundary"
+    },
+    {
+      "candidate_latitude": 35.25,
+      "candidate_longitude": -115.75,
+      "candidate_point_id": "p+3525_-11575",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 106.12771802511811,
+      "station_id": "nv264436",
+      "station_latitude": 36.08,
+      "station_longitude": -115.17,
+      "station_regime": "hot_arid"
+    },
+    {
+      "candidate_latitude": 41.75,
+      "candidate_longitude": -117.0,
+      "candidate_point_id": "p+4175_-11700",
+      "candidate_regime": "arid_boundary",
+      "great_circle_distance_km": 105.99153994759381,
+      "station_id": "nv269171",
+      "station_latitude": 40.97,
+      "station_longitude": -117.73,
+      "station_regime": "arid_boundary"
+    },
+    {
+      "candidate_latitude": 42.75,
+      "candidate_longitude": -117.0,
+      "candidate_point_id": "p+4275_-11700",
+      "candidate_regime": "arid_boundary",
+      "great_circle_distance_km": 240.4655864668182,
+      "station_id": "or350412",
+      "station_latitude": 44.83,
+      "station_longitude": -117.82,
+      "station_regime": "non_monsoonal_semi_arid"
+    },
+    {
+      "candidate_latitude": 34.25,
+      "candidate_longitude": -81.75,
+      "candidate_point_id": "p+3425_-08175",
+      "candidate_regime": "humid",
+      "great_circle_distance_km": 218.91131801522806,
+      "station_id": "sc381544",
+      "station_latitude": 32.9,
+      "station_longitude": -80.03,
+      "station_regime": "humid"
+    },
+    {
+      "candidate_latitude": 30.75,
+      "candidate_longitude": -104.0,
+      "candidate_point_id": "p+3075_-10400",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 109.18161837223028,
+      "station_id": "tx413280",
+      "station_latitude": 30.9,
+      "station_longitude": -102.87,
+      "station_regime": "monsoonal_transition"
+    },
+    {
+      "candidate_latitude": 30.5,
+      "candidate_longitude": -104.0,
+      "candidate_point_id": "p+3050_-10400",
+      "candidate_regime": "hot_arid",
+      "great_circle_distance_km": 111.47929078349013,
+      "station_id": "tx417262",
+      "station_latitude": 29.55,
+      "station_longitude": -104.37,
+      "station_regime": "monsoonal_transition"
+    },
+    {
+      "candidate_latitude": 41.0,
+      "candidate_longitude": -110.0,
+      "candidate_point_id": "p+4100_-11000",
+      "candidate_regime": "arid_boundary",
+      "great_circle_distance_km": 102.40385916074518,
+      "station_id": "wy487845",
+      "station_latitude": 41.6,
+      "station_longitude": -109.07,
+      "station_regime": "cold"
+    }
+  ],
+  "schema_version": "a11e2-selection-receipt-1",
+  "selection_id": "a11e2-nearest-candidate-coordinate-v1",
+  "stations_over_250_km": [
+    "me171175",
+    "mt243996"
+  ],
+  "tie_break": "minimum (distance_km, point_id UTF-8 byte order); candidate regime is not a selector"
+}

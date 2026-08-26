@@ -10,8 +10,8 @@ location for the circular-block arm.
 - [x] 2026-08-25: inherited A11E1's independent successor recommendation.
 - [x] 2026-08-25: verified coordinate metadata and candidate-fit coverage.
 - [x] 2026-08-25: scaffolded and independently cleared exact source for publication.
-- [ ] Preflight, fit, generate, evaluate, and replay.
-- [ ] Review, gate, reconcile, commit, and push terminal evidence.
+- [x] 2026-08-25: preflighted, fit, generated, evaluated, and replayed byte-identically.
+- [x] 2026-08-25: independently reviewed, gated, and reconciled terminal evidence.
 
 ## Decisions and limitations
 
@@ -37,4 +37,10 @@ elapsed time in the execution receipt may differ.
 
 ## Outcome
 
-Pending execution.
+Published source `e15369a` executed 20 complete common-RNG streams with zero
+invariants and no confirmation access. Both frozen primary medians improved, so
+the disposition is `SUPPORTED_FOR_EXPLORATION`. Only 8/20 stations improved on
+both primary metrics and the composite bootstrap crossed zero; the result is a
+mechanism signal, not selection. The next bounded question is multi-member
+stability with all model, selector, adapter, role, calendar, and evaluator
+surfaces frozen.

@@ -27,3 +27,24 @@ cover these boundaries, including dependency drift.
 Corrected-source disposition: **GO for publication**. The reviewer confirmed
 all three P1s resolved, reran 11/11 synthetic tests, and found no unresolved
 P0/P1. No raw observed or confirmation values were accessed in review.
+
+## Completed-evidence review
+
+Independent disposition: **evidence accepted; GO to close after terminal
+reconciliation**. Source `e15369a`, all source/dependency/input/output hashes,
+the evidence self-hash, selector mapping, A11E1 baselines, common-RNG contracts,
+and decision computations reproduced. The 20 unique member-0 streams were
+finite with zero invariant failures and confirmation false.
+
+The primary medians reproduce exactly: precipitation 0.909285 to 0.748092 and
+temperature 3.064101 to 1.999233 °C. `SUPPORTED_FOR_EXPLORATION` is correct
+under the preregistered median rule. It is not stationwise dominance: both
+primary metrics improve at 8/20 stations and composite improves at 12/20. The
+descriptive composite bootstrap mean is -2.633 with 5/50/95
+-6.649/-2.464/+0.325, so it crosses zero and cannot imply selection.
+
+The sole closure P1 was missing replay/final-gate and terminal reconciliation
+records. Scientific outputs replayed byte-identically and those records are
+now reconciled. Final closure disposition: **GO**, with no remaining P0/P1.
+The reviewer recommends the bounded fixed-selector multi-member stability
+successor recorded in the package and roadmap.
