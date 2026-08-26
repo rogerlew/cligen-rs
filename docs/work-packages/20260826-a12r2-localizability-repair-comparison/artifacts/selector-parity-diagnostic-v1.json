@@ -1,0 +1,38 @@
+{
+  "schema_version": "a12r2-selector-parity-diagnostic-1",
+  "attempt_source_commit": "b34e94104208df868bd602dea21f1b9723850362",
+  "attempt_build_receipt_sha256": "e03b2d1120a696ef2d48c437a06c1e02cb69bdd3b0bcbfd9649dab6f8ba260eb",
+  "attempt_manifest_sha256": "3973ec1e82ba5bf074131ed31820592b1d65202bb52dfdb23bb08c6803f8e60a",
+  "cligen_binary_sha256": "01d53ea3a61ed1c604c8b2201c4cce1267ca2d8f01143b999f1bcbe90cc66483",
+  "input_hashes": {
+    "a10_corpus_spec": "703a67dffdcc15f99ebd60ec1e6cc4402aff8ad24e8971a4521e7b6c664c19d4",
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "daymet_shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "station_archive": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9",
+    "station_manifests": "86039805acc0a160cb44773b9f02d04cd68173690df34337d794ab5e727c96ef",
+    "prism_cache_file_set": "478623402434722813a8083674ed50555b0d9efb5ef416c22bfdabf36866e1d9"
+  },
+  "runtime": {"python": "3.12.13", "numpy": "2.3.5"},
+  "method": "recompute A12 nearest-ten Python selector and compare production repair-run station-selection receipts; production-ineligible sites are recorded, not silently omitted",
+  "site_count": 240,
+  "production_runnable_site_count": 236,
+  "audited_candidate_cell_count": 2360,
+  "production_failure_sites": [
+    {"index": 56, "point_id": "p+3350_-11625", "reason": "month 6 cannot be localized"},
+    {"index": 57, "point_id": "p+3350_-11675", "reason": "month 6 cannot be localized"},
+    {"index": 63, "point_id": "p+3375_-11625", "reason": "month 6 cannot be localized"},
+    {"index": 64, "point_id": "p+3375_-11650", "reason": "month 6 cannot be localized"}
+  ],
+  "exact_mismatch_counts": {"candidate_pool": 0, "ranks": 0, "current_scores": 0, "winner": 0},
+  "component_maxima": {
+    "distance_km": {"absolute_delta": 6.679101716144942e-13, "index": 236, "point_id": "p+4800_-09325", "station_id": "mn213303.par", "rust": 87.64679818044027, "python": 87.64679818044094},
+    "latitude_error": {"absolute_delta": 0.0, "index": null, "point_id": null, "station_id": null, "rust": null, "python": null},
+    "ppt_error": {"absolute_delta": 1.7763568394002505e-15, "index": 181, "point_id": "p+4150_-11150", "station_id": "wy483100.par", "rust": 8.987596843055618, "python": 8.98759684305562},
+    "tmax_error": {"absolute_delta": 1.4210854715202004e-14, "index": 40, "point_id": "p+3300_-10550", "station_id": "nm290600.par", "rust": 46.27324029424414, "python": 46.273240294244154},
+    "tmin_error": {"absolute_delta": 7.105427357601002e-15, "index": 27, "point_id": "p+3250_-10975", "station_id": "az028820.par", "rust": 38.94074716303676, "python": 38.94074716303677}
+  },
+  "selected_tolerance": {"absolute": 1e-12, "relative": 1e-13},
+  "confirmation_target_series_accessed": false,
+  "receipt_sha256": "2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230"
+}

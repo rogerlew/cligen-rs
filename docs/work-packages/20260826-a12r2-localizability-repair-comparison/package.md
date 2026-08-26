@@ -70,3 +70,14 @@ first/replay receipts, independent review, and test log.
 Complete on authenticated feasibility, six-arm evidence, a frozen disposition,
 byte-identical replay, all required gates, and independent GO. Stop honestly on
 the named feasibility or repair gates without scientific policy inference.
+
+## Prospective amendment boundary
+
+The authenticated parity diagnostic required after first-source evaluator
+failure also unsealed a feasibility fact: current raw winners fail the explicit
+repair at four sites (indices 56, 57, 63, and 64), all in June. A12R2 is
+therefore expected to close on `HOLD-REPAIR-INELIGIBLE`, not reach six-arm
+quality scoring. Execution remains necessary to publish the complete 2,400-cell
+ordinary-localizability census, all raw-policy repair failures, production
+failure parity, and the formal named receipt. The package will not weaken its
+prospective gate after observing this result.

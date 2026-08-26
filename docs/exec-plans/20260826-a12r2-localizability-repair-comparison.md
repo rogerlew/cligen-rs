@@ -32,6 +32,14 @@ runtime default or open confirmation.
   anchored wet-day mean.
 - Merely naming predecessor commits in prose does not authenticate imported
   evaluator code. A12R2 now verifies historical git blobs before import.
+- The first exact-source attempt failed safely before publication because the
+  inherited `1e-13` absolute component tolerance was smaller than cross-libm
+  haversine drift. A complete diagnostic found maximum drift `6.68e-13 km`;
+  the amendment uses `1e-12` while ranks, scores, pools, and winners stay exact.
+- That authenticated diagnostic also found four current raw winners that the
+  explicit A12R1 repair cannot localize. The formal A12R2 run is now expected
+  to publish the full feasibility census and close on
+  `HOLD-REPAIR-INELIGIBLE` before quality scoring.
 
 ## Decision Log
 
@@ -43,6 +51,9 @@ runtime default or open confirmation.
 - Require universal matched-family support for a strategy preference. Partial
   support is mixed; no support is no uniform advantage.
 - Use the 240 fit-validation sites only. Confirmation stays sealed.
+- Preserve the frozen repair gate despite the prospectively discovered four
+  failures; do not retrofit zero-target or one-sided absorbing-chain behavior
+  into A12R2.
 
 ## Outcomes & Retrospective
 

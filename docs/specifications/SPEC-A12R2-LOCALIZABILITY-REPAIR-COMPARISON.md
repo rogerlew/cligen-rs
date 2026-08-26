@@ -67,6 +67,17 @@ parity, exact localized parameter parity, a v2 receipt binding the source
 `.par` and cligen executable SHA-256, and the declared extension profile.
 When Python classifies the current raw winner as repair-ineligible, require the
 production command to fail nonzero and publish no output directory instead.
+Candidate pool, ranks, rank-sum scores, and winner must match exactly. Floating
+distance/error components must match within relative tolerance `1e-13` or
+absolute tolerance `1e-12`; the latter covers the empirically observed maximum
+Rust/Python libm distance difference `6.68e-13 km` without relaxing any rank or
+decision identity.
+The governing diagnostic receipt has canonical self-hash
+`2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230`.
+That prospective diagnostic records four current-selector production failures,
+so the first amended execution is expected to exercise the frozen repair gate.
+This observation does not authorize changing the gate or scoring an incomplete
+six-arm roster.
 
 ## Quality estimand and inference
 

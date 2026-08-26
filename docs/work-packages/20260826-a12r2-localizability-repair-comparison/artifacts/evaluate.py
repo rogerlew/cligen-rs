@@ -94,6 +94,7 @@ PACKAGE_PATH = PACKAGE.parent / "package.md"
 PLAN_PATH = ROOT / "docs/exec-plans/20260826-a12r2-localizability-repair-comparison.md"
 REVIEW_PATH = PACKAGE / "review.md"
 TEST_RESULTS_PATH = PACKAGE / "test-results.md"
+DIAGNOSTIC_PATH = PACKAGE / "selector-parity-diagnostic-v1.json"
 
 SELECTORS = ("closest", "current", "reference")
 STRATEGIES = ("repair", "localizable")
@@ -126,7 +127,7 @@ REPAIR_PROFILE_ID = "stochastic_prism_localized_par_degenerate_occurrence_indepe
 def validate_manifest(value: Any) -> dict[str, Any]:
     expected_fields = {
         "bootstrap", "corpus", "decision", "evaluation_id", "input_hashes",
-        "metrics", "policies", "predecessors", "runtime", "schema_version",
+        "metrics", "policies", "selector_parity", "predecessors", "runtime", "schema_version",
     }
     if not isinstance(value, dict) or set(value) != expected_fields:
         raise EvaluationError("evaluation manifest fields differ")
@@ -136,6 +137,13 @@ def validate_manifest(value: Any) -> dict[str, Any]:
         raise EvaluationError("metric or policy roster differs")
     if value["predecessors"] != AUTHENTICATED_PREDECESSORS:
         raise EvaluationError("predecessor identity differs")
+    if value["selector_parity"] != {
+        "component_absolute_tolerance": 1e-12,
+        "component_relative_tolerance": 1e-13,
+        "diagnostic_receipt_sha256": "2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230",
+        "pool_ranks_scores_winner_exact": True,
+    }:
+        raise EvaluationError("selector parity contract differs")
     if value["bootstrap"] != {
         "algorithm": "numpy_philox", "common_resamples": True,
         "domain": "a12r2_localizability_repair_site_median_v1",
@@ -172,6 +180,7 @@ def source_paths() -> list[Path]:
     return [
         Path(__file__), MANIFEST_PATH, SCHEMA_PATH, PACKAGE / "test_evaluate.py",
         SPEC_PATH, PACKAGE_PATH, PLAN_PATH, REVIEW_PATH, TEST_RESULTS_PATH,
+        DIAGNOSTIC_PATH,
         BASE_PATH, FAILURE_PATH,
         ROOT / "docs/specifications/SPEC-A12R1-LOCALIZABILITY-AWARE-SELECTION.md",
         ROOT / "docs/specifications/SPEC-A12-STATION-SELECTION-EVALUATION.md",
@@ -480,6 +489,27 @@ def verify_current_score_parity(selection: dict[str, Any], diagnostics: list[dic
             raise EvaluationError("Python/Rust current-selector score differs")
 
 
+def verify_selector_parity(selection: dict[str, Any], selected: dict[str, dict[str, Any]],
+                           diagnostics: list[dict[str, Any]], manifest: dict[str, Any]) -> None:
+    if selection["selected_station_id"] != selected["cligen_prism_rank_sum_v1"]["id"]:
+        raise EvaluationError("Python/Rust current-selector winner differs")
+    rust = {row["station_id"]: row for row in selection["candidates"]}
+    if set(rust) != {row["station_id"] for row in diagnostics}:
+        raise EvaluationError("Python/Rust current-selector pool differs")
+    exact_fields = ("distance_rank", "latitude_rank", "ppt_rank", "tmax_rank", "tmin_rank")
+    value_fields = ("distance_km", "latitude_error", "ppt_error", "tmax_error", "tmin_error")
+    contract = manifest["selector_parity"]
+    for row in diagnostics:
+        actual = rust[row["station_id"]]
+        if any(actual[name] != row[name] for name in exact_fields):
+            raise EvaluationError("Python/Rust current-selector ranks differ")
+        if any(not math.isclose(actual[name], row[name],
+                                rel_tol=contract["component_relative_tolerance"],
+                                abs_tol=contract["component_absolute_tolerance"])
+               for name in value_fields):
+            raise EvaluationError("Python/Rust current-selector component differs")
+
+
 def extracted_tree_identity(root: Path) -> tuple[int, str]:
     files = {}
     for path in sorted(item for item in root.rglob("*") if item.is_file()):
@@ -696,7 +726,7 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
                 raw_for_parity = {
                     RAW_BASE_KEYS[selector]: arms[ARM[("repair", selector)]] for selector in SELECTORS
                 }
-                BASE.verify_selector_parity(selection, raw_for_parity, matrix)
+                verify_selector_parity(selection, raw_for_parity, matrix, manifest)
                 verify_current_score_parity(selection, matrix)
                 current = arms[ARM[("repair", "current")]]
                 if probe["selected_station_id"] != current["id"]:

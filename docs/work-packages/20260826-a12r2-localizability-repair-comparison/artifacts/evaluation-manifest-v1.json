@@ -50,6 +50,12 @@
     "cligen_prism_rank_sum_localizable_v1",
     "elevation_prism_reference_localizable_v1"
   ],
+  "selector_parity": {
+    "component_absolute_tolerance": 1e-12,
+    "component_relative_tolerance": 1e-13,
+    "diagnostic_receipt_sha256": "2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230",
+    "pool_ranks_scores_winner_exact": true
+  },
   "predecessors": {
     "a12_evaluator_sha256_at_source_commit": "a8bcc227e4ce5d894a6c789093f93523b1f55e6cb10366d1471926b8aaa8921c",
     "a12_failure_receipt_sha256": "ba103ab7d50fbc510910f980181aec9f3a8c188a05cdbee2b7780f7ce567fa7f",

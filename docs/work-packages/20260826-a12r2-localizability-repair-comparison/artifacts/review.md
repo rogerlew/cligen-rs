@@ -15,6 +15,23 @@ Its two nonblocking P2 suggestions were dispositioned by documenting the
 sequential completion-marker recovery and directly testing the expected-runtime-
 failure branch.
 
+The first published-source execution then exposed an over-strict inherited
+floating component tolerance before publishing any evidence. A corpus
+diagnostic measured maximum Rust/Python component drift of `6.68e-13 km` with
+exact pools/ranks/scores/winners. The prospective amendment freezes `1e-12`
+absolute and `1e-13` relative component tolerance; amendment re-review is
+pending.
+The exact diagnostic is preserved as `selector-parity-diagnostic-v1.json`
+with canonical self-hash
+`2c56001f1488150039df453f4df222394f8386a4b7cbc9d28a11554cd3238230`;
+the original attempt build receipt is byte-preserved under its attempt filename.
+The diagnostic also prospectively establishes that four current raw winners
+are repair-ineligible under the frozen A12R1 rule. The amended source is being
+published to produce the complete census and formal expected HOLD; no claim of
+an attainable six-arm quality disposition remains.
+Independent amendment re-review returned GO with no unresolved P0/P1 for
+publication and execution of the formal expected-HOLD run.
+
 ## Closure review
 
 Pending realized evidence and replay.

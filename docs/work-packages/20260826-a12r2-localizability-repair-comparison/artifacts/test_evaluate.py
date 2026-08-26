@@ -50,6 +50,13 @@ class EvaluationTests(unittest.TestCase):
         with self.assertRaises(MODULE.EvaluationError):
             MODULE.validate_manifest(changed)
 
+    def test_selector_parity_diagnostic_self_hash_and_binding(self) -> None:
+        value = json.loads(MODULE.DIAGNOSTIC_PATH.read_text())
+        claimed = value.pop("receipt_sha256")
+        self.assertEqual(MODULE.BASE.canonical_digest(value), claimed)
+        manifest = MODULE.validate_manifest(json.loads(MODULE.MANIFEST_PATH.read_text()))
+        self.assertEqual(manifest["selector_parity"]["diagnostic_receipt_sha256"], claimed)
+
     def test_predecessor_dependencies_authenticate_before_base_import(self) -> None:
         self.assertEqual(MODULE.AUTHENTICATED_PREDECESSORS, MODULE.FROZEN_PREDECESSORS)
 
@@ -130,6 +137,22 @@ class EvaluationTests(unittest.TestCase):
                               return_value=SimpleNamespace(returncode=0, stderr="")):
                 with self.assertRaises(MODULE.EvaluationError):
                     MODULE.runtime_repair_expected_failure(Path("/binary"), Path(temporary), target)
+
+    def test_selector_component_tolerance_accepts_empirical_libm_drift_only(self) -> None:
+        manifest = MODULE.validate_manifest(json.loads(MODULE.MANIFEST_PATH.read_text()))
+        station = {"id": "s"}
+        diagnostic = {"station_id": "s", "distance_rank": 0, "latitude_rank": 0,
+                      "ppt_rank": 0, "tmax_rank": 0, "tmin_rank": 0,
+                      "distance_km": 10.0, "latitude_error": 1.0, "ppt_error": 2.0,
+                      "tmax_error": 3.0, "tmin_error": 4.0}
+        rust = {"selected_station_id": "s", "candidates": [{**diagnostic,
+                "distance_km": 10.0 + 6.7e-13}]}
+        MODULE.verify_selector_parity(rust, {"cligen_prism_rank_sum_v1": station},
+                                      [diagnostic], manifest)
+        rust["candidates"][0]["distance_km"] = 10.0 + 2e-12
+        with self.assertRaises(MODULE.EvaluationError):
+            MODULE.verify_selector_parity(rust, {"cligen_prism_rank_sum_v1": station},
+                                          [diagnostic], manifest)
 
     def test_fixed_all_ten_scores_drive_six_arm_mapping_and_displacement(self) -> None:
         rows = [{"id": f"s{i}", "path": Path(f"/s{i}"), "distance_km": float(i)}
