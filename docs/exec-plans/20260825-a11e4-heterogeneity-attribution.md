@@ -9,13 +9,16 @@ explanation for A11E3's station-level response heterogeneity.
 
 - [x] 2026-08-25: operator separately authorized the post-A11E3 diagnosis.
 - [x] 2026-08-25: fixed one joint model, exact max-|t| inference, stability gates, and stop rules.
-- [ ] Publish independently reviewed prospective analysis source.
-- [ ] Execute and replay the closed-evidence attribution.
-- [ ] Review, gate, and reconcile the terminal package.
+- [x] 2026-08-25: published independently reviewed prospective source as `dfef66c`.
+- [x] 2026-08-25: executed and replayed the closed-evidence attribution.
+- [x] 2026-08-25: independently reviewed, gated, and reconciled the terminal package.
 
 ## Surprises & Discoveries
 
-- Pending execution.
+- Cross-regime candidates were descriptively farther away on average, but the
+  joint conditional association was negligible and unstable.
+- Ranked distance retained its positive sign across member omissions but changed
+  sign under station omission; regime mismatch changed sign under both checks.
 
 ## Decision Log
 
@@ -26,7 +29,13 @@ explanation for A11E3's station-level response heterogeneity.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+The package closed `NO_STABLE_METADATA_ASSOCIATION`. Ranked distance had
+coefficient `0.037254810384821986`, adjusted `p=0.9290846836419753`, and failed
+the station-omission sign gate. Regime mismatch had coefficient
+`-0.016770749395648543`, adjusted `p=0.9981794945987654`, and failed both sign
+gates. Scientific evidence and decision replayed byte-identically. No simple
+distance/regime selector refinement is supported, no confirmation evidence was
+accessed, and this package launches no automatic successor.
 
 ## Context and Orientation
 
@@ -82,4 +91,4 @@ Python 3.12.13 and NumPy 2.3.5 are frozen. Inputs are the closed A11E3 evidence,
 decision, and receipt plus the A11E2 selection receipt. No production interface
 is introduced.
 
-Revision note (2026-08-25): initial prospective plan.
+Revision note (2026-08-25): completed with no stable metadata association.

@@ -1,0 +1,38 @@
+{
+  "analysis_id": "a11e4-heterogeneity-attribution-v1",
+  "analysis_source_commit": "dfef66cac102bdcd9f9ab8e163bd0e088e20e5b0",
+  "confirmation_target_series_accessed": false,
+  "elapsed_seconds": 3.594386167002085,
+  "input_hashes": {
+    "a11e2_selection_receipt": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6",
+    "a11e3_decision": "06537916809199ed0857ce8d8af2dab77f86975bb67bb536f41651ce5d424d37",
+    "a11e3_evidence": "834d9af57679a0a252622d7c29fb223985833b85022a8bc55656f7a24daaa930",
+    "a11e3_execution_receipt": "00464e2e2b4b96f2ff71e35c6aed8f543f2215b43c207b3bcaea55ff0937f314"
+  },
+  "outputs": {
+    "attribution-decision-v1.json": {
+      "bytes": 533,
+      "sha256": "d5c1401516299516a3578ae4c08d32e368f2746db2a22c173925f4376171be67"
+    },
+    "attribution-evidence-v1.json": {
+      "bytes": 14758,
+      "sha256": "6622309dc9410ae778c67963160c7abef7c61730442118f427b7ea4f0e7f5dad"
+    }
+  },
+  "published_ref": "origin/main",
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": "a11e4-execution-receipt-1",
+  "source_hashes": {
+    "docs/exec-plans/20260825-a11e4-heterogeneity-attribution.md": "465a21261303c28fd7d81acb91ad33f566c463d5abe830319167dc58bdc8a4d3",
+    "docs/specifications/SPEC-A11-HETEROGENEITY-ATTRIBUTION.md": "59c4e8966940161ce96361336eca96acdee6221829c17cfbbb3e3a36a4a913f9",
+    "docs/work-packages/20260825-a11e4-heterogeneity-attribution/artifacts/analysis-manifest-v1.json": "39bf8290603df0a03a15d95669996293ffd443d81295a5bee6b44073434880ec",
+    "docs/work-packages/20260825-a11e4-heterogeneity-attribution/artifacts/analysis-manifest-v1.schema.json": "154eb3fa530cd407dfabd90e5c6a02aba874a3e0e6ae457e209acd55f4275984",
+    "docs/work-packages/20260825-a11e4-heterogeneity-attribution/artifacts/analyze.py": "9c8834614c9d0d04eb4cd481600d9e17a9549ee517eb3e27201e633cee2db3ed",
+    "docs/work-packages/20260825-a11e4-heterogeneity-attribution/artifacts/test_analyze.py": "84340840fcca54ec39bc47f5399a5646036094c95364bb58c8ac4bb0193659a5",
+    "docs/work-packages/20260825-a11e4-heterogeneity-attribution/package.md": "59b82353aa4fd220f93e068eef926fc1f16573b04f5fb8b94ca9512f06355cba"
+  },
+  "station_count": 20
+}

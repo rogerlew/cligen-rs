@@ -1,0 +1,12 @@
+{
+  "analysis_id": "a11e4-heterogeneity-attribution-v1",
+  "confirmation_authorized": false,
+  "disposition": "NO_STABLE_METADATA_ASSOCIATION",
+  "distance_association_supported": false,
+  "production_authorized": false,
+  "regime_mismatch_association_supported": false,
+  "schema_version": "a11e4-attribution-decision-1",
+  "science_status": "EXPLORATORY_ATTRIBUTION_EVALUATED",
+  "scope": "closed development evidence only; no selector change, confirmation, nomination, or promotion authority",
+  "terminal": "EXECUTED-COMPLETE"
+}

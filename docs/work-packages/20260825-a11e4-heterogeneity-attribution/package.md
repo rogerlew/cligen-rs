@@ -1,6 +1,6 @@
 # A11E4 — Forcing Heterogeneity Attribution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — NO_STABLE_METADATA_ASSOCIATION`
 
 Date: 2026-08-25
 
@@ -76,3 +76,21 @@ No production Rust function changes occur, so coverage/CRAP is not triggered.
 - `artifacts/analysis-manifest-v1.json` and strict schema
 - `artifacts/analyze.py` and `artifacts/test_analyze.py`
 - attribution evidence, decision, execution receipt, review, and gate record
+
+## Outcome
+
+The published source commit `dfef66cac102bdcd9f9ab8e163bd0e088e20e5b0`
+executed and replayed byte-identical scientific outputs over the authenticated
+20-station by eight-member closed evidence grid. The exact 1,327,104-assignment
+max-|t| test found no supported association:
+
+- ranked distance: coefficient `0.037254810384821986`, adjusted
+  `p=0.9290846836419753`, with leave-one-station-out sign instability;
+- regime mismatch: coefficient `-0.016770749395648543`, adjusted
+  `p=0.9981794945987654`, with both leave-one-member-out and
+  leave-one-station-out sign instability.
+
+The terminal disposition is `NO_STABLE_METADATA_ASSOCIATION`. These two simple
+metadata variables do not justify a selector refinement. Confirmation,
+nomination, promotion, production changes, and automatic succession remain
+unauthorized.
