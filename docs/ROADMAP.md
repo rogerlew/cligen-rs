@@ -799,12 +799,15 @@ result is `SUPPORTED_FOR_EXPLORATION`. Only 8/20 stations improved on both
 primary metrics and the descriptive composite bootstrap crossed zero; this is
 not selection or promotion. Confirmation remained sealed.
 
-**A11 recommended next stage:** a small prospectively fixed, development-only
-common-RNG multi-member stability test. Freeze the region-median and nearest
-adapters, circular-block law, selector, evaluator, calendars, and roles; test
-whether both primary median improvements persist across members. Do not tune
-distance, elevation, cutoffs, or model surfaces from A11E2 outcomes. This stage
-has no confirmation or promotion authority and is not yet dispatched.
+**A11 multi-member stability stage dispatched (2026-08-25):**
+[A11E3 multi-member forcing stability](work-packages/20260825-a11e3-multi-member-forcing-stability/package.md)
+is the small prospectively fixed, development-only common-RNG successor. It
+freezes the region-median and nearest adapters, circular-block law, selector,
+evaluator, calendars, and roles and tests whether both primary median
+improvements persist for every member 0–7. Distance, elevation, cutoffs, and
+model surfaces cannot be tuned from A11E2 outcomes. This stage has no
+confirmation or promotion authority; prospective review and publication
+precede execution.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

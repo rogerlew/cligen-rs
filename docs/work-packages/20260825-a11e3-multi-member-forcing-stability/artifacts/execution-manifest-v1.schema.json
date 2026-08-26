@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arms": {"const": ["circular_fixed_block_physical_core_v1", "circular_fixed_block_nearest_candidate_forcing_v1"]},
+    "confirmation_target_access": {"const": false},
+    "execution_id": {"const": "a11e3-multi-member-forcing-stability-v1"},
+    "hypothesis": {"const": {
+      "estimand": "member_metric_delta_is_median_nearest_minus_median_region",
+      "primary_metrics": ["monthly_equivalent_precipitation_mean_relative_absolute_error", "monthly_temperature_mean_absolute_error_c"],
+      "rule": "all_member_metric_deltas_strictly_negative_and_zero_invariants_and_exact_member0_replay"
+    }},
+    "inherited_contract": {"const": {
+      "annual_strategy_id": "circular_fixed_block_bootstrap_v1",
+      "block_length_years": 5,
+      "calendar_estimator": "daymet_mask_normalized_month_v1",
+      "daily_adapter_id": "a11e_two_part_physical_core_36_v1",
+      "evaluator_id": "a11e_mask_normalized_observed_diagnostics_v1",
+      "forcing_selector_id": "a11e2-nearest-candidate-coordinate-v1",
+      "metric_set_id": "a11e_mask_normalized_observed_metrics_v1",
+      "rng_reference_strategy_id": "circular_fixed_block_physical_core_v1"
+    }},
+    "inputs": {"const": {
+      "a11e1_closure_commit": "6a60ecc7bdeab39b00a00c1a707da8278695c8ba",
+      "a11e1_decision_sha256": "b72ea78d5b4f2b446915aa64f263608091da76202d6dcc24f65dfcb1bfaf3398",
+      "a11e1_evidence_sha256": "961e0bd524566535159a85a30fdaa17bb6b7fccaab763915ddcaa9197e2ea746",
+      "a11e1_execution_manifest_sha256": "609ea61f40219f16c409f668763b77c8ed139cf2b78b9bf5f272396207b38fc3",
+      "a11e1_execution_receipt_sha256": "12d2979f5ccfe20b5b082478c1914a0d05ced666497d2c3cd0642b28e8441218",
+      "a11e1_executor_sha256": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+      "a11e1_fit_summary_sha256": "134b15b1aa61868cd90b5777621c0c5df580a2145a6edc727209e6ac5fd3ce45",
+      "a11e1_source_commit": "105c29b0efa3feccd27db37914bcaa60693cd828",
+      "a11e2_closure_commit": "65ed7ac7c54a67014e33358c64147bc686cd9327",
+      "a11e2_decision_sha256": "8ba4757b817453c4be5d7a706aa321a9786a66425a9285584d94f49c0d205dc5",
+      "a11e2_evidence_sha256": "fa3ad7a9df5be6c1350567182be5802646de26aabec68b32bf2411e813c729b4",
+      "a11e2_execution_manifest_sha256": "1dc78ed31f695ccb64e8072cc7c52893b4ba44271704f9b2eca4118d54f1aa6e",
+      "a11e2_execution_receipt_sha256": "24c8aa6391fedb900f3376842c37c56442c91473bee54d823f1e4afc84267235",
+      "a11e2_executor_sha256": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+      "a11e2_fit_summary_sha256": "94a4742869d98e31a5478706e533c4d6ae38c22113d38a1d5378dd3829985b0a",
+      "a11e2_schema_sha256": "9c060127494661e71f5446a83007dee57dc5063910e22555f91d6b3e1a7f4eaf",
+      "a11e2_selection_receipt_sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6",
+      "a11e2_source_commit": "e15369ad26f4e0b646f5f4665912dd6a37e35e3a"
+    }},
+    "member_ids": {"const": [0, 1, 2, 3, 4, 5, 6, 7]},
+    "resource_bound": {"const": {"maximum_cells_per_execution": 320, "replays": 1}},
+    "runtime": {"const": {"numpy": "2.3.5", "python": "3.12.13"}},
+    "rng": {"const": {
+      "algorithm": "numpy_philox",
+      "daily_member_stride": 3840,
+      "daily_site_stride": 192,
+      "domains": ["annual_target", "month_hurdle", "wet_count", "occurrence", "amount", "temperature", "range"]
+    }},
+    "schema_version": {"const": 1}
+  },
+  "required": ["arms", "confirmation_target_access", "execution_id", "hypothesis", "inherited_contract", "inputs", "member_ids", "resource_bound", "runtime", "rng", "schema_version"],
+  "type": "object"
+}
