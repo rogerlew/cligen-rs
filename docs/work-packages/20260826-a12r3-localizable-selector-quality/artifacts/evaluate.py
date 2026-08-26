@@ -127,8 +127,9 @@ def source_paths() -> list[Path]:
         Path(__file__), MANIFEST_PATH, SCHEMA_PATH, PACKAGE / "test_evaluate.py",
         SPEC_PATH, PACKAGE_PATH, PLAN_PATH, REVIEW_PATH, TEST_RESULTS_PATH,
         R2_PATH, R2.BASE_PATH, R2.LOCALIZE_PATH, R2.RUN_PATH,
-        ROOT / "crates/cligen/src/prism/distribution.rs",
-        BASE.PRISM_DISTRIBUTION, BASE.STATION_MANIFESTS, ROOT / "Cargo.lock",
+        ROOT / "crates/cligen/src/prism/grid.rs", ROOT / "crates/cligen/src/prism/mod.rs",
+        ROOT / "crates/cligen/src/prism/sync.rs", BASE.PRISM_DISTRIBUTION,
+        ROOT / "crates/cligen/src/prism/method.json", BASE.STATION_MANIFESTS, ROOT / "Cargo.lock",
         ROOT / "rust-toolchain.toml",
     ]
 

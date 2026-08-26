@@ -11,7 +11,9 @@ living operational guidance; the specification and package retain authority.
 
 - [x] Freeze the three arms, corpus, estimand, decision rule, and predecessor identities.
 - [x] Obtain independent prospective review.
-- [ ] Commit and push prospective source.
+- [x] Commit and push prospective source.
+- [ ] Amend the prospective source inventory after its clean-build preflight
+      exposed a nonexistent `distribution.rs` path before compilation.
 - [ ] Build the exact locked release binary and record its SHA-256.
 - [ ] Execute the first 240-site evaluation.
 - [ ] Execute a separately staged byte-identical replay.

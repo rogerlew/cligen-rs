@@ -83,6 +83,8 @@ class A12R3Tests(unittest.TestCase):
         relative = {path.relative_to(MODULE.ROOT).as_posix() for path in MODULE.source_paths()}
         for required in ("Cargo.lock", "rust-toolchain.toml", "crates/cligen/src/prism/run.rs",
                          "crates/cligen/src/prism/localize.rs",
+                         "crates/cligen/src/prism/grid.rs", "crates/cligen/src/prism/mod.rs",
+                         "crates/cligen/src/prism/sync.rs", "crates/cligen/src/prism/method.json",
                          "crates/cligen/src/prism/distribution.json",
                          "crates/cligen/src/stations/manifests.json"):
             self.assertIn(required, relative)
