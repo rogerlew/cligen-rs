@@ -203,6 +203,11 @@ def paired_comparison(candidate: list[dict[str, Any]], baseline: list[dict[str, 
     return R2.paired_comparison(candidate, baseline, manifest)
 
 
+def snapshot_arms(arms: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Detach site-specific station fields from reusable station archive rows."""
+    return {name: dict(station) for name, station in arms.items()}
+
+
 def observed_descriptors_masked(value: dict[str, Any]) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
     dates = [BASE.dt.date.fromisoformat(text) for text in value["dates"]]
     observed = np.array(value["source_observed"], dtype=bool)
@@ -347,6 +352,7 @@ def execute_science(source_commit: str, binary: Path, build_receipt_path: Path,
             target = {key: value[key] for key in ("point_id", "latitude", "longitude", "elevation_m")}
             normals = BASE.query_normals(isolated_binary, isolated, target["latitude"], target["longitude"])
             all_arms, matrix, displacements = R2.select_arms(rows, target, normals, par_cache)
+            all_arms = snapshot_arms(all_arms)
             prior = predecessor_by_site[target["point_id"]]
             if (matrix != prior["candidate_pool"] or displacements != prior["policy_displacements"]
                     or sum(row["ordinary_localizable"] for row in matrix) != prior["eligible_candidate_count"]):

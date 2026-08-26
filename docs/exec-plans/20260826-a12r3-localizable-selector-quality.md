@@ -23,6 +23,13 @@ living operational guidance; the specification and package retain authority.
 - [ ] Obtain independent closure review and run all gates.
 - [ ] Reconcile package, roadmap, catalog, and specification registry; commit and push.
 
+The first complete/replay pair at source `6b42aa6` was preserved as attempt 1
+after closure review found shared mutable station dictionaries had overwritten
+582 site-specific published distances. Selection, hashes, metrics, inference,
+and disposition reproduced, but evidence integrity did not. The corrected
+source snapshots every selected arm immediately; it receives a new commit,
+build receipt, execution, and replay.
+
 ## Commands
 
 Use the bundled Python 3.12.13 / NumPy 2.3.5 runtime:

@@ -133,6 +133,12 @@ class A12R3Tests(unittest.TestCase):
         with self.assertRaisesRegex(MODULE.EvaluationError, "diagnostic reproduction"):
             MODULE.verify_estimand_diagnostic([site])
 
+    def test_station_arm_snapshot_detaches_mutable_distance(self):
+        station = {"id": "x.par", "distance_km": 1.0}
+        snapshot = MODULE.snapshot_arms({"closest_localizable_v1": station})
+        station["distance_km"] = 99.0
+        self.assertEqual(snapshot["closest_localizable_v1"]["distance_km"], 1.0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -23,3 +23,15 @@ cells before publishing evidence. Independent amendment review required and
 confirmed an exact full-corpus descriptor-eligibility replay before scoring,
 the exact two-cell diagnostic roster, and 12 finite months for all non-wet-day
 families. Final prospective amendment disposition: GO, no unresolved P0/P1.
+
+## First closure review
+
+Status: NO-GO; implementation correction pending re-execution
+
+Independent recomputation matched all 240 sites, 2,400 candidate cells, two
+sparse cells, 720 selected station/source identities and metrics, both
+bootstrap comparisons, and `CLOSEST_PREFERRED`. It found 582 published
+site-policy distances had been overwritten through shared mutable station
+dictionaries. The flawed execution and replay are preserved under `attempt1-`
+artifact names. The corrected evaluator snapshots each selected arm at the
+site boundary and has a regression test for later mutation.
