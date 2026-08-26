@@ -1,10 +1,10 @@
 # A11E3 — Multi-Member Forcing Stability
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE`
 
 Date: 2026-08-25
 
-Evidence mode: prospective source; observed development execution pending
+Evidence mode: observed development; confirmation sealed
 
 Starting branch and push target: current `origin/main`, push `main`
 
@@ -90,3 +90,26 @@ evidence only. No scarce accelerator or external service is used.
 - prospective review and test records
 - calendar/RNG/fit preflight, development evidence, decision, and execution
   receipts after authorized execution
+
+## Outcome
+
+Published source `ac254ee4fc2bc0073a4f4c351e555cc517c49f3d`
+authenticated all inherited inputs, repeated calendar/selector/location/RNG
+preflight, and completed the exact 20-station by eight-member grid: 160 paired
+rows and 320 arm cells. All metrics were finite, all daily invariant counts
+were zero, member 0 reproduced both closed anchors exactly, and confirmation
+access was false. The four scientific outputs replayed byte-identically.
+
+All 16 preregistered member/metric deltas were strictly negative, so the
+disposition is `STABLE_FOR_EXPLORATION`. Across members, precipitation median
+improvements ranged from 0.161 to 0.529 and temperature median improvements
+from 0.429 to 1.065 °C. This is stability of across-site medians, not
+stationwise dominance: both primary metrics improved together in 66/160
+site-member cells, only 4/20 stations did so in every member, and 6/20 never
+did. The adaptive reuse of development targets and sparse selector geography
+remain material limitations.
+
+Independent evidence review reproduced all identities and decision arithmetic
+and found no scientific P0/P1. No automatic development successor, nomination,
+promotion, or confirmation is authorized. Any such step requires a separately
+authorized prospective scientific decision; confirmation remains sealed.

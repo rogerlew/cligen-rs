@@ -1,0 +1,57 @@
+{
+  "confirmation_target_series_accessed": false,
+  "development": {
+    "axis_rows_per_object": 5844,
+    "calendar_objects": 20,
+    "masked_dates": [
+      "2012-12-31",
+      "2016-12-31",
+      "2020-12-31",
+      "2024-12-31"
+    ],
+    "object_receipts_sha256": "662e90a80b1adaa504c725e43c24cb153f6f3c1417266e094d41c52ad7c67808",
+    "observed_rows_per_object": 5840,
+    "role_counts": {
+      "development": 20
+    }
+  },
+  "fit": {
+    "axis_rows_per_object": 10958,
+    "calendar_objects": 1440,
+    "masked_dates": [
+      "1980-12-31",
+      "1984-12-31",
+      "1988-12-31",
+      "1992-12-31",
+      "1996-12-31",
+      "2000-12-31",
+      "2004-12-31",
+      "2008-12-31"
+    ],
+    "object_receipts_sha256": "3fb1ed58bbbc49ce96e370dfec89eba8530a8c8eacad49dfbe2e9a7e89f0bd68",
+    "observed_rows_per_object": 10950,
+    "role_counts": {
+      "candidate_fit": 1200,
+      "fit_validation": 240
+    }
+  },
+  "normalized_statistic": "daymet_mask_normalized_month_v1",
+  "rng": {
+    "annual_identity_count": 160,
+    "confirmation_target_series_accessed": false,
+    "contracts_sha256": "f560984bd1336e864f3810a14de0d12992cae465c791da205e06077c4f7f4c1e",
+    "daily_domain_stream_count": 153600,
+    "daily_ordinal_count": 30720,
+    "hurdle_identity_count": 160,
+    "member_zero_preserves_a11e1_identity": true,
+    "paired_arm_cell_count": 160,
+    "schema_version": "a11e3-rng-preflight-1"
+  },
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": "a11e3-calendar-rng-preflight-1",
+  "source_transform": "daymet_official_365_v1",
+  "valid": true
+}

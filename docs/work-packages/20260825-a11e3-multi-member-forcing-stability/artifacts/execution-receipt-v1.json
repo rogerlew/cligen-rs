@@ -1,0 +1,64 @@
+{
+  "candidate_fit_objects": 1200,
+  "confirmation_target_series_accessed": false,
+  "development_cells": 320,
+  "development_objects": 20,
+  "elapsed_seconds": 260.40011674999914,
+  "execution_id": "a11e3-multi-member-forcing-stability-v1",
+  "execution_source_commit": "ac254ee4fc2bc0073a4f4c351e555cc517c49f3d",
+  "fit_calendar_objects": 1440,
+  "inherited_input_hashes": {
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+    "inherited": {
+      "candidate_shard_set": "f9a016ec7c637c9bbbb79bc1f1cf1c06e879d95e8b03f79a84f3c768fb257812",
+      "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+      "daymet_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+      "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+      "development_object_set": "531566ccb96d6d1b1fb6c0201e673112d4ae32d468c1f879949cf3c724cf76b8",
+      "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40"
+    },
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9"
+  },
+  "inherited_strategy_dependencies": {
+    "strategy-manifest-v1.json": "fb9dd3771e130ed58b1146af6ac5d360bf2afe3d2b3b30293c547f4a80339a53",
+    "strategy_lab.py": "af5691361bf278ef6adbb4c4e56fa35d017bc33677284836ee008396190b2de4",
+    "strategy_source_commit": "b842430cb665a1219e01061312357688e04e6c62"
+  },
+  "outputs": {
+    "calendar-rng-preflight-v1.json": {
+      "bytes": 1599,
+      "sha256": "49d86f2da3a00ad05a115c17b91a5c820a740f5b8acbbf0127a0b192bb5eb6a4"
+    },
+    "development-decision-v1.json": {
+      "bytes": 5824,
+      "sha256": "06537916809199ed0857ce8d8af2dab77f86975bb67bb536f41651ce5d424d37"
+    },
+    "development-evidence-v1.json": {
+      "bytes": 588225,
+      "sha256": "834d9af57679a0a252622d7c29fb223985833b85022a8bc55656f7a24daaa930"
+    },
+    "fit-authentication-v1.json": {
+      "bytes": 559,
+      "sha256": "5cdcddec1e411e1b0a726439ea0944db2141462de451dcebe7d04e28e232d523"
+    }
+  },
+  "paired_rows": 160,
+  "published_ref": "origin/main",
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": "a11e3-execution-receipt-1",
+  "source_hashes": {
+    "docs/exec-plans/20260825-a11e3-multi-member-forcing-stability.md": "9b3925c41ab8a6f1d077dea24355891be1bd42684f5c874b42e6e1ff347753c1",
+    "docs/specifications/SPEC-A11-MULTI-MEMBER-FORCING-STABILITY.md": "56d5963bc4bc0ddf80e6ef03349abb32f07a4e5ca0f187ea6a8c69da09df3077",
+    "docs/work-packages/20260825-a11e3-multi-member-forcing-stability/artifacts/execute.py": "4572b45c21eb9d4b3d7ec0f1c264817228aaa92ca632af23bd75533529a2d543",
+    "docs/work-packages/20260825-a11e3-multi-member-forcing-stability/artifacts/execution-manifest-v1.json": "e3e925dae4b9df6ab2e2fed958873a7fb51a26374cb27fd29b0d77f2fab71044",
+    "docs/work-packages/20260825-a11e3-multi-member-forcing-stability/artifacts/execution-manifest-v1.schema.json": "d899a6a0a06f261aec5566c5155771b809d6524101a26900e4ed1f7c7de80b23",
+    "docs/work-packages/20260825-a11e3-multi-member-forcing-stability/artifacts/test_execute.py": "ef84464f795c69f80c7c46d7eef14e17b0e8a119069c049f6ee54e8878968e9e",
+    "docs/work-packages/20260825-a11e3-multi-member-forcing-stability/package.md": "cdf7aaca55f2d2b285c9491413de4a87191e57e67de62f90d0d3d9e6589cf75e"
+  }
+}

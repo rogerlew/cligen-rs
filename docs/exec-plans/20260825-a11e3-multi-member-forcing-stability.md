@@ -9,9 +9,9 @@ stochastic members without changing any scientific surface.
 
 - [x] 2026-08-25: inherited the independently recommended A11E2 successor.
 - [x] 2026-08-25: fixed the eight-member grid, common-RNG mapping, and strict rule.
-- [ ] Publish independently reviewed prospective execution source.
-- [ ] Preflight and execute the 320-cell development grid.
-- [ ] Replay, review, gate, and reconcile terminal evidence.
+- [x] 2026-08-25: published independently reviewed source `ac254ee`.
+- [x] 2026-08-25: preflighted and executed the 320-cell development grid.
+- [x] 2026-08-25: replayed byte-identically, reviewed, gated, and reconciled.
 
 ## Surprises & Discoveries
 
@@ -26,7 +26,13 @@ stochastic members without changing any scientific surface.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+All 16 fixed primary deltas were negative with zero invariants, exact member-0
+parity, and confirmation false, yielding `STABLE_FOR_EXPLORATION`. Scientific
+outputs replayed byte-identically. The result is an across-site-median mechanism
+signal, not stationwise dominance: both metrics improve in 66/160 cells and
+only four stations do so in every member. Independent review recommends closing
+without automatic succession; confirmation remains sealed pending a separately
+authorized prospective decision.
 
 ## Context and Orientation
 
@@ -97,3 +103,6 @@ executors and strategy lab. It consumes their frozen manifests, receipts, and
 existing local A10/A9 data paths. It introduces no production interface.
 
 Revision note (2026-08-25): initial prospective plan.
+
+Revision note (2026-08-25): recorded published execution, replay, independent
+evidence review, terminal disposition, and campaign stop boundary.

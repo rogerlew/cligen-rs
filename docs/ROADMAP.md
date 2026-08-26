@@ -799,15 +799,22 @@ result is `SUPPORTED_FOR_EXPLORATION`. Only 8/20 stations improved on both
 primary metrics and the descriptive composite bootstrap crossed zero; this is
 not selection or promotion. Confirmation remained sealed.
 
-**A11 multi-member stability stage dispatched (2026-08-25):**
+**A11 multi-member stability stage complete (2026-08-25):**
 [A11E3 multi-member forcing stability](work-packages/20260825-a11e3-multi-member-forcing-stability/package.md)
-is the small prospectively fixed, development-only common-RNG successor. It
-freezes the region-median and nearest adapters, circular-block law, selector,
-evaluator, calendars, and roles and tests whether both primary median
-improvements persist for every member 0–7. Distance, elevation, cutoffs, and
-model surfaces cannot be tuned from A11E2 outcomes. This stage has no
-confirmation or promotion authority; prospective review and publication
-precede execution.
+executed from published source `ac254ee` with the region-median and nearest
+adapters, circular-block law, selector, evaluator, calendars, and roles fixed.
+All 320 cells completed with zero invariants, exact member-0 replay, and no
+confirmation access. Both primary across-site median improvements persisted in
+every member 0–7, yielding `STABLE_FOR_EXPLORATION`. This is not stationwise
+dominance: both metrics improved in 66/160 site-member cells, only 4/20 stations
+did so in all members, and 6/20 never did. Scientific outputs replayed
+byte-identically and independent evidence review reproduced the result.
+
+**A11 campaign boundary:** stop automatic development succession. A11E3
+supports location conditioning as an exploratory across-site-median mechanism,
+not nomination or promotion. Confirmation remains sealed. Any nomination,
+confirmation, selector refinement, or new model surface requires a separately
+authorized prospective scientific decision.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

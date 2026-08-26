@@ -1,0 +1,10 @@
+{
+  "candidate_fit_objects": 1200,
+  "candidate_fit_only": true,
+  "confirmation_target_series_accessed": false,
+  "inherited_fit_sha256": "847dfcd6150c64d53275d20647121b816809e4cb9e1bfde96360e74bfc6b94ed",
+  "nearest_station_location_sha256": "b5ee091b36a9b6b98c45167b1d0ce3ea9a8c022c6bec37faac26831287d6a14d",
+  "regional_location_sha256": "28d6a359d0e4db2a08b65b91f0a55dca140e6aeb52adc64c7a1d7601f0e97ba1",
+  "schema_version": "a11e3-fit-authentication-1",
+  "selection_receipt_sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6"
+}
