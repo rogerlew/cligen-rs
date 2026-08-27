@@ -1,6 +1,6 @@
 # A12R4 — Station Source CLI and Runtime
 
-Status: `EXECUTING — IMPLEMENTATION GO`
+Status: `EXECUTED-COMPLETE — CLOSEST_DEFAULT`
 
 Date: 2026-08-26
 
@@ -45,3 +45,29 @@ provenance and human documentation.
 Complete when every mode is implemented and documented, default behavior is
 closest-localizable, exact sources never fall back, receipts carry source and
 binary SHA-256 identities, gates pass, and independent review returns GO.
+
+## Disposition
+
+Completed at implementation commit
+`1e558b553412bfdc0f1b61ccd5c331ced056de54`. `cligen prism run` now defaults
+to `closest_localizable_v1`; the prior PRISM rank-sum and the evaluated
+elevation-reference heuristic remain explicit modes. Users may instead request
+one exact registered station ID or one exact `.par` file. No mode falls back.
+
+Station-selection receipt schema 3 and preprocessing profile v2 bind requested
+and effective method identity, full automatic feasibility evidence, selected
+source `.par` SHA-256, and exact executable SHA-256. Full station semantics are
+validated before feasibility classification. Exact files use one immutable byte
+snapshot and retain lexical plus canonical path identity.
+
+The release binary SHA-256 is
+`a6491ed5e4b39dc52ae8fc2426cb7eef5a8fa1ee37e20bfc48df55c73ec7bac0`.
+Default/replay artifacts were byte-identical; all success manifests and source
+and binary identities verified; all declared failure cases published no output.
+Repository, coverage, and CRAP gates passed, and independent final closure
+review returned GO with no remaining P0/P1.
+
+This is an exploratory selector surface, not a claim that the optional
+heuristics improve climate quality. A12R3 remains the evidence for preferring
+closest as the default. Future selector strategies can add distinct method IDs
+without changing exact-source or no-fallback behavior.

@@ -16,11 +16,6 @@ axes. A revision of one does not imply a revision of another.
 
 ## Active queue
 
-**A12R4 station-source CLI active (2026-08-26):** implement the operator-approved
-default closest-localizable selector, exact station ID and `.par` inputs, and
-explicit current/elevation localizable selectors with cryptographic receipts.
-No selector may silently fall back to another method.
-
 **Operator direction 2026-07-15: continue stochastic climate-generator
 development, retire the stopped A8c runtime first, and replace incremental
 candidate rescue with a calibration-first successor family.** File/I/O,

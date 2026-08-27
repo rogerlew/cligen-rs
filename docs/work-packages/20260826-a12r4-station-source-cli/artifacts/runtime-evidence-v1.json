@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "package_id": "A12R4",
+  "executed_utc": "2026-08-27T05:51:31Z",
+  "source_commit": "1e558b553412bfdc0f1b61ccd5c331ced056de54",
+  "toolchain": {
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)"
+  },
+  "release_binary": {
+    "path": "target/release/cligen",
+    "sha256": "a6491ed5e4b39dc52ae8fc2426cb7eef5a8fa1ee37e20bfc48df55c73ec7bac0"
+  },
+  "runtime_inputs": {
+    "prism_bundle_id": "prism_norm91m_9120_4km_m4_m5_v1",
+    "prism_bundle_version": "2026.07",
+    "station_collection": "us-2015@2026.07",
+    "station_collection_archive_sha256": "f3bf68bb39e65378c1eefc9a956b514fc7cf0fb8e3377e868852f7b3f7b25ab9"
+  },
+  "runs": [
+    {
+      "id": "default",
+      "method_id": "closest_localizable_v1",
+      "selected_station_id": "id106152.par",
+      "candidate_count": 10,
+      "rejection_count": 0,
+      "source_par_sha256": "8fd757fc48b659d13b5dd9a0c39b7d7c02f0a61be89b4c50b87ee63fcdd301ac",
+      "selection_receipt_sha256": "37bc587310d10e69ec29c5d6b37f9d42b3f688b091f23d6af861b8b513492089"
+    },
+    {
+      "id": "default-replay",
+      "method_id": "closest_localizable_v1",
+      "selected_station_id": "id106152.par",
+      "candidate_count": 10,
+      "rejection_count": 0,
+      "source_par_sha256": "8fd757fc48b659d13b5dd9a0c39b7d7c02f0a61be89b4c50b87ee63fcdd301ac",
+      "selection_receipt_sha256": "37bc587310d10e69ec29c5d6b37f9d42b3f688b091f23d6af861b8b513492089"
+    },
+    {
+      "id": "rank-sum",
+      "method_id": "cligen_prism_rank_sum_localizable_v1",
+      "selected_station_id": "id106152.par",
+      "candidate_count": 10,
+      "rejection_count": 0,
+      "selection_receipt_sha256": "61ca5f992c07ce0254c942f1e5da48766350ebce67bece2b92bd3b11dc75a5e1"
+    },
+    {
+      "id": "elevation",
+      "method_id": "elevation_prism_reference_localizable_v1",
+      "target_elevation_m": 717.0,
+      "selected_station_id": "id106152.par",
+      "candidate_count": 10,
+      "rejection_count": 0,
+      "selection_receipt_sha256": "6200f7760cff8e5ca4f83e219cdb7def0dad9b0ff4aab6e9c539405bc9cb8023"
+    },
+    {
+      "id": "exact-id",
+      "method_id": "exact_registered_station_id_v1",
+      "selected_station_id": "id106152.par",
+      "candidate_count": 0,
+      "rejection_count": 0,
+      "selection_receipt_sha256": "b4aa2cd767425b57566e19397e059d85ac71cbb112fd6e659f603fcede3c3d40"
+    },
+    {
+      "id": "exact-par",
+      "method_id": "exact_par_file_v1",
+      "selected_source_identity": "external-par:8fd757fc48b659d13b5dd9a0c39b7d7c02f0a61be89b4c50b87ee63fcdd301ac",
+      "candidate_count": 0,
+      "rejection_count": 0,
+      "selection_receipt_sha256": "19a1d4d9d5c3655e7512ceaaf8b57b3bed2a290e527e9cd28a62daf7a20b0772"
+    },
+    {
+      "id": "exact-par-symlink",
+      "method_id": "exact_par_file_v1",
+      "source_par_sha256": "8fd757fc48b659d13b5dd9a0c39b7d7c02f0a61be89b4c50b87ee63fcdd301ac",
+      "lexical_and_canonical_paths_distinct": true,
+      "selection_receipt_sha256": "7f53a494452f3b2b1f67a1c79a59f84b2d778d6fcfaa451df4ea4c3d87306a3f"
+    },
+    {
+      "id": "dry-default",
+      "method_id": "closest_localizable_v1",
+      "selected_station_id": "ca043914.par",
+      "candidate_count": 10,
+      "rejection_count": 4,
+      "selection_receipt_sha256": "e55d902accdef67a8dd35dc68056c4839d13a0d4bfacf83bb814905e2cdba123"
+    },
+    {
+      "id": "dry-default-repair",
+      "method_id": "closest_localizable_v1",
+      "selected_station_id": "ca043914.par",
+      "candidate_count": 10,
+      "rejection_count": 4,
+      "repair_count": 0,
+      "selection_receipt_sha256": "dc4afa2236db726352ecd0e1bb4c01641406c0fd50e34f77a1434b8b56146062"
+    },
+    {
+      "id": "exact-dry-repair",
+      "method_id": "exact_registered_station_id_v1",
+      "selected_station_id": "ca040983.par",
+      "repair_count": 1,
+      "warning_months": [6],
+      "source_par_sha256": "13bd7d13a59a2180da11798bdb926888f6835acb4167c664907f4446433b567f",
+      "selection_receipt_sha256": "dbaea8a33920fcb2a9096ac445d4eb7abf1108617f06ee9e0cb0d5420d1968fd"
+    }
+  ],
+  "default_replay_artifact_sha256": {
+    "request.json": "e9d08b3d0abf58488bc64936d89df348f07ab325d13fcdddd1bad57579bd57e9",
+    "method.json": "c8139e3adf498a3d62de1f4bdce54592cedcee13245a73f4876e4e890b558416",
+    "prism-normals.json": "c3e0b9cc1320aa803df5718d664d9456e61349f5a9d1b3698ccfb6a2a50ea06f",
+    "station-selection.json": "37bc587310d10e69ec29c5d6b37f9d42b3f688b091f23d6af861b8b513492089",
+    "source-station.par": "8fd757fc48b659d13b5dd9a0c39b7d7c02f0a61be89b4c50b87ee63fcdd301ac",
+    "localized.par": "a8d1e51fd7f39d9934d311cac7b6027bb26ad47622b110152b26c1389d05f65e",
+    "localization.json": "ea2b472fab80511753f5407882edf8472f191ee2db3ab8e4e86e2aaf07b296b0",
+    "inp.yaml": "7fd4c5fba568fd3a9bfcf8b2265f2512a9ecd7940dbc3803339071a193f0e6f9",
+    "climate.cli": "c5eca291089a8dbf15e31249beb3af3c0c8a8e8c19c7d32b3d17158d25c0958e",
+    "artifact-manifest.json": "1a0529a5ded0cbe0a1e93bb11a929b1ff037c873092118f6b4d25fec347f1c17"
+  },
+  "failure_checks": [
+    {"id": "unlocalizable-exact-id", "exit_code": 1, "output_directory_absent": true, "diagnostic_sha256": "815e189ef88d927064c117927d283046e7cd90bb6220b9528cab03c3ea00da94"},
+    {"id": "missing-exact-id", "exit_code": 1, "output_directory_absent": true, "diagnostic_sha256": "fc22fd43d63b48e6da8c25bd5c3481374036088203ed143d1b732007d1387d20"},
+    {"id": "dangling-exact-par", "exit_code": 1, "output_directory_absent": true, "diagnostic_sha256": "f8bf3f88b0afcff6d8cf846a1de64618e0631d5470e57a08ada31234aafce7ca"},
+    {"id": "non-file-exact-par", "exit_code": 1, "output_directory_absent": true, "diagnostic_sha256": "ccd72a47a8335c7312a37aff13792c0220368133539f6d01deef86603345c191"},
+    {"id": "missing-elevation-target", "exit_code": 1, "output_directory_absent": true, "diagnostic_sha256": "5169d10c45ce248828eda523fd2fca6204b53e9b4c00a958d8a6b4a754695914"}
+  ],
+  "verification": {
+    "all_successful_artifact_manifest_entries_verified": true,
+    "all_receipt_binary_hashes_match_manifest_and_release_binary": true,
+    "all_receipt_source_hashes_match_published_source_station_bytes": true,
+    "default_and_replay_preprocessing_and_climate_bytes_identical": true,
+    "automatic_selection_invariant_under_repair_toggle": true,
+    "exact_sources_never_fell_back": true,
+    "failure_publication_atomic": true,
+    "lcov_sha256": "d3dba4d22c08d1e1abdae49101b759eccc08f3b05ba389ade6865a7f3faf6c59",
+    "crap_functions_analyzed": 861,
+    "crap_functions_above_30": 0
+  }
+}

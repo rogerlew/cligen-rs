@@ -1,6 +1,6 @@
 # A12R4 independent review
 
-Status: implementation GO; terminal evidence reconciliation pending
+Status: FINAL CLOSURE GO
 
 The initial review found three P1 gaps: elevation source/unit/rank provenance,
 schema-3 null and method-ID semantics, and exact-source resolution/snapshot
@@ -19,6 +19,8 @@ bytewise catalog query, and tests corruption in both localized and untouched
 fields for automatic and exact sources. Focused tests, format, and strict clippy
 passed. Independent disposition: GO with no remaining P0/P1 code findings.
 
-Final closure GO remains conditional only on recording the full repository,
-coverage/CRAP, end-to-end provenance, atomicity, and repeatability evidence and
-reconciling the package records.
+Final closure review independently verified all five method identities, ten
+successful release runs, five atomic failures, default/replay identity, dry-site
+repair invariance, source commit agreement with `origin/main`, release binary
+and LCOV hashes, the runtime-evidence file hash, and terminal roadmap/catalog/
+package/ExecPlan consistency. Final disposition: GO with no remaining P0/P1.

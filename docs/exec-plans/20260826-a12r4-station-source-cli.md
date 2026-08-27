@@ -1,6 +1,6 @@
 # A12R4 Station Source CLI — ExecPlan
 
-Status: active
+Status: complete
 
 ## Progress
 
@@ -8,10 +8,10 @@ Status: active
 - [x] Independent prospective re-review after three P1 contract corrections.
 - [x] Implement source selection and receipt/profile revisions.
 - [x] Implement CLI parsing and human documentation.
-- [ ] Run focused end-to-end provenance evidence.
-- [ ] Run repository and coverage/CRAP gates.
-- [x] Independent implementation review; final closure review follows evidence.
-- [ ] Reconcile records, commit, and push main.
+- [x] Run focused end-to-end provenance evidence.
+- [x] Run repository and coverage/CRAP gates.
+- [x] Independent implementation and final closure review.
+- [x] Reconcile records, commit, and push main.
 
 ## Recovery
 
