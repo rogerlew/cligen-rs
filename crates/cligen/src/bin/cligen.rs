@@ -5,7 +5,7 @@ use std::process::ExitCode;
 use clap::{Parser, Subcommand, ValueEnum};
 
 use cligen::par::ParFile;
-use cligen::prism::localize::DegenerateOccurrenceRepair;
+use cligen::prism::localize::{DegenerateOccurrenceRepair, StationSource};
 use cligen::prism::run::{PrismRunOptions, PrismRunRequest};
 use cligen::prism::{grid as prism_grid, run as prism_run, sync as prism_sync, Distribution};
 use cligen::quality::compute_report;
@@ -89,7 +89,41 @@ enum PrismCommand {
         /// Explicitly repair source months with PWW=PWD=0 and positive PRISM precipitation.
         #[arg(long, value_enum)]
         degenerate_occurrence_repair: Option<DegenerateOccurrenceRepairArg>,
+        /// Automatic donor selector; defaults to closest-localizable.
+        #[arg(long, value_enum, conflicts_with_all = ["station_id", "station_par"])]
+        station_selection: Option<StationSelectionArg>,
+        /// Exact case-sensitive station ID in us-2015@2026.07.
+        #[arg(long, conflicts_with_all = ["station_selection", "station_par"])]
+        station_id: Option<String>,
+        /// Exact legacy .par source; symlinks are resolved and receipted.
+        #[arg(long, conflicts_with_all = ["station_selection", "station_id"])]
+        station_par: Option<PathBuf>,
+        /// Target elevation required only by elevation-prism-reference-localizable.
+        #[arg(long, allow_hyphen_values = true)]
+        target_elevation_m: Option<f64>,
     },
+}
+
+#[derive(Debug, Clone, Copy, ValueEnum)]
+enum StationSelectionArg {
+    #[value(name = "closest-localizable")]
+    Closest,
+    #[value(name = "prism-rank-sum-localizable")]
+    PrismRankSum,
+    #[value(name = "elevation-prism-reference-localizable")]
+    ElevationPrismReference,
+}
+
+struct PrismRunInputs {
+    longitude: f64,
+    latitude: f64,
+    years: i32,
+    output_dir: PathBuf,
+    degenerate_occurrence_repair: Option<DegenerateOccurrenceRepairArg>,
+    station_selection: Option<StationSelectionArg>,
+    station_id: Option<String>,
+    station_par: Option<PathBuf>,
+    target_elevation_m: Option<f64>,
 }
 
 #[derive(Debug, Clone, Copy, ValueEnum)]
@@ -338,14 +372,24 @@ fn prism(command: PrismCommand) -> Result<(), String> {
             years,
             output_dir,
             degenerate_occurrence_repair,
+            station_selection,
+            station_id,
+            station_par,
+            target_elevation_m,
         } => prism_run_command(
             &distribution,
             &cache_root,
-            longitude,
-            latitude,
-            years,
-            output_dir,
-            degenerate_occurrence_repair,
+            PrismRunInputs {
+                longitude,
+                latitude,
+                years,
+                output_dir,
+                degenerate_occurrence_repair,
+                station_selection,
+                station_id,
+                station_par,
+                target_elevation_m,
+            },
         ),
     }
 }
@@ -409,33 +453,92 @@ fn print_prism_table(receipt: &prism_grid::NormalsReceipt) {
 fn prism_run_command(
     distribution: &Distribution,
     cache_root: &Path,
-    longitude: f64,
-    latitude: f64,
-    years: i32,
-    output_dir: PathBuf,
-    degenerate_occurrence_repair: Option<DegenerateOccurrenceRepairArg>,
+    inputs: PrismRunInputs,
 ) -> Result<(), String> {
+    let station_source = station_source(
+        inputs.station_selection,
+        inputs.station_id,
+        inputs.station_par,
+        inputs.target_elevation_m,
+    )?;
     let repairs = prism_run::execute_with_options(
         distribution,
         cache_root,
         &PrismRunRequest {
-            longitude,
-            latitude,
-            years,
-            output_dir: output_dir.clone(),
+            longitude: inputs.longitude,
+            latitude: inputs.latitude,
+            years: inputs.years,
+            output_dir: inputs.output_dir.clone(),
         },
         PrismRunOptions {
-            degenerate_occurrence_repair: degenerate_occurrence_repair
+            degenerate_occurrence_repair: inputs
+                .degenerate_occurrence_repair
                 .map(Into::into)
                 .unwrap_or_default(),
+            station_source,
         },
     )
     .map_err(|error| error.to_string())?;
     for repair in repairs {
         eprintln!("warning: {}", repair.warning());
     }
-    println!("{}", output_dir.display());
+    println!("{}", inputs.output_dir.display());
     Ok(())
+}
+
+fn station_source(
+    selection: Option<StationSelectionArg>,
+    station_id: Option<String>,
+    station_par: Option<PathBuf>,
+    target_elevation_m: Option<f64>,
+) -> Result<StationSource, String> {
+    if let Some(station_id) = station_id {
+        if target_elevation_m.is_some() {
+            return Err(
+                "--target-elevation-m is valid only with elevation-prism-reference-localizable"
+                    .to_owned(),
+            );
+        }
+        return Ok(StationSource::ExactStationId { station_id });
+    }
+    if let Some(requested_path) = station_par {
+        if target_elevation_m.is_some() {
+            return Err(
+                "--target-elevation-m is valid only with elevation-prism-reference-localizable"
+                    .to_owned(),
+            );
+        }
+        return Ok(StationSource::ExactParFile { requested_path });
+    }
+    match selection.unwrap_or(StationSelectionArg::Closest) {
+        StationSelectionArg::Closest => {
+            if target_elevation_m.is_some() {
+                return Err(
+                    "--target-elevation-m is valid only with elevation-prism-reference-localizable"
+                        .to_owned(),
+                );
+            }
+            Ok(StationSource::ClosestLocalizable)
+        }
+        StationSelectionArg::PrismRankSum => {
+            if target_elevation_m.is_some() {
+                return Err(
+                    "--target-elevation-m is valid only with elevation-prism-reference-localizable"
+                        .to_owned(),
+                );
+            }
+            Ok(StationSource::PrismRankSumLocalizable)
+        }
+        StationSelectionArg::ElevationPrismReference => {
+            let target_elevation_m = target_elevation_m.ok_or_else(|| {
+                "elevation-prism-reference-localizable requires --target-elevation-m".to_owned()
+            })?;
+            if !target_elevation_m.is_finite() {
+                return Err("--target-elevation-m must be finite".to_owned());
+            }
+            Ok(StationSource::ElevationPrismReferenceLocalizable { target_elevation_m })
+        }
+    }
 }
 
 fn stations_convert(par: &Path, document: &Path, overwrite: bool) -> Result<(), String> {
@@ -482,8 +585,12 @@ fn post_hoc_quality(cli: &PathBuf, par: &PathBuf) -> Result<(), String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{Cli, Command, DegenerateOccurrenceRepairArg, PrismCommand};
+    use super::{
+        station_source, Cli, Command, DegenerateOccurrenceRepairArg, PrismCommand,
+        StationSelectionArg,
+    };
     use clap::Parser;
+    use cligen::prism::localize::StationSource;
 
     #[test]
     fn prism_repair_flag_parses_only_as_explicit_run_option() {
@@ -517,5 +624,71 @@ mod tests {
             degenerate_occurrence_repair,
             Some(DegenerateOccurrenceRepairArg::IndependentPrismV1)
         ));
+    }
+
+    #[test]
+    fn closest_localizable_is_the_default_station_source() {
+        assert_eq!(
+            station_source(None, None, None, None).unwrap(),
+            StationSource::ClosestLocalizable
+        );
+    }
+
+    #[test]
+    fn exact_station_sources_never_accept_target_elevation() {
+        assert!(station_source(None, Some("id.par".to_owned()), None, Some(100.0)).is_err());
+        assert!(station_source(None, None, Some("x.par".into()), Some(100.0)).is_err());
+    }
+
+    #[test]
+    fn elevation_selector_requires_finite_target() {
+        assert!(station_source(
+            Some(StationSelectionArg::ElevationPrismReference),
+            None,
+            None,
+            None,
+        )
+        .is_err());
+        assert!(station_source(
+            Some(StationSelectionArg::ElevationPrismReference),
+            None,
+            None,
+            Some(f64::NAN),
+        )
+        .is_err());
+        assert_eq!(
+            station_source(
+                Some(StationSelectionArg::ElevationPrismReference),
+                None,
+                None,
+                Some(123.0),
+            )
+            .unwrap(),
+            StationSource::ElevationPrismReferenceLocalizable {
+                target_elevation_m: 123.0
+            }
+        );
+    }
+
+    #[test]
+    fn clap_rejects_conflicting_station_sources() {
+        let result = Cli::try_parse_from([
+            "cligen",
+            "prism",
+            "run",
+            "--longitude",
+            "-116.5",
+            "--latitude",
+            "33.25",
+            "--years",
+            "1",
+            "--output-dir",
+            "out",
+            "--station-id",
+            "id.par",
+            "--station-par",
+            "x.par",
+        ]);
+        assert!(result.is_err());
     }
 }

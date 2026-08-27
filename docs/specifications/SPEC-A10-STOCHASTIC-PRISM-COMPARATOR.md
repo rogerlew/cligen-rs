@@ -95,10 +95,12 @@ claim from FSWEPP or WEPPcloud.
 
 ## Station selection
 
-The selector is a deterministic adaptation of the `wepppy` rank-sum
-heuristics to the three request axes the operator froze: distance, latitude,
-and monthly normals. It does not add an elevation service because elevation
-is not supplied by this contract.
+The original selector below remains the
+`cligen_prism_rank_sum_localizable_v1` option. The current runtime surface,
+default closest-localizable decision, exact station sources, elevation
+reference option, feasibility filtering, and receipt schema are governed by
+SPEC-A12R4-STATION-SOURCE-CLI. That successor preserves this algorithm as an
+explicit exploratory alternative instead of silently changing its identity.
 
 1. Order all `us-2015` stations by SPEC-STATION-DB haversine distance and
    station ID, and retain the nearest ten.
@@ -175,7 +177,8 @@ The Cargo CLI is:
 - `cligen prism query --longitude <deg> --latitude <deg> [--json]` — local
   verified monthly normals and cell/source receipt; and
 - `cligen prism run --longitude <deg> --latitude <deg> --years <n>
-  --output-dir <path> [--degenerate-occurrence-repair independent-prism-v1]`
+  --output-dir <path> [station-source options]
+  [--degenerate-occurrence-repair independent-prism-v1]`
   — local query, station selection, localization, and faithful generation.
   The output directory is an operational destination, not a fourth scientific
   input; the optional repair value is a declared preprocessing policy.
@@ -195,10 +198,10 @@ Every successful request atomically publishes:
   governing contract, and independence assumption;
 - PRISM query receipt with bundle/manifest/grid hashes, source metadata,
   raster cells, raw values, converted values, and attribution;
-- station-selection receipt schema version 2 with the method ID, all ten
-  candidates, component errors/ranks, scores, collection name/version/archive
-  SHA-256, selected source `.par` path and SHA-256, and exact executing cligen
-  binary SHA-256;
+- station-selection receipt schema version 3 under SPEC-A12R4, with requested
+  and effective method IDs, complete automatic candidates and rejections,
+  exact-source identity where applicable, collection identity, selected source
+  `.par` SHA-256, and exact executing cligen binary SHA-256;
 - source and localized `.par` files plus a field-level mutation receipt;
 - runspec, `.cli`, ordinary cligen-rs provenance, and quality report; and
 - a top-level manifest hashing every artifact and the cligen executable.
@@ -235,15 +238,17 @@ structure. Wet-day and `MX .5 P` changes are bounded continuity heuristics,
 not PRISM observations.
 
 The point query uses one containing 4 km cell with no interpolation,
-lapse-rate adjustment, elevation input, terrain downscaling, or nearest-valid
-fallback. Fixed 1991--2020 normals do not represent event-specific gradients,
+lapse-rate adjustment, terrain downscaling, or nearest-valid fallback. An
+optional user elevation influences only one donor-selection heuristic. Fixed
+1991--2020 normals do not represent event-specific gradients,
 trends, climate change, or year-to-year spatial anomalies. Independent point
 runs do not establish coherent watershed storms or a shared daily state.
 
-The registered station selector is neither FSWEPP's user selection nor the
-current WEPPcloud US heuristic. Operational history and comparator performance
-do not certify general climate accuracy or fitness for a particular WEPP
-application. Network overlap between PRISM and station sources also means the
+The default registered station selector is closest ordinarily localizable;
+the prior all-normal and WEPPcloud-like reference heuristics remain explicitly
+identified exploratory alternatives. Operational history and comparator
+performance do not certify general climate accuracy or fitness for a
+particular WEPP application. Network overlap between PRISM and station sources also means the
 comparator is independently implemented and versioned, not statistically
 independent climate evidence. Localized output is not an official PRISM
 product. Observations and unmodified faithful CLIGEN remain distinct evidence

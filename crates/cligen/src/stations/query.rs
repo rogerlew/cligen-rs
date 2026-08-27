@@ -129,6 +129,78 @@ pub fn nearest(
     Ok(rows)
 }
 
+/// Resolve every bytewise exact station ID match in one synced collection.
+///
+/// The result is intentionally not truncated: callers that require a unique
+/// identity must be able to distinguish zero, one, and duplicate catalog rows.
+///
+/// # Errors
+///
+/// Fails closed on an unknown or unsynced collection, an invalid query point,
+/// catalog read errors, or an unresolvable matching catalog row.
+pub fn exact_station_id(
+    manifests: &Manifests,
+    cache_root: &Path,
+    collection_name: &str,
+    station_id: &str,
+    latitude: f64,
+    longitude: f64,
+) -> Result<Vec<NearestRow>, StationsError> {
+    validate_query_point(&NearestQuery {
+        latitude,
+        longitude,
+        count: 0,
+        collection: Some(collection_name.to_owned()),
+        min_years: None,
+    })?;
+    let collection = manifests.get(collection_name)?;
+    if !collection.is_synced(cache_root) {
+        return Err(StationsError::NotSynced {
+            name: collection_name.to_owned(),
+        });
+    }
+    let payload_dir = collection.cache_dir(cache_root);
+    let connection = open_catalog(collection, cache_root)?;
+    let mut statement = connection
+        .prepare(
+            "SELECT par, desc, latitude, longitude, years FROM stations \
+             WHERE par = ?1 COLLATE BINARY",
+        )
+        .map_err(|error| catalog_error(collection, error))?;
+    let mapped = statement
+        .query_map([station_id], |row| {
+            Ok((
+                row.get::<_, String>(0)?,
+                row.get::<_, String>(1)?,
+                row.get::<_, f64>(2)?,
+                row.get::<_, f64>(3)?,
+                row.get::<_, f64>(4)?,
+            ))
+        })
+        .map_err(|error| catalog_error(collection, error))?;
+    let mut rows = Vec::new();
+    for station in mapped {
+        let (par, desc, station_latitude, station_longitude, years) =
+            station.map_err(|error| catalog_error(collection, error))?;
+        let path =
+            resolve_par(&payload_dir, &par).ok_or_else(|| StationsError::UnresolvedCatalogRow {
+                name: collection.name.clone(),
+                par: par.clone(),
+            })?;
+        rows.push(NearestRow {
+            collection: collection.name.clone(),
+            id: par,
+            desc: desc.trim().to_owned(),
+            latitude: station_latitude,
+            longitude: station_longitude,
+            years,
+            distance_km: haversine_km(latitude, longitude, station_latitude, station_longitude),
+            path,
+        });
+    }
+    Ok(rows)
+}
+
 fn validate_query_point(query: &NearestQuery) -> Result<(), StationsError> {
     let lat_ok = query.latitude.is_finite() && (-90.0..=90.0).contains(&query.latitude);
     let lon_ok = query.longitude.is_finite() && (-360.0..=360.0).contains(&query.longitude);
@@ -225,7 +297,8 @@ pub fn haversine_km(lat1: f64, lon1: f64, lat2: f64, lon2: f64) -> f64 {
 
 #[cfg(test)]
 mod tests {
-    use super::haversine_km;
+    use super::{exact_station_id, haversine_km};
+    use crate::stations::{Archive, Collection, Manifests};
 
     #[test]
     fn haversine_matches_reference_distances() {
@@ -238,5 +311,61 @@ mod tests {
         // Antipodal-ish sanity: half circumference ~ 20015 km.
         let half = haversine_km(0.0, 0.0, 0.0, 180.0);
         assert!((half - 20015.0).abs() < 5.0, "{half}");
+    }
+
+    #[test]
+    fn exact_station_lookup_is_bytewise_and_never_manifest_truncated() {
+        let root = std::env::temp_dir().join(format!(
+            "cligen-exact-station-{}-{:?}",
+            std::process::id(),
+            std::thread::current().id()
+        ));
+        let payload = root.join("stations/test/v1");
+        std::fs::create_dir_all(&payload).unwrap();
+        std::fs::write(payload.join("exact.par"), b"fixture").unwrap();
+        let connection = rusqlite::Connection::open(payload.join("stations.db")).unwrap();
+        connection
+            .execute(
+                "CREATE TABLE stations (par TEXT, desc TEXT, latitude REAL, longitude REAL, years REAL)",
+                [],
+            )
+            .unwrap();
+        for description in ["first", "duplicate"] {
+            connection
+                .execute(
+                    "INSERT INTO stations VALUES ('exact.par', ?1, 45.0, -116.0, 40.0)",
+                    [description],
+                )
+                .unwrap();
+        }
+        drop(connection);
+        let manifests = Manifests {
+            schema_version: 1,
+            collections: vec![Collection {
+                name: "test".to_owned(),
+                version: "v1".to_owned(),
+                description: "test".to_owned(),
+                lineage: "test".to_owned(),
+                catalog: "stations.db".to_owned(),
+                catalog_rows: 1,
+                archive: Archive {
+                    url: "https://example.invalid/test".to_owned(),
+                    sha256: "0".repeat(64),
+                    bytes: 0,
+                },
+            }],
+        };
+        assert_eq!(
+            exact_station_id(&manifests, &root, "test", "exact.par", 45.0, -116.0)
+                .unwrap()
+                .len(),
+            2
+        );
+        assert!(
+            exact_station_id(&manifests, &root, "test", "EXACT.PAR", 45.0, -116.0)
+                .unwrap()
+                .is_empty()
+        );
+        std::fs::remove_dir_all(root).unwrap();
     }
 }

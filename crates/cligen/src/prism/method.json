@@ -36,11 +36,11 @@
     },
     {
       "id": "point_cell_no_terrain",
-      "statement": "The mode uses one containing 4 km cell with no interpolation, lapse-rate adjustment, elevation input, or terrain downscaling."
+      "statement": "The mode uses one containing 4 km cell with no interpolation, lapse-rate adjustment, or terrain downscaling; optional elevation affects only an explicitly requested donor-selection heuristic."
     },
     {
       "id": "station_selector_not_prior_identity",
-      "statement": "Station selection is a registered cligen-rs heuristic and is not identical to FSWEPP user selection or the current WEPPcloud US heuristic."
+      "statement": "Station source choice is explicit and registered: closest ordinarily localizable is the default, while exact sources and evaluated heuristics retain distinct method identities."
     },
     {
       "id": "static_climatology",

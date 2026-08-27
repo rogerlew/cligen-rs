@@ -12,7 +12,7 @@ use std::path::{Path, PathBuf};
 use serde::Serialize;
 
 use crate::par::ParFile;
-use crate::stations::query::{nearest, NearestQuery, NearestRow};
+use crate::stations::query::{exact_station_id, nearest, NearestQuery, NearestRow};
 use crate::stations::Manifests;
 
 use super::grid::NormalsReceipt;
@@ -29,6 +29,7 @@ pub struct CandidateReceipt {
     pub station_id: String,
     pub description: String,
     pub path: PathBuf,
+    pub source_par_sha256: String,
     pub latitude: f64,
     pub longitude: f64,
     pub distance_km: f64,
@@ -41,7 +42,23 @@ pub struct CandidateReceipt {
     pub ppt_rank: usize,
     pub tmax_rank: usize,
     pub tmin_rank: usize,
-    pub score: f64,
+    pub current_score: f64,
+    pub station_elevation_ft: i32,
+    pub station_elevation_m: f64,
+    pub target_elevation_m: Option<f64>,
+    pub elevation_error_m: Option<f64>,
+    pub elevation_rank: Option<usize>,
+    pub reference_score: Option<f64>,
+    pub ordinary_localizable: bool,
+    pub rejection_reason: Option<String>,
+}
+
+/// One automatic candidate excluded by ordinary localization coverage.
+#[derive(Debug, Clone, Serialize)]
+pub struct CandidateRejectionReceipt {
+    pub station_id: String,
+    pub source_par_sha256: String,
+    pub reason: String,
 }
 
 /// Station-selection decision, including the complete ten-station pool.
@@ -49,15 +66,77 @@ pub struct CandidateReceipt {
 pub struct SelectionReceipt {
     pub schema_version: u32,
     pub profile_id: String,
+    pub requested_selection_method_id: String,
+    pub effective_selection_method_id: String,
     pub selection_method_id: String,
-    pub collection_name: String,
-    pub collection_version: String,
-    pub collection_archive_sha256: String,
+    pub fallback_applied: bool,
+    pub requested_station_id: Option<String>,
+    pub requested_par_path: Option<PathBuf>,
+    pub resolved_par_path: Option<PathBuf>,
+    pub target_elevation_m: Option<f64>,
+    pub collection_name: Option<String>,
+    pub collection_version: Option<String>,
+    pub collection_archive_sha256: Option<String>,
     pub selected_station_id: String,
+    pub selected_source_identity: String,
     pub selected_source_par_path: PathBuf,
     pub selected_source_par_sha256: String,
     pub cligen_binary_sha256: String,
     pub candidates: Vec<CandidateReceipt>,
+    pub candidate_rejections: Vec<CandidateRejectionReceipt>,
+}
+
+/// Requested donor-selection/source policy for PRISM localization.
+#[derive(Debug, Clone, Default, PartialEq)]
+pub enum StationSource {
+    #[default]
+    ClosestLocalizable,
+    PrismRankSumLocalizable,
+    ElevationPrismReferenceLocalizable {
+        target_elevation_m: f64,
+    },
+    ExactStationId {
+        station_id: String,
+    },
+    ExactParFile {
+        requested_path: PathBuf,
+    },
+}
+
+impl StationSource {
+    /// Stable requested/effective selection method identifier.
+    #[must_use]
+    pub const fn method_id(&self) -> &'static str {
+        match self {
+            Self::ClosestLocalizable => "closest_localizable_v1",
+            Self::PrismRankSumLocalizable => "cligen_prism_rank_sum_localizable_v1",
+            Self::ElevationPrismReferenceLocalizable { .. } => {
+                "elevation_prism_reference_localizable_v1"
+            }
+            Self::ExactStationId { .. } => "exact_registered_station_id_v1",
+            Self::ExactParFile { .. } => "exact_par_file_v1",
+        }
+    }
+
+    #[must_use]
+    pub const fn is_automatic(&self) -> bool {
+        matches!(
+            self,
+            Self::ClosestLocalizable
+                | Self::PrismRankSumLocalizable
+                | Self::ElevationPrismReferenceLocalizable { .. }
+        )
+    }
+
+    #[must_use]
+    pub const fn target_elevation_m(&self) -> Option<f64> {
+        match self {
+            Self::ElevationPrismReferenceLocalizable { target_elevation_m } => {
+                Some(*target_elevation_m)
+            }
+            _ => None,
+        }
+    }
 }
 
 /// Requested, calculated, and encoded monthly localization state.
@@ -184,11 +263,34 @@ pub struct LocalizedParV2 {
 #[derive(Debug)]
 struct Candidate {
     row: NearestRow,
+    source_bytes: Vec<u8>,
+    source_par_sha256: String,
+    par: ParFile,
     ppt_error: f64,
     tmax_error: f64,
     tmin_error: f64,
     latitude_error: f64,
     ranks: [usize; 5],
+    target_elevation_m: Option<f64>,
+    elevation_error_m: Option<f64>,
+    elevation_rank: Option<usize>,
+    reference_score: Option<f64>,
+    ordinary_localizable: bool,
+    rejection_reason: Option<String>,
+}
+
+#[derive(Debug)]
+struct SelectedSource {
+    row: NearestRow,
+    bytes: Vec<u8>,
+}
+
+#[derive(Default)]
+struct SelectionEvidence {
+    candidates: Vec<CandidateReceipt>,
+    candidate_rejections: Vec<CandidateRejectionReceipt>,
+    requested_par_path: Option<PathBuf>,
+    resolved_par_path: Option<PathBuf>,
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -211,16 +313,35 @@ struct RewriteResult {
 
 /// Select a station and localize its monthly precipitation/temperature rows.
 pub fn localize(cache_root: &Path, normals: &NormalsReceipt) -> Result<LocalizedPar, PrismError> {
+    localize_from(cache_root, normals, StationSource::default())
+}
+
+/// Select from an explicit source policy and localize ordinary monthly rows.
+pub fn localize_from(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
+    source: StationSource,
+) -> Result<LocalizedPar, PrismError> {
     let executable_path = std::env::current_exe()
         .map_err(|source| super::io_error("resolve current executable", source))?;
     let cligen_binary_sha256 = super::sha256_file(&executable_path)?;
-    localize_with_binary_identity(cache_root, normals, &cligen_binary_sha256)
+    localize_with_binary_identity(cache_root, normals, &cligen_binary_sha256, source)
 }
 
 /// Select and localize with an explicitly declared degenerate-month policy.
 pub fn localize_with_repair(
     cache_root: &Path,
     normals: &NormalsReceipt,
+    repair: DegenerateOccurrenceRepair,
+) -> Result<LocalizedParV2, PrismError> {
+    localize_from_with_repair(cache_root, normals, StationSource::default(), repair)
+}
+
+/// Select from an explicit source policy and apply a declared repair method.
+pub fn localize_from_with_repair(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
+    source: StationSource,
     repair: DegenerateOccurrenceRepair,
 ) -> Result<LocalizedParV2, PrismError> {
     if repair == DegenerateOccurrenceRepair::Disabled {
@@ -231,17 +352,23 @@ pub fn localize_with_repair(
     let executable_path = std::env::current_exe()
         .map_err(|source| super::io_error("resolve current executable", source))?;
     let cligen_binary_sha256 = super::sha256_file(&executable_path)?;
-    localize_v2_with_binary_identity(cache_root, normals, &cligen_binary_sha256, repair)
+    localize_v2_with_binary_identity(cache_root, normals, &cligen_binary_sha256, source, repair)
 }
 
 fn localize_with_binary_identity(
     cache_root: &Path,
     normals: &NormalsReceipt,
     cligen_binary_sha256: &str,
+    source: StationSource,
 ) -> Result<LocalizedPar, PrismError> {
     validate_binary_identity(cligen_binary_sha256)?;
-    let (selected, selection) =
-        select_station(cache_root, normals, cligen_binary_sha256, PROFILE_ID)?;
+    let (selected, selection) = select_station(
+        cache_root,
+        normals,
+        cligen_binary_sha256,
+        PROFILE_ID,
+        &source,
+    )?;
     localize_selected(selected, selection, normals)
 }
 
@@ -249,6 +376,7 @@ fn localize_v2_with_binary_identity(
     cache_root: &Path,
     normals: &NormalsReceipt,
     cligen_binary_sha256: &str,
+    source: StationSource,
     repair: DegenerateOccurrenceRepair,
 ) -> Result<LocalizedParV2, PrismError> {
     validate_binary_identity(cligen_binary_sha256)?;
@@ -257,6 +385,7 @@ fn localize_v2_with_binary_identity(
         normals,
         cligen_binary_sha256,
         repair.profile_id(),
+        &source,
     )?;
     localize_selected_v2(selected, selection, normals, repair)
 }
@@ -275,18 +404,18 @@ fn validate_binary_identity(cligen_binary_sha256: &str) -> Result<(), PrismError
 }
 
 fn localize_selected(
-    selected: NearestRow,
+    selected: SelectedSource,
     selection: SelectionReceipt,
     normals: &NormalsReceipt,
 ) -> Result<LocalizedPar, PrismError> {
     let (source_bytes, rewritten, encoded) = prepare_selected(
-        &selected,
+        selected.bytes,
         &selection,
         normals,
         DegenerateOccurrenceRepair::Disabled,
     )?;
     Ok(build_localized_result(
-        selected,
+        selected.row,
         selection,
         source_bytes,
         rewritten.bytes,
@@ -297,15 +426,15 @@ fn localize_selected(
 }
 
 fn localize_selected_v2(
-    selected: NearestRow,
+    selected: SelectedSource,
     selection: SelectionReceipt,
     normals: &NormalsReceipt,
     repair: DegenerateOccurrenceRepair,
 ) -> Result<LocalizedParV2, PrismError> {
     let (source_bytes, rewritten, encoded) =
-        prepare_selected(&selected, &selection, normals, repair)?;
+        prepare_selected(selected.bytes, &selection, normals, repair)?;
     Ok(build_localized_result_v2(
-        selected,
+        selected.row,
         selection,
         source_bytes,
         rewritten.bytes,
@@ -318,13 +447,11 @@ fn localize_selected_v2(
 }
 
 fn prepare_selected(
-    selected: &NearestRow,
+    source_bytes: Vec<u8>,
     selection: &SelectionReceipt,
     normals: &NormalsReceipt,
     repair: DegenerateOccurrenceRepair,
 ) -> Result<(Vec<u8>, RewriteResult, ParFile), PrismError> {
-    let source_bytes = fs::read(&selected.path)
-        .map_err(|source| super::io_error("read selected station .par", source))?;
     if crate::quality::sha256_hex(&source_bytes) != selection.selected_source_par_sha256 {
         return Err(PrismError::InvalidStation(
             "selected source .par changed after selection".to_owned(),
@@ -450,20 +577,85 @@ fn select_station(
     normals: &NormalsReceipt,
     cligen_binary_sha256: &str,
     profile_id: &str,
-) -> Result<(NearestRow, SelectionReceipt), PrismError> {
+    source: &StationSource,
+) -> Result<(SelectedSource, SelectionReceipt), PrismError> {
+    match source {
+        StationSource::ExactStationId { station_id } => select_exact_station_id(
+            cache_root,
+            normals,
+            cligen_binary_sha256,
+            profile_id,
+            source,
+            station_id,
+        ),
+        StationSource::ExactParFile { requested_path } => select_exact_par(
+            normals,
+            cligen_binary_sha256,
+            profile_id,
+            source,
+            requested_path,
+        ),
+        _ => select_automatic(
+            cache_root,
+            normals,
+            cligen_binary_sha256,
+            profile_id,
+            source,
+        ),
+    }
+}
+
+fn select_automatic(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
+    cligen_binary_sha256: &str,
+    profile_id: &str,
+    source: &StationSource,
+) -> Result<(SelectedSource, SelectionReceipt), PrismError> {
+    if source
+        .target_elevation_m()
+        .is_some_and(|value| !value.is_finite())
+    {
+        return Err(PrismError::InvalidRequest(
+            "target_elevation_m must be finite".to_owned(),
+        ));
+    }
     let (collection, rows) = load_pool(cache_root, normals)?;
-    let mut candidates = load_candidates(rows, normals)?;
+    let mut candidates = load_candidates(rows, normals, source.target_elevation_m())?;
     assign_ranks(&mut candidates);
+    assign_elevation_ranks(&mut candidates, source.target_elevation_m());
     let receipts: Vec<CandidateReceipt> = candidates.iter().map(candidate_receipt).collect();
-    let winner = winning_candidate(&candidates);
+    let rejections = candidates
+        .iter()
+        .filter_map(|candidate| {
+            candidate
+                .rejection_reason
+                .as_ref()
+                .map(|reason| CandidateRejectionReceipt {
+                    station_id: candidate.row.id.clone(),
+                    source_par_sha256: candidate.source_par_sha256.clone(),
+                    reason: reason.clone(),
+                })
+        })
+        .collect();
+    let winner = winning_candidate(&candidates, source)?;
+    let selected = SelectedSource {
+        row: winner.row.clone(),
+        bytes: winner.source_bytes.clone(),
+    };
     let receipt = build_selection_receipt(
-        &collection,
-        &winner,
-        receipts,
+        Some(&collection),
+        &selected,
+        SelectionEvidence {
+            candidates: receipts,
+            candidate_rejections: rejections,
+            ..SelectionEvidence::default()
+        },
         cligen_binary_sha256,
         profile_id,
+        source,
     )?;
-    Ok((winner, receipt))
+    Ok((selected, receipt))
 }
 
 fn load_pool(
@@ -501,33 +693,156 @@ fn require_complete_pool(rows: &[NearestRow]) -> Result<(), PrismError> {
     )))
 }
 
-fn build_selection_receipt(
-    collection: &crate::stations::Collection,
-    winner: &NearestRow,
-    candidates: Vec<CandidateReceipt>,
+fn select_exact_station_id(
+    cache_root: &Path,
+    normals: &NormalsReceipt,
     cligen_binary_sha256: &str,
     profile_id: &str,
+    source: &StationSource,
+    station_id: &str,
+) -> Result<(SelectedSource, SelectionReceipt), PrismError> {
+    if station_id.is_empty() {
+        return Err(PrismError::InvalidRequest(
+            "station_id must not be empty".to_owned(),
+        ));
+    }
+    let manifests = Manifests::embedded();
+    let collection = manifests
+        .get("us-2015")
+        .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+    let rows = exact_station_id(
+        &manifests,
+        cache_root,
+        &collection.name,
+        station_id,
+        normals.requested_latitude,
+        normals.requested_longitude,
+    )
+    .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+    let mut matches = rows.into_iter();
+    let row = matches.next().ok_or_else(|| {
+        PrismError::InvalidStation(format!("station ID {station_id:?} has zero exact matches"))
+    })?;
+    if matches.next().is_some() {
+        return Err(PrismError::InvalidStation(format!(
+            "station ID {station_id:?} has more than one exact match"
+        )));
+    }
+    let bytes = fs::read(&row.path)
+        .map_err(|error| super::io_error("read exact station ID .par", error))?;
+    let par =
+        ParFile::parse(&bytes).map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+    validate_source_semantics(&row, &par)?;
+    let selected = SelectedSource { row, bytes };
+    let receipt = build_selection_receipt(
+        Some(collection),
+        &selected,
+        SelectionEvidence::default(),
+        cligen_binary_sha256,
+        profile_id,
+        source,
+    )?;
+    Ok((selected, receipt))
+}
+
+fn select_exact_par(
+    normals: &NormalsReceipt,
+    cligen_binary_sha256: &str,
+    profile_id: &str,
+    source: &StationSource,
+    requested_path: &Path,
+) -> Result<(SelectedSource, SelectionReceipt), PrismError> {
+    let lexical = requested_path.to_path_buf();
+    let resolved = fs::canonicalize(requested_path)
+        .map_err(|error| super::io_error("canonicalize exact .par", error))?;
+    if !resolved.is_file() {
+        return Err(PrismError::InvalidStation(format!(
+            "exact .par is not a file: {}",
+            resolved.display()
+        )));
+    }
+    let bytes = fs::read(&resolved).map_err(|error| super::io_error("read exact .par", error))?;
+    let par =
+        ParFile::parse(&bytes).map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+    let hash = crate::quality::sha256_hex(&bytes);
+    let model = par.fixed_monthly();
+    let row = NearestRow {
+        collection: "external-par".to_owned(),
+        id: format!("external-par:{hash}"),
+        desc: model.stidd.trim().to_owned(),
+        latitude: f64::from(model.ylt),
+        longitude: f64::from(model.yll),
+        years: f64::from(model.years),
+        distance_km: crate::stations::query::haversine_km(
+            normals.requested_latitude,
+            normals.requested_longitude,
+            f64::from(model.ylt),
+            f64::from(model.yll),
+        ),
+        path: resolved.clone(),
+    };
+    validate_source_semantics(&row, &par)?;
+    let selected = SelectedSource { row, bytes };
+    let receipt = build_selection_receipt(
+        None,
+        &selected,
+        SelectionEvidence {
+            requested_par_path: Some(lexical),
+            resolved_par_path: Some(resolved),
+            ..SelectionEvidence::default()
+        },
+        cligen_binary_sha256,
+        profile_id,
+        source,
+    )?;
+    Ok((selected, receipt))
+}
+
+fn build_selection_receipt(
+    collection: Option<&crate::stations::Collection>,
+    selected: &SelectedSource,
+    evidence: SelectionEvidence,
+    cligen_binary_sha256: &str,
+    profile_id: &str,
+    source: &StationSource,
 ) -> Result<SelectionReceipt, PrismError> {
-    let source_bytes = fs::read(&winner.path)
-        .map_err(|source| super::io_error("hash selected station .par", source))?;
+    let source_par_sha256 = crate::quality::sha256_hex(&selected.bytes);
+    let selected_source_identity = match source {
+        StationSource::ExactParFile { .. } => format!("external-par:{source_par_sha256}"),
+        _ => format!("registered:us-2015@2026.07:{}", selected.row.id),
+    };
+    let method_id = source.method_id().to_owned();
     Ok(SelectionReceipt {
-        schema_version: 2,
+        schema_version: 3,
         profile_id: profile_id.to_owned(),
-        selection_method_id: "cligen_prism_rank_sum_v1".to_owned(),
-        collection_name: collection.name.clone(),
-        collection_version: collection.version.clone(),
-        collection_archive_sha256: collection.archive.sha256.clone(),
-        selected_station_id: winner.id.clone(),
-        selected_source_par_path: winner.path.clone(),
-        selected_source_par_sha256: crate::quality::sha256_hex(&source_bytes),
+        requested_selection_method_id: method_id.clone(),
+        effective_selection_method_id: method_id.clone(),
+        selection_method_id: method_id,
+        fallback_applied: false,
+        requested_station_id: match source {
+            StationSource::ExactStationId { station_id } => Some(station_id.clone()),
+            _ => None,
+        },
+        requested_par_path: evidence.requested_par_path,
+        resolved_par_path: evidence.resolved_par_path,
+        target_elevation_m: source.target_elevation_m(),
+        collection_name: collection.map(|value| value.name.clone()),
+        collection_version: collection.map(|value| value.version.clone()),
+        collection_archive_sha256: collection.map(|value| value.archive.sha256.clone()),
+        selected_station_id: selected.row.id.clone(),
+        selected_source_identity,
+        selected_source_par_path: selected.row.path.clone(),
+        selected_source_par_sha256: source_par_sha256,
         cligen_binary_sha256: cligen_binary_sha256.to_owned(),
-        candidates,
+        candidates: evidence.candidates,
+        candidate_rejections: evidence.candidate_rejections,
     })
 }
 
 fn load_candidates(
     rows: Vec<NearestRow>,
     normals: &NormalsReceipt,
+    target_elevation_m: Option<f64>,
 ) -> Result<Vec<Candidate>, PrismError> {
     let target_ppt = normals.monthly_ppt_in();
     let target_tmax = normals.monthly_tmax_f();
@@ -538,32 +853,137 @@ fn load_candidates(
                 .map_err(|source| super::io_error("read candidate station .par", source))?;
             let par = ParFile::parse(&bytes)
                 .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+            validate_source_semantics(&row, &par)?;
             let model = par.fixed_monthly();
-            let ppt = station_ppt(model)?;
+            let localization_rejection = ordinary_rejection(&par, normals)?;
+            let ppt_error = euclidean(&station_ppt(model)?, &target_ppt);
+            let tmax_error = euclidean_f32(&model.obmx, &target_tmax);
+            let tmin_error = euclidean_f32(&model.obmn, &target_tmin);
+            let elevation_error_m =
+                target_elevation_m.map(|target| (f64::from(model.elev_ft) * 0.3048 - target).abs());
             Ok(Candidate {
+                source_par_sha256: crate::quality::sha256_hex(&bytes),
+                source_bytes: bytes,
+                par,
                 latitude_error: (row.latitude - normals.requested_latitude).abs(),
-                ppt_error: euclidean(&ppt, &target_ppt),
-                tmax_error: euclidean_f32(&model.obmx, &target_tmax),
-                tmin_error: euclidean_f32(&model.obmn, &target_tmin),
+                ppt_error,
+                tmax_error,
+                tmin_error,
                 row,
                 ranks: [0; 5],
+                target_elevation_m,
+                elevation_error_m,
+                elevation_rank: None,
+                reference_score: target_elevation_m.map(|_| 0.0),
+                ordinary_localizable: localization_rejection.is_none(),
+                rejection_reason: localization_rejection,
             })
         })
         .collect()
 }
 
-fn winning_candidate(candidates: &[Candidate]) -> NearestRow {
+fn validate_source_semantics(row: &NearestRow, par: &ParFile) -> Result<(), PrismError> {
+    crate::station::StationDocumentV1::from_legacy_par(par)
+        .map_err(|error| PrismError::InvalidStation(error.to_string()))?;
+    if !row.latitude.is_finite()
+        || !(-90.0..=90.0).contains(&row.latitude)
+        || !row.longitude.is_finite()
+        || !(-360.0..=360.0).contains(&row.longitude)
+        || !row.years.is_finite()
+        || row.years <= 0.0
+        || !row.distance_km.is_finite()
+    {
+        return Err(PrismError::InvalidStation(format!(
+            "station {} has invalid catalog coordinates or years",
+            row.id
+        )));
+    }
+    let model = par.fixed_monthly();
+    for month in 0..12 {
+        let mean = model.rst[month][0];
+        let pww = model.prw[month][0];
+        let pwd = model.prw[month][1];
+        let tmax = model.obmx[month];
+        let tmin = model.obmn[month];
+        let intensity = model.wi_raw[month];
+        if !mean.is_finite()
+            || mean < 0.0
+            || !pww.is_finite()
+            || !(0.0..1.0).contains(&pww)
+            || !pwd.is_finite()
+            || !(0.0..1.0).contains(&pwd)
+            || !tmax.is_finite()
+            || !tmin.is_finite()
+            || tmax < tmin
+            || !intensity.is_finite()
+            || intensity < 0.0
+        {
+            return Err(PrismError::InvalidStation(format!(
+                "station {} has invalid source values in month {}",
+                row.id,
+                month + 1
+            )));
+        }
+    }
+    Ok(())
+}
+
+fn ordinary_rejection(
+    par: &ParFile,
+    normals: &NormalsReceipt,
+) -> Result<Option<String>, PrismError> {
+    match rewrite(
+        &par.to_bytes(),
+        par,
+        normals,
+        DegenerateOccurrenceRepair::Disabled,
+    ) {
+        Ok(rewritten) => {
+            let encoded = ParFile::parse(&rewritten.bytes)
+                .map_err(|error| PrismError::Render(error.to_string()))?;
+            match validate_encoded(&encoded, normals) {
+                Ok(()) => Ok(None),
+                Err(error) => Ok(Some(error.to_string())),
+            }
+        }
+        Err(error @ (PrismError::InvalidStation(_) | PrismError::Render(_))) => {
+            Ok(Some(error.to_string()))
+        }
+        Err(error) => Err(error),
+    }
+}
+
+fn winning_candidate<'a>(
+    candidates: &'a [Candidate],
+    source: &StationSource,
+) -> Result<&'a Candidate, PrismError> {
     candidates
         .iter()
+        .filter(|candidate| candidate.ordinary_localizable)
         .min_by(|left, right| {
-            score(left)
-                .total_cmp(&score(right))
+            selection_score(left, source)
+                .total_cmp(&selection_score(right, source))
                 .then_with(|| left.row.distance_km.total_cmp(&right.row.distance_km))
                 .then_with(|| left.row.id.cmp(&right.row.id))
         })
-        .expect("ten candidates")
-        .row
-        .clone()
+        .ok_or_else(|| {
+            PrismError::InvalidStation(
+                "none of the nearest ten stations completes ordinary localization".to_owned(),
+            )
+        })
+}
+
+fn selection_score(candidate: &Candidate, source: &StationSource) -> f64 {
+    match source {
+        StationSource::ClosestLocalizable => candidate.row.distance_km,
+        StationSource::PrismRankSumLocalizable => score(candidate),
+        StationSource::ElevationPrismReferenceLocalizable { .. } => candidate
+            .reference_score
+            .expect("elevation mode assigns reference score"),
+        StationSource::ExactStationId { .. } | StationSource::ExactParFile { .. } => {
+            unreachable!("exact sources do not use automatic scoring")
+        }
+    }
 }
 
 fn station_ppt(model: &crate::station::FixedMonthly5323) -> Result<[f64; 12], PrismError> {
@@ -610,6 +1030,33 @@ fn assign_ranks(candidates: &mut [Candidate]) {
     }
 }
 
+fn assign_elevation_ranks(candidates: &mut [Candidate], target_elevation_m: Option<f64>) {
+    let Some(target) = target_elevation_m else {
+        return;
+    };
+    let mut order: Vec<usize> = (0..candidates.len()).collect();
+    order.sort_by(|&left, &right| {
+        elevation_error(&candidates[left], target)
+            .total_cmp(&elevation_error(&candidates[right], target))
+            .then_with(|| candidates[left].row.id.cmp(&candidates[right].row.id))
+    });
+    for (rank, index) in order.into_iter().enumerate() {
+        candidates[index].elevation_rank = Some(rank);
+        candidates[index].reference_score = Some(
+            candidates[index].ranks[0] as f64
+                + candidates[index].ranks[1] as f64
+                + rank as f64
+                + 3.0 * candidates[index].ranks[2] as f64,
+        );
+    }
+}
+
+fn elevation_error(candidate: &Candidate, target_elevation_m: f64) -> f64 {
+    candidate.elevation_error_m.unwrap_or_else(|| {
+        (f64::from(candidate.par.fixed_monthly().elev_ft) * 0.3048 - target_elevation_m).abs()
+    })
+}
+
 fn component_value(candidate: &Candidate, component: usize) -> f64 {
     [
         candidate.row.distance_km,
@@ -634,6 +1081,7 @@ fn candidate_receipt(candidate: &Candidate) -> CandidateReceipt {
         station_id: candidate.row.id.clone(),
         description: candidate.row.desc.clone(),
         path: candidate.row.path.clone(),
+        source_par_sha256: candidate.source_par_sha256.clone(),
         latitude: candidate.row.latitude,
         longitude: candidate.row.longitude,
         distance_km: candidate.row.distance_km,
@@ -646,7 +1094,15 @@ fn candidate_receipt(candidate: &Candidate) -> CandidateReceipt {
         ppt_rank: candidate.ranks[2],
         tmax_rank: candidate.ranks[3],
         tmin_rank: candidate.ranks[4],
-        score: score(candidate),
+        current_score: score(candidate),
+        station_elevation_ft: candidate.par.fixed_monthly().elev_ft,
+        station_elevation_m: f64::from(candidate.par.fixed_monthly().elev_ft) * 0.3048,
+        target_elevation_m: candidate.target_elevation_m,
+        elevation_error_m: candidate.elevation_error_m,
+        elevation_rank: candidate.elevation_rank,
+        reference_score: candidate.reference_score,
+        ordinary_localizable: candidate.ordinary_localizable,
+        rejection_reason: candidate.rejection_reason.clone(),
     }
 }
 
@@ -879,13 +1335,55 @@ fn validate_encoded(par: &ParFile, normals: &NormalsReceipt) -> Result<(), Prism
 mod tests {
     use super::{
         f6_2_probability, localize_month, localize_month_with_repair, localize_selected,
-        localize_selected_v2, localize_with_binary_identity, render_monthly, rewrite, station_ppt,
-        validate_encoded, DegenerateOccurrenceRepair, SelectionReceipt,
+        localize_selected_v2, localize_with_binary_identity, render_monthly, rewrite,
+        select_station, station_ppt, validate_encoded, DegenerateOccurrenceRepair, SelectedSource,
+        SelectionReceipt, StationSource,
     };
     use crate::par::ParFile;
     use crate::prism::grid::NormalsReceipt;
+    use crate::prism::PROFILE_ID;
 
     const PAR: &[u8] = include_bytes!("../../../../fixtures/new-meadows-id/id106388.par");
+
+    fn test_root(label: &str) -> std::path::PathBuf {
+        std::env::temp_dir().join(format!(
+            "cligen-a12r4-{label}-{}-{:?}",
+            std::process::id(),
+            std::thread::current().id()
+        ))
+    }
+
+    fn station_cache(label: &str, station_bytes: &[Vec<u8>]) -> std::path::PathBuf {
+        let root = test_root(label);
+        let payload = root.join("stations/us-2015/2026.07");
+        std::fs::create_dir_all(&payload).unwrap();
+        let database = payload.join("2015_stations.db");
+        let connection = rusqlite::Connection::open(database).unwrap();
+        connection
+            .execute(
+                "CREATE TABLE stations (par TEXT, desc TEXT, latitude REAL, longitude REAL, years REAL)",
+                [],
+            )
+            .unwrap();
+        for (index, bytes) in station_bytes.iter().enumerate() {
+            let id = format!("test-{index:02}.par");
+            std::fs::write(payload.join(&id), bytes).unwrap();
+            connection
+                .execute(
+                    "INSERT INTO stations VALUES (?1, ?2, ?3, ?4, ?5)",
+                    rusqlite::params![
+                        id,
+                        format!("candidate {index}"),
+                        45.0 + index as f64 / 100.0,
+                        -116.0,
+                        40.0
+                    ],
+                )
+                .unwrap();
+        }
+        drop(connection);
+        root
+    }
 
     fn normals(par: &ParFile) -> NormalsReceipt {
         let model = par.fixed_monthly();
@@ -928,19 +1426,35 @@ mod tests {
         format!("{}\n", rows.join("\n")).into_bytes()
     }
 
+    fn par_with_nonfinite_precipitation_sd() -> Vec<u8> {
+        let source = std::str::from_utf8(PAR).unwrap();
+        let mut rows: Vec<String> = source.lines().map(str::to_owned).collect();
+        rows[4].replace_range(38..44, "1.e999");
+        format!("{}\n", rows.join("\n")).into_bytes()
+    }
+
     fn selection(path: std::path::PathBuf, bytes: &[u8], profile_id: &str) -> SelectionReceipt {
         SelectionReceipt {
-            schema_version: 2,
+            schema_version: 3,
             profile_id: profile_id.to_owned(),
-            selection_method_id: "cligen_prism_rank_sum_v1".to_owned(),
-            collection_name: "us-2015".to_owned(),
-            collection_version: "2026.07".to_owned(),
-            collection_archive_sha256: "0".repeat(64),
+            requested_selection_method_id: "exact_registered_station_id_v1".to_owned(),
+            effective_selection_method_id: "exact_registered_station_id_v1".to_owned(),
+            selection_method_id: "exact_registered_station_id_v1".to_owned(),
+            fallback_applied: false,
+            requested_station_id: Some("test.par".to_owned()),
+            requested_par_path: None,
+            resolved_par_path: None,
+            target_elevation_m: None,
+            collection_name: Some("us-2015".to_owned()),
+            collection_version: Some("2026.07".to_owned()),
+            collection_archive_sha256: Some("0".repeat(64)),
             selected_station_id: "test.par".to_owned(),
+            selected_source_identity: "registered:us-2015@2026.07:test.par".to_owned(),
             selected_source_par_path: path,
             selected_source_par_sha256: crate::quality::sha256_hex(bytes),
             cligen_binary_sha256: "1".repeat(64),
             candidates: Vec::new(),
+            candidate_rejections: Vec::new(),
         }
     }
 
@@ -1001,34 +1515,25 @@ mod tests {
             .join("../../fixtures/new-meadows-id/id106388.par");
         let par = ParFile::parse(PAR).unwrap();
         let result = localize_selected(
-            crate::stations::query::NearestRow {
-                collection: "us-2015".to_owned(),
-                id: "id106388.par".to_owned(),
-                desc: "test".to_owned(),
-                latitude: 45.0,
-                longitude: -116.0,
-                years: 40.0,
-                distance_km: 0.0,
-                path: path.clone(),
+            SelectedSource {
+                row: crate::stations::query::NearestRow {
+                    collection: "us-2015".to_owned(),
+                    id: "id106388.par".to_owned(),
+                    desc: "test".to_owned(),
+                    latitude: 45.0,
+                    longitude: -116.0,
+                    years: 40.0,
+                    distance_km: 0.0,
+                    path: path.clone(),
+                },
+                bytes: PAR.to_vec(),
             },
-            SelectionReceipt {
-                schema_version: 2,
-                profile_id: "stochastic_prism_localized_par_v1".to_owned(),
-                selection_method_id: "cligen_prism_rank_sum_v1".to_owned(),
-                collection_name: "us-2015".to_owned(),
-                collection_version: "2026.07".to_owned(),
-                collection_archive_sha256: "0".repeat(64),
-                selected_station_id: "id106388.par".to_owned(),
-                selected_source_par_path: path,
-                selected_source_par_sha256: crate::quality::sha256_hex(PAR),
-                cligen_binary_sha256: "1".repeat(64),
-                candidates: Vec::new(),
-            },
+            selection(path, PAR, PROFILE_ID),
             &normals(&par),
         )
         .unwrap();
         assert_eq!(result.localization.source_station_id, "id106388.par");
-        assert_eq!(result.selection.schema_version, 2);
+        assert_eq!(result.selection.schema_version, 3);
         assert_eq!(result.localization.schema_version, 1);
         let serialized = serde_json::to_value(&result.localization).unwrap();
         assert!(serialized
@@ -1046,9 +1551,205 @@ mod tests {
             std::path::Path::new("missing"),
             &normals(&par),
             "not-a-hash",
+            StationSource::default(),
         )
         .unwrap_err();
         assert!(error.to_string().contains("binary SHA-256"));
+    }
+
+    #[test]
+    fn automatic_modes_filter_before_selection_and_report_full_pool() {
+        let dry = par_with_month_six(0.0, 0.0, None);
+        let mut stations = vec![PAR.to_vec(); 10];
+        stations[0] = dry;
+        let root = station_cache("automatic", &stations);
+        let par = ParFile::parse(PAR).unwrap();
+        let targets = normals(&par);
+
+        let closest = localize_with_binary_identity(
+            &root,
+            &targets,
+            &"1".repeat(64),
+            StationSource::ClosestLocalizable,
+        )
+        .unwrap();
+        assert_eq!(closest.selection.candidates.len(), 10);
+        assert_eq!(closest.selection.candidate_rejections.len(), 1);
+        assert_eq!(closest.selection.selected_station_id, "test-01.par");
+        assert!(closest.selection.candidates[0].rejection_reason.is_some());
+        assert!(closest
+            .selection
+            .candidates
+            .iter()
+            .all(|candidate| candidate.target_elevation_m.is_none()
+                && candidate.elevation_error_m.is_none()
+                && candidate.elevation_rank.is_none()
+                && candidate.reference_score.is_none()));
+
+        let elevation = localize_with_binary_identity(
+            &root,
+            &targets,
+            &"1".repeat(64),
+            StationSource::ElevationPrismReferenceLocalizable {
+                target_elevation_m: 717.0,
+            },
+        )
+        .unwrap();
+        assert!(elevation.selection.candidates.iter().all(|candidate| {
+            candidate.target_elevation_m == Some(717.0)
+                && candidate.elevation_error_m.is_some()
+                && candidate.elevation_rank.is_some()
+                && candidate.reference_score.is_some()
+        }));
+        assert_eq!(
+            elevation.selection.requested_selection_method_id,
+            "elevation_prism_reference_localizable_v1"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn automatic_selection_fails_when_no_candidate_is_localizable() {
+        let root = station_cache("no-eligible", &vec![par_with_month_six(0.0, 0.0, None); 10]);
+        let par = ParFile::parse(PAR).unwrap();
+        let error = localize_with_binary_identity(
+            &root,
+            &normals(&par),
+            &"1".repeat(64),
+            StationSource::default(),
+        )
+        .unwrap_err();
+        assert!(error.to_string().contains("none of the nearest ten"));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn automatic_selection_fails_on_semantically_corrupt_candidate() {
+        let corrupt = par_with_month_six(1.0, 0.0, None);
+        let mut stations = vec![PAR.to_vec(); 10];
+        stations[0] = corrupt;
+        let root = station_cache("corrupt-candidate", &stations);
+        let par = ParFile::parse(PAR).unwrap();
+        let error = localize_with_binary_identity(
+            &root,
+            &normals(&par),
+            &"1".repeat(64),
+            StationSource::default(),
+        )
+        .unwrap_err();
+        assert!(error
+            .to_string()
+            .contains("invalid source values in month 6"));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn untouched_nonfinite_source_field_is_fatal_for_automatic_and_exact() {
+        let corrupt = par_with_nonfinite_precipitation_sd();
+        let mut stations = vec![PAR.to_vec(); 10];
+        stations[0] = corrupt.clone();
+        let root = station_cache("nonfinite-candidate", &stations);
+        let par = ParFile::parse(PAR).unwrap();
+        let targets = normals(&par);
+        let error = localize_with_binary_identity(
+            &root,
+            &targets,
+            &"1".repeat(64),
+            StationSource::default(),
+        )
+        .unwrap_err();
+        assert!(error.to_string().contains("must be finite"), "{error}");
+
+        let exact_path = root.join("exact-corrupt.par");
+        std::fs::write(&exact_path, corrupt).unwrap();
+        let error = localize_with_binary_identity(
+            &root,
+            &targets,
+            &"1".repeat(64),
+            StationSource::ExactParFile {
+                requested_path: exact_path,
+            },
+        )
+        .unwrap_err();
+        assert!(error.to_string().contains("must be finite"), "{error}");
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn exact_station_id_requires_one_bytewise_catalog_match() {
+        let root = station_cache("exact-id", &[PAR.to_vec()]);
+        let par = ParFile::parse(PAR).unwrap();
+        let targets = normals(&par);
+        let source = StationSource::ExactStationId {
+            station_id: "test-00.par".to_owned(),
+        };
+        let (selected, receipt) =
+            select_station(&root, &targets, &"1".repeat(64), PROFILE_ID, &source).unwrap();
+        assert_eq!(selected.row.id, "test-00.par");
+        assert!(receipt.candidates.is_empty());
+        assert_eq!(
+            receipt.selected_source_identity,
+            "registered:us-2015@2026.07:test-00.par"
+        );
+
+        let missing = StationSource::ExactStationId {
+            station_id: "TEST-00.PAR".to_owned(),
+        };
+        let error =
+            select_station(&root, &targets, &"1".repeat(64), PROFILE_ID, &missing).unwrap_err();
+        assert!(error.to_string().contains("zero exact matches"));
+
+        let database = root.join("stations/us-2015/2026.07/2015_stations.db");
+        let connection = rusqlite::Connection::open(database).unwrap();
+        connection
+            .execute(
+                "INSERT INTO stations VALUES ('test-00.par', 'duplicate', 45.0, -116.0, 40.0)",
+                [],
+            )
+            .unwrap();
+        drop(connection);
+        let error =
+            select_station(&root, &targets, &"1".repeat(64), PROFILE_ID, &source).unwrap_err();
+        assert!(error.to_string().contains("more than one exact match"));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn exact_par_keeps_lexical_and_resolved_paths_and_uses_snapshot() {
+        let root = test_root("exact-par");
+        std::fs::create_dir_all(&root).unwrap();
+        let target = root.join("station.par");
+        let link = root.join("requested.par");
+        std::fs::write(&target, PAR).unwrap();
+        std::os::unix::fs::symlink(&target, &link).unwrap();
+        let par = ParFile::parse(PAR).unwrap();
+        let targets = normals(&par);
+        let source = StationSource::ExactParFile {
+            requested_path: link.clone(),
+        };
+        let (selected, receipt) = select_station(
+            std::path::Path::new("unused"),
+            &targets,
+            &"1".repeat(64),
+            PROFILE_ID,
+            &source,
+        )
+        .unwrap();
+        assert_eq!(receipt.requested_par_path.as_ref(), Some(&link));
+        assert_eq!(
+            receipt.resolved_par_path.as_ref(),
+            Some(&std::fs::canonicalize(&target).unwrap())
+        );
+        assert_eq!(
+            receipt.selected_source_identity,
+            format!("external-par:{}", crate::quality::sha256_hex(PAR))
+        );
+
+        std::fs::write(&target, b"mutated after selection\n").unwrap();
+        let localized = localize_selected(selected, receipt, &targets).unwrap();
+        assert_eq!(localized.source_bytes, PAR);
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
@@ -1095,15 +1796,18 @@ mod tests {
         let path = root.join("test.par");
         std::fs::write(&path, &dry_bytes).unwrap();
         let result = localize_selected_v2(
-            crate::stations::query::NearestRow {
-                collection: "us-2015".to_owned(),
-                id: "test.par".to_owned(),
-                desc: "test".to_owned(),
-                latitude: 33.25,
-                longitude: -116.5,
-                years: 40.0,
-                distance_km: 0.0,
-                path: path.clone(),
+            SelectedSource {
+                row: crate::stations::query::NearestRow {
+                    collection: "us-2015".to_owned(),
+                    id: "test.par".to_owned(),
+                    desc: "test".to_owned(),
+                    latitude: 33.25,
+                    longitude: -116.5,
+                    years: 40.0,
+                    distance_km: 0.0,
+                    path: path.clone(),
+                },
+                bytes: dry_bytes.clone(),
             },
             selection(
                 path,

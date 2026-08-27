@@ -94,6 +94,12 @@ cligen prism run --longitude -117.0 --latitude 46.73 --years 30 \
   --output-dir pullman-prism
 ```
 
+The default is the closest ordinarily localizable donor in the nearest-ten
+pool. Exact `--station-id` and `--station-par` sources and two explicit
+exploratory heuristic modes are documented in the
+[command-line guide](docs/cli-guide.md); no mode silently falls back to
+another selector or donor.
+
 For an air-gapped installation, download the registered
 `prism-normals-runtime-2026.07.tar.gz` release asset and use
 `cligen prism sync --from <directory>`. A separate exact-source asset retains
@@ -101,7 +107,9 @@ all 36 official PRISM ZIPs for audit and reconstruction. Only `sync` can use
 the network; query and generation fail closed unless the registered local
 bundle and the `us-2015` station collection are present. The scientific and
 artifact contract is
-[SPEC-A10-STOCHASTIC-PRISM-COMPARATOR](docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md).
+[SPEC-A10-STOCHASTIC-PRISM-COMPARATOR](docs/specifications/SPEC-A10-STOCHASTIC-PRISM-COMPARATOR.md)
+and
+[SPEC-A12R4-STATION-SOURCE-CLI](docs/specifications/SPEC-A12R4-STATION-SOURCE-CLI.md).
 
 PRISM data attribution: PRISM Group, Oregon State University,
 https://prism.oregonstate.edu, data accessed 2026-07-18. PRISM supplies the
