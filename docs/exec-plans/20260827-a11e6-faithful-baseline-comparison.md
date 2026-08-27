@@ -1,6 +1,6 @@
 # A11E6 Faithful Baseline Comparison ExecPlan
 
-Status: executing
+Status: complete
 
 ## Purpose
 
@@ -11,9 +11,9 @@ scientific authority.
 ## Progress
 
 - [x] Freeze observed-target / faithful-control / circular-treatment framing.
-- [ ] Publish source-bound scaffold on `origin/main`.
-- [ ] Execute and replay the frozen 20-by-eight grid.
-- [ ] Review findings, run gates, and close the package.
+- [x] Publish source-bound scaffold on `origin/main`.
+- [x] Execute and replay the frozen 20-by-eight grid.
+- [x] Review findings, run gates, and close the package.
 
 ## Decisions
 

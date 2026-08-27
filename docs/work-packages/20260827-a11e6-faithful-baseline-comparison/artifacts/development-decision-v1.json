@@ -1,0 +1,160 @@
+{
+  "all_fourteen_medians_noninferior": false,
+  "confirmation_authorized": false,
+  "disposition": "MIXED_VS_FAITHFUL",
+  "interannual_materially_improved_count": 5,
+  "materially_worse_metrics": [
+    "monthly_precipitation_dispersion_error",
+    "annual_precipitation_dispersion_error",
+    "monthly_equivalent_precipitation_mean_relative_absolute_error",
+    "monthly_temperature_mean_absolute_error_c",
+    "monthly_range_mean_relative_absolute_error"
+  ],
+  "metrics": {
+    "annual_precipitation_dispersion_error": {
+      "circular_median": 1.7386038508462018,
+      "faithful_median": 0.6493913006813605,
+      "pair_counts": {
+        "improved_at_least_5pct": 39,
+        "noninferior_at_5pct": 41
+      },
+      "ratio_circular_over_faithful": 2.6772823242658275,
+      "status": "materially_worse"
+    },
+    "annual_precipitation_lag1_error": {
+      "circular_median": 0.28020838070130677,
+      "faithful_median": 0.2714095766664226,
+      "pair_counts": {
+        "improved_at_least_5pct": 80,
+        "noninferior_at_5pct": 85
+      },
+      "ratio_circular_over_faithful": 1.032418915142771,
+      "status": "noninferior"
+    },
+    "annual_precipitation_low_frequency_error": {
+      "circular_median": 0.13892464458711426,
+      "faithful_median": 0.17262186107367147,
+      "pair_counts": {
+        "improved_at_least_5pct": 94,
+        "noninferior_at_5pct": 99
+      },
+      "ratio_circular_over_faithful": 0.804791720602665,
+      "status": "materially_improved"
+    },
+    "annual_temperature_dispersion_error": {
+      "circular_median": 0.5045248202696395,
+      "faithful_median": 2.5002754738315263,
+      "pair_counts": {
+        "improved_at_least_5pct": 160,
+        "noninferior_at_5pct": 160
+      },
+      "ratio_circular_over_faithful": 0.20178769321625376,
+      "status": "materially_improved"
+    },
+    "annual_temperature_lag1_error": {
+      "circular_median": 0.19982486339341032,
+      "faithful_median": 0.3287581262081706,
+      "pair_counts": {
+        "improved_at_least_5pct": 103,
+        "noninferior_at_5pct": 108
+      },
+      "ratio_circular_over_faithful": 0.6078172597530886,
+      "status": "materially_improved"
+    },
+    "annual_temperature_low_frequency_error": {
+      "circular_median": 0.135769911085951,
+      "faithful_median": 0.20936821617022275,
+      "pair_counts": {
+        "improved_at_least_5pct": 103,
+        "noninferior_at_5pct": 108
+      },
+      "ratio_circular_over_faithful": 0.6484743174941411,
+      "status": "materially_improved"
+    },
+    "monthly_equivalent_precipitation_mean_relative_absolute_error": {
+      "circular_median": 0.6923778136504689,
+      "faithful_median": 0.2553871159830617,
+      "pair_counts": {
+        "improved_at_least_5pct": 2,
+        "noninferior_at_5pct": 3
+      },
+      "ratio_circular_over_faithful": 2.711091399365621,
+      "status": "materially_worse"
+    },
+    "monthly_precipitation_dispersion_error": {
+      "circular_median": 2.043176216739787,
+      "faithful_median": 0.7718223882290971,
+      "pair_counts": {
+        "improved_at_least_5pct": 18,
+        "noninferior_at_5pct": 24
+      },
+      "ratio_circular_over_faithful": 2.6472103529255473,
+      "status": "materially_worse"
+    },
+    "monthly_range_mean_relative_absolute_error": {
+      "circular_median": 0.07842633065121571,
+      "faithful_median": 0.0676652214191745,
+      "pair_counts": {
+        "improved_at_least_5pct": 52,
+        "noninferior_at_5pct": 62
+      },
+      "ratio_circular_over_faithful": 1.1590345676308067,
+      "status": "materially_worse"
+    },
+    "monthly_temperature_dispersion_error": {
+      "circular_median": 0.5253544763052624,
+      "faithful_median": 1.756241054610247,
+      "pair_counts": {
+        "improved_at_least_5pct": 160,
+        "noninferior_at_5pct": 160
+      },
+      "ratio_circular_over_faithful": 0.29913574501983814,
+      "status": "materially_improved"
+    },
+    "monthly_temperature_mean_absolute_error_c": {
+      "circular_median": 2.1664122685728238,
+      "faithful_median": 0.6509641636375073,
+      "pair_counts": {
+        "improved_at_least_5pct": 22,
+        "noninferior_at_5pct": 25
+      },
+      "ratio_circular_over_faithful": 3.3280054257782483,
+      "status": "materially_worse"
+    },
+    "monthly_wet_fraction_mean_absolute_error": {
+      "circular_median": 0.04351404007097834,
+      "faithful_median": 0.04284096940824901,
+      "pair_counts": {
+        "improved_at_least_5pct": 73,
+        "noninferior_at_5pct": 82
+      },
+      "ratio_circular_over_faithful": 1.01571091112144,
+      "status": "noninferior"
+    },
+    "precipitation_cross_month_correlation_rmse": {
+      "circular_median": 0.3730919228847491,
+      "faithful_median": 0.37167596058900587,
+      "pair_counts": {
+        "improved_at_least_5pct": 44,
+        "noninferior_at_5pct": 106
+      },
+      "ratio_circular_over_faithful": 1.0038096687595812,
+      "status": "noninferior"
+    },
+    "temperature_cross_month_correlation_rmse": {
+      "circular_median": 0.38470725869591144,
+      "faithful_median": 0.3970988527180177,
+      "pair_counts": {
+        "improved_at_least_5pct": 70,
+        "noninferior_at_5pct": 127
+      },
+      "ratio_circular_over_faithful": 0.9687946869216829,
+      "status": "noninferior"
+    }
+  },
+  "minimum_interannual_improvements": 4,
+  "production_authorized": false,
+  "schema_version": "a11e6-development-decision-1",
+  "science_status": "FAITHFUL_BASELINE_COMPARISON_EVALUATED",
+  "terminal": "EXECUTED-COMPLETE"
+}

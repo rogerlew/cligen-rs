@@ -1,0 +1,62 @@
+{
+  "build": {
+    "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "cargo_toml_sha256": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+    "cargo_version": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "cligen_binary_sha256": "9dc8d7a1699b2ee3941903dcb472819500e54755ea6dbf3e7c3b911b309dd9d7",
+    "command": "cargo build --release --locked --bin cligen --target-dir <deterministic-runtime>/build",
+    "rustc_version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "rustflags": ""
+  },
+  "confirmation_target_series_accessed": false,
+  "elapsed_seconds": 238.4924547090195,
+  "execution_id": "a11e6-faithful-baseline-comparison-v1",
+  "inherited_input_hashes": {
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+    "inherited": {
+      "candidate_shard_set": "f9a016ec7c637c9bbbb79bc1f1cf1c06e879d95e8b03f79a84f3c768fb257812",
+      "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+      "daymet_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+      "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+      "development_object_set": "531566ccb96d6d1b1fb6c0201e673112d4ae32d468c1f879949cf3c724cf76b8",
+      "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40"
+    },
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9"
+  },
+  "outputs": {
+    "calendar-missingness-preflight-v1.json": {
+      "bytes": 1365,
+      "sha256": "b671b95d5c3cda901c5dd82e6ec67b83e8b8e5b8af2c6f559835f93d042a8f5c"
+    },
+    "development-decision-v1.json": {
+      "bytes": 5519,
+      "sha256": "0bc147cdeb3cf422c25bd9b0fb02df89e576e97d930f265decda26dedc1084be"
+    },
+    "development-evidence-v1.json": {
+      "bytes": 2151705,
+      "sha256": "debe78506bfa2a8184b68e32b55bc6ce05907c3bf392cea9699c914247d0bb3b"
+    }
+  },
+  "published_ref": "origin/main",
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": "a11e6-execution-receipt-1",
+  "source_commit": "2ae1d5d9204781a54e6f3762624d215958b26597",
+  "source_hashes": {
+    "docs/exec-plans/20260827-a11e6-faithful-baseline-comparison.md": "7f40f51193595e82c6ae579b39b7c2228aeda18bb61a77b163466a48c3c2ea7b",
+    "docs/specifications/SPEC-A11-FAITHFUL-BASELINE-COMPARISON.md": "1889a0505c370cb3493beb0a9e2655c4176f12689e08078aa985ecf066da8dfe",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/artifacts/execute.py": "e2019f81772f815909b01a237ca2cad6af744624cff2b369880880c51450fcec",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/artifacts/execution-manifest-v1.json": "cd0f287fbf643cf0d865c09a98d26ea2bccc79d4b6200ed9138009b6a1ba5752",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/artifacts/execution-manifest-v1.schema.json": "2d19d75c9a341214d39f460f70a0ae6556bd18ff98298ca79c78765f6c9e90db",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/artifacts/test_execute.py": "a72b3b0d25a440145e8f86cfe4fdfe83fd02259bc84768ecb41ce61c364cb569",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/package.md": "a3fa1f815f622c4aade3ff1e1837ef2ca82a2428244ec13f7392004f9f03faa0"
+  },
+  "source_tree": "f4856111e0325567f44e0bc8374cd9a4a8c8bc25",
+  "station_database_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211",
+  "stream_count": 160
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "a11e6-replay-preflight-1",
+  "source_commit": "2ae1d5d9204781a54e6f3762624d215958b26597",
+  "first_execution_receipt_sha256": "2f03c25ce05980ce550f6c7e8b95964bb446e5697b9b9482b36d771674b67abe",
+  "replay_execution_receipt_sha256": "aa3b72057f31631b27059813d2ef16b6c9761955b193dd5f0c9abdb61f8dfc8f",
+  "cligen_binary_sha256_first": "9dc8d7a1699b2ee3941903dcb472819500e54755ea6dbf3e7c3b911b309dd9d7",
+  "cligen_binary_sha256_replay": "9dc8d7a1699b2ee3941903dcb472819500e54755ea6dbf3e7c3b911b309dd9d7",
+  "scientific_outputs": {
+    "calendar-missingness-preflight-v1.json": "b671b95d5c3cda901c5dd82e6ec67b83e8b8e5b8af2c6f559835f93d042a8f5c",
+    "development-evidence-v1.json": "debe78506bfa2a8184b68e32b55bc6ce05907c3bf392cea9699c914247d0bb3b",
+    "development-decision-v1.json": "0bc147cdeb3cf422c25bd9b0fb02df89e576e97d930f265decda26dedc1084be"
+  },
+  "scientific_outputs_byte_identical": true,
+  "binary_byte_identical": true,
+  "confirmation_target_series_accessed": false,
+  "valid": true
+}

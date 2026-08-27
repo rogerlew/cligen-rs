@@ -841,11 +841,14 @@ confirmation and production remain unauthorized.
 **A11E5D directional diagnostic complete (2026-08-27):**
 [A11E5D directional error attribution](work-packages/20260827-a11e5d-directional-error-attribution/package.md)
 
-**A11E6 faithful-baseline comparison executing (2026-08-27):**
+**A11E6 faithful-baseline comparison complete (2026-08-27):**
 [A11E6 faithful baseline comparison](work-packages/20260827-a11e6-faithful-baseline-comparison/package.md)
 uses observations as the target, faithful/legacy CLIGEN as the operational
-control, and circular block as the treatment. It freezes 160 exact `.par` and
-burn runs with binary and per-stream cryptographic provenance.
+control, and circular block as the treatment. The 160-stream authenticated
+comparison closed `MIXED_VS_FAITHFUL`: circular improves five temporal metrics
+but materially worsens precipitation dispersion and monthly precipitation,
+temperature, and range preservation. Successors must retain faithful as the
+operational control and isolate temporal gains without those regressions.
 replayed all 320 closed streams exactly and established systematic annual
 temperature underdispersion: circular block has 0.802 times observed variance
 geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
