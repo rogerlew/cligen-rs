@@ -826,15 +826,17 @@ frozen exact max-|t| and stability gates. The terminal disposition is
 `NO_STABLE_METADATA_ASSOCIATION`: no distance/regime selector refinement is
 supported, confirmation remains sealed, and there is no automatic successor.
 
-**A11E5 full-family evaluation authorized (2026-08-27):**
+**A11E5 full-family evaluation complete (2026-08-27):**
 [A11E5 full interannual family stability](work-packages/20260827-a11e5-interannual-family-stability/package.md)
-prospectively compares the circular-block and Gaussian annual/monthly laws over
-eight members with nearest forcing and the daily core fixed. It evaluates ten
-monthly/annual dispersion, covariance, persistence, and low-frequency errors.
-The frozen exploratory criterion distinguishes universal viability (at least
-one-third materially improved, no materially worse pairs, and every aggregate
-metric noninferior) from a mixed result that would require a separately
-prospective router. Confirmation and production remain unauthorized.
+executed 320 streams from published source `2eb5748`. Circular block materially
+improved 142/160 station/member family scores and strongly improved monthly and
+annual precipitation dispersion, but 9 pairs materially worsened. Annual
+temperature dispersion was 46.4% worse at the aggregate median and annual
+precipitation lag-one error was 5.7% worse, so the result is
+`NOT_VIABLE_ON_FROZEN_CRITERION`. Member 0's favorable temperature result did
+not persist across members 1--7. A future bounded field-wise or dependence
+successor must preserve cross-variable coherence and repeat noninferiority;
+confirmation and production remain unauthorized.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

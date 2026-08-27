@@ -1,0 +1,8 @@
+{
+  "candidate_fit_only": true,
+  "confirmation_target_series_accessed": false,
+  "fit_sha256": "847dfcd6150c64d53275d20647121b816809e4cb9e1bfde96360e74bfc6b94ed",
+  "nearest_locations_sha256": "b5ee091b36a9b6b98c45167b1d0ce3ea9a8c022c6bec37faac26831287d6a14d",
+  "schema_version": "a11e5-fit-authentication-1",
+  "selection_receipt_sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6"
+}

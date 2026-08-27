@@ -1,6 +1,6 @@
 # A11E5 — Full Interannual Family Stability
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — NOT_VIABLE_ON_FROZEN_CRITERION`
 
 Date: 2026-08-27
 
@@ -59,3 +59,33 @@ streams and compact JSON. No external service or scarce accelerator is used.
 Close with one frozen scientific disposition or an exact integrity HOLD.
 Neither a universal nor mixed exploratory result authorizes production or
 outcome-informed routing.
+
+## Outcome
+
+Published source `2eb57485c53d6a85af0cd8ce502314769fe50702`
+authenticated the inherited A11E inputs, repeated the canonical calendar and
+missingness preflight, and completed all 160 paired station/member rows and 320
+daily-core streams. Metrics were finite, daily invariant failures were zero,
+confirmation access was false, and the four scientific outputs replayed
+byte-identically.
+
+The circular-block treatment materially improved the ten-metric family score
+in 142/160 pairs (88.75%), was neutral in 9, and materially worsened 9. It
+comfortably passed the one-third benefit threshold. Precipitation dispersion
+improved strongly: the monthly median error ratio was 0.632 and the annual
+ratio was 0.333 relative to Gaussian. Eight of ten aggregate metric medians
+were within the frozen 5% noninferiority bound.
+
+The universal criterion nevertheless failed. Annual temperature dispersion
+had a treatment/control median ratio of 1.464, and annual precipitation
+lag-one error narrowly exceeded the bound at 1.057. The original member-0
+temperature result (0.254 treatment versus 0.412 control) did not persist:
+members 1--7 all had higher treatment medians. The terminal scientific
+disposition is therefore `NOT_VIABLE_ON_FROZEN_CRITERION`, not a HOLD.
+
+The result supports a bounded successor hypothesis, not immediate routing:
+retain the circular-block precipitation mechanism while using a separately
+prospective temperature/dependence treatment that preserves cross-variable
+coherence. Any hybrid must be specified before seeing its outputs and must
+repeat the same noninferiority audit. No production or confirmation action is
+authorized.

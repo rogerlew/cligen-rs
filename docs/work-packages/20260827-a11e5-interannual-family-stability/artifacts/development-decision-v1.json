@@ -1,0 +1,201 @@
+{
+  "all_metric_medians_aggregate_noninferior": false,
+  "confirmation_authorized": false,
+  "disposition": "NOT_VIABLE_ON_FROZEN_CRITERION",
+  "execution_id": "a11e5-interannual-family-stability-v1",
+  "improvement_fraction": 0.8875,
+  "metrics": {
+    "annual_precipitation_dispersion_error": {
+      "aggregate_noninferior": true,
+      "control_median": 5.214812721933978,
+      "ratio_treatment_over_control": 0.3333971790652185,
+      "treatment_median": 1.7386038508462018
+    },
+    "annual_precipitation_lag1_error": {
+      "aggregate_noninferior": false,
+      "control_median": 0.26516527617302393,
+      "ratio_treatment_over_control": 1.0567310499526605,
+      "treatment_median": 0.28020838070130677
+    },
+    "annual_precipitation_low_frequency_error": {
+      "aggregate_noninferior": true,
+      "control_median": 0.18705271293097067,
+      "ratio_treatment_over_control": 0.7427031792817812,
+      "treatment_median": 0.13892464458711426
+    },
+    "annual_temperature_dispersion_error": {
+      "aggregate_noninferior": false,
+      "control_median": 0.3447325896772358,
+      "ratio_treatment_over_control": 1.4635251652360834,
+      "treatment_median": 0.5045248202696395
+    },
+    "annual_temperature_lag1_error": {
+      "aggregate_noninferior": true,
+      "control_median": 0.24362798686375625,
+      "ratio_treatment_over_control": 0.8202048786174887,
+      "treatment_median": 0.19982486339341032
+    },
+    "annual_temperature_low_frequency_error": {
+      "aggregate_noninferior": true,
+      "control_median": 0.17253182048684218,
+      "ratio_treatment_over_control": 0.7869267866231391,
+      "treatment_median": 0.135769911085951
+    },
+    "monthly_precipitation_dispersion_error": {
+      "aggregate_noninferior": true,
+      "control_median": 3.2334302790349474,
+      "ratio_treatment_over_control": 0.6318912240005358,
+      "treatment_median": 2.043176216739787
+    },
+    "monthly_temperature_dispersion_error": {
+      "aggregate_noninferior": true,
+      "control_median": 0.5405104819123296,
+      "ratio_treatment_over_control": 0.9719598303562123,
+      "treatment_median": 0.5253544763052624
+    },
+    "precipitation_cross_month_correlation_rmse": {
+      "aggregate_noninferior": true,
+      "control_median": 0.37263018955311433,
+      "ratio_treatment_over_control": 1.0012391194932126,
+      "treatment_median": 0.3730919228847491
+    },
+    "temperature_cross_month_correlation_rmse": {
+      "aggregate_noninferior": true,
+      "control_median": 0.3822368053559143,
+      "ratio_treatment_over_control": 1.0064631487742182,
+      "treatment_median": 0.38470725869591144
+    }
+  },
+  "minimum_improvement_fraction_met": true,
+  "pair_counts": {
+    "materially_improved": 142,
+    "materially_worse": 9,
+    "neutral": 9
+  },
+  "production_authorized": false,
+  "schema_version": "a11e5-development-decision-1",
+  "science_status": "EXPLORATORY_INTERANNUAL_FAMILY_EVALUATED",
+  "station_summaries": [
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "az026481"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "az028820"
+    },
+    {
+      "materially_improved_members": 6,
+      "materially_worse_members": 1,
+      "neutral_members": 1,
+      "station_id": "ca040442"
+    },
+    {
+      "materially_improved_members": 6,
+      "materially_worse_members": 0,
+      "neutral_members": 2,
+      "station_id": "ca042713"
+    },
+    {
+      "materially_improved_members": 7,
+      "materially_worse_members": 1,
+      "neutral_members": 0,
+      "station_id": "co050130"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "id101022"
+    },
+    {
+      "materially_improved_members": 2,
+      "materially_worse_members": 2,
+      "neutral_members": 4,
+      "station_id": "la160549"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "me171175"
+    },
+    {
+      "materially_improved_members": 7,
+      "materially_worse_members": 1,
+      "neutral_members": 0,
+      "station_id": "mn212248"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "mt243996"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "ne257665"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "nm290234"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "nv262631"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "nv264436"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "nv269171"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "or350412"
+    },
+    {
+      "materially_improved_members": 4,
+      "materially_worse_members": 2,
+      "neutral_members": 2,
+      "station_id": "sc381544"
+    },
+    {
+      "materially_improved_members": 8,
+      "materially_worse_members": 0,
+      "neutral_members": 0,
+      "station_id": "tx413280"
+    },
+    {
+      "materially_improved_members": 7,
+      "materially_worse_members": 1,
+      "neutral_members": 0,
+      "station_id": "tx417262"
+    },
+    {
+      "materially_improved_members": 7,
+      "materially_worse_members": 1,
+      "neutral_members": 0,
+      "station_id": "wy487845"
+    }
+  ],
+  "terminal": "EXECUTED-COMPLETE"
+}

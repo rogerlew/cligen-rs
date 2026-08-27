@@ -9,14 +9,17 @@ from a mixed result that would require a future prospective router.
 ## Progress
 
 - [x] 2026-08-27: objective and frozen decision recorded.
-- [ ] Publish prospective source.
-- [ ] Execute and replay the observed development grid.
-- [ ] Review evidence and run repository gates.
-- [ ] Reconcile package, catalog, roadmap, and outcome.
+- [x] 2026-08-27: Published prospective source `2eb5748`.
+- [x] 2026-08-27: Executed and byte-identically replayed the 320-stream grid.
+- [x] 2026-08-27: Reviewed evidence and ran repository gates.
+- [x] 2026-08-27: Reconciled package, catalog, roadmap, and outcome.
 
 ## Surprises & Discoveries
 
-None yet.
+- Member 0 repeated A11E1's favorable annual-temperature dispersion result,
+  but all seven additional members reversed it.
+- Circular block improved 88.75% of combined family scores despite failing two
+  of ten aggregate metric noninferiority conditions.
 
 ## Decision Log
 
@@ -27,7 +30,11 @@ None yet.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+Execution was complete, deterministic, and integrity-clean. The treatment
+strongly improved precipitation dispersion but was not universally viable
+because annual temperature dispersion and precipitation lag-one error missed
+the frozen aggregate bounds. The next falsifiable direction is a prospective
+field-wise/dependence composition, not an outcome-selected station router.
 
 ## Context and Orientation
 

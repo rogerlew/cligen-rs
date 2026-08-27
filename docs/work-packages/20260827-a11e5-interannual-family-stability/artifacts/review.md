@@ -26,4 +26,23 @@ limitations. No P0/P1 finding remains before publication.
 
 ## Evidence review
 
-Pending observed execution.
+Disposition: `GO — NOT_VIABLE_ON_FROZEN_CRITERION reproduced`
+
+The published source identity, three inherited dependency hashes, canonical
+calendar/missingness receipts, 20x8 paired roster, 320 stream count, finite
+metrics, zero daily invariants, and confirmation=false were reproduced. The
+four scientific artifacts replayed byte-identically.
+
+Decision arithmetic reproduces 142 materially improved, 9 neutral, and 9
+materially worse family-score pairs. The one-third benefit gate passes. Eight
+metric medians pass aggregate noninferiority; annual temperature dispersion
+(ratio 1.4635) and annual precipitation lag-one error (ratio 1.0567) do not.
+The recorded terminal follows the frozen rule.
+
+Member-stratified inspection explains the discrepancy with A11E1: member 0
+again favors circular block for annual temperature dispersion (0.2537 versus
+0.4124), while every member 1--7 favors Gaussian at the across-site median.
+This is a stability finding, not an implementation failure. The proposed
+field-wise/dependence successor is properly left prospective because directly
+splicing precipitation and temperature streams could break their registered
+cross-variable covariance. No unresolved P0/P1 finding remains.
