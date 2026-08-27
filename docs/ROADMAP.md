@@ -838,12 +838,17 @@ not persist across members 1--7. A future bounded field-wise or dependence
 successor must preserve cross-variable coherence and repeat noninferiority;
 confirmation and production remain unauthorized.
 
-**A11E5D directional diagnostic authorized (2026-08-27):**
+**A11E5D directional diagnostic complete (2026-08-27):**
 [A11E5D directional error attribution](work-packages/20260827-a11e5d-directional-error-attribution/package.md)
-will replay the exact A11E5 grid and restore signed monthly/annual variance
-ratios plus signed persistence and low-frequency residuals. It will distinguish
-systematic over/underdispersion from unbiased scatter and quantify circular
-block variance relative to Gaussian before any hybrid is designed.
+replayed all 320 closed streams exactly and established systematic annual
+temperature underdispersion: circular block has 0.802 times observed variance
+geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
+0.878 times Gaussian variance directly. Monthly temperature variance is nearly
+unchanged between arms, localizing the regression to annual/cross-month
+aggregation. Both precipitation arms are overdispersed, but circular block
+reduces the geometric annual variance ratio from 167 to 5.80 and the monthly
+ratio from 7.58 to 1.23. A bounded covariance-decomposition successor should
+precede hybrid design; confirmation and production remain unauthorized.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

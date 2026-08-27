@@ -1,0 +1,51 @@
+{
+  "analysis_id": "a11e5d-directional-error-attribution-v1",
+  "confirmation_target_series_accessed": false,
+  "elapsed_seconds": 268.2782199580106,
+  "inherited_input_hashes": {
+    "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+    "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+    "inherited": {
+      "candidate_shard_set": "f9a016ec7c637c9bbbb79bc1f1cf1c06e879d95e8b03f79a84f3c768fb257812",
+      "cohort_selection": "af20d8b44cbbffced284b7f9a1105335567ae9cf924e897d54fa9bd8d4f39c5b",
+      "daymet_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9",
+      "development_manifest": "8c8e4c2dbcb70f40c0f4d0a6cfd3dd12f0fc1cbb6f0b47bc36653bc2c44fa46b",
+      "development_object_set": "531566ccb96d6d1b1fb6c0201e673112d4ae32d468c1f879949cf3c724cf76b8",
+      "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40"
+    },
+    "normalized_manifest": "32edc2bf5dd14f5e7c7c47b5354f8d95dd4f601ea14f92fae734694177724f40",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "shard_manifest": "552a88870014e5f50f1ad0acf17aa72495509b5ddc3f30461b7a744b0de6e7d9"
+  },
+  "outputs": {
+    "directional-decision-v1.json": {
+      "bytes": 19598,
+      "sha256": "3d12659ae3a19e387c47d0918e8b5801eb0d8a37549ccdc8f7eb1457c5f20bb7"
+    },
+    "directional-evidence-v1.json": {
+      "bytes": 2818662,
+      "sha256": "47c30b45116a962862be08aaa56b684df478591a7866124629df35b38aa4ae6c"
+    },
+    "replay-preflight-v1.json": {
+      "bytes": 1381,
+      "sha256": "4c1d396abfb8dbdb3c552bd56132e5d5b66461c8f9748de1cc159327af768c2d"
+    }
+  },
+  "paired_rows": 160,
+  "published_ref": "origin/main",
+  "runtime": {
+    "numpy": "2.3.5",
+    "python": "3.12.13"
+  },
+  "schema_version": "a11e5d-execution-receipt-1",
+  "source_commit": "a5e896a61db61d0b057684859c2b78ef2576d86e",
+  "source_hashes": {
+    "docs/specifications/SPEC-A11-DIRECTIONAL-ERROR-ATTRIBUTION.md": "e4b2abc2d433dfecc5f918d01d3ac4a373ecbaded1619b652a5e3b3bf4e0ac52",
+    "docs/work-packages/20260827-a11e5d-directional-error-attribution/artifacts/analysis-manifest-v1.json": "476f25d4683138f69377801be3678dceefe41a9d34c83b0c45daa97e9a0ded00",
+    "docs/work-packages/20260827-a11e5d-directional-error-attribution/artifacts/analysis-manifest-v1.schema.json": "95ef18b237bc6c9f99404f453bed06c646436e29e43d64566293dc48aa386a74",
+    "docs/work-packages/20260827-a11e5d-directional-error-attribution/artifacts/analyze.py": "c2830bb13315409720ae0a7d05fcad318836c6e80434baec0fa33b9cdcc3e560",
+    "docs/work-packages/20260827-a11e5d-directional-error-attribution/artifacts/test_analyze.py": "333a208bbe091a99727cca85ed1a82479ba1955c4ec73cc6ce31f1e8d7bdd839",
+    "docs/work-packages/20260827-a11e5d-directional-error-attribution/package.md": "68b6c1e9c80378d17d13c5d33933da345bb6756bda41c5c942a8a8cd27b551e7"
+  },
+  "stream_count": 320
+}

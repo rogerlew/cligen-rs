@@ -1,0 +1,480 @@
+{
+  "a11e5_disposition_unchanged": "NOT_VIABLE_ON_FROZEN_CRITERION",
+  "analysis_id": "a11e5d-directional-error-attribution-v1",
+  "confirmation_authorized": false,
+  "hybrid_authorized": false,
+  "production_authorized": false,
+  "schema_version": "a11e5d-directional-decision-1",
+  "science_status": "DIRECTIONAL_ERROR_ATTRIBUTED",
+  "summary": {
+    "dependence": {
+      "annual_lag_one": {
+        "precipitation": {
+          "control": {
+            "mean_absolute_residual": 0.2891592119830927,
+            "mean_signed_residual": -0.03531034967753284,
+            "median_signed_residual": 0.016646745009887387,
+            "negative_count": 77,
+            "positive_count": 83
+          },
+          "treatment": {
+            "mean_absolute_residual": 0.28741394399245035,
+            "mean_signed_residual": 0.024384274710388544,
+            "median_signed_residual": 0.05002262203709119,
+            "negative_count": 67,
+            "positive_count": 93
+          }
+        },
+        "temperature": {
+          "control": {
+            "mean_absolute_residual": 0.3224274309045833,
+            "mean_signed_residual": -0.26791112380720083,
+            "median_signed_residual": -0.23094867920950962,
+            "negative_count": 130,
+            "positive_count": 30
+          },
+          "treatment": {
+            "mean_absolute_residual": 0.24562286515284776,
+            "mean_signed_residual": -0.08555090939960769,
+            "median_signed_residual": -0.04711784087156476,
+            "negative_count": 88,
+            "positive_count": 72
+          }
+        }
+      },
+      "annual_low_frequency": {
+        "precipitation": {
+          "control": {
+            "mean_absolute_residual": 0.19257461346805022,
+            "mean_signed_residual": -0.019957306137214643,
+            "median_signed_residual": -0.03542769820033159,
+            "negative_count": 88,
+            "positive_count": 72
+          },
+          "treatment": {
+            "mean_absolute_residual": 0.173873902640475,
+            "mean_signed_residual": 0.01039040260107461,
+            "median_signed_residual": 0.006162969588625555,
+            "negative_count": 76,
+            "positive_count": 84
+          }
+        },
+        "temperature": {
+          "control": {
+            "mean_absolute_residual": 0.21428162497050435,
+            "mean_signed_residual": -0.14682100371581538,
+            "median_signed_residual": -0.12906521241463265,
+            "negative_count": 117,
+            "positive_count": 43
+          },
+          "treatment": {
+            "mean_absolute_residual": 0.1666687304833249,
+            "mean_signed_residual": -0.038947587112751314,
+            "median_signed_residual": -0.016736377330929475,
+            "negative_count": 87,
+            "positive_count": 73
+          }
+        }
+      }
+    },
+    "dispersion": {
+      "annual_precipitation_variance": {
+        "circular_block_vs_gaussian": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.9897593291404423,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 5,
+            "underdispersed_more_than_5pct": 154,
+            "within_5pct": 1
+          },
+          "geometric_mean_variance_ratio": 0.03465459957994415,
+          "mean_absolute_log_variance_ratio": 3.397113539779427,
+          "mean_signed_log_variance_ratio": -3.362324818145999,
+          "median_signed_log_variance_ratio": -3.110629690703612,
+          "median_variance_ratio": 0.044572879373839774,
+          "most_overdispersed": {
+            "generated_variance": 92623.78637435337,
+            "member_id": 3,
+            "month": null,
+            "observed_variance": 32203.48200642597,
+            "signed_log_variance_ratio": 1.0564713974098054,
+            "station_id": "wy487845",
+            "variance_ratio": 2.8762040811571548
+          },
+          "most_underdispersed": {
+            "generated_variance": 6823.192834132404,
+            "member_id": 5,
+            "month": null,
+            "observed_variance": 29330809206.41297,
+            "signed_log_variance_ratio": -15.273821510489242,
+            "station_id": "nv264436",
+            "variance_ratio": 2.3262886428106292e-07
+          },
+          "semantics": "positive means circular-block generated variance exceeds Gaussian generated variance"
+        },
+        "circular_block_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.8639353919393956,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 122,
+            "underdispersed_more_than_5pct": 36,
+            "within_5pct": 2
+          },
+          "geometric_mean_variance_ratio": 5.799219020910747,
+          "mean_absolute_log_variance_ratio": 2.0345540573041228,
+          "mean_signed_log_variance_ratio": 1.757723256918925,
+          "median_signed_log_variance_ratio": 1.7386038508462018,
+          "median_variance_ratio": 5.689394631613655,
+          "most_overdispersed": {
+            "generated_variance": 10245184.899591226,
+            "member_id": 5,
+            "month": null,
+            "observed_variance": 2423.016945324552,
+            "signed_log_variance_ratio": 8.349549672957954,
+            "station_id": "az026481",
+            "variance_ratio": 4228.27620721362
+          },
+          "most_underdispersed": {
+            "generated_variance": 1022.0844923499758,
+            "member_id": 5,
+            "month": null,
+            "observed_variance": 5373.940029687257,
+            "signed_log_variance_ratio": -1.659717188890879,
+            "station_id": "ca040442",
+            "variance_ratio": 0.19019276112194672
+          }
+        },
+        "gaussian_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.9978088568193754,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 155,
+            "underdispersed_more_than_5pct": 3,
+            "within_5pct": 2
+          },
+          "geometric_mean_variance_ratio": 167.3434144732395,
+          "mean_absolute_log_variance_ratio": 5.131291469375844,
+          "mean_signed_log_variance_ratio": 5.120048075064924,
+          "median_signed_log_variance_ratio": 5.214812721933978,
+          "median_variance_ratio": 183.97736282841694,
+          "most_overdispersed": {
+            "generated_variance": 29330809206.41297,
+            "member_id": 5,
+            "month": null,
+            "observed_variance": 1954.2343981794963,
+            "signed_log_variance_ratio": 16.52415052573765,
+            "station_id": "nv264436",
+            "variance_ratio": 15008849.109265843
+          },
+          "most_underdispersed": {
+            "generated_variance": 28719.931584851467,
+            "member_id": 6,
+            "month": null,
+            "observed_variance": 47787.305821773145,
+            "signed_log_variance_ratio": -0.5091686736115467,
+            "station_id": "sc381544",
+            "variance_ratio": 0.6009949941929121
+          }
+        }
+      },
+      "annual_temperature_variance": {
+        "circular_block_vs_gaussian": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.28663343515028616,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 61,
+            "underdispersed_more_than_5pct": 88,
+            "within_5pct": 11
+          },
+          "geometric_mean_variance_ratio": 0.8784863576377363,
+          "mean_absolute_log_variance_ratio": 0.4519880960927555,
+          "mean_signed_log_variance_ratio": -0.12955490063010414,
+          "median_signed_log_variance_ratio": -0.15463273202050526,
+          "median_variance_ratio": 0.856729769121638,
+          "most_overdispersed": {
+            "generated_variance": 0.6453310396821155,
+            "member_id": 4,
+            "month": null,
+            "observed_variance": 0.1232056370227632,
+            "signed_log_variance_ratio": 1.6559086198429136,
+            "station_id": "az028820",
+            "variance_ratio": 5.237836963278601
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.18743298252273063,
+            "member_id": 2,
+            "month": null,
+            "observed_variance": 0.9074583932860735,
+            "signed_log_variance_ratio": -1.5772263624963836,
+            "station_id": "mt243996",
+            "variance_ratio": 0.20654719148500172
+          },
+          "semantics": "positive means circular-block generated variance exceeds Gaussian generated variance"
+        },
+        "circular_block_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.42871720705845934,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 50,
+            "underdispersed_more_than_5pct": 100,
+            "within_5pct": 10
+          },
+          "geometric_mean_variance_ratio": 0.8016076457805964,
+          "mean_absolute_log_variance_ratio": 0.5158085724266817,
+          "mean_signed_log_variance_ratio": -0.221136010547578,
+          "median_signed_log_variance_ratio": -0.24899081759511352,
+          "median_variance_ratio": 0.7795871318365233,
+          "most_overdispersed": {
+            "generated_variance": 0.6453310396821155,
+            "member_id": 4,
+            "month": null,
+            "observed_variance": 0.22864517644337182,
+            "signed_log_variance_ratio": 1.0375920708775181,
+            "station_id": "az028820",
+            "variance_ratio": 2.822412655803144
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.0825960652261976,
+            "member_id": 1,
+            "month": null,
+            "observed_variance": 0.593012178484634,
+            "signed_log_variance_ratio": -1.9712528929548574,
+            "station_id": "la160549",
+            "variance_ratio": 0.1392822411122503
+          }
+        },
+        "gaussian_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.22291623342559339,
+          "count": 160,
+          "counts": {
+            "overdispersed_more_than_5pct": 65,
+            "underdispersed_more_than_5pct": 81,
+            "within_5pct": 14
+          },
+          "geometric_mean_variance_ratio": 0.9124873013806748,
+          "mean_absolute_log_variance_ratio": 0.4108319457498931,
+          "mean_signed_log_variance_ratio": -0.0915811099174739,
+          "median_signed_log_variance_ratio": -0.06583109027510724,
+          "median_variance_ratio": 0.9362889992532605,
+          "most_overdispersed": {
+            "generated_variance": 1.671162622626302,
+            "member_id": 7,
+            "month": null,
+            "observed_variance": 0.49175656813250535,
+            "signed_log_variance_ratio": 1.2232910305727276,
+            "station_id": "co050130",
+            "variance_ratio": 3.39835343526312
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.1676102838152645,
+            "member_id": 1,
+            "month": null,
+            "observed_variance": 0.593012178484634,
+            "signed_log_variance_ratio": -1.263573390415224,
+            "station_id": "la160549",
+            "variance_ratio": 0.28264222877103634
+          }
+        }
+      },
+      "monthly_precipitation_variance": {
+        "circular_block_vs_gaussian": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.7663277826492464,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 403,
+            "underdispersed_more_than_5pct": 1468,
+            "within_5pct": 49
+          },
+          "geometric_mean_variance_ratio": 0.16251641794569197,
+          "mean_absolute_log_variance_ratio": 2.3710170633805387,
+          "mean_signed_log_variance_ratio": -1.8169762488039358,
+          "median_signed_log_variance_ratio": -1.238638045471745,
+          "median_variance_ratio": 0.2897786145992724,
+          "most_overdispersed": {
+            "generated_variance": 1968654.881763001,
+            "member_id": 5,
+            "month": 6,
+            "observed_variance": 5.517321699050696,
+            "signed_log_variance_ratio": 12.784968523269452,
+            "station_id": "az026481",
+            "variance_ratio": 356813.50284536154
+          },
+          "most_underdispersed": {
+            "generated_variance": 7.283137320378823,
+            "member_id": 7,
+            "month": 12,
+            "observed_variance": 117492465.24288727,
+            "signed_log_variance_ratio": -16.596323043922364,
+            "station_id": "ca042713",
+            "variance_ratio": 6.198812243255514e-08
+          },
+          "semantics": "positive means circular-block generated variance exceeds Gaussian generated variance"
+        },
+        "circular_block_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.10342517194349271,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 1044,
+            "underdispersed_more_than_5pct": 840,
+            "within_5pct": 36
+          },
+          "geometric_mean_variance_ratio": 1.232158281437842,
+          "mean_absolute_log_variance_ratio": 2.018535025169818,
+          "mean_signed_log_variance_ratio": 0.20876733205215084,
+          "median_signed_log_variance_ratio": 0.26790901914999954,
+          "median_variance_ratio": 1.3072282018715204,
+          "most_overdispersed": {
+            "generated_variance": 2954112.771807728,
+            "member_id": 5,
+            "month": 4,
+            "observed_variance": 26.20976682030527,
+            "signed_log_variance_ratio": 11.63257679660915,
+            "station_id": "az026481",
+            "variance_ratio": 112710.37976267356
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.022192691921430353,
+            "member_id": 2,
+            "month": 8,
+            "observed_variance": 197.7770054381219,
+            "signed_log_variance_ratio": -9.095132397882224,
+            "station_id": "or350412",
+            "variance_ratio": 0.00011221067824476567
+          }
+        },
+        "gaussian_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.6298838092295169,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 1374,
+            "underdispersed_more_than_5pct": 525,
+            "within_5pct": 21
+          },
+          "geometric_mean_variance_ratio": 7.581746490681279,
+          "mean_absolute_log_variance_ratio": 3.216059138484613,
+          "mean_signed_log_variance_ratio": 2.0257435808560866,
+          "median_signed_log_variance_ratio": 1.6251779883439927,
+          "median_variance_ratio": 5.079323017021161,
+          "most_overdispersed": {
+            "generated_variance": 29152812155.72423,
+            "member_id": 5,
+            "month": 2,
+            "observed_variance": 298.6733593112626,
+            "signed_log_variance_ratio": 18.39646668452028,
+            "station_id": "nv264436",
+            "variance_ratio": 97607674.89591388
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.005953215740987061,
+            "member_id": 2,
+            "month": 7,
+            "observed_variance": 80.69108466516403,
+            "signed_log_variance_ratio": -9.514451838894912,
+            "station_id": "id101022",
+            "variance_ratio": 7.377786239571008e-05
+          }
+        }
+      },
+      "monthly_temperature_variance": {
+        "circular_block_vs_gaussian": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.0225829143998348,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 872,
+            "underdispersed_more_than_5pct": 898,
+            "within_5pct": 150
+          },
+          "geometric_mean_variance_ratio": 0.9906617315366923,
+          "mean_absolute_log_variance_ratio": 0.4154531733165607,
+          "mean_signed_log_variance_ratio": -0.009382143450147621,
+          "median_signed_log_variance_ratio": -0.0027565651250387457,
+          "median_variance_ratio": 0.9972472307119805,
+          "most_overdispersed": {
+            "generated_variance": 3.089003440279414,
+            "member_id": 6,
+            "month": 9,
+            "observed_variance": 0.32201274945942066,
+            "signed_log_variance_ratio": 2.2610126672823854,
+            "station_id": "ca040442",
+            "variance_ratio": 9.592798562991943
+          },
+          "most_underdispersed": {
+            "generated_variance": 0.9207420596832823,
+            "member_id": 7,
+            "month": 12,
+            "observed_variance": 4.68216234246005,
+            "signed_log_variance_ratio": -1.626335389652558,
+            "station_id": "ca040442",
+            "variance_ratio": 0.1966488968854327
+          },
+          "semantics": "positive means circular-block generated variance exceeds Gaussian generated variance"
+        },
+        "circular_block_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.2159858816395777,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 1010,
+            "underdispersed_more_than_5pct": 794,
+            "within_5pct": 116
+          },
+          "geometric_mean_variance_ratio": 1.1283120406763427,
+          "mean_absolute_log_variance_ratio": 0.5589381384986379,
+          "mean_signed_log_variance_ratio": 0.12072274662561269,
+          "median_signed_log_variance_ratio": 0.09069018483023972,
+          "median_variance_ratio": 1.0949297268651783,
+          "most_overdispersed": {
+            "generated_variance": 5.447599316614975,
+            "member_id": 6,
+            "month": 4,
+            "observed_variance": 0.5290203907407405,
+            "signed_log_variance_ratio": 2.33190332130867,
+            "station_id": "nm290234",
+            "variance_ratio": 10.297522386589266
+          },
+          "most_underdispersed": {
+            "generated_variance": 1.8393919486098265,
+            "member_id": 1,
+            "month": 3,
+            "observed_variance": 15.7406324981573,
+            "signed_log_variance_ratio": -2.146810372014781,
+            "station_id": "mt243996",
+            "variance_ratio": 0.11685629207245374
+          }
+        },
+        "gaussian_vs_observed": {
+          "bias_fraction_abs_mean_over_mean_absolute": 0.22736442836763468,
+          "count": 1920,
+          "counts": {
+            "overdispersed_more_than_5pct": 1025,
+            "underdispersed_more_than_5pct": 793,
+            "within_5pct": 102
+          },
+          "geometric_mean_variance_ratio": 1.1389478413848997,
+          "mean_absolute_log_variance_ratio": 0.5722306299619943,
+          "mean_signed_log_variance_ratio": 0.13010489007576032,
+          "median_signed_log_variance_ratio": 0.10811825386701805,
+          "median_variance_ratio": 1.1141794936301184,
+          "most_overdispersed": {
+            "generated_variance": 7.140834134361014,
+            "member_id": 7,
+            "month": 4,
+            "observed_variance": 0.6539795648148148,
+            "signed_log_variance_ratio": 2.3905087695423264,
+            "station_id": "co050130",
+            "variance_ratio": 10.919047809059693
+          },
+          "most_underdispersed": {
+            "generated_variance": 1.4422606481263491,
+            "member_id": 6,
+            "month": 3,
+            "observed_variance": 15.7406324981573,
+            "signed_log_variance_ratio": -2.3900336491849274,
+            "station_id": "mt243996",
+            "variance_ratio": 0.0916266006652013
+          }
+        }
+      }
+    }
+  },
+  "terminal": "EXECUTED-COMPLETE"
+}
