@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A11E6 execution manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_id", "control_profile", "treatment_strategy", "member_burns", "station_count", "years", "material_ratio", "minimum_interannual_improvements", "metric_set", "runtime", "resource_bound", "confirmation_target_access", "dependencies"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "execution_id": {"const": "a11e6-faithful-baseline-comparison-v1"},
+    "control_profile": {"const": "faithful_5_32_3"},
+    "treatment_strategy": {"const": "circular_fixed_block_nearest_candidate_forcing_v1"},
+    "member_burns": {"const": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007]},
+    "station_count": {"const": 20},
+    "years": {"const": 16},
+    "material_ratio": {"const": 0.05},
+    "minimum_interannual_improvements": {"const": 4},
+    "metric_set": {"const": "a11e6-fourteen-observed-error-metrics-v1"},
+    "runtime": {"type": "object"},
+    "resource_bound": {"type": "object"},
+    "confirmation_target_access": {"const": false},
+    "dependencies": {"type": "object"}
+  }
+}

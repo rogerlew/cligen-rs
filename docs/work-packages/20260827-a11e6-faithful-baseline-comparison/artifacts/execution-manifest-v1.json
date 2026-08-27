@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e6-faithful-baseline-comparison-v1",
+  "control_profile": "faithful_5_32_3",
+  "treatment_strategy": "circular_fixed_block_nearest_candidate_forcing_v1",
+  "member_burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007],
+  "station_count": 20,
+  "years": 16,
+  "material_ratio": 0.05,
+  "minimum_interannual_improvements": 4,
+  "metric_set": "a11e6-fourteen-observed-error-metrics-v1",
+  "runtime": {"python": "3.12.13", "numpy": "2.3.5"},
+  "resource_bound": {"streams_per_execution": 160, "replays": 1},
+  "confirmation_target_access": false,
+  "dependencies": {
+    "panel_sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a11e3_evidence_sha256": "834d9af57679a0a252622d7c29fb223985833b85022a8bc55656f7a24daaa930",
+    "a11e5_evidence_sha256": "b85fc59a9925557565ba26163e165f834f6bd8d272122baebbb71b0da9673f47",
+    "a11e5d_evidence_sha256": "47c30b45116a962862be08aaa56b684df478591a7866124629df35b38aa4ae6c",
+    "a11e1_executor_sha256": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e2_executor_sha256": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e5_executor_sha256": "9bf3cab2752bc84235886deabe2f8b759de2cc320259999c5ccaccce15751ffc",
+    "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "cargo_toml_sha256": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+    "station_database_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211"
+  }
+}
