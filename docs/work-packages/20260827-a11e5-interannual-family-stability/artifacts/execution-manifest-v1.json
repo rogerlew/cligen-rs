@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e5-interannual-family-stability-v1",
+  "control_strategy_id": "gaussian_latent_ar1_physical_core_v1",
+  "treatment_strategy_id": "circular_fixed_block_physical_core_v1",
+  "forcing_selector_id": "a11e2-nearest-candidate-coordinate-v1",
+  "member_ids": [0, 1, 2, 3, 4, 5, 6, 7],
+  "station_count": 20,
+  "years": 16,
+  "material_ratio": 0.05,
+  "minimum_improvement_fraction": 0.3333333333333333,
+  "metric_set_id": "a11e5-full-interannual-family-v1",
+  "confirmation_target_access": false,
+  "runtime": {"python": "3.12.13", "numpy": "2.3.5"},
+  "resource_bound": {"maximum_streams_per_execution": 320, "replays": 1},
+  "dependencies": {
+    "a11e1_executor_sha256": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e2_executor_sha256": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e2_selection_sha256": "26e33ca30e0e64fa0dba1913f56ecaec12fbb5d1cc95aeb0a341af9ae52b31d6"
+  }
+}

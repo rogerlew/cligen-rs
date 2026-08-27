@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_id", "control_strategy_id", "treatment_strategy_id", "forcing_selector_id", "member_ids", "station_count", "years", "material_ratio", "minimum_improvement_fraction", "metric_set_id", "confirmation_target_access", "runtime", "resource_bound", "dependencies"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "execution_id": {"const": "a11e5-interannual-family-stability-v1"},
+    "control_strategy_id": {"const": "gaussian_latent_ar1_physical_core_v1"},
+    "treatment_strategy_id": {"const": "circular_fixed_block_physical_core_v1"},
+    "forcing_selector_id": {"const": "a11e2-nearest-candidate-coordinate-v1"},
+    "member_ids": {"const": [0, 1, 2, 3, 4, 5, 6, 7]},
+    "station_count": {"const": 20},
+    "years": {"const": 16},
+    "material_ratio": {"const": 0.05},
+    "minimum_improvement_fraction": {"const": 0.3333333333333333},
+    "metric_set_id": {"const": "a11e5-full-interannual-family-v1"},
+    "confirmation_target_access": {"const": false},
+    "runtime": {"const": {"python": "3.12.13", "numpy": "2.3.5"}},
+    "resource_bound": {"const": {"maximum_streams_per_execution": 320, "replays": 1}},
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["a11e1_executor_sha256", "a11e2_executor_sha256", "a11e2_selection_sha256"],
+      "properties": {
+        "a11e1_executor_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "a11e2_executor_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "a11e2_selection_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

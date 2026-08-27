@@ -826,6 +826,16 @@ frozen exact max-|t| and stability gates. The terminal disposition is
 `NO_STABLE_METADATA_ASSOCIATION`: no distance/regime selector refinement is
 supported, confirmation remains sealed, and there is no automatic successor.
 
+**A11E5 full-family evaluation authorized (2026-08-27):**
+[A11E5 full interannual family stability](work-packages/20260827-a11e5-interannual-family-stability/package.md)
+prospectively compares the circular-block and Gaussian annual/monthly laws over
+eight members with nearest forcing and the daily core fixed. It evaluates ten
+monthly/annual dispersion, covariance, persistence, and low-frequency errors.
+The frozen exploratory criterion distinguishes universal viability (at least
+one-third materially improved, no materially worse pairs, and every aggregate
+metric noninferior) from a mixed result that would require a separately
+prospective router. Confirmation and production remain unauthorized.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

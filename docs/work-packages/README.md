@@ -132,6 +132,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260825-a11e2-nearest-candidate-forcing](20260825-a11e2-nearest-candidate-forcing/package.md) | EXECUTED-COMPLETE — SUPPORTED_FOR_EXPLORATION |
 | [20260825-a11e3-multi-member-forcing-stability](20260825-a11e3-multi-member-forcing-stability/package.md) | EXECUTED-COMPLETE — STABLE_FOR_EXPLORATION |
 | [20260825-a11e4-heterogeneity-attribution](20260825-a11e4-heterogeneity-attribution/package.md) | EXECUTED-COMPLETE — NO_STABLE_METADATA_ASSOCIATION |
+| [20260827-a11e5-interannual-family-stability](20260827-a11e5-interannual-family-stability/package.md) | SCAFFOLDED |
 | [20260826-a12-station-selection-heuristic-evaluation](20260826-a12-station-selection-heuristic-evaluation/package.md) | EXECUTED-HOLD-UNLOCALIZABLE-DONOR |
 | [20260826-a12r1-localizability-aware-selection](20260826-a12r1-localizability-aware-selection/package.md) | EXECUTED-COMPLETE |
 | [20260826-a12r2-localizability-repair-comparison](20260826-a12r2-localizability-repair-comparison/package.md) | EXECUTED-HOLD-REPAIR-INELIGIBLE |
