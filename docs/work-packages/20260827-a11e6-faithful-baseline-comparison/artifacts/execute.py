@@ -215,7 +215,10 @@ def execute(source_commit: str) -> None:
         inherited_hashes, development_rows, _ = predecessor.verify_inputs(pred_manifest)
         inherited = predecessor.ensure_base_loaded(); development, observed_preflight = inherited.load_development(development_rows)
         observed_by_id = {row["point_id"]: row for row in development}
-        fit, fit_preflight = inherited.load_fit_corpus(); adapters = inherited.adapter_parameters([row for row in fit if row["role"] == "candidate_fit"])
+        fit, fit_preflight = inherited.load_fit_corpus()
+        candidate_fit = [row for row in fit if row["role"] == "candidate_fit"]
+        adapters = inherited.adapter_parameters(candidate_fit)
+        _models, inherited_fit = inherited.fit_regions(candidate_fit, adapters)
 
         a11e5_module = load_module("a11e5_for_a11e6", A11E5_EXECUTOR)
         circular_interannual = {(row["station_id"], row["member_id"]): row for row in json.loads(A11E5.read_text())["rows"]}
@@ -263,6 +266,7 @@ def execute(source_commit: str) -> None:
         decision_body = evaluate(rows, manifest["material_ratio"], manifest["minimum_interannual_improvements"])
         preflight = {"schema_version": "a11e6-preflight-1", "valid": True, "source_transform": "daymet_official_365_v1",
                      "normalized_statistic": "daymet_mask_normalized_month_v1", "observed": observed_preflight, "fit": fit_preflight,
+                     "inherited_fit_sha256": inherited_fit["fit_sha256"],
                      "station_count": 20, "stream_count": 160, "expected_daily_rows_per_stream": 5844,
                      "station_database_sha256": digest(database), "confirmation_target_series_accessed": False}
         evidence = {"schema_version": "a11e6-development-evidence-1", "execution_id": manifest["execution_id"], "source_commit": source_commit,

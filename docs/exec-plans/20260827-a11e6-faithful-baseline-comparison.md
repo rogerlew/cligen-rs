@@ -20,3 +20,10 @@ scientific authority.
 - Observations are the target; faithful is the operational control.
 - Gaussian is retained only as historical diagnostic context.
 - The source `.par` and `cligen` binary are both cryptographically identified.
+
+## Discoveries
+
+- The initial source-bound attempt failed before stream generation because the
+  inherited adapter's annual weights are populated by `fit_regions`, not by
+  `adapter_parameters`. The executor now materializes and records that frozen
+  fit before scoring.
