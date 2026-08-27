@@ -838,6 +838,13 @@ not persist across members 1--7. A future bounded field-wise or dependence
 successor must preserve cross-variable coherence and repeat noninferiority;
 confirmation and production remain unauthorized.
 
+**A11E5D directional diagnostic authorized (2026-08-27):**
+[A11E5D directional error attribution](work-packages/20260827-a11e5d-directional-error-attribution/package.md)
+will replay the exact A11E5 grid and restore signed monthly/annual variance
+ratios plus signed persistence and low-frequency residuals. It will distinguish
+systematic over/underdispersion from unbiased scatter and quantify circular
+block variance relative to Gaussian before any hybrid is designed.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "analysis_id", "member_ids", "station_count", "arms", "directional_metric_set_id", "material_ratio", "confirmation_target_access", "runtime", "resource_bound", "a11e5"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "analysis_id": {"const": "a11e5d-directional-error-attribution-v1"},
+    "member_ids": {"const": [0, 1, 2, 3, 4, 5, 6, 7]},
+    "station_count": {"const": 20},
+    "arms": {"const": ["gaussian_latent_ar1_physical_core_v1", "circular_fixed_block_physical_core_v1"]},
+    "directional_metric_set_id": {"const": "a11e5d-signed-dispersion-dependence-v1"},
+    "material_ratio": {"const": 0.05},
+    "confirmation_target_access": {"const": false},
+    "runtime": {"const": {"python": "3.12.13", "numpy": "2.3.5"}},
+    "resource_bound": {"const": {"maximum_streams_per_execution": 320, "replays": 1}},
+    "a11e5": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["closure_commit", "executor_sha256", "execution_manifest_sha256", "development_evidence_sha256", "development_decision_sha256", "execution_receipt_sha256"],
+      "properties": {
+        "closure_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "executor_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "execution_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "development_evidence_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "development_decision_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "execution_receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}
