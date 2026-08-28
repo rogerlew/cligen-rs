@@ -1,0 +1,21 @@
+{
+  "schema_version": "a11e6s-source-inventory-1",
+  "review_commit": "a12e567f9563577072c666b89a69719d61f334b5",
+  "review_tree": "13bc55b83937d55f17852037baebf127f3a8116f",
+  "files": {
+    "reference/cligen532/cligen.f": "3dfd51db98fedfbfb155d4227099cf9133043d4d699093268ed21ce16ec4267c",
+    "reference/cligen532/crandom3.inc": "8f2ce2ee56f9e3f9f0c287b8d04967581c49d394be7de14f5156a00de4657770",
+    "crates/cligen/src/daily.rs": "ba26137dc1b54d06977bfa31cd5a67c398c0ecce6287bc92571ab507c8fcb2bc",
+    "crates/cligen/src/rng.rs": "250cd576a886aab42c1b01ee4f83cc3322254eccdf18ca411d11e0edbd1b7a2d",
+    "crates/cligen/src/deviates.rs": "32bc0a6dff876c5ff4ff7b559656060883fce84bba26d6d24ae01867779162b1",
+    "crates/cligen/src/crandom3.rs": "1381c9d04fc5379dc271cfaaa53982fe9301d7b4d3ac16bda4c4ff74a7805a2b",
+    "crates/cligen/src/par/sta_parms.rs": "af69021d1a05a77bc106bc8c48881f71481b7ae06bca3cd767fc82498a70ce59",
+    "crates/cligen/src/modes.rs": "4e31db928046f5323a0377b2bf48168e9c412ed9352b02a201589e3331cfeaa5",
+    "crates/cligen/src/output.rs": "7705bbf619312d999b017d51411e69c3e6f549e98f3ce094e6a56029368e044b",
+    "docs/decisions/0002-quality-metrics-authority.md": "caaa454358a116c099c93f8d8cf47baa07cd027df2db25285a91a5717802e82c",
+    "docs/specifications/SPEC-GENERATION-PROFILES.md": "348703a719f12d515b88a1fe3ff81a5cd68aac6e69fda6af432491982e66e0e0",
+    "docs/work-packages/20260827-a11e6-faithful-baseline-comparison/artifacts/development-evidence-v1.json": "debe78506bfa2a8184b68e32b55bc6ce05907c3bf392cea9699c914247d0bb3b"
+  },
+  "reference_source_modified": false,
+  "confirmation_target_series_accessed": false
+}
