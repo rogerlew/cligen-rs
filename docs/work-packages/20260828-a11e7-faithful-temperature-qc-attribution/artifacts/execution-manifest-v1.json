@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e7-faithful-temperature-qc-attribution-v1",
+  "profile": "faithful_5_32_3",
+  "arms": ["faithful", "off"],
+  "burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007, 17, 31, 53, 79, 127, 199, 317, 503, 797, 1259, 1999, 3163, 5003, 7919, 12547, 19867, 31469, 49853, 78977, 125087, 198149, 313919, 497503, 788129],
+  "station_count": 20,
+  "years": 16,
+  "material_variance_ratio": 1.10,
+  "material_error_ratio": 0.95,
+  "noninferiority_ratio": 1.05,
+  "structural_variance_ratio": 0.95,
+  "runtime": {"python": "3.12.13", "numpy": "2.3.5"},
+  "resource_bound": {"streams_per_execution": 1280, "replays": 1},
+  "confirmation_target_access": false,
+  "dependencies": {
+    "panel_sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a11e6_evidence_sha256": "debe78506bfa2a8184b68e32b55bc6ce05907c3bf392cea9699c914247d0bb3b",
+    "a11e6_provenance_sha256": "2c6e598cd3fbd16e0cedff5dcd34f87bb85deb1a329fc2a0c1bbc7dfc702f563",
+    "a11e6s_review_sha256": "76ce8a80b8f4ab519cee205ac16c57e6942ed4b53f6b852ab0702bbf1c8ba684",
+    "a11e1_executor_sha256": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e2_executor_sha256": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e5_executor_sha256": "9bf3cab2752bc84235886deabe2f8b759de2cc320259999c5ccaccce15751ffc",
+    "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "cargo_toml_sha256": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+    "station_database_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211"
+  }
+}

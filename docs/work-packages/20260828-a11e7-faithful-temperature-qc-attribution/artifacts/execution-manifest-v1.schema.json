@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A11E7 execution manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "execution_id", "profile", "arms", "burns", "station_count", "years", "material_variance_ratio", "material_error_ratio", "noninferiority_ratio", "structural_variance_ratio", "runtime", "resource_bound", "confirmation_target_access", "dependencies"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "execution_id": {"const": "a11e7-faithful-temperature-qc-attribution-v1"},
+    "profile": {"const": "faithful_5_32_3"},
+    "arms": {"const": ["faithful", "off"]},
+    "burns": {"type": "array", "minItems": 32, "maxItems": 32, "uniqueItems": true},
+    "station_count": {"const": 20},
+    "years": {"const": 16},
+    "material_variance_ratio": {"const": 1.10},
+    "material_error_ratio": {"const": 0.95},
+    "noninferiority_ratio": {"const": 1.05},
+    "structural_variance_ratio": {"const": 0.95},
+    "runtime": {"type": "object"},
+    "resource_bound": {"type": "object"},
+    "confirmation_target_access": {"const": false},
+    "dependencies": {"type": "object"}
+  }
+}

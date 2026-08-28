@@ -857,6 +857,11 @@ daily distributions contain no year-level state, while cumulative `RANSET`
 conditioning rejects atypical temperature batches and can deepen low-frequency
 underdispersion. A temperature-specific faithful-QC/on versus QC/off ablation
 is the recommended bounded successor before an annual-state overlay.
+
+**A11E7 faithful-temperature QC attribution executing (2026-08-28):**
+[A11E7 QC attribution](work-packages/20260828-a11e7-faithful-temperature-qc-attribution/package.md)
+freezes a 20-station by 32-burn conditioned/off comparison to quantify the
+conditioner's contribution and the structural temperature-variance remainder.
 replayed all 320 closed streams exactly and established systematic annual
 temperature underdispersion: circular block has 0.802 times observed variance
 geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
