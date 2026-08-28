@@ -1,6 +1,6 @@
 # A11E7 Faithful Temperature QC Attribution ExecPlan
 
-Status: executing
+Status: complete
 
 ## Purpose
 
@@ -11,10 +11,10 @@ replay, and closure. The package and specification retain scientific authority.
 
 - [x] Freeze the QC-on/off attribution question and decision semantics.
 - [x] Publish prospective execution source.
-- [ ] Correct the independently nullable correlation validator exposed by the
+- [x] Correct the independently nullable correlation validator exposed by the
       first exact-source attempt and publish a new execution source.
-- [ ] Execute and replay the frozen grid.
-- [ ] Review, run gates, and close.
+- [x] Execute and replay the frozen grid.
+- [x] Review, run gates, and close.
 
 ## Decisions
 
@@ -29,3 +29,9 @@ replay, and closure. The package and specification retain scientific authority.
   required to share definedness because they operate on different variates
   and have independent finite-result gates. Correct that bounded contract and
   restart from a new exact source commit; do not retain partial evidence.
+- QC is a material amplifier of annual-temperature underdispersion, but the
+  fixed-monthly structure remains dominant: QC-off raises median variance by
+  29.4%, yet retains only 10.2% of observed annual variance.
+- Keep faithful as operational control. Use QC-off only as a declared
+  development base for the next temperature-only annual-state overlay pilot;
+  this package does not promote it or alter defaults.

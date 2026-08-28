@@ -1,6 +1,6 @@
 # A11E7 — Faithful Temperature QC Attribution
 
-Status: `EXECUTING`
+Status: `EXECUTED-COMPLETE — QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS`
 
 Date: 2026-08-28
 
@@ -56,3 +56,42 @@ external service or scarce accelerator is used.
 ## Exit
 
 Close with the frozen attribution disposition or an exact integrity HOLD.
+
+## Outcome
+
+The first exact-source attempt from `84baddf0e5e26adb0e9b8a6cd819bfbd172e742f`
+failed closed when a valid quality report had independently nullable Pearson
+and Spearman results. No scientific output was published. The bounded
+specification, validator, and regression-test correction was published as
+`984b983e6d058aa8b190cef02667e328aad39ebc`; it changes no generated climate
+value. The corrected source built release binary SHA-256
+`2136e940208b134e7bbaac677abdc038030fb406a62014847ab2dad67d4db665`
+identically on the execution and replay.
+
+Both complete runs generated 1,280 streams and 7,480,320 daily rows, replayed
+all 160 A11E6 overlap streams exactly, preserved the 20 source `.par`
+identities, and left confirmation sealed. The preflight, 640-pair evidence,
+and decision artifacts replayed byte-identically.
+
+QC removal materially relieves temperature underdispersion. Median annual
+generated/observed variance rises from `0.07875` under faithful QC to
+`0.10240` with QC off; the paired off/on median is `1.29357`. Median absolute
+log variance error falls to `0.89666` of faithful. QC-off is closer for 425 of
+640 members, and every one of the 20 stations and all six regimes has a median
+paired variance increase. Monthly temperature mean error remains noninferior
+at `1.01053` times faithful.
+
+The conditioner is highly active: faithful temperature columns record 201,460
+rejected attempts for 245,760 accepted batches, with no cap give-ups. On the
+diverged QC-off paths, 178,060 of 245,760 temperature batches (72.45%) would
+have failed the faithful verdict. This supports a causal QC contribution, but
+not a complete explanation: QC-off retains only `0.10240` of observed median
+annual variance and never reaches the frozen `0.95` structural threshold.
+
+The disposition is therefore
+`QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS`. QC-off is not promoted and no
+default changes. The simplest successor is a temperature-only annual-state
+overlay pilot using faithful as operational control, QC-off as the declared
+development base, and QC-off plus overlay as treatment. It should preserve the
+monthly-mean noninferiority gate and measure the complete temperature metric
+family before any confirmation or production decision.

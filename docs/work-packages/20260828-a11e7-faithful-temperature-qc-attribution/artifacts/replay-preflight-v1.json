@@ -1,0 +1,23 @@
+{
+  "schema_version": "a11e7-replay-preflight-1",
+  "source_commit": "984b983e6d058aa8b190cef02667e328aad39ebc",
+  "source_tree": "b085687f5dcd2de15c98404480299e32bd254927",
+  "first_execution": {
+    "elapsed_seconds": 309.82985741697485,
+    "execution_receipt_sha256": "5cdcc4d54eb8362cc0ff425761dd20458fc942eb797eeed9677c48f308935e28"
+  },
+  "replay": {
+    "elapsed_seconds": 310.95224362498266,
+    "execution_receipt_sha256": "b6a128ab20ca2ae439a1199bc9cd552075538b9621e718db8f63f64b91fab730"
+  },
+  "scientific_outputs": {
+    "calendar-missingness-preflight-v1.json": "532159a54cf40a26ec48abbfcc2ceb82bf83c2fbc5e2018935a11045090c950d",
+    "development-decision-v1.json": "41143b9b5fdce8e3bc22a024252c167d0fe15ed7bbde675918105227c416f582",
+    "development-evidence-v1.json": "809b400f6126714373f09638bc04a6340e75caffb543dcbed0731bfdfe67f7b5"
+  },
+  "scientific_outputs_byte_identical": true,
+  "first_cligen_binary_sha256": "2136e940208b134e7bbaac677abdc038030fb406a62014847ab2dad67d4db665",
+  "replay_cligen_binary_sha256": "2136e940208b134e7bbaac677abdc038030fb406a62014847ab2dad67d4db665",
+  "cligen_binary_byte_identity": true,
+  "confirmation_target_series_accessed": false
+}

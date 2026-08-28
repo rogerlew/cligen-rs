@@ -1,0 +1,197 @@
+{
+  "annual_temperature_variance": {
+    "faithful_median_absolute_log_error": 2.5415093956531205,
+    "faithful_median_generated_over_observed": 0.07874747293696187,
+    "geometric_mean_pair_ratio_off_over_faithful": 1.264508418076425,
+    "median_pair_ratio_off_over_faithful": 1.293566992889553,
+    "off_closer_pair_count": 425,
+    "off_farther_pair_count": 215,
+    "off_median_absolute_log_error": 2.2788583807425757,
+    "off_median_generated_over_observed": 0.10240105821936382,
+    "ratio_of_median_errors_off_over_faithful": 0.8966555011129328
+  },
+  "confirmation_authorized": false,
+  "disposition": "QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS",
+  "material_qc_relief": true,
+  "metrics": {
+    "annual_temperature_dispersion_error": {
+      "faithful_median": 2.5415093956531205,
+      "off_median": 2.2788583807425757,
+      "ratio_off_over_faithful": 0.8966555011129328
+    },
+    "annual_temperature_lag1_error": {
+      "faithful_median": 0.30965609167907615,
+      "off_median": 0.24958339668856633,
+      "ratio_off_over_faithful": 0.8060018949901091
+    },
+    "annual_temperature_low_frequency_error": {
+      "faithful_median": 0.19551577359807748,
+      "off_median": 0.18628051024983963,
+      "ratio_off_over_faithful": 0.9527646123978579
+    },
+    "monthly_temperature_dispersion_error": {
+      "faithful_median": 1.74833147964359,
+      "off_median": 1.3914481765683189,
+      "ratio_off_over_faithful": 0.7958720601724655
+    },
+    "monthly_temperature_mean_absolute_error_c": {
+      "faithful_median": 0.6509641636375073,
+      "off_median": 0.6578176484674316,
+      "ratio_off_over_faithful": 1.0105282060253946
+    },
+    "temperature_cross_month_correlation_rmse": {
+      "faithful_median": 0.3922099544309606,
+      "off_median": 0.3851053134637554,
+      "ratio_off_over_faithful": 0.9818856179274875
+    }
+  },
+  "monthly_temperature_mean_noninferior": true,
+  "overlay_authorized": false,
+  "production_authorized": false,
+  "schema_version": "a11e7-development-decision-1",
+  "science_status": "FAITHFUL_TEMPERATURE_QC_ATTRIBUTED",
+  "station_summaries": [
+    {
+      "faithful_median_variance_ratio": 0.08360477616029699,
+      "median_off_over_faithful": 1.1304185407087806,
+      "off_closer_members": 20,
+      "off_median_variance_ratio": 0.07854944574642914,
+      "station_id": "az026481"
+    },
+    {
+      "faithful_median_variance_ratio": 0.11014377046964399,
+      "median_off_over_faithful": 1.28456263910271,
+      "off_closer_members": 23,
+      "off_median_variance_ratio": 0.1337656069656188,
+      "station_id": "az028820"
+    },
+    {
+      "faithful_median_variance_ratio": 0.05976008238917101,
+      "median_off_over_faithful": 1.2706996292965875,
+      "off_closer_members": 21,
+      "off_median_variance_ratio": 0.06818230081017121,
+      "station_id": "ca040442"
+    },
+    {
+      "faithful_median_variance_ratio": 0.055291192908835655,
+      "median_off_over_faithful": 1.3766437913571599,
+      "off_closer_members": 22,
+      "off_median_variance_ratio": 0.07652437650544569,
+      "station_id": "ca042713"
+    },
+    {
+      "faithful_median_variance_ratio": 0.08491950805998316,
+      "median_off_over_faithful": 1.4617884406072494,
+      "off_closer_members": 22,
+      "off_median_variance_ratio": 0.11708236043799475,
+      "station_id": "co050130"
+    },
+    {
+      "faithful_median_variance_ratio": 0.10219912764153652,
+      "median_off_over_faithful": 1.1934341517903477,
+      "off_closer_members": 21,
+      "off_median_variance_ratio": 0.1259006366262227,
+      "station_id": "id101022"
+    },
+    {
+      "faithful_median_variance_ratio": 0.0658945541269373,
+      "median_off_over_faithful": 1.4572601109862195,
+      "off_closer_members": 23,
+      "off_median_variance_ratio": 0.0962605619047461,
+      "station_id": "la160549"
+    },
+    {
+      "faithful_median_variance_ratio": 0.0781028221167765,
+      "median_off_over_faithful": 1.0688770566059969,
+      "off_closer_members": 18,
+      "off_median_variance_ratio": 0.08784664162758209,
+      "station_id": "me171175"
+    },
+    {
+      "faithful_median_variance_ratio": 0.04287364059615105,
+      "median_off_over_faithful": 1.0975111278158027,
+      "off_closer_members": 17,
+      "off_median_variance_ratio": 0.04808433988188236,
+      "station_id": "mn212248"
+    },
+    {
+      "faithful_median_variance_ratio": 0.11243360544382412,
+      "median_off_over_faithful": 1.2338899302838753,
+      "off_closer_members": 20,
+      "off_median_variance_ratio": 0.13724919111728384,
+      "station_id": "mt243996"
+    },
+    {
+      "faithful_median_variance_ratio": 0.09869036873213843,
+      "median_off_over_faithful": 1.3919282078333324,
+      "off_closer_members": 22,
+      "off_median_variance_ratio": 0.11998648742318953,
+      "station_id": "ne257665"
+    },
+    {
+      "faithful_median_variance_ratio": 0.12039776289611667,
+      "median_off_over_faithful": 1.191597322379681,
+      "off_closer_members": 20,
+      "off_median_variance_ratio": 0.1321954388708986,
+      "station_id": "nm290234"
+    },
+    {
+      "faithful_median_variance_ratio": 0.07233879715447722,
+      "median_off_over_faithful": 1.5369367546838293,
+      "off_closer_members": 23,
+      "off_median_variance_ratio": 0.10597299324894184,
+      "station_id": "nv262631"
+    },
+    {
+      "faithful_median_variance_ratio": 0.06661824310345414,
+      "median_off_over_faithful": 1.1234248253400005,
+      "off_closer_members": 19,
+      "off_median_variance_ratio": 0.05783464660038225,
+      "station_id": "nv264436"
+    },
+    {
+      "faithful_median_variance_ratio": 0.09071222944499702,
+      "median_off_over_faithful": 1.5339792203323626,
+      "off_closer_members": 21,
+      "off_median_variance_ratio": 0.12238925486092167,
+      "station_id": "nv269171"
+    },
+    {
+      "faithful_median_variance_ratio": 0.0840285755172216,
+      "median_off_over_faithful": 1.4489554856308509,
+      "off_closer_members": 24,
+      "off_median_variance_ratio": 0.11972913383920862,
+      "station_id": "or350412"
+    },
+    {
+      "faithful_median_variance_ratio": 0.11888591047878769,
+      "median_off_over_faithful": 1.8528949435721438,
+      "off_closer_members": 26,
+      "off_median_variance_ratio": 0.2142856189935773,
+      "station_id": "sc381544"
+    },
+    {
+      "faithful_median_variance_ratio": 0.07835409932884813,
+      "median_off_over_faithful": 1.231361446178282,
+      "off_closer_members": 22,
+      "off_median_variance_ratio": 0.0904414211040763,
+      "station_id": "tx413280"
+    },
+    {
+      "faithful_median_variance_ratio": 0.06117729111942058,
+      "median_off_over_faithful": 1.3647784267327063,
+      "off_closer_members": 23,
+      "off_median_variance_ratio": 0.08384034918145603,
+      "station_id": "tx417262"
+    },
+    {
+      "faithful_median_variance_ratio": 0.06086666367427243,
+      "median_off_over_faithful": 1.0974843204762827,
+      "off_closer_members": 18,
+      "off_median_variance_ratio": 0.06336940914164801,
+      "station_id": "wy487845"
+    }
+  ],
+  "structural_deficit_remains": true,
+  "terminal": "EXECUTED-COMPLETE"
+}

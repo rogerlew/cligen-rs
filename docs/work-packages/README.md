@@ -136,7 +136,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260827-a11e5d-directional-error-attribution](20260827-a11e5d-directional-error-attribution/package.md) | EXECUTED-COMPLETE — DIRECTIONAL_ERROR_ATTRIBUTED |
 | [20260827-a11e6-faithful-baseline-comparison](20260827-a11e6-faithful-baseline-comparison/package.md) | EXECUTED-COMPLETE — MIXED_VS_FAITHFUL |
 | [20260827-a11e6s-faithful-temperature-static-review](20260827-a11e6s-faithful-temperature-static-review/package.md) | EXECUTED-COMPLETE — DESIGN_CONSISTENT_UNDERDISPERSION_EXPECTED |
-| [20260828-a11e7-faithful-temperature-qc-attribution](20260828-a11e7-faithful-temperature-qc-attribution/package.md) | SCAFFOLDED |
+| [20260828-a11e7-faithful-temperature-qc-attribution](20260828-a11e7-faithful-temperature-qc-attribution/package.md) | EXECUTED-COMPLETE — QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS |
 | [20260826-a12-station-selection-heuristic-evaluation](20260826-a12-station-selection-heuristic-evaluation/package.md) | EXECUTED-HOLD-UNLOCALIZABLE-DONOR |
 | [20260826-a12r1-localizability-aware-selection](20260826-a12r1-localizability-aware-selection/package.md) | EXECUTED-COMPLETE |
 | [20260826-a12r2-localizability-repair-comparison](20260826-a12r2-localizability-repair-comparison/package.md) | EXECUTED-HOLD-REPAIR-INELIGIBLE |

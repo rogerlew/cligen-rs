@@ -858,10 +858,16 @@ conditioning rejects atypical temperature batches and can deepen low-frequency
 underdispersion. A temperature-specific faithful-QC/on versus QC/off ablation
 is the recommended bounded successor before an annual-state overlay.
 
-**A11E7 faithful-temperature QC attribution executing (2026-08-28):**
+**A11E7 faithful-temperature QC attribution complete (2026-08-28):**
 [A11E7 QC attribution](work-packages/20260828-a11e7-faithful-temperature-qc-attribution/package.md)
-freezes a 20-station by 32-burn conditioned/off comparison to quantify the
-conditioner's contribution and the structural temperature-variance remainder.
+executed and byte-replayed a 20-station by 32-burn conditioned/off comparison.
+QC-off raises median annual-temperature variance by 29.4%, reduces median
+absolute-log variance error by 10.3%, and is monthly-mean noninferior, so the
+conditioner materially contributes to underdispersion. The deficit remains
+structural: QC-off retains only 10.2% of observed median annual variance. The
+terminal disposition is `QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS`; QC-off
+is not promoted. A bounded temperature-only annual-state overlay with faithful
+control and a declared QC-off development base is the recommended successor.
 replayed all 320 closed streams exactly and established systematic annual
 temperature underdispersion: circular block has 0.802 times observed variance
 geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
