@@ -1367,14 +1367,9 @@ fn validate_distribution(
 }
 
 fn validate_corr_pair(pair: &CorrPair, path: &str) -> Result<(), QualityError> {
-    ensure(
-        pair.pearson.is_some() == pair.spearman.is_some(),
-        path,
-        "Pearson and Spearman definedness must agree",
-    )?;
     if pair.n < 2 {
         ensure(
-            pair.pearson.is_none(),
+            pair.pearson.is_none() && pair.spearman.is_none(),
             path,
             "correlations require at least two paired values",
         )?;

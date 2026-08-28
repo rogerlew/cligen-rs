@@ -85,7 +85,10 @@ reports; `cligen quality` reports them as `null`.
 - Determinism: all accumulation in f64; sample statistics use the
   n−1 convention; **skew** is the adjusted Fisher–Pearson estimator
   g1·√(n(n−1))/(n−2) (n ≥ 3, else `null`); Spearman uses
-  average-rank ties; **top-N event ordering** breaks ties by earlier
+  average-rank ties. Pearson and Spearman definedness is independent:
+  either estimator is `null` when its own variance or finite-result gate
+  fails, and both are `null` when fewer than two pairs are present.
+  **Top-N event ordering** breaks ties by earlier
   date, then lower row index; decades are fixed 10-year blocks from
   the first simulated year (a trailing partial decade is reported
   with its `n_years`); JSON keys are emitted in schema order. A given

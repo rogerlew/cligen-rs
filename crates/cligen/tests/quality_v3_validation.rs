@@ -215,6 +215,28 @@ fn schema_rejects_versions_correlations_and_fraction_summaries() {
 }
 
 #[test]
+fn correlation_estimators_may_have_independent_definedness() {
+    let mut pearson_undefined = two_day_report();
+    let pair = &mut pearson_undefined
+        .tails
+        .storm_descriptors
+        .dependence
+        .depth_duration;
+    assert!(pair.pearson.is_some() && pair.spearman.is_some());
+    pair.pearson = None;
+    pearson_undefined.validate().unwrap();
+
+    let mut spearman_undefined = two_day_report();
+    spearman_undefined
+        .tails
+        .storm_descriptors
+        .dependence
+        .depth_duration
+        .spearman = None;
+    spearman_undefined.validate().unwrap();
+}
+
+#[test]
 fn mutable_dto_rejects_nonfinite_values_before_json_coercion() {
     let mut report = two_day_report();
     report.tails.top_events[0].precip_mm = f64::NAN;

@@ -1,6 +1,6 @@
 # A11E7 — Faithful Temperature QC Attribution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTING`
 
 Date: 2026-08-28
 
@@ -30,6 +30,14 @@ A11E6 overlap replay, full replay, review, gates, and reconciliation.
 Excluded: generator changes, overlay implementation, precipitation decisions,
 station selection changes, confirmation, promotion, defaults, and WEPP claims.
 
+The first exact-source attempt found a quality-report relational-validator
+defect at station `co050130`, burn `53`: one valid correlation estimator was
+undefined while the other was defined. The published schema permits the two
+nullable estimators independently, and their estimators have independent
+finite-result gates. A bounded specification, validator, and regression-test
+correction is therefore included before restarting the source-bound run. This
+does not alter generated climate values or the frozen A11E7 estimand.
+
 ## Plan and gates
 
 1. Freeze specification, manifest, schema, executor, and synthetic tests.
@@ -37,7 +45,8 @@ station selection changes, confirmation, promotion, defaults, and WEPP claims.
 3. Build release CLIGEN and execute the 1,280-stream grid.
 4. Replay scientific outputs byte-identically, review, run gates, and close.
 
-No production Rust function changes occur, so coverage/CRAP is not triggered.
+The quality-report validator correction changes one production Rust function,
+so the workspace coverage/CRAP gates are required.
 
 ## Resource bound
 
