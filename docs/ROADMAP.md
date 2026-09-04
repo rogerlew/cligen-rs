@@ -840,6 +840,15 @@ confirmation and production remain unauthorized.
 
 **A11E5D directional diagnostic complete (2026-08-27):**
 [A11E5D directional error attribution](work-packages/20260827-a11e5d-directional-error-attribution/package.md)
+replayed all 320 closed streams exactly and established systematic annual
+temperature underdispersion: circular block has 0.802 times observed variance
+geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
+0.878 times Gaussian variance directly. Monthly temperature variance is nearly
+unchanged between arms, localizing the regression to annual/cross-month
+aggregation. Both precipitation arms are overdispersed, but circular block
+reduces the geometric annual variance ratio from 167 to 5.80 and the monthly
+ratio from 7.58 to 1.23. A bounded covariance-decomposition successor should
+precede hybrid design; confirmation and production remain unauthorized.
 
 **A11E6 faithful-baseline comparison complete (2026-08-27):**
 [A11E6 faithful baseline comparison](work-packages/20260827-a11e6-faithful-baseline-comparison/package.md)
@@ -866,17 +875,20 @@ absolute-log variance error by 10.3%, and is monthly-mean noninferior, so the
 conditioner materially contributes to underdispersion. The deficit remains
 structural: QC-off retains only 10.2% of observed median annual variance. The
 terminal disposition is `QC_MATERIAL_AND_STRUCTURAL_DEFICIT_REMAINS`; QC-off
-is not promoted. A bounded temperature-only annual-state overlay with faithful
-control and a declared QC-off development base is the recommended successor.
-replayed all 320 closed streams exactly and established systematic annual
-temperature underdispersion: circular block has 0.802 times observed variance
-geometrically (median 0.780), versus Gaussian at 0.912 (median 0.936), and has
-0.878 times Gaussian variance directly. Monthly temperature variance is nearly
-unchanged between arms, localizing the regression to annual/cross-month
-aggregation. Both precipitation arms are overdispersed, but circular block
-reduces the geometric annual variance ratio from 167 to 5.80 and the monthly
-ratio from 7.58 to 1.23. A bounded covariance-decomposition successor should
-precede hybrid design; confirmation and production remain unauthorized.
+is not promoted. The bounded successor keeps faithful as both control and base,
+then adds one explicitly declared temperature-only annual-state overlay;
+QC-off remains attribution evidence rather than a development foundation.
+
+**A11E8 deterministic cohort joint-model foundation scaffolded (2026-09-04):**
+[A11E8 deterministic cohort joint foundation](work-packages/20260904-a11e8-deterministic-cohort-joint-foundation/package.md)
+starts a nested, low-complexity joint residual architecture from faithful. Its
+first component is a temperature-only rank-one annual residual; the previously
+retired A5e0 precipitation/temperature scalar coupling is not revived. Four
+fixed eight-member cohorts support a deterministic integer-quantized selector,
+but the unselected cohort must beat faithful before selection can count. The
+scaffold freezes full-cohort cryptographic provenance, byte-identical replay,
+and separate component/selector dispositions. Execution and confirmation are
+not authorized by the scaffold.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

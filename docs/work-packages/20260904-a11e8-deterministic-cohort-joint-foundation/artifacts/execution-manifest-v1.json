@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e8-deterministic-cohort-joint-foundation-v1",
+  "control_model_id": "faithful_5_32_3",
+  "candidate_model_id": "a11_joint_residual_thermal_rank1_v1",
+  "thermal_state_rng_id": "splitmix64_box_muller_v1",
+  "thermal_state_seed_domain": "cligen-rs/a11e8/thermal-state-v1\\0",
+  "selector_id": "a11e8_quantized_lexicographic_cohort_v1",
+  "model_order": [
+    "faithful_5_32_3",
+    "a11_joint_residual_thermal_rank1_v1"
+  ],
+  "station_count": 20,
+  "years": 16,
+  "cohort_size": 8,
+  "cohorts": [
+    {
+      "cohort_id": 0,
+      "root_seed_hex": "0x0c8862ed55f21e2e",
+      "burns": [0, 101, 1009, 10007, 100003, 1000003, 10000019, 100000007]
+    },
+    {
+      "cohort_id": 1,
+      "root_seed_hex": "0x0c268832683959b1",
+      "burns": [17, 31, 53, 79, 127, 199, 317, 503]
+    },
+    {
+      "cohort_id": 2,
+      "root_seed_hex": "0x1a237b2016b95a3f",
+      "burns": [797, 1259, 1999, 3163, 5003, 7919, 12547, 19867]
+    },
+    {
+      "cohort_id": 3,
+      "root_seed_hex": "0x91328e5fa9a0e916",
+      "burns": [31469, 49853, 78977, 125087, 198149, 313919, 497503, 788129]
+    }
+  ],
+  "score_quantization": {
+    "units_per_one": 1000000000,
+    "rounding": "nearest_ties_to_even"
+  },
+  "selector_order": [
+    "annual_temperature_dispersion_error_q",
+    "temperature_cross_month_correlation_rmse_q",
+    "annual_temperature_lag1_error_q",
+    "annual_temperature_low_frequency_error_q",
+    "model_ordinal",
+    "candidate_index"
+  ],
+  "monthly_mean_eligibility_ratio": 1.05,
+  "model_gate": {
+    "annual_dispersion_error_ratio_max": 0.90,
+    "noninferiority_ratio_max": 1.05,
+    "minimum_improvement_fraction": 0.3333333333333333,
+    "station_annual_error_ratio_max": 1.25
+  },
+  "selector_gate": {
+    "selected_annual_error_ratio_max": 0.95,
+    "complete_scorecard_ratio_max": 1.05,
+    "minimum_thermal_selection_fraction": 0.3333333333333333
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "system": "Darwin",
+    "machine": "arm64",
+    "linear_algebra_threads": 1,
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)"
+  },
+  "resource_bound": {
+    "faithful_streams_per_execution": 640,
+    "derived_candidates_per_execution": 640,
+    "scored_records_per_execution": 1280,
+    "selection_cells_per_execution": 80,
+    "mixed_model_selections_per_execution": 80,
+    "faithful_only_selections_per_execution": 80,
+    "replays": 1
+  },
+  "confirmation_target_access": false,
+  "dependencies": {
+    "panel_sha256": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a11e7_evidence_sha256": "809b400f6126714373f09638bc04a6340e75caffb543dcbed0731bfdfe67f7b5",
+    "a11e7_decision_sha256": "41143b9b5fdce8e3bc22a024252c167d0fe15ed7bbde675918105227c416f582",
+    "a11e7_provenance_sha256": "f342c00d7998d73431bf8e1b24d41a7f2da8c13eb94aaf23962c5b07f24b9959",
+    "a5f0_decision_sha256": "c1d6c73097e14d4e98b6021632a03055667d1932732d0bbae9806024dfb7f064",
+    "a5f0_findings_sha256": "2a90720c4e1bee0a02b38231be93363c3e624d26cc3645ef66312ce3098f6f71",
+    "a11e2_executor_sha256": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e5_executor_sha256": "9bf3cab2752bc84235886deabe2f8b759de2cc320259999c5ccaccce15751ffc",
+    "cargo_lock_sha256": "d06583a7b8eaaacf5c7ba2e2691f6511b071b5e54050696e9ade503e0d63dc39",
+    "cargo_toml_sha256": "a8cdc5b5c96f5720ecd701f3278e7b394fed380a377c0b1b572a464abe64138d",
+    "rust_toolchain_sha256": "3e18e70208ee460635e239a91c142cf67371feafb718b05617ff06f388bf96df",
+    "station_database_sha256": "650b59d17adfdeeab00c5346b812d1d5db791978897c2851ce95c24c133a7211"
+  }
+}
