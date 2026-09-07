@@ -1,0 +1,63 @@
+{
+  "component": {
+    "annual_dispersion_improved_pairs": 639,
+    "annual_dispersion_improvement_fraction": 0.9984375,
+    "metric_median_ratios_candidate_over_faithful": {
+      "annual_temperature_dispersion_error": 0.16088264817718279,
+      "annual_temperature_lag1_error": 0.9421476422583922,
+      "annual_temperature_low_frequency_error": 0.9867632707013344,
+      "monthly_temperature_dispersion_error": 0.6103089065628904,
+      "monthly_temperature_mean_absolute_error_c": 1.0956412076517998,
+      "temperature_cross_month_correlation_rmse": 0.9751577696848797
+    },
+    "passes": false,
+    "station_annual_error_ratios": {
+      "az026481": 0.12051572130500623,
+      "az028820": 0.14994145551853122,
+      "ca040442": 0.14918774485753342,
+      "ca042713": 0.08055069783264587,
+      "co050130": 0.07894444169203625,
+      "id101022": 0.4372169846358862,
+      "la160549": 0.09020785159808356,
+      "me171175": 0.24584554373146175,
+      "mn212248": 0.059350925682464445,
+      "mt243996": 0.23455828999900968,
+      "ne257665": 0.17854315828715395,
+      "nm290234": 0.13013468562110955,
+      "nv262631": 0.1259052313743454,
+      "nv264436": 0.10352574362978532,
+      "nv269171": 0.6710400801284783,
+      "or350412": 0.18923115340903332,
+      "sc381544": 0.2366000357430504,
+      "tx413280": 0.15633651070623364,
+      "tx417262": 0.163120240255223,
+      "wy487845": 0.08445758996512852
+    }
+  },
+  "confirmation_authorized": false,
+  "disposition": "THERMAL_COMPONENT_REJECTED",
+  "execution_id": "a11e8-deterministic-cohort-joint-foundation-v1",
+  "production_authorized": false,
+  "public_runtime_authorized": false,
+  "schema_version": "a11e8-development-decision-1",
+  "science_status": "DETERMINISTIC_COHORT_JOINT_FOUNDATION_EVALUATED",
+  "selector": {
+    "metric_median_ratios_mixed_over_faithful_only": {
+      "annual_precipitation_dispersion_error": 1.1902629186342764,
+      "annual_precipitation_lag1_error": 1.0684623368765938,
+      "annual_precipitation_low_frequency_error": 0.9333948065506193,
+      "annual_temperature_dispersion_error": 0.05454108584929424,
+      "annual_temperature_lag1_error": 1.0714797877276634,
+      "annual_temperature_low_frequency_error": 0.9663343433096137,
+      "monthly_precipitation_dispersion_error": 1.0415778722604077,
+      "monthly_temperature_dispersion_error": 0.5584687751668184,
+      "monthly_temperature_mean_absolute_error_c": 0.9336929920881455,
+      "precipitation_cross_month_correlation_rmse": 1.0054729812213845,
+      "temperature_cross_month_correlation_rmse": 1.0376423650419375
+    },
+    "thermal_selection_fraction": 1.0,
+    "thermal_selections": 80,
+    "useful": false
+  },
+  "terminal": "EXECUTED-COMPLETE"
+}

@@ -1,6 +1,6 @@
 # A11E8 Deterministic Cohort Joint-Model Foundation ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -18,9 +18,10 @@ underlying model. A model cannot pass by producing one lucky selected member.
 - [x] 2026-09-04: implement and synthetically validate the package-local fit,
   overlay, scoring, execution, evidence, and replay-ready provenance tools
   before candidate-output access.
-- [ ] Publish exact execution source to `origin/main` and execute from that
-  forty-character commit.
-- [ ] Replay, review, run gates, and close the package and campaign records.
+- [x] 2026-09-06: execute twice from published source commit
+  `00babe13e88c2af90b10b89e71728155a8a999bb` with the frozen runtime.
+- [x] 2026-09-06: verify byte-identical scientific replay, review the result,
+  run all gates, and close the package and campaign records.
 
 ## Surprises & Discoveries
 
@@ -48,9 +49,19 @@ underlying model. A model cannot pass by producing one lucky selected member.
 
 ## Outcomes & Retrospective
 
-Pending execution. Closure must compare the result with the goal of a simple,
-nested joint model and state whether the component and selector independently
-earned continuation.
+The rank-one thermal residual did not earn retention. It improved annual
+temperature dispersion error in 639 of 640 pairs and reduced the median error
+to `0.16088` of faithful, but regressed monthly-temperature mean error to
+`1.09564`, beyond the frozen `1.05` limit. The selector also did not earn
+continuation: it chose thermal in all 80 cells and strongly improved the
+primary annual-temperature score, but exceeded the scorecard limit on annual
+precipitation dispersion, annual precipitation lag-one, and annual temperature
+lag-one errors.
+
+The simple nested architecture remains the goal, but the next thermal work
+must explain and correct mean drift before adding hydroclimate state, coupling,
+memory, seasonal factors, or runtime selector machinery. Confirmation and
+production remain unauthorized.
 
 ## Context and Orientation
 
@@ -148,3 +159,7 @@ evidence exist.
 2026-09-04: the initial scaffold was completed as runnable prospective source,
 with architecture-pinned numerics and fail-closed ambiguous eigenpairs added
 while preserving the original one-component scientific scope.
+
+2026-09-06: execution and replay completed from the exact published scaffold;
+the thermal component and selector were rejected under their independent
+frozen gates, and the plan closed without production changes.

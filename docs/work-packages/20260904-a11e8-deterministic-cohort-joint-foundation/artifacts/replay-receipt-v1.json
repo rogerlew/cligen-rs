@@ -1,0 +1,16 @@
+{
+  "schema_version": "a11e8-replay-receipt-1",
+  "source_commit": "00babe13e88c2af90b10b89e71728155a8a999bb",
+  "scientific_replay": "BYTE_IDENTICAL",
+  "artifacts": {
+    "calendar-missingness-preflight-v1.json": "e494480265aeb4ee72c7bdf41722cb78774d9e94b7d4d98f6fa86bad4fca4231",
+    "development-decision-v1.json": "bd6fe639c3993ca5c2d5cb45c8374d7c2aadc13d427125f9613158f915b0a797",
+    "development-evidence-v1.json": "a0de09b4691826067286aaedd5495c03c43f6e64c4d203d8fdb7723692f18922",
+    "thermal-loading-bundle-v1.json": "55f4a4d8d0f256768b9e4ca529723487c3214808d8696bf8328baaf9c891eb59"
+  },
+  "first_execution_receipt_sha256": "2814c67ca6063e6b6bcc0643d1540efb96cf77462f69ac1cbe3a7a54a81b2ffe",
+  "replay_execution_receipt_sha256": "b7608db3a30deb1fea6ab3aca097f8ff2fdf6c4132a6fa751610c179ecbdcde5",
+  "provenance_receipts_differ_only_in_execution_receipt_sha256": true,
+  "elapsed_time_excluded_from_scientific_replay": true,
+  "confirmation_target_series_accessed": false
+}

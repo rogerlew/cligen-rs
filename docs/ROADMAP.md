@@ -879,17 +879,6 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E8 deterministic cohort joint-model foundation scaffolded (2026-09-04):**
-[A11E8 deterministic cohort joint foundation](work-packages/20260904-a11e8-deterministic-cohort-joint-foundation/package.md)
-starts a nested, low-complexity joint residual architecture from faithful. Its
-first component is a temperature-only rank-one annual residual; the previously
-retired A5e0 precipitation/temperature scalar coupling is not revived. Four
-fixed eight-member cohorts support a deterministic integer-quantized selector,
-but the unselected cohort must beat faithful before selection can count. The
-scaffold freezes full-cohort cryptographic provenance, byte-identical replay,
-and separate component/selector dispositions. Execution and confirmation are
-not authorized by the scaffold.
-
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

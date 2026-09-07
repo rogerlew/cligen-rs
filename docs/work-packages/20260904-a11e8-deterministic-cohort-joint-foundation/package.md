@@ -1,6 +1,6 @@
 # A11E8 — Deterministic Cohort Joint-Model Foundation
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — THERMAL_COMPONENT_REJECTED`
 
 Date: 2026-09-04
 
@@ -59,10 +59,9 @@ and complete-year eligibility. Confirmation-target access must remain false.
 
 ## Execution and dispatch
 
-Execution is not authorized by this scaffold. The prospective executor and
-synthetic tests are frozen here. A later kickoff must start from the
-then-current `origin/main` and invoke the executor with that exact
-forty-character source commit before any further source edit.
+Execution was authorized on 2026-09-06 and ran from exact published commit
+`00babe13e88c2af90b10b89e71728155a8a999bb`. The prospective executor and
+synthetic tests remained unchanged through both complete executions.
 
 The bounded grid contains 640 fresh faithful CLIGEN streams and 640 derived
 thermal candidates per execution. Four cohorts by twenty stations yield 80
@@ -104,4 +103,33 @@ and selection cannot rescue a rejected component.
   candidate-blind synthetic validation.
 - `artifacts/scaffold-validation.md` — prospective test and repository-gate
   record.
-- `artifacts/review.md` — pending execution review surface.
+- `artifacts/review.md` — completed execution review.
+- `artifacts/replay-receipt-v1.json` — exact scientific replay record.
+- `artifacts/test-results.md` — execution and repository gate record.
+
+## Outcome
+
+Both complete executions generated 640 faithful streams and 640 derived
+thermal candidates, scored all 1,280 records, and produced 80 mixed-model and
+80 faithful-only selections. The calendar/missingness preflight authenticated
+20 development stations with 5,844 normalized axis rows, 5,840 observed rows,
+and the four expected masked dates per object. Confirmation access remained
+false.
+
+The thermal component substantially reduced annual-temperature dispersion
+error: its median candidate/faithful ratio was `0.16088`, and 639 of 640 paired
+records improved. It failed the frozen monthly-temperature mean gate at
+`1.09564` times faithful, above `1.05`, so the terminal disposition is
+`THERMAL_COMPONENT_REJECTED`. Selection cannot rescue that result.
+
+The mixed selector chose thermal in all 80 cells and reduced selected annual
+temperature dispersion error to `0.05454` of the faithful-only selector, but
+it was independently not useful. Selected annual precipitation dispersion and
+lag-one errors were `1.19026` and `1.06846` times faithful-only, and annual
+temperature lag-one error was `1.07148`; all exceed the frozen `1.05` bound.
+
+The calendar preflight, loading bundle, full evidence, and decision replayed
+byte-identically. Review closed GO with no unresolved P0/P1. No model,
+selector, confirmation, public runtime, production behavior, or default is
+promoted. A successor must first isolate the monthly-mean regression without
+adding hydroclimate state or selector complexity.

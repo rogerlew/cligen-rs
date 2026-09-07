@@ -1,0 +1,26 @@
+{
+  "candidates_per_cohort": 8,
+  "cohort_count": 4,
+  "confirmation_target_series_accessed": false,
+  "expected_daily_rows_per_stream": 5844,
+  "normalized_statistic": "daymet_mask_normalized_month_v1",
+  "observed": {
+    "axis_rows_per_object": 5844,
+    "calendar_objects": 20,
+    "masked_dates": [
+      "2012-12-31",
+      "2016-12-31",
+      "2020-12-31",
+      "2024-12-31"
+    ],
+    "object_receipts_sha256": "662e90a80b1adaa504c725e43c24cb153f6f3c1417266e094d41c52ad7c67808",
+    "observed_rows_per_object": 5840,
+    "role_counts": {
+      "development": 20
+    }
+  },
+  "schema_version": "a11e8-calendar-missingness-preflight-1",
+  "source_transform": "daymet_official_365_v1",
+  "station_count": 20,
+  "valid": true
+}
