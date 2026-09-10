@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e9-thermal-mean-regression-attribution-v1",
+  "years": 16,
+  "station_count": 20,
+  "burns": [0,101,1009,10007,100003,1000003,10000019,100000007,17,31,53,79,127,199,317,503,797,1259,1999,3163,5003,7919,12547,19867,31469,49853,78977,125087,198149,313919,497503,788129],
+  "cohort_roots": ["0x0c8862ed55f21e2e","0x0c268832683959b1","0x1a237b2016b95a3f","0x91328e5fa9a0e916"],
+  "arms": ["faithful","raw_rendered","centered_rendered","centered_balanced_rendered","centered_unquantized"],
+  "gate": {"annual_max":0.90,"noninferiority_max":1.05,"improvement_fraction_min":0.3333333333333333,"station_annual_max":1.25},
+  "runtime": {"python":"3.12.14","numpy":"2.3.5","system":"Darwin","machine":"arm64","rustc":"rustc 1.97.1 (8bab26f4f 2026-07-14)","cargo":"cargo 1.97.1 (c980f4866 2026-06-30)"},
+  "dependencies": {
+    "a11e8_manifest":"ffb743f9843498c19196313fa422d1a080025461ee3c28c1289898d4583f833a",
+    "a11e8_contract":"c21907de35d1dae9bcb5a543a354342ca00e722db7170fecc2b2f754cee3c01a",
+    "a11e8_evidence":"a0de09b4691826067286aaedd5495c03c43f6e64c4d203d8fdb7723692f18922",
+    "a11e8_decision":"bd6fe639c3993ca5c2d5cb45c8374d7c2aadc13d427125f9613158f915b0a797",
+    "a11e8_loading":"55f4a4d8d0f256768b9e4ca529723487c3214808d8696bf8328baaf9c891eb59",
+    "a11e8_executor":"8cc57fefb21ff03e566c82c5ed028b452fdaf5e7a9e144d34257cb99ef1a4a33",
+    "panel":"1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+  },
+  "confirmation_target_access": false
+}
