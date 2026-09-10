@@ -1,0 +1,29 @@
+{
+  "confirmation_target_series_accessed": false,
+  "inputs": {
+    "a11e10_bundle": "a0a36f01d238b7053a7aa1801f85b2900ad6b42b2a76573d2ceb27b88ff3bd36",
+    "a11e13_analyzer": "29555587354b757ebfd894ccc74c2e2ff9884148faa5799400c73f044f7af223",
+    "a11e13_decision": "352d94cc77899f14df48c6fabc3a6a2b1ea2362346e72012bbf99faadd496c89",
+    "a11e1_executor": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e2_executor": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e2_manifest": "1dc78ed31f695ccb64e8072cc7c52893b4ba44271704f9b2eca4118d54f1aa6e",
+    "a11e9_executor": "2db309d4c49d7f4407d8ba56f5922c4708abe2945cdcf8fd7cf5adae7b99d04a",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+  },
+  "mode": "replay",
+  "outputs": {
+    "calendar-missingness-preflight-v1.json": "31f2c72f51954861241b1069ad522a6cce77257234653331251d66eeb3cb55cb",
+    "phi-fit-v1.json": "071727f31dd780005ed4f14b170e7c42dfe8cf2baa9ca77017e6ce7861f61636",
+    "transfer-decision-v1.json": "35d5e6975f56e28d785af5d7ddd6aee42b7118b0452b0a9bb58c456e85c0efde",
+    "transfer-evidence-v1.json": "c7097370edc1b30ae927a36f33b8b5ef90fb25b64d274aa7281718a8212369aa"
+  },
+  "runtime": {
+    "machine": "arm64",
+    "numpy": "2.3.5",
+    "python": "3.12.14",
+    "system": "Darwin"
+  },
+  "schema_version": "a11e14-execution-receipt-1",
+  "source_commit": "c5b60cbc5d6a12122c880e435f50b94347d92555",
+  "source_tree": "6f51dbc57e41f342fd22c47162b1b4e7ff310625"
+}

@@ -1,0 +1,333 @@
+{
+  "confirmation_target_series_accessed": false,
+  "decision": {
+    "admission": {
+      "global_median_phi": {
+        "downstream_passes": true,
+        "passes": false,
+        "phi_mae_improves_zero": true,
+        "stability_passes": false
+      },
+      "regime_median_phi": {
+        "downstream_passes": true,
+        "passes": true,
+        "phi_mae_improves_zero": true,
+        "stability_passes": true
+      }
+    },
+    "confirmation_authorized": false,
+    "disposition": "REGIME_PHI_TRANSFER_SUPPORTED",
+    "fresh_burn_validation_authorized": true,
+    "ordered_selection": [
+      "global_median_phi",
+      "regime_median_phi"
+    ],
+    "production_authorized": false,
+    "schema_version": "a11e14-decision-1",
+    "terminal": "EXECUTED-COMPLETE"
+  },
+  "downstream": {
+    "global_median_phi": {
+      "cohort_stability_passes": true,
+      "cohorts": {
+        "0": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.1260767895210312,
+            "annual_temperature_lag1_error": 0.5678879601739234,
+            "annual_temperature_low_frequency_error": 0.7303616776324254,
+            "monthly_temperature_dispersion_error": 0.5979281133248705,
+            "monthly_temperature_mean_absolute_error_c": 0.9999999999999997,
+            "temperature_cross_month_correlation_rmse": 0.9609087573978805
+          },
+          "passes": true
+        },
+        "1": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.10620995148700299,
+            "annual_temperature_lag1_error": 0.41634963609754483,
+            "annual_temperature_low_frequency_error": 0.6996315844681149,
+            "monthly_temperature_dispersion_error": 0.5942235657482701,
+            "monthly_temperature_mean_absolute_error_c": 1.0,
+            "temperature_cross_month_correlation_rmse": 0.9716541736853805
+          },
+          "passes": true
+        },
+        "2": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.10996869072314934,
+            "annual_temperature_lag1_error": 0.8443405896145604,
+            "annual_temperature_low_frequency_error": 0.823582457584351,
+            "monthly_temperature_dispersion_error": 0.6098494830577043,
+            "monthly_temperature_mean_absolute_error_c": 0.9999999999999998,
+            "temperature_cross_month_correlation_rmse": 0.9674690575492558
+          },
+          "passes": true
+        },
+        "3": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.11174184147669387,
+            "annual_temperature_lag1_error": 0.8014461020011898,
+            "annual_temperature_low_frequency_error": 0.9309541793469904,
+            "monthly_temperature_dispersion_error": 0.5973321288783018,
+            "monthly_temperature_mean_absolute_error_c": 0.9999999999999993,
+            "temperature_cross_month_correlation_rmse": 0.9590749647168335
+          },
+          "passes": true
+        }
+      },
+      "overall": {
+        "annual_improved": 640,
+        "annual_improvement_fraction": 1.0,
+        "metric_median_ratios_candidate_over_faithful": {
+          "annual_temperature_dispersion_error": 0.11474184959642207,
+          "annual_temperature_lag1_error": 0.6348597346832539,
+          "annual_temperature_low_frequency_error": 0.7988218832219373,
+          "monthly_temperature_dispersion_error": 0.6048363724137722,
+          "monthly_temperature_mean_absolute_error_c": 0.999999999999999,
+          "temperature_cross_month_correlation_rmse": 0.9648917542147027
+        },
+        "passes": true,
+        "station_annual_error_ratios": {
+          "az026481": 0.08098852312961735,
+          "az028820": 0.13862764391018653,
+          "ca040442": 0.046389698191037575,
+          "ca042713": 0.029443132870296488,
+          "co050130": 0.045670793807772385,
+          "id101022": 0.4579476697731722,
+          "la160549": 0.10013568852308241,
+          "me171175": 0.25700918432370023,
+          "mn212248": 0.04968120130448389,
+          "mt243996": 0.20790567983235356,
+          "ne257665": 0.11550282328933091,
+          "nm290234": 0.11388944754660706,
+          "nv262631": 0.10419009530650644,
+          "nv264436": 0.052527377809914025,
+          "nv269171": 0.697192504701991,
+          "or350412": 0.1959544510961678,
+          "sc381544": 0.19010053225766996,
+          "tx413280": 0.06870988285770595,
+          "tx417262": 0.16700925389771726,
+          "wy487845": 0.08600372644165051
+        }
+      },
+      "passes": true,
+      "reconstruction_sha256": "2480570248991cf862442cbdf34b690d558365c62a18fe20251bdc7d5000c515",
+      "row_count": 640
+    },
+    "regime_median_phi": {
+      "cohort_stability_passes": true,
+      "cohorts": {
+        "0": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.12708891131528022,
+            "annual_temperature_lag1_error": 0.5758793329430648,
+            "annual_temperature_low_frequency_error": 0.7280430185186373,
+            "monthly_temperature_dispersion_error": 0.5990160706000298,
+            "monthly_temperature_mean_absolute_error_c": 1.0000000000000004,
+            "temperature_cross_month_correlation_rmse": 0.9592025822616558
+          },
+          "passes": true
+        },
+        "1": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.1078553882290916,
+            "annual_temperature_lag1_error": 0.3989702350969328,
+            "annual_temperature_low_frequency_error": 0.6867849714246914,
+            "monthly_temperature_dispersion_error": 0.5936826843529389,
+            "monthly_temperature_mean_absolute_error_c": 1.000000000000001,
+            "temperature_cross_month_correlation_rmse": 0.9709531018488816
+          },
+          "passes": true
+        },
+        "2": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.11221583973696221,
+            "annual_temperature_lag1_error": 0.7797753410291379,
+            "annual_temperature_low_frequency_error": 0.828328278765707,
+            "monthly_temperature_dispersion_error": 0.6101363786606918,
+            "monthly_temperature_mean_absolute_error_c": 0.9999999999999997,
+            "temperature_cross_month_correlation_rmse": 0.9642284756892155
+          },
+          "passes": true
+        },
+        "3": {
+          "annual_improved": 160,
+          "annual_improvement_fraction": 1.0,
+          "metric_median_ratios_candidate_over_faithful": {
+            "annual_temperature_dispersion_error": 0.1096691086355759,
+            "annual_temperature_lag1_error": 0.7880896554739838,
+            "annual_temperature_low_frequency_error": 0.9262855265867013,
+            "monthly_temperature_dispersion_error": 0.5968347314767408,
+            "monthly_temperature_mean_absolute_error_c": 1.0000000000000004,
+            "temperature_cross_month_correlation_rmse": 0.9619555995300414
+          },
+          "passes": true
+        }
+      },
+      "overall": {
+        "annual_improved": 640,
+        "annual_improvement_fraction": 1.0,
+        "metric_median_ratios_candidate_over_faithful": {
+          "annual_temperature_dispersion_error": 0.11447215000354541,
+          "annual_temperature_lag1_error": 0.6227881589993057,
+          "annual_temperature_low_frequency_error": 0.7932685567065715,
+          "monthly_temperature_dispersion_error": 0.6023234989013533,
+          "monthly_temperature_mean_absolute_error_c": 0.9999999999999994,
+          "temperature_cross_month_correlation_rmse": 0.9649488026978479
+        },
+        "passes": true,
+        "station_annual_error_ratios": {
+          "az026481": 0.08461284213322837,
+          "az028820": 0.13761721939537483,
+          "ca040442": 0.04043257721966117,
+          "ca042713": 0.03198195164269707,
+          "co050130": 0.04438347277378402,
+          "id101022": 0.4579476697731722,
+          "la160549": 0.10014384975380941,
+          "me171175": 0.2536063986995679,
+          "mn212248": 0.05102782888640266,
+          "mt243996": 0.20790567983235356,
+          "ne257665": 0.11550282328933091,
+          "nm290234": 0.12430080856847964,
+          "nv262631": 0.10434637892451606,
+          "nv264436": 0.04992000299261765,
+          "nv269171": 0.697192504701991,
+          "or350412": 0.1959544510961678,
+          "sc381544": 0.19512683483425397,
+          "tx413280": 0.07305947425056536,
+          "tx417262": 0.1766047888677639,
+          "wy487845": 0.08456745872134798
+        }
+      },
+      "passes": true,
+      "reconstruction_sha256": "d9fa26a8a57b12b50b095ca0bb0dcb9ff39837d80a1b4a2ae1eafc6244d71bac",
+      "row_count": 640
+    }
+  },
+  "evidence_sha256": "ff8fbcba347f88e4ed7e5ea4e14352ff1aa03836c7c55dafe9d39551de50136d",
+  "phi_fit": {
+    "candidate_fit_count": 1200,
+    "candidate_fit_phi_sha256": "17ba1559a920079d9fe3fecda9a4addfd85c1b047180c5ce64b3866fc1bb77fc",
+    "confirmation_target_series_accessed": false,
+    "development_oracle_phi": {
+      "az026481": 0.41096487612990384,
+      "az028820": 0.18304415139795246,
+      "ca040442": 0.32400663065698204,
+      "ca042713": 0.19028743884707225,
+      "co050130": -0.02357356893784458,
+      "id101022": -0.00708552540953012,
+      "la160549": 0.440331604651563,
+      "me171175": 0.35192495513073985,
+      "mn212248": -0.006651316299049265,
+      "mt243996": 0.3356633607783243,
+      "ne257665": 0.011601957229057056,
+      "nm290234": 0.1339324099716635,
+      "nv262631": -0.0005291310870250194,
+      "nv264436": 0.11730786083141431,
+      "nv269171": 0.019706907913615027,
+      "or350412": 0.18936585817687435,
+      "sc381544": 0.24927411714277778,
+      "tx413280": 0.5130986704905393,
+      "tx417262": 0.6407834346956018,
+      "wy487845": -0.06657795606300097
+    },
+    "global_leave_source_regime_out": {
+      "arid_boundary": {
+        "passes": false,
+        "phi_mae": 0.24754053857177735,
+        "trained_phi": 0.25712942698507235,
+        "zero_phi_mae": 0.010118019500320022
+      },
+      "cold": {
+        "passes": false,
+        "phi_mae": 0.2575998752608433,
+        "trained_phi": 0.2908358523063693,
+        "zero_phi_mae": 0.11218194910765866
+      },
+      "hot_arid": {
+        "passes": true,
+        "phi_mae": 0.10684405177709982,
+        "trained_phi": 0.2394867643812646,
+        "zero_phi_mae": 0.2606417016163431
+      },
+      "humid": {
+        "passes": true,
+        "phi_mae": 0.09552874375439262,
+        "trained_phi": 0.28378870230768327,
+        "zero_phi_mae": 0.3448028608971704
+      },
+      "monsoonal_transition": {
+        "passes": true,
+        "phi_mae": 0.2092263859541313,
+        "trained_phi": 0.2422925242117715,
+        "zero_phi_mae": 0.36771466663893926
+      },
+      "non_monsoonal_semi_arid": {
+        "passes": false,
+        "phi_mae": 0.16409108537539174,
+        "trained_phi": 0.25729163535982197,
+        "zero_phi_mae": 0.13592917539844646
+      }
+    },
+    "global_phi": 0.25729163535982197,
+    "hash_half_medians": {
+      "arid_boundary": {
+        "0": 0.2523959699351448,
+        "1": 0.2769965819370536
+      },
+      "cold": {
+        "0": 0.21603114677330026,
+        "1": 0.20686133928826705
+      },
+      "hot_arid": {
+        "0": 0.40137839731850744,
+        "1": 0.3995774732820305
+      },
+      "humid": {
+        "0": 0.17547782800109393,
+        "1": 0.1786000074080788
+      },
+      "monsoonal_transition": {
+        "0": 0.41614199378066946,
+        "1": 0.384615326510938
+      },
+      "non_monsoonal_semi_arid": {
+        "0": 0.2253006397001327,
+        "1": 0.2739096539676657
+      }
+    },
+    "phi_mae": {
+      "global_median_phi": 0.17852100704893045,
+      "regime_median_phi": 0.18876273868880805,
+      "zero": 0.21078558659202656
+    },
+    "regime_phi": {
+      "arid_boundary": 0.2580201754460112,
+      "cold": 0.21113239072816226,
+      "hot_arid": 0.400477935300269,
+      "humid": 0.17743047248375066,
+      "monsoonal_transition": 0.40105511964579005,
+      "non_monsoonal_semi_arid": 0.25682470700175414
+    },
+    "schema_version": "a11e14-phi-fit-1",
+    "stability_passes": {
+      "global_median_phi": false,
+      "regime_median_phi": true
+    }
+  },
+  "schema_version": "a11e14-evidence-1"
+}

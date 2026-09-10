@@ -1,6 +1,6 @@
 # A11E14 — AR(1) Parameter Transfer
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — REGIME_PHI_TRANSFER_SUPPORTED`
 
 Date: 2026-09-10
 
@@ -53,5 +53,25 @@ Close with one frozen transfer disposition or exact integrity HOLD.
 - `artifacts/execution-manifest-v1.json`, `analyze.py`, `test_analyze.py`.
 - `artifacts/calendar-missingness-preflight-v1.json`, `phi-fit-v1.json`.
 - `artifacts/transfer-evidence-v1.json`, `transfer-decision-v1.json`, and
-  `execution-receipt-v1.json` — pending execution.
-- `artifacts/review.md` — pending review.
+  `execution-receipt-v1.json`.
+- `artifacts/review.md`, `artifacts/test-results.md`.
+
+## Outcome
+
+Execution and byte-identical replay completed from exact published commit
+`c5b60cbc5d6a12122c880e435f50b94347d92555`. Fitting used exactly 1,200
+candidate-fit objects; 240 fit-validation objects were excluded, the 20
+development objects were evaluation-only, and confirmation remained sealed.
+
+Both estimators improved development `phi` MAE over the `phi=0` baseline
+(`0.17852` global and `0.18876` regime versus `0.21079`) and passed the overall
+and all four downstream cohort gates. The global estimator failed its frozen
+leave-source-regime-out stability check in three of six regimes. Every regime
+estimator hash-half median difference was below `0.15`, so the ordered fallback
+passed. Its downstream annual-dispersion, lag-one, and low-frequency median
+error ratios were `0.11447`, `0.62279`, and `0.79327`; all 640 pairs improved
+annual dispersion and monthly means remained exactly preserved.
+
+Disposition: `REGIME_PHI_TRANSFER_SUPPORTED`. This authorizes only fresh-burn
+validation of the transferred regime AR(1) law. It does not authorize
+confirmation, public integration, production, or a default change.

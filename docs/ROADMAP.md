@@ -879,10 +879,13 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E14 AR(1) parameter transfer active (2026-09-10):**
+**A11E14 AR(1) parameter transfer complete (2026-09-10):**
 [A11E14](work-packages/20260910-a11e14-ar1-parameter-transfer/package.md)
-tests prospectively frozen global and regime-median candidate-fit persistence
-estimators on development observations, with confirmation sealed.
+fit only the 1,200 candidate-role objects and evaluated 20 development stations.
+Both global and regime medians improved phi MAE and passed every downstream
+cohort; global failed exclusion stability while regime medians passed their
+hash-half gate. The disposition is `REGIME_PHI_TRANSFER_SUPPORTED`, authorizing
+only a fresh-burn transferred-law validation with confirmation still sealed.
 
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)

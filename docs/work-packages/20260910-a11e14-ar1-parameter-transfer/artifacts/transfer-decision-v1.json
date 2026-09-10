@@ -1,0 +1,26 @@
+{
+  "admission": {
+    "global_median_phi": {
+      "downstream_passes": true,
+      "passes": false,
+      "phi_mae_improves_zero": true,
+      "stability_passes": false
+    },
+    "regime_median_phi": {
+      "downstream_passes": true,
+      "passes": true,
+      "phi_mae_improves_zero": true,
+      "stability_passes": true
+    }
+  },
+  "confirmation_authorized": false,
+  "disposition": "REGIME_PHI_TRANSFER_SUPPORTED",
+  "fresh_burn_validation_authorized": true,
+  "ordered_selection": [
+    "global_median_phi",
+    "regime_median_phi"
+  ],
+  "production_authorized": false,
+  "schema_version": "a11e14-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}
