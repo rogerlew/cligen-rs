@@ -25,7 +25,7 @@ def summary(rows:list[dict[str,Any]],gate:dict[str,Any],station_gate:bool=False)
   sr={s:float(np.median([r['candidate_metrics']['annual_temperature_dispersion_error'] for r in rows if r['station_id']==s]))/max(float(np.median([r['faithful_metrics']['annual_temperature_dispersion_error'] for r in rows if r['station_id']==s])),1e-12) for s in sorted({r['station_id'] for r in rows})};out['station_annual_error_ratios']=sr;passed=passed and max(sr.values())<=gate['station_annual_max']
  out['passes']=bool(passed);return out
 def validate(m:dict[str,Any])->None:
- if m['confirmation_target_access'] is not False or m['estimators']!=['global_median_phi','regime_median_phi'] or m['expected']!={'fit_objects':1200,'development_objects':20,'downstream_rows_per_estimator':640}:raise Error('manifest invalid')
+ if m['confirmation_target_access'] is not False or m['estimators']!=['global_median_phi','regime_median_phi'] or m['grouping_authority']!='authenticated_observed_corpus_regime' or m['expected']!={'fit_objects':1200,'development_objects':20,'downstream_rows_per_estimator':640}:raise Error('manifest invalid')
  for k,p in DEPS.items():
   if sha(p)!=m['dependencies'][k]:raise Error(f'dependency drift: {k}')
 def source(commit:str)->dict[str,str]:
@@ -55,9 +55,9 @@ def downstream(name:str,value:Any,bundle:dict[str,Any],station_regime:dict[str,s
  if len(rows)!=m['expected']['downstream_rows_per_estimator']:raise Error('downstream grid invalid')
  overall=summary(rows,m['gate'],True);cohorts={str(c):summary([r for r in rows if r['cohort_id']==c],m['gate']) for c in range(4)};stable=all(x['passes'] for x in cohorts.values());return {'row_count':len(rows),'reconstruction_sha256':canon(digests),'overall':overall,'cohorts':cohorts,'cohort_stability_passes':stable,'passes':overall['passes'] and stable}
 def analyze(m:dict[str,Any])->tuple[dict[str,Any],dict[str,Any],dict[str,Any],dict[str,Any]]:
- fit,development,preflight=load_observed();weights=np.asarray([31,28,31,30,31,30,31,31,30,31,30,31],dtype=np.float64);weights/=weights.sum();fit_bundle,_,dev_regime=fit_estimators(fit,development,weights,m);panel={r['station_id']:r['stratum'] for r in json.loads(PANEL.read_text())['stations']}
- if panel!=dev_regime:raise Error('development regime/panel mismatch')
- replay=json.loads(A10.read_text());down={name:downstream(name,fit_bundle['global_phi'] if name=='global_median_phi' else fit_bundle['regime_phi'],replay,panel,m) for name in m['estimators']};admission={name:{'phi_mae_improves_zero':fit_bundle['phi_mae'][name]<fit_bundle['phi_mae']['zero'],'downstream_passes':down[name]['passes'],'stability_passes':fit_bundle['stability_passes'][name]} for name in m['estimators']}
+ fit,development,preflight=load_observed();weights=np.asarray([31,28,31,30,31,30,31,31,30,31,30,31],dtype=np.float64);weights/=weights.sum();fit_bundle,_,dev_regime=fit_estimators(fit,development,weights,m);panel_ids={r['station_id'] for r in json.loads(PANEL.read_text())['stations']}
+ if panel_ids!=set(dev_regime):raise Error('development/panel station identity mismatch')
+ replay=json.loads(A10.read_text());down={name:downstream(name,fit_bundle['global_phi'] if name=='global_median_phi' else fit_bundle['regime_phi'],replay,dev_regime,m) for name in m['estimators']};admission={name:{'phi_mae_improves_zero':fit_bundle['phi_mae'][name]<fit_bundle['phi_mae']['zero'],'downstream_passes':down[name]['passes'],'stability_passes':fit_bundle['stability_passes'][name]} for name in m['estimators']}
  for v in admission.values():v['passes']=all(v.values())
  disposition='GLOBAL_PHI_TRANSFER_SUPPORTED' if admission['global_median_phi']['passes'] else ('REGIME_PHI_TRANSFER_SUPPORTED' if admission['regime_median_phi']['passes'] else 'AR1_NONDEPLOYABLE_RETIRE_THERMAL_CAMPAIGN');decision={'schema_version':'a11e14-decision-1','terminal':'EXECUTED-COMPLETE','disposition':disposition,'admission':admission,'ordered_selection':m['estimators'],'fresh_burn_validation_authorized':disposition!='AR1_NONDEPLOYABLE_RETIRE_THERMAL_CAMPAIGN','confirmation_authorized':False,'production_authorized':False};evidence={'schema_version':'a11e14-evidence-1','phi_fit':fit_bundle,'downstream':down,'decision':decision,'confirmation_target_series_accessed':False};evidence['evidence_sha256']=canon(evidence);return preflight,fit_bundle,evidence,decision
 def main()->None:

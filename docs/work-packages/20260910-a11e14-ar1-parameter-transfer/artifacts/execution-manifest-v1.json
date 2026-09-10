@@ -2,6 +2,7 @@
   "schema_version": 1,
   "execution_id": "a11e14-ar1-parameter-transfer-v1",
   "estimators": ["global_median_phi", "regime_median_phi"],
+  "grouping_authority": "authenticated_observed_corpus_regime",
   "phi_clip": [-0.75, 0.75],
   "hash_half_median_difference_max": 0.15,
   "expected": {"fit_objects": 1200, "development_objects": 20, "downstream_rows_per_estimator": 640},

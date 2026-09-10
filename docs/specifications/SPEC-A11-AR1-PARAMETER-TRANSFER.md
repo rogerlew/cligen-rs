@@ -1,6 +1,6 @@
 # SPEC-A11-AR1-PARAMETER-TRANSFER
 
-Status: research-only revision 1
+Status: research-only revision 2
 
 Owning package:
 `docs/work-packages/20260910-a11e14-ar1-parameter-transfer/`
@@ -18,8 +18,8 @@ Compute each candidate-fit object's weighted annual mean-air-temperature series
 and clipped lag-one correlation in `[-0.75, 0.75]`.
 
 1. `global_median_phi`: median across all candidate-fit objects.
-2. `regime_median_phi`: median within the target station's existing panel
-   stratum. This is evaluated only as the ordered fallback.
+2. `regime_median_phi`: median within the target station's authenticated
+   observed-corpus regime. This is evaluated only as the ordered fallback.
 
 No target normals, target annual observations, nearest-neighbor search,
 regression, routing, or outcome-tuned fallback enters fitting.
@@ -35,9 +35,9 @@ Require:
 - every A11E10 cohort independently passes its metric and improvement gates.
 
 Global transfer stability additionally requires that, for every development
-stratum, the median trained after excluding all candidate-fit objects from that
-stratum has lower `phi` MAE on that stratum's development stations than
-`phi=0`. Regime transfer stability requires each stratum's two deterministic
+regime, the median trained after excluding all candidate-fit objects from that
+regime has lower `phi` MAE on that regime's development stations than
+`phi=0`. Regime transfer stability requires each regime's two deterministic
 point-ID hash halves to produce medians differing by at most `0.15`.
 
 Admit global first if it passes. Otherwise admit regime median if it passes.
