@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e10-centered-thermal-prospective-validation-v1",
+  "control_model_id": "faithful_5_32_3",
+  "candidate_model_id": "a11_centered_balanced_thermal_rank1_v1",
+  "seed_domain": "cligen-rs/a11e10/centered-thermal-state-v1\\0",
+  "station_count": 20,
+  "years": 16,
+  "cohorts": [
+    {"cohort_id":0,"root_seed_hex":"0x59b34a8f107dc2e1","burns":[5,13,29,43,61,89,139,211]},
+    {"cohort_id":1,"root_seed_hex":"0xc17e02a9465bd873","burns":[337,541,863,1361,2153,3407,5381,8501]},
+    {"cohort_id":2,"root_seed_hex":"0x8a4d61f03cb9275e","burns":[13441,21269,33647,53233,84211,133171,210643,333419]},
+    {"cohort_id":3,"root_seed_hex":"0x27f5c908be1436ad","burns":[527689,835207,1322113,2090837,3303761,5221801,8256049,13051421]}
+  ],
+  "gate": {"annual_max":0.90,"noninferiority_max":1.05,"improvement_fraction_min":0.3333333333333333,"station_annual_max":1.25,"every_cohort_must_pass":true},
+  "runtime": {"python":"3.12.14","numpy":"2.3.5","system":"Darwin","machine":"arm64","rustc":"rustc 1.97.1 (8bab26f4f 2026-07-14)","cargo":"cargo 1.97.1 (c980f4866 2026-06-30)"},
+  "dependencies": {
+    "a11e8_executor":"8cc57fefb21ff03e566c82c5ed028b452fdaf5e7a9e144d34257cb99ef1a4a33",
+    "a11e8_contract":"c21907de35d1dae9bcb5a543a354342ca00e722db7170fecc2b2f754cee3c01a",
+    "a11e9_manifest":"ef85c717d4f7f40bcb466c1952b583be21e03b822e5d0054f6d6d2cc733ed5eb",
+    "a11e9_executor":"2db309d4c49d7f4407d8ba56f5922c4708abe2945cdcf8fd7cf5adae7b99d04a",
+    "a11e9_decision":"9652c04d4822ddb43248665126a1adb9232fcdfcf6dd949d820cb8feb5b34eb5",
+    "panel":"1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d"
+  },
+  "confirmation_target_access": false
+}
