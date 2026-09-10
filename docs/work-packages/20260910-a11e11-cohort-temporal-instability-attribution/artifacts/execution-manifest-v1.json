@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e11-cohort-temporal-instability-attribution-v1",
+  "failed_surfaces": [
+    {"cohort_id":2,"metric":"annual_temperature_lag1_error"},
+    {"cohort_id":3,"metric":"annual_temperature_lag1_error"},
+    {"cohort_id":3,"metric":"annual_temperature_low_frequency_error"}
+  ],
+  "ratio_limit": 1.05,
+  "absolute_excess_tolerance": 0.02,
+  "broad_station_minimum": 10,
+  "broad_worsening_fraction_minimum": 0.3333333333333333,
+  "concentrated_station_maximum": 5,
+  "runtime": {"python":"3.12.14","numpy":"2.3.5","system":"Darwin","machine":"arm64"},
+  "dependencies": {
+    "a11e10_manifest":"3ca41c141ba08b1937c1d8debd9931ba0257ddc7b8de938fca231296949cc754",
+    "a11e10_executor":"221e78542f5acfe94ef942001b188558cf2b8be9b3c1cac717ec23a6e95a04e9",
+    "a11e10_evidence":"086f2e9f17a1bfb7a7f9e3ffbac6e30a01386e8d5efcabdecbe9c6e806eaf1bd",
+    "a11e10_decision":"bddf2f37a2c55693db3c4ab3a6a09792146aece0484abad596905314c4e66118",
+    "a11e10_bundle":"a0a36f01d238b7053a7aa1801f85b2900ad6b42b2a76573d2ceb27b88ff3bd36",
+    "a11e10_loading":"cb929a7d80d3b0c1442d1e6b13f996852a9546d6bad3fd85f22b904da2e0b37d"
+  },
+  "confirmation_target_access": false
+}
