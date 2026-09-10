@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e12-station-loading-signal-influence-v1",
+  "association_threshold": 0.50,
+  "ratio_limit": 1.05,
+  "magnitude_predictors": ["loading_l2","loading_max_abs","annual_weighted_loading_abs","selected_eigenvalue","signal_sd_over_observed_sd"],
+  "shape_predictors": ["loading_max_over_l2","cyclic_roughness_over_l2"],
+  "runtime": {"python":"3.12.14","numpy":"2.3.5","system":"Darwin","machine":"arm64"},
+  "dependencies": {
+    "a11e10_bundle":"a0a36f01d238b7053a7aa1801f85b2900ad6b42b2a76573d2ceb27b88ff3bd36",
+    "a11e10_loading":"cb929a7d80d3b0c1442d1e6b13f996852a9546d6bad3fd85f22b904da2e0b37d",
+    "a11e10_evidence":"086f2e9f17a1bfb7a7f9e3ffbac6e30a01386e8d5efcabdecbe9c6e806eaf1bd",
+    "a11e11_manifest":"3ddc1ceda411ad876eed3d47d77ffb5fab49698ec6493a4b270d3850adfeca30",
+    "a11e11_analyzer":"bdd8282977f52936ed178176be22871d4935c0cebef852f196172ea1653271d9",
+    "a11e11_evidence":"226974daa140a851f191093d03e72834b1167ff47e98e5f262c5322d59d41825",
+    "a11e11_decision":"ab3f7c4a5d84b75b2f95d0dead23171ad8d07d2979380f89334453ca4aeddbcb"
+  },
+  "confirmation_target_access": false
+}

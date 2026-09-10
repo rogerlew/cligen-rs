@@ -879,6 +879,11 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
+**A11E12 station loading and signal-influence attribution scaffolded (2026-09-10):**
+[A11E12 attribution](work-packages/20260910-a11e12-station-loading-signal-influence/package.md)
+tests whether one common loading magnitude or shape explains all A11E10
+temporal failures before any correction or new temporal law is proposed.
+
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
