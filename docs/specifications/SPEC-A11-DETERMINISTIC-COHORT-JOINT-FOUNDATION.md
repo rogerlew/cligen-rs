@@ -1,6 +1,6 @@
 # SPEC-A11-DETERMINISTIC-COHORT-JOINT-FOUNDATION
 
-Status: research-only revision 1
+Status: retired research record — thermal model retired by A11E13
 
 Owning work package:
 `docs/work-packages/20260904-a11e8-deterministic-cohort-joint-foundation/`

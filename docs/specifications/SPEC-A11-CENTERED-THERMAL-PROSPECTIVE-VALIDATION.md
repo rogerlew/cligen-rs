@@ -1,6 +1,6 @@
 # SPEC-A11-CENTERED-THERMAL-PROSPECTIVE-VALIDATION
 
-Status: research-only revision 1
+Status: retired research record — candidate retired by A11E13
 
 Owning work package:
 `docs/work-packages/20260910-a11e10-centered-thermal-prospective-validation/`
