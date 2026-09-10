@@ -143,6 +143,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260910-a11e11-cohort-temporal-instability-attribution](20260910-a11e11-cohort-temporal-instability-attribution/package.md) | EXECUTED-COMPLETE — STATION_CONCENTRATED_LOADING_INSTABILITY |
 | [20260910-a11e12-station-loading-signal-influence](20260910-a11e12-station-loading-signal-influence/package.md) | EXECUTED-COMPLETE — STATION_SPECIFIC_NO_COMMON_LOADING_RULE |
 | [20260910-a11e13-thermal-successor-law-freeze](20260910-a11e13-thermal-successor-law-freeze/package.md) | EXECUTED-COMPLETE — AR1_FEASIBLE_TRANSFER_REQUIRED |
+| [20260910-a11e14-ar1-parameter-transfer](20260910-a11e14-ar1-parameter-transfer/package.md) | SCAFFOLDED |
 | [20260826-a12-station-selection-heuristic-evaluation](20260826-a12-station-selection-heuristic-evaluation/package.md) | EXECUTED-HOLD-UNLOCALIZABLE-DONOR |
 | [20260826-a12r1-localizability-aware-selection](20260826-a12r1-localizability-aware-selection/package.md) | EXECUTED-COMPLETE |
 | [20260826-a12r2-localizability-repair-comparison](20260826-a12r2-localizability-repair-comparison/package.md) | EXECUTED-HOLD-REPAIR-INELIGIBLE |

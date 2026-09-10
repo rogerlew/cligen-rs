@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "execution_id": "a11e14-ar1-parameter-transfer-v1",
+  "estimators": ["global_median_phi", "regime_median_phi"],
+  "phi_clip": [-0.75, 0.75],
+  "hash_half_median_difference_max": 0.15,
+  "expected": {"fit_objects": 1200, "development_objects": 20, "downstream_rows_per_estimator": 640},
+  "gate": {"annual_max": 0.90, "noninferiority_max": 1.05, "improvement_fraction_min": 0.3333333333333333, "station_annual_max": 1.25, "every_cohort_must_pass": true},
+  "runtime": {"python": "3.12.14", "numpy": "2.3.5", "system": "Darwin", "machine": "arm64"},
+  "dependencies": {
+    "a11e1_executor": "8a41acf4521abb53a49c7a295a30643084e32650632dfe8f84178c55fd722dd7",
+    "a11e2_executor": "c047eb20f1132c73045a1aaae91878e786bd200c08c82cdc0bab988a686b252f",
+    "a11e2_manifest": "1dc78ed31f695ccb64e8072cc7c52893b4ba44271704f9b2eca4118d54f1aa6e",
+    "panel": "1c60bed0dc1fe955c8ad0d72cb10d63f9753684ff1c5dcff370459980ad22e7d",
+    "a11e10_bundle": "a0a36f01d238b7053a7aa1801f85b2900ad6b42b2a76573d2ceb27b88ff3bd36",
+    "a11e13_analyzer": "29555587354b757ebfd894ccc74c2e2ff9884148faa5799400c73f044f7af223",
+    "a11e13_decision": "352d94cc77899f14df48c6fabc3a6a2b1ea2362346e72012bbf99faadd496c89",
+    "a11e9_executor": "2db309d4c49d7f4407d8ba56f5922c4708abe2945cdcf8fd7cf5adae7b99d04a"
+  },
+  "confirmation_target_access": false
+}
