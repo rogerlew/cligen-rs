@@ -1,0 +1,8 @@
+{
+  "a11e10_disposition_unchanged": "CENTERED_THERMAL_COMPONENT_REJECTED",
+  "confirmation_authorized": false,
+  "disposition": "STATION_CONCENTRATED_LOADING_INSTABILITY",
+  "production_authorized": false,
+  "schema_version": "a11e11-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}

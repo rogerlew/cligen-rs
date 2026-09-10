@@ -1,6 +1,6 @@
 # A11E11 Cohort Temporal-Instability Attribution ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -9,7 +9,8 @@ Attribute A11E10's cohort instability before proposing another thermal law.
 ## Progress
 
 - [x] 2026-09-10: freeze diagnostics and disposition vocabulary.
-- [ ] Publish, execute, replay, review, and close.
+- [x] 2026-09-10: publish exact source, execute, replay byte-identically,
+  review, run gates, and close.
 
 ## Surprises & Discoveries
 
@@ -23,7 +24,11 @@ Attribute A11E10's cohort instability before proposing another thermal law.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+The disposition is `STATION_CONCENTRATED_LOADING_INSTABILITY`. Two or three
+stations explain half of positive deterioration on every failed surface,
+although two surfaces are also broad by station and pair counts. The next
+minimal diagnostic is station loading/signal influence, not a new temporal law
+or another burn search.
 
 ## Context and Orientation
 
@@ -59,3 +64,6 @@ No public or production interface changes.
 ## Revision Note
 
 2026-09-10: initial scaffold.
+
+2026-09-10: attribution executed and replayed; station concentration was the
+frozen terminal classification.

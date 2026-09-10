@@ -879,11 +879,6 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E11 cohort temporal-instability attribution scaffolded (2026-09-10):**
-[A11E11 attribution](work-packages/20260910-a11e11-cohort-temporal-instability-attribution/package.md)
-diagnoses A11E10's three failed temporal surfaces without new generation,
-gate changes, selector work, or confirmation access.
-
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

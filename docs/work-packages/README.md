@@ -140,7 +140,7 @@ Start from [templates/package.md](templates/package.md).
 | [20260904-a11e8-deterministic-cohort-joint-foundation](20260904-a11e8-deterministic-cohort-joint-foundation/package.md) | EXECUTED-COMPLETE — THERMAL_COMPONENT_REJECTED |
 | [20260910-a11e9-thermal-mean-regression-attribution](20260910-a11e9-thermal-mean-regression-attribution/package.md) | EXECUTED-COMPLETE — CENTERING_REMEDY_SUPPORTED |
 | [20260910-a11e10-centered-thermal-prospective-validation](20260910-a11e10-centered-thermal-prospective-validation/package.md) | EXECUTED-COMPLETE — CENTERED_THERMAL_COMPONENT_REJECTED |
-| [20260910-a11e11-cohort-temporal-instability-attribution](20260910-a11e11-cohort-temporal-instability-attribution/package.md) | SCAFFOLDED |
+| [20260910-a11e11-cohort-temporal-instability-attribution](20260910-a11e11-cohort-temporal-instability-attribution/package.md) | EXECUTED-COMPLETE — STATION_CONCENTRATED_LOADING_INSTABILITY |
 | [20260826-a12-station-selection-heuristic-evaluation](20260826-a12-station-selection-heuristic-evaluation/package.md) | EXECUTED-HOLD-UNLOCALIZABLE-DONOR |
 | [20260826-a12r1-localizability-aware-selection](20260826-a12r1-localizability-aware-selection/package.md) | EXECUTED-COMPLETE |
 | [20260826-a12r2-localizability-repair-comparison](20260826-a12r2-localizability-repair-comparison/package.md) | EXECUTED-HOLD-REPAIR-INELIGIBLE |

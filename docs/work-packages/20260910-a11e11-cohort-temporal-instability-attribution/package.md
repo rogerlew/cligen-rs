@@ -1,6 +1,6 @@
 # A11E11 — Cohort Temporal-Instability Attribution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — STATION_CONCENTRATED_LOADING_INSTABILITY`
 
 Date: 2026-09-10
 
@@ -53,3 +53,22 @@ Close with one frozen attribution disposition or an exact integrity HOLD.
 
 - `artifacts/execution-manifest-v1.json`, `analyze.py`, `test_analyze.py`.
 - `artifacts/review.md` — pending execution review.
+
+## Outcome
+
+Execution and byte-identical replay completed from published commit
+`1bc31db5fe5748e4808a5819406f5b2741438834`. All 640 A11E10 records and the three frozen failure surfaces were
+authenticated; confirmation remained sealed.
+
+All three failures are station-concentrated: two or three stations account for
+half of positive deterioration on each surface. Cohort 2 lag-one and cohort 3
+low-frequency failures are nevertheless broad by count, each worsening 11
+station medians and 51.875% of pairs. Cohort 3 lag-one is not broad and exceeds
+the `1.05` bound by only `0.00054` absolute error, making that crossing
+denominator-sensitive.
+
+The largest contributors differ by cohort: `or350412` leads cohort-2 lag-one;
+`la160549` leads both cohort-3 failures, followed by `id101022` for cohort-3
+low-frequency. The disposition is `STATION_CONCENTRATED_LOADING_INSTABILITY`.
+A11E10 remains rejected. A bounded successor should test loading magnitude and
+annual-signal influence at these stations before proposing a new temporal law.
