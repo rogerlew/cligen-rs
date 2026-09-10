@@ -1,6 +1,6 @@
 # A11E10 — Centered Thermal Prospective Validation
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — CENTERED_THERMAL_COMPONENT_REJECTED`
 
 Date: 2026-09-10
 
@@ -62,3 +62,20 @@ outcome directly authorizes confirmation or production.
 - `artifacts/execution-manifest-v1.json` — frozen identities and gates.
 - `artifacts/execute.py`, `test_execute.py` — prospective tools.
 - `artifacts/review.md` — pending execution review.
+
+## Outcome
+
+Execution and replay completed from exact published commit
+`fa14a5d6b30104c0e9299b34bca02d735ff8b996`. All 640 fresh pairs were complete,
+balanced, finite, and confirmation-sealed.
+
+The overall component gate passed: annual-dispersion error was `0.15558` of
+faithful, 639/640 pairs improved, monthly mean was exactly preserved, and every
+other overall ratio was noninferior. The frozen cohort-stability gate failed.
+Cohort 2 had annual lag-one ratio `1.13411`; cohort 3 had annual lag-one
+`1.05175` and low-frequency `1.20651`, all above `1.05`. The disposition is
+therefore `CENTERED_THERMAL_COMPONENT_REJECTED`.
+
+The result rejects this IID rank-one annual-state formulation despite its
+strong dispersion correction. It authorizes no transfer, selector,
+hydroclimate expansion, confirmation, production, or default change.

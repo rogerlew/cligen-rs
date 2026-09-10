@@ -879,11 +879,6 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E10 centered thermal prospective validation scaffolded (2026-09-10):**
-[A11E10 validation](work-packages/20260910-a11e10-centered-thermal-prospective-validation/package.md)
-tests the A11E9 centered and exactly balanced thermal component on four fresh
-burn cohorts with a new state domain and explicit cohort-stability gates.
-
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

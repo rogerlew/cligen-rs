@@ -1,0 +1,97 @@
+{
+  "cohort_stability_passes": false,
+  "cohorts": {
+    "0": {
+      "annual_improved": 159,
+      "annual_improvement_fraction": 0.99375,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.16771414686298236,
+        "annual_temperature_lag1_error": 0.8024290345725148,
+        "annual_temperature_low_frequency_error": 0.8736620018547423,
+        "monthly_temperature_dispersion_error": 0.6141494752824401,
+        "monthly_temperature_mean_absolute_error_c": 0.9999999999999993,
+        "temperature_cross_month_correlation_rmse": 0.9580960289398096
+      },
+      "passes": true
+    },
+    "1": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.15622578544081098,
+        "annual_temperature_lag1_error": 0.7050464838729731,
+        "annual_temperature_low_frequency_error": 0.880240248433788,
+        "monthly_temperature_dispersion_error": 0.6200842922840046,
+        "monthly_temperature_mean_absolute_error_c": 1.000000000000001,
+        "temperature_cross_month_correlation_rmse": 0.9435203990190785
+      },
+      "passes": true
+    },
+    "2": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.15747960303558753,
+        "annual_temperature_lag1_error": 1.1341123240243083,
+        "annual_temperature_low_frequency_error": 1.0493900637189206,
+        "monthly_temperature_dispersion_error": 0.6129308281437313,
+        "monthly_temperature_mean_absolute_error_c": 0.9999999999999994,
+        "temperature_cross_month_correlation_rmse": 0.9696316898669386
+      },
+      "passes": false
+    },
+    "3": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.14759291579420028,
+        "annual_temperature_lag1_error": 1.0517507397599515,
+        "annual_temperature_low_frequency_error": 1.206505085661162,
+        "monthly_temperature_dispersion_error": 0.6126226767870492,
+        "monthly_temperature_mean_absolute_error_c": 0.9999999999999987,
+        "temperature_cross_month_correlation_rmse": 0.9548202981485152
+      },
+      "passes": false
+    }
+  },
+  "confirmation_authorized": false,
+  "disposition": "CENTERED_THERMAL_COMPONENT_REJECTED",
+  "overall": {
+    "annual_improved": 639,
+    "annual_improvement_fraction": 0.9984375,
+    "metric_median_ratios_candidate_over_faithful": {
+      "annual_temperature_dispersion_error": 0.15558179362218266,
+      "annual_temperature_lag1_error": 0.9090782766055411,
+      "annual_temperature_low_frequency_error": 1.0018607648209175,
+      "monthly_temperature_dispersion_error": 0.6196045683435634,
+      "monthly_temperature_mean_absolute_error_c": 0.999999999999998,
+      "temperature_cross_month_correlation_rmse": 0.9574633799834025
+    },
+    "passes": true,
+    "station_annual_error_ratios": {
+      "az026481": 0.09813829216493644,
+      "az028820": 0.17034293151731433,
+      "ca040442": 0.10169346142440265,
+      "ca042713": 0.11949916462944438,
+      "co050130": 0.09070093341462832,
+      "id101022": 0.44017640549847203,
+      "la160549": 0.10330067794346064,
+      "me171175": 0.28978945164174746,
+      "mn212248": 0.05563649553562713,
+      "mt243996": 0.1897388703716679,
+      "ne257665": 0.13482062016108373,
+      "nm290234": 0.14951836586223669,
+      "nv262631": 0.13031162423301212,
+      "nv264436": 0.11609889723911955,
+      "nv269171": 0.7208543778323393,
+      "or350412": 0.2753114720400805,
+      "sc381544": 0.21157504419484124,
+      "tx413280": 0.12346541415150117,
+      "tx417262": 0.18095386576536626,
+      "wy487845": 0.11490856949099022
+    }
+  },
+  "production_authorized": false,
+  "schema_version": "a11e10-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}

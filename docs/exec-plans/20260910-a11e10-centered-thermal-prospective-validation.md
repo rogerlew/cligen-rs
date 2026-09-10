@@ -1,6 +1,6 @@
 # A11E10 Centered Thermal Prospective Validation ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -10,8 +10,9 @@ parameter-transfer or model-expansion work.
 ## Progress
 
 - [x] 2026-09-10: freeze fresh identities, component, and stability gates.
-- [ ] Publish and execute exact source.
-- [ ] Replay, review, run gates, and close records.
+- [x] 2026-09-10: publish commit `fa14a5d6b30104c0e9299b34bca02d735ff8b996`
+  and execute exact source.
+- [x] 2026-09-10: replay byte-identically, review, run gates, and close records.
 
 ## Surprises & Discoveries
 
@@ -25,7 +26,10 @@ parameter-transfer or model-expansion work.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+Overall gates passed strongly, but two of four fresh cohorts failed temporal
+dependence stability. The IID rank-one annual-state component is rejected.
+Future work, if authorized, should diagnose cohort-sensitive lag and
+low-frequency behavior before proposing a different minimal temporal law.
 
 ## Context and Orientation
 
@@ -67,3 +71,6 @@ No public interface or production function changes.
 ## Revision Note
 
 2026-09-10: initial prospective scaffold.
+
+2026-09-10: fresh validation closed `CENTERED_THERMAL_COMPONENT_REJECTED`
+because cohort-stability gates failed despite an overall pass.
