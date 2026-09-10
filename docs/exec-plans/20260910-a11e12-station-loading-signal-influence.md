@@ -1,6 +1,6 @@
 # A11E12 Station Loading and Signal-Influence ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -9,7 +9,8 @@ Test whether A11E11's concentration supports one simple loading correction.
 ## Progress
 
 - [x] 2026-09-10: freeze predictors and attribution rules.
-- [ ] Publish, execute, replay, review, and close.
+- [x] 2026-09-10: publish exact source, execute, replay byte-identically,
+  review, run gates, and close.
 
 ## Surprises & Discoveries
 
@@ -24,7 +25,9 @@ Test whether A11E11's concentration supports one simple loading correction.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+No common loading magnitude or shape explains all three failures, and no
+single station exclusion clears them. The rank-one thermal line has no simple
+loading normalization supported by this evidence and should be retired.
 
 ## Context and Orientation
 
@@ -60,3 +63,5 @@ No public or production interface changes.
 ## Revision Note
 
 2026-09-10: initial scaffold.
+
+2026-09-10: closed `STATION_SPECIFIC_NO_COMMON_LOADING_RULE` after exact replay.

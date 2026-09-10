@@ -1,0 +1,275 @@
+{
+  "clearing_single_station_exclusions": {
+    "c2_annual_temperature_lag1_error": [],
+    "c3_annual_temperature_lag1_error": [
+      "az026481",
+      "co050130",
+      "id101022",
+      "la160549",
+      "me171175",
+      "mn212248",
+      "ne257665",
+      "nv262631",
+      "nv269171",
+      "tx413280",
+      "tx417262",
+      "wy487845"
+    ],
+    "c3_annual_temperature_low_frequency_error": []
+  },
+  "confirmation_target_series_accessed": false,
+  "decision": {
+    "a11e10_disposition_unchanged": "CENTERED_THERMAL_COMPONENT_REJECTED",
+    "common_magnitude_predictors": [],
+    "common_shape_predictors": [],
+    "common_single_station_exclusions": [],
+    "confirmation_authorized": false,
+    "disposition": "STATION_SPECIFIC_NO_COMMON_LOADING_RULE",
+    "normalization_hypothesis_authorized": false,
+    "production_authorized": false,
+    "schema_version": "a11e12-decision-1",
+    "terminal": "EXECUTED-COMPLETE"
+  },
+  "evidence_sha256": "b26e050d4edac5f2f2d76f22f21b87c9b74f0263c437d75d28a28f16e2b0f636",
+  "schema_version": "a11e12-evidence-1",
+  "station_count": 20,
+  "station_predictors": [
+    {
+      "annual_weighted_loading_abs": 0.4875617862525912,
+      "cyclic_roughness_over_l2": 1.0823060130718838,
+      "loading_l2": 2.492459234276905,
+      "loading_max_abs": 1.5287670056699687,
+      "loading_max_over_l2": 0.6133568744659865,
+      "selected_eigenvalue": 6.212353034532216,
+      "signal_sd_over_observed_sd": 0.8727419588060571,
+      "station_id": "az026481"
+    },
+    {
+      "annual_weighted_loading_abs": 0.3649620954027458,
+      "cyclic_roughness_over_l2": 1.128135131026349,
+      "loading_l2": 2.394328185160688,
+      "loading_max_abs": 1.5907938284710514,
+      "loading_max_over_l2": 0.6644009114248848,
+      "selected_eigenvalue": 5.732807458254861,
+      "signal_sd_over_observed_sd": 0.7734374061494802,
+      "station_id": "az028820"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6306909379876824,
+      "cyclic_roughness_over_l2": 0.5027762662820374,
+      "loading_l2": 2.581841736212844,
+      "loading_max_abs": 1.156790965890742,
+      "loading_max_over_l2": 0.44804875127147514,
+      "selected_eigenvalue": 6.665906750850549,
+      "signal_sd_over_observed_sd": 0.9118830675839348,
+      "station_id": "ca040442"
+    },
+    {
+      "annual_weighted_loading_abs": 0.605836410097196,
+      "cyclic_roughness_over_l2": 0.8387568062889563,
+      "loading_l2": 2.680249135601983,
+      "loading_max_abs": 1.8812704605387298,
+      "loading_max_over_l2": 0.7019013402708167,
+      "selected_eigenvalue": 7.183735428895169,
+      "signal_sd_over_observed_sd": 0.8954854077882183,
+      "station_id": "ca042713"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6313896615905474,
+      "cyclic_roughness_over_l2": 0.8231075416561695,
+      "loading_l2": 3.708138625299142,
+      "loading_max_abs": 2.668008200399716,
+      "loading_max_over_l2": 0.7195006632699669,
+      "selected_eigenvalue": 13.750292064435422,
+      "signal_sd_over_observed_sd": 0.892322495715929,
+      "station_id": "co050130"
+    },
+    {
+      "annual_weighted_loading_abs": 0.3324682307447264,
+      "cyclic_roughness_over_l2": 1.001205237731706,
+      "loading_l2": 2.9915832773171047,
+      "loading_max_abs": 2.2645959175641175,
+      "loading_max_over_l2": 0.7569890949500961,
+      "selected_eigenvalue": 8.949570505123349,
+      "signal_sd_over_observed_sd": 0.5470980450407147,
+      "station_id": "id101022"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6395387678180956,
+      "cyclic_roughness_over_l2": 0.7347692482859816,
+      "loading_l2": 3.4562839501650373,
+      "loading_max_abs": 2.296854258489506,
+      "loading_max_over_l2": 0.6645444331562605,
+      "selected_eigenvalue": 11.945898744168439,
+      "signal_sd_over_observed_sd": 0.8121684345474367,
+      "station_id": "la160549"
+    },
+    {
+      "annual_weighted_loading_abs": 0.5569190602071797,
+      "cyclic_roughness_over_l2": 0.8579712439691265,
+      "loading_l2": 3.7788294106951286,
+      "loading_max_abs": 2.3945011527986297,
+      "loading_max_over_l2": 0.6336621457485039,
+      "selected_eigenvalue": 14.279551715134486,
+      "signal_sd_over_observed_sd": 0.7207002608217037,
+      "station_id": "me171175"
+    },
+    {
+      "annual_weighted_loading_abs": 1.0743221853785943,
+      "cyclic_roughness_over_l2": 0.6819284076034824,
+      "loading_l2": 5.089541487076393,
+      "loading_max_abs": 2.933776672058871,
+      "loading_max_over_l2": 0.5764324113495208,
+      "selected_eigenvalue": 25.90343254867181,
+      "signal_sd_over_observed_sd": 0.9067108652557305,
+      "station_id": "mn212248"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6416597165545365,
+      "cyclic_roughness_over_l2": 1.11124929132301,
+      "loading_l2": 6.25214700448027,
+      "loading_max_abs": 4.98578059004052,
+      "loading_max_over_l2": 0.7974509534832952,
+      "selected_eigenvalue": 39.08934216563162,
+      "signal_sd_over_observed_sd": 0.7333785832234642,
+      "station_id": "mt243996"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6357683247329948,
+      "cyclic_roughness_over_l2": 1.0362511018309257,
+      "loading_l2": 3.7163344338887576,
+      "loading_max_abs": 2.39773399149948,
+      "loading_max_over_l2": 0.6451878952644476,
+      "selected_eigenvalue": 13.811141624507272,
+      "signal_sd_over_observed_sd": 0.7852117763229557,
+      "station_id": "ne257665"
+    },
+    {
+      "annual_weighted_loading_abs": 0.3965376917910447,
+      "cyclic_roughness_over_l2": 1.0598994520978136,
+      "loading_l2": 2.5454449461457247,
+      "loading_max_abs": 1.6338586020702117,
+      "loading_max_over_l2": 0.6418754428549619,
+      "selected_eigenvalue": 6.479289973858817,
+      "signal_sd_over_observed_sd": 0.7364952619094812,
+      "station_id": "nm290234"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6531492836536076,
+      "cyclic_roughness_over_l2": 0.8524320073237333,
+      "loading_l2": 3.305653583999673,
+      "loading_max_abs": 2.005331215977973,
+      "loading_max_over_l2": 0.606636831422494,
+      "selected_eigenvalue": 10.927345617409877,
+      "signal_sd_over_observed_sd": 0.8307262856564318,
+      "station_id": "nv262631"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6152199596477769,
+      "cyclic_roughness_over_l2": 0.8139070432738085,
+      "loading_l2": 2.7388152380178092,
+      "loading_max_abs": 1.6450919611774764,
+      "loading_max_over_l2": 0.6006582475304525,
+      "selected_eigenvalue": 7.501108907998553,
+      "signal_sd_over_observed_sd": 0.8239812788344162,
+      "station_id": "nv264436"
+    },
+    {
+      "annual_weighted_loading_abs": 0.24205069310892446,
+      "cyclic_roughness_over_l2": 1.368227150210524,
+      "loading_l2": 2.932450471556657,
+      "loading_max_abs": 1.789203417664226,
+      "loading_max_over_l2": 0.6101393476270541,
+      "selected_eigenvalue": 8.599265768132863,
+      "signal_sd_over_observed_sd": 0.3331276452054114,
+      "station_id": "nv269171"
+    },
+    {
+      "annual_weighted_loading_abs": 0.5152202091932832,
+      "cyclic_roughness_over_l2": 0.8724888194304634,
+      "loading_l2": 2.833091032448371,
+      "loading_max_abs": 1.3222064933550501,
+      "loading_max_over_l2": 0.4667010266212282,
+      "selected_eigenvalue": 8.026404798139385,
+      "signal_sd_over_observed_sd": 0.6568498468324794,
+      "station_id": "or350412"
+    },
+    {
+      "annual_weighted_loading_abs": 0.4017244762501725,
+      "cyclic_roughness_over_l2": 0.7348385958669188,
+      "loading_l2": 3.10841678305091,
+      "loading_max_abs": 1.9346400614771737,
+      "loading_max_over_l2": 0.6223876000239341,
+      "selected_eigenvalue": 9.662254897152572,
+      "signal_sd_over_observed_sd": 0.716055684418796,
+      "station_id": "sc381544"
+    },
+    {
+      "annual_weighted_loading_abs": 0.6446203711558257,
+      "cyclic_roughness_over_l2": 0.6060219409772379,
+      "loading_l2": 2.741420846929183,
+      "loading_max_abs": 1.5702686630773126,
+      "loading_max_over_l2": 0.5727937265948266,
+      "selected_eigenvalue": 7.515388259977927,
+      "signal_sd_over_observed_sd": 0.8229257128746503,
+      "station_id": "tx413280"
+    },
+    {
+      "annual_weighted_loading_abs": 0.5152301642096232,
+      "cyclic_roughness_over_l2": 0.7975844874231112,
+      "loading_l2": 2.6010862801794477,
+      "loading_max_abs": 1.6620116394240925,
+      "loading_max_over_l2": 0.6389682849387953,
+      "selected_eigenvalue": 6.765649836937755,
+      "signal_sd_over_observed_sd": 0.7478371120887249,
+      "station_id": "tx417262"
+    },
+    {
+      "annual_weighted_loading_abs": 0.771945010591575,
+      "cyclic_roughness_over_l2": 0.7319406501561753,
+      "loading_l2": 3.799065900215372,
+      "loading_max_abs": 2.1763995006593437,
+      "loading_max_over_l2": 0.5728775330104071,
+      "selected_eigenvalue": 14.43290171417925,
+      "signal_sd_over_observed_sd": 0.8778029931523433,
+      "station_id": "wy487845"
+    }
+  ],
+  "surface_correlations": {
+    "annual_weighted_loading_abs": {
+      "c2_annual_temperature_lag1_error": -0.004707272625974371,
+      "c3_annual_temperature_lag1_error": -0.08678190982390778,
+      "c3_annual_temperature_low_frequency_error": -0.22068404029365377
+    },
+    "cyclic_roughness_over_l2": {
+      "c2_annual_temperature_lag1_error": -0.16458306802496558,
+      "c3_annual_temperature_lag1_error": 0.14024627790824618,
+      "c3_annual_temperature_low_frequency_error": 0.007431784052438853
+    },
+    "loading_l2": {
+      "c2_annual_temperature_lag1_error": -0.05477341795600386,
+      "c3_annual_temperature_lag1_error": -0.05653792445462039,
+      "c3_annual_temperature_low_frequency_error": -0.19262074541620314
+    },
+    "loading_max_abs": {
+      "c2_annual_temperature_lag1_error": -0.11056043057939713,
+      "c3_annual_temperature_lag1_error": -0.009089587085912273,
+      "c3_annual_temperature_low_frequency_error": -0.10293697296023516
+    },
+    "loading_max_over_l2": {
+      "c2_annual_temperature_lag1_error": -0.34146869595184126,
+      "c3_annual_temperature_lag1_error": 0.15480934218476883,
+      "c3_annual_temperature_low_frequency_error": 0.22367851057923202
+    },
+    "selected_eigenvalue": {
+      "c2_annual_temperature_lag1_error": -0.000637666035161417,
+      "c3_annual_temperature_lag1_error": -0.048915394658689854,
+      "c3_annual_temperature_low_frequency_error": -0.23385534646138692
+    },
+    "signal_sd_over_observed_sd": {
+      "c2_annual_temperature_lag1_error": 0.017525997101527656,
+      "c3_annual_temperature_lag1_error": -0.12107403900598661,
+      "c3_annual_temperature_low_frequency_error": -0.1842826646419218
+    }
+  }
+}

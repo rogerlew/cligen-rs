@@ -1,6 +1,6 @@
 # A11E12 — Station Loading and Signal-Influence Attribution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — STATION_SPECIFIC_NO_COMMON_LOADING_RULE`
 
 Date: 2026-09-10
 
@@ -50,3 +50,18 @@ Close with one frozen attribution disposition or exact integrity HOLD.
 
 - `artifacts/execution-manifest-v1.json`, `analyze.py`, `test_analyze.py`.
 - `artifacts/review.md` — pending review.
+
+## Outcome
+
+Execution and byte-identical replay completed from published commit
+`116022b60f1324be7e4c7435ef58f64eca1ed284`. No magnitude or shape predictor
+met the frozen common-association rule. All cross-surface magnitude
+correlations were small (absolute maximum `0.234`), and shape correlations
+changed sign or remained below `0.342`.
+
+No single station exclusion cleared all failures. Individual exclusions clear
+only the already denominator-sensitive cohort-3 lag-one crossing; none clears
+cohort-2 lag-one or cohort-3 low-frequency. The disposition is
+`STATION_SPECIFIC_NO_COMMON_LOADING_RULE`, and no normalization hypothesis is
+authorized. The current rank-one thermal line should be retired rather than
+cap-tuned. A11E10 remains rejected.

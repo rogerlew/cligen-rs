@@ -1,0 +1,24 @@
+{
+  "confirmation_target_series_accessed": false,
+  "decision_sha256": "24fca4ae4637ca6cda14831bb26d29e1b246cbcd1f58ea280ab53787ed6169c3",
+  "evidence_sha256": "ae2cc6d8e3ba4ba21997b86eef7843998b0f5bd159a7473717e0e46e3e1f1bfb",
+  "inputs": {
+    "a11e10_bundle": "a0a36f01d238b7053a7aa1801f85b2900ad6b42b2a76573d2ceb27b88ff3bd36",
+    "a11e10_evidence": "086f2e9f17a1bfb7a7f9e3ffbac6e30a01386e8d5efcabdecbe9c6e806eaf1bd",
+    "a11e10_loading": "cb929a7d80d3b0c1442d1e6b13f996852a9546d6bad3fd85f22b904da2e0b37d",
+    "a11e11_analyzer": "bdd8282977f52936ed178176be22871d4935c0cebef852f196172ea1653271d9",
+    "a11e11_decision": "ab3f7c4a5d84b75b2f95d0dead23171ad8d07d2979380f89334453ca4aeddbcb",
+    "a11e11_evidence": "226974daa140a851f191093d03e72834b1167ff47e98e5f262c5322d59d41825",
+    "a11e11_manifest": "3ddc1ceda411ad876eed3d47d77ffb5fab49698ec6493a4b270d3850adfeca30"
+  },
+  "mode": "replay",
+  "runtime": {
+    "machine": "arm64",
+    "numpy": "2.3.5",
+    "python": "3.12.14",
+    "system": "Darwin"
+  },
+  "schema_version": "a11e12-execution-receipt-1",
+  "source_commit": "116022b60f1324be7e4c7435ef58f64eca1ed284",
+  "source_tree": "d21fe5304dcd34ff9878e5a309591a8813e7d7bb"
+}

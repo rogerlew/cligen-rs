@@ -1,0 +1,12 @@
+{
+  "a11e10_disposition_unchanged": "CENTERED_THERMAL_COMPONENT_REJECTED",
+  "common_magnitude_predictors": [],
+  "common_shape_predictors": [],
+  "common_single_station_exclusions": [],
+  "confirmation_authorized": false,
+  "disposition": "STATION_SPECIFIC_NO_COMMON_LOADING_RULE",
+  "normalization_hypothesis_authorized": false,
+  "production_authorized": false,
+  "schema_version": "a11e12-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}
