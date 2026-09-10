@@ -1,0 +1,11 @@
+{
+  "confirmation_target_series_accessed": false,
+  "reason": "fresh cohort temporal instability with no common loading correction",
+  "replacement_id": "a11_station_ar1_centered_balanced_thermal_rank1_feasibility_v1",
+  "replacement_selected": true,
+  "retired_model_ids": [
+    "a11_joint_residual_thermal_rank1_v1",
+    "a11_centered_balanced_thermal_rank1_v1"
+  ],
+  "schema_version": "a11e13-retirement-1"
+}

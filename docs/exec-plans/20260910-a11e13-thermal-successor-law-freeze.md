@@ -1,6 +1,6 @@
 # A11E13 Thermal Successor-Law Freeze ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -9,7 +9,8 @@ Close the failed IID line and test the simplest temporally explicit successor.
 ## Progress
 
 - [x] 2026-09-10: freeze retirement and AR(1) feasibility contract.
-- [ ] Publish, execute, replay, review, and close.
+- [x] 2026-09-10: publish exact source, execute, replay byte-identically,
+  review, run gates, and close.
 
 ## Surprises & Discoveries
 
@@ -23,7 +24,9 @@ Close the failed IID line and test the simplest temporally explicit successor.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+The station-fitted AR(1) oracle passed every overall and cohort gate. The IID
+laws remain retired. The next bounded stage is parameter-transfer feasibility
+for `phi`; no generation-profile or confirmation work is yet authorized.
 
 ## Context and Orientation
 
@@ -59,3 +62,5 @@ No public or production interface changes.
 ## Revision Note
 
 2026-09-10: initial scaffold.
+
+2026-09-10: closed `AR1_FEASIBLE_TRANSFER_REQUIRED` after exact replay.

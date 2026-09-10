@@ -1,0 +1,103 @@
+{
+  "cohort_stability_passes": true,
+  "cohorts": {
+    "0": {
+      "annual_improved": 159,
+      "annual_improvement_fraction": 0.99375,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.1305476901491779,
+        "annual_temperature_lag1_error": 0.534829680323388,
+        "annual_temperature_low_frequency_error": 0.6597859333713879,
+        "monthly_temperature_dispersion_error": 0.6017651408843726,
+        "monthly_temperature_mean_absolute_error_c": 1.0000000000000004,
+        "temperature_cross_month_correlation_rmse": 0.9620718194943592
+      },
+      "passes": true
+    },
+    "1": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.10918765742761471,
+        "annual_temperature_lag1_error": 0.4278355104965634,
+        "annual_temperature_low_frequency_error": 0.6637755793415858,
+        "monthly_temperature_dispersion_error": 0.5994425963020161,
+        "monthly_temperature_mean_absolute_error_c": 1.0,
+        "temperature_cross_month_correlation_rmse": 0.9729680300132152
+      },
+      "passes": true
+    },
+    "2": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.10982689758239819,
+        "annual_temperature_lag1_error": 0.7831475730723338,
+        "annual_temperature_low_frequency_error": 0.710613430109468,
+        "monthly_temperature_dispersion_error": 0.6107988459431571,
+        "monthly_temperature_mean_absolute_error_c": 0.9999999999999998,
+        "temperature_cross_month_correlation_rmse": 0.9673288456317343
+      },
+      "passes": true
+    },
+    "3": {
+      "annual_improved": 160,
+      "annual_improvement_fraction": 1.0,
+      "metric_median_ratios_candidate_over_faithful": {
+        "annual_temperature_dispersion_error": 0.11018503625759929,
+        "annual_temperature_lag1_error": 0.5964265438075261,
+        "annual_temperature_low_frequency_error": 0.7956642300686004,
+        "monthly_temperature_dispersion_error": 0.5987181553745818,
+        "monthly_temperature_mean_absolute_error_c": 0.999999999999999,
+        "temperature_cross_month_correlation_rmse": 0.9674531928029252
+      },
+      "passes": true
+    }
+  },
+  "conditioned_iid_status": "REJECTED_HORIZON_SELECTOR_SEMANTICS",
+  "confirmation_authorized": false,
+  "disposition": "AR1_FEASIBLE_TRANSFER_REQUIRED",
+  "overall": {
+    "annual_improved": 639,
+    "annual_improvement_fraction": 0.9984375,
+    "metric_median_ratios_candidate_over_faithful": {
+      "annual_temperature_dispersion_error": 0.11423987894469834,
+      "annual_temperature_lag1_error": 0.568537511344358,
+      "annual_temperature_low_frequency_error": 0.7161204990209604,
+      "monthly_temperature_dispersion_error": 0.6074913406426287,
+      "monthly_temperature_mean_absolute_error_c": 0.999999999999999,
+      "temperature_cross_month_correlation_rmse": 0.9691376581685964
+    },
+    "passes": true,
+    "station_annual_error_ratios": {
+      "az026481": 0.0833861971927752,
+      "az028820": 0.14189721998562546,
+      "ca040442": 0.04445868680230615,
+      "ca042713": 0.029350405406270142,
+      "co050130": 0.03723333118803905,
+      "id101022": 0.4601158659141165,
+      "la160549": 0.10439789634423248,
+      "me171175": 0.25307870277646366,
+      "mn212248": 0.052717378073512004,
+      "mt243996": 0.21162107547511333,
+      "ne257665": 0.1187429209291784,
+      "nm290234": 0.11400143970885106,
+      "nv262631": 0.1006185089622369,
+      "nv264436": 0.048896966424805566,
+      "nv269171": 0.720256096269532,
+      "or350412": 0.19600668295820897,
+      "sc381544": 0.19352906521068322,
+      "tx413280": 0.07216944916275751,
+      "tx417262": 0.18358395730558938,
+      "wy487845": 0.08546362809272741
+    }
+  },
+  "parameter_transfer_authorized": true,
+  "production_authorized": false,
+  "retired_model_ids": [
+    "a11_joint_residual_thermal_rank1_v1",
+    "a11_centered_balanced_thermal_rank1_v1"
+  ],
+  "schema_version": "a11e13-decision-1",
+  "terminal": "EXECUTED-COMPLETE"
+}

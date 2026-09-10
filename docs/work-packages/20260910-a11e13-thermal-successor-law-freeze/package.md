@@ -1,6 +1,6 @@
 # A11E13 — Thermal Successor-Law Freeze
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — AR1_FEASIBLE_TRANSFER_REQUIRED`
 
 Date: 2026-09-10
 
@@ -55,3 +55,19 @@ HOLD. No result directly authorizes production.
 
 - `artifacts/execution-manifest-v1.json`, `analyze.py`, `test_analyze.py`.
 - `artifacts/review.md` — pending execution review.
+
+## Outcome
+
+Execution and byte-identical replay completed from exact published commit
+`7e1d2919483b52d990286653f54dcc80030018a6`. The two IID thermal identifiers
+are retired, and horizon-conditioned IID is rejected as selector-like.
+
+The station-fitted AR(1) oracle passed overall and in every cohort. Overall
+annual-dispersion error fell to `0.11424` of faithful, lag-one error to
+`0.56854`, low-frequency error to `0.71612`, and monthly mean remained exactly
+preserved. All four cohorts passed every frozen metric bound; 639/640 pairs
+improved annual dispersion. Fitted `phi` ranged from `-0.06658` to `0.64078`.
+
+Disposition: `AR1_FEASIBLE_TRANSFER_REQUIRED`. This authorizes only a package
+to find a legitimate non-oracle source for `phi`; it does not authorize public
+integration, confirmation, production, or defaults.

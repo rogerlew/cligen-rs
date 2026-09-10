@@ -879,11 +879,6 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E13 thermal successor-law freeze scaffolded (2026-09-10):**
-[A11E13 law freeze](work-packages/20260910-a11e13-thermal-successor-law-freeze/package.md)
-retires the failed IID thermal laws, rejects horizon-conditioned IID, and tests
-one frozen station-fitted AR(1) oracle before any transfer work.
-
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a
