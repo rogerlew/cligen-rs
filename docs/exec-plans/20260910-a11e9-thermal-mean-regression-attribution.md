@@ -1,6 +1,6 @@
 # A11E9 Thermal Mean-Regression Attribution ExecPlan
 
-Status: scaffolded
+Status: complete
 
 ## Purpose / Big Picture
 
@@ -10,8 +10,9 @@ A11E8's sole component-gate failure without sacrificing its annual benefit.
 ## Progress
 
 - [x] 2026-09-10: freeze the four-arm attribution and decision rules.
-- [ ] Publish exact prospective source and execute the bounded grid.
-- [ ] Replay, review, run gates, and close records.
+- [x] 2026-09-10: publish commit `a25f12723ae264b94749a0a69a1ad04cb0dd6858`
+  and execute the bounded grid.
+- [x] 2026-09-10: replay byte-identically, review, run gates, and close records.
 
 ## Surprises & Discoveries
 
@@ -26,7 +27,10 @@ A11E8's sole component-gate failure without sacrificing its annual benefit.
 
 ## Outcomes & Retrospective
 
-Pending execution.
+Finite-sample state-mean drift caused the A11E8 regression. Centered and
+balanced rendered overlays pass all component gates while retaining the annual
+benefit. Quantization is not the blocker. The next bounded stage is a fresh
+prospective validation of the centered thermal component without a selector.
 
 ## Context and Orientation
 
@@ -71,3 +75,6 @@ No public interface or production function changes.
 ## Revision Note
 
 2026-09-10: initial prospective scaffold.
+
+2026-09-10: execution closed `CENTERING_REMEDY_SUPPORTED` with byte-identical
+scientific replay.

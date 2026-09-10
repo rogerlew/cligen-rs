@@ -1,0 +1,21 @@
+{
+  "confirmation_target_series_accessed": false,
+  "observed": {
+    "axis_rows_per_object": 5844,
+    "calendar_objects": 20,
+    "masked_dates": [
+      "2012-12-31",
+      "2016-12-31",
+      "2020-12-31",
+      "2024-12-31"
+    ],
+    "object_receipts_sha256": "662e90a80b1adaa504c725e43c24cb153f6f3c1417266e094d41c52ad7c67808",
+    "observed_rows_per_object": 5840,
+    "role_counts": {
+      "development": 20
+    }
+  },
+  "record_count": 640,
+  "schema_version": "a11e9-preflight-1",
+  "station_count": 20
+}

@@ -1,0 +1,19 @@
+{
+  "bundle_sha256": "9149e43a9be694724dacb366bc0e9d199ecdbfc9a14a0044569ec3dca098d73c",
+  "confirmation_target_series_accessed": false,
+  "decision_sha256": "9652c04d4822ddb43248665126a1adb9232fcdfcf6dd949d820cb8feb5b34eb5",
+  "evidence_sha256": "c2997041f3ce2eec04c307cdb18263f51120ce4b32ab63243c16a31a7a9102b6",
+  "mode": "replay",
+  "preflight_sha256": "2f6b174df9f617d40cfa3aa6a657d9b5be6faee8ace15852cd116de57dd68caa",
+  "runtime": {
+    "cargo": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "machine": "arm64",
+    "numpy": "2.3.5",
+    "python": "3.12.14",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "system": "Darwin"
+  },
+  "schema_version": "a11e9-execution-receipt-1",
+  "source_commit": "a25f12723ae264b94749a0a69a1ad04cb0dd6858",
+  "source_tree": "2969c8a3cc597ac67523e51e8b94a6e405a54076"
+}

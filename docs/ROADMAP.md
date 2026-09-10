@@ -879,12 +879,6 @@ is not promoted. The bounded successor keeps faithful as both control and base,
 then adds one explicitly declared temperature-only annual-state overlay;
 QC-off remains attribution evidence rather than a development foundation.
 
-**A11E9 thermal mean-regression attribution scaffolded (2026-09-10):**
-[A11E9 attribution](work-packages/20260910-a11e9-thermal-mean-regression-attribution/package.md)
-tests whether centered annual states and exactly balanced tenths repair A11E8's
-monthly-temperature mean regression while preserving its annual benefit. It
-adds no model factor, selector behavior, confirmation access, or public API.
-
 **Public comparator follow-through complete (2026-07-18):** the independent
 [PRISM mode bundle and pedigree package](work-packages/20260718-prism-mode-bundle-pedigree/package.md)
 closed with `PRISM-MODE-BUNDLE-PEDIGREE-READY`. The Cargo mode now emits a

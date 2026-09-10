@@ -1,6 +1,6 @@
 # A11E9 — Thermal Mean-Regression Attribution
 
-Status: `SCAFFOLDED`
+Status: `EXECUTED-COMPLETE — CENTERING_REMEDY_SUPPORTED`
 
 Date: 2026-09-10
 
@@ -66,3 +66,21 @@ outcome promotes a model or authorizes confirmation or production.
 - `artifacts/execution-manifest-v1.json` — frozen experiment.
 - `artifacts/execute.py` and `test_execute.py` — prospective implementation.
 - `artifacts/review.md` — pending review surface.
+
+## Outcome
+
+Execution and replay completed from published commit
+`a25f12723ae264b94749a0a69a1ad04cb0dd6858`. The 640-stream grid and all four
+diagnostic arms were complete; confirmation remained sealed.
+
+The raw arm reproduced A11E8 (`1.09564` monthly-mean error ratio). Centering
+alone reduced that ratio to `1.00049`; exact zero-sum balancing reduced it to
+`1.00000`. The balanced rendered arm passed every frozen gate, retained annual
+dispersion error at `0.16053` of faithful, and improved 639/640 pairs. The
+unquantized arm also passed, so finite-sample latent-state mean drift—not
+tenths quantization—caused the regression. Disposition:
+`CENTERING_REMEDY_SUPPORTED`.
+
+This authorizes only a new prospective centered-thermal validation package;
+it does not revive A11E8, promote the selector, or authorize confirmation or
+production.
